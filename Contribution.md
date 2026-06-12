@@ -1,12 +1,12 @@
 🌐 **Welcome to MatrAIx!** 🌐
 
-Thank you for your interest in contributing to the MatrAIx project! 🎉 We are thrilled to have your support. As an open source initiative in a fast moving and open ended field, we wholeheartedly welcome contributions of every kind. Whether you would like to introduce new features, strengthen the infrastructure, polish the documentation, raise issues, contribute more examples, implement state of the art research ideas, or fix bugs, we deeply appreciate your enthusiasm and effort. 🙌 You are also warmly invited to join our [discord](https://discord.matraix-ai.org/) for faster, more efficient communication. 💬
+Thank you for your interest in contributing to the MatrAIx project! 🎉 We are thrilled to have your support. As an open source initiative in a fast moving and open ended field, we wholeheartedly welcome contributions of every kind. Whether you would like to introduce new features, strengthen the infrastructure, polish the documentation, raise issues, contribute more examples, implement state of the art research ideas, or fix bugs, we deeply appreciate your enthusiasm and effort. 🙌 You are also warmly invited to join our [discord](https://discord.gg/vruP88PTZ) for faster, more efficient communication. 💬
 
 ---
 
 ## AI Generated Code Policy
 
-MatrAIx is a multi agent framework designed to deliver high quality open source solutions. We welcome developers who genuinely use MatrAIx to solve real world problems and want to build alongside us.
+MatrAIx is a agent simulation for evaluation benchmark, designed to simulate agents on different domains of applications. We welcome developers who genuinely use MatrAIx to solve real world problems and want to build alongside us.
 
 **Our goals are:**
 
