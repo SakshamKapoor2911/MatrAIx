@@ -34,6 +34,39 @@ _Multi-agent / social simulation, long-horizon tasks, related work._
 
 - _add items here..._
 
+### [Magentic Marketplace: An Open-Source Environment for Studying Agentic Markets](https://www.microsoft.com/en-us/research/wp-content/uploads/2025/10/multi-agent-marketplace.pdf)
+
+* Proposes an open-source environment for studying **agentic markets**, where LLM-powered assistant agents act on behalf of consumers and service agents act on behalf of businesses.
+* The core idea is to simulate future marketplaces where autonomous agents search, communicate, negotiate-like through proposals, and complete transactions under different market and information conditions.
+* This is directly relevant to MatrAIx because it provides a concrete reference environment for building multi-agent simulations with heterogeneous roles, strategic behavior, long-horizon interactions, and measurable market-level outcomes.
+
+### 🕹️ Agent Environments & Benchmarks
+
+*Web agents, GUI/app automation, tool-use sandboxes, simulation frameworks (e.g. τ-bench / tau-bench style customer-service settings).*
+
+* Introduces a simulated two-sided marketplace where Assistant Agents represent customers and Service Agents represent businesses.
+* The environment supports agent-to-agent discovery, search, messaging, proposal exchange, payment, and final transaction completion.
+* Uses synthetic service-market domains such as restaurants and home contractors, making it a benchmark for studying agent behavior in realistic economic decision-making scenarios.
+* Relevant to MatrAIx because it offers a reusable environment pattern for marketplace-style simulations: agents have roles, preferences, constraints, private information, and multi-step interaction protocols.
+
+### 📊 Evaluation & Telemetry
+
+*Interaction logging, metrics, LLM-as-judge, human eval protocols.*
+
+* Evaluates agents using market-level utility rather than only task completion; a transaction is successful only if it satisfies the customer’s required needs.
+* Measures outcomes such as consumer utility, transaction success, welfare loss, search degradation, manipulation resistance, and behavioral bias.
+* Compares different market conditions, including perfect search vs. noisy lexical search, varying consideration-set sizes, strategic manipulation by services, and first-proposal bias.
+* Relevant to MatrAIx because it suggests a strong telemetry design: log search results, messages, proposals, payments, transaction outcomes, final utility, and failure/bias cases.
+
+### 🧩 Others
+
+*Multi-agent / social simulation, long-horizon tasks, related work.*
+
+* Shows that frontier LLM agents can perform well under ideal search conditions, but their performance degrades when search is noisy, the market scales, or service agents use manipulation tactics.
+* Finds that assistant agents can exhibit first-proposal bias, meaning faster-responding service agents may gain an advantage even when they are not the optimal choice.
+* Positions agentic marketplaces as a testbed for studying emergent economic behavior, strategic interaction, hybrid human-agent markets, and protocol/mechanism design.
+* Relevant to MatrAIx because it shows how a single environment can support both benchmark-style evaluation and broader social/economic simulation research.
+
 ---
 
 ## 🧩 Task 1 — Shared Environment Interface & Telemetry
