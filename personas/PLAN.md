@@ -8,7 +8,7 @@
 
 Collect and summarize existing persona work, grouped into the subsections below.
 
-**Owner(s):** _@name1, @name2, @name3_ (add more as needed)
+**Owner(s):** @Shirley-Huang, _@name2, @name3_ (add more as needed)
 
 > 📌 **Default item format** — each entry should look like:
 >
@@ -20,17 +20,141 @@ Collect and summarize existing persona work, grouped into the subsections below.
 ### 🗃️ Persona Data
 _Existing persona datasets / profile collections (also log scale + how to compare against them: Tencent ~1B, Persona-Hub 375K, NVIDIA Nemotron-Personas ~1M, Google, etc.)._
 
-- _add items here..._
+### [Scaling Synthetic Data Creation with 1,000,000,000 Personas (Persona-Hub)](https://arxiv.org/abs/2406.20094)
+- Tencent AI Lab (Tao Ge et al.) curated 1 billion diverse personas automatically from web data — ~13% of the world's population — used as "distributed carriers of world knowledge" to prompt LLMs into generating diverse synthetic data (math, reasoning, instructions, NPCs, tools).
+- Scale: 1B personas total; publicly released subset of ~200K preview personas plus ~370M "elite" personas, alongside ~175K synthetic data samples ([GitHub](https://github.com/tencent-ailab/persona-hub)). A 7B model trained on its synthetic math data reached 65% on MATH, matching gpt-4-turbo-preview.
+- Relevance: the closest existing analog to MatrAIxPersona's scale ambition (1B vs ~8.3B), sharing the persona-driven synthetic-data approach; its released elite-persona set is the natural diversity/coverage comparison point, with MatrAIx sitting ~8x larger and population-grounded.
+
+### [Nemotron-Personas](https://huggingface.co/datasets/nvidia/Nemotron-Personas-USA)
+- NVIDIA's synthetic persona datasets grounded in real-world demographic, geographic, and personality-trait distributions — first such collection aligned to census statistics for names, sex, age, education, occupation, marital status, location.
+- Scale: Nemotron-Personas-USA has 1M personas (~0.94B tokens, CC-BY-4.0); broader collection adds region-specific sets (France, India, Japan, Singapore, Korea). Built via a compound pipeline: a Probabilistic Graphical Model anchors demographic realism, then open-weight LLMs write narratives (each persona: core demographics + 16 contextual fields, 560+ occupations).
+- Relevance: a close methodological reference for MatrAIxPersona's demographics domain — its PGM-then-LLM pipeline and census-aligned attributes mirror what demographic grounding requires, and its per-region census fidelity is a benchmark for distributional realism at global scale.
+
+### [DeepPersona: A Generative Engine for Scaling Deep Synthetic Personas](https://arxiv.org/abs/2511.07338)
+- A two-stage, taxonomy-guided engine that produces far deeper personas than one-paragraph profiles, addressing homogenization/stereotyping in agent-based social simulation.
+- Scale/method: Stage 1 mines an 8,000+ node human-attribute taxonomy from real user–ChatGPT conversations; Stage 2 generates narratively coherent personas averaging 200+ structured attributes via progressive attribute sampling.
+- Relevance: a depth-oriented counterpart to MatrAIx's breadth — its taxonomy-guided 200+-attribute personas and explicit anti-homogenization focus speak directly to MatrAIx's per-persona richness and diversity concerns.
+
+### [PERSONA: A Reproducible Testbed for Pluralistic Alignment](https://arxiv.org/abs/2407.17387)
+- SynthLabs built a procedurally generated persona testbed for evaluating and improving pluralistic alignment of LLMs across diverse viewpoints.
+- Scale: 1,586 synthetic personas from US Census demographics + idiosyncratic attributes, yielding 3,868 prompts and 317,200 persona-conditioned feedback pairs.
+- Relevance: a census-grounded persona testbed whose 317K persona-conditioned feedback pairs and pluralistic-alignment focus overlap MatrAIx's interest in whether persona agents express genuinely diverse, non-homogenized preferences.
+
+### [Personalizing Dialogue Agents: I have a dog, do you have pets too? (PersonaChat)](https://arxiv.org/abs/1801.07243)
+- Facebook AI Research's foundational persona-grounded dialogue dataset, where crowdworkers chat while each adopting a short profile, testing character consistency.
+- Scale: 1,155 crowd-sourced personas (each 4–5 profile sentences), 10,907 dialogues, 162,000+ utterances.
+- Relevance: the canonical small-scale, hand-written persona-dialogue benchmark and the historical baseline MatrAIx's scale dwarfs; it originates the profile-faithfulness-in-conversation question that MatrAIx studies.
+
+### [OpenCharacter: Training Customizable Role-Playing LLMs with Large-Scale Synthetic Personas](https://arxiv.org/abs/2501.15427)
+- Synthesizes large-scale character profiles from Persona-Hub personas and generates character-aligned instruction data (response rewriting + generation) to train customizable role-playing LLMs.
+- Scale/method: builds character profiles on top of Persona-Hub personas (scalable to large numbers); fine-tuned LLaMA-3 8B reaches role-playing performance comparable to GPT-4o.
+- Relevance: a demonstration that a persona database (Persona-Hub) converts into agent training data via a persona→character-profile→instruction pipeline — the same pathway from MatrAIxPersona entries to per-agent behavior data.
+
+### [WildChat: 1M ChatGPT Interaction Logs in the Wild](https://arxiv.org/abs/2405.01470)
+- Allen Institute for AI / Cornell (ICLR 2024) release a corpus of real, opt-in user–ChatGPT conversations collected in the wild — the canonical "real-conversation-derived" persona source.
+- Scale: 1M conversations / 2.5M+ turns across 68 languages, each transcript enriched with geographic demographic metadata (state, country, hashed IP) and request headers.
+- Relevance: highest-signal real-world seed corpus for grounding synthetic personas in actual user behavior and geography — DeepPersona mines its attribute taxonomy from exactly this kind of real ChatGPT-conversation data.
+
+### [Synthetic-Persona-Chat: Faithful Persona-based Conversational Dataset Generation with LLMs](https://arxiv.org/abs/2312.10007)
+- Google's synthetically generated, persona-grounded dialogue dataset, built with a Generator–Critic framework ([HF dataset](https://huggingface.co/datasets/google/Synthetic-Persona-Chat)).
+- ~5,648 new synthetic personas with ~11K conversations (plus a 4,723-persona / 10,906-conversation PersonaChat extension); a mixture-of-experts Critic iteratively filters quality, cutting the Turing-test losing rate vs human PersonaChat from 17.2% to 8.8% over three rounds.
+- Relevance: a Generator–Critic quality-control loop relevant to MatrAIx's synthetic-persona pipeline, with a measured fidelity signal (Turing-test win rate vs human personas) for how human generated personas read.
 
 ### 🛠️ Generation Methods
 _Methods for synthesizing personas, persona-conditioned generation, augmentation._
 
-- _add items here..._
+### [Generative Agents: Interactive Simulacra of Human Behavior](https://arxiv.org/abs/2304.03442)
+- Park et al. (Stanford/Google) introduce generative agents that simulate believable individual and emergent social behavior in a sandbox of 25 agents.
+- The architecture extends an LLM with a memory stream, reflection (synthesizing memories into higher-level insights), and planning; ablations show each component is critical to believability, evaluated via human-judged believability studies.
+- Foundational for the agent side of MatrAIx: a concrete memory/reflection/planning loop for turning a static persona into a persistent, behaviorally coherent agent.
+
+### [Generative Agent Simulations of 1,000 People](https://arxiv.org/abs/2411.10109)
+- Park et al. (Stanford/DeepMind) build agents from ~2-hour qualitative interviews with 1,052 real people, then test how faithfully each agent reproduces that individual's survey/experimental responses.
+- Agents match participants' General Social Survey answers ~85% as well as participants match themselves two weeks later, and reduce accuracy bias across racial/ideological groups vs demographic-only descriptions.
+- Direct evidence that rich, interview-style conditioning outperforms thin demographic priors — bearing directly on MatrAIx's question of how deeply personas must be conditioned to behave faithfully.
+
+### [Claude's Character](https://www.anthropic.com/research/claude-character)
+- Anthropic's account of "character training": instilling stable traits (curiosity, open-mindedness, honesty about its own leanings) into a model rather than only avoiding harm.
+- Uses a character variant of Constitutional AI on purely synthetic, self-generated data — the model drafts trait-relevant messages, generates trait-aligned responses, and ranks them to train a preference model, with no human feedback in the core step.
+- Relevant to giving MatrAIx agents consistent, persona-faithful personalities at scale through self-generated preference data, and to trait stability across long interactions.
+
+### [Self-Instruct: Aligning Language Models with Self-Generated Instructions](https://arxiv.org/abs/2212.10560)
+- Wang et al. bootstrap instruction-following by having an LLM generate its own instructions, inputs, and outputs, then filtering low-quality/redundant samples before fine-tuning.
+- Seeded from 175 human tasks, the pipeline produces 52K instructions / 82K instances; applied to GPT-3 it yields a 33% absolute gain on Super-NaturalInstructions, nearly matching InstructGPT-001 with no private data.
+- The core synthetic-data-generation + filtering recipe underlying persona-conditioned augmentation — directly relevant to how MatrAIx self-generates large, deduplicated, quality-filtered persona behavior data.
+
+### [Character-LLM: A Trainable Agent for Role-Playing](https://arxiv.org/abs/2310.10158)
+- Shao et al. (Fudan) train agents to embody specific people (e.g. Beethoven, Cleopatra) with profile, experiences, and emotions rather than relying on prompt-only role-play.
+- An "Experience Reconstruction" process converts profiles into formatted experience data for SFT, plus protective experiences to suppress out-of-character hallucination; evaluated via an interview playground.
+- Bakes a persona into model weights (vs prompting) and defends against character drift — relevant to MatrAIx's persistent, fine-tuned persona setting.
+
+### [LLMs are Superpositions of All Characters: Arbitrary Role-play via Self-Alignment (Ditto)](https://arxiv.org/abs/2401.12474)
+- Ditto (OFA-Sys) posits that LLMs already contain latent knowledge of countless characters and elicits role-play as a self-alignment / reading-comprehension task — no proprietary teacher needed.
+- Self-generates a role-play training set of 4,000 characters (10x prior datasets) for fine-tuning; maintains role identity and role-specific knowledge across multi-turn dialogue.
+- A scalable, self-supervised augmentation method for massive persona-conditioned dialogue data — relevant to MatrAIx's scale, where per-persona human/GPT-4 supervision is infeasible.
+
+### [WizardLM: Empowering LLMs to Follow Complex Instructions (Evol-Instruct)](https://arxiv.org/abs/2304.12244)
+- Xu et al. (Microsoft) introduce Evol-Instruct: an LLM rewrites seed instructions step by step into progressively more complex ones via in-depth evolution (add constraints, deepen reasoning) and in-breadth evolution (novel, diverse instructions).
+- Fine-tuning LLaMA 7B on 70K evolved instructions yields WizardLM, beating Vicuna by a 12.4% win rate on human eval and topping ChatGPT on the high-difficulty (level ≥8) slice; evolved instructions judged superior to human-written ones.
+- Relevance: the canonical complexity/diversity-augmentation engine complementing Self-Instruct; its depth/breadth evolution bears on producing rich, non-homogenized persona behavior data and diverse per-persona prompts at scale.
+
+### [Persona Vectors: Monitoring and Controlling Character Traits in Language Models](https://arxiv.org/abs/2507.21509)
+- Chen, Arditi, Sleight, Evans, Lindsey (incl. Anthropic) identify linear directions in activation space — persona vectors — corresponding to character traits (e.g. evil, sycophancy, hallucination), extracted automatically from natural-language trait descriptions.
+- The vectors monitor persona drift during deployment and finetuning, and support causal control: steering along a vector induces a trait, while inference-time and preventative steering suppress unwanted shifts and flag training data that would induce them.
+- Relevance: the canonical activation-steering method for persona conditioning/enforcement; alongside Claude's Character it bears on instilling and holding trait-faithful behavior at scale and on monitoring persona drift over long interactions.
 
 ### 🧩 Others
 _Benchmarks, evaluation, related work that doesn't fit above._
 
-- _add items here..._
+### [PersonaGym: Evaluating Persona Agents and LLMs](https://arxiv.org/abs/2407.18416)
+- First dynamic evaluation framework for persona agents, measuring how faithfully LLM agents adhere to an assigned persona across diverse, persona-relevant environments rather than a single fixed setting.
+- Benchmark of 200 personas and 10,000 questions; introduces PersonaScore, a decision-theory-grounded automatic metric calibrating rubric-based LLM-judge ensembles against human ratings across 6 models.
+- Closely parallels MatrAIxPersonaBench: PersonaScore's rubric-calibrated, human-aligned LLM-as-judge methodology and dynamic environment generation are the same persona-adherence scoring MatrAIxPersona targets at scale.
+
+### [RoleLLM: Benchmarking, Eliciting, and Enhancing Role-Playing Abilities of LLMs](https://arxiv.org/abs/2310.00746)
+- Builds RoleBench, the first systematic fine-grained character-level role-playing benchmark, plus a pipeline (RoleGPT, Context-Instruct, role-conditioned instruction tuning) to elicit and train role-playing ability.
+- 100 roles and 168,093 samples; evaluates speaking-style imitation and role-specific knowledge, producing RoleLLaMA (EN) and RoleGLM (ZH) that approach GPT-4-level role fidelity.
+- A large-scale, character-grained reference for persona-adherence metrics and persona data construction, covering the style- and knowledge-consistency axes MatrAIxPersona measures.
+
+### [CharacterEval: A Chinese Benchmark for Role-Playing Conversational Agent Evaluation](https://arxiv.org/abs/2401.01275)
+- Multi-turn benchmark for role-playing conversational agents emphasizing in-character consistency over extended dialogue, complemented by detailed character profiles.
+- 1,785 multi-turn dialogues / 23,020 examples / 77 characters; 13 metrics across 4 dimensions, plus CharacterRM, a learned reward model whose human correlation surpasses GPT-4 as a judge.
+- Its multi-turn, multi-dimensional rubric and trained reward model target persona consistency across long interactions rather than single-turn outputs — the same long-horizon adherence axis as MatrAIxPersonaBench.
+
+### [RoleEval: A Bilingual Role Evaluation Benchmark for Large Language Models](https://arxiv.org/abs/2312.16132)
+- Probes memorization, utilization, and multi-hop reasoning over role knowledge, isolating whether models actually "know" a character's facts versus merely imitating style.
+- 6,000 parallel Chinese-English MCQs over 300 influential real and fictional figures (personal info, relationships, abilities, experiences), with hybrid auto+human quality control.
+- Adds an objective, MCQ-based persona-knowledge axis complementing style-based scoring — the factual-persona-fidelity dimension relevant to MatrAIxPersonaBench at population scale.
+
+### [Out of One, Many: Using Language Models to Simulate Human Samples](https://arxiv.org/abs/2209.06899)
+- Foundational "silicon sampling" work: conditioning GPT-3 on real participants' socio-demographic backstories reproduces subgroup response distributions, introducing the notion of "algorithmic fidelity."
+- Conditions on thousands of demographic backstories from US surveys and compares simulated vs real human response distributions across demographic subgroups.
+- Core conceptual basis for MatrAIx's population simulation; its algorithmic-fidelity criterion is a natural top-level faithfulness metric for MatrAIxPersonaBench.
+
+### [Whose Opinions Do Language Models Reflect?](https://arxiv.org/abs/2303.17548)
+- Quantitative framework (OpinionQA) measuring how well LM-expressed opinions align with those of specific US demographic groups, surfacing systematic representational bias.
+- Built from public-opinion polls covering 60 demographic groups; finds substantial misalignment that persists even after steering, and identifies poorly-represented groups (e.g. 65+, widowed).
+- Provides the demographic-bias and opinion-faithfulness lens essential for auditing whether MatrAIx persona agents faithfully and fairly reflect the populations they simulate.
+
+### [Measuring and Controlling Instruction (In)Stability in Language Model Dialogs](https://arxiv.org/abs/2402.10962)
+- Defines and quantifies "persona/instruction drift": LLMs progressively deviate from an assigned persona over multi-turn dialogue, and proposes a method to control it.
+- Shows significant drift within ~8 conversation rounds (e.g. LLaMA2-chat-70B), attributes it partly to attention decay, and introduces a split-softmax stabilization.
+- Defines a key failure mode relevant to MatrAIxPersonaBench — long-horizon persona-adherence stability — and supplies a drift metric and mitigation baseline.
+
+### [The Price of Format: Diversity Collapse in LLMs](https://arxiv.org/abs/2505.18949)
+- Shows that structured chat formatting (role markers, special tokens) causes "diversity collapse": models emit semantically near-identical outputs for open-ended prompts.
+- Demonstrates the collapse persists even at high sampling temperature and is governed mainly by structural tokens, with minimal formatting yielding the most diverse responses.
+- Highly relevant to large-scale persona simulation: explains how billions of distinct personas could homogenize, motivating diversity/distinctiveness metrics in MatrAIxPersonaBench.
+
+### [From Persona to Personalization: A Survey on Role-Playing Language Agents](https://arxiv.org/abs/2404.18231)
+- The canonical TMLR 2024 survey of Role-Playing Language Agents (Chen, Wang, Xu et al., Fudan), organizing the field around three persona types: demographic, character, and individualized.
+- Systematizes data sourcing, agent construction, and evaluation methodologies, and catalogs risks, limitations, and applications (companions, digital clones, social simulation).
+- A field-level taxonomy and evaluation-methodology map covering the demographic-vs-character axes that frame persona-adherence benchmarking in MatrAIxPersonaBench.
+
+### [LLMs that Replace Human Participants Can Harmfully Misportray and Flatten Identity Groups](https://arxiv.org/abs/2402.01908)
+- The key critique counterbalancing "silicon sampling": LLMs conditioned on demographic identities systematically misportray and flatten group diversity (a fairness-harm framing of diversity collapse).
+- Empirically grounded: 4 LLMs, human studies with 3,200 participants across 16 demographic identities, plus inference-time mitigation tests (Wang, Morgenstern, Dickerson et al.; Nature Machine Intelligence 2024).
+- Bears on a fairness/distinctiveness axis in MatrAIxPersonaBench — whether large-scale persona agents preserve within-group variation rather than collapsing identities into stereotypes.
 
 ---
 
