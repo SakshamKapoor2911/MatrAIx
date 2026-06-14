@@ -32,7 +32,10 @@ _Interaction logging, metrics, LLM-as-judge, human eval protocols._
 ### 🧩 Others
 _Multi-agent / social simulation, long-horizon tasks, related work._
 
-- _add items here..._
+### [Magentic Marketplace: An Open-Source Environment for Studying Agentic Markets](https://www.microsoft.com/en-us/research/wp-content/uploads/2025/10/multi-agent-marketplace.pdf)
+- Proposes an open-source multi-agent marketplace simulation where consumer-side assistant agents interact with business-side service agents to search, communicate, receive proposals, and complete transactions.
+- The environment is built around a centralized marketplace server and a simple action protocol supporting agent registration, search, message passing, proposal submission, payment, and full interaction logging; evaluation focuses on transaction success, consumer utility, welfare, search quality, manipulation resistance, and behavioral biases such as first-proposal bias.
+- Relevant to MatrAIx because it provides a reusable pattern for long-horizon multi-agent social/economic simulations with heterogeneous roles, private preferences, strategic service agents, market-level outcomes, and extensible domains beyond restaurants/contractors.
 ---
 
 ## 🧩 Task 1 — Shared Environment Interface & Telemetry
