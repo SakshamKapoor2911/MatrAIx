@@ -62,7 +62,7 @@ Example:
 ## Scenario: AI Tutor Evaluation for High School Algebra
 
 Target domain: Education
-Environment type: Conversational System Environment
+Environment type: Chatbot Environment
 
 Persona requirements:
 Students with different math confidence levels, learning styles, and

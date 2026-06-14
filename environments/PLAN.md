@@ -1,0 +1,104 @@
+# 🌐 Environment Team — Plan & Task Assignments
+
+> Working plan for the [Environment team](README.md). Each task has an **Owner** field — add your name to a placeholder slot. Each task can take **1–3 people** to start, and more can be added later (just append `@you`).
+
+> 🧭 **Scope from kickoff (Jun 13).** Block 2 is mostly **engineering** and **task-agnostic**: given a persona-conditioned agent (persona injected via system prompt) and a defined environment, make the agent *run* and emit a full **telemetry trace**. We do **not** design tasks here (that's the Application team) — we provide a few general environment *types* they plug into. Keep each type **basic** so the end-to-end pipeline works first; depth can come later.
+
+---
+
+## 📚 Literature Review
+
+Collect and summarize prior work on agent environments, evaluation harnesses, and simulation frameworks.
+
+**Owner(s):** _@name1, @name2, @name3_ (add more as needed)
+
+> 📌 **Default item format** — each entry should look like:
+>
+> ### [Paper / Framework Title](https://link-here)
+> - bullet point summarizing the key idea
+> - bullet point on the environment / interface / evaluation design
+> - bullet point on relevance to MatrAIx environments
+
+### 🕹️ Agent Environments & Benchmarks
+_Web agents, GUI/app automation, tool-use sandboxes, simulation frameworks (e.g. τ-bench / tau-bench style customer-service settings)._
+
+- _add items here..._
+
+### 📊 Evaluation & Telemetry
+_Interaction logging, metrics, LLM-as-judge, human eval protocols._
+
+- _add items here..._
+
+### 🧩 Others
+_Multi-agent / social simulation, long-horizon tasks, related work._
+
+- _add items here..._
+
+---
+
+## 🧩 Task 1 — Shared Environment Interface & Telemetry
+
+Define the common contract every environment implements so personas, tasks, and loggers are interchangeable.
+
+- Standard **observation / action / tool** schema for an agent ↔ environment loop.
+- Episode lifecycle: `reset → step → done`, plus state and reset semantics.
+- Persona injected via **system prompt** (Block 1) + task plugged in by Block 3.
+- **Telemetry trace** is the required output: full record of steps, actions, signals, timings, outcome — this feeds the Application team's report (Block 3).
+- Two integration paths: **(a) hosted sandbox playground** (contributor supplies the surface) and **(b) agent API** that an external system drives.
+
+**Owner(s):** _@name1, @name2, @name3_ (add more as needed)
+
+---
+
+## 📝 Task 2 — Type 1: Survey Environment _(simplest / start here)_
+
+The simplest surface — the agent reads a stimulus (product concept, message, description, UI mockup, decision scenario) and returns structured feedback. Behaves like an LLM answering a questionnaire rather than a tool-using agent.
+
+- Define input formats and a **structured output schema** (rating scores, free-form feedback, ranked preferences, objections, predicted adoption).
+- Reference implementation + a couple of example stimuli.
+
+**Owner(s):** _@name1, @name2, @name3_ (add more as needed)
+
+---
+
+## 💬 Task 3 — Type 2: Chatbot Environment _(priority)_
+
+High-value surface — many target products *are* AI systems, so they can be tested directly through conversation. Prioritized at kickoff.
+
+- Persona agent converses with a target system (assistant, support bot, tutor, coding assistant).
+- Adapter to connect an external chatbot (API).
+- Conversation logging + metrics (helpfulness, trust, clarity, satisfaction, length).
+- Cover **cooperative** users **and** hard/realistic users (privacy-sensitive, low-literacy / elderly, confused, adversarial) — the realistic-but-hard cases are where simulation adds value.
+
+**Owner(s):** _@name1, @name2, @name3_ (add more as needed)
+
+---
+
+## 🌐 Task 4 — Type 3: Web Environment
+
+Agent interaction with web surfaces (landing pages, prototypes, dashboards, **forum / social** sub-form).
+
+- Sandbox playground (host a supplied web surface) **and/or** agent API path.
+- Capture signals: pages, clicks, scroll, hesitation, failed actions, final decision.
+- Forum/social subtype: read posts, comment, initiate DMs — same interaction layer, different surface.
+
+**Owner(s):** _@name1, @name2, @name3_ (add more as needed)
+
+---
+
+## 📱 Task 5 — Type 4: App / Sandbox Environment _(longer-term, deprioritized)_
+
+Complex interactive products (mobile / desktop / sandbox builds). Pulls in low-value engineering (auth, captchas, device state, reset) — explicitly **deprioritized** for early stages.
+
+- Scope build formats and UI-automation approach for later.
+
+**Owner(s):** _@name1, @name2, @name3_ (add more as needed)
+
+---
+
+## 🤝 How to Contribute
+
+1. Pick a task above and add your name to its **Owner** field.
+2. Open a sub-issue / sub-doc for your task to track details and progress.
+3. Align early on the shared **interface + telemetry** (Task 1) — it blocks Tasks 2–5.
+4. Build **Type 1 (survey)** and **Type 2 (chatbot)** first; they're the fastest path to a working end-to-end pipeline.

@@ -52,14 +52,14 @@ We are actively looking for collaborators across all three teams, whether you ar
 MatrAIx is intended to produce both a unifying paper and several focused papers.
 
 - **Grand paper.** An end-to-end paper covering the full stack: persona construction, simulation environments, and downstream applications, demonstrating the complete simulation-to-evaluation pipeline.
-- **Focused papers.** Standalone papers on individual components, e.g. a dedicated paper on the persona benchmark (MatrAIx-Persona-Bench), plus possible papers on environments, evaluation methodology, and specific application domains.
+- **Focused papers.** Standalone papers on individual components, e.g. a dedicated paper on the persona benchmark (MatrAIxPersonaBench), plus possible papers on environments, evaluation methodology, and specific application domains.
 
 **Timeline.** Targeting completion over the summer of 2026, with submissions to **AAAI 2026** and **ICLR 2026**.
 
 ## 🗺️ Roadmap
 
-- **Stage 1 — Minimal stack.** Persona schema, initial persona set, basic survey + conversational environments, first persona-adherence benchmark, simple telemetry.
-- **Stage 2 — Core dataset & benchmark.** Release MatrAIx-Persona, MatrAIx-Persona-Train, MatrAIx-Persona-Bench; add domain subsets and automatic evaluation.
+- **Stage 1 — Minimal stack.** Persona schema, initial persona set, basic survey + chatbot environments, first persona-adherence benchmark, simple telemetry.
+- **Stage 2 — Core dataset & benchmark.** Release MatrAIxPersona-8B, MatrAIxPersonaTrain, MatrAIxPersonaBench; add domain subsets and automatic evaluation.
 - **Stage 3 — Environment expansion.** Web environment, long-horizon and multi-turn tasks, memory-enabled agents, multi-agent interaction, cost/friction simulation.
 - **Stage 4 — Simulated society.** Scale toward a planet-scale population with social graphs, group interaction, information diffusion, and synthetic communities.
 
@@ -74,7 +74,7 @@ MatrAIx is intended to produce both a unifying paper and several focused papers.
 
 ## 🤝 Contributing
 
-We welcome contributions in all three areas — see each team's README ([Persona](personas/README.md), [Environment](environments/README.md), [Application](applications/README.md)) for specifics, plus [Contribution.md](Contribution.md) and [Environment.md](Environment.md) for setup and scene-authoring guidelines.
+We welcome contributions in all three areas — see each team's README ([Persona](personas/README.md), [Environment](environments/README.md), [Application](applications/README.md)) for specifics, plus [Contribution.md](Contribution.md) for setup and scene-authoring guidelines.
 
 ## 📁 Repository Layout
 

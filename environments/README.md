@@ -40,11 +40,11 @@ Read this product description and answer:
 
 Possible outputs: rating scores, free-form feedback, ranked preferences, objections and confusion points, and predicted adoption likelihood.
 
-### 💬 Type 2: Conversational System Environment
+### 💬 Type 2: Chatbot Environment
 
 Designed for evaluating AI assistants, chatbots, LLM products, AI companions, customer support agents, AI tutors, AI SDRs, and other conversation-based systems.
 
-Persona agents interact with a target conversational system and evaluate the experience. This environment is especially natural because many modern products *are themselves* AI systems, so they can be tested directly through conversation without any UI automation.
+Persona agents interact with a target chatbot and evaluate the experience. This environment is especially natural because many modern products *are themselves* AI systems, so they can be tested directly through conversation without any UI automation.
 
 Example domains: AI customer support, AI sales agents, AI tutors, AI companions, coding assistants, healthcare chatbots, financial advisors, and internal enterprise copilots.
 
@@ -95,7 +95,7 @@ Possible input formats:
 
 Useful for: mobile onboarding flows, app navigation testing, feature discovery, workflow completion, long-horizon task evaluation, and multi-session behavior simulation.
 
-For early-stage development, MatrAIx prioritizes simpler surfaces (surveys, conversational systems, and lightweight web prototypes) before expanding into full app automation, which tends to pull in low-value engineering work such as account state, login, captchas, and environment cleanup.
+For early-stage development, MatrAIx prioritizes simpler surfaces (surveys, chatbots, and lightweight web prototypes) before expanding into full app automation, which tends to pull in low-value engineering work such as account state, login, captchas, and environment cleanup.
 
 ## 🔮 Future Environment Directions
 
@@ -120,7 +120,7 @@ This allows environments to evaluate not only whether a product is preferred, bu
 ## 🤝 Contributing
 
 - survey environments
-- conversational system environments
+- chatbot environments
 - web interaction environments
 - sandbox environments
 - logging and telemetry tools

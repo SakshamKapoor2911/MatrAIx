@@ -9,7 +9,7 @@ This team focuses on constructing, curating, validating, and benchmarking large-
 The main goal is to build a diverse and scalable persona database, tentatively called:
 
 ```text
-MatrAIx-Persona
+MatrAIxPersona-8B
 ```
 
 This database will contain synthetic and semi-synthetic persona profiles that can be used to instantiate persona-affiliated agents.
@@ -46,7 +46,7 @@ Rather than a flat list of traits, we organize each persona around a few **major
 
 The exact aspects and dimensions are an open design question (and a contribution area). The goal is a schema rich enough that an agent conditioned on a persona behaves like a coherent, complete individual — not a one-line caricature.
 
-### 🗃️ 1. MatrAIx-Persona
+### 🗃️ 1. MatrAIxPersona-8B
 
 The full persona database.
 
@@ -112,7 +112,7 @@ tags: [productivity, ai-tools, indie-games, fitness]
 - ...
 ```
 
-### 🎓 2. MatrAIx-Persona-Train
+### 🎓 2. MatrAIxPersonaTrain
 
 A high-quality core subset for model training and agent development.
 
@@ -133,7 +133,7 @@ Possible uses:
 - agent instruction tuning
 - memory and self-consistency training
 
-### 📊 3. MatrAIx-Persona-Bench
+### 📊 3. MatrAIxPersonaBench
 
 A benchmark subset for evaluating **persona simulation quality** — i.e. how well an agent conditioned on a persona actually *behaves* in line with that persona's profile.
 
