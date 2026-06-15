@@ -208,7 +208,7 @@ Scenarios where the agent converses with a target AI system and evaluates it.
 - Include **hard users** (privacy-sensitive, low-literacy/elderly, confused, adversarial).
 - Each with task prompt, persona requirements, metrics, example run.
 
-**Owner(s):** @Shirley-Huang, _@name2, @name3_ (add more as needed)
+**Owner(s):** @Shirley-Huang, @Eliza_Fan, @name3_ (add more as needed)
 
 ---
 
@@ -242,7 +242,7 @@ Cross-cutting layer: standardize how scenario outputs are scored, then turn raw 
 - **Report generation**: given the task + the full telemetry trace from Block 2, produce the final **feedback report** (e.g. "users engaged X with feature Y; main objections were Z").
 - Reusable analysis/report templates over collected traces.
 
-**Owner(s):** @Shirley-Huang, _@name2, @name3_ (add more as needed)
+**Owner(s):** @Shirley-Huang, @Eliza_Fan, @name3_ (add more as needed)
 
 ---
 
