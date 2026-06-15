@@ -1,0 +1,23 @@
+# CUA web task (use-computer). Requires USE_COMPUTER_API_KEY in your shell.
+#
+#   uv run harbor run -c configs/jobs/persona-cua-local.yaml
+
+job_name: persona-cua-local
+jobs_dir: jobs
+n_attempts: 1
+timeout_multiplier: 1.0
+n_concurrent_trials: 1
+quiet: false
+
+environment:
+  type: use-computer
+  delete: true
+
+agents:
+  - name: persona-computer-1
+    model_name: anthropic/claude-sonnet-4-20250514
+    kwargs:
+      persona_path: personas/examples/persona_0042.yaml
+
+tasks:
+  - path: tasks/web/books-interest-cua

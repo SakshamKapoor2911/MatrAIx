@@ -1,0 +1,31 @@
+# Local persona reference job (Docker)
+
+job_name: persona-debug-local
+jobs_dir: jobs
+n_attempts: 1
+timeout_multiplier: 1.0
+n_concurrent_trials: 1
+quiet: false
+
+environment:
+  type: docker
+  force_build: true
+  delete: true
+  env:
+    ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+
+agents:
+  - name: persona-claude-code
+    model_name: anthropic/claude-sonnet-4-20250514
+    kwargs:
+      persona_path: personas/examples/persona_0042.yaml
+
+tasks:
+  - path: tasks/survey/product-feedback
+  - path: tasks/chat/acme-support-mcp
+
+# Other forms — use dedicated job configs or one-off runs:
+#   configs/jobs/persona-browser-use-local.yaml
+#   configs/jobs/persona-cocoa-local.yaml
+#   configs/jobs/persona-cua-local.yaml
+#   harbor run -p tasks/computer-use/notification-preferences -a persona-computer-1 -e use-computer ...

@@ -1,0 +1,23 @@
+# CocoaAgent web task (single-container AIO Sandbox). Requires API key in your shell.
+#
+#   uv run harbor run -c configs/jobs/persona-cocoa-local.yaml
+
+job_name: persona-cocoa-local
+jobs_dir: jobs
+n_attempts: 1
+timeout_multiplier: 1.5
+n_concurrent_trials: 1
+quiet: false
+
+environment:
+  type: docker
+  delete: true
+
+agents:
+  - name: persona-cocoa
+    model_name: anthropic/claude-sonnet-4-20250514
+    kwargs:
+      persona_path: personas/examples/persona_0042.yaml
+
+tasks:
+  - path: tasks/web/books-interest-cocoa
