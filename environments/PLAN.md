@@ -6,11 +6,11 @@
 
 ---
 
-## 📚 Related Work
+## 📚 Literature Review
 
 Collect and summarize prior work on agent environments, evaluation harnesses, and simulation frameworks.
 
-**Owner(s):** _@name1, @name2, @name3_ (add more as needed)
+**Owner(s):** _@ahmd-mohsin, @name2, @name3_ (add more as needed)
 
 > 📌 **Default item format** — each entry should look like:
 >
@@ -22,15 +22,46 @@ Collect and summarize prior work on agent environments, evaluation harnesses, an
 ### 🕹️ Agent Environments & Benchmarks
 _Web agents, GUI/app automation, tool-use sandboxes, simulation frameworks (e.g. τ-bench / tau-bench style customer-service settings)._
 
-- _add items here..._
+### [τ-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains](https://arxiv.org/abs/2406.12045)
+- Emulates multi-turn conversations between an **LLM-simulated user** and a tool-using agent that must follow a domain **policy document** (retail, airline), testing whether the agent can gather/convey the right information and obey rules across a full dialogue.
+- Each task is framed as a POMDP; the agent acts on databases via API tools and on the simulated user via messages, and the **reward compares the final database state to an annotated goal state** rather than grading the dialogue text. Introduces `pass^k` to measure reliability across *k* trials. The successor [τ²-bench](https://github.com/sierra-research/tau2-bench) adds telecom/voice/dual-control domains and **automatic detection of when the simulated user drifts off its instructions** (re-running the affected eval).
+- Closest template for our **Chatbot Environment (Task 3)**: gives us the user-simulator-as-component design, state-based rewards, policy-following tests, and a reliability metric. The off-instruction detection maps directly onto the persona-adherence checks we'll need for hard/realistic users.
+
+### [WebArena: A Realistic Web Environment for Building Autonomous Agents](https://arxiv.org/abs/2307.13854)
+- A **self-hostable, reproducible** web environment built from four fully functional open-source sites (e-commerce, a Reddit-style forum, GitLab, a CMS) plus utility tools (map, calculator, scratchpad), with 812 long-horizon natural-language tasks.
+- Evaluates **functional correctness** — whether the resulting site state achieves the goal — instead of matching action sequences, which admits multiple valid paths; the best GPT-4 agent reached only ~14% vs ~78% for humans, showing even "lightweight" web tasks are hard. Extended by VisualWebArena (visual grounding) and unified under [BrowserGym/AgentLab](https://github.com/web-arena-x/webarena) for parallel runs and a shared leaderboard.
+- Direct reference for our **Web Environment (Task 4)**, including the forum/social subtype. The self-hosted-sandbox pattern matches our hosted-playground integration path, and the functional-correctness checker is the template for our web success signals.
+
+### [AndroidWorld: A Dynamic Benchmarking Environment for Autonomous Agents](https://arxiv.org/abs/2405.14573)
+- A fully functional **Android environment on a live emulator** with 116 hand-crafted tasks across 20 real apps, dynamically parameterized to generate millions of task variations.
+- Rewards are derived from **device system state**, and each task ships dedicated **initialization, success-checking, and teardown** logic; a strong multimodal baseline (M3A) solved only ~31%, and a desktop web agent ported to mobile did worse — cross-surface transfer is not free.
+- Template for our **App/Sandbox Environment (Task 5)** and a concrete illustration of why it's deprioritized — but the `init → success-check → teardown` lifecycle and task parameterization are patterns worth adopting in the **shared interface (Task 1)** for *every* surface.
 
 ### 📊 Evaluation & Telemetry
 _Interaction logging, metrics, LLM-as-judge, human eval protocols._
 
-- _add items here..._
+### [Generative Agent Simulations of 1,000 People](https://arxiv.org/abs/2411.10109)
+- Builds agents from two-hour qualitative **interviews with 1,052 real individuals**, then measures how faithfully each agent reproduces its source person's attitudes and behaviors.
+- Agents replicate **General Social Survey responses ~85% as accurately** as the humans replicate their own answers two weeks later, with comparable results on Big Five traits and replicated behavioral-economics experiments; interview-grounded agents **reduce accuracy bias** across racial/ideological groups vs demographic-only personas. The eval protocol is the gold standard: compare simulated answers against the real person's held-out answers.
+- Defines how we should **validate persona fidelity** for the Survey/Chatbot environments — the metric is "does the agent match the real person." The finding that thin demographic personas underperform rich ones tells us how much persona context our telemetry must carry.
+
+### [Synthetic Replacements for Human Survey Data? The Perils of Large Language Models](https://www.cambridge.org/core/journals/political-analysis/article/synthetic-replacements-for-human-survey-data-the-perils-of-large-language-models/B92267DC26195C7F36E63EA04A47D2FE)
+- Stress-tests "silicon sampling" (prompting an LLM to answer as a persona) and finds important **validity failures even when averaged opinions look plausible**.
+- Synthetic responses show **compressed variance** and regression coefficients that diverge — sometimes flipping sign — versus real survey data, making them unreliable for inference; related work documents social-desirability bias and a distinct "machine bias" with lower between-subgroup variance.
+- A required caution for our **evaluation layer**: synthetic feedback is a signal for exploration/debugging, not ground truth. We should ship calibration against real distributions, report variance (not just means), and label outputs as synthetic — consistent with the project's stated Limitations.
 
 ### 🧩 Others
 _Multi-agent / social simulation, long-horizon tasks, related work._
+
+### [Generative Agents: Interactive Simulacra of Human Behavior](https://arxiv.org/abs/2304.03442)
+- 25 LLM agents living in a Sims-like sandbox ("Smallville"), producing believable individual behavior and **emergent group dynamics** (information diffusion, relationship memory, coordinating a Valentine's party).
+- Introduces the **memory-stream architecture** — observations retrieved by recency, importance, and relevance — plus periodic **reflection** and re-planning; believability is evaluated via ablations and TrueSkill ratings.
+- The foundational design for the **"lightweight self-evolving memory"** and long-horizon/multi-agent directions on our roadmap; the memory/reflection loop is the reference architecture if our persona agents need to persist and adapt across sessions.
+
+### [AgentSociety: Large-Scale Simulation of LLM-Driven Generative Agents](https://arxiv.org/abs/2502.08691)
+- A large-scale **societal simulator** running 10k+ psychologically-grounded agents (memory, emotion, needs) through ~5M interactions in a multi-layer urban/social/economic environment.
+- A **Ray-based distributed engine** scales to ~30k agents faster than real time; used as a testbed for polarization, inflammatory-message spread, UBI, and external shocks (hurricanes); finds **environment-grounded agents match real-world mobility/behavior data far better** than prompt-only "text simulators."
+- The strongest reference for our **Stage-4 planet-scale** ambitions — it shows the scaling path is distributed infrastructure, and externally validates our core thesis that the *environment* (not just the persona) drives behavioral fidelity.
 
 ### [Magentic Marketplace: An Open-Source Environment for Studying Agentic Markets](https://www.microsoft.com/en-us/research/wp-content/uploads/2025/10/multi-agent-marketplace.pdf)
 - Proposes an open-source multi-agent marketplace simulation where consumer-side assistant agents interact with business-side service agents to search, communicate, receive proposals, and complete transactions.
@@ -41,7 +72,6 @@ _Multi-agent / social simulation, long-horizon tasks, related work._
 - Proposes a scalable open-source social media simulation framework where LLM-based agents act as users on platforms like X/Twitter and Reddit, enabling studies of large-scale social phenomena such as information spreading, group polarization, and herd behavior.
 - The environment includes dynamic social networks, evolving post/content states, diverse user actions such as posting, following, reposting, liking, and commenting, plus recommendation systems based on user interests and hot-score ranking; it supports simulations with up to one million agents.
 - Relevant to MatrAIx because it provides a strong reference for large-scale multi-agent social simulation: agent personas, network evolution, recommender-mediated interaction, long-horizon collective dynamics, and environment-level metrics for studying emergent behavior.
-
 
 ---
 
@@ -55,7 +85,7 @@ Define the common contract every environment implements so personas, tasks, and 
 - **Telemetry trace** is the required output: full record of steps, actions, signals, timings, outcome — this feeds the Application team's report (Block 3).
 - Two integration paths: **(a) hosted sandbox playground** (contributor supplies the surface) and **(b) agent API** that an external system drives.
 
-**Owner(s):** @JianhengHou, @name2, @name3_ (add more as needed)
+**Owner(s):** _@name1, @name2, @name3_ (add more as needed)
 
 ---
 
@@ -79,7 +109,7 @@ High-value surface — many target products *are* AI systems, so they can be tes
 - Conversation logging + metrics (helpfulness, trust, clarity, satisfaction, length).
 - Cover **cooperative** users **and** hard/realistic users (privacy-sensitive, low-literacy / elderly, confused, adversarial) — the realistic-but-hard cases are where simulation adds value.
 
-**Owner(s):** _@name1, @name2, @name3_ (add more as needed)
+**Owner(s):** _@ahmd-mohsin, @name2, @name3_ (add more as needed)
 
 ---
 
@@ -91,7 +121,7 @@ Agent interaction with web surfaces (landing pages, prototypes, dashboards, **fo
 - Capture signals: pages, clicks, scroll, hesitation, failed actions, final decision.
 - Forum/social subtype: read posts, comment, initiate DMs — same interaction layer, different surface.
 
-**Owner(s):** _@name1, @name2, @name3_ (add more as needed)
+**Owner(s):** _@ahmd-mohsin, @name2, @name3_ (add more as needed)
 
 ---
 
@@ -108,7 +138,6 @@ Complex interactive products (mobile / desktop / sandbox builds). Pulls in low-v
 ## 🤝 How to Contribute
 
 1. Pick a task above and add your name to its **Owner** field.
-2. Open an issue for your task to track details and progress.
+2. Open a sub-issue / sub-doc for your task to track details and progress.
 3. Align early on the shared **interface + telemetry** (Task 1) — it blocks Tasks 2–5.
-4. Keep your own `Status Update - <Your Name>` issue and add the `status-update` + `team: environment` labels so it's easy to find.
 4. Build **Type 1 (survey)** and **Type 2 (chatbot)** first; they're the fastest path to a working end-to-end pipeline.
