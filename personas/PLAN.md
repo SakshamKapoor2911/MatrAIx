@@ -310,7 +310,7 @@ A train-oriented coreset. **Goal: train a persona-conditioned model** that, give
 - Use for instruction tuning / fine-tuning so a model can faithfully follow any given persona.
 - Keep it lightweight — this is a supporting artifact, not the paper's focus.
 
-**Owner(s):** @Eliza_Fan, @name2, @name3_ (add more as needed)
+**Owner(s):** @Eliza_Fan, @Wenkai Li, @name3_ (add more as needed)
 
 ---
 
