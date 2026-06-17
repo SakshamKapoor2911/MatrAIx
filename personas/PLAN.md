@@ -184,7 +184,7 @@ _Benchmarks, evaluation, related work that doesn't fit above._
 ---
 
 ## 🧱 Task 1 — Schema & Domain Design
-**Owner(s):** @Yunze Xiao @Eliza_Fan, @Xiaoyi-Liu, @brihijoshi (add more as needed)
+**Owner(s):** @Yunze Xiao @Eliza_Fan, @Xiaoyi-Liu, @brihijoshi , @Ziyan Wang(add more as needed)
 
 The schema blocks everything else, so settle it first. **Don't over-explore** — define attributes from understanding of the target domains/tasks (limited-scope exploration).
 
