@@ -55,7 +55,7 @@ Define the common contract every environment implements so personas, tasks, and 
 - **Telemetry trace** is the required output: full record of steps, actions, signals, timings, outcome — this feeds the Application team's report (Block 3).
 - Two integration paths: **(a) hosted sandbox playground** (contributor supplies the surface) and **(b) agent API** that an external system drives.
 
-**Owner(s):** @JianhengHou, @dipeshbabu, _@name3_ (add more as needed)
+**Owner(s):** @JianhengHou, @dipeshbabu, _@AravindMohan10_ (add more as needed)
 
 ---
 
@@ -101,7 +101,7 @@ Complex interactive products (mobile / desktop / sandbox builds). Pulls in low-v
 
 - Scope build formats and UI-automation approach for later.
 
-**Owner(s):** @JianhengHou, @dipeshbabu, _@name3_ (add more as needed)
+**Owner(s):** @JianhengHou, @dipeshbabu, _@AravindMohan10_ (add more as needed)
 
 ---
 
