@@ -65,6 +65,11 @@ _Existing persona datasets / profile collections (also log scale + how to compar
 - Scale/method: prompt the LLM with open-ended questions to self-generate a large anthology of backstories, then greedy-match backstories to real survey respondents to build aligned "virtual subjects".
 - Relevance: a persona-generation recipe which is relevant to MatrAIxPersona's narrative-expansion step (Task 1, Step 3), offering a generation-plus-validation pattern for population-grounded personas through respondent matching and distribution/consistency metrics.
 
+## [SCOPE: Sociopsychological Context Shapes Persona-Based LLM Simulations](https://arxiv.org/abs/2601.07110)
+- A persona framework grounded in rich sociopsychological attributes rather than demographics alone. The authors collected a 141-question survey from 124 participants covering values, beliefs, identity, personality, social attitudes, and life experiences, then used these factors to construct persona representations for LLM simulation.
+- Key finding: demographic variables explain only ~1.5% of variation in human responses, while sociopsychological factors substantially improve behavioral prediction. Across seven LLMs and evaluations on both SCOPE and SimBench, personas built from values, beliefs, and identity consistently outperform demographic-only personas and reduce demographic stereotyping and over-accentuation.
+- Relevance: The paper argues that realistic human simulation requires modeling latent psychological structure—not just age, gender, occupation, or location. Its survey-derived belief, value, identity, and personality dimensions closely align with MatrAIx's goal of building personas that capture deeper behavioral drivers rather than surface demographic descriptors.
+
 ### 🛠️ Generation Methods
 _Methods for synthesizing personas, persona-conditioned generation, augmentation._
 
@@ -107,6 +112,11 @@ _Methods for synthesizing personas, persona-conditioned generation, augmentation
 - Chen, Arditi, Sleight, Evans, Lindsey (incl. Anthropic) identify linear directions in activation space — persona vectors — corresponding to character traits (e.g. evil, sycophancy, hallucination), extracted automatically from natural-language trait descriptions.
 - The vectors monitor persona drift during deployment and finetuning, and support causal control: steering along a vector induces a trait, while inference-time and preventative steering suppress unwanted shifts and flag training data that would induce them.
 - Relevance: the canonical activation-steering method for persona conditioning/enforcement; alongside Claude's Character it bears on instilling and holding trait-faithful behavior at scale and on monitoring persona drift over long interactions.
+
+### [Persona Generators: Generating Diverse Synthetic Personas for Arbitrary Contexts](https://arxiv.org/abs/2602.03545)
+- Google DeepMind introduces Persona Generators that automatically expand a short scenario description into a population of synthetic personas. Rather than matching the most likely user profiles, the method explicitly targets support coverage—capturing the full range of plausible attitudes, preferences, and behaviors, including rare long-tail combinations.
+- Method: the authors use an AlphaEvolve-style evolutionary optimization loop, where LLMs mutate and improve persona-generation code over hundreds of iterations. The evolved generators learn how to produce persona populations that maximize diversity along context-relevant axes and substantially outperform prompting-based baselines on six diversity metrics across unseen scenarios.
+- Relevance: While Nemotron and census-grounded methods focus on distributional realism, Persona Generators focus on coverage realism—ensuring synthetic populations span rare viewpoints, edge cases, and underrepresented behavioral patterns. This is particularly relevant for simulation, stress-testing, and discovering failure modes where long-tail personas matter more than average users.
 
 ### 🧩 Others
 _Benchmarks, evaluation, related work that doesn't fit above._
