@@ -92,6 +92,11 @@ _Synthetic users, LLM-based user studies, product/UX evaluation._
 - Trained and evaluated on standard recommendation datasets (e.g., Amazon); the learned agents capture user-item, user-user, and item-item interaction patterns and can personalize behavior simulation comparable to real users.
 - Relevant to making MatrAIx's simulated users faithful: its reflection-based correction loop is a concrete mechanism for aligning persona-driven agent behavior with real telemetry before that telemetry is trusted in a feedback report.
 
+### [MEMARD: A Conversational Recommendation Dataset via Memory-Enhanced Multi-Agent Dialogue Synthesis](https://openreview.net/forum?id=3Df83swog6)(Eliza Fan)
+- Extracts persona traits from real Amazon review data and proposes a memory-enhanced multi-agent framework to automatically synthesize high-quality conversational recommendation dialogues
+- The dataset comprises 50,166 conversational turns derived from real Amazon movie reviews. Evaluation is rigorous, utilizing a mix of human blind tests and LLM-as-a-judge scoring across six key dimensions—user control, expertise, specificity, relevance, naturalness, and consistency—to measure dialogue quality and behavioral diversity.
+- MEMARD serves as the foundational blueprint for MatrAIx’s recommendation-focused simulations. Its turn-level verifiers (quality gates) and persona-based memory retrieval provide the exact logic needed for MatrAIx to simulate "intelligent users" interacting with live product surfaces. By adopting the MEMARD benchmark design, MatrAIx can effectively measure whether its agents truly understand nuanced user needs (e.g., preference shifts, avoidance of disliked items) rather than just performing generic chat, bridging the gap between isolated model training and realistic, large-scale product-environment simulation.
+
 ### 🗂️ Domain Benchmarks
 _Task suites for tutoring, e-commerce, support, gaming, enterprise, etc._
 
