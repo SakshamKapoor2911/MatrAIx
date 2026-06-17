@@ -37,6 +37,11 @@ _Multi-agent / social simulation, long-horizon tasks, related work._
 - The environment is built around a centralized marketplace server and a simple action protocol supporting agent registration, search, message passing, proposal submission, payment, and full interaction logging; evaluation focuses on transaction success, consumer utility, welfare, search quality, manipulation resistance, and behavioral biases such as first-proposal bias.
 - Relevant to MatrAIx because it provides a reusable pattern for long-horizon multi-agent social/economic simulations with heterogeneous roles, private preferences, strategic service agents, market-level outcomes, and extensible domains beyond restaurants/contractors.
 
+### [SOTOPIA: Interactive Evaluation for Social Intelligence in Language Agents](https://arxiv.org/abs/2310.11667)
+- Introduces an open-ended interactive environment where LLM agents role-play characters with personas, goals, relationships, and private information, interacting turn by turn to pursue their social goals.
+- Method & scale: 90 social scenarios paired with 40 characters into role-play episodes; turn-based interaction over a structured action space, scored by a multidimensional LLM-as-judge.
+- Relevance: a good structure and template for Task 1's shared interface and telemetry (e.g. a structured observation/action schema, a "scenario + persona + goal" configuration that maps cleanly onto `reset → step → done` with persona injected via system prompt).
+
 ### [OASIS: Open Agent Social Interaction Simulations with One Million Agents](https://arxiv.org/pdf/2411.11581)
 - Proposes a scalable open-source social media simulation framework where LLM-based agents act as users on platforms like X/Twitter and Reddit, enabling studies of large-scale social phenomena such as information spreading, group polarization, and herd behavior.
 - The environment includes dynamic social networks, evolving post/content states, diverse user actions such as posting, following, reposting, liking, and commenting, plus recommendation systems based on user interests and hot-score ranking; it supports simulations with up to one million agents.
@@ -66,7 +71,7 @@ The simplest surface — the agent reads a stimulus (product concept, message, d
 - Define input formats and a **structured output schema** (rating scores, free-form feedback, ranked preferences, objections, predicted adoption).
 - Reference implementation + a couple of example stimuli.
 
-**Owner(s):** @JianhengHou, @dipeshbabu, _@name3_ (add more as needed)
+**Owner(s):** @JianhengHou, @dipeshbabu, @Keyang Xuan, _@name3_ (add more as needed)
 
 ---
 
