@@ -313,7 +313,7 @@ Build the raw persona pool through four complementary sources, all conforming to
 ---
 
 ## 🧹 Task 3 — Data Quality Filtering & Evaluation
-**Owner(s):** @Eliza_Fan, @Yun Shen, @rosierogao, @name3_ (add more as needed)
+**Owner(s):** @Eliza_Fan, @Yun Shen, @rosierogao, @ziweil2 (add more as needed)
 Turn the raw pool into clean, trustworthy data, and *measure* that quality (our differentiator). This is a **foundation** task — we generate a lot, then filter hard.
 
 **Filtering**
