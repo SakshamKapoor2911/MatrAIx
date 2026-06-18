@@ -118,6 +118,11 @@ _Methods for synthesizing personas, persona-conditioned generation, augmentation
 - Method: the authors use an AlphaEvolve-style evolutionary optimization loop, where LLMs mutate and improve persona-generation code over hundreds of iterations. The evolved generators learn how to produce persona populations that maximize diversity along context-relevant axes and substantially outperform prompting-based baselines on six diversity metrics across unseen scenarios.
 - Relevance: While Nemotron and census-grounded methods focus on distributional realism, Persona Generators focus on coverage realism—ensuring synthetic populations span rare viewpoints, edge cases, and underrepresented behavioral patterns. This is particularly relevant for simulation, stress-testing, and discovering failure modes where long-tail personas matter more than average users.
 
+### [Generative Agent-Based Modeling with Actions Grounded in Physical, Social, or Digital Space using Concordia](https://arxiv.org/abs/2312.03664) (@Yixuan-He)
+- DeepMind's open-source framework for building generative-agent societies with grounded actions in physical, social, and digital environments.
+- Provides reusable abstractions for memory, planning, observations, social interactions, and environment dynamics.
+- Relevance: a practical simulation substrate for deploying MatrAIx personas as agents and evaluating emergent population-level behavior beyond static role-playing.
+
 ### 🧩 Others
 _Benchmarks, evaluation, related work that doesn't fit above._
 
@@ -180,6 +185,11 @@ _Benchmarks, evaluation, related work that doesn't fit above._
 - An open-source implementation of a persistent multi-agent virtual town where LLM-powered characters interact, build memories, form relationships, and generate emergent social behaviors over time.
 - Combines persona profiles, long-term memory, world state management, and agent planning/action loops to support continuous simulation rather than single-turn interactions.
 - Relevant to MatrAIx as a reference architecture for generating long-horizon user trajectories, modeling social influence, and studying how personas evolve through repeated interactions in shared environments.
+
+### [τ-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains](https://arxiv.org/abs/2406.12045) (@Yixuan-He)
+- Benchmark for evaluating tool-using and interactive LLM agents in realistic user-facing tasks.
+- Emphasizes long-horizon interactions and human-like user behavior.
+- Relevance: provides evaluation settings for testing whether MatrAIx personas behave realistically when interacting with agents rather than only answering survey questions.
 
 ### [Generative Agents: Interactive Simulacra of Human Behavior](https://arxiv.org/pdf/2304.03442) (Xiaoyi-Liu added, Yuexing-Hao posted in Discord discussion)
 ### [Human Relations Area Files(eHRAF ​​World Culture)](https://hraf.yale.edu/resources/reference/outline-of-cultural-materials/) (Xiaoyi-Liu added, Ziyan-Wang posted in Discord)
