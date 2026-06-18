@@ -181,6 +181,22 @@ _Benchmarks, evaluation, related work that doesn't fit above._
 - Combines persona profiles, long-term memory, world state management, and agent planning/action loops to support continuous simulation rather than single-turn interactions.
 - Relevant to MatrAIx as a reference architecture for generating long-horizon user trajectories, modeling social influence, and studying how personas evolve through repeated interactions in shared environments.
 
+### [Generative Agents: Interactive Simulacra of Human Behavior](https://arxiv.org/pdf/2304.03442) (Xiaoyi-Liu added, Yuexing-Hao posted in Discord discussion)
+### [Human Relations Area Files(eHRAF ​​World Culture)](https://hraf.yale.edu/resources/reference/outline-of-cultural-materials/) (Xiaoyi-Liu added, Ziyan-Wang posted in Discord)
+### [OdysSim: Building Foundation Models for Human Behavior Simulation] (Xiaoyi-Liu added, Lorenzo-Xiao posted in Discord)
+### [OASIS: Open Agent Social Interaction Simulations with One Million Agents](https://arxiv.org/pdf/2411.11581) (Xiaoyi-Liu added, Yuexing-Hao posted on Discord)
+### [Large Language Models Assume People are More Rational than We Really are](https://arxiv.org/abs/2406.17055) (Xiaoyi-Liu added, Yucheng-Lu posted on Discord)
+### [LLMs Position Themselves as More Rational Than Humans: Emergence of AI Self-Awareness Measured Through Game Theory](https://arxiv.org/abs/2511.00926v1) (Xiaoyi-Liu added, Yucheng-Lu posted on Discord)
+### [SimCity: Multi-Agent Urban Development Simulation with Rich Interactions](https://arxiv.org/abs/2510.01297) (Xiaoyi-Liu added, Yucheng-Lu posted on Discord)
+### [Using LLMs for Market Research](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4395751) (Xiaoyi-Liu added, Shirley-Huang posted blog on Discord)
+### [LLM Economist: Large Population Models and Mechanism Design in Multi-Agent Generative Simulacra](https://arxiv.org/abs/2507.15815) (Xiaoyi-Liu added, Seth-Karen posted on Discord)
+### [Beyond Cooperative Simulators: Generating Realistic User Personas for Robust Evaluation of LLM Agents](https://arxiv.org/abs/2605.12894) (Xiaoyi-Liu added, Ishan-Gupta (twitter link) and Brihi-Joshi posted on Discord)
+### [CoSER: A Comprehensive Literary Dataset and Framework for Training and Evaluating LLM Role-Playing and Persona Simulation](https://arxiv.org/abs/2502.09082) (Xiaoyi-Liu added, Lorenzo-Xiao posted on Discord)
+### [HER: Human-like Reasoning and Reinforcement Learning for LLM Role-playing](https://arxiv.org/abs/2601.21459) (Xiaoyi-Liu)
+- reasoning-augmented version of CoSER, according to [CoSER github](https://github.com/Neph0s/CoSER）
+### [The Need for a Socially-Grounded Persona Framework for User Simulation](https://arxiv.org/abs/2601.07110) (Xiaoyi-Liu added, Haiwen-Huang posted on Discord)
+
+
 ---
 
 ## 🧱 Task 1 — Schema & Domain Design
