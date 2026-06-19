@@ -8,12 +8,14 @@ Use --mode full for full artifact download.
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import os
 import shutil
 import sys
 import urllib.error
 import urllib.request
+from io import StringIO
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -72,6 +74,14 @@ def stream_download(url: str, dest: Path, force: bool = False) -> Path:
     tmp_dest.replace(dest)
     log(f"Saved {dest}")
     return dest
+
+
+def read_url_text(url: str) -> str:
+    try:
+        with urllib.request.urlopen(url) as response:
+            return response.read().decode("utf-8")
+    except urllib.error.URLError as err:
+        raise RuntimeError(f"Failed to download {url}: {err}") from err
 
 
 def save_jsonl_sample(
@@ -197,14 +207,49 @@ def fetch_personahub(args: argparse.Namespace, target_root: Path) -> None:
     )
 
 
-def fetch_oasis(_: argparse.Namespace, target_root: Path) -> None:
-    out_path = target_root / "oasis" / "user_data_36.json"
-    stream_download(OASIS_URL, out_path)
+def fetch_oasis(args: argparse.Namespace, target_root: Path) -> None:
+    out_dir = target_root / "oasis"
+    ensure_dir(out_dir)
+
+    if args.mode == "full":
+        out_path = out_dir / "user_data_36.json"
+        stream_download(OASIS_URL, out_path, force=args.force)
+        return
+
+    text = read_url_text(OASIS_URL)
+    records = json.loads(text)
+    sampled = records[: args.sample_rows]
+    out_path = out_dir / f"oasis_sample_{args.sample_rows}.json"
+    with open(out_path, "w", encoding="utf-8") as fh:
+        json.dump(sampled, fh, ensure_ascii=False, indent=2)
+        fh.write("\n")
+    log(f"Saved {len(sampled)} sampled records to {out_path}")
 
 
-def fetch_ml_primex(_: argparse.Namespace, target_root: Path) -> None:
-    out_path = target_root / "apple_ml_primex" / "primexdata.csv"
-    stream_download(PRIMEX_URL, out_path)
+def fetch_ml_primex(args: argparse.Namespace, target_root: Path) -> None:
+    out_dir = target_root / "apple_ml_primex"
+    ensure_dir(out_dir)
+
+    if args.mode == "full":
+        out_path = out_dir / "primexdata.csv"
+        stream_download(PRIMEX_URL, out_path, force=args.force)
+        return
+
+    text = read_url_text(PRIMEX_URL)
+    reader = csv.reader(StringIO(text))
+    header = next(reader)
+    rows: list[list[str]] = []
+    for row in reader:
+        rows.append(row)
+        if len(rows) >= args.sample_rows:
+            break
+
+    out_path = out_dir / f"primex_sample_{args.sample_rows}.csv"
+    with open(out_path, "w", encoding="utf-8", newline="") as fh:
+        writer = csv.writer(fh)
+        writer.writerow(header)
+        writer.writerows(rows)
+    log(f"Saved {len(rows)} sampled rows to {out_path}")
 
 
 def parse_args(argv: Iterable[str]) -> argparse.Namespace:

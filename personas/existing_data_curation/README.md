@@ -26,7 +26,7 @@ python scripts/fetch_sources.py --source all --mode sample --sample-rows 1000
 
 This will:
 - sample `Nemotron` and `PersonaHub` into JSONL files
-- fully download the OASIS JSON and ML-PRIMEX CSV
+- sample `OASIS` and `ML-PRIMEX` into small subset files
 
 ### 2) Full Nemotron download
 
