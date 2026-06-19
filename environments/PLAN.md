@@ -71,7 +71,7 @@ The simplest surface — the agent reads a stimulus (product concept, message, d
 - Define input formats and a **structured output schema** (rating scores, free-form feedback, ranked preferences, objections, predicted adoption).
 - Reference implementation + a couple of example stimuli.
 
-**Owner(s):** @JianhengHou, @dipeshbabu, @Keyang Xuan, _@name3_ (add more as needed)
+**Owner(s):** @JianhengHou, @dipeshbabu, @Keyang Xuan, @Peiyang-Song (add more as needed)
 
 ---
 
