@@ -96,7 +96,7 @@ Agent interaction with web surfaces (landing pages, prototypes, dashboards, **fo
 - Capture signals: pages, clicks, scroll, hesitation, failed actions, final decision.
 - Forum/social subtype: read posts, comment, initiate DMs — same interaction layer, different surface.
 
-**Owner(s):** @JianhengHou, @dipeshbabu, _@ahmd-mohsin (add more as needed)
+**Owner(s):** @JianhengHou, @dipeshbabu, _@ahmd-mohsin, @wenkai-li (add more as needed)
 
 ---
 
