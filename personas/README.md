@@ -184,3 +184,7 @@ Evaluation:
 - persona validation tools
 - domain-specific persona subsets
 - persona consistency benchmarks
+
+## 📥 Existing Data Curation
+
+For curated ingestion scripts and manifests of external persona datasets (Nemotron, PersonaHub, OASIS, ML-PRIMEX), see [existing_data_curation/README.md](existing_data_curation/README.md).
