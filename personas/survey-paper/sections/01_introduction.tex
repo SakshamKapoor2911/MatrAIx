@@ -1,2 +1,81 @@
 \section{Introduction}
-TODO.
+Large language models (LLMs) are increasingly used to simulate users, citizens,
+customers, patients, students, workers, voters, and communities. In these
+systems, personas are no longer only design artifacts or role-playing cues; they
+are part of the infrastructure by which LLM agents are made heterogeneous. A
+persona may specify demographic attributes, values, goals, history, style,
+constraints, or memory, and it may be realized as a prompt, structured record,
+retrieval state, or agent profile. Recent work on LLM social simulation and
+role-playing agents shows how quickly this infrastructure is expanding, from
+survey-derived and social-media-grounded virtual populations to personalized
+role-playing agents and digital twins \citep{arxiv241203563,arxiv240418231,arxiv251121722,arxiv250714922}.
+This survey therefore does not treat personas as a new idea. Instead, it focuses
+on a narrower and increasingly consequential problem: how synthetic personas for
+LLM agents are generated, enriched, sampled, grounded, validated, and audited.
+
+The central risk is that persona generation can look methodologically complete
+when it is only narratively complete. Many workflows move from a plausible
+persona prompt directly to simulated behavior, skipping the layer where persona
+attributes are specified, sampled, fused, checked, and tied to the intended
+population or use. A detailed backstory can be vivid but distributionally
+arbitrary; a persona set can match one-dimensional demographic marginals while
+violating feasible joint structure; and a persona-conditioned LLM can match an
+aggregate outcome for the wrong reason, such as stereotype reliance or prompt
+artifacts. Recent critiques of ad hoc LLM-generated personas, audits of
+marginal-versus-joint alignment, and studies of persona collapse make this
+failure mode explicit \citep{arxiv250316527,arxiv260612433,arxiv260424698}.
+Put tersely: narrative vividness is not population validity; persona validity is
+not behavioral fidelity.
+
+Existing surveys provide important adjacent maps. Role-playing-language-agent
+surveys organize personas by the identity being enacted, such as demographic,
+character, or individualized personas, and social-simulation surveys organize
+LLM-agent systems by simulation level, architecture, application, and evaluation
+\citep{arxiv240418231,arxiv241203563}. These perspectives are necessary, but
+they leave a methodological question under-specified. Whereas role-playing-agent
+surveys classify personas by the identity being enacted, this survey classifies
+persona-generation methods by the source and construction logic of the persona
+distribution and by the objective the persona set is meant to support. The gap
+is not that prior work ignores personas. The gap is that persona generation
+itself has not yet been synthesized as a methodological object, with its own
+choices about specification, sampling, grounding, enrichment, validation,
+auditing, and uncertainty.
+
+We separate the generation problem into a pipeline of claims. A target
+population, person, or scenario is first translated into a construction process;
+that process yields a structured persona set; the set is then realized as a
+prompt, memory, narrative, or agent state; the LLM enacts that conditioning; and
+the resulting behavior, response, or interaction trace is evaluated. Different
+validity questions attach to different stages. \emph{Marginal validity} asks
+whether one-dimensional attribute distributions match the intended target.
+\emph{Joint validity} asks whether dependencies, constraints, and feasible
+attribute combinations are preserved. \emph{Enactment validity} asks whether the
+LLM behaves consistently with the persona after conditioning. \emph{Use-relative
+fidelity} asks how much of any of these properties is required for a particular
+downstream use, such as ideation, robustness testing, survey simulation, policy
+analysis, training, or model evaluation. A persona set can be coherent before
+enactment and still be ignored by the LLM; conversely, an LLM can reproduce some
+observed response distribution from a weak persona prompt without the persona
+set being a valid representation of the target population.
+
+This survey makes four contributions. First, it introduces a two-axis taxonomy
+of synthetic persona generation methods for LLM agents. The construction axis
+distinguishes Authored Archetypes, Model-Generated Personas, Population-Sampled
+Personas, and Trace-Grounded Personas. The objective axis distinguishes
+Population Representation, Coverage and Stress Testing, Individual Fidelity,
+Behavioral Calibration, Design Communication, Bias and Harm Auditing, and Agent
+/ Model Evaluation. Second, it provides a conceptual framework that separates
+construction source, objective, persona validity, and enactment validity. Third,
+it synthesizes evidence and failure modes from a curated corpus of recent work,
+including the construction-axis and objective-axis coding files used to develop
+the taxonomy. Fourth, it derives reporting and evaluation guidance for future
+persona-generation studies, with particular attention to joint structure,
+grounding claims, representational harms, and the distinction between persona
+quality and LLM behavior.
+
+The rest of the paper proceeds as follows. We first define the survey scope and
+search process, then position persona generation against related work on
+role-playing agents, social simulation, synthetic survey data, and HCI personas.
+We then present the taxonomy, discuss persona-space design and sampling
+identification, review evaluation practices, and close with ethical
+considerations and open problems.

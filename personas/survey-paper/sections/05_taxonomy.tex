@@ -1,2 +1,255 @@
 \section{Taxonomy of Persona Generation Methods}
-TODO.
+Persona-generation methods cannot be understood from a single list of persona
+types. Labels such as demographic, psychometric, cultural, character,
+stakeholder, or individualized persona describe what attributes or identities
+appear in a persona. They do not say where the persona information came from,
+how the persona distribution was constructed, or what validity claim the persona
+set is meant to support. We therefore classify persona-generation methods along
+two orthogonal axes: construction technique and objective. The construction
+axis asks where the persona information comes from before LLM enactment. The
+objective axis asks what the persona set is meant to be valid for.
+
+\subsection{Construction-Technique Axis}
+
+Along the construction-technique axis, persona-generation methods differ by the
+source used to construct persona-conditioning inputs: Authored Archetypes,
+Model-Generated Personas, Population-Sampled Personas, and Trace-Grounded
+Personas. This axis is determined by the anchor source, not by the final format.
+Nearly every method can end in an LLM prompt, a natural-language profile, or an
+agent memory. The relevant question is what source carries the substantive
+persona information before enactment.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{p{0.18\linewidth}p{0.22\linewidth}p{0.25\linewidth}p{0.24\linewidth}}
+\toprule
+\textbf{Family} & \textbf{Source} & \textbf{Construction logic} & \textbf{Main risk} \\
+\midrule
+Authored Archetypes &
+Human designers, domain experts, stakeholders, or user researchers &
+Manually craft a small number of interpretable representative types &
+Subjectivity, stereotyping, overgeneralization, and weak representativeness \\
+\addlinespace
+Model-Generated Personas &
+LLM priors plus broad prompts, labels, or weak constraints &
+Ask the model to invent personas, attributes, backstories, or diverse sets &
+Opaque model priors, prompt sensitivity, stereotypes, and incoherent joints \\
+\addlinespace
+Population-Sampled Personas &
+Census data, surveys, panels, synthetic populations, or fused datasets &
+Draw, weight, impute, calibrate, or synthesize anonymous records from target population structure &
+Marginal-only alignment, missing variables, unobserved dependencies, and fusion assumptions \\
+\addlinespace
+Trace-Grounded Personas &
+Interviews, logs, social media, profiles, histories, protocols, or other person-level evidence &
+Reconstruct persona states from evidence about specific people or traces &
+Privacy, consent, selection bias, memorization, and weak representativeness \\
+\bottomrule
+\end{tabular}
+\caption{Construction-technique axis for persona generation.}
+\label{tab:construction-axis}
+\end{table}
+
+\textbf{Authored Archetypes} are human-designed persona types. They inherit from
+the HCI, requirements, product, and design tradition in which personas support
+human reasoning, communication, and decision-making. In LLM-agent work, authored
+or verified customer-persona artifacts appear in systems that bring customer
+segments to life or refine personas with expert critique
+\citep{arxiv250517156,arxiv260609637}. Their strength is interpretability and
+domain relevance. Their weakness is that the type system may reflect the
+designer's assumptions more than a target population.
+
+\textbf{Model-Generated Personas} are invented primarily by an LLM from broad
+prompts, labels, or weak constraints. They are attractive because they scale
+quickly and produce vivid, varied surface descriptions. They are also the
+clearest case where narrative fluency can be mistaken for methodological
+grounding. Audits of open-ended persona brainstorming and critiques of
+LLM-generated personas show that apparent diversity can hide stereotypes,
+unstable sampling behavior, and invalid attribute combinations
+\citep{arxiv250316527,arxiv260200044}. The model prior is doing much of the
+sampling work, but that prior is usually opaque.
+
+\textbf{Population-Sampled Personas} are top-down draws from population
+structure. The anchor may be a census, survey, panel, synthetic-population
+model, official statistic, or fused dataset. Their central claim is not merely
+that each generated row sounds plausible, but that the persona set preserves
+relevant marginal and joint structure. Examples include census-derived testbeds,
+survey-derived persona prompts, and large population-persona datasets
+\citep{arxiv240717387,arxiv251121722}.
+% Citation TODO: add/verify a BibTeX key for NVIDIA Nemotron-Personas-USA.
+% URL: https://huggingface.co/datasets/nvidia/Nemotron-Personas-USA
+For this family, an eight-year-old persona with college education is not a
+fluency failure; it is a joint-validity failure. Population-sampled methods are
+therefore strongest when they report not only one-dimensional marginals, but
+also dependencies such as age by education by household composition by region.
+
+\textbf{Trace-Grounded Personas} are bottom-up reconstructions from
+person-level evidence. The anchor may be an interview, longitudinal record,
+social-media history, interaction log, profile, survey protocol, or design
+research artifact. Such methods are often appropriate for individual fidelity,
+behavioral calibration, and grounded user simulation. Examples include
+social-media-grounded virtual populations, sociopsychological user-simulation
+protocols, and digital-twin benchmarks \citep{arxiv250714922,arxiv260107110,arxiv251025536}.
+Their risks differ from population-sampled methods: trace-grounded personas can
+be richly evidenced and still be unrepresentative, privacy-sensitive, or
+dependent on traces that were collected under selective conditions.
+
+The same surface persona can therefore belong to different construction
+families. ``A 45-year-old rural woman'' is an Authored Archetype if a designer
+selected it, Model-Generated if an LLM invented it from a broad request for
+diverse users, Population-Sampled if it was drawn from census or survey
+structure, and Trace-Grounded if it summarizes a real participant or user.
+Hybrids should be classified by their anchor source. A census scaffold enriched
+with personality traits remains Population-Sampled if population structure
+carries the validity claim. Social-media traces reweighted to population targets
+remain Trace-Grounded with population calibration if person-level evidence is
+the starting point.
+
+\subsection{Objective Axis}
+
+Along the objective axis, persona-generation methods differ by the claim their
+persona sets are meant to support: population representation, coverage and
+stress testing, individual fidelity, behavioral calibration, design
+communication, bias and harm auditing, or agent/model evaluation. Objective
+labels are multi-label. A single method can aim to represent a population,
+calibrate behavior, and audit subgroup harms. Conversely, the same construction
+family can serve different objectives.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{p{0.22\linewidth}p{0.34\linewidth}p{0.32\linewidth}}
+\toprule
+\textbf{Objective} & \textbf{Question answered} & \textbf{Failure if confused} \\
+\midrule
+Population Representation &
+Does the set represent a target population, including relevant marginals and joints? &
+Treating vivid examples or balanced marginals as population validity \\
+\addlinespace
+Coverage and Stress Testing &
+Does the set span rare, risky, difficult, or adversarial cases? &
+Mistaking deliberate over-sampling of edge cases for prevalence estimates \\
+\addlinespace
+Individual Fidelity &
+Does the persona preserve a specific person, trace, style, memory, or history? &
+Treating a person-specific reconstruction as representative of a group \\
+\addlinespace
+Behavioral Calibration &
+Do persona-conditioned agents reproduce observed responses, actions, or interactions? &
+Treating response matching as proof that persona construction was valid \\
+\addlinespace
+Design Communication &
+Do personas help humans reason, design, deliberate, or align stakeholders? &
+Treating communicative usefulness as statistical representativeness \\
+\addlinespace
+Bias and Harm Auditing &
+Does the method expose stereotypes, erasure, unfairness, or representational harm? &
+Treating harm discovery as population simulation, or ignoring intersectional failures \\
+\addlinespace
+Agent / Model Evaluation &
+Does persona conditioning test model behavior, role following, safety, alignment, or capability shifts? &
+Treating model sensitivity to personas as evidence that the personas are valid \\
+\bottomrule
+\end{tabular}
+\caption{Objective axis for persona generation.}
+\label{tab:objective-axis}
+\end{table}
+
+\textbf{Population Representation} asks whether a persona set represents a
+target population. This includes density matching, subgroup representation,
+weighting, quota or stratified balance, and preservation of joint structure.
+Survey-derived persona prompts and population-persona datasets are natural
+examples \citep{arxiv251121722}.
+% Citation TODO: add/verify a BibTeX key for NVIDIA Nemotron-Personas-USA.
+% URL: https://huggingface.co/datasets/nvidia/Nemotron-Personas-USA
+The relevant evidence is comparison to census, survey, panel, or official
+reference data, with attention to both marginal and joint validity.
+
+\textbf{Coverage and Stress Testing} asks whether the set spans important,
+rare, difficult, or adversarial cases. Unlike population representation, the
+goal may be to overrepresent low-prevalence situations because they reveal
+failure modes. Persona generators that optimize support coverage rather than
+density matching are a clear example \citep{arxiv260203545}. Evaluation should
+therefore use coverage metrics, discovered failures, or robustness evidence
+rather than prevalence accuracy alone.
+
+\textbf{Individual Fidelity} asks whether a persona preserves a specific person
+or trace. This objective is central to digital twins, longitudinal user
+simulation, memory continuity, communication-style preservation, and
+person-indexed modeling. Trace-grounded systems and digital-twin benchmarks
+often combine individual fidelity with behavioral calibration
+\citep{arxiv260107110,arxiv251025536}. The relevant evidence is person-level
+comparison, not population-level representativeness.
+
+\textbf{Behavioral Calibration} asks whether persona-conditioned agents
+reproduce observed actions, responses, or interaction patterns. It can be
+individual or aggregate, and it often appears in survey simulation,
+recommendation, dialogue, and social-simulation settings
+\citep{arxiv250714922,arxiv260107110,arxiv251121722}. Behavioral calibration
+must be kept separate from persona validity. A coherent persona can be enacted
+poorly, and a poorly grounded persona can sometimes produce plausible aggregate
+behavior through model priors.
+
+\textbf{Design Communication} asks whether personas help humans reason, design,
+deliberate, or coordinate. This objective connects most directly to HCI and
+requirements traditions, where personas are judged partly by interpretability,
+stakeholder usefulness, and design relevance. Voice-of-customer-grounded
+interviewable personas exemplify this objective \citep{arxiv260122288}.
+Narrative enrichment is often important here, but narrative enrichment is a
+means rather than a top-level objective.
+
+\textbf{Bias and Harm Auditing} asks whether persona generation or persona
+conditioning exposes stereotypes, erasure, unfairness, over-accentuation, or
+other representational harms. Ethical audits of human and AI-crafted personas
+and large-scale audits of open-ended persona brainstorming are central examples
+\citep{arxiv250507850,arxiv260200044}. This objective often requires subgroup
+and intersectional analysis, because harms can appear in attribute combinations
+that are invisible in one-dimensional checks.
+
+\textbf{Agent / Model Evaluation} asks what persona conditioning reveals about
+LLM behavior. Many papers use personas not to create a population-valid persona
+set, but to test role following, persona consistency, safety, alignment,
+capability shifts, or vulnerability. Studies of persona collapse and
+psychometric evaluation under persona conditioning fit this objective
+\citep{arxiv260424698,arxiv251022170}. This category is included because
+persona use in LLM research often evaluates the model rather than the persona
+generation method.
+
+\subsection{How the Axes Interact}
+
+A construction family does not imply a validity claim. The same source can
+serve different objectives, and the same objective can be pursued with different
+sources. Model-generated personas can be used for bias and harm auditing, as in
+open-ended persona-brainstorm audits \citep{arxiv260200044}, or for coverage and
+stress testing, as in support-coverage-oriented persona generators
+\citep{arxiv260203545}. Population-sampled personas can support population
+representation and behavioral calibration when survey-derived prompts are used
+to compare simulated and observed response distributions \citep{arxiv251121722}.
+Trace-grounded personas can support individual fidelity and behavioral
+calibration when they reconstruct participants, users, or digital twins from
+person-level evidence \citep{arxiv260107110,arxiv251025536}.
+
+This interaction is why the two slogans matter. Narrative vividness is not
+population validity: a model-generated profile can be rich, memorable, and
+useful for ideation without representing any target population. Persona validity
+is not behavioral fidelity: a population-sampled or trace-grounded persona can
+be well constructed while the LLM ignores, flattens, or overstates the persona
+during enactment. Conversely, behavioral agreement can arise from shortcuts that
+do not validate the persona set itself.
+
+\subsection{Implications for Evaluation}
+
+The taxonomy implies that evaluation should follow the claim. Population
+Representation requires marginal and joint checks against a target reference.
+Coverage and Stress Testing requires coverage metrics, scenario diversity, or
+failure-discovery evidence. Individual Fidelity requires person-level
+comparisons against traces, histories, or human judgments. Behavioral
+Calibration requires benchmarks against observed responses, actions, or
+interaction patterns. Design Communication requires evidence of usefulness,
+interpretability, and design relevance for human stakeholders. Bias and Harm
+Auditing requires subgroup, intersectional, and representational-harm analysis.
+Agent / Model Evaluation requires role-following, consistency, safety,
+alignment, or capability tests under persona conditioning. Later sections build
+on this taxonomy to discuss persona-space design, sampling and identification,
+evaluation standards, and ethical constraints.
