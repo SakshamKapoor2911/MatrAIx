@@ -12,15 +12,15 @@ The Application team collects realistic scenarios where persona-affiliated agent
 
 Each application should define:
 
-- target domain
-- task setting
-- relevant persona types
-- required environment
-- interaction protocol
-- evaluation metrics
-- expected output format
-- example runs
-- known limitations
+- task type (Survey / Chatbot / Web / App)
+- domain / vertical
+- product under test
+- task specification
+- environment needs
+- persona (simulated user)
+- user goal & context
+- metrics
+- outputs
 
 ## 📚 Example Application Areas
 
@@ -41,50 +41,35 @@ A non-exhaustive set of domains where persona agents can drive evaluation. Each 
 
 ## 📝 Application Template
 
-Each application scenario should be described in a consistent format so it can be reproduced and shared:
+Each application scenario should be described in a consistent format so it can be reproduced and handed to the Environment team to run:
 
 ```text
 Scenario name:
-Target domain:
-Environment type:
-Persona requirements:
-Task prompt:
-Interaction protocol:
-Evaluation metrics:
-Expected outputs:
-Example run:
-Known limitations:
+Task type:                # 1·Survey / 2·Chatbot / 3·Web / 4·App   (the four types in PLAN.md)
+Domain / vertical:        # first focus set: Software · Finance · Healthcare · Commerce & Retail
+Product under test:       # WHAT we're evaluating, named concretely
+Task specification:       # the concrete task: what happens in the episode + what the agent/user must do
+Environment needs:        # what the Environment team must set up: surface + how to connect + initial state/data/tools
+Persona (simulated user): # which persona traits/dimensions matter (e.g. price-sensitivity, age, shopping habits)
+User goal & context:      # the persona's specific motivation + what they already know
+Metrics:                  # signals to collect (clarity, satisfaction, friction, task completion…)
+Outputs:                  # telemetry / trajectory the env emits → feeds the report
 ```
 
 Example:
 
 ```markdown
-## Scenario: AI Tutor Evaluation for High School Algebra
-
-Target domain: Education
-Environment type: Chatbot Environment
-
-Persona requirements:
-Students with different math confidence levels, learning styles, and
-attention spans.
-
-Task prompt:
-Interact with the AI tutor to learn how to solve a quadratic equation.
-Ask questions naturally and express confusion when the explanation is unclear.
-
-Evaluation metrics:
-- clarity
-- student confidence
-- number of unresolved confusions
-- correctness of final answer
-- engagement
-- persona-specific satisfaction
-
-Expected outputs:
-- conversation transcript
-- student feedback
-- tutor failure points
-- improvement suggestions
+Scenario name: Retail order-support refund handling
+Task type: 2·Chatbot
+Domain / vertical: Commerce & Retail / order support
+Product under test: a retail order-support chatbot (chat API)
+Task specification: Simulated shoppers request a return/refund over multi-turn chat; the bot must
+                    handle each per the return policy (≤30 turns each).
+Environment needs: connect to the bot's chat API; load an orders DB (order #4521) + the return policy
+Persona: price-sensitivity, age, shopping habits, tech-savviness
+User goal & context: "You ordered NovaBuds earbuds; they arrived late; you want a full refund"
+Metrics: persona adherence, frustration, turns-to-resolution, policy-followed (yes/no)
+Outputs: conversation trajectory + per-metric scores
 ```
 
 ## 🤝 Contributing
