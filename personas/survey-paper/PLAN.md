@@ -34,6 +34,8 @@ Synthetic personas are often evaluated for plausibility one profile at a time, b
 
 ## Tentative Taxonomy
 
+See `taxonomy_options.md` and `TAXONOMY_AGENT_CONTEXT.md` for the current taxonomy-focused debate brief. The current direction is to classify persona-generation methods by the source and construction logic of the persona distribution, rather than by the identity being enacted.
+
 - Prompted Priors: mostly implicit, uncontrolled joint structure.
 - Authored Archetypes: manually coherent, but not distributionally representative.
 - Sampled Populations: best positioned to preserve joint structure.
@@ -1625,4 +1627,3 @@ If the paper can be longer, use this structure:
 ## 22. One-Sentence Pitch
 
 > This survey explains how to construct synthetic personas for LLM agents not as ad hoc prompts, but as theoretically grounded, data-informed, uncertainty-aware representations of heterogeneous agents.
-
