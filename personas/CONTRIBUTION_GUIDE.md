@@ -21,10 +21,10 @@ Complete guide for adding new datasets and persona dimensions to `dimensions+new
 ├── dimensions+new.json                      ← Main dimension file (1,316 dims)
 ├── CONTRIBUTION_GUIDE.md                    ← This file
 ├── DIMENSIONS_ADDITIONS_SUMMARY.md           ← Example of complete addition
-├── HORIZONBENCH_DIMENSIONS.txt              ← Reference list
 │
 └── existing_data_curation/
     ├── README.md                            ← Data source overview
+    ├── HORIZONBENCH_DIMENSIONS.txt          ← Reference list
     ├── manifests/                           ← 10 manifest JSON files
     │   ├── personachat_facebook.json
     │   ├── horizonbench_mental_state_graphs.json
@@ -521,9 +521,9 @@ python scripts/fetch_sources.py --source yourdataset --mode sample
 ## Next Steps After First Contribution
 
 1. Review `DIMENSIONS_ADDITIONS_SUMMARY.md` for a complete example
-2. Check `HORIZONBENCH_DIMENSIONS.txt` for reference format
+2. Check `existing_data_curation/HORIZONBENCH_DIMENSIONS.txt` for reference format
 3. Study other manifests in `existing_data_curation/manifests/`
-4. Explore other fetch functions in `fetch_sources.py`
+4. Explore other fetch functions in `existing_data_curation/scripts/fetch_sources.py`
 5. Help document and deduplicate dimensions (future work)
 
 ---
