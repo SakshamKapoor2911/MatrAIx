@@ -70,6 +70,21 @@ _Existing persona datasets / profile collections (also log scale + how to compar
 - Key finding: demographic variables explain only ~1.5% of variation in human responses, while sociopsychological factors substantially improve behavioral prediction. Across seven LLMs and evaluations on both SCOPE and SimBench, personas built from values, beliefs, and identity consistently outperform demographic-only personas and reduce demographic stereotyping and over-accentuation.
 - Relevance: The paper argues that realistic human simulation requires modeling latent psychological structure—not just age, gender, occupation, or location. Its survey-derived belief, value, identity, and personality dimensions closely align with MatrAIx's goal of building personas that capture deeper behavioral drivers rather than surface demographic descriptors.
 
+### [Synthia: Scalable Grounded Persona Generation from Social Media Data](https://arxiv.org/abs/2507.14922)
+- Introduces a persona-generation framework that grounds LLM-written personas in public social-media posts, using Bluesky data as a behavioral and linguistic substrate rather than relying only on unconstrained model imagination.
+- Method: retrieve real posts, infer structured and narrative persona attributes, and delegate persona prose construction to LLMs while preserving links to the source signals that motivated the persona.
+- Relevance: directly supports MatrAIx Task 2.3 (personas from public/real signals) and gives a concrete pattern for provenance-aware narrative expansion from social traces.
+
+### [Persona-Based Simulation of Human Opinion at Population Scale](https://arxiv.org/abs/2603.27056)
+- Introduces SPIRIT, a framework for inferring psychologically grounded, semi-structured personas from public social-media posts and using those personas as virtual respondents for surveys and event reactions.
+- Method/evaluation: combines structured attributes (e.g. personality traits and world beliefs) with narrative persona text, then validates simulations against Ipsos KnowledgePanel responses from a nationally representative U.S. sample.
+- Relevance: a strong reference for population-scale opinion simulation, virtual respondent panels, and evaluation against real human response distributions rather than only plausible persona text.
+
+### [OPeRA: A Dataset of Observation, Persona, Rationale, and Action for Evaluating LLMs on Human Online Shopping Behavior Simulation](https://arxiv.org/abs/2506.05606)
+- Builds a dataset from real online shopping sessions that jointly records user personas, browser observations, fine-grained actions, and just-in-time rationales.
+- Method: combines an online questionnaire with a browser plugin to capture human behavior traces, then benchmarks whether LLMs can predict the next action and rationale from persona plus observation/action history.
+- Relevance: bridges static persona profiles and action-level behavior modeling, making it relevant to MatrAIxPersonaBench tasks where agents must act through web/product environments instead of only answering questions.
+
 ### 🛠️ Generation Methods
 _Methods for synthesizing personas, persona-conditioned generation, augmentation._
 
@@ -118,10 +133,25 @@ _Methods for synthesizing personas, persona-conditioned generation, augmentation
 - Method: the authors use an AlphaEvolve-style evolutionary optimization loop, where LLMs mutate and improve persona-generation code over hundreds of iterations. The evolved generators learn how to produce persona populations that maximize diversity along context-relevant axes and substantially outperform prompting-based baselines on six diversity metrics across unseen scenarios.
 - Relevance: While Nemotron and census-grounded methods focus on distributional realism, Persona Generators focus on coverage realism—ensuring synthetic populations span rare viewpoints, edge cases, and underrepresented behavioral patterns. This is particularly relevant for simulation, stress-testing, and discovering failure modes where long-tail personas matter more than average users.
 
+### [HAG: Hierarchical Demographic Tree-based Agent Generation for Topic-Adaptive Simulation](https://arxiv.org/abs/2601.05656)
+- Proposes Hierarchical Agent Generation for topic-adaptive simulated populations, balancing macro-level population alignment with micro-level persona consistency.
+- Method/evaluation: uses a World Knowledge Model to infer hierarchical conditional probabilities, builds a topic-adaptive demographic tree, grounds agent instantiation in real-world data, and evaluates with a multi-domain benchmark plus PACE framework.
+- Relevance: complements MatrAIx's ACS/PUMS demographic-skeleton plan by offering a topic-adaptive alternative to static resampling and a reference metric suite for population alignment and sociological consistency.
+
 ### [Generative Agent-Based Modeling with Actions Grounded in Physical, Social, or Digital Space using Concordia](https://arxiv.org/abs/2312.03664) (@Yixuan-He)
 - DeepMind's open-source framework for building generative-agent societies with grounded actions in physical, social, and digital environments.
 - Provides reusable abstractions for memory, planning, observations, social interactions, and environment dynamics.
 - Relevance: a practical simulation substrate for deploying MatrAIx personas as agents and evaluating emergent population-level behavior beyond static role-playing.
+
+### [SPASM: Stable Persona-driven Agent Simulation for Multi-turn Dialogue Generation](https://arxiv.org/abs/2604.09212)
+- Introduces a stability-first framework for LLM-LLM dialogue generation where persona drift, role confusion, and echoing are treated as core failure modes rather than incidental artifacts.
+- Method/evaluation: decomposes simulation into persona creation, Client-Responder dialogue generation, and termination detection; uses Egocentric Context Projection to store dialogue history in a perspective-agnostic form and project it back into each agent's view.
+- Relevance: directly informs MatrAIx long-horizon persona adherence, especially PersonaBench tests for multi-turn stability and agent identity preservation.
+
+### [State-Grounded Multi-Agent Synthetic Data Generation for Tool-Augmented LLMs](https://arxiv.org/abs/2606.16307)
+- Presents StateGen, a synthetic data platform that orchestrates a persona-conditioned user simulator, an agent under test, a state-grounded tool simulator, and a multi-axis judge.
+- Method/evaluation: maintains an authoritative structured world state across turns, reports 64,698 evaluated conversations, and uses a 23-dimensional trait vector to support persona-driven variation.
+- Relevance: useful for MatrAIx environments where persona agents interact with tools and backend state; its "backend-is-truth" invariant is a practical pattern for reducing hallucinated tool traces in generated training/evaluation data.
 
 ### 🧩 Others
 _Benchmarks, evaluation, related work that doesn't fit above._
@@ -196,6 +226,41 @@ _Benchmarks, evaluation, related work that doesn't fit above._
 - Finds that current models achieve only modest simulation fidelity (best score ≈40.8/100), with performance improving as model size increases but showing little benefit from additional inference-time reasoning.
 - Relevance: provides a standardized evaluation framework for MatrAIx-style personas, measuring whether generated personas can reproduce realistic population and demographic-group behaviors rather than only producing plausible persona descriptions.
 
+### [MCP-Persona: Benchmarking LLM Agents on Real-World Personal Applications via Environment Simulation](https://arxiv.org/html/2606.02470v1)
+- Introduces an evaluation platform for tool-enhanced agents operating over real-world personalized applications such as Slack, Rednote, and Instagram.
+- Method: builds the benchmark around three environment components--tools, contexts/user profiles, and tasks--with Tool-Traverse for tool simulation, Context-Tree for user context, and Persona-Gen for profile generation.
+- Relevance: closely matches MatrAIx's environment-facing PersonaBench needs, where persona-conditioned agents should act through tools and application contexts rather than only produce free-form text.
+
+### [Towards Real-world Human Behavior Simulation: Benchmarking Large Language Models on Long-horizon, Cross-scenario, Heterogeneous Behavior Traces](https://arxiv.org/abs/2604.08362)
+- Introduces OmniBehavior, a benchmark built from real-world, long-horizon, cross-scenario behavior traces to test whether LLMs can simulate authentic human behavior beyond isolated tasks.
+- Key finding: current LLMs struggle with cross-scenario causal chains and tend to converge toward a "positive average person," losing individual differences and long-tail behavior.
+- Relevance: directly motivates MatrAIx's focus on persona collapse, behavioral diversity, and long-horizon simulations grounded in realistic heterogeneous traces.
+
+### [TwinVoice: A Multi-dimensional Benchmark Towards Digital Twins via LLM Persona Simulation](https://arxiv.org/abs/2510.25536)
+- Proposes a digital-twin benchmark for evaluating persona simulation across social, interpersonal, and narrative contexts rather than a single role-play setting.
+- Method/evaluation: decomposes persona simulation into opinion consistency, memory recall, logical reasoning, lexical fidelity, persona tone, and syntactic style, then compares LLM performance against human baselines.
+- Relevance: offers a useful capability taxonomy for MatrAIxPersonaBench, especially if benchmarks need to separate factual recall, style, tone, and behavioral consistency.
+
+### [ShopperBench: A Benchmark for Personalized Shopping with Persona-Guided Simulation](https://aclanthology.org/2026.eacl-industry.62.pdf)
+- Adds persona-guided shopping tasks on top of WebShop and tau^2-bench-style environments, testing whether agents adapt decisions to heterogeneous shopper personas.
+- Method/evaluation: augments shopping trajectories with persona-conditioned goals, rationales, and preference cues; proposes Persona Fidelity, Persona-Query Alignment, and Path Consistency metrics.
+- Relevance: a strong application-domain reference for MatrAIx e-commerce or recommendation scenarios, where persona fidelity must be measured alongside task success.
+
+### [DPRF: A Generalizable Dynamic Persona Refinement Framework for Optimizing Behavior Alignment Between Personalized LLM Role-Playing Agents and Humans](https://arxiv.org/html/2510.14205v1)
+- Introduces Dynamic Persona Refinement, an iterative process that compares generated behavior with human ground truth and revises persona profiles to reduce cognitive or behavioral divergence.
+- Method/evaluation: uses a role-playing agent, behavior-analysis agent, and persona-refinement agent across scenarios such as debates, social media posts, public interviews, and movie reviews.
+- Relevance: useful for MatrAIx Task 3 and Task 6 because it turns validation failures into schema/profile updates rather than treating persona evaluation as a one-shot score.
+
+### [Stable Personas: Dual-Assessment of Temporal Stability in LLM-Based Human Simulation](https://arxiv.org/abs/2601.22812)
+- Studies whether persona-instructed LLMs remain stable across repeated and extended conversations, using both self-report and observer-rating views of stability.
+- Method/evaluation: tests seven LLMs across persona conditions and prompt variants, with thousands of between-conversation and within-conversation samples.
+- Relevance: highlights that self-reported persona alignment can remain stable while observable persona expression declines over long interactions, a failure mode MatrAIxPersonaBench should explicitly test.
+
+### [Defining and Measuring the Intended Effects of Persona Prompting](https://aclanthology.org/2025.emnlp-main.1364.pdf)
+- Formalizes what persona prompting is supposed to change and introduces metrics for evaluating whether persona prompts improve expertise, robustness, and fidelity rather than simply changing surface style.
+- Method/evaluation: benchmarks nine open-weight LLMs across 27 tasks and proposes mitigation strategies for enforcing the intended effects of persona prompting.
+- Relevance: gives MatrAIx Task 3 a more precise evaluation framing for distinguishing useful persona conditioning from prompt-induced artifacts or unrelated performance changes.
+
 ### [Generative Agents: Interactive Simulacra of Human Behavior](https://arxiv.org/pdf/2304.03442) (Xiaoyi-Liu added, Yuexing-Hao posted in Discord discussion)
 ### [Human Relations Area Files(eHRAF ​​World Culture)](https://hraf.yale.edu/resources/reference/outline-of-cultural-materials/) (Xiaoyi-Liu added, Ziyan-Wang posted in Discord)
 ### [OdysSim: Building Foundation Models for Human Behavior Simulation] (Xiaoyi-Liu added, Lorenzo-Xiao posted in Discord)
@@ -206,9 +271,20 @@ _Benchmarks, evaluation, related work that doesn't fit above._
 ### [Using LLMs for Market Research](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4395751) (Xiaoyi-Liu added, Shirley-Huang posted blog on Discord)
 ### [LLM Economist: Large Population Models and Mechanism Design in Multi-Agent Generative Simulacra](https://arxiv.org/abs/2507.15815) (Xiaoyi-Liu added, Seth-Karen posted on Discord)
 ### [Beyond Cooperative Simulators: Generating Realistic User Personas for Robust Evaluation of LLM Agents](https://arxiv.org/abs/2605.12894) (Xiaoyi-Liu added, Ishan-Gupta (twitter link) and Brihi-Joshi posted on Discord)
+- Introduces Persona Policies (PPol), a plug-and-play control layer for inducing realistic user behaviors such as confusion, impatience, reluctance, and privacy sensitivity while preserving task goals.
+- Method/evaluation: casts persona generation as LLM-driven evolutionary program search over policy generators, optimizing human-likeness and behavior coverage on tau^2-bench retail and airline settings; blinded annotators rated PPol-conditioned users as human 80.4% of the time.
+- Relevance: directly targets MatrAIx's central simulator risk--LLM users becoming uniformly cooperative and homogeneous--and offers a concrete approach for hard-but-task-preserving persona policies in PersonaBench.
+
 ### [CoSER: A Comprehensive Literary Dataset and Framework for Training and Evaluating LLM Role-Playing and Persona Simulation](https://arxiv.org/abs/2502.09082) (Xiaoyi-Liu added, Lorenzo-Xiao posted on Discord)
+- Builds a large literary dataset and framework for training and evaluating role-playing language agents that must preserve character identity, knowledge, and behavior across interactions.
+- Method/evaluation: coordinates persona simulation of established roles, trains CoSER models, and evaluates against role-playing benchmarks such as InCharacter and LifeChoice.
+- Relevance: useful for MatrAIxPersonaTrain and PersonaBench as a reference for profile-to-training-data pipelines, role-specific evaluation, and retrieval over rich persona/background material.
+
 ### [HER: Human-like Reasoning and Reinforcement Learning for LLM Role-playing](https://arxiv.org/abs/2601.21459) (Xiaoyi-Liu)
-- reasoning-augmented version of CoSER, according to [CoSER github](https://github.com/Neph0s/CoSER）
+- Extends role-playing models with human-like reasoning before response generation, targeting deeper "thinking-in-character" rather than only surface style or memorized facts.
+- Method/evaluation: trains HER models with supervised learning and reinforcement learning from human feedback, reporting gains over a Qwen3-32B baseline on CoSER and MiniMax role-playing benchmarks.
+- Relevance: complements MatrAIxPersonaTrain by highlighting that persona-faithful behavior may require reasoning traces or internal-state scaffolds, not just richer persona cards.
+
 ### [The Need for a Socially-Grounded Persona Framework for User Simulation](https://arxiv.org/abs/2601.07110) (Xiaoyi-Liu added, Haiwen-Huang posted on Discord)
 
 ### [Improving Language Model Personas via Rationalization with Psychological Scaffolds](https://aclanthology.org/2025.findings-emnlp.1187.pdf) (Xiaoyi-Liu)
@@ -223,6 +299,9 @@ _Benchmarks, evaluation, related work that doesn't fit above._
 ### [Training Millions of Personalized Dialogue Agents](https://aclanthology.org/D18-1298.pdf) (Xiaoyi-Liu)
 ### [Two Tales of Persona in LLMs: A Survey of Role-Playing and Personalization](https://aclanthology.org/2024.findings-emnlp.969/) (Xiaoyi-Liu)
 ### [Population-Aligned Persona Generation for LLM-based Social Simulation](https://arxiv.org/abs/2509.10127) (Xiaoyi-Liu)
+- Introduces a pipeline for generating narrative persona sets aligned to reference population distributions instead of sampling personas independently from unconstrained prompts.
+- Method/evaluation: aligns generated persona populations with psychometric reference distributions such as Big Five traits and adapts persona sets to task-specific subgroups.
+- Relevance: directly informs MatrAIx's population-grounded schema and release strategy by connecting individual persona richness with aggregate distributional fidelity.
 
 
 ---
@@ -393,4 +472,3 @@ A small human study to validate data quality and benchmark ground-truth.
 2. Open an issue for your task to track details and progress.
 3. Align early on the shared persona **schema** (Task 1) — it blocks Tasks 2–5.
 4. Keep your own `Status Update - <Your Name>` issue and add the `status-update` + `team: persona` labels so it's easy to find.
-
