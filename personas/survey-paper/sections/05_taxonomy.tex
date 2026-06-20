@@ -7,7 +7,12 @@ how the persona distribution was constructed, or what validity claim the persona
 set is meant to support. We therefore classify persona-generation methods along
 two orthogonal axes: construction technique and objective. The construction
 axis asks where the persona information comes from before LLM enactment. The
-objective axis asks what the persona set is meant to be valid for.
+objective axis asks what the persona set is meant to be valid for. These axes
+classify the persona-generation layer rather than every possible way of making
+an LLM follow a persona. Fine-tuning, reinforcement learning, decoding-time
+steering, and personalization are important enactment or adaptation mechanisms,
+but they do not constitute a fifth construction source unless they also define
+where the persona information comes from.
 
 \subsection{Construction-Technique Axis}
 
@@ -104,7 +109,10 @@ Hybrids should be classified by their anchor source. A census scaffold enriched
 with personality traits remains Population-Sampled if population structure
 carries the validity claim. Social-media traces reweighted to population targets
 remain Trace-Grounded with population calibration if person-level evidence is
-the starting point.
+the starting point. The same rule applies to trained or personalized models:
+training can help a model enact an authored, model-generated,
+population-sampled, or trace-grounded persona, but the training procedure does
+not by itself determine the construction family.
 
 \subsection{Objective Axis}
 
@@ -210,7 +218,10 @@ that are invisible in one-dimensional checks.
 \textbf{Agent / Model Evaluation} asks what persona conditioning reveals about
 LLM behavior. Many papers use personas not to create a population-valid persona
 set, but to test role following, persona consistency, safety, alignment,
-capability shifts, or vulnerability. Studies of persona collapse and
+capability shifts, or vulnerability. This category also covers work on
+persona-aligned or persona-steered models when the central question is whether a
+model follows, preserves, or is affected by a persona rather than how the
+persona set was constructed. Studies of persona collapse and
 psychometric evaluation under persona conditioning fit this objective
 \citep{arxiv260424698,arxiv251022170}. This category is included because
 persona use in LLM research often evaluates the model rather than the persona
@@ -235,8 +246,10 @@ population validity: a model-generated profile can be rich, memorable, and
 useful for ideation without representing any target population. Persona validity
 is not behavioral fidelity: a population-sampled or trace-grounded persona can
 be well constructed while the LLM ignores, flattens, or overstates the persona
-during enactment. Conversely, behavioral agreement can arise from shortcuts that
-do not validate the persona set itself.
+during enactment. Training or decoding-time steering may reduce this enactment
+failure, but it does not retroactively validate the construction of the persona
+set. Conversely, behavioral agreement can arise from shortcuts that do not
+validate the persona set itself.
 
 \subsection{Implications for Evaluation}
 

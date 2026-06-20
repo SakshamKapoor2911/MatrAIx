@@ -1,2 +1,36 @@
 \section{Scope and Definitions}
-TODO.
+This survey focuses on synthetic persona generation for LLM agents. We use
+\emph{persona} broadly to mean a representation that conditions an LLM agent as
+a user, citizen, customer, patient, student, worker, voter, character,
+stakeholder, or other situated actor. A persona may be a structured record, a
+natural-language profile, a prompt, a memory state, a retrieval context, or a
+hybrid representation. A \emph{persona set} is a collection or distribution of
+such representations intended to support some downstream use, such as
+simulation, design, evaluation, auditing, or stress testing.
+
+The unit of analysis is the persona-generation procedure: how persona
+information is specified, sampled, grounded, enriched, represented, and
+validated before or during LLM use. This includes authored design personas,
+open-ended model-generated profiles, census- or survey-derived synthetic
+populations, trace-grounded user simulations, and hybrid pipelines that combine
+data, theory, and LLM rendering. The survey is therefore narrower than work on
+LLM agents in general and broader than prompt templates alone.
+
+We distinguish persona generation from the adjacent problem of persona
+enactment or adaptation. Training a model to act like a role, user, group, or
+individual can improve behavioral fidelity, and this includes supervised
+fine-tuning, reinforcement learning, preference optimization, decoding-time
+steering, and personalization. However, these methods are not a separate source
+of persona information. They can be applied to authored archetypes,
+model-generated profiles, population-sampled records, or trace-grounded
+histories. We include such work when it evaluates persona following, behavioral
+calibration, individual fidelity, safety, or model sensitivity, but we treat it
+as an enactment-layer or model-evaluation issue unless it also contributes a
+method for constructing the personas themselves.
+
+Several adjacent literatures are therefore in scope only at their boundary with
+persona generation: role-playing language agents, LLM-based social simulation,
+personalized assistants, synthetic survey respondents, synthetic populations,
+and HCI/user-research personas. Work is out of scope when it studies general
+agent architectures, general alignment, synthetic data generation, or
+personalization without a substantive persona-construction component.

@@ -32,15 +32,42 @@ Current LLM persona generation often jumps directly from narrative vividness to 
 
 Synthetic personas are often evaluated for plausibility one profile at a time, but realism is fundamentally relational: a persona is realistic only if its attributes are jointly coherent and if the population of personas preserves meaningful marginal and joint distributions.
 
-## Tentative Taxonomy
+## Pinned Taxonomy
 
-See `taxonomy_options.md` and `TAXONOMY_AGENT_CONTEXT.md` for the current taxonomy-focused debate brief. The current direction is to classify persona-generation methods by the source and construction logic of the persona distribution, rather than by the identity being enacted.
+Use the two-axis taxonomy defined in `taxonomy_construction_axis.md` and `taxonomy_objective_axis.md`. The survey should no longer treat demographic prompting, role personas, psychometric personas, HCI personas, or survey respondents as mutually exclusive top-level method families. Those are better understood as persona dimensions, grounding traditions, representation formats, or downstream use cases.
 
-- Prompted Priors: mostly implicit, uncontrolled joint structure.
-- Authored Archetypes: manually coherent, but not distributionally representative.
-- Sampled Populations: best positioned to preserve joint structure.
-- Reconstructed Individuals: joint structure is real at the individual level, but sampling coverage may be biased.
-- Optimized Coverage Sets: deliberately violates density realism sometimes, but should still enforce feasibility constraints.
+### Axis 1: Construction Source / Technique
+
+This axis asks where the substantive persona information comes from before LLM enactment:
+
+- **Authored Archetypes**: human-designed persona types.
+- **Model-Generated Personas**: LLM-invented persona distributions.
+- **Population-Sampled Personas**: top-down draws from population structure.
+- **Trace-Grounded Personas**: bottom-up reconstructions from person-level evidence.
+
+Recommended sentence:
+
+> Along the construction-technique axis, persona-generation methods differ by the source used to construct persona-conditioning inputs: Authored Archetypes, Model-Generated Personas, Population-Sampled Personas, and Trace-Grounded Personas.
+
+### Axis 2: Objective / Validity Claim
+
+This axis asks what the persona set is meant to be valid for:
+
+- **Population Representation**: represent a target population.
+- **Coverage and Stress Testing**: span important, rare, risky, or adversarial cases.
+- **Individual Fidelity**: preserve specific people, traces, memories, styles, or histories.
+- **Behavioral Calibration**: reproduce observed actions, responses, or interaction patterns.
+- **Design Communication**: help humans reason, design, deliberate, or align stakeholders.
+- **Bias and Harm Auditing**: expose stereotypes, erasure, unfairness, or representational harms.
+- **Agent / Model Evaluation**: test whether models follow, preserve, or are affected by personas.
+
+Recommended sentence:
+
+> Along the objective axis, persona-generation methods differ by the claim their persona sets are meant to support: population representation, coverage and stress testing, individual fidelity, behavioral calibration, design communication, bias and harm auditing, or agent/model evaluation.
+
+Key distinction:
+
+> The construction axis asks where personas come from; the objective axis asks what the persona set is valid for.
 
 ## Conceptual Map: From Persona to Simulation
 
@@ -78,15 +105,10 @@ Behavior / response / interaction trace
 
 The survey should contribute four things:
 
-1. **A taxonomy of persona-generation regimes**
-   - demographic prompting
-   - role/character personas
-   - survey-grounded synthetic respondents
-   - psychometric/value-based personas
-   - HCI/user-research personas
-   - synthetic-population personas
-   - LLM-generated open-ended personas
-   - hybrid theory-and-data-grounded personas
+1. **A two-axis taxonomy of persona-generation methods**
+   - construction source / technique: Authored Archetypes, Model-Generated Personas, Population-Sampled Personas, Trace-Grounded Personas
+   - objective / validity claim: Population Representation, Coverage and Stress Testing, Individual Fidelity, Behavioral Calibration, Design Communication, Bias and Harm Auditing, Agent / Model Evaluation
+   - explicit separation between source, objective, persona dimensions, and final prompt format
 
 2. **A unifying theoretical framework**
    - persona generation as construction of a distribution over structured latent agent states
@@ -285,226 +307,71 @@ How your survey differs:
 - LLM-agent personas also need beliefs, values, goals, memories, emotions, and narrative descriptions.
 - Your paper can bridge synthetic population methods with LLM persona prompting and psychometric/social-theory grounding.
 
-## 5. Proposed Taxonomy of Persona Generation Methods
+## 5. Pinned Taxonomy of Persona Generation Methods
 
-### 5.1 Demographic Prompting
+The taxonomy should be presented as two complementary axes rather than a single list of persona types. This is the main structural update to the paper.
 
-Persona is specified by a short demographic description:
+### 5.1 Axis 1: Construction Source / Technique
 
-```text
-You are a 45-year-old low-income rural woman living in Ohio.
-```
+This axis classifies methods by where the substantive persona information comes from before LLM enactment. The final representation may be a prompt, profile, memory, backstory, structured row, or natural-language persona.
 
-Strengths:
+| Family | Construction source | Construction logic | Main validity claim | Main risks |
+|---|---|---|---|---|
+| **Authored Archetypes** | Human designers, domain experts, stakeholders, user researchers | Manually craft a small number of interpretable representative types | Persona is useful, plausible, communicative, and domain-relevant | Subjectivity, stereotyping, overgeneralization, weak population representativeness |
+| **Model-Generated Personas** | LLM internal priors plus broad prompts, labels, or weak constraints | Ask the model to invent personas, attributes, backstories, or diverse user/citizen/customer sets | Persona set is scalable, vivid, broad, or useful for exploration | Opaque sampling distribution, prompt sensitivity, stereotypes, incoherent joint attributes |
+| **Population-Sampled Personas** | Census data, survey data, panels, synthetic population models, fused datasets | Draw, weight, impute, calibrate, or synthesize anonymous persona records from a target population distribution | Persona set preserves marginal and joint population structure | Missing variables, marginal-only alignment, unobserved dependencies, data fusion assumptions |
+| **Trace-Grounded Personas** | Interviews, logs, social media, behavioral histories, user profiles, longitudinal records | Reconstruct persona states from evidence about specific people or person-level traces | Persona preserves individual continuity, memory, style, preferences, or behavior | Privacy, consent, selection bias, memorization, weak representativeness |
 
-- simple
-- easy to control
-- maps to common survey/census variables
-- scalable
+Memorable contrast:
 
-Weaknesses:
+> Authored archetypes are designed types; model-generated personas are model-invented people; population-sampled personas are top-down from population structure; trace-grounded personas are bottom-up from person-level evidence.
 
-- high risk of stereotypes
-- demographics often weakly predict fine-grained attitudes or decisions
-- under-specifies mechanisms
-- may exaggerate group differences
-- creates false confidence because attributes look objective
+### 5.2 Axis 2: Objective / Validity Claim
 
-Representative work:
+This axis records the inferential or practical purpose of the persona set. It is multi-label: a single paper can pursue multiple objectives.
 
-- demographic persona prompting studies
-- virtual survey respondent benchmarks
-- LLM social-simulation papers that condition agents on demographic profiles
+| Objective | Core question | Includes | Typical evidence |
+|---|---|---|---|
+| **Population Representation** | Does the persona set represent a target population? | density matching, marginal validity, joint validity, weighting, quota/stratified balance, subgroup representation | comparisons to census, surveys, panels, official statistics, known marginals and joint distributions |
+| **Coverage and Stress Testing** | Does the set span important, rare, difficult, or risky cases? | support coverage, long-tail cases, edge cases, adversarial users, robustness tests, scenario coverage | diversity/coverage metrics, held-out scenario coverage, discovered failures, red-team outcomes |
+| **Individual Fidelity** | Does the persona preserve a specific person, user, trace, or history? | memory continuity, style fidelity, preference consistency, longitudinal consistency, digital-twin fidelity | comparisons to individual logs, interviews, histories, repeated responses, human judgments of personal fidelity |
+| **Behavioral Calibration** | Do persona-conditioned agents reproduce observed behavior? | survey response fidelity, action prediction, interaction realism, aggregate response matching, task-specific user simulation | accuracy against human responses/actions, distributional response matching, benchmark performance, behavioral correlations |
+| **Design Communication** | Do personas help humans reason, design, or coordinate? | HCI personas, requirements elicitation, stakeholder alignment, product/UX ideation, scenario design | expert approval, stakeholder usefulness, design relevance, interpretability, qualitative validation |
+| **Bias and Harm Auditing** | Does the method reveal or reduce representational harms? | stereotype audits, fairness checks, intersectional bias, erasure, harmful group portrayals | bias metrics, subgroup analysis, fairness audits, harm taxonomies, affected-group or expert review |
+| **Agent / Model Evaluation** | Does persona conditioning test model behavior or capabilities? | persona following, role-play fidelity, persona steering, capability shifts, safety/alignment effects, vulnerability testing | role-play benchmarks, consistency tests, safety/capability evaluations, model-behavior comparisons |
 
-### 5.2 Character / Role Personas
+### 5.3 Boundary Rules for Coding Papers
 
-Persona is a named role, fictional character, historical figure, professional type, or stakeholder category.
+1. **Classify by anchor source, not final format.** Nearly all methods can end in an LLM prompt. The source of the persona information determines the construction family.
+2. **Same surface prompt, different category.** "45-year-old rural woman" is Authored Archetype if manually chosen, Model-Generated if invented by the LLM, Population-Sampled if drawn from Census/survey structure, and Trace-Grounded if summarizing a real participant or user.
+3. **Hybrids inherit from the anchor.** Census scaffold plus psychometric imputation is Population-Sampled. Social-media user profiles reweighted to population targets are Trace-Grounded with population calibration.
+4. **Psychometric, cultural, demographic, and value variables are dimensions, not top-level method families.** They can appear in any construction family.
+5. **Narrative rendering is not a source family.** If an LLM only verbalizes a structured row, code the method by the row's source.
+6. **Separate source from objective.** Coverage, density matching, quota balancing, stress testing, individual fidelity, behavioral calibration, design communication, bias auditing, and model evaluation are design objectives, not construction-source families.
 
-Examples:
+### 5.4 How the Older Categories Fit
 
-```text
-You are a skeptical central banker.
-You are a small business owner facing a credit constraint.
-You are Elizabeth Bennet after Chapter 20.
-```
+Older labels remain useful, but they should be demoted from top-level taxonomy families:
 
-Strengths:
+- **Demographic prompting**: a representation format or persona dimension; construction source depends on whether the demographics are authored, model-generated, sampled from population data, or trace-derived.
+- **Character / role personas**: often Authored Archetypes or Model-Generated Personas; objective is often Design Communication or Agent / Model Evaluation.
+- **Survey-grounded synthetic respondents**: usually Population-Sampled Personas; objectives often Population Representation and Behavioral Calibration.
+- **Psychometric and value-based personas**: latent dimensions or theoretical enrichments; can support Population Representation, Individual Fidelity, Behavioral Calibration, or Agent / Model Evaluation.
+- **Data-driven HCI personas**: often Authored Archetypes or Trace-Grounded Personas; objective often Design Communication.
+- **Synthetic population personas**: Population-Sampled Personas, usually with Population Representation as the main objective.
+- **LLM-generated open-ended personas**: Model-Generated Personas, often with Coverage and Stress Testing, Design Communication, Bias and Harm Auditing, or Agent / Model Evaluation objectives.
+- **Hybrid theory/data/LLM persona generation**: code by the anchor source first, then add objectives and enrichment layers.
 
-- vivid
-- useful for role-play, education, deliberation, and narrative environments
-- often easier for LLMs to enact than abstract demographic profiles
+### 5.5 Most Promising Direction
 
-Weaknesses:
+The strongest constructive recommendation is not a fifth taxonomy family. It is a disciplined pipeline:
 
-- may rely heavily on model priors
-- hard to validate
-- limited distributional meaning
-- character consistency is not the same as population validity
-
-Representative work:
-
-- role-playing language agent surveys
-- generative agents
-- character-fidelity benchmarks
-
-### 5.3 Survey-Grounded Synthetic Respondents
-
-Persona is derived from or calibrated to survey respondents.
-
-Possible approaches:
-
-- sample real survey rows and convert them into prompts
-- impute missing attributes
-- ask LLMs to answer as a respondent with given attributes
-- calibrate synthetic response distributions to observed survey marginals
-
-Strengths:
-
-- empirically grounded
-- directly evaluable against survey data
-- useful for public opinion, policy, and market research
-
-Weaknesses:
-
-- limited to survey items
-- depends on survey design and measurement validity
-- many relevant traits are unobserved
-- joint distributions across datasets remain difficult
-
-Representative work:
-
-- Argyle et al., “Out of One, Many”
-- LLM-S³ / virtual survey respondent benchmark
-- synthetic public opinion studies
-
-### 5.4 Psychometric and Value-Based Personas
-
-Persona is specified through latent traits or value dimensions.
-
-Examples:
-
-- Big Five personality
-- Moral Foundations Theory
-- Schwartz values
-- Inglehart-Welzel cultural dimensions
-- risk aversion
-- time preference
-- locus of control
-- institutional trust
-
-Strengths:
-
-- theoretically meaningful
-- more behavioral than demographics
-- can improve internal consistency
-- supports dimensional persona spaces rather than ad hoc descriptions
-
-Weaknesses:
-
-- measurement scales may not transfer cleanly to LLM behavior
-- traits may not map uniquely to actions
-- psychometric validity of LLM enactment is uncertain
-- cultural and linguistic validity issues
-
-Representative work:
-
-- SCOPE socially grounded persona framework
-- Persona Alchemy
-- culturally grounded personas using WVS / Inglehart-Welzel / Moral Foundations Theory
-- personality-fidelity evaluations of role-playing agents
-
-### 5.5 Data-Driven HCI Personas
-
-Persona is generated from user research data through clustering, dimensionality reduction, qualitative synthesis, or mixed methods.
-
-Strengths:
-
-- long tradition in user-centered design
-- combines quantitative and qualitative evidence
-- focuses on interpretability and stakeholder communication
-
-Weaknesses:
-
-- often small number of archetypes rather than full populations
-- historically criticized as fictional, reductive, or difficult to validate
-- not designed for large-scale LLM-agent simulations
-
-Representative work:
-
-- classic HCI persona literature
-- data-driven persona development
-- recent AI-assisted persona construction in requirements engineering
-
-### 5.6 Synthetic Population Personas
-
-Persona is sampled from a synthetic population calibrated to demographic, socioeconomic, geographic, or behavioral marginals.
-
-Strengths:
-
-- strongest tradition for population representativeness
-- compatible with agent-based modeling and microsimulation
-- explicit calibration targets
-- can support geographic and household structure
-
-Weaknesses:
-
-- traditional synthetic populations rarely include rich psychological/narrative attributes
-- high-dimensional joint distributions are difficult
-- adding subjective traits requires data fusion or assumptions
-
-Representative methods:
-
-- iterative proportional fitting / raking
-- combinatorial optimization
-- Bayesian networks
-- copulas
-- generative models
-- statistical matching
-- multiple imputation
-
-### 5.7 LLM-Generated Open-Ended Personas
-
-Persona is generated directly by an LLM, often with a diversity prompt.
-
-Example:
-
-```text
-Generate 1,000 diverse personas for a study of consumer financial behavior.
-```
-
-Strengths:
-
-- very scalable
-- rich narrative detail
-- low setup cost
-- can cover rare or complex situations
-
-Weaknesses:
-
-- opaque distribution
-- model priors dominate
-- can generate stereotyped, incoherent, or unrepresentative profiles
-- difficult to reproduce across models and prompt versions
-- not statistically identified
-
-Representative work:
-
-- “LLM Generated Persona is a Promise with a Catch”
-- population-aligned persona generation
-- ethical audits of AI-crafted personas
-
-### 5.8 Hybrid Theory/Data/LLM Persona Generation
-
-Persona is generated through a structured pipeline:
-
-1. sample demographic and socioeconomic anchors from data
-2. infer latent traits from psychometric/survey sources
-3. impute missing blocks through statistical matching or hierarchical models
-4. calibrate marginals and selected correlations
-5. use LLMs only to verbalize structured facts into coherent narrative prompts
-6. validate consistency, diversity, and harms
-
-This should be presented as the most promising direction.
+1. define the target population and objective claim
+2. choose the construction anchor: authored, model-generated, population-sampled, or trace-grounded
+3. specify observed attributes, latent traits, beliefs, domain states, memory/history, and narrative fields
+4. sample, fuse, impute, or reconstruct persona states with explicit assumptions
+5. use LLMs to render or enrich personas without silently changing the structured facts
+6. validate the persona set against the objective claim, including uncertainty, robustness, and harms
 
 ## 6. Proposed Conceptual Framework
 
@@ -886,22 +753,30 @@ Focus:
 - identifiability
 - uncertainty and sensitivity
 
-## 5. Taxonomy of LLM Persona Generation Methods
+## 5. Two-Axis Taxonomy of LLM Persona Generation Methods
 
-Use taxonomy from Section 5 above.
+Use the pinned taxonomy from Section 5 above.
 
-Possible table:
+Core table A: construction source / technique.
 
-| Method family | Persona representation | Grounding source | Strength | Weakness |
+| Construction family | Source anchor | Typical representation | Main validity claim | Main risks |
 |---|---|---|---|---|
-| Demographic prompting | short attribute prompt | census/survey categories | simple/control | stereotypes/weak explanatory power |
-| Character role-play | role or named character | text corpora/lore | vivid | hard to validate |
-| Survey-grounded respondent | survey profile | public survey data | evaluable | narrow domains |
-| Psychometric persona | latent traits | scales/theory | interpretable | mapping uncertainty |
-| Data-driven HCI persona | archetype | user research | communicative | few clusters |
-| Synthetic population | micro-agent row | census/surveys | representative | weak psychology |
-| LLM-generated persona | narrative profile | model prior | scalable/rich | opaque/bias-prone |
-| Hybrid framework | structured + narrative | data + theory + LLM | principled | complex/costly |
+| Authored Archetypes | designers, domain experts, stakeholders | interpretable types, role prompts, HCI personas | usefulness, plausibility, communicative value | subjectivity, stereotyping, weak population representativeness |
+| Model-Generated Personas | LLM priors plus broad prompts or weak constraints | generated profiles, backstories, diverse persona lists | scalability, vividness, exploration, coverage | opaque distribution, prompt sensitivity, stereotypes, incoherence |
+| Population-Sampled Personas | census, survey, panel, synthetic population, fused data | sampled rows, weighted profiles, calibrated synthetic agents | marginal and joint population structure | missing variables, data-fusion assumptions, marginal-only alignment |
+| Trace-Grounded Personas | interviews, logs, social media, behavioral histories | reconstructed individuals, memories, style profiles | individual continuity, style, preference, or behavior preservation | privacy, consent, selection bias, memorization |
+
+Core table B: objective / validity claim.
+
+| Objective | What it asks | Common evidence |
+|---|---|---|
+| Population Representation | Does the set represent a target population? | census/survey comparison, marginal and joint checks |
+| Coverage and Stress Testing | Does the set span important or risky cases? | diversity metrics, scenario coverage, red-team outcomes |
+| Individual Fidelity | Does the persona preserve a specific person or trace? | comparison to logs, interviews, histories, repeated responses |
+| Behavioral Calibration | Do agents reproduce observed behavior? | response/action accuracy, aggregate response matching |
+| Design Communication | Do personas help humans design or coordinate? | expert/stakeholder validation, interpretability |
+| Bias and Harm Auditing | Does the method expose or reduce harms? | stereotype/fairness metrics, subgroup audits |
+| Agent / Model Evaluation | Does persona conditioning test model behavior? | role-following, consistency, safety, capability checks |
 
 ## 6. Persona Space Design
 
@@ -1102,18 +977,16 @@ Propose a checklist named something like **PERSONA-GEN**.
 
 Axes:
 
-- x-axis: data grounding from weak to strong
-- y-axis: narrative/psychological richness from low to high
+- x-axis: construction source, from model-generated / weakly anchored to population-sampled / trace-grounded
+- y-axis: objective claim, from exploratory communication/coverage to representational or behavioral validity
 
 Place literatures:
 
-- demographic prompting
-- HCI personas
-- synthetic populations
-- psychometric personas
-- LLM-generated personas
-- survey-grounded respondents
-- hybrid persona generation
+- authored HCI and requirements personas
+- model-generated open-ended personas
+- population-sampled synthetic respondents and synthetic populations
+- trace-grounded user simulations and digital-twin-style personas
+- psychometric, value, cultural, and demographic enrichments as overlays rather than separate families
 
 ### Figure 2. Layered Persona Generator
 
@@ -1180,16 +1053,26 @@ Rows:
 - requirements engineering persona mapping
 - synthetic population / microsimulation reviews
 
-### Table 2. Persona Generation Methods
+### Table 2. Construction-Source Taxonomy
 
 Columns:
 
-- method family
-- representation
-- data source
-- assumptions
-- evaluation
+- construction family
+- source anchor
+- construction logic
+- typical representation
+- main validity claim
 - risks
+
+### Table 2B. Objective Taxonomy
+
+Columns:
+
+- objective / validity claim
+- core question
+- included uses
+- typical evidence
+- common failure mode
 
 ### Table 3. Persona Dimensions
 
@@ -1377,13 +1260,15 @@ Exclude or downweight papers that:
 For each paper, code:
 
 - domain
-- persona type
+- construction_family
+- objective_labels
 - representation format
-- generation method
-- grounding data
+- persona dimensions included
+- source anchor / grounding data
 - theoretical grounding
 - sampling design
 - target population
+- assumptions about joint structure or data fusion
 - evaluation metrics
 - bias/harm analysis
 - reproducibility artifacts
@@ -1446,7 +1331,7 @@ Every persona field should have metadata:
 
 ## 15. Possible Paper Abstract Draft
 
-Large language model (LLM) agents are increasingly used to simulate individuals, groups, markets, organizations, and societies. These systems often rely on synthetic personas to encode agent heterogeneity, yet persona construction remains fragmented across demographic prompting, role-play, synthetic respondents, HCI personas, psychometrics, and synthetic population methods. Existing surveys review role-playing language agents and LLM-based social simulation, but do not treat persona generation itself as a central methodological object. This survey synthesizes work across LLM agents, computational social science, HCI, psychometrics, and microsimulation to ask: how should synthetic personas be specified, sampled, grounded, validated, and audited? We propose a taxonomy of persona-generation methods, distinguish observed attributes, latent traits, domain-specific states, and narrative realizations, and frame persona generation as a partially identified population-synthesis problem. We further develop an evaluation checklist covering distributional validity, internal consistency, theoretical validity, diversity and coverage, robustness, and representational harms. By organizing fragmented work around the persona-generation pipeline, this survey aims to support more transparent, reproducible, and theoretically grounded LLM-agent research.
+Large language model (LLM) agents are increasingly used to simulate individuals, groups, markets, organizations, and societies. These systems often rely on synthetic personas to encode agent heterogeneity, yet persona construction remains fragmented across authored role prompts, model-generated profiles, survey-derived respondents, HCI personas, psychometrics, traces, and synthetic population methods. Existing surveys review role-playing language agents and LLM-based social simulation, but do not treat persona generation itself as a central methodological object. This survey synthesizes work across LLM agents, computational social science, HCI, psychometrics, and microsimulation to ask: how should synthetic personas be specified, sampled, grounded, validated, and audited? We propose a two-axis taxonomy that separates construction source from objective claim, distinguish observed attributes, latent traits, domain-specific states, and narrative realizations, and frame persona generation as a partially identified population-synthesis problem. We further develop an evaluation checklist covering distributional validity, internal consistency, theoretical validity, diversity and coverage, robustness, and representational harms. By organizing fragmented work around the persona-generation pipeline, this survey aims to support more transparent, reproducible, and theoretically grounded LLM-agent research.
 
 ## 16. Concrete Next Steps
 
@@ -1474,12 +1359,15 @@ title
 year
 venue/domain
 is_survey
-persona_type
+construction_family
+objective_labels
 persona_representation
-generation_method
-data_grounding
+persona_dimensions
+source_anchor
 theoretical_grounding
 sampling_design
+target_population
+joint_structure_assumptions
 evaluation_type
 bias_audit
 reproducibility
@@ -1489,7 +1377,7 @@ relevance_score
 
 ### Week 3: Taxonomy and Figures
 
-- Draft method taxonomy.
+- Finalize construction-source and objective-axis taxonomy tables.
 - Create literature map figure.
 - Create layered persona pipeline figure.
 - Create identification problem figure.

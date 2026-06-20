@@ -13,8 +13,7 @@ Use these local files first:
 - `personas/survey-paper/literature/papers_merged_top100.csv`
 - `personas/survey-paper/literature/papers_merged_top100.jsonl`
 - `personas/survey-paper/literature/corpus_summary.md`
-- `personas/survey-paper/taxonomy_construction_technique.md`
-- `personas/survey-paper/TAXONOMY_AGENT_CONTEXT.md`
+- `personas/survey-paper/taxonomy_construction_axis.md`
 
 For paper claims, always include a link using `url`, `doi`, `arxiv_id`, or `pdf_url`. Do not reference a paper without a link.
 

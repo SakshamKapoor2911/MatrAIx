@@ -23,6 +23,13 @@ The taxonomy operationalizes these slogans:
 - The **construction-technique axis** asks where persona information comes from.
 - The **objective axis** asks what the persona set is meant to be valid for.
 
+Boundary with training and personalization:
+
+- The survey's primary unit is **persona generation**: construction of persona-conditioning inputs or persona populations.
+- Training, fine-tuning, RL, preference optimization, decoding-time steering, and personalization are **enactment/adaptation-layer** methods. They can make a model better at acting as a persona, but they do not by themselves answer how the persona was specified, sampled, grounded, or validated.
+- Do not add "trained personas" as a fifth construction family. Training can be applied to authored archetypes, model-generated personas, population-sampled personas, or trace-grounded personas, so it cuts across the construction axis.
+- Include training-based persona alignment as adjacent work under Behavioral Calibration, Individual Fidelity, and Agent / Model Evaluation when it affects enactment fidelity or evaluation.
+
 ## Introduction Writing Plan
 
 Target length: roughly 900-1,200 words for a compact survey paper introduction.
@@ -83,7 +90,7 @@ Target population / person / scenario
     -> persona construction
     -> structured persona set
     -> prompt, memory, or narrative realization
-    -> LLM enactment
+    -> LLM enactment/adaptation
     -> behavior / response / interaction trace
 ```
 
@@ -93,6 +100,10 @@ Explain the validity distinction:
 - **Joint validity**: dependencies and feasibility constraints across attributes are preserved.
 - **Enactment validity**: the LLM behaves consistently with the persona after conditioning.
 - **Use-relative fidelity**: required fidelity depends on downstream use.
+
+Add a boundary sentence:
+
+> Training or fine-tuning can improve the enactment layer, but it is not a substitute for persona construction: a model can be trained to follow a persona whose source is authored, model-generated, population-sampled, or trace-grounded.
 
 This paragraph should set up why the taxonomy has two axes.
 
@@ -169,6 +180,7 @@ Boundary paragraph:
 - Hybrids inherit from the anchor source.
 - Census scaffold plus MBTI enrichment remains Population-Sampled Personas.
 - Social-media traces plus population weighting remains Trace-Grounded Personas with population calibration.
+- Training or personalization should not be treated as a source family. It is an adaptation mechanism applied after or alongside persona representation.
 
 ### Subsection 2: Objective Axis
 
@@ -214,6 +226,7 @@ Boundary paragraph:
 - Objectives are multi-label.
 - Narrative enrichment is a means, not a top-level objective.
 - Agent/model evaluation is included because many papers use personas to test model behavior rather than generate population-valid personas.
+- Persona alignment through fine-tuning, RL, decoding-time steering, or preference optimization usually belongs here as an enactment-layer or model-evaluation issue, unless the paper also contributes a persona-construction method.
 
 ### Subsection 3: How The Axes Interact
 

@@ -11,7 +11,6 @@ Do not rewrite the survey paper. Do not edit the construction-technique taxonomy
 Use these local files first:
 
 - `personas/survey-paper/taxonomy_objective_axis.md`
-- `personas/survey-paper/taxonomy_construction_technique.md`
 - `personas/survey-paper/literature/papers_top100_taxonomy_coding.csv`
 - `personas/survey-paper/literature/papers_merged_top100.csv`
 - `personas/survey-paper/literature/papers_merged_top100.jsonl`

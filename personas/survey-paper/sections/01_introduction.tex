@@ -44,9 +44,10 @@ auditing, and uncertainty.
 We separate the generation problem into a pipeline of claims. A target
 population, person, or scenario is first translated into a construction process;
 that process yields a structured persona set; the set is then realized as a
-prompt, memory, narrative, or agent state; the LLM enacts that conditioning; and
-the resulting behavior, response, or interaction trace is evaluated. Different
-validity questions attach to different stages. \emph{Marginal validity} asks
+prompt, memory, narrative, or agent state; the LLM enacts or adapts to that
+conditioning; and the resulting behavior, response, or interaction trace is
+evaluated. Different validity questions attach to different stages.
+\emph{Marginal validity} asks
 whether one-dimensional attribute distributions match the intended target.
 \emph{Joint validity} asks whether dependencies, constraints, and feasible
 attribute combinations are preserved. \emph{Enactment validity} asks whether the
@@ -56,7 +57,11 @@ downstream use, such as ideation, robustness testing, survey simulation, policy
 analysis, training, or model evaluation. A persona set can be coherent before
 enactment and still be ignored by the LLM; conversely, an LLM can reproduce some
 observed response distribution from a weak persona prompt without the persona
-set being a valid representation of the target population.
+set being a valid representation of the target population. Training,
+fine-tuning, reinforcement learning, decoding-time steering, and personalization
+can improve this enactment layer \citep{arxiv250115427,arxiv231104978,arxiv250214289},
+but they do not by themselves answer how the persona was specified, sampled,
+grounded, or validated.
 
 This survey makes four contributions. First, it introduces a two-axis taxonomy
 of synthetic persona generation methods for LLM agents. The construction axis
