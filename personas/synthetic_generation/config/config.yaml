@@ -1,0 +1,25 @@
+# Model registry for Task 2.2 synthetic generation (DRAFT).
+#
+# Routing is handled by LiteLLM via the `model` string; API keys are read from the
+# standard provider env vars (OPENAI_API_KEY, DEEPSEEK_API_KEY, ANTHROPIC_API_KEY, ...).
+# This file is committed and holds NO secrets. Only OpenAI-compatible / self-hosted
+# endpoints need `api_base` (LiteLLM already knows the hosted providers' URLs).
+
+defaults:
+  max_tokens: 4096
+  temperature: 1.0
+
+# base model list - feel free to add more models here, or adjust the parameters for each model as needed.
+models:
+  gpt-4o:
+    model: gpt-4o                              # native provider — no api_base needed
+  deepseek-chat:
+    model: deepseek/deepseek-chat              # native provider — no api_base needed
+  claude-opus-4-8:
+    model: anthropic/claude-opus-4-8           # native provider — no api_base needed
+  qwen2.5-72b:
+    model: openai/qwen2.5-72b-instruct         # OpenAI-compatible endpoint -> needs api_base
+    api_base: https://dashscope-intl.aliyuncs.com/compatible-mode/v1
+  local-vllm:
+    model: openai/Qwen/Qwen2.5-7B-Instruct     # local vLLM (OpenAI-compatible) -> needs api_base
+    api_base: http://localhost:8000/v1

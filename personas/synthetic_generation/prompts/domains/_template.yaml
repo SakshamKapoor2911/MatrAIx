@@ -1,0 +1,27 @@
+# <domain>@v0.2 — domain overlay template (DRAFT)
+# Copy this file to <domain>.yaml (e.g. finance.yaml) and fill it in.
+# `content` is appended to the USER message, after the base prompt, before the skeleton.
+
+domain: <domain-name>
+status: draft
+content: |
+  ## Domain: <domain-name>
+
+  You are generating a persona for the <domain-name> context. Tailor the persona so it is
+  realistic and useful for tasks in this domain.
+
+  ### Dimensions to emphasize
+  The dimensions (labels from personas/dimensions.json) that are most behaviorally
+  load-bearing here — make these vivid:
+  - <dimension label> — why it matters here
+  - ...
+
+  ### Situational probes (ground behavior in this domain)
+  1-3 concrete "how would they act when…" scenarios the first-person narrative should
+  reflect, so domain behavior is shown, not just told:
+  - e.g. "...when the app asks for personal info before showing any value?"
+  - ...
+
+  ### Domain guardrails
+  - Things that would be implausible / out-of-character for this domain (avoid them).
+  - Any sensitive-attribute cautions specific to this domain.
