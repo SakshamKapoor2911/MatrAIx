@@ -20,8 +20,18 @@ http://127.0.0.1:8899/
 
 ## Temporary Online Preview
 
-After the PR branch is pushed, the demo can be opened through an HTML preview
-service:
+For a private repository, run the local server above and expose it with a
+temporary tunnel:
+
+```bash
+npx --yes localtunnel --port 8899
+```
+
+Share the returned `https://*.loca.lt` URL while the local server and tunnel are
+running.
+
+For a public repository, the same HTML file can also be opened through an HTML
+preview service:
 
 ```text
 https://htmlpreview.github.io/?https://github.com/MatrAIx-ai/MatrAIx/blob/codex/wiki-persona-seed-pipeline/personas/existing_data_curation/demo/index.html

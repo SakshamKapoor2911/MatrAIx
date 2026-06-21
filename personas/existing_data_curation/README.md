@@ -374,7 +374,15 @@ python3 -m http.server 8899
 ```
 
 Open `http://127.0.0.1:8899/`. After the PR branch is pushed, the same file can
-also be shown through an HTML preview service:
+be exposed temporarily for demos:
+
+```bash
+npx --yes localtunnel --port 8899
+```
+
+Share the returned `https://*.loca.lt` URL while both the local server and
+tunnel are running. If the repository is public, the file can also be shown
+through an HTML preview service:
 
 ```text
 https://htmlpreview.github.io/?https://github.com/MatrAIx-ai/MatrAIx/blob/codex/wiki-persona-seed-pipeline/personas/existing_data_curation/demo/index.html
