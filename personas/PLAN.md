@@ -224,6 +224,16 @@ _Benchmarks, evaluation, related work that doesn't fit above._
 ### [Two Tales of Persona in LLMs: A Survey of Role-Playing and Personalization](https://aclanthology.org/2024.findings-emnlp.969/) (Xiaoyi-Liu)
 ### [Population-Aligned Persona Generation for LLM-based Social Simulation](https://arxiv.org/abs/2509.10127) (Xiaoyi-Liu)
 
+Some none-ML references for attributes that the team (and previous works organized in the above) has been using:
+
+### The stories we live by: Personal myths and the making of the self. (Xiaoyi-Liu)
+- basis for using personal experiences and social norms in persona problems
+### [An alternative "description of personality": The Big-Five factor structure](https://psycnet.apa.org/record/1991-09869-001) (Xiaoyi-Liu)
+- basis for "Big 5" or OCEAN for persona problems
+### [Universals in the Content and Structure of Values: Theoretical Advances and Empirical Tests in 20 Countries](https://www.researchgate.net/publication/230557790_Universals_in_the_Content_and_Structure_of_Values_Theoretical_Advances_and_Empirical_Tests_in_20_Countries) (Xiaoyi-Liu)
+- also known as the Schwartz values after the author. 
+### [Primal world beliefs](https://psycnet.apa.org/record/2018-49649-001) (Xiaoyi-Liu)
+- another psychology reference for persona design
 
 ---
 
