@@ -61,7 +61,7 @@ class TestPrompt:
         prompt = build_system_prompt(personas[0])
         assert personas[0].name in prompt
         assert "social media user" in prompt.lower()
-        assert "tool" in prompt.lower()
+        assert "json" in prompt.lower()
 
     def test_observation_prompt_with_posts(self):
         posts = [
