@@ -271,6 +271,80 @@ python scripts/fetch_sources.py --source need_for_closure --mode sample
 
 For manifests with explicit `download.sample_urls`, `sample` mode downloads those core instrument/reference pages. Otherwise it snapshots the manifest's primary source URL. `full` mode also tries supplemental URLs listed in `download.full_urls`.
 
+
+## Wikipedia Persona Seed Pipeline
+
+This two-stage workflow converts real people and fictional characters from
+Wikipedia/Wikidata into evidence-grounded persona seed records, then uses a local
+LLM runner to map those records onto selected persona template keys.
+
+The workflow is inspired by BenchFlow-style local agent execution: deterministic
+code prepares the data/evidence, and a coding-agent subscription such as Claude
+Code is used only for the bounded interpretation step.
+
+### 1) Fetch Wikipedia/Wikidata seed records
+
+Use known Wikidata QIDs when possible:
+
+```bash
+python scripts/fetch_wikipedia_persona_seeds.py \
+  --input examples/wikipedia_persona_seed_entities_sample.jsonl \
+  --output outputs/wiki_persona_seeds_sample.jsonl \
+  --overwrite
+```
+
+Input rows can represent real people or fictional characters:
+
+```json
+{"qid": "Q937", "entity_type": "real_person", "name": "Albert Einstein"}
+{"qid": "Q4653", "entity_type": "fictional_character", "name": "Sherlock Holmes"}
+```
+
+Rows may also provide only a name. In that case the script searches Wikidata and
+validates the expected entity type:
+
+```json
+{"name": "Lara Croft", "entity_type": "fictional_character"}
+```
+
+The seed output follows the existing persona YAML shape (`metadata`, `persona`,
+`dimensions`) but is written as JSONL for curation. Fields without direct
+Wikipedia/Wikidata evidence, such as Big Five traits or socioeconomic band, are
+left as `null` rather than inferred.
+
+### 2) Assign persona fields with Claude Code subscription
+
+If your Claude Code subscription includes CLI access, install Claude Code, sign
+in locally, and ensure the `claude` command is on your `PATH`:
+
+```bash
+claude --version
+```
+
+Then run the field assignment step:
+
+```bash
+python scripts/assign_wikipedia_persona_fields.py \
+  --input outputs/wiki_persona_seeds_sample.jsonl \
+  --output outputs/wiki_persona_field_assignments_sample.jsonl \
+  --target-fields source_entity_type,domain,subject_specialty,role_function,known_for_or_source_work,creator,highest_education,intent,personality_big5_openness \
+  --backend claude_code \
+  --overwrite
+```
+
+The script invokes Claude Code through `claude -p`; no Anthropic API key is
+stored in the repository. If your executable is not named `claude`, pass
+`--claude-bin /path/to/claude` using a local path outside committed files.
+
+The assignment output preserves the original seed record and adds
+`persona.llm_field_assignments`. Each assignment includes `value`,
+`evidence_quotes`, `confidence`, and `assignment_type` (`direct`,
+`structured_claim`, `summary_inference`, or `unsupported`). Values are written
+back to `persona.dimensions` only when confidence passes `--min-confidence`; by
+default, existing deterministic values are not overwritten.
+
+Use `--backend dry_run` to test the file flow without calling Claude Code.
+
 ## Output Layout
 
 Downloads are stored under `raw/`:
@@ -288,5 +362,7 @@ Downloads are stored under `raw/`:
 - `raw/literature_references/reference_registry.json`
 - `raw/literature_references/reference_registry.jsonl`
 - `raw/{reference_source_id}/`
+- `outputs/wiki_persona_seeds*.jsonl` (generated Wikipedia persona seeds; git-ignored)
+- `outputs/wiki_persona_field_assignments*.jsonl` (LLM-assigned Wikipedia persona fields; git-ignored)
 
-`raw/` is git-ignored by default.
+`raw/` and `outputs/` are git-ignored by default.
