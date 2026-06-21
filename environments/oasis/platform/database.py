@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS post (
     num_dislikes INTEGER DEFAULT 0,
     num_shares INTEGER DEFAULT 0,
     num_comments INTEGER DEFAULT 0,
+    num_reports INTEGER DEFAULT 0,
     FOREIGN KEY (user_id) REFERENCES user(user_id)
 );
 
@@ -381,6 +382,28 @@ class Database:
     def get_muted(self, user_id: int) -> list[int]:
         rows = self._query("SELECT mutee_id FROM mute WHERE user_id = ?", (user_id,))
         return [r["mutee_id"] for r in rows]
+
+    def get_root_post_id(self, post_id: int) -> int:
+        post = self.get_post(post_id)
+        if post is None:
+            return post_id
+        original = post.get("original_post_id")
+        if original is None:
+            return post_id
+        return original
+
+    def is_repost(self, post_id: int) -> bool:
+        post = self.get_post(post_id)
+        if post is None:
+            return False
+        return post.get("original_post_id") is not None and post.get("quote_content") is None
+
+    def has_reposted(self, user_id: int, original_post_id: int) -> bool:
+        row = self._query_one(
+            "SELECT post_id FROM post WHERE user_id = ? AND original_post_id = ?",
+            (user_id, original_post_id),
+        )
+        return row is not None
 
     def get_all_posts(self, limit: int = 10000) -> list[dict[str, Any]]:
         return self._query("SELECT * FROM post ORDER BY created_at DESC LIMIT ?", (limit,))

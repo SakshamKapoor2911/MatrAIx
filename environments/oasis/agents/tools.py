@@ -269,6 +269,16 @@ TOOL_DEFINITIONS: list[dict[str, Any]] = [
 
 TOOL_NAMES: list[str] = [t["function"]["name"] for t in TOOL_DEFINITIONS]
 
+DEFAULT_TWITTER_ACTIONS: list[str] = [
+    "create_post", "like_post", "repost", "follow", "do_nothing", "quote_post",
+]
+
+DEFAULT_REDDIT_ACTIONS: list[str] = [
+    "like_post", "dislike_post", "create_post", "create_comment",
+    "like_comment", "dislike_comment", "search_posts", "search_user",
+    "trend", "do_nothing", "follow", "mute",
+]
+
 
 def get_tools_for_actions(available_actions: list[str] | None = None) -> list[dict[str, Any]]:
     if available_actions is None:

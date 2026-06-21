@@ -82,7 +82,8 @@ class ActionProcessor:
         post_id = params.get("post_id")
         if post_id is None:
             return ActionResult(success=False, error="post_id is required")
-        ok = self._db.like_post(user_id, int(post_id))
+        resolved_id = self._db.get_root_post_id(int(post_id))
+        ok = self._db.like_post(user_id, resolved_id)
         return ActionResult(success=ok, error=None if ok else "already liked")
 
     def _handle_unlike_post(self, user_id: int, params: dict) -> ActionResult:
@@ -96,7 +97,8 @@ class ActionProcessor:
         post_id = params.get("post_id")
         if post_id is None:
             return ActionResult(success=False, error="post_id is required")
-        ok = self._db.dislike_post(user_id, int(post_id))
+        resolved_id = self._db.get_root_post_id(int(post_id))
+        ok = self._db.dislike_post(user_id, resolved_id)
         return ActionResult(success=ok, error=None if ok else "already disliked")
 
     def _handle_undo_dislike_post(self, user_id: int, params: dict) -> ActionResult:
@@ -113,8 +115,13 @@ class ActionProcessor:
         original = self._db.get_post(int(post_id))
         if original is None:
             return ActionResult(success=False, error="post not found")
-        new_id = self._db.create_post(user_id, original["content"], original_post_id=int(post_id))
-        return ActionResult(success=True, data={"post_id": new_id, "original_post_id": post_id})
+        root_id = self._db.get_root_post_id(int(post_id))
+        if self._db.has_reposted(user_id, root_id):
+            return ActionResult(success=False, error="already reposted")
+        root_post = self._db.get_post(root_id)
+        content = root_post["content"] if root_post else original["content"]
+        new_id = self._db.create_post(user_id, content, original_post_id=root_id)
+        return ActionResult(success=True, data={"post_id": new_id, "original_post_id": root_id})
 
     def _handle_quote_post(self, user_id: int, params: dict) -> ActionResult:
         post_id = params.get("post_id")
