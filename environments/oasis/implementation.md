@@ -1,399 +1,399 @@
 # OASIS Implementation Plan
 
-> How we integrate OASIS into MatrAIx: load personas, build social graphs, run simulations, extract traces.
+> Integrating OASIS (Open Agent Social Interaction Simulations) into MatrAIx.
+> Load MatrAIx personas → build social graph → run agents on a shared platform → collect trajectories.
 
 ---
 
-## Module Overview
+## How OASIS Actually Works (from source code analysis)
+
+### The Real Architecture
+
+OASIS separates concerns into:
+1. **Agents** — LLM-powered actors with a persona system prompt. Each agent is always active (the LLM decides `do_nothing` as an action). At 1M scale, activation probability gates which agents get a turn.
+2. **Platform** — A single async event loop processing all actions sequentially via SQLite. This is the shared state layer — posts, follows, likes, comments all live here.
+3. **Channel** — Async queue connecting agents ↔ platform. Each action gets a UUID, agent polls until response arrives.
+4. **RecSys** — Controls what each agent sees when they "refresh" their feed. This is the information flow bottleneck.
+
+### What They Actually Do for Networks
+
+OASIS's network generation is deliberately simple:
+- Load pre-curated "star" (influencer) accounts from a CSV categorized by topic
+- For each regular user, iterate over their 2 topic interests
+- For each star account matching that topic, follow with **flat probability 0.2**
+- No affinity calculation, no personality weighting, no region similarity
+- The philosophy: simple topology + LLM behavioral complexity = emergent realism
+
+### What They Actually Do for Profiles
+
+- Each agent has one `user_char` field: a RAG-generated narrative paragraph
+- Generated via GPT-3.5 + `BAAI/bge-m3` embeddings over real Twitter bios
+- Demographics: age (weighted), gender, MBTI (weighted), 2 topics from 9, 1 profession from 16
+- Activity level: `[100] * 24` for ALL agents (= always active, LLM decides inaction)
+- The 1M experiment overrides stars to 10% threshold
+
+### What They Actually Do for Simulation
+
+- `env.step(actions)`: updates recsys table → all agents act concurrently via asyncio
+- Each agent: refresh feed → LLM with function calling → selected tools execute as actions
+- Platform processes actions one at a time (SQLite serializes)
+- All actions recorded in `trace` table with full JSON
+- Semaphore (default 128) limits concurrent LLM calls
+
+### CSV Format (the actual runtime input)
+
+```
+user_id, name, username, description, user_char, following_agentid_list,
+previous_tweets, activity_level, activity_level_frequency, tweets_id
+```
+
+- `following_agentid_list`: Python list as string literal, e.g. `"[32, 55, 12]"`
+- `activity_level`: `"['active'] * 24"`
+- `activity_level_frequency`: `"[100] * 24"` (100 = always active in OASIS's framework)
+- Parsed at runtime with `ast.literal_eval()`
+
+---
+
+## Our Architecture (what we're building differently)
+
+### Key Difference from OASIS
+
+OASIS runs everything in one Python process with async concurrency. We split into:
+- **Agents in isolated Docker containers** — each agent runs as a persona-conditioned LLM process in its own container, receiving the persona via system prompt
+- **Shared platform as a service** — the social media environment (SQLite + recsys + action processing) runs as a separate service that all agent containers connect to
+- **Trajectory storage** — all actions and traces persisted for post-hoc analysis
+
+This separation means:
+- Agents can use different LLM backends (vLLM, OpenAI, Anthropic) per container
+- Platform scales independently from agent compute
+- Agent crashes don't kill the platform
+- Trajectories survive agent failures
+
+---
+
+## Module Structure
 
 ```
 environments/oasis/
-├── README.md                  # Reference documentation (done)
-├── implementation.md          # This file
-├── persona_adapter.py         # Module 1: MatrAIx personas → OASIS agents
-├── network_builder.py         # Module 2: Social graph construction
-├── simulation_runner.py       # Module 3: Configure + run OASIS simulation
-├── trace_analyzer.py          # Module 4: Extract + analyze outputs
-├── config.yaml                # Default simulation configuration
-└── tests/
-    ├── test_persona_adapter.py
-    ├── test_network_builder.py
-    ├── test_simulation_runner.py
-    └── test_trace_analyzer.py
+├── README.md                          # Reference documentation
+├── implementation.md                  # This file
+├── __init__.py                        # Package root (re-exports all public API)
+│
+├── persona_loader/                    # MODULE 1: Load & convert personas
+│   ├── __init__.py
+│   ├── adapter.py                     # MatrAIx YAML → OasisUserInfo → CSV export
+│   └── tests/
+│       ├── __init__.py
+│       ├── test_adapter.py            # 45 tests
+│       └── fixtures/                  # 5 deep dummy personas (50+ dims each)
+│           ├── persona_young_tech.yaml
+│           ├── persona_older_healthcare.yaml
+│           ├── persona_young_creative.yaml
+│           ├── persona_finance_introvert.yaml
+│           └── persona_rural_educator.yaml
+│
+├── network/                           # MODULE 2: Social graph construction
+│   ├── __init__.py
+│   ├── builder.py                     # Affinity graph + simple topic graph + CSV export
+│   └── tests/
+│       ├── __init__.py
+│       └── test_builder.py            # 44 tests
+│
+├── platform/                          # MODULE 3: Shared social media environment
+│   ├── __init__.py
+│   ├── server.py                      # FastAPI service (SQLite + recsys + action queue)
+│   ├── database.py                    # Schema creation + queries (16 tables)
+│   ├── recsys.py                      # Recommendation algorithms
+│   ├── actions.py                     # Action processing (post, like, follow, etc.)
+│   └── Dockerfile                     # Container for the platform service
+│
+└── agents/                            # MODULE 4: Persona-conditioned agent containers
+    ├── __init__.py
+    ├── runner.py                       # Agent loop: refresh → LLM → act → repeat
+    ├── llm_client.py                   # LLM backend abstraction (vLLM, OpenAI, etc.)
+    ├── persona_prompt.py               # System prompt assembly from persona data
+    ├── Dockerfile                      # Agent container template
+    └── docker-compose.yaml             # Orchestration (platform + N agents)
 ```
 
 ---
 
-## Module 1: Persona Adapter (`persona_adapter.py`)
+## Module 1: Persona Loader (DONE)
 
-**Purpose**: Convert MatrAIx persona YAML files into OASIS-compatible `UserInfo` objects.
+**Status**: Implemented and tested (45 tests passing)
 
-### Input
+**What it does**: Loads MatrAIx persona YAML files (with 50+ dimensions per persona) and converts them to OASIS-compatible format. Two output modes:
 
-MatrAIx persona YAML (from `personas/Jun20_1k_persona_description/`):
+1. **`OasisUserInfo` objects** — Python dataclass for programmatic use
+2. **OASIS CSV export** — Exact format OASIS runtime expects (`export_oasis_csv()`)
 
-```yaml
-metadata:
-  id: ID0001
-persona:
-  name: Nikhil Desai
-  title: Mid in Social Services & NGO
-  age: 59
-  description: "59-year-old man based in South Asia..."
-  dimensions:
-    region: South Asia
-    gender_identity: Man
-    age_bracket: 55–64
-    urbanicity: Suburban
-    socioeconomic_band: Lower-middle
-    domain: Social Services & NGO
-    primary_language: Hindi
-    english_proficiency: Intermediate (B1–B2)
-    marital_status: Single
-    children: No children
-    emotional_state: Concerned
-    intent: help others
-    personality_big5_openness: Medium
-    personality_big5_conscientiousness: Very high
-    personality_big5_extraversion: High
-    personality_big5_agreeableness: Low
-    personality_big5_neuroticism: Medium
-```
+**Key design**: We export with `activity_level_frequency = [100] * 24` (OASIS standard = always active) because OASIS expects the LLM to decide inaction. Our per-hour activity curves are available for custom scheduling but not used in OASIS-compatible mode.
 
-### Output
-
-OASIS `UserInfo` object:
-
-```python
-UserInfo(
-    name="Nikhil Desai",
-    user_name="nikhil_desai_0001",
-    description="Mid in Social Services & NGO. 59-year-old man based in South Asia...",
-    profile={
-        "other_info": {
-            "user_profile": "<rich persona text from description + dimensions>",
-            "mbti": "ENFJ",  # derived from Big Five mapping
-            "gender": "male",
-            "age": 59,
-            "country": "India",
-            "profession": "Social Services & NGO",
-            "interested_topics": ["Social Work", "Community Development"],
-            "active_threshold": [0.01] * 24,  # hourly activity probability
-        }
-    }
-)
-```
-
-### Implementation Steps
-
-1. **Load YAML batch** — Read all persona files from a directory (or accept a list of paths).
-2. **Map dimensions → OASIS fields**:
-   - `gender_identity` → `gender`
-   - `region` → `country` (map "South Asia" → random country in region, or keep region)
-   - `domain` → `profession`
-   - `personality_big5_*` → derive approximate MBTI (OpenNess+Extraversion→I/E, etc.)
-   - `intent` + `domain` → `interested_topics` (map to OASIS's 9 topic categories)
-3. **Generate username** — Slugify name + append persona ID.
-4. **Build user_profile text** — Combine `description` + key dimensions into a natural-language persona paragraph that the LLM will see as its system prompt.
-5. **Set activity probability** — Based on `age_bracket` and `urbanicity` (younger/urban → higher activity).
-6. **Return list of UserInfo** — Ready to feed into Module 2.
-
-### Key Decisions
-
-- Big Five → MBTI mapping is lossy but OASIS expects MBTI. We use the standard approximate mapping (high O + high E → ENFP, etc.). Alternatively, we can patch OASIS to accept Big Five directly in the system prompt.
-- For `interested_topics`, we define a mapping from MatrAIx `domain` values to OASIS topic categories (Technology, Business, Health, etc.).
-- Activity thresholds can be uniform (simple) or vary by persona traits (high extraversion → higher threshold).
+**Mapping decisions**:
+- Big Five → MBTI via threshold mapping (E/I at 0.5, N/S from openness, T/F from agreeableness, J/P from conscientiousness)
+- `topic_*` dimensions with Passionate/Interested/Neutral/Indifferent/Averse levels → OASIS topic list (top 2 by score)
+- `domain` → profession string
+- `region` → deterministic country selection
+- Full persona dimensions → `user_char` narrative text (the system prompt content)
 
 ---
 
-## Module 2: Network Builder (`network_builder.py`)
+## Module 2: Network (DONE)
 
-**Purpose**: Construct the initial social graph (who follows whom) from persona attributes.
+**Status**: Implemented and tested (44 tests passing)
 
-### Strategy
+**What it does**: Constructs the directed follow graph. Two modes:
 
-OASIS requires a directed follow graph. We build it from persona similarity:
+### Mode A: `build_simple_topic_graph()` — OASIS-compatible
+Mirrors OASIS's exact algorithm:
+- Identify influencer accounts (top 10% by extraversion + conscientiousness + openness score)
+- For each regular user, check topic overlap with each influencer
+- Follow with flat probability (default 0.2) if topics match
+- Output: adjacency list compatible with OASIS CSV `following_agentid_list`
 
-1. **Topic-based clustering** — Group personas by `domain` / `interested_topics`. Users within the same topic cluster have a higher probability of following each other.
-2. **Influencer seeding** — Select N "seed" accounts per topic (high extraversion, high conscientiousness) that many others follow, creating a scale-free topology.
-3. **Cross-topic bridges** — Small probability of following users from different topics (prevents isolated clusters).
+### Mode B: `build_social_graph()` — MatrAIx-enhanced
+Richer topology for research experiments:
+- Multi-factor affinity (interest cosine 40%, domain Jaccard 25%, region 15%, personality distance 20%)
+- Extraversion-scaled follow budgets (introverts follow 3-6, extraverts follow 15-30)
+- Openness-scaled cross-topic bridging
+- Reciprocal follow probability (0.15)
+- Influencer boost (5x affinity)
+- Deterministic with seed for reproducibility
 
-### Implementation Steps
-
-1. **Accept list of personas** (output of Module 1).
-2. **Cluster by topic** — Group personas into topic buckets.
-3. **Generate follow edges**:
-   - Within-topic: each user follows 5–20 others in same topic (probability weighted by similarity).
-   - Influencers: top 5% by extraversion score get 10x more followers.
-   - Cross-topic: 10% probability of following 1–3 users from a different topic.
-4. **Output**: Either an igraph `Graph(directed=True)` for <100K agents, or a CSV of `(follower_id, followee_id)` pairs for larger scale.
-5. **Optionally generate seed posts** — Create 1–3 initial posts per influencer to bootstrap the feed.
-
-### Configuration
-
-```yaml
-network:
-  within_topic_follow_range: [5, 20]
-  influencer_percentile: 0.95
-  influencer_follower_multiplier: 10
-  cross_topic_probability: 0.10
-  cross_topic_follow_range: [1, 3]
-  seed_posts_per_influencer: 3
-```
+Both modes output `SocialGraph` objects with `to_adjacency_list()` and `to_edge_list_csv()` for OASIS integration.
 
 ---
 
-## Module 3: Simulation Runner (`simulation_runner.py`)
+## Module 3: Platform (TODO)
 
-**Purpose**: Configure and execute the OASIS simulation end-to-end.
+**What it builds**: The shared social media environment as a service.
 
-### Responsibilities
+### Architecture
 
-1. **Initialize LLM backend** — Connect to vLLM endpoints (Greenland) or OpenAI API (dev/testing).
-2. **Build AgentGraph** — Create `SocialAgent` instances from Module 1 output, wire up the Module 2 graph.
-3. **Configure Platform** — Set recsys type, action space, clock settings.
-4. **Run simulation loop** — Execute N timesteps with configurable activation probability.
-5. **Checkpoint** — Periodically save the SQLite database for resumability.
-6. **Shutdown** — Clean close of environment.
-
-### Implementation Steps
-
-1. **Load config** (`config.yaml`):
-
-```yaml
-simulation:
-  num_timesteps: 50
-  semaphore: 128
-  platform_type: twitter          # twitter | reddit
-  recsys_type: twitter            # random | reddit | twitter | twhin-bert
-  activation_probability: 0.05   # fraction of agents acting per step
-  checkpoint_every: 10           # save DB every N steps
-
-inference:
-  backend: vllm                   # vllm | openai | anthropic
-  model: meta-llama/Meta-Llama-3-8B-Instruct
-  endpoints:
-    - host: localhost
-      ports: [8002, 8003, 8004, 8005]
-
-actions:
-  available:
-    - do_nothing
-    - create_post
-    - repost
-    - like_post
-    - dislike_post
-    - create_comment
-    - follow
-    - unfollow
-
-persona:
-  source_dir: ../../personas/Jun20_1k_persona_description/
-  max_agents: 1000               # limit for testing
-
-network:
-  within_topic_follow_range: [5, 20]
-  influencer_percentile: 0.95
-  cross_topic_probability: 0.10
-  seed_posts_per_influencer: 3
-
-output:
-  database_path: ./data/simulation.db
-  checkpoint_dir: ./data/checkpoints/
+```
+┌─────────────────────────────────────────────────────┐
+│              Platform Service (Docker)                │
+│                                                     │
+│  ┌─────────────────┐  ┌──────────────────────────┐  │
+│  │   FastAPI/HTTP   │  │      Action Queue         │  │
+│  │   (agent API)    │  │  (async, UUID-keyed)      │  │
+│  └────────┬────────┘  └────────────┬─────────────┘  │
+│           │                        │                 │
+│  ┌────────▼────────────────────────▼─────────────┐  │
+│  │           SQLite Database (16 tables)          │  │
+│  │  user | post | follow | like | comment | rec   │  │
+│  │  trace | dislike | mute | report | ...         │  │
+│  └───────────────────────────────────────────────┘  │
+│                                                     │
+│  ┌───────────────────────────────────────────────┐  │
+│  │         Recommendation System                  │  │
+│  │  random | reddit_hot | miniLM | twhin_bert     │  │
+│  └───────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────┘
 ```
 
-2. **Main entry point**:
+### API Endpoints (what agents call)
 
-```python
-async def run_simulation(config_path: str):
-    config = load_config(config_path)
+| Method | Path | Description |
+|--------|------|-------------|
+| POST | `/signup` | Register agent |
+| POST | `/refresh` | Get recommended + following posts |
+| POST | `/action` | Execute action (create_post, like, follow, etc.) |
+| GET | `/state/{agent_id}` | Get agent's current state |
+| GET | `/traces` | Dump all traces for analysis |
+| POST | `/step` | Advance simulation clock |
 
-    # Module 1: Load and convert personas
-    personas = load_personas(config["persona"]["source_dir"], max_agents=config["persona"]["max_agents"])
-    user_infos = adapt_personas(personas)
+### Key Design (matching OASIS internals)
 
-    # Module 2: Build social network
-    graph, seed_posts = build_network(user_infos, config["network"])
+- SQLite with `PRAGMA synchronous = OFF` for performance
+- Action processing is sequential (one at a time) to maintain consistency
+- RecSys rebuilds the `rec` table each step before agents act
+- `trace` table stores every action with full JSON payload + timestamp
+- Agent feed = recommended posts (from rec table) + posts from followed users (sorted by likes)
 
-    # Module 3: Initialize OASIS
-    agents = create_agents(user_infos, graph, config["inference"])
-    env = oasis.make(
-        agent_graph=agents,
-        platform=config["simulation"]["platform_type"],
-        database_path=config["output"]["database_path"],
-        semaphore=config["simulation"]["semaphore"],
-    )
+### Trajectory Storage
 
-    await env.reset()
-    inject_seed_posts(env, seed_posts)
-
-    # Simulation loop
-    for t in range(config["simulation"]["num_timesteps"]):
-        active_agents = select_active_agents(agents, config["simulation"]["activation_probability"])
-        actions = {agent: LLMAction() for agent in active_agents}
-        await env.step(actions)
-
-        if (t + 1) % config["simulation"]["checkpoint_every"] == 0:
-            checkpoint(env, config["output"]["checkpoint_dir"], t)
-
-    await env.close()
-
-    # Module 4: Analyze
-    results = analyze_traces(config["output"]["database_path"])
-    return results
-```
-
-3. **LLM backend setup**:
-   - For Greenland: start vLLM servers on the 8 A100s, connect via localhost ports.
-   - For dev/testing: use OpenAI API with `gpt-4o-mini` (cheap, fast).
-   - CAMEL's `ModelFactory` handles both via `ModelPlatformType.VLLM` or `ModelPlatformType.OPENAI`.
-
-### Running
-
-```bash
-# Dev (OpenAI API, 10 agents)
-python -m environments.oasis.simulation_runner --config environments/oasis/config.yaml
-
-# Greenland (vLLM, 1000 agents)
-./scripts/greenland-sync.sh push
-./scripts/greenland-sync.sh runbg "python -m environments.oasis.simulation_runner --config environments/oasis/config.yaml"
-```
-
----
-
-## Module 4: Trace Analyzer (`trace_analyzer.py`)
-
-**Purpose**: Extract simulation traces from SQLite and produce analysis reports.
-
-### What We Extract
-
-From the `trace` table (every agent action with full JSON):
-- **Information spread**: How many reposts/quotes did each seed post generate? What's the cascade depth?
-- **Engagement metrics**: Likes, comments, reposts per post; engagement rate by persona type.
-- **Network evolution**: New follows/unfollows over time; cluster formation.
-- **Behavioral patterns**: Do personas with high neuroticism post differently? Do introverts engage less?
-- **Polarization**: Do agents cluster into echo chambers? Do cross-topic bridges prevent it?
-
-### Implementation Steps
-
-1. **Connect to SQLite database** (output of Module 3).
-2. **Extract raw traces** — Query `trace`, `post`, `follow`, `like`, `comment` tables.
-3. **Compute metrics**:
-   - Per-agent: posts created, likes given/received, follows gained/lost, activity rate
-   - Per-post: reach (unique views), engagement rate, cascade depth
-   - Network-level: clustering coefficient, average path length, community detection
-   - Temporal: activity curves, information velocity, opinion drift
-4. **Persona-conditioned analysis** — Group metrics by persona dimensions (age, region, Big Five, domain) to answer: "Do personas with trait X behave differently from trait Y?"
-5. **Generate report** — JSON + optional markdown summary.
-
-### Output Format
-
+Every agent action produces a trace record:
 ```json
 {
-    "simulation_meta": {
-        "num_agents": 1000,
-        "num_timesteps": 50,
-        "platform": "twitter",
-        "recsys": "twitter",
-        "total_actions": 12450
-    },
-    "aggregate_metrics": {
-        "total_posts": 890,
-        "total_reposts": 340,
-        "total_likes": 2100,
-        "total_comments": 560,
-        "total_follows": 1200,
-        "avg_engagement_rate": 0.034
-    },
-    "persona_breakdown": {
-        "by_age_bracket": { "18-24": {...}, "25-34": {...}, ... },
-        "by_big5_extraversion": { "High": {...}, "Medium": {...}, "Low": {...} },
-        "by_domain": { "Technology": {...}, "Healthcare": {...}, ... }
-    },
-    "network_evolution": {
-        "initial_edges": 8500,
-        "final_edges": 9700,
-        "new_follows": 1200,
-        "unfollows": 0,
-        "communities_detected": 7
-    },
-    "information_spread": {
-        "avg_cascade_depth": 2.3,
-        "max_cascade_depth": 8,
-        "viral_posts": [{"post_id": 42, "reach": 340, "reposts": 28}]
-    }
+    "trace_id": 1,
+    "user_id": 42,
+    "action": "create_post",
+    "info": {"content": "Just discovered...", "post_id": 157},
+    "created_at": "2026-06-21T10:30:00"
 }
+```
+
+These trajectories are the primary output for analysis — information spread, engagement patterns, behavioral diversity, persona adherence.
+
+---
+
+## Module 4: Agents (TODO)
+
+**What it builds**: Persona-conditioned LLM agents running in Docker containers.
+
+### Architecture
+
+```
+┌──────────────────────────────────────┐
+│         Agent Container (Docker)      │
+│                                      │
+│  ┌────────────────────────────────┐  │
+│  │        System Prompt            │  │
+│  │  (persona narrative from YAML)  │  │
+│  └────────────────────────────────┘  │
+│                                      │
+│  ┌────────────────────────────────┐  │
+│  │         Agent Loop              │  │
+│  │  1. Call platform /refresh      │  │
+│  │  2. Build observation text      │  │
+│  │  3. LLM call (function calling) │  │
+│  │  4. Execute selected actions    │  │
+│  │  5. Repeat until step ends      │  │
+│  └────────────────────────────────┘  │
+│                                      │
+│  ┌────────────────────────────────┐  │
+│  │      LLM Client                 │  │
+│  │  (vLLM / OpenAI / Anthropic)    │  │
+│  └────────────────────────────────┘  │
+└──────────────────────────────────────┘
+```
+
+### How Persona Becomes Behavior
+
+OASIS uses OpenAI function calling. The agent sees:
+1. **System message**: persona narrative (our `user_profile` text)
+2. **User message**: "Here is your feed: [posts]. Choose actions from available tools."
+3. **Available tools**: action methods as function definitions (create_post, like_post, follow, do_nothing, etc.)
+
+The LLM returns `tool_calls` — structured action selection driven by the persona system prompt.
+
+### Docker Isolation
+
+Each agent container:
+- Receives persona YAML path + platform URL as env vars
+- Runs the agent loop independently
+- Connects to platform service via HTTP
+- Can be killed/restarted without affecting other agents
+- Logs its own trajectory locally (also stored in platform)
+
+### docker-compose.yaml (orchestration)
+
+```yaml
+services:
+  platform:
+    build: ./platform
+    ports: ["8000:8000"]
+    volumes: ["./data:/app/data"]
+    environment:
+      - RECSYS_TYPE=twitter
+      - DB_PATH=/app/data/simulation.db
+
+  agent-0:
+    build: ./agents
+    environment:
+      - PLATFORM_URL=http://platform:8000
+      - PERSONA_PATH=/app/personas/ID0001.yaml
+      - LLM_BACKEND=vllm
+      - LLM_URL=http://host.docker.internal:8002/v1
+    depends_on: [platform]
+
+  # ... agent-1 through agent-N
 ```
 
 ---
 
 ## Implementation Order
 
-| Phase | Module | Effort | Depends On |
-|-------|--------|--------|------------|
-| **Phase 1** | Module 1 (Persona Adapter) | 1–2 days | MatrAIx persona YAMLs |
-| **Phase 2** | Module 2 (Network Builder) + Module 3 (Simulation Runner) | 2–3 days | Module 1 |
-| **Phase 3** | Module 4 (Trace Analyzer) | 1–2 days | Module 3 output |
+| Phase | Module | What | Status |
+|-------|--------|------|--------|
+| 1 | `persona_loader/` | YAML loading, dimension mapping, CSV export | DONE (45 tests) |
+| 2 | `network/` | Graph construction (simple + affinity modes) | DONE (44 tests) |
+| 3 | `platform/` | FastAPI service, SQLite, recsys, action queue | TODO |
+| 4 | `agents/` | Docker agent loop, LLM client, persona prompt | TODO |
 
-### Phase 1: Get personas into OASIS format
+### Phase 3 Steps (Platform)
 
-- Start with the 1,000 personas already generated (`personas/Jun20_1k_persona_description/`)
-- Validate that the converted UserInfo objects produce sensible system prompts
-- Test with 5–10 agents against OpenAI API locally
+1. Port OASIS's 16-table SQLite schema into `database.py`
+2. Implement action processing (sequential, one-at-a-time)
+3. Implement the 4 recsys algorithms (start with `random` and `reddit_hot`)
+4. Expose as FastAPI HTTP service
+5. Add trace recording
+6. Dockerize
 
-### Phase 2: Build graph + run simulation
+### Phase 4 Steps (Agents)
 
-- Start with a small run (50 agents, 10 timesteps, OpenAI API)
-- Validate that agents take diverse actions consistent with their personas
-- Scale to 1,000 agents on Greenland with vLLM
-
-### Phase 3: Analyze and report
-
-- Build the trace analyzer
-- Verify persona-conditioned behavioral differences exist (the core research question)
-- Generate reports that feed back into MatrAIx's Application team evaluation
-
----
-
-## Dev vs. Production Configuration
-
-| Setting | Dev (local) | Production (Greenland) |
-|---------|-------------|------------------------|
-| Agents | 10–50 | 1,000–10,000+ |
-| LLM backend | OpenAI API (`gpt-4o-mini`) | vLLM (Llama-3-8B on 8x A100) |
-| Timesteps | 5–10 | 50–100 |
-| Semaphore | 10 | 128 |
-| Activation probability | 1.0 (all agents act) | 0.05–0.10 |
-| Database | `./data/dev.db` | `/tmp/instance_storage/simulation.db` |
-| Recsys | `random` | `twitter` or `twhin-bert` |
+1. Build the agent loop (refresh → observe → LLM → act)
+2. Implement LLM client abstraction (vLLM for Greenland, OpenAI for dev)
+3. Build system prompt from persona data
+4. Expose all 29 actions as function tool definitions
+5. Dockerize with env-var configuration
+6. Build docker-compose orchestrator
 
 ---
 
-## Dependencies to Install
+## Running Modes
+
+### Dev (local, 5-10 agents)
 
 ```bash
-# Core OASIS
-pip install camel-oasis  # or: pip install camel-ai==0.2.78
+# Start platform
+python -m environments.oasis.platform.server --db ./data/dev.db --recsys random
 
-# For personalized recsys
-pip install sentence-transformers torch
+# Run agents (no Docker, direct Python)
+python -m environments.oasis.agents.runner \
+  --platform http://localhost:8000 \
+  --persona personas/Jun20_1k_persona_description/ID0001.yaml \
+  --llm-backend openai --model gpt-4o-mini
+```
 
-# For network analysis
-pip install igraph networkx
+### Production (Greenland, 1000+ agents)
 
-# For vLLM inference (Greenland only)
-pip install vllm
+```bash
+# Push code
+./scripts/greenland-sync.sh push
 
-# MatrAIx persona loading
-pip install pyyaml
+# Start vLLM
+./scripts/greenland-sync.sh runbg "python -m vllm.entrypoints.openai.api_server --model meta-llama/Meta-Llama-3-8B-Instruct --tensor-parallel-size 4 --port 8002"
+
+# Run simulation via docker-compose
+./scripts/greenland-sync.sh run "docker compose -f environments/oasis/agents/docker-compose.yaml up"
+```
+
+### OASIS-native (for comparison/validation)
+
+```bash
+# Export MatrAIx personas to OASIS CSV
+python -c "
+from environments.oasis import load_personas_from_directory, build_simple_topic_graph, export_oasis_csv, build_oasis_follow_data
+personas = load_personas_from_directory('personas/Jun20_1k_persona_description/', max_agents=100)
+graph = build_simple_topic_graph(personas, follow_probability=0.2)
+adj = graph.to_adjacency_list()
+export_oasis_csv(personas, 'data/oasis_agents.csv', following_lists=[adj[i] for i in range(len(personas))])
+"
+
+# Run with upstream OASIS directly
+python examples/experiment/twitter_simulation/run.py --csv data/oasis_agents.csv
 ```
 
 ---
 
-## Open Questions
+## Differences from Upstream OASIS (intentional)
 
-1. **Big Five → MBTI**: Should we patch OASIS to accept Big Five directly in the system prompt instead of converting? This preserves more persona fidelity.
-2. **Persona richness**: OASIS system prompts are short (~100 words). Should we inject the full MatrAIx persona description or a compressed version?
-3. **Action space**: Full 29 actions or restricted set for initial experiments? Full set is more realistic but harder to analyze.
-4. **Evaluation**: What specific emergent behaviors validate that personas are working? (e.g., introverts post less, risk-averse users don't repost controversial content)
-5. **Scale target**: Start with 1,000 agents and scale up, or go straight to 10K on Greenland?
+| Aspect | OASIS | Our Implementation | Why |
+|--------|-------|-------------------|-----|
+| Agent isolation | Single process, asyncio | Docker containers | Fault tolerance, mixed LLM backends |
+| Platform | In-process event loop | HTTP service | Independent scaling, persistence |
+| Network | Flat p=0.2 | Two modes (simple + affinity) | Research flexibility |
+| Personas | ~6 fields + narrative | 50+ dimensions + narrative | MatrAIx's richer schema |
+| Activity gating | frequency=100 (always active) | Exported as 100 for OASIS compat | LLM decides inaction |
+| Trace storage | SQLite trace table | Same + optional export | Analysis pipeline |
+
+### What we preserve exactly from OASIS
+
+- CSV format (column names, Python list literals, ast.literal_eval compatibility)
+- 16-table SQLite schema
+- Action types (all 29)
+- Recommendation algorithms (4 types)
+- System prompt structure (persona narrative + available tools)
+- Function calling for action selection

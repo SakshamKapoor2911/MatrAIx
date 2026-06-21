@@ -1,4 +1,4 @@
-# test_network_builder.py — Tests for the social graph construction module.
+# test_builder.py — Tests for the social graph construction module.
 # Validates affinity computation, influencer identification, topic clustering,
 # edge generation, graph properties, and OASIS-compatible output format.
 
@@ -6,10 +6,10 @@ import pytest
 from pathlib import Path
 
 import sys
-sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[4]))
 
-from environments.oasis.persona_adapter import load_personas_from_directory, OasisUserInfo
-from environments.oasis.network_builder import (
+from environments.oasis.persona_loader.adapter import load_personas_from_directory, OasisUserInfo
+from environments.oasis.network.builder import (
     NetworkConfig,
     FollowEdge,
     SeedPost,
@@ -30,7 +30,7 @@ from environments.oasis.network_builder import (
     _get_openness_multiplier,
 )
 
-FIXTURES_DIR = Path(__file__).parent / "fixtures"
+FIXTURES_DIR = Path(__file__).resolve().parents[2] / "persona_loader" / "tests" / "fixtures"
 
 
 @pytest.fixture
@@ -375,7 +375,7 @@ class TestBuildOasisFollowData:
 
 class TestWithRealPersonas:
     def test_scales_to_100_agents(self):
-        matraix_dir = Path(__file__).resolve().parents[3] / "personas" / "Jun20_1k_persona_description"
+        matraix_dir = Path(__file__).resolve().parents[4] / "personas" / "Jun20_1k_persona_description"
         if not matraix_dir.is_dir():
             pytest.skip("MatrAIx persona directory not available")
 

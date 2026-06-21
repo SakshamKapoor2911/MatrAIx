@@ -1,6 +1,12 @@
 # environments.oasis — OASIS multi-agent social simulation integration for MatrAIx.
+#
+# Modules:
+#   persona_loader — Load MatrAIx YAMLs → OASIS UserInfo + CSV export
+#   network        — Build social follow graphs (simple topic-based or affinity-weighted)
+#   platform       — Shared social media environment (SQLite state, recsys, action processing)
+#   agents         — Persona-conditioned LLM agents in isolated Docker containers
 
-from environments.oasis.persona_adapter import (
+from environments.oasis.persona_loader import (
     OasisUserInfo,
     adapt_single_persona,
     export_oasis_csv,
@@ -9,7 +15,7 @@ from environments.oasis.persona_adapter import (
     personas_to_oasis_csv_rows,
     personas_to_oasis_dicts,
 )
-from environments.oasis.network_builder import (
+from environments.oasis.network import (
     NetworkConfig,
     SocialGraph,
     build_oasis_follow_data,

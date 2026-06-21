@@ -1,4 +1,4 @@
-# test_persona_adapter.py — Tests for persona adapter module.
+# test_adapter.py — Tests for persona loader/adapter module.
 # Validates YAML loading, dimension mapping, MBTI derivation, activity thresholds,
 # and end-to-end batch conversion using fixture personas.
 
@@ -6,9 +6,9 @@ import pytest
 from pathlib import Path
 
 import sys
-sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[4]))
 
-from environments.oasis.persona_adapter import (
+from environments.oasis.persona_loader.adapter import (
     OasisUserInfo,
     adapt_single_persona,
     big5_to_mbti,
@@ -332,7 +332,7 @@ class TestPersonasToOasisDicts:
 
 class TestEndToEndWithRealPersonas:
     def test_loads_matraix_personas_if_available(self):
-        matraix_dir = Path(__file__).resolve().parents[3] / "personas" / "Jun20_1k_persona_description"
+        matraix_dir = Path(__file__).resolve().parents[4] / "personas" / "Jun20_1k_persona_description"
         if not matraix_dir.is_dir():
             pytest.skip("MatrAIx persona directory not available")
 

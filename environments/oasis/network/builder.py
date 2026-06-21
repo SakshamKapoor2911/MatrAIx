@@ -12,7 +12,7 @@ import random
 from dataclasses import dataclass, field
 from typing import Any
 
-from environments.oasis.persona_adapter import OasisUserInfo
+from environments.oasis.persona_loader.adapter import OasisUserInfo
 
 
 INTEREST_AFFINITY_WEIGHT = 0.40
