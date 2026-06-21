@@ -71,18 +71,18 @@ class TestPrompt:
         prompt = build_observation_prompt(posts)
         assert "Hello world" in prompt
         assert "Tech news" in prompt
-        assert "#1" in prompt
-        assert "likes:3" in prompt
+        assert "post_id=1" in prompt
+        assert "3 likes" in prompt
 
     def test_observation_prompt_empty_feed(self):
         prompt = build_observation_prompt([])
-        assert "first" in prompt.lower() or "empty" in prompt.lower()
+        assert "launched" in prompt.lower() or "no posts" in prompt.lower()
 
     def test_observation_respects_max_posts(self):
         posts = [{"post_id": i, "user_id": 1, "content": f"Post {i}", "num_likes": 0, "num_dislikes": 0, "num_comments": 0, "num_shares": 0} for i in range(50)]
         prompt = build_observation_prompt(posts, max_posts=5)
-        assert "#4" in prompt
-        assert "#10" not in prompt
+        assert "post_id=4" in prompt
+        assert "post_id=10" not in prompt
 
 
 class TestLLMClient:

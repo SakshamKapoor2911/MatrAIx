@@ -111,7 +111,7 @@ class Orchestrator:
             posts_result = self._platform_state.action_processor.process(user_id, "refresh", {})
             posts = posts_result.data.get("posts", []) if posts_result.data else []
 
-            observation = build_observation_prompt(posts, step=self._platform_state.time_step)
+            observation = build_observation_prompt(posts, step=self._platform_state.time_step, agent_name=persona.name)
             system_prompt = build_system_prompt(persona)
 
             llm = LLMClient(LLMConfig(
@@ -126,7 +126,7 @@ class Orchestrator:
                 {"role": "user", "content": observation},
             ]
             tools = get_tools_for_actions(self._config.available_actions)
-            llm_response = llm.chat(messages, tools=tools)
+            llm_response = llm.chat(messages)
 
             actions_taken = []
             if llm_response.error:

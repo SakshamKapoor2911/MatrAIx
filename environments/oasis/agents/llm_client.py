@@ -127,8 +127,24 @@ class LLMClient:
                 data = json.loads(array_match.group(0))
                 if isinstance(data, list):
                     for item in data:
-                        if isinstance(item, dict) and "name" in item:
-                            calls.append(ToolCall(name=item["name"], arguments=item.get("arguments", {})))
+                        if isinstance(item, dict):
+                            name = item.get("name") or item.get("action") or ""
+                            if name:
+                                args = item.get("arguments", {})
+                                if not args:
+                                    args = {}
+                                    if "post_id" in item:
+                                        args["post_id"] = int(item["post_id"])
+                                    elif "target" in item:
+                                        try:
+                                            args["post_id"] = int(item["target"])
+                                        except (ValueError, TypeError):
+                                            args["user_id"] = item["target"]
+                                    if "content" in item and name in ("create_post", "create_comment"):
+                                        args["content"] = item["content"]
+                                    if "user_id" in item:
+                                        args["user_id"] = int(item["user_id"])
+                                calls.append(ToolCall(name=name, arguments=args))
                     if calls:
                         return calls
             except (json.JSONDecodeError, TypeError):

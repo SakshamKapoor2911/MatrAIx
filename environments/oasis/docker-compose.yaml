@@ -7,46 +7,109 @@ services:
       - "8000:8000"
     volumes:
       - ./data:/app/data
+      - ./output:/app/output
     environment:
-      - DB_PATH=/app/data/simulation.db
+      - DB_PATH=/app/output/simulation.db
       - RECSYS_TYPE=random
       - MAX_REC_POSTS=50
+      - PORT=8000
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
 
-  agent-0:
+  agent-01:
     build:
       context: ../..
       dockerfile: environments/oasis/agents/Dockerfile
     environment:
       - PLATFORM_URL=http://platform:8000
       - PERSONA_PATH=personas/Jun20_1k_persona_description/ID0001.yaml
-      - LLM_BASE_URL=http://host.docker.internal:8002/v1
-      - LLM_MODEL=Qwen/Qwen3-4B
-      - NUM_STEPS=10
+      - LLM_BASE_URL=${LLM_BASE_URL:-http://host.docker.internal:8002/v1}
+      - LLM_MODEL=${LLM_MODEL:-Qwen/Qwen3-8B}
+      - LLM_API_KEY=${LLM_API_KEY:-no-key}
+      - NUM_STEPS=${NUM_STEPS:-20}
+      - AGENT_ID=0
     depends_on:
-      - platform
+      platform:
+        condition: service_healthy
 
-  agent-1:
+  agent-02:
     build:
       context: ../..
       dockerfile: environments/oasis/agents/Dockerfile
     environment:
       - PLATFORM_URL=http://platform:8000
       - PERSONA_PATH=personas/Jun20_1k_persona_description/ID0002.yaml
-      - LLM_BASE_URL=http://host.docker.internal:8002/v1
-      - LLM_MODEL=Qwen/Qwen3-4B
-      - NUM_STEPS=10
+      - LLM_BASE_URL=${LLM_BASE_URL:-http://host.docker.internal:8002/v1}
+      - LLM_MODEL=${LLM_MODEL:-Qwen/Qwen3-8B}
+      - LLM_API_KEY=${LLM_API_KEY:-no-key}
+      - NUM_STEPS=${NUM_STEPS:-20}
+      - AGENT_ID=1
     depends_on:
-      - platform
+      platform:
+        condition: service_healthy
 
-  agent-2:
+  agent-03:
     build:
       context: ../..
       dockerfile: environments/oasis/agents/Dockerfile
     environment:
       - PLATFORM_URL=http://platform:8000
       - PERSONA_PATH=personas/Jun20_1k_persona_description/ID0003.yaml
-      - LLM_BASE_URL=http://host.docker.internal:8002/v1
-      - LLM_MODEL=Qwen/Qwen3-4B
-      - NUM_STEPS=10
+      - LLM_BASE_URL=${LLM_BASE_URL:-http://host.docker.internal:8002/v1}
+      - LLM_MODEL=${LLM_MODEL:-Qwen/Qwen3-8B}
+      - LLM_API_KEY=${LLM_API_KEY:-no-key}
+      - NUM_STEPS=${NUM_STEPS:-20}
+      - AGENT_ID=2
     depends_on:
-      - platform
+      platform:
+        condition: service_healthy
+
+  agent-04:
+    build:
+      context: ../..
+      dockerfile: environments/oasis/agents/Dockerfile
+    environment:
+      - PLATFORM_URL=http://platform:8000
+      - PERSONA_PATH=personas/Jun20_1k_persona_description/ID0004.yaml
+      - LLM_BASE_URL=${LLM_BASE_URL:-http://host.docker.internal:8002/v1}
+      - LLM_MODEL=${LLM_MODEL:-Qwen/Qwen3-8B}
+      - LLM_API_KEY=${LLM_API_KEY:-no-key}
+      - NUM_STEPS=${NUM_STEPS:-20}
+      - AGENT_ID=3
+    depends_on:
+      platform:
+        condition: service_healthy
+
+  agent-05:
+    build:
+      context: ../..
+      dockerfile: environments/oasis/agents/Dockerfile
+    environment:
+      - PLATFORM_URL=http://platform:8000
+      - PERSONA_PATH=personas/Jun20_1k_persona_description/ID0005.yaml
+      - LLM_BASE_URL=${LLM_BASE_URL:-http://host.docker.internal:8002/v1}
+      - LLM_MODEL=${LLM_MODEL:-Qwen/Qwen3-8B}
+      - LLM_API_KEY=${LLM_API_KEY:-no-key}
+      - NUM_STEPS=${NUM_STEPS:-20}
+      - AGENT_ID=4
+    depends_on:
+      platform:
+        condition: service_healthy
+
+  dashboard:
+    build:
+      context: ../..
+      dockerfile: environments/oasis/gui/Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./output:/app/output
+    environment:
+      - DB_PATH=/app/output/simulation.db
+      - PORT=3000
+    depends_on:
+      platform:
+        condition: service_healthy
