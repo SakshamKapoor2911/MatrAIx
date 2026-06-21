@@ -111,7 +111,7 @@ class Orchestrator:
             posts_result = self._platform_state.action_processor.process(user_id, "refresh", {})
             posts = posts_result.data.get("posts", []) if posts_result.data else []
 
-            observation = build_observation_prompt(posts)
+            observation = build_observation_prompt(posts, step=self._platform_state.time_step)
             system_prompt = build_system_prompt(persona)
 
             llm = LLMClient(LLMConfig(

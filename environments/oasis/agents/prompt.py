@@ -31,10 +31,12 @@ Available actions:
 Respond with ONLY the JSON object."""
 
 
-OBSERVATION_TEMPLATE = """Your feed:
+OBSERVATION_TEMPLATE = """Your feed (step {step}):
 {feed_text}
 
-What action do you take? Respond with JSON only. /no_think"""
+Pick ONE action that best reflects your personality right now. Consider: creating an original post about your field, liking a post you agree with, reposting something worth sharing, following an interesting user, or doing nothing if nothing catches your eye. Vary your behavior naturally.
+
+Respond with JSON only. /no_think"""
 
 
 def build_system_prompt(persona: OasisUserInfo) -> str:
@@ -44,10 +46,10 @@ def build_system_prompt(persona: OasisUserInfo) -> str:
     )
 
 
-def build_observation_prompt(posts: list[dict[str, Any]], max_posts: int = 20) -> str:
+def build_observation_prompt(posts: list[dict[str, Any]], max_posts: int = 20, step: int = 1) -> str:
     if not posts:
         feed_text = "Your feed is empty. No posts to see right now. You may want to create a post or search for content."
-        return OBSERVATION_TEMPLATE.format(feed_text=feed_text)
+        return OBSERVATION_TEMPLATE.format(feed_text=feed_text, step=step)
 
     display_posts = posts[:max_posts]
     lines = []
@@ -68,4 +70,4 @@ def build_observation_prompt(posts: list[dict[str, Any]], max_posts: int = 20) -
         lines.append(line)
 
     feed_text = "\n".join(lines)
-    return OBSERVATION_TEMPLATE.format(feed_text=feed_text)
+    return OBSERVATION_TEMPLATE.format(feed_text=feed_text, step=step)
