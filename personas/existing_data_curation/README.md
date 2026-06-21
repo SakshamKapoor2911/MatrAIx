@@ -49,6 +49,48 @@ These psychometric, survey, and theoretical frameworks have been integrated as r
 | GSS cumulative codebook | 6518 | Survey | Official social survey grounding |
 | World Values Survey Wave 7 | 153 | Survey | Values, beliefs, politics, religion, social attitudes |
 | ACS PUMS | 135 | Population Data | Official demographic grounding |
+| Wikipedia Biographical Data | 10 | Real People Data | Birth date/place, nationality, occupation, education, positions, awards |
+
+### Real-World Biographical Data (from Wikipedia & Wikidata)
+
+Dimensions sourced from real people biographical data extracted from Wikipedia infoboxes and Wikidata properties. These ground persona simulation in actual patterns from 6M+ Wikipedia articles covering real individuals.
+
+| Source | Dimensions | Data Format | Access | Coverage |
+| --- | --- | --- | --- | --- |
+| **wiki_bio** (michaelauli) | 10 new | Biography infoboxes + Wikidata P-codes | [Hugging Face: michaelauli/wiki_bio](https://huggingface.co/datasets/michaelauli/wiki_bio) | 728K entries |
+| **wikipedia-persons-masked** (rcds) | 10 (via extraction) | Full Wikipedia text + sentences | [Hugging Face: rcds/wikipedia-persons-masked](https://huggingface.co/datasets/rcds/wikipedia-persons-masked) | 70k people pages |
+| **structured-wikipedia** (Wikimedia) | 10 (via extraction) | Structured articles, infoboxes, Wikidata QIDs | [Hugging Face: wikimedia/structured-wikipedia](https://huggingface.co/datasets/wikimedia/structured-wikipedia) | 6M+ articles |
+| **Wikidata** (Wikimedia Foundation) | 10 (via properties) | Linked data / RDF triples | [Wikidata.org Query Service](https://query.wikidata.org) | 100M+ entities |
+
+#### Extracted Biographical Dimensions (10 total):
+
+1. **wiki_birth_date** — Birth date (decades); Wikidata P569
+2. **wiki_birth_place** — Geographic birthplace; Wikidata P19
+3. **wiki_nationality** — Country of citizenship; Wikidata P27
+4. **wiki_occupation** — Primary profession/field; Wikidata P106
+5. **wiki_field_of_work** — Academic/professional discipline; Wikidata P101
+6. **wiki_position_held** — Official roles (CEO, President, Minister, etc.); Wikidata P39
+7. **wiki_education_level** — Highest education attained; Wikidata P69
+8. **wiki_awards_recognition** — Major prizes/distinctions; Wikidata P166
+9. **wiki_marital_status** — Marriage/partnership status; Wikidata P26
+10. **wiki_political_affiliation** — Political party/ideology; Wikidata P102
+
+#### Data Quality Notes:
+
+- **High coverage (85-95%)**: Demographics (birth, nationality, occupation)
+- **Medium coverage (55-81%)**: Professional/education (positions, awards, field)
+- **Low coverage (48-62%)**: Social/political (marital status, political affiliation)
+- **Inference-required (0%)**: Derived traits (OCEAN personality, socioeconomic status)
+
+#### Integration Rationale:
+
+Real-world biographical grounding provides:
+- **Authenticity**: Patterns from 6M+ real people, not synthetic or survey-based
+- **Diversity**: Global coverage across occupations, nationalities, time periods
+- **Completeness**: Infobox structure enables systematic extraction
+- **Linkability**: Wikidata QIDs enable cross-reference with other knowledge graphs
+
+See `from_real_people.md` for dataset discovery notes and resource links.
 
 ## Eliza's Proposed Persona Schema Categories and Theoretical Basis
 
