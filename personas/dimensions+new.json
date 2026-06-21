@@ -2,7 +2,7 @@
   "schemaVersion": "2.0",
   "name": "matrAIx Persona Dimension Space",
   "headlineBehaviors": 8300000000,
-  "targetDimensions": 1378,
+  "targetDimensions": 1388,
   "note": "Flat unified dimension set. Every sampled persona is assigned exactly one value per dimension. The 'category' tag is for UI grouping/filtering only \u2014 it does not nest the schema. The full reachable persona space is the product of all value counts; the 8.3B headline is the corpus of behaviors already simulated within it.",
   "dimensions": [
     {
@@ -19072,6 +19072,269 @@
         "persona_category": "Social Identity & Relationships",
         "added_date": "2026-06-20",
         "contributor_github": "elizabeth-fan"
+      }
+    },
+    {
+      "id": "wiki_birth_date",
+      "label": "Birth Date",
+      "category": "Demographic: Life Events",
+      "description": "Specific date a person was born; enables age calculation and historical context.",
+      "values": [
+        "1800s",
+        "1900-1920",
+        "1920-1940",
+        "1940-1960",
+        "1960-1980",
+        "1980-2000",
+        "2000+"
+      ],
+      "source_origin": {
+        "source_id": "wiki_bio_dataset",
+        "source_name": "Wikipedia Biographical Data",
+        "source_type": "wikipedia_wikidata_reference",
+        "source_url": "https://huggingface.co/datasets/michaelauli/wiki_bio",
+        "manifest_file": "personas/existing_data_curation/manifests/wikipedia_biographical_data.json",
+        "dimensions_claimed": 18,
+        "license": "CC-BY-SA-3.0 (Wikipedia)",
+        "note": "Extracted from Wikipedia infoboxes and Wikidata P569",
+        "fetch_script": "personas/existing_data_curation/scripts/fetch_sources.py",
+        "intended_use": "Grounding personas in real biographical data",
+        "added_date": "2026-06-20",
+        "contributor_github": "claude-assistant"
+      }
+    },
+    {
+      "id": "wiki_birth_place",
+      "label": "Birth Place",
+      "category": "Demographic: Geographic",
+      "description": "Geographic location where the person was born.",
+      "values": [
+        "North America",
+        "Latin America",
+        "Western Europe",
+        "Eastern Europe",
+        "Sub-Saharan Africa",
+        "MENA",
+        "South Asia",
+        "East Asia",
+        "Southeast Asia",
+        "Oceania"
+      ],
+      "source_origin": {
+        "source_id": "wiki_bio_dataset",
+        "source_name": "Wikipedia Biographical Data",
+        "source_type": "wikipedia_wikidata_reference",
+        "source_url": "https://huggingface.co/datasets/michaelauli/wiki_bio",
+        "note": "Extracted from Wikipedia infoboxes and Wikidata P19",
+        "added_date": "2026-06-20",
+        "contributor_github": "claude-assistant"
+      }
+    },
+    {
+      "id": "wiki_nationality",
+      "label": "Nationality",
+      "category": "Demographic: Core",
+      "description": "Primary country or countries of citizenship.",
+      "values": [
+        "American",
+        "British",
+        "French",
+        "German",
+        "Japanese",
+        "Chinese",
+        "Indian",
+        "Canadian",
+        "Australian",
+        "Other"
+      ],
+      "source_origin": {
+        "source_id": "wiki_bio_dataset",
+        "source_name": "Wikipedia Biographical Data",
+        "source_type": "wikipedia_wikidata_reference",
+        "source_url": "https://huggingface.co/datasets/michaelauli/wiki_bio",
+        "note": "Extracted from Wikipedia infoboxes and Wikidata P27",
+        "added_date": "2026-06-20",
+        "contributor_github": "claude-assistant"
+      }
+    },
+    {
+      "id": "wiki_occupation",
+      "label": "Occupation",
+      "category": "Professional: Industry & Sector",
+      "description": "Primary profession or occupational field from real biographical data.",
+      "values": [
+        "Scientist",
+        "Politician",
+        "Artist",
+        "Athlete",
+        "Entrepreneur",
+        "Entertainer",
+        "Academic",
+        "Military",
+        "Religious",
+        "Other"
+      ],
+      "source_origin": {
+        "source_id": "wiki_bio_dataset",
+        "source_name": "Wikipedia Biographical Data",
+        "source_type": "wikipedia_wikidata_reference",
+        "source_url": "https://huggingface.co/datasets/michaelauli/wiki_bio",
+        "note": "Extracted from Wikipedia infoboxes and Wikidata P106",
+        "added_date": "2026-06-20",
+        "contributor_github": "claude-assistant"
+      }
+    },
+    {
+      "id": "wiki_field_of_work",
+      "label": "Field of Work",
+      "category": "Learning: Domains",
+      "description": "Academic or professional discipline.",
+      "values": [
+        "Physics",
+        "Medicine",
+        "Literature",
+        "Politics",
+        "Law",
+        "Engineering",
+        "Business",
+        "Arts",
+        "Sports",
+        "Religion"
+      ],
+      "source_origin": {
+        "source_id": "wiki_bio_dataset",
+        "source_name": "Wikipedia Biographical Data",
+        "source_type": "wikipedia_wikidata_reference",
+        "source_url": "https://huggingface.co/datasets/michaelauli/wiki_bio",
+        "note": "Extracted from Wikipedia infoboxes and Wikidata P101",
+        "added_date": "2026-06-20",
+        "contributor_github": "claude-assistant"
+      }
+    },
+    {
+      "id": "wiki_position_held",
+      "label": "Notable Positions/Titles",
+      "category": "Professional: Career",
+      "description": "Official roles and positions occupied by the person.",
+      "values": [
+        "CEO",
+        "President",
+        "Minister",
+        "Governor",
+        "Mayor",
+        "Archbishop",
+        "Chancellor",
+        "General",
+        "Ambassador",
+        "None"
+      ],
+      "source_origin": {
+        "source_id": "wiki_bio_dataset",
+        "source_name": "Wikipedia Biographical Data",
+        "source_type": "wikipedia_wikidata_reference",
+        "source_url": "https://huggingface.co/datasets/michaelauli/wiki_bio",
+        "note": "Extracted from Wikipedia infoboxes and Wikidata P39",
+        "added_date": "2026-06-20",
+        "contributor_github": "claude-assistant"
+      }
+    },
+    {
+      "id": "wiki_education_level",
+      "label": "Educational Attainment",
+      "category": "Learning: Education",
+      "description": "Highest level of formal education achieved.",
+      "values": [
+        "No formal education",
+        "Primary",
+        "Secondary",
+        "Bachelor's degree",
+        "Master's degree",
+        "Doctorate",
+        "Postdoctoral"
+      ],
+      "source_origin": {
+        "source_id": "wiki_bio_dataset",
+        "source_name": "Wikipedia Biographical Data",
+        "source_type": "wikipedia_wikidata_reference",
+        "source_url": "https://huggingface.co/datasets/michaelauli/wiki_bio",
+        "note": "Extracted from Wikipedia infoboxes and Wikidata P69",
+        "added_date": "2026-06-20",
+        "contributor_github": "claude-assistant"
+      }
+    },
+    {
+      "id": "wiki_awards_recognition",
+      "label": "Awards and Honors",
+      "category": "Professional: Career",
+      "description": "Major prizes and distinctions received.",
+      "values": [
+        "Nobel Prize",
+        "Academy Award",
+        "Pulitzer Prize",
+        "Emmy Award",
+        "Olympic Medal",
+        "Grammy Award",
+        "Other major award",
+        "None"
+      ],
+      "source_origin": {
+        "source_id": "wiki_bio_dataset",
+        "source_name": "Wikipedia Biographical Data",
+        "source_type": "wikipedia_wikidata_reference",
+        "source_url": "https://huggingface.co/datasets/michaelauli/wiki_bio",
+        "note": "Extracted from Wikipedia infoboxes and Wikidata P166",
+        "added_date": "2026-06-20",
+        "contributor_github": "claude-assistant"
+      }
+    },
+    {
+      "id": "wiki_marital_status",
+      "label": "Marital Status",
+      "category": "Demographic: Family",
+      "description": "Marriage and partnership status from biographical records.",
+      "values": [
+        "Single",
+        "Married",
+        "Divorced",
+        "Widowed",
+        "Separated",
+        "Partnered"
+      ],
+      "source_origin": {
+        "source_id": "wiki_bio_dataset",
+        "source_name": "Wikipedia Biographical Data",
+        "source_type": "wikipedia_wikidata_reference",
+        "source_url": "https://huggingface.co/datasets/michaelauli/wiki_bio",
+        "note": "Extracted from Wikipedia infoboxes and Wikidata P26",
+        "added_date": "2026-06-20",
+        "contributor_github": "claude-assistant"
+      }
+    },
+    {
+      "id": "wiki_political_affiliation",
+      "label": "Political Affiliation",
+      "category": "Worldview: Political Beliefs",
+      "description": "Political party or political ideology association.",
+      "values": [
+        "Democratic",
+        "Republican",
+        "Conservative",
+        "Labour",
+        "Green",
+        "Independent",
+        "Progressive",
+        "Socialist",
+        "Liberal",
+        "Other"
+      ],
+      "source_origin": {
+        "source_id": "wiki_bio_dataset",
+        "source_name": "Wikipedia Biographical Data",
+        "source_type": "wikipedia_wikidata_reference",
+        "source_url": "https://huggingface.co/datasets/michaelauli/wiki_bio",
+        "note": "Extracted from Wikipedia infoboxes and Wikidata P102",
+        "added_date": "2026-06-20",
+        "contributor_github": "claude-assistant"
       }
     }
   ],
