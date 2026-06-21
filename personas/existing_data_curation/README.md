@@ -362,6 +362,24 @@ default, existing deterministic values are not overwritten.
 
 Use `--backend dry_run` to test the file flow without calling Claude Code.
 
+### 3) Browser demo
+
+A static demo is available at `demo/index.html`. It calls public Wikidata and
+English Wikipedia APIs directly from the browser, then renders the persona seed,
+source evidence, and a Claude-style prompt without requiring any API key:
+
+```bash
+cd personas/existing_data_curation/demo
+python3 -m http.server 8899
+```
+
+Open `http://127.0.0.1:8899/`. After the PR branch is pushed, the same file can
+also be shown through an HTML preview service:
+
+```text
+https://htmlpreview.github.io/?https://github.com/MatrAIx-ai/MatrAIx/blob/codex/wiki-persona-seed-pipeline/personas/existing_data_curation/demo/index.html
+```
+
 ## Output Layout
 
 Downloads are stored under `raw/`:

@@ -1,0 +1,1159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MatrAIx Wikipedia Persona Demo</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1b1f24;
+      --muted: #5c6672;
+      --line: #d9dee5;
+      --panel: #ffffff;
+      --paper: #f6f7f9;
+      --blue: #2f6f9f;
+      --green: #557a46;
+      --red: #a34e39;
+      --gold: #9b742f;
+      --focus: #1d5f8f;
+      --shadow: 0 10px 30px rgba(18, 25, 38, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      cursor: pointer;
+      min-height: 38px;
+      padding: 8px 12px;
+      transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+    }
+
+    button:hover {
+      border-color: #aeb7c2;
+      box-shadow: 0 3px 10px rgba(18, 25, 38, 0.08);
+    }
+
+    button:active {
+      transform: translateY(1px);
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .shell {
+      width: min(1440px, 100%);
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .top {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: end;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+    }
+
+    .eyebrow {
+      margin: 0 0 5px;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 5vw, 56px);
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+
+    .subhead {
+      margin: 10px 0 0;
+      color: var(--muted);
+      max-width: 850px;
+      font-size: 16px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(130px, 1fr));
+      gap: 8px;
+      min-width: 310px;
+    }
+
+    .stat {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 10px 12px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 20px;
+      line-height: 1.1;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: 360px minmax(0, 1fr);
+      gap: 18px;
+      margin-top: 20px;
+      align-items: start;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .controls {
+      position: sticky;
+      top: 16px;
+      padding: 18px;
+    }
+
+    .section-title {
+      margin: 0 0 12px;
+      font-size: 14px;
+      font-weight: 750;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    label {
+      display: block;
+      margin: 14px 0 6px;
+      color: #333b45;
+      font-weight: 650;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      min-height: 40px;
+      padding: 9px 10px;
+    }
+
+    .run-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 8px;
+    }
+
+    .primary {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .primary:hover {
+      border-color: #24577d;
+      box-shadow: 0 4px 14px rgba(47, 111, 159, 0.22);
+    }
+
+    .examples {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .examples button {
+      text-align: left;
+      white-space: normal;
+      min-height: 44px;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 13px;
+      margin: 10px 0 0;
+    }
+
+    .result {
+      min-height: 650px;
+      overflow: hidden;
+    }
+
+    .result-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: start;
+      border-bottom: 1px solid var(--line);
+      padding: 18px;
+    }
+
+    .identity {
+      min-width: 0;
+    }
+
+    .identity h2 {
+      margin: 0;
+      font-size: 26px;
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    .identity p {
+      margin: 6px 0 0;
+      color: var(--muted);
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 10px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      min-height: 26px;
+      border-radius: 999px;
+      padding: 3px 9px;
+      background: #eef3f7;
+      color: #27455a;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .badge.green {
+      background: #edf4ec;
+      color: var(--green);
+    }
+
+    .badge.gold {
+      background: #fbf2df;
+      color: var(--gold);
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      gap: 0;
+    }
+
+    .summary-pane,
+    .detail-pane {
+      padding: 18px;
+    }
+
+    .summary-pane {
+      border-right: 1px solid var(--line);
+    }
+
+    .wiki-image {
+      width: 100%;
+      max-height: 300px;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #eef1f4;
+      margin-bottom: 14px;
+      display: none;
+    }
+
+    .summary-text {
+      margin: 0;
+      color: #303842;
+      font-size: 16px;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .field {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+      background: #fbfcfd;
+      min-height: 74px;
+    }
+
+    .field dt {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 750;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    .field dd {
+      margin: 5px 0 0;
+      color: var(--ink);
+      overflow-wrap: anywhere;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 6px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .tab {
+      min-height: 34px;
+      padding: 6px 10px;
+      font-size: 13px;
+      font-weight: 700;
+      background: #f2f4f6;
+    }
+
+    .tab[aria-selected="true"] {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: #fff;
+    }
+
+    .tab-panel {
+      display: none;
+      margin-top: 12px;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    pre {
+      margin: 0;
+      max-height: 520px;
+      overflow: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #111820;
+      color: #eef4f8;
+      padding: 13px;
+      font: 12px/1.55 "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .assignments {
+      display: grid;
+      gap: 10px;
+    }
+
+    .assignment {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 11px;
+      background: #fbfcfd;
+    }
+
+    .assignment-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .assignment-name {
+      font-weight: 800;
+      overflow-wrap: anywhere;
+    }
+
+    .confidence {
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .assignment-value {
+      margin: 6px 0 0;
+      color: #303842;
+    }
+
+    .assignment-evidence {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .status {
+      display: none;
+      border-bottom: 1px solid var(--line);
+      padding: 11px 18px;
+      color: var(--blue);
+      font-weight: 700;
+      background: #f1f7fb;
+    }
+
+    .status.error {
+      color: var(--red);
+      background: #fff4f1;
+    }
+
+    .status.active {
+      display: block;
+    }
+
+    .empty {
+      padding: 40px 18px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .toast {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      max-width: min(360px, calc(100vw - 36px));
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: var(--shadow);
+      padding: 12px 14px;
+      color: var(--ink);
+      transform: translateY(16px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 160ms ease, transform 160ms ease;
+    }
+
+    .toast.active {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    @media (max-width: 1080px) {
+      .top,
+      .workspace,
+      .content {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        min-width: 0;
+      }
+
+      .controls {
+        position: static;
+      }
+
+      .summary-pane {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .shell {
+        padding: 14px;
+      }
+
+      .stats,
+      .examples,
+      .field-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .result-header {
+        grid-template-columns: 1fr;
+      }
+
+      .actions {
+        justify-content: stretch;
+      }
+
+      .actions button {
+        flex: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="top" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">MatrAIx persona curation</p>
+        <h1 id="page-title">Wikipedia/Wikidata to persona seed</h1>
+        <p class="subhead">Live browser demo for real people and fictional characters. The production PR keeps the same evidence-first shape and can add Claude Code field assignment afterward.</p>
+      </div>
+      <div class="stats" aria-label="Candidate pool size">
+        <div class="stat"><strong>2.16M</strong><span>English biography articles</span></div>
+        <div class="stat"><strong>29.8K</strong><span>English fictional characters</span></div>
+        <div class="stat"><strong>13.57M</strong><span>Wikidata humans</span></div>
+        <div class="stat"><strong>124.3K</strong><span>Wikidata fictional characters</span></div>
+      </div>
+    </section>
+
+    <section class="workspace">
+      <aside class="panel controls" aria-label="Demo controls">
+        <p class="section-title">Entity lookup</p>
+        <label for="entityInput">Name or Wikidata QID</label>
+        <div class="run-row">
+          <input id="entityInput" value="Q937" autocomplete="off" spellcheck="false">
+          <button class="primary" id="runButton" type="button">Run</button>
+        </div>
+
+        <label for="entityType">Expected type</label>
+        <select id="entityType">
+          <option value="real_person">Real person</option>
+          <option value="fictional_character">Fictional character</option>
+          <option value="">Auto</option>
+        </select>
+
+        <label>Examples</label>
+        <div class="examples">
+          <button type="button" data-qid="Q937" data-type="real_person">Albert Einstein</button>
+          <button type="button" data-qid="Q4653" data-type="fictional_character">Sherlock Holmes</button>
+          <button type="button" data-qid="Q7259" data-type="real_person">Ada Lovelace</button>
+          <button type="button" data-qid="Q207649" data-type="fictional_character">Lara Croft</button>
+        </div>
+
+        <p class="hint">The demo uses public MediaWiki APIs and deterministic field drafting. It does not call Claude or store credentials.</p>
+      </aside>
+
+      <section class="panel result" aria-live="polite">
+        <div id="status" class="status"></div>
+        <div class="result-header">
+          <div class="identity">
+            <h2 id="resultName">Ready</h2>
+            <p id="resultDescription">Run an entity lookup to create a persona seed.</p>
+            <div class="badges" id="badges"></div>
+          </div>
+          <div class="actions">
+            <button id="copyButton" type="button">Copy JSON</button>
+            <button id="downloadButton" type="button">Download JSON</button>
+          </div>
+        </div>
+
+        <div id="emptyState" class="empty">Loading the default example...</div>
+        <div id="resultContent" class="content" hidden>
+          <div class="summary-pane">
+            <img id="wikiImage" class="wiki-image" alt="">
+            <p id="summaryText" class="summary-text"></p>
+            <dl class="field-grid" id="fieldGrid"></dl>
+          </div>
+          <div class="detail-pane">
+            <div class="tabs" role="tablist" aria-label="Result views">
+              <button class="tab" type="button" role="tab" aria-selected="true" data-tab="assignments">Fields</button>
+              <button class="tab" type="button" role="tab" aria-selected="false" data-tab="seed">Seed JSON</button>
+              <button class="tab" type="button" role="tab" aria-selected="false" data-tab="evidence">Evidence</button>
+              <button class="tab" type="button" role="tab" aria-selected="false" data-tab="prompt">Claude Prompt</button>
+            </div>
+            <div id="tab-assignments" class="tab-panel active">
+              <div id="assignmentList" class="assignments"></div>
+            </div>
+            <div id="tab-seed" class="tab-panel">
+              <pre id="seedJson"></pre>
+            </div>
+            <div id="tab-evidence" class="tab-panel">
+              <pre id="evidenceJson"></pre>
+            </div>
+            <div id="tab-prompt" class="tab-panel">
+              <pre id="promptText"></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status"></div>
+
+  <script>
+    "use strict";
+
+    const CLAIMS = {
+      instance_of: "P31",
+      sex_or_gender: "P21",
+      occupation: "P106",
+      country_of_citizenship: "P27",
+      date_of_birth: "P569",
+      date_of_death: "P570",
+      languages: "P1412",
+      field_of_work: "P101",
+      notable_work: "P800",
+      creator: "P170",
+      present_in_work: "P1441",
+      fictional_universe: "P1080"
+    };
+
+    const FIELD_LABELS = {
+      source_entity_type: "Source entity type",
+      identity_name: "Name",
+      domain: "Domain",
+      role_function: "Role/function",
+      subject_specialty: "Subject specialty",
+      known_for_or_source_work: "Known for/source work",
+      creator: "Creator",
+      nationality: "Nationality",
+      gender: "Gender",
+      primary_language: "Primary language"
+    };
+
+    const state = {
+      currentRecord: null,
+      currentEvidence: null,
+      lastPrompt: ""
+    };
+
+    const el = {
+      input: document.getElementById("entityInput"),
+      type: document.getElementById("entityType"),
+      run: document.getElementById("runButton"),
+      status: document.getElementById("status"),
+      resultName: document.getElementById("resultName"),
+      resultDescription: document.getElementById("resultDescription"),
+      badges: document.getElementById("badges"),
+      empty: document.getElementById("emptyState"),
+      content: document.getElementById("resultContent"),
+      image: document.getElementById("wikiImage"),
+      summary: document.getElementById("summaryText"),
+      fieldGrid: document.getElementById("fieldGrid"),
+      assignments: document.getElementById("assignmentList"),
+      seedJson: document.getElementById("seedJson"),
+      evidenceJson: document.getElementById("evidenceJson"),
+      promptText: document.getElementById("promptText"),
+      copy: document.getElementById("copyButton"),
+      download: document.getElementById("downloadButton"),
+      toast: document.getElementById("toast")
+    };
+
+    function showStatus(message, isError = false) {
+      el.status.textContent = message;
+      el.status.classList.toggle("error", isError);
+      el.status.classList.add("active");
+    }
+
+    function clearStatus() {
+      el.status.textContent = "";
+      el.status.classList.remove("active", "error");
+    }
+
+    function showToast(message) {
+      el.toast.textContent = message;
+      el.toast.classList.add("active");
+      window.clearTimeout(showToast.timer);
+      showToast.timer = window.setTimeout(() => {
+        el.toast.classList.remove("active");
+      }, 2200);
+    }
+
+    async function fetchJson(url) {
+      const response = await fetch(url, {
+        headers: { "Accept": "application/json" }
+      });
+      if (!response.ok) {
+        throw new Error(`${response.status} ${response.statusText}`);
+      }
+      return response.json();
+    }
+
+    function wikidataApi(params) {
+      const url = new URL("https://www.wikidata.org/w/api.php");
+      Object.entries(params).forEach(([key, value]) => url.searchParams.set(key, value));
+      url.searchParams.set("format", "json");
+      url.searchParams.set("origin", "*");
+      return url.toString();
+    }
+
+    async function searchWikidata(name, expectedType) {
+      const data = await fetchJson(wikidataApi({
+        action: "wbsearchentities",
+        search: name,
+        language: "en",
+        limit: "8"
+      }));
+      const candidates = data.search || [];
+      if (!candidates.length) {
+        throw new Error(`No Wikidata result for "${name}".`);
+      }
+
+      for (const candidate of candidates) {
+        const entity = await getEntity(candidate.id);
+        const inferred = inferEntityType(entity);
+        if (!expectedType || inferred === expectedType) {
+          return entity;
+        }
+      }
+      return getEntity(candidates[0].id);
+    }
+
+    async function getEntity(qid) {
+      const data = await fetchJson(wikidataApi({
+        action: "wbgetentities",
+        ids: qid,
+        props: "labels|descriptions|claims|sitelinks",
+        languages: "en"
+      }));
+      const entity = data.entities && data.entities[qid];
+      if (!entity || entity.missing === "") {
+        throw new Error(`Wikidata entity ${qid} was not found.`);
+      }
+      return entity;
+    }
+
+    function getEntityLabel(entity) {
+      return entity.labels?.en?.value || entity.id;
+    }
+
+    function getEntityDescription(entity) {
+      return entity.descriptions?.en?.value || "";
+    }
+
+    function claimValues(entity, propertyId) {
+      return (entity.claims?.[propertyId] || [])
+        .map((claim) => claim.mainsnak?.datavalue?.value)
+        .filter(Boolean);
+    }
+
+    function claimQids(entity, propertyId) {
+      return claimValues(entity, propertyId)
+        .filter((value) => value && value["entity-type"] === "item")
+        .map((value) => `Q${value["numeric-id"]}`);
+    }
+
+    function timeClaims(entity, propertyId) {
+      return claimValues(entity, propertyId)
+        .filter((value) => typeof value.time === "string")
+        .map((value) => value.time.replace(/^\+/, "").replace(/T.*$/, ""));
+    }
+
+    async function getLabels(qids) {
+      const unique = [...new Set(qids)].filter(Boolean);
+      const labels = {};
+      for (let index = 0; index < unique.length; index += 50) {
+        const batch = unique.slice(index, index + 50);
+        const data = await fetchJson(wikidataApi({
+          action: "wbgetentities",
+          ids: batch.join("|"),
+          props: "labels|descriptions",
+          languages: "en"
+        }));
+        Object.entries(data.entities || {}).forEach(([qid, entity]) => {
+          labels[qid] = entity.labels?.en?.value || qid;
+        });
+      }
+      return labels;
+    }
+
+    function inferEntityType(entity) {
+      const description = getEntityDescription(entity).toLowerCase();
+      const directInstances = claimQids(entity, CLAIMS.instance_of);
+      if (directInstances.includes("Q5")) {
+        return "real_person";
+      }
+      if (directInstances.includes("Q95074")) {
+        return "fictional_character";
+      }
+      if (description.includes("fictional") || description.includes("character")) {
+        return "fictional_character";
+      }
+      return "real_person";
+    }
+
+    async function getWikipediaSummary(entity) {
+      const title = entity.sitelinks?.enwiki?.title || getEntityLabel(entity);
+      const url = new URL("https://en.wikipedia.org/w/api.php");
+      url.searchParams.set("action", "query");
+      url.searchParams.set("format", "json");
+      url.searchParams.set("origin", "*");
+      url.searchParams.set("redirects", "1");
+      url.searchParams.set("prop", "extracts|pageimages|info");
+      url.searchParams.set("exintro", "1");
+      url.searchParams.set("explaintext", "1");
+      url.searchParams.set("piprop", "thumbnail");
+      url.searchParams.set("pithumbsize", "900");
+      url.searchParams.set("inprop", "url");
+      url.searchParams.set("titles", title);
+
+      const data = await fetchJson(url.toString());
+      const pages = Object.values(data.query?.pages || {});
+      const page = pages[0] || {};
+      return {
+        title: page.title || title,
+        extract: page.extract || "",
+        url: page.fullurl || `https://en.wikipedia.org/wiki/${encodeURIComponent(title.replaceAll(" ", "_"))}`,
+        thumbnail: page.thumbnail?.source || null
+      };
+    }
+
+    function mapLabels(qids, labels, limit = 6) {
+      return qids.slice(0, limit).map((qid) => labels[qid] || qid);
+    }
+
+    function first(values) {
+      return values.find((value) => value !== null && value !== undefined && value !== "") || null;
+    }
+
+    function evidenceQuote(summary, value) {
+      if (!summary || !value) {
+        return null;
+      }
+      const sentences = summary.match(/[^.!?]+[.!?]+/g) || [summary];
+      const lowerValue = String(value).toLowerCase();
+      return first(sentences.filter((sentence) => sentence.toLowerCase().includes(lowerValue))) ||
+        sentences[0]?.trim() ||
+        null;
+    }
+
+    function buildAssignments(dimensions, summary) {
+      const fields = [
+        "source_entity_type",
+        "identity_name",
+        "domain",
+        "role_function",
+        "subject_specialty",
+        "known_for_or_source_work",
+        "creator",
+        "nationality",
+        "gender",
+        "primary_language"
+      ];
+      return fields.map((field) => {
+        const value = dimensions[field] || null;
+        return {
+          field,
+          value,
+          evidence_quotes: value ? [evidenceQuote(summary, Array.isArray(value) ? value[0] : value)].filter(Boolean) : [],
+          confidence: value ? 0.82 : 0.0,
+          assignment_type: value ? "structured_claim_or_summary_hint" : "unsupported"
+        };
+      });
+    }
+
+    function buildPrompt(record, evidence) {
+      const targetFields = Object.keys(FIELD_LABELS).join(", ");
+      return [
+        "You are assigning persona fields from Wikipedia/Wikidata evidence.",
+        "Use only the evidence below. Return null when unsupported.",
+        "",
+        `Target fields: ${targetFields}`,
+        "",
+        "Wikipedia summary:",
+        evidence.wikipedia_summary || "",
+        "",
+        "Wikidata claims:",
+        JSON.stringify(evidence.wikidata_claims, null, 2),
+        "",
+        "Current seed dimensions:",
+        JSON.stringify(record.persona.dimensions, null, 2)
+      ].join("\n");
+    }
+
+    function buildRecord(entity, summary, labels, expectedType) {
+      const entityType = expectedType || inferEntityType(entity);
+      const label = getEntityLabel(entity);
+
+      const claimSets = {
+        instance_of: mapLabels(claimQids(entity, CLAIMS.instance_of), labels),
+        occupation: mapLabels(claimQids(entity, CLAIMS.occupation), labels),
+        country_of_citizenship: mapLabels(claimQids(entity, CLAIMS.country_of_citizenship), labels),
+        sex_or_gender: mapLabels(claimQids(entity, CLAIMS.sex_or_gender), labels, 2),
+        languages: mapLabels(claimQids(entity, CLAIMS.languages), labels),
+        field_of_work: mapLabels(claimQids(entity, CLAIMS.field_of_work), labels),
+        notable_work: mapLabels(claimQids(entity, CLAIMS.notable_work), labels),
+        creator: mapLabels(claimQids(entity, CLAIMS.creator), labels),
+        present_in_work: mapLabels(claimQids(entity, CLAIMS.present_in_work), labels),
+        fictional_universe: mapLabels(claimQids(entity, CLAIMS.fictional_universe), labels)
+      };
+
+      const birthDate = first(timeClaims(entity, CLAIMS.date_of_birth));
+      const deathDate = first(timeClaims(entity, CLAIMS.date_of_death));
+      const role = first(claimSets.occupation) || first(claimSets.instance_of);
+      const specialty = first(claimSets.field_of_work) || first(claimSets.occupation);
+      const knownFor = first(claimSets.notable_work) ||
+        first(claimSets.present_in_work) ||
+        first(claimSets.fictional_universe);
+      const creator = first(claimSets.creator);
+
+      const dimensions = {
+        source_entity_type: entityType,
+        identity_name: label,
+        domain: entityType === "fictional_character" ? "Fictional character" : "Real person biography",
+        role_function: role,
+        subject_specialty: specialty,
+        known_for_or_source_work: knownFor,
+        creator,
+        nationality: first(claimSets.country_of_citizenship),
+        gender: first(claimSets.sex_or_gender),
+        primary_language: first(claimSets.languages),
+        birth_date: birthDate,
+        death_date: deathDate
+      };
+
+      const evidence = {
+        wikidata_qid: entity.id,
+        wikipedia_title: summary.title,
+        wikipedia_url: summary.url,
+        wikipedia_summary: summary.extract,
+        wikidata_claims: claimSets
+      };
+
+      const assignments = buildAssignments(dimensions, summary.extract);
+      const record = {
+        metadata: {
+          source: "wikidata_wikipedia_browser_demo",
+          qid: entity.id,
+          entity_type: entityType,
+          wikipedia_language: "en",
+          wikipedia_title: summary.title,
+          generated_at: new Date().toISOString()
+        },
+        persona: {
+          name: label,
+          summary: summary.extract,
+          dimensions,
+          llm_field_assignments: assignments
+        },
+        source_evidence: evidence,
+        validation: {
+          mode: "browser_demo_rule_based",
+          notes: [
+            "This online demo does not call Claude Code.",
+            "The PR script can run Claude Code over the same seed record for production curation."
+          ]
+        }
+      };
+      return { record, evidence };
+    }
+
+    function renderRecord(record, evidence, thumbnail) {
+      state.currentRecord = record;
+      state.currentEvidence = evidence;
+      state.lastPrompt = buildPrompt(record, evidence);
+
+      el.empty.hidden = true;
+      el.content.hidden = false;
+      el.resultName.textContent = record.persona.name;
+      el.resultDescription.textContent = record.metadata.wikipedia_title;
+      el.summary.textContent = record.persona.summary || "No English Wikipedia summary found.";
+
+      if (thumbnail) {
+        el.image.src = thumbnail;
+        el.image.alt = `${record.persona.name} image from Wikipedia`;
+        el.image.style.display = "block";
+      } else {
+        el.image.removeAttribute("src");
+        el.image.alt = "";
+        el.image.style.display = "none";
+      }
+
+      el.badges.innerHTML = "";
+      [
+        record.metadata.entity_type.replace("_", " "),
+        record.metadata.qid,
+        "English Wikipedia"
+      ].forEach((text, index) => {
+        const badge = document.createElement("span");
+        badge.className = `badge ${index === 0 ? "green" : index === 1 ? "gold" : ""}`;
+        badge.textContent = text;
+        el.badges.appendChild(badge);
+      });
+
+      const visibleFields = [
+        "source_entity_type",
+        "domain",
+        "role_function",
+        "subject_specialty",
+        "known_for_or_source_work",
+        "creator",
+        "nationality",
+        "primary_language"
+      ];
+      el.fieldGrid.innerHTML = "";
+      visibleFields.forEach((field) => {
+        const wrapper = document.createElement("div");
+        wrapper.className = "field";
+        const dt = document.createElement("dt");
+        const dd = document.createElement("dd");
+        dt.textContent = FIELD_LABELS[field] || field;
+        const value = record.persona.dimensions[field];
+        dd.textContent = Array.isArray(value) ? value.join(", ") : value || "null";
+        wrapper.append(dt, dd);
+        el.fieldGrid.appendChild(wrapper);
+      });
+
+      el.assignments.innerHTML = "";
+      record.persona.llm_field_assignments.forEach((assignment) => {
+        const item = document.createElement("article");
+        item.className = "assignment";
+        const head = document.createElement("div");
+        head.className = "assignment-head";
+        const name = document.createElement("div");
+        name.className = "assignment-name";
+        name.textContent = FIELD_LABELS[assignment.field] || assignment.field;
+        const confidence = document.createElement("div");
+        confidence.className = "confidence";
+        confidence.textContent = `${Math.round(assignment.confidence * 100)}%`;
+        head.append(name, confidence);
+
+        const value = document.createElement("p");
+        value.className = "assignment-value";
+        value.textContent = assignment.value || "null";
+
+        const evidenceLine = document.createElement("p");
+        evidenceLine.className = "assignment-evidence";
+        evidenceLine.textContent = assignment.evidence_quotes[0] || assignment.assignment_type;
+
+        item.append(head, value, evidenceLine);
+        el.assignments.appendChild(item);
+      });
+
+      el.seedJson.textContent = JSON.stringify(record, null, 2);
+      el.evidenceJson.textContent = JSON.stringify(evidence, null, 2);
+      el.promptText.textContent = state.lastPrompt;
+    }
+
+    async function runLookup() {
+      const raw = el.input.value.trim();
+      if (!raw) {
+        showStatus("Enter a name or Wikidata QID.", true);
+        return;
+      }
+      const expectedType = el.type.value || null;
+      const started = performance.now();
+      showStatus("Resolving Wikidata entity and Wikipedia summary...");
+      el.run.disabled = true;
+      try {
+        const entity = /^Q\d+$/i.test(raw)
+          ? await getEntity(raw.toUpperCase())
+          : await searchWikidata(raw, expectedType);
+
+        const allQids = Object.values(CLAIMS).flatMap((propertyId) => claimQids(entity, propertyId));
+        showStatus("Loading linked claim labels...");
+        const [labels, summary] = await Promise.all([
+          getLabels(allQids),
+          getWikipediaSummary(entity)
+        ]);
+
+        const { record, evidence } = buildRecord(entity, summary, labels, expectedType);
+        renderRecord(record, evidence, summary.thumbnail);
+        const elapsed = Math.round(performance.now() - started);
+        showStatus(`Loaded ${record.persona.name} in ${elapsed} ms.`);
+      } catch (error) {
+        console.error(error);
+        showStatus(error.message || "Lookup failed.", true);
+      } finally {
+        el.run.disabled = false;
+      }
+    }
+
+    function setTab(name) {
+      document.querySelectorAll(".tab").forEach((tab) => {
+        tab.setAttribute("aria-selected", String(tab.dataset.tab === name));
+      });
+      document.querySelectorAll(".tab-panel").forEach((panel) => {
+        panel.classList.toggle("active", panel.id === `tab-${name}`);
+      });
+    }
+
+    async function copyJson() {
+      if (!state.currentRecord) {
+        showToast("No record to copy yet.");
+        return;
+      }
+      await navigator.clipboard.writeText(JSON.stringify(state.currentRecord, null, 2));
+      showToast("Persona seed JSON copied.");
+    }
+
+    function downloadJson() {
+      if (!state.currentRecord) {
+        showToast("No record to download yet.");
+        return;
+      }
+      const slug = state.currentRecord.persona.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+      const blob = new Blob([JSON.stringify(state.currentRecord, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `${slug || "persona-seed"}.json`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    el.run.addEventListener("click", runLookup);
+    el.input.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        runLookup();
+      }
+    });
+    document.querySelectorAll(".examples button").forEach((button) => {
+      button.addEventListener("click", () => {
+        el.input.value = button.dataset.qid;
+        el.type.value = button.dataset.type;
+        runLookup();
+      });
+    });
+    document.querySelectorAll(".tab").forEach((tab) => {
+      tab.addEventListener("click", () => setTab(tab.dataset.tab));
+    });
+    el.copy.addEventListener("click", copyJson);
+    el.download.addEventListener("click", downloadJson);
+
+    runLookup();
+  </script>
+</body>
+</html>
