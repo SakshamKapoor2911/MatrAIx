@@ -332,3 +332,52 @@ def load_personas_from_files(filepaths: list[str | Path]) -> list[OasisUserInfo]
 
 def personas_to_oasis_dicts(personas: list[OasisUserInfo]) -> list[dict[str, Any]]:
     return [p.to_oasis_dict() for p in personas]
+
+
+def personas_to_oasis_csv_rows(
+    personas: list[OasisUserInfo],
+    following_lists: list[list[int]] | None = None,
+    activity_frequency: int = 100,
+) -> list[dict[str, str]]:
+    rows = []
+    for i, p in enumerate(personas):
+        following = following_lists[i] if following_lists else []
+        rows.append({
+            "user_id": str(i),
+            "name": p.name,
+            "username": p.user_name,
+            "description": p.bio,
+            "user_char": p.user_profile,
+            "following_agentid_list": repr(following),
+            "previous_tweets": "[]",
+            "activity_level": repr(["active"] * 24),
+            "activity_level_frequency": repr([activity_frequency] * 24),
+            "tweets_id": "0",
+        })
+    return rows
+
+
+def export_oasis_csv(
+    personas: list[OasisUserInfo],
+    output_path: str | Path,
+    following_lists: list[list[int]] | None = None,
+    activity_frequency: int = 100,
+) -> Path:
+    import csv
+
+    output_path = Path(output_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    rows = personas_to_oasis_csv_rows(personas, following_lists, activity_frequency)
+    fieldnames = [
+        "user_id", "name", "username", "description", "user_char",
+        "following_agentid_list", "previous_tweets", "activity_level",
+        "activity_level_frequency", "tweets_id",
+    ]
+
+    with output_path.open("w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)
+
+    return output_path

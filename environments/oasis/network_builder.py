@@ -382,3 +382,52 @@ def build_oasis_follow_data(
             "following_agentid_list": adj[i],
         })
     return result
+
+
+def build_simple_topic_graph(
+    personas: list[OasisUserInfo],
+    follow_probability: float = 0.2,
+    random_seed: int | None = 42,
+) -> SocialGraph:
+    rng = random.Random(random_seed)
+
+    if len(personas) < 2:
+        return SocialGraph(
+            num_agents=len(personas), edges=[], influencer_indices=[],
+            seed_posts=[], topic_clusters={},
+        )
+
+    influencer_indices = _identify_influencers(personas, percentile=0.90)
+    topic_clusters = _cluster_by_topic(personas)
+
+    edges: list[FollowEdge] = []
+    edge_set: set[tuple[int, int]] = set()
+
+    for i, persona in enumerate(personas):
+        persona_topics = set(persona.interested_topics)
+
+        for inf_idx in influencer_indices:
+            if inf_idx == i:
+                continue
+            inf_topics = set(personas[inf_idx].interested_topics)
+            if persona_topics & inf_topics:
+                if rng.random() <= follow_probability:
+                    if (i, inf_idx) not in edge_set:
+                        edges.append(FollowEdge(follower_idx=i, followee_idx=inf_idx))
+                        edge_set.add((i, inf_idx))
+
+    seed_posts: list[SeedPost] = []
+    for inf_idx in influencer_indices:
+        inf_persona = personas[inf_idx]
+        topics = inf_persona.interested_topics
+        if topics:
+            content = _generate_seed_post_content(inf_persona, topics[0])
+            seed_posts.append(SeedPost(author_idx=inf_idx, content=content, topic=topics[0]))
+
+    return SocialGraph(
+        num_agents=len(personas),
+        edges=edges,
+        influencer_indices=influencer_indices,
+        seed_posts=seed_posts,
+        topic_clusters=topic_clusters,
+    )
