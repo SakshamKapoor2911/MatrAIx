@@ -6,6 +6,8 @@ This folder curates external persona datasets and reference-only literature sour
 
 Dataset manifests live in `manifests/`.
 
+### Persona Datasets
+
 | Source | Claimed Dimensions | Access |
 | --- | --- | --- |
 | NVIDIA Nemotron Personas USA | 21 | Hugging Face dataset: `nvidia/Nemotron-Personas-USA` |
@@ -18,6 +20,35 @@ Dataset manifests live in `manifests/`.
 | Facebook PersonaChat | 2 | Hugging Face dataset: `facebook/persona-chat` |
 | HorizonBench (mental_state_graphs) | 30 | Hugging Face dataset: `stellalisy/HorizonBench` (`mental_state_graphs` config) |
 | AllenAI WildChat (1M) | 3 | Hugging Face dataset: `allenai/WildChat-1M` |
+
+### Grounding Sources (Merged into `personas/dimensions+new.json`)
+
+These psychometric, survey, and theoretical frameworks have been integrated as reference sources in the `dimensions+new.json` schema. Questionnaire items are converted to construct-level attribute labels.
+
+| Source | Constructs/Variables | Type | Use in Schema |
+| --- | --- | --- | --- |
+| Big Five / BFI-2 | 20 | Psychometric | Domain and facet traits |
+| HEXACO-PI-R | 31 | Psychometric | 6 domains + 25 facets for personality trait grounding |
+| Facet MAP | 70 | Psychometric | Fine-grained Big Five facet labels |
+| IPIP constructs and item pool | 276 | Psychometric | Trait construct reference and item pool |
+| Schwartz Basic Values | 10 | Theory/Survey | Core value priorities |
+| Self-Determination Theory | 3 | Theory | Autonomy, competence, relatedness motivation |
+| Moral Foundations Theory | 6 | Theory | Moral and worldview dimensions |
+| Need for Cognition | 1 | Psychometric | Cognitive motivation (effortful thinking preference) |
+| Need for Closure | 1 | Psychometric | Cognitive style (ambiguity tolerance) |
+| DOSPERT risk attitudes | 5 | Psychometric | Domain-specific risk orientation |
+| Attachment style | 2 | Psychometric | Adult attachment dimensions (anxiety, avoidance) |
+| Interpersonal circumplex | 2 | Theory | Interpersonal style axes (dominance, warmth) |
+| Primal World Beliefs | 26 | Psychometric | Worldview constructs (safe, enticing, alive) |
+| BIS/BAS | 4 | Psychometric | Behavioral inhibition and activation |
+| Grit / perseverance | 2 | Psychometric | Persistence and long-term effort |
+| Growth mindset | 1 | Theory | Malleability-of-ability beliefs |
+| McAdams Three Levels of Personality | 3 | Theory | Schema framework (traits, adaptations, narrative) |
+| DeepPersona | 12 | Taxonomy | Candidate attribute coverage and subcategories |
+| SCOPE-Persona | 135 | Protocol | Sociopsychological persona schema reference |
+| GSS cumulative codebook | 6518 | Survey | Official social survey grounding |
+| World Values Survey Wave 7 | 153 | Survey | Values, beliefs, politics, religion, social attitudes |
+| ACS PUMS | 135 | Population Data | Official demographic grounding |
 
 ## Eliza's Proposed Persona Schema Categories and Theoretical Basis
 
@@ -50,25 +81,6 @@ The category structure below is Eliza Fan's current proposal, not a finalized pr
 | Attachment style | 2 | Adds interpersonal relationship tendencies using the common adult attachment dimensions of anxiety and avoidance. |
 | Interpersonal circumplex | 2 | Adds broad interpersonal style axes for dominance/agency and warmth/communion. |
 
-## Reference Sources (Didn't Get Added to Sources)
-
-These manifests are grounding sources for later schema and attribute curation, but they have not yet been converted into `personas/dimensions+new.json`. Questionnaire items should still be converted into construct-level attribute labels before they are used as candidate attributes.
-
-| Source | Claimed Constructs / Variables | Intended Use |
-| --- | --- | --- |
-| HEXACO-PI-R | 6 domains + 25 facets | Personality trait grounding |
-| Facet MAP | 70 Big Five facet labels | Fine-grained personality traits |
-| IPIP constructs and item pool | 276 scale labels; 3319 item pool entries | Public-domain trait construct and item reference |
-| DeepPersona | 12 top-level categories; long-tail persona attribute taxonomy | Candidate attribute coverage and subcategory grounding; requires review before becoming dimensions |
-| SCOPE-Persona | 135 protocol fields | Sociopsychological persona protocol reference |
-| GSS cumulative codebook | 6518 variables | Official social survey grounding |
-| World Values Survey Wave 7 | 153 questionnaire items | Values, beliefs, trust, politics, religion, and social attitudes |
-| ACS PUMS | Curated demographic/population variables | Official demographic grounding layer |
-| McAdams Three Levels of Personality | 3 theoretical levels | Schema theory and narrative identity grounding |
-| Primal World Beliefs | World-belief constructs | Worldview grounding |
-| BIS/BAS | Behavioral inhibition and activation constructs | Motivation and affective disposition grounding |
-| Grit / perseverance | Perseverance and long-term effort constructs | Motivation and persistence grounding |
-| Growth mindset | Malleability-of-ability belief construct | Cognitive and motivation grounding |
 
 ## Fetch Script
 
