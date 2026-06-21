@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MatrAIx OASIS Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f1419; color: #e7e9ea; }
+        .header { background: #1a1f25; padding: 16px 24px; border-bottom: 1px solid #2f3336; display: flex; align-items: center; justify-content: space-between; }
+        .header h1 { font-size: 20px; color: #4ecdc4; }
+        .header .status { display: flex; align-items: center; gap: 8px; font-size: 14px; color: #71767b; }
+        .header .dot { width: 8px; height: 8px; border-radius: 50%; background: #4ecdc4; }
+        .tabs { display: flex; background: #1a1f25; border-bottom: 1px solid #2f3336; padding: 0 24px; }
+        .tab { padding: 12px 20px; cursor: pointer; color: #71767b; border-bottom: 2px solid transparent; font-size: 14px; font-weight: 600; }
+        .tab.active { color: #4ecdc4; border-bottom-color: #4ecdc4; }
+        .tab:hover { color: #e7e9ea; }
+        .content { padding: 24px; max-width: 1400px; margin: 0 auto; }
+        .panel { display: none; }
+        .panel.active { display: block; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; margin-bottom: 24px; }
+        .stat-card { background: #1a1f25; border: 1px solid #2f3336; border-radius: 12px; padding: 16px; text-align: center; }
+        .stat-card .value { font-size: 28px; font-weight: 700; color: #4ecdc4; }
+        .stat-card .label { font-size: 12px; color: #71767b; margin-top: 4px; }
+        .post-card { background: #1a1f25; border: 1px solid #2f3336; border-radius: 12px; padding: 16px; margin-bottom: 12px; }
+        .post-card .author { font-weight: 600; color: #4ecdc4; margin-bottom: 4px; }
+        .post-card .content-text { color: #e7e9ea; line-height: 1.5; margin-bottom: 8px; }
+        .post-card .metrics { display: flex; gap: 16px; color: #71767b; font-size: 13px; }
+        .post-card .metrics span { display: flex; align-items: center; gap: 4px; }
+        .agent-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+        .agent-card { background: #1a1f25; border: 1px solid #2f3336; border-radius: 12px; padding: 16px; cursor: pointer; transition: border-color 0.2s; }
+        .agent-card:hover { border-color: #4ecdc4; }
+        .agent-card .name { font-weight: 600; font-size: 16px; }
+        .agent-card .bio { color: #71767b; font-size: 13px; margin: 4px 0 8px; }
+        .agent-card .agent-stats { display: flex; gap: 12px; font-size: 12px; color: #71767b; }
+        .agent-card .agent-stats span { color: #e7e9ea; font-weight: 600; }
+        .network-container { background: #1a1f25; border: 1px solid #2f3336; border-radius: 12px; padding: 24px; min-height: 500px; text-align: center; }
+        .trace-item { padding: 8px 12px; border-bottom: 1px solid #2f3336; display: flex; gap: 12px; align-items: center; font-size: 13px; }
+        .trace-item .action-badge { padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+        .trace-item .action-badge.create_post { background: #4ecdc420; color: #4ecdc4; }
+        .trace-item .action-badge.like_post { background: #ff6b6b20; color: #ff6b6b; }
+        .trace-item .action-badge.do_nothing { background: #71767b20; color: #71767b; }
+        .trace-item .action-badge.repost { background: #feca5720; color: #feca57; }
+        .trace-item .action-badge.follow { background: #a29bfe20; color: #a29bfe; }
+        .chart-container { background: #1a1f25; border: 1px solid #2f3336; border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        @media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } }
+        .bar { height: 24px; border-radius: 4px; margin-bottom: 6px; display: flex; align-items: center; padding: 0 8px; font-size: 12px; color: #fff; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>MatrAIx OASIS Dashboard</h1>
+        <div class="status"><div class="dot"></div><span id="status-text">Loading...</span></div>
+    </div>
+    <div class="tabs">
+        <div class="tab active" data-panel="feed">Feed</div>
+        <div class="tab" data-panel="agents">Agents</div>
+        <div class="tab" data-panel="network">Network</div>
+        <div class="tab" data-panel="analytics">Analytics</div>
+        <div class="tab" data-panel="traces">Traces</div>
+    </div>
+    <div class="content">
+        <div class="stats-grid" id="stats-grid"></div>
+        <div class="panel active" id="panel-feed"></div>
+        <div class="panel" id="panel-agents"></div>
+        <div class="panel" id="panel-network"><div class="network-container" id="network-viz">Network visualization (nodes and edges from simulation)</div></div>
+        <div class="panel" id="panel-analytics"></div>
+        <div class="panel" id="panel-traces"></div>
+    </div>
+    <script>
+        const API = '';
+        let statsData = {};
+        let agentsData = [];
+        let feedData = [];
+        let tracesData = [];
+
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById('panel-' + tab.dataset.panel).classList.add('active');
+            });
+        });
+
+        async function loadStats() {
+            const res = await fetch(API + '/api/stats');
+            statsData = await res.json();
+            const grid = document.getElementById('stats-grid');
+            grid.innerHTML = Object.entries(statsData).map(([k, v]) =>
+                `<div class="stat-card"><div class="value">${v}</div><div class="label">${k}</div></div>`
+            ).join('');
+            document.getElementById('status-text').textContent =
+                `${statsData.user || 0} agents | ${statsData.post || 0} posts | ${statsData.trace || 0} actions`;
+        }
+
+        async function loadFeed() {
+            const res = await fetch(API + '/api/feed');
+            feedData = await res.json();
+            const panel = document.getElementById('panel-feed');
+            panel.innerHTML = feedData.map(p => `
+                <div class="post-card">
+                    <div class="author">@${p.user_name || 'user_' + p.user_id} (${p.name || ''})</div>
+                    <div class="content-text">${p.content || ''}</div>
+                    <div class="metrics">
+                        <span>❤️ ${p.num_likes || 0}</span>
+                        <span>👎 ${p.num_dislikes || 0}</span>
+                        <span>🔄 ${p.num_shares || 0}</span>
+                        <span>💬 ${p.num_comments || 0}</span>
+                        <span>📅 step ${p.created_at || ''}</span>
+                    </div>
+                </div>
+            `).join('') || '<p>No posts yet</p>';
+        }
+
+        async function loadAgents() {
+            const res = await fetch(API + '/api/agents');
+            agentsData = await res.json();
+            const panel = document.getElementById('panel-agents');
+            panel.innerHTML = '<div class="agent-grid">' + agentsData.map(a => `
+                <div class="agent-card">
+                    <div class="name">${a.name} (@${a.user_name})</div>
+                    <div class="bio">${a.bio || ''}</div>
+                    <div class="agent-stats">
+                        Posts: <span>${a.post_count || 0}</span>
+                        Likes: <span>${a.likes_given || 0}</span>
+                        Followers: <span>${a.num_followers || 0}</span>
+                        Following: <span>${a.num_followings || 0}</span>
+                    </div>
+                </div>
+            `).join('') + '</div>';
+        }
+
+        async function loadTraces() {
+            const res = await fetch(API + '/api/traces?limit=100');
+            tracesData = await res.json();
+            const panel = document.getElementById('panel-traces');
+            panel.innerHTML = tracesData.filter(t => t.action !== 'refresh').map(t => {
+                let info = {};
+                try { info = JSON.parse(t.info); } catch(e) {}
+                const params = info.params || {};
+                const detail = params.content ? params.content.substring(0, 80) : (params.post_id ? `post #${params.post_id}` : '');
+                return `<div class="trace-item">
+                    <span style="color:#71767b;width:60px;">user_${String(t.user_id).padStart(2,'0')}</span>
+                    <span class="action-badge ${t.action}">${t.action}</span>
+                    <span style="color:#e7e9ea;flex:1;">${detail}</span>
+                </div>`;
+            }).join('') || '<p>No traces</p>';
+        }
+
+        async function loadAnalytics() {
+            const res = await fetch(API + '/api/action_distribution');
+            const actions = await res.json();
+            const panel = document.getElementById('panel-analytics');
+            const total = actions.reduce((s, a) => s + a.cnt, 0);
+            const colors = { create_post: '#4ecdc4', do_nothing: '#71767b', like_post: '#ff6b6b', repost: '#feca57', follow: '#a29bfe', dislike_post: '#fd79a8', create_comment: '#00b894' };
+            const bars = actions.map(a => {
+                const pct = (a.cnt / total * 100).toFixed(1);
+                const width = Math.max(pct * 3, 20);
+                const color = colors[a.action] || '#636e72';
+                return `<div class="bar" style="width:${width}px;background:${color};">${a.action}: ${a.cnt} (${pct}%)</div>`;
+            }).join('');
+
+            const engRes = await fetch(API + '/api/engagement');
+            const engagement = await engRes.json();
+            const engTable = `<table style="width:100%;border-collapse:collapse;margin-top:16px;">
+                <tr style="border-bottom:1px solid #2f3336;color:#71767b;font-size:12px;">
+                    <th style="text-align:left;padding:8px;">Agent</th>
+                    <th>Posts</th><th>Likes Given</th><th>Following</th><th>Followers</th>
+                </tr>
+                ${engagement.map(e => `<tr style="border-bottom:1px solid #2f3336;">
+                    <td style="padding:8px;">${e.name} (@${e.user_name})</td>
+                    <td style="text-align:center;color:#4ecdc4;">${e.posts}</td>
+                    <td style="text-align:center;color:#ff6b6b;">${e.likes_given}</td>
+                    <td style="text-align:center;">${e.following}</td>
+                    <td style="text-align:center;">${e.followers}</td>
+                </tr>`).join('')}
+            </table>`;
+
+            panel.innerHTML = `
+                <div class="chart-container"><h3 style="margin-bottom:12px;">Action Distribution</h3>${bars}</div>
+                <div class="chart-container"><h3 style="margin-bottom:12px;">Agent Engagement Table</h3>${engTable}</div>
+            `;
+        }
+
+        async function loadNetwork() {
+            const res = await fetch(API + '/api/network');
+            const data = await res.json();
+            const container = document.getElementById('network-viz');
+            container.innerHTML = `<p style="color:#71767b;">Network: ${data.nodes.length} nodes, ${data.edges.length} edges</p>
+                <svg id="network-svg" width="100%" height="500" style="background:#0f1419;border-radius:8px;"></svg>`;
+            drawNetwork(data);
+        }
+
+        function drawNetwork(data) {
+            const svg = document.getElementById('network-svg');
+            const w = svg.clientWidth || 800, h = 500;
+            const nodes = data.nodes.map((n, i) => ({...n, x: w/2 + (Math.cos(i * 2 * Math.PI / data.nodes.length) * 200), y: h/2 + (Math.sin(i * 2 * Math.PI / data.nodes.length) * 200)}));
+            const nodeMap = {};
+            nodes.forEach(n => { nodeMap[n.user_id] = n; });
+
+            let svgContent = '';
+            data.edges.forEach(e => {
+                const s = nodeMap[e.source], t = nodeMap[e.target];
+                if (s && t) svgContent += `<line x1="${s.x}" y1="${s.y}" x2="${t.x}" y2="${t.y}" stroke="#2f3336" stroke-width="0.5"/>`;
+            });
+            nodes.forEach(n => {
+                const r = 6 + (n.num_followers || 0) * 1.5;
+                svgContent += `<circle cx="${n.x}" cy="${n.y}" r="${r}" fill="#4ecdc4" opacity="0.8"/>`;
+                svgContent += `<text x="${n.x}" y="${n.y + r + 12}" text-anchor="middle" fill="#71767b" font-size="9">${n.user_name}</text>`;
+            });
+            svg.innerHTML = svgContent;
+        }
+
+        async function init() {
+            await loadStats();
+            await loadFeed();
+            await loadAgents();
+            await loadTraces();
+            await loadAnalytics();
+            await loadNetwork();
+        }
+        init();
+    </script>
+</body>
+</html>
