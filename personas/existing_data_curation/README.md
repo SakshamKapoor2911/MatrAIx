@@ -365,8 +365,10 @@ Use `--backend dry_run` to test the file flow without calling Claude Code.
 ### 3) Browser demo
 
 A static demo is available at `demo/index.html`. It calls public Wikidata and
-English Wikipedia APIs directly from the browser, then renders the persona seed,
-source evidence, and a Claude-style prompt without requiring any API key:
+English Wikipedia APIs directly from the browser, loads the live matrAIx persona
+schema from `https://matraix.ai/dimensions.js?v=3`, then renders the persona
+seed, source evidence, all persona keys, and a Claude-style prompt without
+requiring any API key:
 
 ```bash
 cd personas/existing_data_curation/demo

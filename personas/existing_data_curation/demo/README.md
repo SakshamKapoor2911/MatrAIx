@@ -44,8 +44,11 @@ Pages, Netlify, Vercel, or a Hugging Face Static Space.
 
 - Supports known Wikidata QIDs and name search.
 - Supports both `real_person` and `fictional_character`.
-- Shows Wikipedia summary, Wikidata evidence, seed JSON, and a Claude-style
-  prompt.
+- Loads the live matrAIx persona schema from
+  `https://matraix.ai/dimensions.js?v=3` and includes all persona dimension IDs
+  in `persona.dimensions`.
+- Shows Wikipedia summary, Wikidata evidence, seed JSON, all persona keys, and a
+  Claude-style prompt.
 - Uses deterministic field drafting only. The production curation step should
   still run `scripts/assign_wikipedia_persona_fields.py --backend claude_code`
   for Claude Code-based assignment.
