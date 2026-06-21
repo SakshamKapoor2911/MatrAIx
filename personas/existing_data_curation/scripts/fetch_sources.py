@@ -62,6 +62,40 @@ PERSONAHUB_SMALL_FILES = {
 OASIS_URL = "https://raw.githubusercontent.com/camel-ai/oasis/main/data/reddit/user_data_36.json"
 PRIMEX_URL = "https://raw.githubusercontent.com/apple/ml-primex/main/primexdata.csv"
 
+REFERENCE_SOURCE_TYPES = {
+    "psychometric_reference",
+    "theory_reference",
+    "official_survey_reference",
+    "official_population_survey_reference",
+    "huggingface_dataset_reference",
+    "persona_taxonomy_reference",
+}
+
+MANIFEST_REFERENCE_SOURCE_IDS = [
+    "acs_pums_curated_variables",
+    "attachment_style",
+    "bfi2_big_five_inventory_2",
+    "bis_bas_scales",
+    "dospert_risk_attitudes",
+    "deep_persona",
+    "facet_map_70_facets",
+    "grit_perseverance",
+    "growth_mindset",
+    "gss_cumulative_codebook",
+    "hexaco_pi_r",
+    "interpersonal_circumplex",
+    "ipip_constructs_and_items",
+    "mcadams_three_levels_personality",
+    "moral_foundations_theory",
+    "need_for_closure",
+    "need_for_cognition",
+    "primal_world_beliefs",
+    "schwartz_basic_values",
+    "scope_persona_salesforce",
+    "self_determination_theory",
+    "world_values_survey_wave7",
+]
+
 
 def log(message: str) -> None:
     print(f"[fetch_sources] {message}")
@@ -82,8 +116,14 @@ def stream_download(url: str, dest: Path, force: bool = False) -> Path:
         tmp_dest.unlink()
 
     log(f"Downloading {url}")
+    request = urllib.request.Request(
+        url,
+        headers={
+            "User-Agent": "MatrAIx-data-curation/1.0",
+        },
+    )
     try:
-        with urllib.request.urlopen(url) as response, open(tmp_dest, "wb") as fh:
+        with urllib.request.urlopen(request) as response, open(tmp_dest, "wb") as fh:
             shutil.copyfileobj(response, fh)
     except urllib.error.URLError as err:
         if tmp_dest.exists():
@@ -93,6 +133,112 @@ def stream_download(url: str, dest: Path, force: bool = False) -> Path:
     tmp_dest.replace(dest)
     log(f"Saved {dest}")
     return dest
+
+
+def load_json(path: Path) -> dict[str, Any]:
+    with open(path, encoding="utf-8") as fh:
+        return json.load(fh)
+
+
+def iter_reference_manifests() -> Iterable[dict[str, Any]]:
+    manifests_dir = BASE_DIR / "manifests"
+    for path in sorted(manifests_dir.glob("*.json")):
+        manifest = load_json(path)
+        source_type = manifest.get("source", {}).get("type")
+        if source_type in REFERENCE_SOURCE_TYPES:
+            manifest["_manifest_path"] = str(path.relative_to(BASE_DIR))
+            yield manifest
+
+
+def reference_registry_row(manifest: dict[str, Any]) -> dict[str, Any]:
+    source = manifest.get("source", {})
+    return {
+        "id": manifest.get("id"),
+        "source_type": source.get("type"),
+        "repo_id": source.get("repo_id"),
+        "url": source.get("url"),
+        "dimensions_claimed": manifest.get("dimensions_claimed"),
+        "format": manifest.get("format"),
+        "license": manifest.get("license"),
+        "gated": manifest.get("gated", False),
+        "notes": manifest.get("notes", ""),
+        "manifest": manifest.get("_manifest_path"),
+    }
+
+
+def write_jsonl(rows: Iterable[dict[str, Any]], path: Path) -> None:
+    ensure_dir(path.parent)
+    with open(path, "w", encoding="utf-8") as fh:
+        for row in rows:
+            fh.write(json.dumps(row, ensure_ascii=False) + "\n")
+
+
+def _snapshot_suffix(reference: dict[str, Any]) -> str:
+    fmt = reference.get("format")
+    if fmt == "pdf":
+        return ".pdf"
+    return ".html"
+
+
+def fetch_manifest_reference_source(
+    source_id: str,
+    args: argparse.Namespace,
+    target_root: Path,
+) -> None:
+    """Download small reference/instrument pages declared in a manifest."""
+    manifest_path = BASE_DIR / "manifests" / f"{source_id}.json"
+    manifest = load_json(manifest_path)
+    download_spec = manifest.get("download", {})
+
+    references: list[dict[str, Any]] = list(download_spec.get("sample_urls", []))
+    if args.mode == "full":
+        references.extend(download_spec.get("full_urls", []))
+
+    if not references:
+        url = manifest.get("source", {}).get("url")
+        if not url:
+            raise RuntimeError(f"No download URLs found for {source_id}.")
+        references = [{"id": "source_url", "url": url, "format": "html"}]
+
+    out_dir = target_root / source_id
+    ensure_dir(out_dir)
+
+    manifest_copy = out_dir / "manifest.json"
+    with open(manifest_copy, "w", encoding="utf-8") as fh:
+        json.dump(manifest, fh, ensure_ascii=False, indent=2)
+        fh.write("\n")
+
+    index: list[dict[str, Any]] = []
+    for reference in references:
+        ref_id = reference.get("id")
+        url = reference.get("url")
+        if not ref_id or not url:
+            raise RuntimeError(f"Invalid download reference in {manifest_path}: {reference}")
+
+        dest = out_dir / f"{ref_id}{_snapshot_suffix(reference)}"
+        row = {
+            "id": ref_id,
+            "url": url,
+            "path": str(dest.relative_to(target_root)),
+            "status": "pending",
+            "notes": reference.get("notes", ""),
+        }
+        try:
+            stream_download(url, dest, force=args.force)
+            row["status"] = "downloaded"
+        except RuntimeError as exc:
+            row["status"] = "failed"
+            row["error"] = str(exc)
+            log(f"WARNING: could not download {source_id}/{ref_id}: {exc}")
+        index.append(row)
+
+    index_path = out_dir / "download_index.json"
+    with open(index_path, "w", encoding="utf-8") as fh:
+        json.dump(index, fh, ensure_ascii=False, indent=2)
+        fh.write("\n")
+
+    downloaded = sum(1 for row in index if row["status"] == "downloaded")
+    log(f"Saved {downloaded}/{len(index)} reference snapshots for {source_id} to {out_dir}")
 
 
 def save_jsonl_sample(
@@ -416,12 +562,69 @@ def fetch_wildchat(args: argparse.Namespace, target_root: Path) -> None:
         config_name=None,
     )
 
+def fetch_literature_references(args: argparse.Namespace, target_root: Path) -> None:
+    """Create a registry for reference-only theory, scale, and survey sources."""
+    out_dir = target_root / "literature_references"
+    ensure_dir(out_dir)
+
+    registry = [reference_registry_row(manifest) for manifest in iter_reference_manifests()]
+    if not registry:
+        raise RuntimeError("No reference manifests found.")
+
+    registry_json = out_dir / "reference_registry.json"
+    registry_jsonl = out_dir / "reference_registry.jsonl"
+    with open(registry_json, "w", encoding="utf-8") as fh:
+        json.dump(registry, fh, ensure_ascii=False, indent=2)
+        fh.write("\n")
+    write_jsonl(registry, registry_jsonl)
+    log(f"Saved {len(registry)} reference manifest rows to {registry_json}")
+    log(f"Saved {len(registry)} reference manifest rows to {registry_jsonl}")
+
+    if args.mode != "full":
+        return
+
+    snapshot_dir = out_dir / "source_snapshots"
+    for row in registry:
+        url = row.get("url")
+        source_id = row.get("id")
+        if not url or not source_id:
+            continue
+
+        dest = snapshot_dir / str(source_id) / "source_snapshot.html"
+        try:
+            stream_download(url, dest, force=args.force)
+        except RuntimeError as exc:
+            log(f"WARNING: could not snapshot {source_id}: {exc}")
 
 def parse_args(argv: Iterable[str]) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--source",
-        choices=["all", "nemotron", "personahub", "oasis", "ml_primex", "synthetic_persona_chat", "pandora", "synthpersona", "personachat", "horizonbench", "wildchat"],
+        choices=[
+            "all",
+            "nemotron",
+            "personahub",
+            "oasis",
+            "ml_primex",
+            "synthetic_persona_chat",
+            "pandora",
+            "synthpersona",
+            "personachat",
+            "horizonbench",
+            "wildchat",
+            "literature_references",
+            "nemotron_personas_usa",
+            "tencent_personahub",
+            "oasis_reddit_36d",
+            "apple_ml_primex",
+            "google_synthetic_persona_chat",
+            "pandora_big5",
+            "synthlabs_persona",
+            "personachat_facebook",
+            "horizonbench_mental_state_graphs",
+            "wildchat_allenai",
+            *MANIFEST_REFERENCE_SOURCE_IDS,
+        ],
         default="all",
         help="Which source to fetch.",
     )
@@ -497,7 +700,27 @@ def main(argv: Iterable[str]) -> int:
         "personachat": fetch_personachat,
         "horizonbench": fetch_horizonbench,
         "wildchat": fetch_wildchat,
+        "literature_references": fetch_literature_references,
+        # Manifest-id aliases for dataset sources.
+        "nemotron_personas_usa": fetch_nemotron,
+        "tencent_personahub": fetch_personahub,
+        "oasis_reddit_36d": fetch_oasis,
+        "apple_ml_primex": fetch_ml_primex,
+        "google_synthetic_persona_chat": fetch_synthetic_persona_chat,
+        "pandora_big5": fetch_pandora,
+        "synthlabs_persona": fetch_synthpersona,
+        "personachat_facebook": fetch_personachat,
+        "horizonbench_mental_state_graphs": fetch_horizonbench,
+        "wildchat_allenai": fetch_wildchat,
     }
+    for source_id in MANIFEST_REFERENCE_SOURCE_IDS:
+        source_to_runner[source_id] = (
+            lambda parsed_args, target_root, source_id=source_id: fetch_manifest_reference_source(
+                source_id,
+                parsed_args,
+                target_root,
+            )
+        )
 
     # "synthpersona" (SynthLabsAI/PERSONA) is intentionally excluded from "all": it is
     # gated and needs HF_TOKEN, so opt in explicitly with --source synthpersona.

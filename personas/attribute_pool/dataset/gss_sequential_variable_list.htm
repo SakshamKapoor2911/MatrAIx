@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title> GSS 1972-2024 Cumulative Datafile - Release 3 </title>
+<style>
+body {
+font-family: arial, helvetica, verdana, geneva, sans-serif;
+}
+h1 { font-size: 1.7em; }
+h2 { font-size: 1.5em; }
+h3 { font-size: 1.17em; }
+h4 { font-size: 1.12em; }
+h1.small { font-size: 1.12em; margin-top: 0em; margin-bottom: 0em; }
+h2.small { font-size: 1em; font-weight: normal; margin-top: 0em; margin-bottom: 0em; }
+pre { font-size: 1em; font-family: "Lucida Console", Monaco, Consolas, "Courier New", Courier, monospace; }
+table.dflt {
+border-collapse: collapse;
+}
+table.dflt td, table.dflt th {
+padding: 5px;
+border: 1px solid #C0C0C0;
+}
+table.noborder {
+border-collapse: collapse;
+margin-top: 10px;
+}
+table.noborder td, table.noborder th {
+padding: 2px;
+border: none;
+}
+table.freqdist {
+border-collapse: collapse;
+margin-top: 10px;
+}
+table.freqdist td, table.freqdist th {
+padding: 2px 5px 2px 15px;
+border: none;
+}
+span.varname {
+font-size: larger;
+font-weight: bold;
+background-color: #ff9999;
+padding: 2px 5px;
+}
+span.varlabel {
+font-size: larger;
+font-weight: bold;
+padding-left: 10px;
+}
+div.vardesc {
+outline: 1px solid #C0C0C0;
+overflow: auto;
+margin: 20px;
+padding: 5px;
+}
+div.barchart {
+background-color: #009999;
+height: 1.0em;
+}
+.confint {
+font-size: smaller;
+font-style: italic;
+white-space: nowrap;
+}
+
+.sidenav {
+  width: 150px;
+  position: fixed;
+  z-index: 1;
+  top: 10px;
+  left: 10px;
+  background: #eee;
+  overflow-x: hidden;
+  padding: 8px 8px;
+  list-style: none;
+  color: #333;
+}
+
+.sidenav ul {
+  padding: 0px;
+  margin-left: 0px;
+  list-style:none;
+}
+
+.sidenav ul li a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 1em;
+  font-weight: bold;
+  color: #333;
+  display: block;
+}
+
+.sidenav ul li a:hover, ul li a:focus {
+  font-weight: bold;
+  background-color: white;
+  color: black;
+}
+
+.sidenav ul li a.current {
+  font-weight: bold;
+  background-color: #336699;
+  color: white;
+}
+
+.main {
+  margin-left: 160px; /* Same width as the sidebar + left position in px */
+  padding: 2px 20px;
+}
+
+.center {
+  text-align: center;
+}
+
+span.genericheading {
+background-color: #93BED5;
+font-weight: bold;
+padding: 2px 5px;
+text-align: center;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="sidenav">
+<nav aria-label="Codebook Table of Contents">
+<ul>
+<li><a href = "hcbk.htm" >Title Page</a></li>
+<li><hr>
+INDEXES
+<ul>
+<li><a href = "hcbkh01.htm" class="current">Sequential Variable List</a></li>
+<li><a href = "hcbkfx0.htm" >Alphabetical Variable List</a></li>
+<li><hr></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+
+
+<div class="main">
+<hr>
+<h1> GSS 1972-2024 Cumulative Datafile - Release 3 </h1>
+<hr>
+<h2> Headings for Sequential Variable List </h2>
+<ul>
+<li> <a href = "hcbkx01.htm#1.HEADING">CASE IDENTIFICATION AND YEAR</a>
+<li> <a href = "hcbkx01.htm#2.HEADING">RESPONDENT BACKGROUND VARIABLES</a>
+<ul>
+<li> <a href = "hcbkx01.htm#3.HEADING">Age, Gender, Race, and Ethnicity</a>
+<li> <a href = "hcbkx01.htm#4.HEADING">Citizenship</a>
+<li> <a href = "hcbkx01.htm#5.HEADING">Education</a>
+<li> <a href = "hcbkx01.htm#6.HEADING">Happiness of Relationship with Partner</a>
+<li> <a href = "hcbkx01.htm#7.HEADING">Convicted of Crime, Jail&#x2F;Prison</a>
+<li> <a href = "hcbkx01.htm#8.HEADING">Military Service</a>
+<li> <a href = "hcbkx01.htm#9.HEADING">Respondent and Spouse Work Week</a>
+<li> <a href = "hcbkx01.htm#10.HEADING">Respondent&#x27;s Dwelling</a>
+<li> <a href = "hcbkx01.htm#11.HEADING">Word Association</a>
+<li> <a href = "hcbkx01.htm#12.HEADING">R&#x27;s Activities</a>
+<li> <a href = "hcbkx01.htm#13.HEADING">Religious Attendance and Identity</a>
+<li> <a href = "hcbkx01.htm#14.HEADING">2012 Core: Jewish Identity</a>
+<li> <a href = "hcbkx01.htm#15.HEADING">Respondent&#x27;s Household Composition</a>
+<li> <a href = "hcbkx01.htm#16.HEADING">Socio-Economic and Status Indicators</a>
+<li> <a href = "hcbkx01.htm#17.HEADING">Other Respondent Background Variables</a>
+</ul>
+<li> <a href = "hcbkx01.htm#18.HEADING">PERSONAL AND FAMILY INFORMATION</a>
+<ul>
+<li> <a href = "hcbkx01.htm#19.HEADING">Marital Status</a>
+<li> <a href = "hcbkx01.htm#20.HEADING">Respondent&#x27;s Employment</a>
+<li> <a href = "hcbkx01.htm#21.HEADING">Spouse&#x27;s Employment</a>
+<li> <a href = "hcbkx01.htm#22.HEADING">Father&#x27;s Employment</a>
+<li> <a href = "hcbkx01.htm#23.HEADING">Mother&#x27;s Employment</a>
+<li> <a href = "hcbkx01.htm#24.HEADING">Family Composition</a>
+<li> <a href = "hcbkx01.htm#25.HEADING">Respondent&#x27;s Background and Childhood</a>
+<li> <a href = "hcbkx01.htm#26.HEADING">Respondent&#x27;s Current Household Composition</a>
+<li> <a href = "hcbkx01.htm#27.HEADING">Income</a>
+<li> <a href = "hcbkx01.htm#28.HEADING">Demographic Variables</a>
+<li> <a href = "hcbkx01.htm#29.HEADING">Respondent&#x27;s Occupational Indices (Dot Codes)</a>
+<li> <a href = "hcbkx01.htm#30.HEADING">Spouse&#x27;s Occupational Indices</a>
+<li> <a href = "hcbkx01.htm#31.HEADING">Father&#x27;s Occupational Indices</a>
+</ul>
+<li> <a href = "hcbkx02.htm#32.HEADING">VOTING PATTERNS: 1968-2012</a>
+<li> <a href = "hcbkx02.htm#33.HEADING">ATTITUDINAL MEASURES - NATIONAL PROBLEMS</a>
+<ul>
+<li> <a href = "hcbkx02.htm#34.HEADING">Social Problem Spending (variant 1)</a>
+<li> <a href = "hcbkx02.htm#35.HEADING">Social Problem Spending (variant 2)</a>
+<li> <a href = "hcbkx02.htm#36.HEADING">Social Problem Spending (variant 3)</a>
+<li> <a href = "hcbkx02.htm#37.HEADING">Economic Equality</a>
+<li> <a href = "hcbkx02.htm#38.HEADING">Class Structure</a>
+<li> <a href = "hcbkx02.htm#39.HEADING">Social Welfare and Taxation</a>
+<li> <a href = "hcbkx02.htm#40.HEADING">Free Speech</a>
+<li> <a href = "hcbkx02.htm#41.HEADING">Capital Punishment</a>
+<li> <a href = "hcbkx02.htm#42.HEADING">Gun Control</a>
+<li> <a href = "hcbkx02.htm#43.HEADING">Crime and Law Enforcement</a>
+<li> <a href = "hcbkx02.htm#44.HEADING">International Affairs</a>
+</ul>
+<li> <a href = "hcbkx02.htm#45.HEADING">PERSONAL CONCERNS</a>
+<ul>
+<li> <a href = "hcbkx02.htm#46.HEADING">Religion</a>
+<li> <a href = "hcbkx02.htm#47.HEADING">Human Nature</a>
+<li> <a href = "hcbkx02.htm#48.HEADING">Feeling Thermometers</a>
+<li> <a href = "hcbkx02.htm#49.HEADING">More Religion</a>
+<li> <a href = "hcbkx02.htm#50.HEADING">Race Issues</a>
+<li> <a href = "hcbkx02.htm#51.HEADING">Alienation Measures</a>
+<li> <a href = "hcbkx02.htm#52.HEADING">Health and Happiness</a>
+<li> <a href = "hcbkx02.htm#53.HEADING">Human Nature Part Two</a>
+<li> <a href = "hcbkx02.htm#54.HEADING">Personal Satisfaction</a>
+</ul>
+<li> <a href = "hcbkx02.htm#55.HEADING">SOCIETAL CONCERNS</a>
+<ul>
+<li> <a href = "hcbkx02.htm#56.HEADING">Confidence in Institutions</a>
+<li> <a href = "hcbkx02.htm#57.HEADING">Desirable Qualities for Children</a>
+<li> <a href = "hcbkx02.htm#58.HEADING">Social Behavior</a>
+<li> <a href = "hcbkx02.htm#59.HEADING">Substance Consumption</a>
+<li> <a href = "hcbkx02.htm#60.HEADING">Social Anomie</a>
+</ul>
+<li> <a href = "hcbkx02.htm#61.HEADING">WORKPLACE AND ECONOMIC CONCERNS</a>
+<ul>
+<li> <a href = "hcbkx02.htm#62.HEADING">Job Security and Satisfaction</a>
+<li> <a href = "hcbkx02.htm#63.HEADING">Class and Financial Needs</a>
+<li> <a href = "hcbkx02.htm#64.HEADING">Job Supervision</a>
+<li> <a href = "hcbkx02.htm#65.HEADING">Standard of Living</a>
+</ul>
+<li> <a href = "hcbkx03.htm#66.HEADING">CONTROVERSIAL SOCIAL ISSUES</a>
+<ul>
+<li> <a href = "hcbkx03.htm#67.HEADING">Gender Issues</a>
+<li> <a href = "hcbkx03.htm#68.HEADING">Abortion</a>
+<li> <a href = "hcbkx03.htm#69.HEADING">Family Planning, Sex, and Contraception</a>
+<li> <a href = "hcbkx03.htm#70.HEADING">Pornography</a>
+<li> <a href = "hcbkx03.htm#71.HEADING">Child Discipline</a>
+<li> <a href = "hcbkx03.htm#72.HEADING">Suicide</a>
+<li> <a href = "hcbkx03.htm#73.HEADING">Activism</a>
+<li> <a href = "hcbkx03.htm#74.HEADING">Violent Experiences</a>
+<li> <a href = "hcbkx03.htm#75.HEADING">Media Exposure</a>
+<li> <a href = "hcbkx03.htm#76.HEADING">Interviewer Observations</a>
+<li> <a href = "hcbkx03.htm#77.HEADING">Experimental Variables</a>
+<li> <a href = "hcbkx03.htm#78.HEADING">Abortion Part Two</a>
+<li> <a href = "hcbkx03.htm#79.HEADING">Working Mothers</a>
+<li> <a href = "hcbkx03.htm#80.HEADING">Women&#x27;s Rights</a>
+<li> <a href = "hcbkx03.htm#81.HEADING">Race Part Two</a>
+<li> <a href = "hcbkx03.htm#82.HEADING">How Often Think About Topics</a>
+<li> <a href = "hcbkx03.htm#83.HEADING">Recent Traumatic Events</a>
+<li> <a href = "hcbkx03.htm#84.HEADING">Social Issues Scales</a>
+<li> <a href = "hcbkx03.htm#85.HEADING">Important Life Aspects</a>
+<li> <a href = "hcbkx03.htm#86.HEADING">Personal Concerns</a>
+</ul>
+<li> <a href = "hcbkx03.htm#87.HEADING">MORE NATIONAL ISSUES</a>
+<ul>
+<li> <a href = "hcbkx03.htm#88.HEADING">Income and Poverty</a>
+<li> <a href = "hcbkx03.htm#89.HEADING">Welfare Issues</a>
+<li> <a href = "hcbkx03.htm#90.HEADING">Government Secrecy</a>
+</ul>
+<li> <a href = "hcbkx03.htm#91.HEADING">MILITARY ISSUES</a>
+<ul>
+<li> <a href = "hcbkx03.htm#92.HEADING">National Service and the Military</a>
+<li> <a href = "hcbkx03.htm#93.HEADING">Women in the Armed Forces</a>
+<li> <a href = "hcbkx03.htm#94.HEADING">The Draft</a>
+<li> <a href = "hcbkx03.htm#95.HEADING">Assorted Military Issues</a>
+<li> <a href = "hcbkx03.htm#96.HEADING">Likelyhood of Military Situations</a>
+<li> <a href = "hcbkx03.htm#97.HEADING">Military Related Employment</a>
+</ul>
+<li> <a href = "hcbkx03.htm#98.HEADING">OBLIGATIONS AND RESPONSIBILITIES</a>
+<ul>
+<li> <a href = "hcbkx03.htm#99.HEADING">Civic Obligations</a>
+<li> <a href = "hcbkx03.htm#100.HEADING">Government Responsibility</a>
+</ul>
+<li> <a href = "hcbkx03.htm#101.HEADING">PERSONAL IMPACT OF PUBLIC CONCERNS</a>
+<ul>
+<li> <a href = "hcbkx03.htm#102.HEADING">Closeness of R to Place Living</a>
+<li> <a href = "hcbkx03.htm#103.HEADING">What is an American</a>
+<li> <a href = "hcbkx03.htm#104.HEADING">How Proud of America</a>
+<li> <a href = "hcbkx03.htm#105.HEADING">Foreign Relations and Immigration</a>
+<li> <a href = "hcbkx03.htm#106.HEADING">Civil Rights</a>
+<li> <a href = "hcbkx03.htm#107.HEADING">Homicide Victims</a>
+<li> <a href = "hcbkx03.htm#108.HEADING">AIDS Victims</a>
+<li> <a href = "hcbkx03.htm#109.HEADING">Suicide Victims</a>
+<li> <a href = "hcbkx03.htm#110.HEADING">Anti AIDS-Spread Measures</a>
+<li> <a href = "hcbkx03.htm#111.HEADING">Sexual Partners and Behavior</a>
+<li> <a href = "hcbkx03.htm#112.HEADING">Genetic Screening</a>
+<li> <a href = "hcbkx03.htm#113.HEADING">HIV Test</a>
+<li> <a href = "hcbkx03.htm#114.HEADING">Parenting</a>
+<li> <a href = "hcbkx03.htm#115.HEADING">Adult Roles in Children&#x27;s Lives</a>
+<li> <a href = "hcbkx03.htm#116.HEADING">Change in Children&#x27;s Quality of Life</a>
+<li> <a href = "hcbkx03.htm#117.HEADING">Influences on Children</a>
+<li> <a href = "hcbkx03.htm#118.HEADING">Government Social Spending</a>
+</ul>
+<li> <a href = "hcbkx04.htm#119.HEADING">RECENT PROBLEMS FOR RESPONDENT</a>
+<ul>
+<li> <a href = "hcbkx04.htm#120.HEADING">Important Household Problems</a>
+<li> <a href = "hcbkx04.htm#121.HEADING">Health Problems</a>
+<li> <a href = "hcbkx04.htm#122.HEADING">Work Related Problems</a>
+<li> <a href = "hcbkx04.htm#123.HEADING">Financial Problems</a>
+<li> <a href = "hcbkx04.htm#124.HEADING">Personal Hardships</a>
+<li> <a href = "hcbkx04.htm#125.HEADING">Family Relationship Problems</a>
+<li> <a href = "hcbkx04.htm#126.HEADING">Crime and Legal Problems</a>
+<li> <a href = "hcbkx04.htm#127.HEADING">Problems Where Live</a>
+<li> <a href = "hcbkx04.htm#128.HEADING">Other Problems</a>
+</ul>
+<li> <a href = "hcbkx04.htm#129.HEADING">1985 TOPICAL MODULE: SOCIAL NETWORKS</a>
+<ul>
+<li> <a href = "hcbkx04.htm#130.HEADING">Closeness within Networks</a>
+<li> <a href = "hcbkx04.htm#131.HEADING">Composition of Networks</a>
+<li> <a href = "hcbkx04.htm#132.HEADING">Frequency and Duration of Contact within Networks</a>
+<li> <a href = "hcbkx04.htm#133.HEADING">Social Attributes of Those in Networks</a>
+</ul>
+<li> <a href = "hcbkx04.htm#134.HEADING">1987 TOPICAL MODULE: SOCIO-POLITICAL PARTICIPATION</a>
+<ul>
+<li> <a href = "hcbkx04.htm#135.HEADING">Group Membership</a>
+<li> <a href = "hcbkx04.htm#136.HEADING">Groups Solving Problems</a>
+<li> <a href = "hcbkx04.htm#137.HEADING">Active in Groups</a>
+<li> <a href = "hcbkx04.htm#138.HEADING">Types of Activities in Groups</a>
+<li> <a href = "hcbkx04.htm#139.HEADING">Involvement with Local Government and Community</a>
+<li> <a href = "hcbkx04.htm#140.HEADING">Political Involvement</a>
+<li> <a href = "hcbkx04.htm#141.HEADING">Knowledge of Political Figures</a>
+<li> <a href = "hcbkx04.htm#142.HEADING">Political Trust and Participation</a>
+<li> <a href = "hcbkx04.htm#143.HEADING">Group Political Influence</a>
+</ul>
+<li> <a href = "hcbkx04.htm#144.HEADING">1988 TOPICAL MODULE: RELIGION</a>
+<ul>
+<li> <a href = "hcbkx04.htm#145.HEADING">Opinions on Science</a>
+<li> <a href = "hcbkx04.htm#146.HEADING">Switching Religions</a>
+<li> <a href = "hcbkx04.htm#147.HEADING">Religious Backgrounds of Parents</a>
+<li> <a href = "hcbkx04.htm#148.HEADING">Religious Upbringing</a>
+<li> <a href = "hcbkx04.htm#149.HEADING">Adult Religious Participation</a>
+<li> <a href = "hcbkx04.htm#150.HEADING">Religious Beliefs</a>
+<li> <a href = "hcbkx04.htm#151.HEADING">Important Factors in Life Decisions</a>
+<li> <a href = "hcbkx04.htm#152.HEADING">What Makes One Good</a>
+<li> <a href = "hcbkx04.htm#153.HEADING">Faith</a>
+<li> <a href = "hcbkx04.htm#154.HEADING">Friends and Religion</a>
+<li> <a href = "hcbkx04.htm#155.HEADING">Friends and Race</a>
+<li> <a href = "hcbkx04.htm#156.HEADING">Religious Expression and Funding</a>
+</ul>
+<li> <a href = "hcbkx04.htm#157.HEADING">1990 TOPICAL MODULE: INTER-GROUP RELATIONS</a>
+<ul>
+<li> <a href = "hcbkx04.htm#158.HEADING">Protest and Dissent</a>
+<li> <a href = "hcbkx04.htm#159.HEADING">Causes of Poverty</a>
+<li> <a href = "hcbkx04.htm#160.HEADING">Social Differences</a>
+<li> <a href = "hcbkx04.htm#161.HEADING">Group Wealth</a>
+<li> <a href = "hcbkx04.htm#162.HEADING">Group Work Ethic</a>
+<li> <a href = "hcbkx04.htm#163.HEADING">Violent Tendencies in Groups</a>
+<li> <a href = "hcbkx04.htm#164.HEADING">Group Intelligence</a>
+<li> <a href = "hcbkx04.htm#165.HEADING">Group Prefer Welfare</a>
+<li> <a href = "hcbkx04.htm#166.HEADING">Group Patriotism</a>
+<li> <a href = "hcbkx04.htm#167.HEADING">Living with Group</a>
+<li> <a href = "hcbkx04.htm#168.HEADING">Group Intermarriage</a>
+<li> <a href = "hcbkx04.htm#169.HEADING">Solutions to Social Problems</a>
+<li> <a href = "hcbkx04.htm#170.HEADING">Group Influence</a>
+<li> <a href = "hcbkx04.htm#171.HEADING">Group Discrimination</a>
+</ul>
+<li> <a href = "hcbkx05.htm#172.HEADING">1991 TOPICAL MODULE: WORK ORGANIZATIONS</a>
+<ul>
+<li> <a href = "hcbkx05.htm#173.HEADING">Genetic Screening</a>
+<li> <a href = "hcbkx05.htm#174.HEADING">Corporations and Unions</a>
+<li> <a href = "hcbkx05.htm#175.HEADING">Organizational Changes</a>
+<li> <a href = "hcbkx05.htm#176.HEADING">Work and Unemployment</a>
+<li> <a href = "hcbkx05.htm#177.HEADING">How Find Present Employer</a>
+<li> <a href = "hcbkx05.htm#178.HEADING">Tests for Employment</a>
+<li> <a href = "hcbkx05.htm#179.HEADING">Present Job</a>
+<li> <a href = "hcbkx05.htm#180.HEADING">Promotions</a>
+<li> <a href = "hcbkx05.htm#181.HEADING">Job Control</a>
+<li> <a href = "hcbkx05.htm#182.HEADING">Supervision</a>
+<li> <a href = "hcbkx05.htm#183.HEADING">Other Job Duties</a>
+<li> <a href = "hcbkx05.htm#184.HEADING">Spending Decisions</a>
+<li> <a href = "hcbkx05.htm#185.HEADING">Performance Evaluations</a>
+<li> <a href = "hcbkx05.htm#186.HEADING">Role within Organization</a>
+<li> <a href = "hcbkx05.htm#187.HEADING">Pay and Raises</a>
+<li> <a href = "hcbkx05.htm#188.HEADING">Fringe Benefits</a>
+<li> <a href = "hcbkx05.htm#189.HEADING">Employees and Management</a>
+<li> <a href = "hcbkx05.htm#190.HEADING">Sources of Job Skills</a>
+<li> <a href = "hcbkx05.htm#191.HEADING">Work Space</a>
+</ul>
+<li> <a href = "hcbkx05.htm#192.HEADING">1993 TOPICAL MODULE: CULTURE</a>
+<ul>
+<li> <a href = "hcbkx05.htm#193.HEADING">Individualism</a>
+<li> <a href = "hcbkx05.htm#194.HEADING">Life Determinants</a>
+<li> <a href = "hcbkx05.htm#195.HEADING">Musical Preferences</a>
+<li> <a href = "hcbkx05.htm#196.HEADING">Leisure and Recreational Activities</a>
+<li> <a href = "hcbkx05.htm#197.HEADING">Television Viewing Patterns</a>
+<li> <a href = "hcbkx05.htm#198.HEADING">Evaluating the Arts</a>
+<li> <a href = "hcbkx05.htm#199.HEADING">Qualities Look for in Friends</a>
+<li> <a href = "hcbkx05.htm#200.HEADING">Qualities of Personal Importance</a>
+<li> <a href = "hcbkx05.htm#201.HEADING">Most Important Events</a>
+<li> <a href = "hcbkx05.htm#202.HEADING">Majors and Favorite School Subjects</a>
+</ul>
+<li> <a href = "hcbkx05.htm#203.HEADING">1994 TOPICAL MODULE: FAMILY MOBILITY</a>
+<ul>
+<li> <a href = "hcbkx05.htm#204.HEADING">Parental Information</a>
+<li> <a href = "hcbkx05.htm#205.HEADING">Educational and Occupational History</a>
+<li> <a href = "hcbkx05.htm#206.HEADING">Reasoning Abilities</a>
+<li> <a href = "hcbkx05.htm#207.HEADING">Spousal Information</a>
+<li> <a href = "hcbkx05.htm#208.HEADING">Respondent&#x27;s Children - Gender</a>
+<li> <a href = "hcbkx05.htm#209.HEADING">Respondent&#x27;s Children - Year of Birth</a>
+<li> <a href = "hcbkx05.htm#210.HEADING">Respondent&#x27;s Children - Relationship to R</a>
+<li> <a href = "hcbkx05.htm#211.HEADING">Respondent&#x27;s Children - Still Alive</a>
+<li> <a href = "hcbkx05.htm#212.HEADING">Respondent&#x27;s Children - Education</a>
+<li> <a href = "hcbkx05.htm#213.HEADING">Selected Child&#x27;s Employment</a>
+<li> <a href = "hcbkx05.htm#214.HEADING">Sibling Information - Gender</a>
+<li> <a href = "hcbkx05.htm#215.HEADING">Siblings - Year of Birth</a>
+<li> <a href = "hcbkx05.htm#216.HEADING">Siblings - Relationship to R</a>
+<li> <a href = "hcbkx05.htm#217.HEADING">Siblings - Still Alive</a>
+<li> <a href = "hcbkx05.htm#218.HEADING">Selected Sibling - Education and Employment</a>
+<li> <a href = "hcbkx05.htm#219.HEADING">Spouse&#x27;s Father</a>
+<li> <a href = "hcbkx05.htm#220.HEADING">Sibling</a>
+</ul>
+<li> <a href = "hcbkx05.htm#221.HEADING">1994 TOPICAL MODULE: MULTICULTURALISM</a>
+<ul>
+<li> <a href = "hcbkx05.htm#222.HEADING">Identification: American or Ethnic Group</a>
+<li> <a href = "hcbkx05.htm#223.HEADING">Cultural Assimilation and Separatism</a>
+<li> <a href = "hcbkx05.htm#224.HEADING">Bilingual Issues</a>
+<li> <a href = "hcbkx05.htm#225.HEADING">Immigration</a>
+<li> <a href = "hcbkx05.htm#226.HEADING">Affirmative Action</a>
+<li> <a href = "hcbkx05.htm#227.HEADING">Group Attention from Government</a>
+<li> <a href = "hcbkx05.htm#228.HEADING">Wealth and Work Ethic of Immigrants</a>
+<li> <a href = "hcbkx05.htm#229.HEADING">Evaluation of the Economy</a>
+<li> <a href = "hcbkx05.htm#230.HEADING">Chances of Losing Job or Promotion to Other Group</a>
+</ul>
+<li> <a href = "hcbkx06.htm#231.HEADING">1996 TOPICAL MODULE: GENDER</a>
+<ul>
+<li> <a href = "hcbkx06.htm#232.HEADING">Romance and Happiness</a>
+<li> <a href = "hcbkx06.htm#233.HEADING">Sharing of Work in Household</a>
+<li> <a href = "hcbkx06.htm#234.HEADING">Balancing Work and Family</a>
+<li> <a href = "hcbkx06.htm#235.HEADING">Roles of Men and Women in Family</a>
+</ul>
+<li> <a href = "hcbkx06.htm#236.HEADING">1996 TOPICAL MODULE: EMOTIONS</a>
+<ul>
+<li> <a href = "hcbkx06.htm#237.HEADING">Feeling Thermometer</a>
+<li> <a href = "hcbkx06.htm#238.HEADING">Level of Personal Empowerment</a>
+<li> <a href = "hcbkx06.htm#239.HEADING">Level of Anger</a>
+<li> <a href = "hcbkx06.htm#240.HEADING">How R Dealt with Anger</a>
+<li> <a href = "hcbkx06.htm#241.HEADING">Level of Nationalism</a>
+</ul>
+<li> <a href = "hcbkx06.htm#242.HEADING">1996 TOPICAL MODULE: MARKETS</a>
+<ul>
+<li> <a href = "hcbkx06.htm#243.HEADING">Automobile Ownership</a>
+<li> <a href = "hcbkx06.htm#244.HEADING">Home Ownership</a>
+<li> <a href = "hcbkx06.htm#245.HEADING">Ever Hired Lawyer</a>
+<li> <a href = "hcbkx06.htm#246.HEADING">Purchasing Power</a>
+<li> <a href = "hcbkx06.htm#247.HEADING">Exchange of Human Organs, Babies, Sex</a>
+<li> <a href = "hcbkx06.htm#248.HEADING">Free Market</a>
+<li> <a href = "hcbkx06.htm#249.HEADING">Family Business</a>
+<li> <a href = "hcbkx06.htm#250.HEADING">Family Finances</a>
+</ul>
+<li> <a href = "hcbkx06.htm#251.HEADING">1996 TOPICAL MODULE: GIVING AND VOLUNTERING</a>
+<ul>
+<li> <a href = "hcbkx06.htm#252.HEADING">Volunteer Work</a>
+<li> <a href = "hcbkx06.htm#253.HEADING">Volunteer Work in Past Month</a>
+<li> <a href = "hcbkx06.htm#254.HEADING">Hours of Volunteer Work</a>
+<li> <a href = "hcbkx06.htm#255.HEADING">Contribute Money</a>
+<li> <a href = "hcbkx06.htm#256.HEADING">Contribute How Much Money</a>
+<li> <a href = "hcbkx06.htm#257.HEADING">Estimated Value Contributed</a>
+<li> <a href = "hcbkx06.htm#258.HEADING">Contributed to Needy</a>
+</ul>
+<li> <a href = "hcbkx06.htm#259.HEADING">1996 TOPICAL MODULE: MENTAL HEALTH I</a>
+<ul>
+<li> <a href = "hcbkx06.htm#260.HEADING">Personal Problems</a>
+<li> <a href = "hcbkx06.htm#261.HEADING">Vignette</a>
+<li> <a href = "hcbkx06.htm#262.HEADING">R&#x27;s Mental and Physical Health</a>
+<li> <a href = "hcbkx06.htm#263.HEADING">In What Order R Would Seek Help</a>
+<li> <a href = "hcbkx06.htm#264.HEADING">Government Spending on Mental Illness</a>
+<li> <a href = "hcbkx06.htm#265.HEADING">Know Anyone Hospitalized or Seeing Psychologist</a>
+<li> <a href = "hcbkx06.htm#266.HEADING">Ever Have Breakdown or Mental Illness</a>
+</ul>
+<li> <a href = "hcbkx07.htm#267.HEADING">1998 TOPICAL MODULE: RELIGION AND CULTURE</a>
+<li> <a href = "hcbkx07.htm#268.HEADING">1998 TOPICAL MODULE: JOBS</a>
+<li> <a href = "hcbkx07.htm#269.HEADING">1998 TOPICAL MODULE: MENTAL HEALTH II</a>
+<li> <a href = "hcbkx07.htm#270.HEADING">2000 TOPICAL MODULE: MULTI-ETHNIC UNITED STATES</a>
+<li> <a href = "hcbkx07.htm#271.HEADING">2000 TOPICAL MODULE: INFORMATION SOCIETY</a>
+<ul>
+<li> <a href = "hcbkx07.htm#272.HEADING">Time Spent on Internet</a>
+<li> <a href = "hcbkx07.htm#273.HEADING">Navigation Strategies</a>
+<li> <a href = "hcbkx07.htm#274.HEADING">Web Site Types in Last 30 Days</a>
+<li> <a href = "hcbkx07.htm#275.HEADING">Uses of Web in Past 12 Months</a>
+<li> <a href = "hcbkx07.htm#276.HEADING">Learning About Issues on the Web in Past 12 Months</a>
+<li> <a href = "hcbkx07.htm#277.HEADING">Type of Political Sites Visited in Past 12 Months</a>
+<li> <a href = "hcbkx07.htm#278.HEADING">Political Actions Because of Web</a>
+<li> <a href = "hcbkx07.htm#279.HEADING">Find Information about Candidate for Political Office</a>
+<li> <a href = "hcbkx07.htm#280.HEADING">Political Thinking Affected by Web</a>
+<li> <a href = "hcbkx07.htm#281.HEADING">Arts Web Use</a>
+<li> <a href = "hcbkx07.htm#282.HEADING">Music Web Use</a>
+<li> <a href = "hcbkx07.htm#283.HEADING">Visual Arts Web Use</a>
+<li> <a href = "hcbkx07.htm#284.HEADING">Literature Web Use</a>
+<li> <a href = "hcbkx07.htm#285.HEADING">Social Web Use</a>
+<li> <a href = "hcbkx07.htm#286.HEADING">Web Use Problem Solving</a>
+<li> <a href = "hcbkx07.htm#287.HEADING">Web Use Information</a>
+<li> <a href = "hcbkx07.htm#288.HEADING">Health Media Use</a>
+<li> <a href = "hcbkx07.htm#289.HEADING">Political Media Use</a>
+<li> <a href = "hcbkx07.htm#290.HEADING">Search Activities</a>
+<li> <a href = "hcbkx07.htm#291.HEADING">Social Network Media Use</a>
+<li> <a href = "hcbkx07.htm#292.HEADING">Home Computer Web Use</a>
+<li> <a href = "hcbkx07.htm#293.HEADING">Work Computer&#x2F;Web Use</a>
+<li> <a href = "hcbkx07.htm#294.HEADING">Other Computer&#x2F;Web Use</a>
+<li> <a href = "hcbkx07.htm#295.HEADING">Email Use</a>
+</ul>
+<li> <a href = "hcbkx08.htm#296.HEADING">2000 TOPICAL MODULE: FREEDOM</a>
+<ul>
+<li> <a href = "hcbkx08.htm#297.HEADING">Child Time&#x2F;Monitor</a>
+<li> <a href = "hcbkx08.htm#298.HEADING">House Clean</a>
+</ul>
+<li> <a href = "hcbkx08.htm#299.HEADING">2000 TOPICAL MODULE: HEALTH STATUS</a>
+<li> <a href = "hcbkx08.htm#300.HEADING">2002 TOPICAL MODULE: PREJUDICE</a>
+<li> <a href = "hcbkx08.htm#301.HEADING">2002 TOPICAL MODULE: DOCTORS AND PATIENTS</a>
+<li> <a href = "hcbkx08.htm#302.HEADING">2002-2014 TOPICAL MODULE: QUALITY OF WORKLIFE</a>
+<li> <a href = "hcbkx08.htm#303.HEADING">2002-2018 TOPICAL MODULE: EMPLOYEE COMPENSATION</a>
+<li> <a href = "hcbkx08.htm#304.HEADING">2002-2014 TOPICAL MODULE: ALTRUISM</a>
+<li> <a href = "hcbkx08.htm#305.HEADING">2002 TOPICAL MODULE: ADULT TRANSITIONS</a>
+<li> <a href = "hcbkx08.htm#306.HEADING">2002 TOPICAL MODULE: CHILD STIGMA</a>
+<li> <a href = "hcbkx08.htm#307.HEADING">2004&#x2F;2012 TOPICAL MODULE: WORKPLACE CONFLICT</a>
+<li> <a href = "hcbkx08.htm#308.HEADING">2004 TOPICAL MODULE: IMMIGRATION</a>
+<li> <a href = "hcbkx08.htm#309.HEADING">2004 TOPICAL MODULE: GENES AND ENVIRONMENT</a>
+<li> <a href = "hcbkx08.htm#310.HEADING">2004 TOPICAL MODULE: ALTRUISTIC LOVE</a>
+<li> <a href = "hcbkx09.htm#311.HEADING">2004 TOPICAL MODULE: GUNS</a>
+<li> <a href = "hcbkx09.htm#312.HEADING">2004 TOPICAL MODULE: SPIRITUALITY</a>
+<ul>
+<li> <a href = "hcbkx09.htm#313.HEADING">Spiritual Transformation</a>
+<li> <a href = "hcbkx09.htm#314.HEADING">Daily Spiritual Experiences</a>
+<li> <a href = "hcbkx09.htm#315.HEADING">Catholics</a>
+</ul>
+<li> <a href = "hcbkx09.htm#316.HEADING">2004 TOPICAL MODULE: WOMEN AND ALCOHOL</a>
+<li> <a href = "hcbkx09.htm#317.HEADING">2004 TOPICAL MODULE: VOLUNTARY ASSOCIATIONS&#x2F;SOCIAL NETWORKS</a>
+<li> <a href = "hcbkx09.htm#318.HEADING">2006-2014 TOPICAL MODULE: SCIENCE</a>
+<ul>
+<li> <a href = "hcbkx09.htm#319.HEADING">2006 Science Module</a>
+<li> <a href = "hcbkx09.htm#320.HEADING">2008 Science Module</a>
+<li> <a href = "hcbkx09.htm#321.HEADING">2010 Science Module</a>
+<li> <a href = "hcbkx09.htm#322.HEADING">2012 Science Module</a>
+<li> <a href = "hcbkx09.htm#323.HEADING">2014 Science Module</a>
+</ul>
+<li> <a href = "hcbkx10.htm#324.HEADING">2006-2014 TOPICAL MODULE: SHARED CAPITALISM</a>
+<li> <a href = "hcbkx10.htm#325.HEADING">2006 TOPICAL MODULE: MENTAL HEALTH III</a>
+<li> <a href = "hcbkx10.htm#326.HEADING">2006 TOPICAL MODULE: NUMBER KNOWN</a>
+<li> <a href = "hcbkx10.htm#327.HEADING">2006 TOPICAL MODULE: GUN CONTROL</a>
+<li> <a href = "hcbkx10.htm#328.HEADING">2006 TOPICAL MODULE: BOARDS&#x2F;TRENDS</a>
+<li> <a href = "hcbkx10.htm#329.HEADING">2006 TOPICAL MODULE: DISABLED</a>
+<li> <a href = "hcbkx10.htm#330.HEADING">2006 TOPICAL MODULE: MENTAL HEALTH IV</a>
+<li> <a href = "hcbkx10.htm#331.HEADING">2008 TOPICAL MODULE: SELF EMPLOYMENT</a>
+<li> <a href = "hcbkx10.htm#332.HEADING">2008 TOPICAL MODULE: JEWISH IDENTITY</a>
+<li> <a href = "hcbkx10.htm#333.HEADING">2008 TOPICAL MODULE: TERRORISM PREPAREDNESS</a>
+<li> <a href = "hcbkx10.htm#334.HEADING">2008 TOPICAL MODULE: GLOBAL ECONOMICS</a>
+<li> <a href = "hcbkx10.htm#335.HEADING">2008,2012 TOPICAL MODULE: SEXUAL ORIENTATION</a>
+<li> <a href = "hcbkx11.htm#336.HEADING">2008 TOPICAL MODULE: CLERGY&#x2F;SEX</a>
+<li> <a href = "hcbkx11.htm#337.HEADING">2014 TOPICAL MODULE: WORK AND RELATIONSHIPS</a>
+<li> <a href = "hcbkx11.htm#338.HEADING">2014 TOPICAL MODULE: HIGH RISK BEHAVIORS</a>
+<li> <a href = "hcbkx11.htm#339.HEADING">1985-2016 ISSP MODULE: ROLE OF GOVERNMENT</a>
+<ul>
+<li> <a href = "hcbkx11.htm#340.HEADING">Newspaper Allowed to Publish Government Secrets</a>
+<li> <a href = "hcbkx11.htm#341.HEADING">Protest</a>
+<li> <a href = "hcbkx11.htm#342.HEADING">Freedom of Speech</a>
+<li> <a href = "hcbkx11.htm#343.HEADING">Police Powers</a>
+<li> <a href = "hcbkx11.htm#344.HEADING">Economic Inequality</a>
+<li> <a href = "hcbkx11.htm#345.HEADING">Importance of Educational Subjects</a>
+<li> <a href = "hcbkx11.htm#346.HEADING">Government Education Assistance</a>
+<li> <a href = "hcbkx11.htm#347.HEADING">Public Authorities&#x27; Role in Child Raising</a>
+<li> <a href = "hcbkx11.htm#348.HEADING">Legal Issues</a>
+<li> <a href = "hcbkx11.htm#349.HEADING">Public Influence on Government</a>
+<li> <a href = "hcbkx11.htm#350.HEADING">Government and the Economy</a>
+<li> <a href = "hcbkx11.htm#351.HEADING">Government Spending Levels</a>
+<li> <a href = "hcbkx11.htm#352.HEADING">Taxes</a>
+<li> <a href = "hcbkx11.htm#353.HEADING">Power and Priorities</a>
+<li> <a href = "hcbkx11.htm#354.HEADING">Government&#x27;s Role in Industries</a>
+<li> <a href = "hcbkx11.htm#355.HEADING">Government Responsibilty</a>
+<li> <a href = "hcbkx11.htm#356.HEADING">Feeling for Political Groups</a>
+<li> <a href = "hcbkx11.htm#357.HEADING">Public Influence on Government (2)</a>
+<li> <a href = "hcbkx11.htm#358.HEADING">2006 Additions</a>
+<li> <a href = "hcbkx11.htm#359.HEADING">2012 Additions</a>
+<li> <a href = "hcbkx11.htm#360.HEADING">2016 Additions</a>
+</ul>
+<li> <a href = "hcbkx11.htm#361.HEADING">1986 ISSP MODULE: SOCIAL SUPPORT AND NETWORKS</a>
+<ul>
+<li> <a href = "hcbkx11.htm#362.HEADING">Contact with Parents</a>
+<li> <a href = "hcbkx11.htm#363.HEADING">Contact with Siblings</a>
+<li> <a href = "hcbkx11.htm#364.HEADING">Contact with Children</a>
+<li> <a href = "hcbkx11.htm#365.HEADING">Other Relatives - Information and Contacts</a>
+<li> <a href = "hcbkx11.htm#366.HEADING">Contact with Friends</a>
+<li> <a href = "hcbkx11.htm#367.HEADING">Who Turn to for Help</a>
+<li> <a href = "hcbkx11.htm#368.HEADING">How Long in Home and Community</a>
+</ul>
+<li> <a href = "hcbkx11.htm#369.HEADING">1987 ISSP MODULE: SOCIAL INEQUALITY</a>
+<ul>
+<li> <a href = "hcbkx11.htm#370.HEADING">Factors for Getting Ahead in Life</a>
+<li> <a href = "hcbkx11.htm#371.HEADING">Need for Inequality</a>
+<li> <a href = "hcbkx11.htm#372.HEADING">Guessing Job Pay</a>
+<li> <a href = "hcbkx11.htm#373.HEADING">How Much Jobs Should Pay</a>
+<li> <a href = "hcbkx11.htm#374.HEADING">Economic Inequality and the Role of Government</a>
+<li> <a href = "hcbkx11.htm#375.HEADING">Class Tax Levels</a>
+<li> <a href = "hcbkx11.htm#376.HEADING">Class Conflict</a>
+<li> <a href = "hcbkx11.htm#377.HEADING">Occupational Mobility</a>
+</ul>
+<li> <a href = "hcbkx12.htm#378.HEADING">1988 ISSP MODULE: WOMEN AND WORK</a>
+<ul>
+<li> <a href = "hcbkx12.htm#379.HEADING">Working Women and the Family</a>
+<li> <a href = "hcbkx12.htm#380.HEADING">When Should Women Work Outside Home</a>
+<li> <a href = "hcbkx12.htm#381.HEADING">Child Care Arrangements</a>
+<li> <a href = "hcbkx12.htm#382.HEADING">Marriage and Child Bearing</a>
+<li> <a href = "hcbkx12.htm#383.HEADING">Family Size</a>
+<li> <a href = "hcbkx12.htm#384.HEADING">Having Children</a>
+<li> <a href = "hcbkx12.htm#385.HEADING">Divorce</a>
+<li> <a href = "hcbkx12.htm#386.HEADING">Work History - Married Women with Children</a>
+<li> <a href = "hcbkx12.htm#387.HEADING">Work and the Family</a>
+<li> <a href = "hcbkx12.htm#388.HEADING">Family Issues</a>
+<li> <a href = "hcbkx12.htm#389.HEADING">Sexual Issues</a>
+<li> <a href = "hcbkx12.htm#390.HEADING">Household Money and Chore Management</a>
+<li> <a href = "hcbkx12.htm#391.HEADING">Spouse Work Outside Home</a>
+</ul>
+<li> <a href = "hcbkx12.htm#392.HEADING">1989-2015 ISSP MODULE: WORK ORIENTATION</a>
+<ul>
+<li> <a href = "hcbkx12.htm#393.HEADING">How Change Time Spent</a>
+<li> <a href = "hcbkx12.htm#394.HEADING">Attitude Towards Work</a>
+<li> <a href = "hcbkx12.htm#395.HEADING">Important Job Pay Factors</a>
+<li> <a href = "hcbkx12.htm#396.HEADING">Workers and Management</a>
+<li> <a href = "hcbkx12.htm#397.HEADING">Important Aspects of Job</a>
+<li> <a href = "hcbkx12.htm#398.HEADING">Worst Aspects of Unemployment</a>
+<li> <a href = "hcbkx12.htm#399.HEADING">Job Preferences</a>
+<li> <a href = "hcbkx12.htm#400.HEADING">Other Work Issues</a>
+<li> <a href = "hcbkx12.htm#401.HEADING">More Job Pay Factors</a>
+<li> <a href = "hcbkx12.htm#402.HEADING">Evaluation of Own Work Situation</a>
+<li> <a href = "hcbkx12.htm#403.HEADING">Workplace Relations</a>
+<li> <a href = "hcbkx12.htm#404.HEADING">Supervision</a>
+<li> <a href = "hcbkx12.htm#405.HEADING">Other Jobs</a>
+<li> <a href = "hcbkx12.htm#406.HEADING">Job Sites</a>
+<li> <a href = "hcbkx12.htm#407.HEADING">Employ Others</a>
+<li> <a href = "hcbkx12.htm#408.HEADING">2006 Additions</a>
+</ul>
+<li> <a href = "hcbkx12.htm#409.HEADING">1991 ISSP MODULE: RELIGION</a>
+<ul>
+<li> <a href = "hcbkx12.htm#410.HEADING">Personal Values</a>
+<li> <a href = "hcbkx12.htm#411.HEADING">Abortion</a>
+<li> <a href = "hcbkx12.htm#412.HEADING">Cheating on Benefits and Taxes</a>
+<li> <a href = "hcbkx12.htm#413.HEADING">Confidence in Institutions</a>
+<li> <a href = "hcbkx12.htm#414.HEADING">Influence of Religion in Government</a>
+<li> <a href = "hcbkx12.htm#415.HEADING">Religious Beliefs</a>
+<li> <a href = "hcbkx12.htm#416.HEADING">Parent&#x27;s Religion</a>
+<li> <a href = "hcbkx12.htm#417.HEADING">Own Religious Upbringing &amp; Spouse&#x27;s Religion</a>
+<li> <a href = "hcbkx12.htm#418.HEADING">Childhood and Current Religious Participation</a>
+<li> <a href = "hcbkx12.htm#419.HEADING">Religion&#x27;s Role in Society</a>
+</ul>
+<li> <a href = "hcbkx12.htm#420.HEADING">1993-2010 ISSP MODULE: ENVIRONMENT</a>
+<ul>
+<li> <a href = "hcbkx12.htm#421.HEADING">National Priorities</a>
+<li> <a href = "hcbkx12.htm#422.HEADING">The Role of Science</a>
+<li> <a href = "hcbkx12.htm#423.HEADING">Environmental Values</a>
+<li> <a href = "hcbkx12.htm#424.HEADING">Willingness to Protect the Environment</a>
+<li> <a href = "hcbkx12.htm#425.HEADING">Science Knowledge Tests</a>
+<li> <a href = "hcbkx12.htm#426.HEADING">Environmental Dangers</a>
+<li> <a href = "hcbkx12.htm#427.HEADING">Government Environmental Involvement</a>
+<li> <a href = "hcbkx12.htm#428.HEADING">Personal Behavior to Help Environment</a>
+<li> <a href = "hcbkx12.htm#429.HEADING">2010 Module</a>
+</ul>
+<li> <a href = "hcbkx13.htm#430.HEADING">2004-2014 ISSP MODULE: NATIONAL IDENTITY</a>
+<li> <a href = "hcbkx13.htm#431.HEADING">2004-2014 ISSP MODULE: CITIZENSHIP</a>
+<li> <a href = "hcbkx13.htm#432.HEADING">2012 ISSP MODULE: GENDER</a>
+<li> <a href = "hcbkx13.htm#433.HEADING">VARIABLES ADDED IN 2016</a>
+<ul>
+<li> <a href = "hcbkx13.htm#434.HEADING">Core</a>
+<li> <a href = "hcbkx13.htm#435.HEADING">Flexible Work</a>
+<li> <a href = "hcbkx13.htm#436.HEADING">Arts and Culture</a>
+<li> <a href = "hcbkx13.htm#437.HEADING">Private Business</a>
+<li> <a href = "hcbkx13.htm#438.HEADING">Feelings During Past Week</a>
+<li> <a href = "hcbkx13.htm#439.HEADING">R&#x27;s Partner</a>
+<li> <a href = "hcbkx13.htm#440.HEADING">Suicide</a>
+<li> <a href = "hcbkx13.htm#441.HEADING">Social Media Use</a>
+<li> <a href = "hcbkx13.htm#442.HEADING">Hope and Optimism</a>
+<li> <a href = "hcbkx13.htm#443.HEADING">Racial&#x2F;Ethnic Identity</a>
+<li> <a href = "hcbkx13.htm#444.HEADING">Work Orientation</a>
+<li> <a href = "hcbkx13.htm#445.HEADING">Science Knowledge and Attitudes</a>
+<li> <a href = "hcbkx13.htm#446.HEADING">Housing Unit</a>
+<li> <a href = "hcbkx13.htm#447.HEADING">Interviewer Observations</a>
+</ul>
+<li> <a href = "hcbkx13.htm#448.HEADING">VARIABLES ADDED IN 2018</a>
+<ul>
+<li> <a href = "hcbkx13.htm#449.HEADING">Vote 2016</a>
+<li> <a href = "hcbkx13.htm#450.HEADING">Trust</a>
+<li> <a href = "hcbkx13.htm#451.HEADING">Job Satisfaction</a>
+<li> <a href = "hcbkx13.htm#452.HEADING">Randomization Variable Form X</a>
+<li> <a href = "hcbkx13.htm#453.HEADING">Consent to Possible Data Linkage</a>
+<li> <a href = "hcbkx13.htm#454.HEADING">Spouse Supervise Anyone</a>
+<li> <a href = "hcbkx13.htm#455.HEADING">Should Do First</a>
+<li> <a href = "hcbkx13.htm#456.HEADING">Personal Relationships with Mental Health Issues</a>
+<li> <a href = "hcbkx13.htm#457.HEADING">Prediction About Future</a>
+<li> <a href = "hcbkx13.htm#458.HEADING">Harassment</a>
+<li> <a href = "hcbkx13.htm#459.HEADING">General Health</a>
+<li> <a href = "hcbkx13.htm#460.HEADING">Health Problems</a>
+<li> <a href = "hcbkx13.htm#461.HEADING">Abortion</a>
+<li> <a href = "hcbkx13.htm#462.HEADING">Experience of Nature</a>
+<li> <a href = "hcbkx13.htm#463.HEADING">Belief about Nature</a>
+<li> <a href = "hcbkx13.htm#464.HEADING">Pets</a>
+<li> <a href = "hcbkx13.htm#465.HEADING">Work</a>
+<li> <a href = "hcbkx13.htm#466.HEADING">Knows Someone Mental Health Diagnosis</a>
+<li> <a href = "hcbkx13.htm#467.HEADING">Person R Acquainted With</a>
+<li> <a href = "hcbkx13.htm#468.HEADING">Inequality</a>
+<li> <a href = "hcbkx13.htm#469.HEADING">Leisure</a>
+<li> <a href = "hcbkx13.htm#470.HEADING">Social Networks</a>
+<li> <a href = "hcbkx13.htm#471.HEADING">Feelings</a>
+<li> <a href = "hcbkx13.htm#472.HEADING">Confidence</a>
+<li> <a href = "hcbkx13.htm#473.HEADING">Family Pressure</a>
+<li> <a href = "hcbkx13.htm#474.HEADING">Sociability&#x2F;Social Networks</a>
+<li> <a href = "hcbkx13.htm#475.HEADING">General Health</a>
+<li> <a href = "hcbkx13.htm#476.HEADING">Feelings</a>
+<li> <a href = "hcbkx13.htm#477.HEADING">Income</a>
+<li> <a href = "hcbkx13.htm#478.HEADING">Language</a>
+<li> <a href = "hcbkx13.htm#479.HEADING">Religion</a>
+<li> <a href = "hcbkx13.htm#480.HEADING">Gender</a>
+<li> <a href = "hcbkx13.htm#481.HEADING">Genetic Testing</a>
+<li> <a href = "hcbkx13.htm#482.HEADING">Race</a>
+<li> <a href = "hcbkx13.htm#483.HEADING">Citizenship</a>
+<li> <a href = "hcbkx13.htm#484.HEADING">Dwelling</a>
+</ul>
+<li> <a href = "hcbkx14.htm#485.HEADING">VARIABLES ADDED IN 2021</a>
+<ul>
+<li> <a href = "hcbkx14.htm#486.HEADING">Gender</a>
+<li> <a href = "hcbkx14.htm#487.HEADING">Born on Vietname War Draft</a>
+<li> <a href = "hcbkx14.htm#488.HEADING">Part of the World Ancestors Came from</a>
+<li> <a href = "hcbkx14.htm#489.HEADING">Country&#x2F;countries Ancestors Came from</a>
+<li> <a href = "hcbkx14.htm#490.HEADING">Race</a>
+<li> <a href = "hcbkx14.htm#491.HEADING">College Respondent Attended</a>
+<li> <a href = "hcbkx14.htm#492.HEADING">Employment</a>
+<li> <a href = "hcbkx14.htm#493.HEADING">Parent&#x27;s Born in this Country</a>
+<li> <a href = "hcbkx14.htm#494.HEADING">Father&#x2F;Mother Employment</a>
+<li> <a href = "hcbkx14.htm#495.HEADING">Government Policies</a>
+<li> <a href = "hcbkx14.htm#496.HEADING">Trust in Institutions</a>
+<li> <a href = "hcbkx14.htm#497.HEADING">Climate Change</a>
+<li> <a href = "hcbkx14.htm#498.HEADING">Nature and Environment</a>
+<li> <a href = "hcbkx14.htm#499.HEADING">Travel</a>
+<li> <a href = "hcbkx14.htm#500.HEADING">Eat Meat</a>
+<li> <a href = "hcbkx14.htm#501.HEADING">Home and Neighborhood</a>
+<li> <a href = "hcbkx14.htm#502.HEADING">Income Inequality, Immigration and Class</a>
+<li> <a href = "hcbkx14.htm#503.HEADING">Pain</a>
+<li> <a href = "hcbkx14.htm#504.HEADING">Religion</a>
+<li> <a href = "hcbkx14.htm#505.HEADING">Business and Government Policies</a>
+<li> <a href = "hcbkx14.htm#506.HEADING">HIV</a>
+<li> <a href = "hcbkx14.htm#507.HEADING">Sexual Partners</a>
+<li> <a href = "hcbkx14.htm#508.HEADING">Police and Race</a>
+<li> <a href = "hcbkx14.htm#509.HEADING">Confidence in Pharmaceutical Companies</a>
+<li> <a href = "hcbkx14.htm#510.HEADING">Confidence in Federal Government</a>
+<li> <a href = "hcbkx14.htm#511.HEADING">Free Speech</a>
+<li> <a href = "hcbkx14.htm#512.HEADING">Police</a>
+<li> <a href = "hcbkx14.htm#513.HEADING">Experiments</a>
+</ul>
+<li> <a href = "hcbkx14.htm#514.HEADING">VARIABLES ADDED IN 2022</a>
+<ul>
+<li> <a href = "hcbkx14.htm#515.HEADING">Vote 2020</a>
+<li> <a href = "hcbkx14.htm#516.HEADING">Immigration</a>
+<li> <a href = "hcbkx14.htm#517.HEADING">Verbal Ability</a>
+<li> <a href = "hcbkx14.htm#518.HEADING">Racial Attitudes and Stereotypes</a>
+<li> <a href = "hcbkx14.htm#519.HEADING">Sexual Behavior</a>
+<li> <a href = "hcbkx14.htm#520.HEADING">Topical Module: ISSP Family and Gender Roles</a>
+<li> <a href = "hcbkx14.htm#521.HEADING">Topical Module: ISSP Health and Healthcare</a>
+<li> <a href = "hcbkx14.htm#522.HEADING">Topical Module: Quality of Worklife</a>
+<li> <a href = "hcbkx14.htm#523.HEADING">Topical Module: Shared Capitalism</a>
+<li> <a href = "hcbkx14.htm#524.HEADING">Follow-on: National Endowment for the Arts</a>
+<li> <a href = "hcbkx14.htm#525.HEADING">Follow-on: GSS Next</a>
+<li> <a href = "hcbkx14.htm#526.HEADING">Household Composition</a>
+<li> <a href = "hcbkx14.htm#527.HEADING">NEXT</a>
+<li> <a href = "hcbkx14.htm#528.HEADING">Occupation and Work</a>
+<li> <a href = "hcbkx14.htm#529.HEADING">Household Screening</a>
+<li> <a href = "hcbkx14.htm#530.HEADING">Weights</a>
+<li> <a href = "hcbkx14.htm#531.HEADING">Technical Data and Paradata</a>
+</ul>
+<li> <a href = "hcbkx15.htm#532.HEADING">VARIABLES ADDED IN 2024</a>
+<ul>
+<li> <a href = "hcbkx15.htm#533.HEADING">Respondent Background - Age, Gender, Race, and Ethnicity</a>
+<li> <a href = "hcbkx15.htm#534.HEADING">New Technology</a>
+<li> <a href = "hcbkx15.htm#535.HEADING">ISSP National Identity and Citizenship (2024 Additions)</a>
+<li> <a href = "hcbkx15.htm#536.HEADING">Replicating Core</a>
+<li> <a href = "hcbkx15.htm#537.HEADING">Adult Mental Stigma</a>
+<li> <a href = "hcbkx15.htm#538.HEADING">Child Mental Stigma</a>
+<li> <a href = "hcbkx15.htm#539.HEADING">ISSP Digital Society</a>
+<li> <a href = "hcbkx15.htm#540.HEADING">ANES</a>
+<li> <a href = "hcbkx15.htm#541.HEADING">CDC High Risk Behaviors</a>
+<li> <a href = "hcbkx15.htm#542.HEADING">Metadata and Paradata</a>
+<li> <a href = "hcbkx15.htm#543.HEADING">Variables added after Release 1</a>
+</ul>
+<li> <a href = "hcbkx15.htm#544.HEADING">SURVEY ADMINISTRATIVE VARIABLES</a>
+<ul>
+<li> <a href = "hcbkx15.htm#545.HEADING">Language</a>
+<li> <a href = "hcbkx15.htm#546.HEADING">Residence</a>
+<li> <a href = "hcbkx15.htm#547.HEADING">Version</a>
+<li> <a href = "hcbkx15.htm#548.HEADING">Sampling</a>
+<li> <a href = "hcbkx15.htm#549.HEADING">Weights -- Sampling and Post-stratification</a>
+<li> <a href = "hcbkx15.htm#550.HEADING">Ballot-form Weights for 2002, 2010, 2012, 2016 and 2018</a>
+<li> <a href = "hcbkx15.htm#551.HEADING">Interviewer Characteristics and Misc</a>
+<li> <a href = "hcbkx15.htm#552.HEADING">National Death Index (See NORC Codebook)</a>
+</ul>
+</ul>
+
+<hr>
+</div>
+
+</body>
+</html>
