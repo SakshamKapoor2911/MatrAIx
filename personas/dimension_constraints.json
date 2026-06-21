@@ -4,6 +4,14 @@
   "total_unique_values": 6644,
   "incompatibilities_count": 115,
   "description": "Comprehensive constraint matrix: unrealistic persona combinations",
+  "usage": "Dimension value pairs listed in 'incompatibilities' array SHOULD NOT coexist in realistic personas. If both values are present in a persona, it is INVALID. Pairs not in this array are allowed.",
+  "examples": [
+    "age_bracket='13–17' + demo_marital_status='Married' → INVALID (teens can't be married)",
+    "highest_education='Doctorate' + seniority='Student/intern' → INVALID (doctorates are post-degree)",
+    "domain='Software & AI' + highest_education='No formal' → INVALID (tech requires education)",
+    "seniority='Director' + years_experience='0–2' → INVALID (directors need experience)",
+    "age_bracket='13–17' + years_experience='20+' → INVALID (teens can't have 20+ years work)"
+  ],
   "incompatibilities": [
     {
       "dim1": "age_bracket",
