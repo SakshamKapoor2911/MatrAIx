@@ -1,44 +1,61 @@
-# OASIS Implementation Plan
+# OASIS Implementation — Complete Technical Reference
 
-> Integrating OASIS (Open Agent Social Interaction Simulations) into MatrAIx.
-> Load MatrAIx personas → build social graph → run agents on a shared platform → collect trajectories.
+> MatrAIx integration of OASIS (Open Agent Social Interaction Simulations).
+> Load MatrAIx personas → build social graph → run persona-conditioned agents on a shared platform → collect trajectories.
 
 ---
 
 ## How OASIS Actually Works (from source code analysis)
 
-### The Real Architecture
+### Architecture
 
 OASIS separates concerns into:
 1. **Agents** — LLM-powered actors with a persona system prompt. Each agent is always active (the LLM decides `do_nothing` as an action). At 1M scale, activation probability gates which agents get a turn.
-2. **Platform** — A single async event loop processing all actions sequentially via SQLite. This is the shared state layer — posts, follows, likes, comments all live here.
-3. **Channel** — Async queue connecting agents ↔ platform. Each action gets a UUID, agent polls until response arrives.
-4. **RecSys** — Controls what each agent sees when they "refresh" their feed. This is the information flow bottleneck.
+2. **Platform** — A single async event loop processing all actions sequentially via SQLite (`PRAGMA synchronous = OFF`). 16-table schema. All state lives here.
+3. **Channel** — Async queue connecting agents ↔ platform. Each action gets a UUID, agent polls `asyncio.sleep(0.1)` until response arrives in `AsyncSafeDict`.
+4. **RecSys** — Controls what each agent sees in their feed. Rebuilt every timestep before agents act. 4 algorithms (random, reddit hot-score, MiniLM cosine, Twhin-BERT + time decay).
+5. **Clock** — Discrete `time_step` integer for Twitter mode. `time_transfer(now, start)` with magnification factor k=60 for Reddit mode.
 
-### What They Actually Do for Networks
+### Network Generation (exact algorithm from `generator/twitter/network.py`)
 
-OASIS's network generation is deliberately simple:
-- Load pre-curated "star" (influencer) accounts from a CSV categorized by topic
+- Load pre-curated "star" accounts from `new_stars.csv` categorized by topic
 - For each regular user, iterate over their 2 topic interests
 - For each star account matching that topic, follow with **flat probability 0.2**
 - No affinity calculation, no personality weighting, no region similarity
-- The philosophy: simple topology + LLM behavioral complexity = emergent realism
+- Output: CSV with `following_agentid_list` as Python list literal string
+- Philosophy: simple topology + LLM behavioral complexity = emergent realism
 
-### What They Actually Do for Profiles
+### Profile Generation (exact algorithm from `generator/twitter/gen.py`)
 
-- Each agent has one `user_char` field: a RAG-generated narrative paragraph
-- Generated via GPT-3.5 + `BAAI/bge-m3` embeddings over real Twitter bios
-- Demographics: age (weighted), gender, MBTI (weighted), 2 topics from 9, 1 profession from 16
-- Activity level: `[100] * 24` for ALL agents (= always active, LLM decides inaction)
-- The 1M experiment overrides stars to 10% threshold
+- Demographics: age (weighted: 13-17=6.6%, 18-24=17.1%, 25-34=38.5%, 35-49=20.7%, 50+=17.1%)
+- 16 MBTI types with specific probability distribution
+- 16 career clusters (uniform)
+- Each agent gets exactly 2 topics from 9 available (combinatorial C(9,2)=36 combos)
+- Profile text generated via RAG: GPT-3.5 + `BAAI/bge-m3` embeddings + Chroma vector store over `complete_user_char.csv`
+- Activity level: `['active'] * 24` with `frequency = [100] * 24` for ALL agents (= always active)
 
-### What They Actually Do for Simulation
+### Platform Actions (31 total from `typing.py`)
 
-- `env.step(actions)`: updates recsys table → all agents act concurrently via asyncio
-- Each agent: refresh feed → LLM with function calling → selected tools execute as actions
-- Platform processes actions one at a time (SQLite serializes)
-- All actions recorded in `trace` table with full JSON
-- Semaphore (default 128) limits concurrent LLM calls
+```
+EXIT, REFRESH, SEARCH_USER, SEARCH_POSTS, CREATE_POST, LIKE_POST,
+UNLIKE_POST, DISLIKE_POST, UNDO_DISLIKE_POST, REPORT_POST, FOLLOW,
+UNFOLLOW, MUTE, UNMUTE, TREND, SIGNUP, REPOST, QUOTE_POST,
+UPDATE_REC_TABLE, CREATE_COMMENT, LIKE_COMMENT, UNLIKE_COMMENT,
+DISLIKE_COMMENT, UNDO_DISLIKE_COMMENT, DO_NOTHING, PURCHASE_PRODUCT,
+INTERVIEW, JOIN_GROUP, LEAVE_GROUP, SEND_TO_GROUP, CREATE_GROUP,
+LISTEN_FROM_GROUP
+```
+
+Default action sets:
+- **Twitter**: create_post, like_post, repost, follow, do_nothing, quote_post
+- **Reddit**: like_post, dislike_post, create_post, create_comment, like_comment, dislike_comment, search_posts, search_user, trend, do_nothing, follow, mute
+
+### Repost Resolution Logic (critical detail from `platform.py`)
+
+OASIS resolves reposts to root posts before any engagement action:
+- `like_post(repost_id)` → finds `original_post_id` → likes the root
+- `repost(already_reposted_id)` → finds root → creates new repost pointing to root
+- Duplicate check: user cannot repost the same root post twice
 
 ### CSV Format (the actual runtime input)
 
@@ -47,353 +64,317 @@ user_id, name, username, description, user_char, following_agentid_list,
 previous_tweets, activity_level, activity_level_frequency, tweets_id
 ```
 
-- `following_agentid_list`: Python list as string literal, e.g. `"[32, 55, 12]"`
+- `following_agentid_list`: Python list as string literal (`"[32, 55, 12]"`), parsed with `ast.literal_eval()`
 - `activity_level`: `"['active'] * 24"`
-- `activity_level_frequency`: `"[100] * 24"` (100 = always active in OASIS's framework)
-- Parsed at runtime with `ast.literal_eval()`
+- `activity_level_frequency`: `"[100] * 24"` (100 = always active)
+- `user_char`: Full persona narrative (the system prompt content)
+- `tweets_id`: Counter starting at "0"
+
+### Data Sources OASIS Ships With
+
+| File | Content |
+|------|---------|
+| `data/twitter_dataset/all_topics.csv` | 198 rumor stories from twitter15/twitter16 (True/False labels, 9 topics) |
+| `data/twitter_dataset/anonymous_topic_200_1h/*.csv` | ~200 pre-built agent CSVs per story |
+| `data/twitter_dataset/group_polarization/` | 197 conservative + 197 progressive users |
+| `data/reddit/user_data_36.json` | 36 LLM-generated Reddit personas |
+| `data/reddit/counterfactual_36.json` | ~160 counterfactual experiment entries with up/down/control groups |
+| `data/emall/product.json` | 3 product descriptions for e-commerce simulation |
+| `generator/twitter/new_stars.csv` | Categorized influencer accounts |
+| `generator/twitter/users.json` | 10,000+ generated profiles |
+| `generator/twitter/complete_user_char.csv` | RAG training data for profile generation |
+
+### 1M Agent Scaling (from `twitter_simulation_1M_agents/`)
+
+- Replace AgentGraph with plain Python list (igraph too slow)
+- 72 vLLM endpoints across 3 GPU servers (24 ports each)
+- `scheduling_strategy='random_model'` distributes across endpoints
+- Activation probability: `active_threshold[hour]` per agent (only ~1% act per step)
+- Reduced action space: do_nothing, repost, like_post, follow
+- Bulk DB operations for signup and follow
 
 ---
 
-## Our Architecture (what we're building differently)
+## Our Architecture
 
-### Key Difference from OASIS
+### Key Differences from OASIS
 
-OASIS runs everything in one Python process with async concurrency. We split into:
-- **Agents in isolated Docker containers** — each agent runs as a persona-conditioned LLM process in its own container, receiving the persona via system prompt
-- **Shared platform as a service** — the social media environment (SQLite + recsys + action processing) runs as a separate service that all agent containers connect to
-- **Trajectory storage** — all actions and traces persisted for post-hoc analysis
+| Aspect | OASIS | Our Implementation |
+|--------|-------|-------------------|
+| Communication | Async Channel (in-process queues) | HTTP REST API (Docker-isolated) |
+| Agent isolation | Same Python process, asyncio | Docker containers (crash-isolated) |
+| Platform | Event loop in same process | FastAPI service (independent scaling) |
+| SQLite | `PRAGMA synchronous = OFF` | WAL mode + thread lock |
+| LLM backend | CAMEL ChatAgent with tool calling | Direct OpenAI-compatible API (vLLM/OpenAI/etc) |
+| Action dispatch | `getattr(self, action.value)` reflection | Explicit handler dict |
+| Clock | In-process Clock object | Clock in PlatformState |
 
-This separation means:
-- Agents can use different LLM backends (vLLM, OpenAI, Anthropic) per container
-- Platform scales independently from agent compute
-- Agent crashes don't kill the platform
-- Trajectories survive agent failures
+### What We Preserve Exactly
+
+- 16-table SQLite schema (all columns, foreign keys, constraints)
+- Repost resolution to root post before engagement
+- Duplicate repost prevention
+- Trace recording for every action
+- RecSys rebuilds rec table each step
+- Feed = recommended posts + following posts (deduplicated, muted excluded)
+- Agent sees observation text + selects tools via function calling
+- `do_nothing` is a valid action the LLM can choose
+- OASIS CSV export with `ast.literal_eval`-compatible list literals
 
 ---
 
-## Module Structure
+## Module Structure (57 files)
 
 ```
 environments/oasis/
-├── README.md                          # Reference documentation
-├── implementation.md                  # This file
-├── __init__.py                        # Package root (re-exports all public API)
+├── README.md
+├── implementation.md                          # This file
+├── __init__.py
+├── docker-compose.yaml                        # Platform + N agent containers
 │
-├── persona_loader/                    # MODULE 1: Load & convert personas
+├── persona_loader/                            # MODULE 1: YAML → OASIS format
 │   ├── __init__.py
-│   ├── adapter.py                     # MatrAIx YAML → OasisUserInfo → CSV export
+│   ├── adapter.py                             # Dimension mapping, MBTI, CSV export
 │   └── tests/
-│       ├── __init__.py
-│       ├── test_adapter.py            # 45 tests
-│       └── fixtures/                  # 5 deep dummy personas (50+ dims each)
-│           ├── persona_young_tech.yaml
-│           ├── persona_older_healthcare.yaml
-│           ├── persona_young_creative.yaml
-│           ├── persona_finance_introvert.yaml
-│           └── persona_rural_educator.yaml
+│       ├── test_adapter.py                    # 45 tests
+│       └── fixtures/                          # 5 deep personas (50+ dims each)
 │
-├── network/                           # MODULE 2: Social graph construction
+├── network/                                   # MODULE 2: Social graph construction
 │   ├── __init__.py
-│   ├── builder.py                     # Affinity graph + simple topic graph + CSV export
+│   ├── builder.py                             # Simple (p=0.2) + affinity modes
 │   └── tests/
-│       ├── __init__.py
-│       └── test_builder.py            # 44 tests
+│       └── test_builder.py                    # 44 tests
 │
-├── platform/                          # MODULE 3: Shared social media environment
+├── platform/                                  # MODULE 3: Shared social media service
 │   ├── __init__.py
-│   ├── server.py                      # FastAPI service (SQLite + recsys + action queue)
-│   ├── database.py                    # Schema creation + queries (16 tables)
-│   ├── recsys.py                      # Recommendation algorithms
-│   ├── actions.py                     # Action processing (post, like, follow, etc.)
-│   └── Dockerfile                     # Container for the platform service
+│   ├── clock.py                               # Sandbox time (discrete steps / time dilation)
+│   ├── database.py                            # SQLite layer (16 tables, WAL, thread-safe)
+│   ├── actions.py                             # 22 action handlers with trace recording
+│   ├── recsys.py                              # 3 algorithms (random, reddit hot, twitter cosine)
+│   ├── server.py                              # FastAPI HTTP service + PlatformState
+│   ├── Dockerfile
+│   ├── schema/                                # 16 SQL schema files
+│   │   ├── user.sql
+│   │   ├── post.sql
+│   │   ├── follow.sql
+│   │   ├── like.sql
+│   │   ├── dislike.sql
+│   │   ├── comment.sql
+│   │   ├── comment_like.sql
+│   │   ├── comment_dislike.sql
+│   │   ├── mute.sql
+│   │   ├── rec.sql
+│   │   ├── trace.sql
+│   │   ├── report.sql
+│   │   ├── product.sql
+│   │   ├── chat_group.sql
+│   │   ├── group_member.sql
+│   │   └── group_message.sql
+│   └── tests/
+│       └── test_platform.py                   # 39 tests
 │
-└── agents/                            # MODULE 4: Persona-conditioned agent containers
-    ├── __init__.py
-    ├── runner.py                       # Agent loop: refresh → LLM → act → repeat
-    ├── llm_client.py                   # LLM backend abstraction (vLLM, OpenAI, etc.)
-    ├── persona_prompt.py               # System prompt assembly from persona data
-    ├── Dockerfile                      # Agent container template
-    └── docker-compose.yaml             # Orchestration (platform + N agents)
+├── agents/                                    # MODULE 4: Docker-isolated persona agents
+│   ├── __init__.py
+│   ├── tools.py                               # 19 OpenAI function-calling tool schemas
+│   ├── prompt.py                              # System prompt + observation prompt builders
+│   ├── llm_client.py                          # OpenAI-compatible HTTP client (vLLM/GPT/etc)
+│   ├── platform_client.py                     # HTTP client for platform API
+│   ├── runner.py                              # Single-agent loop (refresh → LLM → act)
+│   ├── orchestrator.py                        # Multi-agent simulation controller
+│   ├── entrypoint.py                          # Docker container entry point
+│   ├── Dockerfile
+│   └── tests/
+│       └── test_agents.py                     # 21 tests
+│
+└── data/                                      # Sample data + generator
+    ├── generate.py                            # CLI: personas → OASIS CSV + edges + seed posts
+    ├── reddit/
+    │   ├── user_data_sample.json              # 5 sample personas (OASIS format)
+    │   └── counterfactual_sample.json         # 5 misinformation experiment entries
+    └── twitter/
+        └── seed_posts.json                    # 5 initial posts for feed bootstrapping
 ```
 
 ---
 
-## Module 1: Persona Loader (DONE)
+## Module Details
 
-**Status**: Implemented and tested (45 tests passing)
+### Module 1: Persona Loader (45 tests)
 
-**What it does**: Loads MatrAIx persona YAML files (with 50+ dimensions per persona) and converts them to OASIS-compatible format. Two output modes:
+**Input**: MatrAIx persona YAML files (50+ dimensions from the 1,276-dimension schema)
 
-1. **`OasisUserInfo` objects** — Python dataclass for programmatic use
-2. **OASIS CSV export** — Exact format OASIS runtime expects (`export_oasis_csv()`)
+**Output**: `OasisUserInfo` objects + OASIS-compatible CSV export
 
-**Key design**: We export with `activity_level_frequency = [100] * 24` (OASIS standard = always active) because OASIS expects the LLM to decide inaction. Our per-hour activity curves are available for custom scheduling but not used in OASIS-compatible mode.
+**Key operations**:
+- Big Five (Very low→0.15 ... Very high→0.85) → MBTI (4-letter via threshold)
+- `topic_*` dimensions (Passionate/Interested/Neutral/Indifferent/Averse) → topic list
+- Region → deterministic country
+- Domain → profession string
+- All dimensions → `user_char` narrative text
+- Activity: exported as `[100]*24` for OASIS compatibility (always active, LLM decides)
 
-**Mapping decisions**:
-- Big Five → MBTI via threshold mapping (E/I at 0.5, N/S from openness, T/F from agreeableness, J/P from conscientiousness)
-- `topic_*` dimensions with Passionate/Interested/Neutral/Indifferent/Averse levels → OASIS topic list (top 2 by score)
-- `domain` → profession string
-- `region` → deterministic country selection
-- Full persona dimensions → `user_char` narrative text (the system prompt content)
+### Module 2: Network (44 tests)
 
----
+**Two modes**:
 
-## Module 2: Network (DONE)
+| Mode | Function | Algorithm | When to use |
+|------|----------|-----------|-------------|
+| OASIS-compatible | `build_simple_topic_graph()` | Flat p=0.2 per topic-matching influencer | OASIS comparison experiments |
+| MatrAIx-enhanced | `build_social_graph()` | Multi-factor affinity (interest cosine + domain + region + personality) | Research on topology effects |
 
-**Status**: Implemented and tested (44 tests passing)
+**Also provides**: `export_oasis_csv()`, `to_edge_list_csv()`, `build_oasis_follow_data()`, seed post generation.
 
-**What it does**: Constructs the directed follow graph. Two modes:
+### Module 3: Platform (39 tests)
 
-### Mode A: `build_simple_topic_graph()` — OASIS-compatible
-Mirrors OASIS's exact algorithm:
-- Identify influencer accounts (top 10% by extraversion + conscientiousness + openness score)
-- For each regular user, check topic overlap with each influencer
-- Follow with flat probability (default 0.2) if topics match
-- Output: adjacency list compatible with OASIS CSV `following_agentid_list`
+**Architecture**: FastAPI HTTP service with SQLite backend.
 
-### Mode B: `build_social_graph()` — MatrAIx-enhanced
-Richer topology for research experiments:
-- Multi-factor affinity (interest cosine 40%, domain Jaccard 25%, region 15%, personality distance 20%)
-- Extraversion-scaled follow budgets (introverts follow 3-6, extraverts follow 15-30)
-- Openness-scaled cross-topic bridging
-- Reciprocal follow probability (0.15)
-- Influencer boost (5x affinity)
-- Deterministic with seed for reproducibility
-
-Both modes output `SocialGraph` objects with `to_adjacency_list()` and `to_edge_list_csv()` for OASIS integration.
-
----
-
-## Module 3: Platform (TODO)
-
-**What it builds**: The shared social media environment as a service.
-
-### Architecture
-
-```
-┌─────────────────────────────────────────────────────┐
-│              Platform Service (Docker)                │
-│                                                     │
-│  ┌─────────────────┐  ┌──────────────────────────┐  │
-│  │   FastAPI/HTTP   │  │      Action Queue         │  │
-│  │   (agent API)    │  │  (async, UUID-keyed)      │  │
-│  └────────┬────────┘  └────────────┬─────────────┘  │
-│           │                        │                 │
-│  ┌────────▼────────────────────────▼─────────────┐  │
-│  │           SQLite Database (16 tables)          │  │
-│  │  user | post | follow | like | comment | rec   │  │
-│  │  trace | dislike | mute | report | ...         │  │
-│  └───────────────────────────────────────────────┘  │
-│                                                     │
-│  ┌───────────────────────────────────────────────┐  │
-│  │         Recommendation System                  │  │
-│  │  random | reddit_hot | miniLM | twhin_bert     │  │
-│  └───────────────────────────────────────────────┘  │
-└─────────────────────────────────────────────────────┘
-```
-
-### API Endpoints (what agents call)
-
+**Endpoints**:
 | Method | Path | Description |
 |--------|------|-------------|
 | POST | `/signup` | Register agent |
-| POST | `/refresh` | Get recommended + following posts |
-| POST | `/action` | Execute action (create_post, like, follow, etc.) |
-| GET | `/state/{agent_id}` | Get agent's current state |
-| GET | `/traces` | Dump all traces for analysis |
-| POST | `/step` | Advance simulation clock |
+| POST | `/signup/bulk` | Batch register agents |
+| POST | `/action` | Execute action (all 22 types) |
+| POST | `/follow/bulk` | Batch insert follow edges |
+| POST | `/seed_post` | Insert initial content |
+| POST | `/step` | Advance clock + rebuild recommendations |
+| GET | `/state/{agent_id}` | Agent profile |
+| GET | `/traces` | Trajectory data |
+| GET | `/stats` | Platform statistics |
+| GET | `/health` | Liveness check |
 
-### Key Design (matching OASIS internals)
+**Action processing** (matching OASIS behavior):
+- Sequential execution via thread lock
+- Repost resolution: likes/dislikes on reposts target the root post
+- Duplicate prevention: cannot repost same root twice
+- Every action recorded in trace table with full JSON
+- Muted users excluded from refresh results
 
-- SQLite with `PRAGMA synchronous = OFF` for performance
-- Action processing is sequential (one at a time) to maintain consistency
-- RecSys rebuilds the `rec` table each step before agents act
-- `trace` table stores every action with full JSON payload + timestamp
-- Agent feed = recommended posts (from rec table) + posts from followed users (sorted by likes)
+**RecSys** (3 of OASIS's 4 algorithms):
+- `random`: Random sample of posts per user
+- `reddit`: Hot-score = sign × log10(|votes|) + epoch/45000
+- `twitter`: Word-overlap between user bio and post content (lightweight cosine proxy)
 
-### Trajectory Storage
+### Module 4: Agents (21 tests)
 
-Every agent action produces a trace record:
-```json
-{
-    "trace_id": 1,
-    "user_id": 42,
-    "action": "create_post",
-    "info": {"content": "Just discovered...", "post_id": 157},
-    "created_at": "2026-06-21T10:30:00"
-}
+**Architecture**: Persona-conditioned LLM agents that connect to platform via HTTP.
+
+**The agent loop** (mirrors OASIS's `perform_action_by_llm`):
+```
+1. POST /action {refresh} → get feed posts
+2. Build observation text: "[Post #1 by user 5] content (likes: 3, ...)"
+3. LLM call with system_prompt (persona) + user_msg (observation) + tools (19 functions)
+4. Parse tool_calls from response
+5. For each tool_call: POST /action {action_type, params}
+6. If no tool_calls or error: POST /action {do_nothing}
 ```
 
-These trajectories are the primary output for analysis — information spread, engagement patterns, behavioral diversity, persona adherence.
+**LLM client**: OpenAI-compatible API (works with vLLM, OpenAI, Together, local Ollama). Parses both native `tool_calls` and JSON-in-content fallback.
+
+**Orchestrator**: In-process mode for local testing (no Docker needed). Registers agents, injects graph/seed posts, runs N timesteps, collects results.
 
 ---
 
-## Module 4: Agents (TODO)
+## Running
 
-**What it builds**: Persona-conditioned LLM agents running in Docker containers.
-
-### Architecture
-
-```
-┌──────────────────────────────────────┐
-│         Agent Container (Docker)      │
-│                                      │
-│  ┌────────────────────────────────┐  │
-│  │        System Prompt            │  │
-│  │  (persona narrative from YAML)  │  │
-│  └────────────────────────────────┘  │
-│                                      │
-│  ┌────────────────────────────────┐  │
-│  │         Agent Loop              │  │
-│  │  1. Call platform /refresh      │  │
-│  │  2. Build observation text      │  │
-│  │  3. LLM call (function calling) │  │
-│  │  4. Execute selected actions    │  │
-│  │  5. Repeat until step ends      │  │
-│  └────────────────────────────────┘  │
-│                                      │
-│  ┌────────────────────────────────┐  │
-│  │      LLM Client                 │  │
-│  │  (vLLM / OpenAI / Anthropic)    │  │
-│  └────────────────────────────────┘  │
-└──────────────────────────────────────┘
-```
-
-### How Persona Becomes Behavior
-
-OASIS uses OpenAI function calling. The agent sees:
-1. **System message**: persona narrative (our `user_profile` text)
-2. **User message**: "Here is your feed: [posts]. Choose actions from available tools."
-3. **Available tools**: action methods as function definitions (create_post, like_post, follow, do_nothing, etc.)
-
-The LLM returns `tool_calls` — structured action selection driven by the persona system prompt.
-
-### Docker Isolation
-
-Each agent container:
-- Receives persona YAML path + platform URL as env vars
-- Runs the agent loop independently
-- Connects to platform service via HTTP
-- Can be killed/restarted without affecting other agents
-- Logs its own trajectory locally (also stored in platform)
-
-### docker-compose.yaml (orchestration)
-
-```yaml
-services:
-  platform:
-    build: ./platform
-    ports: ["8000:8000"]
-    volumes: ["./data:/app/data"]
-    environment:
-      - RECSYS_TYPE=twitter
-      - DB_PATH=/app/data/simulation.db
-
-  agent-0:
-    build: ./agents
-    environment:
-      - PLATFORM_URL=http://platform:8000
-      - PERSONA_PATH=/app/personas/ID0001.yaml
-      - LLM_BACKEND=vllm
-      - LLM_URL=http://host.docker.internal:8002/v1
-    depends_on: [platform]
-
-  # ... agent-1 through agent-N
-```
-
----
-
-## Implementation Order
-
-| Phase | Module | What | Status |
-|-------|--------|------|--------|
-| 1 | `persona_loader/` | YAML loading, dimension mapping, CSV export | DONE (45 tests) |
-| 2 | `network/` | Graph construction (simple + affinity modes) | DONE (44 tests) |
-| 3 | `platform/` | FastAPI service, SQLite, recsys, action queue | TODO |
-| 4 | `agents/` | Docker agent loop, LLM client, persona prompt | TODO |
-
-### Phase 3 Steps (Platform)
-
-1. Port OASIS's 16-table SQLite schema into `database.py`
-2. Implement action processing (sequential, one-at-a-time)
-3. Implement the 4 recsys algorithms (start with `random` and `reddit_hot`)
-4. Expose as FastAPI HTTP service
-5. Add trace recording
-6. Dockerize
-
-### Phase 4 Steps (Agents)
-
-1. Build the agent loop (refresh → observe → LLM → act)
-2. Implement LLM client abstraction (vLLM for Greenland, OpenAI for dev)
-3. Build system prompt from persona data
-4. Expose all 29 actions as function tool definitions
-5. Dockerize with env-var configuration
-6. Build docker-compose orchestrator
-
----
-
-## Running Modes
-
-### Dev (local, 5-10 agents)
+### Local Development (no Docker, no GPU)
 
 ```bash
-# Start platform
-python -m environments.oasis.platform.server --db ./data/dev.db --recsys random
+# Generate OASIS-compatible data from MatrAIx personas
+python environments/oasis/data/generate.py \
+  --persona-dir personas/Jun20_1k_persona_description \
+  --output-dir environments/oasis/data/generated \
+  --max-agents 20
 
-# Run agents (no Docker, direct Python)
-python -m environments.oasis.agents.runner \
-  --platform http://localhost:8000 \
-  --persona personas/Jun20_1k_persona_description/ID0001.yaml \
-  --llm-backend openai --model gpt-4o-mini
+# Run tests (149 passing, no external dependencies)
+python -m pytest environments/oasis/ -q
 ```
 
-### Production (Greenland, 1000+ agents)
+### Local with LLM (OpenAI API)
+
+```python
+from environments.oasis.agents.orchestrator import Orchestrator, SimulationConfig
+from environments.oasis.persona_loader import load_personas_from_directory
+from environments.oasis.network import build_social_graph, NetworkConfig
+
+personas = load_personas_from_directory("personas/Jun20_1k_persona_description/", max_agents=10)
+graph = build_social_graph(personas, NetworkConfig(random_seed=42))
+
+config = SimulationConfig(
+    max_agents=10, num_steps=5,
+    llm_base_url="https://api.openai.com/v1",
+    llm_api_key="sk-...",
+    llm_model="gpt-4o-mini",
+    recsys_type="random",
+    available_actions=["create_post", "like_post", "repost", "follow", "do_nothing"],
+)
+orch = Orchestrator(config)
+orch.setup(personas=personas, graph=graph)
+result = orch.run()
+print(f"Posts: {result.platform_stats['post']}, Traces: {result.platform_stats['trace']}")
+orch.close()
+```
+
+### Greenland (p4d.24xlarge, 8x A100, vLLM)
 
 ```bash
-# Push code
+# 1. Push code
 ./scripts/greenland-sync.sh push
 
-# Start vLLM
-./scripts/greenland-sync.sh runbg "python -m vllm.entrypoints.openai.api_server --model meta-llama/Meta-Llama-3-8B-Instruct --tensor-parallel-size 4 --port 8002"
+# 2. Start vLLM with Qwen3-4B (or Llama-3-8B)
+./scripts/greenland-sync.sh runbg "python -m vllm.entrypoints.openai.api_server \
+  --model Qwen/Qwen3-4B --tensor-parallel-size 2 --port 8002"
 
-# Run simulation via docker-compose
-./scripts/greenland-sync.sh run "docker compose -f environments/oasis/agents/docker-compose.yaml up"
+# 3. Generate data
+./scripts/greenland-sync.sh run "python environments/oasis/data/generate.py \
+  --persona-dir personas/Jun20_1k_persona_description \
+  --output-dir environments/oasis/data/generated \
+  --max-agents 1000 --network-mode affinity"
+
+# 4. Run simulation
+./scripts/greenland-sync.sh run "python -c \"
+from environments.oasis.agents.orchestrator import Orchestrator, SimulationConfig
+from environments.oasis.persona_loader import load_personas_from_directory
+from environments.oasis.network import build_social_graph, NetworkConfig
+
+personas = load_personas_from_directory('personas/Jun20_1k_persona_description/', max_agents=1000)
+graph = build_social_graph(personas, NetworkConfig(random_seed=42))
+config = SimulationConfig(max_agents=1000, num_steps=20, llm_base_url='http://localhost:8002/v1', llm_model='Qwen/Qwen3-4B')
+orch = Orchestrator(config)
+orch.setup(personas=personas, graph=graph)
+result = orch.run()
+print(result.platform_stats)
+orch.close()
+\""
+
+# 5. Pull results
+./scripts/greenland-sync.sh pull data/outputs/
 ```
 
-### OASIS-native (for comparison/validation)
+### Docker Compose (multi-container)
 
 ```bash
-# Export MatrAIx personas to OASIS CSV
-python -c "
-from environments.oasis import load_personas_from_directory, build_simple_topic_graph, export_oasis_csv, build_oasis_follow_data
-personas = load_personas_from_directory('personas/Jun20_1k_persona_description/', max_agents=100)
-graph = build_simple_topic_graph(personas, follow_probability=0.2)
-adj = graph.to_adjacency_list()
-export_oasis_csv(personas, 'data/oasis_agents.csv', following_lists=[adj[i] for i in range(len(personas))])
-"
+docker compose -f environments/oasis/docker-compose.yaml up
+```
 
-# Run with upstream OASIS directly
-python examples/experiment/twitter_simulation/run.py --csv data/oasis_agents.csv
+### OASIS-native (export CSV, run upstream OASIS directly)
+
+```bash
+python environments/oasis/data/generate.py \
+  --persona-dir personas/Jun20_1k_persona_description \
+  --output-dir /tmp/oasis_data --max-agents 200
+
+# Then use with upstream OASIS:
+# python -m oasis.run --csv /tmp/oasis_data/agents.csv --recsys reddit
 ```
 
 ---
 
-## Differences from Upstream OASIS (intentional)
+## Test Summary
 
-| Aspect | OASIS | Our Implementation | Why |
-|--------|-------|-------------------|-----|
-| Agent isolation | Single process, asyncio | Docker containers | Fault tolerance, mixed LLM backends |
-| Platform | In-process event loop | HTTP service | Independent scaling, persistence |
-| Network | Flat p=0.2 | Two modes (simple + affinity) | Research flexibility |
-| Personas | ~6 fields + narrative | 50+ dimensions + narrative | MatrAIx's richer schema |
-| Activity gating | frequency=100 (always active) | Exported as 100 for OASIS compat | LLM decides inaction |
-| Trace storage | SQLite trace table | Same + optional export | Analysis pipeline |
-
-### What we preserve exactly from OASIS
-
-- CSV format (column names, Python list literals, ast.literal_eval compatibility)
-- 16-table SQLite schema
-- Action types (all 29)
-- Recommendation algorithms (4 types)
-- System prompt structure (persona narrative + available tools)
-- Function calling for action selection
+| Module | Tests | Coverage |
+|--------|-------|----------|
+| persona_loader | 45 | YAML loading, dimension mapping, MBTI, activity thresholds, CSV export, batch ops, real persona integration |
+| network | 44 | Affinity computation, influencer ID, clustering, edge generation, graph properties, determinism, OASIS format |
+| platform | 39 | All 16 tables CRUD, 22 action handlers, repost resolution, duplicate prevention, trace recording, recsys, full simulation cycle |
+| agents | 21 | Tool schemas, prompt construction, LLM client parsing, orchestrator setup/run, mock LLM, error fallback |
+| **Total** | **149** | All passing in ~19s, no external dependencies required |
