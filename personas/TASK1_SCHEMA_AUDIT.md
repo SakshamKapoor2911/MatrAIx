@@ -108,13 +108,61 @@ Open mapping questions:
 - No behavioral-sensitivity probe tying coarsening decisions to observed agent behavior.
 - No provenance contract for generated skeletons beyond source metadata in dimensions and curation docs.
 
+## Reviewable Acceptance Criteria
+
+The tracking issue should not require every downstream implementation to land in the first PR. A practical review path is split into phases.
+
+### Phase A: Documentation Alignment
+
+The first PR should be considered complete when:
+
+- this audit note is merged under `personas/`;
+- it records the current schema facts, including 1,339 dimensions and 39 categories;
+- it lists all 39 current categories with counts;
+- it proposes a reviewable mapping from categories to 4-5 major aspects;
+- it calls out unresolved classification questions rather than hiding them;
+- it makes no changes to `dimensions+new.json`, generated persona artifacts, or pipeline code.
+
+### Phase B: Category Decision Artifact
+
+A follow-up PR or update should be considered complete when there is a single source of truth, in Markdown, JSON, or CSV, with one row per current category and at least these fields:
+
+- `category`;
+- `major_aspect`;
+- `schema_role`: one of `core`, `domain_overlay`, `dynamic_state`, `source_provenance`, or `review_bucket`;
+- `prompt_inclusion`: one of `default`, `task_dependent`, `never_direct`, or `review`;
+- `rationale`;
+- `owner_or_reviewer`.
+
+This artifact should explicitly resolve at least these categories or groups: `External: Datasets`, `State: Emotional`, `Health:*`, `Expertise:*`, `Learning:*`, and `Skills:*`.
+
+### Phase C: ACS/PUMS Skeleton Scope
+
+The ACS/PUMS work should be considered scoped when the team has documented:
+
+- reference population and year;
+- source access path, such as `folktables` or Census PUMS files;
+- weighted-resampling key, including `PWGTP` or the relevant person weight;
+- output fields for the demographic skeleton;
+- provenance fields, including source, year, source row hash, and sampling weight;
+- a 100-row prototype target or a linked follow-up implementation issue.
+
+### Phase D: Validation and Behavioral Sensitivity Scope
+
+The validation plan should be considered scoped when the team has documented:
+
+- marginal checks for age, sex/gender, education, occupation, income, marital status, household, geography, language, and nativity/citizenship;
+- at least two joint checks, such as age x education and occupation x income;
+- a tiny behavioral-sensitivity probe with 3-5 tasks, 3-5 demographic axes, and cheap metrics;
+- how the result affects coarsening decisions and PersonaBench prompt inclusion.
+
 ## Minimal Next Steps
 
-1. Confirm the 5 major aspects and approve or edit the draft category mapping above.
-2. Mark each category as one of: core, domain overlay, dynamic state, source/provenance, or review bucket.
-3. Prototype a 100-row ACS PUMS demographic skeleton with provenance fields, even before full narrative generation.
-4. Run simple marginal checks for the prototype: age, sex/gender, education, occupation, income, marital status, household, geography, language, nativity/citizenship.
-5. Select a tiny behavioral-sensitivity probe with 3-5 tasks and 3-5 demographic axes to test whether current binning is behaviorally meaningful.
+1. Merge or review Phase A as a documentation-only PR.
+2. Decide whether Phase B should be a Markdown table in this document or a machine-readable mapping file.
+3. Assign owner(s) for Phase C ACS/PUMS skeleton scope.
+4. Assign owner(s) for Phase D validation and behavioral-sensitivity scope.
+5. Revisit issue #66 after Phase B to decide whether to split implementation into separate issues.
 
 ## Not a Blocker
 
