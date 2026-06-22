@@ -12,6 +12,7 @@ This bridges the exploration outputs and persona inference:
 from __future__ import annotations
 
 import argparse
+import concurrent.futures
 import gzip
 import json
 import sys
@@ -185,14 +186,32 @@ def retrieve_histories(
     start_timestamp: int | None,
     end_timestamp: int | None,
     max_reviews_per_category: int,
+    early_stop_from_candidate_counts: bool,
+    workers: int,
+    progress_every: int,
 ) -> dict[str, list[dict[str, Any]]]:
     selected_user_ids = {row["user_id"] for row in candidate_rows if row.get("user_id")}
+    expected_counts_by_category = {}
+    if early_stop_from_candidate_counts:
+        for category in categories:
+            expected_counts_by_category[category] = sum(
+                int(row.get("category_counts", {}).get(category, 0) or 0)
+                for row in candidate_rows
+            )
+
     histories: dict[str, list[dict[str, Any]]] = defaultdict(list)
-    for category in categories:
+
+    def retrieve_category(category: str) -> list[dict[str, Any]]:
+        category_reviews = []
         scanned = 0
         kept = 0
+        expected_count = expected_counts_by_category.get(category, 0)
+        if expected_count:
+            log(f"{category}: expecting {expected_count:,} selected-user reviews")
         for row in open_remote_gzip_jsonl(review_url(category)):
             scanned += 1
+            if progress_every and scanned % progress_every == 0:
+                log(f"{category}: scanned {scanned:,}; kept {kept:,}")
             user_id = row.get("user_id")
             if user_id not in selected_user_ids:
                 continue
@@ -201,13 +220,37 @@ def retrieve_histories(
                 continue
             if end_timestamp is not None and (timestamp is None or timestamp >= end_timestamp):
                 continue
-            histories[user_id].append(normalize_review(row, category))
+            category_reviews.append(normalize_review(row, category))
             kept += 1
+            if expected_count and kept >= expected_count:
+                log(
+                    f"{category}: found all {kept:,} expected selected-user reviews; "
+                    f"stopping after {scanned:,} scanned"
+                )
+                break
             if max_reviews_per_category and kept >= max_reviews_per_category:
                 break
-            if scanned % 1_000_000 == 0:
-                log(f"{category}: scanned {scanned:,}; kept {kept:,}")
         log(f"{category}: scanned {scanned:,}; kept {kept:,}")
+        return category_reviews
+
+    if workers <= 1 or len(categories) <= 1:
+        for category in categories:
+            for review in retrieve_category(category):
+                histories[review["user_id"]].append(review)
+    else:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as executor:
+            future_to_category = {
+                executor.submit(retrieve_category, category): category
+                for category in categories
+            }
+            for future in concurrent.futures.as_completed(future_to_category):
+                category = future_to_category[future]
+                try:
+                    reviews = future.result()
+                except Exception as err:
+                    raise RuntimeError(f"Failed retrieving category {category}: {err}") from err
+                for review in reviews:
+                    histories[review["user_id"]].append(review)
     return histories
 
 
@@ -258,6 +301,27 @@ def parse_args(argv: Iterable[str]) -> argparse.Namespace:
         default=0,
         help="Stop after this many kept selected-user reviews per category. 0 means all.",
     )
+    parser.add_argument(
+        "--disable-early-stop",
+        action="store_true",
+        help=(
+            "Do not stop early using category_counts from candidate users. "
+            "By default, category_counts lets the retriever stop once all expected "
+            "selected-user reviews are found for a category."
+        ),
+    )
+    parser.add_argument(
+        "--workers",
+        type=int,
+        default=1,
+        help="Number of categories to stream in parallel. Use 1 for sequential scans.",
+    )
+    parser.add_argument(
+        "--progress-every",
+        type=int,
+        default=250_000,
+        help="Log progress every N scanned review rows per category. Use 0 to disable.",
+    )
     return parser.parse_args(list(argv))
 
 
@@ -273,6 +337,9 @@ def main(argv: Iterable[str]) -> int:
         start_timestamp=year_to_timestamp_ms(args.start_year),
         end_timestamp=year_to_timestamp_ms(args.end_year, end=True),
         max_reviews_per_category=args.max_reviews_per_category,
+        early_stop_from_candidate_counts=not args.disable_early_stop,
+        workers=args.workers,
+        progress_every=args.progress_every,
     )
     count = write_histories(args.output, candidate_rows, histories)
     log(f"Wrote {count:,} user histories: {args.output}")
