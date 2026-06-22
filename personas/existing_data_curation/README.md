@@ -361,6 +361,65 @@ Outputs:
 - `raw/amazon_reviews_2023/exploration/candidate_users.jsonl`
 - `raw/amazon_reviews_2023/exploration/all_user_stats.jsonl.gz` when `--write-user-state` is set
 
+### Amazon Review to 1,339-Dimension Schema Inference
+
+Use `scripts/retrieve_amazon_user_histories.py` and
+`scripts/infer_amazon_review_dimensions.py` to infer values from
+`personas/dimensions+new.json` where the review history directly supports the
+schema attribute. The inference prompt is conservative: unsupported dimensions
+are omitted, sensitive demographics are not inferred from product stereotypes,
+and every returned value must include review evidence.
+
+Retrieve full review histories for selected candidate users:
+
+```bash
+python scripts/retrieve_amazon_user_histories.py \
+  --candidate-users samples/amazon_reviews_2023/candidate_users_top100.jsonl \
+  --categories candidate_categories \
+  --top-n 100 \
+  --start-year 2018 \
+  --end-year 2023 \
+  --output raw/amazon_reviews_2023/persona_dimension_inference/user_histories.jsonl
+```
+
+The tracked `samples/amazon_reviews_2023/candidate_users_top100.jsonl` file is
+a lightweight collaborator sample from the larger 2018-2023 application
+candidate pool. Full candidate pools and retrieved review histories stay under
+`raw/` and are intentionally ignored by Git.
+
+Inspect prompts without calling the API:
+
+```bash
+python scripts/infer_amazon_review_dimensions.py \
+  --user-histories raw/amazon_reviews_2023/persona_dimension_inference/user_histories.jsonl \
+  --max-users 2 \
+  --dimensions-per-call 40 \
+  --dry-run
+```
+
+Run OpenAI inference:
+
+```bash
+export OPENAI_API_KEY=...
+python scripts/infer_amazon_review_dimensions.py \
+  --user-histories raw/amazon_reviews_2023/persona_dimension_inference/user_histories.jsonl \
+  --schema-path ../dimensions+new.json \
+  --model "${OPENAI_LLM_MODEL:-gpt-4.1-mini}" \
+  --dimensions-per-call 40 \
+  --max-users 100 \
+  --output raw/amazon_reviews_2023/persona_dimension_inference/inferred_dimensions.jsonl
+```
+
+For cheaper pilots, restrict the schema surface first:
+
+```bash
+python scripts/infer_amazon_review_dimensions.py \
+  --user-histories raw/amazon_reviews_2023/persona_dimension_inference/user_histories.jsonl \
+  --dimension-categories "Interests: Hobbies,Interests: Topics,Behavior: Preferences,Expertise: Domains" \
+  --max-users 20 \
+  --dry-run
+```
+
 ### 6) Literature and theory references
 
 This source creates a registry from reference-only manifests:
