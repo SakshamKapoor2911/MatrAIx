@@ -3,8 +3,7 @@
 | Path | Purpose |
 |------|---------|
 | `dimensions.json` | Dimension catalog (synced from MatrAIx; 1-based `index` = `bench_dim_index`) |
-| `datasets/bench-dev-2000/` | Primary dev persona pool (2000+ synthetic, consistent profiles) |
-| `datasets/bench-dev-1000/` | Legacy 1000-persona pool |
+| `datasets/bench-dev-2000/` | Primary dev persona pool (2000 synthetic profiles) |
 | `tasks/` | Validation Harbor tasks |
 | `scripts/generate_dev_personas.py` | Generate dev YAML from `dimensions.json` |
 | `scripts/generate_persona_job.py` | Sample personas → Harbor grounding job YAML |

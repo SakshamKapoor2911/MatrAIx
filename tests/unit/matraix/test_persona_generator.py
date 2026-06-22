@@ -9,7 +9,7 @@ from matraix.persona_consistency import validate_dimensions
 from matraix.persona_generator import generate_persona_pool
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-MANIFEST = REPO_ROOT / "persona" / "datasets" / "bench-dev-1000" / "manifest.json"
+MANIFEST = REPO_ROOT / "persona" / "datasets" / "bench-dev-2000" / "manifest.json"
 
 
 def test_validate_rejects_counterfactual_combo() -> None:

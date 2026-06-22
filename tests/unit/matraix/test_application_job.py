@@ -8,7 +8,7 @@ from matraix.application_job import build_application_job_config
 from matraix.persona_job import DEFAULT_DATASET
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-MANIFEST = REPO_ROOT / "persona" / "datasets" / "bench-dev-1000" / "manifest.json"
+MANIFEST = REPO_ROOT / "persona" / "datasets" / "bench-dev-2000" / "manifest.json"
 
 
 def test_build_application_job_random_sample() -> None:
@@ -27,7 +27,7 @@ def test_build_application_job_random_sample() -> None:
     job = build_application_job_config(spec, repo_root=REPO_ROOT)
     meta = job.pop("_job_meta")
 
-    assert meta["matched_pool_size"] == 1000
+    assert meta["matched_pool_size"] == 2002
     assert len(job["agents"]) == 10
     assert meta["sample_size"] == 10
     assert "verifier" not in job

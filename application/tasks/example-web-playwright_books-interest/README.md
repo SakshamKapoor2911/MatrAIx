@@ -13,13 +13,13 @@ See [web-interaction.md](../../docs/applications/web-interaction.md) for Playwri
 |-------|-------|
 | Agent | `persona-openhands-sdk` |
 | Environment | `docker` (Playwright image, `network_mode = "public"`) |
-| Persona | `persona/datasets/bench-dev-100/persona_0042.yaml` |
+| Persona | `persona/datasets/bench-dev-2000/persona_0042.yaml` |
 
 ```bash
 uv run harbor run \
   -a persona-openhands-sdk \
   -m anthropic/claude-sonnet-4-6 \
-  --ak persona_path=persona/datasets/bench-dev-100/persona_0042.yaml \
+  --ak persona_path=persona/datasets/bench-dev-2000/persona_0042.yaml \
   -p application/tasks/example-web-playwright_books-interest
 ```
 

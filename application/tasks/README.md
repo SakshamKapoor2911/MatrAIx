@@ -25,7 +25,7 @@ Copy the closest `example-*` sibling (same interaction type), then edit files. S
 | **domain** | Vertical: `software` · `finance` · `healthcare` · `commerce-retail` |
 | **tags** | Task-specific (see `src/matraix/task_catalog.py`) |
 
-See [../README.md](../README.md) and [../../docs/applications/](../../docs/applications/).
+See [../../docs/applications/task-guide.md](../../docs/applications/task-guide.md) and [../../docs/applications/](../../docs/applications/).
 
 Persona bench: [`persona/tasks/`](../../persona/tasks/) — same example names, independent tasks.
 

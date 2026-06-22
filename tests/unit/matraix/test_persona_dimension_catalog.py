@@ -30,7 +30,7 @@ def test_build_narrative_covers_full_persona_0001() -> None:
     import yaml
 
     payload = yaml.safe_load(
-        Path("persona/datasets/bench-dev-1000/persona_0001.yaml").read_text(
+        Path("persona/datasets/bench-dev-2000/persona_0001.yaml").read_text(
             encoding="utf-8"
         )
     )

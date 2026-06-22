@@ -27,7 +27,7 @@ Change `[ios]` in `task.toml` if your reserved mini uses different simulator run
 |-------|-------|
 | Agent | `persona-computer-1` |
 | Environment | `use-computer` + `platform: ios` |
-| Persona | `persona/datasets/bench-dev-100/persona_0042.yaml` |
+| Persona | `persona/datasets/bench-dev-2000/persona_0042.yaml` |
 | Agent kwargs | `max_steps: 35`, `recording_enabled: false` (job config) |
 
 ```bash

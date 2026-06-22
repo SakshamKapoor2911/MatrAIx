@@ -58,7 +58,7 @@ uv run harbor view jobs --build
 
 > Use **`uv run harbor`** — a globally installed `harbor` may be an older build without `persona-*` agents.
 
-Step-by-step guides: [Application](docs/applications/getting-started.md) · [Persona](docs/personas/README.md) · [Environment](docs/environments/README.md)
+Step-by-step guides: [Application getting started](docs/applications/getting-started.md) · [Persona getting started](docs/personas/getting-started.md)
 
 ---
 
@@ -76,8 +76,8 @@ We welcome collaborators across research, product, data, and engineering.
 
 | Team | If you care about… | Start here |
 |------|-------------------|------------|
-| 🧬 **Persona** | Persona schema and data, persona generator, persona grounding | [docs/personas/](docs/personas/README.md) |
-| 📋 **Application** | Product scenarios, task design, product user metrics design | [getting started](docs/applications/getting-started.md) |
+| 🧬 **Persona** | Persona schema and data, persona generator, persona grounding | [docs/personas/](docs/personas/README.md)<br>[getting started](docs/personas/getting-started.md) |
+| 📋 **Application** | Product scenarios, task design, product user metrics design | [docs/applications/](docs/applications/README.md)<br>[getting started](docs/applications/getting-started.md) |
 | 🌐 **Environment** | Environment infra, engineering, runtime, back and front end | [docs/environments/](docs/environments/README.md) |
 
 All teams that run simulations should skim [choosing-an-agent.md](docs/environments/choosing-an-agent.md).

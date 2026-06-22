@@ -12,13 +12,13 @@ For the MCP variant, see [`example-chat-mcp_support_chatbot`](../example-chat-mc
 |-------|-------|
 | Agent | `persona-claude-code` |
 | Environment | `docker` (default) |
-| Persona | `persona/datasets/bench-dev-100/persona_0042.yaml` |
+| Persona | `persona/datasets/bench-dev-2000/persona_0042.yaml` |
 
 ```bash
 uv run harbor run \
   -a persona-claude-code \
   -m anthropic/claude-sonnet-4-6 \
-  --ak persona_path=persona/datasets/bench-dev-100/persona_0042.yaml \
+  --ak persona_path=persona/datasets/bench-dev-2000/persona_0042.yaml \
   -p application/tasks/example-chat-api_support_chatbot
 ```
 

@@ -6,9 +6,9 @@ Harbor Job YAML under `configs/jobs/`. Run with `harbor run -c configs/jobs/<sub
 
 | Directory | Purpose |
 |-----------|---------|
-| [`example-job-recipe/`](example-job-recipe/) | Hand-written **smoke / demo** jobs (usually 1 persona, `persona_0042`) |
-| [`persona-task-grounding-job-recipe/`](persona-task-grounding-job-recipe/) | **Generated** persona bench grounding jobs (`persona/scripts/generate_persona_job.py`) |
-| [`application-task-job-recipe/`](application-task-job-recipe/) | **Generated** application multi-persona jobs (`application/scripts/generate_application_job.py`) |
+| [`example-job-recipe/`](example-job-recipe/) | Hand-written **smoke / demo** jobs (checked in; `appSim-*`, `harbor-smoke-local`) |
+| [`persona-task-grounding-job-recipe/`](persona-task-grounding-job-recipe/) | **Generated** persona bench jobs (`persona/scripts/generate_persona_job.py`) — **gitignored** |
+| [`application-task-job-recipe/`](application-task-job-recipe/) | **Generated** application multi-persona jobs — **gitignored**; see [getting-started.md](../../docs/applications/getting-started.md#7-batch--sample-many-personas-job) |
 
 ## Example smoke jobs
 
@@ -28,7 +28,7 @@ Harbor Job YAML under `configs/jobs/`. Run with `harbor run -c configs/jobs/<sub
 
 ## Persona grounding recipes
 
-See [`persona-task-grounding-job-recipe/`](persona-task-grounding-job-recipe/) and [`persona/README.md`](../../persona/README.md).
+Generated locally via `persona/scripts/generate_persona_job.py` → `configs/jobs/persona-task-grounding-job-recipe/` (gitignored). See [`persona/README.md`](../../persona/README.md).
 
 ## Environment variables
 

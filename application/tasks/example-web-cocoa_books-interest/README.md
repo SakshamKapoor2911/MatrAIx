@@ -13,7 +13,7 @@ See [web-interaction.md](../../docs/applications/web-interaction.md).
 |-------|-------|
 | Agent | `persona-cocoa` |
 | Environment | `docker` (`network_mode = "public"`) |
-| Persona | `persona/datasets/bench-dev-100/persona_0042.yaml` |
+| Persona | `persona/datasets/bench-dev-2000/persona_0042.yaml` |
 | API key | `ANTHROPIC_API_KEY` or `LLM_API_KEY` |
 
 ```bash

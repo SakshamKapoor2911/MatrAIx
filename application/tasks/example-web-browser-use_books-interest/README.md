@@ -13,14 +13,14 @@ See [web-interaction.md](../../docs/applications/web-interaction.md).
 |-------|-------|
 | Agent | `persona-browser-use` |
 | Environment | `docker` (`network_mode = "public"`) |
-| Persona | `persona/datasets/bench-dev-100/persona_0042.yaml` |
+| Persona | `persona/datasets/bench-dev-2000/persona_0042.yaml` |
 | API key | `ANTHROPIC_API_KEY` or `LLM_API_KEY` |
 
 ```bash
 uv run harbor run \
   -a persona-browser-use \
   -m anthropic/claude-sonnet-4-6 \
-  --ak persona_path=persona/datasets/bench-dev-100/persona_0042.yaml \
+  --ak persona_path=persona/datasets/bench-dev-2000/persona_0042.yaml \
   -p application/tasks/example-web-browser-use_books-interest \
   --env-file .env
 ```

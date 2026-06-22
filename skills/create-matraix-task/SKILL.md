@@ -39,7 +39,7 @@ When unclear, ask once: *product research or persona dimension validation?*
 1. **Catalog first** — add the folder name to [`src/matraix/task_catalog.py`](../../src/matraix/task_catalog.py) with `type`, `domain`, `tags`. For persona bench tasks tied to one dimension, also set `bench_dim_index`.
 2. **Copy, don’t init from scratch** — duplicate the closest `example-*` sibling in the same tree (see tables below). Do **not** use bare `harbor task init` unless the user explicitly wants a greenfield task outside MatrAIx examples.
 3. **`task.toml` metadata** — omit `[task].keywords`; set `[metadata]` `type`, `domain`, `tags` to match the catalog entry ([`docs/applications/task-guide.md`](../../docs/applications/task-guide.md)).
-4. **Persona at run time** — scenarios live in `instruction.md`; traits live in persona YAML (`persona/datasets/bench-dev-100/`). Smoke with `-a persona-*` and `--ak persona_path=persona/datasets/bench-dev-100/persona_0042.yaml`.
+4. **Persona at run time** — scenarios live in `instruction.md`; traits live in persona YAML (`persona/datasets/bench-dev-2000/`). Smoke with `-a persona-*` and `--ak persona_path=persona/datasets/bench-dev-2000/persona_0042.yaml`.
 5. **No persona/scripts when authoring** — contributors edit files only; CI validates persona bench `task.toml` vs catalog.
 
 Naming slug: directory `example-survey_my-scenario` → slug `survey-my-scenario` (drop `example-`, `_` → `-`).
@@ -89,7 +89,7 @@ tags = ["...", "..."] # from catalog — scenario topics only
 ```bash
 uv run harbor run \
   -a persona-claude-code \
-  --ak persona_path=persona/datasets/bench-dev-100/persona_0042.yaml \
+  --ak persona_path=persona/datasets/bench-dev-2000/persona_0042.yaml \
   -p application/tasks/example-survey_my-scenario
 ```
 
@@ -146,7 +146,7 @@ CI: `pytest tests/unit/matraix/test_persona_validation_tasks.py` — catalog and
 ```bash
 uv run harbor run \
   -a persona-claude-code \
-  --ak persona_path=persona/datasets/bench-dev-100/persona_0042.yaml \
+  --ak persona_path=persona/datasets/bench-dev-2000/persona_0042.yaml \
   -p persona/tasks/example-survey_my-scenario
 ```
 

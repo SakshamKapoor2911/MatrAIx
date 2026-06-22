@@ -153,7 +153,7 @@ def test_build_job_config_confounder_probe_synthesizes_shortage() -> None:
         "controlled_probe": False,
         "sample_size_per_value_group": 3,
         "seed": 42,
-        "persona_pool": "persona/datasets/bench-dev-1000",
+        "persona_pool": "persona/datasets/bench-dev-2000",
         "task": "persona/tasks/example-survey_product-feedback",
         "agent": {
             "name": "persona-claude-code",

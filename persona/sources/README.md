@@ -3,7 +3,7 @@
 Optional upstream persona exports for one-off conversion experiments. The primary dev pool is generated locally:
 
 ```bash
-uv run python persona/scripts/generate_dev_personas.py --count 1000 --seed 42
+uv run python persona/scripts/generate_dev_personas.py --count 2000 --seed 42
 ```
 
-Output: `persona/datasets/bench-dev-1000/`.
+Output: `persona/datasets/bench-dev-2000/`.

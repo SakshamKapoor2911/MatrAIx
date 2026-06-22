@@ -72,7 +72,7 @@ Known limitations:
 - [x] [`getting-started.md`](./getting-started.md) — Docker → first survey → batch → create a task
 - [x] [`task-guide.md`](./task-guide.md) — application task folder structure
 - [x] [`web-interaction.md`](./web-interaction.md) — Playwright vs CUA for live-web tasks
-- [x] Reference scenarios under `application/` — see [application/README.md](../../application/README.md)
+- [x] Reference scenarios under `application/tasks/` — see [task-guide.md](./task-guide.md#reference-scenarios)
 - [ ] Adapter output → root `application/` normalization checklist
 
 ## Contributing

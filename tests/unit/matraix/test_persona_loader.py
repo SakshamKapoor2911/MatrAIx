@@ -38,7 +38,7 @@ def test_load_persona_0042_example(personas_0042: Path) -> None:
 
 def test_resolve_relative_path(personas_0042: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.chdir(personas_0042.parents[3])
-    resolved = resolve_persona_path("persona/datasets/bench-dev-1000/persona_0042.yaml")
+    resolved = resolve_persona_path("persona/datasets/bench-dev-2000/persona_0042.yaml")
     assert resolved == personas_0042.resolve()
 
 

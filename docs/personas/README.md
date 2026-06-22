@@ -4,6 +4,10 @@
 
 This team focuses on constructing, curating, validating, and benchmarking large-scale persona datasets.
 
+## New here?
+
+**[Getting started](./getting-started.md)** — 1,300+ dims → probe / confounders / control → persona cohort → discriminative task & grounding. Start here if you are designing persona bench tasks.
+
 ## 🎯 Goals
 
 The main goal is to build a diverse and scalable persona database, tentatively called:

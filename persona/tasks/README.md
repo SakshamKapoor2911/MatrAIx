@@ -36,7 +36,7 @@ No scripts to run.
 ```bash
 uv run harbor run \
   -a persona-claude-code \
-  --ak persona_path=persona/datasets/bench-dev-1000/persona_0042.yaml \
+  --ak persona_path=persona/datasets/bench-dev-2000/persona_0042.yaml \
   -p persona/tasks/example-survey_my-scenario
 ```
 

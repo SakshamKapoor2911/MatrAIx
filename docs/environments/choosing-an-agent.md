@@ -9,7 +9,7 @@ Every run specifies the agent, model, persona, and task on the command line.
 | `-a` | Persona agent | `persona-claude-code` |
 | `-m` | LLM | `anthropic/claude-sonnet-4-6` |
 | `-p` | Task scenario | `application/tasks/example-survey_product-feedback` |
-| `--ak persona_path` | Persona YAML (**which profile**) | `persona/datasets/bench-dev-100/persona_0042.yaml` |
+| `--ak persona_path` | Persona YAML (**which profile**) | `persona/datasets/bench-dev-2000/persona_0042.yaml` |
 
 ## Persona agents
 
@@ -75,7 +75,7 @@ Variable names per agent: see [`.env.example`](../../.env.example). Optional: [d
 uv run harbor run \
   -a persona-claude-code \
   -m anthropic/claude-sonnet-4-6 \
-  --ak persona_path=persona/datasets/bench-dev-100/persona_0042.yaml \
+  --ak persona_path=persona/datasets/bench-dev-2000/persona_0042.yaml \
   -p application/tasks/example-chat-mcp_support_chatbot
 ```
 
@@ -83,7 +83,7 @@ uv run harbor run \
 uv run harbor run \
   -a persona-browser-use \
   -m anthropic/claude-sonnet-4-6 \
-  --ak persona_path=persona/datasets/bench-dev-100/persona_0042.yaml \
+  --ak persona_path=persona/datasets/bench-dev-2000/persona_0042.yaml \
   -p application/tasks/example-web-browser-use_books-interest
 ```
 

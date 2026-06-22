@@ -170,6 +170,14 @@ uv run python application/scripts/generate_application_job.py \
   --model-name anthropic/claude-sonnet-4-6
 ```
 
+**Stratify** when you need balanced representation across a persona field (e.g. age brackets):
+
+```bash
+uv run python application/scripts/generate_application_job.py \
+  --task application/tasks/example-survey_product-feedback \
+  --stratify dimensions.age_bracket
+```
+
 | Flag | Default | Meaning |
 |------|---------|---------|
 | `--sample-size` | `1` | How many personas (= how many trials in the job) |
@@ -241,7 +249,7 @@ Read [task-guide.md](./task-guide.md) — `task.toml`, `instruction.md`, `enviro
 
 Survey is only one **form**. Chat, web, and computer-use need different Docker setups and **different persona agents** (e.g. web uses Playwright or browser automation, not `persona-claude-code` alone).
 
-Browse the example table in [application/README.md](../../application/README.md), run any example with the suggested agent, then inspect with:
+Browse the example table in [task-guide.md](./task-guide.md#reference-scenarios), run any example with the suggested agent, then inspect with:
 
 ```bash
 uv run harbor view jobs --build
