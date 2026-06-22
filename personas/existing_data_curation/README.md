@@ -387,38 +387,118 @@ a lightweight collaborator sample from the larger 2018-2023 application
 candidate pool. Full candidate pools and retrieved review histories stay under
 `raw/` and are intentionally ignored by Git.
 
+### Modal User-Indexed Parquet Workflow
+
+For a cloud-built team artifact, use
+`modal_amazon_user_index.py`. It reads the Hugging Face dataset
+`McAuley-Lab/Amazon-Reviews-2023`, launches one Modal job per category, and
+writes user-bucketed Parquet shards to the Modal Volume
+`amazon-reviews-user-index`. The default and recommended index window is
+2018-2023; the commands below explicitly filter to that window.
+
+Install and authenticate Modal locally, using the account/workspace for the
+`cs231n-final-project` project:
+
+```bash
+python3 -m pip install modal
+modal setup
+```
+
+Run a small smoke test first:
+
+```bash
+modal run modal_amazon_user_index.py::build_sample_categories
+```
+
+Build all Amazon categories for 2018-2023 reviews only:
+
+```bash
+modal run modal_amazon_user_index.py::build_categories \
+  --categories all \
+  --start-year 2018 \
+  --end-year 2023 \
+  --output-prefix amazon_reviews_2018_2023_user_buckets
+```
+
+The output layout is bucketed by `sha1(user_id)[:2]`, for example:
+
+```text
+bucket=ab/category=Books/part-000000.parquet
+bucket=ab/category=Electronics/part-000000.parquet
+```
+
+This layout avoids concurrent writes to one SQLite file and lets downstream
+retrieval read only buckets needed for a candidate user list.
+
 Inspect prompts without calling the API:
 
 ```bash
 python scripts/infer_amazon_review_dimensions.py \
   --user-histories raw/amazon_reviews_2023/persona_dimension_inference/user_histories.jsonl \
+  --inference-mode evidence_profile \
   --max-users 2 \
   --dimensions-per-call 40 \
   --dry-run
 ```
 
-Run OpenAI inference:
+The recommended inference mode is `evidence_profile`. It first compresses each
+review history into a compact, evidence-cited profile using broad Amazon-review
+evidence categories from `amazon_review_evidence_mapping.json`, then maps that
+profile to the persona schema. This avoids resending the same raw reviews for
+every schema batch. Evidence profiles are written to
+`raw/amazon_reviews_2023/persona_dimension_inference/evidence_profiles.jsonl`
+and can be reused across resumed schema-mapping runs.
+
+Run OpenAI inference with the optimized evidence-profile pipeline:
 
 ```bash
 export OPENAI_API_KEY=...
 python scripts/infer_amazon_review_dimensions.py \
   --user-histories raw/amazon_reviews_2023/persona_dimension_inference/user_histories.jsonl \
+  --inference-mode evidence_profile \
   --schema-path ../dimensions+new.json \
-  --model "${OPENAI_LLM_MODEL:-gpt-4.1-mini}" \
+  --model "${OPENAI_LLM_MODEL:-gpt-5.4-mini}" \
   --dimensions-per-call 40 \
   --max-users 100 \
   --output raw/amazon_reviews_2023/persona_dimension_inference/inferred_dimensions.jsonl
 ```
+
+Use `--overwrite-profiles` only when you want to pay to regenerate compact
+profiles instead of reusing the existing profile cache. Use
+`--no-amazon-default-schema-filter` if you intentionally want to test every
+selected schema dimension, including categories that Amazon reviews usually
+cannot support.
 
 For cheaper pilots, restrict the schema surface first:
 
 ```bash
 python scripts/infer_amazon_review_dimensions.py \
   --user-histories raw/amazon_reviews_2023/persona_dimension_inference/user_histories.jsonl \
+  --inference-mode evidence_profile \
   --dimension-categories "Interests: Hobbies,Interests: Topics,Behavior: Preferences,Expertise: Domains" \
   --max-users 20 \
   --dry-run
 ```
+
+The original direct raw-review batching path is still available with
+`--inference-mode raw_reviews`, but it is more expensive because each schema
+batch receives the same review context again.
+
+Render a readable Markdown report from inference JSONL outputs:
+
+```bash
+python scripts/render_amazon_inference_report.py \
+  --inference-output raw/amazon_reviews_2023/persona_dimension_inference/inferred_dimensions_pilot_2users_dpc100.jsonl \
+  --evidence-profiles raw/amazon_reviews_2023/persona_dimension_inference/evidence_profiles_pilot_2users_dpc100.jsonl \
+  --user-histories raw/amazon_reviews_2023/persona_dimension_inference/user_histories_top100.jsonl \
+  --dimensions-per-call 100 \
+  --output samples/amazon_reviews_2023/persona_dimension_inference/pilot_2users_dpc100_readable.md
+```
+
+The report groups inferred attributes by schema category, includes the compact
+evidence profile, and estimates cost from serialized prompt/output character
+counts when `--user-histories` is provided. Exact billed token usage requires
+persisted API usage metadata.
 
 ### 6) Literature and theory references
 

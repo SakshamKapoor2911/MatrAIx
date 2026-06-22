@@ -38,6 +38,14 @@ DEFAULT_OUTPUT_PATH = (
     / "persona_dimension_inference"
     / "inferred_dimensions.jsonl"
 )
+DEFAULT_EVIDENCE_PROFILE_PATH = (
+    BASE_DIR
+    / "raw"
+    / "amazon_reviews_2023"
+    / "persona_dimension_inference"
+    / "evidence_profiles.jsonl"
+)
+DEFAULT_EVIDENCE_MAPPING_PATH = BASE_DIR / "amazon_review_evidence_mapping.json"
 DEFAULT_MODEL = os.environ.get("OPENAI_LLM_MODEL", "gpt-4.1-mini")
 
 
@@ -52,6 +60,29 @@ Evidence standards:
 - Do not infer occupation, age, gender, region, politics, religion, or medical conditions unless directly stated.
 - Prefer lower confidence when evidence is suggestive but still grounded.
 - If a schema dimension has enumerated values, choose only one of the provided values. If no listed value fits, omit the dimension.
+
+Return compact JSON only."""
+
+
+EVIDENCE_PROFILE_SYSTEM_PROMPT = """You create compact evidence profiles from Amazon review histories.
+
+Core rule: record only evidence directly supported by review text, product title, rating, category, or repeated review behavior. Do not make persona claims from stereotypes.
+
+Use the provided broad evidence categories as the organizing guide. Capture explicit self-statements separately from behavioral signals. Do not infer protected or sensitive demographics, health status, family status, socioeconomic status, occupation, region, politics, or religion unless the reviewer explicitly states it in the evidence.
+
+Return compact JSON only."""
+
+
+SCHEMA_MAPPING_SYSTEM_PROMPT = """You map compact Amazon-review evidence profiles to persona schema attributes.
+
+Core rule: return an attribute only when the compact evidence profile directly supports it. If the evidence profile does not support a schema dimension, omit it.
+
+Evidence standards:
+- Prefer explicit self-statements and repeated behavioral evidence.
+- For each inferred dimension, choose exactly one allowed value from that dimension.
+- Every inferred dimension must cite profile evidence item ids and original review ids.
+- Do not infer sensitive demographics, health, family, socioeconomic, political, religious, or identity attributes unless the profile contains explicit quoted self-statements.
+- Use confidence between 0 and 1. Use >=0.8 only for explicit or repeated evidence.
 
 Return compact JSON only."""
 
@@ -96,6 +127,15 @@ def load_schema(path: Path) -> list[dict[str, Any]]:
     return dimensions
 
 
+def load_evidence_mapping(path: Path) -> dict[str, Any]:
+    with open(path, encoding="utf-8") as fh:
+        mapping = json.load(fh)
+    categories = mapping.get("evidence_categories", [])
+    if not isinstance(categories, list) or not categories:
+        raise ValueError(f"No evidence_categories list found in mapping: {path}")
+    return mapping
+
+
 def parse_csv_filter(value: str | None) -> set[str] | None:
     if not value:
         return None
@@ -115,6 +155,39 @@ def filter_dimensions(
         if id_filter and dim["id"] not in id_filter:
             continue
         filtered.append(dim)
+    return filtered
+
+
+def category_matches(category: str, patterns: Iterable[str]) -> bool:
+    for pattern in patterns:
+        if pattern.endswith("*") and category.startswith(pattern[:-1]):
+            return True
+        if category == pattern:
+            return True
+    return False
+
+
+def amazon_supported_schema_categories(mapping: dict[str, Any]) -> set[str]:
+    supported = set()
+    for evidence_category in mapping.get("evidence_categories", []):
+        for category in evidence_category.get("schema_categories", []):
+            supported.add(str(category))
+    return supported
+
+
+def filter_amazon_supported_dimensions(
+    dimensions: list[dict[str, Any]],
+    mapping: dict[str, Any],
+) -> list[dict[str, Any]]:
+    supported = amazon_supported_schema_categories(mapping)
+    skip_by_default = set(mapping.get("skip_by_default_schema_categories", []))
+    filtered = []
+    for dim in dimensions:
+        category = str(dim["category"])
+        if category_matches(category, skip_by_default):
+            continue
+        if category_matches(category, supported):
+            filtered.append(dim)
     return filtered
 
 
@@ -234,6 +307,98 @@ def prompt_payload(
     }
 
 
+def evidence_profile_payload(
+    user_row: dict[str, Any],
+    review_context: list[dict[str, Any]],
+    mapping: dict[str, Any],
+) -> dict[str, Any]:
+    return {
+        "task": "build_compact_amazon_review_evidence_profile",
+        "user_id": user_row.get("user_id"),
+        "instructions": [
+            "Summarize only evidence supported by the supplied reviews.",
+            "Organize evidence using the broad evidence categories.",
+            "Keep claims short and grounded.",
+            "Each evidence item must cite at least one review_id and include a short exact quote from that review when text/title supports the claim.",
+            "Use explicit_self_statement for occupation, family, health, location, politics, religion, or other sensitive/personal claims only when directly stated.",
+            "Omit unsupported categories instead of guessing.",
+        ],
+        "broad_evidence_categories": mapping.get("evidence_categories", []),
+        "output_json_schema": {
+            "evidence_profile": {
+                "user_id": "source user id",
+                "overview": "brief grounded summary, not a persona biography",
+                "evidence_items": [
+                    {
+                        "evidence_item_id": "e1",
+                        "broad_category_id": "one broad evidence category id",
+                        "claim": "short grounded claim",
+                        "support": [
+                            {
+                                "review_id": "review ids used as support",
+                                "quote": "short exact quote from review title/text",
+                            }
+                        ],
+                        "schema_category_hints": ["schema categories this evidence could support"],
+                        "confidence": "number from 0 to 1",
+                        "evidence_type": "explicit_self_statement | repeated_behavior | product_interest | preference | expertise_signal | communication_style",
+                    }
+                ],
+                "unsupported_or_blocked": [
+                    {
+                        "topic": "schema area or claim type",
+                        "reason": "why Amazon reviews do not support it for this user",
+                    }
+                ],
+            }
+        },
+        "review_evidence": review_context,
+    }
+
+
+def schema_mapping_payload(
+    user_row: dict[str, Any],
+    dimension_batch: list[dict[str, Any]],
+    evidence_profile: dict[str, Any],
+) -> dict[str, Any]:
+    dimensions = [
+        {
+            "id": dim["id"],
+            "label": dim["label"],
+            "category": dim["category"],
+            "description": dim["description"],
+            "allowed_values": dim["values"],
+        }
+        for dim in dimension_batch
+    ]
+    return {
+        "task": "map_compact_amazon_review_evidence_profile_to_schema_dimensions",
+        "user_id": user_row.get("user_id"),
+        "instructions": [
+            "Return only dimensions directly supported by the compact evidence profile.",
+            "Omit unknown, weak, stereotyped, or unsupported dimensions.",
+            "For each inferred dimension, choose exactly one allowed value from that dimension.",
+            "Every inferred dimension must include at least one evidence_item_id and at least one original review_id.",
+            "Use confidence between 0 and 1. Use >=0.8 only for explicit or repeated evidence.",
+        ],
+        "output_json_schema": {
+            "inferred_attributes": [
+                {
+                    "dimension_id": "schema dimension id",
+                    "value": "one allowed value for that dimension",
+                    "confidence": "number from 0 to 1",
+                    "evidence_item_ids": ["compact profile evidence item ids"],
+                    "evidence_review_ids": ["original review ids used as support"],
+                    "evidence_quotes": ["short exact quotes copied from profile support"],
+                    "reasoning": "brief grounded rationale",
+                }
+            ]
+        },
+        "schema_dimensions": dimensions,
+        "compact_evidence_profile": evidence_profile,
+    }
+
+
 def openai_request(
     payload: dict[str, Any],
     api_key: str,
@@ -321,12 +486,76 @@ def validate_inferences(
                 "category": dim["category"],
                 "value": value,
                 "confidence": round(confidence, 3),
+                "evidence_item_ids": item.get("evidence_item_ids") or [],
                 "evidence_review_ids": evidence_ids,
                 "evidence_quotes": item.get("evidence_quotes") or [],
                 "reasoning": item.get("reasoning", ""),
             }
         )
     return valid, rejected
+
+
+def normalize_evidence_profile(
+    model_output: dict[str, Any],
+    user_id: Any,
+    valid_review_ids: set[str],
+) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    profile = model_output.get("evidence_profile", model_output)
+    if not isinstance(profile, dict):
+        return {"user_id": user_id, "overview": "", "evidence_items": []}, [
+            {"item": model_output, "reason": "profile_not_object"}
+        ]
+    normalized_items = []
+    rejected = []
+    for idx, item in enumerate(profile.get("evidence_items") or [], start=1):
+        if not isinstance(item, dict):
+            rejected.append({"item": item, "reason": "not_object"})
+            continue
+        support = item.get("support") or []
+        if not isinstance(support, list):
+            rejected.append({"item": item, "reason": "support_not_list"})
+            continue
+        normalized_support = []
+        invalid_review_id = False
+        for support_item in support:
+            if not isinstance(support_item, dict):
+                continue
+            review_id = support_item.get("review_id")
+            if review_id not in valid_review_ids:
+                invalid_review_id = True
+                continue
+            normalized_support.append(
+                {
+                    "review_id": review_id,
+                    "quote": compact_text(support_item.get("quote"), 240),
+                }
+            )
+        if invalid_review_id or not normalized_support:
+            rejected.append({"item": item, "reason": "invalid_or_missing_support"})
+            continue
+        try:
+            confidence = float(item.get("confidence", 0.5))
+        except (TypeError, ValueError):
+            confidence = 0.5
+        confidence = max(0.0, min(1.0, confidence))
+        normalized_items.append(
+            {
+                "evidence_item_id": str(item.get("evidence_item_id") or f"e{idx}"),
+                "broad_category_id": str(item.get("broad_category_id") or ""),
+                "claim": compact_text(item.get("claim"), 360),
+                "support": normalized_support,
+                "schema_category_hints": item.get("schema_category_hints") or [],
+                "confidence": round(confidence, 3),
+                "evidence_type": str(item.get("evidence_type") or ""),
+            }
+        )
+    normalized = {
+        "user_id": user_id,
+        "overview": compact_text(profile.get("overview"), 1200),
+        "evidence_items": normalized_items,
+        "unsupported_or_blocked": profile.get("unsupported_or_blocked") or [],
+    }
+    return normalized, rejected
 
 
 def completed_user_ids(path: Path) -> set[str]:
@@ -338,6 +567,63 @@ def completed_user_ids(path: Path) -> set[str]:
         if user_id:
             done.add(str(user_id))
     return done
+
+
+def load_completed_rows_by_user(path: Path) -> dict[str, dict[str, Any]]:
+    if not path.exists():
+        return {}
+    rows = {}
+    for row in iter_jsonl_or_gz(path):
+        user_id = row.get("user_id")
+        if user_id:
+            rows[str(user_id)] = row
+    return rows
+
+
+def build_or_load_evidence_profile(
+    user_row: dict[str, Any],
+    review_context: list[dict[str, Any]],
+    mapping: dict[str, Any],
+    args: argparse.Namespace,
+    api_key: str,
+    existing_profiles: dict[str, dict[str, Any]],
+) -> tuple[dict[str, Any], list[dict[str, Any]], bool]:
+    user_id = str(user_row.get("user_id", ""))
+    if user_id in existing_profiles and not args.overwrite_profiles:
+        profile_row = existing_profiles[user_id]
+        return profile_row.get("evidence_profile") or {}, profile_row.get("rejected_evidence_items") or [], False
+    payload = {
+        "model": args.model,
+        "temperature": args.temperature,
+        "response_format": {"type": "json_object"},
+        "messages": [
+            {"role": "system", "content": EVIDENCE_PROFILE_SYSTEM_PROMPT},
+            {
+                "role": "user",
+                "content": json.dumps(
+                    evidence_profile_payload(user_row, review_context, mapping),
+                    ensure_ascii=False,
+                ),
+            },
+        ],
+    }
+    response = openai_request(payload, api_key)
+    model_output = parse_model_json(response)
+    valid_review_ids = {row["review_id"] for row in review_context}
+    profile, rejected = normalize_evidence_profile(model_output, user_id, valid_review_ids)
+    profile_row = {
+        "source": "amazon_reviews_2023",
+        "user_id": user_row.get("user_id"),
+        "review_count": len(user_row.get("reviews") or []),
+        "review_context_count": len(review_context),
+        "model": args.model,
+        "status": "ok",
+        "evidence_profile": profile,
+        "rejected_evidence_items": rejected,
+    }
+    write_jsonl(args.evidence_profiles_output, [profile_row], append=args.evidence_profiles_output.exists())
+    existing_profiles[user_id] = profile_row
+    return profile, rejected, True
 
 
 def infer_user(
@@ -396,9 +682,81 @@ def infer_user(
     }
 
 
+def infer_user_from_evidence_profile(
+    user_row: dict[str, Any],
+    dimensions: list[dict[str, Any]],
+    mapping: dict[str, Any],
+    args: argparse.Namespace,
+    api_key: str,
+    existing_profiles: dict[str, dict[str, Any]],
+) -> dict[str, Any]:
+    reviews = user_row.get("reviews") or []
+    if not isinstance(reviews, list) or not reviews:
+        return {
+            "user_id": user_row.get("user_id"),
+            "status": "skipped_no_reviews",
+            "inferred_attributes": [],
+            "rejected_attributes": [],
+        }
+    review_context = build_review_context(
+        reviews,
+        max_reviews=args.max_reviews_per_user,
+        max_review_text_chars=args.max_review_text_chars,
+        max_total_chars=args.max_review_context_chars,
+    )
+    valid_review_ids = {row["review_id"] for row in review_context}
+    evidence_profile, rejected_evidence, profile_created = build_or_load_evidence_profile(
+        user_row,
+        review_context,
+        mapping,
+        args,
+        api_key,
+        existing_profiles,
+    )
+    all_valid = []
+    all_rejected = []
+    request_count = 1 if profile_created else 0
+    for dimension_batch in batched(dimensions, args.dimensions_per_call):
+        request_count += 1
+        task = schema_mapping_payload(user_row, dimension_batch, evidence_profile)
+        payload = {
+            "model": args.model,
+            "temperature": args.temperature,
+            "response_format": {"type": "json_object"},
+            "messages": [
+                {"role": "system", "content": SCHEMA_MAPPING_SYSTEM_PROMPT},
+                {"role": "user", "content": json.dumps(task, ensure_ascii=False)},
+            ],
+        }
+        response = openai_request(payload, api_key)
+        model_output = parse_model_json(response)
+        valid, rejected = validate_inferences(model_output, dimension_batch, valid_review_ids)
+        all_valid.extend(valid)
+        all_rejected.extend(rejected)
+    return {
+        "source": "amazon_reviews_2023",
+        "inference_mode": "evidence_profile",
+        "schema_path": str(args.schema_path),
+        "schema_dimension_count": len(dimensions),
+        "evidence_mapping_path": str(args.evidence_mapping_path),
+        "user_id": user_row.get("user_id"),
+        "review_count": len(reviews),
+        "review_context_count": len(review_context),
+        "evidence_item_count": len(evidence_profile.get("evidence_items") or []),
+        "model": args.model,
+        "request_count": request_count,
+        "status": "ok",
+        "evidence_profile": evidence_profile,
+        "rejected_evidence_items": rejected_evidence,
+        "inferred_attributes": all_valid,
+        "rejected_attributes": all_rejected,
+    }
+
+
 def write_dry_run_prompts(
     history_path: Path,
     dimensions: list[dict[str, Any]],
+    mapping: dict[str, Any] | None,
     args: argparse.Namespace,
 ) -> int:
     rows = []
@@ -412,6 +770,39 @@ def write_dry_run_prompts(
             max_review_text_chars=args.max_review_text_chars,
             max_total_chars=args.max_review_context_chars,
         )
+        if args.inference_mode == "evidence_profile":
+            if mapping is None:
+                raise ValueError("Evidence mapping is required for evidence_profile dry run.")
+            rows.append(
+                {
+                    "user_id": user_row.get("user_id"),
+                    "stage": "evidence_profile",
+                    "system_prompt": EVIDENCE_PROFILE_SYSTEM_PROMPT,
+                    "user_payload": evidence_profile_payload(user_row, review_context, mapping),
+                }
+            )
+            placeholder_profile = {
+                "user_id": user_row.get("user_id"),
+                "overview": "DRY RUN PLACEHOLDER: schema-mapping prompts require a model-created evidence profile.",
+                "evidence_items": [],
+            }
+            for batch_index, dimension_batch in enumerate(
+                batched(dimensions, args.dimensions_per_call), start=1
+            ):
+                rows.append(
+                    {
+                        "user_id": user_row.get("user_id"),
+                        "stage": "schema_mapping",
+                        "batch_index": batch_index,
+                        "system_prompt": SCHEMA_MAPPING_SYSTEM_PROMPT,
+                        "user_payload": schema_mapping_payload(
+                            user_row,
+                            dimension_batch,
+                            placeholder_profile,
+                        ),
+                    }
+                )
+            continue
         for batch_index, dimension_batch in enumerate(
             batched(dimensions, args.dimensions_per_call), start=1
         ):
@@ -448,6 +839,34 @@ def parse_args(argv: Iterable[str]) -> argparse.Namespace:
     )
     parser.add_argument("--model", default=DEFAULT_MODEL)
     parser.add_argument("--temperature", type=float, default=0.0)
+    parser.add_argument(
+        "--inference-mode",
+        choices=("raw_reviews", "evidence_profile"),
+        default="raw_reviews",
+        help="raw_reviews preserves the original pipeline; evidence_profile extracts a compact profile first.",
+    )
+    parser.add_argument(
+        "--evidence-mapping-path",
+        type=Path,
+        default=DEFAULT_EVIDENCE_MAPPING_PATH,
+        help=f"Broad Amazon-review evidence mapping config. Default: {DEFAULT_EVIDENCE_MAPPING_PATH}",
+    )
+    parser.add_argument(
+        "--evidence-profiles-output",
+        type=Path,
+        default=DEFAULT_EVIDENCE_PROFILE_PATH,
+        help=f"Reusable compact profile JSONL. Default: {DEFAULT_EVIDENCE_PROFILE_PATH}",
+    )
+    parser.add_argument(
+        "--overwrite-profiles",
+        action="store_true",
+        help="Regenerate compact evidence profiles instead of reusing existing profile rows.",
+    )
+    parser.add_argument(
+        "--no-amazon-default-schema-filter",
+        action="store_true",
+        help="In evidence_profile mode, keep all selected dimensions instead of filtering to Amazon-supported schema categories.",
+    )
     parser.add_argument("--max-users", type=int, default=0, help="0 means all users.")
     parser.add_argument("--max-reviews-per-user", type=int, default=80)
     parser.add_argument("--max-review-text-chars", type=int, default=900)
@@ -488,17 +907,33 @@ def parse_args(argv: Iterable[str]) -> argparse.Namespace:
 def main(argv: Iterable[str]) -> int:
     args = parse_args(argv)
     dimensions = load_schema(args.schema_path)
+    mapping = None
+    explicit_dimension_filter = bool(args.dimension_categories or args.dimension_ids)
+    if args.inference_mode == "evidence_profile":
+        mapping = load_evidence_mapping(args.evidence_mapping_path)
     dimensions = filter_dimensions(
         dimensions,
         category_filter=parse_csv_filter(args.dimension_categories),
         id_filter=parse_csv_filter(args.dimension_ids),
     )
+    if (
+        args.inference_mode == "evidence_profile"
+        and mapping is not None
+        and not args.no_amazon_default_schema_filter
+        and not explicit_dimension_filter
+    ):
+        before_count = len(dimensions)
+        dimensions = filter_amazon_supported_dimensions(dimensions, mapping)
+        log(
+            "Applied Amazon-supported schema filter: "
+            f"{before_count:,} -> {len(dimensions):,} dimensions"
+        )
     if not dimensions:
         raise ValueError("No dimensions selected after filtering.")
     log(f"Selected {len(dimensions):,} schema dimensions")
 
     if args.dry_run:
-        count = write_dry_run_prompts(args.user_histories, dimensions, args)
+        count = write_dry_run_prompts(args.user_histories, dimensions, mapping, args)
         log(f"Wrote {count:,} dry-run prompts: {args.dry_run_prompts_path}")
         return 0
 
@@ -507,6 +942,11 @@ def main(argv: Iterable[str]) -> int:
         raise RuntimeError("OPENAI_API_KEY is required unless --dry-run is used.")
 
     done = set() if args.overwrite else completed_user_ids(args.output)
+    existing_profiles: dict[str, dict[str, Any]] = {}
+    if args.inference_mode == "evidence_profile":
+        if args.overwrite_profiles and args.evidence_profiles_output.exists():
+            args.evidence_profiles_output.unlink()
+        existing_profiles = load_completed_rows_by_user(args.evidence_profiles_output)
     append = not args.overwrite
     processed = 0
     written = 0
@@ -516,7 +956,19 @@ def main(argv: Iterable[str]) -> int:
             continue
         if args.max_users and processed >= args.max_users:
             break
-        result = infer_user(user_row, dimensions, args, api_key)
+        if args.inference_mode == "evidence_profile":
+            if mapping is None:
+                raise ValueError("Evidence mapping is required for evidence_profile mode.")
+            result = infer_user_from_evidence_profile(
+                user_row,
+                dimensions,
+                mapping,
+                args,
+                api_key,
+                existing_profiles,
+            )
+        else:
+            result = infer_user(user_row, dimensions, args, api_key)
         write_jsonl(args.output, [result], append=append or written > 0)
         append = True
         processed += 1
