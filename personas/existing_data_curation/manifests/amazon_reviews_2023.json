@@ -1,0 +1,19 @@
+{
+  "id": "amazon_reviews_2023",
+  "source": {
+    "type": "remote_jsonl_gzip_by_category",
+    "dataset_url": "https://amazon-reviews-2023.github.io/",
+    "paper_url": "https://arxiv.org/abs/2403.03952",
+    "review_url_template": "https://mcauleylab.ucsd.edu/public_datasets/data/amazon_2023/raw/review_categories/{category}.jsonl.gz",
+    "meta_url_template": "https://mcauleylab.ucsd.edu/public_datasets/data/amazon_2023/raw/meta_categories/meta_{category}.jsonl.gz"
+  },
+  "format": "jsonl.gz",
+  "persona_relevance": [
+    "Longitudinal user review histories",
+    "Product/category preferences",
+    "Rating behavior",
+    "Preference explanations in review text",
+    "Verified-purchase and helpful-vote signals"
+  ],
+  "notes": "Use scripts/fetch_amazon_reviews_2023.py for category-scoped sampling, optional metadata retrieval, full raw downloads, and reviewer-level history construction."
+}
