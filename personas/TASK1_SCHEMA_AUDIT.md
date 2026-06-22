@@ -23,6 +23,27 @@ This is a small Task 1 note focused on real-data persona construction and cleani
 - Issue #64 also requires temporal split, text-rich evidence selection, deduped reviews, and stronger evidence validation.
 - `origin/amazon-evidence-profile-modal` adds `amazon_review_evidence_mapping.json`, whose broad evidence categories include `product_interests`, `consumption_preferences`, `expertise_signals`, `behavioral_habits`, `decision_style`, `values_and_motivations`, `explicit_self_statements`, and `communication_style`.
 
+## Sources Used for Local ACS/PUMS Prototype
+
+- Task 1 plan: `personas/PLAN.md`, especially the ACS PUMS weighted-resampling skeleton section.
+- ACS PUMS access page: https://www.census.gov/programs-surveys/acs/microdata/access.html
+- ACS PUMS documentation page: https://www.census.gov/programs-surveys/acs/microdata/documentation.html
+- Wyoming 2024 ACS 1-Year person records: `csv_pwy.zip` from https://www2.census.gov/programs-surveys/acs/data/pums/2024/1-Year/
+- Wyoming 2024 ACS 1-Year housing records: `csv_hwy.zip` from the same Census FTP directory.
+- 2024 ACS PUMS data dictionary: `PUMS_Data_Dictionary_2024.csv`.
+- 2024 ACS PUMS code lists: `ACSPUMS2024CodeLists.xls`.
+
+These raw Census files are stored only under `personas/existing_data_curation/raw/acs_pums_2024_1yr/`, which is gitignored.
+
+Local prototype status:
+
+- downloaded one state, Wyoming, for a small local test;
+- sampled 1,000 age-13+ person records with `PWGTP` weighted sampling with replacement;
+- joined person records to housing records by `SERIALNO`;
+- generated local ignored files `wy_1000_weighted_skeleton.jsonl` and `wy_1000_weighted_skeleton_summary.json`;
+- no narrative expansion was run;
+- mappings are draft only and should be reviewed before reuse.
+
 ## Requirements
 
 ### 1. Real-data records must preserve provenance
@@ -128,3 +149,13 @@ This issue is complete when this note:
 3. Add evidence-quote validation for Amazon review inference outputs.
 4. Define a temporal split protocol for behavior-grounded data.
 5. Decide which cleaned fields should be included in PersonaBench v1 prompts.
+
+## Local Prototype Gaps
+
+The local Wyoming prototype still leaves these fields unsupported or partially unsupported:
+
+- `urbanicity`: unsupported for all 1,000 records; needs a PUMA-to-urbanicity crosswalk.
+- `domain`: unsupported for 236 records; current INDP-based mapping is broad and draft.
+- `role_function`: unsupported for 226 records; current OCCP-based mapping is broad and draft.
+- `demo_children_count`: unsupported for 37 records; housing/person derivation needs review.
+- `primary_language`: unsupported for 12 records; unmapped `LANP` codes need review against MatrAIx language values.
