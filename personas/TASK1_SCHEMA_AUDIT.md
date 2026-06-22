@@ -21,6 +21,7 @@ This is a small Task 1 note focused on real-data persona construction and cleani
 - `personas/CONTRIBUTION_GUIDE.md` defines `source_origin` metadata for dimension provenance.
 - Issue #64 proposes schema-mapped inference outputs with `dimension_id`, `value`, `confidence`, `evidence_review_ids`, `evidence_quotes`, and `reasoning`.
 - Issue #64 also requires temporal split, text-rich evidence selection, deduped reviews, and stronger evidence validation.
+- `origin/amazon-evidence-profile-modal` adds `amazon_review_evidence_mapping.json`, whose broad evidence categories include `product_interests`, `consumption_preferences`, `expertise_signals`, `behavioral_habits`, `decision_style`, `values_and_motivations`, `explicit_self_statements`, and `communication_style`.
 
 ## Requirements
 
@@ -57,6 +58,8 @@ This issue only records shared requirements for those paths. Implementation shou
 
 ## Minimal Sample
 
+This sample is aligned with the `source_origin` pattern in `CONTRIBUTION_GUIDE.md` and the Amazon review inference shape discussed in #64 / `origin/amazon-evidence-profile-modal`.
+
 ```json
 {
   "record_id": "amazon_user_profile_0001",
@@ -71,12 +74,30 @@ This issue only records shared requirements for those paths. Implementation shou
     "persona_construction": "2018-2021",
     "evaluation_holdout": "2022-2023"
   },
+  "evidence_profile": {
+    "evidence_items": [
+      {
+        "evidence_id": "ev_001",
+        "category": "product_interests",
+        "claim": "The reviewer repeatedly engages with books and long-form reading.",
+        "review_ids": ["review_123", "review_456"],
+        "evidence_quotes": ["I read this series every year"],
+        "confidence": 0.86
+      }
+    ],
+    "unsupported_or_blocked": [
+      {
+        "topic": "marital status",
+        "reason": "No explicit self-statement in review evidence."
+      }
+    ]
+  },
   "inferred_attributes": [
     {
       "dimension_id": "topic_books",
       "value": "Passionate",
       "confidence": 0.86,
-      "evidence_ids": ["review_123", "review_456"],
+      "evidence_review_ids": ["review_123", "review_456"],
       "evidence_quotes": ["I read this series every year"],
       "reasoning": "Repeated long-form book reviews support a strong books interest."
     }
