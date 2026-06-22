@@ -1,0 +1,90 @@
+
+
+LAYER ORDER GUIDES
+
+These are here to help you place the equipment on the correct layer.
+Sometimes the sword or shield needs to be in front of the character sprite, sometimes they need to be behind it.
+If you see a "++" that means you need to make sure it goes in front of the OTHER piece of equipment, "--" means it goes behind it.
+For example, a sword with "behind ++" and a shield with "behind --" means they both go behind the player sprite, but the sword goes in front of the shield.
+
+
+ANIMATION GUIDES
+
+These are here to help you understand where all the animations begin and end.
+All animations right left to right, in four directions.
+You'll have to figure out some timings that work well for you, but I think the attacks look good at 160ms/65ms/65ms/200ms.
+Feel free to mix and match frames and move the effects or weapons around to make your own special attack animations.
+
+-------------------------------------------
+
+I've designed these animations with a Seiken Densetsu 3 (Trials of Mana) combat style in mind. Here's how that works:
+	When enemies are present, the characters draw weapons automatically.
+	While in this combat mode, movement is restricted to a relatively slow shuffle (no running or jumping with weapon drawn).
+	Attacks automatically target the nearest enemy.
+	When enemies are defeated, the characters auto sheath their weapons and can resume normal movement.
+	If you want to have your characters run or jump with their weapon drawn, you'll need to add the optional spear sprite layers to page 1 of the base.
+
+
+This asset contains 2 layers (0bas, 6tla) on 3 new pages (pONE1, pONE2, and pONE3).
+Layer 6tla contains the one-handed weapon sprites with proper placement.
+Layer 7tlb contains the shield sprites with proper placement.
+The both weapon and shield sprites will need to move in front of or behind the player sprite depending on facing/animation.
+You will also need to ensure the weapon and shield are in front of or behind one another, depending on the animation (see "LAYER ORDER GUIDES" above).
+Most of it should be obvious, but I've included some reference images to help.
+
+
+One-hand page 1 (pONE1) contains the following animations:
+
+	Draw/sheath weapon & shield. The first 3 columns in the top half of the page.
+	You should transition this animation directly into the combat idle.
+	Run this animation in reverse to stow your weapon.
+
+	Parry. Column 4, top half.
+	The character holds the weapon up to deflect an attack while in combat idle.
+	Best if you pair it with some kind of flash or spark effect (not included).
+
+	Evade. Column 5, top half.
+	Used for dodging attacks while in combat idle.
+
+	Get hit. Column 6, top half.
+	Used for getting hit while in combat idle.
+
+	Knockdown. Columns 6 through 8, top half.
+	Repeat 6 and 7 a couple times for a little bounce. 
+
+	// The bottom half is intentionally left blank at this point. I may add something there in a future update.
+
+
+One-hand page 2 (pONE2) contains the following animations:
+
+	Combat idle. Columns 1 through 4, top half.
+	This is a loop. I like 200ms on each frame.
+
+	Combat move. Columns 5 through 6, top half.
+	This is a shuffling combat-ready walk cycle. I like 140ms, 140ms, 200ms, 240ms.
+
+	Retreat/evade. Columns 1 and 2, bottom half.
+	Hold column 1 for a beat, then use column 2 to leap backwards, then play column 1 again before returning to idle.
+	This is like a jump back or dodge animation.
+
+	Lunge/dash. Columns 1 and 3, bottom half.
+	Just like the retreat above, but use column 3 and make the character leap forward.
+	Both of these dashes can be used in conjunction with the slash or thrust attack animations for cool special skill attacks.
+ 
+	// The rest of page 2 is intentionally left blank at this point. I may add something there in a future update.
+
+One-hand page 2 (pONE3) contains the following animations:
+	
+	Attack, slash 1. Columns 1 through 4, top half.
+
+	Attack, slash 2. Columns 5 through 8, top half.
+
+	Attack, thrust. Columns 1 through 4, bottom half.
+
+	Attack, shield bash. Columns 5 through 8, bottom half.
+	Column 5 all by itself can be used as a block frame.
+
+	// Experiment and find timings that work for your gameplay.
+	// You can also mix and match different frames for special attacks.
+
+

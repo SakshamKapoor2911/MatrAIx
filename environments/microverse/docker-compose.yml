@@ -1,0 +1,23 @@
+# Local Postgres for the seed run. The SAME schema (JSONB, BEFORE UPDATE trigger,
+# range-partitioned action_log) runs here and on Aurora Serverless v2 later — that
+# portability is the entire reason the seed run uses real Postgres, not SQLite.
+services:
+  postgres:
+    image: postgres:16
+    container_name: mircoverse-pg
+    environment:
+      POSTGRES_USER: mircoverse
+      POSTGRES_PASSWORD: mircoverse
+      POSTGRES_DB: mircoverse
+    ports:
+      - "5432:5432"
+    volumes:
+      - mircoverse_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mircoverse -d mircoverse"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  mircoverse_pgdata:

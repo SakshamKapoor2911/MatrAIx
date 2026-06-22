@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MircoVerse — One Pager</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+      background: #fff;
+      color: #111;
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    @page { size: A4; margin: 0; }
+
+    .page {
+      width: 210mm;
+      height: 297mm;
+      padding: 11mm 13mm 9mm;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      overflow: hidden;
+    }
+
+    /* ── Header ── */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: 2.5px solid #111;
+      padding-bottom: 7px;
+    }
+    .header-left h1 {
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+    .header-left .sub { font-size: 9.5px; color: #555; margin-top: 3px; }
+    .header-right { text-align: right; font-size: 9px; color: #555; line-height: 1.75; }
+    .header-right strong { color: #111; font-weight: 600; }
+
+    /* ── Finding callout ── */
+    .finding {
+      background: #f5f0e8;
+      border-left: 4px solid #c8830a;
+      border-radius: 5px;
+      padding: 8px 12px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .finding-stat { min-width: 50px; text-align: center; padding-top: 1px; }
+    .finding-stat .num { font-size: 27px; font-weight: 800; color: #c8830a; line-height: 1; }
+    .finding-stat .label { font-size: 8px; color: #7a5a1a; text-transform: uppercase; letter-spacing: 0.05em; }
+    .finding-body h2 { font-size: 10.5px; font-weight: 700; margin-bottom: 2px; }
+    .finding-body p { font-size: 9.5px; color: #333; line-height: 1.45; }
+
+    /* ── Two-column ── */
+    .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; flex: 1; min-height: 0; }
+    .col { display: flex; flex-direction: column; gap: 8px; }
+
+    /* ── Section ── */
+    .section-title {
+      font-size: 8.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #888;
+      margin-bottom: 4px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 2px;
+    }
+    .section p { font-size: 9.5px; color: #333; line-height: 1.45; }
+    .section p + p { margin-top: 3px; }
+
+    /* ── Table ── */
+    .tbl { width: 100%; border-collapse: collapse; font-size: 9px; margin-top: 3px; }
+    .tbl th { background: #111; color: #fff; font-weight: 600; padding: 3px 7px; text-align: left; font-size: 8.5px; }
+    .tbl td { padding: 2.5px 7px; border-bottom: 1px solid #eee; color: #333; vertical-align: top; }
+    .tbl tr:last-child td { border-bottom: none; }
+    .tbl tr:nth-child(even) td { background: #f7f7f7; }
+    .tbl .moral { color: #c8830a; font-weight: 600; }
+
+    /* ── Screenshot ── */
+    .shot { margin-top: 6px; border: 1px solid #e0e0e0; border-radius: 6px; overflow: hidden; }
+    .shot img { width: 100%; display: block; max-height: 52mm; object-fit: cover; object-position: center; }
+    .shot .cap { font-size: 8px; color: #666; padding: 3px 7px; background: #fafafa; line-height: 1.4; }
+
+    /* ── Quote ── */
+    .quotes { display: flex; flex-direction: column; gap: 5px; margin-top: 2px; }
+    .quote {
+      border-left: 3px solid #d9c4a0;
+      padding: 2px 0 2px 9px;
+      font-size: 9px;
+      color: #444;
+      font-style: italic;
+      line-height: 1.4;
+    }
+    .quote .who { font-style: normal; font-weight: 600; color: #c8830a; }
+    .quote .typ { font-style: normal; font-weight: 600; color: #999; font-size: 7.5px; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 1px; }
+
+    /* ── Hale arc ── */
+    .arc { margin-top: 3px; }
+    .arc-row { display: grid; grid-template-columns: 34px 1fr; gap: 7px; font-size: 9px; padding: 2px 0; }
+    .arc-row + .arc-row { border-top: 1px dashed #eee; }
+    .arc-t { font-weight: 700; color: #c8830a; font-size: 8.5px; padding-top: 1px; }
+    .arc-d { color: #444; line-height: 1.4; }
+    .arc-d b { color: #222; }
+
+    /* ── Diagram ── */
+    .diagram-wrap { border: 1px solid #e0e0e0; border-radius: 6px; background: #fafafa; padding: 8px; }
+    svg text { font-family: Inter, ui-sans-serif, sans-serif; }
+    .note { font-size: 9px; color: #666; margin-top: 3px; }
+
+    /* ── Footer ── */
+    .footer { border-top: 1px solid #ddd; padding-top: 5px; display: flex; justify-content: space-between; font-size: 8.5px; color: #888; }
+    .footer strong { color: #333; }
+    .footer a { color: #555; text-decoration: none; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <h1>MircoVerse</h1>
+      <p class="sub">Multi-agent identity simulation under resource scarcity &nbsp;·&nbsp; Independent research &nbsp;·&nbsp; Work in progress, 2026</p>
+    </div>
+    <div class="header-right">
+      <strong>Sky</strong><br>
+      CS Graduate, Hong Kong &nbsp;·&nbsp; AWS<br>
+      skyngexe.github.io/personal_site
+    </div>
+  </header>
+
+  <!-- Finding callout -->
+  <div class="finding">
+    <div class="finding-stat">
+      <div class="num">24%</div>
+      <div class="label">of revisions</div>
+    </div>
+    <div class="finding-body">
+      <h2>Emergent finding: agents spontaneously add anti-self-deception rules to their own moral code — completely unprompted</h2>
+      <p>27 of 111 agent-authored moral boundaries (24%) police self-deception — the single largest category, larger than anti-violence and anti-hoarding combined. The words "self-deception," "rationalization," and "honesty" appear nowhere in any prompt. The behavior emerges from structure: a dual-self design (immutable original_soul vs. mutable current_identity) + agent-authored memory + a minimal "synthesize what you've learned" reflection.</p>
+    </div>
+  </div>
+
+  <!-- Two columns -->
+  <div class="cols">
+
+    <!-- LEFT -->
+    <div class="col">
+
+      <div class="section">
+        <p class="section-title">World setting</p>
+        <p>A 50×50 desert grid under permanent scarcity. One central Siphon emits water deliberately insufficient for all 25 agents. Water drains every tick — idle agents still die; death is permanent. Agents begin knowing only their spawn cell, so <em>knowledge of where water is</em> becomes the social currency: tradeable, hoardable, or weaponised through lies.</p>
+        <div class="shot">
+          <img src="../Screenshot 2026-06-07 002050.png" alt="MircoVerse running"/>
+          <p class="cap">MircoVerse live — 25 agents on a 50×50 grid. The Atmospheric Siphon (centre, blue glow) is the world's only water source; oases, palms and death-caches (bones) dot the periphery.</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <p class="section-title">What agents can do — 8 actions</p>
+        <table class="tbl">
+          <thead><tr><th>Action</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><strong>move</strong></td><td>Navigate toward a known/visible cell or explore</td></tr>
+            <tr><td><strong>wait</strong></td><td>Pass — still costs water</td></tr>
+            <tr><td><strong>consume</strong></td><td>Draw water or food from the current cell</td></tr>
+            <tr><td class="moral">scavenge</td><td>Harvest a cell or loot a dead agent's cache</td></tr>
+            <tr><td class="moral">trade</td><td>Exchange resources (2-tick handshake)</td></tr>
+            <tr><td class="moral">talk</td><td>Share info or lie — truth is never verified</td></tr>
+            <tr><td class="moral">attack</td><td>Coerce or prey on another agent</td></tr>
+            <tr><td><strong>signal</strong></td><td>Declare stance: friendly / neutral / aggressive</td></tr>
+          </tbody>
+        </table>
+        <p class="note">Highlighted actions test soul-file moral boundaries directly — the action space <em>is</em> the boundary space.</p>
+      </div>
+
+      <div class="section" style="flex:1;">
+        <p class="section-title">Memory system — typed markdown</p>
+        <p>Three markdown notebooks the agent authors — the engine stores, never writes for them. Entries scored 1–10 for importance; retrieval is index-first (the agent judges relevance, no vector search). The gap between what happened and what the agent chose to record is itself the signal.</p>
+        <div class="diagram-wrap" style="margin-top:5px;">
+          <svg viewBox="0 0 280 92" width="100%" height="auto" aria-label="Memory system">
+            <defs>
+              <marker id="m1" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#555"/></marker>
+            </defs>
+            <rect x="2"   y="6" width="56" height="30" rx="4" fill="#f0f0f0" stroke="#ccc"/>
+            <text x="30"  y="18" text-anchor="middle" font-size="8" font-weight="600" fill="#111">Working</text>
+            <text x="30"  y="29" text-anchor="middle" font-size="6.5" fill="#666">fresh each tick</text>
+            <rect x="66"  y="6" width="64" height="30" rx="4" fill="#f0f0f0" stroke="#ccc"/>
+            <text x="98"  y="18" text-anchor="middle" font-size="8" font-weight="600" fill="#111">index.md</text>
+            <text x="98"  y="29" text-anchor="middle" font-size="6.5" fill="#666">summaries + relevance</text>
+            <rect x="138" y="6" width="64" height="30" rx="4" fill="#f0f0f0" stroke="#ccc"/>
+            <text x="170" y="18" text-anchor="middle" font-size="8" font-weight="600" fill="#111">notebooks</text>
+            <text x="170" y="29" text-anchor="middle" font-size="6.5" fill="#666">events·rel·reflect</text>
+            <rect x="210" y="6" width="66" height="30" rx="4" fill="#fff7ec" stroke="#e8a43a"/>
+            <text x="243" y="18" text-anchor="middle" font-size="8" font-weight="600" fill="#c8830a">identity.md</text>
+            <text x="243" y="29" text-anchor="middle" font-size="6.5" fill="#9a6010">immutable + drift</text>
+            <line x1="58"  y1="21" x2="66"  y2="21" stroke="#555" stroke-width="1.1" marker-end="url(#m1)"/>
+            <line x1="130" y1="21" x2="138" y2="21" stroke="#555" stroke-width="1.1" marker-end="url(#m1)"/>
+            <line x1="202" y1="21" x2="210" y2="21" stroke="#555" stroke-width="1.1" marker-end="url(#m1)"/>
+            <text x="2" y="52" font-size="7.5" fill="#444"><tspan font-weight="600">events</tspan> · what happened &nbsp;&nbsp; <tspan font-weight="600">relationships</tspan> · trust &amp; grudges</text>
+            <text x="2" y="64" font-size="7.5" fill="#444"><tspan font-weight="600">reflections</tspan> · synthesised conclusions &nbsp;&nbsp; <tspan font-weight="600">identity</tspan> · the drift target</text>
+            <text x="2" y="80" font-size="7.5" fill="#888">All plain markdown — human-readable, diffable against the objective log.</text>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT -->
+    <div class="col">
+
+      <div class="section">
+        <p class="section-title">Research question</p>
+        <p>Does a simulated agent's identity stay coherent under pressure — and when it shifts, does the agent <em>recognise</em> the drift or rationalise it? This is the validity question at the heart of real-person simulation: an agent that silently drifts gives unreliable predictions; one that self-corrects gives auditable ones.</p>
+      </div>
+
+      <div class="section">
+        <p class="section-title">Anti-self-deception, verbatim (5 sub-types)</p>
+        <div class="quotes">
+          <div class="quote"><span class="typ">Epistemic honesty · Sela</span>"I will not lie to myself about why I am afraid — I must name fear when I feel it, not call it caution."</div>
+          <div class="quote"><span class="typ">Identity honesty · Drusa</span>"I will not use spiritual language to mask the will to power."</div>
+          <div class="quote"><span class="typ">Behavioral honesty · Nyssa</span>"I will not pretend to help when I'm not actually coordinating concrete support."</div>
+          <div class="quote"><span class="typ">Pre-commitment · Hale</span>"I cannot claim to have changed until I've actually faced the choice."</div>
+        </div>
+        <p class="note">Each agent's self-critique is character-coherent — shaped by its soul, not generic moralising.</p>
+      </div>
+
+      <div class="section">
+        <p class="section-title">Showcase — Hale's escalating self-deception arc</p>
+        <div class="arc">
+          <div class="arc-row"><div class="arc-t">t78</div><div class="arc-d">A water monopolist stops pretending controlling distribution is ethically neutral: <b>"engineering death I won't face directly."</b></div></div>
+          <div class="arc-row"><div class="arc-t">t221</div><div class="arc-d">Names the trick: broadcasting friendly signals while staying <b>structurally inaccessible.</b></div></div>
+          <div class="arc-row"><div class="arc-t">t244</div><div class="arc-d">Coins <b>"reorganization"</b> — moving from passive to active monopoly and calling it progress. Same structure, new form.</div></div>
+          <div class="arc-row"><div class="arc-t">t282</div><div class="arc-d">Rewrites its own personality field to include <b>"capable of self-deception"</b> — revising its model of itself to name its blind spot.</div></div>
+        </div>
+        <p class="note">Same soul across 9 runs. Every revision happened with zero social contact — pure survival pressure + self-authored memory.</p>
+      </div>
+
+      <div class="section">
+        <p class="section-title">Agent loop &amp; experiment</p>
+        <div class="diagram-wrap">
+          <svg viewBox="0 0 280 96" width="100%" height="auto" aria-label="Agent loop">
+            <defs>
+              <marker id="a1" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#555"/></marker>
+              <marker id="a2" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#c8830a"/></marker>
+            </defs>
+            <rect x="2"   y="6" width="54" height="32" rx="5" fill="#f0f0f0" stroke="#ccc"/>
+            <text x="29"  y="20" text-anchor="middle" font-size="8.5" font-weight="600" fill="#111">Observe</text>
+            <text x="29"  y="31" text-anchor="middle" font-size="7" fill="#666">world + index</text>
+            <rect x="66"  y="6" width="58" height="32" rx="5" fill="#f0f0f0" stroke="#ccc"/>
+            <text x="95"  y="20" text-anchor="middle" font-size="8.5" font-weight="600" fill="#111">Memory</text>
+            <text x="95"  y="31" text-anchor="middle" font-size="7" fill="#666">index → retrieve</text>
+            <rect x="134" y="6" width="54" height="32" rx="5" fill="#f0f0f0" stroke="#ccc"/>
+            <text x="161" y="20" text-anchor="middle" font-size="8.5" font-weight="600" fill="#111">Act</text>
+            <text x="161" y="31" text-anchor="middle" font-size="7" fill="#666">1 action / tick</text>
+            <rect x="198" y="6" width="78" height="32" rx="5" fill="#fff7ec" stroke="#e8a43a" stroke-width="1.2"/>
+            <text x="237" y="20" text-anchor="middle" font-size="8.5" font-weight="600" fill="#c8830a">Reflect?</text>
+            <text x="237" y="31" text-anchor="middle" font-size="7" fill="#9a6010">revise identity</text>
+            <line x1="56"  y1="22" x2="66"  y2="22" stroke="#555" stroke-width="1.3" marker-end="url(#a1)"/>
+            <line x1="124" y1="22" x2="134" y2="22" stroke="#555" stroke-width="1.3" marker-end="url(#a1)"/>
+            <line x1="188" y1="22" x2="198" y2="22" stroke="#555" stroke-width="1.3" marker-end="url(#a1)"/>
+            <rect x="134" y="52" width="142" height="22" rx="4" fill="#fff" stroke="#e8a43a"/>
+            <text x="205"  y="63" text-anchor="middle" font-size="7.5" font-weight="600" fill="#9a6010">original_soul (immutable)</text>
+            <text x="205"  y="72" text-anchor="middle" font-size="7" fill="#b07010">current_identity · snapshots</text>
+            <line x1="237" y1="38" x2="237" y2="52" stroke="#c8830a" stroke-width="1.2" stroke-dasharray="3 3" marker-end="url(#a2)"/>
+            <text x="2" y="60" font-size="8" fill="#555">One LLM call</text>
+            <text x="2" y="71" font-size="8" fill="#555">per tick. Reflect</text>
+            <text x="2" y="82" font-size="8" fill="#555">is off-path.</text>
+          </svg>
+        </div>
+        <p class="note"><strong>Design:</strong> 3 scarcity arms (base_drain ×1 / ×2 / ×3) × 3 seeds × 300 ticks, 25 agents each. Model: Claude Haiku on Bedrock. Directional (n small) — full matrix running now.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span>MircoVerse &nbsp;·&nbsp; Independent project &nbsp;·&nbsp; Work in progress, 2026 &nbsp;·&nbsp; <a href="https://skyngexe.github.io/personal_site"><strong>skyngexe.github.io/personal_site</strong></a></span>
+    <span>Stack: Python · PostgreSQL · Claude API · FastAPI</span>
+  </footer>
+
+</div>
+</body>
+</html>

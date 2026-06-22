@@ -1,0 +1,49 @@
+# ── Python ───────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+.mypy_cache/
+.ruff_cache/
+
+# ── Node / frontend ──────────────────────────────────────────────────────
+# (ui/public/ game art IS tracked — only build output & deps are ignored)
+ui/node_modules/
+ui/dist/
+ui/_discarded_assets/
+node_modules/
+
+# ── Secrets / local config ─────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+.claude/settings.local.json
+
+# ── Generated artifacts ────────────────────────────────────────────────────
+# generated PDFs (regenerate via scripts/make_pdf.py)
+dist/
+# generated from one-pager.html
+explanations/one-pager.pdf
+
+# ── Superseded prototype (kept locally for reference, not shared) ──────────
+_legacy/
+
+# ── Large local media not part of the repo ─────────────────────────────────
+# upstream paper (12 MB); download separately
+Generative*Agents.pdf
+# scratch screenshots at repo root
+Screenshot*.png
+
+# ── Run data: keep curated results + seeds, drop raw logs & backups ─────────
+*.log
+data/overnight_logs/
+data/runs_legacy_oasis_DISCREDITED/
+data/runs_smoke_backup_40t/
+data/personas_backup_*/
+data/runs/postfix_clean/
+
+# ── OS / editor cruft ──────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
