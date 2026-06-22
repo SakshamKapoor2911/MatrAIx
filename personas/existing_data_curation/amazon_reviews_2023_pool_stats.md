@@ -85,44 +85,6 @@ counts over the full May 1996-Sep 2023 dataset. It is not restricted to the
 | 33 | `Magazine_Subscriptions` | 71.5K |
 | 34 | `Subscription_Boxes` | 16.2K |
 
-## Pool Definitions
-
-### Standard Pool
-
-- 2018-2023 reviews
-- >=30 reviews
-- >=2 categories
-- >=365 days history
-- >=5000 review text characters
-- verified_purchase_share >=0.7
-
-### Stricter Pool
-
-- 2018-2023 reviews
-- >=50 reviews
-- >=2 categories
-- >=365 days history
-- >=10000 review text characters
-- verified_purchase_share >=0.7
-
-### Stricter Pool, 2-Year Verified>=0.8
-
-- 2018-2023 reviews
-- >=50 reviews
-- >=2 categories
-- >=730 days history
-- >=10000 review text characters
-- verified_purchase_share >=0.8
-
-### Stricter Pool, Cat>=3 Reference
-
-- 2018-2023 reviews
-- >=50 reviews
-- >=3 categories
-- >=730 days history
-- >=10000 review text characters
-- verified_purchase_share >=0.8
-
 ## Pool Summary
 
 The user pools below are computed from the following categories only:
@@ -134,24 +96,12 @@ this window are excluded from review counts, category counts, history span,
 review text character counts, and verified-purchase share. Average rating is
 reported in candidate records but is not used for pool selection.
 
-| Pool | Users | >=100 reviews | >=200 reviews | >=5 categories | verified_share >=0.9 |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| Standard pool | 247,891 | 19,112 | 3,577 | 159,227 | 198,163 |
-| Stricter pool | 64,855 | 16,593 | 3,417 | 46,696 | 48,185 |
-| Stricter pool, 2-year verified>=0.8 | 57,765 | 14,340 | 2,770 | 42,169 | 47,137 |
-| Stricter pool, cat>=3 reference | 55,032 | 13,204 | 2,399 | 42,169 | 45,160 |
-
-## Category Coverage
-
-| Category | Standard users | Stricter users | Stricter 2-year verified>=0.8 users | Stricter cat>=3 users |
-| --- | ---: | ---: | ---: | ---: |
-| `Books` | 168,237 | 51,277 | 45,041 | 42,685 |
-| `Kindle_Store` | 83,112 | 29,583 | 24,321 | 21,870 |
-| `Movies_and_TV` | 94,014 | 29,207 | 26,341 | 26,280 |
-| `Electronics` | 211,491 | 54,430 | 49,501 | 49,416 |
-| `Office_Products` | 185,994 | 49,771 | 45,676 | 45,657 |
-| `Home_and_Kitchen` | 234,364 | 58,805 | 53,172 | 52,926 |
-| `Clothing_Shoes_and_Jewelry` | 231,228 | 57,917 | 52,499 | 52,251 |
+| Pool | Definition | Users |
+| --- | --- | ---: |
+| Standard pool | >=30 reviews; >=2 categories; >=365 days history; >=5000 review text characters; verified_purchase_share >=0.7 | 247,891 |
+| Stricter pool | >=50 reviews; >=2 categories; >=365 days history; >=10000 review text characters; verified_purchase_share >=0.7 | 64,855 |
+| Stricter pool, 2-year verified>=0.8 | >=50 reviews; >=2 categories; >=730 days history; >=10000 review text characters; verified_purchase_share >=0.8 | 57,765 |
+| Stricter pool, cat>=3 reference | >=50 reviews; >=3 categories; >=730 days history; >=10000 review text characters; verified_purchase_share >=0.8 | 55,032 |
 
 ## Generated Output Files
 
@@ -163,11 +113,3 @@ are not committed to the repository.
 - Stricter pool, 2-year verified>=0.8: `raw/amazon_reviews_2023/exploration/application_large_2018_2023_min30_1y_5k_verified70/candidate_users_strict_min50_cat2_2y_10k_verified80.jsonl`
 - Stricter cat>=3 reference: `raw/amazon_reviews_2023/exploration/application_large_2018_2023_min30_1y_5k_verified70/candidate_users_strict_min50_cat3_2y_10k_verified80.jsonl`
 - Run summary: `raw/amazon_reviews_2023/exploration/application_large_2018_2023_min30_1y_5k_verified70/summary.json`
-
-## Recommendation
-
-Use the stricter pool with at least 2 categories as the main persona-construction
-pool when preserving a larger pool matters. Use the 2-year verified>=0.8 pool
-when longer histories and stronger verified-purchase reliability matter more.
-Keep the standard pool for broader ablations and the stricter cat>=3 pool as a
-higher-diversity reference subset.
