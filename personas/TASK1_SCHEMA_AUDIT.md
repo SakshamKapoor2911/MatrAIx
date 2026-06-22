@@ -44,6 +44,21 @@ Local prototype status:
 - no narrative expansion was run;
 - mappings are draft only and should be reviewed before reuse.
 
+## Needs Review
+
+The local prototype intentionally marks uncertain mappings instead of treating them as final. These are the current review points:
+
+| Area | Current prototype behavior | Why review is needed |
+| --- | --- | --- |
+| `urbanicity` | Left unsupported for all 1,000 records. | `PUMA` alone is not enough; needs a PUMA-to-urbanicity or similar geographic crosswalk. |
+| `domain` | Draft mapped from broad `INDP` industry ranges. | Industry ranges are coarse and may not match MatrAIx domain semantics. |
+| `role_function` | Draft mapped from broad `OCCP` occupation ranges. | Occupation codes need a reviewed SOC/occupation crosswalk before use. |
+| `demo_children_count` | Draft mapped from housing `NOC`. | Household children count may not equal the sampled person's own children; derivation needs care. |
+| `primary_language` | Draft mapped from `LANP`, `LANX`, and household `HHL`. | Some `LANP` codes are not in MatrAIx language values; household language may not equal person language. |
+| Sensitive demographics | Mapped only from explicit ACS fields. | Downstream behavior-grounded sources should not infer these from weak behavioral signals. |
+
+Recommended reviewers: Task 1 schema owners for domain semantics, ACS/PUMS owner for Census variable interpretation, and Amazon/behavior-grounded owners for evidence and leakage requirements.
+
 ## Requirements
 
 ### 1. Real-data records must preserve provenance
