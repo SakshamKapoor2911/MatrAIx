@@ -85,44 +85,6 @@ counts over the full May 1996-Sep 2023 dataset. It is not restricted to the
 | 33 | `Magazine_Subscriptions` | 71.5K |
 | 34 | `Subscription_Boxes` | 16.2K |
 
-## Pool Definitions
-
-### Standard Pool
-
-- 2018-2023 reviews
-- >=30 reviews
-- >=2 categories
-- >=365 days history
-- >=5000 review text characters
-- verified_purchase_share >=0.7
-
-### Stricter Pool
-
-- 2018-2023 reviews
-- >=50 reviews
-- >=2 categories
-- >=365 days history
-- >=10000 review text characters
-- verified_purchase_share >=0.7
-
-### Stricter Pool, 2-Year Verified>=0.8
-
-- 2018-2023 reviews
-- >=50 reviews
-- >=2 categories
-- >=730 days history
-- >=10000 review text characters
-- verified_purchase_share >=0.8
-
-### Stricter Pool, Cat>=3 Reference
-
-- 2018-2023 reviews
-- >=50 reviews
-- >=3 categories
-- >=730 days history
-- >=10000 review text characters
-- verified_purchase_share >=0.8
-
 ## Pool Summary
 
 The user pools below are computed from the following categories only:
@@ -134,12 +96,12 @@ this window are excluded from review counts, category counts, history span,
 review text character counts, and verified-purchase share. Average rating is
 reported in candidate records but is not used for pool selection.
 
-| Pool | Users |
-| --- | ---: |
-| Standard pool | 247,891 |
-| Stricter pool | 64,855 |
-| Stricter pool, 2-year verified>=0.8 | 57,765 |
-| Stricter pool, cat>=3 reference | 55,032 |
+| Pool | Definition | Users |
+| --- | --- | ---: |
+| Standard pool | >=30 reviews; >=2 categories; >=365 days history; >=5000 review text characters; verified_purchase_share >=0.7 | 247,891 |
+| Stricter pool | >=50 reviews; >=2 categories; >=365 days history; >=10000 review text characters; verified_purchase_share >=0.7 | 64,855 |
+| Stricter pool, 2-year verified>=0.8 | >=50 reviews; >=2 categories; >=730 days history; >=10000 review text characters; verified_purchase_share >=0.8 | 57,765 |
+| Stricter pool, cat>=3 reference | >=50 reviews; >=3 categories; >=730 days history; >=10000 review text characters; verified_purchase_share >=0.8 | 55,032 |
 
 ## Generated Output Files
 
