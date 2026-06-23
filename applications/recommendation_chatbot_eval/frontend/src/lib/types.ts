@@ -63,15 +63,30 @@ export interface ConfigKnob {
 }
 
 /**
+ * Read-only prompt ownership facts for Harbor-backed persona eval runs.
+ * Harbor injects the persona identity as the system prompt; this application
+ * supplies the recommender simulation task prompt.
+ */
+export interface PromptOwnership {
+  personaSystemPrompt: string;
+  taskPrompt: string;
+}
+
+/**
  * Read-only facts about the fixed parts of the stack (the "Environment" facts
- * popover). Mirrors the backend `ConfigEnvironment`: the ranker (native SASRec),
- * the resource bundle (`all_resources`), and the agent (`InteRecAgent`) are not
- * user-configurable.
+ * popover). Mirrors the backend `ConfigEnvironment`: Harbor owns the runtime
+ * persona-agent loop, this app exposes the rec-agent-api sidecar, and the
+ * ranker/resource/agent stack and prompt boundary are not user-configurable.
  */
 export interface ConfigEnvironment {
+  runtime: string;
+  personaAgent: string;
+  applicationApi: string;
+  cache: string;
   ranker: string;
   resources: string;
   agent: string;
+  promptOwnership: PromptOwnership;
 }
 
 /**
@@ -363,6 +378,14 @@ export interface PersonaEvalMetricScores {
   recommendedItemCount: number;
 }
 
+/** Prompt texts used by a Harbor-backed persona-eval run. */
+export interface PersonaEvalPrompts {
+  /** Harbor persona YAML `system_prompt` text. */
+  harborPrompt: string;
+  /** Application-owned task-specific prompt passed as Harbor extra instruction. */
+  taskPrompt: string;
+}
+
 /**
  * Live view of a persona-eval job. Mirrors `PersonaEvalProgress.to_view()` on
  * the backend. `turns` are full `TurnView`s (same shape the manual chat
@@ -382,6 +405,7 @@ export interface PersonaEvalJobView {
   turns: TurnView[];
   questionnaire: PersonaEvalQuestionnaire | null;
   metricScores: PersonaEvalMetricScores | null;
+  prompts: PersonaEvalPrompts | null;
   error: string | null;
 }
 
@@ -427,4 +451,5 @@ export interface PersonaEvalResult {
   recommendedItemIds: Record<string, unknown>;
   questionnaire: PersonaEvalQuestionnaire | null;
   metricScores: PersonaEvalMetricScores | null;
+  prompts?: PersonaEvalPrompts | null;
 }

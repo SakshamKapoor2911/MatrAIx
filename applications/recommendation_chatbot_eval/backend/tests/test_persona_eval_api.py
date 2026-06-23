@@ -59,6 +59,10 @@ class _FakePersonaEvalService:
             ],
             "questionnaire": None,
             "metricScores": None,
+            "prompts": {
+                "harborPrompt": "Harbor persona prompt",
+                "taskPrompt": "Application task prompt",
+            },
             "error": None,
         }
 
@@ -102,6 +106,10 @@ class _FakePersonaEvalService:
             "recommendedItemIds": {"perTurn": [["6574"]], "final": ["6574"]},
             "questionnaire": {"overallRating": 8},
             "metricScores": {"numTurns": 1},
+            "prompts": {
+                "harborPrompt": "Harbor persona prompt",
+                "taskPrompt": "Application task prompt",
+            },
         }
 
 
@@ -274,6 +282,10 @@ def test_get_persona_eval_job_view(client, fake_persona_eval):
     assert body["goalContextId"] == "scenario_default"
     assert len(body["turns"]) == 1
     assert body["turns"][0]["recommendedItems"][0]["itemId"] == "6574"
+    assert body["prompts"] == {
+        "harborPrompt": "Harbor persona prompt",
+        "taskPrompt": "Application task prompt",
+    }
 
 
 def test_get_persona_eval_job_unknown_404(client, fake_persona_eval):
@@ -308,6 +320,10 @@ def test_get_persona_eval_run(client, fake_persona_eval):
     assert body["questionnaire"]["overallRating"] == 8
     assert body["transcript"][0]["recommendedItems"][0]["id"] == "6574"
     assert body["recommendedItemIds"]["final"] == ["6574"]
+    assert body["prompts"] == {
+        "harborPrompt": "Harbor persona prompt",
+        "taskPrompt": "Application task prompt",
+    }
 
 
 def test_get_persona_eval_run_unknown_404(client, fake_persona_eval):

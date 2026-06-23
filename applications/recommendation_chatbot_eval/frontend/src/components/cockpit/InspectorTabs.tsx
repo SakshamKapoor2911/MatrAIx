@@ -16,11 +16,12 @@ import { useRef } from "react";
 
 import { FOCUS_RING, Sym } from "./cockpitShared";
 
-export type InspectorTab = "evaluation" | "persona";
+export type InspectorTab = "evaluation" | "persona" | "prompts";
 
 const TABS: ReadonlyArray<{ id: InspectorTab; label: string; icon: string }> = [
   { id: "evaluation", label: "Evaluation", icon: "verified" },
   { id: "persona", label: "Persona", icon: "person" },
+  { id: "prompts", label: "Prompts", icon: "terminal" },
 ];
 
 export interface InspectorTabsProps {
@@ -29,9 +30,10 @@ export interface InspectorTabsProps {
   /** Panel content keyed by tab id. */
   evaluation: React.ReactNode;
   persona: React.ReactNode;
+  prompts: React.ReactNode;
 }
 
-export function InspectorTabs({ active, onChange, evaluation, persona }: InspectorTabsProps) {
+export function InspectorTabs({ active, onChange, evaluation, persona, prompts }: InspectorTabsProps) {
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
   function focusTab(index: number) {
@@ -109,6 +111,14 @@ export function InspectorTabs({ active, onChange, evaluation, persona }: Inspect
           hidden={active !== "persona"}
         >
           {active === "persona" && persona}
+        </div>
+        <div
+          role="tabpanel"
+          id="inspector-panel-prompts"
+          aria-labelledby="inspector-tab-prompts"
+          hidden={active !== "prompts"}
+        >
+          {active === "prompts" && prompts}
         </div>
       </div>
     </aside>

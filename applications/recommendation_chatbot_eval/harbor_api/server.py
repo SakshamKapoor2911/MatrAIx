@@ -56,6 +56,8 @@ class MessageRequest(SessionRequest):
 
 _state_lock = threading.Lock()
 _state: Any = None
+_ready_lock = threading.Lock()
+_ready_domains: set[str] = set()
 
 
 def reset_state_for_tests() -> None:
@@ -74,6 +76,17 @@ def get_state() -> Any:
         if _state is None:
             _state = build_state()
         return _state
+
+
+def warm_recommender(domain: str) -> None:
+    """Preload the native RecAI agent so health gating covers first-turn cost."""
+    with _ready_lock:
+        if domain in _ready_domains:
+            return
+        from recbot.interecagent_bridge import warmup
+
+        warmup(domain)
+        _ready_domains.add(domain)
 
 
 def _config_from_request(body: SessionRequest) -> Dict[str, str]:
@@ -146,6 +159,22 @@ app = FastAPI(
 @app.get("/v1/health")
 def health() -> Dict[str, Any]:
     return {"status": "ok", "supportedDomains": list(SUPPORTED_DOMAINS)}
+
+
+@app.get("/ready")
+@app.get("/v1/ready")
+def ready(domain: str = Query(default=ConfigManager.DEFAULTS["domain"])) -> Dict[str, Any]:
+    if domain not in SUPPORTED_DOMAINS:
+        raise HTTPException(
+            status_code=422,
+            detail="domain must be one of: {}".format(", ".join(SUPPORTED_DOMAINS)),
+        )
+    try:
+        get_state()
+        warm_recommender(domain)
+    except Exception as exc:  # noqa: BLE001 - readiness should surface root cause.
+        raise HTTPException(status_code=503, detail=str(exc))
+    return {"status": "ready", "domain": domain}
 
 
 @app.post("/v1/session")

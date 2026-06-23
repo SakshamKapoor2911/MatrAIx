@@ -129,10 +129,18 @@ class ConfigManager:
 
     #: Read-only facts about the fixed parts of the stack, surfaced alongside the
     #: editable knobs so the UI can show what is *not* configurable and why.
-    ENVIRONMENT: Dict[str, str] = {
+    ENVIRONMENT: Dict[str, object] = {
+        "runtime": "Harbor",
+        "personaAgent": "Harbor persona-claude-code",
+        "applicationApi": "rec-agent-api sidecar",
+        "cache": "Docker image + model cache volumes",
         "ranker": "SASRec (native)",
         "resources": "all_resources",
         "agent": "InteRecAgent",
+        "promptOwnership": {
+            "personaSystemPrompt": "Harbor native persona injection",
+            "taskPrompt": "Application-provided recommender simulation prompt",
+        },
     }
 
     def options(self) -> Dict[str, object]:

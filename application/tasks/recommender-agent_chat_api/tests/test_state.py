@@ -4,7 +4,7 @@ import json
 import os
 import sys
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Set
 
 
 OUTPUT_DIR = Path(os.environ.get("MATRIX_OUTPUT_DIR", "/app/output"))
@@ -73,6 +73,54 @@ def validate_recommended_items(items: Any) -> List[Dict[str, Any]]:
     return normalized
 
 
+def collect_grounded_item_ids(turns: Any) -> Set[str]:
+    if not isinstance(turns, list) or not turns:
+        fail("transcript.turns must contain real recbot turn objects")
+
+    item_ids: Set[str] = set()
+    for turn_index, turn in enumerate(turns):
+        if not isinstance(turn, dict):
+            fail("transcript.turns[{}] must be an object".format(turn_index))
+        items = turn.get("recommendedItems", [])
+        if not isinstance(items, list):
+            fail(
+                "transcript.turns[{}].recommendedItems must be a list".format(
+                    turn_index
+                )
+            )
+        for item_index, item in enumerate(items):
+            if not isinstance(item, dict):
+                fail(
+                    "transcript.turns[{}].recommendedItems[{}] must be an object".format(
+                        turn_index, item_index
+                    )
+                )
+            item_id = item.get("itemId", item.get("id"))
+            if item_id is not None and str(item_id).strip():
+                item_ids.add(str(item_id).strip())
+
+    if not item_ids:
+        fail("transcript.turns must include at least one recbot recommended item")
+    return item_ids
+
+
+def validate_recommendation_grounding(
+    recommended_items: List[Dict[str, Any]], grounded_item_ids: Set[str]
+) -> None:
+    missing = [
+        item["itemId"]
+        for item in recommended_items
+        if item["itemId"] not in grounded_item_ids
+    ]
+    if missing:
+        fail(
+            "recommendation_result.recommendedItems must be grounded in "
+            "transcript.turns recommendedItems; missing ids: {}".format(
+                ", ".join(missing[:5])
+            )
+        )
+
+
 def validate_feedback(feedback: Dict[str, Any]) -> None:
     for key in (
         "productNeedConstraintSatisfaction",
@@ -102,7 +150,9 @@ def main() -> int:
         fail("transcript and recommendation result domain differ")
 
     validate_messages(transcript.get("messages"))
-    validate_recommended_items(result.get("recommendedItems"))
+    grounded_item_ids = collect_grounded_item_ids(transcript.get("turns"))
+    recommended_items = validate_recommended_items(result.get("recommendedItems"))
+    validate_recommendation_grounding(recommended_items, grounded_item_ids)
 
     turns_to_recommendation = result.get("turnsToRecommendation")
     if not isinstance(turns_to_recommendation, int) or turns_to_recommendation < 1:

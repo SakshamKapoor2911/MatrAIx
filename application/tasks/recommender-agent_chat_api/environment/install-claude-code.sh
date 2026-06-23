@@ -3,14 +3,19 @@ set -euo pipefail
 
 export DEBIAN_FRONTEND=noninteractive
 
-apt-get update
-apt-get install -y --no-install-recommends \
-    ca-certificates \
-    curl \
-    procps \
-    python3 \
-    python3-pip
-rm -rf /var/lib/apt/lists/*
+if ! command -v curl >/dev/null \
+    || ! command -v ps >/dev/null \
+    || ! command -v python3 >/dev/null \
+    || ! command -v pip >/dev/null; then
+    apt-get update
+    apt-get install -y --no-install-recommends \
+        ca-certificates \
+        curl \
+        procps \
+        python3 \
+        python3-pip
+    rm -rf /var/lib/apt/lists/*
+fi
 
 curl -fsSL https://downloads.claude.ai/claude-code-releases/bootstrap.sh | bash -s --
 echo 'export PATH="/root/.local/bin:$PATH"' >> /root/.bashrc

@@ -79,7 +79,24 @@ def test_options_defaults_are_full_config(config_manager):
 
 def test_options_environment_block(config_manager):
     env = config_manager.options()["environment"]
-    assert set(env.keys()) == {"ranker", "resources", "agent"}
+    assert set(env.keys()) == {
+        "runtime",
+        "personaAgent",
+        "applicationApi",
+        "cache",
+        "ranker",
+        "resources",
+        "agent",
+        "promptOwnership",
+    }
+    assert env["runtime"] == "Harbor"
+    assert env["personaAgent"] == "Harbor persona-claude-code"
+    assert env["applicationApi"] == "rec-agent-api sidecar"
+    assert env["cache"] == "Docker image + model cache volumes"
     assert "SASRec" in env["ranker"]
     assert env["resources"] == "all_resources"
     assert env["agent"] == "InteRecAgent"
+    assert env["promptOwnership"] == {
+        "personaSystemPrompt": "Harbor native persona injection",
+        "taskPrompt": "Application-provided recommender simulation prompt",
+    }

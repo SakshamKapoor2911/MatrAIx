@@ -16,21 +16,32 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     && rm -rf /var/lib/apt/lists/*
 
-COPY . /app
+COPY backend/requirements.txt /tmp/backend-requirements.txt
+COPY scripts/setup_resources.py /app/scripts/setup_resources.py
 
-RUN if [ ! -d /app/recai/InteRecAgent/llm4crs ]; then \
-      rm -rf /app/recai && \
-      git clone https://github.com/microsoft/RecAI.git /app/recai && \
-      cd /app/recai && \
-      git checkout "${RECAI_COMMIT}"; \
-    fi
+RUN git clone https://github.com/microsoft/RecAI.git /app/recai && \
+    cd /app/recai && \
+    git checkout "${RECAI_COMMIT}"
 
-RUN python -m pip install --no-cache-dir --upgrade pip setuptools wheel && \
+RUN python -m pip install --no-cache-dir --upgrade pip "setuptools<81" wheel && \
     python -m pip install --no-cache-dir gdown "numpy<2" && \
-    python -m pip install --no-cache-dir -r /app/recai/InteRecAgent/requirements.txt && \
-    python -m pip install --no-cache-dir -r /app/backend/requirements.txt
+    grep -v -E '^(--extra-index-url|torch[<=>])' \
+      /app/recai/InteRecAgent/requirements.txt > /tmp/recai-requirements-docker.txt && \
+    python -m pip install --no-cache-dir \
+      --index-url https://download.pytorch.org/whl/cpu \
+      "torch==1.13.1+cpu" \
+      "torchvision==0.14.1+cpu" && \
+    python -m pip install --no-cache-dir -r /tmp/recai-requirements-docker.txt && \
+    python -m pip install --no-cache-dir \
+      "setuptools<81" \
+      "huggingface_hub>=0.14,<0.17" \
+      "accelerate<0.20" \
+      "transformers==4.27.4" && \
+    python -m pip install --no-cache-dir -r /tmp/backend-requirements.txt
 
 RUN python /app/scripts/setup_resources.py
+
+COPY . /app
 
 EXPOSE 8000
 

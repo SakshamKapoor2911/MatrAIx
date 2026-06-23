@@ -129,16 +129,24 @@ class ConfigKnob(BaseModel):
 class ConfigEnvironment(BaseModel):
     """Read-only facts about the fixed parts of the stack.
 
-    The ranker (native SASRec), the resource bundle (``all_resources``), and the
-    agent (``InteRecAgent``) are not user-configurable; they are reported so the
-    UI can show what is fixed and why.
+    ``runtime`` / ``personaAgent`` / ``applicationApi`` report the Harbor-backed
+    execution boundary. The ranker (native SASRec), the resource bundle
+    (``all_resources``), and the agent (``InteRecAgent``) are not
+    user-configurable. ``promptOwnership`` reports the prompt boundary for
+    Harbor runs: Harbor owns persona system prompt injection, while this
+    application owns the task-specific simulation prompt.
     """
 
     model_config = ConfigDict(extra="allow")
 
+    runtime: str
+    personaAgent: str
+    applicationApi: str
+    cache: str
     ranker: str
     resources: str
     agent: str
+    promptOwnership: Dict[str, str]
 
 
 class ConfigOptionsResponse(BaseModel):
@@ -481,6 +489,7 @@ class PersonaEvalJobView(BaseModel):
     turns: List[TurnView] = Field(default_factory=list)
     questionnaire: Optional[Dict[str, Any]] = None
     metricScores: Optional[Dict[str, Any]] = None
+    prompts: Optional[Dict[str, str]] = None
     error: Optional[str] = None
 
 
@@ -534,3 +543,4 @@ class PersonaEvalResultView(BaseModel):
     recommendedItemIds: Dict[str, Any] = Field(default_factory=dict)
     questionnaire: Optional[Dict[str, Any]] = None
     metricScores: Optional[Dict[str, Any]] = None
+    prompts: Optional[Dict[str, str]] = None

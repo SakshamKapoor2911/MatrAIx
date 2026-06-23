@@ -117,6 +117,19 @@ def test_message_creates_session_when_omitted(monkeypatch):
     assert body["turn"]["conversationId"] == "ses_1"
 
 
+def test_ready_prewarms_native_recommender(monkeypatch):
+    client, _fake_state = client_with_fake_state(monkeypatch)
+    warmed = []
+
+    monkeypatch.setattr(server, "warm_recommender", warmed.append)
+
+    response = client.get("/ready", params={"domain": "game"})
+
+    assert response.status_code == 200
+    assert response.json() == {"status": "ready", "domain": "game"}
+    assert warmed == ["game"]
+
+
 def test_message_appends_to_existing_conversation(monkeypatch):
     client, _fake_state = client_with_fake_state(monkeypatch)
     session = client.post("/v1/session", json={"domain": "movie"}).json()

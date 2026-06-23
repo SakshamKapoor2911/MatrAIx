@@ -11,7 +11,6 @@ from typing import Any
 
 
 APP_ROOT = Path(__file__).resolve().parents[1]
-REPO_ROOT = APP_ROOT.parents[1]
 if str(APP_ROOT) not in sys.path:
     sys.path.insert(0, str(APP_ROOT))
 
@@ -80,6 +79,19 @@ def _agent_cache_key(domain: str) -> tuple[str, ...]:
         os.environ.get("INTERECAGENT_ENGINE", "gpt-4o-mini"),
         os.environ.get("INTERECAGENT_BOT_TYPE", "chat"),
     )
+
+
+def warmup(domain: str) -> None:
+    """Load and cache the native InterecAgent for ``domain`` without a turn."""
+    interecagent_root = os.environ.get("INTERECAGENT_ROOT") or str(default_interecagent_root())
+    _prepare_imports(
+        interecagent_root,
+        domain,
+        require_resources=True,
+    )
+    cache_key = _agent_cache_key(domain)
+    if _AGENT_CACHE.get(cache_key) is None:
+        _AGENT_CACHE[cache_key] = _build_interecagent(domain)
 
 
 def _force_hard_filter_selectable_sql(sql: str) -> str:

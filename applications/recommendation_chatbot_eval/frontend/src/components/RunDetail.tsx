@@ -15,6 +15,7 @@ import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import { RatingChip } from "./RatingChip";
+import { PromptPanel } from "./cockpit/PromptPanel";
 import { Scorecard } from "./cockpit/Scorecard";
 import {
   DomainPill,
@@ -134,6 +135,16 @@ function RunDetailBody({ run, runId }: { run: ReturnType<typeof asRunDetail>; ru
           This run finished without a recorded evaluation.
         </section>
       )}
+
+      {/* Prompts */}
+      <section className="mt-5">
+        <div className="mb-2.5 text-label-md font-label-md uppercase tracking-wider text-on-surface-variant">
+          Prompts
+        </div>
+        <div className="-mx-md">
+          <PromptPanel prompts={run.prompts ?? null} />
+        </div>
+      </section>
     </>
   );
 }

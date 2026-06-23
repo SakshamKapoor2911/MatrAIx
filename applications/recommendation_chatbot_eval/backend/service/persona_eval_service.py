@@ -1,8 +1,8 @@
-"""Run a persona persona-eval as a background job with live progress.
+"""Run a persona-eval as a background job with live progress.
 
-Persona-eval execution is serialized process-globally (`_RUN_LOCK`): the in-process
-RecAI agent and ``os.environ`` are shared across sessions, so only one persona-eval
-may drive RecAI at a time.
+Persona-eval execution is serialized process-globally (`_RUN_LOCK`) because the
+underlying recommender resources and process-level environment are expensive and
+partly shared across runs.
 """
 from __future__ import annotations
 
@@ -40,6 +40,16 @@ def _default_runs_dir() -> Path:
     return Path(repo_root) / "data" / "cache" / "recommendation_chatbot_eval" / "persona_eval_runs"
 
 
+def _normalize_prompts(value: Any) -> Optional[Dict[str, str]]:
+    if not isinstance(value, dict):
+        return None
+    prompts: Dict[str, str] = {}
+    for key in ("harborPrompt", "taskPrompt"):
+        if key in value and value[key] is not None:
+            prompts[key] = str(value[key])
+    return prompts or None
+
+
 @dataclass
 class PersonaEvalProgress:
     job_id: str
@@ -53,6 +63,7 @@ class PersonaEvalProgress:
     turns: List[Dict[str, Any]] = field(default_factory=list)
     questionnaire: Optional[Dict[str, Any]] = None
     metric_scores: Optional[Dict[str, Any]] = None
+    prompts: Optional[Dict[str, str]] = None
     error: Optional[str] = None
 
     def to_view(self) -> Dict[str, Any]:
@@ -62,6 +73,7 @@ class PersonaEvalProgress:
             "goalContextId": self.goal_context_id,
             "status": self.status, "phase": self.phase, "turns": list(self.turns),
             "questionnaire": self.questionnaire, "metricScores": self.metric_scores,
+            "prompts": self.prompts,
             "error": self.error,
         }
 
@@ -87,9 +99,8 @@ class PersonaEvalService:
               goal_context_id: str = "scenario_default",
               *, now: Callable[[], str], engine: Optional[str] = None) -> str:
         # Persona is domain-free: any persona may run against any domain.
-        # ``engine`` drives BOTH the recommender (per-run ``INTERECAGENT_ENGINE``)
-        # and the user-simulator's OpenAI model; ``None`` keeps the service
-        # default so existing callers are unchanged.
+        # ``engine`` drives the recommender side of the run; ``None`` keeps the
+        # service default so existing callers are unchanged.
         persona = self._get_persona(persona_id)
         run_engine = engine or self._engine
         job_id = _new_persona_eval_id()
@@ -213,21 +224,39 @@ class PersonaEvalService:
                     elif etype == "turn":
                         with self._guard:
                             progress.turns = list(getattr(session, "turns", progress.turns))
+                    elif etype == "prompts":
+                        prompts = _normalize_prompts(event.get("prompts"))
+                        with self._guard:
+                            progress.prompts = prompts
                     elif etype == "done":
                         result = event.get("result") or {}
                         questionnaire = result.get("questionnaire")
                         metric_scores = result.get("metricScores")
+                        prompts = _normalize_prompts(result.get("prompts"))
                         with self._guard:
                             progress.questionnaire = questionnaire
                             progress.metric_scores = metric_scores
+                            if prompts is not None:
+                                progress.prompts = prompts
 
                 result = self._runner(
                     session, persona, progress.sut_description, config,
                     self._simulator_factory(engine, progress.goal_context_id, progress.domain),
                     created_at=now(), on_event=on_event)
                 self._persist_run(progress.job_id, result)
+                try:
+                    result_payload = result.to_dict()
+                except Exception:  # noqa: BLE001 - progress can finish without rich result metadata
+                    result_payload = {}
                 with self._guard:
                     progress.turns = list(getattr(session, "turns", progress.turns))
+                    if "questionnaire" in result_payload:
+                        progress.questionnaire = result_payload.get("questionnaire")
+                    if "metricScores" in result_payload:
+                        progress.metric_scores = result_payload.get("metricScores")
+                    prompts = _normalize_prompts(result_payload.get("prompts"))
+                    if prompts is not None:
+                        progress.prompts = prompts
                     progress.phase = None
                     progress.status = "done"
             except BaseException as exc:  # noqa: BLE001 - surface any failure to the client

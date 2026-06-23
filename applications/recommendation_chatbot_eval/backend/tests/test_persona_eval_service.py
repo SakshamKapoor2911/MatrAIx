@@ -66,6 +66,91 @@ def test_start_runs_and_streams_turns_then_done(tmp_path):
     assert view["metricScores"]["turnsToRecommendation"] == 2
 
 
+def test_runner_return_populates_final_progress_without_done_event(tmp_path):
+    def runner_without_done(session, persona, sut, config, simulator, *, created_at, on_event):
+        del simulator, on_event
+        session.turns.append({"turnId": "0", "userMessage": "u", "assistantMessage": "a"})
+        return PersonaEvalResult(
+            config=config,
+            persona=persona,
+            sut_description=sut,
+            transcript=[],
+            questionnaire=Questionnaire(3, "", 3, "", 6, "ok", True, ""),
+            metric_scores=MetricScores(1, 1, 0),
+            created_at=created_at,
+        )
+
+    svc = PersonaEvalService(
+        session_builder=lambda config: FakeSession(),
+        get_persona=lambda pid: _persona(),
+        sut_for=lambda d: "desc",
+        simulator_factory=lambda e, g, d2: object(),
+        runner=runner_without_done,
+        runs_dir=tmp_path,
+    )
+    job_id = svc.start("game", "game-x", 6, now=lambda: "t")
+    view = _wait_done(svc, job_id)
+    assert view["status"] == "done"
+    assert view["questionnaire"]["overallRating"] == 6
+    assert view["metricScores"]["numTurns"] == 1
+
+
+def test_prompt_event_and_result_prompts_reach_progress_and_persistence(tmp_path):
+    class ResultWithPrompts:
+        def __init__(self, config, persona, sut, created_at):
+            self.config = config
+            self.persona = persona
+            self.sut = sut
+            self.created_at = created_at
+
+        def to_dict(self):
+            return {
+                "config": self.config.to_dict(),
+                "persona": self.persona.to_dict(),
+                "sutDescription": self.sut,
+                "transcript": [],
+                "recommendedItemIds": {"perTurn": [], "final": []},
+                "questionnaire": {"overallRating": 7},
+                "metricScores": {"numTurns": 0},
+                "createdAt": self.created_at,
+                "prompts": {
+                    "harborPrompt": "Harbor persona prompt",
+                    "taskPrompt": "Application task prompt",
+                },
+            }
+
+    def runner_with_prompts(session, persona, sut, config, simulator, *, created_at, on_event):
+        del session, simulator
+        on_event({
+            "type": "prompts",
+            "prompts": {
+                "harborPrompt": "Harbor persona prompt",
+                "taskPrompt": "Application task prompt",
+            },
+        })
+        return ResultWithPrompts(config, persona, sut, created_at)
+
+    svc = PersonaEvalService(
+        session_builder=lambda config: FakeSession(),
+        get_persona=lambda pid: _persona(),
+        sut_for=lambda d: "desc",
+        simulator_factory=lambda e, g, d2: object(),
+        runner=runner_with_prompts,
+        runs_dir=tmp_path,
+    )
+
+    job_id = svc.start("game", "game-x", 6, now=lambda: "t")
+    view = _wait_done(svc, job_id)
+
+    assert view["status"] == "done"
+    assert view["prompts"] == {
+        "harborPrompt": "Harbor persona prompt",
+        "taskPrompt": "Application task prompt",
+    }
+    stored = json.loads((tmp_path / "{}.json".format(job_id)).read_text())
+    assert stored["prompts"] == view["prompts"]
+
+
 def test_goal_context_id_defaults_and_reaches_factory(tmp_path):
     record = []
     svc = _service(record, runs_dir=tmp_path)

@@ -22,20 +22,26 @@ uv venv --python 3.9 .venv
 
 APP=applications/recommendation_chatbot_eval
 
-# 2. torch 1.13.1 CPU first (before requirements.txt, which pulls a cu113 build)
-uv pip install --python .venv/bin/python "torch==1.13.1" \
-  --index-url https://download.pytorch.org/whl/cpu
+# 2. Filter RecAI's CUDA torch requirement for CPU-only local/Harbor runs
+grep -v -E '^(--extra-index-url|torch[<=>])' \
+  "$APP/recai/InteRecAgent/requirements.txt" > /tmp/recai-requirements-local.txt
 
-# 3. RecAI engine deps
-uv pip install --python .venv/bin/python -r "$APP/recai/InteRecAgent/requirements.txt"
+# 3. torch / torchvision CPU first
+uv pip install --python .venv/bin/python \
+  --index-url https://download.pytorch.org/whl/cpu \
+  "torch==1.13.1+cpu" \
+  "torchvision==0.14.1+cpu"
 
-# 4. Re-pin torch to the CPU build (requirements.txt overrides it with cu113)
-uv pip install --python .venv/bin/python "torch==1.13.1" \
-  --index-url https://download.pytorch.org/whl/cpu
+# 4. RecAI engine deps
+uv pip install --python .venv/bin/python -r /tmp/recai-requirements-local.txt
 
-# 5. Pin huggingface_hub / accelerate for sentence-transformers 2.2.2 compatibility
+# 5. Re-pin RecAI-era runtime compatibility deps
 #    (st 2.2.2 needs hub<0.17's cached_download; accelerate 1.2.x needs hub>=0.22 — conflict)
-uv pip install --python .venv/bin/python "huggingface_hub>=0.14,<0.17" "accelerate<0.20"
+uv pip install --python .venv/bin/python \
+  "setuptools<81" \
+  "huggingface_hub>=0.14,<0.17" \
+  "accelerate<0.20" \
+  "transformers==4.27.4"
 
 # 6. Backend (FastAPI / pydantic v2 / uvicorn)
 uv pip install --python .venv/bin/python -r "$APP/backend/requirements.txt"
@@ -50,12 +56,13 @@ into your HuggingFace cache (`~/.cache/huggingface` by default; override with
 | Package | Version | Note |
 |---|---|---|
 | Python | 3.9.x | |
-| torch | 1.13.1+cpu | re-pinned in step 4 (requirements.txt installs the cu113 build) |
+| torch / torchvision | 1.13.1+cpu / 0.14.1+cpu | RecAI's cu113 requirement is filtered for CPU-only local/Harbor runs |
 | unirec | 0.0.1a4 | native SASRec ranker |
 | sentence-transformers | 2.2.2 | exact pin |
 | huggingface_hub | <0.17 (e.g. 0.16.4) | deviation: st 2.2.2 uses the removed `cached_download` API |
 | transformers | 4.27.4 | deviation: compatible with hub <0.17 |
 | accelerate | <0.20 (e.g. 0.19.0) | deviation: 1.2.x requires hub ≥0.22 |
+| setuptools | <81 | deviation: accelerate imports `pkg_resources` |
 | pandas | 2.0.3 | within the `<2.1` constraint; works with pandasql 0.7.3 |
 | fastapi / pydantic | 0.128.x / 2.13.x | backend |
 
@@ -67,3 +74,5 @@ into your HuggingFace cache (`~/.cache/huggingface` by default; override with
   filter tool failed and recommendations came back empty.
 - The in-repo RecAI path (`recai/InteRecAgent`) is resolved automatically via
   `recbot/paths.py`; there's no `INTERECAGENT_ROOT` to set.
+- The Harbor sidecar Dockerfile applies the same CPU-only filtering to RecAI's
+  requirements before installing dependencies.

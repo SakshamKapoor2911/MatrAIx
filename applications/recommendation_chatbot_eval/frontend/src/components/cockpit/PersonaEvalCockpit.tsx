@@ -5,12 +5,12 @@
  *   - LEFT   `PersonaCatalog` — the curated persona catalog;
  *   - CENTRE `RunHeader` + `RunConfigBar` + `Trajectory` — the run identity, the
  *     editable knobs / fixed-environment facts, and the pure conversation;
- *   - RIGHT  `InspectorTabs` — Evaluation (`Scorecard`) · Persona (`PersonaPanel`).
+ *   - RIGHT  `InspectorTabs` — Evaluation (`Scorecard`) · Persona (`PersonaPanel`) · Prompts.
  *
  * It owns the cross-component state (selected persona, run knobs, the run via
  * `usePersonaEval`, the inspector tab, the open tool-plan folds, the focused
  * turn) and the keyboard shortcuts the brief requires:
- *   R run / re-run · J/K move between turns · 1/2 switch inspector tab ·
+ *   R run / re-run · J/K move between turns · 1/2/3 switch inspector tab ·
  *   E expand / collapse all tool-plans.
  * Shortcuts are ignored while typing in a field. Transitions respect
  * `prefers-reduced-motion` via the global utility fallbacks in `index.css`.
@@ -30,6 +30,7 @@ import { InspectorTabs, type InspectorTab } from "./InspectorTabs";
 import { Scorecard } from "./Scorecard";
 import { PersonaPanel } from "./PersonaPanel";
 import { PersonaDrawer } from "./PersonaDrawer";
+import { PromptPanel } from "./PromptPanel";
 import { listGoalContexts } from "@/lib/api";
 import { usePersonaEval, type PersonaEvalRunPhase } from "@/lib/usePersonaEval";
 import type {
@@ -176,6 +177,7 @@ export function PersonaEvalCockpit({ options, onOpenRuns, onDomainChange }: Pers
   const hasRun = phase === "done" || phase === "error" || phase === "timeout";
   const questionnaire = job?.questionnaire ?? null;
   const metrics = job?.metricScores ?? null;
+  const prompts = job?.prompts ?? null;
 
   // --- Actions ------------------------------------------------------------
   const handleRun = useCallback(() => {
@@ -285,6 +287,10 @@ export function PersonaEvalCockpit({ options, onOpenRuns, onDomainChange }: Pers
           e.preventDefault();
           setTab("persona");
           break;
+        case "3":
+          e.preventDefault();
+          setTab("prompts");
+          break;
         case "e":
         case "E":
           e.preventDefault();
@@ -358,6 +364,7 @@ export function PersonaEvalCockpit({ options, onOpenRuns, onDomainChange }: Pers
         persona={
           <PersonaPanel persona={persona} context={null} onOpenRaw={() => setDrawerOpen(true)} />
         }
+        prompts={<PromptPanel prompts={prompts} />}
       />
 
       <PersonaDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} persona={persona} context={null} />

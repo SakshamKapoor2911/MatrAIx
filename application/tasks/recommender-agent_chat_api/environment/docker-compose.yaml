@@ -6,6 +6,7 @@ services:
 
   rec-agent-api:
     platform: linux/amd64
+    image: ${RECBOT_API_IMAGE:-matraix-recommender-agent-api:local}
     build:
       context: ../../../../applications/recommendation_chatbot_eval
       dockerfile: harbor_api/Dockerfile
@@ -13,19 +14,29 @@ services:
       OPENAI_API_KEY: ${OPENAI_API_KEY:-}
       INTERECAGENT_ENGINE: ${INTERECAGENT_ENGINE:-gpt-4o-mini}
       INTERECAGENT_CACHE_AGENT: "1"
+      RECBOT_READY_DOMAIN: ${RECBOT_READY_DOMAIN:-movie}
       TOKENIZERS_PARALLELISM: "false"
       PYTHONFAULTHANDLER: "1"
     expose:
       - "8000"
+    volumes:
+      - recbot-hf-cache:/root/.cache/huggingface
+      - recbot-torch-cache:/root/.cache/torch
+      - recbot-sentence-transformers-cache:/root/.cache/sentence_transformers
     healthcheck:
       test:
-        [
-          "CMD",
-          "python",
-          "-c",
-          "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=2).read()",
-        ]
-      interval: 5s
-      timeout: 5s
+        - CMD-SHELL
+        - >-
+          python -c "import os, urllib.parse, urllib.request; domain=urllib.parse.quote(os.environ.get('RECBOT_READY_DOMAIN', 'movie')); urllib.request.urlopen('http://localhost:8000/ready?domain=' + domain, timeout=170).read()"
+      interval: 10s
+      timeout: 180s
       retries: 30
       start_period: 30s
+
+volumes:
+  recbot-hf-cache:
+    name: matraix-recbot-hf-cache
+  recbot-torch-cache:
+    name: matraix-recbot-torch-cache
+  recbot-sentence-transformers-cache:
+    name: matraix-recbot-sentence-transformers-cache

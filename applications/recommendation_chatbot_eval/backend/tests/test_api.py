@@ -121,6 +121,10 @@ def test_config_options(client):
     assert body["environment"]["resources"] == "all_resources"
     assert body["environment"]["agent"] == "InteRecAgent"
     assert "SASRec" in body["environment"]["ranker"]
+    assert body["environment"]["promptOwnership"] == {
+        "personaSystemPrompt": "Harbor native persona injection",
+        "taskPrompt": "Application-provided recommender simulation prompt",
+    }
 
 
 # --------------------------------------------------------------------------- #

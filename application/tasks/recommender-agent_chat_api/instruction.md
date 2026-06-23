@@ -8,6 +8,11 @@ The recommender application is available through a REST API sidecar named
 Use `curl` or a short script to have a real multi-turn conversation with the
 recommender.
 
+If `rec-agent-api` is unavailable, unhealthy, or fails during the conversation,
+stop and fail the task. Do not simulate the recommender with any other model,
+do not call external LLM APIs as a replacement recommender, and do not invent a
+conversation or item ids.
+
 For this smoke task, use the `movie` domain unless the run configuration tells
 you otherwise. Based on your persona, decide what kind of item you realistically
 want, what constraints matter to you, and what personal preferences should guide
@@ -33,7 +38,8 @@ You may omit `sessionId` on the first `/v1/messages` call and include
 1. Have at least three user turns and three assistant turns.
 2. Try to get recommendations that fit your product need, constraints, and
    personal preferences.
-3. Save the exact conversation artifact to `/app/output/transcript.json`.
+3. Save the exact conversation artifact returned by `/v1/conversation` to
+   `/app/output/transcript.json`.
 4. Save the recommendation artifact to `/app/output/recommendation_result.json`.
 5. If possible, save your post-interaction questionnaire to
    `/app/output/user_feedback.json`.
@@ -50,7 +56,16 @@ You may omit `sessionId` on the first `/v1/messages` call and include
     {"role": "user", "content": "<string>"},
     {"role": "assistant", "content": "<string>"}
   ],
-  "turns": []
+  "turns": [
+    {
+      "turnId": "<string>",
+      "userMessage": "<string>",
+      "assistantMessage": "<string>",
+      "recommendedItems": [
+        {"itemId": "<string>", "title": "<string>"}
+      ]
+    }
+  ]
 }
 ```
 
@@ -80,4 +95,6 @@ You may omit `sessionId` on the first `/v1/messages` call and include
 ```
 
 Make sure the JSON files are valid JSON. Do not invent item ids; use item ids
-returned by `/v1/recommendations` or `/v1/messages`.
+returned by `/v1/recommendations` or `/v1/messages`. The verifier requires
+`recommendation_result.recommendedItems` to be grounded in
+`transcript.turns[*].recommendedItems`.

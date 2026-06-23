@@ -117,31 +117,37 @@ def build_persona_eval_service(
 ) -> "PersonaEvalService":
     """Construct the process-wide :class:`PersonaEvalService`.
 
-    The engine pieces are **lazy-imported here** (not at module load) — mirroring
-    how the turn path lazy-imports ``recbot.interecagent_bridge.run_turn`` — so
-    importing :mod:`backend.api.deps` (and the test suite) stays light. The
-    service shares the app's ``catalog`` + ``config`` (so persona-eval sessions read
-    the same ``items.jsonl`` and apply the same ``INTERECAGENT_*`` env as manual
-    turns), and lazily builds a fresh ``OpenAIChatClient``-backed simulator
-    (bound to the chosen goal-context) per run — the OpenAI client itself is
-    created only when a run starts.
+    Persona-eval is Harbor-backed: Harbor's native ``persona-claude-code`` owns
+    persona system prompt injection, and the application appends the
+    recommender-simulation task prompt through Harbor's extra-instruction
+    mechanism. The RecBot itself runs inside Harbor as the ``rec-agent-api``
+    sidecar, not as this FastAPI process's in-process session.
     """
+    del catalog, config
+
+    class HarborSession:
+        def __init__(self) -> None:
+            self.turns = []
+
+    from backend.service.harbor_persona_eval import HarborPersonaEvalRunner
     from backend.service.persona_eval_service import PersonaEvalService
     from persona_eval.goal_contexts import get_goal_context
-    from persona_eval.openai_client import OpenAIChatClient
     from persona_eval.persona import get_persona
-    from persona_eval.session_factory import build_session
     from persona_eval.sut_descriptions import sut_description_for
-    from persona_eval.user_simulator import UserSimulator
+
+    def goal_context_description(goal_context_id: str) -> str:
+        try:
+            return get_goal_context(goal_context_id).description
+        except KeyError:
+            return goal_context_id
 
     return PersonaEvalService(
-        session_builder=lambda cfg: build_session(
-            cfg, catalog=catalog, config_manager=config
-        ),
+        session_builder=lambda _cfg: HarborSession(),
         get_persona=get_persona,
         sut_for=sut_description_for,
-        simulator_factory=lambda engine, gid, domain: UserSimulator(
-            OpenAIChatClient(model=engine), get_goal_context(gid), domain
+        simulator_factory=lambda _engine, _gid, _domain: None,
+        runner=HarborPersonaEvalRunner(
+            goal_context_description_for=goal_context_description
         ),
     )
 
