@@ -391,7 +391,6 @@ modal run modal_amazon_user_index.py::export_user_histories \
   --top-n 100 \
   --review-prefix amazon_reviews_2018_2023_user_buckets_min30_verified70_text3000 \
   --temporal-train-fraction 0.8 \
-  --include-metadata \
   --output raw/amazon_reviews_2023/persona_dimension_inference/user_histories.jsonl
 ```
 
@@ -414,11 +413,21 @@ aggregate stats for both splits, plus text-review, rating, and rating-only row
 counts. The inference script passes only the construction-split stats as
 additional behavioral context for persona extraction.
 
-Add `--include-metadata` when inference should use product names and product
-categories as reviewed-item context. The inference prompt only receives compact
-product `name`, `main_category`, and category path values from metadata; long
-descriptions, features, details, price, and store fields are intentionally left
-out. The metadata join can add extra I/O for users with many reviewed products.
+Export product metadata as a separate compact sidecar after user histories are
+retrieved. This keeps retrieval fast and makes metadata enrichment optional:
+
+```bash
+modal run modal_amazon_user_index.py::export_history_metadata \
+  --user-histories raw/amazon_reviews_2023/persona_dimension_inference/user_histories.jsonl \
+  --output raw/amazon_reviews_2023/persona_dimension_inference/user_histories.product_metadata.jsonl
+```
+
+The sidecar contains only product title, main category, source category, and
+category path keyed by `parent_asin` and source category. Long descriptions,
+features, details, price, and store fields are omitted. The older one-step
+`export_user_histories --include-metadata` option is still available for small
+debugging runs, but it joins metadata during retrieval and can add substantial
+I/O latency.
 
 ### Amazon Review to 1,339-Dimension Schema Inference
 
@@ -433,6 +442,7 @@ Inspect prompts without calling the API:
 ```bash
 python scripts/infer_amazon_review_dimensions.py \
   --user-histories raw/amazon_reviews_2023/persona_dimension_inference/user_histories.jsonl \
+  --product-metadata-sidecar raw/amazon_reviews_2023/persona_dimension_inference/user_histories.product_metadata.jsonl \
   --inference-mode evidence_profile \
   --max-users 2 \
   --dimensions-per-call 40 \
@@ -446,8 +456,10 @@ profile to the persona schema. This avoids resending the same raw reviews for
 every schema batch. Evidence profiles are written to
 `raw/amazon_reviews_2023/persona_dimension_inference/evidence_profiles.jsonl`
 and can be reused across resumed schema-mapping runs.
-If user histories were exported with `--include-metadata`, the evidence profile
-also sees compact product name/category context for each reviewed item.
+If `--product-metadata-sidecar` is supplied, the evidence profile also sees
+compact product name/category context for each reviewed item. Histories exported
+with the older `--include-metadata` option continue to work; the sidecar loader
+only fills reviews that do not already include product metadata.
 
 The evidence profile file is the reusable review memory. It is written before
 the granular schema extraction step and can be addressed with either
@@ -477,6 +489,7 @@ Run OpenAI inference with the optimized evidence-profile pipeline:
 export OPENAI_API_KEY=...
 python scripts/infer_amazon_review_dimensions.py \
   --user-histories raw/amazon_reviews_2023/persona_dimension_inference/user_histories.jsonl \
+  --product-metadata-sidecar raw/amazon_reviews_2023/persona_dimension_inference/user_histories.product_metadata.jsonl \
   --inference-mode evidence_profile \
   --schema-path ../dimensions+new.json \
   --model "${OPENAI_LLM_MODEL:-gpt-5.4-mini}" \
@@ -539,6 +552,42 @@ The report groups inferred attributes by schema category, includes the compact
 evidence profile, and estimates cost from serialized prompt/output character
 counts when `--user-histories` is provided. Exact billed token usage requires
 persisted API usage metadata.
+
+### V1 Persona Validation: Temporal Rating Holdout
+
+Use `scripts/evaluate_amazon_persona_rating_holdout.py` to prepare the first
+simple persona-validation benchmark from a current temporal-split
+`user_histories.jsonl` export. The script assigns users to loose cohorts from
+construction-split rating behavior only:
+
+- `harsh_low`
+- `high_variance`
+- `mostly_5`
+- `balanced_mixed`
+
+It writes a labeled scoring target file, a blind product-context-only target file
+for persona prediction, cohort/user summaries, and a Markdown report with MAE and
+within-1-star rates for built-in non-personalized baselines.
+
+```bash
+python scripts/evaluate_amazon_persona_rating_holdout.py \
+  --user-histories raw/amazon_reviews_2023/persona_dimension_inference/user_histories.jsonl \
+  --output-dir raw/amazon_reviews_2023/persona_rating_holdout_eval
+```
+
+The blind prediction target file is
+`raw/amazon_reviews_2023/persona_rating_holdout_eval/prediction_targets.jsonl`.
+It excludes held-out review title, held-out review text, and true rating. Persona
+prediction outputs can be scored by writing JSONL rows with `target_id` and
+`predicted_rating`, then running:
+
+```bash
+python scripts/evaluate_amazon_persona_rating_holdout.py \
+  --user-histories raw/amazon_reviews_2023/persona_dimension_inference/user_histories.jsonl \
+  --predictions raw/amazon_reviews_2023/persona_rating_holdout_eval/persona_predictions.jsonl \
+  --prediction-method-name persona_dims_summary \
+  --output-dir raw/amazon_reviews_2023/persona_rating_holdout_eval
+```
 
 ### Legacy Local Raw-Streaming Tools
 

@@ -628,6 +628,34 @@ def metadata_for_parent_asins(
     return metadata
 
 
+def compact_metadata_sidecar_row(row: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "source": "amazon_reviews_2023",
+        "parent_asin": row.get("parent_asin"),
+        "source_category": row.get("source_category"),
+        "main_category": row.get("main_category"),
+        "title": row.get("title"),
+        "categories_json": row.get("categories_json"),
+    }
+
+
+def parent_asins_by_category_from_histories(path: Path) -> dict[str, set[str]]:
+    parent_asins_by_category: dict[str, set[str]] = {}
+    for user_row in iter_local_jsonl_or_gz(path):
+        for field in ("reviews", "validation_reviews"):
+            reviews = user_row.get(field) or []
+            if not isinstance(reviews, list):
+                continue
+            for review in reviews:
+                if not isinstance(review, dict):
+                    continue
+                parent_asin = review.get("parent_asin")
+                category = review.get("category")
+                if parent_asin and category:
+                    parent_asins_by_category.setdefault(str(category), set()).add(str(parent_asin))
+    return parent_asins_by_category
+
+
 @app.function(
     volumes={str(VOLUME_MOUNT): volume},
     timeout=24 * 60 * 60,
@@ -1938,6 +1966,117 @@ def export_user_histories(
         f"selected reviews: {total_selected:,}; removed reviews: {total_removed:,}; "
         f"kept reviews: {total_kept:,}; construction reviews: {total_construction_reviews:,}; "
         f"validation reviews: {total_validation_reviews:,}. Filter summary: {summary_path}"
+    )
+
+
+@app.function(
+    volumes={str(VOLUME_MOUNT): volume},
+    timeout=2 * 60 * 60,
+    cpu=2,
+    memory=8192,
+)
+def export_metadata_sidecar_for_category(
+    category: str,
+    parent_asins: list[str],
+    metadata_prefix: str = DEFAULT_METADATA_PREFIX,
+) -> dict[str, Any]:
+    """Fetch compact product metadata for selected parent_asins in one category."""
+    requested = set(parent_asins)
+    metadata = metadata_for_parent_asins({category: requested}, metadata_prefix)
+    rows_by_parent_asin = {
+        parent_asin: compact_metadata_sidecar_row(row)
+        for parent_asin, row in metadata.items()
+    }
+    summary = {
+        "category": category,
+        "metadata_prefix": metadata_prefix,
+        "requested_parent_asins": len(requested),
+        "matched_parent_asins": len(rows_by_parent_asin),
+        "missing_parent_asins": len(requested) - len(rows_by_parent_asin),
+    }
+    print(f"[modal_amazon_metadata_sidecar] {category}: {json.dumps(summary)}", flush=True)
+    return {"summary": summary, "metadata_rows": list(rows_by_parent_asin.values())}
+
+
+@app.local_entrypoint()
+def export_history_metadata(
+    user_histories: str,
+    output: str = "",
+    metadata_prefix: str = DEFAULT_METADATA_PREFIX,
+    wait: bool = True,
+) -> None:
+    """Export compact product metadata sidecar for an existing user-history JSONL."""
+    history_path = Path(user_histories)
+    output_path = (
+        Path(output)
+        if output
+        else history_path.with_suffix(history_path.suffix + ".product_metadata.jsonl")
+    )
+    parent_asins_by_category = parent_asins_by_category_from_histories(history_path)
+    total_parent_asins = sum(len(parent_asins) for parent_asins in parent_asins_by_category.values())
+    print(
+        f"Exporting compact metadata for {total_parent_asins:,} category-parent_asin "
+        f"pairs across {len(parent_asins_by_category):,} categories from {history_path}"
+    )
+    calls = [
+        export_metadata_sidecar_for_category.spawn(
+            category,
+            sorted(parent_asins),
+            metadata_prefix=metadata_prefix,
+        )
+        for category, parent_asins in sorted(parent_asins_by_category.items())
+    ]
+    for category, call in zip(sorted(parent_asins_by_category), calls, strict=True):
+        print(f"{category}: {call.object_id}")
+    if not wait:
+        return
+
+    rows_by_key: dict[tuple[str, str], dict[str, Any]] = {}
+    summaries = []
+    requested = 0
+    matched = 0
+    for category, call in zip(sorted(parent_asins_by_category), calls, strict=True):
+        try:
+            result = call.get()
+        except Exception as err:
+            print(f"{category}: failed: {err}")
+            raise
+        summary = result["summary"]
+        summaries.append(summary)
+        requested += int(summary.get("requested_parent_asins") or 0)
+        matched += int(summary.get("matched_parent_asins") or 0)
+        for row in result["metadata_rows"]:
+            parent_asin = row.get("parent_asin")
+            source_category = row.get("source_category") or category
+            if parent_asin:
+                rows_by_key[(str(parent_asin), str(source_category))] = row
+        print(f"{category}: completed {summary}")
+
+    rows = [
+        row
+        for _, row in sorted(
+            rows_by_key.items(),
+            key=lambda item: (item[0][1], item[0][0]),
+        )
+    ]
+    written = write_local_jsonl(output_path, iter(rows))
+    summary_path = output_path.with_suffix(output_path.suffix + ".summary.json")
+    write_json(
+        summary_path,
+        {
+            "user_histories": str(history_path),
+            "output": str(output_path),
+            "metadata_prefix": metadata_prefix,
+            "requested_category_parent_asin_pairs": requested,
+            "matched_category_parent_asin_pairs": matched,
+            "written_rows": written,
+            "categories": summaries,
+        },
+    )
+    print(
+        f"Wrote {written:,} compact metadata rows to {output_path}. "
+        f"Requested pairs: {requested:,}; matched pairs: {matched:,}. "
+        f"Summary: {summary_path}"
     )
 
 

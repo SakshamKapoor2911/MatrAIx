@@ -114,6 +114,44 @@ def write_jsonl(path: Path, rows: Iterable[dict[str, Any]], append: bool = False
     return count
 
 
+def load_product_metadata_sidecar(path: Path | None) -> dict[tuple[str, str], dict[str, Any]]:
+    if not path:
+        return {}
+    if not path.exists():
+        raise FileNotFoundError(f"Product metadata sidecar not found: {path}")
+    metadata: dict[tuple[str, str], dict[str, Any]] = {}
+    for row in iter_jsonl_or_gz(path):
+        parent_asin = row.get("parent_asin")
+        source_category = row.get("source_category")
+        if parent_asin and source_category:
+            metadata[(str(parent_asin), str(source_category))] = row
+            metadata.setdefault((str(parent_asin), ""), row)
+    return metadata
+
+
+def attach_product_metadata_sidecar(
+    user_row: dict[str, Any],
+    metadata: dict[tuple[str, str], dict[str, Any]],
+) -> dict[str, Any]:
+    if not metadata:
+        return user_row
+    for field in ("reviews", "validation_reviews"):
+        reviews = user_row.get(field) or []
+        if not isinstance(reviews, list):
+            continue
+        for review in reviews:
+            if not isinstance(review, dict) or review.get("product_metadata"):
+                continue
+            parent_asin = review.get("parent_asin")
+            if not parent_asin:
+                continue
+            category = str(review.get("category") or "")
+            row = metadata.get((str(parent_asin), category)) or metadata.get((str(parent_asin), ""))
+            if row:
+                review["product_metadata"] = row
+    return user_row
+
+
 def yaml_key(value: Any) -> str:
     key = str(value)
     if key and all(char.isalnum() or char in "_-" for char in key) and not key[0].isdigit():
@@ -1157,9 +1195,11 @@ def write_dry_run_prompts(
     dimensions: list[dict[str, Any]],
     mapping: dict[str, Any] | None,
     args: argparse.Namespace,
+    product_metadata: dict[tuple[str, str], dict[str, Any]] | None = None,
 ) -> int:
     rows = []
     for user_index, user_row in enumerate(iter_jsonl_or_gz(history_path), start=1):
+        user_row = attach_product_metadata_sidecar(user_row, product_metadata or {})
         if args.max_users and user_index > args.max_users:
             break
         reviews = user_row.get("reviews") or []
@@ -1254,6 +1294,16 @@ def parse_args(argv: Iterable[str]) -> argparse.Namespace:
         type=Path,
         default=None,
         help="Optional YAML copy of the final inference JSONL output.",
+    )
+    parser.add_argument(
+        "--product-metadata-sidecar",
+        type=Path,
+        default=None,
+        help=(
+            "Optional compact product metadata JSONL from "
+            "modal_amazon_user_index.py::export_history_metadata. "
+            "Loaded in memory and attached to reviews before prompt construction."
+        ),
     )
     parser.add_argument("--model", default=DEFAULT_MODEL)
     parser.add_argument("--temperature", type=float, default=0.0)
@@ -1365,6 +1415,12 @@ def parse_args(argv: Iterable[str]) -> argparse.Namespace:
 def main(argv: Iterable[str]) -> int:
     args = parse_args(argv)
     dimensions = load_schema(args.schema_path)
+    product_metadata = load_product_metadata_sidecar(args.product_metadata_sidecar)
+    if product_metadata:
+        log(
+            f"Loaded {len(product_metadata):,} product metadata lookup keys "
+            f"from {args.product_metadata_sidecar}"
+        )
     mapping = None
     explicit_dimension_filter = bool(args.dimension_categories or args.dimension_ids)
     if args.inference_mode == "evidence_profile":
@@ -1391,7 +1447,13 @@ def main(argv: Iterable[str]) -> int:
     log(f"Selected {len(dimensions):,} schema dimensions")
 
     if args.dry_run:
-        count = write_dry_run_prompts(args.user_histories, dimensions, mapping, args)
+        count = write_dry_run_prompts(
+            args.user_histories,
+            dimensions,
+            mapping,
+            args,
+            product_metadata,
+        )
         log(f"Wrote {count:,} dry-run prompts: {args.dry_run_prompts_path}")
         return 0
 
@@ -1409,6 +1471,7 @@ def main(argv: Iterable[str]) -> int:
     processed = 0
     written = 0
     for user_row in iter_jsonl_or_gz(args.user_histories):
+        user_row = attach_product_metadata_sidecar(user_row, product_metadata)
         user_id = str(user_row.get("user_id", ""))
         if user_id in done:
             continue
