@@ -50,14 +50,14 @@ def run_verifier_against(output_dir: Path) -> int:
     return module.main()
 
 
-def test_instruction_calibrates_user_feedback_rating():
+def test_instruction_delegates_feedback_rating_to_application_scorer():
     instruction = Path(__file__).parents[1].joinpath("instruction.md").read_text(
         encoding="utf-8"
     )
 
-    assert "`overallExperienceRating`: an integer from 1 to 10" in instruction
-    assert "7-8: the run is useful overall" in instruction
-    assert "3-4: the run mostly misses the need" in instruction
+    assert "application feedback scorer" in instruction
+    assert "overallExperienceRating" not in instruction
+    assert "7-8: the run is useful overall" not in instruction
     assert '"overallExperienceRating": 1' not in instruction
 
 

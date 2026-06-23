@@ -41,8 +41,8 @@ You may omit `sessionId` on the first `/v1/messages` call and include
 3. Save the exact conversation artifact returned by `/v1/conversation` to
    `/app/output/transcript.json`.
 4. Save the recommendation artifact to `/app/output/recommendation_result.json`.
-5. If possible, save your post-interaction questionnaire to
-   `/app/output/user_feedback.json`.
+5. The application feedback scorer will generate the post-interaction
+   questionnaire from the saved transcript and recommendation artifacts.
 
 ## Output schemas
 
@@ -81,30 +81,6 @@ You may omit `sessionId` on the first `/v1/messages` call and include
   "turnsToRecommendation": 3
 }
 ```
-
-`/app/output/user_feedback.json`:
-
-This file must be a valid JSON object with these fields:
-
-- `productNeedConstraintSatisfaction`: one of `"yes"`, `"partially"`, or
-  `"no"`.
-- `personalPreferenceSatisfaction`: one of `"yes"`, `"partially"`, or `"no"`.
-- `overallExperienceRating`: an integer from 1 to 10.
-- `reason`: a short string explaining the rating.
-- `askedUsefulClarificationQuestions`: a boolean.
-
-Use this rating scale for `overallExperienceRating`:
-
-- 9-10: grounded recommendations satisfy the user's main need, hard constraints,
-  and personal preferences with clear fit.
-- 7-8: the run is useful overall; the main need is satisfied, with minor misses,
-  extra steering, or imperfect explanations.
-- 5-6: the run is usable but important constraints or preferences are only
-  partly met.
-- 3-4: the run mostly misses the need; at most one useful grounded item appears,
-  or the agent needs repeated correction.
-- 1-2: no usable grounded recommendation is produced, or the recommender API
-  fails.
 
 Make sure the JSON files are valid JSON. Do not invent item ids; use item ids
 returned by `/v1/recommendations` or `/v1/messages`. The verifier requires

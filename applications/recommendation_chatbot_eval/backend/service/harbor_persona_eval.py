@@ -21,6 +21,8 @@ import yaml
 
 from persona_eval.types import Persona, PersonaEvalConfig
 
+FeedbackScorer = Callable[..., Dict[str, Any]]
+
 
 def _path_prefix(parts: Sequence[str], end: int) -> Path:
     return Path(*parts[:end]) if end > 0 else Path(".")
@@ -227,26 +229,8 @@ Required behavior:
   `turns[*].recommendedItems` from the recommender API.
 - Save `/app/output/transcript.json`.
 - Save `/app/output/recommendation_result.json`.
-- Save `/app/output/user_feedback.json`.
-
-The post-interaction questionnaire in `user_feedback.json` must be valid JSON
-with these fields:
-- `productNeedConstraintSatisfaction`: one of "yes", "partially", or "no".
-- `personalPreferenceSatisfaction`: one of "yes", "partially", or "no".
-- `overallExperienceRating`: an integer from 1 to 10.
-- `reason`: a short explanation in your own voice.
-- `askedUsefulClarificationQuestions`: a boolean.
-
-Use this rating scale for `overallExperienceRating`:
-- 9-10: the grounded recommendations satisfy the user's main need, hard constraints, and personal preferences with clear fit.
-- 7-8: the run is useful overall; the main need is satisfied, with minor misses, extra steering, or imperfect explanations.
-- 5-6: the run is usable but important constraints or preferences are only partly met.
-- 3-4: the run mostly misses the need; at most one useful grounded item appears, or the agent needs repeated correction.
-- 1-2: no usable grounded recommendation is produced, or the recommender API fails.
-
-Base the rating on the full conversation and the catalog-grounded item ids in the
-saved transcript/recommendation artifacts, while giving credit for useful
-clarifying questions, adaptation after feedback, and acceptable final items.
+- The application feedback scorer will generate the post-interaction
+  questionnaire from the saved transcript and recommendation artifacts.
 """.format(
         domain=domain,
         max_turns=max_turns,
@@ -268,6 +252,7 @@ class HarborPersonaEvalRunner:
         ] = _run_subprocess,
         harbor_command: Optional[Sequence[str]] = None,
         goal_context_description_for: Optional[Callable[[str], str]] = None,
+        feedback_scorer: Optional[FeedbackScorer] = None,
     ) -> None:
         self.repo_root = Path(repo_root) if repo_root is not None else _repo_root()
         self.runs_root = (
@@ -278,6 +263,7 @@ class HarborPersonaEvalRunner:
         self.goal_context_description_for = (
             goal_context_description_for or (lambda goal_context_id: goal_context_id)
         )
+        self.feedback_scorer = feedback_scorer
 
     def __call__(
         self,
@@ -383,6 +369,14 @@ class HarborPersonaEvalRunner:
             created_at=created_at,
             prompts=prompts,
         )
+        if self.feedback_scorer is not None:
+            result.questionnaire = self.feedback_scorer(
+                persona=persona,
+                sut_description=sut_description,
+                config=config,
+                turn_views=result.turn_views,
+                recommended_items=result.recommended_items,
+            )
         session.turns = list(result.turn_views)
         return result
 
@@ -569,6 +563,7 @@ class HarborPersonaEvalResult:
     persona: Persona
     sut_description: str
     turn_views: List[Dict[str, Any]]
+    recommended_items: List[Dict[str, Any]]
     questionnaire: Dict[str, Any]
     metric_scores: Dict[str, Any]
     created_at: str
@@ -623,6 +618,7 @@ def build_result_from_harbor_artifacts(
         persona=persona,
         sut_description=sut_description,
         turn_views=turn_views,
+        recommended_items=recommended_items,
         questionnaire=_questionnaire(feedback),
         metric_scores=metric_scores,
         created_at=created_at,

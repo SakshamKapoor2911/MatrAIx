@@ -133,6 +133,7 @@ def build_persona_eval_service(
     from backend.service.persona_eval_service import PersonaEvalService
     from persona_eval.goal_contexts import get_goal_context
     from persona_eval.persona import get_persona
+    from persona_eval.scoring import OriginalPromptFeedbackScorer
     from persona_eval.sut_descriptions import sut_description_for
 
     def goal_context_description(goal_context_id: str) -> str:
@@ -147,7 +148,8 @@ def build_persona_eval_service(
         sut_for=sut_description_for,
         simulator_factory=lambda _engine, _gid, _domain: None,
         runner=HarborPersonaEvalRunner(
-            goal_context_description_for=goal_context_description
+            goal_context_description_for=goal_context_description,
+            feedback_scorer=OriginalPromptFeedbackScorer(),
         ),
     )
 

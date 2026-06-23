@@ -169,14 +169,12 @@ def test_build_recommender_simulation_prompt_is_task_specific_not_persona_identi
     assert '"domain": "game"' in prompt
     assert "at least three user turns and three assistant turns" in prompt
     assert "Do not reveal everything at once" in prompt
-    assert "user_feedback.json" in prompt
-    assert "productNeedConstraintSatisfaction" in prompt
     assert "Finish within 7 user turns" in prompt
     assert "Do not simulate the recommender" in prompt
-    assert "`overallExperienceRating`: an integer from 1 to 10" in prompt
-    assert "7-8: the run is useful overall" in prompt
-    assert "3-4: the run mostly misses the need" in prompt
-    assert "catalog-grounded item ids" in prompt
+    assert "application feedback scorer" in prompt
+    assert "user_feedback.json" not in prompt
+    assert "overallExperienceRating" not in prompt
+    assert "7-8: the run is useful overall" not in prompt
 
 
 def test_resolve_repo_root_handles_local_and_container_layouts():
@@ -291,6 +289,101 @@ def test_harbor_runner_writes_run_inputs_invokes_harbor_and_maps_artifacts(tmp_p
         for event in events
     )
     assert {"type": "phase", "phase": "harbor_collecting_artifacts"} in events
+
+
+def test_harbor_runner_uses_feedback_scorer_over_harbor_self_rating(tmp_path):
+    scorer_calls = []
+
+    def feedback_scorer(*, persona, sut_description, config, turn_views, recommended_items):
+        scorer_calls.append(
+            {
+                "persona": persona.id,
+                "sut": sut_description,
+                "domain": config.domain,
+                "turn_items": turn_views[0]["recommendedItems"],
+                "final_items": recommended_items,
+            }
+        )
+        return {
+            "constraintSatisfaction": 4,
+            "constraintRationale": "Original scorer judged the need mostly met.",
+            "preferenceSatisfaction": 4,
+            "preferenceRationale": "Original scorer judged preferences mostly met.",
+            "overallRating": 8,
+            "ratingReason": "Original scoring prompt output.",
+            "askedUsefulClarifyingQuestions": True,
+            "clarifyingNotes": "The recommender adapted after feedback.",
+        }
+
+    def fake_command(command, *, cwd, env):
+        config = yaml.safe_load(open(command[command.index("-c") + 1], encoding="utf-8"))
+        output_dir = (
+            tmp_path
+            / "runs"
+            / config["job_name"]
+            / "recommender-agent_chat_api__fake"
+            / "artifacts"
+            / "app"
+            / "output"
+        )
+        output_dir.mkdir(parents=True)
+        (output_dir / "transcript.json").write_text(json.dumps({
+            "sessionId": "ses_123",
+            "domain": "movie",
+            "messages": [
+                {"role": "user", "content": "I want a movie."},
+                {"role": "assistant", "content": "Try Movie A."},
+            ],
+            "turns": [{
+                "turnId": "0",
+                "userMessage": "I want a movie.",
+                "assistantMessage": "Try Movie A.",
+                "recommendedItems": [{"itemId": "42", "title": "Movie A"}],
+            }],
+        }), encoding="utf-8")
+        (output_dir / "recommendation_result.json").write_text(json.dumps({
+            "sessionId": "ses_123",
+            "domain": "movie",
+            "recommendedItems": [{"itemId": "42", "title": "Movie A"}],
+            "turnsToRecommendation": 1,
+        }), encoding="utf-8")
+        (output_dir / "user_feedback.json").write_text(json.dumps({
+            "productNeedConstraintSatisfaction": "no",
+            "personalPreferenceSatisfaction": "no",
+            "overallExperienceRating": 2,
+            "reason": "Harbor self-rating should be ignored.",
+            "askedUsefulClarificationQuestions": False,
+        }), encoding="utf-8")
+        return 0
+
+    class Session:
+        turns = []
+
+    runner = HarborPersonaEvalRunner(
+        repo_root=tmp_path,
+        runs_root=tmp_path / "runs",
+        command_runner=fake_command,
+        feedback_scorer=feedback_scorer,
+    )
+    result = runner(
+        Session(),
+        Persona(id="p1", name="Persona One", context="A careful viewer."),
+        "Movie recommender.",
+        PersonaEvalConfig(domain="movie"),
+        object(),
+        created_at="2026-06-23T00:00:00Z",
+    )
+
+    assert result.to_dict()["questionnaire"]["overallRating"] == 8
+    assert scorer_calls == [
+        {
+            "persona": "p1",
+            "sut": "Movie recommender.",
+            "domain": "movie",
+            "turn_items": [{"itemId": "42", "title": "Movie A"}],
+            "final_items": [{"itemId": "42", "title": "Movie A"}],
+        }
+    ]
 
 
 def test_harbor_runner_cache_flags_can_be_overridden(tmp_path, monkeypatch):
