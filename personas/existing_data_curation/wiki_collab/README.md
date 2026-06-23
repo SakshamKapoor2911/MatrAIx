@@ -1,6 +1,6 @@
 # Offline Wiki Range Extraction
 
-This directory defines the primitive email-based collaboration flow for running
+This directory defines the primitive offline range-based collaboration flow for running
 LLM extraction over a shared Wikipedia profile database.
 
 ## Owner Publishes Once
@@ -37,7 +37,7 @@ python personas/existing_data_curation/scripts/make_wiki_assignments.py \
   --out /tmp/wiki_assignments.jsonl
 ```
 
-Email each collaborator their `worker_id`, `dataset_id`, `dataset_sha256`,
+Give each collaborator their `worker_id`, `dataset_id`, `dataset_sha256`,
 `protocol_id`, `protocol_sha256`, and half-open range `[range_start, range_end)`.
 
 ## Collaborator Runs A Range

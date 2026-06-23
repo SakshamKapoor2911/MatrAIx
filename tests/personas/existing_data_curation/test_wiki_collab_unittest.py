@@ -438,6 +438,20 @@ class WikiCollabTests(unittest.TestCase):
         self.assertIn("WIKI_COLLAB_CLAUDE_CMD", readme)
         self.assertIn("WIKI_COLLAB_CODEX_CMD", readme)
 
+    def test_distribution_docs_are_channel_neutral(self):
+        readme = Path("personas/existing_data_curation/wiki_collab/README.md").read_text(
+            encoding="utf-8"
+        )
+        assignment_script = Path(
+            "personas/existing_data_curation/scripts/make_wiki_assignments.py"
+        ).read_text(encoding="utf-8")
+
+        self.assertFalse(
+            Path("personas/existing_data_curation/wiki_collab/EMAIL_TEMPLATES.md").exists()
+        )
+        self.assertNotIn("email", readme.lower())
+        self.assertNotIn("email-friendly", assignment_script.lower())
+
     def test_validate_accepts_non_max_effort_and_audit_reports_it(self):
         with tempfile.TemporaryDirectory() as tmp:
             tmp_path = Path(tmp)

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Create email-friendly range assignments for offline wiki extraction."""
+"""Create range assignments for offline wiki extraction."""
 
 from __future__ import annotations
 
@@ -90,4 +90,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
