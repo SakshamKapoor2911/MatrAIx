@@ -24,7 +24,7 @@ from persona_eval.types import Persona, PersonaEvalConfig
 
 SCORER_PACKAGE_TARGET = "/app/persona_eval"
 SCORER_PACKAGE_PARENT = "/app"
-SCORER_OUTPUT_PATH = "/app/output/user_feedback.json"
+SCORER_OUTPUT_PATH = "/logs/verifier/user_feedback.json"
 
 
 def _path_prefix(parts: Sequence[str], end: int) -> Path:
@@ -615,6 +615,17 @@ def _questionnaire(feedback: Dict[str, Any]) -> Dict[str, Any]:
     }
 
 
+def _feedback_path(output_dir: Path) -> Optional[Path]:
+    app_feedback = output_dir / "user_feedback.json"
+    if app_feedback.is_file():
+        return app_feedback
+    try:
+        verifier_feedback = output_dir.parents[2] / "verifier" / "user_feedback.json"
+    except IndexError:
+        return None
+    return verifier_feedback if verifier_feedback.is_file() else None
+
+
 def _recommended_ids_per_turn(turn_views: List[Dict[str, Any]]) -> List[List[str]]:
     per_turn: List[List[str]] = []
     for turn in turn_views:
@@ -726,8 +737,8 @@ def build_result_from_harbor_artifacts(
     """Map Harbor task artifacts into the existing Persona Eval UI result."""
     transcript = _read_json(output_dir / "transcript.json")
     recommendation = _read_json(output_dir / "recommendation_result.json")
-    feedback_path = output_dir / "user_feedback.json"
-    feedback = _read_json(feedback_path) if feedback_path.is_file() else {}
+    feedback_path = _feedback_path(output_dir)
+    feedback = _read_json(feedback_path) if feedback_path is not None else {}
 
     turn_views = _turn_views(transcript)
     recommended_items = _normalize_recommended_items(

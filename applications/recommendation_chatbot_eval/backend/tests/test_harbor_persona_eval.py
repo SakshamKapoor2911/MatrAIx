@@ -206,6 +206,76 @@ def test_build_result_from_harbor_artifacts_accepts_application_scorer_questionn
     }
 
 
+def test_build_result_from_harbor_artifacts_reads_verifier_feedback(tmp_path):
+    trial_dir = tmp_path / "trial"
+    output_dir = trial_dir / "artifacts" / "app" / "output"
+    verifier_dir = trial_dir / "verifier"
+    output_dir.mkdir(parents=True)
+    verifier_dir.mkdir()
+    (output_dir / "transcript.json").write_text(
+        json.dumps(
+            {
+                "sessionId": "ses_123",
+                "domain": "movie",
+                "messages": [
+                    {"role": "user", "content": "I want a movie."},
+                    {"role": "assistant", "content": "Try Movie A."},
+                ],
+                "turns": [
+                    {
+                        "turnId": "0",
+                        "userMessage": "I want a movie.",
+                        "assistantMessage": "Try Movie A.",
+                        "recommendedItems": [{"itemId": "42", "title": "Movie A"}],
+                    }
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+    (output_dir / "recommendation_result.json").write_text(
+        json.dumps(
+            {
+                "sessionId": "ses_123",
+                "domain": "movie",
+                "recommendedItems": [{"itemId": "42", "title": "Movie A"}],
+                "turnsToRecommendation": 1,
+            }
+        ),
+        encoding="utf-8",
+    )
+    (verifier_dir / "user_feedback.json").write_text(
+        json.dumps(
+            {
+                "constraintSatisfaction": 4,
+                "constraintRationale": "Verifier scorer judged the need met.",
+                "preferenceSatisfaction": 5,
+                "preferenceRationale": "Verifier scorer judged preferences met.",
+                "overallRating": 8,
+                "ratingReason": "Verifier scorer output.",
+                "askedUsefulClarifyingQuestions": True,
+                "clarifyingNotes": "The agent asked about tone.",
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    result = build_result_from_harbor_artifacts(
+        output_dir=output_dir,
+        config=PersonaEvalConfig(domain="movie"),
+        persona=Persona(id="p1", name="Persona One"),
+        sut_description="Movie recommender.",
+        created_at="2026-06-23T00:00:00Z",
+    )
+
+    questionnaire = result.to_dict()["questionnaire"]
+    assert questionnaire["overallRating"] == 8
+    assert questionnaire["ratingReason"] == "Verifier scorer output."
+    assert (
+        questionnaire["constraintRationale"] == "Verifier scorer judged the need met."
+    )
+
+
 def test_build_result_from_harbor_artifacts_rejects_ungrounded_recommendations(
     tmp_path,
 ):
@@ -359,7 +429,7 @@ def test_harbor_runner_writes_run_inputs_invokes_harbor_and_maps_artifacts(tmp_p
         assert verifier_env["MATRIX_SCORER_PACKAGE_PARENT"] == "/app"
         assert (
             verifier_env["MATRIX_SCORER_OUTPUT_PATH"]
-            == "/app/output/user_feedback.json"
+            == "/logs/verifier/user_feedback.json"
         )
         assert json.loads(verifier_env["MATRIX_SCORER_PERSONA_JSON"])["id"] == "p1"
         assert (
