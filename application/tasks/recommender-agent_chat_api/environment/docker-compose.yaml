@@ -1,0 +1,31 @@
+services:
+  main:
+    depends_on:
+      rec-agent-api:
+        condition: service_healthy
+
+  rec-agent-api:
+    platform: linux/amd64
+    build:
+      context: ../../../../applications/recommendation_chatbot_eval
+      dockerfile: harbor_api/Dockerfile
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      INTERECAGENT_ENGINE: ${INTERECAGENT_ENGINE:-gpt-4o-mini}
+      INTERECAGENT_CACHE_AGENT: "1"
+      TOKENIZERS_PARALLELISM: "false"
+      PYTHONFAULTHANDLER: "1"
+    expose:
+      - "8000"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=2).read()",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 30s

@@ -105,12 +105,52 @@ served at **`/docs`** when the app is running.
 
 ---
 
+## Harbor application task
+
+The Harbor-facing adapter lives in `harbor_api/`. It wraps the same RecBot
+service layer behind a smaller synchronous REST contract for persona agents:
+
+| Method | Path | Purpose |
+|---|---|---|
+| GET | `/health` | Sidecar liveness check. |
+| POST | `/v1/session` | Create a recommender chat session. |
+| POST | `/v1/messages` | Send one user message and receive one recommender reply. |
+| GET | `/v1/conversation?sessionId=...` | Fetch transcript and turns. |
+| GET | `/v1/recommendations?sessionId=...` | Fetch recommended item ids across turns. |
+
+The Harbor task is `application/tasks/recommender-agent_chat_api/`. It runs this
+adapter as the `rec-agent-api` sidecar and asks the persona agent to save
+`/app/output/transcript.json` and `/app/output/recommendation_result.json`.
+
+Contract tests:
+
+```bash
+PYTHONPATH=applications/recommendation_chatbot_eval \
+  /Users/liuyifan/Desktop/MatrAIx/.venv-arm64/bin/python \
+  -m pytest applications/recommendation_chatbot_eval/harbor_api/tests/test_server.py -q
+```
+
+Harbor smoke, once the Harbor runtime is present on the branch:
+
+```bash
+export OPENAI_API_KEY=...
+export ANTHROPIC_API_KEY=...
+uv run harbor run -c configs/jobs/example-job-recipe/appSim-recommender-agent-local.yaml
+```
+
+The sidecar uses the real RecAI / InteRecAgent path. The first Docker build is
+heavy because it installs RecAI dependencies and downloads the ready-to-run
+resource bundle.
+
+---
+
 ## Project layout
 
 ```
 backend/        FastAPI app (api/) + service layer (service/) + tests
 frontend/       React/Vite SPA (built to frontend/dist, served by the backend)
 recbot/         Bridge to the in-process RecAI agent (interecagent_bridge.py)
+harbor_api/     Harbor-facing synchronous REST wrapper for persona-agent tasks
 persona_eval/   Persona simulator, goal contexts, runner, persona catalog
 recai/          Microsoft RecAI (git submodule) — the recommender engine
 data/catalogs/  Committed parquet item catalogs (browse without the big bundle)
