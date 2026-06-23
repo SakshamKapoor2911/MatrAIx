@@ -467,8 +467,15 @@ python scripts/infer_amazon_review_dimensions.py \
   --dimensions-per-call 40 \
   --window-summary-threshold-chars 120000 \
   --max-users 100 \
-  --output raw/amazon_reviews_2023/persona_dimension_inference/inferred_dimensions.jsonl
+  --output raw/amazon_reviews_2023/persona_dimension_inference/inferred_dimensions.jsonl \
+  --yaml-output raw/amazon_reviews_2023/persona_dimension_inference/inferred_dimensions.yaml
 ```
+
+The primary inference output remains JSONL for resumable runs, with one user row
+per line. Each row includes `user_id`, run metadata, `review_corpus_stats`,
+optional `evidence_profile`, `inferred_attributes`, and `rejected_attributes`.
+Use `--yaml-output` to write the same final records as a readable YAML list after
+the JSONL output is updated.
 
 Use `--overwrite-profiles` only when you want to pay to regenerate compact
 profiles instead of reusing the existing profile cache. Use

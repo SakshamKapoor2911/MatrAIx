@@ -114,6 +114,61 @@ def write_jsonl(path: Path, rows: Iterable[dict[str, Any]], append: bool = False
     return count
 
 
+def yaml_key(value: Any) -> str:
+    key = str(value)
+    if key and all(char.isalnum() or char in "_-" for char in key) and not key[0].isdigit():
+        return key
+    return json.dumps(key, ensure_ascii=False)
+
+
+def yaml_scalar(value: Any) -> str:
+    if value is None:
+        return "null"
+    if isinstance(value, bool):
+        return "true" if value else "false"
+    if isinstance(value, int | float):
+        return str(value)
+    return json.dumps(str(value), ensure_ascii=False)
+
+
+def yaml_dump(data: Any, indent: int = 0) -> str:
+    prefix = " " * indent
+    if isinstance(data, dict):
+        if not data:
+            return f"{prefix}{{}}"
+        lines = []
+        for key, value in data.items():
+            if isinstance(value, dict | list):
+                lines.append(f"{prefix}{yaml_key(key)}:")
+                lines.append(yaml_dump(value, indent + 2))
+            else:
+                lines.append(f"{prefix}{yaml_key(key)}: {yaml_scalar(value)}")
+        return "\n".join(lines)
+    if isinstance(data, list):
+        if not data:
+            return f"{prefix}[]"
+        lines = []
+        for item in data:
+            if isinstance(item, dict | list):
+                lines.append(f"{prefix}-")
+                lines.append(yaml_dump(item, indent + 2))
+            else:
+                lines.append(f"{prefix}- {yaml_scalar(item)}")
+        return "\n".join(lines)
+    return f"{prefix}{yaml_scalar(data)}"
+
+
+def write_yaml(path: Path, data: Any) -> None:
+    ensure_dir(path.parent)
+    path.write_text(yaml_dump(data) + "\n", encoding="utf-8")
+
+
+def write_inference_yaml(jsonl_path: Path, yaml_path: Path) -> int:
+    rows = list(iter_jsonl_or_gz(jsonl_path))
+    write_yaml(yaml_path, rows)
+    return len(rows)
+
+
 def load_schema(path: Path) -> list[dict[str, Any]]:
     with open(path, encoding="utf-8") as fh:
         data = json.load(fh)
@@ -1140,6 +1195,12 @@ def parse_args(argv: Iterable[str]) -> argparse.Namespace:
         default=DEFAULT_OUTPUT_PATH,
         help=f"Output JSONL path. Default: {DEFAULT_OUTPUT_PATH}",
     )
+    parser.add_argument(
+        "--yaml-output",
+        type=Path,
+        default=None,
+        help="Optional YAML copy of the final inference JSONL output.",
+    )
     parser.add_argument("--model", default=DEFAULT_MODEL)
     parser.add_argument("--temperature", type=float, default=0.0)
     parser.add_argument(
@@ -1309,6 +1370,9 @@ def main(argv: Iterable[str]) -> int:
             f"attributes across {result.get('request_count', 0)} requests"
         )
     log(f"Wrote {written:,} user inference rows: {args.output}")
+    if args.yaml_output:
+        yaml_rows = write_inference_yaml(args.output, args.yaml_output)
+        log(f"Wrote {yaml_rows:,} user inference rows as YAML: {args.yaml_output}")
     return 0
 
 
