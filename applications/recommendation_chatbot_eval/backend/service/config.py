@@ -133,6 +133,7 @@ class ConfigManager:
         "runtime": "Harbor",
         "personaAgent": "Harbor persona-claude-code",
         "applicationApi": "rec-agent-api sidecar",
+        "scorer": "Application scorer via Harbor verifier",
         "cache": "Docker image + model cache volumes",
         "ranker": "SASRec (native)",
         "resources": "all_resources",

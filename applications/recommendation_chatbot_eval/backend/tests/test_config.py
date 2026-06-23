@@ -83,6 +83,7 @@ def test_options_environment_block(config_manager):
         "runtime",
         "personaAgent",
         "applicationApi",
+        "scorer",
         "cache",
         "ranker",
         "resources",
@@ -92,6 +93,7 @@ def test_options_environment_block(config_manager):
     assert env["runtime"] == "Harbor"
     assert env["personaAgent"] == "Harbor persona-claude-code"
     assert env["applicationApi"] == "rec-agent-api sidecar"
+    assert env["scorer"] == "Application scorer via Harbor verifier"
     assert env["cache"] == "Docker image + model cache volumes"
     assert "SASRec" in env["ranker"]
     assert env["resources"] == "all_resources"

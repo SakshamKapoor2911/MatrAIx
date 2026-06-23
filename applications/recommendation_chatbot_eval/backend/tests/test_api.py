@@ -120,6 +120,7 @@ def test_config_options(client):
     # environment reports the fixed stack facts.
     assert body["environment"]["resources"] == "all_resources"
     assert body["environment"]["agent"] == "InteRecAgent"
+    assert body["environment"]["scorer"] == "Application scorer via Harbor verifier"
     assert "SASRec" in body["environment"]["ranker"]
     assert body["environment"]["promptOwnership"] == {
         "personaSystemPrompt": "Harbor native persona injection",
@@ -342,9 +343,7 @@ def test_turn_job_flow_error(client, set_run_turn):
 
 
 def test_submit_turn_404_for_unknown_session(client):
-    resp = client.post(
-        "/api/sessions/ses_missing/turns", json={"message": "hi"}
-    )
+    resp = client.post("/api/sessions/ses_missing/turns", json={"message": "hi"})
     assert resp.status_code == 404
 
 

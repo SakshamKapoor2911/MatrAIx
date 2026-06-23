@@ -4,8 +4,8 @@
  * The cockpit separates *editable knobs* (Model/Domain/Conversation style/Max
  * turns) from the *fixed* parts of the stack the operator cannot change. This
  * renders that read-only block — Runtime (Harbor), persona agent, application
- * API sidecar, cache policy, Ranker (native SASRec), Catalog (`all_resources`),
- * Agent (InteRecAgent), and the Harbor/application prompt boundary — from the
+ * API sidecar, application scorer, cache policy, Ranker (native SASRec),
+ * Catalog (`all_resources`), Agent (InteRecAgent), and the Harbor/application prompt boundary — from the
  * backend `environment` block of `GET /api/config/options`, behind a button
  * that toggles a popover.
  *
@@ -49,6 +49,7 @@ export function EnvironmentPopover({ environment }: EnvironmentPopoverProps) {
     { label: "Runtime", value: runtime },
     { label: "Persona", value: environment?.personaAgent ?? "Harbor persona-claude-code" },
     { label: "Rec API", value: environment?.applicationApi ?? "rec-agent-api sidecar" },
+    { label: "Scorer", value: environment?.scorer ?? "Application scorer via Harbor verifier" },
     { label: "Cache", value: environment?.cache ?? "Docker image + model cache volumes" },
   ];
   const stackRows: Array<{ label: string; value: string }> = [

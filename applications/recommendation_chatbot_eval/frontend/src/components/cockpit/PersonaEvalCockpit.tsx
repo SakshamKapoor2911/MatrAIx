@@ -25,6 +25,7 @@ import { useQuery } from "@tanstack/react-query";
 import { PersonaCatalog } from "./PersonaCatalog";
 import { RunHeader } from "./RunHeader";
 import { RunConfigBar } from "./RunConfigBar";
+import { ComponentPipeline } from "./ComponentPipeline";
 import { Trajectory } from "./Trajectory";
 import { InspectorTabs, type InspectorTab } from "./InspectorTabs";
 import { Scorecard } from "./Scorecard";
@@ -337,6 +338,14 @@ export function PersonaEvalCockpit({ options, onOpenRuns, onDomainChange }: Pers
           maxTurns={maxTurns}
           onMaxTurns={setMaxTurns}
           disabled={isRunning}
+        />
+        <ComponentPipeline
+          environment={environment}
+          phase={phase}
+          jobPhase={job?.phase}
+          hasPersona={persona !== null}
+          turnCount={turns.length}
+          hasQuestionnaire={questionnaire !== null}
         />
         <Trajectory
           turns={turns}

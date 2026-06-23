@@ -129,8 +129,8 @@ class ConfigKnob(BaseModel):
 class ConfigEnvironment(BaseModel):
     """Read-only facts about the fixed parts of the stack.
 
-    ``runtime`` / ``personaAgent`` / ``applicationApi`` report the Harbor-backed
-    execution boundary. The ranker (native SASRec), the resource bundle
+    ``runtime`` / ``personaAgent`` / ``applicationApi`` / ``scorer`` report the
+    Harbor-backed execution boundary. The ranker (native SASRec), the resource bundle
     (``all_resources``), and the agent (``InteRecAgent``) are not
     user-configurable. ``promptOwnership`` reports the prompt boundary for
     Harbor runs: Harbor owns persona system prompt injection, while this
@@ -142,6 +142,7 @@ class ConfigEnvironment(BaseModel):
     runtime: str
     personaAgent: str
     applicationApi: str
+    scorer: str
     cache: str
     ranker: str
     resources: str
@@ -393,9 +394,7 @@ class StartPersonaEvalRequest(BaseModel):
     @classmethod
     def _validate_domain(cls, value: str) -> str:
         if value not in SUPPORTED_DOMAINS:
-            raise ValueError(
-                "domain must be one of {}".format(list(SUPPORTED_DOMAINS))
-            )
+            raise ValueError("domain must be one of {}".format(list(SUPPORTED_DOMAINS)))
         return value
 
 

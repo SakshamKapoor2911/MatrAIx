@@ -75,13 +75,15 @@ export interface PromptOwnership {
 /**
  * Read-only facts about the fixed parts of the stack (the "Environment" facts
  * popover). Mirrors the backend `ConfigEnvironment`: Harbor owns the runtime
- * persona-agent loop, this app exposes the rec-agent-api sidecar, and the
- * ranker/resource/agent stack and prompt boundary are not user-configurable.
+ * persona-agent loop, this app exposes the rec-agent-api sidecar and scoring
+ * function, and the ranker/resource/agent stack and prompt boundary are not
+ * user-configurable.
  */
 export interface ConfigEnvironment {
   runtime: string;
   personaAgent: string;
   applicationApi: string;
+  scorer: string;
   cache: string;
   ranker: string;
   resources: string;
