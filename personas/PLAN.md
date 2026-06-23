@@ -196,6 +196,18 @@ _Benchmarks, evaluation, related work that doesn't fit above._
 - Finds that current models achieve only modest simulation fidelity (best score ≈40.8/100), with performance improving as model size increases but showing little benefit from additional inference-time reasoning.
 - Relevance: provides a standardized evaluation framework for MatrAIx-style personas, measuring whether generated personas can reproduce realistic population and demographic-group behaviors rather than only producing plausible persona descriptions.
 
+### [The Personality Illusion: Revealing Dissociation Between Self-Reports & Behavior in LLMs](https://arxiv.org/abs/2509.03730) (added by @Peiyang-Song)
+
+* Systematically evaluates whether LLM “personality” is behaviorally meaningful by tracing trait profiles across training stages, testing whether psychometric self-reports predict downstream behavior, and measuring the effects of persona prompting.
+* Finds that instruction tuning and alignment make self-reported traits more stable and human-like, yet only 24% of tested trait–behavior relationships are significant—and barely half of those follow the directions expected from human psychology. Persona prompts reliably alter reported traits but have little or inconsistent effect on behavior.
+* Establishes a central validity requirement of persona evaluation: persona fidelity cannot be inferred from questionnaires or plausible self-description alone, but must be verified through behaviorally grounded tasks that test whether simulated traits actually govern agents’ decisions.
+
+### [Rethinking Psychometric Evaluation of LLMs: When and Why Self-Reports Predict Behavior](https://arxiv.org/abs/2606.12730) (added by @Peiyang-Song)
+
+* Identifies the conditions under which LLM self-reports can predict behavior, contrasting the broad Big Five framework with the behavior-specific Theory of Planned Behavior across four tasks, 11 frontier LLMs, shared versus separate conversations, and different identity-induction methods.
+* Shows that task-specific self-reports achieve human-level behavioral coherence within a shared conversation, while Big Five traits remain weak predictors. Across separate sessions, coherence persists for externally anchored behaviors such as implicit bias, but collapses for context-sensitive behavior such as sycophancy; persona prompting stabilizes self-reports without reliably aligning behavior.
+* Provides a measurement-design blueprint for persona evaluation: use behavior-specific constructs, distinguish within-context consistency from durable cross-session persona fidelity, and evaluate persona agents across tasks whose behavior varies in contextual sensitivity and persistence.
+
 ### [Generative Agents: Interactive Simulacra of Human Behavior](https://arxiv.org/pdf/2304.03442) (Xiaoyi-Liu added, Yuexing-Hao posted in Discord discussion)
 ### [Human Relations Area Files(eHRAF ​​World Culture)](https://hraf.yale.edu/resources/reference/outline-of-cultural-materials/) (Xiaoyi-Liu added, Ziyan-Wang posted in Discord)
 ### [OdysSim: Building Foundation Models for Human Behavior Simulation] (Xiaoyi-Liu added, Lorenzo-Xiao posted in Discord)
