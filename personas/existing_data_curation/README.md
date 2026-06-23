@@ -249,152 +249,23 @@ export HF_TOKEN=hf_...   # token for an account that accepted the terms
 python scripts/fetch_sources.py --source synthpersona --mode sample --sample-rows 1000
 ```
 
-## Amazon Reviews 2023 Retrieval
-
-Use `scripts/fetch_amazon_reviews_2023.py` for the Amazon Reviews 2023 pivot.
-The script streams category-level `.jsonl.gz` files and writes reviewer-level
-histories for persona construction/evaluation.
-
-List supported categories:
-
-```bash
-python scripts/fetch_amazon_reviews_2023.py --list-categories
-```
-
-Small pilot sample from one category:
-
-```bash
-python scripts/fetch_amazon_reviews_2023.py \
-  --categories All_Beauty \
-  --max-reviews-per-category 10000 \
-  --min-user-reviews 3 \
-  --max-users 1000
-```
-
-Pilot sample across application-relevant categories:
-
-```bash
-python scripts/fetch_amazon_reviews_2023.py \
-  --categories Software,Electronics,Office_Products,Beauty_and_Personal_Care,Health_and_Household \
-  --max-reviews-per-category 50000 \
-  --min-user-reviews 5 \
-  --max-users 5000 \
-  --include-metadata
-```
-
-Full raw download for selected categories:
-
-```bash
-python scripts/fetch_amazon_reviews_2023.py \
-  --mode full \
-  --categories Software,Electronics \
-  --include-metadata
-```
-
-Amazon output layout:
-
-- `raw/amazon_reviews_2023/reviews/*_sample_*.jsonl`
-- `raw/amazon_reviews_2023/metadata/meta_*_sample.jsonl`
-- `raw/amazon_reviews_2023/user_histories/user_histories_*.jsonl`
-- `raw/amazon_reviews_2023/raw_gz/*.jsonl.gz` for full downloads
-- `raw/amazon_reviews_2023/manifest.json`
-
-### Amazon Reviewer Pool Exploration
-
-Use `scripts/analyze_amazon_reviews_2023.py` to find reviewers with enough
-behavior for persona construction: many reviews, multiple categories, long
-history span, and enough review text.
-
-Example exploratory run:
-
-```bash
-python scripts/analyze_amazon_reviews_2023.py \
-  --categories All_Beauty,Software,Office_Products,Electronics,Books \
-  --start-year 2018 \
-  --end-year 2023 \
-  --min-reviews 30 \
-  --min-categories 2 \
-  --min-history-days 730 \
-  --min-text-chars 5000 \
-  --min-verified-share 0.7 \
-  --top-n 0
-```
-
-Write a reusable all-user aggregate checkpoint while scanning:
-
-```bash
-python scripts/analyze_amazon_reviews_2023.py \
-  --categories Sports_and_Outdoors,Health_and_Household \
-  --start-year 2018 \
-  --end-year 2023 \
-  --min-reviews 30 \
-  --min-categories 2 \
-  --min-history-days 365 \
-  --min-text-chars 5000 \
-  --min-verified-share 0.7 \
-  --top-n 0 \
-  --write-user-state \
-  --output-dir raw/amazon_reviews_2023/exploration/sports_health_2018_2023
-```
-
-Merge one or more aggregate checkpoints without rescanning remote category files:
-
-```bash
-python scripts/analyze_amazon_reviews_2023.py \
-  --merge-only \
-  --load-user-state raw/amazon_reviews_2023/exploration/base_2018_2023/all_user_stats.jsonl.gz \
-  --load-user-state raw/amazon_reviews_2023/exploration/sports_health_2018_2023/all_user_stats.jsonl.gz \
-  --categories Books,Kindle_Store,Movies_and_TV,Electronics,Office_Products,Home_and_Kitchen,Clothing_Shoes_and_Jewelry,Sports_and_Outdoors,Health_and_Household \
-  --min-reviews 30 \
-  --min-categories 2 \
-  --min-history-days 365 \
-  --min-text-chars 5000 \
-  --min-verified-share 0.7 \
-  --top-n 0 \
-  --write-user-state \
-  --output-dir raw/amazon_reviews_2023/exploration/base_plus_sports_health_2018_2023
-```
-
-Outputs:
-
-- `raw/amazon_reviews_2023/exploration/summary.json`
-- `raw/amazon_reviews_2023/exploration/candidate_users.jsonl`
-- `raw/amazon_reviews_2023/exploration/all_user_stats.jsonl.gz` when `--write-user-state` is set
-
-### Amazon Review to 1,339-Dimension Schema Inference
-
-Use `scripts/retrieve_amazon_user_histories.py` and
-`scripts/infer_amazon_review_dimensions.py` to infer values from
-`personas/dimensions+new.json` where the review history directly supports the
-schema attribute. The inference prompt is conservative: unsupported dimensions
-are omitted, sensitive demographics are not inferred from product stereotypes,
-and every returned value must include review evidence.
-
-Retrieve full review histories for selected candidate users:
-
-```bash
-python scripts/retrieve_amazon_user_histories.py \
-  --candidate-users samples/amazon_reviews_2023/candidate_users_top100.jsonl \
-  --categories candidate_categories \
-  --top-n 100 \
-  --start-year 2018 \
-  --end-year 2023 \
-  --output raw/amazon_reviews_2023/persona_dimension_inference/user_histories.jsonl
-```
-
-The tracked `samples/amazon_reviews_2023/candidate_users_top100.jsonl` file is
-a lightweight collaborator sample from the larger 2018-2023 application
-candidate pool. Full candidate pools and retrieved review histories stay under
-`raw/` and are intentionally ignored by Git.
-
-### Modal User-Indexed Parquet Workflow
+## Amazon Reviews 2023 Persona Workflow
 
 For a cloud-built team artifact, use
-`modal_amazon_user_index.py`. It reads the Hugging Face dataset
-`McAuley-Lab/Amazon-Reviews-2023`, launches one Modal job per category, and
-writes user-bucketed Parquet shards to the Modal Volume
-`amazon-reviews-user-index`. The default and recommended index window is
-2018-2023; the commands below explicitly filter to that window.
+`modal_amazon_user_index.py`. The current recommended path uses the Modal
+Volume `amazon-reviews-user-index` as the source of truth, so downstream work no
+longer needs to rescan raw category-indexed review files.
+
+Prepared Modal artifacts:
+
+| Artifact | Prefix | Purpose |
+|---|---|---|
+| Per-user summary stats | `amazon_reviews_2018_2023_user_stats` | One row per user per category, used for pool filtering |
+| Eligible user pool | `amazon_reviews_2018_2023_eligible_users_min30_verified70_text2000` | Users with >=30 reviews, verified purchase share >=0.7, and >=2000 review-text characters |
+| Eligible user-indexed reviews | `amazon_reviews_2018_2023_user_buckets_min30_verified70_text2000` | Review rows for eligible users, bucketed by `sha1(user_id)[:2]` |
+| Stricter eligible user pool | `amazon_reviews_2018_2023_eligible_users_min30_verified70_text3000` | Derived from the >=2000 pool with >=3000 review-text characters |
+| Stricter eligible user-indexed reviews | `amazon_reviews_2018_2023_user_buckets_min30_verified70_text3000` | Derived from the >=2000 user-indexed reviews for the stricter eligible pool |
+| Product metadata index | `amazon_reviews_2023_metadata_by_parent_asin_bucket_v2` | Product metadata bucketed by `sha1(parent_asin)[:2]` |
 
 Install and authenticate Modal locally, using the account/workspace for the
 `cs231n-final-project` project:
@@ -404,31 +275,153 @@ python3 -m pip install modal
 modal setup
 ```
 
-Run a small smoke test first:
+### Build or Refresh Modal Artifacts
+
+These commands are only needed when rebuilding the shared artifacts.
+
+Build per-user 2018-2023 summary stats:
 
 ```bash
-modal run modal_amazon_user_index.py::build_sample_categories
+modal run modal_amazon_user_index.py::build_user_stats \
+  --categories all \
+  --start-year 2018 \
+  --end-year 2023
 ```
 
-Build all Amazon categories for 2018-2023 reviews only:
+Reduce the stats into an eligible user pool:
+
+```bash
+modal run modal_amazon_user_index.py::build_eligible_users \
+  --min-reviews 30 \
+  --min-verified-share 0.7 \
+  --min-text-chars 2000
+```
+
+Build review-level user-indexed Parquet only for eligible users:
 
 ```bash
 modal run modal_amazon_user_index.py::build_categories \
   --categories all \
   --start-year 2018 \
   --end-year 2023 \
-  --output-prefix amazon_reviews_2018_2023_user_buckets
+  --eligible-prefix amazon_reviews_2018_2023_eligible_users_min30_verified70_text2000 \
+  --output-prefix amazon_reviews_2018_2023_user_buckets_min30_verified70_text2000
 ```
 
-The output layout is bucketed by `sha1(user_id)[:2]`, for example:
+Derive the stricter >=3000 text-character pool from the existing >=2000 pool:
+
+```bash
+modal run modal_amazon_user_index.py::derive_eligible_users \
+  --source-prefix amazon_reviews_2018_2023_eligible_users_min30_verified70_text2000 \
+  --output-prefix amazon_reviews_2018_2023_eligible_users_min30_verified70_text3000 \
+  --min-reviews 30 \
+  --min-verified-share 0.7 \
+  --min-text-chars 3000
+```
+
+Derive matching review-level user-indexed Parquet from the existing >=2000
+review index:
+
+```bash
+modal run modal_amazon_user_index.py::derive_user_buckets \
+  --source-review-prefix amazon_reviews_2018_2023_user_buckets_min30_verified70_text2000 \
+  --eligible-prefix amazon_reviews_2018_2023_eligible_users_min30_verified70_text3000 \
+  --output-prefix amazon_reviews_2018_2023_user_buckets_min30_verified70_text3000
+```
+
+Build product metadata indexed by `parent_asin` bucket:
+
+```bash
+modal run modal_amazon_user_index.py::build_metadata \
+  --categories all \
+  --output-prefix amazon_reviews_2023_metadata_by_parent_asin_bucket_v2
+```
+
+Review index layout:
 
 ```text
 bucket=ab/category=Books/part-000000.parquet
 bucket=ab/category=Electronics/part-000000.parquet
 ```
 
-This layout avoids concurrent writes to one SQLite file and lets downstream
-retrieval read only buckets needed for a candidate user list.
+Metadata index layout:
+
+```text
+bucket=ab/source_category=Books/part-000000.parquet
+bucket=ab/source_category=Electronics/part-000000.parquet
+```
+
+### Export Candidate Histories
+
+First export candidate users from the same eligible-user pool used to build the
+review index. This keeps the candidate list and review index aligned:
+
+```bash
+modal run modal_amazon_user_index.py::export_candidate_users \
+  --eligible-prefix amazon_reviews_2018_2023_eligible_users_min30_verified70_text2000 \
+  --top-n 100 \
+  --min-history-days 365 \
+  --output raw/amazon_reviews_2023/candidates/eligible_candidates_top100.jsonl
+```
+
+The tracked `samples/amazon_reviews_2023/candidate_users_top100.jsonl` file is
+a lightweight collaborator sample from an earlier candidate pool. It is useful
+for code smoke tests, but newly generated candidates should come from the
+current eligible-user prefix. Full candidate pools and retrieved review
+histories stay under `raw/` and are intentionally ignored by Git.
+
+Export selected users from the Modal user-indexed review artifact into the local
+JSONL format expected by the inference script:
+
+```bash
+modal run modal_amazon_user_index.py::export_user_histories \
+  --candidate-users raw/amazon_reviews_2023/candidates/eligible_candidates_top100.jsonl \
+  --top-n 100 \
+  --review-prefix amazon_reviews_2018_2023_user_buckets_min30_verified70_text2000 \
+  --temporal-train-fraction 0.8 \
+  --output raw/amazon_reviews_2023/persona_dimension_inference/user_histories.jsonl
+```
+
+By default, the export removes reviews that are primarily about fulfillment,
+shipping, damaged packaging, wrong/missing items, returns, or compensated/template
+review disclosures. The export writes a sidecar summary such as
+`user_histories.jsonl.filter_summary.json` with removed-review counts by
+category, by user, by user/category, and by matched phrase. Use
+`--no-filter-fulfillment-reviews` only for debugging or ablations.
+
+After filtering, each exported user history is split per user by timestamp over
+all retained review/rating rows, including rating rows with empty review text.
+The earliest `--temporal-train-fraction` share, 0.8 by default, is written to
+`reviews` for persona construction. The latest held-out share is written to
+`validation_reviews` for downstream validation. `category_review_stats` is
+computed from the construction split, including per-category row counts, rating
+counts, rating distributions, and average ratings. The export also saves
+`validation_category_review_stats`; the sidecar summary includes per-user and
+aggregate stats for both splits, plus text-review, rating, and rating-only row
+counts. The inference script passes only the construction-split stats as
+additional behavioral context for persona extraction.
+
+Add `--include-metadata` when inference should use product names and product
+categories as reviewed-item context. The inference prompt only receives compact
+product `name`, `main_category`, and category path values from metadata; long
+descriptions, features, details, price, and store fields are intentionally left
+out. The metadata join can add extra I/O for users with many reviewed products.
+
+```bash
+modal run modal_amazon_user_index.py::export_user_histories \
+  --candidate-users raw/amazon_reviews_2023/candidates/eligible_candidates_top100.jsonl \
+  --top-n 100 \
+  --include-metadata \
+  --output raw/amazon_reviews_2023/persona_dimension_inference/user_histories_with_metadata.jsonl
+```
+
+### Amazon Review to 1,339-Dimension Schema Inference
+
+Use `scripts/infer_amazon_review_dimensions.py` to infer values from
+`personas/dimensions+new.json` where the exported review history directly
+supports the schema attribute. The prompt is conservative: unsupported
+dimensions are omitted, sensitive demographics are not inferred from product
+stereotypes, and every returned value must include review evidence.
 
 Inspect prompts without calling the API:
 
@@ -448,6 +441,19 @@ profile to the persona schema. This avoids resending the same raw reviews for
 every schema batch. Evidence profiles are written to
 `raw/amazon_reviews_2023/persona_dimension_inference/evidence_profiles.jsonl`
 and can be reused across resumed schema-mapping runs.
+If user histories were exported with `--include-metadata`, the evidence profile
+also sees compact product name/category context for each reviewed item.
+
+Inference outputs include `review_corpus_stats` for the construction split:
+row count, text-review count, rating count, rating-only row count, total review
+text characters, date span, category counts, and rating-only product/category
+summary stats. In `evidence_profile` mode, only rows with review text are sent
+as `review_evidence`; rating-only rows are represented through aggregate rating,
+product-name, and product-category stats in `construction_corpus_summary`. Users
+with very large construction text histories are summarized in temporal windows
+before schema mapping. By default, windowing triggers when construction review
+text exceeds `--window-summary-threshold-chars 120000`; each window is capped by
+`--window-summary-max-chars 60000` and `--window-summary-max-rows 200`.
 
 Run OpenAI inference with the optimized evidence-profile pipeline:
 
@@ -459,6 +465,7 @@ python scripts/infer_amazon_review_dimensions.py \
   --schema-path ../dimensions+new.json \
   --model "${OPENAI_LLM_MODEL:-gpt-5.4-mini}" \
   --dimensions-per-call 40 \
+  --window-summary-threshold-chars 120000 \
   --max-users 100 \
   --output raw/amazon_reviews_2023/persona_dimension_inference/inferred_dimensions.jsonl
 ```
@@ -499,6 +506,15 @@ The report groups inferred attributes by schema category, includes the compact
 evidence profile, and estimates cost from serialized prompt/output character
 counts when `--user-histories` is provided. Exact billed token usage requires
 persisted API usage metadata.
+
+### Legacy Local Raw-Streaming Tools
+
+`scripts/fetch_amazon_reviews_2023.py`,
+`scripts/analyze_amazon_reviews_2023.py`, and
+`scripts/retrieve_amazon_user_histories.py` are still available for small local
+pilots or debugging raw source files. They stream category-level `.jsonl.gz`
+files directly and are much slower for repeated candidate retrieval than the
+Modal user-indexed workflow above.
 
 ### 6) Literature and theory references
 

@@ -226,15 +226,177 @@ def compact_text(value: Any, max_chars: int) -> str:
     return text[: max_chars - 1].rstrip() + "…"
 
 
-def select_reviews(reviews: list[dict[str, Any]], max_reviews: int) -> list[dict[str, Any]]:
-    reviews = sorted(reviews, key=lambda row: normalize_timestamp(row.get("timestamp")) or 0)
-    if max_reviews <= 0 or len(reviews) <= max_reviews:
-        return reviews
+def review_corpus_stats(reviews: list[dict[str, Any]]) -> dict[str, Any]:
+    sorted_reviews = sorted(reviews, key=lambda row: normalize_timestamp(row.get("timestamp")) or 0)
+    text_chars = 0
+    text_reviews = 0
+    rating_count = 0
+    rating_only_count = 0
+    category_counts: dict[str, int] = {}
+    rating_only_rating_counts: dict[str, int] = {}
+    rating_only_product_counts: dict[str, int] = {}
+    rating_only_main_category_counts: dict[str, int] = {}
+    rating_only_category_counts: dict[str, int] = {}
+    for review in sorted_reviews:
+        category = str(review.get("category") or "Unknown")
+        category_counts[category] = category_counts.get(category, 0) + 1
+        text = " ".join(str(review.get("text") or "").split())
+        if text:
+            text_reviews += 1
+            text_chars += len(text)
+        if review.get("rating") is not None:
+            rating_count += 1
+            if not text:
+                rating_only_count += 1
+                try:
+                    rating = float(review.get("rating"))
+                    rating_key = str(int(rating)) if rating.is_integer() else str(rating)
+                except (TypeError, ValueError):
+                    rating_key = str(review.get("rating"))
+                rating_only_rating_counts[rating_key] = (
+                    rating_only_rating_counts.get(rating_key, 0) + 1
+                )
+                product = product_context(review)
+                product_name = product.get("name")
+                if product_name:
+                    rating_only_product_counts[product_name] = (
+                        rating_only_product_counts.get(product_name, 0) + 1
+                    )
+                main_category = product.get("main_category") or category
+                if main_category:
+                    rating_only_main_category_counts[main_category] = (
+                        rating_only_main_category_counts.get(main_category, 0) + 1
+                    )
+                product_categories = product.get("categories") or [category]
+                for product_category in product_categories:
+                    rating_only_category_counts[product_category] = (
+                        rating_only_category_counts.get(product_category, 0) + 1
+                    )
+
+    def top_counts(counts: dict[str, int], limit: int = 25) -> dict[str, int]:
+        return dict(sorted(counts.items(), key=lambda item: (-item[1], item[0]))[:limit])
+
+    return {
+        "row_count": len(sorted_reviews),
+        "text_review_count": text_reviews,
+        "rating_count": rating_count,
+        "rating_only_count": rating_only_count,
+        "text_chars": text_chars,
+        "first_date": timestamp_to_date(sorted_reviews[0].get("timestamp")) if sorted_reviews else None,
+        "last_date": timestamp_to_date(sorted_reviews[-1].get("timestamp")) if sorted_reviews else None,
+        "category_counts": dict(sorted(category_counts.items())),
+        "rating_only_summary": {
+            "row_count": rating_only_count,
+            "rating_counts": dict(sorted(rating_only_rating_counts.items())),
+            "top_product_names": top_counts(rating_only_product_counts),
+            "top_main_categories": top_counts(rating_only_main_category_counts),
+            "top_product_categories": top_counts(rating_only_category_counts),
+        },
+    }
+
+
+def product_context(review: dict[str, Any]) -> dict[str, Any]:
+    metadata = review.get("product_metadata")
+    if not isinstance(metadata, dict):
+        return {}
+    product = {}
+    title = compact_text(metadata.get("title"), 220)
+    if title:
+        product["name"] = title
+    main_category = compact_text(metadata.get("main_category"), 120)
+    if main_category:
+        product["main_category"] = main_category
+    categories = []
+    categories_json = metadata.get("categories_json")
+    if categories_json:
+        try:
+            parsed_categories = json.loads(categories_json)
+        except (TypeError, ValueError):
+            parsed_categories = []
+        if isinstance(parsed_categories, list):
+            for value in parsed_categories:
+                if isinstance(value, list):
+                    categories.extend(str(part) for part in value if part)
+                elif value:
+                    categories.append(str(value))
+    compact_categories = []
+    seen = set()
+    for category in categories:
+        category = compact_text(category, 80)
+        if category and category not in seen:
+            seen.add(category)
+            compact_categories.append(category)
+        if len(compact_categories) >= 6:
+            break
+    if compact_categories:
+        product["categories"] = compact_categories
+    return product
+
+
+def context_rows_for_reviews(
+    reviews: list[dict[str, Any]],
+    max_review_text_chars: int,
+    include_textless: bool = True,
+) -> list[dict[str, Any]]:
+    sorted_reviews = sorted(reviews, key=lambda row: normalize_timestamp(row.get("timestamp")) or 0)
+    rows = []
+    for idx, review in enumerate(sorted_reviews, start=1):
+        text = compact_text(review.get("text"), max_review_text_chars)
+        if not include_textless and not text:
+            continue
+        title = compact_text(review.get("title"), 180)
+        rows.append(
+            {
+                "review_id": f"r{idx:06d}",
+                "date": timestamp_to_date(review.get("timestamp")),
+                "category": review.get("category"),
+                "rating": review.get("rating"),
+                "title": title,
+                "text": text,
+                "verified_purchase": review.get("verified_purchase"),
+                "helpful_vote": review.get("helpful_vote", review.get("helpful_votes")),
+                "product": product_context(review),
+            }
+        )
+    return rows
+
+
+def serialized_context_chars(context: list[dict[str, Any]]) -> int:
+    return sum(len(json.dumps(row, ensure_ascii=False)) for row in context)
+
+
+def select_context_rows(rows: list[dict[str, Any]], max_reviews: int) -> list[dict[str, Any]]:
+    if max_reviews <= 0 or len(rows) <= max_reviews:
+        return rows
     if max_reviews == 1:
-        return [reviews[-1]]
-    last = len(reviews) - 1
+        return [rows[-1]]
+    last = len(rows) - 1
     indices = sorted({round(i * last / (max_reviews - 1)) for i in range(max_reviews)})
-    return [reviews[idx] for idx in indices]
+    return [rows[idx] for idx in indices]
+
+
+def split_context_rows_into_windows(
+    rows: list[dict[str, Any]],
+    max_window_chars: int,
+    max_window_rows: int,
+) -> list[list[dict[str, Any]]]:
+    windows: list[list[dict[str, Any]]] = []
+    current: list[dict[str, Any]] = []
+    current_chars = 0
+    for row in rows:
+        row_chars = len(json.dumps(row, ensure_ascii=False))
+        if current and (
+            (max_window_chars and current_chars + row_chars > max_window_chars)
+            or (max_window_rows and len(current) >= max_window_rows)
+        ):
+            windows.append(current)
+            current = []
+            current_chars = 0
+        current.append(row)
+        current_chars += row_chars
+    if current:
+        windows.append(current)
+    return windows
 
 
 def build_review_context(
@@ -242,22 +404,15 @@ def build_review_context(
     max_reviews: int,
     max_review_text_chars: int,
     max_total_chars: int,
+    include_textless: bool = True,
 ) -> list[dict[str, Any]]:
+    rows = select_context_rows(
+        context_rows_for_reviews(reviews, max_review_text_chars, include_textless=include_textless),
+        max_reviews,
+    )
     context = []
     total_chars = 0
-    for idx, review in enumerate(select_reviews(reviews, max_reviews), start=1):
-        text = compact_text(review.get("text"), max_review_text_chars)
-        title = compact_text(review.get("title"), 180)
-        row = {
-            "review_id": f"r{idx:04d}",
-            "date": timestamp_to_date(review.get("timestamp")),
-            "category": review.get("category"),
-            "rating": review.get("rating"),
-            "title": title,
-            "text": text,
-            "verified_purchase": review.get("verified_purchase"),
-            "helpful_vote": review.get("helpful_vote", review.get("helpful_votes")),
-        }
+    for row in rows:
         total_chars += len(json.dumps(row, ensure_ascii=False))
         if max_total_chars and total_chars > max_total_chars:
             break
@@ -269,6 +424,7 @@ def prompt_payload(
     user_row: dict[str, Any],
     dimension_batch: list[dict[str, Any]],
     review_context: list[dict[str, Any]],
+    corpus_stats: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     dimensions = [
         {
@@ -286,6 +442,9 @@ def prompt_payload(
         "instructions": [
             "Return only dimensions with direct support from the review evidence.",
             "Omit unknown, weak, stereotyped, or unsupported dimensions.",
+            "Use category_review_summary as aggregate behavioral context; evidence quotes must still come from review_evidence.",
+            "Use construction_corpus_summary for aggregate rating-only behavior; do not cite rating-only aggregate stats as direct evidence quotes.",
+            "Use product name/category only to interpret the reviewed item; do not infer sensitive attributes from product stereotypes.",
             "For each inferred dimension, choose exactly one allowed value from that dimension.",
             "Every inferred dimension must include at least one review_id and a short evidence quote copied from that review.",
             "Use confidence between 0 and 1. Use >=0.8 only for explicit or repeated evidence.",
@@ -303,6 +462,8 @@ def prompt_payload(
             ]
         },
         "schema_dimensions": dimensions,
+        "category_review_summary": user_row.get("category_review_stats", {}),
+        "construction_corpus_summary": corpus_stats or user_row.get("review_corpus_stats", {}),
         "review_evidence": review_context,
     }
 
@@ -311,6 +472,7 @@ def evidence_profile_payload(
     user_row: dict[str, Any],
     review_context: list[dict[str, Any]],
     mapping: dict[str, Any],
+    corpus_stats: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     return {
         "task": "build_compact_amazon_review_evidence_profile",
@@ -318,12 +480,17 @@ def evidence_profile_payload(
         "instructions": [
             "Summarize only evidence supported by the supplied reviews.",
             "Organize evidence using the broad evidence categories.",
+            "Use category_review_summary as aggregate behavioral context, especially category frequency and rating patterns.",
+            "Use construction_corpus_summary for aggregate rating-only behavior; review_evidence contains text-bearing rows only when text-only context is enabled.",
+            "Use product name/category only to interpret the reviewed item; do not infer sensitive attributes from product stereotypes.",
             "Keep claims short and grounded.",
             "Each evidence item must cite at least one review_id and include a short exact quote from that review when text/title supports the claim.",
             "Use explicit_self_statement for occupation, family, health, location, politics, religion, or other sensitive/personal claims only when directly stated.",
             "Omit unsupported categories instead of guessing.",
         ],
         "broad_evidence_categories": mapping.get("evidence_categories", []),
+        "category_review_summary": user_row.get("category_review_stats", {}),
+        "construction_corpus_summary": corpus_stats or user_row.get("review_corpus_stats", {}),
         "output_json_schema": {
             "evidence_profile": {
                 "user_id": "source user id",
@@ -582,16 +749,115 @@ def load_completed_rows_by_user(path: Path) -> dict[str, dict[str, Any]]:
 
 def build_or_load_evidence_profile(
     user_row: dict[str, Any],
+    reviews: list[dict[str, Any]],
     review_context: list[dict[str, Any]],
+    corpus_stats: dict[str, Any],
     mapping: dict[str, Any],
     args: argparse.Namespace,
     api_key: str,
     existing_profiles: dict[str, dict[str, Any]],
-) -> tuple[dict[str, Any], list[dict[str, Any]], bool]:
+) -> tuple[dict[str, Any], list[dict[str, Any]], int]:
     user_id = str(user_row.get("user_id", ""))
     if user_id in existing_profiles and not args.overwrite_profiles:
         profile_row = existing_profiles[user_id]
-        return profile_row.get("evidence_profile") or {}, profile_row.get("rejected_evidence_items") or [], False
+        return profile_row.get("evidence_profile") or {}, profile_row.get("rejected_evidence_items") or [], 0
+
+    all_context_rows = context_rows_for_reviews(
+        reviews,
+        args.max_review_text_chars,
+        include_textless=False,
+    )
+    all_context_chars = serialized_context_chars(all_context_rows)
+    should_window = (
+        args.window_summary_threshold_chars > 0
+        and corpus_stats.get("text_chars", 0) > args.window_summary_threshold_chars
+    )
+    request_count = 0
+
+    if should_window:
+        windows = split_context_rows_into_windows(
+            all_context_rows,
+            max_window_chars=args.window_summary_max_chars,
+            max_window_rows=args.window_summary_max_rows,
+        )
+        profile_items = []
+        rejected = []
+        overview_parts = []
+        unsupported_or_blocked = []
+        for window_index, window_context in enumerate(windows, start=1):
+            payload = {
+                "model": args.model,
+                "temperature": args.temperature,
+                "response_format": {"type": "json_object"},
+                "messages": [
+                    {"role": "system", "content": EVIDENCE_PROFILE_SYSTEM_PROMPT},
+                    {
+                        "role": "user",
+                        "content": json.dumps(
+                            evidence_profile_payload(user_row, window_context, mapping, corpus_stats),
+                            ensure_ascii=False,
+                        ),
+                    },
+                ],
+            }
+            response = openai_request(payload, api_key)
+            request_count += 1
+            model_output = parse_model_json(response)
+            valid_review_ids = {row["review_id"] for row in window_context}
+            window_profile, window_rejected = normalize_evidence_profile(
+                model_output,
+                user_id,
+                valid_review_ids,
+            )
+            if window_profile.get("overview"):
+                overview_parts.append(f"Window {window_index}: {window_profile['overview']}")
+            for item_index, item in enumerate(window_profile.get("evidence_items") or [], start=1):
+                item = dict(item)
+                item["evidence_item_id"] = f"w{window_index}_{item.get('evidence_item_id') or item_index}"
+                profile_items.append(item)
+            unsupported_or_blocked.extend(window_profile.get("unsupported_or_blocked") or [])
+            rejected.extend(
+                {
+                    **item,
+                    "window_index": window_index,
+                }
+                for item in window_rejected
+            )
+
+        profile = {
+            "user_id": user_id,
+            "overview": compact_text(" ".join(overview_parts), 1200),
+            "evidence_items": (
+                profile_items[: args.max_window_evidence_items]
+                if args.max_window_evidence_items
+                else profile_items
+            ),
+            "unsupported_or_blocked": unsupported_or_blocked,
+        }
+        profile_row = {
+            "source": "amazon_reviews_2023",
+            "user_id": user_row.get("user_id"),
+            "review_count": len(reviews),
+            "review_corpus_stats": corpus_stats,
+            "review_context_count": len(all_context_rows),
+            "review_context_chars": all_context_chars,
+            "model": args.model,
+            "status": "ok",
+            "profile_build_mode": "windowed",
+            "window_summary": {
+                "threshold_text_chars": args.window_summary_threshold_chars,
+                "window_count": len(windows),
+                "max_window_chars": args.window_summary_max_chars,
+                "max_window_rows": args.window_summary_max_rows,
+                "max_window_evidence_items": args.max_window_evidence_items,
+            },
+            "evidence_profile": profile,
+            "rejected_evidence_items": rejected,
+        }
+        write_jsonl(args.evidence_profiles_output, [profile_row], append=args.evidence_profiles_output.exists())
+        existing_profiles[user_id] = profile_row
+        return profile, rejected, request_count
+
     payload = {
         "model": args.model,
         "temperature": args.temperature,
@@ -601,13 +867,14 @@ def build_or_load_evidence_profile(
             {
                 "role": "user",
                 "content": json.dumps(
-                    evidence_profile_payload(user_row, review_context, mapping),
+                    evidence_profile_payload(user_row, review_context, mapping, corpus_stats),
                     ensure_ascii=False,
                 ),
             },
         ],
     }
     response = openai_request(payload, api_key)
+    request_count += 1
     model_output = parse_model_json(response)
     valid_review_ids = {row["review_id"] for row in review_context}
     profile, rejected = normalize_evidence_profile(model_output, user_id, valid_review_ids)
@@ -615,15 +882,22 @@ def build_or_load_evidence_profile(
         "source": "amazon_reviews_2023",
         "user_id": user_row.get("user_id"),
         "review_count": len(user_row.get("reviews") or []),
+        "review_corpus_stats": corpus_stats,
         "review_context_count": len(review_context),
+        "review_context_chars": serialized_context_chars(review_context),
         "model": args.model,
         "status": "ok",
+        "profile_build_mode": "single_context",
+        "window_summary": {
+            "threshold_text_chars": args.window_summary_threshold_chars,
+            "source_context_chars": all_context_chars,
+        },
         "evidence_profile": profile,
         "rejected_evidence_items": rejected,
     }
     write_jsonl(args.evidence_profiles_output, [profile_row], append=args.evidence_profiles_output.exists())
     existing_profiles[user_id] = profile_row
-    return profile, rejected, True
+    return profile, rejected, request_count
 
 
 def infer_user(
@@ -640,6 +914,7 @@ def infer_user(
             "inferred_attributes": [],
             "rejected_attributes": [],
         }
+    corpus_stats = review_corpus_stats(reviews)
     review_context = build_review_context(
         reviews,
         max_reviews=args.max_reviews_per_user,
@@ -652,7 +927,7 @@ def infer_user(
     request_count = 0
     for dimension_batch in batched(dimensions, args.dimensions_per_call):
         request_count += 1
-        task = prompt_payload(user_row, dimension_batch, review_context)
+        task = prompt_payload(user_row, dimension_batch, review_context, corpus_stats)
         payload = {
             "model": args.model,
             "temperature": args.temperature,
@@ -673,7 +948,9 @@ def infer_user(
         "schema_dimension_count": len(dimensions),
         "user_id": user_row.get("user_id"),
         "review_count": len(reviews),
+        "review_corpus_stats": corpus_stats,
         "review_context_count": len(review_context),
+        "review_context_chars": serialized_context_chars(review_context),
         "model": args.model,
         "request_count": request_count,
         "status": "ok",
@@ -698,16 +975,27 @@ def infer_user_from_evidence_profile(
             "inferred_attributes": [],
             "rejected_attributes": [],
         }
+    corpus_stats = review_corpus_stats(reviews)
     review_context = build_review_context(
         reviews,
         max_reviews=args.max_reviews_per_user,
         max_review_text_chars=args.max_review_text_chars,
         max_total_chars=args.max_review_context_chars,
+        include_textless=False,
     )
-    valid_review_ids = {row["review_id"] for row in review_context}
-    evidence_profile, rejected_evidence, profile_created = build_or_load_evidence_profile(
+    valid_review_ids = {
+        row["review_id"]
+        for row in context_rows_for_reviews(
+            reviews,
+            args.max_review_text_chars,
+            include_textless=False,
+        )
+    }
+    evidence_profile, rejected_evidence, profile_request_count = build_or_load_evidence_profile(
         user_row,
+        reviews,
         review_context,
+        corpus_stats,
         mapping,
         args,
         api_key,
@@ -715,7 +1003,7 @@ def infer_user_from_evidence_profile(
     )
     all_valid = []
     all_rejected = []
-    request_count = 1 if profile_created else 0
+    request_count = profile_request_count
     for dimension_batch in batched(dimensions, args.dimensions_per_call):
         request_count += 1
         task = schema_mapping_payload(user_row, dimension_batch, evidence_profile)
@@ -741,7 +1029,9 @@ def infer_user_from_evidence_profile(
         "evidence_mapping_path": str(args.evidence_mapping_path),
         "user_id": user_row.get("user_id"),
         "review_count": len(reviews),
+        "review_corpus_stats": corpus_stats,
         "review_context_count": len(review_context),
+        "review_context_chars": serialized_context_chars(review_context),
         "evidence_item_count": len(evidence_profile.get("evidence_items") or []),
         "model": args.model,
         "request_count": request_count,
@@ -764,11 +1054,14 @@ def write_dry_run_prompts(
         if args.max_users and user_index > args.max_users:
             break
         reviews = user_row.get("reviews") or []
+        corpus_stats = review_corpus_stats(reviews) if isinstance(reviews, list) else {}
+        include_textless = args.inference_mode != "evidence_profile"
         review_context = build_review_context(
             reviews,
             max_reviews=args.max_reviews_per_user,
             max_review_text_chars=args.max_review_text_chars,
             max_total_chars=args.max_review_context_chars,
+            include_textless=include_textless,
         )
         if args.inference_mode == "evidence_profile":
             if mapping is None:
@@ -778,7 +1071,12 @@ def write_dry_run_prompts(
                     "user_id": user_row.get("user_id"),
                     "stage": "evidence_profile",
                     "system_prompt": EVIDENCE_PROFILE_SYSTEM_PROMPT,
-                    "user_payload": evidence_profile_payload(user_row, review_context, mapping),
+                    "user_payload": evidence_profile_payload(
+                        user_row,
+                        review_context,
+                        mapping,
+                        corpus_stats,
+                    ),
                 }
             )
             placeholder_profile = {
@@ -811,7 +1109,12 @@ def write_dry_run_prompts(
                     "user_id": user_row.get("user_id"),
                     "batch_index": batch_index,
                     "system_prompt": SYSTEM_PROMPT,
-                    "user_payload": prompt_payload(user_row, dimension_batch, review_context),
+                    "user_payload": prompt_payload(
+                        user_row,
+                        dimension_batch,
+                        review_context,
+                        corpus_stats,
+                    ),
                 }
             )
     return write_jsonl(args.dry_run_prompts_path, rows)
@@ -871,6 +1174,34 @@ def parse_args(argv: Iterable[str]) -> argparse.Namespace:
     parser.add_argument("--max-reviews-per-user", type=int, default=80)
     parser.add_argument("--max-review-text-chars", type=int, default=900)
     parser.add_argument("--max-review-context-chars", type=int, default=70_000)
+    parser.add_argument(
+        "--window-summary-threshold-chars",
+        type=int,
+        default=120_000,
+        help=(
+            "In evidence_profile mode, summarize construction reviews in temporal "
+            "windows when total construction review text exceeds this many characters. "
+            "Use 0 to disable windowing."
+        ),
+    )
+    parser.add_argument(
+        "--window-summary-max-chars",
+        type=int,
+        default=60_000,
+        help="Approximate max serialized review-context characters per temporal summary window.",
+    )
+    parser.add_argument(
+        "--window-summary-max-rows",
+        type=int,
+        default=200,
+        help="Max review/rating rows per temporal summary window.",
+    )
+    parser.add_argument(
+        "--max-window-evidence-items",
+        type=int,
+        default=120,
+        help="Max evidence items retained after concatenating window evidence profiles.",
+    )
     parser.add_argument("--dimensions-per-call", type=int, default=40)
     parser.add_argument(
         "--dimension-categories",
