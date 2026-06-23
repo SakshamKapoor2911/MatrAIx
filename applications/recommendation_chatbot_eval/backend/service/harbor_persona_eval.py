@@ -428,10 +428,82 @@ class HarborPersonaEvalRunner:
             raise FileNotFoundError(
                 "Harbor output artifacts not found under {}".format(job_dir)
             )
-        return matches[0]
+        output_dir = matches[0]
+        missing = _missing_required_output_artifacts(output_dir)
+        if missing:
+            failure = _harbor_failure_summary(job_dir)
+            detail = failure or "missing required artifacts: {}".format(
+                ", ".join(missing)
+            )
+            raise RuntimeError(
+                "Harbor run did not produce required artifacts ({}): {}".format(
+                    ", ".join(missing), detail
+                )
+            )
+        return output_dir
+
+
+def _missing_required_output_artifacts(output_dir: Path) -> List[str]:
+    return [
+        name
+        for name in ("transcript.json", "recommendation_result.json")
+        if not (output_dir / name).is_file()
+    ]
+
+
+def _content_text(value: Any) -> str:
+    if isinstance(value, str):
+        return value
+    if isinstance(value, dict):
+        return _content_text(value.get("content"))
+    if isinstance(value, list):
+        parts = []
+        for entry in value:
+            if isinstance(entry, dict):
+                text = entry.get("text")
+                if isinstance(text, str) and text.strip():
+                    parts.append(text.strip())
+            elif isinstance(entry, str) and entry.strip():
+                parts.append(entry.strip())
+        return " ".join(parts)
+    return ""
+
+
+def _agent_error_summary(job_dir: Path) -> str:
+    for path in sorted(job_dir.glob("*/agent/claude-code.txt")):
+        for raw in path.read_text(encoding="utf-8", errors="replace").splitlines():
+            try:
+                event = json.loads(raw)
+            except json.JSONDecodeError:
+                continue
+            if not isinstance(event, dict):
+                continue
+            error = event.get("error")
+            status = event.get("api_error_status")
+            if not (event.get("is_error") or error or status):
+                continue
+            result = event.get("result")
+            message = _content_text(event.get("message"))
+            text = str(result or message or error or "").strip()
+            if not text:
+                continue
+            meta = []
+            if error:
+                meta.append(str(error))
+            if status:
+                meta.append("status {}".format(status))
+            return "Agent failed: {}{}".format(
+                text,
+                " ({})".format(", ".join(meta)) if meta else "",
+            )
+    return ""
 
 
 def _harbor_failure_summary(job_dir: Path) -> str:
+    agent_error = _agent_error_summary(job_dir)
+    if agent_error:
+        return agent_error
+
     for path in sorted(job_dir.glob("*/exception.txt")):
         text = path.read_text(encoding="utf-8", errors="replace").strip()
         if text:

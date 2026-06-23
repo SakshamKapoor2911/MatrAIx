@@ -747,3 +747,85 @@ def test_harbor_runner_surfaces_trial_errors_when_artifacts_are_missing(tmp_path
             object(),
             created_at="2026-06-23T00:00:00Z",
         )
+
+
+def test_harbor_runner_surfaces_agent_error_when_output_dir_is_empty(tmp_path):
+    def fake_command(command, *, cwd, env):
+        config = yaml.safe_load(
+            open(command[command.index("-c") + 1], encoding="utf-8")
+        )
+        job_dir = tmp_path / "runs" / config["job_name"]
+        trial_dir = job_dir / "recommender-agent_chat_api__fake"
+        output_dir = trial_dir / "artifacts" / "app" / "output"
+        output_dir.mkdir(parents=True)
+        (job_dir / "result.json").write_text(
+            json.dumps(
+                {
+                    "stats": {
+                        "n_errored_trials": 1,
+                        "evals": {
+                            "persona-claude-code__claude-sonnet-4-6__adhoc": {
+                                "exception_stats": {
+                                    "NonZeroAgentExitCodeError": [
+                                        "recommender-agent_chat_api__fake"
+                                    ]
+                                }
+                            }
+                        },
+                    }
+                }
+            ),
+            encoding="utf-8",
+        )
+        (trial_dir / "agent").mkdir()
+        (trial_dir / "agent" / "claude-code.txt").write_text(
+            "\n".join(
+                [
+                    json.dumps({"type": "system", "subtype": "init"}),
+                    json.dumps(
+                        {
+                            "type": "assistant",
+                            "error": "billing_error",
+                            "api_error_status": 400,
+                            "message": {
+                                "content": [
+                                    {
+                                        "type": "text",
+                                        "text": "Credit balance is too low",
+                                    }
+                                ]
+                            },
+                        }
+                    ),
+                    json.dumps(
+                        {
+                            "type": "result",
+                            "is_error": True,
+                            "api_error_status": 400,
+                            "result": "Credit balance is too low",
+                        }
+                    ),
+                ]
+            ),
+            encoding="utf-8",
+        )
+        return 0
+
+    class Session:
+        turns = []
+
+    runner = HarborPersonaEvalRunner(
+        repo_root=tmp_path,
+        runs_root=tmp_path / "runs",
+        command_runner=fake_command,
+    )
+
+    with pytest.raises(RuntimeError, match="Credit balance is too low"):
+        runner(
+            Session(),
+            Persona(id="p1", name="Persona One", context="A careful viewer."),
+            "Movie recommender.",
+            PersonaEvalConfig(domain="movie"),
+            object(),
+            created_at="2026-06-23T00:00:00Z",
+        )
