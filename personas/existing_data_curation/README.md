@@ -524,9 +524,21 @@ python scripts/evaluate_amazon_persona_rating_holdout.py \
 
 The blind prediction target file is
 `raw/amazon_reviews_2023/persona_rating_holdout_eval/prediction_targets.jsonl`.
-It excludes held-out review title, held-out review text, and true rating. Persona
-prediction outputs can be scored by writing JSONL rows with `target_id` and
-`predicted_rating`, then running:
+It excludes held-out review title, held-out review text, and true rating.
+
+Call the LLM predictor with constructed persona inference outputs:
+
+```bash
+python scripts/predict_amazon_persona_holdout_ratings.py \
+  --prediction-targets raw/amazon_reviews_2023/persona_rating_holdout_eval/prediction_targets.jsonl \
+  --inference-output raw/amazon_reviews_2023/persona_dimension_inference/inferred_dimensions.jsonl \
+  --output raw/amazon_reviews_2023/persona_rating_holdout_eval/persona_predictions.jsonl \
+  --persona-mode summary_dimensions \
+  --prediction-method-name persona_dims_summary
+```
+
+Prediction outputs can then be scored by passing JSONL rows with `target_id` and
+`predicted_rating` back to the evaluator:
 
 ```bash
 python scripts/evaluate_amazon_persona_rating_holdout.py \
