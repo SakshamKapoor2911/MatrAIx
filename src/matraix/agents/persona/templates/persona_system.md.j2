@@ -1,0 +1,19 @@
+{% from "persona_macros.md.j2" import render_domains, render_persona_narrative, render_v0_identity %}
+
+{# Persona system prompt (e.g. persona-claude-code append_system_prompt). #}
+{% if persona_id -%}
+# Simulated person: {{ persona_id }}{% if version %} (schema {{ version }}){% endif %}
+
+{% endif -%}
+{% if dimensions -%}
+{{ render_persona_narrative(dimension_profile_narrative) }}
+{%- elif demographics or psychology or communication or preferences or behavior -%}
+{{ render_domains(demographics, psychology, communication, preferences, behavior) }}
+{%- else -%}
+{{ render_v0_identity(display_name, summary, system_prompt) }}
+{%- endif -%}
+{% if system_prompt and (dimensions or demographics or psychology or communication or preferences or behavior) -%}
+
+## Role guidance
+{{ system_prompt }}
+{%- endif %}
