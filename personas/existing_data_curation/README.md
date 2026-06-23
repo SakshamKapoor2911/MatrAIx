@@ -267,6 +267,18 @@ Prepared Modal artifacts:
 | Stricter eligible user-indexed reviews | `amazon_reviews_2018_2023_user_buckets_min30_verified70_text3000` | Derived from the >=2000 user-indexed reviews for the stricter eligible pool |
 | Product metadata index | `amazon_reviews_2023_metadata_by_parent_asin_bucket_v2` | Product metadata bucketed by `sha1(parent_asin)[:2]` |
 
+Current recommended persona-construction path:
+
+1. Use the stricter eligible pool with `>=30` reviews, verified-purchase share
+   `>=0.70`, and `>=3000` review-text characters.
+2. Export histories from the matching stricter user-indexed review parquet.
+3. Split each user's retained review/rating rows temporally: earliest 80% for
+   persona construction, latest 20% for validation.
+4. Include product metadata during export so inference can link each text review
+   to compact product name/category context.
+5. Save reusable review memory before schema extraction, then map that memory to
+   the current `dimensions+new.json` schema and optionally export persona YAML.
+
 Install and authenticate Modal locally, using the account/workspace for the
 `cs231n-final-project` project:
 
@@ -358,7 +370,7 @@ review index. This keeps the candidate list and review index aligned:
 
 ```bash
 modal run modal_amazon_user_index.py::export_candidate_users \
-  --eligible-prefix amazon_reviews_2018_2023_eligible_users_min30_verified70_text2000 \
+  --eligible-prefix amazon_reviews_2018_2023_eligible_users_min30_verified70_text3000 \
   --top-n 100 \
   --min-history-days 365 \
   --output raw/amazon_reviews_2023/candidates/eligible_candidates_top100.jsonl
@@ -377,8 +389,9 @@ JSONL format expected by the inference script:
 modal run modal_amazon_user_index.py::export_user_histories \
   --candidate-users raw/amazon_reviews_2023/candidates/eligible_candidates_top100.jsonl \
   --top-n 100 \
-  --review-prefix amazon_reviews_2018_2023_user_buckets_min30_verified70_text2000 \
+  --review-prefix amazon_reviews_2018_2023_user_buckets_min30_verified70_text3000 \
   --temporal-train-fraction 0.8 \
+  --include-metadata \
   --output raw/amazon_reviews_2023/persona_dimension_inference/user_histories.jsonl
 ```
 
@@ -406,14 +419,6 @@ categories as reviewed-item context. The inference prompt only receives compact
 product `name`, `main_category`, and category path values from metadata; long
 descriptions, features, details, price, and store fields are intentionally left
 out. The metadata join can add extra I/O for users with many reviewed products.
-
-```bash
-modal run modal_amazon_user_index.py::export_user_histories \
-  --candidate-users raw/amazon_reviews_2023/candidates/eligible_candidates_top100.jsonl \
-  --top-n 100 \
-  --include-metadata \
-  --output raw/amazon_reviews_2023/persona_dimension_inference/user_histories_with_metadata.jsonl
-```
 
 ### Amazon Review to 1,339-Dimension Schema Inference
 
@@ -462,7 +467,9 @@ product-name, and product-category stats in `construction_corpus_summary`. Users
 with very large construction text histories are summarized in temporal windows
 before schema mapping. By default, windowing triggers when construction review
 text exceeds `--window-summary-threshold-chars 120000`; each window is capped by
-`--window-summary-max-chars 60000` and `--window-summary-max-rows 200`.
+`--window-summary-max-chars 60000` and `--window-summary-max-rows 200`, and the
+combined window memory keeps up to `--max-window-evidence-items 100` evidence
+items.
 
 Run OpenAI inference with the optimized evidence-profile pipeline:
 
@@ -475,6 +482,7 @@ python scripts/infer_amazon_review_dimensions.py \
   --model "${OPENAI_LLM_MODEL:-gpt-5.4-mini}" \
   --dimensions-per-call 40 \
   --window-summary-threshold-chars 120000 \
+  --max-window-evidence-items 100 \
   --review-memory-output raw/amazon_reviews_2023/persona_dimension_inference/evidence_profiles.jsonl \
   --max-users 100 \
   --output raw/amazon_reviews_2023/persona_dimension_inference/inferred_dimensions.jsonl \

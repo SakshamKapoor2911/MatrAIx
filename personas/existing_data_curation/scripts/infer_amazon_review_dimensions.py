@@ -1326,7 +1326,7 @@ def parse_args(argv: Iterable[str]) -> argparse.Namespace:
     parser.add_argument(
         "--max-window-evidence-items",
         type=int,
-        default=120,
+        default=100,
         help="Max evidence items retained after concatenating window evidence profiles.",
     )
     parser.add_argument("--dimensions-per-call", type=int, default=40)
