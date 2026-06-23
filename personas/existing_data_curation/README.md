@@ -474,8 +474,16 @@ python scripts/infer_amazon_review_dimensions.py \
 The primary inference output remains JSONL for resumable runs, with one user row
 per line. Each row includes `user_id`, run metadata, `review_corpus_stats`,
 optional `evidence_profile`, `inferred_attributes`, and `rejected_attributes`.
-Use `--yaml-output` to write the same final records as a readable YAML list after
-the JSONL output is updated.
+Use `--yaml-output` to write a persona YAML file matching the
+`personas/Jun20_1k_persona_description/personas.yaml` structure:
+top-level `metadata`, then `personas`, where each persona has `id`, `name`,
+`title`, `description`, and a `dimensions` map of `dimension_id: value`.
+Only validated inferred attributes are exported to `dimensions`.
+
+Inferred attribute values are validated before writing: the script rejects any
+model output whose `value` is not one of that dimension's allowed `values` in
+`personas/dimensions+new.json`. Rejected values remain in `rejected_attributes`
+in the JSONL output and are omitted from the YAML `dimensions` map.
 
 Use `--overwrite-profiles` only when you want to pay to regenerate compact
 profiles instead of reusing the existing profile cache. Use

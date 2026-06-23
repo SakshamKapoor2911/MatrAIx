@@ -138,9 +138,12 @@ def yaml_dump(data: Any, indent: int = 0) -> str:
             return f"{prefix}{{}}"
         lines = []
         for key, value in data.items():
-            if isinstance(value, dict | list):
+            if isinstance(value, dict):
                 lines.append(f"{prefix}{yaml_key(key)}:")
                 lines.append(yaml_dump(value, indent + 2))
+            elif isinstance(value, list):
+                lines.append(f"{prefix}{yaml_key(key)}:")
+                lines.append(yaml_dump(value, indent))
             else:
                 lines.append(f"{prefix}{yaml_key(key)}: {yaml_scalar(value)}")
         return "\n".join(lines)
@@ -163,9 +166,60 @@ def write_yaml(path: Path, data: Any) -> None:
     path.write_text(yaml_dump(data) + "\n", encoding="utf-8")
 
 
+def persona_yaml_document(rows: list[dict[str, Any]], source_jsonl: Path) -> dict[str, Any]:
+    personas = []
+    for index, row in enumerate(rows, start=1):
+        user_id = str(row.get("user_id") or f"user_{index:04d}")
+        evidence_profile = row.get("evidence_profile") or {}
+        overview = compact_text(evidence_profile.get("overview"), 1200)
+        inferred_attributes = row.get("inferred_attributes") or []
+        dimensions = {
+            str(attr["dimension_id"]): attr.get("value")
+            for attr in sorted(
+                inferred_attributes,
+                key=lambda item: str(item.get("dimension_id") or ""),
+            )
+            if attr.get("dimension_id") and attr.get("value") is not None
+        }
+        personas.append(
+            {
+                "id": f"amazon_user_{index:04d}",
+                "name": user_id,
+                "title": "Amazon review-derived persona",
+                "description": overview
+                or (
+                    f"Persona attributes inferred from Amazon Reviews 2023 "
+                    f"construction history for user {user_id}."
+                ),
+                "dimensions": dimensions,
+            }
+        )
+
+    return {
+        "metadata": {
+            "title": "Amazon Reviews 2023 Persona Attributes",
+            "description": (
+                "Behavior-grounded personas inferred from Amazon review histories. "
+                "Only schema-supported attributes are included; unsupported "
+                "dimensions are omitted."
+            ),
+            "count": len(personas),
+            "generation_date": datetime.now(timezone.utc).date().isoformat(),
+            "source": "amazon_reviews_2023",
+            "source_jsonl": str(source_jsonl),
+            "format": "personas_yaml_v1",
+            "validation": (
+                "Inferred attribute values are validated against the allowed "
+                "values in personas/dimensions+new.json before export."
+            ),
+        },
+        "personas": personas,
+    }
+
+
 def write_inference_yaml(jsonl_path: Path, yaml_path: Path) -> int:
     rows = list(iter_jsonl_or_gz(jsonl_path))
-    write_yaml(yaml_path, rows)
+    write_yaml(yaml_path, persona_yaml_document(rows, jsonl_path))
     return len(rows)
 
 
