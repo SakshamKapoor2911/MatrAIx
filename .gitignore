@@ -1,0 +1,70 @@
+# ---------------------------------------------------------------------------
+# Python
+# ---------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# ---------------------------------------------------------------------------
+# OS / editor noise
+# ---------------------------------------------------------------------------
+.DS_Store
+
+# ---------------------------------------------------------------------------
+# Data: normalized catalogs and on-disk caches are generated, not versioned.
+# (Referenced by the recbot backend and the RecBot Studio harness.)
+# ---------------------------------------------------------------------------
+data/normalized/
+data/cache/
+
+# RecBot Studio session store (JSON sessions written at runtime).
+data/cache/recommendation_chatbot_eval/studio_sessions/
+
+# ---------------------------------------------------------------------------
+# RecBot Studio frontend (applications/recommendation_chatbot_eval/frontend)
+# ---------------------------------------------------------------------------
+applications/recommendation_chatbot_eval/frontend/node_modules/
+applications/recommendation_chatbot_eval/frontend/dist/
+
+# ---------------------------------------------------------------------------
+# RecBot Studio backend — catch-all patterns (anywhere in the tree).
+# Bare patterns so build/runtime artefacts are ignored regardless of cwd; the
+# path-scoped lines above stay for clarity. Both session-store dir names are
+# listed because the backend defaults to `studio_sessions/` while the build
+# contract names `harness_sessions/`.
+# ---------------------------------------------------------------------------
+node_modules/
+__pycache__/
+data/cache/recommendation_chatbot_eval/harness_sessions/
+data/cache/recommendation_chatbot_eval/persona_eval_runs/
+
+# local secrets / env (OPENAI_API_KEY, INTERECAGENT_ROOT, ...) — never commit
+.env.local
+.env
+
+# RecAI resource bundle + unpacked data (never commit — ~497MB zip, ~1.2GB unpacked)
+applications/all_resources.zip
+applications/recommendation_chatbot_eval/recai/**/resources/
+applications/recommendation_chatbot_eval/**/resources/
+
+# Persona-eval / studio caches
+data/cache/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# SDD controller scratch (progress ledger)
+.superpowers/
+
+# Frontend build + deps
+applications/recommendation_chatbot_eval/frontend/dist/
+**/node_modules/
