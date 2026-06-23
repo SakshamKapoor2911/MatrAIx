@@ -25,9 +25,20 @@ RUN if [ ! -d /app/recai/InteRecAgent/llm4crs ]; then \
       git checkout "${RECAI_COMMIT}"; \
     fi
 
-RUN python -m pip install --no-cache-dir --upgrade pip setuptools wheel && \
+RUN python -m pip install --no-cache-dir --upgrade pip "setuptools<81" wheel && \
     python -m pip install --no-cache-dir gdown "numpy<2" && \
-    python -m pip install --no-cache-dir -r /app/recai/InteRecAgent/requirements.txt && \
+    grep -v -E '^(--extra-index-url|torch[<=>])' \
+      /app/recai/InteRecAgent/requirements.txt > /tmp/recai-requirements-docker.txt && \
+    python -m pip install --no-cache-dir \
+      --index-url https://download.pytorch.org/whl/cpu \
+      "torch==1.13.1+cpu" \
+      "torchvision==0.14.1+cpu" && \
+    python -m pip install --no-cache-dir -r /tmp/recai-requirements-docker.txt && \
+    python -m pip install --no-cache-dir \
+      "setuptools<81" \
+      "huggingface_hub>=0.14,<0.17" \
+      "accelerate<0.20" \
+      "transformers==4.27.4" && \
     python -m pip install --no-cache-dir -r /app/backend/requirements.txt
 
 RUN python /app/scripts/setup_resources.py
