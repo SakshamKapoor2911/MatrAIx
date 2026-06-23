@@ -42,6 +42,24 @@ python personas/existing_data_curation/worker_kit/run_range.py \
 
 You may use `mock`, `claude-code-acp`, `codex-acp`, `openai-api`, `anthropic-api`, or `external-command`. If you omit `--model`, the runner defaults to `gpt-5.5` for Codex/OpenAI and `claude-opus-4-8` for Claude/Anthropic. Effort defaults to `max`, but you may override it; the chosen effort must be recorded and will appear in the audit report.
 
+For Claude Code subscription:
+
+```bash
+export WIKI_COLLAB_CLAUDE_CMD='python personas/existing_data_curation/wiki_collab/claude_json_backend.py'
+# then set --backend claude-code-acp
+```
+
+For Codex subscription:
+
+```bash
+export WIKI_COLLAB_CODEX_CMD='python personas/existing_data_curation/wiki_collab/codex_json_backend.py'
+# then set --backend codex-acp
+```
+
+These are command-adapter integrations: the wrapper reads the rendered prompt
+from stdin, invokes the local CLI subscription, and emits protocol JSON to
+stdout for the runner.
+
 Please return:
 
 ```text
@@ -80,4 +98,3 @@ Notes:
 ```text
 {notes}
 ```
-

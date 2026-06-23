@@ -56,35 +56,68 @@ python personas/existing_data_curation/worker_kit/run_range.py \
   --dataset-sha256 DATASET_SHA256
 ```
 
-Claude Code / Codex / API usage is routed through command adapters. The command
-must read the prompt from stdin and emit JSON matching the protocol output
-schema to stdout:
+Claude Code / Codex / API usage is routed through command adapters. This is a
+command-adapter integration for subscriptions and API CLIs; it is not a native
+ACP client implementation. The runner exposes backend names such as
+`claude-code-acp` and `codex-acp` because the worker selects those surfaces, but
+the local contract is deliberately simpler:
+
+```text
+stdin: rendered protocol prompt
+stdout: JSON matching personas/existing_data_curation/protocols/persona_attribution_v1/output.schema.json
+```
+
+The built-in wrappers below are intended to be copy-pasteable starting points
+for collaborators who already have Claude Code or Codex CLI authenticated.
+
+### Claude Code Subscription
 
 ```bash
-export WIKI_COLLAB_CLAUDE_CMD='your-claude-wrapper-command'
+export WIKI_COLLAB_CLAUDE_CMD='python personas/existing_data_curation/wiki_collab/claude_json_backend.py'
 python personas/existing_data_curation/worker_kit/run_range.py \
   --db matraix-wiki-profiles-20260601-v1.sqlite \
   --protocol personas/existing_data_curation/protocols/persona_attribution_v1 \
   --range 0:50000 \
   --backend claude-code-acp \
+  --model claude-opus-4-8 \
+  --effort high \
   --concurrency 4 \
   --worker-id alice \
   --dataset-id matraix_wiki_profiles_20260601_v1 \
   --dataset-sha256 DATASET_SHA256
 ```
 
+`claude_json_backend.py` calls `claude -p --output-format json --json-schema ...`
+and normalizes Claude Code's structured output into the runner's `fields` JSON.
+If the local Claude CLI uses a different model alias, set
+`WIKI_COLLAB_CLAUDE_CLI_MODEL`, for example:
+
 ```bash
-export WIKI_COLLAB_CODEX_CMD='your-codex-wrapper-command'
+export WIKI_COLLAB_CLAUDE_CLI_MODEL=opus
+```
+
+### Codex Subscription
+
+```bash
+export WIKI_COLLAB_CODEX_CMD='python personas/existing_data_curation/wiki_collab/codex_json_backend.py'
 python personas/existing_data_curation/worker_kit/run_range.py \
   --db matraix-wiki-profiles-20260601-v1.sqlite \
   --protocol personas/existing_data_curation/protocols/persona_attribution_v1 \
   --range 50000:100000 \
   --backend codex-acp \
+  --model gpt-5.5 \
+  --effort high \
   --concurrency 4 \
   --worker-id bob \
   --dataset-id matraix_wiki_profiles_20260601_v1 \
   --dataset-sha256 DATASET_SHA256
 ```
+
+`codex_json_backend.py` calls `codex exec - --output-schema ...` and writes the
+final structured response through `--output-last-message`. Runner effort values
+are recorded exactly in provenance; the Codex CLI wrapper maps `--effort max` to
+Codex CLI's `model_reasoning_effort="xhigh"` because Codex CLI accepts
+`low|medium|high|xhigh`.
 
 The runner returns:
 

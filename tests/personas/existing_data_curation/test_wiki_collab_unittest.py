@@ -25,6 +25,11 @@ from personas.existing_data_curation.wiki_collab.core import (
     parse_range,
     sha256_text,
 )
+from personas.existing_data_curation.wiki_collab.codex_json_backend import (
+    _cli_effort,
+    _extract_payload as extract_codex_payload,
+    build_codex_command,
+)
 from personas.existing_data_curation.worker_kit.run_range import run_range
 from personas.existing_data_curation.worker_kit.backends import create_backend
 
@@ -398,6 +403,41 @@ class WikiCollabTests(unittest.TestCase):
         self.assertEqual(rows[0]["provenance"]["requested_model"], "mock-model")
         self.assertEqual(rows[0]["provenance"]["effort"], "max")
 
+    def test_codex_cli_wrapper_parses_json_and_builds_command(self):
+        payload = extract_codex_payload(
+            '```json\n{"fields":[{"field_id":"domain","value":"science",'
+            '"confidence":0.9,"evidence":"science","assignment_type":"direct"}],'
+            '"reported_model":"gpt-5.5"}\n```'
+        )
+        cmd = build_codex_command(
+            codex_bin="codex",
+            requested_model="gpt-5.5",
+            effort="max",
+            schema_path=Path("/tmp/schema.json"),
+            last_message_path=Path("/tmp/last-message.json"),
+        )
+
+        self.assertEqual(payload["fields"][0]["field_id"], "domain")
+        self.assertEqual(payload["reported_model"], "gpt-5.5")
+        self.assertEqual(_cli_effort("max"), "xhigh")
+        self.assertEqual(cmd[:2], ["codex", "exec"])
+        self.assertIn("--output-schema", cmd)
+        self.assertIn("--output-last-message", cmd)
+        self.assertIn("-m", cmd)
+        self.assertIn("gpt-5.5", cmd)
+        self.assertIn('model_reasoning_effort="xhigh"', cmd)
+
+    def test_readme_documents_subscription_wrappers_and_adapter_scope(self):
+        readme = Path("personas/existing_data_curation/wiki_collab/README.md").read_text(
+            encoding="utf-8"
+        )
+
+        self.assertIn("command-adapter integration", readme)
+        self.assertIn("claude_json_backend.py", readme)
+        self.assertIn("codex_json_backend.py", readme)
+        self.assertIn("WIKI_COLLAB_CLAUDE_CMD", readme)
+        self.assertIn("WIKI_COLLAB_CODEX_CMD", readme)
+
     def test_validate_accepts_non_max_effort_and_audit_reports_it(self):
         with tempfile.TemporaryDirectory() as tmp:
             tmp_path = Path(tmp)
@@ -431,4 +471,3 @@ class WikiCollabTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
