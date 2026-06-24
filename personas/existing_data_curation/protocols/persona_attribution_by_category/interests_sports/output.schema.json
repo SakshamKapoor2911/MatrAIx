@@ -1,0 +1,98 @@
+{
+  "type": "object",
+  "required": [
+    "fields"
+  ],
+  "properties": {
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "field_id",
+          "value",
+          "confidence",
+          "evidence",
+          "assignment_type"
+        ],
+        "properties": {
+          "field_id": {
+            "type": "string",
+            "enum": [
+              "sport_soccer",
+              "sport_basketball",
+              "sport_american_football",
+              "sport_baseball",
+              "sport_tennis",
+              "sport_golf",
+              "sport_cricket",
+              "sport_rugby",
+              "sport_hockey",
+              "sport_volleyball",
+              "sport_swimming",
+              "sport_running",
+              "sport_cycling",
+              "sport_boxing",
+              "sport_mma",
+              "sport_wrestling",
+              "sport_skiing",
+              "sport_snowboarding",
+              "sport_surfing",
+              "sport_skateboarding",
+              "sport_climbing",
+              "sport_gymnastics",
+              "sport_track_field",
+              "sport_badminton",
+              "sport_table_tennis",
+              "sport_squash",
+              "sport_sailing",
+              "sport_rowing",
+              "sport_martial_arts",
+              "sport_yoga",
+              "sport_pilates",
+              "sport_crossfit",
+              "sport_weightlifting",
+              "sport_esports",
+              "sport_darts",
+              "sport_bowling",
+              "sport_archery",
+              "sport_equestrian",
+              "sport_fencing",
+              "sport_triathlon"
+            ]
+          },
+          "value": {},
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "evidence": {
+            "type": "string"
+          },
+          "assignment_type": {
+            "type": "string",
+            "enum": [
+              "direct",
+              "structured_claim",
+              "summary_inference",
+              "unsupported"
+            ]
+          }
+        }
+      }
+    },
+    "reported_model": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "model_source": {
+      "type": "string"
+    },
+    "model_confidence": {
+      "type": "string"
+    }
+  }
+}

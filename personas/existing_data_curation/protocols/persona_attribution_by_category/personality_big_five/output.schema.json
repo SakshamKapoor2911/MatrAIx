@@ -1,0 +1,114 @@
+{
+  "type": "object",
+  "required": [
+    "fields"
+  ],
+  "properties": {
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "field_id",
+          "value",
+          "confidence",
+          "evidence",
+          "assignment_type"
+        ],
+        "properties": {
+          "field_id": {
+            "type": "string",
+            "enum": [
+              "big5_imagination",
+              "big5_artistic_interest",
+              "big5_emotionality",
+              "big5_adventurousness",
+              "big5_intellect",
+              "big5_liberalism",
+              "big5_self_efficacy",
+              "big5_orderliness",
+              "big5_dutifulness",
+              "big5_achievement_striving",
+              "big5_self_discipline",
+              "big5_cautiousness",
+              "big5_friendliness",
+              "big5_gregariousness",
+              "big5_assertiveness",
+              "big5_activity_level",
+              "big5_excitement_seeking",
+              "big5_cheerfulness",
+              "big5_trust",
+              "big5_morality",
+              "big5_altruism",
+              "big5_cooperation",
+              "big5_modesty",
+              "big5_sympathy",
+              "big5_anxiety",
+              "big5_anger",
+              "big5_depression",
+              "big5_self_consciousness",
+              "big5_immoderation",
+              "big5_vulnerability",
+              "pandora_big5_dimension_1",
+              "pandora_big5_dimension_2",
+              "pandora_big5_dimension_3",
+              "pandora_big5_dimension_4",
+              "pandora_big5_dimension_5",
+              "pandora_big5_dimension_6",
+              "bfi2_domain_extraversion",
+              "bfi2_domain_agreeableness",
+              "bfi2_domain_conscientiousness",
+              "bfi2_domain_negative_emotionality",
+              "bfi2_domain_open_mindedness",
+              "bfi2_facet_sociability",
+              "bfi2_facet_assertiveness",
+              "bfi2_facet_energy_level",
+              "bfi2_facet_compassion",
+              "bfi2_facet_respectfulness",
+              "bfi2_facet_trust",
+              "bfi2_facet_organization",
+              "bfi2_facet_productiveness",
+              "bfi2_facet_responsibility",
+              "bfi2_facet_anxiety",
+              "bfi2_facet_depression",
+              "bfi2_facet_emotional_volatility",
+              "bfi2_facet_intellectual_curiosity",
+              "bfi2_facet_aesthetic_sensitivity",
+              "bfi2_facet_creative_imagination"
+            ]
+          },
+          "value": {},
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "evidence": {
+            "type": "string"
+          },
+          "assignment_type": {
+            "type": "string",
+            "enum": [
+              "direct",
+              "structured_claim",
+              "summary_inference",
+              "unsupported"
+            ]
+          }
+        }
+      }
+    },
+    "reported_model": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "model_source": {
+      "type": "string"
+    },
+    "model_confidence": {
+      "type": "string"
+    }
+  }
+}

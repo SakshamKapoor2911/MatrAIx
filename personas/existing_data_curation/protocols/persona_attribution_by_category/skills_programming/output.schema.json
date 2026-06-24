@@ -1,0 +1,102 @@
+{
+  "type": "object",
+  "required": [
+    "fields"
+  ],
+  "properties": {
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "field_id",
+          "value",
+          "confidence",
+          "evidence",
+          "assignment_type"
+        ],
+        "properties": {
+          "field_id": {
+            "type": "string",
+            "enum": [
+              "code_comment_style",
+              "code_summary_documentation",
+              "code_naming_verbosity",
+              "code_indentation_style",
+              "code_structure_preference",
+              "code_error_handling",
+              "code_abstraction_level",
+              "code_dependencies_approach",
+              "code_performance_priority",
+              "code_testing_approach",
+              "code_refactoring_frequency",
+              "prog_python",
+              "prog_javascript",
+              "prog_typescript",
+              "prog_java",
+              "prog_c",
+              "prog_go",
+              "prog_rust",
+              "prog_ruby",
+              "prog_php",
+              "prog_swift",
+              "prog_kotlin",
+              "prog_objective_c",
+              "prog_scala",
+              "prog_haskell",
+              "prog_elixir",
+              "prog_erlang",
+              "prog_clojure",
+              "prog_lua",
+              "prog_perl",
+              "prog_r",
+              "prog_julia",
+              "prog_matlab",
+              "prog_sql",
+              "prog_bash",
+              "prog_powershell",
+              "prog_dart",
+              "prog_f",
+              "prog_ocaml",
+              "prog_assembly",
+              "prog_cobol",
+              "prog_fortran",
+              "prog_solidity",
+              "prog_graphql"
+            ]
+          },
+          "value": {},
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "evidence": {
+            "type": "string"
+          },
+          "assignment_type": {
+            "type": "string",
+            "enum": [
+              "direct",
+              "structured_claim",
+              "summary_inference",
+              "unsupported"
+            ]
+          }
+        }
+      }
+    },
+    "reported_model": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "model_source": {
+      "type": "string"
+    },
+    "model_confidence": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "type": "object",
+  "required": [
+    "fields"
+  ],
+  "properties": {
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "field_id",
+          "value",
+          "confidence",
+          "evidence",
+          "assignment_type"
+        ],
+        "properties": {
+          "field_id": {
+            "type": "string",
+            "enum": [
+              "political_lean",
+              "trust_level",
+              "safety_sensitivity",
+              "fam_political_science",
+              "fam_religious_studies",
+              "topic_spirituality",
+              "att_ai",
+              "att_automation",
+              "att_data_privacy",
+              "att_social_media",
+              "att_remote_work",
+              "att_globalization",
+              "att_free_markets",
+              "att_government_regulation",
+              "att_climate_action",
+              "att_nuclear_energy",
+              "att_renewable_energy",
+              "att_genetic_engineering",
+              "att_vaccines",
+              "att_alternative_medicine",
+              "att_organized_religion",
+              "att_cryptocurrency",
+              "att_the_gig_economy",
+              "att_labor_unions",
+              "att_higher_education",
+              "att_homeownership",
+              "att_taking_on_debt",
+              "att_risk_taking",
+              "att_authority",
+              "att_rapid_change",
+              "att_new_technology",
+              "att_brand_loyalty",
+              "att_advertising",
+              "att_influencers",
+              "att_online_reviews",
+              "att_subscription_services",
+              "att_open_source",
+              "att_surveillance",
+              "att_self_driving_cars",
+              "att_space_exploration",
+              "att_universal_basic_income",
+              "att_minimalism",
+              "att_consumerism",
+              "att_veganism",
+              "att_fast_fashion",
+              "att_gun_ownership",
+              "att_capital_punishment",
+              "att_free_speech",
+              "att_privacy_vs_security",
+              "att_globalized_supply_chains",
+              "att_working_from_office",
+              "att_four_day_work_week",
+              "att_performance_reviews",
+              "att_standardized_testing",
+              "att_tipping_culture",
+              "att_electric_vehicles",
+              "att_public_transit",
+              "att_urban_density",
+              "att_gentrification",
+              "acad_political_theory",
+              "mft_care_harm",
+              "mft_fairness_cheating",
+              "mft_loyalty_betrayal",
+              "mft_authority_subversion",
+              "mft_sanctity_degradation",
+              "mft_liberty_oppression",
+              "dospert_health_safety_risk_tolerance",
+              "wiki_political_affiliation"
+            ]
+          },
+          "value": {},
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "evidence": {
+            "type": "string"
+          },
+          "assignment_type": {
+            "type": "string",
+            "enum": [
+              "direct",
+              "structured_claim",
+              "summary_inference",
+              "unsupported"
+            ]
+          }
+        }
+      }
+    },
+    "reported_model": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "model_source": {
+      "type": "string"
+    },
+    "model_confidence": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "type": "object",
+  "required": [
+    "fields"
+  ],
+  "properties": {
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "field_id",
+          "value",
+          "confidence",
+          "evidence",
+          "assignment_type"
+        ],
+        "properties": {
+          "field_id": {
+            "type": "string",
+            "enum": [
+              "modality_pref",
+              "accessibility_needs",
+              "media_diet",
+              "peeve_typos",
+              "peeve_being_interrupted",
+              "peeve_lateness",
+              "peeve_loud_chewing",
+              "peeve_slow_walkers",
+              "peeve_spam",
+              "peeve_clickbait",
+              "peeve_unexplained_jargon",
+              "peeve_condescension",
+              "peeve_forced_small_talk",
+              "peeve_cold_calls",
+              "peeve_pop_up_ads",
+              "peeve_auto_play_video",
+              "peeve_paywalls",
+              "pref_team_vs_solo",
+              "pref_plan_vs_spontaneous",
+              "pref_city_vs_nature",
+              "pref_routine_vs_variety",
+              "pref_speed_vs_accuracy",
+              "pref_quality_vs_quantity",
+              "pref_logic_vs_intuition",
+              "pref_save_vs_spend",
+              "pref_lead_vs_follow",
+              "pref_indoor_vs_outdoor",
+              "pref_early_vs_late",
+              "pref_text_vs_call",
+              "pref_big_group_vs_one_on_one",
+              "pref_novelty_vs_familiarity",
+              "pref_detail_brief_vs_full",
+              "pref_competition_vs_collab",
+              "pref_stability_vs_change"
+            ]
+          },
+          "value": {},
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "evidence": {
+            "type": "string"
+          },
+          "assignment_type": {
+            "type": "string",
+            "enum": [
+              "direct",
+              "structured_claim",
+              "summary_inference",
+              "unsupported"
+            ]
+          }
+        }
+      }
+    },
+    "reported_model": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "model_source": {
+      "type": "string"
+    },
+    "model_confidence": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,136 @@
+{
+  "type": "object",
+  "required": [
+    "fields"
+  ],
+  "properties": {
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "field_id",
+          "value",
+          "confidence",
+          "evidence",
+          "assignment_type"
+        ],
+        "properties": {
+          "field_id": {
+            "type": "string",
+            "enum": [
+              "topic_politics",
+              "topic_sports",
+              "topic_travel",
+              "topic_cooking",
+              "topic_gaming",
+              "topic_fashion",
+              "topic_technology",
+              "topic_science",
+              "topic_space",
+              "topic_personal_finance",
+              "topic_investing",
+              "topic_cryptocurrency",
+              "topic_real_estate",
+              "topic_parenting",
+              "topic_pets",
+              "topic_gardening",
+              "topic_home_improvement",
+              "topic_cars",
+              "topic_motorcycles",
+              "topic_cycling",
+              "topic_running",
+              "topic_photography",
+              "topic_film",
+              "topic_tv_series",
+              "topic_anime",
+              "topic_comics",
+              "topic_music",
+              "topic_live_concerts",
+              "topic_theater",
+              "topic_visual_art",
+              "topic_literature",
+              "topic_poetry",
+              "topic_history",
+              "topic_philosophy",
+              "topic_religion",
+              "topic_meditation",
+              "topic_yoga",
+              "topic_hiking",
+              "topic_camping",
+              "topic_fishing",
+              "topic_birdwatching",
+              "topic_board_games",
+              "topic_tabletop_rpgs",
+              "topic_puzzles",
+              "topic_chess",
+              "topic_astrology",
+              "topic_true_crime",
+              "topic_podcasts",
+              "topic_social_media",
+              "topic_volunteering",
+              "topic_activism",
+              "topic_environment",
+              "topic_sustainability",
+              "topic_wine",
+              "topic_coffee",
+              "topic_craft_beer",
+              "topic_tea",
+              "topic_baking",
+              "topic_interior_design",
+              "topic_architecture",
+              "topic_languages",
+              "topic_genealogy",
+              "topic_collecting",
+              "topic_knitting",
+              "topic_woodworking",
+              "topic_calligraphy",
+              "topic_dance",
+              "topic_stand_up_comedy",
+              "topic_magic_tricks",
+              "topic_astronomy",
+              "topic_robotics",
+              "topic_drones",
+              "topic_3d_printing",
+              "topic_investmentoring",
+              "topic_entrepreneurship",
+              "topic_productivity",
+              "topic_self_improvement",
+              "topic_mindfulness"
+            ]
+          },
+          "value": {},
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "evidence": {
+            "type": "string"
+          },
+          "assignment_type": {
+            "type": "string",
+            "enum": [
+              "direct",
+              "structured_claim",
+              "summary_inference",
+              "unsupported"
+            ]
+          }
+        }
+      }
+    },
+    "reported_model": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "model_source": {
+      "type": "string"
+    },
+    "model_confidence": {
+      "type": "string"
+    }
+  }
+}

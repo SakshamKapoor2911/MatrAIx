@@ -1,0 +1,132 @@
+{
+  "type": "object",
+  "required": [
+    "fields"
+  ],
+  "properties": {
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "field_id",
+          "value",
+          "confidence",
+          "evidence",
+          "assignment_type"
+        ],
+        "properties": {
+          "field_id": {
+            "type": "string",
+            "enum": [
+              "cult_united_states",
+              "cult_canada",
+              "cult_mexico",
+              "cult_brazil",
+              "cult_argentina",
+              "cult_united_kingdom",
+              "cult_france",
+              "cult_germany",
+              "cult_italy",
+              "cult_spain",
+              "cult_netherlands",
+              "cult_sweden",
+              "cult_poland",
+              "cult_russia",
+              "cult_turkey",
+              "cult_egypt",
+              "cult_saudi_arabia",
+              "cult_uae",
+              "cult_israel",
+              "cult_iran",
+              "cult_nigeria",
+              "cult_kenya",
+              "cult_south_africa",
+              "cult_ethiopia",
+              "cult_india",
+              "cult_pakistan",
+              "cult_bangladesh",
+              "cult_china",
+              "cult_japan",
+              "cult_south_korea",
+              "cult_vietnam",
+              "cult_thailand",
+              "cult_indonesia",
+              "cult_philippines",
+              "cult_australia",
+              "cult_new_zealand",
+              "cult_singapore",
+              "cult_malaysia",
+              "cult_greece",
+              "cult_portugal",
+              "lstyle_smoking",
+              "lstyle_caffeine",
+              "lstyle_cooking_freq",
+              "lstyle_shopping_style",
+              "lstyle_travel_freq",
+              "lstyle_commute_mode",
+              "lstyle_pet_ownership",
+              "lstyle_screen_time",
+              "lstyle_social_battery",
+              "lstyle_planning_horizon",
+              "lstyle_punctuality",
+              "lstyle_tidiness",
+              "lstyle_frugality",
+              "lstyle_giving",
+              "lstyle_news_freq",
+              "lstyle_reading_freq",
+              "lstyle_gaming_freq",
+              "lstyle_streaming_hours",
+              "lstyle_music_listening",
+              "lstyle_podcast_listening",
+              "lstyle_primary_social",
+              "lstyle_primary_messenger",
+              "lstyle_device_ecosystem",
+              "lstyle_browser",
+              "lstyle_payment_pref",
+              "lstyle_banking_style",
+              "lstyle_investment_style",
+              "lstyle_subscription_count",
+              "lstyle_coffee_ritual",
+              "lstyle_fashion_sense",
+              "lstyle_hobby_intensity",
+              "lstyle_vacation_style",
+              "lstyle_morning_routine",
+              "lstyle_volunteering"
+            ]
+          },
+          "value": {},
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "evidence": {
+            "type": "string"
+          },
+          "assignment_type": {
+            "type": "string",
+            "enum": [
+              "direct",
+              "structured_claim",
+              "summary_inference",
+              "unsupported"
+            ]
+          }
+        }
+      }
+    },
+    "reported_model": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "model_source": {
+      "type": "string"
+    },
+    "model_confidence": {
+      "type": "string"
+    }
+  }
+}

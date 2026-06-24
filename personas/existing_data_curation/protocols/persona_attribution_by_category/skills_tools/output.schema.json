@@ -1,0 +1,127 @@
+{
+  "type": "object",
+  "required": [
+    "fields"
+  ],
+  "properties": {
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "field_id",
+          "value",
+          "confidence",
+          "evidence",
+          "assignment_type"
+        ],
+        "properties": {
+          "field_id": {
+            "type": "string",
+            "enum": [
+              "tool_excel",
+              "tool_google_sheets",
+              "tool_python",
+              "tool_r",
+              "tool_sql",
+              "tool_tableau",
+              "tool_power_bi",
+              "tool_looker",
+              "tool_figma",
+              "tool_sketch",
+              "tool_photoshop",
+              "tool_illustrator",
+              "tool_indesign",
+              "tool_after_effects",
+              "tool_premiere_pro",
+              "tool_notion",
+              "tool_obsidian",
+              "tool_jira",
+              "tool_linear",
+              "tool_slack",
+              "tool_microsoft_teams",
+              "tool_salesforce",
+              "tool_hubspot",
+              "tool_sap",
+              "tool_oracle_erp",
+              "tool_git",
+              "tool_github",
+              "tool_gitlab",
+              "tool_docker",
+              "tool_kubernetes",
+              "tool_terraform",
+              "tool_aws",
+              "tool_azure",
+              "tool_google_cloud",
+              "tool_vs_code",
+              "tool_jetbrains_ides",
+              "tool_vim",
+              "tool_jupyter",
+              "tool_matlab",
+              "tool_stata",
+              "tool_spss",
+              "tool_sas",
+              "tool_word",
+              "tool_powerpoint",
+              "tool_keynote",
+              "tool_canva",
+              "tool_blender",
+              "tool_autocad",
+              "tool_solidworks",
+              "tool_revit",
+              "tool_unity",
+              "tool_unreal_engine",
+              "tool_linux_cli",
+              "tool_wordpress",
+              "tool_webflow",
+              "tool_shopify",
+              "tool_stripe",
+              "tool_quickbooks",
+              "tool_xero",
+              "tool_zoom",
+              "tool_trello",
+              "tool_asana",
+              "tool_airtable",
+              "tool_chatgpt",
+              "tool_claude",
+              "tool_github_copilot",
+              "tool_midjourney",
+              "tool_zapier",
+              "tool_postman"
+            ]
+          },
+          "value": {},
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "evidence": {
+            "type": "string"
+          },
+          "assignment_type": {
+            "type": "string",
+            "enum": [
+              "direct",
+              "structured_claim",
+              "summary_inference",
+              "unsupported"
+            ]
+          }
+        }
+      }
+    },
+    "reported_model": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "model_source": {
+      "type": "string"
+    },
+    "model_confidence": {
+      "type": "string"
+    }
+  }
+}

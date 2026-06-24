@@ -1,0 +1,96 @@
+{
+  "type": "object",
+  "required": [
+    "fields"
+  ],
+  "properties": {
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "field_id",
+          "value",
+          "confidence",
+          "evidence",
+          "assignment_type"
+        ],
+        "properties": {
+          "field_id": {
+            "type": "string",
+            "enum": [
+              "highest_education",
+              "academic_field",
+              "institution_tier",
+              "fam_special_education",
+              "ind_education",
+              "acad_algebra",
+              "acad_geometry",
+              "acad_calculus",
+              "acad_statistics",
+              "acad_physics",
+              "acad_chemistry",
+              "acad_biology",
+              "acad_earth_science",
+              "acad_computer_science",
+              "acad_economics",
+              "acad_psychology",
+              "acad_sociology",
+              "acad_world_history",
+              "acad_geography",
+              "acad_civics",
+              "acad_literature",
+              "acad_creative_writing",
+              "acad_foreign_languages",
+              "acad_philosophy",
+              "acad_visual_art",
+              "acad_music",
+              "acad_drama",
+              "acad_physical_education",
+              "acad_health_science",
+              "acad_business_studies",
+              "acad_environmental_science",
+              "acad_logic",
+              "acad_astronomy",
+              "acad_anthropology",
+              "wiki_field_of_work",
+              "wiki_education_level",
+              "nemotron_education_level",
+              "nemotron_bachelors_field"
+            ]
+          },
+          "value": {},
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "evidence": {
+            "type": "string"
+          },
+          "assignment_type": {
+            "type": "string",
+            "enum": [
+              "direct",
+              "structured_claim",
+              "summary_inference",
+              "unsupported"
+            ]
+          }
+        }
+      }
+    },
+    "reported_model": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "model_source": {
+      "type": "string"
+    },
+    "model_confidence": {
+      "type": "string"
+    }
+  }
+}

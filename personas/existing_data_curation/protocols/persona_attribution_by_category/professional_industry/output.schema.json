@@ -1,0 +1,110 @@
+{
+  "type": "object",
+  "required": [
+    "fields"
+  ],
+  "properties": {
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "field_id",
+          "value",
+          "confidence",
+          "evidence",
+          "assignment_type"
+        ],
+        "properties": {
+          "field_id": {
+            "type": "string",
+            "enum": [
+              "company_size",
+              "role_function",
+              "ind_technology",
+              "ind_healthcare",
+              "ind_finance",
+              "ind_banking",
+              "ind_insurance",
+              "ind_retail",
+              "ind_e_commerce",
+              "ind_manufacturing",
+              "ind_automotive",
+              "ind_aerospace",
+              "ind_energy",
+              "ind_oil_gas",
+              "ind_utilities",
+              "ind_construction",
+              "ind_real_estate",
+              "ind_hospitality",
+              "ind_travel_tourism",
+              "ind_restaurants",
+              "ind_agriculture",
+              "ind_food_beverage",
+              "ind_pharmaceuticals",
+              "ind_biotech",
+              "ind_media",
+              "ind_entertainment",
+              "ind_gaming",
+              "ind_publishing",
+              "ind_advertising",
+              "ind_government",
+              "ind_defense",
+              "ind_nonprofit",
+              "ind_logistics",
+              "ind_transportation",
+              "ind_shipping",
+              "ind_mining",
+              "ind_chemicals",
+              "ind_textiles",
+              "ind_apparel",
+              "ind_consumer_electronics",
+              "ind_semiconductors",
+              "ind_legal_services",
+              "ind_consulting",
+              "ind_accounting",
+              "ind_marketing_agencies",
+              "ind_fitness_wellness",
+              "ind_beauty_cosmetics",
+              "ind_sports",
+              "ind_music",
+              "ind_fine_art",
+              "code_function_length",
+              "wiki_occupation"
+            ]
+          },
+          "value": {},
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "evidence": {
+            "type": "string"
+          },
+          "assignment_type": {
+            "type": "string",
+            "enum": [
+              "direct",
+              "structured_claim",
+              "summary_inference",
+              "unsupported"
+            ]
+          }
+        }
+      }
+    },
+    "reported_model": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "model_source": {
+      "type": "string"
+    },
+    "model_confidence": {
+      "type": "string"
+    }
+  }
+}

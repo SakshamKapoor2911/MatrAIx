@@ -1,0 +1,93 @@
+{
+  "type": "object",
+  "required": [
+    "fields"
+  ],
+  "properties": {
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "field_id",
+          "value",
+          "confidence",
+          "evidence",
+          "assignment_type"
+        ],
+        "properties": {
+          "field_id": {
+            "type": "string",
+            "enum": [
+              "cuis_italian",
+              "cuis_french",
+              "cuis_spanish",
+              "cuis_greek",
+              "cuis_mexican",
+              "cuis_peruvian",
+              "cuis_brazilian",
+              "cuis_american_bbq",
+              "cuis_southern_soul_food",
+              "cuis_cajun",
+              "cuis_chinese",
+              "cuis_sichuan",
+              "cuis_cantonese",
+              "cuis_japanese",
+              "cuis_korean",
+              "cuis_thai",
+              "cuis_vietnamese",
+              "cuis_indian",
+              "cuis_pakistani",
+              "cuis_middle_eastern",
+              "cuis_lebanese",
+              "cuis_turkish",
+              "cuis_moroccan",
+              "cuis_ethiopian",
+              "cuis_nigerian",
+              "cuis_caribbean",
+              "cuis_german",
+              "cuis_scandinavian",
+              "cuis_russian",
+              "cuis_spanish_tapas",
+              "cuis_sushi",
+              "cuis_ramen",
+              "cuis_vegan",
+              "cuis_vegetarian",
+              "cuis_seafood"
+            ]
+          },
+          "value": {},
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "evidence": {
+            "type": "string"
+          },
+          "assignment_type": {
+            "type": "string",
+            "enum": [
+              "direct",
+              "structured_claim",
+              "summary_inference",
+              "unsupported"
+            ]
+          }
+        }
+      }
+    },
+    "reported_model": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "model_source": {
+      "type": "string"
+    },
+    "model_confidence": {
+      "type": "string"
+    }
+  }
+}

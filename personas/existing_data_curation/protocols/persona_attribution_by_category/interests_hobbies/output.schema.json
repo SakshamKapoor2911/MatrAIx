@@ -1,0 +1,108 @@
+{
+  "type": "object",
+  "required": [
+    "fields"
+  ],
+  "properties": {
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "field_id",
+          "value",
+          "confidence",
+          "evidence",
+          "assignment_type"
+        ],
+        "properties": {
+          "field_id": {
+            "type": "string",
+            "enum": [
+              "hob_knitting",
+              "hob_crocheting",
+              "hob_pottery",
+              "hob_woodworking",
+              "hob_metalworking",
+              "hob_leatherworking",
+              "hob_candle_making",
+              "hob_origami",
+              "hob_calligraphy",
+              "hob_scrapbooking",
+              "hob_quilting",
+              "hob_embroidery",
+              "hob_jewelry_making",
+              "hob_model_building",
+              "hob_coin_collecting",
+              "hob_stamp_collecting",
+              "hob_antiquing",
+              "hob_vegetable_gardening",
+              "hob_bonsai",
+              "hob_aquariums",
+              "hob_beekeeping",
+              "hob_birdwatching",
+              "hob_stargazing",
+              "hob_geocaching",
+              "hob_rock_climbing",
+              "hob_bouldering",
+              "hob_kayaking",
+              "hob_paddleboarding",
+              "hob_scuba_diving",
+              "hob_snorkeling",
+              "hob_skydiving",
+              "hob_paragliding",
+              "hob_horseback_riding",
+              "hob_foraging",
+              "hob_bread_baking",
+              "hob_home_brewing",
+              "hob_winemaking",
+              "hob_cheesemaking",
+              "hob_karaoke",
+              "hob_ballroom_dance",
+              "hob_salsa_dancing",
+              "hob_improv",
+              "hob_stand_up_comedy",
+              "hob_juggling",
+              "hob_whittling",
+              "hob_letterpress",
+              "hob_urban_sketching",
+              "hob_genealogy",
+              "hob_metal_detecting",
+              "hob_cosplay"
+            ]
+          },
+          "value": {},
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "evidence": {
+            "type": "string"
+          },
+          "assignment_type": {
+            "type": "string",
+            "enum": [
+              "direct",
+              "structured_claim",
+              "summary_inference",
+              "unsupported"
+            ]
+          }
+        }
+      }
+    },
+    "reported_model": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "model_source": {
+      "type": "string"
+    },
+    "model_confidence": {
+      "type": "string"
+    }
+  }
+}

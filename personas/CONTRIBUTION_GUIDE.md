@@ -18,7 +18,7 @@ Complete guide for adding new datasets and persona dimensions to `dimensions+new
 
 ```
 /home/yuexing/MatrAIx/personas/
-├── dimensions+new.json                      ← Main dimension file (1,316 dims)
+├── dimensions+new.json                      ← Main dimension file (1,309 dims)
 ├── CONTRIBUTION_GUIDE.md                    ← This file
 ├── DIMENSIONS_ADDITIONS_SUMMARY.md           ← Example of complete addition
 │
@@ -538,5 +538,5 @@ python scripts/fetch_sources.py --source yourdataset --mode sample
 ---
 
 **Last updated:** 2026-06-20  
-**Current contributors:** yuexing (40 dimensions)  
-**Total dimensions:** 1,316
+**Current contributors:** yuexing (40 dimensions), ElegantLin (14 dimensions)
+**Total dimensions:** 1,309

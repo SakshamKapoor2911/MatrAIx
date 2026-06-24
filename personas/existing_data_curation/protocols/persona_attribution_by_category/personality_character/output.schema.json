@@ -1,0 +1,92 @@
+{
+  "type": "object",
+  "required": [
+    "fields"
+  ],
+  "properties": {
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "field_id",
+          "value",
+          "confidence",
+          "evidence",
+          "assignment_type"
+        ],
+        "properties": {
+          "field_id": {
+            "type": "string",
+            "enum": [
+              "domain_characteristics",
+              "dominant_trait",
+              "trait_curiosity",
+              "trait_creativity",
+              "trait_love_of_learning",
+              "trait_open_mindedness",
+              "trait_perspective",
+              "trait_bravery",
+              "trait_perseverance",
+              "trait_honesty",
+              "trait_zest",
+              "trait_capacity_for_love",
+              "trait_kindness",
+              "trait_social_intelligence",
+              "trait_teamwork",
+              "trait_fairness",
+              "trait_leadership",
+              "trait_forgiveness",
+              "trait_humility",
+              "trait_prudence",
+              "trait_self_regulation",
+              "trait_appreciation_of_beauty",
+              "trait_gratitude",
+              "trait_hope_optimism",
+              "trait_playfulness",
+              "trait_spirituality",
+              "trait_ambition",
+              "trait_empathy",
+              "trait_resilience",
+              "trait_discipline",
+              "trait_generosity",
+              "trait_loyalty",
+              "trait_competitiveness",
+              "trait_adaptability"
+            ]
+          },
+          "value": {},
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "evidence": {
+            "type": "string"
+          },
+          "assignment_type": {
+            "type": "string",
+            "enum": [
+              "direct",
+              "structured_claim",
+              "summary_inference",
+              "unsupported"
+            ]
+          }
+        }
+      }
+    },
+    "reported_model": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "model_source": {
+      "type": "string"
+    },
+    "model_confidence": {
+      "type": "string"
+    }
+  }
+}

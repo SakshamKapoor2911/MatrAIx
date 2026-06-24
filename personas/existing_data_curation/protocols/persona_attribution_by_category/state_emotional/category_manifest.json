@@ -1,0 +1,72 @@
+{
+  "category": "State: Emotional",
+  "slug": "state_emotional",
+  "protocol_id": "persona_attribution_state_emotional",
+  "dimension_count": 5,
+  "dimensions": [
+    {
+      "id": "emotional_state",
+      "label": "Emotional state",
+      "description": "Mood at the moment of interaction.",
+      "values": [
+        "Calm",
+        "Curious",
+        "Frustrated",
+        "Anxious",
+        "Excited",
+        "Skeptical",
+        "Urgent"
+      ]
+    },
+    {
+      "id": "intent",
+      "label": "Intent",
+      "description": "What they want from the agent.",
+      "values": [
+        "Learn / explain",
+        "Get task done",
+        "Brainstorm",
+        "Debug / troubleshoot",
+        "Decide",
+        "Vent / support",
+        "Probe / red-team",
+        "Verify a claim"
+      ]
+    },
+    {
+      "id": "query_complexity",
+      "label": "Query complexity",
+      "description": "Shape of the request.",
+      "values": [
+        "Simple factual",
+        "Multi-step",
+        "Ambiguous / underspecified",
+        "Adversarial",
+        "Open-ended creative"
+      ]
+    },
+    {
+      "id": "prior_context",
+      "label": "Prior context",
+      "description": "History with the agent.",
+      "values": [
+        "Cold start",
+        "Returning user",
+        "Long ongoing project",
+        "Frustrated re-ask"
+      ]
+    },
+    {
+      "id": "device_context",
+      "label": "Device context",
+      "description": "Where/how they're interacting.",
+      "values": [
+        "Desktop, focused",
+        "Mobile, on-the-go",
+        "Voice assistant",
+        "Accessibility tool",
+        "Low-bandwidth"
+      ]
+    }
+  ]
+}

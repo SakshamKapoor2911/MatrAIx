@@ -1,0 +1,95 @@
+{
+  "type": "object",
+  "required": [
+    "fields"
+  ],
+  "properties": {
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "field_id",
+          "value",
+          "confidence",
+          "evidence",
+          "assignment_type"
+        ],
+        "properties": {
+          "field_id": {
+            "type": "string",
+            "enum": [
+              "tone_expected",
+              "ind_telecommunications",
+              "cog_verbosity",
+              "cog_formality",
+              "cog_directness",
+              "cog_humor",
+              "cog_detail_orientation",
+              "cog_abstraction",
+              "cog_optimism",
+              "cog_patience",
+              "cog_curiosity",
+              "cog_skepticism",
+              "cog_open_mindedness",
+              "cog_assertiveness",
+              "cog_emotional_expressiveness",
+              "cog_conflict_approach",
+              "cog_feedback_receptiveness",
+              "cog_ambiguity_tolerance",
+              "cog_perfectionism",
+              "cog_procrastination",
+              "cog_multitasking",
+              "cog_attention_span",
+              "cog_learning_pace",
+              "cog_question_asking",
+              "cog_decision_speed",
+              "cog_confidence_calibration",
+              "cog_numeracy_comfort",
+              "cog_reading_vs_watching",
+              "cog_visual_vs_verbal",
+              "cog_big_picture_vs_detail",
+              "cog_risk_framing",
+              "cog_empathy_expression",
+              "cog_storytelling",
+              "cog_precision_of_language",
+              "cog_use_of_jargon",
+              "cog_emoji_use",
+              "cog_politeness"
+            ]
+          },
+          "value": {},
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "evidence": {
+            "type": "string"
+          },
+          "assignment_type": {
+            "type": "string",
+            "enum": [
+              "direct",
+              "structured_claim",
+              "summary_inference",
+              "unsupported"
+            ]
+          }
+        }
+      }
+    },
+    "reported_model": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "model_source": {
+      "type": "string"
+    },
+    "model_confidence": {
+      "type": "string"
+    }
+  }
+}

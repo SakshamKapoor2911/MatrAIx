@@ -1,0 +1,83 @@
+{
+  "type": "object",
+  "required": [
+    "fields"
+  ],
+  "properties": {
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "field_id",
+          "value",
+          "confidence",
+          "evidence",
+          "assignment_type"
+        ],
+        "properties": {
+          "field_id": {
+            "type": "string",
+            "enum": [
+              "life_stage",
+              "major_life_events",
+              "lifex_childhood_environment",
+              "lifex_geographic_mobility",
+              "lifex_travel_breadth",
+              "lifex_career_path_shape",
+              "lifex_education_journey",
+              "lifex_financial_trajectory",
+              "lifex_adversity_level",
+              "lifex_immigration_generation",
+              "lifex_military_history",
+              "lifex_entrepreneurship_history",
+              "lifex_relationship_history",
+              "lifex_parenting_journey",
+              "lifex_health_journey",
+              "lifex_loss_experience",
+              "lifex_faith_journey",
+              "lifex_cultural_exposure",
+              "lifex_formative_decade",
+              "lifex_public_recognition",
+              "lifex_service_history",
+              "lifex_turning_point",
+              "lifex_languages_lifetime",
+              "lifex_hometown_tie",
+              "wiki_birth_date"
+            ]
+          },
+          "value": {},
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "evidence": {
+            "type": "string"
+          },
+          "assignment_type": {
+            "type": "string",
+            "enum": [
+              "direct",
+              "structured_claim",
+              "summary_inference",
+              "unsupported"
+            ]
+          }
+        }
+      }
+    },
+    "reported_model": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "model_source": {
+      "type": "string"
+    },
+    "model_confidence": {
+      "type": "string"
+    }
+  }
+}

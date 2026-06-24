@@ -1,0 +1,122 @@
+{
+  "type": "object",
+  "required": [
+    "fields"
+  ],
+  "properties": {
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "field_id",
+          "value",
+          "confidence",
+          "evidence",
+          "assignment_type"
+        ],
+        "properties": {
+          "field_id": {
+            "type": "string",
+            "enum": [
+              "skill_writing",
+              "skill_copywriting",
+              "skill_editing",
+              "skill_storytelling",
+              "skill_public_speaking",
+              "skill_negotiation",
+              "skill_coding",
+              "skill_debugging",
+              "skill_code_review",
+              "skill_system_design",
+              "skill_data_analysis",
+              "skill_data_visualization",
+              "skill_statistical_modeling",
+              "skill_spreadsheet_modeling",
+              "skill_financial_modeling",
+              "skill_project_management",
+              "skill_product_strategy",
+              "skill_leadership",
+              "skill_people_management",
+              "skill_mentoring",
+              "skill_coaching",
+              "skill_conflict_resolution",
+              "skill_time_management",
+              "skill_prioritization",
+              "skill_research",
+              "skill_critical_thinking",
+              "skill_problem_solving",
+              "skill_mathematics",
+              "skill_mental_arithmetic",
+              "skill_logical_reasoning",
+              "skill_language_learning",
+              "skill_translation",
+              "skill_interpretation",
+              "skill_design_thinking",
+              "skill_prototyping",
+              "skill_sketching",
+              "skill_drawing",
+              "skill_painting",
+              "skill_photography",
+              "skill_videography",
+              "skill_video_editing",
+              "skill_audio_production",
+              "skill_cooking",
+              "skill_baking",
+              "skill_budgeting",
+              "skill_investing",
+              "skill_diy_repair",
+              "skill_gardening",
+              "skill_driving",
+              "skill_technical_writing",
+              "skill_note_taking",
+              "skill_speed_reading",
+              "skill_memorization",
+              "skill_active_listening",
+              "skill_empathy",
+              "skill_persuasion",
+              "skill_facilitation",
+              "skill_forecasting",
+              "skill_estimation",
+              "skill_fact_checking",
+              "skill_proofreading",
+              "skill_presenting",
+              "skill_networking",
+              "skill_selling"
+            ]
+          },
+          "value": {},
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "evidence": {
+            "type": "string"
+          },
+          "assignment_type": {
+            "type": "string",
+            "enum": [
+              "direct",
+              "structured_claim",
+              "summary_inference",
+              "unsupported"
+            ]
+          }
+        }
+      }
+    },
+    "reported_model": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "model_source": {
+      "type": "string"
+    },
+    "model_confidence": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "type": "object",
+  "required": [
+    "fields"
+  ],
+  "properties": {
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "field_id",
+          "value",
+          "confidence",
+          "evidence",
+          "assignment_type"
+        ],
+        "properties": {
+          "field_id": {
+            "type": "string",
+            "enum": [
+              "values_priority",
+              "religiosity",
+              "economic_motivation",
+              "val_family",
+              "val_career_success",
+              "val_wealth",
+              "val_health",
+              "val_personal_freedom",
+              "val_security_stability",
+              "val_adventure",
+              "val_tradition",
+              "val_power_influence",
+              "val_achievement",
+              "val_creativity_self_expression",
+              "val_community",
+              "val_spirituality_faith",
+              "val_knowledge_truth",
+              "val_social_status",
+              "val_independence",
+              "val_justice_fairness",
+              "val_loyalty",
+              "val_sustainability",
+              "val_recognition",
+              "val_helping_others",
+              "val_personal_growth",
+              "val_fun_enjoyment",
+              "val_integrity_honesty",
+              "val_beauty_aesthetics",
+              "val_order_structure",
+              "val_patriotism",
+              "val_equality",
+              "val_privacy",
+              "schwartz_value_self_direction",
+              "schwartz_value_stimulation",
+              "schwartz_value_hedonism",
+              "schwartz_value_achievement",
+              "schwartz_value_power",
+              "schwartz_value_security",
+              "schwartz_value_conformity",
+              "schwartz_value_tradition",
+              "schwartz_value_benevolence",
+              "schwartz_value_universalism",
+              "sdt_need_autonomy",
+              "sdt_need_competence",
+              "sdt_need_relatedness",
+              "need_for_cognition"
+            ]
+          },
+          "value": {},
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "evidence": {
+            "type": "string"
+          },
+          "assignment_type": {
+            "type": "string",
+            "enum": [
+              "direct",
+              "structured_claim",
+              "summary_inference",
+              "unsupported"
+            ]
+          }
+        }
+      }
+    },
+    "reported_model": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "model_source": {
+      "type": "string"
+    },
+    "model_confidence": {
+      "type": "string"
+    }
+  }
+}

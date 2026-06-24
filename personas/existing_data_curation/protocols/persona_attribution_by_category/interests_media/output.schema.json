@@ -1,0 +1,139 @@
+{
+  "type": "object",
+  "required": [
+    "fields"
+  ],
+  "properties": {
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "field_id",
+          "value",
+          "confidence",
+          "evidence",
+          "assignment_type"
+        ],
+        "properties": {
+          "field_id": {
+            "type": "string",
+            "enum": [
+              "musg_pop",
+              "musg_rock",
+              "musg_hip_hop",
+              "musg_r_b",
+              "musg_jazz",
+              "musg_blues",
+              "musg_classical",
+              "musg_opera",
+              "musg_country",
+              "musg_folk",
+              "musg_reggae",
+              "musg_reggaeton",
+              "musg_electronic",
+              "musg_house",
+              "musg_techno",
+              "musg_trance",
+              "musg_drum_bass",
+              "musg_metal",
+              "musg_punk",
+              "musg_indie",
+              "musg_k_pop",
+              "musg_j_pop",
+              "musg_latin",
+              "musg_afrobeats",
+              "musg_gospel",
+              "musg_soul",
+              "musg_funk",
+              "musg_disco",
+              "musg_ambient",
+              "musg_lo_fi",
+              "musg_bluegrass",
+              "musg_ska",
+              "musg_synthwave",
+              "musg_trap",
+              "musg_bollywood",
+              "filmg_action",
+              "filmg_adventure",
+              "filmg_comedy",
+              "filmg_drama",
+              "filmg_horror",
+              "filmg_thriller",
+              "filmg_sci_fi",
+              "filmg_fantasy",
+              "filmg_romance",
+              "filmg_documentary",
+              "filmg_animation",
+              "filmg_crime",
+              "filmg_mystery",
+              "filmg_historical",
+              "filmg_war",
+              "filmg_western",
+              "filmg_musical",
+              "filmg_noir",
+              "filmg_superhero",
+              "filmg_indie_film",
+              "filmg_art_house",
+              "filmg_biopic",
+              "filmg_comedy_drama",
+              "filmg_disaster",
+              "bookg_literary_fiction",
+              "bookg_science_fiction",
+              "bookg_fantasy",
+              "bookg_mystery",
+              "bookg_thriller",
+              "bookg_romance",
+              "bookg_historical_fiction",
+              "bookg_horror",
+              "bookg_biography",
+              "bookg_memoir",
+              "bookg_self_help",
+              "bookg_business",
+              "bookg_popular_science",
+              "bookg_history",
+              "bookg_philosophy",
+              "bookg_poetry",
+              "bookg_young_adult",
+              "bookg_graphic_novels",
+              "bookg_true_crime",
+              "bookg_travel_writing",
+              "bookg_cookbooks",
+              "bookg_essays"
+            ]
+          },
+          "value": {},
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "evidence": {
+            "type": "string"
+          },
+          "assignment_type": {
+            "type": "string",
+            "enum": [
+              "direct",
+              "structured_claim",
+              "summary_inference",
+              "unsupported"
+            ]
+          }
+        }
+      }
+    },
+    "reported_model": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "model_source": {
+      "type": "string"
+    },
+    "model_confidence": {
+      "type": "string"
+    }
+  }
+}

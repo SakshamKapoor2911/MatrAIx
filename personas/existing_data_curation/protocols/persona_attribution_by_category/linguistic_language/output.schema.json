@@ -1,0 +1,111 @@
+{
+  "type": "object",
+  "required": [
+    "fields"
+  ],
+  "properties": {
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "field_id",
+          "value",
+          "confidence",
+          "evidence",
+          "assignment_type"
+        ],
+        "properties": {
+          "field_id": {
+            "type": "string",
+            "enum": [
+              "primary_language",
+              "english_proficiency",
+              "multilingualism",
+              "lang_english",
+              "lang_mandarin",
+              "lang_cantonese",
+              "lang_spanish",
+              "lang_hindi",
+              "lang_arabic",
+              "lang_french",
+              "lang_portuguese",
+              "lang_bengali",
+              "lang_russian",
+              "lang_japanese",
+              "lang_german",
+              "lang_korean",
+              "lang_italian",
+              "lang_turkish",
+              "lang_vietnamese",
+              "lang_thai",
+              "lang_indonesian",
+              "lang_malay",
+              "lang_swahili",
+              "lang_dutch",
+              "lang_polish",
+              "lang_ukrainian",
+              "lang_persian",
+              "lang_hebrew",
+              "lang_greek",
+              "lang_czech",
+              "lang_hungarian",
+              "lang_romanian",
+              "lang_swedish",
+              "lang_norwegian",
+              "lang_danish",
+              "lang_finnish",
+              "lang_tagalog",
+              "lang_urdu",
+              "lang_tamil",
+              "lang_telugu",
+              "lang_marathi",
+              "lang_punjabi",
+              "lang_gujarati",
+              "lang_hausa",
+              "lang_yoruba",
+              "lang_igbo",
+              "lang_amharic",
+              "lang_zulu",
+              "lang_afrikaans",
+              "lang_serbian",
+              "lang_croatian",
+              "lang_bulgarian",
+              "lang_slovak"
+            ]
+          },
+          "value": {},
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "evidence": {
+            "type": "string"
+          },
+          "assignment_type": {
+            "type": "string",
+            "enum": [
+              "direct",
+              "structured_claim",
+              "summary_inference",
+              "unsupported"
+            ]
+          }
+        }
+      }
+    },
+    "reported_model": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "model_source": {
+      "type": "string"
+    },
+    "model_confidence": {
+      "type": "string"
+    }
+  }
+}

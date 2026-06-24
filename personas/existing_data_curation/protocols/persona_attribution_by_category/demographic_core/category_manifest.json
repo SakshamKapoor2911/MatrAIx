@@ -1,0 +1,364 @@
+{
+  "category": "Demographic: Core",
+  "slug": "demographic_core",
+  "protocol_id": "persona_attribution_demographic_core",
+  "dimension_count": 27,
+  "dimensions": [
+    {
+      "id": "age_bracket",
+      "label": "Age bracket",
+      "description": "Life-age band of the persona.",
+      "values": [
+        "13–17",
+        "18–24",
+        "25–34",
+        "35–44",
+        "45–54",
+        "55–64",
+        "65+"
+      ]
+    },
+    {
+      "id": "region",
+      "label": "Region",
+      "description": "World region the persona is based in.",
+      "values": [
+        "North America",
+        "Latin America",
+        "Western Europe",
+        "Eastern Europe",
+        "Sub-Saharan Africa",
+        "MENA",
+        "South Asia",
+        "East Asia",
+        "Southeast Asia",
+        "Oceania"
+      ]
+    },
+    {
+      "id": "gender_identity",
+      "label": "Gender identity",
+      "description": "Self-identified gender.",
+      "values": [
+        "Woman",
+        "Man",
+        "Non-binary",
+        "Self-described",
+        "Prefer not to say"
+      ]
+    },
+    {
+      "id": "urbanicity",
+      "label": "Urbanicity",
+      "description": "Settlement density of where they live.",
+      "values": [
+        "Dense urban",
+        "Suburban",
+        "Small town",
+        "Rural",
+        "Nomadic / remote"
+      ]
+    },
+    {
+      "id": "socioeconomic_band",
+      "label": "Socioeconomic band",
+      "description": "Relative income/wealth band.",
+      "values": [
+        "Low income",
+        "Lower-middle",
+        "Middle",
+        "Upper-middle",
+        "High income"
+      ]
+    },
+    {
+      "id": "register",
+      "label": "Dialect / register",
+      "description": "Default speech register.",
+      "values": [
+        "Formal / standard",
+        "Colloquial",
+        "Regional dialect",
+        "Code-switching",
+        "Technical jargon"
+      ]
+    },
+    {
+      "id": "att_traditional_gender_roles",
+      "label": "Attitude: Traditional gender roles",
+      "description": "Stance toward traditional gender roles.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "demo_marital_status",
+      "label": "Marital status",
+      "description": "Marital status.",
+      "values": [
+        "Single",
+        "In a relationship",
+        "Married",
+        "Domestic partnership",
+        "Separated",
+        "Divorced",
+        "Widowed"
+      ]
+    },
+    {
+      "id": "demo_children_count",
+      "label": "Children",
+      "description": "Children.",
+      "values": [
+        "None",
+        "Expecting",
+        "1 child",
+        "2 children",
+        "3+ children",
+        "Adult children"
+      ]
+    },
+    {
+      "id": "demo_household_income",
+      "label": "Household income band",
+      "description": "Household income band.",
+      "values": [
+        "<$25k",
+        "$25k–50k",
+        "$50k–100k",
+        "$100k–200k",
+        "$200k+"
+      ]
+    },
+    {
+      "id": "demo_employment_status",
+      "label": "Employment status",
+      "description": "Employment status.",
+      "values": [
+        "Full-time",
+        "Part-time",
+        "Self-employed",
+        "Gig / freelance",
+        "Student",
+        "Unemployed",
+        "Retired",
+        "Homemaker"
+      ]
+    },
+    {
+      "id": "demo_housing_status",
+      "label": "Housing status",
+      "description": "Housing status.",
+      "values": [
+        "Own outright",
+        "Mortgage",
+        "Renting",
+        "Living with family",
+        "Shared housing",
+        "Temporary / transitional"
+      ]
+    },
+    {
+      "id": "demo_generation",
+      "label": "Generational cohort",
+      "description": "Generational cohort.",
+      "values": [
+        "Gen Alpha",
+        "Gen Z",
+        "Millennial",
+        "Gen X",
+        "Boomer",
+        "Silent"
+      ]
+    },
+    {
+      "id": "demo_religion_affiliation",
+      "label": "Religious affiliation",
+      "description": "Religious affiliation.",
+      "values": [
+        "Christian",
+        "Muslim",
+        "Hindu",
+        "Buddhist",
+        "Jewish",
+        "Sikh",
+        "Folk / traditional",
+        "Spiritual but unaffiliated",
+        "Atheist / agnostic",
+        "None"
+      ]
+    },
+    {
+      "id": "demo_sexual_orientation",
+      "label": "Sexual orientation",
+      "description": "Sexual orientation.",
+      "values": [
+        "Heterosexual",
+        "Gay / lesbian",
+        "Bisexual",
+        "Pansexual",
+        "Asexual",
+        "Queer",
+        "Prefer not to say"
+      ]
+    },
+    {
+      "id": "demo_citizenship_status",
+      "label": "Citizenship status",
+      "description": "Citizenship status.",
+      "values": [
+        "Citizen by birth",
+        "Naturalized citizen",
+        "Permanent resident",
+        "Visa holder",
+        "Dual national",
+        "Undocumented"
+      ]
+    },
+    {
+      "id": "demo_ethnicity_broad",
+      "label": "Ethnic background",
+      "description": "Ethnic background.",
+      "values": [
+        "White / European",
+        "Black / African",
+        "Hispanic / Latino",
+        "East Asian",
+        "South Asian",
+        "Southeast Asian",
+        "Middle Eastern",
+        "Indigenous",
+        "Pacific Islander",
+        "Multiracial"
+      ]
+    },
+    {
+      "id": "demo_disability_status",
+      "label": "Disability status",
+      "description": "Disability status.",
+      "values": [
+        "No disability",
+        "Physical",
+        "Sensory",
+        "Cognitive",
+        "Chronic illness",
+        "Multiple",
+        "Prefers not to say"
+      ]
+    },
+    {
+      "id": "demo_veteran_status",
+      "label": "Veteran status",
+      "description": "Veteran status.",
+      "values": [
+        "Civilian",
+        "Active duty",
+        "Reserve / guard",
+        "Veteran",
+        "Military family"
+      ]
+    },
+    {
+      "id": "demo_birth_order",
+      "label": "Birth order",
+      "description": "Birth order.",
+      "values": [
+        "Only child",
+        "Eldest",
+        "Middle",
+        "Youngest",
+        "Twin / multiple"
+      ]
+    },
+    {
+      "id": "demo_home_language",
+      "label": "Language at home",
+      "description": "Language at home.",
+      "values": [
+        "Same as primary",
+        "Bilingual home",
+        "Heritage language",
+        "Mixed languages"
+      ]
+    },
+    {
+      "id": "demo_political_engagement",
+      "label": "Political engagement",
+      "description": "Political engagement.",
+      "values": [
+        "Activist",
+        "Engaged voter",
+        "Occasional voter",
+        "Disengaged",
+        "Non-voter"
+      ]
+    },
+    {
+      "id": "demo_parental_status",
+      "label": "Parenthood",
+      "description": "Parenthood.",
+      "values": [
+        "Not a parent",
+        "New parent",
+        "Parent of minors",
+        "Parent of adults",
+        "Grandparent",
+        "Step / foster parent"
+      ]
+    },
+    {
+      "id": "demo_relationship_length",
+      "label": "Relationship length",
+      "description": "Relationship length.",
+      "values": [
+        "Not in one",
+        "Under 1 year",
+        "1–5 years",
+        "5–15 years",
+        "15+ years"
+      ]
+    },
+    {
+      "id": "demo_driver_status",
+      "label": "Driving status",
+      "description": "Driving status.",
+      "values": [
+        "Daily driver",
+        "Occasional driver",
+        "Licensed, rarely drives",
+        "Non-driver",
+        "Cannot drive"
+      ]
+    },
+    {
+      "id": "wiki_nationality",
+      "label": "Nationality",
+      "description": "Primary country or countries of citizenship.",
+      "values": [
+        "American",
+        "British",
+        "French",
+        "German",
+        "Japanese",
+        "Chinese",
+        "Indian",
+        "Canadian",
+        "Australian",
+        "Other"
+      ]
+    },
+    {
+      "id": "nemotron_sex",
+      "label": "Sex",
+      "description": "Biological sex.",
+      "values": [
+        "Female",
+        "Male"
+      ]
+    }
+  ]
+}

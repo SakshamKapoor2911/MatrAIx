@@ -1,0 +1,152 @@
+{
+  "type": "object",
+  "required": [
+    "fields"
+  ],
+  "properties": {
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "field_id",
+          "value",
+          "confidence",
+          "evidence",
+          "assignment_type"
+        ],
+        "properties": {
+          "field_id": {
+            "type": "string",
+            "enum": [
+              "personahub_dimension_1",
+              "personahub_dimension_2",
+              "oasis_dimension_1",
+              "oasis_dimension_2",
+              "oasis_dimension_3",
+              "oasis_dimension_4",
+              "oasis_dimension_5",
+              "oasis_dimension_6",
+              "apple_primex_dimension_1",
+              "apple_primex_dimension_2",
+              "apple_primex_dimension_3",
+              "apple_primex_dimension_4",
+              "apple_primex_dimension_5",
+              "apple_primex_dimension_6",
+              "apple_primex_dimension_7",
+              "apple_primex_dimension_8",
+              "apple_primex_dimension_9",
+              "apple_primex_dimension_10",
+              "apple_primex_dimension_11",
+              "apple_primex_dimension_12",
+              "apple_primex_dimension_13",
+              "apple_primex_dimension_14",
+              "apple_primex_dimension_15",
+              "apple_primex_dimension_16",
+              "apple_primex_dimension_17",
+              "apple_primex_dimension_18",
+              "apple_primex_dimension_19",
+              "apple_primex_dimension_20",
+              "apple_primex_dimension_21",
+              "apple_primex_dimension_22",
+              "apple_primex_dimension_23",
+              "apple_primex_dimension_24",
+              "apple_primex_dimension_25",
+              "apple_primex_dimension_26",
+              "apple_primex_dimension_27",
+              "apple_primex_dimension_28",
+              "apple_primex_dimension_29",
+              "apple_primex_dimension_30",
+              "apple_primex_dimension_31",
+              "apple_primex_dimension_32",
+              "apple_primex_dimension_33",
+              "apple_primex_dimension_34",
+              "apple_primex_dimension_35",
+              "apple_primex_dimension_36",
+              "apple_primex_dimension_37",
+              "apple_primex_dimension_38",
+              "apple_primex_dimension_39",
+              "apple_primex_dimension_40",
+              "apple_primex_dimension_41",
+              "apple_primex_dimension_42",
+              "apple_primex_dimension_43",
+              "pandora_dimension_1",
+              "pandora_dimension_2",
+              "pandora_dimension_3",
+              "pandora_dimension_4",
+              "pandora_dimension_5",
+              "pandora_dimension_6",
+              "synthetic_persona_chat_dimension_1",
+              "synthetic_persona_chat_dimension_2",
+              "synthetic_persona_chat_dimension_3",
+              "personachat_persona",
+              "horizonbench_dimension_1",
+              "horizonbench_dimension_2",
+              "horizonbench_dimension_3",
+              "horizonbench_dimension_4",
+              "horizonbench_dimension_5",
+              "horizonbench_dimension_6",
+              "horizonbench_dimension_7",
+              "horizonbench_dimension_8",
+              "horizonbench_dimension_9",
+              "horizonbench_dimension_10",
+              "horizonbench_dimension_11",
+              "horizonbench_dimension_12",
+              "horizonbench_dimension_13",
+              "horizonbench_dimension_14",
+              "horizonbench_dimension_15",
+              "horizonbench_dimension_16",
+              "horizonbench_dimension_17",
+              "horizonbench_dimension_18",
+              "horizonbench_dimension_19",
+              "horizonbench_dimension_20",
+              "horizonbench_dimension_21",
+              "horizonbench_dimension_22",
+              "horizonbench_dimension_23",
+              "horizonbench_dimension_24",
+              "horizonbench_dimension_25",
+              "horizonbench_dimension_26",
+              "horizonbench_dimension_27",
+              "horizonbench_dimension_28",
+              "horizonbench_dimension_29",
+              "horizonbench_dimension_30",
+              "wildchat_state",
+              "wildchat_country",
+              "wildchat_hashed_ip"
+            ]
+          },
+          "value": {},
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "evidence": {
+            "type": "string"
+          },
+          "assignment_type": {
+            "type": "string",
+            "enum": [
+              "direct",
+              "structured_claim",
+              "summary_inference",
+              "unsupported"
+            ]
+          }
+        }
+      }
+    },
+    "reported_model": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "model_source": {
+      "type": "string"
+    },
+    "model_confidence": {
+      "type": "string"
+    }
+  }
+}

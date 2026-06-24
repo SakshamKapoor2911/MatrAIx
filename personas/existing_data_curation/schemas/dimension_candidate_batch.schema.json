@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Persona Dimension Candidate Batch",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "dataset_id": {
+      "type": "string"
+    },
+    "source_config": {
+      "type": "string"
+    },
+    "batch_id": {
+      "type": "string"
+    },
+    "source_row_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "dimension_candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "dimension_label": {
+            "type": "string"
+          },
+          "definition": {
+            "type": "string"
+          },
+          "supported_by": {
+            "type": "string"
+          },
+          "source_fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "evidence_quotes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "possible_values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "value_type": {
+            "type": "string"
+          },
+          "granularity": {
+            "type": "string"
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "dimension_label",
+          "definition",
+          "supported_by",
+          "source_fields",
+          "evidence_quotes",
+          "possible_values",
+          "value_type",
+          "granularity",
+          "confidence"
+        ]
+      }
+    },
+    "extraction_origin": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "contributor_github": {
+          "type": "string"
+        },
+        "backend": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "prompt_version": {
+          "type": "string"
+        },
+        "added_date": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "contributor_github",
+        "backend",
+        "model",
+        "prompt_version",
+        "added_date"
+      ]
+    }
+  },
+  "required": [
+    "dataset_id",
+    "source_config",
+    "batch_id",
+    "source_row_ids",
+    "dimension_candidates",
+    "extraction_origin"
+  ]
+}

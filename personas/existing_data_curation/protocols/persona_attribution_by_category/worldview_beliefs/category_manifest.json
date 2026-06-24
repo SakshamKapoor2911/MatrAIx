@@ -1,0 +1,829 @@
+{
+  "category": "Worldview: Beliefs",
+  "slug": "worldview_beliefs",
+  "protocol_id": "persona_attribution_worldview_beliefs",
+  "dimension_count": 68,
+  "dimensions": [
+    {
+      "id": "political_lean",
+      "label": "Political lean",
+      "description": "Broad political orientation.",
+      "values": [
+        "Left",
+        "Center-left",
+        "Center",
+        "Center-right",
+        "Right",
+        "Apolitical"
+      ]
+    },
+    {
+      "id": "trust_level",
+      "label": "Trust level",
+      "description": "How much they trust the agent.",
+      "values": [
+        "Trusting",
+        "Verifying",
+        "Skeptical",
+        "Hostile"
+      ]
+    },
+    {
+      "id": "safety_sensitivity",
+      "label": "Safety sensitivity",
+      "description": "Risk class of the request.",
+      "values": [
+        "Benign",
+        "Sensitive personal",
+        "High-stakes (medical/legal/financial)",
+        "Potentially harmful",
+        "Dual-use"
+      ]
+    },
+    {
+      "id": "fam_political_science",
+      "label": "Familiarity: Political science",
+      "description": "How well the persona knows Political science.",
+      "values": [
+        "Expert",
+        "Proficient",
+        "Familiar",
+        "Aware",
+        "None"
+      ]
+    },
+    {
+      "id": "fam_religious_studies",
+      "label": "Familiarity: Religious studies",
+      "description": "How well the persona knows Religious studies.",
+      "values": [
+        "Expert",
+        "Proficient",
+        "Familiar",
+        "Aware",
+        "None"
+      ]
+    },
+    {
+      "id": "topic_spirituality",
+      "label": "Interest: Spirituality",
+      "description": "Level of interest in spirituality.",
+      "values": [
+        "Passionate",
+        "Interested",
+        "Neutral",
+        "Indifferent",
+        "Averse"
+      ]
+    },
+    {
+      "id": "att_ai",
+      "label": "Attitude: AI",
+      "description": "Stance toward ai.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_automation",
+      "label": "Attitude: Automation",
+      "description": "Stance toward automation.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_data_privacy",
+      "label": "Attitude: Data privacy",
+      "description": "Stance toward data privacy.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_social_media",
+      "label": "Attitude: Social media",
+      "description": "Stance toward social media.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_remote_work",
+      "label": "Attitude: Remote work",
+      "description": "Stance toward remote work.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_globalization",
+      "label": "Attitude: Globalization",
+      "description": "Stance toward globalization.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_free_markets",
+      "label": "Attitude: Free markets",
+      "description": "Stance toward free markets.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_government_regulation",
+      "label": "Attitude: Government regulation",
+      "description": "Stance toward government regulation.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_climate_action",
+      "label": "Attitude: Climate action",
+      "description": "Stance toward climate action.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_nuclear_energy",
+      "label": "Attitude: Nuclear energy",
+      "description": "Stance toward nuclear energy.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_renewable_energy",
+      "label": "Attitude: Renewable energy",
+      "description": "Stance toward renewable energy.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_genetic_engineering",
+      "label": "Attitude: Genetic engineering",
+      "description": "Stance toward genetic engineering.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_vaccines",
+      "label": "Attitude: Vaccines",
+      "description": "Stance toward vaccines.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_alternative_medicine",
+      "label": "Attitude: Alternative medicine",
+      "description": "Stance toward alternative medicine.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_organized_religion",
+      "label": "Attitude: Organized religion",
+      "description": "Stance toward organized religion.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_cryptocurrency",
+      "label": "Attitude: Cryptocurrency",
+      "description": "Stance toward cryptocurrency.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_the_gig_economy",
+      "label": "Attitude: The gig economy",
+      "description": "Stance toward the gig economy.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_labor_unions",
+      "label": "Attitude: Labor unions",
+      "description": "Stance toward labor unions.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_higher_education",
+      "label": "Attitude: Higher education",
+      "description": "Stance toward higher education.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_homeownership",
+      "label": "Attitude: Homeownership",
+      "description": "Stance toward homeownership.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_taking_on_debt",
+      "label": "Attitude: Taking on debt",
+      "description": "Stance toward taking on debt.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_risk_taking",
+      "label": "Attitude: Risk-taking",
+      "description": "Stance toward risk-taking.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_authority",
+      "label": "Attitude: Authority",
+      "description": "Stance toward authority.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_rapid_change",
+      "label": "Attitude: Rapid change",
+      "description": "Stance toward rapid change.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_new_technology",
+      "label": "Attitude: New technology",
+      "description": "Stance toward new technology.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_brand_loyalty",
+      "label": "Attitude: Brand loyalty",
+      "description": "Stance toward brand loyalty.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_advertising",
+      "label": "Attitude: Advertising",
+      "description": "Stance toward advertising.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_influencers",
+      "label": "Attitude: Influencers",
+      "description": "Stance toward influencers.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_online_reviews",
+      "label": "Attitude: Online reviews",
+      "description": "Stance toward online reviews.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_subscription_services",
+      "label": "Attitude: Subscription services",
+      "description": "Stance toward subscription services.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_open_source",
+      "label": "Attitude: Open source",
+      "description": "Stance toward open source.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_surveillance",
+      "label": "Attitude: Surveillance",
+      "description": "Stance toward surveillance.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_self_driving_cars",
+      "label": "Attitude: Self-driving cars",
+      "description": "Stance toward self-driving cars.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_space_exploration",
+      "label": "Attitude: Space exploration",
+      "description": "Stance toward space exploration.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_universal_basic_income",
+      "label": "Attitude: Universal basic income",
+      "description": "Stance toward universal basic income.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_minimalism",
+      "label": "Attitude: Minimalism",
+      "description": "Stance toward minimalism.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_consumerism",
+      "label": "Attitude: Consumerism",
+      "description": "Stance toward consumerism.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_veganism",
+      "label": "Attitude: Veganism",
+      "description": "Stance toward veganism.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_fast_fashion",
+      "label": "Attitude: Fast fashion",
+      "description": "Stance toward fast fashion.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_gun_ownership",
+      "label": "Attitude: Gun ownership",
+      "description": "Stance toward gun ownership.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_capital_punishment",
+      "label": "Attitude: Capital punishment",
+      "description": "Stance toward capital punishment.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_free_speech",
+      "label": "Attitude: Free speech",
+      "description": "Stance toward free speech.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_privacy_vs_security",
+      "label": "Attitude: Privacy vs security",
+      "description": "Stance toward privacy vs security.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_globalized_supply_chains",
+      "label": "Attitude: Globalized supply chains",
+      "description": "Stance toward globalized supply chains.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_working_from_office",
+      "label": "Attitude: Working from office",
+      "description": "Stance toward working from office.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_four_day_work_week",
+      "label": "Attitude: Four-day work week",
+      "description": "Stance toward four-day work week.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_performance_reviews",
+      "label": "Attitude: Performance reviews",
+      "description": "Stance toward performance reviews.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_standardized_testing",
+      "label": "Attitude: Standardized testing",
+      "description": "Stance toward standardized testing.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_tipping_culture",
+      "label": "Attitude: Tipping culture",
+      "description": "Stance toward tipping culture.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_electric_vehicles",
+      "label": "Attitude: Electric vehicles",
+      "description": "Stance toward electric vehicles.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_public_transit",
+      "label": "Attitude: Public transit",
+      "description": "Stance toward public transit.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_urban_density",
+      "label": "Attitude: Urban density",
+      "description": "Stance toward urban density.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "att_gentrification",
+      "label": "Attitude: Gentrification",
+      "description": "Stance toward gentrification.",
+      "values": [
+        "Enthusiast",
+        "Positive",
+        "Neutral",
+        "Skeptical",
+        "Opposed"
+      ]
+    },
+    {
+      "id": "acad_political_theory",
+      "label": "Subject: Political theory",
+      "description": "Interest in political theory.",
+      "values": [
+        "Passionate",
+        "Interested",
+        "Neutral",
+        "Indifferent",
+        "Averse"
+      ]
+    },
+    {
+      "id": "mft_care_harm",
+      "label": "Moral Foundation Care/Harm",
+      "description": "Moral Foundations Theory construct: sensitivity to care versus harm.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ]
+    },
+    {
+      "id": "mft_fairness_cheating",
+      "label": "Moral Foundation Fairness/Cheating",
+      "description": "Moral Foundations Theory construct: sensitivity to fairness versus cheating.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ]
+    },
+    {
+      "id": "mft_loyalty_betrayal",
+      "label": "Moral Foundation Loyalty/Betrayal",
+      "description": "Moral Foundations Theory construct: sensitivity to loyalty versus betrayal.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ]
+    },
+    {
+      "id": "mft_authority_subversion",
+      "label": "Moral Foundation Authority/Subversion",
+      "description": "Moral Foundations Theory construct: sensitivity to authority versus subversion.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ]
+    },
+    {
+      "id": "mft_sanctity_degradation",
+      "label": "Moral Foundation Sanctity/Degradation",
+      "description": "Moral Foundations Theory construct: sensitivity to sanctity versus degradation.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ]
+    },
+    {
+      "id": "mft_liberty_oppression",
+      "label": "Moral Foundation Liberty/Oppression",
+      "description": "Moral Foundations Theory construct: sensitivity to liberty versus oppression.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ]
+    },
+    {
+      "id": "dospert_health_safety_risk_tolerance",
+      "label": "DOSPERT Health/Safety Risk Tolerance",
+      "description": "Domain-specific risk orientation for health and safety risks.",
+      "values": [
+        "Very high",
+        "High",
+        "Average",
+        "Low",
+        "Very low"
+      ]
+    },
+    {
+      "id": "wiki_political_affiliation",
+      "label": "Political Affiliation",
+      "description": "Political party or political ideology association.",
+      "values": [
+        "Democratic",
+        "Republican",
+        "Conservative",
+        "Labour",
+        "Green",
+        "Independent",
+        "Progressive",
+        "Socialist",
+        "Liberal",
+        "Other"
+      ]
+    }
+  ]
+}

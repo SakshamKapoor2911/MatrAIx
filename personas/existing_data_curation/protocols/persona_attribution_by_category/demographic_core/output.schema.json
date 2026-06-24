@@ -1,0 +1,85 @@
+{
+  "type": "object",
+  "required": [
+    "fields"
+  ],
+  "properties": {
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "field_id",
+          "value",
+          "confidence",
+          "evidence",
+          "assignment_type"
+        ],
+        "properties": {
+          "field_id": {
+            "type": "string",
+            "enum": [
+              "age_bracket",
+              "region",
+              "gender_identity",
+              "urbanicity",
+              "socioeconomic_band",
+              "register",
+              "att_traditional_gender_roles",
+              "demo_marital_status",
+              "demo_children_count",
+              "demo_household_income",
+              "demo_employment_status",
+              "demo_housing_status",
+              "demo_generation",
+              "demo_religion_affiliation",
+              "demo_sexual_orientation",
+              "demo_citizenship_status",
+              "demo_ethnicity_broad",
+              "demo_disability_status",
+              "demo_veteran_status",
+              "demo_birth_order",
+              "demo_home_language",
+              "demo_political_engagement",
+              "demo_parental_status",
+              "demo_relationship_length",
+              "demo_driver_status",
+              "wiki_nationality",
+              "nemotron_sex"
+            ]
+          },
+          "value": {},
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "evidence": {
+            "type": "string"
+          },
+          "assignment_type": {
+            "type": "string",
+            "enum": [
+              "direct",
+              "structured_claim",
+              "summary_inference",
+              "unsupported"
+            ]
+          }
+        }
+      }
+    },
+    "reported_model": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "model_source": {
+      "type": "string"
+    },
+    "model_confidence": {
+      "type": "string"
+    }
+  }
+}

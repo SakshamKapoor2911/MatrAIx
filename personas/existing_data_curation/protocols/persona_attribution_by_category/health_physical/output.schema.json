@@ -1,0 +1,83 @@
+{
+  "type": "object",
+  "required": [
+    "fields"
+  ],
+  "properties": {
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "field_id",
+          "value",
+          "confidence",
+          "evidence",
+          "assignment_type"
+        ],
+        "properties": {
+          "field_id": {
+            "type": "string",
+            "enum": [
+              "health_general_health",
+              "health_chronic_condition",
+              "health_mobility",
+              "health_vision",
+              "health_hearing",
+              "health_color_vision",
+              "health_dexterity",
+              "health_mental_health",
+              "health_stress_level",
+              "health_energy_level",
+              "health_sleep_quality",
+              "health_pain_level",
+              "health_medication_use",
+              "health_dietary_restriction",
+              "health_neurodivergence",
+              "health_caregiver_status",
+              "health_health_literacy",
+              "health_insurance_status",
+              "health_fitness_level",
+              "health_cognitive_load_capacity",
+              "health_contrast_need",
+              "health_text_size_need",
+              "health_assistive_tech",
+              "health_motion_sensitivity",
+              "health_attention_condition"
+            ]
+          },
+          "value": {},
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "evidence": {
+            "type": "string"
+          },
+          "assignment_type": {
+            "type": "string",
+            "enum": [
+              "direct",
+              "structured_claim",
+              "summary_inference",
+              "unsupported"
+            ]
+          }
+        }
+      }
+    },
+    "reported_model": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "model_source": {
+      "type": "string"
+    },
+    "model_confidence": {
+      "type": "string"
+    }
+  }
+}

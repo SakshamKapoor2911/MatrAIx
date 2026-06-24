@@ -1,0 +1,88 @@
+{
+  "type": "object",
+  "required": [
+    "fields"
+  ],
+  "properties": {
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "field_id",
+          "value",
+          "confidence",
+          "evidence",
+          "assignment_type"
+        ],
+        "properties": {
+          "field_id": {
+            "type": "string",
+            "enum": [
+              "habit_journaling",
+              "habit_meditation",
+              "habit_to_do_lists",
+              "habit_goal_setting",
+              "habit_daily_reflection",
+              "habit_budget_tracking",
+              "habit_meal_prepping",
+              "habit_stretching_mobility",
+              "habit_morning_walk",
+              "habit_phone_free_downtime",
+              "habit_gratitude_practice",
+              "habit_reading_before_bed",
+              "habit_naps",
+              "habit_power_snoozing_alarm",
+              "habit_skipping_breakfast",
+              "habit_late_night_snacking",
+              "habit_nail_biting_fidgeting",
+              "habit_doomscrolling",
+              "habit_multitab_browsing",
+              "habit_inbox_zero_discipline",
+              "habit_saving_receipts",
+              "habit_pre_trip_overpacking",
+              "habit_talking_to_oneself",
+              "habit_humming_whistling",
+              "habit_cold_showers",
+              "habit_step_counting",
+              "habit_hydration_tracking",
+              "habit_backing_up_files",
+              "habit_re_reading_texts_before_sending",
+              "habit_procrasti_cleaning"
+            ]
+          },
+          "value": {},
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "evidence": {
+            "type": "string"
+          },
+          "assignment_type": {
+            "type": "string",
+            "enum": [
+              "direct",
+              "structured_claim",
+              "summary_inference",
+              "unsupported"
+            ]
+          }
+        }
+      }
+    },
+    "reported_model": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "model_source": {
+      "type": "string"
+    },
+    "model_confidence": {
+      "type": "string"
+    }
+  }
+}

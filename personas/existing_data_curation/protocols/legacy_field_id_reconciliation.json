@@ -1,0 +1,56 @@
+{
+  "description": "Maps the legacy persona_attribution_v1 9-field output onto the dimensions+new.json catalog. New per-category protocols need no reconciliation (field_id == catalog id by construction); this only interprets legacy results.",
+  "legacy_protocol": "persona_attribution_v1",
+  "fields": {
+    "domain": {
+      "status": "catalog_direct",
+      "catalog_id": "domain"
+    },
+    "subject_specialty": {
+      "status": "catalog_direct",
+      "catalog_id": "subject_specialty"
+    },
+    "role_function": {
+      "status": "catalog_direct",
+      "catalog_id": "role_function"
+    },
+    "highest_education": {
+      "status": "catalog_direct",
+      "catalog_id": "highest_education"
+    },
+    "intent": {
+      "status": "catalog_direct",
+      "catalog_id": "intent"
+    },
+    "source_entity_type": {
+      "status": "meta",
+      "catalog_id": null,
+      "note": "Entity typing (person/org/work). Pipeline metadata, not a persona dimension. Keep on the profile header; exclude from the 1339-dim grid."
+    },
+    "known_for_or_source_work": {
+      "status": "unmapped_freeform",
+      "catalog_id": null,
+      "candidates": [
+        "wiki_field_of_work"
+      ],
+      "note": "Free-form 'notable work' string with no closed-enum catalog equivalent. Display as profile metadata, not a dimension cell."
+    },
+    "creator": {
+      "status": "meta",
+      "catalog_id": null,
+      "note": "Provenance of a fictional/derived entity; not a persona dimension."
+    },
+    "personality_big5_openness": {
+      "status": "domain_level_split",
+      "catalog_id": null,
+      "facet_ids": [
+        "big5_imagination",
+        "big5_artistic_interest",
+        "big5_adventurousness",
+        "big5_intellect",
+        "big5_liberalism"
+      ],
+      "note": "The catalog decomposes Big5 Openness into IPIP-NEO facets; there is no single big5_openness dimension. A domain-level openness score maps to this facet GROUP, not 1:1."
+    }
+  }
+}
