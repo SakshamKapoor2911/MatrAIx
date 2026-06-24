@@ -806,7 +806,6 @@ def openai_request(
                 continue
             log(f"OpenAI urllib failed after retries: {err}; trying curl fallback")
             return openai_request_with_curl(payload, api_key, timeout=timeout)
-            raise RuntimeError(f"OpenAI request failed after retries: {err}") from err
     raise RuntimeError("OpenAI request failed after retries")
 
 
@@ -980,6 +979,17 @@ def normalize_evidence_profile(
         "unsupported_or_blocked": profile.get("unsupported_or_blocked") or [],
     }
     return normalized, rejected
+
+
+def evidence_profile_review_ids(evidence_profile: dict[str, Any]) -> set[str]:
+    review_ids: set[str] = set()
+    for item in evidence_profile.get("evidence_items") or []:
+        if not isinstance(item, dict):
+            continue
+        for support in item.get("support") or []:
+            if isinstance(support, dict) and support.get("review_id"):
+                review_ids.add(str(support["review_id"]))
+    return review_ids
 
 
 def completed_user_ids(path: Path) -> set[str]:
@@ -1264,14 +1274,6 @@ def infer_user_from_evidence_profile(
         max_total_chars=args.max_review_context_chars,
         include_textless=False,
     )
-    valid_review_ids = {
-        row["review_id"]
-        for row in context_rows_for_reviews(
-            reviews,
-            args.max_review_text_chars,
-            include_textless=False,
-        )
-    }
     evidence_profile, rejected_evidence, profile_request_count = build_or_load_evidence_profile(
         user_row,
         reviews,
@@ -1282,6 +1284,9 @@ def infer_user_from_evidence_profile(
         api_key,
         existing_profiles,
     )
+    valid_review_ids = evidence_profile_review_ids(evidence_profile) or {
+        row["review_id"] for row in review_context
+    }
     all_valid = []
     all_rejected = []
     request_count = profile_request_count
