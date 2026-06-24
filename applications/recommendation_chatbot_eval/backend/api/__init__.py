@@ -1,4 +1,4 @@
-"""FastAPI application layer for RecBot Studio.
+"""FastAPI application layer for PersonaEval.
 
 This package exposes the HTTP API that the React SPA talks to. It is a thin
 adapter over the pure-python service layer (:mod:`backend.service`):

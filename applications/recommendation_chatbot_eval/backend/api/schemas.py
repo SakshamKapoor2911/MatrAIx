@@ -1,4 +1,4 @@
-"""Pydantic v2 request/response models for the RecBot Studio API.
+"""Pydantic v2 request/response models for the PersonaEval API.
 
 These models mirror the wire contract one-to-one with the TypeScript types in
 ``web/src/lib/types.ts`` and the service-layer view objects
@@ -28,7 +28,7 @@ from __future__ import annotations
 
 from typing import Any, Dict, List, Optional
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 __all__ = [
     "HealthResponse",
@@ -71,6 +71,7 @@ __all__ = [
 #: game) so a bad domain is rejected here with a clean 422.
 SUPPORTED_DOMAINS = ("movie", "beauty_product", "game")
 SUPPORTED_APPLICATION_IDS = ("recai", "finance_openbb")
+DEFAULT_APPLICATION_CONTEXTS = {"finance_openbb": "financial_research"}
 SUPPORTED_PERSONA_MODELS = (
     "anthropic/claude-haiku-4-5",
     "anthropic/claude-sonnet-4-6",
@@ -383,13 +384,13 @@ class StartPersonaEvalRequest(BaseModel):
     """Body for ``POST /api/persona-eval``.
 
     ``applicationId`` selects the chatbot application adapter. ``domain`` is the
-    legacy RecAI context and remains validated for back-compat; non-RecAI
-    applications use ``applicationContext`` for their own context.
+    legacy RecAI context; non-RecAI applications use ``applicationContext`` for
+    their own context and normalize ``domain`` to that value.
     ``maxTurns`` is bounded to a sensible 1..20 so a demo run cannot wedge the
     process-global persona-eval lock for an unbounded number of turns.
     """
 
-    domain: str
+    domain: Optional[str] = None
     applicationId: str = "recai"
     applicationContext: Optional[str] = None
     personaId: str
@@ -403,13 +404,6 @@ class StartPersonaEvalRequest(BaseModel):
     #: persona model default / env override.
     personaModel: Optional[str] = None
 
-    @field_validator("domain")
-    @classmethod
-    def _validate_domain(cls, value: str) -> str:
-        if value not in SUPPORTED_DOMAINS:
-            raise ValueError("domain must be one of {}".format(list(SUPPORTED_DOMAINS)))
-        return value
-
     @field_validator("applicationId")
     @classmethod
     def _validate_application_id(cls, value: str) -> str:
@@ -420,6 +414,25 @@ class StartPersonaEvalRequest(BaseModel):
                 )
             )
         return value
+
+    @model_validator(mode="after")
+    def _normalize_application_context(self) -> "StartPersonaEvalRequest":
+        if self.applicationId == "recai":
+            self.domain = self.domain or "movie"
+            if self.domain not in SUPPORTED_DOMAINS:
+                raise ValueError(
+                    "domain must be one of {}".format(list(SUPPORTED_DOMAINS))
+                )
+            if self.applicationContext is None:
+                self.applicationContext = self.domain
+            return self
+
+        default_context = DEFAULT_APPLICATION_CONTEXTS.get(self.applicationId)
+        self.applicationContext = self.applicationContext or default_context
+        if not self.applicationContext:
+            raise ValueError("applicationContext is required")
+        self.domain = self.applicationContext
+        return self
 
     @field_validator("personaModel")
     @classmethod

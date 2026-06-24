@@ -9,7 +9,7 @@ going through the manager (which would also spin up the async job registry /
 thread pool that the headless runner does not need).
 
 The :class:`~persona_eval.types.PersonaEvalConfig` (snake_case engine / ranker_mode /
-resource_mode / domain) is translated to the Studio config dict (camelCase keys)
+resource_mode / domain) is translated to the PersonaEval config dict (camelCase keys)
 and validated/normalized by :class:`~backend.service.config.ConfigManager` so the
 session carries the same shape the API would build.
 """

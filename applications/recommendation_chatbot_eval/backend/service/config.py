@@ -46,11 +46,11 @@ def harbor_persona_model() -> str:
 
 
 class ConfigError(ValueError):
-    """Raised when a Studio config fails validation."""
+    """Raised when a PersonaEval config fails validation."""
 
 
 class ConfigManager:
-    """Validate Studio configs and map them to backend environment variables.
+    """Validate PersonaEval configs and map them to backend environment variables.
 
     The class is effectively a namespace of class attributes / class methods;
     there is no per-instance state, but it is instantiated by the API so it can
@@ -192,15 +192,15 @@ class ConfigManager:
     #: editable knobs so the UI can show what is *not* configurable and why.
     ENVIRONMENT: Dict[str, object] = {
         "runtime": "Harbor",
-        "personaAgent": "Harbor persona-claude-code",
+        "personaAgent": "PersonaEval task controller",
         "applicationApi": "chatbot-api sidecar",
-        "scorer": "Persona self-report via task controller",
+        "scorer": "PersonaEval self-report scorer",
         "cache": "Docker image + model cache volumes",
         "ranker": "application-specific ranking / tool selection",
         "resources": "adapter-specific resources",
         "agent": "chatbot application adapter",
         "promptOwnership": {
-            "personaSystemPrompt": "Harbor native persona injection",
+            "personaSystemPrompt": "Persona prompt from task runtime",
             "taskPrompt": "Application-provided chatbot simulation prompt",
         },
     }

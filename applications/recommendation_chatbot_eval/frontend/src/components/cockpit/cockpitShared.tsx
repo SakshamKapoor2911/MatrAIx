@@ -1,5 +1,5 @@
 /**
- * Shared primitives + honest-data helpers for the Persona Eval cockpit.
+ * Shared primitives + honest-data helpers for the PersonaEval cockpit.
  *
  * The cockpit ports `tools/recbot-mockups/cockpit-stitch-v2.html` into React.
  * The mockup shows rich, structured persona fields (a descriptive title,

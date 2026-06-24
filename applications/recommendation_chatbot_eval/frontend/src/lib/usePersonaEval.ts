@@ -1,12 +1,12 @@
 /**
- * `usePersonaEval` — drive a persona-driven "Persona Eval" run from the UI.
+ * `usePersonaEval` — drive a persona-driven PersonaEval run from the UI.
  *
- * A persona-eval is an async job: the persona agent drives a live multi-turn
- * conversation against the real native RecAI, and the job's state grows as
+ * A PersonaEval run is an async job: the simulated user drives a live multi-turn
+ * conversation against the selected chatbot application, and the job's state grows as
  * turns stream in (and finally carries the evaluator's questionnaire +
  * metrics). This hook encapsulates the lifecycle:
  *
- *   1. `run({ domain, personaId, maxTurns? })` POSTs the run -> `{ jobId }`.
+ *   1. `run({ applicationId, applicationContext, personaId, maxTurns? })` POSTs the run -> `{ jobId }`.
  *   2. It then polls `GET /api/persona-eval/jobs/{jobId}` on an interval.
  *   3. It exposes the growing `PersonaEvalJobView` (with its accumulating
  *      `turns`), a flattened phase (`idle | building | running | done |
@@ -41,7 +41,7 @@ const MAX_POLL_DURATION_MS = 15 * 60_000;
 
 /** Input accepted by `run` (mirrors the `startPersonaEval` request body). */
 export interface RunPersonaEvalInput {
-  domain: Domain;
+  domain?: Domain;
   applicationId?: ApplicationId;
   applicationContext?: string;
   personaId: string;
@@ -49,7 +49,7 @@ export interface RunPersonaEvalInput {
   goalContextId?: string;
   /** Chat model driving the RecBot application. */
   engine?: Engine;
-  /** Harbor model driving the persona agent. */
+  /** PersonaEval model driving the simulated user. */
   personaModel?: PersonaModel;
 }
 
@@ -115,7 +115,7 @@ export function usePersonaEval(): UsePersonaEvalResult {
       setPollStartedAt(Date.now());
     },
     onError: (err: unknown) => {
-      setStartError(err instanceof Error ? err.message : "Failed to start persona eval");
+      setStartError(err instanceof Error ? err.message : "Failed to start PersonaEval");
     },
   });
 
@@ -168,7 +168,7 @@ export function usePersonaEval(): UsePersonaEvalResult {
   const error =
     startError ??
     job?.error ??
-    (timedOut ? "The persona eval is taking too long — the backend may be stuck." : null);
+    (timedOut ? "The PersonaEval run is taking too long — the backend may be stuck." : null);
 
   const run = useCallback(
     (input: RunPersonaEvalInput) => {

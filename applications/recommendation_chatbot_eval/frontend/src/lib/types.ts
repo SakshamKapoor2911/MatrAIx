@@ -1,5 +1,5 @@
 /**
- * TypeScript mirror of the RecBot Studio API contract.
+ * TypeScript mirror of the PersonaEval API contract.
  *
  * These types track the FastAPI pydantic models in `harness/api/schemas.py`
  * and the service-layer view objects (TurnView, Session, CatalogItem). Keep
@@ -70,9 +70,9 @@ export interface ConfigKnob {
 }
 
 /**
- * Read-only prompt ownership facts for Harbor-backed persona eval runs.
- * Harbor injects the persona identity as the system prompt; this application
- * supplies the chatbot simulation task prompt.
+ * Read-only prompt ownership facts for PersonaEval runs.
+ * The task runtime loads the persona prompt; this application supplies the
+ * chatbot simulation task prompt.
  */
 export interface PromptOwnership {
   personaSystemPrompt: string;
@@ -283,7 +283,7 @@ export interface CatalogSearchParams {
 }
 
 // ---------------------------------------------------------------------------
-// Persona Eval (persona-driven live evaluation)
+// PersonaEval (persona-driven live evaluation)
 // ---------------------------------------------------------------------------
 
 /**
@@ -346,7 +346,7 @@ export interface GoalContextsResponse {
 
 /** Body for `POST /api/persona-eval`. */
 export interface StartPersonaEvalBody {
-  domain: Domain;
+  domain?: Domain;
   applicationId?: ApplicationId;
   applicationContext?: string;
   personaId: string;
@@ -358,7 +358,7 @@ export interface StartPersonaEvalBody {
    */
   engine?: Engine;
   /**
-   * The Harbor persona-agent model driving the simulated user.
+   * The PersonaEval persona model driving the simulated user.
    * Omitted -> the backend falls back to its local Harbor default.
    */
   personaModel?: PersonaModel;
@@ -411,7 +411,7 @@ export interface PersonaEvalPrompts {
  */
 export interface PersonaEvalJobView {
   jobId: string;
-  domain: Domain;
+  domain: string;
   applicationId?: ApplicationId | null;
   applicationContext?: string | null;
   personaId: string;
@@ -441,7 +441,7 @@ export interface PersonaEvalJobView {
 export interface PersonaEvalRunSummary {
   id: string;
   createdAt?: string | null;
-  domain?: Domain | null;
+  domain?: string | null;
   personaName?: string | null;
   source?: string | null;
   goalContextId?: string | null;

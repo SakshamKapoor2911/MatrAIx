@@ -814,7 +814,7 @@ def build_result_from_harbor_artifacts(
     created_at: str,
     prompts: Optional[Dict[str, Any]] = None,
 ) -> HarborPersonaEvalResult:
-    """Map Harbor task artifacts into the existing Persona Eval UI result."""
+    """Map Harbor task artifacts into the existing PersonaEval UI result."""
     transcript = _read_json(output_dir / "transcript.json")
     recommendation = _read_json(_application_result_path(output_dir))
     feedback_path = _feedback_path(output_dir)

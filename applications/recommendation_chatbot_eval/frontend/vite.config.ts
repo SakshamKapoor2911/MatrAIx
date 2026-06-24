@@ -3,7 +3,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
 /**
- * Vite config for the RecBot Studio SPA.
+ * Vite config for the PersonaEval SPA.
  *
  * - React plugin (Fast Refresh + JSX).
  * - `@` path alias -> `src/` (mirrors the `paths` entry in tsconfig.json so

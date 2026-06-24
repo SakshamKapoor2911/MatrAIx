@@ -135,10 +135,10 @@ def test_config_options(client):
     assert body["environment"]["resources"] == "adapter-specific resources"
     assert body["environment"]["agent"] == "chatbot application adapter"
     assert body["environment"]["personaModel"] == "anthropic/claude-haiku-4-5"
-    assert body["environment"]["scorer"] == "Persona self-report via task controller"
+    assert body["environment"]["scorer"] == "PersonaEval self-report scorer"
     assert "application-specific" in body["environment"]["ranker"]
     assert body["environment"]["promptOwnership"] == {
-        "personaSystemPrompt": "Harbor native persona injection",
+        "personaSystemPrompt": "Persona prompt from task runtime",
         "taskPrompt": "Application-provided chatbot simulation prompt",
     }
 

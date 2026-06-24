@@ -1,10 +1,16 @@
 from __future__ import annotations
 
+import inspect
 from typing import Any, Dict, Mapping, Optional
 
 from fastapi.testclient import TestClient
 
 from harbor_api import router_server
+
+
+def test_router_message_endpoints_are_sync_to_keep_blocking_upstream_off_event_loop():
+    assert not inspect.iscoroutinefunction(router_server.create_session)
+    assert not inspect.iscoroutinefunction(router_server.send_message)
 
 
 def test_router_remembers_application_for_followup_messages(monkeypatch):

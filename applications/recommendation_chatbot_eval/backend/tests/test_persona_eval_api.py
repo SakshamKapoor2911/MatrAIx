@@ -300,6 +300,26 @@ def test_start_persona_eval_forwards_application_selection(client, fake_persona_
     }
 
 
+def test_start_finance_persona_eval_does_not_require_recai_domain(client, fake_persona_eval):
+    resp = client.post(
+        "/api/persona-eval",
+        json={
+            "applicationId": "finance_openbb",
+            "applicationContext": "financial_research",
+            "personaId": "game-lapsed-coop",
+        },
+    )
+
+    assert resp.status_code == 200, resp.text
+    assert fake_persona_eval.started == [
+        ("financial_research", "game-lapsed-coop", 8, "scenario_default")
+    ]
+    assert fake_persona_eval.started_application == {
+        "applicationId": "finance_openbb",
+        "applicationContext": "financial_research",
+    }
+
+
 def test_start_persona_eval_defaults_engine_when_omitted(client, fake_persona_eval):
     # An omitted engine falls back to the canonical config default so existing
     # behavior is unchanged.

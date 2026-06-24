@@ -94,13 +94,13 @@ export function ComponentPipeline({
   const persona = personaStatus(phase, rawPhase, hasPersona);
   const chatbot = chatbotStatus(phase, rawPhase, turnCount);
   const scorer = scorerStatus(phase, rawPhase, hasQuestionnaire);
-  const personaPromptOwner = environment?.promptOwnership.personaSystemPrompt ?? "Harbor native persona injection";
+  const personaPromptOwner = environment?.promptOwnership.personaSystemPrompt ?? "Persona prompt from task runtime";
 
   const nodes: PipelineNode[] = [
     {
       key: "persona",
       label: "Persona",
-      owner: environment?.personaAgent ?? "Harbor persona-claude-code",
+      owner: environment?.personaAgent ?? "PersonaEval task controller",
       detail: `${personaModel || environment?.personaModel || "anthropic/claude-haiku-4-5"} · ${personaPromptOwner}`,
       icon: "badge",
       ...persona,
@@ -116,7 +116,7 @@ export function ComponentPipeline({
     {
       key: "scorer",
       label: "Scorer",
-      owner: environment?.scorer ?? "Persona self-report via task controller",
+      owner: environment?.scorer ?? "PersonaEval self-report scorer",
       detail: "persona_self_report.json -> user_feedback.json",
       icon: "fact_check",
       ...scorer,

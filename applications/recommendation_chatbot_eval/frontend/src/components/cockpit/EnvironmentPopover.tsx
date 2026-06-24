@@ -47,10 +47,10 @@ export function EnvironmentPopover({ environment }: EnvironmentPopoverProps) {
   const runtime = environment?.runtime ?? "Harbor";
   const runtimeRows: Array<{ label: string; value: string }> = [
     { label: "Runtime", value: runtime },
-    { label: "Persona", value: environment?.personaAgent ?? "Harbor persona-claude-code" },
+    { label: "Persona", value: environment?.personaAgent ?? "PersonaEval task controller" },
     { label: "Persona default", value: environment?.personaModel ?? "anthropic/claude-haiku-4-5" },
     { label: "Chatbot API", value: environment?.applicationApi ?? "chatbot-api sidecar" },
-    { label: "Scorer", value: environment?.scorer ?? "Persona self-report via task controller" },
+    { label: "Scorer", value: environment?.scorer ?? "PersonaEval self-report scorer" },
     { label: "Cache", value: environment?.cache ?? "Docker image + model cache volumes" },
   ];
   const stackRows: Array<{ label: string; value: string }> = [
@@ -59,7 +59,7 @@ export function EnvironmentPopover({ environment }: EnvironmentPopoverProps) {
     { label: "Agent", value: environment?.agent ?? "chatbot application adapter" },
   ];
   const promptOwnership = environment?.promptOwnership ?? {
-    personaSystemPrompt: "Harbor native persona injection",
+    personaSystemPrompt: "Persona prompt from task runtime",
     taskPrompt: "Application-provided chatbot simulation prompt",
   };
   const promptRows: Array<{ label: string; value: string }> = [
@@ -105,7 +105,7 @@ export function EnvironmentPopover({ environment }: EnvironmentPopoverProps) {
           <div className="mt-3 border-t border-border-soft pt-3">
             <p className="mb-2 flex items-center gap-1 text-[11px] font-medium uppercase tracking-wider text-on-surface-variant">
               <Sym name="storage" size={13} />
-              RecAI stack
+              Application stack
             </p>
             <div className="space-y-2">
               {stackRows.map((r) => (

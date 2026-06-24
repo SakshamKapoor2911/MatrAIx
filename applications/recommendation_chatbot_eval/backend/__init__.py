@@ -1,4 +1,4 @@
-"""RecBot Studio backend.
+"""PersonaEval backend.
 
 A developer/research harness that wraps the in-process RecAI movie
 recommendation chatbot (``recbot.interecagent_bridge``) with a small service

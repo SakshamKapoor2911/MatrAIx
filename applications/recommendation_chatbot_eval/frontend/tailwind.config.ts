@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
 
 /**
- * Tailwind theme for RecBot Studio — the "Executive Precision" design system
+ * Tailwind theme for PersonaEval — the "Executive Precision" design system
  * (see `DESIGN.md` for the authoritative token values, and
  * `tools/recbot-mockups/cockpit-stitch-v2.html` for the approved cockpit).
  *

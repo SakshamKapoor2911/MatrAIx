@@ -1,18 +1,20 @@
-# RecBot Studio
+# PersonaEval
 
-A workbench for **testing and evaluating a conversational recommender agent**.
-The agent ("RecBot") is Microsoft RecAI's in-process *InteRecAgent* running over a
-native SASRec ranker and a real item catalog (movies, beauty products, games).
+PersonaEval is a workbench for **testing and evaluating interactive chatbot
+applications with simulated persona users**. The current app adapters include a
+RecAI / InteRecAgent recommender over real item catalogs (movies, beauty
+products, games) and a finance research chatbot backed by OpenBB-style tools.
 
-RecBot Studio gives you two surfaces over that agent, in one web app:
+PersonaEval gives you two surfaces over those applications, in one web app:
 
-- **Chat** — you talk to RecBot turn by turn and inspect, per turn, its tool
+- **Chat** — you talk to the selected chatbot turn by turn and inspect its tool
   plan, the ranked candidates, and the raw model action. For interactive
   debugging.
-- **Persona Eval** — pick a persona from a catalog of 336, set the run knobs,
+- **PersonaEval** — pick a persona from a catalog of 336, set the run knobs,
   and an LLM "user simulator" drives a full multi-turn conversation against
-  RecBot on its own, then scores the result (overall rating + per-dimension +
-  transcript). Fully headless-capable, so it can run inside a harness.
+  the application on its own, then scores the result (overall rating +
+  per-dimension + transcript). Fully headless-capable, so it can run inside a
+  harness.
 
 The frontend is a React/Vite SPA; the backend is a FastAPI app that also serves
 the built SPA, so the whole thing runs at a single origin.
@@ -94,7 +96,7 @@ served at **`/docs`** when the app is running.
 | **Catalog** | | |
 | GET | `/api/catalog/search` | Search a domain's catalog (`q`, `genre`, `limit`, `domain`). |
 | GET | `/api/catalog/items/{id}` | Fetch one catalog item (`domain`). |
-| **Persona Eval** | | |
+| **PersonaEval** | | |
 | GET | `/api/persona-eval/personas` | List the persona catalog (`q`, `limit`). |
 | GET | `/api/persona-eval/personas/{id}` | One persona's full humanized profile. |
 | GET | `/api/persona-eval/goal-contexts` | Selectable conversation styles. |
@@ -107,8 +109,8 @@ served at **`/docs`** when the app is running.
 
 ## Harbor application task
 
-The Harbor-facing adapter lives in `harbor_api/`. It wraps the same RecBot
-service layer behind a smaller synchronous REST contract for persona agents:
+The Harbor-facing adapter lives in `harbor_api/`. It wraps each chatbot
+application behind a smaller synchronous REST contract for persona agents:
 
 | Method | Path | Purpose |
 |---|---|---|

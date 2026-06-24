@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# run_dev.sh — start the RecBot Studio backend (FastAPI + uvicorn) for local dev.
+# run_dev.sh — start the PersonaEval backend (FastAPI + uvicorn) for local dev.
 #
 # This launches the API only. The Vite dev server for the React SPA is run
 # separately (see the note at the bottom), and proxies `/api` to this process.

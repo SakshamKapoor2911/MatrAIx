@@ -14,10 +14,9 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
-from json import JSONDecodeError
 from typing import Any, Dict, Mapping, Optional
 
-from fastapi import FastAPI, HTTPException, Query, Request
+from fastapi import Body, FastAPI, HTTPException, Query
 
 DEFAULT_APPLICATION_ID = "recai"
 FINANCE_APPLICATION_ID = "finance_openbb"
@@ -173,14 +172,12 @@ def _application_views() -> list[Dict[str, Any]]:
 app = FastAPI(title="MatrAIx Chatbot Application Router", version="1.0")
 
 
-async def _json_body(request: Request) -> Dict[str, Any]:
-    try:
-        body = await request.json()
-    except JSONDecodeError as exc:
-        raise HTTPException(status_code=422, detail="request body must be valid JSON") from exc
+def _json_body(body: Optional[Mapping[str, Any]]) -> Dict[str, Any]:
+    if body is None:
+        return {}
     if not isinstance(body, dict):
         raise HTTPException(status_code=422, detail="request body must be an object")
-    return body
+    return dict(body)
 
 
 @app.get("/health")
@@ -214,8 +211,10 @@ def ready(
 
 
 @app.post("/v1/session")
-async def create_session(request: Request) -> Dict[str, Any]:
-    body = await _json_body(request)
+def create_session(
+    body_payload: Optional[Dict[str, Any]] = Body(default=None),
+) -> Dict[str, Any]:
+    body = _json_body(body_payload)
     application_id = _application_from_body(body)
     payload = _request_json(
         application_id=application_id,
@@ -228,8 +227,10 @@ async def create_session(request: Request) -> Dict[str, Any]:
 
 
 @app.post("/v1/messages")
-async def send_message(request: Request) -> Dict[str, Any]:
-    body = await _json_body(request)
+def send_message(
+    body_payload: Optional[Dict[str, Any]] = Body(default=None),
+) -> Dict[str, Any]:
+    body = _json_body(body_payload)
     application_id = _application_from_body(body)
     payload = _request_json(
         application_id=application_id,

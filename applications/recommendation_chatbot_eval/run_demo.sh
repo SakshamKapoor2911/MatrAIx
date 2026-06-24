@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Start RecBot Studio: serves the API + the built SPA at http://HOST:PORT
+# Start PersonaEval: serves the API + the built SPA at http://HOST:PORT
 # (single origin). Ctrl-C to stop.
 #
 #   ./run_demo.sh                  # uses `python` on PATH (activate your venv first)

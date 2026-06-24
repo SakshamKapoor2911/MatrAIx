@@ -1,21 +1,21 @@
 /**
  * TopBar — the fixed application header.
  *
- * Ports the approved cockpit nav (`cockpit-stitch-v2.html`): the "RecBot Studio"
+ * Ports the approved cockpit nav (`cockpit-stitch-v2.html`): the "PersonaEval"
  * brand lockup + ⌘K search on the left, the two top-level surfaces
- * (`Chat | Persona Eval`) as a primary-underlined tab row in the middle, and a
+ * (`Chat | PersonaEval`) as a primary-underlined tab row in the middle, and a
  * right-aligned cluster (the readiness chip + — in Chat — the Export / Save /
  * New-session actions).
  *
  * There are exactly two surfaces: the separate "Runs" top-mode is gone — Runs
- * history + Compare now live INSIDE Persona Eval. The Chat config knobs live in
+ * history + Compare now live INSIDE PersonaEval. The Chat config knobs live in
  * a dedicated bar below the header (see `ChatConfigBar`), not in this row, so the
  * nav stays clean at every width.
  */
 import { PreflightChip } from "./PreflightChip";
 import { FOCUS_RING, Sym } from "./cockpit/cockpitShared";
 
-/** The two top-level surfaces. Runs live inside Persona Eval, not up here. */
+/** The two top-level surfaces. Runs live inside PersonaEval, not up here. */
 export type StudioMode = "normal" | "persona-eval";
 
 export interface TopBarProps {
@@ -29,7 +29,7 @@ export interface TopBarProps {
   saving?: boolean;
   /** Whether session-scoped actions (Export/Save) are available. */
   hasSession: boolean;
-  /** Active surface (Chat vs. Persona Eval). */
+  /** Active surface (Chat vs. PersonaEval). */
   mode: StudioMode;
   /** Switch the surface. */
   onModeChange: (mode: StudioMode) => void;
@@ -40,7 +40,7 @@ export interface TopBarProps {
 /** The two surfaces, with labels for the nav row. */
 const MODES: ReadonlyArray<{ value: StudioMode; label: string }> = [
   { value: "normal", label: "Chat" },
-  { value: "persona-eval", label: "Persona Eval" },
+  { value: "persona-eval", label: "PersonaEval" },
 ];
 
 export function TopBar({
@@ -53,7 +53,7 @@ export function TopBar({
   onModeChange,
   onOpenSearch,
 }: TopBarProps) {
-  // The session actions belong to Chat only. Persona Eval owns its own actions
+  // The session actions belong to Chat only. PersonaEval owns its own actions
   // inside the cockpit.
   const showSessionTools = mode === "normal";
 
@@ -62,7 +62,7 @@ export function TopBar({
       {/* Brand + ⌘K search */}
       <div className="flex flex-shrink-0 items-center gap-md">
         <span className="whitespace-nowrap text-headline-md font-headline-md font-bold tracking-[-0.01em] text-primary">
-          RecBot Studio
+          PersonaEval
         </span>
         <button
           type="button"
@@ -78,8 +78,8 @@ export function TopBar({
         </button>
       </div>
 
-      {/* Two surfaces: Chat | Persona Eval (primary-underlined tabs) */}
-      <nav className="flex h-full flex-shrink-0 items-end gap-lg" aria-label="Studio surface">
+      {/* Two surfaces: Chat | PersonaEval (primary-underlined tabs) */}
+      <nav className="flex h-full flex-shrink-0 items-end gap-lg" aria-label="Application surface">
         {MODES.map(({ value, label }) => {
           const active = value === mode;
           return (

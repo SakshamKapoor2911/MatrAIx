@@ -302,6 +302,7 @@ class FinanceSession:
     messages: List[Dict[str, str]] = field(default_factory=list)
     turns: List[Dict[str, Any]] = field(default_factory=list)
     created_at: str = field(default_factory=_utc_now)
+    turn_lock: Any = field(default_factory=threading.Lock, repr=False)
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -361,26 +362,33 @@ class FinanceChatService:
         if not user_text:
             raise ValueError("message must not be empty")
 
-        with self._guard:
-            messages = [dict(existing) for existing in session.messages]
-            messages.append({"role": "user", "content": user_text})
-
-        runner_messages = self._messages_for_runner(messages)
+        acquired = False
+        await asyncio.to_thread(session.turn_lock.acquire)
+        acquired = True
         try:
-            result = await self.runner.run(messages=runner_messages, config=self.config)
-        except RuntimeError:
-            raise
-        except Exception as exc:
-            raise RuntimeError("Finance application failed: {}".format(exc)) from exc
-        turn = self._build_turn(session, user_text, result)
+            with self._guard:
+                messages = [dict(existing) for existing in session.messages]
+                messages.append({"role": "user", "content": user_text})
 
-        with self._guard:
-            session.messages.append({"role": "user", "content": user_text})
-            session.messages.append(
-                {"role": "assistant", "content": result.assistant_message}
-            )
-            session.turns.append(turn)
-        return dict(turn)
+            runner_messages = self._messages_for_runner(messages)
+            try:
+                result = await self.runner.run(messages=runner_messages, config=self.config)
+            except RuntimeError:
+                raise
+            except Exception as exc:
+                raise RuntimeError("Finance application failed: {}".format(exc)) from exc
+            turn = self._build_turn(session, user_text, result)
+
+            with self._guard:
+                session.messages.append({"role": "user", "content": user_text})
+                session.messages.append(
+                    {"role": "assistant", "content": result.assistant_message}
+                )
+                session.turns.append(turn)
+            return dict(turn)
+        finally:
+            if acquired:
+                session.turn_lock.release()
 
     def _build_turn(
         self, session: FinanceSession, user_message: str, result: AgentResult
@@ -500,7 +508,9 @@ class FinanceOpenBBApplication:
         engine: Optional[str],
         bot_type: Optional[str],
     ) -> Dict[str, Any]:
-        del title, context, engine, bot_type
+        del title, engine, bot_type
+        if context != self.default_context:
+            raise HTTPException(status_code=422, detail="unknown applicationContext")
         try:
             turn = asyncio.run(
                 self.service.chat(message=message, session_id=session_id)

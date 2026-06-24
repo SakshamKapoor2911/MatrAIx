@@ -1,7 +1,7 @@
 /**
- * RunsView — the Runs history surface, folded inside Persona Eval.
+ * RunsView — the Runs history surface, folded inside PersonaEval.
  *
- * Rendered below the TopBar when the Persona Eval runs sub-view is active. The
+ * Rendered below the TopBar when the PersonaEval runs sub-view is active. The
  * sub-route is driven entirely by the URL (via App's handlers):
  *
  *   view=runs (no `run`)           → the LIST (this file)
@@ -319,7 +319,7 @@ function ListEmpty({ onClose }: { onClose: () => void }) {
       </div>
       <h2 className="text-headline-md font-headline-md text-on-surface">No runs yet</h2>
       <p className="mx-auto mt-2 max-w-md text-body-md leading-relaxed text-on-surface-variant">
-        Launch a persona eval from the cockpit. Completed runs land here, newest first — ready to
+        Launch a PersonaEval run from the cockpit. Completed runs land here, newest first — ready to
         open or compare side by side.
       </p>
       <button

@@ -1,4 +1,4 @@
-"""Service layer for RecBot Studio.
+"""Service layer for PersonaEval.
 
 Pure-Python (stdlib + optional FastAPI/pydantic at the API layer only) building
 blocks that sit between the FastAPI app and the existing in-process
@@ -7,7 +7,7 @@ blocks that sit between the FastAPI app and the existing in-process
 * :class:`~backend.service.catalog_index.CatalogIndex` -- loads the normalized
   catalog ``items.jsonl`` with stdlib ``json`` (no pandas/numpy) and offers
   cheap search / lookup.
-* :class:`~backend.service.config.ConfigManager` -- validates Studio config and
+* :class:`~backend.service.config.ConfigManager` -- validates PersonaEval config and
   maps it to ``INTERECAGENT_*`` environment variables.
 * :class:`~backend.service.trace_view.TraceView` -- turns a raw
   ``RecBotTurnResult`` dict into the ``TurnView`` the UI renders.

@@ -1,5 +1,5 @@
 /**
- * RecBot Studio — application shell.
+ * PersonaEval — application shell.
  *
  * Wires the locked three-pane Workbench (top bar · session rail · chat · turn
  * inspector) to the typed API client and TanStack Query. App owns the small
@@ -81,7 +81,7 @@ export default function App() {
   const mode = parseMode(urlState.mode);
   const activeId = urlState.session;
   const activeTurnIndex = parseTurnIndex(urlState.turn);
-  // Runs now live INSIDE Persona Eval. The runs sub-view is URL-driven:
+  // Runs now live inside PersonaEval. The runs sub-view is URL-driven:
   //   view=runs                  → the runs history list
   //   run set                    → that run's detail
   //   run + compareWith          → the side-by-side compare
@@ -97,7 +97,7 @@ export default function App() {
   // catalog drawer browses the same domain in that surface.
   const [pevalDomain, setPevalDomain] = useState<Domain>("movie");
 
-  // --- Runs navigation handlers (Persona Eval → Runs sub-view) ------------
+  // --- Runs navigation handlers (PersonaEval -> Runs sub-view) ------------
   const openRunsList = useCallback(() => {
     setUrlState({ view: "runs", run: null, compareWith: null });
   }, [setUrlState]);
@@ -124,7 +124,7 @@ export default function App() {
   const setMode = useCallback(
     (next: StudioMode) => {
       // Switching surface always lands on the surface's primary view (clears any
-      // runs sub-view so Persona Eval opens on the cockpit, not the runs list).
+      // runs sub-view so PersonaEval opens on the cockpit, not the runs list).
       setUrlState({
         mode: next === "normal" ? null : next,
         view: null,
@@ -347,7 +347,7 @@ export default function App() {
     />
   );
 
-  // Persona Eval is a FULL-WIDTH three-column cockpit (catalog · centre ·
+  // PersonaEval is a full-width three-column cockpit (catalog · centre ·
   // inspector); its Runs sub-view (history list / detail / compare) renders
   // full-width too. Like the Chat workbench, it's a flex column with the TopBar
   // above the surface.

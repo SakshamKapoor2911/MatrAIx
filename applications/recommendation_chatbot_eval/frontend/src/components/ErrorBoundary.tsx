@@ -33,7 +33,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
     // Surface the crash for local debugging; in a research tool the console is
     // the operator's primary log.
     // eslint-disable-next-line no-console
-    console.error("RecBot Studio crashed:", error, info.componentStack);
+    console.error("PersonaEval crashed:", error, info.componentStack);
   }
 
   private handleReset = (): void => {
@@ -56,7 +56,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
             <h1 className="text-headline-md font-headline-md text-on-surface">Something went wrong</h1>
           </div>
           <p className="mt-2 text-body-md leading-relaxed text-on-surface-variant">
-            The Studio hit an unexpected error and stopped rendering. Your data is safe — you can
+            PersonaEval hit an unexpected error and stopped rendering. Your data is safe — you can
             recover the view or reload the app.
           </p>
           {error.message && (

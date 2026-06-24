@@ -1,4 +1,4 @@
-"""Test package for the RecBot Studio backend (service + API).
+"""Test package for the PersonaEval backend (service + API).
 
 These tests exercise the pure-python service layer
 (:mod:`backend.service`) and the FastAPI app (:mod:`backend.api`) **without**

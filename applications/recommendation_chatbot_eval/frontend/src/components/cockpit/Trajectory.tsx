@@ -162,7 +162,7 @@ export function Trajectory({
               <div className="min-w-0 flex-1">
                 <h4 className="text-body-md font-semibold text-on-surface">This run didn&apos;t finish</h4>
                 <p className="mt-1 break-words text-body-sm leading-relaxed text-on-surface-variant">
-                  {error ?? "The persona eval stopped unexpectedly. Your configuration is unchanged."}
+                  {error ?? "The PersonaEval run stopped unexpectedly. Your configuration is unchanged."}
                 </p>
                 <button
                   type="button"

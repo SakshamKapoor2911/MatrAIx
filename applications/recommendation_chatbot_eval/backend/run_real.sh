@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# run_real.sh -- launch RecBot Studio API in REAL mode (in-repo InteRecAgent + OpenAI).
+# run_real.sh -- launch PersonaEval API in REAL mode (in-repo InteRecAgent + OpenAI).
 #
 # Thin wrapper over run_dev.sh: it pins the REAL-mode knobs (native ranker,
 # recai_resources resource mode), then hands off to run_dev.sh which loads

@@ -2,7 +2,7 @@
  * `useUrlState` — the single source of truth for the cross-pane view state that
  * should survive a refresh and be shareable by link.
  *
- * The Studio's coarse navigation — which `mode` is active, which `session` is
+ * PersonaEval's coarse navigation — which `mode` is active, which `session` is
  * open, which `turn` is focused, and which persisted `run` is being inspected —
  * lives in the URL's query string (via `history.replaceState`, so it never adds
  * history entries) with a `localStorage` mirror. On a cold load with an empty
@@ -17,11 +17,11 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 /** The view state we persist to the URL + localStorage. */
 export interface UrlState {
-  /** Active workbench mode (manual chat vs. persona-driven persona eval). */
+  /** Active workbench mode (manual chat vs. PersonaEval). */
   mode: string | null;
   /**
-   * The sub-view within Persona Eval. `"runs"` opens the Runs history (folded
-   * inside Persona Eval); anything else (null) shows the cockpit. A `run` /
+   * The sub-view within PersonaEval. `"runs"` opens the Runs history (folded
+   * inside PersonaEval); anything else (null) shows the cockpit. A `run` /
    * `compareWith` selection implies the runs sub-view too.
    */
   view: string | null;

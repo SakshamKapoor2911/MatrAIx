@@ -1,4 +1,4 @@
-"""The RecBot Studio FastAPI application.
+"""The PersonaEval FastAPI application.
 
 This wires the pure-python service layer (:mod:`backend.service`) into a single
 HTTP app and implements every endpoint of the API contract. It is intentionally
@@ -319,9 +319,9 @@ def create_app(catalog_path: Optional[str] = None) -> FastAPI:
             state.shutdown()
 
     app = FastAPI(
-        title="RecBot Studio API",
+        title="PersonaEval API",
         version="0.1.0",
-        summary="Developer harness API for the InteRecAgent movie chatbot.",
+        summary="Developer harness API for persona-driven chatbot evaluation.",
         lifespan=lifespan,
     )
     app.state.services = state
@@ -421,7 +421,7 @@ def create_app(catalog_path: Optional[str] = None) -> FastAPI:
         session = services.manager.get(session_id)
         if session is None:
             raise HTTPException(status_code=404, detail="session not found")
-        filename = "recbot-studio-{}.json".format(session.id)
+        filename = "personaeval-{}.json".format(session.id)
         return JSONResponse(
             content=session.to_dict(),
             headers={
@@ -497,7 +497,7 @@ def create_app(catalog_path: Optional[str] = None) -> FastAPI:
             raise HTTPException(status_code=404, detail="item not found")
         return catalog_item_view(item)
 
-    # ---------------------------- persona eval --------------------------- #
+    # ---------------------------- PersonaEval ---------------------------- #
     @app.get(
         "/api/persona-eval/personas",
         response_model=schemas.PersonaEvalPersonasResponse,
@@ -592,9 +592,10 @@ def create_app(catalog_path: Optional[str] = None) -> FastAPI:
         # defaults so existing callers keep working.
         engine = body.engine or ConfigManager.DEFAULTS["engine"]
         persona_model = body.personaModel or harbor_persona_model()
+        run_domain = body.domain or body.applicationContext or ConfigManager.DEFAULTS["domain"]
         try:
             job_id = services.persona_eval.start(
-                body.domain,
+                run_domain,
                 body.personaId,
                 body.maxTurns,
                 body.goalContextId or "scenario_default",

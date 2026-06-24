@@ -1,5 +1,5 @@
 /**
- * Typed fetch client for the RecBot Studio API.
+ * Typed fetch client for the PersonaEval API.
  *
  * One thin function per endpoint in the FastAPI contract (prefix `/api`).
  * In development, Vite proxies `/api` to the FastAPI app on port 8765
@@ -198,7 +198,7 @@ export function getCatalogItem(itemId: string, domain?: string): Promise<Catalog
 }
 
 // ---------------------------------------------------------------------------
-// Persona Eval (persona-driven live evaluation)
+// PersonaEval (persona-driven live evaluation)
 // ---------------------------------------------------------------------------
 
 /** Start a persona-eval run; returns immediately with a `jobId` to poll. */

@@ -112,15 +112,15 @@ def test_options_environment_block(config_manager):
         "promptOwnership",
     }
     assert env["runtime"] == "Harbor"
-    assert env["personaAgent"] == "Harbor persona-claude-code"
+    assert env["personaAgent"] == "PersonaEval task controller"
     assert env["personaModel"] == "anthropic/claude-haiku-4-5"
     assert env["applicationApi"] == "chatbot-api sidecar"
-    assert env["scorer"] == "Persona self-report via task controller"
+    assert env["scorer"] == "PersonaEval self-report scorer"
     assert env["cache"] == "Docker image + model cache volumes"
     assert "application-specific" in env["ranker"]
     assert "adapter-specific" in env["resources"]
     assert "chatbot application adapter" in env["agent"]
     assert env["promptOwnership"] == {
-        "personaSystemPrompt": "Harbor native persona injection",
+        "personaSystemPrompt": "Persona prompt from task runtime",
         "taskPrompt": "Application-provided chatbot simulation prompt",
     }

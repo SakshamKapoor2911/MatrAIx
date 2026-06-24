@@ -1,4 +1,4 @@
-"""Process-wide service singletons for the RecBot Studio API.
+"""Process-wide service singletons for the PersonaEval API.
 
 The architecture runs a **single** uvicorn worker (the cached RecAI agent and
 the in-memory job registry are module globals — multiple workers would each

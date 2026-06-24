@@ -1,7 +1,7 @@
 /**
- * PersonaEvalCockpit — the Persona Eval surface (ports cockpit-stitch-v2.html).
+ * PersonaEvalCockpit — the PersonaEval surface (ports cockpit-stitch-v2.html).
  *
- * The full three-column cockpit (the Persona Eval surface):
+ * The full three-column cockpit (the PersonaEval surface):
  *   - LEFT   `PersonaCatalog` — the curated persona catalog;
  *   - CENTRE `RunHeader` + `RunConfigBar` + `Trajectory` — the run identity, the
  *     editable knobs / fixed-environment facts, and the pure conversation;
@@ -60,7 +60,7 @@ function liveStatusLine(
     return "Chatbot application is thinking…";
   if (raw.includes("eval")) return "Scoring the conversation…";
   if (job?.phase) return `${job.phase}…`;
-  return "Running the persona eval…";
+  return "Running the PersonaEval…";
 }
 
 /** True when focus is in a text input / textarea / select / contenteditable. */
@@ -81,7 +81,7 @@ interface ExportSnapshot {
   config: {
     applicationId: ApplicationId;
     applicationContext: string;
-    domain: Domain;
+    domain?: Domain;
     engine: string;
     personaModel: string;
     goalContextId: string | null;
@@ -136,6 +136,7 @@ export function PersonaEvalCockpit({ options, onOpenRuns, onDomainChange }: Pers
   }, [domain, onDomainChange]);
 
   const applicationContext = applicationId === "finance_openbb" ? "financial_research" : domain;
+  const requestDomain = applicationId === "recai" ? domain : undefined;
 
   // --- Goal contexts (the "Conversation style" knob) ----------------------
   const goalContextsQuery = useQuery<GoalContextsResponse>({
@@ -159,14 +160,14 @@ export function PersonaEvalCockpit({ options, onOpenRuns, onDomainChange }: Pers
       config: {
         applicationId,
         applicationContext,
-        domain,
+        domain: requestDomain,
         engine,
         personaModel,
         goalContextId: goalContextId ?? activeGoalContext?.id ?? null,
         maxTurns,
       },
     }),
-    [persona, applicationId, applicationContext, domain, engine, personaModel, goalContextId, activeGoalContext, maxTurns],
+    [persona, applicationId, applicationContext, requestDomain, engine, personaModel, goalContextId, activeGoalContext, maxTurns],
   );
   const liveControlsRef = useRef(liveControls);
   liveControlsRef.current = liveControls;
@@ -205,7 +206,7 @@ export function PersonaEvalCockpit({ options, onOpenRuns, onDomainChange }: Pers
     setFocusedTurnIndex(null);
     setExportSnapshot(null);
     run({
-      domain,
+      domain: requestDomain,
       applicationId,
       applicationContext,
       personaId: persona.id,
@@ -214,7 +215,7 @@ export function PersonaEvalCockpit({ options, onOpenRuns, onDomainChange }: Pers
       engine: engine as Engine,
       personaModel: personaModel as PersonaModel,
     });
-  }, [persona, isRunning, run, domain, applicationId, applicationContext, goalContextId, maxTurns, engine, personaModel]);
+  }, [persona, isRunning, run, requestDomain, applicationId, applicationContext, goalContextId, maxTurns, engine, personaModel]);
 
   const handleRetry = useCallback(() => {
     if (timedOut || phase === "error") retry();

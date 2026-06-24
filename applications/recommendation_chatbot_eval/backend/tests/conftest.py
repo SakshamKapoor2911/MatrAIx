@@ -1,4 +1,4 @@
-"""Shared pytest fixtures for the RecBot Studio backend tests.
+"""Shared pytest fixtures for the PersonaEval backend tests.
 
 This module does three load-bearing things so the whole suite runs with **no**
 RecAI / OpenAI / numpy / pandas / network present:

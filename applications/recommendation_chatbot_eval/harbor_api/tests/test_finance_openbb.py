@@ -3,6 +3,9 @@ from __future__ import annotations
 import asyncio
 from typing import Dict, List
 
+import pytest
+from fastapi import HTTPException
+
 from harbor_api.finance_openbb import (
     AgentResult,
     FinanceAgentConfig,
@@ -24,6 +27,28 @@ class FakeFinanceRunner:
                 {"name": "etf_search", "status": "ok", "type": "mcp_tool_call"}
             ],
             raw={"model": config.model},
+        )
+
+
+class CoordinatedFinanceRunner:
+    def __init__(self) -> None:
+        self.messages_by_user: Dict[str, List[Dict[str, str]]] = {}
+        self.first_started = asyncio.Event()
+        self.release_first = asyncio.Event()
+        self._calls = 0
+
+    async def run(self, *, messages, config):
+        del config
+        user_message = messages[-1]["content"]
+        self.messages_by_user[user_message] = list(messages)
+        self._calls += 1
+        if self._calls == 1:
+            self.first_started.set()
+            await self.release_first.wait()
+        return AgentResult(
+            assistant_message="reply to {}".format(user_message),
+            tool_calls=[],
+            raw={},
         )
 
 
@@ -112,3 +137,55 @@ def test_finance_application_exposes_generic_result(monkeypatch):
     assert message["groundedItems"][0]["itemId"] == "finance:openbb:etf_search:0"
     assert result["groundedItems"][0]["title"] == "OpenBB etf_search"
     assert result["turnsToResult"] == 1
+
+
+def test_finance_application_rejects_unknown_message_context():
+    app = FinanceOpenBBApplication(
+        service=FinanceChatService(
+            runner=FakeFinanceRunner(),
+            config=FinanceAgentConfig(
+                model="gpt-4o-mini",
+                openbb_mcp_url="http://mcp/mcp",
+            ),
+        )
+    )
+
+    with pytest.raises(HTTPException) as exc:
+        app.send_message(
+            session_id=None,
+            message="Compare conservative ETF options.",
+            title=None,
+            context="movie",
+            engine=None,
+            bot_type=None,
+        )
+
+    assert exc.value.status_code == 422
+    assert exc.value.detail == "unknown applicationContext"
+
+
+def test_finance_chat_service_serializes_turns_for_one_session():
+    async def scenario() -> Dict[str, List[Dict[str, str]]]:
+        runner = CoordinatedFinanceRunner()
+        service = FinanceChatService(
+            runner=runner,
+            config=FinanceAgentConfig(
+                model="gpt-4o-mini",
+                openbb_mcp_url="http://mcp/mcp",
+            ),
+        )
+        session = service.create_session()
+        first = asyncio.create_task(service.chat(session_id=session.id, message="first"))
+        await asyncio.wait_for(runner.first_started.wait(), timeout=1.0)
+        second = asyncio.create_task(service.chat(session_id=session.id, message="second"))
+        await asyncio.sleep(0.01)
+        runner.release_first.set()
+        await asyncio.wait_for(asyncio.gather(first, second), timeout=1.0)
+        return runner.messages_by_user
+
+    histories = asyncio.run(scenario())
+
+    assert histories["second"][:2] == [
+        {"role": "user", "content": "first"},
+        {"role": "assistant", "content": "reply to first"},
+    ]
