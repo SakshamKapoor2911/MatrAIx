@@ -977,6 +977,69 @@ def preview_result_archive(archive_path: Path, limit: int = 5) -> dict[str, Any]
     }
 
 
+def union_result_preview(workspace: DemoWorkspace, limit: int = 5) -> dict[str, Any] | None:
+    """Union every result archive in the workspace by global_idx.
+
+    The 1339-dim flow produces one archive per category, so a single person is
+    spread across up to 39 archives. This merges their fields into one preview
+    row per person (field_id keyed, last write wins) so the cockpit shows the
+    full union instead of just the latest single category. Returns None when no
+    result archives are present.
+    """
+    archives = sorted(
+        {*workspace.inbox_dir.glob("*.tar.gz"), *workspace.runs_dir.glob("*.tar.gz")}
+    )
+    if not archives:
+        return None
+    people: dict[Any, dict[str, Any]] = {}
+    order: list[Any] = []
+    failure_count = 0
+    for archive in archives:
+        failure_count += len(_read_gzip_jsonl_from_archive(archive, "failures.jsonl.gz"))
+        for row in _read_gzip_jsonl_from_archive(archive, "results.jsonl.gz"):
+            gi = row.get("global_idx")
+            person = people.get(gi)
+            if person is None:
+                person = {
+                    "global_idx": gi,
+                    "task_id": row.get("task_id"),
+                    "qid": row.get("qid"),
+                    "title": _demo_title_for_qid(row.get("qid")) or row.get("qid") or "unknown",
+                    "status": row.get("status"),
+                    "input_sha256": row.get("input_sha256"),
+                    "_fields": {},
+                    "provenance": row.get("provenance", {}),
+                }
+                people[gi] = person
+                order.append(gi)
+            for field in row.get("fields", []):
+                if not isinstance(field, dict):
+                    continue
+                fid = field.get("field_id")
+                if fid is None:
+                    continue
+                person["_fields"][str(fid)] = {
+                    "field_id": fid,
+                    "value": field.get("value"),
+                    "confidence": field.get("confidence"),
+                    "assignment_type": field.get("assignment_type"),
+                    "evidence": field.get("evidence"),
+                    "plain_meaning": _plain_field_meaning(field),
+                }
+    rows = []
+    for gi in order[: max(0, limit)]:
+        person = people[gi]
+        person["fields"] = list(person.pop("_fields").values())
+        rows.append(person)
+    return {
+        "archive_path": f"union of {len(archives)} archives",
+        "row_count": len(order),
+        "failure_count": failure_count,
+        "preview_limit": limit,
+        "rows": rows,
+    }
+
+
 _DIMENSIONS_PATH = REPO_ROOT / "personas" / "dimensions+new.json"
 _DIMENSION_CATALOG_CACHE: dict[str, Any] | None = None
 
@@ -1040,8 +1103,7 @@ def state_payload(workspace: DemoWorkspace) -> dict[str, Any]:
     audit_report = None
     if audit_path.exists():
         audit_report = json.loads(audit_path.read_text(encoding="utf-8"))
-    latest_result_archive = _latest(workspace.inbox_dir, "*.tar.gz") or _latest(workspace.runs_dir, "*.tar.gz")
-    result_preview = preview_result_archive(latest_result_archive) if latest_result_archive else None
+    result_preview = union_result_preview(workspace)
     protocol_dir = active_protocol_dir(workspace)
     protocol = load_protocol_manifest(protocol_dir)
     prompt_template = (protocol_dir / protocol.prompt_file).read_text(encoding="utf-8")

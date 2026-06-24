@@ -19,6 +19,7 @@ from personas.existing_data_curation.wiki_collab.demo_app import (
     return_archive,
     run_demo_assignment,
     state_payload,
+    union_result_preview,
 )
 from personas.existing_data_curation.wiki_collab.core import sha256_text
 
@@ -173,6 +174,54 @@ class WikiCollabDemoAppTests(unittest.TestCase):
         all_ids = {d["id"] for c in categories for d in c["dimensions"]}
         self.assertIn("age_bracket", all_ids)
         self.assertIn("domain", all_ids)
+
+    def test_union_result_preview_merges_category_archives_per_person(self):
+        # The 1339-dim flow drops one archive per category; the cockpit preview
+        # must union their fields per global_idx, not show just the latest one.
+        def _fake_archive(path: Path, fields: list[dict]) -> None:
+            work = path.parent / (path.name.removesuffix(".tar.gz") + "_w")
+            work.mkdir(parents=True, exist_ok=True)
+            _write_jsonl_gz(
+                work / "results.jsonl.gz",
+                [{"global_idx": 0, "qid": "Q91", "title": "Abraham Lincoln", "fields": fields}],
+            )
+            _write_jsonl_gz(work / "failures.jsonl.gz", [])
+            with tarfile.open(path, "w:gz") as tar:
+                tar.add(work / "results.jsonl.gz", arcname="results.jsonl.gz")
+                tar.add(work / "failures.jsonl.gz", arcname="failures.jsonl.gz")
+
+        with tempfile.TemporaryDirectory() as tmp:
+            workspace = ensure_demo_workspace(Path(tmp))
+            for f in workspace.inbox_dir.glob("*.tar.gz"):
+                f.unlink()
+            _fake_archive(
+                workspace.inbox_dir / "cat_a.tar.gz",
+                [{"field_id": "age_bracket", "value": "55–64", "confidence": 0.4,
+                  "evidence": "1809-1865", "assignment_type": "structured_claim"}],
+            )
+            _fake_archive(
+                workspace.inbox_dir / "cat_b.tar.gz",
+                [{"field_id": "domain", "value": "Law & Policy", "confidence": 0.8,
+                  "evidence": "16th president", "assignment_type": "direct"}],
+            )
+
+            preview = union_result_preview(workspace)
+
+        assert preview is not None
+        assert preview["row_count"] == 1  # one person, not two archives
+        row = preview["rows"][0]
+        assert row["title"] == "Abraham Lincoln"
+        ids = {f["field_id"] for f in row["fields"]}
+        assert ids == {"age_bracket", "domain"}  # fields UNIONED across archives
+
+    def test_union_result_preview_is_none_without_archives(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            workspace = ensure_demo_workspace(Path(tmp))
+            for f in workspace.inbox_dir.glob("*.tar.gz"):
+                f.unlink()
+            for f in workspace.runs_dir.glob("*.tar.gz"):
+                f.unlink()
+            assert union_result_preview(workspace) is None
 
     def test_state_includes_full_lincoln_article_footprint(self):
         with tempfile.TemporaryDirectory() as tmp:
