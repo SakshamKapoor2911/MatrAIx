@@ -469,6 +469,9 @@ The inference pipeline first compresses each review history into a compact,
 evidence-cited profile using broad Amazon-review evidence categories from
 `amazon_review_evidence_mapping.json`, then maps that profile to the persona
 schema. This avoids resending the same raw reviews for every schema batch.
+The compression prompt also includes a compact schema-signal checklist so it
+preserves information relevant to the 1,339-dimension schema without sending
+the full schema into the review-memory call.
 Evidence profiles are written to
 `raw/amazon_reviews_2023/persona_dimension_inference/evidence_profiles.jsonl`
 and can be reused across resumed schema-mapping runs.

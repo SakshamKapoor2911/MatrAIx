@@ -74,6 +74,52 @@ Evidence standards:
 Return compact JSON only."""
 
 
+SCHEMA_SIGNAL_CHECKLIST = [
+    {
+        "schema_area": "interests_and_topics",
+        "preserve": [
+            "specific product topics, hobbies, sports, foods, media genres, cultural interests, and recurring category clusters",
+            "explicit likes/dislikes and repeated engagement patterns, with product/category context",
+        ],
+    },
+    {
+        "schema_area": "preferences_habits_and_decision_style",
+        "preserve": [
+            "price/value sensitivity, quality standards, durability, comfort, convenience, aesthetics, safety, brand loyalty, and tolerance for tradeoffs",
+            "routines and use contexts such as DIY, home organization, gifting, cooking, parenting/caregiving, pets, travel, work, study, and entertainment",
+        ],
+    },
+    {
+        "schema_area": "skills_expertise_and_learning",
+        "preserve": [
+            "technical vocabulary, tool use, comparative evaluation, troubleshooting, domain-specific criteria, and repeated knowledgeable reviews",
+            "software/programming, tools, crafts, cooking, fitness, finance, health, education, professional, and other skill or expertise signals when directly supported",
+        ],
+    },
+    {
+        "schema_area": "values_motivations_and_personality",
+        "preserve": [
+            "grounded priorities such as reliability, frugality, learning, creativity, productivity, sustainability, comfort, safety, and care for others",
+            "review-supported traits such as detail orientation, cautiousness, novelty seeking, patience, discipline, kindness, and problem solving",
+        ],
+    },
+    {
+        "schema_area": "communication_and_linguistic_style",
+        "preserve": [
+            "review length/detail, directness, emotional tone, critique style, explanation depth, and recurring language patterns",
+            "evidence useful for linguistic, learning-style, and personality dimensions",
+        ],
+    },
+    {
+        "schema_area": "explicit_only_personal_facts",
+        "preserve": [
+            "direct quotes for occupation, education, family role, location, life stage, health context, identity, politics, religion, or other sensitive facts",
+            "also record when these areas are unsupported so downstream schema mapping does not guess",
+        ],
+    },
+]
+
+
 def log(message: str) -> None:
     print(f"[amazon_dimension_inference] {message}", flush=True)
 
@@ -700,6 +746,7 @@ def evidence_profile_payload(
             "Use category_review_summary as aggregate behavioral context, especially category frequency and rating patterns.",
             "Use construction_corpus_summary for aggregate rating-only behavior; review_evidence contains text-bearing rows only when text-only context is enabled.",
             "Use product name/category only to interpret the reviewed item; do not infer sensitive attributes from product stereotypes.",
+            "Use schema_signal_checklist to preserve information likely to support the downstream 1,339-dimension persona schema without copying the whole schema.",
             "Preserve enough distinct evidence to support downstream schema extraction; do not collapse unrelated interests, preferences, habits, skills, and values into one generic claim.",
             "Prefer concrete, reusable evidence over biography-like prose.",
             "Keep claims short and grounded.",
@@ -709,6 +756,7 @@ def evidence_profile_payload(
             "Omit unsupported categories instead of guessing.",
         ],
         "broad_evidence_categories": mapping.get("evidence_categories", []),
+        "schema_signal_checklist": SCHEMA_SIGNAL_CHECKLIST,
         "extraction_settings": {
             "target_evidence_items": target_evidence_items,
             "memory_density": "preserve distinct grounded signals across evidence categories",
