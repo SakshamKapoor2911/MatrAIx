@@ -1,11 +1,11 @@
 {
-  "_note": "Real output: Abraham Lincoln run through all 39 per-category persona-attribution protocols (claude-opus-4-8, effort=high) over the short demo bio, then union-merged. Only the attributed dimensions are shown here; the full record also carries the ~1272 'unsupported' dimensions.",
+  "_note": "Real output: Abraham Lincoln run through all 39 per-category persona-attribution protocols (claude-opus-4-8, effort=high) over the FULL cleaned Wikipedia article (74,335 chars, 34 sections), then union-merged. 231/1339 dimensions attributed across 25 categories, 0 field_id drift. Only attributed dimensions are shown; the full record also carries the ~1108 'unsupported' dimensions.",
   "global_idx": 0,
   "qid": "Q91",
   "title": null,
   "coverage": {
     "total_dimensions": 1339,
-    "attributed": 67,
+    "attributed": 231,
     "in_catalog_fields": 1339,
     "unmapped_fields": 0,
     "by_category": {
@@ -14,7 +14,7 @@
         "total": 30
       },
       "Behavior: Preferences": {
-        "attributed": 0,
+        "attributed": 2,
         "total": 34
       },
       "Behavior: Time": {
@@ -26,15 +26,15 @@
         "total": 2
       },
       "Demographic: Core": {
-        "attributed": 10,
+        "attributed": 22,
         "total": 27
       },
       "Demographic: Cultural": {
-        "attributed": 0,
+        "attributed": 2,
         "total": 2
       },
       "Demographic: Family": {
-        "attributed": 0,
+        "attributed": 1,
         "total": 2
       },
       "Demographic: Geographic": {
@@ -46,15 +46,15 @@
         "total": 1
       },
       "Demographic: Life Events": {
-        "attributed": 7,
+        "attributed": 24,
         "total": 25
       },
       "Expertise: Domains": {
-        "attributed": 4,
+        "attributed": 14,
         "total": 144
       },
       "Expertise: Skills": {
-        "attributed": 1,
+        "attributed": 13,
         "total": 64
       },
       "External: Datasets": {
@@ -70,11 +70,11 @@
         "total": 2
       },
       "Health: Physical": {
-        "attributed": 0,
+        "attributed": 5,
         "total": 25
       },
       "Interests: Culture": {
-        "attributed": 1,
+        "attributed": 3,
         "total": 74
       },
       "Interests: Food": {
@@ -90,23 +90,23 @@
         "total": 81
       },
       "Interests: Sports": {
-        "attributed": 0,
+        "attributed": 3,
         "total": 40
       },
       "Interests: Topics": {
-        "attributed": 1,
+        "attributed": 4,
         "total": 78
       },
       "Learning: Academic": {
-        "attributed": 5,
+        "attributed": 8,
         "total": 38
       },
       "Learning: Style": {
-        "attributed": 0,
+        "attributed": 1,
         "total": 1
       },
       "Linguistic: Communication": {
-        "attributed": 0,
+        "attributed": 4,
         "total": 37
       },
       "Linguistic: Language": {
@@ -114,11 +114,11 @@
         "total": 53
       },
       "Personality: Big Five": {
-        "attributed": 0,
+        "attributed": 8,
         "total": 56
       },
       "Personality: Character": {
-        "attributed": 3,
+        "attributed": 30,
         "total": 34
       },
       "Personality: MBTI": {
@@ -126,15 +126,15 @@
         "total": 2
       },
       "Personality: Relationships": {
-        "attributed": 0,
+        "attributed": 2,
         "total": 4
       },
       "Professional: Career": {
-        "attributed": 1,
+        "attributed": 5,
         "total": 6
       },
       "Professional: Industry": {
-        "attributed": 5,
+        "attributed": 13,
         "total": 52
       },
       "Professional: Role": {
@@ -142,7 +142,7 @@
         "total": 1
       },
       "Risk & Decision": {
-        "attributed": 0,
+        "attributed": 3,
         "total": 7
       },
       "Skills: Programming": {
@@ -158,29 +158,47 @@
         "total": 5
       },
       "Values & Motivation": {
-        "attributed": 19,
+        "attributed": 43,
         "total": 46
       },
       "Worldview: Beliefs": {
-        "attributed": 5,
+        "attributed": 16,
         "total": 68
       }
     }
   },
   "attributed_dimensions": {
+    "media_diet": {
+      "value": "Long-form",
+      "confidence": 0.3,
+      "evidence": "he was an avid reader and maintained a lifelong interest in learning",
+      "assignment_type": "summary_inference",
+      "category": "Behavior: Preferences",
+      "protocol_id": "persona_attribution_behavior_preferences",
+      "in_catalog": true
+    },
+    "pref_lead_vs_follow": {
+      "value": "Leans lead",
+      "confidence": 0.4,
+      "evidence": "He led the United States through the American Civil War",
+      "assignment_type": "summary_inference",
+      "category": "Behavior: Preferences",
+      "protocol_id": "persona_attribution_behavior_preferences",
+      "in_catalog": true
+    },
     "age_bracket": {
       "value": "55–64",
       "confidence": 0.4,
-      "evidence": "February 12, 1809 - April 15, 1865",
-      "assignment_type": "structured_claim",
+      "evidence": "Abraham Lincoln (February 12, 1809 - April 15, 1865)",
+      "assignment_type": "summary_inference",
       "category": "Demographic: Core",
       "protocol_id": "persona_attribution_demographic_core",
       "in_catalog": true
     },
     "region": {
       "value": "North America",
-      "confidence": 0.97,
-      "evidence": "16th president of the United States",
+      "confidence": 0.98,
+      "evidence": "the 16th president of the United States",
       "assignment_type": "structured_claim",
       "category": "Demographic: Core",
       "protocol_id": "persona_attribution_demographic_core",
@@ -188,17 +206,53 @@
     },
     "gender_identity": {
       "value": "Man",
-      "confidence": 0.9,
-      "evidence": "He led the United States through the American Civil War",
-      "assignment_type": "summary_inference",
+      "confidence": 0.97,
+      "evidence": "Mary was verbally abusive and at times physically violent towards her husband",
+      "assignment_type": "structured_claim",
       "category": "Demographic: Core",
       "protocol_id": "persona_attribution_demographic_core",
       "in_catalog": true
     },
     "urbanicity": {
       "value": "Rural",
-      "confidence": 0.85,
-      "evidence": "Born in a one-room log cabin in Kentucky, Lincoln was raised on the frontier.",
+      "confidence": 0.4,
+      "evidence": "Born in a one-room log cabin in Kentucky, Lincoln was raised on the frontier",
+      "assignment_type": "summary_inference",
+      "category": "Demographic: Core",
+      "protocol_id": "persona_attribution_demographic_core",
+      "in_catalog": true
+    },
+    "socioeconomic_band": {
+      "value": "Upper-middle",
+      "confidence": 0.3,
+      "evidence": "became a lawyer, Illinois state legislator, and U.S. representative",
+      "assignment_type": "summary_inference",
+      "category": "Demographic: Core",
+      "protocol_id": "persona_attribution_demographic_core",
+      "in_catalog": true
+    },
+    "register": {
+      "value": "Formal / standard",
+      "confidence": 0.3,
+      "evidence": "he delivered the Gettysburg Address, which became one of the most famous speeches in American history",
+      "assignment_type": "summary_inference",
+      "category": "Demographic: Core",
+      "protocol_id": "persona_attribution_demographic_core",
+      "in_catalog": true
+    },
+    "demo_marital_status": {
+      "value": "Married",
+      "confidence": 0.98,
+      "evidence": "the two were reconciled and married on November 4, 1842",
+      "assignment_type": "direct",
+      "category": "Demographic: Core",
+      "protocol_id": "persona_attribution_demographic_core",
+      "in_catalog": true
+    },
+    "demo_children_count": {
+      "value": "3+ children",
+      "confidence": 0.97,
+      "evidence": "They had four sons",
       "assignment_type": "direct",
       "category": "Demographic: Core",
       "protocol_id": "persona_attribution_demographic_core",
@@ -206,17 +260,44 @@
     },
     "demo_employment_status": {
       "value": "Full-time",
-      "confidence": 0.5,
+      "confidence": 0.3,
       "evidence": "the 16th president of the United States, serving from 1861",
-      "assignment_type": "structured_claim",
+      "assignment_type": "summary_inference",
+      "category": "Demographic: Core",
+      "protocol_id": "persona_attribution_demographic_core",
+      "in_catalog": true
+    },
+    "demo_housing_status": {
+      "value": "Own outright",
+      "confidence": 0.3,
+      "evidence": "the couple bought a house in Springfield near his law office",
+      "assignment_type": "summary_inference",
+      "category": "Demographic: Core",
+      "protocol_id": "persona_attribution_demographic_core",
+      "in_catalog": true
+    },
+    "demo_religion_affiliation": {
+      "value": "Spiritual but unaffiliated",
+      "confidence": 0.4,
+      "evidence": "He never joined a church, although he and his wife frequently attended First Presbyterian Church",
+      "assignment_type": "summary_inference",
+      "category": "Demographic: Core",
+      "protocol_id": "persona_attribution_demographic_core",
+      "in_catalog": true
+    },
+    "demo_sexual_orientation": {
+      "value": "Heterosexual",
+      "confidence": 0.6,
+      "evidence": "identify Lincoln's first romantic interest as Ann Rutledge, a young woman",
+      "assignment_type": "summary_inference",
       "category": "Demographic: Core",
       "protocol_id": "persona_attribution_demographic_core",
       "in_catalog": true
     },
     "demo_citizenship_status": {
       "value": "Citizen by birth",
-      "confidence": 0.7,
-      "evidence": "Born in a one-room log cabin in Kentucky",
+      "confidence": 0.9,
+      "evidence": "Born in a one-room log cabin in Kentucky on February 12, 1809",
       "assignment_type": "structured_claim",
       "category": "Demographic: Core",
       "protocol_id": "persona_attribution_demographic_core",
@@ -224,8 +305,35 @@
     },
     "demo_ethnicity_broad": {
       "value": "White / European",
-      "confidence": 0.5,
-      "evidence": "16th president of the United States",
+      "confidence": 0.9,
+      "evidence": "a descendant of Samuel Lincoln, an Englishman who emigrated to Massachusetts in 1637",
+      "assignment_type": "structured_claim",
+      "category": "Demographic: Core",
+      "protocol_id": "persona_attribution_demographic_core",
+      "in_catalog": true
+    },
+    "demo_veteran_status": {
+      "value": "Veteran",
+      "confidence": 0.6,
+      "evidence": "serve as a captain in the Illinois Militia during the Black Hawk War",
+      "assignment_type": "direct",
+      "category": "Demographic: Core",
+      "protocol_id": "persona_attribution_demographic_core",
+      "in_catalog": true
+    },
+    "demo_birth_order": {
+      "value": "Middle",
+      "confidence": 0.7,
+      "evidence": "The second child of Thomas Lincoln and Nancy Hanks Lincoln",
+      "assignment_type": "structured_claim",
+      "category": "Demographic: Core",
+      "protocol_id": "persona_attribution_demographic_core",
+      "in_catalog": true
+    },
+    "demo_home_language": {
+      "value": "Same as primary",
+      "confidence": 0.3,
+      "evidence": "where he learned to read",
       "assignment_type": "summary_inference",
       "category": "Demographic: Core",
       "protocol_id": "persona_attribution_demographic_core",
@@ -233,8 +341,26 @@
     },
     "demo_political_engagement": {
       "value": "Activist",
-      "confidence": 0.45,
+      "confidence": 0.8,
       "evidence": "he became a leader of the new Republican Party",
+      "assignment_type": "direct",
+      "category": "Demographic: Core",
+      "protocol_id": "persona_attribution_demographic_core",
+      "in_catalog": true
+    },
+    "demo_parental_status": {
+      "value": "Parent of minors",
+      "confidence": 0.4,
+      "evidence": "Lincoln loved children, and the Lincolns were not considered to be strict with their own",
+      "assignment_type": "summary_inference",
+      "category": "Demographic: Core",
+      "protocol_id": "persona_attribution_demographic_core",
+      "in_catalog": true
+    },
+    "demo_relationship_length": {
+      "value": "15+ years",
+      "confidence": 0.7,
+      "evidence": "married on November 4, 1842",
       "assignment_type": "structured_claim",
       "category": "Demographic: Core",
       "protocol_id": "persona_attribution_demographic_core",
@@ -244,23 +370,50 @@
       "value": "American",
       "confidence": 0.97,
       "evidence": "the 16th president of the United States",
-      "assignment_type": "structured_claim",
+      "assignment_type": "direct",
       "category": "Demographic: Core",
       "protocol_id": "persona_attribution_demographic_core",
       "in_catalog": true
     },
     "nemotron_sex": {
       "value": "Male",
-      "confidence": 0.9,
-      "evidence": "He led the United States through the American Civil War",
-      "assignment_type": "summary_inference",
+      "confidence": 0.97,
+      "evidence": "physically violent towards her husband",
+      "assignment_type": "structured_claim",
       "category": "Demographic: Core",
       "protocol_id": "persona_attribution_demographic_core",
       "in_catalog": true
     },
+    "cultural_background": {
+      "value": "Individualist (Western)",
+      "confidence": 0.55,
+      "evidence": "a descendant of Samuel Lincoln, an Englishman who emigrated to Massachusetts in 1637",
+      "assignment_type": "summary_inference",
+      "category": "Demographic: Cultural",
+      "protocol_id": "persona_attribution_demographic_cultural",
+      "in_catalog": true
+    },
+    "att_immigration": {
+      "value": "Positive",
+      "confidence": 0.3,
+      "evidence": "he lamented his party's growing closeness with the nativist Know Nothing movement",
+      "assignment_type": "summary_inference",
+      "category": "Demographic: Cultural",
+      "protocol_id": "persona_attribution_demographic_cultural",
+      "in_catalog": true
+    },
+    "nemotron_marital_status": {
+      "value": "married_present",
+      "confidence": 0.95,
+      "evidence": "the two were reconciled and married on November 4, 1842",
+      "assignment_type": "direct",
+      "category": "Demographic: Family",
+      "protocol_id": "persona_attribution_demographic_family",
+      "in_catalog": true
+    },
     "wiki_birth_place": {
       "value": "North America",
-      "confidence": 0.99,
+      "confidence": 1,
       "evidence": "Born in a one-room log cabin in Kentucky",
       "assignment_type": "direct",
       "category": "Demographic: Geographic",
@@ -269,17 +422,35 @@
     },
     "nemotron_state": {
       "value": "IL",
-      "confidence": 0.6,
-      "evidence": "Illinois state legislator",
-      "assignment_type": "structured_claim",
+      "confidence": 0.9,
+      "evidence": "Lincoln's home in Springfield, Illinois, where he resided from 1844 until becoming president in 1861",
+      "assignment_type": "direct",
       "category": "Demographic: Geography",
       "protocol_id": "persona_attribution_demographic_geography",
       "in_catalog": true
     },
+    "life_stage": {
+      "value": "Mid-life",
+      "confidence": 0.4,
+      "evidence": "Abraham Lincoln (February 12, 1809 - April 15, 1865) was the 16th president of the United States",
+      "assignment_type": "summary_inference",
+      "category": "Demographic: Life Events",
+      "protocol_id": "persona_attribution_demographic_life_events",
+      "in_catalog": true
+    },
+    "major_life_events": {
+      "value": "Bereavement",
+      "confidence": 0.6,
+      "evidence": "The deaths of Eddie and Willie had profound effects on both parents.",
+      "assignment_type": "summary_inference",
+      "category": "Demographic: Life Events",
+      "protocol_id": "persona_attribution_demographic_life_events",
+      "in_catalog": true
+    },
     "lifex_childhood_environment": {
       "value": "Hardship",
-      "confidence": 0.55,
-      "evidence": "Born in a one-room log cabin in Kentucky, Lincoln was raised on the frontier.",
+      "confidence": 0.7,
+      "evidence": "Republican speakers emphasized Lincoln's childhood poverty",
       "assignment_type": "summary_inference",
       "category": "Demographic: Life Events",
       "protocol_id": "persona_attribution_demographic_life_events",
@@ -287,17 +458,26 @@
     },
     "lifex_geographic_mobility": {
       "value": "Moved nationally",
-      "confidence": 0.5,
-      "evidence": "Born in a one-room log cabin in Kentucky... became a lawyer, Illinois state legislator",
+      "confidence": 0.7,
+      "evidence": "In 1816, the family moved to Indiana... several members of the extended Lincoln family, including Abraham, moved west to Illinois",
+      "assignment_type": "direct",
+      "category": "Demographic: Life Events",
+      "protocol_id": "persona_attribution_demographic_life_events",
+      "in_catalog": true
+    },
+    "lifex_travel_breadth": {
+      "value": "Never left country",
+      "confidence": 0.4,
+      "evidence": "Lincoln and some friends took a job carrying goods by flatboat to New Orleans, Louisiana",
       "assignment_type": "summary_inference",
       "category": "Demographic: Life Events",
       "protocol_id": "persona_attribution_demographic_life_events",
       "in_catalog": true
     },
     "lifex_career_path_shape": {
-      "value": "Linear climb",
-      "confidence": 0.4,
-      "evidence": "became a lawyer, Illinois state legislator, and U.S. representative",
+      "value": "Multiple pivots",
+      "confidence": 0.6,
+      "evidence": "Lincoln served as New Salem's postmaster and later as county surveyor, but he continued his voracious reading and decided to become a lawyer",
       "assignment_type": "summary_inference",
       "category": "Demographic: Life Events",
       "protocol_id": "persona_attribution_demographic_life_events",
@@ -305,9 +485,108 @@
     },
     "lifex_education_journey": {
       "value": "Largely self-taught",
-      "confidence": 0.9,
-      "evidence": "He was self-educated",
+      "confidence": 0.95,
+      "evidence": "Lincoln was largely self-educated.",
       "assignment_type": "direct",
+      "category": "Demographic: Life Events",
+      "protocol_id": "persona_attribution_demographic_life_events",
+      "in_catalog": true
+    },
+    "lifex_financial_trajectory": {
+      "value": "Steady upward",
+      "confidence": 0.4,
+      "evidence": "allowed a common farm boy to work his way to the top by his own efforts",
+      "assignment_type": "summary_inference",
+      "category": "Demographic: Life Events",
+      "protocol_id": "persona_attribution_demographic_life_events",
+      "in_catalog": true
+    },
+    "lifex_adversity_level": {
+      "value": "Overcame major hardship",
+      "confidence": 0.6,
+      "evidence": "Republican speakers emphasized Lincoln's childhood poverty to demonstrate the power of \"free labor\"",
+      "assignment_type": "summary_inference",
+      "category": "Demographic: Life Events",
+      "protocol_id": "persona_attribution_demographic_life_events",
+      "in_catalog": true
+    },
+    "lifex_immigration_generation": {
+      "value": "Native multi-generational",
+      "confidence": 0.7,
+      "evidence": "a descendant of Samuel Lincoln, an Englishman who emigrated to Massachusetts in 1637",
+      "assignment_type": "direct",
+      "category": "Demographic: Life Events",
+      "protocol_id": "persona_attribution_demographic_life_events",
+      "in_catalog": true
+    },
+    "lifex_military_history": {
+      "value": "Served briefly",
+      "confidence": 0.8,
+      "evidence": "serve as a captain in the Illinois Militia during the Black Hawk War. He was elected the captain of his militia company but did not see combat.",
+      "assignment_type": "direct",
+      "category": "Demographic: Life Events",
+      "protocol_id": "persona_attribution_demographic_life_events",
+      "in_catalog": true
+    },
+    "lifex_entrepreneurship_history": {
+      "value": "Founded once",
+      "confidence": 0.5,
+      "evidence": "purchased a New Salem general store in partnership with William Berry",
+      "assignment_type": "summary_inference",
+      "category": "Demographic: Life Events",
+      "protocol_id": "persona_attribution_demographic_life_events",
+      "in_catalog": true
+    },
+    "lifex_relationship_history": {
+      "value": "Married once",
+      "confidence": 0.85,
+      "evidence": "In 1839, Lincoln met Mary Todd in Springfield, Illinois... the two were reconciled and married on November 4, 1842.",
+      "assignment_type": "direct",
+      "category": "Demographic: Life Events",
+      "protocol_id": "persona_attribution_demographic_life_events",
+      "in_catalog": true
+    },
+    "lifex_parenting_journey": {
+      "value": "Grown children",
+      "confidence": 0.3,
+      "evidence": "The eldest, Robert Todd Lincoln, was born in 1843, and was the only child to live to maturity.",
+      "assignment_type": "summary_inference",
+      "category": "Demographic: Life Events",
+      "protocol_id": "persona_attribution_demographic_life_events",
+      "in_catalog": true
+    },
+    "lifex_health_journey": {
+      "value": "Mental health journey",
+      "confidence": 0.7,
+      "evidence": "Lincoln suffered from \"melancholy\", a condition now thought to be clinical depression.",
+      "assignment_type": "direct",
+      "category": "Demographic: Life Events",
+      "protocol_id": "persona_attribution_demographic_life_events",
+      "in_catalog": true
+    },
+    "lifex_loss_experience": {
+      "value": "Multiple bereavements",
+      "confidence": 0.85,
+      "evidence": "On October 5, 1818, Nancy died from milk sickness... The deaths of Eddie and Willie had profound effects on both parents.",
+      "assignment_type": "direct",
+      "category": "Demographic: Life Events",
+      "protocol_id": "persona_attribution_demographic_life_events",
+      "in_catalog": true
+    },
+    "lifex_faith_journey": {
+      "value": "Still searching",
+      "confidence": 0.5,
+      "evidence": "As a young man, Lincoln was a religious skeptic... his personal faith... necessarily remain a puzzle",
+      "assignment_type": "summary_inference",
+      "category": "Demographic: Life Events",
+      "protocol_id": "persona_attribution_demographic_life_events",
+      "in_catalog": true
+    },
+    "lifex_cultural_exposure": {
+      "value": "Monocultural",
+      "confidence": 0.5,
+      "evidence": "Born in a one-room log cabin in Kentucky, Lincoln was raised on the frontier.",
+      "assignment_type": "summary_inference",
       "category": "Demographic: Life Events",
       "protocol_id": "persona_attribution_demographic_life_events",
       "in_catalog": true
@@ -315,7 +594,7 @@
     "lifex_public_recognition": {
       "value": "Famous",
       "confidence": 0.95,
-      "evidence": "was the 16th president of the United States",
+      "evidence": "He is consistently ranked in both popular and scholarly polls as among the greatest presidents in American history.",
       "assignment_type": "direct",
       "category": "Demographic: Life Events",
       "protocol_id": "persona_attribution_demographic_life_events",
@@ -324,8 +603,35 @@
     "lifex_service_history": {
       "value": "Public office",
       "confidence": 0.95,
-      "evidence": "16th president of the United States... Illinois state legislator, and U.S. representative",
+      "evidence": "He was self-educated and became a lawyer, Illinois state legislator, and U.S. representative.",
       "assignment_type": "direct",
+      "category": "Demographic: Life Events",
+      "protocol_id": "persona_attribution_demographic_life_events",
+      "in_catalog": true
+    },
+    "lifex_turning_point": {
+      "value": "Reinvention",
+      "confidence": 0.4,
+      "evidence": "Lincoln's attacks on the Kansas–Nebraska Act marked his return to political life.",
+      "assignment_type": "summary_inference",
+      "category": "Demographic: Life Events",
+      "protocol_id": "persona_attribution_demographic_life_events",
+      "in_catalog": true
+    },
+    "lifex_languages_lifetime": {
+      "value": "One",
+      "confidence": 0.3,
+      "evidence": "where he learned to read, but probably not to write",
+      "assignment_type": "summary_inference",
+      "category": "Demographic: Life Events",
+      "protocol_id": "persona_attribution_demographic_life_events",
+      "in_catalog": true
+    },
+    "lifex_hometown_tie": {
+      "value": "Rarely returns",
+      "confidence": 0.4,
+      "evidence": "he would later refuse to attend his father's deathbed or funeral in 1851",
+      "assignment_type": "summary_inference",
       "category": "Demographic: Life Events",
       "protocol_id": "persona_attribution_demographic_life_events",
       "in_catalog": true
@@ -341,47 +647,290 @@
     },
     "domain": {
       "value": "Law & Policy",
-      "confidence": 0.8,
-      "evidence": "became a lawyer, Illinois state legislator, and U.S. representative",
-      "assignment_type": "direct",
+      "confidence": 0.7,
+      "evidence": "He was self-educated and became a lawyer, Illinois state legislator, and U.S. representative.",
+      "assignment_type": "structured_claim",
       "category": "Expertise: Domains",
       "protocol_id": "persona_attribution_expertise_domains",
       "in_catalog": true
     },
     "subject_specialty": {
       "value": "Constitutional law",
-      "confidence": 0.4,
-      "evidence": "playing a major role in the abolition of slavery",
-      "assignment_type": "summary_inference",
+      "confidence": 0.6,
+      "evidence": "He promoted the Thirteenth Amendment to the U.S. Constitution",
+      "assignment_type": "structured_claim",
       "category": "Expertise: Domains",
       "protocol_id": "persona_attribution_expertise_domains",
       "in_catalog": true
     },
     "fam_constitutional_law": {
+      "value": "Expert",
+      "confidence": 0.6,
+      "evidence": "He promoted the Thirteenth Amendment to the U.S. Constitution, which, in 1865, abolished chattel slavery.",
+      "assignment_type": "summary_inference",
+      "category": "Expertise: Domains",
+      "protocol_id": "persona_attribution_expertise_domains",
+      "in_catalog": true
+    },
+    "fam_contract_law": {
       "value": "Familiar",
       "confidence": 0.4,
-      "evidence": "became a lawyer ... playing a major role in the abolition of slavery",
+      "evidence": "Lincoln handled \"virtually every kind of business that could come before a prairie lawyer\"",
+      "assignment_type": "summary_inference",
+      "category": "Expertise: Domains",
+      "protocol_id": "persona_attribution_expertise_domains",
+      "in_catalog": true
+    },
+    "fam_criminal_law": {
+      "value": "Proficient",
+      "confidence": 0.5,
+      "evidence": "Lincoln represented William \"Duff\" Armstrong in his 1858 trial for the murder of James Preston Metzker.",
+      "assignment_type": "summary_inference",
+      "category": "Expertise: Domains",
+      "protocol_id": "persona_attribution_expertise_domains",
+      "in_catalog": true
+    },
+    "fam_intellectual_property": {
+      "value": "Aware",
+      "confidence": 0.4,
+      "evidence": "In 1849 he received a patent for a flotation device for the movement of riverboats in shallow water",
+      "assignment_type": "summary_inference",
+      "category": "Expertise: Domains",
+      "protocol_id": "persona_attribution_expertise_domains",
+      "in_catalog": true
+    },
+    "fam_corporate_finance": {
+      "value": "Aware",
+      "confidence": 0.3,
+      "evidence": "one of his largest clients was the Illinois Central Railroad",
+      "assignment_type": "summary_inference",
+      "category": "Expertise: Domains",
+      "protocol_id": "persona_attribution_expertise_domains",
+      "in_catalog": true
+    },
+    "fam_macroeconomics": {
+      "value": "Aware",
+      "confidence": 0.3,
+      "evidence": "Lincoln and Secretary of the Treasury Salmon Chase faced a challenge in funding a wartime economy.",
+      "assignment_type": "summary_inference",
+      "category": "Expertise: Domains",
+      "protocol_id": "persona_attribution_expertise_domains",
+      "in_catalog": true
+    },
+    "fam_international_relations": {
+      "value": "Familiar",
+      "confidence": 0.4,
+      "evidence": "Lincoln appointed diplomats to try to persuade European nations not to recognize the Confederacy.",
+      "assignment_type": "summary_inference",
+      "category": "Expertise: Domains",
+      "protocol_id": "persona_attribution_expertise_domains",
+      "in_catalog": true
+    },
+    "fam_philosophy": {
+      "value": "Familiar",
+      "confidence": 0.4,
+      "evidence": "Lincoln redefined the political philosophy of republicanism in the United States.",
+      "assignment_type": "summary_inference",
+      "category": "Expertise: Domains",
+      "protocol_id": "persona_attribution_expertise_domains",
+      "in_catalog": true
+    },
+    "fam_history": {
+      "value": "Aware",
+      "confidence": 0.3,
+      "evidence": "his \"reverence for the Founding Fathers, the Constitution, the laws under it\"",
       "assignment_type": "summary_inference",
       "category": "Expertise: Domains",
       "protocol_id": "persona_attribution_expertise_domains",
       "in_catalog": true
     },
     "fam_military_strategy": {
-      "value": "Familiar",
-      "confidence": 0.4,
-      "evidence": "He led the United States through the American Civil War, defeating the Confederacy",
+      "value": "Proficient",
+      "confidence": 0.5,
+      "evidence": "Lincoln took executive control of the war and shaped the Union military strategy.",
       "assignment_type": "summary_inference",
       "category": "Expertise: Domains",
       "protocol_id": "persona_attribution_expertise_domains",
       "in_catalog": true
     },
-    "skill_leadership": {
+    "fam_diplomacy": {
+      "value": "Familiar",
+      "confidence": 0.4,
+      "evidence": "Lincoln had \"limited familiarity with diplomatic practices\" but exerted \"substantial influence on U.S. diplomacy\"",
+      "assignment_type": "summary_inference",
+      "category": "Expertise: Domains",
+      "protocol_id": "persona_attribution_expertise_domains",
+      "in_catalog": true
+    },
+    "fam_theology": {
+      "value": "Aware",
+      "confidence": 0.3,
+      "evidence": "he was deeply familiar with the Bible; throughout his public career, he often quoted scripture",
+      "assignment_type": "summary_inference",
+      "category": "Expertise: Domains",
+      "protocol_id": "persona_attribution_expertise_domains",
+      "in_catalog": true
+    },
+    "skill_writing": {
       "value": "Master",
+      "confidence": 0.85,
+      "evidence": "he delivered the Gettysburg Address, which became one of the most famous speeches in American history",
+      "assignment_type": "summary_inference",
+      "category": "Expertise: Skills",
+      "protocol_id": "persona_attribution_expertise_skills",
+      "in_catalog": true
+    },
+    "skill_storytelling": {
+      "value": "Advanced",
       "confidence": 0.7,
-      "evidence": "He led the United States through the American Civil War",
+      "evidence": "He drew crowds as a raconteur",
       "assignment_type": "direct",
       "category": "Expertise: Skills",
       "protocol_id": "persona_attribution_expertise_skills",
+      "in_catalog": true
+    },
+    "skill_public_speaking": {
+      "value": "Master",
+      "confidence": 0.9,
+      "evidence": "the Gettysburg Address, which became one of the most famous speeches in American history",
+      "assignment_type": "summary_inference",
+      "category": "Expertise: Skills",
+      "protocol_id": "persona_attribution_expertise_skills",
+      "in_catalog": true
+    },
+    "skill_leadership": {
+      "value": "Master",
+      "confidence": 0.9,
+      "evidence": "remembered as a martyr and a national hero for his wartime leadership",
+      "assignment_type": "direct",
+      "category": "Expertise: Skills",
+      "protocol_id": "persona_attribution_expertise_skills",
+      "in_catalog": true
+    },
+    "skill_people_management": {
+      "value": "Advanced",
+      "confidence": 0.55,
+      "evidence": "Doris Kearns Goodwin described the group in her 2005 biography of Lincoln as a \"team of rivals\"",
+      "assignment_type": "summary_inference",
+      "category": "Expertise: Skills",
+      "protocol_id": "persona_attribution_expertise_skills",
+      "in_catalog": true
+    },
+    "skill_conflict_resolution": {
+      "value": "Advanced",
+      "confidence": 0.5,
+      "evidence": "Lincoln had to navigate conflicting political opinions from contentious factions during the war effort",
+      "assignment_type": "summary_inference",
+      "category": "Expertise: Skills",
+      "protocol_id": "persona_attribution_expertise_skills",
+      "in_catalog": true
+    },
+    "skill_research": {
+      "value": "Advanced",
+      "confidence": 0.65,
+      "evidence": "Lincoln read law on his own, borrowing legal texts",
+      "assignment_type": "summary_inference",
+      "category": "Expertise: Skills",
+      "protocol_id": "persona_attribution_expertise_skills",
+      "in_catalog": true
+    },
+    "skill_critical_thinking": {
+      "value": "Advanced",
+      "confidence": 0.6,
+      "evidence": "Lincoln demonstrated intellectual leadership, which brought him into contention for the presidency",
+      "assignment_type": "summary_inference",
+      "category": "Expertise: Skills",
+      "protocol_id": "persona_attribution_expertise_skills",
+      "in_catalog": true
+    },
+    "skill_problem_solving": {
+      "value": "Advanced",
+      "confidence": 0.55,
+      "evidence": "Lincoln produced a Farmers' Almanac showing the Moon was at a low angle, drastically reducing visibility",
+      "assignment_type": "summary_inference",
+      "category": "Expertise: Skills",
+      "protocol_id": "persona_attribution_expertise_skills",
+      "in_catalog": true
+    },
+    "skill_mathematics": {
+      "value": "Intermediate",
+      "confidence": 0.45,
+      "evidence": "Lincoln served as New Salem's postmaster and later as county surveyor",
+      "assignment_type": "summary_inference",
+      "category": "Expertise: Skills",
+      "protocol_id": "persona_attribution_expertise_skills",
+      "in_catalog": true
+    },
+    "skill_logical_reasoning": {
+      "value": "Advanced",
+      "confidence": 0.6,
+      "evidence": "Lincoln argued that the testimony involved a dying declaration and so was not subject to the hearsay rule",
+      "assignment_type": "summary_inference",
+      "category": "Expertise: Skills",
+      "protocol_id": "persona_attribution_expertise_skills",
+      "in_catalog": true
+    },
+    "skill_persuasion": {
+      "value": "Advanced",
+      "confidence": 0.65,
+      "evidence": "Lincoln's articulation of the issues had given him a national political presence",
+      "assignment_type": "summary_inference",
+      "category": "Expertise: Skills",
+      "protocol_id": "persona_attribution_expertise_skills",
+      "in_catalog": true
+    },
+    "skill_presenting": {
+      "value": "Advanced",
+      "confidence": 0.7,
+      "evidence": "In his speech at Cooper Union... Lincoln demonstrated intellectual leadership",
+      "assignment_type": "summary_inference",
+      "category": "Expertise: Skills",
+      "protocol_id": "persona_attribution_expertise_skills",
+      "in_catalog": true
+    },
+    "health_mobility": {
+      "value": "Full",
+      "confidence": 0.4,
+      "evidence": "participating in jumping, throwing, wrestling, and footraces, and demonstrating exceptional strength",
+      "assignment_type": "summary_inference",
+      "category": "Health: Physical",
+      "protocol_id": "persona_attribution_health_physical",
+      "in_catalog": true
+    },
+    "health_mental_health": {
+      "value": "Struggling",
+      "confidence": 0.8,
+      "evidence": "Lincoln suffered from \"melancholy\", a condition now thought to be clinical depression",
+      "assignment_type": "direct",
+      "category": "Health: Physical",
+      "protocol_id": "persona_attribution_health_physical",
+      "in_catalog": true
+    },
+    "health_stress_level": {
+      "value": "High",
+      "confidence": 0.4,
+      "evidence": "concerned that he was working too hard",
+      "assignment_type": "summary_inference",
+      "category": "Health: Physical",
+      "protocol_id": "persona_attribution_health_physical",
+      "in_catalog": true
+    },
+    "health_medication_use": {
+      "value": "Occasional",
+      "confidence": 0.35,
+      "evidence": "He took blue mass pills, which contained mercury, to treat melancholy or hypochondriasis",
+      "assignment_type": "summary_inference",
+      "category": "Health: Physical",
+      "protocol_id": "persona_attribution_health_physical",
+      "in_catalog": true
+    },
+    "health_fitness_level": {
+      "value": "Fit",
+      "confidence": 0.6,
+      "evidence": "In adolescence he was tall and strong, participating in jumping, throwing, wrestling, and footraces, and demonstrating exceptional strength",
+      "assignment_type": "direct",
+      "category": "Health: Physical",
+      "protocol_id": "persona_attribution_health_physical",
       "in_catalog": true
     },
     "cult_united_states": {
@@ -393,20 +942,92 @@
       "protocol_id": "persona_attribution_interests_culture",
       "in_catalog": true
     },
+    "lstyle_reading_freq": {
+      "value": "Daily",
+      "confidence": 0.55,
+      "evidence": "he was an avid reader and maintained a lifelong interest in learning",
+      "assignment_type": "summary_inference",
+      "category": "Interests: Culture",
+      "protocol_id": "persona_attribution_interests_culture",
+      "in_catalog": true
+    },
+    "lstyle_fashion_sense": {
+      "value": "Indifferent",
+      "confidence": 0.6,
+      "evidence": "he cared little about fashion",
+      "assignment_type": "direct",
+      "category": "Interests: Culture",
+      "protocol_id": "persona_attribution_interests_culture",
+      "in_catalog": true
+    },
+    "sport_running": {
+      "value": "Play",
+      "confidence": 0.7,
+      "evidence": "participating in jumping, throwing, wrestling, and footraces",
+      "assignment_type": "direct",
+      "category": "Interests: Sports",
+      "protocol_id": "persona_attribution_interests_sports",
+      "in_catalog": true
+    },
+    "sport_wrestling": {
+      "value": "Play",
+      "confidence": 0.9,
+      "evidence": "after winning a wrestling match with the leader of a group of ruffians",
+      "assignment_type": "direct",
+      "category": "Interests: Sports",
+      "protocol_id": "persona_attribution_interests_sports",
+      "in_catalog": true
+    },
+    "sport_track_field": {
+      "value": "Play",
+      "confidence": 0.6,
+      "evidence": "participating in jumping, throwing, wrestling, and footraces",
+      "assignment_type": "direct",
+      "category": "Interests: Sports",
+      "protocol_id": "persona_attribution_interests_sports",
+      "in_catalog": true
+    },
     "topic_politics": {
       "value": "Passionate",
-      "confidence": 0.95,
-      "evidence": "he became a leader of the new Republican Party",
+      "confidence": 0.9,
+      "evidence": "became a leader of the new Republican Party",
+      "assignment_type": "direct",
+      "category": "Interests: Topics",
+      "protocol_id": "persona_attribution_interests_topics",
+      "in_catalog": true
+    },
+    "topic_sports": {
+      "value": "Interested",
+      "confidence": 0.4,
+      "evidence": "participating in jumping, throwing, wrestling, and footraces",
+      "assignment_type": "summary_inference",
+      "category": "Interests: Topics",
+      "protocol_id": "persona_attribution_interests_topics",
+      "in_catalog": true
+    },
+    "topic_fashion": {
+      "value": "Indifferent",
+      "confidence": 0.85,
+      "evidence": "he cared little about fashion",
+      "assignment_type": "direct",
+      "category": "Interests: Topics",
+      "protocol_id": "persona_attribution_interests_topics",
+      "in_catalog": true
+    },
+    "topic_literature": {
+      "value": "Interested",
+      "confidence": 0.7,
+      "evidence": "he was an avid reader and maintained a lifelong interest in learning",
       "assignment_type": "direct",
       "category": "Interests: Topics",
       "protocol_id": "persona_attribution_interests_topics",
       "in_catalog": true
     },
     "highest_education": {
-      "value": "No formal",
-      "confidence": 0.6,
-      "evidence": "He was self-educated and became a lawyer",
-      "assignment_type": "summary_inference",
+      "value": "Primary",
+      "confidence": 0.55,
+      "evidence": "he attended school only sporadically, for a total of less than 12 months by age 15",
+      "assignment_type": "direct",
       "category": "Learning: Academic",
       "protocol_id": "persona_attribution_learning_academic",
       "in_catalog": true
@@ -414,7 +1035,7 @@
     "academic_field": {
       "value": "Law",
       "confidence": 0.5,
-      "evidence": "became a lawyer",
+      "evidence": "continued his voracious reading and decided to become a lawyer",
       "assignment_type": "summary_inference",
       "category": "Learning: Academic",
       "protocol_id": "persona_attribution_learning_academic",
@@ -422,35 +1043,107 @@
     },
     "institution_tier": {
       "value": "Self-taught",
-      "confidence": 0.8,
-      "evidence": "He was self-educated",
+      "confidence": 0.85,
+      "evidence": "Lincoln read law on his own... He later said of his legal education that he \"studied with nobody.\"",
       "assignment_type": "direct",
+      "category": "Learning: Academic",
+      "protocol_id": "persona_attribution_learning_academic",
+      "in_catalog": true
+    },
+    "acad_civics": {
+      "value": "Interested",
+      "confidence": 0.45,
+      "evidence": "reverence for the Founding Fathers, the Constitution, the laws under it, and the preservation of the Republic",
+      "assignment_type": "summary_inference",
+      "category": "Learning: Academic",
+      "protocol_id": "persona_attribution_learning_academic",
+      "in_catalog": true
+    },
+    "acad_literature": {
+      "value": "Interested",
+      "confidence": 0.4,
+      "evidence": "he was an avid reader and maintained a lifelong interest in learning",
+      "assignment_type": "summary_inference",
       "category": "Learning: Academic",
       "protocol_id": "persona_attribution_learning_academic",
       "in_catalog": true
     },
     "wiki_field_of_work": {
       "value": "Politics",
-      "confidence": 0.7,
+      "confidence": 0.8,
       "evidence": "was the 16th president of the United States",
-      "assignment_type": "summary_inference",
+      "assignment_type": "direct",
       "category": "Learning: Academic",
       "protocol_id": "persona_attribution_learning_academic",
       "in_catalog": true
     },
     "wiki_education_level": {
-      "value": "No formal education",
-      "confidence": 0.6,
-      "evidence": "He was self-educated",
-      "assignment_type": "summary_inference",
+      "value": "Primary",
+      "confidence": 0.5,
+      "evidence": "he attended school only sporadically, for a total of less than 12 months by age 15",
+      "assignment_type": "direct",
       "category": "Learning: Academic",
       "protocol_id": "persona_attribution_learning_academic",
       "in_catalog": true
     },
+    "nemotron_education_level": {
+      "value": "less_than_9th",
+      "confidence": 0.5,
+      "evidence": "Lincoln was largely self-educated... a total of less than 12 months by age 15",
+      "assignment_type": "direct",
+      "category": "Learning: Academic",
+      "protocol_id": "persona_attribution_learning_academic",
+      "in_catalog": true
+    },
+    "learning_style": {
+      "value": "Reading / writing",
+      "confidence": 0.6,
+      "evidence": "he was an avid reader and maintained a lifelong interest in learning",
+      "assignment_type": "summary_inference",
+      "category": "Learning: Style",
+      "protocol_id": "persona_attribution_learning_style",
+      "in_catalog": true
+    },
+    "cog_curiosity": {
+      "value": "Very high",
+      "confidence": 0.6,
+      "evidence": "he was an avid reader and maintained a lifelong interest in learning",
+      "assignment_type": "summary_inference",
+      "category": "Linguistic: Communication",
+      "protocol_id": "persona_attribution_linguistic_communication",
+      "in_catalog": true
+    },
+    "cog_open_mindedness": {
+      "value": "High",
+      "confidence": 0.45,
+      "evidence": "chose the men he found the most competent, even when they had been his opponents",
+      "assignment_type": "summary_inference",
+      "category": "Linguistic: Communication",
+      "protocol_id": "persona_attribution_linguistic_communication",
+      "in_catalog": true
+    },
+    "cog_reading_vs_watching": {
+      "value": "Strongly prefers reading",
+      "confidence": 0.4,
+      "evidence": "he continued his voracious reading",
+      "assignment_type": "summary_inference",
+      "category": "Linguistic: Communication",
+      "protocol_id": "persona_attribution_linguistic_communication",
+      "in_catalog": true
+    },
+    "cog_storytelling": {
+      "value": "High",
+      "confidence": 0.55,
+      "evidence": "He drew crowds as a raconteur",
+      "assignment_type": "summary_inference",
+      "category": "Linguistic: Communication",
+      "protocol_id": "persona_attribution_linguistic_communication",
+      "in_catalog": true
+    },
     "primary_language": {
       "value": "English",
-      "confidence": 0.9,
-      "evidence": "16th president of the United States",
+      "confidence": 0.97,
+      "evidence": "he delivered the Gettysburg Address, which became one of the most famous speeches in American history",
       "assignment_type": "summary_inference",
       "category": "Linguistic: Language",
       "protocol_id": "persona_attribution_linguistic_language",
@@ -458,8 +1151,8 @@
     },
     "english_proficiency": {
       "value": "Native",
-      "confidence": 0.9,
-      "evidence": "president of the United States ... became a lawyer",
+      "confidence": 0.97,
+      "evidence": "16th president of the United States",
       "assignment_type": "summary_inference",
       "category": "Linguistic: Language",
       "protocol_id": "persona_attribution_linguistic_language",
@@ -467,26 +1160,215 @@
     },
     "lang_english": {
       "value": "Native",
-      "confidence": 0.9,
-      "evidence": "became a lawyer, Illinois state legislator, and U.S. representative",
+      "confidence": 0.97,
+      "evidence": "he delivered the Gettysburg Address, which became one of the most famous speeches in American history",
       "assignment_type": "summary_inference",
       "category": "Linguistic: Language",
       "protocol_id": "persona_attribution_linguistic_language",
       "in_catalog": true
     },
+    "big5_emotionality": {
+      "value": "High",
+      "confidence": 0.4,
+      "evidence": "Lincoln took her death very hard, sinking into a serious depression",
+      "assignment_type": "summary_inference",
+      "category": "Personality: Big Five",
+      "protocol_id": "persona_attribution_personality_big_five",
+      "in_catalog": true
+    },
+    "big5_intellect": {
+      "value": "High",
+      "confidence": 0.55,
+      "evidence": "he was an avid reader and maintained a lifelong interest in learning",
+      "assignment_type": "summary_inference",
+      "category": "Personality: Big Five",
+      "protocol_id": "persona_attribution_personality_big_five",
+      "in_catalog": true
+    },
+    "big5_achievement_striving": {
+      "value": "High",
+      "confidence": 0.45,
+      "evidence": "allowed a common farm boy to work his way to the top by his own efforts",
+      "assignment_type": "summary_inference",
+      "category": "Personality: Big Five",
+      "protocol_id": "persona_attribution_personality_big_five",
+      "in_catalog": true
+    },
+    "big5_self_discipline": {
+      "value": "High",
+      "confidence": 0.45,
+      "evidence": "Lincoln read law on his own... He later said of his legal education that he \"studied with nobody.\"",
+      "assignment_type": "summary_inference",
+      "category": "Personality: Big Five",
+      "protocol_id": "persona_attribution_personality_big_five",
+      "in_catalog": true
+    },
+    "big5_depression": {
+      "value": "High",
+      "confidence": 0.6,
+      "evidence": "Lincoln suffered from \"melancholy\", a condition now thought to be clinical depression",
+      "assignment_type": "direct",
+      "category": "Personality: Big Five",
+      "protocol_id": "persona_attribution_personality_big_five",
+      "in_catalog": true
+    },
+    "bfi2_domain_open_mindedness": {
+      "value": "High",
+      "confidence": 0.45,
+      "evidence": "he was an avid reader and maintained a lifelong interest in learning",
+      "assignment_type": "summary_inference",
+      "category": "Personality: Big Five",
+      "protocol_id": "persona_attribution_personality_big_five",
+      "in_catalog": true
+    },
+    "bfi2_facet_depression": {
+      "value": "High",
+      "confidence": 0.6,
+      "evidence": "Lincoln suffered from \"melancholy\", a condition now thought to be clinical depression",
+      "assignment_type": "direct",
+      "category": "Personality: Big Five",
+      "protocol_id": "persona_attribution_personality_big_five",
+      "in_catalog": true
+    },
+    "bfi2_facet_intellectual_curiosity": {
+      "value": "High",
+      "confidence": 0.55,
+      "evidence": "he was an avid reader and maintained a lifelong interest in learning",
+      "assignment_type": "summary_inference",
+      "category": "Personality: Big Five",
+      "protocol_id": "persona_attribution_personality_big_five",
+      "in_catalog": true
+    },
     "domain_characteristics": {
       "value": "Practitioner",
-      "confidence": 0.4,
+      "confidence": 0.72,
       "evidence": "became a lawyer, Illinois state legislator, and U.S. representative",
       "assignment_type": "summary_inference",
       "category": "Personality: Character",
       "protocol_id": "persona_attribution_personality_character",
       "in_catalog": true
     },
-    "trait_love_of_learning": {
-      "value": "Strong",
+    "dominant_trait": {
+      "value": "High openness",
       "confidence": 0.5,
-      "evidence": "He was self-educated and became a lawyer",
+      "evidence": "he was an avid reader and maintained a lifelong interest in learning",
+      "assignment_type": "summary_inference",
+      "category": "Personality: Character",
+      "protocol_id": "persona_attribution_personality_character",
+      "in_catalog": true
+    },
+    "trait_curiosity": {
+      "value": "Strong",
+      "confidence": 0.7,
+      "evidence": "he was an avid reader and maintained a lifelong interest in learning",
+      "assignment_type": "summary_inference",
+      "category": "Personality: Character",
+      "protocol_id": "persona_attribution_personality_character",
+      "in_catalog": true
+    },
+    "trait_love_of_learning": {
+      "value": "Signature",
+      "confidence": 0.85,
+      "evidence": "Lincoln was largely self-educated... he was an avid reader and maintained a lifelong interest in learning",
+      "assignment_type": "direct",
+      "category": "Personality: Character",
+      "protocol_id": "persona_attribution_personality_character",
+      "in_catalog": true
+    },
+    "trait_open_mindedness": {
+      "value": "Strong",
+      "confidence": 0.65,
+      "evidence": "Lincoln chose the men he found the most competent, even when they had been his opponents for the presidency",
+      "assignment_type": "summary_inference",
+      "category": "Personality: Character",
+      "protocol_id": "persona_attribution_personality_character",
+      "in_catalog": true
+    },
+    "trait_perspective": {
+      "value": "Strong",
+      "confidence": 0.6,
+      "evidence": "capable of being in uncertainties... without any irritable reaching after fact and reason",
+      "assignment_type": "summary_inference",
+      "category": "Personality: Character",
+      "protocol_id": "persona_attribution_personality_character",
+      "in_catalog": true
+    },
+    "trait_bravery": {
+      "value": "Strong",
+      "confidence": 0.6,
+      "evidence": "He gained a reputation for strength and courage after winning a wrestling match",
+      "assignment_type": "summary_inference",
+      "category": "Personality: Character",
+      "protocol_id": "persona_attribution_personality_character",
+      "in_catalog": true
+    },
+    "trait_perseverance": {
+      "value": "Strong",
+      "confidence": 0.7,
+      "evidence": "a common farm boy to work his way to the top by his own efforts",
+      "assignment_type": "summary_inference",
+      "category": "Personality: Character",
+      "protocol_id": "persona_attribution_personality_character",
+      "in_catalog": true
+    },
+    "trait_honesty": {
+      "value": "Signature",
+      "confidence": 0.85,
+      "evidence": "Lincoln has also been characterized as a folk hero and as \"Honest Abe\"",
+      "assignment_type": "direct",
+      "category": "Personality: Character",
+      "protocol_id": "persona_attribution_personality_character",
+      "in_catalog": true
+    },
+    "trait_zest": {
+      "value": "Moderate",
+      "confidence": 0.5,
+      "evidence": "Lincoln accepted the nomination with great enthusiasm and zeal",
+      "assignment_type": "summary_inference",
+      "category": "Personality: Character",
+      "protocol_id": "persona_attribution_personality_character",
+      "in_catalog": true
+    },
+    "trait_capacity_for_love": {
+      "value": "Moderate",
+      "confidence": 0.55,
+      "evidence": "Lincoln loved children, and the Lincolns were not considered to be strict with their own",
+      "assignment_type": "summary_inference",
+      "category": "Personality: Character",
+      "protocol_id": "persona_attribution_personality_character",
+      "in_catalog": true
+    },
+    "trait_kindness": {
+      "value": "Strong",
+      "confidence": 0.65,
+      "evidence": "Lincoln \"was too soft-hearted to deny anyone credit\"",
+      "assignment_type": "summary_inference",
+      "category": "Personality: Character",
+      "protocol_id": "persona_attribution_personality_character",
+      "in_catalog": true
+    },
+    "trait_social_intelligence": {
+      "value": "Strong",
+      "confidence": 0.6,
+      "evidence": "He drew crowds as a raconteur",
+      "assignment_type": "summary_inference",
+      "category": "Personality: Character",
+      "protocol_id": "persona_attribution_personality_character",
+      "in_catalog": true
+    },
+    "trait_teamwork": {
+      "value": "Strong",
+      "confidence": 0.6,
+      "evidence": "Stanton and Lincoln virtually conducted the war together",
+      "assignment_type": "summary_inference",
+      "category": "Personality: Character",
+      "protocol_id": "persona_attribution_personality_character",
+      "in_catalog": true
+    },
+    "trait_fairness": {
+      "value": "Strong",
+      "confidence": 0.6,
+      "evidence": "I could not afford to hang men for votes",
       "assignment_type": "summary_inference",
       "category": "Personality: Character",
       "protocol_id": "persona_attribution_personality_character",
@@ -494,18 +1376,198 @@
     },
     "trait_leadership": {
       "value": "Signature",
-      "confidence": 0.8,
-      "evidence": "He led the United States through the American Civil War",
+      "confidence": 0.85,
+      "evidence": "a national hero for his wartime leadership",
       "assignment_type": "direct",
       "category": "Personality: Character",
       "protocol_id": "persona_attribution_personality_character",
       "in_catalog": true
     },
+    "trait_forgiveness": {
+      "value": "Strong",
+      "confidence": 0.65,
+      "evidence": "Lincoln replied, \"Let 'em up easy\"; he focused not on blame for the war but on rebuilding",
+      "assignment_type": "summary_inference",
+      "category": "Personality: Character",
+      "protocol_id": "persona_attribution_personality_character",
+      "in_catalog": true
+    },
+    "trait_humility": {
+      "value": "Moderate",
+      "confidence": 0.5,
+      "evidence": "in \"his company, I was never reminded of my humble origin",
+      "assignment_type": "summary_inference",
+      "category": "Personality: Character",
+      "protocol_id": "persona_attribution_personality_character",
+      "in_catalog": true
+    },
+    "trait_prudence": {
+      "value": "Moderate",
+      "confidence": 0.5,
+      "evidence": "After considerable deliberation, Lincoln decided to send provisions",
+      "assignment_type": "summary_inference",
+      "category": "Personality: Character",
+      "protocol_id": "persona_attribution_personality_character",
+      "in_catalog": true
+    },
+    "trait_hope_optimism": {
+      "value": "Moderate",
+      "confidence": 0.5,
+      "evidence": "will yet swell the chorus of the Union, when again touched... by the better angels of our nature",
+      "assignment_type": "summary_inference",
+      "category": "Personality: Character",
+      "protocol_id": "persona_attribution_personality_character",
+      "in_catalog": true
+    },
+    "trait_playfulness": {
+      "value": "Moderate",
+      "confidence": 0.45,
+      "evidence": "He drew crowds as a raconteur",
+      "assignment_type": "summary_inference",
+      "category": "Personality: Character",
+      "protocol_id": "persona_attribution_personality_character",
+      "in_catalog": true
+    },
+    "trait_spirituality": {
+      "value": "Moderate",
+      "confidence": 0.5,
+      "evidence": "After the death of his son Edward in 1850, Lincoln more frequently expressed a dependence on God",
+      "assignment_type": "summary_inference",
+      "category": "Personality: Character",
+      "protocol_id": "persona_attribution_personality_character",
+      "in_catalog": true
+    },
+    "trait_ambition": {
+      "value": "Strong",
+      "confidence": 0.65,
+      "evidence": "In response to an inquiry about his ambitions, Lincoln said, \"The taste is in my mouth a little\"",
+      "assignment_type": "summary_inference",
+      "category": "Personality: Character",
+      "protocol_id": "persona_attribution_personality_character",
+      "in_catalog": true
+    },
+    "trait_empathy": {
+      "value": "Strong",
+      "confidence": 0.6,
+      "evidence": "It was the first time, but not the last, that he would be repelled while observing slavery firsthand",
+      "assignment_type": "summary_inference",
+      "category": "Personality: Character",
+      "protocol_id": "persona_attribution_personality_character",
+      "in_catalog": true
+    },
+    "trait_resilience": {
+      "value": "Strong",
+      "confidence": 0.65,
+      "evidence": "Lincoln took her death very hard, sinking into a serious depression and contemplating suicide",
+      "assignment_type": "summary_inference",
+      "category": "Personality: Character",
+      "protocol_id": "persona_attribution_personality_character",
+      "in_catalog": true
+    },
+    "trait_discipline": {
+      "value": "Strong",
+      "confidence": 0.65,
+      "evidence": "Lincoln read law on his own, borrowing legal texts",
+      "assignment_type": "summary_inference",
+      "category": "Personality: Character",
+      "protocol_id": "persona_attribution_personality_character",
+      "in_catalog": true
+    },
+    "trait_generosity": {
+      "value": "Moderate",
+      "confidence": 0.45,
+      "evidence": "Lincoln \"was too soft-hearted to deny anyone credit\"",
+      "assignment_type": "summary_inference",
+      "category": "Personality: Character",
+      "protocol_id": "persona_attribution_personality_character",
+      "in_catalog": true
+    },
+    "trait_loyalty": {
+      "value": "Moderate",
+      "confidence": 0.5,
+      "evidence": "calling for the preservation of the Union",
+      "assignment_type": "summary_inference",
+      "category": "Personality: Character",
+      "protocol_id": "persona_attribution_personality_character",
+      "in_catalog": true
+    },
+    "trait_competitiveness": {
+      "value": "Moderate",
+      "confidence": 0.5,
+      "evidence": "they had an atmosphere akin to a prizefight and drew thousands",
+      "assignment_type": "summary_inference",
+      "category": "Personality: Character",
+      "protocol_id": "persona_attribution_personality_character",
+      "in_catalog": true
+    },
+    "trait_adaptability": {
+      "value": "Strong",
+      "confidence": 0.55,
+      "evidence": "Lincoln had to navigate conflicting political opinions from contentious factions during the war effort",
+      "assignment_type": "summary_inference",
+      "category": "Personality: Character",
+      "protocol_id": "persona_attribution_personality_character",
+      "in_catalog": true
+    },
+    "interpersonal_agency_dominance": {
+      "value": "Very high",
+      "confidence": 0.85,
+      "evidence": "Lincoln took executive control of the war and shaped the Union military strategy... by exercising unprecedented authority.",
+      "assignment_type": "summary_inference",
+      "category": "Personality: Relationships",
+      "protocol_id": "persona_attribution_personality_relationships",
+      "in_catalog": true
+    },
+    "interpersonal_communion_warmth": {
+      "value": "High",
+      "confidence": 0.6,
+      "evidence": "Lincoln loved children, and the Lincolns were not considered to be strict with their own.",
+      "assignment_type": "summary_inference",
+      "category": "Personality: Relationships",
+      "protocol_id": "persona_attribution_personality_relationships",
+      "in_catalog": true
+    },
+    "research_output": {
+      "value": "None",
+      "confidence": 0.55,
+      "evidence": "He delivered the Gettysburg Address, which became one of the most famous speeches in American history.",
+      "assignment_type": "summary_inference",
+      "category": "Professional: Career",
+      "protocol_id": "persona_attribution_professional_career",
+      "in_catalog": true
+    },
+    "seniority": {
+      "value": "C-suite",
+      "confidence": 0.85,
+      "evidence": "was the 16th president of the United States, serving from 1861 until his assassination in 1865",
+      "assignment_type": "structured_claim",
+      "category": "Professional: Career",
+      "protocol_id": "persona_attribution_professional_career",
+      "in_catalog": true
+    },
+    "years_experience": {
+      "value": "20+",
+      "confidence": 0.8,
+      "evidence": "Lincoln was admitted to the Illinois bar on September 9, 1836.",
+      "assignment_type": "structured_claim",
+      "category": "Professional: Career",
+      "protocol_id": "persona_attribution_professional_career",
+      "in_catalog": true
+    },
     "wiki_position_held": {
       "value": "President",
-      "confidence": 0.98,
+      "confidence": 0.99,
       "evidence": "was the 16th president of the United States",
       "assignment_type": "direct",
+      "category": "Professional: Career",
+      "protocol_id": "persona_attribution_professional_career",
+      "in_catalog": true
+    },
+    "wiki_awards_recognition": {
+      "value": "None",
+      "confidence": 0.7,
+      "evidence": "He is consistently ranked in both popular and scholarly polls as among the greatest presidents in American history.",
+      "assignment_type": "summary_inference",
       "category": "Professional: Career",
       "protocol_id": "persona_attribution_professional_career",
       "in_catalog": true
@@ -513,8 +1575,8 @@
     "company_size": {
       "value": "Public sector",
       "confidence": 0.9,
-      "evidence": "16th president of the United States",
-      "assignment_type": "direct",
+      "evidence": "the 16th president of the United States",
+      "assignment_type": "structured_claim",
       "category": "Professional: Industry",
       "protocol_id": "persona_attribution_professional_industry",
       "in_catalog": true
@@ -522,8 +1584,62 @@
     "role_function": {
       "value": "Executive",
       "confidence": 0.85,
-      "evidence": "was the 16th president of the United States",
+      "evidence": "the 16th president of the United States, serving from 1861",
+      "assignment_type": "structured_claim",
+      "category": "Professional: Industry",
+      "protocol_id": "persona_attribution_professional_industry",
+      "in_catalog": true
+    },
+    "ind_finance": {
+      "value": "Some exposure",
+      "confidence": 0.4,
+      "evidence": "This act imposed the first U.S. federal income tax",
+      "assignment_type": "summary_inference",
+      "category": "Professional: Industry",
+      "protocol_id": "persona_attribution_professional_industry",
+      "in_catalog": true
+    },
+    "ind_banking": {
+      "value": "Some exposure",
+      "confidence": 0.4,
+      "evidence": "Lincoln convinced Congress to pass the National Banking Act in 1863",
+      "assignment_type": "summary_inference",
+      "category": "Professional: Industry",
+      "protocol_id": "persona_attribution_professional_industry",
+      "in_catalog": true
+    },
+    "ind_retail": {
+      "value": "Some exposure",
+      "confidence": 0.55,
+      "evidence": "Lincoln worked at a general store in New Salem",
       "assignment_type": "direct",
+      "category": "Professional: Industry",
+      "protocol_id": "persona_attribution_professional_industry",
+      "in_catalog": true
+    },
+    "ind_hospitality": {
+      "value": "Some exposure",
+      "confidence": 0.4,
+      "evidence": "the Lincoln–Berry General Store became a tavern as well",
+      "assignment_type": "summary_inference",
+      "category": "Professional: Industry",
+      "protocol_id": "persona_attribution_professional_industry",
+      "in_catalog": true
+    },
+    "ind_restaurants": {
+      "value": "Some exposure",
+      "confidence": 0.35,
+      "evidence": "the Lincoln–Berry General Store became a tavern as well",
+      "assignment_type": "summary_inference",
+      "category": "Professional: Industry",
+      "protocol_id": "persona_attribution_professional_industry",
+      "in_catalog": true
+    },
+    "ind_agriculture": {
+      "value": "Some exposure",
+      "confidence": 0.45,
+      "evidence": "his father relied heavily on him for farmwork and for supplementary income, hiring the boy out to area farmers",
+      "assignment_type": "summary_inference",
       "category": "Professional: Industry",
       "protocol_id": "persona_attribution_professional_industry",
       "in_catalog": true
@@ -531,16 +1647,34 @@
     "ind_government": {
       "value": "Veteran",
       "confidence": 0.95,
-      "evidence": "was the 16th president of the United States, serving from 1861",
+      "evidence": "became a lawyer, Illinois state legislator, and U.S. representative",
       "assignment_type": "direct",
       "category": "Professional: Industry",
       "protocol_id": "persona_attribution_professional_industry",
       "in_catalog": true
     },
-    "ind_legal_services": {
+    "ind_defense": {
       "value": "Experienced",
-      "confidence": 0.7,
-      "evidence": "He was self-educated and became a lawyer",
+      "confidence": 0.6,
+      "evidence": "He closely supervised the Union's strategy and tactics, including the selection of generals",
+      "assignment_type": "structured_claim",
+      "category": "Professional: Industry",
+      "protocol_id": "persona_attribution_professional_industry",
+      "in_catalog": true
+    },
+    "ind_transportation": {
+      "value": "Some exposure",
+      "confidence": 0.35,
+      "evidence": "He dealt with many transportation cases in the midst of the nation's western expansion",
+      "assignment_type": "summary_inference",
+      "category": "Professional: Industry",
+      "protocol_id": "persona_attribution_professional_industry",
+      "in_catalog": true
+    },
+    "ind_legal_services": {
+      "value": "Veteran",
+      "confidence": 0.9,
+      "evidence": "Lincoln appeared before the Illinois Supreme Court in 411 cases",
       "assignment_type": "direct",
       "category": "Professional: Industry",
       "protocol_id": "persona_attribution_professional_industry",
@@ -549,16 +1683,70 @@
     "wiki_occupation": {
       "value": "Politician",
       "confidence": 0.95,
-      "evidence": "became a leader of the new Republican Party",
+      "evidence": "the 16th president of the United States",
       "assignment_type": "direct",
       "category": "Professional: Industry",
       "protocol_id": "persona_attribution_professional_industry",
       "in_catalog": true
     },
-    "values_priority": {
-      "value": "Achievement",
+    "risk_tolerance": {
+      "value": "Balanced",
       "confidence": 0.4,
-      "evidence": "self-educated and became a lawyer, Illinois state legislator, and U.S. representative",
+      "evidence": "After considerable deliberation, Lincoln decided to send provisions; according to Michael Burlingame, he \"could not be sure that his decision would precipitate a war, though he had good reason to believe that it might\"",
+      "assignment_type": "summary_inference",
+      "category": "Risk & Decision",
+      "protocol_id": "persona_attribution_risk_decision",
+      "in_catalog": true
+    },
+    "decision_style": {
+      "value": "Deliberative",
+      "confidence": 0.55,
+      "evidence": "After considerable deliberation, Lincoln decided to send provisions",
+      "assignment_type": "summary_inference",
+      "category": "Risk & Decision",
+      "protocol_id": "persona_attribution_risk_decision",
+      "in_catalog": true
+    },
+    "need_for_closure": {
+      "value": "Low",
+      "confidence": 0.45,
+      "evidence": "Lincoln was endowed with the personality trait of negative capability... \"capable of being in uncertainties... without any irritable reaching after fact and reason\"",
+      "assignment_type": "summary_inference",
+      "category": "Risk & Decision",
+      "protocol_id": "persona_attribution_risk_decision",
+      "in_catalog": true
+    },
+    "values_priority": {
+      "value": "Community",
+      "confidence": 0.4,
+      "evidence": "his efforts to preserve the Union and abolish slavery",
+      "assignment_type": "summary_inference",
+      "category": "Values & Motivation",
+      "protocol_id": "persona_attribution_values_motivation",
+      "in_catalog": true
+    },
+    "religiosity": {
+      "value": "Spiritual",
+      "confidence": 0.55,
+      "evidence": "As a young man, Lincoln was a religious skeptic. However... he more frequently expressed a dependence on God",
+      "assignment_type": "summary_inference",
+      "category": "Values & Motivation",
+      "protocol_id": "persona_attribution_values_motivation",
+      "in_catalog": true
+    },
+    "economic_motivation": {
+      "value": "Cost-sensitive",
+      "confidence": 0.3,
+      "evidence": "he cared little about fashion",
+      "assignment_type": "summary_inference",
+      "category": "Values & Motivation",
+      "protocol_id": "persona_attribution_values_motivation",
+      "in_catalog": true
+    },
+    "val_family": {
+      "value": "Important",
+      "confidence": 0.55,
+      "evidence": "Lincoln loved children, and the Lincolns were not considered to be strict with their own",
       "assignment_type": "summary_inference",
       "category": "Values & Motivation",
       "protocol_id": "persona_attribution_values_motivation",
@@ -566,8 +1754,17 @@
     },
     "val_career_success": {
       "value": "Important",
-      "confidence": 0.5,
-      "evidence": "became a lawyer, Illinois state legislator, and U.S. representative",
+      "confidence": 0.6,
+      "evidence": "In response to an inquiry about his ambitions, Lincoln said, \"The taste is in my mouth a little\"",
+      "assignment_type": "summary_inference",
+      "category": "Values & Motivation",
+      "protocol_id": "persona_attribution_values_motivation",
+      "in_catalog": true
+    },
+    "val_wealth": {
+      "value": "Minor",
+      "confidence": 0.45,
+      "evidence": "he lacked name recognition, powerful friends, and money",
       "assignment_type": "summary_inference",
       "category": "Values & Motivation",
       "protocol_id": "persona_attribution_values_motivation",
@@ -575,17 +1772,35 @@
     },
     "val_personal_freedom": {
       "value": "Important",
-      "confidence": 0.45,
-      "evidence": "playing a major role in the abolition of slavery",
+      "confidence": 0.6,
+      "evidence": "a new birth of freedom",
+      "assignment_type": "summary_inference",
+      "category": "Values & Motivation",
+      "protocol_id": "persona_attribution_values_motivation",
+      "in_catalog": true
+    },
+    "val_security_stability": {
+      "value": "Important",
+      "confidence": 0.6,
+      "evidence": "his efforts to preserve the Union",
+      "assignment_type": "summary_inference",
+      "category": "Values & Motivation",
+      "protocol_id": "persona_attribution_values_motivation",
+      "in_catalog": true
+    },
+    "val_tradition": {
+      "value": "Important",
+      "confidence": 0.55,
+      "evidence": "reverence for the Founding Fathers, the Constitution, the laws under it",
       "assignment_type": "summary_inference",
       "category": "Values & Motivation",
       "protocol_id": "persona_attribution_values_motivation",
       "in_catalog": true
     },
     "val_power_influence": {
-      "value": "Important",
-      "confidence": 0.45,
-      "evidence": "16th president of the United States",
+      "value": "Moderate",
+      "confidence": 0.4,
+      "evidence": "I could not afford to hang men for votes",
       "assignment_type": "summary_inference",
       "category": "Values & Motivation",
       "protocol_id": "persona_attribution_values_motivation",
@@ -593,8 +1808,35 @@
     },
     "val_achievement": {
       "value": "Important",
-      "confidence": 0.5,
-      "evidence": "He was self-educated and became a lawyer, Illinois state legislator, and U.S. representative",
+      "confidence": 0.6,
+      "evidence": "a common farm boy to work his way to the top by his own efforts",
+      "assignment_type": "summary_inference",
+      "category": "Values & Motivation",
+      "protocol_id": "persona_attribution_values_motivation",
+      "in_catalog": true
+    },
+    "val_creativity_self_expression": {
+      "value": "Moderate",
+      "confidence": 0.4,
+      "evidence": "the Gettysburg Address, which became one of the most famous speeches in American history",
+      "assignment_type": "summary_inference",
+      "category": "Values & Motivation",
+      "protocol_id": "persona_attribution_values_motivation",
+      "in_catalog": true
+    },
+    "val_community": {
+      "value": "Important",
+      "confidence": 0.55,
+      "evidence": "calling for the preservation of the Union",
+      "assignment_type": "summary_inference",
+      "category": "Values & Motivation",
+      "protocol_id": "persona_attribution_values_motivation",
+      "in_catalog": true
+    },
+    "val_spirituality_faith": {
+      "value": "Moderate",
+      "confidence": 0.45,
+      "evidence": "Lincoln more frequently expressed a dependence on God",
       "assignment_type": "summary_inference",
       "category": "Values & Motivation",
       "protocol_id": "persona_attribution_values_motivation",
@@ -602,8 +1844,17 @@
     },
     "val_knowledge_truth": {
       "value": "Important",
+      "confidence": 0.65,
+      "evidence": "he was an avid reader and maintained a lifelong interest in learning",
+      "assignment_type": "summary_inference",
+      "category": "Values & Motivation",
+      "protocol_id": "persona_attribution_values_motivation",
+      "in_catalog": true
+    },
+    "val_social_status": {
+      "value": "Minor",
       "confidence": 0.4,
-      "evidence": "He was self-educated",
+      "evidence": "he cared little about fashion",
       "assignment_type": "summary_inference",
       "category": "Values & Motivation",
       "protocol_id": "persona_attribution_values_motivation",
@@ -611,17 +1862,44 @@
     },
     "val_independence": {
       "value": "Important",
-      "confidence": 0.4,
-      "evidence": "He was self-educated",
+      "confidence": 0.6,
+      "evidence": "He later said of his legal education that he \"studied with nobody.\"",
       "assignment_type": "summary_inference",
       "category": "Values & Motivation",
       "protocol_id": "persona_attribution_values_motivation",
       "in_catalog": true
     },
     "val_justice_fairness": {
-      "value": "Important",
-      "confidence": 0.5,
-      "evidence": "playing a major role in the abolition of slavery",
+      "value": "Core value",
+      "confidence": 0.7,
+      "evidence": "he insisted that morality required opposition to slavery",
+      "assignment_type": "summary_inference",
+      "category": "Values & Motivation",
+      "protocol_id": "persona_attribution_values_motivation",
+      "in_catalog": true
+    },
+    "val_loyalty": {
+      "value": "Moderate",
+      "confidence": 0.35,
+      "evidence": "if they signed an oath of allegiance",
+      "assignment_type": "summary_inference",
+      "category": "Values & Motivation",
+      "protocol_id": "persona_attribution_values_motivation",
+      "in_catalog": true
+    },
+    "val_sustainability": {
+      "value": "Moderate",
+      "confidence": 0.35,
+      "evidence": "the Yosemite Grant, which provided unprecedented federal protection for the area now known as Yosemite National Park",
+      "assignment_type": "summary_inference",
+      "category": "Values & Motivation",
+      "protocol_id": "persona_attribution_values_motivation",
+      "in_catalog": true
+    },
+    "val_recognition": {
+      "value": "Moderate",
+      "confidence": 0.4,
+      "evidence": "The taste is in my mouth a little",
       "assignment_type": "summary_inference",
       "category": "Values & Motivation",
       "protocol_id": "persona_attribution_values_motivation",
@@ -629,8 +1907,8 @@
     },
     "val_helping_others": {
       "value": "Important",
-      "confidence": 0.4,
-      "evidence": "playing a major role in the abolition of slavery",
+      "confidence": 0.55,
+      "evidence": "the government had at least some responsibility for the material needs of millions of ex-slaves",
       "assignment_type": "summary_inference",
       "category": "Values & Motivation",
       "protocol_id": "persona_attribution_values_motivation",
@@ -638,8 +1916,44 @@
     },
     "val_personal_growth": {
       "value": "Important",
-      "confidence": 0.45,
-      "evidence": "He was self-educated",
+      "confidence": 0.6,
+      "evidence": "Lincoln was largely self-educated",
+      "assignment_type": "summary_inference",
+      "category": "Values & Motivation",
+      "protocol_id": "persona_attribution_values_motivation",
+      "in_catalog": true
+    },
+    "val_fun_enjoyment": {
+      "value": "Moderate",
+      "confidence": 0.4,
+      "evidence": "He drew crowds as a raconteur",
+      "assignment_type": "summary_inference",
+      "category": "Values & Motivation",
+      "protocol_id": "persona_attribution_values_motivation",
+      "in_catalog": true
+    },
+    "val_integrity_honesty": {
+      "value": "Core value",
+      "confidence": 0.65,
+      "evidence": "Lincoln has also been characterized as a folk hero and as \"Honest Abe\"",
+      "assignment_type": "summary_inference",
+      "category": "Values & Motivation",
+      "protocol_id": "persona_attribution_values_motivation",
+      "in_catalog": true
+    },
+    "val_beauty_aesthetics": {
+      "value": "Minor",
+      "confidence": 0.4,
+      "evidence": "he cared little about fashion",
+      "assignment_type": "summary_inference",
+      "category": "Values & Motivation",
+      "protocol_id": "persona_attribution_values_motivation",
+      "in_catalog": true
+    },
+    "val_order_structure": {
+      "value": "Important",
+      "confidence": 0.5,
+      "evidence": "reverence for the Founding Fathers, the Constitution, the laws under it",
       "assignment_type": "summary_inference",
       "category": "Values & Motivation",
       "protocol_id": "persona_attribution_values_motivation",
@@ -647,17 +1961,17 @@
     },
     "val_patriotism": {
       "value": "Important",
-      "confidence": 0.4,
-      "evidence": "He led the United States through the American Civil War",
+      "confidence": 0.6,
+      "evidence": "a hero to political conservatives... for his nationalism",
       "assignment_type": "summary_inference",
       "category": "Values & Motivation",
       "protocol_id": "persona_attribution_values_motivation",
       "in_catalog": true
     },
     "val_equality": {
-      "value": "Important",
-      "confidence": 0.5,
-      "evidence": "playing a major role in the abolition of slavery",
+      "value": "Core value",
+      "confidence": 0.7,
+      "evidence": "He presented the Declaration as establishing equality as a foundational principle for the United States",
       "assignment_type": "summary_inference",
       "category": "Values & Motivation",
       "protocol_id": "persona_attribution_values_motivation",
@@ -665,8 +1979,26 @@
     },
     "schwartz_value_self_direction": {
       "value": "High",
-      "confidence": 0.45,
-      "evidence": "He was self-educated",
+      "confidence": 0.6,
+      "evidence": "He later said of his legal education that he \"studied with nobody.\"",
+      "assignment_type": "summary_inference",
+      "category": "Values & Motivation",
+      "protocol_id": "persona_attribution_values_motivation",
+      "in_catalog": true
+    },
+    "schwartz_value_stimulation": {
+      "value": "Low",
+      "confidence": 0.35,
+      "evidence": "Lincoln suffered from \"melancholy\"",
+      "assignment_type": "summary_inference",
+      "category": "Values & Motivation",
+      "protocol_id": "persona_attribution_values_motivation",
+      "in_catalog": true
+    },
+    "schwartz_value_hedonism": {
+      "value": "Low",
+      "confidence": 0.35,
+      "evidence": "he cared little about fashion",
       "assignment_type": "summary_inference",
       "category": "Values & Motivation",
       "protocol_id": "persona_attribution_values_motivation",
@@ -674,26 +2006,62 @@
     },
     "schwartz_value_achievement": {
       "value": "High",
-      "confidence": 0.45,
-      "evidence": "self-educated and became a lawyer, Illinois state legislator, and U.S. representative",
+      "confidence": 0.6,
+      "evidence": "a common farm boy to work his way to the top by his own efforts",
       "assignment_type": "summary_inference",
       "category": "Values & Motivation",
       "protocol_id": "persona_attribution_values_motivation",
       "in_catalog": true
     },
     "schwartz_value_power": {
-      "value": "High",
+      "value": "Average",
       "confidence": 0.4,
-      "evidence": "16th president of the United States",
+      "evidence": "I could not afford to hang men for votes",
+      "assignment_type": "summary_inference",
+      "category": "Values & Motivation",
+      "protocol_id": "persona_attribution_values_motivation",
+      "in_catalog": true
+    },
+    "schwartz_value_security": {
+      "value": "High",
+      "confidence": 0.55,
+      "evidence": "his first obligation as president was to preserve the Union",
+      "assignment_type": "summary_inference",
+      "category": "Values & Motivation",
+      "protocol_id": "persona_attribution_values_motivation",
+      "in_catalog": true
+    },
+    "schwartz_value_conformity": {
+      "value": "Low",
+      "confidence": 0.4,
+      "evidence": "Lincoln engaged in nonacquiescence and persisted with the policy of suspension",
+      "assignment_type": "summary_inference",
+      "category": "Values & Motivation",
+      "protocol_id": "persona_attribution_values_motivation",
+      "in_catalog": true
+    },
+    "schwartz_value_tradition": {
+      "value": "High",
+      "confidence": 0.55,
+      "evidence": "reverence for the Founding Fathers, the Constitution",
+      "assignment_type": "summary_inference",
+      "category": "Values & Motivation",
+      "protocol_id": "persona_attribution_values_motivation",
+      "in_catalog": true
+    },
+    "schwartz_value_benevolence": {
+      "value": "High",
+      "confidence": 0.5,
+      "evidence": "Lincoln loved children",
       "assignment_type": "summary_inference",
       "category": "Values & Motivation",
       "protocol_id": "persona_attribution_values_motivation",
       "in_catalog": true
     },
     "schwartz_value_universalism": {
-      "value": "High",
-      "confidence": 0.45,
-      "evidence": "playing a major role in the abolition of slavery",
+      "value": "Very high",
+      "confidence": 0.65,
+      "evidence": "all men are created equal",
       "assignment_type": "summary_inference",
       "category": "Values & Motivation",
       "protocol_id": "persona_attribution_values_motivation",
@@ -701,8 +2069,8 @@
     },
     "sdt_need_autonomy": {
       "value": "High",
-      "confidence": 0.4,
-      "evidence": "He was self-educated",
+      "confidence": 0.55,
+      "evidence": "Rather than studying in the office of an established attorney... Lincoln read law on his own",
       "assignment_type": "summary_inference",
       "category": "Values & Motivation",
       "protocol_id": "persona_attribution_values_motivation",
@@ -710,35 +2078,125 @@
     },
     "sdt_need_competence": {
       "value": "High",
-      "confidence": 0.4,
-      "evidence": "self-educated and became a lawyer",
+      "confidence": 0.55,
+      "evidence": "Lincoln demonstrated intellectual leadership, which brought him into contention for the presidency",
+      "assignment_type": "summary_inference",
+      "category": "Values & Motivation",
+      "protocol_id": "persona_attribution_values_motivation",
+      "in_catalog": true
+    },
+    "sdt_need_relatedness": {
+      "value": "Average",
+      "confidence": 0.35,
+      "evidence": "Abraham became increasingly distant from Thomas",
       "assignment_type": "summary_inference",
       "category": "Values & Motivation",
       "protocol_id": "persona_attribution_values_motivation",
       "in_catalog": true
     },
     "need_for_cognition": {
-      "value": "High",
-      "confidence": 0.45,
-      "evidence": "He was self-educated and became a lawyer",
+      "value": "Very high",
+      "confidence": 0.7,
+      "evidence": "he was an avid reader and maintained a lifelong interest in learning",
       "assignment_type": "summary_inference",
       "category": "Values & Motivation",
       "protocol_id": "persona_attribution_values_motivation",
       "in_catalog": true
     },
+    "political_lean": {
+      "value": "Center-right",
+      "confidence": 0.3,
+      "evidence": "As a moderate Republican, Lincoln had to navigate conflicting political opinions",
+      "assignment_type": "summary_inference",
+      "category": "Worldview: Beliefs",
+      "protocol_id": "persona_attribution_worldview_beliefs",
+      "in_catalog": true
+    },
     "fam_political_science": {
       "value": "Proficient",
       "confidence": 0.55,
-      "evidence": "became a lawyer, Illinois state legislator, and U.S. representative",
-      "assignment_type": "structured_claim",
+      "evidence": "Lincoln redefined the political philosophy of republicanism in the United States.",
+      "assignment_type": "summary_inference",
+      "category": "Worldview: Beliefs",
+      "protocol_id": "persona_attribution_worldview_beliefs",
+      "in_catalog": true
+    },
+    "fam_religious_studies": {
+      "value": "Familiar",
+      "confidence": 0.45,
+      "evidence": "he was deeply familiar with the Bible; throughout his public career, he often quoted scripture",
+      "assignment_type": "summary_inference",
+      "category": "Worldview: Beliefs",
+      "protocol_id": "persona_attribution_worldview_beliefs",
+      "in_catalog": true
+    },
+    "topic_spirituality": {
+      "value": "Neutral",
+      "confidence": 0.3,
+      "evidence": "As a young man, Lincoln was a religious skeptic",
+      "assignment_type": "summary_inference",
+      "category": "Worldview: Beliefs",
+      "protocol_id": "persona_attribution_worldview_beliefs",
+      "in_catalog": true
+    },
+    "att_government_regulation": {
+      "value": "Positive",
+      "confidence": 0.35,
+      "evidence": "he was a spokesman for business interests, favoring high tariffs, banks, infrastructure improvements, and railroads",
+      "assignment_type": "summary_inference",
+      "category": "Worldview: Beliefs",
+      "protocol_id": "persona_attribution_worldview_beliefs",
+      "in_catalog": true
+    },
+    "att_organized_religion": {
+      "value": "Skeptical",
+      "confidence": 0.5,
+      "evidence": "As a young man, Lincoln was a religious skeptic... He never joined a church",
+      "assignment_type": "summary_inference",
+      "category": "Worldview: Beliefs",
+      "protocol_id": "persona_attribution_worldview_beliefs",
+      "in_catalog": true
+    },
+    "att_higher_education": {
+      "value": "Positive",
+      "confidence": 0.45,
+      "evidence": "The 1862 Morrill Land-Grant Colleges Act provided government grants for agricultural colleges in each state.",
+      "assignment_type": "summary_inference",
+      "category": "Worldview: Beliefs",
+      "protocol_id": "persona_attribution_worldview_beliefs",
+      "in_catalog": true
+    },
+    "att_authority": {
+      "value": "Positive",
+      "confidence": 0.35,
+      "evidence": "reverence for the Founding Fathers, the Constitution, the laws under it... strengthened his conservatism",
+      "assignment_type": "summary_inference",
+      "category": "Worldview: Beliefs",
+      "protocol_id": "persona_attribution_worldview_beliefs",
+      "in_catalog": true
+    },
+    "att_capital_punishment": {
+      "value": "Skeptical",
+      "confidence": 0.3,
+      "evidence": "Lincoln pardoned all but 39 of the condemned warriors",
+      "assignment_type": "summary_inference",
+      "category": "Worldview: Beliefs",
+      "protocol_id": "persona_attribution_worldview_beliefs",
+      "in_catalog": true
+    },
+    "acad_political_theory": {
+      "value": "Interested",
+      "confidence": 0.5,
+      "evidence": "Lincoln redefined the political philosophy of republicanism in the United States.",
+      "assignment_type": "summary_inference",
       "category": "Worldview: Beliefs",
       "protocol_id": "persona_attribution_worldview_beliefs",
       "in_catalog": true
     },
     "mft_care_harm": {
       "value": "High",
-      "confidence": 0.4,
-      "evidence": "playing a major role in the abolition of slavery",
+      "confidence": 0.5,
+      "evidence": "he would be repelled while observing slavery firsthand",
       "assignment_type": "summary_inference",
       "category": "Worldview: Beliefs",
       "protocol_id": "persona_attribution_worldview_beliefs",
@@ -746,8 +2204,26 @@
     },
     "mft_fairness_cheating": {
       "value": "High",
-      "confidence": 0.4,
-      "evidence": "playing a major role in the abolition of slavery",
+      "confidence": 0.5,
+      "evidence": "establishing equality as a foundational principle for the United States",
+      "assignment_type": "summary_inference",
+      "category": "Worldview: Beliefs",
+      "protocol_id": "persona_attribution_worldview_beliefs",
+      "in_catalog": true
+    },
+    "mft_loyalty_betrayal": {
+      "value": "High",
+      "confidence": 0.45,
+      "evidence": "calling for the preservation of the Union",
+      "assignment_type": "summary_inference",
+      "category": "Worldview: Beliefs",
+      "protocol_id": "persona_attribution_worldview_beliefs",
+      "in_catalog": true
+    },
+    "mft_authority_subversion": {
+      "value": "Average",
+      "confidence": 0.3,
+      "evidence": "reverence for the Founding Fathers, the Constitution",
       "assignment_type": "summary_inference",
       "category": "Worldview: Beliefs",
       "protocol_id": "persona_attribution_worldview_beliefs",
@@ -755,8 +2231,8 @@
     },
     "mft_liberty_oppression": {
       "value": "Very high",
-      "confidence": 0.5,
-      "evidence": "defeating the Confederacy and playing a major role in the abolition of slavery",
+      "confidence": 0.55,
+      "evidence": "all men have an unalienable right to life, liberty and the pursuit of happiness",
       "assignment_type": "summary_inference",
       "category": "Worldview: Beliefs",
       "protocol_id": "persona_attribution_worldview_beliefs",
@@ -764,8 +2240,8 @@
     },
     "wiki_political_affiliation": {
       "value": "Republican",
-      "confidence": 0.9,
-      "evidence": "he became a leader of the new Republican Party",
+      "confidence": 0.95,
+      "evidence": "On November 6, 1860, Lincoln was elected as the first Republican president.",
       "assignment_type": "direct",
       "category": "Worldview: Beliefs",
       "protocol_id": "persona_attribution_worldview_beliefs",
