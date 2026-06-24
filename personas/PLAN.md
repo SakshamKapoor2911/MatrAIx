@@ -8,7 +8,7 @@
 
 Collect and summarize existing persona work, grouped into the subsections below.
 
-**Owner(s):** @Shirley-Huang, @Eliza_Fan, @Yixuan-He, @Xiaoyi-Liu @heming03 (add more as needed)
+**Owner(s):** @Shirley-Huang, @Eliza_Fan, @Yixuan-He, @Xiaoyi-Liu @heming03 @ZhengyangShan(add more as needed)
 
 > 📌 **Default item format** — each entry should look like:
 >
@@ -205,6 +205,16 @@ _Benchmarks, evaluation, related work that doesn't fit above._
 - Studies how to adapt LLMs to heterogeneous individual user preferences rather than broad demographic or role-level personas.
 - Provides a public benchmark and dataset with open-ended prompts, multiple high-quality responses, and preference signals from simulated users with diverse latent preferences.
 - Relevance: useful for defining preference-oriented persona dimensions and testing whether MatrAIx personas induce genuinely individualized preferences instead of homogeneous behavior.
+
+### [How Far are LLMs from Being Our Digital Twins? A Benchmark for Persona-Based Behavior Chain Simulation](https://aclanthology.org/2025.findings-acl.813/)(@ZhengyangShan)
+- Introduces BehaviorChain, a benchmark for evaluating whether LLMs can simulate continuous human behavior rather than only dialogue or survey responses.
+- Contains 1,001 personas and 15,846 behavior instances/chains with profile and history metadata, where models iteratively infer contextually appropriate behaviors.
+- Relevance: provides an action-sequence evaluation format for MatrAIxPersonaBench: given a persona, history, and dynamic context, predict the next plausible behavior.
+
+### [PersonaBench: Evaluating AI Models on Understanding Personal Information through Accessing Synthetic Private User Data](https://aclanthology.org/2025.findings-acl.49/)(@ZhengyangShan)
+- Builds synthetic user profiles and private documents to evaluate whether AI models can understand personal information from simulated private user data.
+- Uses private documents such as conversation history, user-AI interactions, and app usage records to evaluate RAG pipelines on personal facts, preferences, and social connections.
+- Relevance: useful for MatrAIxPersona data construction if the project wants personas with document-grounded histories rather than only explicit profile fields.
 
 ### [SimBench: Benchmarking the Ability for Large Language Models to Simulate Human Behaviors](https://openreview.net/pdf?id=PL51SpN6ZJ)
 - Introduces the first large-scale benchmark for evaluating whether LLMs can faithfully simulate group-level human behavior, unifying 20 datasets spanning moral decisions, economic choices, surveys, and social science tasks.
