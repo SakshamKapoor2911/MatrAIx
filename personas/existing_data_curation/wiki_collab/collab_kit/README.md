@@ -72,6 +72,34 @@ Each wrapper command reads the prompt on stdin and prints one JSON object with a
 `fields` array on stdout (see `claude_json_backend.py` for a working example).
 The bundled adapters are pure stdlib — no install step.
 
+Pick the model and reasoning effort with `--model` and `--effort`:
+
+```bash
+./run.sh --tasks ../tasks.jsonl --dimensions ../dimensions.json --out ../results.jsonl \
+         --backend claude-code-acp --model claude-opus-4-8 --effort high --jobs 6
+```
+
+## Pause, resume, and progress
+
+The run is **resumable**. Every finished (profile × category) unit is
+checkpointed to `<out>.progress.jsonl`, so you can stop any time — Ctrl-C, or
+your model quota runs out — and **just run the exact same command again later**
+to continue. Finished units are skipped; only the remaining ones are attempted.
+A unit that errors (e.g. a 429) is left pending and retried on the next run.
+
+```bash
+# how far along am I? (reads the checkpoint, runs nothing)
+python3 harness.py --tasks ../tasks.jsonl --dimensions ../dimensions.json \
+        --out ../results.jsonl --status
+
+# start over, discarding progress
+./run.sh ... --restart
+```
+
+`results.jsonl` is rewritten from the checkpoint on every run, so it always
+reflects what is done so far. When all units are done, the harness runs the
+conformance check and tells you it is ready to send.
+
 ## What you edit
 
 **`solver.py`** — the one function `attribute(profile, dimensions) -> [field]`.
