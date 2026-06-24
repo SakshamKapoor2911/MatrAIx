@@ -8,7 +8,7 @@
 
 Collect and summarize existing persona work, grouped into the subsections below.
 
-**Owner(s):** @Shirley-Huang, @Eliza_Fan, @Yixuan-He, @Xiaoyi-Liu (add more as needed)
+**Owner(s):** @Shirley-Huang, @Eliza_Fan, @Yixuan-He, @Xiaoyi-Liu @heming03 (add more as needed)
 
 > 📌 **Default item format** — each entry should look like:
 >
@@ -190,6 +190,21 @@ _Benchmarks, evaluation, related work that doesn't fit above._
 - Benchmark for evaluating tool-using and interactive LLM agents in realistic user-facing tasks.
 - Emphasizes long-horizon interactions and human-like user behavior.
 - Relevance: provides evaluation settings for testing whether MatrAIx personas behave realistically when interacting with agents rather than only answering survey questions.
+
+### [SOTOPIA: Interactive Evaluation for Social Intelligence in Language Agents](https://arxiv.org/abs/2310.11667)(@heming03)
+- Introduces an open-ended environment for evaluating social intelligence in language agents through role-play interactions under diverse social scenarios.
+- Uses assigned roles, private social goals, interactive dialogue, and SOTOPIA-Eval to measure agents' goal completion, believability, and social reasoning.
+- Relevance: provides an interaction-based benchmark design for MatrAIxPersonaBench, testing whether persona agents behave plausibly in social contexts rather than only answering static profile-conditioned questions.
+
+### [LaMP: When Large Language Models Meet Personalization](https://aclanthology.org/2024.acl-long.399/)(@heming03)
+- Introduces a benchmark for training and evaluating LLMs on personalized outputs conditioned on user profiles or historical user data.
+- Contains seven personalized tasks across text classification and text generation, with multiple entries per user profile.
+- Relevance: complements persona-role benchmarks by testing whether user/persona information changes concrete downstream task behavior; useful for MatrAIxPersonaBench and MatrAIxPersonaTrain.
+
+### [PersonalLLM: Tailoring LLMs to Individual Preferences](https://openreview.net/forum?id=2R7498e2Tx)(@heming03)
+- Studies how to adapt LLMs to heterogeneous individual user preferences rather than broad demographic or role-level personas.
+- Provides a public benchmark and dataset with open-ended prompts, multiple high-quality responses, and preference signals from simulated users with diverse latent preferences.
+- Relevance: useful for defining preference-oriented persona dimensions and testing whether MatrAIx personas induce genuinely individualized preferences instead of homogeneous behavior.
 
 ### [SimBench: Benchmarking the Ability for Large Language Models to Simulate Human Behaviors](https://openreview.net/pdf?id=PL51SpN6ZJ)
 - Introduces the first large-scale benchmark for evaluating whether LLMs can faithfully simulate group-level human behavior, unifying 20 datasets spanning moral decisions, economic choices, surveys, and social science tasks.
