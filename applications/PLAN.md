@@ -10,7 +10,7 @@
 
 Collect and summarize prior work on user simulation, evaluation scenarios, and domain-specific agent benchmarks.
 
-**Owner(s):** @Shirley-Huang, @Qianfeng-Wen, @Yifan-Liu, @Eliza_Fan, @Wenqian_Ye (add more as needed)
+**Owner(s):** @Shirley-Huang, @Qianfeng-Wen, @Yifan-Liu, @Eliza_Fan, @Wenqian-Ye (add more as needed)
 
 > 📌 **Default item format** — each entry should look like:
 >
