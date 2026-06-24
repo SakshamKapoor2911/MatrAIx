@@ -37,22 +37,21 @@ doesn't support.
 
 ```bash
 # From an unpacked assignment package:
-cd collab_kit
+./run_assignment.sh
 
-# 1) Smoke test the real assignment files. Proves the pipeline + format.
-./run.sh --tasks ../tasks.jsonl --dimensions ../dimensions.json \
-         --out ../results.jsonl --backend mock
-
-# 2) Check any results file against the contract (run this before sending back).
-python3 conformance.py --results ../results.jsonl --dimensions ../dimensions.json --tasks ../tasks.jsonl
-
-# 3) The real thing — same code, YOUR account. Pick the backend for your auth:
-./run.sh --tasks ../tasks.jsonl --dimensions ../dimensions.json \
-         --out ../results.jsonl --backend claude-code-acp --jobs 6
+# Direct commands if you do not want the menu:
+./run_assignment.sh --configure
+./run_assignment.sh --status
+./run_assignment.sh --backend mock --model mock-model --effort high --jobs 2 --yes --run
+./run_assignment.sh --backend claude-code-acp --model claude-opus-4-8 --effort high --jobs 6 --yes --run
+./run_assignment.sh --backend codex-acp --model gpt-5.5 --effort high --jobs 4 --yes --run
+./run_assignment.sh --validate
 ```
 
-`harness.py` writes `../results.jsonl` and runs the conformance check for you,
-so a green run means you're ready to send that file back.
+`run_assignment.sh` verifies package checksums before every action, saves
+settings in `.wiki_collab_settings.yaml`, writes `results.jsonl`, and runs the
+conformance check for you. A green run means you're ready to send that file
+back.
 
 ## Run on your own account (auth)
 
@@ -63,20 +62,20 @@ backend that matches what you have; nothing to edit:
 | you have | backend | how to authenticate |
 |---|---|---|
 | a **Claude subscription** | `--backend claude-code-acp` | log in once with the `claude` CLI; the kit calls it for you |
-| a **Codex subscription** | `--backend codex-acp` | `export WIKI_COLLAB_CODEX_CMD='<your codex wrapper>'` |
+| a **Codex subscription** | `--backend codex-acp` | log in once with the `codex` CLI; the kit calls it for you |
 | an **Anthropic API key** | `--backend anthropic-api` | `export WIKI_COLLAB_ANTHROPIC_CMD='<your wrapper>'` |
 | an **OpenAI API key** | `--backend openai-api` | `export WIKI_COLLAB_OPENAI_CMD='<your wrapper>'` |
 | nothing / just testing | `--backend mock` | none (writes all-`unsupported`, proves the pipeline) |
 
 Each wrapper command reads the prompt on stdin and prints one JSON object with a
-`fields` array on stdout (see `claude_json_backend.py` for a working example).
-The bundled adapters are pure stdlib — no install step.
+`fields` array on stdout. The bundled Claude and Codex adapters are pure
+stdlib. You can still override commands with `WIKI_COLLAB_CLAUDE_CMD` or
+`WIKI_COLLAB_CODEX_CMD`.
 
 Pick the model and reasoning effort with `--model` and `--effort`:
 
 ```bash
-./run.sh --tasks ../tasks.jsonl --dimensions ../dimensions.json --out ../results.jsonl \
-         --backend claude-code-acp --model claude-opus-4-8 --effort high --jobs 6
+./run_assignment.sh --backend claude-code-acp --model claude-opus-4-8 --effort high --jobs 6 --yes --run
 ```
 
 ## Pause, resume, and progress
@@ -89,11 +88,10 @@ A unit that errors (e.g. a 429) is left pending and retried on the next run.
 
 ```bash
 # how far along am I? (reads the checkpoint, runs nothing)
-python3 harness.py --tasks ../tasks.jsonl --dimensions ../dimensions.json \
-        --out ../results.jsonl --status
+./run_assignment.sh --status
 
 # start over, discarding progress
-./run.sh ... --restart
+./run_assignment.sh --restart --backend claude-code-acp --model claude-opus-4-8 --effort high --jobs 6 --yes --run
 ```
 
 `results.jsonl` is rewritten from the checkpoint on every run, so it always
@@ -121,9 +119,11 @@ collab_kit/
   schemas/              the contract (input task, dimensions, output result)
   solver.py             << YOUR CODE: attribute(profile, dimensions) -> fields
   harness.py            tasks.jsonl + dimensions.json -> results.jsonl (calls solver)
+  assignment_runner.py  package menu, settings, checksums, run/status/validate
   conformance.py        validates results.jsonl against the contract (both sides run it)
   backends.py           backend adapters (mock / claude / codex / api) — bundled, stdlib only
   claude_json_backend.py  CLI adapter: uses YOUR Claude subscription
+  codex_json_backend.py   CLI adapter: uses YOUR Codex subscription
   run.sh                convenience wrapper for harness.py
   sample/               tasks.jsonl, dimensions.json, results.jsonl (a conformant example)
 ```
@@ -136,13 +136,13 @@ collab_kit/
   already has the `{id,label,description,values}` shape, and
   `personas/dimensions+new.json` is the full catalog).
 - Prefer `scripts/make_collab_package.py` to create the package. It writes
-  `assignment.json`, hashes the outgoing files, copies this kit, and emits a
-  `.tar.gz` that is ready to send.
+  `assignment.json`, `package_manifest.json`, hashes the outgoing files, copies
+  this kit, and emits a `.tar.gz` that is ready to send.
 - On return, run `conformance.py --results theirs.jsonl --dimensions dimensions.json --tasks tasks.jsonl`
   before ingesting. Same checker both sides ⇒ formats always match.
 - Merge everyone's returns with `scripts/merge_collab_results.py` (repeat
-  `--results` per worker). With `--db` it verifies each `global_idx`/`task_id`/
-  `qid` against the source SQLite (so a profile can't be swapped), unions fields
-  per profile, reports value conflicts, and tallies the model/effort/version
-  each return was produced with. Each returned record carries that provenance in
-  its `run` block.
+  `--results` and `--package-manifest` per worker). With `--db` it verifies each
+  `global_idx`/`task_id`/`qid`/`input_sha256` against the source SQLite, unions
+  fields per profile, reports value conflicts, and tallies the model/effort/
+  version each return was produced with. Each returned record carries that
+  provenance in its `run` block.

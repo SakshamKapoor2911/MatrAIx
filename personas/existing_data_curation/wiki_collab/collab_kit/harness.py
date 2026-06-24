@@ -29,6 +29,7 @@ from __future__ import annotations
 import argparse
 import concurrent.futures
 import json
+import os
 import sys
 import threading
 from collections import OrderedDict
@@ -57,12 +58,21 @@ def run_provenance(backend: str, model: str | None, effort: str) -> dict[str, An
             resolved = DEFAULT_MODELS.get(backend)
         except Exception:
             resolved = None
-    return {
+    run = {
         "backend": backend,
         "model": resolved,
         "effort": effort,
         "runner_version": HARNESS_VERSION,
     }
+    assignment_raw = os.environ.get("WIKI_COLLAB_ASSIGNMENT_PROVENANCE")
+    if assignment_raw:
+        try:
+            assignment = json.loads(assignment_raw)
+        except json.JSONDecodeError:
+            assignment = None
+        if isinstance(assignment, dict):
+            run["assignment"] = assignment
+    return run
 
 
 def group_by_category(
@@ -120,6 +130,7 @@ def assemble_results(
                 "global_idx": gi,
                 "task_id": task.get("task_id"),
                 "qid": task.get("qid"),
+                "input_sha256": task.get("input_sha256"),
                 "model": run.get("model"),  # back-compat mirror of run.model
                 "run": run,
                 "fields": list(per_profile.get(gi, {}).values()),

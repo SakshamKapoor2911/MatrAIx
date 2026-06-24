@@ -30,6 +30,7 @@ DEFAULT_DIMENSIONS = REPO_ROOT / "personas" / "dimensions+new.json"
 COLLAB_KIT_SRC = (
     REPO_ROOT / "personas/existing_data_curation/wiki_collab/collab_kit"
 )
+ROOT_LAUNCHER_SRC = REPO_ROOT / "personas/existing_data_curation/wiki_collab/run_assignment.sh"
 SLUG_RE = re.compile(r"[^a-z0-9]+")
 
 
@@ -95,6 +96,8 @@ def write_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:
 
 def _ignore_collab_kit(dir_path: str, names: list[str]) -> set[str]:
     ignored = set()
+    source_dir = Path(dir_path).resolve()
+    kit_root = COLLAB_KIT_SRC.resolve()
     for name in names:
         if name == "__pycache__":
             ignored.add(name)
@@ -104,7 +107,9 @@ def _ignore_collab_kit(dir_path: str, names: list[str]) -> set[str]:
             ignored.add(name)
         elif name.endswith(".tar.gz"):
             ignored.add(name)
-        elif name == "results.jsonl":
+        elif source_dir == kit_root and (
+            name == "results.jsonl" or name.endswith(".progress.jsonl")
+        ):
             ignored.add(name)
     return ignored
 
@@ -112,6 +117,65 @@ def _ignore_collab_kit(dir_path: str, names: list[str]) -> set[str]:
 def copy_collab_kit(out_dir: Path) -> None:
     dst = out_dir / "collab_kit"
     shutil.copytree(COLLAB_KIT_SRC, dst, ignore=_ignore_collab_kit)
+
+
+def copy_root_launcher(out_dir: Path) -> None:
+    dst = out_dir / "run_assignment.sh"
+    shutil.copy2(ROOT_LAUNCHER_SRC, dst)
+    dst.chmod(dst.stat().st_mode | 0o111)
+
+
+def _manifest_file_entry(path: Path, *, root: Path, mode: str) -> dict[str, Any]:
+    return {
+        "mode": mode,
+        "sha256": sha256_file(path),
+        "bytes": path.stat().st_size,
+        "path": str(path.relative_to(root)),
+    }
+
+
+def write_package_manifest(out_dir: Path, assignment: dict[str, Any]) -> None:
+    immutable = [
+        out_dir / "assignment.json",
+        out_dir / "tasks.jsonl",
+        out_dir / "dimensions.json",
+        out_dir / "run_assignment.sh",
+        out_dir / "collab_kit" / "harness.py",
+        out_dir / "collab_kit" / "conformance.py",
+        out_dir / "collab_kit" / "backends.py",
+        out_dir / "collab_kit" / "assignment_runner.py",
+        out_dir / "collab_kit" / "claude_json_backend.py",
+        out_dir / "collab_kit" / "codex_json_backend.py",
+    ]
+    immutable.extend(sorted((out_dir / "collab_kit" / "schemas").glob("*.json")))
+
+    files: dict[str, Any] = {}
+    for path in immutable:
+        if path.exists():
+            rel = str(path.relative_to(out_dir))
+            files[rel] = _manifest_file_entry(path, root=out_dir, mode="immutable")
+
+    solver = out_dir / "collab_kit" / "solver.py"
+    if solver.exists():
+        rel = str(solver.relative_to(out_dir))
+        files[rel] = _manifest_file_entry(solver, root=out_dir, mode="editable")
+
+    manifest = {
+        "manifest_version": 1,
+        "assignment": {
+            "assignment_id": assignment["assignment_id"],
+            "worker_id": assignment["worker_id"],
+            "dataset_id": assignment["dataset_id"],
+            "dataset_sha256": assignment["dataset_sha256"],
+            "range_start": assignment["range_start"],
+            "range_end": assignment["range_end"],
+            "task_count": assignment["task_count"],
+            "dimension_count": assignment["dimension_count"],
+            "categories": assignment["categories"],
+        },
+        "files": dict(sorted(files.items())),
+    }
+    write_json(out_dir / "package_manifest.json", manifest)
 
 
 def write_worker_readme(out_dir: Path) -> None:
@@ -124,27 +188,31 @@ Files:
 - `assignment.json`: assignment metadata.
 - `tasks.jsonl`: Wikipedia person profiles to process.
 - `dimensions.json`: persona dimensions and allowed values to fill.
+- `package_manifest.json`: checksums for files that should not change.
+- `run_assignment.sh`: the main entrypoint.
 - `collab_kit/solver.py`: the starter code you may edit.
 - `results.jsonl`: the file you send back after a passing run.
 
 Quickstart:
 
 ```bash
-cd collab_kit
-# smoke test (no credentials):
-./run.sh --tasks ../tasks.jsonl --dimensions ../dimensions.json --out ../results.jsonl --backend mock
-python3 conformance.py --results ../results.jsonl --dimensions ../dimensions.json --tasks ../tasks.jsonl
+./run_assignment.sh
 
-# real run on YOUR Claude subscription (just have the `claude` CLI logged in):
-./run.sh --tasks ../tasks.jsonl --dimensions ../dimensions.json --out ../results.jsonl --backend claude-code-acp --jobs 6
+# direct commands:
+./run_assignment.sh --status
+./run_assignment.sh --backend mock --model mock-model --effort high --jobs 2 --yes --run
+./run_assignment.sh --backend claude-code-acp --model claude-opus-4-8 --effort high --jobs 6 --yes --run
+./run_assignment.sh --backend codex-acp --model gpt-5.5 --effort high --jobs 4 --yes --run
+./run_assignment.sh --validate
 ```
 
-The code is the same for everyone — only your credentials differ. `solver.py`
-ships with the owner's default extraction method and works as-is; pick the
-backend for your account (`claude-code-acp`, `codex-acp`, `anthropic-api`,
-`openai-api` — see `collab_kit/README.md`). You may improve `solver.py` to get
-better results; just keep the output contract unchanged and return only
-`results.jsonl` unless the owner asks for logs.
+The runner verifies checksums before every action, saves settings in
+`.wiki_collab_settings.yaml`, and resumes from `results.jsonl.progress.jsonl` if
+quota runs out. The code is the same for everyone — only your credentials
+differ. `solver.py` ships with the owner's default extraction method and works
+as-is. You may improve `solver.py` to get better results; just keep the output
+contract unchanged and return only `results.jsonl` unless the owner asks for
+logs.
 """
     (out_dir / "README.md").write_text(readme, encoding="utf-8")
 
@@ -155,7 +223,8 @@ def build_archive(out_dir: Path) -> Path:
         archive_path.unlink()
     with tarfile.open(archive_path, "w:gz") as tar:
         for path in sorted(out_dir.rglob("*")):
-            tar.add(path, arcname=str(path.relative_to(out_dir)))
+            if path.is_file():
+                tar.add(path, arcname=str(path.relative_to(out_dir)), recursive=False)
     return archive_path
 
 
@@ -194,6 +263,7 @@ def build_collab_package(
         encoding="utf-8",
     )
     copy_collab_kit(out_dir)
+    copy_root_launcher(out_dir)
     write_worker_readme(out_dir)
 
     assignment = {
@@ -214,6 +284,7 @@ def build_collab_package(
         "return_file": "results.jsonl",
     }
     write_json(out_dir / "assignment.json", assignment)
+    write_package_manifest(out_dir, assignment)
 
     archive_path = build_archive(out_dir) if create_archive else None
     return {

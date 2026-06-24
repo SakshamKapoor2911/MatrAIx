@@ -103,6 +103,9 @@ def _ensure_default_command(backend: str) -> None:
     if backend == "claude-code-acp" and not os.environ.get("WIKI_COLLAB_CLAUDE_CMD"):
         adapter = KIT_DIR / "claude_json_backend.py"
         os.environ["WIKI_COLLAB_CLAUDE_CMD"] = f"{sys.executable} {adapter}"
+    if backend == "codex-acp" and not os.environ.get("WIKI_COLLAB_CODEX_CMD"):
+        adapter = KIT_DIR / "codex_json_backend.py"
+        os.environ["WIKI_COLLAB_CODEX_CMD"] = f"{sys.executable} {adapter}"
 
 
 def attribute(
