@@ -10,13 +10,25 @@ def test_domain_allows_all_three(config_manager):
         config_manager.validate({"domain": d})  # must not raise
 
 
+def test_application_id_allows_generic_chatbot_applications(config_manager):
+    assert config_manager.ALLOWED["applicationId"] == ["recai", "finance_openbb"]
+    for application_id in ("recai", "finance_openbb"):
+        config_manager.validate({"applicationId": application_id})
+
+
 def test_options_returns_enriched_knobs(config_manager):
     opts = config_manager.options()
     assert set(opts.keys()) == {"knobs", "defaults", "environment"}
 
     knobs = {k["key"]: k for k in opts["knobs"]}
     # Editable knobs only — rankerMode / resourceMode are environment facts.
-    assert set(knobs.keys()) == {"engine", "personaModel", "domain", "botType"}
+    assert set(knobs.keys()) == {
+        "applicationId",
+        "engine",
+        "personaModel",
+        "domain",
+        "botType",
+    }
 
     for knob in opts["knobs"]:
         assert set(knob.keys()) >= {
@@ -36,7 +48,7 @@ def test_options_returns_enriched_knobs(config_manager):
 def test_options_knob_values_match_allowed(config_manager):
     opts = config_manager.options()
     knobs = {k["key"]: k for k in opts["knobs"]}
-    for key in ("engine", "domain", "botType"):
+    for key in ("applicationId", "engine", "domain", "botType"):
         values = [o["value"] for o in knobs[key]["options"]]
         assert values == config_manager.ALLOWED[key]
     assert [o["value"] for o in knobs["personaModel"]["options"]] == [
@@ -50,6 +62,7 @@ def test_options_rebuilds_agent_flag(config_manager):
     # Every editable knob feeds the bridge's agent cache key, so each one
     # rebuilds (re-warms) the agent when changed — including botType, which is
     # part of INTERECAGENT_BOT_TYPE in the agent cache key.
+    assert knobs["applicationId"]["rebuildsAgent"] is True
     assert knobs["domain"]["rebuildsAgent"] is True
     assert knobs["botType"]["rebuildsAgent"] is True
     assert knobs["engine"]["rebuildsAgent"] is True
@@ -72,12 +85,14 @@ def test_options_defaults_are_full_config(config_manager):
     defaults = config_manager.options()["defaults"]
     # Full config: every key, including the fixed ranker/resource modes.
     assert set(defaults.keys()) == {
+        "applicationId",
         "engine",
         "rankerMode",
         "resourceMode",
         "domain",
         "botType",
     }
+    assert defaults["applicationId"] == "recai"
     assert defaults["engine"] == "gpt-4o-mini"
     assert defaults["domain"] == "movie"
 
@@ -99,13 +114,13 @@ def test_options_environment_block(config_manager):
     assert env["runtime"] == "Harbor"
     assert env["personaAgent"] == "Harbor persona-claude-code"
     assert env["personaModel"] == "anthropic/claude-haiku-4-5"
-    assert env["applicationApi"] == "rec-agent-api sidecar"
-    assert env["scorer"] == "Application scorer via Harbor verifier"
+    assert env["applicationApi"] == "chatbot-api sidecar"
+    assert env["scorer"] == "Persona self-report via task controller"
     assert env["cache"] == "Docker image + model cache volumes"
-    assert "SASRec" in env["ranker"]
-    assert env["resources"] == "all_resources"
-    assert env["agent"] == "InteRecAgent"
+    assert "application-specific" in env["ranker"]
+    assert "adapter-specific" in env["resources"]
+    assert "chatbot application adapter" in env["agent"]
     assert env["promptOwnership"] == {
         "personaSystemPrompt": "Harbor native persona injection",
-        "taskPrompt": "Application-provided recommender simulation prompt",
+        "taskPrompt": "Application-provided chatbot simulation prompt",
     }

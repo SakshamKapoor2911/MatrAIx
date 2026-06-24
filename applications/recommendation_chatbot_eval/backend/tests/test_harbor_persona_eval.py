@@ -6,6 +6,8 @@ import yaml
 
 from backend.service.harbor_persona_eval import (
     HarborPersonaEvalRunner,
+    _harbor_failure_summary,
+    build_chatbot_simulation_prompt,
     build_recommender_simulation_prompt,
     build_result_from_harbor_artifacts,
     resolve_repo_root,
@@ -80,7 +82,7 @@ def test_build_result_from_harbor_artifacts_maps_transcript_feedback_and_metrics
     (output_dir / "user_feedback.json").write_text(
         json.dumps(
             {
-                "productNeedConstraintSatisfaction": "partially",
+                "productNeedSatisfaction": 4,
                 "personalPreferenceSatisfaction": "yes",
                 "overallExperienceRating": 8,
                 "reason": "The final choice fit, but the first response was broad.",
@@ -115,7 +117,7 @@ def test_build_result_from_harbor_artifacts_maps_transcript_feedback_and_metrics
         "taskPrompt": "Task prompt.",
     }
     assert payload["questionnaire"] == {
-        "constraintSatisfaction": 3,
+        "constraintSatisfaction": 4,
         "constraintRationale": "The final choice fit, but the first response was broad.",
         "preferenceSatisfaction": 5,
         "preferenceRationale": "The final choice fit, but the first response was broad.",
@@ -129,6 +131,147 @@ def test_build_result_from_harbor_artifacts_maps_transcript_feedback_and_metrics
         "numTurns": 2,
         "recommendedItemCount": 1,
     }
+
+
+def test_build_result_from_harbor_artifacts_maps_persona_self_report_keys(tmp_path):
+    output_dir = tmp_path / "output"
+    output_dir.mkdir()
+    (output_dir / "transcript.json").write_text(
+        json.dumps(
+            {
+                "sessionId": "ses_123",
+                "domain": "movie",
+                "messages": [
+                    {"role": "user", "content": "I want a movie."},
+                    {"role": "assistant", "content": "Try Movie A."},
+                ],
+                "turns": [
+                    {
+                        "turnId": "0",
+                        "userMessage": "I want a movie.",
+                        "assistantMessage": "Try Movie A.",
+                        "groundedItems": [{"itemId": "42", "title": "Movie A"}],
+                    }
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+    (output_dir / "application_result.json").write_text(
+        json.dumps(
+            {
+                "sessionId": "ses_123",
+                "domain": "movie",
+                "groundedItems": [{"itemId": "42", "title": "Movie A"}],
+                "turnsToResult": 1,
+            }
+        ),
+        encoding="utf-8",
+    )
+    (output_dir / "user_feedback.json").write_text(
+        json.dumps(
+            {
+                "productNeedSatisfaction": 4,
+                "personalPreferenceSatisfaction": 2,
+                "overallExperienceRating": 6,
+                "reason": "Legacy persona self-report.",
+                "askedUsefulClarificationQuestions": True,
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    result = build_result_from_harbor_artifacts(
+        output_dir=output_dir,
+        config=PersonaEvalConfig(domain="movie"),
+        persona=Persona(id="p1", name="Persona One", source="fixture"),
+        sut_description="Movie recommender.",
+        created_at="2026-06-23T00:00:00Z",
+    )
+
+    questionnaire = result.to_dict()["questionnaire"]
+    assert questionnaire["constraintSatisfaction"] == 4
+    assert questionnaire["preferenceSatisfaction"] == 2
+    assert questionnaire["overallRating"] == 6
+
+
+def test_build_result_from_harbor_artifacts_allows_general_chatbot_without_items(
+    tmp_path,
+):
+    output_dir = tmp_path / "output"
+    output_dir.mkdir()
+    (output_dir / "transcript.json").write_text(
+        json.dumps(
+            {
+                "sessionId": "fin_ses_123",
+                "applicationId": "finance_openbb",
+                "applicationContext": "financial_research",
+                "domain": "financial_research",
+                "messages": [
+                    {"role": "user", "content": "Can you help me compare bank stocks?"},
+                    {
+                        "role": "assistant",
+                        "content": "What time horizon and risk constraints matter?",
+                    },
+                ],
+                "turns": [
+                    {
+                        "turnId": "0",
+                        "userMessage": "Can you help me compare bank stocks?",
+                        "assistantMessage": (
+                            "What time horizon and risk constraints matter?"
+                        ),
+                        "groundedItems": [],
+                    }
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+    (output_dir / "application_result.json").write_text(
+        json.dumps(
+            {
+                "sessionId": "fin_ses_123",
+                "applicationId": "finance_openbb",
+                "applicationContext": "financial_research",
+                "domain": "financial_research",
+                "groundedItems": [],
+                "turnsToResult": 1,
+            }
+        ),
+        encoding="utf-8",
+    )
+    (output_dir / "user_feedback.json").write_text(
+        json.dumps(
+            {
+                "productNeedSatisfaction": 2,
+                "personalPreferenceSatisfaction": 2,
+                "overallExperienceRating": 3,
+                "reason": "The chatbot only asked a clarifying question.",
+                "askedUsefulClarificationQuestions": True,
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    result = build_result_from_harbor_artifacts(
+        output_dir=output_dir,
+        config=PersonaEvalConfig(
+            application_id="finance_openbb",
+            application_context="financial_research",
+            domain="movie",
+            engine="gpt-4o-mini",
+            max_turns=1,
+        ),
+        persona=Persona(id="p1", name="Persona One", source="fixture"),
+        sut_description="Finance chatbot.",
+        created_at="2026-06-23T00:00:00Z",
+    )
+
+    payload = result.to_dict()
+    assert payload["recommendedItemIds"] == {"perTurn": [[]], "final": []}
+    assert payload["metricScores"]["recommendedItemCount"] == 0
+    assert payload["questionnaire"]["overallRating"] == 3
 
 
 def test_build_result_from_harbor_artifacts_accepts_application_scorer_questionnaire(
@@ -204,6 +347,63 @@ def test_build_result_from_harbor_artifacts_accepts_application_scorer_questionn
         "askedUsefulClarifyingQuestions": True,
         "clarifyingNotes": "The agent asked about tone.",
     }
+
+
+def test_build_result_from_harbor_artifacts_maps_turns_to_result(tmp_path):
+    output_dir = tmp_path / "output"
+    output_dir.mkdir()
+    (output_dir / "transcript.json").write_text(
+        json.dumps(
+            {
+                "sessionId": "ses_123",
+                "applicationId": "recai",
+                "applicationContext": "movie",
+                "domain": "movie",
+                "messages": [
+                    {"role": "user", "content": "I want a movie."},
+                    {"role": "assistant", "content": "Try Movie A."},
+                ],
+                "turns": [
+                    {
+                        "turnId": "0",
+                        "userMessage": "I want a movie.",
+                        "assistantMessage": "Try Movie A.",
+                        "groundedItems": [{"itemId": "42", "title": "Movie A"}],
+                    }
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+    (output_dir / "application_result.json").write_text(
+        json.dumps(
+            {
+                "sessionId": "ses_123",
+                "applicationId": "recai",
+                "applicationContext": "movie",
+                "domain": "movie",
+                "groundedItems": [{"itemId": "42", "title": "Movie A"}],
+                "turnsToResult": 1,
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    result = build_result_from_harbor_artifacts(
+        output_dir=output_dir,
+        config=PersonaEvalConfig(
+            domain="movie",
+            application_id="recai",
+            application_context="movie",
+            engine="gpt-4o-mini",
+            max_turns=3,
+        ),
+        persona=Persona(id="p1", name="Persona One", source="fixture"),
+        sut_description="Movie chatbot.",
+        created_at="2026-06-23T00:00:00Z",
+    )
+
+    assert result.to_dict()["metricScores"]["turnsToRecommendation"] == 1
 
 
 def test_build_result_from_harbor_artifacts_reads_verifier_feedback(tmp_path):
@@ -351,17 +551,80 @@ def test_build_recommender_simulation_prompt_is_task_specific_not_persona_identi
         goal_context_description="Persona reveals preferences gradually.",
     )
 
-    assert "Harbor supplies the persona system prompt" in prompt
-    assert "You are testing a game recommendation system" in prompt
-    assert '"domain": "game"' in prompt
-    assert "at least three user turns and three assistant turns" in prompt
+    assert prompt.startswith("You are a user of a game recommendation system")
+    assert "Harbor supplies your persona" not in prompt
+    assert "Controller input" not in prompt
+    assert "This section is consumed" not in prompt
+    assert "You are a user of a game recommendation system" in prompt
+    assert '"domain": "game"' not in prompt
     assert "Do not reveal everything at once" in prompt
-    assert "Finish within 7 user turns" in prompt
-    assert "Do not simulate the recommender" in prompt
-    assert "application feedback scorer" in prompt
+    assert "Required behavior" not in prompt
+    assert "at least three user turns and three assistant turns" not in prompt
+    assert "Finish within" not in prompt
+    assert "application feedback scorer" not in prompt
     assert "user_feedback.json" not in prompt
     assert "overallExperienceRating" not in prompt
     assert "7-8: the run is useful overall" not in prompt
+
+
+def test_build_chatbot_simulation_prompt_uses_generic_application_contract():
+    prompt = build_chatbot_simulation_prompt(
+        application_id="finance_openbb",
+        application_context="financial_research",
+        max_turns=7,
+        sut_description="A financial research chatbot exposed through a chat API.",
+        goal_context_description="Persona reveals needs gradually.",
+    )
+
+    assert prompt.startswith("You are a user of a financial research system")
+    assert "# Controller input" not in prompt
+    assert "This section is consumed by the chatbot task controller." not in prompt
+    assert "Harbor supplies your persona" not in prompt
+    assert "You are a user of a financial research system" in prompt
+    assert "Application id:" not in prompt
+    assert "Application context:" not in prompt
+    assert "finance_openbb" not in prompt
+    assert "financial_research" not in prompt
+    assert '"applicationId": "finance_openbb"' not in prompt
+    assert '"applicationContext": "financial_research"' not in prompt
+    assert "Required behavior" not in prompt
+    assert "at least three user turns and three assistant turns" not in prompt
+    assert "application_result.json" not in prompt
+    assert "recommendation_result.json" not in prompt
+    assert "recommender" not in prompt.lower()
+
+
+def test_harbor_failure_summary_reports_controller_tool_errors(tmp_path):
+    job_dir = tmp_path / "runs" / "persona-eval-tool-error"
+    agent_dir = job_dir / "chatbot_chat_api__fake" / "agent"
+    agent_dir.mkdir(parents=True)
+    (agent_dir / "claude-code.txt").write_text(
+        json.dumps(
+            {
+                "type": "user",
+                "tool_use_result": (
+                    "Error: Exit code 1\n"
+                    "ERROR: HTTP 503 from http://chatbot-api:8000/ready"
+                ),
+                "message": {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "tool_result",
+                            "is_error": True,
+                            "content": (
+                                "Exit code 1\n"
+                                "ERROR: HTTP 503 from http://chatbot-api:8000/ready"
+                            ),
+                        }
+                    ],
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    assert "HTTP 503" in _harbor_failure_summary(job_dir)
 
 
 def test_resolve_repo_root_handles_local_and_container_layouts():
@@ -392,20 +655,23 @@ def test_harbor_runner_writes_run_inputs_invokes_harbor_and_maps_artifacts(tmp_p
         assert config["environment"]["delete"] is False
         assert config["agents"][0]["kwargs"]["persona_path"].endswith("persona.yaml")
         assert config["tasks"][0]["path"].endswith(
-            "application/tasks/recommender-agent_chat_api"
+            "application/tasks/chatbot_chat_api"
         )
         prompt_path = config["extra_instruction_paths"][0]
         assert prompt_path.endswith("task_prompt.md")
         assert (
-            "You are testing a movie recommendation system"
+            "You are a user of a movie recommendation system"
             in open(prompt_path, encoding="utf-8").read()
         )
         assert env["INTERECAGENT_ENGINE"] == "gpt-4o"
         assert env["RECBOT_READY_DOMAIN"] == "movie"
+        assert env["MATRIX_CHATBOT_APPLICATION_ID"] == "recai"
+        assert env["MATRIX_CHATBOT_APPLICATION_CONTEXT"] == "movie"
+        assert env["COMPOSE_PROFILES"] == "recai"
         assert env["OPENAI_API_KEY"] == "sk-test-openai"
         assert env["ANTHROPIC_API_KEY"] == "sk-test-anthropic"
-        mount = config["environment"]["mounts"][0]
-        assert mount == {
+        mounts = config["environment"]["mounts"]
+        assert {
             "type": "bind",
             "source": str(
                 tmp_path
@@ -415,27 +681,26 @@ def test_harbor_runner_writes_run_inputs_invokes_harbor_and_maps_artifacts(tmp_p
             ),
             "target": "/app/persona_eval",
             "read_only": True,
-        }
-        verifier_env = {
+        } in mounts
+        assert {
+            "type": "bind",
+            "source": prompt_path,
+            "target": "/app/input/task_prompt.md",
+            "read_only": True,
+        } in mounts
+        agent_env = {
             command[index + 1].split("=", 1)[0]: command[index + 1].split("=", 1)[1]
             for index, value in enumerate(command)
-            if value == "--verifier-env"
+            if value == "--agent-env"
         }
-        assert verifier_env["OPENAI_API_KEY"] == "${OPENAI_API_KEY}"
-        assert (
-            verifier_env["OPENAI_BASE_URL"]
-            == "${OPENAI_BASE_URL:-https://api.openai.com/v1}"
-        )
-        assert verifier_env["MATRIX_SCORER_PACKAGE_PARENT"] == "/app"
-        assert (
-            verifier_env["MATRIX_SCORER_OUTPUT_PATH"]
-            == "/logs/verifier/user_feedback.json"
-        )
-        assert json.loads(verifier_env["MATRIX_SCORER_PERSONA_JSON"])["id"] == "p1"
-        assert (
-            json.loads(verifier_env["MATRIX_SCORER_CONFIG_JSON"])["engine"] == "gpt-4o"
-        )
-        assert verifier_env["MATRIX_SCORER_SUT_DESCRIPTION"] == "Movie recommender."
+        assert agent_env["MATRIX_CHATBOT_APPLICATION_ID"] == "recai"
+        assert agent_env["MATRIX_CHATBOT_APPLICATION_CONTEXT"] == "movie"
+        assert agent_env["MATRIX_CHATBOT_DOMAIN"] == "movie"
+        assert agent_env["MATRIX_CHATBOT_MAX_TURNS"] == "5"
+        assert agent_env["MATRIX_CHATBOT_MIN_TURNS"] == "3"
+        assert agent_env["MATRIX_CHATBOT_TASK_PROMPT_PATH"] == "/app/input/task_prompt.md"
+        assert agent_env["MATRIX_CHATBOT_PERSONA_MODEL"] == "anthropic/claude-haiku-4-5"
+        assert "MATRIX_SCORER_MODULE" not in " ".join(command)
 
         output_dir = (
             tmp_path
@@ -517,25 +782,134 @@ def test_harbor_runner_writes_run_inputs_invokes_harbor_and_maps_artifacts(tmp_p
 
     assert calls
     assert "--agent-env" in calls[0][0]
-    assert "--verifier-env" in calls[0][0]
+    assert "--verifier-env" not in calls[0][0]
     assert "--env-file" in calls[0][0]
     assert session.turns[0]["recommendedItems"][0]["itemId"] == "42"
     payload = result.to_dict()
     assert payload["questionnaire"]["overallRating"] == 9
     assert payload["prompts"]["harborPrompt"] == "A careful viewer."
     assert (
-        "You are testing a movie recommendation system"
+        "You are a user of a movie recommendation system"
         in payload["prompts"]["taskPrompt"]
     )
     assert {"type": "phase", "phase": "harbor_starting"} in events
     assert any(
         event.get("type") == "prompts"
         and event["prompts"]["harborPrompt"] == "A careful viewer."
-        and "You are testing a movie recommendation system"
+        and "You are a user of a movie recommendation system"
         in event["prompts"]["taskPrompt"]
         for event in events
     )
     assert {"type": "phase", "phase": "harbor_collecting_artifacts"} in events
+
+
+def test_harbor_runner_uses_finance_compose_profile(tmp_path):
+    calls = []
+
+    def fake_command(command, *, cwd, env):
+        calls.append((command, cwd, env))
+        config = yaml.safe_load(
+            open(command[command.index("-c") + 1], encoding="utf-8")
+        )
+        output_dir = (
+            tmp_path
+            / "runs"
+            / config["job_name"]
+            / "chatbot_chat_api__fake"
+            / "artifacts"
+            / "app"
+            / "output"
+        )
+        output_dir.mkdir(parents=True)
+        (output_dir / "transcript.json").write_text(
+            json.dumps(
+                {
+                    "sessionId": "fin_ses_1",
+                    "applicationId": "finance_openbb",
+                    "applicationContext": "financial_research",
+                    "domain": "financial_research",
+                    "messages": [
+                        {"role": "user", "content": "Compare fintech securities."},
+                        {"role": "assistant", "content": "I used OpenBB data."},
+                    ],
+                    "turns": [
+                        {
+                            "turnId": "fin_turn_1",
+                            "userMessage": "Compare fintech securities.",
+                            "assistantMessage": "I used OpenBB data.",
+                            "groundedItems": [
+                                {
+                                    "itemId": "finance:openbb:equity_screener:0",
+                                    "title": "OpenBB equity_screener",
+                                }
+                            ],
+                        }
+                    ],
+                }
+            ),
+            encoding="utf-8",
+        )
+        (output_dir / "application_result.json").write_text(
+            json.dumps(
+                {
+                    "sessionId": "fin_ses_1",
+                    "applicationId": "finance_openbb",
+                    "applicationContext": "financial_research",
+                    "groundedItems": [
+                        {
+                            "itemId": "finance:openbb:equity_screener:0",
+                            "title": "OpenBB equity_screener",
+                        }
+                    ],
+                    "turnsToResult": 1,
+                }
+            ),
+            encoding="utf-8",
+        )
+        (output_dir / "user_feedback.json").write_text(
+            json.dumps(
+                {
+                    "overallRating": 8,
+                    "ratingReason": "Useful finance result.",
+                    "constraintSatisfaction": 4,
+                    "preferenceSatisfaction": 4,
+                    "askedUsefulClarifyingQuestions": True,
+                }
+            ),
+            encoding="utf-8",
+        )
+        return 0
+
+    class Session:
+        turns = []
+
+    runner = HarborPersonaEvalRunner(
+        repo_root=tmp_path,
+        runs_root=tmp_path / "runs",
+        command_runner=fake_command,
+        harbor_command=("uv", "run", "--frozen", "harbor", "run"),
+    )
+    result = runner(
+        Session(),
+        Persona(id="p1", name="Persona One", context="A careful analyst."),
+        "Finance chatbot.",
+        PersonaEvalConfig(
+            domain="movie",
+            application_id="finance_openbb",
+            application_context="financial_research",
+            engine="gpt-4o-mini",
+            max_turns=3,
+        ),
+        object(),
+        created_at="2026-06-23T00:00:00Z",
+    )
+
+    env = calls[0][2]
+    assert env["COMPOSE_PROFILES"] == "finance"
+    assert env["MATRIX_CHATBOT_APPLICATION_ID"] == "finance_openbb"
+    assert env["MATRIX_CHATBOT_APPLICATION_CONTEXT"] == "financial_research"
+    assert env["FINANCE_AGENT_MODEL"] == "gpt-4o-mini"
+    assert result.to_dict()["metricScores"]["recommendedItemCount"] == 1
 
 
 def test_harbor_runner_reads_feedback_written_by_application_scorer_artifact(tmp_path):

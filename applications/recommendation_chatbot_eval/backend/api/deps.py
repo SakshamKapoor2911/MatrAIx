@@ -119,8 +119,8 @@ def build_persona_eval_service(
 
     Persona-eval is Harbor-backed: Harbor's native ``persona-claude-code`` owns
     persona system prompt injection, and the application appends the
-    recommender-simulation task prompt through Harbor's extra-instruction
-    mechanism. The RecBot itself runs inside Harbor as the ``rec-agent-api``
+    chatbot-simulation task prompt through Harbor's extra-instruction
+    mechanism. The application chatbot runs inside Harbor as the ``chatbot-api``
     sidecar, not as this FastAPI process's in-process session.
     """
     del catalog, config

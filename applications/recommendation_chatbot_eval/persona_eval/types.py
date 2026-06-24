@@ -56,6 +56,8 @@ class Persona:
 @dataclass
 class PersonaEvalConfig:
     domain: str
+    application_id: str = "recai"
+    application_context: str = ""
     engine: str = "gpt-4o-mini"
     persona_model: str = DEFAULT_PERSONA_MODEL
     ranker_mode: str = "native"
@@ -64,7 +66,10 @@ class PersonaEvalConfig:
     goal_context_id: str = "scenario_default"
 
     def to_dict(self) -> Dict[str, Any]:
+        application_context = self.application_context or self.domain
         return {
+            "applicationId": self.application_id,
+            "applicationContext": application_context,
             "domain": self.domain,
             "engine": self.engine,
             "personaModel": self.persona_model,

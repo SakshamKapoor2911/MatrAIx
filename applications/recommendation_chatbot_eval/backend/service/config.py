@@ -60,6 +60,7 @@ class ConfigManager:
     #: Allowed values for each config key. Order is meaningful: the first entry
     #: of each list is the canonical default surfaced in :attr:`DEFAULTS`.
     ALLOWED: Dict[str, List[str]] = {
+        "applicationId": ["recai", "finance_openbb"],
         "engine": ["gpt-4o-mini", "gpt-4o"],
         "rankerMode": ["native"],
         "resourceMode": ["recai_resources"],
@@ -69,6 +70,7 @@ class ConfigManager:
 
     #: Default config used for brand-new sessions.
     DEFAULTS: Dict[str, str] = {
+        "applicationId": "recai",
         "engine": "gpt-4o-mini",
         "rankerMode": "native",
         "resourceMode": "recai_resources",
@@ -80,6 +82,7 @@ class ConfigManager:
     #: agent, because they alter agent construction / resources rather than
     #: just per-turn behavior.
     CACHE_INVALIDATING_KEYS: List[str] = [
+        "applicationId",
         "engine",
         "rankerMode",
         "resourceMode",
@@ -92,16 +95,37 @@ class ConfigManager:
     #: single allowed value and is reported instead as a read-only fact in
     #: :attr:`ENVIRONMENT` (the native SASRec ranker / the ``all_resources``
     #: bundle), so the UI does not present a choice where none exists.
-    EDITABLE_KEYS: List[str] = ["engine", "personaModel", "domain", "botType"]
+    EDITABLE_KEYS: List[str] = [
+        "applicationId",
+        "engine",
+        "personaModel",
+        "domain",
+        "botType",
+    ]
 
     #: Human-readable metadata per editable knob: a label, a one-line
     #: description, and per-value labels/descriptions. Keyed by config key; the
     #: allowed values come from :attr:`ALLOWED` so the two cannot drift.
     KNOB_META: Dict[str, Dict[str, object]] = {
+        "applicationId": {
+            "label": "Chatbot application",
+            "description": "The application-under-test adapter exposed through "
+            "the Harbor chatbot sidecar.",
+            "values": {
+                "recai": {
+                    "label": "RecAI / InteRecAgent",
+                    "description": "Conversational product recommendation adapter.",
+                },
+                "finance_openbb": {
+                    "label": "FinAI / OpenBB",
+                    "description": "Financial research chatbot adapter backed by OpenBB MCP.",
+                },
+            },
+        },
         "engine": {
-            "label": "RecBot model",
+            "label": "Application model",
             "description": "The OpenAI chat model that plans tool use and writes "
-            "the assistant's replies.",
+            "the application chatbot's replies.",
             "values": {
                 "gpt-4o-mini": {
                     "label": "GPT-4o mini",
@@ -130,8 +154,8 @@ class ConfigManager:
         },
         "domain": {
             "label": "Domain",
-            "description": "Which catalog the recommender draws from. Changing it "
-            "rebuilds the agent against that domain's resources.",
+            "description": "Application-specific context. For RecAI, this selects "
+            "the catalog. Changing it rebuilds the application adapter.",
             "values": {
                 "movie": {
                     "label": "Movies",
@@ -169,15 +193,15 @@ class ConfigManager:
     ENVIRONMENT: Dict[str, object] = {
         "runtime": "Harbor",
         "personaAgent": "Harbor persona-claude-code",
-        "applicationApi": "rec-agent-api sidecar",
-        "scorer": "Application scorer via Harbor verifier",
+        "applicationApi": "chatbot-api sidecar",
+        "scorer": "Persona self-report via task controller",
         "cache": "Docker image + model cache volumes",
-        "ranker": "SASRec (native)",
-        "resources": "all_resources",
-        "agent": "InteRecAgent",
+        "ranker": "application-specific ranking / tool selection",
+        "resources": "adapter-specific resources",
+        "agent": "chatbot application adapter",
         "promptOwnership": {
             "personaSystemPrompt": "Harbor native persona injection",
-            "taskPrompt": "Application-provided recommender simulation prompt",
+            "taskPrompt": "Application-provided chatbot simulation prompt",
         },
     }
 
@@ -302,6 +326,7 @@ class ConfigManager:
             "INTERECAGENT_DOMAIN": str(full["domain"]),
             "INTERECAGENT_BOT_TYPE": str(full["botType"]),
             "INTERECAGENT_CACHE_AGENT": "1",
+            "MATRIX_CHATBOT_APPLICATION_ID": str(full["applicationId"]),
         }
 
     def apply(

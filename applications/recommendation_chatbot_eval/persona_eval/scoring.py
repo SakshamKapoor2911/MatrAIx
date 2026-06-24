@@ -75,6 +75,15 @@ def _turn_views_from_transcript(transcript: Dict[str, Any]) -> List[Dict[str, An
 def _config_from_dict(value: Dict[str, Any]) -> PersonaEvalConfig:
     return PersonaEvalConfig(
         domain=str(value.get("domain") or "movie"),
+        application_id=str(
+            value.get("applicationId", value.get("application_id", "recai"))
+        ),
+        application_context=str(
+            value.get(
+                "applicationContext",
+                value.get("application_context", value.get("domain") or "movie"),
+            )
+        ),
         engine=str(value.get("engine") or "gpt-4o-mini"),
         persona_model=str(
             value.get(
@@ -199,20 +208,26 @@ class OriginalPromptFeedbackScorer:
 def score_harbor_artifacts(
     *,
     transcript_path: Path,
-    recommendation_path: Path,
+    application_path: Optional[Path] = None,
+    recommendation_path: Optional[Path] = None,
     output_path: Path,
     persona: Persona,
     sut_description: str,
     config: PersonaEvalConfig,
     client_factory: Optional[Callable[[str], Any]] = None,
 ) -> Dict[str, Any]:
-    """Score Harbor recommender artifacts and write the questionnaire artifact."""
+    """Score Harbor chatbot artifacts and write the questionnaire artifact."""
     transcript = _read_json_object(Path(transcript_path))
-    recommendation = _read_json_object(Path(recommendation_path))
+    result_path = application_path or recommendation_path
+    if result_path is None:
+        raise ValueError("application_path is required")
+    recommendation = _read_json_object(Path(result_path))
     turn_views = _turn_views_from_transcript(transcript)
-    recommended_items = recommendation.get("recommendedItems") or []
+    recommended_items = recommendation.get(
+        "groundedItems", recommendation.get("recommendedItems")
+    ) or []
     if not isinstance(recommended_items, list):
-        raise ValueError("recommendation_result.recommendedItems must be a list")
+        raise ValueError("application_result.groundedItems must be a list")
     scorer = OriginalPromptFeedbackScorer(
         client_factory=client_factory
         or (lambda model: StdlibOpenAIChatClient(model=model))
@@ -238,7 +253,8 @@ def score_harbor_artifacts(
 def score_harbor_artifacts_from_env(
     *,
     transcript_path: Path,
-    recommendation_path: Path,
+    application_path: Optional[Path] = None,
+    recommendation_path: Optional[Path] = None,
     output_path: Optional[Path] = None,
     client_factory: Optional[Callable[[str], Any]] = None,
 ) -> Dict[str, Any]:
@@ -258,7 +274,12 @@ def score_harbor_artifacts_from_env(
     )
     return score_harbor_artifacts(
         transcript_path=Path(transcript_path),
-        recommendation_path=Path(recommendation_path),
+        application_path=Path(application_path)
+        if application_path is not None
+        else None,
+        recommendation_path=Path(recommendation_path)
+        if recommendation_path is not None
+        else None,
         output_path=target,
         persona=persona,
         sut_description=sut_description,

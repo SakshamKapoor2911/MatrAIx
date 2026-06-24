@@ -65,6 +65,8 @@ class PersonaEvalProgress:
     persona_id: str
     persona_name: str
     sut_description: str
+    application_id: str = "recai"
+    application_context: Optional[str] = None
     goal_context_id: str = "scenario_default"
     status: str = "building"  # building | running | done | error
     phase: Optional[str] = None
@@ -78,6 +80,8 @@ class PersonaEvalProgress:
         return {
             "jobId": self.job_id,
             "domain": self.domain,
+            "applicationId": self.application_id,
+            "applicationContext": self.application_context,
             "personaId": self.persona_id,
             "personaName": self.persona_name,
             "sutDescription": self.sut_description,
@@ -124,6 +128,8 @@ class PersonaEvalService:
         now: Callable[[], str],
         engine: Optional[str] = None,
         persona_model: Optional[str] = None,
+        application_id: str = "recai",
+        application_context: Optional[str] = None,
     ) -> str:
         # Persona is domain-free: any persona may run against any domain.
         # ``engine`` drives the recommender side of the run; ``persona_model``
@@ -132,13 +138,17 @@ class PersonaEvalService:
         persona = self._get_persona(persona_id)
         run_engine = engine or self._engine
         run_persona_model = persona_model or DEFAULT_PERSONA_MODEL
+        resolved_application_context = application_context or domain
+        sut_key = domain if application_id == "recai" else resolved_application_context
         job_id = _new_persona_eval_id()
         progress = PersonaEvalProgress(
             job_id=job_id,
             domain=domain,
+            application_id=application_id,
+            application_context=resolved_application_context,
             persona_id=persona_id,
             persona_name=getattr(persona, "name", persona_id),
-            sut_description=self._sut_for(domain),
+            sut_description=self._sut_for(sut_key),
             goal_context_id=goal_context_id,
         )
         with self._guard:
@@ -253,6 +263,8 @@ class PersonaEvalService:
             try:
                 config = PersonaEvalConfig(
                     domain=progress.domain,
+                    application_id=progress.application_id,
+                    application_context=progress.application_context or progress.domain,
                     engine=engine,
                     persona_model=persona_model,
                     ranker_mode="native",

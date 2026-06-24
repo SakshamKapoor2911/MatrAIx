@@ -1,0 +1,7 @@
+# Finance/OpenBB chatbot sidecar runtime dependencies.
+#
+# Keep these out of backend/requirements.txt: the RecAI sidecar runs on
+# Python 3.9 for the pinned torch/RecAI stack, while current OpenAI Agents SDK
+# releases require Python 3.10+.
+
+openai-agents>=0.17.6

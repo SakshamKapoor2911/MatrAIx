@@ -78,10 +78,16 @@ class _FakePersonaEvalService:
         now,
         engine: Optional[str] = None,
         persona_model: Optional[str] = None,
+        application_id: str = "recai",
+        application_context: Optional[str] = None,
     ) -> str:
         self.started.append((domain, persona_id, max_turns, goal_context_id))
         self.started_engines.append(engine)
         self.started_persona_models.append(persona_model)
+        self.started_application = {
+            "applicationId": application_id,
+            "applicationContext": application_context,
+        }
         return "wt_fake123"
 
     def view(self, job_id: str) -> Optional[Dict[str, Any]]:
@@ -275,6 +281,23 @@ def test_start_persona_eval_forwards_persona_model(client, fake_persona_eval):
     )
     assert resp.status_code == 200, resp.text
     assert fake_persona_eval.started_persona_models == ["anthropic/claude-sonnet-4-6"]
+
+
+def test_start_persona_eval_forwards_application_selection(client, fake_persona_eval):
+    resp = client.post(
+        "/api/persona-eval",
+        json={
+            "applicationId": "finance_openbb",
+            "applicationContext": "financial_research",
+            "domain": "game",
+            "personaId": "game-lapsed-coop",
+        },
+    )
+    assert resp.status_code == 200, resp.text
+    assert fake_persona_eval.started_application == {
+        "applicationId": "finance_openbb",
+        "applicationContext": "financial_research",
+    }
 
 
 def test_start_persona_eval_defaults_engine_when_omitted(client, fake_persona_eval):

@@ -1,0 +1,122 @@
+services:
+  main:
+    depends_on:
+      chatbot-api:
+        condition: service_healthy
+
+  chatbot-api:
+    image: ${CHATBOT_ROUTER_IMAGE:-matraix-chatbot-router:local}
+    build:
+      context: ../../../../applications/recommendation_chatbot_eval
+      dockerfile: harbor_api/router.Dockerfile
+    environment:
+      CHATBOT_UPSTREAM_RECAI: ${CHATBOT_UPSTREAM_RECAI:-http://recai-api:8000}
+      CHATBOT_UPSTREAM_FINANCE: ${CHATBOT_UPSTREAM_FINANCE:-http://finance-api:8000}
+      MATRIX_CHATBOT_READY_APPLICATION_ID: ${MATRIX_CHATBOT_APPLICATION_ID:-recai}
+      MATRIX_CHATBOT_READY_APPLICATION_CONTEXT: ${MATRIX_CHATBOT_APPLICATION_CONTEXT:-movie}
+    expose:
+      - "8000"
+    depends_on:
+      recai-api:
+        condition: service_healthy
+        required: false
+      finance-api:
+        condition: service_healthy
+        required: false
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - >-
+          python -c "import os, urllib.parse, urllib.request; app=urllib.parse.quote(os.environ.get('MATRIX_CHATBOT_READY_APPLICATION_ID', 'recai')); ctx=urllib.parse.quote(os.environ.get('MATRIX_CHATBOT_READY_APPLICATION_CONTEXT', 'movie')); urllib.request.urlopen('http://localhost:8000/ready?applicationId=' + app + '&applicationContext=' + ctx, timeout=180).read()"
+      interval: 10s
+      timeout: 190s
+      retries: 30
+      start_period: 10s
+
+  recai-api:
+    profiles: ["recai"]
+    platform: linux/amd64
+    image: ${RECAI_API_IMAGE:-matraix-chatbot-recai-api:local}
+    build:
+      context: ../../../../applications/recommendation_chatbot_eval
+      dockerfile: harbor_api/Dockerfile
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      INTERECAGENT_ENGINE: ${INTERECAGENT_ENGINE:-gpt-4o-mini}
+      INTERECAGENT_CACHE_AGENT: "1"
+      RECBOT_READY_DOMAIN: ${RECBOT_READY_DOMAIN:-movie}
+      TOKENIZERS_PARALLELISM: "false"
+      PYTHONFAULTHANDLER: "1"
+    expose:
+      - "8000"
+    volumes:
+      - chatbot-hf-cache:/root/.cache/huggingface
+      - chatbot-torch-cache:/root/.cache/torch
+      - chatbot-sentence-transformers-cache:/root/.cache/sentence_transformers
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - >-
+          python -c "import os, urllib.parse, urllib.request; app=urllib.parse.quote(os.environ.get('MATRIX_CHATBOT_READY_APPLICATION_ID', 'recai')); ctx=urllib.parse.quote(os.environ.get('MATRIX_CHATBOT_READY_APPLICATION_CONTEXT', os.environ.get('RECBOT_READY_DOMAIN', 'movie'))); urllib.request.urlopen('http://localhost:8000/ready?applicationId=' + app + '&applicationContext=' + ctx, timeout=170).read()"
+      interval: 10s
+      timeout: 180s
+      retries: 30
+      start_period: 30s
+
+  finance-api:
+    profiles: ["finance"]
+    image: ${FINANCE_API_IMAGE:-matraix-chatbot-finance-api:local}
+    build:
+      context: ../../../../applications/recommendation_chatbot_eval
+      dockerfile: harbor_api/finance.Dockerfile
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      FINANCE_AGENT_MODEL: ${FINANCE_AGENT_MODEL:-gpt-4o-mini}
+      OPENBB_MCP_URL: ${OPENBB_MCP_URL:-http://openbb-mcp:8001/mcp}
+      OPENBB_MCP_CATEGORIES: ${OPENBB_MCP_CATEGORIES:-equity,etf,economy,news,crypto,fixedincome,index,technical}
+      TOKENIZERS_PARALLELISM: "false"
+      PYTHONFAULTHANDLER: "1"
+    expose:
+      - "8000"
+    depends_on:
+      openbb-mcp:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - >-
+          python -c "import urllib.request; urllib.request.urlopen('http://localhost:8000/ready?applicationId=finance_openbb&applicationContext=financial_research', timeout=30).read()"
+      interval: 10s
+      timeout: 40s
+      retries: 20
+      start_period: 20s
+
+  openbb-mcp:
+    profiles: ["finance"]
+    platform: linux/amd64
+    image: ${OPENBB_MCP_IMAGE:-matraix-openbb-mcp:local}
+    build:
+      context: ../../../../applications/recommendation_chatbot_eval
+      dockerfile: harbor_api/openbb-mcp.Dockerfile
+    environment:
+      OPENBB_MCP_CATEGORIES: ${OPENBB_MCP_CATEGORIES:-equity,etf,economy,news,crypto,fixedincome,index,technical}
+      PYTHONUNBUFFERED: "1"
+    expose:
+      - "8001"
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - >-
+          python -c "import socket; s=socket.create_connection(('127.0.0.1', 8001), timeout=10); s.close()"
+      interval: 10s
+      timeout: 30s
+      retries: 20
+      start_period: 30s
+
+volumes:
+  chatbot-hf-cache:
+    name: matraix-chatbot-hf-cache
+  chatbot-torch-cache:
+    name: matraix-chatbot-torch-cache
+  chatbot-sentence-transformers-cache:
+    name: matraix-chatbot-sentence-transformers-cache

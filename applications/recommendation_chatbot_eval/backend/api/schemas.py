@@ -70,6 +70,7 @@ __all__ = [
 #: :class:`~backend.service.config.ConfigManager` (movie / beauty_product /
 #: game) so a bad domain is rejected here with a clean 422.
 SUPPORTED_DOMAINS = ("movie", "beauty_product", "game")
+SUPPORTED_APPLICATION_IDS = ("recai", "finance_openbb")
 SUPPORTED_PERSONA_MODELS = (
     "anthropic/claude-haiku-4-5",
     "anthropic/claude-sonnet-4-6",
@@ -381,12 +382,16 @@ class CatalogSearchResponse(BaseModel):
 class StartPersonaEvalRequest(BaseModel):
     """Body for ``POST /api/persona-eval``.
 
-    ``domain`` must be one of the supported domains (:data:`SUPPORTED_DOMAINS`);
+    ``applicationId`` selects the chatbot application adapter. ``domain`` is the
+    legacy RecAI context and remains validated for back-compat; non-RecAI
+    applications use ``applicationContext`` for their own context.
     ``maxTurns`` is bounded to a sensible 1..20 so a demo run cannot wedge the
     process-global persona-eval lock for an unbounded number of turns.
     """
 
     domain: str
+    applicationId: str = "recai"
+    applicationContext: Optional[str] = None
     personaId: str
     maxTurns: int = Field(default=8, ge=1, le=20)
     goalContextId: Optional[str] = None
@@ -403,6 +408,17 @@ class StartPersonaEvalRequest(BaseModel):
     def _validate_domain(cls, value: str) -> str:
         if value not in SUPPORTED_DOMAINS:
             raise ValueError("domain must be one of {}".format(list(SUPPORTED_DOMAINS)))
+        return value
+
+    @field_validator("applicationId")
+    @classmethod
+    def _validate_application_id(cls, value: str) -> str:
+        if value not in SUPPORTED_APPLICATION_IDS:
+            raise ValueError(
+                "applicationId must be one of {}".format(
+                    list(SUPPORTED_APPLICATION_IDS)
+                )
+            )
         return value
 
     @field_validator("personaModel")
@@ -498,6 +514,8 @@ class PersonaEvalJobView(BaseModel):
 
     jobId: str
     domain: str
+    applicationId: Optional[str] = None
+    applicationContext: Optional[str] = None
     personaId: str
     personaName: str
     sutDescription: str

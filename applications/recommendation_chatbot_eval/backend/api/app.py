@@ -601,6 +601,8 @@ def create_app(catalog_path: Optional[str] = None) -> FastAPI:
                 now=_utc_now,
                 engine=engine,
                 persona_model=persona_model,
+                application_id=body.applicationId,
+                application_context=body.applicationContext,
             )
         except (ValueError, KeyError) as exc:
             raise HTTPException(status_code=422, detail=str(exc))

@@ -16,6 +16,12 @@ _DESCRIPTIONS = {
         "It can ask about your needs, skin type, and budget, search a catalog of beauty "
         "products, and suggest specific items. Tell it what you want to get recommendations."
     ),
+    "financial_research": (
+        "You are chatting with a financial research chatbot. It can ask about "
+        "your objective, risk constraints, time horizon, tickers, funds, sectors, "
+        "or macro topics, use OpenBB data tools, and provide grounded research "
+        "or comparisons without giving personalized buy/sell instructions."
+    ),
 }
 
 

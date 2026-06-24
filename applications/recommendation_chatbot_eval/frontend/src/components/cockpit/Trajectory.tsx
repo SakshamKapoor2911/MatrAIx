@@ -143,7 +143,7 @@ export function Trajectory({
 
         {/* Loading skeleton while building, or while running before turns land. */}
         {isRunning && (turns.length === 0 || phase === "building") && (
-          <SkeletonTurn label={phase === "building" ? "Warming the recommender…" : liveStatus} />
+          <SkeletonTurn label={phase === "building" ? "Warming the chatbot application…" : liveStatus} />
         )}
 
         {/* Live "thinking" line once turns are streaming. */}

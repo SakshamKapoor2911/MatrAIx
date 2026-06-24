@@ -55,8 +55,8 @@ _REGISTRY: Dict[str, GoalContext] = {
     "scenario_default": GoalContext(
         id="scenario_default",
         label="Realistic scenario",
-        description="Persona derives a realistic per-domain shopping intent and "
-        "reveals it gradually.",
+        description="Persona derives a realistic per-domain need or goal and "
+        "reveals relevant details gradually.",
         template=_SCENARIO_DEFAULT,
     ),
     "gradual_reveal": GoalContext(

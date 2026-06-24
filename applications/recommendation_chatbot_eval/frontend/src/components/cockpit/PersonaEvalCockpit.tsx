@@ -35,6 +35,7 @@ import { PromptPanel } from "./PromptPanel";
 import { listGoalContexts } from "@/lib/api";
 import { usePersonaEval, type PersonaEvalRunPhase } from "@/lib/usePersonaEval";
 import type {
+  ApplicationId,
   ConfigOptionsResponse,
   Domain,
   Engine,
@@ -51,12 +52,12 @@ function liveStatusLine(
   phase: PersonaEvalRunPhase,
   isRunning: boolean,
 ): string | null {
-  if (phase === "building") return "Warming the recommender — this first turn can take a minute.";
+  if (phase === "building") return "Warming the chatbot application — this first turn can take a minute.";
   if (!isRunning) return null;
   const raw = (job?.phase ?? "").toLowerCase();
   if (raw.includes("persona") || raw.includes("user") || raw.includes("simulat")) return "Persona is thinking…";
-  if (raw.includes("recommend") || raw.includes("agent") || raw.includes("recai") || raw.includes("turn"))
-    return "Recommender is thinking…";
+  if (raw.includes("chatbot") || raw.includes("application") || raw.includes("agent") || raw.includes("recai") || raw.includes("turn"))
+    return "Chatbot application is thinking…";
   if (raw.includes("eval")) return "Scoring the conversation…";
   if (job?.phase) return `${job.phase}…`;
   return "Running the persona eval…";
@@ -78,6 +79,8 @@ function isTypingTarget(el: EventTarget | null): boolean {
 interface ExportSnapshot {
   persona: { id: string; name: string; source: string } | null;
   config: {
+    applicationId: ApplicationId;
+    applicationContext: string;
     domain: Domain;
     engine: string;
     personaModel: string;
@@ -100,6 +103,9 @@ export function PersonaEvalCockpit({ options, onOpenRuns, onDomainChange }: Pers
 
   // --- Selection + run knobs ---------------------------------------------
   const [persona, setPersona] = useState<PersonaEvalPersona | null>(null);
+  const [applicationId, setApplicationId] = useState<ApplicationId>(
+    ((options?.defaults.applicationId as ApplicationId | undefined) ?? "recai"),
+  );
   const [domain, setDomain] = useState<Domain>((options?.defaults.domain as Domain) ?? "movie");
   const [engine, setEngine] = useState<string>(options?.defaults.engine ?? "gpt-4o-mini");
   const [personaModel, setPersonaModel] = useState<string>(
@@ -117,6 +123,7 @@ export function PersonaEvalCockpit({ options, onOpenRuns, onDomainChange }: Pers
   useEffect(() => {
     if (adoptedDefaults.current || !options) return;
     adoptedDefaults.current = true;
+    setApplicationId((options.defaults.applicationId as ApplicationId | undefined) ?? "recai");
     setDomain((options.defaults.domain as Domain) ?? "movie");
     setEngine(options.defaults.engine ?? "gpt-4o-mini");
     setPersonaModel(options.environment.personaModel ?? "anthropic/claude-haiku-4-5");
@@ -127,6 +134,8 @@ export function PersonaEvalCockpit({ options, onOpenRuns, onDomainChange }: Pers
   useEffect(() => {
     onDomainChange?.(domain);
   }, [domain, onDomainChange]);
+
+  const applicationContext = applicationId === "finance_openbb" ? "financial_research" : domain;
 
   // --- Goal contexts (the "Conversation style" knob) ----------------------
   const goalContextsQuery = useQuery<GoalContextsResponse>({
@@ -148,6 +157,8 @@ export function PersonaEvalCockpit({ options, onOpenRuns, onDomainChange }: Pers
     () => ({
       persona: persona ? { id: persona.id, name: persona.name, source: persona.source } : null,
       config: {
+        applicationId,
+        applicationContext,
         domain,
         engine,
         personaModel,
@@ -155,7 +166,7 @@ export function PersonaEvalCockpit({ options, onOpenRuns, onDomainChange }: Pers
         maxTurns,
       },
     }),
-    [persona, domain, engine, personaModel, goalContextId, activeGoalContext, maxTurns],
+    [persona, applicationId, applicationContext, domain, engine, personaModel, goalContextId, activeGoalContext, maxTurns],
   );
   const liveControlsRef = useRef(liveControls);
   liveControlsRef.current = liveControls;
@@ -195,13 +206,15 @@ export function PersonaEvalCockpit({ options, onOpenRuns, onDomainChange }: Pers
     setExportSnapshot(null);
     run({
       domain,
+      applicationId,
+      applicationContext,
       personaId: persona.id,
       goalContextId: goalContextId ?? undefined,
       maxTurns,
       engine: engine as Engine,
       personaModel: personaModel as PersonaModel,
     });
-  }, [persona, isRunning, run, domain, goalContextId, maxTurns, engine, personaModel]);
+  }, [persona, isRunning, run, domain, applicationId, applicationContext, goalContextId, maxTurns, engine, personaModel]);
 
   const handleRetry = useCallback(() => {
     if (timedOut || phase === "error") retry();
@@ -337,6 +350,8 @@ export function PersonaEvalCockpit({ options, onOpenRuns, onDomainChange }: Pers
           knobs={knobs}
           environment={environment}
           goalContexts={goalContexts}
+          applicationId={applicationId}
+          onApplicationId={setApplicationId}
           engine={engine}
           onEngine={setEngine}
           personaModel={personaModel}

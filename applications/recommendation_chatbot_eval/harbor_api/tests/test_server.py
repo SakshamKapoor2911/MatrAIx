@@ -126,7 +126,12 @@ def test_ready_prewarms_native_recommender(monkeypatch):
     response = client.get("/ready", params={"domain": "game"})
 
     assert response.status_code == 200
-    assert response.json() == {"status": "ready", "domain": "game"}
+    assert response.json() == {
+        "status": "ready",
+        "applicationId": "recai",
+        "applicationContext": "game",
+        "domain": "game",
+    }
     assert warmed == ["game"]
 
 
@@ -169,6 +174,7 @@ def test_recommendations_are_deduped_across_turns(monkeypatch):
     assert response.status_code == 200
     body = response.json()
     assert body["total"] == 2
+    assert body["turnsToResult"] == 2
     assert [item["itemId"] for item in body["recommendedItems"]] == [
         "movie:arrival",
         "movie:moon",
@@ -206,3 +212,148 @@ def test_unknown_session_returns_404(monkeypatch):
     )
 
     assert response.status_code == 404
+
+
+def test_health_reports_generic_chatbot_applications(monkeypatch):
+    client, _fake_state = client_with_fake_state(monkeypatch)
+
+    response = client.get("/v1/health")
+
+    assert response.status_code == 200
+    body = response.json()
+    assert body["status"] == "ok"
+    assert "applications" in body
+    assert [app["applicationId"] for app in body["applications"]] == [
+        "recai",
+        "finance_openbb",
+    ]
+    recai = body["applications"][0]
+    assert recai["defaultContext"] == "movie"
+    assert "movie" in recai["contexts"]
+
+
+def test_finance_application_routes_through_generic_contract(monkeypatch):
+    class FakeFinanceApp:
+        application_id = "finance_openbb"
+        default_context = "financial_research"
+        contexts = ("financial_research",)
+
+        def ready(self, context: str) -> None:
+            self.ready_context = context
+
+        def create_session(
+            self, *, title: Optional[str], context: str, engine: Optional[str], bot_type: Optional[str]
+        ) -> Dict[str, Any]:
+            self.session = {
+                "sessionId": "fin_ses_1",
+                "applicationId": "finance_openbb",
+                "applicationContext": context,
+                "config": {"applicationId": "finance_openbb", "applicationContext": context},
+                "session": {
+                    "id": "fin_ses_1",
+                    "title": title or "Finance chat",
+                    "messages": [],
+                    "turns": [],
+                    "createdAt": "2026-06-23T00:00:00Z",
+                },
+            }
+            return self.session
+
+        def send_message(
+            self, *, session_id: Optional[str], message: str, title: Optional[str], context: str, engine: Optional[str], bot_type: Optional[str]
+        ) -> Dict[str, Any]:
+            if not hasattr(self, "session"):
+                self.create_session(
+                    title=title,
+                    context=context,
+                    engine=engine,
+                    bot_type=bot_type,
+                )
+            turn = {
+                "turnId": "fin_turn_1",
+                "conversationId": "fin_ses_1",
+                "backend": "finance_openbb",
+                "userMessage": message,
+                "assistantMessage": "I can compare broad-market ETFs using OpenBB data.",
+                "recommendedItems": [
+                    {"itemId": "finance:ETF:VTI", "title": "VTI", "rank": 1}
+                ],
+                "plan": [{"tool": "OpenBB MCP", "status": "ok"}],
+            }
+            self.session["session"]["messages"] = [
+                {"role": "user", "content": message},
+                {"role": "assistant", "content": turn["assistantMessage"]},
+            ]
+            self.session["session"]["turns"] = [turn]
+            return {
+                "sessionId": "fin_ses_1",
+                "applicationId": "finance_openbb",
+                "applicationContext": context,
+                "reply": turn["assistantMessage"],
+                "turn": turn,
+                "recommendedItems": turn["recommendedItems"],
+                "groundedItems": turn["recommendedItems"],
+                "messages": list(self.session["session"]["messages"]),
+            }
+
+        def conversation(self, *, session_id: str) -> Dict[str, Any]:
+            return {
+                "sessionId": session_id,
+                "applicationId": "finance_openbb",
+                "applicationContext": "financial_research",
+                "messages": list(self.session["session"]["messages"]),
+                "turns": list(self.session["session"]["turns"]),
+            }
+
+        def recommendations(self, *, session_id: str) -> Dict[str, Any]:
+            return {
+                "sessionId": session_id,
+                "applicationId": "finance_openbb",
+                "applicationContext": "financial_research",
+                "recommendedItems": [
+                    {"itemId": "finance:ETF:VTI", "title": "VTI", "rank": 1}
+                ],
+                "groundedItems": [
+                    {"itemId": "finance:ETF:VTI", "title": "VTI", "rank": 1}
+                ],
+                "turnsToResult": 1,
+                "total": 1,
+            }
+
+    fake_app = FakeFinanceApp()
+    monkeypatch.setattr(server, "get_application", lambda application_id: fake_app)
+    client, _fake_state = client_with_fake_state(monkeypatch)
+
+    ready = client.get(
+        "/v1/ready",
+        params={
+            "applicationId": "finance_openbb",
+            "applicationContext": "financial_research",
+        },
+    )
+    message = client.post(
+        "/v1/messages",
+        json={
+            "applicationId": "finance_openbb",
+            "applicationContext": "financial_research",
+            "message": "I want a conservative ETF comparison.",
+        },
+    )
+    conversation = client.get(
+        "/v1/conversation",
+        params={"sessionId": "fin_ses_1", "applicationId": "finance_openbb"},
+    )
+    grounded = client.get(
+        "/v1/recommendations",
+        params={"sessionId": "fin_ses_1", "applicationId": "finance_openbb"},
+    )
+
+    assert ready.status_code == 200
+    assert ready.json()["applicationId"] == "finance_openbb"
+    assert fake_app.ready_context == "financial_research"
+    assert message.status_code == 200
+    assert message.json()["applicationId"] == "finance_openbb"
+    assert message.json()["groundedItems"][0]["itemId"] == "finance:ETF:VTI"
+    assert conversation.json()["turns"][0]["backend"] == "finance_openbb"
+    assert grounded.json()["turnsToResult"] == 1
+    assert grounded.json()["groundedItems"][0]["title"] == "VTI"

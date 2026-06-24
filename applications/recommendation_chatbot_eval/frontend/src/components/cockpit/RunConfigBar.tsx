@@ -22,7 +22,7 @@ import { useId } from "react";
 import { EnvironmentPopover } from "./EnvironmentPopover";
 import { KnobSelect, type KnobOption } from "./KnobSelect";
 import { FOCUS_RING } from "./cockpitShared";
-import type { ConfigEnvironment, ConfigKnob, Domain, GoalContext } from "@/lib/types";
+import type { ApplicationId, ConfigEnvironment, ConfigKnob, Domain, GoalContext } from "@/lib/types";
 
 /** Min/max for the max-turns slider (mirrors the backend's accepted range). */
 const TURNS_MIN = 1;
@@ -36,6 +36,9 @@ export interface RunConfigBarProps {
   /** Goal contexts (the "Conversation style" options). */
   goalContexts: GoalContext[];
 
+  /** Selected chatbot application adapter. */
+  applicationId: ApplicationId;
+  onApplicationId: (value: ApplicationId) => void;
   /** Selected model (engine) value. */
   engine: string;
   onEngine: (value: string) => void;
@@ -68,6 +71,8 @@ export function RunConfigBar({
   goalContexts,
   engine,
   onEngine,
+  applicationId,
+  onApplicationId,
   personaModel,
   onPersonaModel,
   domain,
@@ -81,8 +86,9 @@ export function RunConfigBar({
   const sliderId = useId();
 
   const engineOptions = optionsFor(knobs, "engine");
+  const applicationOptions = optionsFor(knobs, "applicationId");
   const personaModelOptions = optionsFor(knobs, "personaModel");
-  const domainOptions = optionsFor(knobs, "domain");
+  const domainOptions = applicationId === "recai" ? optionsFor(knobs, "domain") : [];
   const styleOptions: KnobOption[] = goalContexts.map((g) => ({
     value: g.id,
     label: g.label,
@@ -92,9 +98,18 @@ export function RunConfigBar({
 
   return (
     <div className="flex shrink-0 flex-wrap items-center gap-x-5 gap-y-2 border-b border-border-soft bg-surface-container-lowest px-lg py-2.5 shadow-sm">
+      {applicationOptions.length > 0 && (
+        <KnobSelect
+          label="Application"
+          value={applicationId}
+          options={applicationOptions}
+          onChange={(v) => onApplicationId(v as ApplicationId)}
+          disabled={disabled}
+        />
+      )}
       {engineOptions.length > 0 && (
         <KnobSelect
-          label="RecBot model"
+          label="Application model"
           value={engine}
           options={engineOptions}
           onChange={onEngine}

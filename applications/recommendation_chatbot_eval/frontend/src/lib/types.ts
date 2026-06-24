@@ -17,6 +17,9 @@ export type Engine = "gpt-4o-mini" | "gpt-4o";
 /** Allowed value for the Harbor persona-agent base model. */
 export type PersonaModel = "anthropic/claude-haiku-4-5" | "anthropic/claude-sonnet-4-6";
 
+/** Application adapter exposed through the Harbor chatbot sidecar. */
+export type ApplicationId = "recai" | "finance_openbb";
+
 /** Candidate ranking strategy. */
 export type RankerMode = "semantic_profile" | "native";
 
@@ -34,6 +37,7 @@ export type BotType = "chat" | "completion";
  * `camelCase` on the wire to match the rest of the JSON contract.
  */
 export interface SessionConfig {
+  applicationId: ApplicationId;
   engine: Engine;
   rankerMode: RankerMode;
   resourceMode: ResourceMode;
@@ -68,7 +72,7 @@ export interface ConfigKnob {
 /**
  * Read-only prompt ownership facts for Harbor-backed persona eval runs.
  * Harbor injects the persona identity as the system prompt; this application
- * supplies the recommender simulation task prompt.
+ * supplies the chatbot simulation task prompt.
  */
 export interface PromptOwnership {
   personaSystemPrompt: string;
@@ -78,7 +82,7 @@ export interface PromptOwnership {
 /**
  * Read-only facts about the fixed parts of the stack (the "Environment" facts
  * popover). Mirrors the backend `ConfigEnvironment`: Harbor owns the runtime
- * persona-agent loop, this app exposes the rec-agent-api sidecar and scoring
+ * persona-agent loop, this app exposes the chatbot-api sidecar and scoring
  * function, and the ranker/resource/agent stack and prompt boundary are not
  * user-configurable.
  */
@@ -343,6 +347,8 @@ export interface GoalContextsResponse {
 /** Body for `POST /api/persona-eval`. */
 export interface StartPersonaEvalBody {
   domain: Domain;
+  applicationId?: ApplicationId;
+  applicationContext?: string;
   personaId: string;
   maxTurns?: number;
   goalContextId?: string;
@@ -406,6 +412,8 @@ export interface PersonaEvalPrompts {
 export interface PersonaEvalJobView {
   jobId: string;
   domain: Domain;
+  applicationId?: ApplicationId | null;
+  applicationContext?: string | null;
   personaId: string;
   personaName: string;
   sutDescription: string;

@@ -20,6 +20,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 
 import { getPersonaEvalJob, getPersonaEvalPersona, startPersonaEval } from "./api";
 import type {
+  ApplicationId,
   Domain,
   Engine,
   JobStatus,
@@ -41,6 +42,8 @@ const MAX_POLL_DURATION_MS = 15 * 60_000;
 /** Input accepted by `run` (mirrors the `startPersonaEval` request body). */
 export interface RunPersonaEvalInput {
   domain: Domain;
+  applicationId?: ApplicationId;
+  applicationContext?: string;
   personaId: string;
   maxTurns?: number;
   goalContextId?: string;

@@ -104,7 +104,13 @@ def test_config_options(client):
     assert set(body.keys()) >= {"knobs", "defaults", "environment"}
 
     knobs = {k["key"]: k for k in body["knobs"]}
-    assert set(knobs.keys()) == {"engine", "personaModel", "domain", "botType"}
+    assert set(knobs.keys()) == {
+        "applicationId",
+        "engine",
+        "personaModel",
+        "domain",
+        "botType",
+    }
     # Each knob carries display metadata + per-value options + rebuild flag.
     engine = knobs["engine"]
     assert engine["label"]
@@ -126,14 +132,14 @@ def test_config_options(client):
     assert body["defaults"]["rankerMode"] == "native"
 
     # environment reports the fixed stack facts.
-    assert body["environment"]["resources"] == "all_resources"
-    assert body["environment"]["agent"] == "InteRecAgent"
+    assert body["environment"]["resources"] == "adapter-specific resources"
+    assert body["environment"]["agent"] == "chatbot application adapter"
     assert body["environment"]["personaModel"] == "anthropic/claude-haiku-4-5"
-    assert body["environment"]["scorer"] == "Application scorer via Harbor verifier"
-    assert "SASRec" in body["environment"]["ranker"]
+    assert body["environment"]["scorer"] == "Persona self-report via task controller"
+    assert "application-specific" in body["environment"]["ranker"]
     assert body["environment"]["promptOwnership"] == {
         "personaSystemPrompt": "Harbor native persona injection",
-        "taskPrompt": "Application-provided recommender simulation prompt",
+        "taskPrompt": "Application-provided chatbot simulation prompt",
     }
 
 

@@ -2,7 +2,7 @@
 
 This module keeps the Harbor-specific artifact contract out of the generic
 ``PersonaEvalService``. Harbor owns the persona system prompt injection; the
-application supplies a task-specific recommender simulation instruction and then
+application supplies a task-specific chatbot simulation instruction and then
 maps Harbor artifacts back to the existing Studio UI shape.
 """
 
@@ -163,6 +163,15 @@ def _scorer_mount(repo_root: Path) -> Dict[str, Any]:
     }
 
 
+def _file_mount(source: Path, target: str) -> Dict[str, Any]:
+    return {
+        "type": "bind",
+        "source": str(source),
+        "target": target,
+        "read_only": True,
+    }
+
+
 def _json_env(value: Dict[str, Any]) -> str:
     return json.dumps(value, ensure_ascii=False, separators=(",", ":"))
 
@@ -186,6 +195,13 @@ def _verifier_env_args(assignments: Dict[str, str]) -> List[str]:
     args: List[str] = []
     for key, value in assignments.items():
         args.extend(["--verifier-env", "{}={}".format(key, value)])
+    return args
+
+
+def _agent_env_args(assignments: Dict[str, str]) -> List[str]:
+    args: List[str] = []
+    for key, value in assignments.items():
+        args.extend(["--agent-env", "{}={}".format(key, value)])
     return args
 
 
@@ -227,55 +243,65 @@ def build_recommender_simulation_prompt(
     goal_context_description: str,
 ) -> str:
     """Build the application-owned task prompt appended to Harbor instruction."""
-    return """# Application task prompt: recommender simulation
-
-Harbor supplies the persona system prompt. Use that persona as your identity,
-communication style, preferences, and decision-making style. This application
-supplies only the task-specific simulation prompt below.
-
-You are testing a {domain} recommendation system.
+    return """You are a user of a {domain} recommendation system.
 
 {sut_description}
 
-Goal context: {goal_context_description}
+Context for this interaction: {goal_context_description}
 
-Start by deciding, silently and in character, what kind of {domain} items you
-realistically want and which constraints or personal preferences matter. Do not reveal everything at once.
-Interact naturally with the recommender, answer its follow-up questions, push
-back when recommendations do not fit, and stop when you can judge whether the
+Based on your assigned persona, silently decide what kind of {domain} items you
+realistically want and which constraints or preferences matter to you. Start the
+conversation naturally. Do not reveal everything at once. Let the system ask
+follow-up questions, answer in character, and give feedback when
+recommendations do not fit. Continue until you can judge whether the
 recommendations satisfy your need.
 
-Use the recommender API sidecar exactly as described in the base task
-instruction. Use this request body when creating the session or sending the
-first message:
-
-```json
-{{"domain": "{domain}"}}
-```
-
-If the sidecar is unavailable, unhealthy, or fails during the conversation,
-fail the task. Do not simulate the recommender, do not call another LLM as a
-replacement recommender, and do not invent item ids or recommendation results.
-
-Required behavior:
-- Have at least three user turns and three assistant turns unless the agent is
-  completely unusable.
-- Finish within {max_turns} user turns.
-- Base every final recommendation id on items returned by `/v1/messages` or
-  `/v1/recommendations`.
-- Save `transcript.json` from `/v1/conversation`; it must include real
-  `turns[*].recommendedItems` from the recommender API.
-- Save `/app/output/transcript.json`.
-- Save `/app/output/recommendation_result.json`.
-- Harbor verifier will call the application feedback scorer to generate the
-  post-interaction questionnaire from the saved transcript and recommendation
-  artifacts.
 """.format(
         domain=domain,
-        max_turns=max_turns,
         sut_description=sut_description,
         goal_context_description=goal_context_description,
     )
+
+
+def build_chatbot_simulation_prompt(
+    *,
+    application_id: str,
+    application_context: str,
+    max_turns: int,
+    sut_description: str,
+    goal_context_description: str,
+) -> str:
+    """Build the application-owned generic chatbot task prompt."""
+    system_label = _chatbot_system_label(
+        application_id=application_id,
+        application_context=application_context,
+    )
+    return """You are a user of a {system_label}.
+
+{sut_description}
+
+Context for this interaction: {goal_context_description}
+
+Based on your assigned persona, silently decide what you realistically want from
+this system and which constraints or preferences matter to you. Start the
+conversation naturally. Do not reveal everything at once. Let the system ask
+follow-up questions, answer in character, and give feedback when a response does
+not fit. Continue until you can judge whether the system satisfied your need.
+
+""".format(
+        system_label=system_label,
+        sut_description=sut_description,
+        goal_context_description=goal_context_description,
+    )
+
+
+def _chatbot_system_label(*, application_id: str, application_context: str) -> str:
+    context = application_context.replace("_", " ").strip() or "chatbot"
+    if application_id == "recai":
+        return "{} recommendation system".format(context)
+    if application_id == "finance_openbb":
+        return "financial research system"
+    return "{} system".format(context)
 
 
 class HarborPersonaEvalRunner:
@@ -320,8 +346,10 @@ class HarborPersonaEvalRunner:
         run_dir.mkdir(parents=True, exist_ok=True)
         persona_path = write_harbor_persona_yaml(run_dir, persona)
         task_prompt_path = run_dir / "task_prompt.md"
-        task_prompt = build_recommender_simulation_prompt(
-            domain=config.domain,
+        application_context = config.application_context or config.domain
+        task_prompt = build_chatbot_simulation_prompt(
+            application_id=config.application_id,
+            application_context=application_context,
             max_turns=config.max_turns,
             sut_description=sut_description,
             goal_context_description=self.goal_context_description_for(
@@ -343,7 +371,10 @@ class HarborPersonaEvalRunner:
                 "type": "docker",
                 "delete": _env_bool("MATRIX_HARBOR_DELETE", False),
                 "force_build": _env_bool("MATRIX_HARBOR_FORCE_BUILD", True),
-                "mounts": [_scorer_mount(self.repo_root)],
+                "mounts": [
+                    _scorer_mount(self.repo_root),
+                    _file_mount(task_prompt_path, "/app/input/task_prompt.md"),
+                ],
             },
             "agents": [
                 {
@@ -358,7 +389,7 @@ class HarborPersonaEvalRunner:
                         self.repo_root
                         / "application"
                         / "tasks"
-                        / "recommender-agent_chat_api"
+                        / "chatbot_chat_api"
                     )
                 }
             ],
@@ -375,6 +406,13 @@ class HarborPersonaEvalRunner:
             env.setdefault(key, value)
         env["INTERECAGENT_ENGINE"] = config.engine
         env["RECBOT_READY_DOMAIN"] = config.domain
+        env["MATRIX_CHATBOT_APPLICATION_ID"] = config.application_id
+        env["MATRIX_CHATBOT_APPLICATION_CONTEXT"] = application_context
+        if config.application_id == "finance_openbb":
+            env["COMPOSE_PROFILES"] = "finance"
+            env.setdefault("FINANCE_AGENT_MODEL", config.engine)
+        else:
+            env["COMPOSE_PROFILES"] = "recai"
         project_env = Path("/tmp/matraix-harbor-project-venv")
         if project_env.exists():
             env.setdefault("UV_PROJECT_ENVIRONMENT", str(project_env))
@@ -384,12 +422,20 @@ class HarborPersonaEvalRunner:
             str(job_config_path),
             "--agent-env",
             "CLAUDE_CODE_TMPDIR=/logs/agent/claude-tmp",
-            *_verifier_env_args(
-                _verifier_env_assignments(
-                    persona=persona,
-                    sut_description=sut_description,
-                    config=config,
-                )
+            *_agent_env_args(
+                {
+                    "MATRIX_CHATBOT_APPLICATION_ID": config.application_id,
+                    "MATRIX_CHATBOT_APPLICATION_CONTEXT": application_context,
+                    "MATRIX_CHATBOT_DOMAIN": config.domain,
+                    "MATRIX_CHATBOT_MAX_TURNS": str(config.max_turns),
+                    "MATRIX_CHATBOT_MIN_TURNS": str(min(3, config.max_turns)),
+                    "MATRIX_CHATBOT_TASK_PROMPT_PATH": "/app/input/task_prompt.md",
+                    "MATRIX_CHATBOT_PERSONA_PATH": "/app/input/persona.yaml",
+                    "MATRIX_CHATBOT_OUTPUT_DIR": "/app/output",
+                    "MATRIX_CHATBOT_API_URL": "http://chatbot-api:8000",
+                    "MATRIX_CHATBOT_PERSONA_MODEL": config.persona_model
+                    or harbor_persona_model(),
+                }
             ),
             "-y",
         ]
@@ -445,11 +491,19 @@ class HarborPersonaEvalRunner:
 
 
 def _missing_required_output_artifacts(output_dir: Path) -> List[str]:
-    return [
-        name
-        for name in ("transcript.json", "recommendation_result.json")
-        if not (output_dir / name).is_file()
-    ]
+    missing: List[str] = []
+    if not (output_dir / "transcript.json").is_file():
+        missing.append("transcript.json")
+    if not _application_result_path(output_dir).is_file():
+        missing.append("application_result.json")
+    return missing
+
+
+def _application_result_path(output_dir: Path) -> Path:
+    generic = output_dir / "application_result.json"
+    if generic.is_file():
+        return generic
+    return output_dir / "recommendation_result.json"
 
 
 def _content_text(value: Any) -> str:
@@ -461,13 +515,26 @@ def _content_text(value: Any) -> str:
         parts = []
         for entry in value:
             if isinstance(entry, dict):
-                text = entry.get("text")
+                text = entry.get("text", entry.get("content"))
                 if isinstance(text, str) and text.strip():
                     parts.append(text.strip())
             elif isinstance(entry, str) and entry.strip():
                 parts.append(entry.strip())
         return " ".join(parts)
     return ""
+
+
+def _compact_log_text(value: str, *, max_chars: int = 1000) -> str:
+    return " ".join(str(value or "").split())[:max_chars]
+
+
+def _message_contains_error(value: Any) -> bool:
+    if not isinstance(value, dict):
+        return False
+    content = value.get("content")
+    if not isinstance(content, list):
+        return False
+    return any(isinstance(entry, dict) and bool(entry.get("is_error")) for entry in content)
 
 
 def _agent_error_summary(job_dir: Path) -> str:
@@ -479,9 +546,15 @@ def _agent_error_summary(job_dir: Path) -> str:
                 continue
             if not isinstance(event, dict):
                 continue
+            tool_result = event.get("tool_use_result")
+            if isinstance(tool_result, str) and (
+                "Error:" in tool_result or "Exit code" in tool_result
+            ):
+                return "Agent failed: {}".format(_compact_log_text(tool_result))
             error = event.get("error")
             status = event.get("api_error_status")
-            if not (event.get("is_error") or error or status):
+            message_has_error = _message_contains_error(event.get("message"))
+            if not (event.get("is_error") or error or status or message_has_error):
                 continue
             result = event.get("result")
             message = _content_text(event.get("message"))
@@ -494,7 +567,7 @@ def _agent_error_summary(job_dir: Path) -> str:
             if status:
                 meta.append("status {}".format(status))
             return "Agent failed: {}{}".format(
-                text,
+                _compact_log_text(text),
                 " ({})".format(", ".join(meta)) if meta else "",
             )
     return ""
@@ -562,6 +635,7 @@ def _build_turns_from_messages(transcript: Dict[str, Any]) -> List[Dict[str, Any
                     "assistantMessage": content,
                     "plan": [],
                     "recommendedItems": [],
+                    "groundedItems": [],
                     "nativeRaw": None,
                     "rawToolOutputs": None,
                 }
@@ -599,7 +673,11 @@ def _questionnaire(feedback: Dict[str, Any]) -> Dict[str, Any]:
     reason = str(feedback.get("reason") or "")
     return {
         "constraintSatisfaction": _coerce_score(
-            feedback.get("productNeedConstraintSatisfaction"), 3
+            feedback.get(
+                "productNeedSatisfaction",
+                feedback.get("productNeedConstraintSatisfaction"),
+            ),
+            3,
         ),
         "constraintRationale": reason,
         "preferenceSatisfaction": _coerce_score(
@@ -629,7 +707,7 @@ def _feedback_path(output_dir: Path) -> Optional[Path]:
 def _recommended_ids_per_turn(turn_views: List[Dict[str, Any]]) -> List[List[str]]:
     per_turn: List[List[str]] = []
     for turn in turn_views:
-        items = turn.get("recommendedItems") or []
+        items = turn.get("groundedItems") or turn.get("recommendedItems") or []
         if not isinstance(items, list):
             per_turn.append([])
             continue
@@ -644,20 +722,22 @@ def _recommended_ids_per_turn(turn_views: List[Dict[str, Any]]) -> List[List[str
 
 
 def _normalize_recommended_items(value: Any) -> List[Dict[str, Any]]:
-    if not isinstance(value, list) or not value:
-        raise ValueError("recommendation_result.recommendedItems must not be empty")
+    if value is None:
+        return []
+    if not isinstance(value, list):
+        raise ValueError("application_result.groundedItems must be a list")
     items: List[Dict[str, Any]] = []
     for index, item in enumerate(value):
         if not isinstance(item, dict):
             raise ValueError(
-                "recommendation_result.recommendedItems[{}] must be an object".format(
+                "application_result.groundedItems[{}] must be an object".format(
                     index
                 )
             )
         item_id = _item_id(item).strip()
         if not item_id:
             raise ValueError(
-                "recommendation_result.recommendedItems[{}].itemId is required".format(
+                "application_result.groundedItems[{}].itemId is required".format(
                     index
                 )
             )
@@ -668,7 +748,7 @@ def _normalize_recommended_items(value: Any) -> List[Dict[str, Any]]:
 def _grounded_item_ids(turn_views: List[Dict[str, Any]]) -> Set[str]:
     ids: Set[str] = set()
     for turn in turn_views:
-        items = turn.get("recommendedItems") or []
+        items = turn.get("groundedItems") or turn.get("recommendedItems") or []
         if not isinstance(items, list):
             continue
         for item in items:
@@ -690,8 +770,8 @@ def _validate_recommendation_grounding(
     ]
     if missing:
         raise ValueError(
-            "recommendation_result.recommendedItems must be grounded in "
-            "transcript.turns recommendedItems; missing ids: {}".format(
+            "application_result.groundedItems must be grounded in "
+            "transcript.turns groundedItems/recommendedItems; missing ids: {}".format(
                 ", ".join(missing[:5])
             )
         )
@@ -736,20 +816,22 @@ def build_result_from_harbor_artifacts(
 ) -> HarborPersonaEvalResult:
     """Map Harbor task artifacts into the existing Persona Eval UI result."""
     transcript = _read_json(output_dir / "transcript.json")
-    recommendation = _read_json(output_dir / "recommendation_result.json")
+    recommendation = _read_json(_application_result_path(output_dir))
     feedback_path = _feedback_path(output_dir)
     feedback = _read_json(feedback_path) if feedback_path is not None else {}
 
     turn_views = _turn_views(transcript)
     recommended_items = _normalize_recommended_items(
-        recommendation.get("recommendedItems")
+        recommendation.get("groundedItems", recommendation.get("recommendedItems"))
     )
     _validate_recommendation_grounding(
         turn_views=turn_views, recommended_items=recommended_items
     )
 
     metric_scores = {
-        "turnsToRecommendation": recommendation.get("turnsToRecommendation"),
+        "turnsToRecommendation": recommendation.get(
+            "turnsToRecommendation", recommendation.get("turnsToResult")
+        ),
         "numTurns": len(turn_views),
         "recommendedItemCount": len(recommended_items),
     }

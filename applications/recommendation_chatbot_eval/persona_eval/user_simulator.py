@@ -5,31 +5,31 @@ from typing import Any, Dict, List, Tuple
 from persona_eval.goal_contexts import GoalContext
 from persona_eval.types import Persona, Questionnaire, SimulatorTurn, PersonaEvalTurn
 
-_KICKOFF_USER = "Write your FIRST message to the recommender to start the conversation. " \
+_KICKOFF_USER = "Write your FIRST message to the application chatbot to start the conversation. " \
     'Respond as strict JSON: {"message": "<your opening message>"}.'
 
-_RESPOND_USER = """Conversation so far (you = user, agent = recommender):
+_RESPOND_USER = """Conversation so far (you = user, agent = application chatbot):
 {transcript}
 
 The agent just said:
 \"\"\"{assistant}\"\"\"
 
-Items it is currently recommending (id — title): {items}
+Grounded items it is currently surfacing (id — title): {items}
 
 Decide your next move IN CHARACTER. Respond as strict JSON:
 {{"message": "<your next message to the agent>",
   "decision": "continue" | "satisfied" | "give_up",
   "note": "<one short private note on why>"}}
-- "satisfied": the recommendations meet your need — you're done.
+- "satisfied": the application response meets your need — you're done.
 - "give_up": the agent isn't helping and you'd stop in real life.
 - "continue": keep the conversation going (ask, refine, or answer).
 If the agent's reply is an error or empty (e.g. "Something went wrong, please retry." or no real content), don't ignore it or change the subject: briefly acknowledge the hiccup and rephrase or retry your last request in character (usually "continue")."""
 
-_FEEDBACK_USER = """You have now FINISHED using the recommender. Here is the full conversation \
-(you = user, agent = recommender):
+_FEEDBACK_USER = """You have now FINISHED using the application chatbot. Here is the full conversation \
+(you = user, agent = application chatbot):
 {transcript}
 
-Final recommended items (id — title): {final_items}
+Final grounded items (id — title): {final_items}
 
 Reflecting honestly from your own point of view as this persona, fill out this \
 post-use questionnaire as strict JSON (no prose outside the JSON):
@@ -88,7 +88,7 @@ def _format_transcript_turns(transcript: List[PersonaEvalTurn]) -> str:
         lines.append("you: {}".format(t.user_message))
         lines.append("agent: {}".format(t.assistant_message))
         if t.recommended_items:
-            lines.append("  [recommended: {}]".format(
+            lines.append("  [grounded: {}]".format(
                 "; ".join("{}—{}".format(i.get("id"), i.get("title") or "?")
                           for i in t.recommended_items)))
     return "\n".join(lines) if lines else "(empty)"
@@ -110,7 +110,7 @@ class UserSimulator:
     def kickoff(self, persona: Persona, sut_description: str) -> str:
         out = self._client.complete_json(self._system(persona, sut_description), _KICKOFF_USER)
         message = str(out.get("message", "")).strip()
-        return message or "Hi, I'm looking for a recommendation."
+        return message or "Hi, I need help finding a suitable answer."
 
     def respond(self, persona: Persona, sut_description: str,
                 transcript_pairs: List[Tuple[str, str]], last_assistant_message: str,
