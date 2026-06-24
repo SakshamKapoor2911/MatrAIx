@@ -1,0 +1,615 @@
+{
+  "cohorts": {
+    "balanced_mixed": {
+      "targets": 5,
+      "train_mean_rating_avg_user": 4.845355964167846,
+      "train_rating_counts": {
+        "1": 0,
+        "2": 4,
+        "3": 4,
+        "4": 308,
+        "5": 1805
+      },
+      "train_share_5_avg_user": 0.851013672795851,
+      "train_std_rating_avg_user": 0.381859242420179,
+      "users": 1,
+      "validation_mean_rating_avg_user": 5.0,
+      "validation_rating_counts": {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 5
+      },
+      "validation_share_5_avg_user": 1.0
+    },
+    "harsh_low": {
+      "targets": 15,
+      "train_mean_rating_avg_user": 3.9478418426087707,
+      "train_rating_counts": {
+        "1": 856,
+        "2": 1106,
+        "3": 675,
+        "4": 514,
+        "5": 6752
+      },
+      "train_share_5_avg_user": 0.577112925049191,
+      "train_std_rating_avg_user": 1.384436665786702,
+      "users": 3,
+      "validation_mean_rating_avg_user": 3.8000000000000003,
+      "validation_rating_counts": {
+        "1": 2,
+        "2": 2,
+        "3": 1,
+        "4": 2,
+        "5": 8
+      },
+      "validation_share_5_avg_user": 0.5333333333333333
+    },
+    "high_variance": {
+      "targets": 20,
+      "train_mean_rating_avg_user": 4.3295797231575355,
+      "train_rating_counts": {
+        "1": 185,
+        "2": 165,
+        "3": 831,
+        "4": 2878,
+        "5": 5191
+      },
+      "train_share_5_avg_user": 0.523072048033776,
+      "train_std_rating_avg_user": 0.8100628753013217,
+      "users": 4,
+      "validation_mean_rating_avg_user": 4.5,
+      "validation_rating_counts": {
+        "1": 0,
+        "2": 0,
+        "3": 1,
+        "4": 8,
+        "5": 11
+      },
+      "validation_share_5_avg_user": 0.55
+    },
+    "mostly_5": {
+      "targets": 10,
+      "train_mean_rating_avg_user": 4.985856392387152,
+      "train_rating_counts": {
+        "1": 27,
+        "2": 2,
+        "3": 3,
+        "4": 27,
+        "5": 11008
+      },
+      "train_share_5_avg_user": 0.9940897127493986,
+      "train_std_rating_avg_user": 0.21389685075834347,
+      "users": 2,
+      "validation_mean_rating_avg_user": 5.0,
+      "validation_rating_counts": {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 10
+      },
+      "validation_share_5_avg_user": 1.0
+    }
+  },
+  "metrics": [
+    {
+      "by_cohort": {
+        "balanced_mixed": {
+          "mae": 0.0,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 1.0
+        },
+        "harsh_low": {
+          "mae": 1.2,
+          "missing": 0,
+          "scored": 15,
+          "targets": 15,
+          "within_1_rate": 0.6666666666666666
+        },
+        "high_variance": {
+          "mae": 0.5,
+          "missing": 0,
+          "scored": 20,
+          "targets": 20,
+          "within_1_rate": 0.95
+        },
+        "mostly_5": {
+          "mae": 0.0,
+          "missing": 0,
+          "scored": 10,
+          "targets": 10,
+          "within_1_rate": 1.0
+        }
+      },
+      "by_user": {
+        "AETXVRADBT6BRQFMVSKTSWF7WMDA": {
+          "mae": 2.0,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 0.4
+        },
+        "AEYKTZXAWOPJG5MGGMKBLRJR6Q3A_1": {
+          "mae": 0.0,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 1.0
+        },
+        "AFTZWAK3ZHAPCNSOT5GCKQDECBTQ": {
+          "mae": 0.0,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 1.0
+        },
+        "AFZUK3MTBIBEDQOPAK3OATUOUKLA": {
+          "mae": 0.0,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 1.0
+        },
+        "AGENFWPRYIMRJKGFJFOF7AFJELIA": {
+          "mae": 0.0,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 1.0
+        },
+        "AGPC7CWRQPMNQFXWLYJYQYF7DCQA": {
+          "mae": 1.6,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 0.6
+        },
+        "AGUTZC4GHLTGYHA3KBEDRF6MHB6A": {
+          "mae": 0.0,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 1.0
+        },
+        "AGWIU2DVVALEVN4DNKJ5CIBFU4JQ": {
+          "mae": 0.8,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 0.8
+        },
+        "AH5SVF75UQNN6QAO26PIT7XHA63Q": {
+          "mae": 0.8,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 1.0
+        },
+        "AHI3UTN6RWSIY3EVMPW2HXEEQ2LA_1": {
+          "mae": 0.4,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 1.0
+        }
+      },
+      "macro_user": {
+        "mae": 0.56,
+        "users": 10,
+        "within_1_rate": 0.8800000000000001
+      },
+      "method": "always_5",
+      "micro": {
+        "mae": 0.56,
+        "missing": 0,
+        "scored": 50,
+        "targets": 50,
+        "within_1_rate": 0.88
+      }
+    },
+    {
+      "by_cohort": {
+        "balanced_mixed": {
+          "mae": 0.4593549982993723,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 1.0
+        },
+        "harsh_low": {
+          "mae": 1.2306236665532915,
+          "missing": 0,
+          "scored": 15,
+          "targets": 15,
+          "within_1_rate": 0.6666666666666666
+        },
+        "high_variance": {
+          "mae": 0.5459354998299373,
+          "missing": 0,
+          "scored": 20,
+          "targets": 20,
+          "within_1_rate": 0.95
+        },
+        "mostly_5": {
+          "mae": 0.4593549982993723,
+          "missing": 0,
+          "scored": 10,
+          "targets": 10,
+          "within_1_rate": 1.0
+        }
+      },
+      "by_user": {
+        "AETXVRADBT6BRQFMVSKTSWF7WMDA": {
+          "mae": 1.5406450017006277,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 0.4
+        },
+        "AEYKTZXAWOPJG5MGGMKBLRJR6Q3A_1": {
+          "mae": 0.4593549982993723,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 1.0
+        },
+        "AFTZWAK3ZHAPCNSOT5GCKQDECBTQ": {
+          "mae": 0.4593549982993723,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 1.0
+        },
+        "AFZUK3MTBIBEDQOPAK3OATUOUKLA": {
+          "mae": 0.4593549982993723,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 1.0
+        },
+        "AGENFWPRYIMRJKGFJFOF7AFJELIA": {
+          "mae": 0.4593549982993723,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 1.0
+        },
+        "AGPC7CWRQPMNQFXWLYJYQYF7DCQA": {
+          "mae": 1.6918709996598742,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 0.6
+        },
+        "AGUTZC4GHLTGYHA3KBEDRF6MHB6A": {
+          "mae": 0.4593549982993723,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 1.0
+        },
+        "AGWIU2DVVALEVN4DNKJ5CIBFU4JQ": {
+          "mae": 0.7081290003401255,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 0.8
+        },
+        "AH5SVF75UQNN6QAO26PIT7XHA63Q": {
+          "mae": 0.5243870010203766,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 1.0
+        },
+        "AHI3UTN6RWSIY3EVMPW2HXEEQ2LA_1": {
+          "mae": 0.49187099965987446,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 1.0
+        }
+      },
+      "macro_user": {
+        "mae": 0.725367799387774,
+        "users": 10,
+        "within_1_rate": 0.8800000000000001
+      },
+      "method": "global_mean",
+      "micro": {
+        "mae": 0.725367799387774,
+        "missing": 0,
+        "scored": 50,
+        "targets": 50,
+        "within_1_rate": 0.88
+      }
+    },
+    {
+      "by_cohort": {
+        "balanced_mixed": {
+          "mae": 0.3560997909171622,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 1.0
+        },
+        "harsh_low": {
+          "mae": 0.9679259090818874,
+          "missing": 0,
+          "scored": 15,
+          "targets": 15,
+          "within_1_rate": 0.6666666666666666
+        },
+        "high_variance": {
+          "mae": 0.5302357146867835,
+          "missing": 0,
+          "scored": 20,
+          "targets": 20,
+          "within_1_rate": 0.95
+        },
+        "mostly_5": {
+          "mae": 0.34357455970051615,
+          "missing": 0,
+          "scored": 10,
+          "targets": 10,
+          "within_1_rate": 1.0
+        }
+      },
+      "by_user": {
+        "AETXVRADBT6BRQFMVSKTSWF7WMDA": {
+          "mae": 1.0719457540306152,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 0.4
+        },
+        "AEYKTZXAWOPJG5MGGMKBLRJR6Q3A_1": {
+          "mae": 0.32762192213106933,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 1.0
+        },
+        "AFTZWAK3ZHAPCNSOT5GCKQDECBTQ": {
+          "mae": 0.19968616048670979,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 1.0
+        },
+        "AFZUK3MTBIBEDQOPAK3OATUOUKLA": {
+          "mae": 0.4278177731208693,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 1.0
+        },
+        "AGENFWPRYIMRJKGFJFOF7AFJELIA": {
+          "mae": 0.3560997909171622,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 1.0
+        },
+        "AGPC7CWRQPMNQFXWLYJYQYF7DCQA": {
+          "mae": 1.632145812728337,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 0.6
+        },
+        "AGUTZC4GHLTGYHA3KBEDRF6MHB6A": {
+          "mae": 0.35952719726996296,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 1.0
+        },
+        "AGWIU2DVVALEVN4DNKJ5CIBFU4JQ": {
+          "mae": 0.7227781926811053,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 0.8
+        },
+        "AH5SVF75UQNN6QAO26PIT7XHA63Q": {
+          "mae": 0.5119274587305279,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 1.0
+        },
+        "AHI3UTN6RWSIY3EVMPW2HXEEQ2LA_1": {
+          "mae": 0.45841943421463205,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 1.0
+        }
+      },
+      "macro_user": {
+        "mae": 0.6067969496310991,
+        "users": 10,
+        "within_1_rate": 0.8800000000000001
+      },
+      "method": "category_mean",
+      "micro": {
+        "mae": 0.6067969496310991,
+        "missing": 0,
+        "scored": 50,
+        "targets": 50,
+        "within_1_rate": 0.88
+      }
+    },
+    {
+      "by_cohort": {
+        "balanced_mixed": {
+          "mae": 1.2,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 0.4
+        },
+        "harsh_low": {
+          "mae": 1.4,
+          "missing": 0,
+          "scored": 15,
+          "targets": 15,
+          "within_1_rate": 0.6666666666666666
+        },
+        "high_variance": {
+          "mae": 0.9,
+          "missing": 0,
+          "scored": 20,
+          "targets": 20,
+          "within_1_rate": 0.9
+        },
+        "mostly_5": {
+          "mae": 0.7,
+          "missing": 0,
+          "scored": 10,
+          "targets": 10,
+          "within_1_rate": 0.9
+        }
+      },
+      "by_user": {
+        "AETXVRADBT6BRQFMVSKTSWF7WMDA": {
+          "mae": 2.0,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 0.4
+        },
+        "AEYKTZXAWOPJG5MGGMKBLRJR6Q3A_1": {
+          "mae": 0.6,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 1.0
+        },
+        "AFTZWAK3ZHAPCNSOT5GCKQDECBTQ": {
+          "mae": 0.4,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 1.0
+        },
+        "AFZUK3MTBIBEDQOPAK3OATUOUKLA": {
+          "mae": 1.0,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 1.0
+        },
+        "AGENFWPRYIMRJKGFJFOF7AFJELIA": {
+          "mae": 1.2,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 0.4
+        },
+        "AGPC7CWRQPMNQFXWLYJYQYF7DCQA": {
+          "mae": 1.8,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 0.6
+        },
+        "AGUTZC4GHLTGYHA3KBEDRF6MHB6A": {
+          "mae": 0.8,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 0.8
+        },
+        "AGWIU2DVVALEVN4DNKJ5CIBFU4JQ": {
+          "mae": 0.6,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 0.8
+        },
+        "AH5SVF75UQNN6QAO26PIT7XHA63Q": {
+          "mae": 1.2,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 0.8
+        },
+        "AHI3UTN6RWSIY3EVMPW2HXEEQ2LA_1": {
+          "mae": 0.8,
+          "missing": 0,
+          "scored": 5,
+          "targets": 5,
+          "within_1_rate": 1.0
+        }
+      },
+      "macro_user": {
+        "mae": 1.04,
+        "users": 10,
+        "within_1_rate": 0.78
+      },
+      "method": "persona_yaml_sanitized_demo",
+      "micro": {
+        "mae": 1.04,
+        "missing": 0,
+        "scored": 50,
+        "targets": 50,
+        "within_1_rate": 0.78
+      }
+    }
+  ],
+  "predictions": "/Users/ruoqigao/Documents/MatrAIx/personas/existing_data_curation/raw/amazon_reviews_2023/persona_rating_holdout_eval_demo_10/persona_predictions_demo_5_per_user.jsonl",
+  "priors": {
+    "category_mean_rating": {
+      "All_Beauty": 4.604166666666667,
+      "Amazon_Fashion": 4.595041322314049,
+      "Appliances": 4.527272727272727,
+      "Arts_Crafts_and_Sewing": 4.552083333333333,
+      "Automotive": 4.884020618556701,
+      "Baby_Products": 4.252054794520548,
+      "Beauty_and_Personal_Care": 4.345335515548282,
+      "Books": 4.2270531400966185,
+      "CDs_and_Vinyl": 4.333333333333333,
+      "Cell_Phones_and_Accessories": 4.875621890547263,
+      "Clothing_Shoes_and_Jewelry": 4.557013574660633,
+      "Electronics": 4.879872204472844,
+      "Gift_Cards": 4.0,
+      "Grocery_and_Gourmet_Food": 3.6156521739130434,
+      "Handmade_Products": 4.8,
+      "Health_and_Household": 4.374087591240876,
+      "Health_and_Personal_Care": 4.8,
+      "Home_and_Kitchen": 4.726580949881921,
+      "Industrial_and_Scientific": 4.669683257918552,
+      "Kindle_Store": 4.519879097884213,
+      "Magazine_Subscriptions": 3.0,
+      "Movies_and_TV": 3.9056224899598395,
+      "Musical_Instruments": 4.993150684931507,
+      "Office_Products": 4.39766081871345,
+      "Patio_Lawn_and_Garden": 4.7031131359149585,
+      "Pet_Supplies": 4.824817518248175,
+      "Software": 4.05,
+      "Sports_and_Outdoors": 4.858018386108274,
+      "Subscription_Boxes": 5.0,
+      "Tools_and_Home_Improvement": 4.8395691609977325,
+      "Toys_and_Games": 4.752200406228842,
+      "Unknown": 4.6138909634055265,
+      "Video_Games": 4.854014598540146
+    },
+    "global_mean_rating": 4.540645001700628
+  },
+  "thresholds": {
+    "harsh_mean_max": 3.8,
+    "harsh_share_1_2_min": 0.15,
+    "high_variance_non5_min": 0.25,
+    "high_variance_std_min": 1.0,
+    "min_train_ratings": 30,
+    "min_validation_ratings": 1,
+    "mostly_5_share_min": 0.9
+  },
+  "user_histories": "/Users/ruoqigao/Documents/MatrAIx/personas/existing_data_curation/raw/amazon_reviews_2023/persona_rating_holdout_eval_demo_10/user_histories_demo_5_per_user.jsonl"
+}
