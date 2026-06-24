@@ -32,6 +32,29 @@ The existing result contract remains unchanged. Collaborators return
 `results.jsonl`. Owner-side validation and merge continue to use
 `merge_collab_results.py`.
 
+## Integrity Contract
+
+The package must carry checksums for immutable inputs and contract files.
+`make_collab_package.py` will write a `package_manifest.json` with:
+
+- assignment metadata: assignment id, worker id, dataset id, range, category
+  filter, task count, and dimension count;
+- SHA-256 for `assignment.json`, `tasks.jsonl`, and `dimensions.json`;
+- SHA-256 for contract/runtime files such as `collab_kit/harness.py`,
+  `collab_kit/conformance.py`, schemas, backend adapters, and the root
+  launcher;
+- editable-file entries for files such as `collab_kit/solver.py`, where a
+  mismatch is a warning rather than a hard failure.
+
+The manifest prevents accidental corruption or edits. It is not a cryptographic
+signature against a malicious collaborator. If adversarial tamper resistance is
+needed later, add a signed owner ledger outside the package.
+
+Every `run_assignment.sh` action must verify the manifest before doing work.
+Mismatches in immutable files are hard failures with a message to re-unpack the
+assignment package. Mismatches in editable files are shown as warnings and
+recorded in run provenance.
+
 ## Entrypoint Shape
 
 `run_assignment.sh` will be a thin, portable launcher. It will:
@@ -115,12 +138,20 @@ PyYAML through `uv`, but the first version should keep settings dependency-free.
 On later launches, the runner shows the current settings and asks whether to
 keep them or overwrite them. Non-interactive flags can bypass prompts.
 
+If a progress checkpoint already exists, the runner must not silently change
+settings that affect result provenance, including backend, model, effort, or
+command override. The first version should require the user to keep the existing
+settings or restart from scratch. A later version can support mixed-model
+resumes by storing provenance per checkpointed unit.
+
 ## Environment And Subscription Checks
 
 The runner checks:
 
 - package files exist: `assignment.json`, `tasks.jsonl`, `dimensions.json`,
-  `collab_kit/harness.py`, `collab_kit/conformance.py`;
+  `package_manifest.json`, `collab_kit/harness.py`,
+  `collab_kit/conformance.py`;
+- manifest checksums for immutable data and contract files;
 - Python is new enough for the bundled code;
 - `uv` availability, without requiring it;
 - whether `uv` can be installed with explicit consent;
@@ -178,6 +209,16 @@ Partial `results.jsonl` may exist, but it is not complete until `harness.py`
 reports all units done and conformance passes. The menu will show both unit
 progress and fully completed profile count by calling the harness status path.
 
+The runner will stamp returned rows with assignment provenance where possible:
+
+- `assignment_id`;
+- `worker_id`;
+- `tasks_sha256`;
+- `dimensions_sha256`;
+- `package_manifest_sha256`;
+- settings hash;
+- whether editable files differed from the original package.
+
 ## Validation
 
 The runner exposes validation as a first-class menu option and as a CLI command:
@@ -189,6 +230,20 @@ The runner exposes validation as a first-class menu option and as a CLI command:
 This calls the bundled `conformance.py` against `results.jsonl`,
 `dimensions.json`, and `tasks.jsonl`. A passing validation means the file is
 ready to return, subject to owner-side identity/merge checks.
+
+Owner-side merge validation should also verify the returned assignment
+provenance. `merge_collab_results.py` should be extended to accept the package
+manifest or assignment metadata and reject returns when:
+
+- `assignment_id`, worker id, range, or file hashes do not match the owner
+  assignment;
+- result rows contain `global_idx` values outside the assigned range;
+- `task_id`, `qid`, or `input_sha256` disagree with the owner SQLite database;
+- dimensions or allowed values drift from the canonical owner dimensions file.
+
+This gives two layers of protection: the collaborator catches accidental local
+file changes before running, and the owner catches mismatched or corrupted
+returns before merging.
 
 ## Cross-Platform Policy
 
@@ -212,11 +267,18 @@ Tests will cover:
 
 - `make_collab_package.py` includes `run_assignment.sh` and
   `collab_kit/assignment_runner.py` in the package directory and archive;
+- `make_collab_package.py` writes `package_manifest.json` with hashes for
+  immutable package files;
 - package ignore rules do not include stale generated outputs;
+- `assignment_runner.py` refuses to run when `tasks.jsonl` or `dimensions.json`
+  does not match the manifest;
 - `assignment_runner.py --status` works on a tiny package before any run;
 - `assignment_runner.py --backend mock --yes` executes a mock run and validates;
 - first-run YAML settings are written and subsequent runs can reuse them;
 - settings prompts collect backend, model, effort, and parallel job count;
+- existing progress prevents silent backend/model/effort changes;
+- owner merge rejects returned rows with wrong assignment hashes or DB
+  `input_sha256` mismatches;
 - `solver.py` installs default commands for Claude and Codex when env vars are
   unset.
 
