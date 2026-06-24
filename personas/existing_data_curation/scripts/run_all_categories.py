@@ -24,6 +24,7 @@ Run from the repo root with the repo on PYTHONPATH, e.g.:
 from __future__ import annotations
 
 import argparse
+import concurrent.futures
 import json
 from pathlib import Path
 from typing import Any
@@ -68,32 +69,62 @@ def run_all_categories(
     dataset_sha256: str,
     categories: list[str] | None = None,
     max_attempts: int = 3,
+    jobs: int = 1,
 ) -> list[dict[str, Any]]:
     slugs = discover_categories(protocols_dir, categories)
     if not slugs:
         raise ValueError(f"no category protocols found under {protocols_dir}")
     out_dir.mkdir(parents=True, exist_ok=True)
+
+    def _one(slug: str) -> dict[str, Any]:
+        # Each category run is independent (own work dir + archive), so categories
+        # parallelize safely; the backend call inside is I/O-bound on the CLI/API.
+        try:
+            archive = run_range(
+                db_path=db_path,
+                protocol_dir=protocols_dir / slug,
+                range_start=range_start,
+                range_end=range_end,
+                backend_name=backend_name,
+                model=model,
+                concurrency=concurrency,
+                effort=effort,
+                worker_id=worker_id,
+                out_dir=out_dir,
+                dataset_id=dataset_id,
+                dataset_sha256=dataset_sha256,
+                max_attempts=max_attempts,
+            )
+            return {"slug": slug, "archive": str(archive)}
+        except Exception as exc:  # one bad category must not kill the batch
+            return {"slug": slug, "error": str(exc)}
+
     produced: list[dict[str, Any]] = []
-    for i, slug in enumerate(slugs, 1):
-        proto_dir = protocols_dir / slug
-        archive = run_range(
-            db_path=db_path,
-            protocol_dir=proto_dir,
-            range_start=range_start,
-            range_end=range_end,
-            backend_name=backend_name,
-            model=model,
-            concurrency=concurrency,
-            effort=effort,
-            worker_id=worker_id,
-            out_dir=out_dir,
-            dataset_id=dataset_id,
-            dataset_sha256=dataset_sha256,
-            max_attempts=max_attempts,
-        )
-        produced.append({"slug": slug, "archive": str(archive)})
-        print(f"[{i}/{len(slugs)}] {slug} -> {archive.name}")
+    done = 0
+    total = len(slugs)
+    if jobs <= 1:
+        for slug in slugs:
+            result = _one(slug)
+            done += 1
+            produced.append(result)
+            _log_result(done, total, result)
+    else:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=jobs) as executor:
+            futures = {executor.submit(_one, slug): slug for slug in slugs}
+            for future in concurrent.futures.as_completed(futures):
+                result = future.result()
+                done += 1
+                produced.append(result)
+                _log_result(done, total, result)
+    produced.sort(key=lambda r: r["slug"])
     return produced
+
+
+def _log_result(done: int, total: int, result: dict[str, Any]) -> None:
+    if "error" in result:
+        print(f"[{done}/{total}] {result['slug']} -> ERROR: {result['error']}")
+    else:
+        print(f"[{done}/{total}] {result['slug']} -> {Path(result['archive']).name}")
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
@@ -121,6 +152,12 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         help="comma-separated slugs to run a subset (default: all 39).",
     )
     ap.add_argument("--max-attempts", type=int, default=3)
+    ap.add_argument(
+        "--jobs",
+        type=int,
+        default=1,
+        help="run this many category protocols in parallel (each is one backend call).",
+    )
     return ap.parse_args(argv)
 
 
@@ -143,8 +180,13 @@ def main(argv: list[str] | None = None) -> int:
         dataset_sha256=args.dataset_sha256,
         categories=categories,
         max_attempts=args.max_attempts,
+        jobs=args.jobs,
     )
-    print(f"\nDone: {len(produced)} category archives in {args.out_dir}")
+    ok = [p for p in produced if "archive" in p]
+    errors = [p for p in produced if "error" in p]
+    print(f"\nDone: {len(ok)} category archives in {args.out_dir}")
+    if errors:
+        print(f"Failed categories ({len(errors)}): {', '.join(e['slug'] for e in errors)}")
     return 0
 
 

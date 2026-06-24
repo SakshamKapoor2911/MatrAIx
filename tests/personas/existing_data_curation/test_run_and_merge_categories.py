@@ -115,8 +115,10 @@ def test_run_all_categories_subset_produces_one_archive_per_category(tmp_path):
         dataset_id="ds",
         dataset_sha256=sha,
         categories=["demographic_core", "interests_media"],
+        jobs=2,  # exercise the parallel-over-categories path
     )
     assert len(produced) == 2
+    assert all("archive" in p for p in produced)
     archives = list(out.glob("*.tar.gz"))
     assert len(archives) == 2
 
