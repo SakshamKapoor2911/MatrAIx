@@ -13,7 +13,17 @@
     "qid": { "type": "string" },
     "model": {
       "type": ["string", "null"],
-      "description": "Optional provenance: which model produced this (e.g. claude-opus-4-8)."
+      "description": "Back-compat mirror of run.model."
+    },
+    "run": {
+      "type": "object",
+      "description": "Provenance the harness stamps on every record: which model/version/effort produced it.",
+      "properties": {
+        "backend": { "type": "string" },
+        "model": { "type": ["string", "null"], "description": "e.g. claude-opus-4-8" },
+        "effort": { "type": "string", "description": "low | medium | high | max" },
+        "runner_version": { "type": "string" }
+      }
     },
     "fields": {
       "type": "array",

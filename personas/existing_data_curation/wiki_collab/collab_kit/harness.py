@@ -42,7 +42,27 @@ if str(KIT_DIR) not in sys.path:
 import conformance  # noqa: E402
 import solver  # noqa: E402
 
+HARNESS_VERSION = "1.0.0"
+
 Unit = tuple[int, str]  # (global_idx, category)
+
+
+def run_provenance(backend: str, model: str | None, effort: str) -> dict[str, Any]:
+    """What produced these results — stamped on every record so the returned
+    log always says which model/version/effort was used."""
+    resolved = model
+    if resolved is None:
+        try:
+            from backends import DEFAULT_MODELS  # bundled in this kit
+            resolved = DEFAULT_MODELS.get(backend)
+        except Exception:
+            resolved = None
+    return {
+        "backend": backend,
+        "model": resolved,
+        "effort": effort,
+        "runner_version": HARNESS_VERSION,
+    }
 
 
 def group_by_category(
@@ -82,7 +102,7 @@ def load_checkpoint(path: Path) -> dict[Unit, list[dict[str, Any]]]:
 def assemble_results(
     tasks: list[dict[str, Any]],
     done: dict[Unit, list[dict[str, Any]]],
-    model: str | None,
+    run: dict[str, Any],
 ) -> list[dict[str, Any]]:
     """Union all finished category-units back into one record per profile."""
     per_profile: dict[int, dict[str, dict[str, Any]]] = {}
@@ -100,7 +120,8 @@ def assemble_results(
                 "global_idx": gi,
                 "task_id": task.get("task_id"),
                 "qid": task.get("qid"),
-                "model": model,
+                "model": run.get("model"),  # back-compat mirror of run.model
+                "run": run,
                 "fields": list(per_profile.get(gi, {}).values()),
             }
         )
@@ -245,7 +266,8 @@ def main(argv: list[str] | None = None) -> int:
         model=args.model, effort=args.effort, jobs=args.jobs,
     )
 
-    results = assemble_results(tasks, done, args.model)
+    run = run_provenance(args.backend, args.model, args.effort)
+    results = assemble_results(tasks, done, run)
     write_results(args.out, results)
     attributed = sum(
         1 for r in results for f in r["fields"]

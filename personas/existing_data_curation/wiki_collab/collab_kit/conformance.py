@@ -23,6 +23,8 @@ from typing import Any
 ASSIGNMENT_TYPES = {"direct", "structured_claim", "summary_inference", "unsupported"}
 RESULT_REQUIRED = ("global_idx", "fields")
 FIELD_REQUIRED = ("field_id", "value", "confidence", "evidence", "assignment_type")
+# Provenance the returned log should carry (which model/version/effort produced it).
+RUN_PROVENANCE = ("model", "effort", "runner_version")
 
 
 def load_jsonl(path: Path) -> list[dict[str, Any]]:
@@ -73,6 +75,14 @@ def check_results(
             if gi in seen_idx:
                 errors.append(f"{where}: duplicate global_idx {gi}")
             seen_idx.add(gi)
+
+        run = rec.get("run")
+        if not isinstance(run, dict):
+            warnings.append(f"{where}: missing 'run' provenance (model/effort/runner_version)")
+        else:
+            missing_prov = [k for k in RUN_PROVENANCE if not run.get(k)]
+            if missing_prov:
+                warnings.append(f"{where}: run provenance missing {missing_prov}")
 
         fields = rec.get("fields")
         if not isinstance(fields, list):

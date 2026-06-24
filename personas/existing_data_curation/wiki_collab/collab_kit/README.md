@@ -140,3 +140,9 @@ collab_kit/
   `.tar.gz` that is ready to send.
 - On return, run `conformance.py --results theirs.jsonl --dimensions dimensions.json --tasks tasks.jsonl`
   before ingesting. Same checker both sides ⇒ formats always match.
+- Merge everyone's returns with `scripts/merge_collab_results.py` (repeat
+  `--results` per worker). With `--db` it verifies each `global_idx`/`task_id`/
+  `qid` against the source SQLite (so a profile can't be swapped), unions fields
+  per profile, reports value conflicts, and tallies the model/effort/version
+  each return was produced with. Each returned record carries that provenance in
+  its `run` block.
