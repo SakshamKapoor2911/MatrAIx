@@ -1,5 +1,55 @@
 # Offline Wiki Collaboration
 
+## Speedrun (the whole loop on one page)
+
+Three steps: you make a package, a collaborator runs it on their own account,
+you merge what comes back. The profile DB lives only on your machine — the
+collaborator gets a lightweight `.tar.gz` (no DB, no build).
+
+**1. You — make a package for a slice** (run from the repo root; first run builds
+the DB once, then reuses it):
+
+```bash
+P=personas/existing_data_curation/scripts
+./$P/make_package.sh 0:100            # -> /tmp/matraix_packages/A_0_100_worker.tar.gz
+# ./$P/make_package.sh 0:100 alice                  # name the worker
+# ./$P/make_package.sh 0:100 alice demographic_core # only some dimensions
+```
+
+Send that one `.tar.gz`. Email text: see [`EMAIL_TEMPLATES.md`](EMAIL_TEMPLATES.md).
+
+**2. Collaborator — unpack and run on their own model/auth** (same code for everyone):
+
+```bash
+cd collab_kit
+./run.sh --tasks ../tasks.jsonl --dimensions ../dimensions.json \
+         --out ../results.jsonl --backend mock          # zero-cred smoke test
+./run.sh --tasks ../tasks.jsonl --dimensions ../dimensions.json \
+         --out ../results.jsonl --backend claude-code-acp \
+         --model claude-opus-4-8 --effort high --jobs 6  # real run, their Claude login
+python3 harness.py ... --status                          # how far along (resumable)
+```
+
+Resumable (re-run the same command if quota runs out), shows progress, and the
+returned `results.jsonl` carries a `run` block (model/effort/version) per record.
+They edit `collab_kit/solver.py` if they want to improve the method. They return
+`results.jsonl`. See [`collab_kit/README.md`](collab_kit/README.md).
+
+**3. You — verify + merge every return** (run from the repo root):
+
+```bash
+PYTHONPATH=. python3 personas/existing_data_curation/scripts/merge_collab_results.py \
+  --results alice/results.jsonl --results bob/results.jsonl \
+  --dimensions personas/dimensions+new.json \
+  --db /tmp/matraix_wiki_profiles_20260601_v1.sqlite \
+  --out merged.jsonl.gz --report merge_report.json
+```
+
+Checks format, verifies each `global_idx`/`task_id`/`qid` against the source DB,
+unions fields per profile, reports conflicts, and tallies model/effort/version.
+
+---
+
 This directory contains two collaboration flows:
 
 1. **Recommended outbound worker package**: the owner sends a small package with
