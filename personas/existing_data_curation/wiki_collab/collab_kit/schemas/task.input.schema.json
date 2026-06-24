@@ -13,6 +13,10 @@
     "qid": { "type": "string", "description": "Wikidata QID, e.g. Q91." },
     "title": { "type": "string" },
     "source_url": { "type": "string" },
+    "input_sha256": {
+      "type": "string",
+      "description": "Owner-computed hash of the profile input payload. Keep it unchanged if you echo it in downstream outputs."
+    },
     "profile_text": {
       "type": "string",
       "description": "The text you attribute persona dimensions from. Evidence quotes must be copied from here."
