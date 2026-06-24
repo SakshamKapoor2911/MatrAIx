@@ -12,8 +12,9 @@ entrypoint:
 
 That entrypoint should behave like a small installer and terminal dashboard. It
 checks the local environment, helps the user pick Claude Code or Codex CLI,
-persists that choice, runs the resumable attribution job, shows progress, and
-validates `results.jsonl` before the collaborator returns it.
+offers to install `uv` when useful, persists the run settings, runs the
+resumable attribution job, shows progress, and validates `results.jsonl` before
+the collaborator returns it.
 
 ## Package Contract
 
@@ -37,6 +38,8 @@ The existing result contract remains unchanged. Collaborators return
 
 - locate a usable Python runtime;
 - prefer `uv run` if `uv` is available;
+- offer an explicit `uv` install path when `uv` is missing and the platform has
+  a supported installer route;
 - fall back to `python3` or `python`;
 - run `collab_kit/assignment_runner.py`;
 - forward all CLI arguments.
@@ -50,12 +53,35 @@ the first version.
 Running `./run_assignment.sh` with no flags opens a terminal menu:
 
 1. Environment check.
-2. Backend setup.
-3. Status.
-4. Mock smoke test.
-5. Real run or resume.
-6. Validate current `results.jsonl`.
-7. Quit.
+2. `uv` check and optional installation.
+3. First-run settings setup.
+4. Status.
+5. Mock smoke test.
+6. Real run or resume.
+7. Validate current `results.jsonl`.
+8. Quit.
+
+First-run settings setup asks for:
+
+- backend;
+- model;
+- effort;
+- parallel job count;
+- optional backend command override.
+
+After settings exist, the menu shows the current values and asks whether to keep
+them or overwrite them before a real run.
+
+The line-oriented TUI should also have direct commands for users who do not want
+the menu:
+
+```bash
+./run_assignment.sh --configure
+./run_assignment.sh --status
+./run_assignment.sh --validate
+./run_assignment.sh --run
+./run_assignment.sh --backend codex-acp --model gpt-5.5 --effort high --jobs 4 --yes
+```
 
 The menu is a simple line-oriented TUI, not a curses full-screen UI. This keeps
 it usable on macOS, Linux, WSL, SSH, and Git Bash-style terminals.
@@ -70,15 +96,24 @@ The first real run asks the user to choose a backend:
 - advanced external command backend
 
 The choice, model, effort, jobs, and optional command overrides are saved in a
-package-local config file such as `.wiki_collab_config.json`. On later launches,
-the runner shows the current settings and asks whether to keep them or overwrite
-them. Non-interactive flags can bypass prompts:
+package-local YAML file:
 
-```bash
-./run_assignment.sh --backend codex-acp --jobs 4 --effort high --yes
-./run_assignment.sh --configure
-./run_assignment.sh --status
+```yaml
+backend: codex-acp
+model: gpt-5.5
+effort: high
+jobs: 4
+command_override: ""
+created_at: "2026-06-24T00:00:00Z"
+updated_at: "2026-06-24T00:00:00Z"
 ```
+
+The runner will use a narrow YAML reader/writer for this flat settings file
+instead of requiring PyYAML. If a future version needs nested YAML, it can add
+PyYAML through `uv`, but the first version should keep settings dependency-free.
+
+On later launches, the runner shows the current settings and asks whether to
+keep them or overwrite them. Non-interactive flags can bypass prompts.
 
 ## Environment And Subscription Checks
 
@@ -88,6 +123,7 @@ The runner checks:
   `collab_kit/harness.py`, `collab_kit/conformance.py`;
 - Python is new enough for the bundled code;
 - `uv` availability, without requiring it;
+- whether `uv` can be installed with explicit consent;
 - selected backend CLI availability;
 - selected backend auth appears usable.
 
@@ -95,6 +131,17 @@ Backend auth checks should be conservative. For Claude and Codex CLI, the first
 version can verify that the command exists and run a tiny non-destructive probe
 where the CLI supports it. If a reliable auth probe is unavailable, the runner
 reports that auth will be confirmed by the smoke or real run.
+
+`uv` installation should never be silent. The runner may offer:
+
+- existing `uv` on `PATH`;
+- official `uv` standalone installer on Unix-like shells when `curl` or `wget`
+  is present;
+- `python -m pip install --user uv` when pip is available;
+- manual instructions when neither route is safe.
+
+If the user declines or installation fails, the runner continues with the
+current Python interpreter because the package itself is stdlib-only.
 
 ## Backend Defaults
 
@@ -155,7 +202,9 @@ python collab_kit/assignment_runner.py
 
 `uv` is optional. If present, the shell launcher may use it to run Python with a
 consistent interpreter, but the package must still work without network access
-or dependency installation after unpacking.
+or dependency installation after unpacking. If missing, the runner may offer to
+install it with explicit user consent, then fall back cleanly if that is not
+possible.
 
 ## Testing
 
@@ -166,7 +215,8 @@ Tests will cover:
 - package ignore rules do not include stale generated outputs;
 - `assignment_runner.py --status` works on a tiny package before any run;
 - `assignment_runner.py --backend mock --yes` executes a mock run and validates;
-- first-run backend config is written and subsequent runs can reuse it;
+- first-run YAML settings are written and subsequent runs can reuse them;
+- settings prompts collect backend, model, effort, and parallel job count;
 - `solver.py` installs default commands for Claude and Codex when env vars are
   unset.
 
@@ -175,6 +225,6 @@ Tests will cover:
 - Sharing the owner SQLite database with collaborators.
 - Replacing `merge_collab_results.py`.
 - Requiring collaborators to clone the MatrAIx repository.
-- Installing Claude Code, Codex CLI, or `uv` automatically through networked
-  package managers. The runner may explain missing tools, but it should not
-  mutate a collaborator machine beyond package-local config/progress files.
+- Installing Claude Code or Codex CLI automatically. The runner may explain
+  missing tools. It may install `uv` only after explicit user confirmation, and
+  it must continue without `uv` if installation is unavailable.
