@@ -1,0 +1,215 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===========================================================================
+   RecBot Studio — design tokens ("Executive Precision")
+   ---------------------------------------------------------------------------
+   The canonical palette/type/radii/shadows are the "Executive Precision" system
+   defined in DESIGN.md and realized in the approved cockpit mockup
+   (tools/recbot-mockups/cockpit-stitch-v2.html). tailwind.config.ts maps every
+   token below into the Tailwind theme (e.g. `bg-surface-container-lowest`,
+   `text-on-surface-variant`, `shadow-soft`, `font-body-md`).
+
+   These are the Executive Precision tokens (indigo `#24389c` primary, the slate
+   surface ramp, tokenized semantic success/error/warning container pairs); hex
+   values lifted from DESIGN.md / the approved mockup. Every component renders
+   against these tokens — the earlier legacy oklch bridge has been removed now
+   that the whole app is ported.
+   =========================================================================== */
+:root {
+  /* ---- Executive Precision palette (canonical) ---- */
+  --background: #f7f9fb;
+  --surface: #f7f9fb;
+  --surface-dim: #d8dadc;
+  --surface-bright: #f7f9fb;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #f2f4f6;
+  --surface-container: #eceef0;
+  --surface-container-high: #e6e8ea;
+  --surface-container-highest: #e0e3e5;
+  --on-surface: #191c1e;
+  --on-surface-variant: #454652;
+  --outline: #757684;
+  --outline-variant: #c5c5d4;
+  --border-soft: #e2e8f0;
+
+  --primary: #24389c;
+  --primary-container: #3f51b5;
+  --primary-tint: #eef0fb;
+  --on-primary: #ffffff;
+  --on-primary-container: #cacfff;
+
+  --secondary: #505f76;
+
+  /* Semantic — each with its container + on-container companion. */
+  --success: #059669;
+  --success-container: #d1fae5;
+  --on-success-container: #065f46;
+  --warning: #8f4700;
+  --warning-container: #ffdcc6;
+  --on-warning-container: #713700;
+  --error: #ba1a1a;
+  --error-container: #ffe4e6;
+  --on-error-container: #9f1239;
+
+  /* Score scale (red → amber → green) — used ONLY for evaluation scores. */
+  --score-low: #9f1239;
+  --score-mid: #8f4700;
+  --score-high: #059669;
+
+  /* ---- Type ---- */
+  --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* ---- Radii (8px standard; 12–16px large panels) ---- */
+  --radius-sm: 0.25rem;
+  --radius: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+
+  /* ---- Elevation ("Stacked Layer") ---- */
+  --sh-soft: 0 4px 6px -1px rgb(0 0 0 / 0.04), 0 2px 4px -1px rgb(0 0 0 / 0.02);
+}
+
+/* ===========================================================================
+   Base
+   =========================================================================== */
+@layer base {
+  * {
+    @apply box-border;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    font-family: var(--sans);
+    color: var(--on-surface);
+    background: var(--background);
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "cv05" 1, "ss01" 1;
+  }
+
+  ::selection {
+    background: var(--primary-tint);
+  }
+
+  /* One tokenized focus-visible ring on every interactive element:
+     2px primary at 2px offset (Executive Precision focus spec). */
+  :focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+
+  /* Quiet, narrow scrollbars that fit the tool register. */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-soft) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: var(--border-soft);
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background: var(--outline);
+    background-clip: padding-box;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+/* ===========================================================================
+   Foundational helpers (NOT in an @layer, so they always ship — the icon font
+   reset + cockpit scrollbars must exist before any component references them).
+   The app shell + pane layout is composed with Tailwind utilities in `App.tsx`
+   (a flex column with an inline three-column grid), so no bespoke shell CSS is
+   needed here.
+   =========================================================================== */
+
+/* ---- Material Symbols (Executive Precision icon set) ----
+   Loaded in index.html; default to the unfilled, regular-weight optical
+   setting. Components opt into FILL/weight via inline font-variation-settings,
+   mirroring the approved cockpit mockup. */
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined";
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: "liga";
+  font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+/* ---- Thin internal scrollbars (cockpit panes) ---- */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--outline-variant);
+  border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: var(--outline);
+}
+
+/* ===========================================================================
+   Motion
+   =========================================================================== */
+@layer utilities {
+  /* Soft pulse for the "warming / running" cold-start indicator. */
+  @keyframes rb-pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.45;
+    }
+  }
+  .animate-rb-pulse {
+    animation: rb-pulse 1.4s ease-in-out infinite;
+  }
+
+  @keyframes rb-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  .animate-rb-spin {
+    animation: rb-spin 0.7s linear infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

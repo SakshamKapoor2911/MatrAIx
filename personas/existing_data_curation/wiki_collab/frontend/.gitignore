@@ -1,0 +1,17 @@
+# dependencies
+node_modules
+
+# logs
+*.log
+npm-debug.log*
+
+# editor / OS
+.vscode/*
+.idea
+.DS_Store
+*.local
+*.tsbuildinfo
+
+# NOTE: dist/ is intentionally NOT ignored. The built SPA is committed so that
+# collaborators can run `python demo_app.py` with no node/npm at run time (the
+# server serves frontend/dist). Rebuild with `npm run build` after UI changes.
