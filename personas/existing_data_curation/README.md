@@ -450,9 +450,11 @@ I/O latency.
 
 Use `scripts/infer_amazon_review_dimensions.py` to infer values from
 `personas/dimensions+new.json` where the exported review history directly
-supports the schema attribute. The prompt is conservative: unsupported
-dimensions are omitted, sensitive demographics are not inferred from product
-stereotypes, and every returned value must include review evidence.
+supports the schema attribute. The prompt is evidence-grounded but
+recall-oriented: it returns strong attributes and weak/suggestive non-sensitive
+attributes with calibrated lower confidence. Unsupported dimensions are
+omitted, sensitive demographics are not inferred from product stereotypes, and
+every returned value must include review evidence.
 
 Inspect prompts without calling the API:
 

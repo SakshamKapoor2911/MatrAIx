@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Infer the 1,339 persona schema dimensions from Amazon review histories.
 
-The script is intentionally conservative: it asks the model to return only
-schema attributes that are directly supported by review text, ratings, dates,
-or reviewed categories. Unknown or weakly-supported dimensions are omitted.
+The script is evidence-grounded but recall-oriented: it asks the model to
+return strongly supported attributes and weak/suggestive non-sensitive
+attributes when review text, ratings, dates, or reviewed categories provide
+some support. Unsupported attributes are omitted.
 
 Input JSONL rows should contain:
 - user_id
@@ -55,21 +56,22 @@ EVIDENCE_PROFILE_SYSTEM_PROMPT = """You create compact evidence profiles from Am
 
 Core rule: record only evidence directly supported by review text, product title, rating, category, or repeated review behavior. Do not make persona claims from stereotypes.
 
-Use the provided broad evidence categories as the organizing guide. Capture explicit self-statements separately from behavioral signals. Do not infer protected or sensitive demographics, health status, family status, socioeconomic status, occupation, region, politics, or religion unless the reviewer explicitly states it in the evidence.
+Use the provided broad evidence categories as the organizing guide. Capture both strong and weak/suggestive non-sensitive signals so downstream schema mapping can choose more attributes with calibrated confidence. Capture explicit self-statements separately from behavioral signals. Do not infer protected or sensitive demographics, health status, family status, socioeconomic status, occupation, region, politics, or religion unless the reviewer explicitly states it in the evidence.
 
 Return compact JSON only."""
 
 
 SCHEMA_MAPPING_SYSTEM_PROMPT = """You map compact Amazon-review evidence profiles to persona schema attributes.
 
-Core rule: return an attribute only when the compact evidence profile directly supports it. If the evidence profile does not support a schema dimension, omit it.
+Core rule: maximize useful non-sensitive persona coverage while staying evidence-grounded. Return strongly supported attributes and weak/suggestive non-sensitive attributes when the compact evidence profile provides some support. If the evidence profile provides no support for a schema dimension, omit it.
 
 Evidence standards:
 - Prefer explicit self-statements and repeated behavioral evidence.
+- Include weak but plausible non-sensitive attributes when evidence is suggestive; mark them with lower confidence and explain the limited support.
 - For each inferred dimension, choose exactly one allowed value from that dimension.
 - Every inferred dimension must cite profile evidence item ids and original review ids.
 - Do not infer sensitive demographics, health, family, socioeconomic, political, religious, or identity attributes unless the profile contains explicit quoted self-statements.
-- Use confidence between 0 and 1. Use >=0.8 only for explicit or repeated evidence.
+- Use confidence between 0 and 1. Use 0.35-0.6 for weak/suggestive non-sensitive attributes, 0.6-0.8 for moderate repeated evidence, and >=0.8 only for explicit or strongly repeated evidence.
 
 Return compact JSON only."""
 
@@ -747,6 +749,7 @@ def evidence_profile_payload(
             "Use construction_corpus_summary for aggregate rating-only behavior; review_evidence contains text-bearing rows only when text-only context is enabled.",
             "Use product name/category only to interpret the reviewed item; do not infer sensitive attributes from product stereotypes.",
             "Use schema_signal_checklist to preserve information likely to support the downstream 1,339-dimension persona schema without copying the whole schema.",
+            "Preserve weak or suggestive non-sensitive signals as candidate evidence when they may support schema attributes; label them with lower confidence.",
             "Preserve enough distinct evidence to support downstream schema extraction; do not collapse unrelated interests, preferences, habits, skills, and values into one generic claim.",
             "Prefer concrete, reusable evidence over biography-like prose.",
             "Keep claims short and grounded.",
@@ -793,7 +796,7 @@ def evidence_profile_payload(
                         ],
                         "schema_category_hints": ["schema categories this evidence could support"],
                         "confidence": "number from 0 to 1",
-                        "evidence_type": "explicit_self_statement | repeated_behavior | product_interest | preference | expertise_signal | communication_style",
+                        "evidence_type": "explicit_self_statement | repeated_behavior | suggestive_behavior | product_interest | preference | expertise_signal | communication_style",
                     }
                 ],
                 "unsupported_or_blocked": [
@@ -827,12 +830,12 @@ def schema_mapping_payload(
         "task": "map_compact_amazon_review_evidence_profile_to_schema_dimensions",
         "user_id": user_row.get("user_id"),
         "instructions": [
-            "Return only dimensions directly supported by the compact evidence profile.",
-            "Omit unknown, weak, stereotyped, or unsupported dimensions.",
+            "Return strongly supported dimensions and weak/suggestive non-sensitive dimensions supported by the compact evidence profile.",
+            "Omit unsupported dimensions. Do not use product stereotypes as evidence for sensitive dimensions.",
             "Use structured_memory to find candidate supported attributes, but cite evidence_item_ids and original review_ids for every returned attribute.",
             "For each inferred dimension, choose exactly one allowed value from that dimension.",
             "Every inferred dimension must include at least one evidence_item_id and at least one original review_id.",
-            "Use confidence between 0 and 1. Use >=0.8 only for explicit or repeated evidence.",
+            "Use confidence between 0 and 1. Use 0.35-0.6 for weak/suggestive non-sensitive attributes, 0.6-0.8 for moderate repeated evidence, and >=0.8 only for explicit or strongly repeated evidence.",
         ],
         "output_json_schema": {
             "inferred_attributes": [
