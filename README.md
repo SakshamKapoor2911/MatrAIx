@@ -1,156 +1,51 @@
 # MatrAIx
 
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
-[![Python](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/)
-[![Discord](https://img.shields.io/badge/Discord-join-5865F2?logo=discord&logoColor=white)](https://discord.gg/vruP88PTZ)
+> **Simulate before reality.**
 
-> **Simulate before reality.**  
-> Large-scale, persona-driven agent simulation — test products, conversations, and workflows *before* they hit real users.
+MatrAIx is an open-source project for building large-scale, persona-based agent simulations of human society.
 
-MatrAIx pairs **synthetic personas** with **LLM agents** in reproducible Harbor tasks: surveys, chat, live web, and desktop computer-use. The name nods to *The Matrix* — a simulated world useful for exploration, not a replacement for real people.
+The name is a nod to *The Matrix*: a simulated world hard to distinguish from the real one. We're exploring how far a simulated population of AI agents can stand in for real people when testing ideas before they touch the real world.
 
-**North star:** toward **8.3B** persona-scale simulation (one synthetic profile per person on Earth). Today the repo ships a working minimal stack you can run locally with Docker.
+Our long-term, deliberately ambitious goal is a planet-scale simulation: on the order of **8.3 billion synthetic personas** (roughly one per person on Earth), each paired with an AI agent that holds preferences, makes decisions, and interacts with products, systems, and other agents.
 
----
+> **The question we start from:** Can we build a simulated population of AI agents useful for testing ideas, products, workflows, conversations, and social systems before deploying them in the real world?
 
-## 🏗️ Architecture
+## 🔭 Vision
 
-![MatrAIx architecture](docs/assets/matraix-architecture.png)
+Modern AI systems are increasingly capable of modeling human-like preferences, communication styles, and decision-making. This creates a new opportunity: before testing every idea with real users, we may first run large-scale simulations inside AI-generated societies.
 
-| Team | Delivers | Docs |
-|------|----------|------|
-| 🧬 **Persona** | Persona cards, datasets, adherence benchmarks | [docs/personas/](docs/personas/README.md) |
-| 🌐 **Environment** | Harbor runtime, agents, jobs, viewer | [docs/environments/](docs/environments/README.md) |
-| 📋 **Application** | Simulation scenarios (survey, chat, web, computer-use) | [docs/applications/](docs/applications/README.md) |
+MatrAIx aims to provide the core building blocks: large-scale persona databases, persona-conditioned agents, simulation environments, task and evaluation suites, multi-agent settings, telemetry, and benchmarks for persona adherence. The long-term vision is simulation at the scale of a virtual world.
 
-**Agents & API keys (Application + Environment):** [choosing-an-agent.md](docs/environments/choosing-an-agent.md)
+MatrAIx is not intended to replace real humans or real-world experiments. It is a pre-deployment simulation layer for research, evaluation, and rapid iteration.
 
----
+## 🧩 The Three Teams
 
-## 🚀 Quick start
+MatrAIx is organized around three teams that map onto three layers of the simulation stack. Each has its own detailed README:
 
-**Prerequisites:** [Docker](https://docs.docker.com/get-docker/) and [uv](https://docs.astral.sh/uv/). An API key is only needed for the examples below — see [`.env.example`](.env.example) and [choosing-an-agent.md](docs/environments/choosing-an-agent.md).
+| Team | Layer | What it builds | Details |
+|------|-------|----------------|---------|
+| 🧬 **Persona** | *who* is simulated | Large-scale persona database + train/bench subsets | [personas/](personas/README.md) |
+| 🌐 **Environment** | *where* and *how* they act | Reusable execution & evaluation environments | [environments/](environments/README.md) |
+| 🧪 **Application** | *what* we simulate and *why* | Task libraries & domain-specific scenarios | [applications/](applications/README.md) |
 
-```bash
-git clone https://github.com/matraix-ai/matraix.git && cd matraix
-uv sync
+```mermaid
+flowchart LR
+    P[🧬 Persona<br/>synthetic population] --> E[🌐 Environment<br/>execution & evaluation]
+    A[🧪 Application<br/>tasks & scenarios] --> E
+    E --> R[Traces, metrics,<br/>reports, benchmarks]
 ```
 
-**Smoke** (no API key) — Harbor `hello-world` task; checks Docker and the runtime (first run builds the image; may take a few minutes):
+A typical simulation pipeline: select or generate personas → instantiate agents → choose an environment → define tasks and evaluation → run → collect traces → analyze → generate reports or benchmark results.
 
-```bash
-uv run harbor run -c configs/jobs/example-job-recipe/harbor-smoke-local.yaml
-```
+## 🙋 Join the Project
 
-**Example (Application)** — one persona, open-text product survey (product metrics, no grounding oracle):
+We are actively looking for collaborators across all three teams, whether you are interested in research, engineering, data, or evaluation.
 
-```bash
-export ANTHROPIC_API_KEY="sk-ant-..."   # if not already in your shell
+> ### 👉 [**Join MatrAIx — Fill out our Google Form**](https://forms.gle/hwEHng5HGWRqcJue9)
+>
+> Share your background and interests, and we will get back to you as soon as possible.
 
-uv run harbor run -c configs/jobs/example-job-recipe/appSim-example-survey-local.yaml
-```
-
-**Example (Persona)** — same persona, **bench** survey (MCQ grounding check on `economic_motivation`):
-
-```bash
-export ANTHROPIC_API_KEY="sk-ant-..."   # if not already in your shell
-
-uv run harbor run -c configs/jobs/example-job-recipe/personaBench-example-survey-local.yaml
-```
-
-**View** — inspect runs (`jobs/` includes examples you can browse without re-running):
-
-```bash
-uv run harbor view jobs --build
-```
-
-> Use **`uv run harbor`** — a globally installed `harbor` may be an older build without `persona-*` agents.
-
-Step-by-step guides: [Application getting started](docs/applications/getting-started.md) · [Persona getting started](docs/personas/getting-started.md)
-
----
-
-## 💬 Join the project
-
-We welcome collaborators across research, product, data, and engineering.
-
-### 1. Say hello
-
-[![Discord](https://img.shields.io/badge/Discord-join%20MatrAIx-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/vruP88PTZ)
-
-[![Google Form](https://img.shields.io/badge/Google%20Form-join%20MatrAIx-4285F4?style=for-the-badge&logo=googleforms&logoColor=white)](https://forms.gle/hwEHng5HGWRqcJue9)
-
-### 2. Read docs and pick a team (or teams)
-
-| Team | If you care about… | Start here |
-|------|-------------------|------------|
-| 🧬 **Persona** | Persona schema and data, persona generator, persona grounding | [docs/personas/](docs/personas/README.md)<br>[getting started](docs/personas/getting-started.md) |
-| 📋 **Application** | Product scenarios, task design, product user metrics design | [docs/applications/](docs/applications/README.md)<br>[getting started](docs/applications/getting-started.md) |
-| 🌐 **Environment** | Environment infra, engineering, runtime, back and front end | [docs/environments/](docs/environments/README.md) |
-
-All teams that run simulations should skim [choosing-an-agent.md](docs/environments/choosing-an-agent.md).
-
-### 3. Do one hands-on pass
-
-Complete your team’s getting-started guide (or the smoke run above), then browse results with `harbor view`.
-
-### 4. Contribute
-
-Discuss on **Discord** or open a **GitHub issue** before a large PR — [contributing guide](docs/contributing.md).
-
----
-
-## 📁 Repository layout
-
-```text
-# —— All teams ——
-docs/                    # Team documentation (personas/, environments/, applications/)
-jobs/                    # Run outputs (example runs checked in for harbor view)
-
-# —— Persona team ——
-persona/
-├── dimensions.json
-├── datasets/            # Persona YAML pools (bench-dev-2000, …)
-├── tasks/               # Persona-adherence Harbor tasks
-├── scripts/
-└── reporting/
-
-# —— Application team ——
-application/
-├── tasks/               # Executable scenarios (survey, chat, web, computer-use)
-├── scripts/
-└── reporting/
-
-# —— Environment team ——
-src/harbor/              # CLI, trial/job runtime, Docker/Modal/Daytona/… backends
-src/matraix/             # Persona agents (persona-claude-code, …)
-configs/jobs/            # Job YAML recipes (smoke, persona bench, application)
-packages/rewardkit/      # Verifier / LLM-judge toolkit
-apps/viewer/             # Web UI for harbor view
-examples/tasks/          # Upstream Harbor hello-world (reference)
-```
-
----
-
-## 🗺️ Roadmap
-
-- **Stage 1 — Minimal stack.** Persona schema, initial persona set, basic survey + chatbot environments, first persona-adherence benchmark, simple telemetry.
-- **Stage 2 — Core dataset & benchmark.** Release MatrAIxPersona-8B, MatrAIxPersonaTrain, MatrAIxPersonaBench; add domain subsets and automatic evaluation.
-- **Stage 3 — Environment expansion.** Web environment, long-horizon and multi-turn tasks, memory-enabled agents, multi-agent interaction, cost/friction simulation.
-- **Stage 4 — Simulated society.** Scale toward a planet-scale population with social graphs, group interaction, information diffusion, and synthetic communities.
-
----
-
-## 🔬 Research questions
-
-- How should synthetic personas be represented, and how do we measure persona adherence?
-- How consistent are LLM agents across long interactions?
-- Can simulated users predict real user preferences?
-- How do multi-agent simulations differ from single-agent feedback?
-- Can lightweight self-evolving memory make agents better human stand-ins?
-- What are the limitations and failure modes of persona-based simulation?
-
----
+🔗 Form link: **https://forms.gle/hwEHng5HGWRqcJue9**
 
 ## 📄 Publications
 
@@ -161,19 +56,49 @@ MatrAIx is intended to produce two initial papers, with more to follow as the pr
 
 **Timeline.** Both papers target completion over the summer of 2026.
 
----
+As the project grows, we expect **additional papers** — for example, more advanced persona-agent methods, evaluation methodology, and broader, more comprehensive simulation applications.
+
+## 🗺️ Roadmap
+
+- **Stage 1 — Minimal stack.** Persona schema, initial persona set, basic survey + chatbot environments, first persona-adherence benchmark, simple telemetry.
+- **Stage 2 — Core dataset & benchmark.** Release MatrAIxPersona-8B, MatrAIxPersonaTrain, MatrAIxPersonaBench; add domain subsets and automatic evaluation.
+- **Stage 3 — Environment expansion.** Web environment, long-horizon and multi-turn tasks, memory-enabled agents, multi-agent interaction, cost/friction simulation.
+- **Stage 4 — Simulated society.** Scale toward a planet-scale population with social graphs, group interaction, information diffusion, and synthetic communities.
+
+## 🔬 Research Questions
+
+- How should synthetic personas be represented, and how do we measure persona adherence?
+- How consistent are LLM agents across long interactions?
+- Can simulated users predict real user preferences?
+- How do multi-agent simulations differ from single-agent feedback?
+- Can lightweight self-evolving memory make agents better human stand-ins?
+- What are the limitations and failure modes of persona-based simulation?
 
 ## 🤝 Contributing
 
-- [Contributing guide](docs/contributing.md)
-- [Persona team](docs/personas/README.md) · [Environment](docs/environments/README.md) · [Application](docs/applications/README.md)
+We welcome contributions in all three areas — see each team's README ([Persona](personas/README.md), [Environment](environments/README.md), [Application](applications/README.md)) for specifics, plus [Contribution.md](Contribution.md) for setup and scene-authoring guidelines.
 
----
+## 📁 Repository Layout
+
+```text
+matraix/
+├── README.md            ← you are here (overview)
+├── personas/            ← 🧬 Team 1: Persona
+├── environments/        ← 🌐 Team 2: Environment
+├── applications/        ← 🧪 Team 3: Application
+├── benchmarks/
+├── examples/
+├── scripts/
+├── docs/
+└── configs/
+```
 
 ## ⚠️ Limitations
 
-MatrAIx is **experimental**. Synthetic users are not real users — use outputs for exploration, hypothesis generation, and early signal only. Validate important decisions with real-world data. Agents can be inconsistent, biased, or prompt-sensitive.
+MatrAIx is an experimental project. Synthetic users are not real users, and simulated feedback should not be treated as ground truth — use it as an additional signal for exploration, debugging, hypothesis generation, and early-stage evaluation. LLM agents may overfit to prompt wording, behave inconsistently, or introduce demographic bias; long-horizon and multi-agent behavior remain hard to evaluate. Validate important findings with real-world data whenever possible.
 
----
+## 🪞 Project Philosophy
 
-<p align="center"><strong>Simulate before reality.</strong></p>
+> Simulate before reality.
+
+We believe future digital systems will increasingly be designed, tested, and improved inside AI-generated simulated environments before being deployed to the real world. MatrAIx is our attempt to build the open infrastructure for that future.

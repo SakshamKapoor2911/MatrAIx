@@ -28,14 +28,15 @@ grounding.
 
 ## Local smoke
 
-After the Harbor runtime is available on the branch:
+After the Harbor runtime is installed:
 
 ```bash
 export OPENAI_API_KEY=...
-uv run harbor run \
+export ANTHROPIC_API_KEY=...
+harbor run \
   -a persona-claude-code \
   -m "${MATRIX_HARBOR_PERSONA_MODEL:-anthropic/claude-haiku-4-5}" \
-  --ak persona_path=persona/datasets/bench-dev-2000/persona_0042.yaml \
+  --ak persona_path=/path/to/persona.yaml \
   -p application/tasks/recommender-agent_chat_api
 ```
 

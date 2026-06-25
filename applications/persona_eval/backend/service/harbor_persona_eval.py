@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import json
 import os
+import shlex
 import shutil
 import subprocess
 import uuid
@@ -91,15 +92,18 @@ def _env_bool(name: str, default: bool) -> bool:
 
 
 def _default_harbor_command() -> Sequence[str]:
-    for env_key in ("MATRIX_HARBOR_UV", "HARBOR_UV", "UV"):
-        value = os.environ.get(env_key)
-        if value:
-            return (value, "run", "--frozen", "harbor", "run")
-    bundled_uv = Path("/tmp/matraix-harbor-uv/bin/uv")
-    if bundled_uv.is_file():
-        return (str(bundled_uv), "run", "--frozen", "harbor", "run")
-    found = shutil.which("uv")
-    return (found or "uv", "run", "--frozen", "harbor", "run")
+    command = os.environ.get("MATRIX_HARBOR_COMMAND") or os.environ.get(
+        "HARBOR_COMMAND"
+    )
+    if command:
+        return tuple(shlex.split(command))
+
+    binary = os.environ.get("MATRIX_HARBOR_BIN") or os.environ.get("HARBOR_BIN")
+    if binary:
+        return (binary, "run")
+
+    found = shutil.which("harbor")
+    return (found or "harbor", "run")
 
 
 def _read_json(path: Path) -> Dict[str, Any]:

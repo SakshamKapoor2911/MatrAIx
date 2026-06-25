@@ -1143,8 +1143,13 @@ def test_harbor_runner_cache_flags_can_be_overridden(tmp_path, monkeypatch):
     )
 
 
-def test_harbor_runner_default_command_uses_configured_uv_path(tmp_path, monkeypatch):
-    monkeypatch.setenv("MATRIX_HARBOR_UV", "/custom/bin/uv")
+def test_harbor_runner_default_command_uses_configured_harbor_command(
+    tmp_path, monkeypatch
+):
+    monkeypatch.setenv(
+        "MATRIX_HARBOR_COMMAND",
+        "uv --directory /opt/harbor run --frozen harbor run",
+    )
     calls = []
 
     def fake_command(command, *, cwd, env):
@@ -1213,7 +1218,14 @@ def test_harbor_runner_default_command_uses_configured_uv_path(tmp_path, monkeyp
         created_at="2026-06-23T00:00:00Z",
     )
 
-    assert calls[0][:4] == ["/custom/bin/uv", "run", "--frozen", "harbor"]
+    assert calls[0][:6] == [
+        "uv",
+        "--directory",
+        "/opt/harbor",
+        "run",
+        "--frozen",
+        "harbor",
+    ]
 
 
 def test_harbor_runner_surfaces_trial_errors_when_artifacts_are_missing(tmp_path):
