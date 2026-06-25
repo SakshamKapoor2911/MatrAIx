@@ -138,6 +138,8 @@ def test_build_survey_task_prompt_uses_persona_prompt_and_trajectory_schema():
     prompt = build_survey_task_prompt(instrument=_instrument())
 
     assert "Harbor supplies the persona system prompt" in prompt
+    assert "Product concept being evaluated" in prompt
+    assert "PersonaEval" in prompt
     assert "product_attitudes_v1" in prompt
     assert "/app/output/survey_result.json" in prompt
     assert '"trajectory"' in prompt
@@ -221,7 +223,7 @@ def test_harbor_survey_runner_uses_survey_form_task(tmp_path):
         assert config["agents"][0]["model_name"] == "anthropic/claude-sonnet-4-6"
         assert config["tasks"][0]["path"].endswith("applications/tasks/survey_form")
         assert config["environment"]["type"] == "docker"
-        assert config["environment"]["force_build"] is True
+        assert config["environment"]["force_build"] is False
         prompt_text = open(config["extra_instruction_paths"][0], encoding="utf-8").read()
         assert "product_attitudes_v1" in prompt_text
         assert env["MATRIX_SURVEY_INSTRUMENT_ID"] == "product_attitudes_v1"

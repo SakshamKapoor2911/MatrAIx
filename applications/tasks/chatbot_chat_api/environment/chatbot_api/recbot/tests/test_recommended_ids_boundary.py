@@ -17,14 +17,20 @@ from recbot.interecagent_bridge import (
 class _FakeCorpus:
     """Resolves recommended titles to ids the way BaseGallery does."""
 
-    def __init__(self, title_to_id: dict[str, str]) -> None:
+    def __init__(
+        self, title_to_id: dict[str, str], fuzzy_overrides: dict[str, str] | None = None
+    ) -> None:
         self._title_to_id = title_to_id
         self._id_to_title = {item_id: title for title, item_id in title_to_id.items()}
+        self._fuzzy_overrides = fuzzy_overrides or {}
 
     def fuzzy_match(self, titles, col_name):
         assert col_name == "title"
         matches = []
         for title in titles:
+            if title in self._fuzzy_overrides:
+                matches.append(self._fuzzy_overrides[title])
+                continue
             title_lower = title.lower()
             for known in self._title_to_id:
                 if title_lower in known.lower() or known.lower() in title_lower:
@@ -47,9 +53,14 @@ class _FakeBuffer:
 
 
 class _FakeAgent:
-    def __init__(self, tracker: list[dict], title_to_id: dict[str, str]) -> None:
+    def __init__(
+        self,
+        tracker: list[dict],
+        title_to_id: dict[str, str],
+        fuzzy_overrides: dict[str, str] | None = None,
+    ) -> None:
         self.candidate_buffer = _FakeBuffer(tracker)
-        self.item_corups = _FakeCorpus(title_to_id)
+        self.item_corups = _FakeCorpus(title_to_id, fuzzy_overrides=fuzzy_overrides)
 
 
 def _map_entry(titles: list[str]) -> dict:
@@ -75,6 +86,44 @@ def test_uses_only_current_turn_map_when_a_newer_one_exists():
 
     # Scanning from the start of turn 2 returns only turn 2's recommendation.
     assert _recommended_item_ids(agent, start=1) == ["222"]
+
+
+def test_map_recommendations_keep_resolvable_titles_when_one_title_fails():
+    tracker = [_map_entry(["Known Product", "Unknown Product", "Another Product"])]
+    agent = _FakeAgent(
+        tracker,
+        {
+            "Known Product": "111",
+            "Another Product": "222",
+        },
+    )
+
+    assert _recommended_item_ids(agent, start=0) == ["111", "222"]
+
+
+def test_map_recommendations_resolve_html_entities_in_titles():
+    tracker = [_map_entry(["Hand &amp; Body Lotion"])]
+    agent = _FakeAgent(tracker, {"Hand & Body Lotion": "333"})
+
+    assert _recommended_item_ids(agent, start=0) == ["333"]
+
+
+def test_map_recommendations_fall_back_to_exact_title_when_fuzzy_is_unsafe():
+    tracker = [_map_entry(["Neutrogena Rapid Wrinkle Repair Eye, 0.5  Ounce"])]
+    agent = _FakeAgent(
+        tracker,
+        {
+            "Neutrogena Rapid Wrinkle Repair Eye, 0.5  Ounce": "1520",
+            "Neutrogena Makeup Remover Cleansing Towelettes": "444",
+        },
+        fuzzy_overrides={
+            "Neutrogena Rapid Wrinkle Repair Eye, 0.5  Ounce": (
+                "Neutrogena Makeup Remover Cleansing Towelettes"
+            )
+        },
+    )
+
+    assert _recommended_item_ids(agent, start=0) == ["1520"]
 
 
 def test_default_start_scans_whole_tracker():

@@ -13,9 +13,8 @@ you would seriously consider.
 Do not place an order or enter payment details. The task is to evaluate the
 shopping and product-discovery experience.
 
-When you are done, submit your result as JSON with a done action. Harbor will
-write it to `/app/output/ecommerce_interaction.json`; do not use Save dialogs or
-manual file editing.
+When you are done, submit your result as JSON in your final answer. Do not use
+Save dialogs or manual file editing.
 
 ```json
 {

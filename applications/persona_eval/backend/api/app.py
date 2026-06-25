@@ -43,7 +43,7 @@ from typing import Any, AsyncIterator, Dict, List, Optional
 
 from fastapi import Depends, FastAPI, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse, JSONResponse
 
 # Importing backend.api wires the eval package dir onto sys.path so the lazy
 # `import recbot...` resolves later (and so `import backend...` works at all).
@@ -696,6 +696,69 @@ def create_app(catalog_path: Optional[str] = None) -> FastAPI:
         if view is None:
             raise HTTPException(status_code=404, detail="survey-eval job not found")
         return view
+
+    # ------------------------------- WebEval ------------------------------ #
+    @app.get(
+        "/api/web-eval/tasks",
+        response_model=schemas.WebEvalTasksResponse,
+        tags=["web-eval"],
+    )
+    def web_eval_tasks(
+        services: AppState = Depends(get_services),
+    ) -> Dict[str, Any]:
+        return {"tasks": services.web_eval.list_tasks()}
+
+    @app.post(
+        "/api/web-eval",
+        response_model=schemas.SubmitPersonaEvalResponse,
+        tags=["web-eval"],
+    )
+    def start_web_eval(
+        body: schemas.StartWebEvalRequest,
+        services: AppState = Depends(get_services),
+    ) -> Dict[str, Any]:
+        try:
+            job_id = services.web_eval.start(
+                persona_id=body.personaId,
+                task_id=body.taskId,
+                persona_model=body.personaModel,
+                now=_utc_now,
+            )
+        except (ValueError, KeyError) as exc:
+            raise HTTPException(status_code=422, detail=str(exc))
+        return {"jobId": job_id}
+
+    @app.get(
+        "/api/web-eval/jobs/{job_id}",
+        response_model=schemas.WebEvalJobView,
+        tags=["web-eval"],
+    )
+    def get_web_eval_job(
+        job_id: str, services: AppState = Depends(get_services)
+    ) -> Dict[str, Any]:
+        view = services.web_eval.view(job_id)
+        if view is None:
+            raise HTTPException(status_code=404, detail="web-eval job not found")
+        return view
+
+    @app.get(
+        "/api/web-eval/jobs/{job_id}/screenshots/{filename:path}",
+        tags=["web-eval"],
+    )
+    def get_web_eval_screenshot(
+        job_id: str,
+        filename: str,
+        services: AppState = Depends(get_services),
+    ) -> FileResponse:
+        try:
+            path = services.web_eval.screenshot_path(job_id, filename)
+        except ValueError as exc:
+            raise HTTPException(status_code=400, detail=str(exc))
+        except KeyError:
+            raise HTTPException(status_code=404, detail="web-eval job not found")
+        except FileNotFoundError:
+            raise HTTPException(status_code=404, detail="screenshot not found")
+        return FileResponse(path, media_type="image/webp")
 
     # --- static SPA (production single-origin) ------------------------- #
     # Mount LAST so it does not shadow the /api routes. Only when a build

@@ -31,9 +31,12 @@ import type {
   SessionSummary,
   StartPersonaEvalBody,
   StartSurveyEvalBody,
+  StartWebEvalBody,
   SurveyEvalJobView,
   SurveyInstrumentsResponse,
   SubmitTurnResponse,
+  WebEvalJobView,
+  WebEvalTasksResponse,
 } from "./types";
 
 /** Base path for the API. Relative so it works behind the dev proxy and when bundled. */
@@ -271,6 +274,28 @@ export function getSurveyEvalJob(jobId: string): Promise<SurveyEvalJobView> {
   return request<SurveyEvalJobView>(`/survey-eval/jobs/${encodeURIComponent(jobId)}`);
 }
 
+// ---------------------------------------------------------------------------
+// WebEval
+// ---------------------------------------------------------------------------
+
+/** List built-in web tasks available for persona-agent website testing. */
+export function listWebEvalTasks(): Promise<WebEvalTasksResponse> {
+  return request<WebEvalTasksResponse>("/web-eval/tasks");
+}
+
+/** Start a website test run; returns immediately with a `jobId` to poll. */
+export function startWebEval(body: StartWebEvalBody): Promise<{ jobId: string }> {
+  return request<{ jobId: string }>("/web-eval", {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
+}
+
+/** Poll a website test run for result, prompts, and preserved trace. */
+export function getWebEvalJob(jobId: string): Promise<WebEvalJobView> {
+  return request<WebEvalJobView>(`/web-eval/jobs/${encodeURIComponent(jobId)}`);
+}
+
 /**
  * Aggregate handle for ergonomic imports and easy mocking in tests/components:
  * `import { api } from "@/lib/api"; api.listSessions()`.
@@ -298,4 +323,7 @@ export const api = {
   listSurveyInstruments,
   startSurveyEval,
   getSurveyEvalJob,
+  listWebEvalTasks,
+  startWebEval,
+  getWebEvalJob,
 } as const;

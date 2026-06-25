@@ -20,8 +20,14 @@ from backend.service.config import ConfigError, ConfigManager
 SUPPORTED_DOMAINS = tuple(ConfigManager.ALLOWED["domain"])
 DEFAULT_APPLICATION_ID = "recai"
 FINANCE_APPLICATION_ID = "finance_openbb"
-SUPPORTED_APPLICATION_IDS = (DEFAULT_APPLICATION_ID, FINANCE_APPLICATION_ID)
+MEDICAL_APPLICATION_ID = "medical_assistant"
+SUPPORTED_APPLICATION_IDS = (
+    DEFAULT_APPLICATION_ID,
+    FINANCE_APPLICATION_ID,
+    MEDICAL_APPLICATION_ID,
+)
 FINANCE_CONTEXT = "financial_research"
+MEDICAL_CONTEXT = "medical_consultation"
 
 
 class SessionRequest(BaseModel):
@@ -80,6 +86,8 @@ _ready_lock = threading.Lock()
 _ready_keys: set[tuple[str, str]] = set()
 _finance_application: Any = None
 _finance_lock = threading.Lock()
+_medical_application: Any = None
+_medical_lock = threading.Lock()
 _recai_turn_lock = threading.Lock()
 
 
@@ -203,6 +211,8 @@ def _request_context(body: SessionRequest) -> str:
         return body.domain
     if body.application_id == FINANCE_APPLICATION_ID:
         return FINANCE_CONTEXT
+    if body.application_id == MEDICAL_APPLICATION_ID:
+        return MEDICAL_CONTEXT
     return body.domain
 
 
@@ -323,11 +333,23 @@ def _finance_app() -> Any:
         return _finance_application
 
 
+def _medical_app() -> Any:
+    global _medical_application
+    with _medical_lock:
+        if _medical_application is None:
+            from harbor_api.medical_http import MedicalAssistantApplication
+
+            _medical_application = MedicalAssistantApplication()
+        return _medical_application
+
+
 def get_application(application_id: str) -> Any:
     if application_id == DEFAULT_APPLICATION_ID:
         return RecAIApplication()
     if application_id == FINANCE_APPLICATION_ID:
         return _finance_app()
+    if application_id == MEDICAL_APPLICATION_ID:
+        return _medical_app()
     raise HTTPException(
         status_code=422,
         detail="applicationId must be one of: {}".format(
@@ -349,6 +371,12 @@ def application_views() -> List[Dict[str, Any]]:
             "label": "FinAI / OpenBB",
             "defaultContext": FINANCE_CONTEXT,
             "contexts": [FINANCE_CONTEXT],
+        },
+        {
+            "applicationId": MEDICAL_APPLICATION_ID,
+            "label": "Medical Assistant",
+            "defaultContext": MEDICAL_CONTEXT,
+            "contexts": [MEDICAL_CONTEXT],
         },
     ]
 
@@ -384,7 +412,11 @@ def ready(
             ),
         )
     context = application_context or (
-        domain if application_id == DEFAULT_APPLICATION_ID else FINANCE_CONTEXT
+        domain
+        if application_id == DEFAULT_APPLICATION_ID
+        else FINANCE_CONTEXT
+        if application_id == FINANCE_APPLICATION_ID
+        else MEDICAL_CONTEXT
     )
     try:
         get_application(application_id).ready(context)

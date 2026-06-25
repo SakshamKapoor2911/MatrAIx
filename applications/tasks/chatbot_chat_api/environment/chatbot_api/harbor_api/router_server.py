@@ -20,9 +20,15 @@ from fastapi import Body, FastAPI, HTTPException, Query
 
 DEFAULT_APPLICATION_ID = "recai"
 FINANCE_APPLICATION_ID = "finance_openbb"
-SUPPORTED_APPLICATION_IDS = (DEFAULT_APPLICATION_ID, FINANCE_APPLICATION_ID)
+MEDICAL_APPLICATION_ID = "medical_assistant"
+SUPPORTED_APPLICATION_IDS = (
+    DEFAULT_APPLICATION_ID,
+    FINANCE_APPLICATION_ID,
+    MEDICAL_APPLICATION_ID,
+)
 SUPPORTED_DOMAINS = ("movie", "beauty_product", "game")
 FINANCE_CONTEXT = "financial_research"
+MEDICAL_CONTEXT = "medical_consultation"
 
 _session_lock = threading.RLock()
 _session_applications: Dict[str, str] = {}
@@ -39,6 +45,10 @@ def _upstream_base(application_id: str) -> str:
     if application_id == FINANCE_APPLICATION_ID:
         return os.environ.get(
             "CHATBOT_UPSTREAM_FINANCE", "http://finance-api:8000"
+        ).rstrip("/")
+    if application_id == MEDICAL_APPLICATION_ID:
+        return os.environ.get(
+            "CHATBOT_UPSTREAM_MEDICAL", "http://medical-api:8000"
         ).rstrip("/")
     raise HTTPException(status_code=422, detail=_application_error())
 
@@ -165,6 +175,13 @@ def _application_views() -> list[Dict[str, Any]]:
             "defaultContext": FINANCE_CONTEXT,
             "contexts": [FINANCE_CONTEXT],
             "upstream": "finance-api",
+        },
+        {
+            "applicationId": MEDICAL_APPLICATION_ID,
+            "label": "Medical Assistant",
+            "defaultContext": MEDICAL_CONTEXT,
+            "contexts": [MEDICAL_CONTEXT],
+            "upstream": "medical-api",
         },
     ]
 

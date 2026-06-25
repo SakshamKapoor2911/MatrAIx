@@ -31,8 +31,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/* \
     && chmod 1777 /tmp /var/tmp \
     && mkdir -p /tmp/.ICE-unix && chmod 1777 /tmp/.ICE-unix \
-    && mkdir -p /logs /app/output /root/.config/xfce4/helpers \
-    && chmod 777 /logs /app/output \
+    && mkdir -p /logs /app/input /app/output /root/.config/xfce4/helpers \
+    && chmod 777 /logs /app/input /app/output \
     && printf '%s\n' \
         '[Desktop Entry]' \
         'Version=1.0' \

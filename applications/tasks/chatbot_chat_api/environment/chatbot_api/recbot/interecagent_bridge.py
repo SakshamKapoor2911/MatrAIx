@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import html
 import os
 import re
 import sys
@@ -449,20 +450,22 @@ def _recommended_item_ids(agent: Any, start: int = 0) -> list[str]:
         marker = "Here are recommendations:"
         if marker in output:
             output = output.split(marker, 1)[1]
+        output = html.unescape(output)
         titles = [title.strip() for title in output.split(";") if title.strip()]
         if not titles:
             continue
-        # Resolve recommended titles to ids (recai_resources mode); fall back across id columns.
-        for id_col in ("external_id", "id"):
-            try:
-                info = item_corpus.convert_title_2_info(titles, col_names=id_col)
-                ids = info[id_col]
-                if isinstance(ids, (str, int)):
-                    return [str(ids)]
-                return [str(item_id) for item_id in ids]
-            except Exception:
+        item_ids: list[str] = []
+        seen: set[str] = set()
+        for title in titles:
+            resolved = _resolve_candidate_title(item_corpus, title)
+            if resolved is None:
                 continue
-        return []
+            item_id, _matched_title = resolved
+            if item_id in seen:
+                continue
+            seen.add(item_id)
+            item_ids.append(item_id)
+        return item_ids
     return []
 
 
@@ -512,6 +515,7 @@ def _title_candidates_from_response(response: str) -> list[str]:
 
 
 def _normalize_title_for_match(title: str) -> str:
+    title = html.unescape(title)
     title = re.sub(r"\([^)]*\)", " ", title)
     title = re.sub(r"[^a-z0-9]+", " ", title.lower()).strip()
     return re.sub(r"\s+", " ", title)
@@ -554,6 +558,26 @@ def _coerce_first(value: Any) -> Any:
 
 
 def _resolve_candidate_title(item_corpus: Any, candidate: str) -> tuple[str, str] | None:
+    def lookup(matched_title: str, require_safe_match: bool) -> tuple[str, str] | None:
+        matched_title = str(matched_title or "").strip()
+        if not matched_title:
+            return None
+        if require_safe_match and not _title_match_is_safe(candidate, matched_title):
+            return None
+        for id_col in ("external_id", "id"):
+            try:
+                info = item_corpus.convert_title_2_info([matched_title], col_names=id_col)
+                item_id = _coerce_first(info[id_col])
+            except Exception:
+                continue
+            if item_id is not None and str(item_id).strip():
+                return str(item_id), matched_title
+        return None
+
+    exact_match = lookup(candidate, require_safe_match=False)
+    if exact_match is not None:
+        return exact_match
+
     matched_titles = None
     if hasattr(item_corpus, "fuzzy_match"):
         try:
@@ -561,21 +585,10 @@ def _resolve_candidate_title(item_corpus: Any, candidate: str) -> tuple[str, str
         except Exception:
             matched_titles = None
     if not matched_titles:
-        matched_titles = [candidate]
-
-    matched_title = str(_coerce_first(matched_titles) or "").strip()
-    if not matched_title or not _title_match_is_safe(candidate, matched_title):
         return None
 
-    for id_col in ("external_id", "id"):
-        try:
-            info = item_corpus.convert_title_2_info([matched_title], col_names=id_col)
-            item_id = _coerce_first(info[id_col])
-        except Exception:
-            continue
-        if item_id is not None and str(item_id).strip():
-            return str(item_id), matched_title
-    return None
+    matched_title = str(_coerce_first(matched_titles) or "").strip()
+    return lookup(matched_title, require_safe_match=True)
 
 
 def _recommended_item_ids_from_response_text(

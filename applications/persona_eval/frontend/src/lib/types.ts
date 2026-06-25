@@ -18,7 +18,7 @@ export type Engine = "gpt-4o-mini" | "gpt-4o";
 export type PersonaModel = "anthropic/claude-haiku-4-5" | "anthropic/claude-sonnet-4-6";
 
 /** Application adapter exposed through the Harbor chatbot sidecar. */
-export type ApplicationId = "recai" | "finance_openbb";
+export type ApplicationId = "recai" | "finance_openbb" | "medical_assistant";
 
 /** Candidate ranking strategy. */
 export type RankerMode = "semantic_profile" | "native";
@@ -550,6 +550,77 @@ export interface SurveyEvalJobView {
   status: JobStatus;
   phase: PersonaEvalPhase;
   surveyResult: SurveyResult | null;
+  prompts: PersonaEvalPrompts | null;
+  error: string | null;
+}
+
+// ---------------------------------------------------------------------------
+// WebEval
+// ---------------------------------------------------------------------------
+
+export interface WebEvalTask {
+  id: string;
+  title: string;
+  siteName: string;
+  siteUrl: string;
+  description: string;
+  outputArtifact: string;
+  submissionProfile: string;
+}
+
+export interface WebEvalTasksResponse {
+  tasks: WebEvalTask[];
+}
+
+export interface StartWebEvalBody {
+  personaId: string;
+  taskId?: string;
+  personaModel?: PersonaModel;
+}
+
+export interface WebResult {
+  selectedProductId: string;
+  selectedProductName: string;
+  needSatisfaction: number;
+  easeOfUse: number;
+  overallExperienceRating: number;
+  reason: string;
+  createdAt: string;
+  valid: boolean;
+}
+
+export interface WebTraceAction {
+  name: string;
+  arguments: Record<string, unknown>;
+}
+
+export interface WebTraceEvent {
+  step: number;
+  source: string;
+  message: string;
+  screenshotFile?: string | null;
+  screenshotUrl?: string | null;
+  actions: WebTraceAction[];
+}
+
+export interface WebTrace {
+  events: WebTraceEvent[];
+  raw: Record<string, unknown>;
+}
+
+export interface WebEvalJobView {
+  jobId: string;
+  applicationType: "web";
+  taskId: string;
+  taskTitle: string;
+  siteName: string;
+  siteUrl: string;
+  personaId: string;
+  personaName: string;
+  status: JobStatus;
+  phase: PersonaEvalPhase;
+  webResult: WebResult | null;
+  trace: WebTrace | null;
   prompts: PersonaEvalPrompts | null;
   error: string | null;
 }

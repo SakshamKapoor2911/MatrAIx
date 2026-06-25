@@ -22,6 +22,13 @@ _DESCRIPTIONS = {
         "or macro topics, use OpenBB data tools, and provide grounded research "
         "or comparisons without giving personalized buy/sell instructions."
     ),
+    "medical_consultation": (
+        "You are chatting with a medical assistant chatbot. It can ask about "
+        "symptoms, duration, severity, medications, history, and red flags, then "
+        "provide general health information and triage-style guidance. It should "
+        "recommend professional or urgent care when appropriate and should not "
+        "claim to replace a clinician."
+    ),
 }
 
 

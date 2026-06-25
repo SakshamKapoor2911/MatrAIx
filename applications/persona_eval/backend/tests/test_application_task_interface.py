@@ -70,6 +70,9 @@ def test_canonical_web_task_shape() -> None:
     assert raw["metadata"]["type"] == "web"
     assert raw["metadata"]["domain"] == "commerce-retail"
     assert "/app/output" in raw["artifacts"]
+    dockerfile = (task / "environment" / "Dockerfile").read_text(encoding="utf-8")
+    assert "/app/input" in dockerfile
+    assert "/app/output" in dockerfile
 
     site = task / "environment" / "ecommerce-web" / "site"
     catalog = json.loads((site / "catalog.json").read_text(encoding="utf-8"))

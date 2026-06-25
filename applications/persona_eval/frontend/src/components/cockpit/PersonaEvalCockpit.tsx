@@ -33,6 +33,7 @@ import { PersonaPanel } from "./PersonaPanel";
 import { PersonaDrawer } from "./PersonaDrawer";
 import { PromptPanel } from "./PromptPanel";
 import { SurveyEvalCockpit } from "./SurveyEvalCockpit";
+import { WebEvalCockpit } from "./WebEvalCockpit";
 import { TaskTypeSwitch, type PersonaEvalTaskType } from "./TaskTypeSwitch";
 import { listGoalContexts } from "@/lib/api";
 import { usePersonaEval, type PersonaEvalRunPhase } from "@/lib/usePersonaEval";
@@ -111,6 +112,15 @@ export function PersonaEvalCockpit({ options, onOpenRuns, onDomainChange }: Pers
       />
     );
   }
+  if (taskType === "web") {
+    return (
+      <WebEvalCockpit
+        options={options}
+        taskType={taskType}
+        onTaskTypeChange={setTaskType}
+      />
+    );
+  }
   return (
     <ChatbotEvalCockpit
       options={options}
@@ -170,7 +180,7 @@ function ChatbotEvalCockpit({
     onDomainChange?.(domain);
   }, [domain, onDomainChange]);
 
-  const applicationContext = applicationId === "finance_openbb" ? "financial_research" : domain;
+  const applicationContext = contextForApplication(applicationId, domain);
   const requestDomain = applicationId === "recai" ? domain : undefined;
 
   // --- Goal contexts (the "Conversation style" knob) ----------------------
@@ -443,6 +453,16 @@ function ChatbotEvalCockpit({
       <PersonaDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} persona={persona} context={null} />
     </div>
   );
+}
+
+function contextForApplication(applicationId: ApplicationId, domain: Domain): string {
+  if (applicationId === "finance_openbb") {
+    return "financial_research";
+  }
+  if (applicationId === "medical_assistant") {
+    return "medical_consultation";
+  }
+  return domain;
 }
 
 export default PersonaEvalCockpit;

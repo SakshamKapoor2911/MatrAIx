@@ -68,6 +68,10 @@ __all__ = [
     "SurveyInstrumentsResponse",
     "StartSurveyEvalRequest",
     "SurveyEvalJobView",
+    "WebEvalTask",
+    "WebEvalTasksResponse",
+    "StartWebEvalRequest",
+    "WebEvalJobView",
 ]
 
 #: Domains the persona-eval (and the rest of the Studio) supports. Mirrors the
@@ -75,8 +79,11 @@ __all__ = [
 #: :class:`~backend.service.config.ConfigManager` (movie / beauty_product /
 #: game) so a bad domain is rejected here with a clean 422.
 SUPPORTED_DOMAINS = ("movie", "beauty_product", "game")
-SUPPORTED_APPLICATION_IDS = ("recai", "finance_openbb")
-DEFAULT_APPLICATION_CONTEXTS = {"finance_openbb": "financial_research"}
+SUPPORTED_APPLICATION_IDS = ("recai", "finance_openbb", "medical_assistant")
+DEFAULT_APPLICATION_CONTEXTS = {
+    "finance_openbb": "financial_research",
+    "medical_assistant": "medical_consultation",
+}
 SUPPORTED_PERSONA_MODELS = (
     "anthropic/claude-haiku-4-5",
     "anthropic/claude-sonnet-4-6",
@@ -673,5 +680,68 @@ class SurveyEvalJobView(BaseModel):
     status: str
     phase: Optional[str] = None
     surveyResult: Optional[Dict[str, Any]] = None
+    prompts: Optional[Dict[str, str]] = None
+    error: Optional[str] = None
+
+
+# --------------------------------------------------------------------------- #
+# Web eval
+# --------------------------------------------------------------------------- #
+class WebEvalTask(BaseModel):
+    """A hosted website task available for persona-agent testing."""
+
+    model_config = ConfigDict(extra="allow")
+
+    id: str
+    title: str
+    siteName: str
+    siteUrl: str
+    description: str = ""
+    outputArtifact: str = "ecommerce_interaction.json"
+    submissionProfile: str = "ecommerce_interaction"
+
+
+class WebEvalTasksResponse(BaseModel):
+    """``GET /api/web-eval/tasks`` payload."""
+
+    tasks: List[WebEvalTask]
+
+
+class StartWebEvalRequest(BaseModel):
+    """Body for ``POST /api/web-eval``."""
+
+    personaId: str
+    taskId: str = "web-ecommerce-platform_product-discovery"
+    personaModel: Optional[str] = None
+
+    @field_validator("personaModel")
+    @classmethod
+    def _validate_persona_model(cls, value: Optional[str]) -> Optional[str]:
+        if value is None:
+            return value
+        if value not in SUPPORTED_PERSONA_MODELS:
+            raise ValueError(
+                "personaModel must be one of {}".format(list(SUPPORTED_PERSONA_MODELS))
+            )
+        return value
+
+
+class WebEvalJobView(BaseModel):
+    """Live view of a Harbor-backed website run."""
+
+    model_config = ConfigDict(extra="allow")
+
+    jobId: str
+    applicationType: str = "web"
+    taskId: str
+    taskTitle: str
+    siteName: str
+    siteUrl: str
+    personaId: str
+    personaName: str
+    status: str
+    phase: Optional[str] = None
+    webResult: Optional[Dict[str, Any]] = None
+    trace: Optional[Dict[str, Any]] = None
     prompts: Optional[Dict[str, str]] = None
     error: Optional[str] = None

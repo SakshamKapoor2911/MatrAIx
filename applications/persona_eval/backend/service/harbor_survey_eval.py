@@ -313,6 +313,14 @@ def build_survey_task_prompt(
             "not call another LLM to answer on behalf of the persona. Answer directly",
             "as the Harbor-injected persona.",
             "",
+            "Product concept being evaluated:",
+            "",
+            "PersonaEval is a system for evaluating interactive applications with",
+            "simulated users who have predefined persona attributes. A team can",
+            "connect a task-specific survey or application prompt, run the persona",
+            "agent inside a sandboxed task environment, and collect structured",
+            "response artifacts for product and research analysis.",
+            "",
             "Survey instrument:",
             "",
             "```json",
@@ -594,7 +602,7 @@ class HarborSurveyEvalRunner:
             "environment": {
                 "type": "docker",
                 "delete": _env_bool("MATRIX_HARBOR_DELETE", False),
-                "force_build": _env_bool("MATRIX_HARBOR_FORCE_BUILD", True),
+                "force_build": _env_bool("MATRIX_HARBOR_FORCE_BUILD", False),
             },
             "agents": [
                 {

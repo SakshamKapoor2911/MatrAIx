@@ -12,6 +12,7 @@ services:
     environment:
       CHATBOT_UPSTREAM_RECAI: ${CHATBOT_UPSTREAM_RECAI:-http://recai-api:8000}
       CHATBOT_UPSTREAM_FINANCE: ${CHATBOT_UPSTREAM_FINANCE:-http://finance-api:8000}
+      CHATBOT_UPSTREAM_MEDICAL: ${CHATBOT_UPSTREAM_MEDICAL:-http://medical-api:8000}
       MATRIX_CHATBOT_READY_APPLICATION_ID: ${MATRIX_CHATBOT_APPLICATION_ID:-recai}
       MATRIX_CHATBOT_READY_APPLICATION_CONTEXT: ${MATRIX_CHATBOT_APPLICATION_CONTEXT:-movie}
     expose:
@@ -21,6 +22,9 @@ services:
         condition: service_healthy
         required: false
       finance-api:
+        condition: service_healthy
+        required: false
+      medical-api:
         condition: service_healthy
         required: false
     healthcheck:
@@ -113,6 +117,60 @@ services:
       retries: 20
       start_period: 30s
 
+  medical-api:
+    profiles: ["medical"]
+    image: ${MEDICAL_API_IMAGE:-matraix-chatbot-medical-api:local}
+    build:
+      context: ./chatbot_api
+      dockerfile: harbor_api/medical.Dockerfile
+    environment:
+      MEDICAL_ASSISTANT_URL: ${MEDICAL_ASSISTANT_URL:-http://medical-upstream:8000}
+      MEDICAL_ASSISTANT_TIMEOUT_SECONDS: ${MEDICAL_ASSISTANT_TIMEOUT_SECONDS:-180}
+      TOKENIZERS_PARALLELISM: "false"
+      PYTHONFAULTHANDLER: "1"
+    expose:
+      - "8000"
+    depends_on:
+      medical-upstream:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - >-
+          python -c "import urllib.request; urllib.request.urlopen('http://localhost:8000/ready?applicationId=medical_assistant&applicationContext=medical_consultation', timeout=30).read()"
+      interval: 10s
+      timeout: 40s
+      retries: 20
+      start_period: 20s
+
+  medical-upstream:
+    profiles: ["medical"]
+    image: ${MEDICAL_UPSTREAM_IMAGE:-multi-agent-medical-assistant:local}
+    build:
+      context: ./chatbot_api
+      dockerfile: harbor_api/medical-upstream.Dockerfile
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      TAVILY_API_KEY: ${TAVILY_API_KEY:-}
+      ELEVENLABS_API_KEY: ${ELEVENLABS_API_KEY:-}
+      HF_TOKEN: ${HF_TOKEN:-}
+      PYTHONUNBUFFERED: "1"
+    expose:
+      - "8000"
+    volumes:
+      - medical-skin-model-cache:/root/.cache
+      - medical-uploads:/app/uploads
+      - medical-data:/app/data
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - >-
+          python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=20).read()"
+      interval: 10s
+      timeout: 30s
+      retries: 30
+      start_period: 30s
+
 volumes:
   chatbot-hf-cache:
     name: matraix-chatbot-hf-cache
@@ -120,3 +178,9 @@ volumes:
     name: matraix-chatbot-torch-cache
   chatbot-sentence-transformers-cache:
     name: matraix-chatbot-sentence-transformers-cache
+  medical-skin-model-cache:
+    name: matraix-medical-skin-model-cache
+  medical-uploads:
+    name: matraix-medical-uploads
+  medical-data:
+    name: matraix-medical-data

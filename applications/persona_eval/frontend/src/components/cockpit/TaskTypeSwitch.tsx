@@ -1,6 +1,6 @@
 import { FOCUS_RING, Sym } from "./cockpitShared";
 
-export type PersonaEvalTaskType = "chatbot" | "survey";
+export type PersonaEvalTaskType = "chatbot" | "survey" | "web";
 
 export interface TaskTypeSwitchProps {
   value: PersonaEvalTaskType;
@@ -11,6 +11,7 @@ export interface TaskTypeSwitchProps {
 const OPTIONS: ReadonlyArray<{ value: PersonaEvalTaskType; label: string; icon: string }> = [
   { value: "chatbot", label: "Chatbot", icon: "forum" },
   { value: "survey", label: "Survey", icon: "fact_check" },
+  { value: "web", label: "Web", icon: "language" },
 ];
 
 export function TaskTypeSwitch({ value, onChange, disabled }: TaskTypeSwitchProps) {

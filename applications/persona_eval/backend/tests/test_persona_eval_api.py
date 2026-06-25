@@ -320,6 +320,25 @@ def test_start_finance_persona_eval_does_not_require_recai_domain(client, fake_p
     }
 
 
+def test_start_medical_persona_eval_does_not_require_recai_domain(client, fake_persona_eval):
+    resp = client.post(
+        "/api/persona-eval",
+        json={
+            "applicationId": "medical_assistant",
+            "personaId": "game-lapsed-coop",
+        },
+    )
+
+    assert resp.status_code == 200, resp.text
+    assert fake_persona_eval.started == [
+        ("medical_consultation", "game-lapsed-coop", 8, "scenario_default")
+    ]
+    assert fake_persona_eval.started_application == {
+        "applicationId": "medical_assistant",
+        "applicationContext": "medical_consultation",
+    }
+
+
 def test_start_persona_eval_defaults_engine_when_omitted(client, fake_persona_eval):
     # An omitted engine falls back to the canonical config default so existing
     # behavior is unchanged.

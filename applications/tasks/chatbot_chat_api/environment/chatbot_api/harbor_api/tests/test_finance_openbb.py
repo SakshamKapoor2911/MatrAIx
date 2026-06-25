@@ -1,10 +1,13 @@
 from __future__ import annotations
 
 import asyncio
+import importlib
+from pathlib import Path
 from typing import Dict, List
 
 import pytest
 from fastapi import HTTPException
+from fastapi.testclient import TestClient
 
 from harbor_api.finance_openbb import (
     AgentResult,
@@ -13,6 +16,32 @@ from harbor_api.finance_openbb import (
     FinanceOpenBBApplication,
     _select_openbb_categories,
 )
+
+
+def test_finance_dockerfile_starts_finance_server():
+    dockerfile = (
+        Path(__file__).resolve().parents[1] / "finance.Dockerfile"
+    ).read_text(encoding="utf-8")
+
+    assert "harbor_api.finance_server:app" in dockerfile
+    assert "harbor_api.server:app" not in dockerfile
+
+
+def test_finance_server_imports_without_backend_package(monkeypatch):
+    monkeypatch.setenv("OPENAI_API_KEY", "sk-test")
+    module = importlib.import_module("harbor_api.finance_server")
+    client = TestClient(module.app)
+
+    response = client.get(
+        "/ready",
+        params={
+            "applicationId": "finance_openbb",
+            "applicationContext": "financial_research",
+        },
+    )
+
+    assert response.status_code == 200
+    assert response.json()["applicationId"] == "finance_openbb"
 
 
 class FakeFinanceRunner:

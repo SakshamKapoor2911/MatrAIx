@@ -594,6 +594,21 @@ def test_build_chatbot_simulation_prompt_uses_generic_application_contract():
     assert "recommender" not in prompt.lower()
 
 
+def test_build_chatbot_simulation_prompt_labels_medical_assistant():
+    prompt = build_chatbot_simulation_prompt(
+        application_id="medical_assistant",
+        application_context="medical_consultation",
+        max_turns=7,
+        sut_description="A medical assistant chatbot exposed through a chat API.",
+        goal_context_description="Persona reveals health-information needs gradually.",
+    )
+
+    assert prompt.startswith("You are a user of a medical assistant")
+    assert "medical_assistant" not in prompt
+    assert "medical_consultation" not in prompt
+    assert "Do not reveal everything at once" in prompt
+
+
 def test_harbor_failure_summary_reports_controller_tool_errors(tmp_path):
     job_dir = tmp_path / "runs" / "persona-eval-tool-error"
     agent_dir = job_dir / "chatbot_chat_api__fake" / "agent"
@@ -651,7 +666,7 @@ def test_harbor_runner_writes_run_inputs_invokes_harbor_and_maps_artifacts(tmp_p
         config = yaml.safe_load(open(config_path, encoding="utf-8"))
         assert config["agents"][0]["name"] == "persona-claude-code"
         assert config["agents"][0]["model_name"] == "anthropic/claude-haiku-4-5"
-        assert config["environment"]["force_build"] is True
+        assert config["environment"]["force_build"] is False
         assert config["environment"]["delete"] is False
         assert config["agents"][0]["kwargs"]["persona_path"].endswith("persona.yaml")
         assert config["tasks"][0]["path"].endswith(
@@ -910,6 +925,122 @@ def test_harbor_runner_uses_finance_compose_profile(tmp_path):
     assert env["MATRIX_CHATBOT_APPLICATION_CONTEXT"] == "financial_research"
     assert env["FINANCE_AGENT_MODEL"] == "gpt-4o-mini"
     assert result.to_dict()["metricScores"]["recommendedItemCount"] == 1
+
+
+def test_harbor_runner_uses_medical_compose_profile(tmp_path):
+    calls = []
+
+    def fake_command(command, *, cwd, env):
+        calls.append((command, cwd, env))
+        config = yaml.safe_load(
+            open(command[command.index("-c") + 1], encoding="utf-8")
+        )
+        prompt_path = config["extra_instruction_paths"][0]
+        assert "You are a user of a medical assistant" in open(
+            prompt_path,
+            encoding="utf-8",
+        ).read()
+        output_dir = (
+            tmp_path
+            / "runs"
+            / config["job_name"]
+            / "chatbot_chat_api__fake"
+            / "artifacts"
+            / "app"
+            / "output"
+        )
+        output_dir.mkdir(parents=True)
+        (output_dir / "transcript.json").write_text(
+            json.dumps(
+                {
+                    "sessionId": "med_ses_1",
+                    "applicationId": "medical_assistant",
+                    "applicationContext": "medical_consultation",
+                    "domain": "medical_consultation",
+                    "messages": [
+                        {"role": "user", "content": "I have a mild fever."},
+                        {
+                            "role": "assistant",
+                            "content": "I can share general guidance and red flags.",
+                        },
+                    ],
+                    "turns": [
+                        {
+                            "turnId": "med_turn_1",
+                            "userMessage": "I have a mild fever.",
+                            "assistantMessage": (
+                                "I can share general guidance and red flags."
+                            ),
+                            "groundedItems": [],
+                        }
+                    ],
+                }
+            ),
+            encoding="utf-8",
+        )
+        (output_dir / "application_result.json").write_text(
+            json.dumps(
+                {
+                    "sessionId": "med_ses_1",
+                    "applicationId": "medical_assistant",
+                    "applicationContext": "medical_consultation",
+                    "groundedItems": [],
+                    "turnsToResult": 1,
+                }
+            ),
+            encoding="utf-8",
+        )
+        (output_dir / "user_feedback.json").write_text(
+            json.dumps(
+                {
+                    "overallRating": 8,
+                    "ratingReason": "Clear medical-information guidance.",
+                    "constraintSatisfaction": 4,
+                    "preferenceSatisfaction": 4,
+                    "askedUsefulClarifyingQuestions": True,
+                }
+            ),
+            encoding="utf-8",
+        )
+        return 0
+
+    class Session:
+        turns = []
+
+    runner = HarborPersonaEvalRunner(
+        repo_root=tmp_path,
+        runs_root=tmp_path / "runs",
+        command_runner=fake_command,
+        harbor_command=("uv", "run", "--frozen", "harbor", "run"),
+    )
+    result = runner(
+        Session(),
+        Persona(id="p1", name="Persona One", context="A careful patient."),
+        "Medical assistant chatbot.",
+        PersonaEvalConfig(
+            domain="movie",
+            application_id="medical_assistant",
+            application_context="medical_consultation",
+            engine="gpt-4o-mini",
+            max_turns=3,
+        ),
+        object(),
+        created_at="2026-06-23T00:00:00Z",
+    )
+
+    command, _cwd, env = calls[0]
+    agent_env = {
+        command[index + 1].split("=", 1)[0]: command[index + 1].split("=", 1)[1]
+        for index, value in enumerate(command)
+        if value == "--agent-env"
+    }
+    assert env["COMPOSE_PROFILES"] == "medical"
+    assert env["MATRIX_CHATBOT_APPLICATION_ID"] == "medical_assistant"
+    assert env["MATRIX_CHATBOT_APPLICATION_CONTEXT"] == "medical_consultation"
+    assert "FINANCE_AGENT_MODEL" not in env
+    assert agent_env["MATRIX_CHATBOT_APPLICATION_ID"] == "medical_assistant"
+    assert agent_env["MATRIX_CHATBOT_APPLICATION_CONTEXT"] == "medical_consultation"
+    assert result.to_dict()["metricScores"]["recommendedItemCount"] == 0
 
 
 def test_harbor_runner_reads_feedback_written_by_application_scorer_artifact(tmp_path):
