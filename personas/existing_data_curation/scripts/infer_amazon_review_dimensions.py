@@ -85,6 +85,15 @@ Core rule: select schema categories that are likely to contain supported attribu
 Return compact JSON only."""
 
 
+SCHEMA_SCRATCHPAD_MAPPING_SYSTEM_PROMPT = """You map compact Amazon-review evidence profiles to persona schema attributes while maintaining a structured evidence-backed scratchpad.
+
+Core rule: use the scratchpad as compact working memory across schema chunks. Update it only with evidence-backed observations, hypotheses, uncertainties, and guardrails. Do not invent unsupported facts, and do not use product stereotypes to assert sensitive identity/status/condition attributes.
+
+For the current schema chunk, return supported attributes plus an updated scratchpad. The scratchpad should be concise, evidence-linked, and uncertainty-aware; it should not include private chain-of-thought or unsupported biography.
+
+Return compact JSON only."""
+
+
 SCHEMA_SIGNAL_CHECKLIST = [
     {
         "schema_area": "interests_and_topics",
@@ -1466,6 +1475,185 @@ def schema_mapping_payload(
     }
 
 
+def initial_schema_scratchpad(user_row: dict[str, Any], evidence_profile: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "user_id": user_row.get("user_id"),
+        "stable_signals": [],
+        "possible_signals": [],
+        "schema_relevance": {
+            "likely_categories": [],
+            "open_categories": [],
+        },
+        "sensitive_or_explicit_only_guardrails": (
+            evidence_profile.get("unsupported_or_blocked") or []
+        )[:20],
+        "rejected_or_uncertain": [],
+    }
+
+
+def schema_scratchpad_mapping_payload(
+    user_row: dict[str, Any],
+    dimension_batch: list[dict[str, Any]],
+    evidence_profile: dict[str, Any],
+    scratchpad: dict[str, Any],
+) -> dict[str, Any]:
+    dimensions = [
+        {
+            "id": dim["id"],
+            "label": dim["label"],
+            "category": dim["category"],
+            "description": dim["description"],
+            "allowed_values": dim["values"],
+        }
+        for dim in dimension_batch
+    ]
+    return {
+        "task": "map_schema_chunk_and_update_evidence_backed_scratchpad",
+        "user_id": user_row.get("user_id"),
+        "instructions": [
+            "Use current_scratchpad as working memory from previous schema chunks.",
+            "For this schema chunk, infer supported attributes and update the scratchpad with evidence-backed signals that help future chunks.",
+            "Scratchpad updates must cite compact evidence_item_ids and, when useful, original review_ids.",
+            "Keep scratchpad concise: preserve stable signals, weak hypotheses, uncertainty notes, and sensitive/explicit-only guardrails.",
+            "Do not store unsupported final attributes or private chain-of-thought in the scratchpad.",
+            "Do not assert sensitive demographics, health conditions, family status, socioeconomic status, political affiliation, religious identity, or identity attributes unless the compact evidence profile contains explicit quoted self-statements.",
+            "Repeated sensitive-adjacent product/context evidence can support contextual interests, topical engagement, needs, values, or preferences, but not asserted sensitive status or identity.",
+            "For each inferred dimension, choose exactly one allowed value and cite evidence_item_ids plus original review_ids.",
+            "Include weak but plausible non-sensitive attributes with calibrated confidence when evidence is suggestive.",
+        ],
+        "output_json_schema": {
+            "inferred_attributes": [
+                {
+                    "dimension_id": "schema dimension id",
+                    "value": "one allowed value for that dimension",
+                    "confidence": "number from 0 to 1",
+                    "evidence_item_ids": ["compact profile evidence item ids"],
+                    "evidence_review_ids": ["original review ids used as support"],
+                    "evidence_quotes": ["short exact quotes copied from profile support"],
+                    "reasoning": "brief grounded rationale",
+                }
+            ],
+            "updated_scratchpad": {
+                "stable_signals": [
+                    {
+                        "signal": "evidence-backed recurring or explicit signal",
+                        "confidence": "number from 0 to 1",
+                        "evidence_item_ids": ["compact profile evidence item ids"],
+                        "review_ids": ["original review ids when useful"],
+                    }
+                ],
+                "possible_signals": [
+                    {
+                        "signal": "weak or emerging signal",
+                        "confidence": "number from 0 to 1",
+                        "evidence_item_ids": ["compact profile evidence item ids"],
+                        "caution": "what not to over-infer",
+                    }
+                ],
+                "schema_relevance": {
+                    "likely_categories": ["schema category strings likely to remain useful"],
+                    "open_categories": ["schema category strings worth watching but uncertain"],
+                },
+                "sensitive_or_explicit_only_guardrails": [
+                    "claims that require explicit self-statements or should stay contextual only"
+                ],
+                "rejected_or_uncertain": [
+                    {
+                        "signal": "unsupported or ambiguous interpretation",
+                        "reason": "why it should not be asserted",
+                    }
+                ],
+            },
+        },
+        "schema_dimensions": dimensions,
+        "compact_evidence_profile": evidence_profile,
+        "current_scratchpad": scratchpad,
+    }
+
+
+def normalize_scratchpad(model_output: dict[str, Any], previous: dict[str, Any]) -> dict[str, Any]:
+    raw = model_output.get("updated_scratchpad")
+    if not isinstance(raw, dict):
+        return previous
+
+    def normalize_signal_list(value: Any, max_items: int, max_text: int = 260) -> list[dict[str, Any]]:
+        if not isinstance(value, list):
+            return []
+        normalized = []
+        for item in value[:max_items]:
+            if isinstance(item, dict):
+                signal = compact_text(item.get("signal"), max_text)
+                if not signal:
+                    continue
+                try:
+                    confidence = float(item.get("confidence", 0.5))
+                except (TypeError, ValueError):
+                    confidence = 0.5
+                normalized.append(
+                    {
+                        "signal": signal,
+                        "confidence": round(max(0.0, min(1.0, confidence)), 3),
+                        "evidence_item_ids": [
+                            str(eid) for eid in (item.get("evidence_item_ids") or [])[:8]
+                        ],
+                        "review_ids": [
+                            str(review_id) for review_id in (item.get("review_ids") or [])[:8]
+                        ],
+                        "caution": compact_text(item.get("caution"), 220),
+                    }
+                )
+            elif isinstance(item, str):
+                text = compact_text(item, max_text)
+                if text:
+                    normalized.append(
+                        {
+                            "signal": text,
+                            "confidence": 0.5,
+                            "evidence_item_ids": [],
+                            "review_ids": [],
+                            "caution": "",
+                        }
+                    )
+        return normalized
+
+    def normalize_text_list(value: Any, max_items: int, max_text: int = 220) -> list[str]:
+        if not isinstance(value, list):
+            return []
+        return [text for text in (compact_text(item, max_text) for item in value[:max_items]) if text]
+
+    def normalize_uncertain(value: Any, max_items: int) -> list[dict[str, Any]]:
+        if not isinstance(value, list):
+            return []
+        normalized = []
+        for item in value[:max_items]:
+            if isinstance(item, dict):
+                signal = compact_text(item.get("signal"), 220)
+                reason = compact_text(item.get("reason"), 260)
+                if signal or reason:
+                    normalized.append({"signal": signal, "reason": reason})
+            elif isinstance(item, str):
+                text = compact_text(item, 260)
+                if text:
+                    normalized.append({"signal": text, "reason": ""})
+        return normalized
+
+    relevance = raw.get("schema_relevance") if isinstance(raw.get("schema_relevance"), dict) else {}
+    normalized = {
+        "user_id": previous.get("user_id"),
+        "stable_signals": normalize_signal_list(raw.get("stable_signals"), 40),
+        "possible_signals": normalize_signal_list(raw.get("possible_signals"), 30),
+        "schema_relevance": {
+            "likely_categories": normalize_text_list(relevance.get("likely_categories"), 40),
+            "open_categories": normalize_text_list(relevance.get("open_categories"), 30),
+        },
+        "sensitive_or_explicit_only_guardrails": normalize_text_list(
+            raw.get("sensitive_or_explicit_only_guardrails"), 30
+        ),
+        "rejected_or_uncertain": normalize_uncertain(raw.get("rejected_or_uncertain"), 30),
+    }
+    return normalized
+
+
 def schema_category_summaries(dimensions: list[dict[str, Any]]) -> list[dict[str, Any]]:
     by_category: dict[str, list[dict[str, Any]]] = {}
     for dim in dimensions:
@@ -1637,6 +1825,66 @@ def run_schema_mapping_batches(
             f"{batch_index}/{len(dimension_batches)} done valid={len(valid)} rejected={len(rejected)}"
         )
     return all_valid, all_rejected, request_count
+
+
+def run_schema_scratchpad_mapping_batches(
+    user_row: dict[str, Any],
+    dimensions: list[dict[str, Any]],
+    evidence_profile: dict[str, Any],
+    valid_review_ids: set[str],
+    args: argparse.Namespace,
+    api_key: str,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], int, dict[str, Any], list[dict[str, Any]]]:
+    all_valid = []
+    all_rejected = []
+    request_count = 0
+    scratchpad = initial_schema_scratchpad(user_row, evidence_profile)
+    scratchpad_trace = []
+    dimension_batches = list(batched(dimensions, args.dimensions_per_call))
+    for batch_index, dimension_batch in enumerate(dimension_batches, start=1):
+        request_count += 1
+        log(
+            f"user={user_row.get('user_id')} schema_scratchpad_mapping batch "
+            f"{batch_index}/{len(dimension_batches)} dimensions={len(dimension_batch)} "
+            f"evidence_items={len(evidence_profile.get('evidence_items') or [])}"
+        )
+        task = schema_scratchpad_mapping_payload(
+            user_row,
+            dimension_batch,
+            evidence_profile,
+            scratchpad,
+        )
+        payload = {
+            "model": args.model,
+            "temperature": args.temperature,
+            "response_format": {"type": "json_object"},
+            "messages": [
+                {"role": "system", "content": SCHEMA_SCRATCHPAD_MAPPING_SYSTEM_PROMPT},
+                {"role": "user", "content": json.dumps(task, ensure_ascii=False)},
+            ],
+        }
+        response = openai_request(payload, api_key)
+        model_output = parse_model_json(response)
+        valid, rejected = validate_inferences(model_output, dimension_batch, valid_review_ids)
+        scratchpad = normalize_scratchpad(model_output, scratchpad)
+        all_valid.extend(valid)
+        all_rejected.extend(rejected)
+        scratchpad_trace.append(
+            {
+                "batch_index": batch_index,
+                "dimension_count": len(dimension_batch),
+                "valid_attribute_count": len(valid),
+                "rejected_attribute_count": len(rejected),
+                "scratchpad_signal_count": len(scratchpad.get("stable_signals") or []),
+                "scratchpad_possible_signal_count": len(scratchpad.get("possible_signals") or []),
+            }
+        )
+        log(
+            f"user={user_row.get('user_id')} schema_scratchpad_mapping batch "
+            f"{batch_index}/{len(dimension_batches)} done valid={len(valid)} "
+            f"rejected={len(rejected)} stable_signals={len(scratchpad.get('stable_signals') or [])}"
+        )
+    return all_valid, all_rejected, request_count, scratchpad, scratchpad_trace
 
 
 def openai_request(
@@ -2161,7 +2409,7 @@ def infer_user_from_evidence_profile(
     valid_routes: list[dict[str, Any]] = []
     rejected_routes: list[dict[str, Any]] = []
     routed_dimensions = dimensions
-    if args.schema_routing_mode == "category":
+    if args.schema_routing_mode in {"category", "scratchpad"}:
         request_count += 1
         always_include_patterns = sorted(parse_csv_filter(args.schema_router_always_include) or [])
         log(
@@ -2205,15 +2453,33 @@ def infer_user_from_evidence_profile(
             f"categories={len(routed_categories)} dimensions={len(routed_dimensions)} "
             f"rejected={len(rejected_routes)}"
         )
-    all_valid, all_rejected, mapping_request_count = run_schema_mapping_batches(
-        user_row,
-        routed_dimensions,
-        evidence_profile,
-        valid_review_ids,
-        args,
-        api_key,
-        stage_name="schema_mapping",
-    )
+    schema_scratchpad: dict[str, Any] | None = None
+    schema_scratchpad_trace: list[dict[str, Any]] = []
+    if args.schema_routing_mode == "scratchpad":
+        (
+            all_valid,
+            all_rejected,
+            mapping_request_count,
+            schema_scratchpad,
+            schema_scratchpad_trace,
+        ) = run_schema_scratchpad_mapping_batches(
+            user_row,
+            routed_dimensions,
+            evidence_profile,
+            valid_review_ids,
+            args,
+            api_key,
+        )
+    else:
+        all_valid, all_rejected, mapping_request_count = run_schema_mapping_batches(
+            user_row,
+            routed_dimensions,
+            evidence_profile,
+            valid_review_ids,
+            args,
+            api_key,
+            stage_name="schema_mapping",
+        )
     request_count += mapping_request_count
     recall_pass_dimension_count = 0
     recall_pass_valid_count = 0
@@ -2268,6 +2534,8 @@ def infer_user_from_evidence_profile(
         "recall_pass_dimension_count": recall_pass_dimension_count,
         "recall_pass_valid_count": recall_pass_valid_count,
         "recall_pass_rejected_count": recall_pass_rejected_count,
+        "schema_scratchpad": schema_scratchpad,
+        "schema_scratchpad_trace": schema_scratchpad_trace,
         "evidence_mapping_path": str(args.evidence_mapping_path),
         "user_id": user_row.get("user_id"),
         "review_count": len(reviews),
@@ -2333,7 +2601,7 @@ def write_dry_run_prompts(
             "structured_memory": {},
             "evidence_items": [],
         }
-        if args.schema_routing_mode == "category":
+        if args.schema_routing_mode in {"category", "scratchpad"}:
             always_include_patterns = sorted(parse_csv_filter(args.schema_router_always_include) or [])
             rows.append(
                 {
@@ -2352,9 +2620,26 @@ def write_dry_run_prompts(
                     ),
                 }
             )
+        placeholder_scratchpad = initial_schema_scratchpad(user_row, placeholder_profile)
         for batch_index, dimension_batch in enumerate(
             batched(dimensions, args.dimensions_per_call), start=1
         ):
+            if args.schema_routing_mode == "scratchpad":
+                rows.append(
+                    {
+                        "user_id": user_row.get("user_id"),
+                        "stage": "schema_scratchpad_mapping",
+                        "batch_index": batch_index,
+                        "system_prompt": SCHEMA_SCRATCHPAD_MAPPING_SYSTEM_PROMPT,
+                        "user_payload": schema_scratchpad_mapping_payload(
+                            user_row,
+                            dimension_batch,
+                            placeholder_profile,
+                            placeholder_scratchpad,
+                        ),
+                    }
+                )
+                continue
             rows.append(
                 {
                     "user_id": user_row.get("user_id"),
@@ -2536,11 +2821,13 @@ def parse_args(argv: Iterable[str]) -> argparse.Namespace:
     )
     parser.add_argument(
         "--schema-routing-mode",
-        choices=("none", "category", "recall"),
+        choices=("none", "category", "scratchpad", "recall"),
         default="none",
         help=(
             "Extraction path. 'none' preserves direct full-schema mapping; "
             "'category' adds a schema-category router before mapping; "
+            "'scratchpad' adds category routing plus evidence-backed scratchpad "
+            "memory across routed schema chunks; "
             "'recall' runs full-schema mapping plus an extra recall-focused "
             "second pass over high-value categories."
         ),

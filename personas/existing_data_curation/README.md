@@ -502,6 +502,12 @@ batches of persona dimensions. Two optional alternatives are available:
   categories plus configurable always-included category patterns. This can save
   schema-mapping tokens and focus extraction, but it adds one router call per
   user and may lose recall if the router misses a category.
+- `--schema-routing-mode scratchpad` uses the same category-routing step, then
+  scans the routed schema dimensions in chunks while maintaining a structured,
+  evidence-backed scratchpad across chunks. The scratchpad stores compact
+  signals, weak hypotheses, uncertainty notes, and explicit-only guardrails with
+  evidence anchors. This is intended to recover more qualitative attributes than
+  plain category routing without running the full recall second pass.
 - `--schema-routing-mode recall` is the recall-maximizing path. It runs the
   full direct schema mapping first, then runs a second recall-focused pass over
   high-value categories such as personality, values, decision style, behavior,
@@ -568,6 +574,19 @@ python scripts/infer_amazon_review_dimensions.py \
   --max-users 20 \
   --output raw/amazon_reviews_2023/persona_dimension_inference/inferred_dimensions_routed.jsonl \
   --yaml-output raw/amazon_reviews_2023/persona_dimension_inference/inferred_dimensions_routed.yaml
+```
+
+To test the scratchpad-based category-routing path:
+
+```bash
+python scripts/infer_amazon_review_dimensions.py \
+  --user-histories raw/amazon_reviews_2023/persona_dimension_inference/user_histories.jsonl \
+  --context-selection-strategy informative_category_temporal \
+  --schema-routing-mode scratchpad \
+  --review-memory-output raw/amazon_reviews_2023/persona_dimension_inference/evidence_profiles.jsonl \
+  --max-users 20 \
+  --output raw/amazon_reviews_2023/persona_dimension_inference/inferred_dimensions_scratchpad.jsonl \
+  --yaml-output raw/amazon_reviews_2023/persona_dimension_inference/inferred_dimensions_scratchpad.yaml
 ```
 
 To maximize extracted attribute count, test the recall path:
