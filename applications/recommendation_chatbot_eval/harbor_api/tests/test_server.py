@@ -295,6 +295,7 @@ def test_health_reports_generic_chatbot_applications(monkeypatch):
     assert [app["applicationId"] for app in body["applications"]] == [
         "recai",
         "finance_openbb",
+        "medical_assistant",
     ]
     recai = body["applications"][0]
     assert recai["defaultContext"] == "movie"

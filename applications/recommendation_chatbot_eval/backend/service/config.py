@@ -60,7 +60,7 @@ class ConfigManager:
     #: Allowed values for each config key. Order is meaningful: the first entry
     #: of each list is the canonical default surfaced in :attr:`DEFAULTS`.
     ALLOWED: Dict[str, List[str]] = {
-        "applicationId": ["recai", "finance_openbb"],
+        "applicationId": ["recai", "finance_openbb", "medical_assistant"],
         "engine": ["gpt-4o-mini", "gpt-4o"],
         "rankerMode": ["native"],
         "resourceMode": ["recai_resources"],
@@ -119,6 +119,10 @@ class ConfigManager:
                 "finance_openbb": {
                     "label": "FinAI / OpenBB",
                     "description": "Financial research chatbot adapter backed by OpenBB MCP.",
+                },
+                "medical_assistant": {
+                    "label": "Medical Assistant",
+                    "description": "Multi-agent medical assistant adapter.",
                 },
             },
         },

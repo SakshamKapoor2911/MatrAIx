@@ -112,3 +112,61 @@ def test_router_forwards_readiness_to_selected_application(monkeypatch):
             },
         }
     ]
+
+
+def test_router_routes_medical_application(monkeypatch):
+    calls: list[Dict[str, Any]] = []
+
+    def fake_request_json(
+        *,
+        application_id: str,
+        method: str,
+        path: str,
+        body: Optional[Mapping[str, Any]] = None,
+        query: Optional[Mapping[str, Any]] = None,
+        timeout: float = 180.0,
+    ) -> Dict[str, Any]:
+        del query, timeout
+        calls.append(
+            {
+                "applicationId": application_id,
+                "method": method,
+                "path": path,
+                "body": dict(body or {}),
+            }
+        )
+        return {
+            "sessionId": "med_ses_1",
+            "applicationId": application_id,
+            "applicationContext": "medical_consultation",
+            "reply": "Medical reply.",
+            "groundedItems": [],
+        }
+
+    monkeypatch.setattr(router_server, "_request_json", fake_request_json)
+    router_server.reset_session_routes_for_tests()
+    client = TestClient(router_server.app)
+
+    response = client.post(
+        "/v1/messages",
+        json={
+            "applicationId": "medical_assistant",
+            "applicationContext": "medical_consultation",
+            "message": "What should I do for a mild fever?",
+        },
+    )
+
+    assert response.status_code == 200
+    assert response.json()["applicationId"] == "medical_assistant"
+    assert calls == [
+        {
+            "applicationId": "medical_assistant",
+            "method": "POST",
+            "path": "/v1/messages",
+            "body": {
+                "applicationId": "medical_assistant",
+                "applicationContext": "medical_consultation",
+                "message": "What should I do for a mild fever?",
+            },
+        }
+    ]

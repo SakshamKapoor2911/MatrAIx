@@ -107,8 +107,9 @@ served at **`/docs`** when the app is running.
 
 ## Harbor application task
 
-The Harbor-facing adapter lives in `harbor_api/`. It wraps the same RecBot
-service layer behind a smaller synchronous REST contract for persona agents:
+The Harbor-facing adapter lives in `harbor_api/`. It exposes a smaller
+synchronous REST contract for persona agents and routes each run to the selected
+chatbot application adapter (`applicationId`):
 
 | Method | Path | Purpose |
 |---|---|---|
@@ -116,7 +117,15 @@ service layer behind a smaller synchronous REST contract for persona agents:
 | POST | `/v1/session` | Create a recommender chat session. |
 | POST | `/v1/messages` | Send one user message and receive one recommender reply. |
 | GET | `/v1/conversation?sessionId=...` | Fetch transcript and turns. |
-| GET | `/v1/recommendations?sessionId=...` | Fetch recommended item ids across turns. |
+| GET | `/v1/recommendations?sessionId=...` | Fetch recommended / grounded item ids across turns. |
+
+Supported application adapters:
+
+| applicationId | Label | Notes |
+|---|---|---|
+| `recai` | RecAI / InteRecAgent | Native recommendation chatbot for movie / beauty / game catalogs. |
+| `finance_openbb` | FinAI / OpenBB | Financial research chatbot backed by OpenBB MCP. |
+| `medical_assistant` | Medical Assistant | Multi-agent medical assistant adapter. In Harbor, the `medical` profile starts a `medical-upstream` FastAPI sidecar from `multi-agent-medical-assistant:local` and the `medical-api` wrapper calls it on the internal compose network. For local non-Harbor development, point `MEDICAL_ASSISTANT_URL` at any compatible FastAPI service. |
 
 The Harbor task is `application/tasks/chatbot_chat_api/`. It runs the chatbot
 application router sidecar, lets the task controller drive the selected

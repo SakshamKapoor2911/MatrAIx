@@ -135,7 +135,12 @@ export function PersonaEvalCockpit({ options, onOpenRuns, onDomainChange }: Pers
     onDomainChange?.(domain);
   }, [domain, onDomainChange]);
 
-  const applicationContext = applicationId === "finance_openbb" ? "financial_research" : domain;
+  const applicationContext =
+    applicationId === "finance_openbb"
+      ? "financial_research"
+      : applicationId === "medical_assistant"
+        ? "medical_consultation"
+        : domain;
 
   // --- Goal contexts (the "Conversation style" knob) ----------------------
   const goalContextsQuery = useQuery<GoalContextsResponse>({

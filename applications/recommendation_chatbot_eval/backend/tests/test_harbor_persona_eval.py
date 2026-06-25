@@ -912,6 +912,110 @@ def test_harbor_runner_uses_finance_compose_profile(tmp_path):
     assert result.to_dict()["metricScores"]["recommendedItemCount"] == 1
 
 
+def test_harbor_runner_uses_medical_compose_profile(tmp_path):
+    calls = []
+
+    def fake_command(command, *, cwd, env):
+        calls.append((list(command), cwd, dict(env)))
+        config = yaml.safe_load(
+            open(command[command.index("-c") + 1], encoding="utf-8")
+        )
+        output_dir = (
+            tmp_path
+            / "runs"
+            / config["job_name"]
+            / "medical-agent_chat_api__fake"
+            / "artifacts"
+            / "app"
+            / "output"
+        )
+        output_dir.mkdir(parents=True)
+        (output_dir / "transcript.json").write_text(
+            json.dumps(
+                {
+                    "sessionId": "med_ses_1",
+                    "applicationId": "medical_assistant",
+                    "applicationContext": "medical_consultation",
+                    "messages": [
+                        {"role": "user", "content": "I have a mild fever."},
+                        {
+                            "role": "assistant",
+                            "content": "Monitor symptoms and seek care if worse.",
+                        },
+                    ],
+                    "turns": [
+                        {
+                            "turnId": "med_turn_1",
+                            "conversationId": "med_ses_1",
+                            "backend": "medical_assistant",
+                            "userMessage": "I have a mild fever.",
+                            "assistantMessage": "Monitor symptoms and seek care if worse.",
+                            "recommendedItems": [],
+                            "groundedItems": [],
+                            "plan": [{"tool": "CONVERSATION_AGENT", "status": "ok"}],
+                        }
+                    ],
+                }
+            ),
+            encoding="utf-8",
+        )
+        (output_dir / "application_result.json").write_text(
+            json.dumps(
+                {
+                    "sessionId": "med_ses_1",
+                    "applicationId": "medical_assistant",
+                    "applicationContext": "medical_consultation",
+                    "groundedItems": [],
+                    "turnsToResult": 1,
+                }
+            ),
+            encoding="utf-8",
+        )
+        (output_dir / "user_feedback.json").write_text(
+            json.dumps(
+                {
+                    "overallRating": 7,
+                    "ratingReason": "Useful medical triage response.",
+                    "constraintSatisfaction": 4,
+                    "preferenceSatisfaction": 4,
+                    "askedUsefulClarifyingQuestions": False,
+                }
+            ),
+            encoding="utf-8",
+        )
+        return 0
+
+    class Session:
+        turns = []
+
+    runner = HarborPersonaEvalRunner(
+        repo_root=tmp_path,
+        runs_root=tmp_path / "runs",
+        command_runner=fake_command,
+        harbor_command=("uv", "run", "--frozen", "harbor", "run"),
+    )
+    result = runner(
+        Session(),
+        Persona(id="p1", name="Persona One", context="A cautious patient."),
+        "Medical assistant.",
+        PersonaEvalConfig(
+            domain="movie",
+            application_id="medical_assistant",
+            application_context="medical_consultation",
+            engine="gpt-4o-mini",
+            max_turns=3,
+        ),
+        object(),
+        created_at="2026-06-23T00:00:00Z",
+    )
+
+    env = calls[0][2]
+    assert env["COMPOSE_PROFILES"] == "medical"
+    assert env["MATRIX_CHATBOT_APPLICATION_ID"] == "medical_assistant"
+    assert env["MATRIX_CHATBOT_APPLICATION_CONTEXT"] == "medical_consultation"
+    assert result.to_dict()["metricScores"]["recommendedItemCount"] == 0
+
+
 def test_harbor_runner_reads_feedback_written_by_application_scorer_artifact(tmp_path):
     def fake_command(command, *, cwd, env):
         config = yaml.safe_load(

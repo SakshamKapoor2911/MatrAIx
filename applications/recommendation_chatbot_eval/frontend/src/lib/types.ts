@@ -18,7 +18,7 @@ export type Engine = "gpt-4o-mini" | "gpt-4o";
 export type PersonaModel = "anthropic/claude-haiku-4-5" | "anthropic/claude-sonnet-4-6";
 
 /** Application adapter exposed through the Harbor chatbot sidecar. */
-export type ApplicationId = "recai" | "finance_openbb";
+export type ApplicationId = "recai" | "finance_openbb" | "medical_assistant";
 
 /** Candidate ranking strategy. */
 export type RankerMode = "semantic_profile" | "native";

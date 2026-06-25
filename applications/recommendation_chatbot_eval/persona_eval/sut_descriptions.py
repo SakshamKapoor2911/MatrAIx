@@ -22,6 +22,13 @@ _DESCRIPTIONS = {
         "or macro topics, use OpenBB data tools, and provide grounded research "
         "or comparisons without giving personalized buy/sell instructions."
     ),
+    "medical_consultation": (
+        "You are chatting with a multi-agent medical assistant. It can answer "
+        "health-related questions, route between conversation, retrieval, web "
+        "search, and medical-image analysis agents, and may ask for clarification "
+        "or uploaded images when needed. Treat its output as informational and "
+        "not a substitute for clinician judgment."
+    ),
 }
 
 

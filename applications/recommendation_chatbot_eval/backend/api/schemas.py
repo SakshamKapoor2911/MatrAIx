@@ -70,7 +70,7 @@ __all__ = [
 #: :class:`~backend.service.config.ConfigManager` (movie / beauty_product /
 #: game) so a bad domain is rejected here with a clean 422.
 SUPPORTED_DOMAINS = ("movie", "beauty_product", "game")
-SUPPORTED_APPLICATION_IDS = ("recai", "finance_openbb")
+SUPPORTED_APPLICATION_IDS = ("recai", "finance_openbb", "medical_assistant")
 SUPPORTED_PERSONA_MODELS = (
     "anthropic/claude-haiku-4-5",
     "anthropic/claude-sonnet-4-6",

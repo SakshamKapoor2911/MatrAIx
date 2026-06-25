@@ -11,8 +11,12 @@ def test_domain_allows_all_three(config_manager):
 
 
 def test_application_id_allows_generic_chatbot_applications(config_manager):
-    assert config_manager.ALLOWED["applicationId"] == ["recai", "finance_openbb"]
-    for application_id in ("recai", "finance_openbb"):
+    assert config_manager.ALLOWED["applicationId"] == [
+        "recai",
+        "finance_openbb",
+        "medical_assistant",
+    ]
+    for application_id in ("recai", "finance_openbb", "medical_assistant"):
         config_manager.validate({"applicationId": application_id})
 
 

@@ -301,6 +301,8 @@ def _chatbot_system_label(*, application_id: str, application_context: str) -> s
         return "{} recommendation system".format(context)
     if application_id == "finance_openbb":
         return "financial research system"
+    if application_id == "medical_assistant":
+        return "medical assistant"
     return "{} system".format(context)
 
 
@@ -411,6 +413,8 @@ class HarborPersonaEvalRunner:
         if config.application_id == "finance_openbb":
             env["COMPOSE_PROFILES"] = "finance"
             env.setdefault("FINANCE_AGENT_MODEL", config.engine)
+        elif config.application_id == "medical_assistant":
+            env["COMPOSE_PROFILES"] = "medical"
         else:
             env["COMPOSE_PROFILES"] = "recai"
         project_env = Path("/tmp/matraix-harbor-project-venv")
