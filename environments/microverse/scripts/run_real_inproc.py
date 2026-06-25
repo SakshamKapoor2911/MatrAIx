@@ -48,6 +48,10 @@ from mircoverse.agents.reference_agent import REFLECTION_THRESHOLD, build_envelo
 from mircoverse.config import settings
 from mircoverse.contracts import MemoryFile, MemoryIndexEntry, Observation, SoulFile
 from mircoverse.manifest import gen_seed_world
+from mircoverse.measurement.snapshots import (
+    take_forced_end_snapshot,
+    take_measurement_snapshot,
+)
 from mircoverse.persistence import dal, db
 from mircoverse.resolution import initialize_simulation, resolve_tick
 
@@ -302,7 +306,7 @@ async def _decide_one(
 
 
 async def _decide_for_tick(
-    conn, tick: int, provider, *, reflection_threshold: int, concurrency: int = 6
+    conn, tick: int, provider, *, reflection_threshold: int, concurrency: int = 10
 ) -> dict:
     """Every agent with an open observation this tick runs the REAL §7 turn CONCURRENTLY (capped
     at ``concurrency`` in-flight model calls to stay under Bedrock throttling). Aggregates each
@@ -334,7 +338,7 @@ async def run(
     agents: int, ticks: int, seed: int, model: str, region: str,
     *, oasis_regen: int, oasis_cap: int, reflection_threshold: int,
     siphon_base: int = 37, siphon_decay: float = 0.0, siphon_floor: int = 0,
-    base_drain: int = 1,
+    base_drain: int = 1, snapshot_cadence: int = 10,
 ) -> dict:
     if not await db.ping(settings.database_url):
         raise SystemExit("Postgres unreachable. Start it with `docker compose up -d` and retry.")
@@ -418,6 +422,7 @@ async def run(
     rejected_total = 0
     reflected_total = 0
     revised_total = 0
+    measurement_snaps_total = 0  # engine_measurement rows written across the run (cadence snapshots)
     move_diag = Counter()
     # Infrastructure-health time series (the throttle-confound guard). agent_errors = agents whose §7
     # turn raised and were defaulted to `wait` this tick (a data-poisoning event); throttle_retries =
@@ -442,6 +447,15 @@ async def run(
                 oasis_cap=oasis_cap,
                 base_drain=base_drain,  # scarcity lever — MUST be threaded or it resets to 1 each tick
             )
+            # ── ENGINE MEASUREMENT (World.md §9, Architecture Step 9b) — the uniform, unbiased
+            # longitudinal series. Independently of whether any agent CHOSE to revise this tick,
+            # every `snapshot_cadence` ticks we copy each active agent's current_identity into
+            # identity_snapshots(trigger='engine_measurement'). This is what makes a per-agent drift
+            # TRAJECTORY plottable (vs the sparse, self-selected agent_revision rows alone). The call
+            # is a no-op on off-cadence ticks. It runs in the SAME tick connection, after resolution
+            # has committed any agent_revision this tick, so the snapshot reflects the latest identity.
+            engine_snaps = await take_measurement_snapshot(conn, tick, snapshot_cadence)
+            measurement_snaps_total += len(engine_snaps)
             alive = await conn.fetchval("SELECT COUNT(*) FROM agents WHERE status = 'active'")
             srow = await conn.fetchrow(
                 "SELECT position_x, position_y, resources FROM agents WHERE agent_id = $1",
@@ -486,6 +500,16 @@ async def run(
             f"rejected={rejected:>3} failed={failed:>3} | malformed={malformed:>2} | "
             f"alive={alive:>3} @siphon={at_siphon:>2} | sample water={res.get('water')}{refl_tag}{infra_tag}"
         )
+
+    # ── FORCED-END SNAPSHOT (World.md §10.3 survivor-bias guard) — one final snapshot of EVERY
+    # agent, alive AND dead, so the terminal identity series is not censored by who survived. Uses
+    # `ticks` as the snapshot tick_number (one past the last resolved tick is also fine; we use the
+    # horizon so it sorts after every in-run snapshot). Runs unconditionally, off the cadence gate.
+    forced_end_snaps = 0
+    async with db.connection() as conn:
+        forced_end_snaps = len(await take_forced_end_snapshot(conn, ticks))
+    print(f"\n  engine_measurement snapshots written: {measurement_snaps_total} "
+          f"(cadence={snapshot_cadence})  |  forced_end snapshots: {forced_end_snaps}")
 
     print("\n── summary ─────────────────────────────────────────────")
     print(f"  malformed submit_action by tick: {malformed_series}")
@@ -538,6 +562,9 @@ async def run(
                    "units_at_0": manifest.siphon.units_at(0)},
         "oasis": {"regen": oasis_regen, "cap": oasis_cap},
         "reflection_threshold": reflection_threshold,
+        "snapshot_cadence": snapshot_cadence,
+        "engine_measurement_snapshots": measurement_snaps_total,
+        "forced_end_snapshots": forced_end_snaps,
         "model": model, "region": region, "seed": seed, "ticks": ticks, "agents": pop,
     }
 
@@ -582,6 +609,12 @@ def main() -> None:
     # short pilot horizon. The agent still only revises if it CHOOSES to — this just lets it consider.
     ap.add_argument("--reflection-threshold", type=int, default=60,
                     help="accumulated importance that triggers a reflect turn (Protocol default 150)")
+    # Engine-measurement cadence (World.md §9 / Protocol §2.6 = every 10 ticks). Every N ticks the
+    # engine snapshots each active agent's current_identity into identity_snapshots
+    # (trigger='engine_measurement'), giving a UNIFORM longitudinal drift trajectory regardless of
+    # when (or whether) an agent chose to self-revise. 0 disables the cadence (forced-end still runs).
+    ap.add_argument("--snapshot-cadence", type=int, default=10,
+                    help="engine_measurement snapshot every N ticks (Protocol §2.6 default 10; 0=off)")
     args = ap.parse_args()
     asyncio.run(run(
         args.agents, args.ticks, args.seed, args.model, args.region,
@@ -589,6 +622,7 @@ def main() -> None:
         reflection_threshold=args.reflection_threshold,
         siphon_base=args.siphon_base, siphon_decay=args.siphon_decay,
         siphon_floor=args.siphon_floor, base_drain=args.base_drain,
+        snapshot_cadence=args.snapshot_cadence,
     ))
 
 

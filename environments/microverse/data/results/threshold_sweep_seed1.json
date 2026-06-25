@@ -1,0 +1,4626 @@
+{
+  "experiment": "reflection_threshold_sweep",
+  "iv": "reflection_threshold",
+  "fixed_arm": {
+    "oasis_regen": 12,
+    "oasis_cap": 50,
+    "siphon_base": 37,
+    "siphon_decay": 0.0,
+    "siphon_floor": 0,
+    "base_drain": 2
+  },
+  "seed": 1,
+  "ticks": 40,
+  "agents": 25,
+  "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+  "snapshot_cadence": 5,
+  "caveat": "1 seed, 1 model (Haiku), n=25, short horizon — DIRECTIONAL, not significant.",
+  "arms": [
+    {
+      "reflection_threshold": 40,
+      "survivors": 12,
+      "n_agents": 25,
+      "agents_with_changed_identity": 5,
+      "total_snapshots": 178,
+      "engine_measurement_snapshots": 148,
+      "forced_end_snapshots": 25,
+      "infra_contaminated": false,
+      "trajectories": [
+        {
+          "name": "Ash",
+          "status": "dead",
+          "identity_changed": false,
+          "n_boundaries_t0": 2,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Bex",
+          "status": "dead",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Corrvan",
+          "status": "dead",
+          "identity_changed": true,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 1,
+          "first_revision_tick": 11,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 11,
+              "trigger": "agent_revision",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Dross",
+          "status": "active",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Drusa",
+          "status": "active",
+          "identity_changed": true,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 1,
+          "first_revision_tick": 4,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 4,
+              "trigger": "agent_revision",
+              "drift_score": null,
+              "n_boundaries": 3,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 3,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 3,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 3,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 3,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 3,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 3,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 3,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 3,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Garrick",
+          "status": "dead",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Hale",
+          "status": "active",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Imra",
+          "status": "dead",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Kael",
+          "status": "dead",
+          "identity_changed": true,
+          "n_boundaries_t0": 2,
+          "n_values_t0": 2,
+          "n_revisions": 1,
+          "first_revision_tick": 27,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 27,
+              "trigger": "agent_revision",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Korv",
+          "status": "active",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Lithen",
+          "status": "dead",
+          "identity_changed": false,
+          "n_boundaries_t0": 2,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Malaric",
+          "status": "dead",
+          "identity_changed": true,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 1,
+          "first_revision_tick": 12,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 12,
+              "trigger": "agent_revision",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Mire",
+          "status": "active",
+          "identity_changed": false,
+          "n_boundaries_t0": 0,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 0,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 0,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 0,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 0,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 0,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 0,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 0,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 0,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 0,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Nyssa",
+          "status": "dead",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Quill",
+          "status": "dead",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Roon",
+          "status": "active",
+          "identity_changed": true,
+          "n_boundaries_t0": 2,
+          "n_values_t0": 2,
+          "n_revisions": 1,
+          "first_revision_tick": 39,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 39,
+              "trigger": "agent_revision",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Sela",
+          "status": "active",
+          "identity_changed": false,
+          "n_boundaries_t0": 2,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Senne",
+          "status": "active",
+          "identity_changed": false,
+          "n_boundaries_t0": 2,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Seraveth",
+          "status": "active",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Skarn",
+          "status": "dead",
+          "identity_changed": false,
+          "n_boundaries_t0": 2,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Tamsin",
+          "status": "active",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Thren",
+          "status": "dead",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Vell",
+          "status": "active",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Veyra",
+          "status": "dead",
+          "identity_changed": false,
+          "n_boundaries_t0": 2,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Vos",
+          "status": "active",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "reflection_threshold": 80,
+      "survivors": 17,
+      "n_agents": 25,
+      "agents_with_changed_identity": 2,
+      "total_snapshots": 187,
+      "engine_measurement_snapshots": 160,
+      "forced_end_snapshots": 25,
+      "infra_contaminated": false,
+      "trajectories": [
+        {
+          "name": "Ash",
+          "status": "dead",
+          "identity_changed": false,
+          "n_boundaries_t0": 2,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Bex",
+          "status": "dead",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Corrvan",
+          "status": "active",
+          "identity_changed": true,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 1,
+          "first_revision_tick": 29,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 29,
+              "trigger": "agent_revision",
+              "drift_score": null,
+              "n_boundaries": 3,
+              "n_values": 3
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 3,
+              "n_values": 3
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 3,
+              "n_values": 3
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 3,
+              "n_values": 3
+            }
+          ]
+        },
+        {
+          "name": "Dross",
+          "status": "active",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Drusa",
+          "status": "dead",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Garrick",
+          "status": "active",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Hale",
+          "status": "active",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Imra",
+          "status": "active",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Kael",
+          "status": "active",
+          "identity_changed": false,
+          "n_boundaries_t0": 2,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Korv",
+          "status": "active",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Lithen",
+          "status": "dead",
+          "identity_changed": false,
+          "n_boundaries_t0": 2,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Malaric",
+          "status": "dead",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Mire",
+          "status": "active",
+          "identity_changed": false,
+          "n_boundaries_t0": 0,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 0,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 0,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 0,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 0,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 0,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 0,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 0,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 0,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 0,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Nyssa",
+          "status": "dead",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Quill",
+          "status": "active",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Roon",
+          "status": "active",
+          "identity_changed": false,
+          "n_boundaries_t0": 2,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Sela",
+          "status": "active",
+          "identity_changed": false,
+          "n_boundaries_t0": 2,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Senne",
+          "status": "active",
+          "identity_changed": false,
+          "n_boundaries_t0": 2,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Seraveth",
+          "status": "active",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Skarn",
+          "status": "active",
+          "identity_changed": false,
+          "n_boundaries_t0": 2,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Tamsin",
+          "status": "active",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Thren",
+          "status": "active",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Vell",
+          "status": "active",
+          "identity_changed": true,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 1,
+          "first_revision_tick": 25,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "agent_revision",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Veyra",
+          "status": "dead",
+          "identity_changed": false,
+          "n_boundaries_t0": 2,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Vos",
+          "status": "dead",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "reflection_threshold": 150,
+      "survivors": 10,
+      "n_agents": 25,
+      "agents_with_changed_identity": 1,
+      "total_snapshots": 170,
+      "engine_measurement_snapshots": 144,
+      "forced_end_snapshots": 25,
+      "infra_contaminated": false,
+      "trajectories": [
+        {
+          "name": "Ash",
+          "status": "dead",
+          "identity_changed": false,
+          "n_boundaries_t0": 2,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Bex",
+          "status": "dead",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Corrvan",
+          "status": "dead",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Dross",
+          "status": "dead",
+          "identity_changed": true,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 1,
+          "first_revision_tick": 35,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "agent_revision",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Drusa",
+          "status": "dead",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Garrick",
+          "status": "active",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Hale",
+          "status": "dead",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Imra",
+          "status": "dead",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Kael",
+          "status": "active",
+          "identity_changed": false,
+          "n_boundaries_t0": 2,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Korv",
+          "status": "active",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Lithen",
+          "status": "dead",
+          "identity_changed": false,
+          "n_boundaries_t0": 2,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Malaric",
+          "status": "dead",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Mire",
+          "status": "active",
+          "identity_changed": false,
+          "n_boundaries_t0": 0,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 0,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 0,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 0,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 0,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 0,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 0,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 0,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 0,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 0,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Nyssa",
+          "status": "dead",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Quill",
+          "status": "dead",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Roon",
+          "status": "dead",
+          "identity_changed": false,
+          "n_boundaries_t0": 2,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Sela",
+          "status": "active",
+          "identity_changed": false,
+          "n_boundaries_t0": 2,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Senne",
+          "status": "active",
+          "identity_changed": false,
+          "n_boundaries_t0": 2,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Seraveth",
+          "status": "active",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Skarn",
+          "status": "dead",
+          "identity_changed": false,
+          "n_boundaries_t0": 2,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Tamsin",
+          "status": "active",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Thren",
+          "status": "active",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Vell",
+          "status": "dead",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Veyra",
+          "status": "dead",
+          "identity_changed": false,
+          "n_boundaries_t0": 2,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 2,
+              "n_values": 2
+            }
+          ]
+        },
+        {
+          "name": "Vos",
+          "status": "active",
+          "identity_changed": false,
+          "n_boundaries_t0": 1,
+          "n_values_t0": 2,
+          "n_revisions": 0,
+          "first_revision_tick": null,
+          "series": [
+            {
+              "tick": 0,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 5,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 10,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 15,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 20,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 25,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 30,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 35,
+              "trigger": "engine_measurement",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            },
+            {
+              "tick": 40,
+              "trigger": "forced_end",
+              "drift_score": null,
+              "n_boundaries": 1,
+              "n_values": 2
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

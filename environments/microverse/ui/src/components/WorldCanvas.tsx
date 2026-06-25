@@ -6,8 +6,9 @@ import type { Agent, WorldSnapshot } from '../types/simulation'
 import { preloadAll, assetsReady, img, SIPHON_SRC, TILE } from '../render/assets'
 import { bakeTerrain, type BakedTerrain } from '../render/terrain'
 import {
-  drawAgentSprite, drawAgentQuad, facingFromDelta, type Facing,
+  drawAgentSprite, drawAgentQuad, drawSpeechBubble, facingFromDelta, type Facing,
 } from '../render/agents'
+import { BUBBLE_TTL_MS } from '../store/worldStore'
 
 // Tick cadence for the standalone demo (ms). Interpolation fills the gap.
 const DEMO_TICK_MS = 900
@@ -182,6 +183,36 @@ export function WorldCanvas({ scale }: WorldCanvasProps) {
         ctx.fillRect(ox, oy, boardW, boardH)
       }
 
+      // ── Diurnal cycle — a slow day→dusk→night→dawn wash over the board ───
+      // Driven by tick (smoothed by interp) so it reads as world time passing, not
+      // wall-clock. ~48 ticks per full day. Tints the whole field; sprites draw on top.
+      {
+        const dayLen = 48
+        const phase = (((snap.tick + interp) % dayLen) / dayLen) // 0..1
+        // 0=dawn .25=noon .5=dusk .75=deep night. Cosine for smooth loop.
+        const sun = (Math.cos((phase - 0.25) * Math.PI * 2) + 1) / 2 // 1 at noon, 0 at midnight
+        // night cools & darkens to indigo; noon adds a faint warm haze.
+        const night = 1 - sun
+        if (night > 0.02) {
+          ctx.fillStyle = `rgba(26,30,66,${(night * 0.34).toFixed(3)})`
+          ctx.fillRect(ox, oy, boardW, boardH)
+        }
+        if (sun > 0.55) {
+          ctx.fillStyle = `rgba(255,196,120,${((sun - 0.55) * 0.16).toFixed(3)})`
+          ctx.fillRect(ox, oy, boardW, boardH)
+        }
+        // warm horizontal band at dawn/dusk (sun low) for a bit of golden hour
+        const goldenness = Math.max(0, 1 - Math.abs(sun - 0.5) * 4) // peaks at sun≈0.5
+        if (goldenness > 0.02) {
+          const gg = ctx.createLinearGradient(0, oy, 0, oy + boardH)
+          gg.addColorStop(0, `rgba(255,150,80,${(goldenness * 0.14).toFixed(3)})`)
+          gg.addColorStop(0.5, 'rgba(255,150,80,0)')
+          gg.addColorStop(1, `rgba(120,60,120,${(goldenness * 0.10).toFixed(3)})`)
+          ctx.fillStyle = gg
+          ctx.fillRect(ox, oy, boardW, boardH)
+        }
+      }
+
       // ── Siphon hero structure at the centre cell ────────────────────────
       const sip = snap.cells.find((c) => c.siphon)
       if (sip) {
@@ -212,20 +243,58 @@ export function WorldCanvas({ scale }: WorldCanvasProps) {
         }
       }
 
-      // ── Heat zone — soft lethal ring ────────────────────────────────────
+      // ── Heat zone — lethal ring with breathing core, ripples & shimmer ──
       if (snap.heatZoneCenter) {
         const [hx, hy] = snap.heatZoneCenter
         const cxp = ox + (hx + 0.5) * cell
         const cyp = oy + (hy + 0.5) * cell
         const hr = Math.min(snap.gridW, snap.gridH) * 0.12 * cell
-        const g = ctx.createRadialGradient(cxp, cyp, hr * 0.3, cxp, cyp, hr)
-        g.addColorStop(0, 'rgba(196,123,115,0.18)')
+        // slow "breathing" so the kill-zone feels alive, not a static decal
+        const breathe = (Math.sin(now / 900) + 1) / 2 // 0..1
+        const core = hr * (0.92 + breathe * 0.12)
+
+        // hot fill — brighter at the lethal core, fading to nothing at the rim
+        const g = ctx.createRadialGradient(cxp, cyp, core * 0.25, cxp, cyp, core)
+        g.addColorStop(0, `rgba(214,108,82,${(0.26 + breathe * 0.12).toFixed(3)})`)
+        g.addColorStop(0.55, 'rgba(201,118,96,0.14)')
         g.addColorStop(1, 'rgba(196,123,115,0)')
         ctx.fillStyle = g
-        ctx.beginPath(); ctx.arc(cxp, cyp, hr, 0, Math.PI * 2); ctx.fill()
-        ctx.strokeStyle = 'rgba(196,123,115,0.30)'
-        ctx.lineWidth = 1
-        ctx.beginPath(); ctx.arc(cxp, cyp, hr, 0, Math.PI * 2); ctx.stroke()
+        ctx.beginPath(); ctx.arc(cxp, cyp, core, 0, Math.PI * 2); ctx.fill()
+
+        // two outward ripple rings on a loop — reads as radiating heat
+        for (let k = 0; k < 2; k++) {
+          const phase = ((now / 2600 + k * 0.5) % 1)
+          const rr = core * (0.5 + phase * 0.7)
+          ctx.strokeStyle = `rgba(220,140,110,${(0.30 * (1 - phase)).toFixed(3)})`
+          ctx.lineWidth = 1
+          ctx.beginPath(); ctx.arc(cxp, cyp, rr, 0, Math.PI * 2); ctx.stroke()
+        }
+        // crisp rim so the lethal boundary stays legible
+        ctx.strokeStyle = `rgba(224,150,120,${(0.34 + breathe * 0.12).toFixed(3)})`
+        ctx.lineWidth = 1.2
+        ctx.beginPath(); ctx.arc(cxp, cyp, core, 0, Math.PI * 2); ctx.stroke()
+
+        // rising shimmer streaks inside the zone (detailed scale only — noise at LOD)
+        if (detailed) {
+          ctx.save()
+          ctx.beginPath(); ctx.arc(cxp, cyp, core, 0, Math.PI * 2); ctx.clip()
+          ctx.strokeStyle = 'rgba(240,200,150,0.10)'
+          ctx.lineWidth = 1
+          for (let i = 0; i < 7; i++) {
+            const baseX = cxp - core + (i * 2 + 1) * (core / 7)
+            const rise = (now / 22 + i * 37) % (core * 1.8)
+            const yTop = cyp + core - rise
+            ctx.beginPath()
+            ctx.moveTo(baseX, cyp + core * 0.7)
+            ctx.bezierCurveTo(
+              baseX + Math.sin(now / 300 + i) * 4, yTop + core * 0.5,
+              baseX - Math.sin(now / 260 + i) * 4, yTop + core * 0.25,
+              baseX + Math.sin(now / 340 + i) * 3, yTop,
+            )
+            ctx.stroke()
+          }
+          ctx.restore()
+        }
       }
 
       // ── Agents ──────────────────────────────────────────────────────────
@@ -240,6 +309,10 @@ export function WorldCanvas({ scale }: WorldCanvasProps) {
       const ordered = detailed
         ? [...snap.agents].sort((a, b) => a.y - b.y)
         : snap.agents
+
+      // Screen anchors captured during the sprite pass, reused by the bubble pass
+      // (bubbles draw AFTER all sprites so they always layer on top). Keyed by id.
+      const anchors: Record<string, { cx: number; headY: number; alive: boolean }> = {}
 
       for (const a of ordered) {
         const prev = state.prevAgents[a.id]
@@ -263,6 +336,10 @@ export function WorldCanvas({ scale }: WorldCanvasProps) {
 
         const cxp = ox + (ix + 0.5) * cell
         const cyp = oy + (iy + 0.5) * cell
+
+        // Head anchor for a speech bubble: above the sprite (detailed) or the quad (LOD).
+        const headY = detailed ? oy + iy * cell - cell * 0.55 : cyp - cell * 0.7
+        anchors[a.id] = { cx: cxp, headY, alive: a.alive }
 
         // Detailed (25-agent) board ALWAYS draws the paper-doll sprites — they stay
         // legible down to ~8px cells (verified), so we gate on `detailed` rather than an
@@ -303,6 +380,21 @@ export function WorldCanvas({ scale }: WorldCanvasProps) {
           ctx.lineTo(ox + boardW, sy + 6)
         }
         ctx.stroke()
+      }
+
+      // ── Speech bubbles (second pass, above sprites & storm haze) ─────────
+      // Wall-clock driven: each bubble fades on its own TTL independent of the tick
+      // rate, so this overlay never gates the sim loop. Skip dead agents and bubbles
+      // whose anchor isn't on screen this frame.
+      const nowMs = Date.now()
+      for (const b of Object.values(state.bubbles)) {
+        const anchor = anchors[b.agentId]
+        if (!anchor || !anchor.alive) continue
+        const age01 = (nowMs - b.bornAt) / BUBBLE_TTL_MS
+        if (age01 < 0 || age01 > 1) continue
+        drawSpeechBubble(ctx, anchor.cx, anchor.headY, cell, {
+          text: b.text, kind: b.kind, age01, selected: b.agentId === selectedId,
+        })
       }
 
       // ── Hover tooltip ───────────────────────────────────────────────────

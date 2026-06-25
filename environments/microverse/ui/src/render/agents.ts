@@ -250,6 +250,145 @@ function roundedBubble(
   ctx.fill()
 }
 
+// ── Speech / chat bubbles (overlaid in a second pass, above all sprites) ───────
+// A word-wrapped, faded chat bubble anchored above an agent's head. Whisper bubbles
+// read as a directed aside (muted, with a downward tail); broadcast bubbles are
+// brighter and wider (a call to the whole population). `age01` is 0→1 across the
+// bubble's lifetime, driving a quick fade-in and a tail-end fade-out so bubbles
+// never pop. Pure draw — all lifetime state lives in the store; this only paints.
+const BUBBLE_FONT = '600 11px "JetBrains Mono", monospace'
+const BUBBLE_FILL = 'rgba(16,15,18,0.93)'
+const WHISPER_STROKE = '#b6b1a7'
+const BROADCAST_STROKE = '#d7b988'
+const BUBBLE_TEXT = '#ece9e2'
+
+function wrapText(
+  ctx: CanvasRenderingContext2D, text: string, maxWidth: number, maxLines: number,
+): string[] {
+  const words = text.split(/\s+/).filter(Boolean)
+  const lines: string[] = []
+  let line = ''
+  for (const word of words) {
+    const trial = line ? `${line} ${word}` : word
+    if (ctx.measureText(trial).width > maxWidth && line) {
+      lines.push(line)
+      line = word
+      if (lines.length === maxLines - 1) break
+    } else {
+      line = trial
+    }
+  }
+  if (line && lines.length < maxLines) lines.push(line)
+  // If we truncated, ellipsize the last surfaced line.
+  const consumed = lines.join(' ').split(/\s+/).filter(Boolean).length
+  if (consumed < words.length && lines.length) {
+    let last = lines[lines.length - 1]
+    while (last && ctx.measureText(last + '…').width > maxWidth) last = last.slice(0, -1)
+    lines[lines.length - 1] = last + '…'
+  }
+  return lines
+}
+
+export interface SpeechBubbleArgs {
+  text: string
+  kind: 'whisper' | 'broadcast'
+  /** 0→1 across the bubble's wall-clock lifetime (store TTL). */
+  age01: number
+  /** True for the currently-selected agent → bubble is emphasised. */
+  selected: boolean
+}
+
+/**
+ * Draw one speech bubble centred horizontally on `cx`, with its tail tip at
+ * `anchorY` (just above the agent's head). Returns nothing; call in a pass after
+ * all sprites so bubbles always layer on top.
+ */
+export function drawSpeechBubble(
+  ctx: CanvasRenderingContext2D, cx: number, anchorY: number, cell: number, b: SpeechBubbleArgs,
+): void {
+  // Fade in over the first ~12% of life, hold, fade out over the last ~22%.
+  const fadeIn = Math.min(1, b.age01 / 0.12)
+  const fadeOut = b.age01 > 0.78 ? Math.max(0, (1 - b.age01) / 0.22) : 1
+  const alpha = Math.max(0, Math.min(1, fadeIn * fadeOut))
+  if (alpha <= 0.01) return
+
+  // Sizing scales gently with cell so it reads at any zoom, clamped to sane px.
+  const fontPx = Math.max(9, Math.min(13, cell * 0.5))
+  const pad = Math.max(5, cell * 0.22)
+  const maxW = Math.max(80, Math.min(180, cell * 7))
+  const broadcast = b.kind === 'broadcast'
+
+  ctx.save()
+  ctx.globalAlpha = alpha
+  ctx.font = `${broadcast ? '700' : '600'} ${fontPx.toFixed(0)}px "JetBrains Mono", monospace`
+  void BUBBLE_FONT
+
+  const lines = wrapText(ctx, b.text, maxW, 3)
+  const lineH = fontPx + 3
+  let textW = 0
+  for (const ln of lines) textW = Math.max(textW, ctx.measureText(ln).width)
+
+  const bw = textW + pad * 2
+  const bh = lines.length * lineH + pad * 1.4
+  // Rise slightly as it ages so it feels like it lifts off the agent.
+  const lift = b.age01 * cell * 0.25
+  const bx = cx - bw / 2
+  const by = anchorY - bh - cell * 0.18 - lift
+
+  // Soft drop shadow for legibility over bright terrain.
+  ctx.shadowColor = 'rgba(0,0,0,0.45)'
+  ctx.shadowBlur = 6
+  ctx.shadowOffsetY = 2
+
+  const stroke = broadcast ? BROADCAST_STROKE : WHISPER_STROKE
+  const r = Math.min(bw, bh) * 0.22
+  ctx.fillStyle = BUBBLE_FILL
+  ctx.strokeStyle = stroke
+  ctx.lineWidth = b.selected ? 1.8 : broadcast ? 1.3 : 1
+  ctx.beginPath()
+  ctx.moveTo(bx + r, by)
+  ctx.arcTo(bx + bw, by, bx + bw, by + bh, r)
+  ctx.arcTo(bx + bw, by + bh, bx, by + bh, r)
+  ctx.arcTo(bx, by + bh, bx, by, r)
+  ctx.arcTo(bx, by, bx + bw, by, r)
+  ctx.closePath()
+  ctx.fill()
+  ctx.stroke()
+
+  // Tail pointing down to the agent.
+  ctx.shadowColor = 'transparent'
+  const tw = Math.max(5, cell * 0.18)
+  ctx.beginPath()
+  ctx.moveTo(cx - tw, by + bh)
+  ctx.lineTo(cx, by + bh + cell * 0.22)
+  ctx.lineTo(cx + tw, by + bh)
+  ctx.closePath()
+  ctx.fillStyle = BUBBLE_FILL
+  ctx.fill()
+  ctx.strokeStyle = stroke
+  ctx.stroke()
+
+  // Broadcast badge dot so the two kinds read apart at a glance.
+  if (broadcast) {
+    ctx.fillStyle = BROADCAST_STROKE
+    ctx.beginPath(); ctx.arc(bx + pad * 0.6, by + bh / 2, Math.max(1.5, fontPx * 0.16), 0, Math.PI * 2); ctx.fill()
+  }
+
+  // Text.
+  ctx.fillStyle = BUBBLE_TEXT
+  ctx.textAlign = 'center'
+  ctx.textBaseline = 'middle'
+  const x0 = cx
+  let ty = by + pad * 0.7 + lineH / 2
+  for (const ln of lines) {
+    ctx.fillText(ln, x0, ty)
+    ty += lineH
+  }
+  ctx.textAlign = 'left'
+  ctx.textBaseline = 'alphabetic'
+  ctx.restore()
+}
+
 // ── LOD quad for the zoomed-out (1000-agent) view ─────────────────────────────
 export function drawAgentQuad(
   ctx: CanvasRenderingContext2D, a: Agent, cxp: number, cyp: number, cell: number,

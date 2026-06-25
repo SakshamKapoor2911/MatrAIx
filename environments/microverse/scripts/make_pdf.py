@@ -97,6 +97,19 @@ def render_html(md_path: Path) -> Path:
         extensions=["fenced_code", "codehilite", "tables", "toc", "sane_lists"],
         extension_configs={"codehilite": {"guess_lang": False, "noclasses": False}},
     )
+    # Resolve relative image srcs (e.g. figures/F1.png) against the markdown file's own
+    # directory so embedded figures render in the PDF regardless of where OUT lives and
+    # regardless of attribute order (Python-Markdown emits `alt` before `src`).
+    import re as _re
+    base_uri = md_path.resolve().parent.as_uri() + "/"
+
+    def _abs_src(m: "re.Match") -> str:
+        src = m.group(1)
+        if src.startswith(("http://", "https://", "file://", "data:", "/")):
+            return m.group(0)
+        return f'src="{base_uri}{src}"'
+
+    body = _re.sub(r'src="([^"]+)"', _abs_src, body)
     html = HTML_TMPL.format(title=md_path.stem, css=CSS, body=body, src=md_path.name)
     out_html = OUT / f"{md_path.stem}.html"
     out_html.write_text(html, encoding="utf-8")
