@@ -40,7 +40,7 @@ uv run harbor run \
   -a persona-claude-code \
   -m "${MATRIX_HARBOR_PERSONA_MODEL:-anthropic/claude-haiku-4-5}" \
   --ak persona_path=persona/datasets/bench-dev-2000/persona_0042.yaml \
-  -p application/tasks/chatbot_chat_api
+  -p applications/tasks/chatbot_chat_api
 ```
 
 The first sidecar build can be slow because application adapters may install or

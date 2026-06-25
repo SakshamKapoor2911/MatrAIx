@@ -386,7 +386,7 @@ class HarborPersonaEvalRunner:
                 {
                     "path": str(
                         self.repo_root
-                        / "application"
+                        / "applications"
                         / "tasks"
                         / "chatbot_chat_api"
                     )

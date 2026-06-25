@@ -46,7 +46,7 @@ cd frontend && npm install && npm run build && cd ..
 
 Open **http://127.0.0.1:8765**. The **catalog browser works immediately** — the
 item catalogs ship with the chatbot task at
-`application/tasks/chatbot_chat_api/environment/chatbot_api/data/catalogs/`, so
+`applications/tasks/chatbot_chat_api/environment/chatbot_api/data/catalogs/`, so
 you can browse all ~9.9k movies / 8.7k games / 8.7k beauty products with no
 extra download.
 
@@ -65,12 +65,12 @@ things (a fresh clone has neither):
    SASRec checkpoints are too big for git, so a script fetches them:
 
    ```bash
-   python application/tasks/chatbot_chat_api/environment/chatbot_api/scripts/setup_resources.py
-   python application/tasks/chatbot_chat_api/environment/chatbot_api/scripts/setup_resources.py --zip PATH
+   python applications/tasks/chatbot_chat_api/environment/chatbot_api/scripts/setup_resources.py
+   python applications/tasks/chatbot_chat_api/environment/chatbot_api/scripts/setup_resources.py --zip PATH
    ```
 
    It installs the official RecAI bundle (movie / beauty_product / game) under
-   `application/tasks/chatbot_chat_api/environment/chatbot_api/recai/InteRecAgent/resources/<domain>/`
+   `applications/tasks/chatbot_chat_api/environment/chatbot_api/recai/InteRecAgent/resources/<domain>/`
    and rebuilds the task-owned parquet catalogs.
 
 `GET /api/preflight` (and the chip in the top bar) reports exactly what's ready
@@ -113,7 +113,7 @@ served at **`/docs`** when the app is running.
 ## Chatbot Application Task
 
 The chatbot application adapter lives in
-`application/tasks/chatbot_chat_api/environment/chatbot_api/harbor_api/`. It
+`applications/tasks/chatbot_chat_api/environment/chatbot_api/harbor_api/`. It
 wraps each chatbot application behind a smaller synchronous REST contract for
 persona agents:
 
@@ -125,7 +125,7 @@ persona agents:
 | GET | `/v1/conversation?sessionId=...` | Fetch transcript and turns. |
 | GET | `/v1/recommendations?sessionId=...` | Fetch recommended item ids across turns. |
 
-The Harbor task is `application/tasks/chatbot_chat_api/`. It runs the chatbot
+The Harbor task is `applications/tasks/chatbot_chat_api/`. It runs the chatbot
 application router sidecar, lets the task controller drive the selected
 application, and writes `/app/output/transcript.json`,
 `/app/output/application_result.json`, and the persona self-report artifacts.
@@ -133,9 +133,9 @@ application, and writes `/app/output/transcript.json`,
 Contract tests:
 
 ```bash
-PYTHONPATH=applications/persona_eval:application/tasks/chatbot_chat_api/environment/chatbot_api \
+PYTHONPATH=applications/persona_eval:applications/tasks/chatbot_chat_api/environment/chatbot_api \
   .venv/bin/python \
-  -m pytest application/tasks/chatbot_chat_api/environment/chatbot_api/harbor_api/tests/test_server.py -q
+  -m pytest applications/tasks/chatbot_chat_api/environment/chatbot_api/harbor_api/tests/test_server.py -q
 ```
 
 Harbor smoke, once the Harbor runtime is installed:
@@ -164,7 +164,7 @@ persona_eval/   Persona simulator, goal contexts, runner, persona catalog
 data/personas/  Shared persona catalog
 run_demo.sh     Start the app
 
-../../application/tasks/chatbot_chat_api/environment/chatbot_api/
+../../applications/tasks/chatbot_chat_api/environment/chatbot_api/
   harbor_api/     Chatbot sidecar router and app adapters
   recbot/         Bridge to the in-process RecAI agent
   recai/          Microsoft RecAI submodule
@@ -176,13 +176,13 @@ run_demo.sh     Start the app
 
 ```bash
 # Backend tests (no RecAI/OpenAI/network needed — the suite fakes the engine)
-PYTHONPATH=.:../../application/tasks/chatbot_chat_api/environment/chatbot_api \
+PYTHONPATH=.:../../applications/tasks/chatbot_chat_api/environment/chatbot_api \
   python -m pytest backend/tests persona_eval/tests -q
 
 # Chatbot task API tests
-PYTHONPATH=../../application/tasks/chatbot_chat_api/environment/chatbot_api \
-  python -m pytest ../../application/tasks/chatbot_chat_api/environment/chatbot_api/harbor_api/tests \
-  ../../application/tasks/chatbot_chat_api/environment/chatbot_api/recbot/tests -q
+PYTHONPATH=../../applications/tasks/chatbot_chat_api/environment/chatbot_api \
+  python -m pytest ../../applications/tasks/chatbot_chat_api/environment/chatbot_api/harbor_api/tests \
+  ../../applications/tasks/chatbot_chat_api/environment/chatbot_api/recbot/tests -q
 
 # Frontend typecheck + build
 cd frontend && npm run typecheck && npm run build

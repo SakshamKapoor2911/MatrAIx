@@ -33,7 +33,7 @@ set -euo pipefail
 BACKEND_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 EVAL_DIR="$(cd "${BACKEND_DIR}/.." && pwd)"  # applications/persona_eval
 REPO_ROOT="$(cd "${EVAL_DIR}/../.." && pwd)"
-CHATBOT_API_DIR="${REPO_ROOT}/application/tasks/chatbot_chat_api/environment/chatbot_api"
+CHATBOT_API_DIR="${REPO_ROOT}/applications/tasks/chatbot_chat_api/environment/chatbot_api"
 
 # --- interpreter: $VENV/bin/python if VENV is set, else `python` on PATH -------
 # (Python 3.9 + RecAI native — see RECAI_ENV_NOTES.md. Activate your venv, or

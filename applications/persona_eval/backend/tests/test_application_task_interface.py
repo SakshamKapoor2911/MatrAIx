@@ -6,7 +6,7 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[4]
-TASKS_ROOT = REPO_ROOT / "application" / "tasks"
+TASKS_ROOT = REPO_ROOT / "applications" / "tasks"
 INTERFACE_ROOT = TASKS_ROOT / "application_interface"
 
 
@@ -16,13 +16,13 @@ def test_application_interface_manifest_groups_core_protocols() -> None:
     assert manifest["schemaVersion"] == "application-task-interface-v1"
     assert set(manifest["applicationTypes"]) == {"survey", "chatbot", "web"}
     assert manifest["applicationTypes"]["survey"]["canonicalTask"] == (
-        "application/tasks/survey_form"
+        "applications/tasks/survey_form"
     )
     assert manifest["applicationTypes"]["chatbot"]["canonicalTask"] == (
-        "application/tasks/chatbot_chat_api"
+        "applications/tasks/chatbot_chat_api"
     )
     assert manifest["applicationTypes"]["web"]["canonicalTask"] == (
-        "application/tasks/web-ecommerce-platform_product-discovery"
+        "applications/tasks/web-ecommerce-platform_product-discovery"
     )
 
 

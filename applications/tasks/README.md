@@ -9,7 +9,7 @@ moving existing Harbor task paths.
 
 ## Naming
 
-- Task directories live under `application/tasks/<task-name>/`.
+- Task directories live under `applications/tasks/<task-name>/`.
 - Use an interaction-specific prefix when it helps discovery, such as
   `chatbot_`, `survey_`, or `web-`.
 

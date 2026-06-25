@@ -46,7 +46,7 @@ def ensure_recbot_importable() -> str:
     """Make the task-owned ``recbot`` package importable.
 
     The chatbot application bridge lives under
-    ``application/tasks/chatbot_chat_api/environment/chatbot_api/recbot``. This
+    ``applications/tasks/chatbot_chat_api/environment/chatbot_api/recbot``. This
     function adds that package parent to ``sys.path`` idempotently so local UI
     runs can import the task-owned RecAI adapter without keeping it inside the
     PersonaEval app package.
@@ -55,7 +55,7 @@ def ensure_recbot_importable() -> str:
     """
     chatbot_api_dir = (
         Path(__file__).resolve().parents[4]
-        / "application"
+        / "applications"
         / "tasks"
         / "chatbot_chat_api"
         / "environment"

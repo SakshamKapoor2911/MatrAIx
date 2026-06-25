@@ -2,7 +2,7 @@
 
 This directory defines the shared application task interface used by survey,
 chatbot, and web/computer-use tasks. Existing runnable tasks stay in their
-current `application/tasks/<task-name>/` folders so Harbor paths remain stable.
+current `applications/tasks/<task-name>/` folders so Harbor paths remain stable.
 This interface directory is the cross-protocol index and contract.
 
 ## Common Contract
@@ -20,9 +20,9 @@ Each application task defines these parts:
 
 | Protocol | Folder | Canonical task |
 | --- | --- | --- |
-| Survey | `survey/` | `application/tasks/survey_form` |
-| Chatbot | `chatbot/` | `application/tasks/chatbot_chat_api` |
-| Web / computer-use | `web/` | `application/tasks/web-ecommerce-platform_product-discovery` |
+| Survey | `survey/` | `applications/tasks/survey_form` |
+| Chatbot | `chatbot/` | `applications/tasks/chatbot_chat_api` |
+| Web / computer-use | `web/` | `applications/tasks/web-ecommerce-platform_product-discovery` |
 
 ## Stable Runtime Boundary
 

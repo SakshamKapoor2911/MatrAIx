@@ -57,7 +57,7 @@ def _chatbot_api_root() -> str:
     """Absolute path to the chatbot task API source root."""
     return os.path.join(
         _repo_root(),
-        "application",
+        "applications",
         "tasks",
         "chatbot_chat_api",
         "environment",

@@ -28,7 +28,7 @@ uv run harbor run -c configs/jobs/example-job-recipe/appSim-web-ecommerce-platfo
 Oracle:
 
 ```bash
-uv run harbor run -p application/tasks/web-ecommerce-platform_product-discovery -a oracle
+uv run harbor run -p applications/tasks/web-ecommerce-platform_product-discovery -a oracle
 ```
 
 ## Expected Submission

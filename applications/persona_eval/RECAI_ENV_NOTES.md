@@ -21,7 +21,7 @@ uv python install 3.9
 uv venv --python 3.9 .venv
 
 APP=applications/persona_eval
-CHATBOT_API=application/tasks/chatbot_chat_api/environment/chatbot_api
+CHATBOT_API=applications/tasks/chatbot_chat_api/environment/chatbot_api
 
 # 2. Filter RecAI's CUDA torch requirement for CPU-only local/Harbor runs
 grep -v -E '^(--extra-index-url|torch[<=>])' \
@@ -74,7 +74,7 @@ into your HuggingFace cache (`~/.cache/huggingface` by default; override with
   only installable pandas (2.2.x) is incompatible with `pandasql 0.7.3`, so the SQL
   filter tool failed and recommendations came back empty.
 - The in-repo RecAI path (`recai/InteRecAgent`) is resolved automatically via
-  `application/tasks/chatbot_chat_api/environment/chatbot_api/recbot/paths.py`;
+  `applications/tasks/chatbot_chat_api/environment/chatbot_api/recbot/paths.py`;
   there's no `INTERECAGENT_ROOT` to set.
 - The Harbor sidecar Dockerfile applies the same CPU-only filtering to RecAI's
   requirements before installing dependencies.

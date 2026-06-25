@@ -606,7 +606,7 @@ class HarborSurveyEvalRunner:
             "tasks": [
                 {
                     "path": str(
-                        self.repo_root / "application" / "tasks" / "survey_form"
+                        self.repo_root / "applications" / "tasks" / "survey_form"
                     )
                 }
             ],

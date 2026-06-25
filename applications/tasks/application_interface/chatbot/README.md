@@ -14,7 +14,7 @@ through a chat API.
 
 ## Canonical Task
 
-`application/tasks/chatbot_chat_api`
+`applications/tasks/chatbot_chat_api`
 
 This task already hosts recommendation and finance application adapters behind a
 single chat API router.

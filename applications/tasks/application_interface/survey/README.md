@@ -16,8 +16,8 @@ the resulting artifact into answers, metrics, and a telemetry-style trajectory.
 
 ## Canonical Task
 
-`application/tasks/survey_form`
+`applications/tasks/survey_form`
 
 The legacy product-feedback survey remains as a reference task:
 
-`application/tasks/example-survey_product-feedback`
+`applications/tasks/example-survey_product-feedback`

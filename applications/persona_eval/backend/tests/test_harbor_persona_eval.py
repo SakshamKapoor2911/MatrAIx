@@ -655,7 +655,7 @@ def test_harbor_runner_writes_run_inputs_invokes_harbor_and_maps_artifacts(tmp_p
         assert config["environment"]["delete"] is False
         assert config["agents"][0]["kwargs"]["persona_path"].endswith("persona.yaml")
         assert config["tasks"][0]["path"].endswith(
-            "application/tasks/chatbot_chat_api"
+            "applications/tasks/chatbot_chat_api"
         )
         prompt_path = config["extra_instruction_paths"][0]
         assert prompt_path.endswith("task_prompt.md")

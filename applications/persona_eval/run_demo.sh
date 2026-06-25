@@ -11,7 +11,7 @@ set -uo pipefail
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$HERE"
 REPO_ROOT="$(cd "${HERE}/../.." && pwd)"
-CHATBOT_API_DIR="${REPO_ROOT}/application/tasks/chatbot_chat_api/environment/chatbot_api"
+CHATBOT_API_DIR="${REPO_ROOT}/applications/tasks/chatbot_chat_api/environment/chatbot_api"
 
 # Optional: load local secrets (e.g. OPENAI_API_KEY) from .env.local if present.
 if [[ -f .env.local ]]; then set -a; . ./.env.local; set +a; fi

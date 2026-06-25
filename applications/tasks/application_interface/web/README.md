@@ -14,7 +14,7 @@ computer-use runtime.
 
 ## Canonical Task
 
-`application/tasks/web-ecommerce-platform_product-discovery`
+`applications/tasks/web-ecommerce-platform_product-discovery`
 
 The ecommerce task is intentionally small and self-hosted so it validates the
 task-specific host pattern before introducing heavier WebArena services.

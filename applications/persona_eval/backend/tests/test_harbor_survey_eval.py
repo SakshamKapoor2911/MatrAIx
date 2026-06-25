@@ -219,7 +219,7 @@ def test_harbor_survey_runner_uses_survey_form_task(tmp_path):
         config = yaml.safe_load(open(config_path, encoding="utf-8"))
         assert config["agents"][0]["name"] == "persona-claude-code"
         assert config["agents"][0]["model_name"] == "anthropic/claude-sonnet-4-6"
-        assert config["tasks"][0]["path"].endswith("application/tasks/survey_form")
+        assert config["tasks"][0]["path"].endswith("applications/tasks/survey_form")
         assert config["environment"]["type"] == "docker"
         assert config["environment"]["force_build"] is True
         prompt_text = open(config["extra_instruction_paths"][0], encoding="utf-8").read()
