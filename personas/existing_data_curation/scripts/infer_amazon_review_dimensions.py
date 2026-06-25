@@ -1437,9 +1437,9 @@ def schema_mapping_payload(
     if recall_focus:
         instructions.extend(
             [
-                "This is a recall-focused second pass over high-value persona dimensions.",
-                "Actively search for additional low-to-moderate confidence attributes that may have been missed in the broad pass.",
+                "This is a recall-focused second pass over high-value persona dimensions. Actively search for low-to-moderate confidence attributes that may have been missed in the broad pass.",
                 "Prefer returning a weak but evidence-cited non-sensitive attribute over omitting it when the evidence plausibly supports one allowed value.",
+                "Use confidence 0.2-0.35 for very weak but evidence-cited attributes, 0.35-0.6 for weak/suggestive attributes, 0.6-0.8 for moderate repeated evidence, and >=0.8 only for explicit or strongly repeated evidence.",
                 "For sensitive-adjacent categories, return contextual needs/interests/preferences when supported; assert sensitive status or identity only from explicit self-statements.",
             ]
         )
