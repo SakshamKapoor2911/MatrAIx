@@ -415,8 +415,10 @@ export function WorldCanvas({ scale, source = 'demo' }: WorldCanvasProps) {
         if (age01 < 0 || age01 > 1) continue
         drawSpeechBubble(ctx, anchor.cx, anchor.headY, cell, {
           text: b.text, kind: b.kind, age01, selected: b.agentId === selectedId,
-          // Clip to the canvas so bubbles never hide behind the panel top edge.
-          minTop: 4, minLeft: 4, maxRight: CW - 4,
+          // Clip to the MAP BOARD (not the whole canvas): the board is inset by the
+          // ox/oy letterbox padding, so clamping to the canvas would let bubbles drift
+          // into the empty margin. Keep them on the playfield, a hair inside the edge.
+          minTop: oy + 2, minLeft: ox + 2, maxRight: ox + boardW - 2,
         })
       }
 
