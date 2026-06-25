@@ -1,4 +1,5 @@
 import json
+import sqlite3
 import sys
 from pathlib import Path
 
@@ -33,6 +34,76 @@ def _record(gi, fields, model="m1", effort="high"):
 
 def _write(path, records):
     path.write_text("\n".join(json.dumps(r) for r in records) + "\n", encoding="utf-8")
+
+
+def _manifest(
+    assignment_id: str,
+    worker_id: str,
+    range_start: int,
+    range_end: int,
+    *,
+    tasks_sha256: str = "t" * 64,
+    dimensions_sha256: str = "d" * 64,
+):
+    return {
+        "assignment": {
+            "assignment_id": assignment_id,
+            "worker_id": worker_id,
+            "range_start": range_start,
+            "range_end": range_end,
+        },
+        "files": {
+            "tasks.jsonl": {"sha256": tasks_sha256},
+            "dimensions.json": {"sha256": dimensions_sha256},
+        },
+    }
+
+
+def _manifest_sha(manifest: dict) -> str:
+    return mcr.package_manifest_sha256(manifest)
+
+
+def _attach_assignment(
+    rec,
+    assignment_id: str,
+    worker_id: str,
+    range_start: int,
+    range_end: int,
+    *,
+    tasks_sha256: str = "t" * 64,
+    dimensions_sha256: str = "d" * 64,
+    package_manifest_sha256: str | None = None,
+):
+    rec["run"]["assignment"] = {
+        "assignment_id": assignment_id,
+        "worker_id": worker_id,
+        "range_start": range_start,
+        "range_end": range_end,
+        "tasks_sha256": tasks_sha256,
+        "dimensions_sha256": dimensions_sha256,
+    }
+    if package_manifest_sha256 is not None:
+        rec["run"]["assignment"]["package_manifest_sha256"] = package_manifest_sha256
+    return rec
+
+
+def _identity_db(tmp_path: Path, *, input_sha256: str = "a" * 64) -> Path:
+    db = tmp_path / "profiles.sqlite"
+    conn = sqlite3.connect(db)
+    conn.execute(
+        """
+        create table profiles (
+          global_idx integer primary key,
+          task_id text not null,
+          qid text not null,
+          input_sha256 text not null
+        )
+        """
+    )
+    conn.execute("insert into profiles values (?,?,?,?)", (0, "t0", "Q0", input_sha256))
+    conn.commit()
+    conn.close()
+    return db
 
 
 def test_disjoint_merge_collects_all_and_tallies_provenance(tmp_path):
@@ -76,3 +147,115 @@ def test_value_conflict_keeps_higher_confidence_and_is_reported(tmp_path):
     assert len(report["conflicts"]) == 1
     region = next(f for f in records[0]["fields"] if f["field_id"] == "region")
     assert region["value"] == "East Asia"  # higher confidence wins
+
+
+def test_merge_rejects_input_sha256_mismatch(tmp_path):
+    db = _identity_db(tmp_path, input_sha256="a" * 64)
+    result = tmp_path / "result.jsonl"
+    rec = _record(0, [_field("region", "North America")])
+    rec["input_sha256"] = "b" * 64
+    _write(result, [rec])
+
+    _records, report = mcr.merge_results([result], dimensions=None, db_path=db)
+
+    assert not report["accepted"]
+    assert any("input_sha256 mismatch" in error for error in report["errors"])
+
+
+def test_merge_rejects_missing_input_sha256_when_dataset_has_hash(tmp_path):
+    db = _identity_db(tmp_path, input_sha256="a" * 64)
+    result = tmp_path / "result.jsonl"
+    _write(result, [_record(0, [_field("region", "North America")])])
+
+    _records, report = mcr.merge_results([result], dimensions=None, db_path=db)
+
+    assert not report["accepted"]
+    assert any("has no returned input_sha256" in error for error in report["errors"])
+
+
+def test_merge_rejects_assignment_hash_mismatch(tmp_path):
+    result = tmp_path / "result.jsonl"
+    manifest = _manifest("A0001", "alice", 0, 1, tasks_sha256="good")
+    rec = _record(0, [_field("region", "North America")])
+    _attach_assignment(
+        rec,
+        "A0001",
+        "alice",
+        0,
+        1,
+        tasks_sha256="bad",
+        package_manifest_sha256=_manifest_sha(manifest),
+    )
+    _write(result, [rec])
+
+    _records, report = mcr.merge_results(
+        [result],
+        dimensions=None,
+        db_path=None,
+        package_manifests=[manifest],
+    )
+
+    assert not report["accepted"]
+    assert any("tasks_sha256 mismatch" in error for error in report["errors"])
+
+
+def test_merge_binds_package_manifests_to_result_files_in_order(tmp_path):
+    alice_result = tmp_path / "alice.jsonl"
+    bob_result = tmp_path / "bob.jsonl"
+    alice_manifest = _manifest("A0001", "alice", 0, 1)
+    bob_manifest = _manifest("B0001", "bob", 1, 2)
+    alice_claims_bob = _attach_assignment(
+        _record(1, [_field("region", "North America")]),
+        "B0001",
+        "bob",
+        1,
+        2,
+        package_manifest_sha256=_manifest_sha(bob_manifest),
+    )
+    bob_claims_alice = _attach_assignment(
+        _record(0, [_field("region", "East Asia")]),
+        "A0001",
+        "alice",
+        0,
+        1,
+        package_manifest_sha256=_manifest_sha(alice_manifest),
+    )
+    _write(alice_result, [alice_claims_bob])
+    _write(bob_result, [bob_claims_alice])
+
+    _records, report = mcr.merge_results(
+        [alice_result, bob_result],
+        dimensions=None,
+        db_path=None,
+        package_manifests=[alice_manifest, bob_manifest],
+    )
+
+    assert not report["accepted"]
+    assert any("assignment_id mismatch" in error for error in report["errors"])
+
+
+def test_merge_rejects_package_manifest_sha256_mismatch(tmp_path):
+    result = tmp_path / "result.jsonl"
+    manifest = _manifest("A0001", "alice", 0, 1)
+    actual_manifest_sha = _manifest_sha(manifest)
+    manifest[mcr.MANIFEST_FILE_SHA_KEY] = actual_manifest_sha
+    rec = _attach_assignment(
+        _record(0, [_field("region", "North America")]),
+        "A0001",
+        "alice",
+        0,
+        1,
+        package_manifest_sha256="0" * 64,
+    )
+    assert actual_manifest_sha != rec["run"]["assignment"]["package_manifest_sha256"]
+    _write(result, [rec])
+
+    _records, report = mcr.merge_results(
+        [result],
+        dimensions=None,
+        db_path=None,
+        package_manifests=[manifest],
+    )
+
+    assert not report["accepted"]
+    assert any("package_manifest_sha256 mismatch" in error for error in report["errors"])

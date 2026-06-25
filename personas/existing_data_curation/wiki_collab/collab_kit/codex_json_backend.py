@@ -118,6 +118,8 @@ def main() -> int:
             "read-only",
             "--model",
             requested_model,
+            "-c",
+            f"model_reasoning_effort={effort}",
             "--output-schema",
             str(schema_path),
             "--output-last-message",
@@ -134,7 +136,12 @@ def main() -> int:
             check=False,
         )
         if proc.returncode != 0:
-            sys.stderr.write(proc.stderr[-4000:])
+            # Surface stdout too — Codex often reports the real error (auth,
+            # model access, sandbox) there with an empty stderr.
+            detail = (proc.stderr or "").strip()
+            if proc.stdout.strip():
+                detail = (detail + "\n[codex stdout]\n" + proc.stdout.strip()).strip()
+            sys.stderr.write((detail or f"codex exited {proc.returncode} with no output")[-4000:])
             return proc.returncode
 
         raw = output_path.read_text(encoding="utf-8") if output_path.exists() else proc.stdout

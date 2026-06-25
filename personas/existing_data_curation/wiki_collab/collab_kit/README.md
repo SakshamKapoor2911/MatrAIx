@@ -35,23 +35,22 @@ doesn't support.
 
 ## Quickstart
 
+Requires Python 3.10+. No Python packages need to be installed.
+
 ```bash
 # From an unpacked assignment package:
 ./run_assignment.sh
 
-# Direct commands if you do not want the menu:
-./run_assignment.sh --configure
+# Non-interactive checks:
 ./run_assignment.sh --status
-./run_assignment.sh --backend mock --model mock-model --effort high --jobs 2 --yes --run
-./run_assignment.sh --backend claude-code-acp --model claude-opus-4-8 --effort high --jobs 6 --yes --run
-./run_assignment.sh --backend codex-acp --model gpt-5.5 --effort high --jobs 4 --yes --run
 ./run_assignment.sh --validate
 ```
 
 `run_assignment.sh` verifies package checksums before every action, saves
 settings in `.wiki_collab_settings.yaml`, writes `results.jsonl`, and runs the
-conformance check for you. A green run means you're ready to send that file
-back.
+conformance check for you. The menu uses numbered choices for backend, effort,
+and parallelism. Environment check also probes the selected Codex/Claude CLI.
+A green run means you're ready to send that file back.
 
 ## Run on your own account (auth)
 
@@ -59,24 +58,16 @@ The default method (the prompt in `solver.py`) is the same one the owner uses.
 The code is identical for everyone — only your credentials differ. Pick the
 backend that matches what you have; nothing to edit:
 
-| you have | backend | how to authenticate |
+| you have | backend | model |
 |---|---|---|
-| a **Claude subscription** | `--backend claude-code-acp` | log in once with the `claude` CLI; the kit calls it for you |
-| a **Codex subscription** | `--backend codex-acp` | log in once with the `codex` CLI; the kit calls it for you |
-| an **Anthropic API key** | `--backend anthropic-api` | `export WIKI_COLLAB_ANTHROPIC_CMD='<your wrapper>'` |
-| an **OpenAI API key** | `--backend openai-api` | `export WIKI_COLLAB_OPENAI_CMD='<your wrapper>'` |
-| nothing / just testing | `--backend mock` | none (writes all-`unsupported`, proves the pipeline) |
+| a **Codex subscription** | `codex-acp` | `gpt-5.5` |
+| a **Claude subscription** | `claude-code-acp` | `claude-opus-4-8` |
 
-Each wrapper command reads the prompt on stdin and prints one JSON object with a
-`fields` array on stdout. The bundled Claude and Codex adapters are pure
-stdlib. You can still override commands with `WIKI_COLLAB_CLAUDE_CMD` or
-`WIKI_COLLAB_CODEX_CMD`.
+Log in once with the matching CLI (`codex` or `claude`) before running. The
+bundled Claude and Codex adapters are pure stdlib.
 
-Pick the model and reasoning effort with `--model` and `--effort`:
-
-```bash
-./run_assignment.sh --backend claude-code-acp --model claude-opus-4-8 --effort high --jobs 6 --yes --run
-```
+Codex effort choices are `high`, `medium`, and `xhigh`.
+Claude Code effort choices are `high`, `medium`, `xhigh`, and `max`.
 
 ## Pause, resume, and progress
 
@@ -85,13 +76,15 @@ checkpointed to `<out>.progress.jsonl`, so you can stop any time — Ctrl-C, or
 your model quota runs out — and **just run the exact same command again later**
 to continue. Finished units are skipped; only the remaining ones are attempted.
 A unit that errors (e.g. a 429) is left pending and retried on the next run.
+If repeated units fail, the runner stops instead of hammering a broken/quota-hit
+backend.
 
 ```bash
 # how far along am I? (reads the checkpoint, runs nothing)
 ./run_assignment.sh --status
 
 # start over, discarding progress
-./run_assignment.sh --restart --backend claude-code-acp --model claude-opus-4-8 --effort high --jobs 6 --yes --run
+./run_assignment.sh --restart --run
 ```
 
 `results.jsonl` is rewritten from the checkpoint on every run, so it always
@@ -141,7 +134,8 @@ collab_kit/
 - On return, run `conformance.py --results theirs.jsonl --dimensions dimensions.json --tasks tasks.jsonl`
   before ingesting. Same checker both sides ⇒ formats always match.
 - Merge everyone's returns with `scripts/merge_collab_results.py` (repeat
-  `--results` and `--package-manifest` per worker). With `--db` it verifies each
+  `--results` and `--package-manifest` per worker, in matching order). With
+  `--db` it verifies each
   `global_idx`/`task_id`/`qid`/`input_sha256` against the source SQLite, unions
   fields per profile, reports value conflicts, and tallies the model/effort/
   version each return was produced with. Each returned record carries that

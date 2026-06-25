@@ -11,14 +11,11 @@ from typing import Any
 
 
 RUNNER_VERSION = "0.1.0"
-DEFAULT_EFFORT = "max"
+DEFAULT_EFFORT = "high"
 DEFAULT_MODELS = {
     "mock": "mock-model",
-    "external-command": "external-default",
     "claude-code-acp": "claude-opus-4-8",
     "codex-acp": "gpt-5.5",
-    "openai-api": "gpt-5.5",
-    "anthropic-api": "claude-opus-4-8",
 }
 
 
@@ -130,27 +127,10 @@ class CodexAcpBackend(ExternalCommandBackend):
     env_var = "WIKI_COLLAB_CODEX_CMD"
 
 
-class OpenAiApiBackend(ExternalCommandBackend):
-    name = "openai-api"
-    provider = "openai"
-    auth_mode = "api_key"
-    env_var = "WIKI_COLLAB_OPENAI_CMD"
-
-
-class AnthropicApiBackend(ExternalCommandBackend):
-    name = "anthropic-api"
-    provider = "anthropic"
-    auth_mode = "api_key"
-    env_var = "WIKI_COLLAB_ANTHROPIC_CMD"
-
-
 BACKENDS = {
     "mock": MockBackend,
-    "external-command": ExternalCommandBackend,
     "claude-code-acp": ClaudeCodeAcpBackend,
     "codex-acp": CodexAcpBackend,
-    "openai-api": OpenAiApiBackend,
-    "anthropic-api": AnthropicApiBackend,
 }
 
 
@@ -163,4 +143,3 @@ def create_backend(
         available = ", ".join(sorted(BACKENDS))
         raise ValueError(f"unknown backend {name!r}; available: {available}") from exc
     return backend_cls(model, effort)
-

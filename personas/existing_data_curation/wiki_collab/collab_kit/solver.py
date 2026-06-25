@@ -16,9 +16,7 @@ Same code for everyone — only your credentials differ:
   --backend mock            zero-setup smoke test (all "unsupported")
   --backend claude-code-acp run the real method on YOUR Claude subscription
                             (just `claude` logged in; nothing to edit)
-  --backend codex-acp       run on YOUR Codex subscription (set WIKI_COLLAB_CODEX_CMD)
-  --backend anthropic-api   run on YOUR Anthropic API key (set WIKI_COLLAB_ANTHROPIC_CMD)
-  --backend openai-api      run on YOUR OpenAI API key (set WIKI_COLLAB_OPENAI_CMD)
+  --backend codex-acp       run on YOUR Codex subscription
 
 The contract for one field:
     {"field_id": <one id from `dimensions`>,
@@ -31,6 +29,7 @@ The contract for one field:
 from __future__ import annotations
 
 import os
+import shlex
 import sys
 from pathlib import Path
 from typing import Any
@@ -102,10 +101,14 @@ def _ensure_default_command(backend: str) -> None:
     """
     if backend == "claude-code-acp" and not os.environ.get("WIKI_COLLAB_CLAUDE_CMD"):
         adapter = KIT_DIR / "claude_json_backend.py"
-        os.environ["WIKI_COLLAB_CLAUDE_CMD"] = f"{sys.executable} {adapter}"
+        os.environ["WIKI_COLLAB_CLAUDE_CMD"] = " ".join(
+            shlex.quote(part) for part in (sys.executable, str(adapter))
+        )
     if backend == "codex-acp" and not os.environ.get("WIKI_COLLAB_CODEX_CMD"):
         adapter = KIT_DIR / "codex_json_backend.py"
-        os.environ["WIKI_COLLAB_CODEX_CMD"] = f"{sys.executable} {adapter}"
+        os.environ["WIKI_COLLAB_CODEX_CMD"] = " ".join(
+            shlex.quote(part) for part in (sys.executable, str(adapter))
+        )
 
 
 def attribute(

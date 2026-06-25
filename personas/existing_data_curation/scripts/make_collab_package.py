@@ -182,6 +182,7 @@ def write_worker_readme(out_dir: Path) -> None:
     readme = """# MatrAIx Persona Attribution Assignment
 
 You received a self-contained assignment package. Work inside this directory.
+Requires Python 3.10+; no Python packages need to be installed.
 
 Files:
 
@@ -197,18 +198,18 @@ Quickstart:
 
 ```bash
 ./run_assignment.sh
-
-# direct commands:
 ./run_assignment.sh --status
-./run_assignment.sh --backend mock --model mock-model --effort high --jobs 2 --yes --run
-./run_assignment.sh --backend claude-code-acp --model claude-opus-4-8 --effort high --jobs 6 --yes --run
-./run_assignment.sh --backend codex-acp --model gpt-5.5 --effort high --jobs 4 --yes --run
 ./run_assignment.sh --validate
 ```
 
+Use the menu to choose Codex or Claude Code, effort, parallelism, smoke test,
+environment/CLI health check, real run, and validation. Codex uses `gpt-5.5`;
+Claude Code uses `claude-opus-4-8`.
+
 The runner verifies checksums before every action, saves settings in
 `.wiki_collab_settings.yaml`, and resumes from `results.jsonl.progress.jsonl` if
-quota runs out. The code is the same for everyone — only your credentials
+quota runs out. Repeated backend failures stop the run so you can fix auth/quota
+and resume later. The code is the same for everyone — only your credentials
 differ. `solver.py` ships with the owner's default extraction method and works
 as-is. You may improve `solver.py` to get better results; just keep the output
 contract unchanged and return only `results.jsonl` unless the owner asks for
@@ -221,10 +222,15 @@ def build_archive(out_dir: Path) -> Path:
     archive_path = out_dir.with_suffix(".tar.gz")
     if archive_path.exists():
         archive_path.unlink()
+    # Nest everything under a top-level folder named after the package so a
+    # collaborator who extracts the archive gets a single clean `<name>/` dir
+    # instead of loose files scattered into their current directory.
+    top = out_dir.name
     with tarfile.open(archive_path, "w:gz") as tar:
         for path in sorted(out_dir.rglob("*")):
             if path.is_file():
-                tar.add(path, arcname=str(path.relative_to(out_dir)), recursive=False)
+                arcname = str(Path(top) / path.relative_to(out_dir))
+                tar.add(path, arcname=arcname, recursive=False)
     return archive_path
 
 

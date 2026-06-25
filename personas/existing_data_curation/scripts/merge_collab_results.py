@@ -34,6 +34,7 @@ from __future__ import annotations
 
 import argparse
 import gzip
+import hashlib
 import json
 import sqlite3
 import sys
@@ -47,6 +48,8 @@ if str(KIT_DIR) not in sys.path:
 
 import conformance  # noqa: E402  (the shared contract checker, bundled with the kit)
 
+MANIFEST_FILE_SHA_KEY = "_package_manifest_file_sha256"
+
 
 def load_dimensions(path: Path | None) -> list[dict[str, Any]] | None:
     if path is None:
@@ -58,21 +61,49 @@ def load_dimensions(path: Path | None) -> list[dict[str, Any]] | None:
     return dims
 
 
+def package_manifest_sha256(manifest: dict[str, Any]) -> str:
+    payload = {
+        key: value
+        for key, value in manifest.items()
+        if not key.startswith("_")
+    }
+    encoded = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def load_package_manifest(path: Path) -> dict[str, Any]:
+    raw = path.read_bytes()
+    manifest = json.loads(raw.decode("utf-8"))
+    if isinstance(manifest, dict):
+        manifest[MANIFEST_FILE_SHA_KEY] = hashlib.sha256(raw).hexdigest()
+    return manifest
+
+
 def fetch_db_identity(db_path: Path, indices: list[int]) -> dict[int, dict[str, Any]]:
     if not indices:
         return {}
     conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
+    columns = {
+        row["name"]
+        for row in conn.execute("pragma table_info(profiles)")
+    }
+    wanted = ["global_idx", "task_id", "qid"]
+    if "input_sha256" in columns:
+        wanted.append("input_sha256")
     out: dict[int, dict[str, Any]] = {}
     CHUNK = 900  # stay under SQLite's variable limit
     for i in range(0, len(indices), CHUNK):
         chunk = indices[i : i + CHUNK]
         placeholders = ",".join("?" for _ in chunk)
         for row in conn.execute(
-            f"select global_idx, task_id, qid from profiles where global_idx in ({placeholders})",
+            f"select {', '.join(wanted)} from profiles where global_idx in ({placeholders})",
             chunk,
         ):
-            out[int(row["global_idx"])] = {"task_id": row["task_id"], "qid": row["qid"]}
+            meta = {"task_id": row["task_id"], "qid": row["qid"]}
+            if "input_sha256" in row.keys():
+                meta["input_sha256"] = row["input_sha256"]
+            out[int(row["global_idx"])] = meta
     conn.close()
     return out
 
@@ -86,6 +117,7 @@ def merge_results(
     *,
     dimensions: list[dict[str, Any]] | None,
     db_path: Path | None,
+    package_manifests: list[dict[str, Any]] | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     """Return (merged_records, report). report['errors'] empty == accepted."""
     errors: list[str] = []
@@ -98,6 +130,18 @@ def merge_results(
 
     # global_idx -> {task_id, qid, fields: {field_id: field}, sources, runs}
     merged: dict[int, dict[str, Any]] = {}
+    manifest_by_result: dict[Path, dict[str, Any]] = {}
+    if package_manifests:
+        if len(package_manifests) != len(results_files):
+            errors.append(
+                "expected one package manifest per results file in the same order "
+                f"(got {len(package_manifests)} manifest(s) for {len(results_files)} result file(s))"
+            )
+        else:
+            manifest_by_result = {
+                path: manifest
+                for path, manifest in zip(results_files, package_manifests)
+            }
 
     loaded: list[tuple[Path, list[dict[str, Any]]]] = []
     for path in results_files:
@@ -150,6 +194,67 @@ def merge_results(
                             f"{name}: global_idx {gi} {key} mismatch "
                             f"(result {row.get(key)!r} != dataset {meta[key]!r})"
                         )
+                expected_input_sha = meta.get("input_sha256")
+                if expected_input_sha:
+                    returned_input_sha = row.get("input_sha256")
+                    if not returned_input_sha:
+                        errors.append(f"{name}: global_idx {gi} has no returned input_sha256")
+                    elif returned_input_sha != expected_input_sha:
+                        errors.append(
+                            f"{name}: global_idx {gi} input_sha256 mismatch "
+                            f"(result {returned_input_sha!r} != dataset {expected_input_sha!r})"
+                        )
+
+            if package_manifests:
+                manifest = manifest_by_result.get(path)
+                if manifest is None:
+                    continue
+                assignment = run.get("assignment") if isinstance(run, dict) else None
+                if not isinstance(assignment, dict):
+                    errors.append(f"{name}: global_idx {gi} has no run.assignment provenance")
+                else:
+                    expected_assignment = manifest.get("assignment", {})
+                    files = manifest.get("files", {})
+                    expected_aid = expected_assignment.get("assignment_id")
+                    if expected_aid is not None and assignment.get("assignment_id") != expected_aid:
+                        errors.append(
+                            f"{name}: global_idx {gi} assignment_id mismatch "
+                            f"(result {assignment.get('assignment_id')!r} != manifest {expected_aid!r})"
+                        )
+                    for key in ("worker_id", "range_start", "range_end"):
+                        if key in expected_assignment and assignment.get(key) != expected_assignment.get(key):
+                            errors.append(
+                                f"{name}: global_idx {gi} assignment {key} mismatch "
+                                f"(result {assignment.get(key)!r} != manifest {expected_assignment.get(key)!r})"
+                            )
+                    start = expected_assignment.get("range_start")
+                    end = expected_assignment.get("range_end")
+                    if isinstance(start, int) and isinstance(end, int) and not start <= gi < end:
+                        errors.append(
+                            f"{name}: global_idx {gi} outside assignment range [{start}, {end})"
+                        )
+                    expected_tasks = files.get("tasks.jsonl", {}).get("sha256")
+                    if expected_tasks and assignment.get("tasks_sha256") != expected_tasks:
+                        errors.append(
+                            f"{name}: global_idx {gi} tasks_sha256 mismatch "
+                            f"(result {assignment.get('tasks_sha256')!r} != manifest {expected_tasks!r})"
+                        )
+                    expected_dims = files.get("dimensions.json", {}).get("sha256")
+                    if expected_dims and assignment.get("dimensions_sha256") != expected_dims:
+                        errors.append(
+                            f"{name}: global_idx {gi} dimensions_sha256 mismatch "
+                            f"(result {assignment.get('dimensions_sha256')!r} != manifest {expected_dims!r})"
+                        )
+                    expected_manifest_sha = manifest.get(MANIFEST_FILE_SHA_KEY)
+                    if expected_manifest_sha:
+                        returned_manifest_sha = assignment.get("package_manifest_sha256")
+                        if not returned_manifest_sha:
+                            errors.append(f"{name}: global_idx {gi} has no package_manifest_sha256")
+                        elif returned_manifest_sha != expected_manifest_sha:
+                            errors.append(
+                                f"{name}: global_idx {gi} package_manifest_sha256 mismatch "
+                                f"(result {returned_manifest_sha!r} != manifest {expected_manifest_sha!r})"
+                            )
 
             entry = merged.setdefault(
                 gi,
@@ -230,6 +335,9 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
                     help="catalog for allowed-value + drift checks (recommended)")
     ap.add_argument("--db", type=Path, default=None,
                     help="source SQLite to verify global_idx/task_id/qid identity")
+    ap.add_argument("--package-manifest", action="append", type=Path, default=None,
+                    help="package_manifest.json for assignment provenance checks "
+                         "(repeat once per --results, in the same order)")
     ap.add_argument("--out", type=Path, required=True, help="merged JSONL (.gz to gzip)")
     ap.add_argument("--report", type=Path, default=None, help="write a JSON summary here")
     ap.add_argument("--force", action="store_true",
@@ -240,7 +348,13 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
     dimensions = load_dimensions(args.dimensions)
-    records, report = merge_results(args.results, dimensions=dimensions, db_path=args.db)
+    manifests = [load_package_manifest(path) for path in (args.package_manifest or [])]
+    records, report = merge_results(
+        args.results,
+        dimensions=dimensions,
+        db_path=args.db,
+        package_manifests=manifests or None,
+    )
 
     if args.report:
         args.report.parent.mkdir(parents=True, exist_ok=True)

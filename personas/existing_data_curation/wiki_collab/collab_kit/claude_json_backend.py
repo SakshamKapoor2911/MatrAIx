@@ -179,7 +179,13 @@ def main() -> int:
         check=False,
     )
     if proc.returncode != 0:
-        sys.stderr.write(proc.stderr[-4000:])
+        # Claude Code with --output-format json usually reports the real failure
+        # (auth, model access, unsupported flag, usage limit) as a JSON object on
+        # STDOUT with an empty stderr. Surface both so the error isn't blank.
+        detail = (proc.stderr or "").strip()
+        if proc.stdout.strip():
+            detail = (detail + "\n[claude stdout]\n" + proc.stdout.strip()).strip()
+        sys.stderr.write((detail or f"claude exited {proc.returncode} with no output")[-4000:])
         return proc.returncode
 
     try:

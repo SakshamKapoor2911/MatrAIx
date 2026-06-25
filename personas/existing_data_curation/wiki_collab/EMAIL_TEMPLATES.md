@@ -30,6 +30,8 @@ The package contains:
 assignment.json
 tasks.jsonl
 dimensions.json
+package_manifest.json
+run_assignment.sh
 README.md
 collab_kit/
 ```
@@ -37,20 +39,16 @@ collab_kit/
 Smoke test after unpacking (no credentials needed):
 
 ```bash
-cd collab_kit
-./run.sh --tasks ../tasks.jsonl --dimensions ../dimensions.json \
-  --out ../results.jsonl --backend mock
-python3 conformance.py --results ../results.jsonl \
-  --dimensions ../dimensions.json --tasks ../tasks.jsonl
+./run_assignment.sh
+# choose "Mock smoke test" from the menu
+./run_assignment.sh --validate
 ```
 
 Real run — same code, your own account. Use whichever you have:
 
 ```bash
-# Claude subscription (just have the `claude` CLI logged in):
-./run.sh --tasks ../tasks.jsonl --dimensions ../dimensions.json \
-  --out ../results.jsonl --backend claude-code-acp --jobs 6
-# Codex subscription / API key: see collab_kit/README.md ("Run on your own account").
+./run_assignment.sh
+# choose Codex or Claude Code, effort, parallelism, then "Real run / resume"
 ```
 
 `solver.py` ships with our default extraction method and works as-is. You are

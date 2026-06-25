@@ -21,32 +21,37 @@ Send that one `.tar.gz`. Email text: see [`EMAIL_TEMPLATES.md`](EMAIL_TEMPLATES.
 **2. Collaborator — unpack and run on their own model/auth** (same code for everyone):
 
 ```bash
-cd collab_kit
-./run.sh --tasks ../tasks.jsonl --dimensions ../dimensions.json \
-         --out ../results.jsonl --backend mock          # zero-cred smoke test
-./run.sh --tasks ../tasks.jsonl --dimensions ../dimensions.json \
-         --out ../results.jsonl --backend claude-code-acp \
-         --model claude-opus-4-8 --effort high --jobs 6  # real run, their Claude login
-python3 harness.py ... --status                          # how far along (resumable)
+tar -xzf A_0_100_worker.tar.gz
+cd A_0_100_worker
+./run_assignment.sh                    # menu: configure, status, run, validate
+./run_assignment.sh --status            # non-interactive status
 ```
 
-Resumable (re-run the same command if quota runs out), shows progress, and the
-returned `results.jsonl` carries a `run` block (model/effort/version) per record.
-They edit `collab_kit/solver.py` if they want to improve the method. They return
-`results.jsonl`. See [`collab_kit/README.md`](collab_kit/README.md).
+The runner verifies package checksums before every action, stores settings in
+`.wiki_collab_settings.yaml`, and resumes from `results.jsonl.progress.jsonl` if
+quota runs out. The menu offers Codex (`gpt-5.5`) or Claude Code
+(`claude-opus-4-8`), backend-specific effort choices, parallelism, smoke test,
+real run, environment/CLI health check, and validation. Repeated backend
+failures stop the run so they can fix auth/quota and resume later. They edit
+`collab_kit/solver.py` only if they want to improve the extraction method. They
+return `results.jsonl`.
 
 **3. You — verify + merge every return** (run from the repo root):
 
 ```bash
 PYTHONPATH=. python3 personas/existing_data_curation/scripts/merge_collab_results.py \
   --results alice/results.jsonl --results bob/results.jsonl \
+  --package-manifest alice/package_manifest.json \
+  --package-manifest bob/package_manifest.json \
   --dimensions personas/dimensions+new.json \
   --db /tmp/matraix_wiki_profiles_20260601_v1.sqlite \
   --out merged.jsonl.gz --report merge_report.json
 ```
 
-Checks format, verifies each `global_idx`/`task_id`/`qid` against the source DB,
-unions fields per profile, reports conflicts, and tallies model/effort/version.
+Checks format, verifies assignment hashes/ranges, verifies each
+`global_idx`/`task_id`/`qid`/`input_sha256` against the source DB, unions fields
+per profile, reports conflicts, and tallies model/effort/version. List each
+`--package-manifest` in the same order as its `--results` file.
 
 ---
 
@@ -96,6 +101,8 @@ The package directory, and the generated `.tar.gz`, contain:
 assignment.json
 tasks.jsonl
 dimensions.json
+package_manifest.json
+run_assignment.sh
 README.md
 collab_kit/
 ```
@@ -122,16 +129,15 @@ python3 personas/existing_data_curation/scripts/make_collab_package.py \
 Collaborator quickstart from the unpacked package:
 
 ```bash
-cd collab_kit
-./run.sh --tasks ../tasks.jsonl --dimensions ../dimensions.json \
-  --out ../results.jsonl --backend mock
-python3 conformance.py --results ../results.jsonl \
-  --dimensions ../dimensions.json --tasks ../tasks.jsonl
+./run_assignment.sh
+./run_assignment.sh --status
+./run_assignment.sh --validate
 ```
 
-The mock backend proves the files and contract line up. For a real run, the
-collaborator edits `solver.py` to call their preferred model/API while keeping
-the output contract unchanged.
+The menu's mock smoke test proves the files and contract line up. Real
+Claude/Codex runs use the collaborator's own CLI login. If quota runs out,
+the runner stops after repeated failures; rerun the same command later and
+completed units are skipped.
 
 ## Advanced: SQLite Range Extraction
 

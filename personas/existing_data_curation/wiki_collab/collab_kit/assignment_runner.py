@@ -13,7 +13,6 @@ import hashlib
 import json
 import os
 from pathlib import Path
-import platform
 import shutil
 import subprocess
 import sys
@@ -28,13 +27,99 @@ RESULTS_PATH = PACKAGE_ROOT / "results.jsonl"
 PROGRESS_PATH = PACKAGE_ROOT / "results.jsonl.progress.jsonl"
 
 DEFAULTS = {
-    "backend": "mock",
-    "model": "mock-model",
+    "backend": "codex-acp",
+    "model": "gpt-5.5",
     "effort": "high",
     "jobs": "4",
     "command_override": "",
 }
 PROVENANCE_KEYS = ("backend", "model", "effort", "command_override")
+DIRECT_BACKEND_CHOICES = ("codex-acp", "claude-code-acp", "mock")
+
+BACKEND_CHOICES = [
+    ("codex-acp", "Codex CLI / ChatGPT subscription"),
+    ("claude-code-acp", "Claude Code CLI / Claude subscription"),
+]
+MODEL_BY_BACKEND = {
+    "codex-acp": "gpt-5.5",
+    "claude-code-acp": "claude-opus-4-8",
+    "mock": "mock-model",
+}
+EFFORT_CHOICES_BY_BACKEND = {
+    # Codex config supports these reasoning effort values; xhigh is model-dependent.
+    "codex-acp": [
+        ("high", "high - deeper reasoning for harder extraction"),
+        ("medium", "medium - balanced token use"),
+        ("xhigh", "xhigh - deepest Codex reasoning when supported"),
+    ],
+    # Claude Code --effort supports these values for Opus 4.8.
+    "claude-code-acp": [
+        ("high", "high - Opus 4.8 default"),
+        ("medium", "medium - lower token use"),
+        ("xhigh", "xhigh - deeper reasoning"),
+        ("max", "max - deepest, can overthink"),
+    ],
+    "mock": [
+        ("high", "high - smoke-test placeholder"),
+    ],
+}
+DEFAULT_EFFORT_BY_BACKEND = {
+    "codex-acp": "high",
+    "claude-code-acp": "high",
+    "mock": "high",
+}
+JOB_CHOICES = [
+    ("4", "4 parallel calls"),
+    ("2", "2 parallel calls"),
+    ("6", "6 parallel calls"),
+    ("8", "8 parallel calls"),
+    ("1", "1 call at a time"),
+]
+
+
+def _supports_color() -> bool:
+    """Emit ANSI color only when it is safe: an interactive stdout, not disabled
+    via NO_COLOR, and not a dumb terminal. Off under pipes/redirects/tests."""
+    return (
+        sys.stdout.isatty()
+        and os.environ.get("NO_COLOR") is None
+        and os.environ.get("TERM", "") not in ("", "dumb")
+    )
+
+
+_COLOR = _supports_color()
+
+
+def _paint(code: str, text: str) -> str:
+    return f"\x1b[{code}m{text}\x1b[0m" if _COLOR else text
+
+
+def _bold(t: str) -> str:
+    return _paint("1", t)
+
+
+def _dim(t: str) -> str:
+    return _paint("2", t)
+
+
+def _cyan(t: str) -> str:
+    return _paint("1;36", t)
+
+
+def _green(t: str) -> str:
+    return _paint("32", t)
+
+
+def _yellow(t: str) -> str:
+    return _paint("33", t)
+
+
+def _red(t: str) -> str:
+    return _paint("31", t)
+
+
+def _rule(width: int = 48) -> str:
+    return _dim("─" * width)
 
 
 def sha256_file(path: Path) -> str:
@@ -125,15 +210,46 @@ def progress_exists(root: Path = PACKAGE_ROOT) -> bool:
     return (root / "results.jsonl.progress.jsonl").exists()
 
 
+def normalize_settings(settings: dict[str, Any]) -> dict[str, str]:
+    normalized = {key: str(value) for key, value in {**DEFAULTS, **settings}.items()}
+    backend = normalized.get("backend", DEFAULTS["backend"])
+    if backend not in DIRECT_BACKEND_CHOICES:
+        backend = DEFAULTS["backend"]
+    normalized["backend"] = backend
+
+    if backend in {"codex-acp", "claude-code-acp"}:
+        normalized["model"] = MODEL_BY_BACKEND[backend]
+    elif backend == "mock" and normalized.get("model") in {
+        "",
+        DEFAULTS["model"],
+        MODEL_BY_BACKEND["codex-acp"],
+        MODEL_BY_BACKEND["claude-code-acp"],
+    }:
+        normalized["model"] = MODEL_BY_BACKEND["mock"]
+
+    effort_values = {value for value, _description in EFFORT_CHOICES_BY_BACKEND[backend]}
+    if normalized.get("effort") not in effort_values:
+        normalized["effort"] = DEFAULT_EFFORT_BY_BACKEND[backend]
+    if normalized.get("jobs") not in {value for value, _description in JOB_CHOICES}:
+        normalized["jobs"] = DEFAULTS["jobs"]
+    normalized["command_override"] = normalized.get("command_override", "")
+    return normalized
+
+
 def configured_settings(args: argparse.Namespace) -> dict[str, str]:
     settings = {**DEFAULTS, **read_flat_yaml(SETTINGS_PATH)}
+    previous_backend = settings.get("backend")
     for key in ("backend", "model", "effort", "command_override"):
         value = getattr(args, key, None)
         if value is not None:
             settings[key] = str(value)
     if args.jobs is not None:
         settings["jobs"] = str(args.jobs)
-    return settings
+    if args.backend is not None and args.model is None and settings.get("backend") != previous_backend:
+        settings["model"] = MODEL_BY_BACKEND.get(settings["backend"], settings.get("model", ""))
+    if args.backend is not None and args.effort is None and settings.get("backend") != previous_backend:
+        settings["effort"] = DEFAULT_EFFORT_BY_BACKEND.get(settings["backend"], settings.get("effort", "high"))
+    return normalize_settings(settings)
 
 
 def build_assignment_provenance(
@@ -173,17 +289,17 @@ def ensure_integrity(root: Path = PACKAGE_ROOT) -> list[str]:
         print(f"ERROR: {exc}", file=sys.stderr)
         raise SystemExit(1) from exc
     for warning in warnings:
-        print(f"WARN  {warning}", file=sys.stderr)
+        print(f"{_yellow('WARN')}  {warning}", file=sys.stderr)
     if errors:
         for error in errors:
-            print(f"ERROR {error}", file=sys.stderr)
+            print(f"{_red('ERROR')} {error}", file=sys.stderr)
         raise SystemExit(1)
     return warnings
 
 
 def run_status(root: Path = PACKAGE_ROOT) -> int:
     ensure_integrity(root)
-    print("Integrity: PASS")
+    print(f"Integrity: {_green('PASS')}")
     return _run(
         [
             sys.executable,
@@ -292,6 +408,13 @@ def _check_progress_settings(settings: dict[str, Any], *, restart: bool) -> None
     active = read_flat_yaml(ACTIVE_RUN_PATH)
     active_hash = active.get("settings_hash")
     current_hash = settings_hash(settings)
+    if not active_hash:
+        print(
+            "ERROR: existing progress has no active-run metadata; rerun with --restart "
+            "to avoid mixing backend/model/effort provenance.",
+            file=sys.stderr,
+        )
+        raise SystemExit(1)
     if active_hash and active_hash != current_hash:
         print(
             "ERROR: existing progress was created with different backend/model/effort; "
@@ -318,10 +441,6 @@ def run_harness(settings: dict[str, Any], *, restart: bool = False, smoke: bool 
             env["WIKI_COLLAB_CLAUDE_CMD"] = settings["command_override"]
         elif backend == "codex-acp":
             env["WIKI_COLLAB_CODEX_CMD"] = settings["command_override"]
-        elif backend == "openai-api":
-            env["WIKI_COLLAB_OPENAI_CMD"] = settings["command_override"]
-        elif backend == "anthropic-api":
-            env["WIKI_COLLAB_ANTHROPIC_CMD"] = settings["command_override"]
     env["WIKI_COLLAB_ASSIGNMENT_PROVENANCE"] = json.dumps(
         build_assignment_provenance(PACKAGE_ROOT, settings, warnings),
         ensure_ascii=False,
@@ -363,73 +482,109 @@ def run_harness(settings: dict[str, Any], *, restart: bool = False, smoke: bool 
 
 def print_environment(root: Path = PACKAGE_ROOT) -> int:
     ensure_integrity(root)
-    print("Integrity: PASS")
+    settings = normalize_settings(read_flat_yaml(SETTINGS_PATH))
+    print(f"Integrity: {_green('PASS')}")
     print(f"Python: {sys.executable}")
-    uv = shutil.which("uv")
-    print(f"uv: {uv or 'not found'}")
     print(f"Package: {root}")
-    return 0
+    print(f"Selected backend: {settings['backend']} (model={settings['model']}, effort={settings['effort']})")
+    return 0 if _check_backend_environment(settings["backend"]) else 1
 
 
-def install_uv(*, assume_yes: bool = False) -> int:
-    existing = shutil.which("uv")
-    if existing:
-        print(f"uv: {existing} (already installed)")
-        return 0
-    if not assume_yes:
-        answer = input("uv is not installed. Install it now? [y/N] ").strip().lower()
-        if answer not in {"y", "yes"}:
-            print("Continuing without uv; the bundled runner works with python3.")
-            return 0
-
-    print(f"Platform: {platform.system()} {platform.machine()}")
-    curl = shutil.which("curl")
-    wget = shutil.which("wget")
-    if curl or wget:
-        if curl:
-            cmd = f"{curl} -LsSf https://astral.sh/uv/install.sh | sh"
-        else:
-            cmd = f"{wget} -qO- https://astral.sh/uv/install.sh | sh"
-        print("Installing uv with the official standalone installer...")
-        rc = subprocess.run(cmd, shell=True, check=False).returncode
-        if rc == 0:
-            print("uv installer finished. Open a new shell if uv is not immediately on PATH.")
-            return 0
-        print("uv standalone installer failed; trying pip --user.")
-
-    pip_cmd = [sys.executable, "-m", "pip", "install", "--user", "uv"]
-    print("Installing uv with pip --user...")
-    rc = subprocess.run(pip_cmd, check=False).returncode
-    if rc == 0:
-        print("uv pip install finished. Open a new shell if uv is not immediately on PATH.")
-        return 0
-    print("Could not install uv automatically. Install manually from https://docs.astral.sh/uv/")
-    print("Continuing without uv is okay; this package only requires Python 3.")
-    return 1
+def _run_probe(label: str, cmd: list[str], *, timeout: int = 30) -> bool:
+    binary = cmd[0]
+    if shutil.which(binary) is None:
+        print(f"{label}: FAIL ({binary} not found on PATH)")
+        return False
+    try:
+        proc = subprocess.run(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            timeout=timeout,
+            check=False,
+        )
+    except Exception as exc:
+        print(f"{label}: FAIL ({exc})")
+        return False
+    if proc.returncode == 0:
+        print(f"{label}: {_green('PASS')}")
+        return True
+    detail = (proc.stderr or proc.stdout).strip().splitlines()
+    suffix = f" ({detail[-1]})" if detail else ""
+    print(f"{label}: {_red('FAIL')}{suffix}")
+    return False
 
 
-def _prompt(defaults: dict[str, str], key: str, label: str) -> str:
-    default = defaults.get(key, "")
-    raw = input(f"{label} [{default}]: ").strip()
-    return raw or default
+def _check_backend_environment(backend: str) -> bool:
+    if backend == "mock":
+        print("Mock backend: PASS (no external CLI/auth required)")
+        return True
+    if backend == "codex-acp":
+        return _run_probe("Codex CLI", ["codex", "doctor", "--summary", "--ascii", "--no-color"])
+    if backend == "claude-code-acp":
+        return _run_probe("Claude Code CLI", ["claude", "doctor"])
+    print(f"Backend check: FAIL (unsupported backend {backend!r})")
+    return False
+
+
+def _select_option(
+    label: str,
+    choices: list[tuple[str, str]],
+    *,
+    default_value: str | None = None,
+) -> str:
+    values = [value for value, _description in choices]
+    try:
+        default_index = values.index(default_value or "") + 1
+    except ValueError:
+        default_index = 1
+    while True:
+        print(f"\n{label}:")
+        for idx, (value, description) in enumerate(choices, start=1):
+            marker = " (default)" if idx == default_index else ""
+            print(f"  {idx}. {value} - {description}{marker}")
+        raw = input(f"Select {label.lower()} [1-{len(choices)}; default {default_index}]: ").strip()
+        if not raw:
+            return choices[default_index - 1][0]
+        if raw.isdigit():
+            idx = int(raw)
+            if 1 <= idx <= len(choices):
+                return choices[idx - 1][0]
+        print(f"Please choose a number from 1 to {len(choices)}.")
+
+
+def _normalize_interactive_settings(settings: dict[str, str]) -> dict[str, str]:
+    normalized = normalize_settings(settings)
+    if normalized["backend"] == "mock":
+        normalized["backend"] = DEFAULTS["backend"]
+        normalized["model"] = MODEL_BY_BACKEND[normalized["backend"]]
+        normalized["effort"] = DEFAULT_EFFORT_BY_BACKEND[normalized["backend"]]
+    normalized["command_override"] = ""
+    return normalized
 
 
 def configure_interactive(existing: dict[str, str]) -> dict[str, str]:
-    settings = {**DEFAULTS, **existing}
+    settings = _normalize_interactive_settings({**DEFAULTS, **existing})
     if existing:
-        print("Current settings:")
-        for key in ("backend", "model", "effort", "jobs", "command_override"):
+        # Show the saved values, which are the wizard's defaults. Pressing Enter
+        # at each step keeps the current value — no separate "Keep these
+        # settings? [Y/n]" gate that would cost an extra keypress.
+        print("Current settings (press Enter at each step to keep the value):")
+        for key in ("backend", "model", "effort", "jobs"):
             print(f"  {key}: {settings.get(key, '')}")
-        answer = input("Keep these settings? [Y/n] ").strip().lower()
-        if answer in {"", "y", "yes"}:
-            return settings
 
-    print("Choose backend: claude-code-acp, codex-acp, mock, openai-api, anthropic-api")
-    settings["backend"] = _prompt(settings, "backend", "Backend")
-    settings["model"] = _prompt(settings, "model", "Model")
-    settings["effort"] = _prompt(settings, "effort", "Effort")
-    settings["jobs"] = _prompt(settings, "jobs", "Parallel jobs")
-    settings["command_override"] = _prompt(settings, "command_override", "Command override")
+    backend = _select_option("Backend", BACKEND_CHOICES, default_value=settings.get("backend"))
+    settings["backend"] = backend
+    settings["model"] = MODEL_BY_BACKEND[backend]
+    print(f"Model: {settings['model']}")
+    settings["effort"] = _select_option(
+        f"Effort for {backend}",
+        EFFORT_CHOICES_BY_BACKEND[backend],
+        default_value=settings.get("effort") or DEFAULT_EFFORT_BY_BACKEND[backend],
+    )
+    settings["jobs"] = _select_option("Parallel jobs", JOB_CHOICES, default_value=settings.get("jobs"))
+    settings["command_override"] = ""
     write_flat_yaml(SETTINGS_PATH, settings)
     print(f"Wrote settings -> {SETTINGS_PATH}")
     return settings
@@ -440,58 +595,103 @@ def interactive_menu() -> int:
         print(
             "No interactive terminal detected. Use direct commands, e.g.:\n"
             "  ./run_assignment.sh --status\n"
-            "  ./run_assignment.sh --backend mock --yes --run\n"
-            "  ./run_assignment.sh --backend claude-code-acp --yes --run\n"
+            "  ./run_assignment.sh --backend codex-acp --effort high --jobs 4 --yes --run\n"
+            "  ./run_assignment.sh --backend claude-code-acp --effort high --jobs 6 --yes --run\n"
             "  ./run_assignment.sh --validate",
             file=sys.stderr,
         )
         return 2
     settings = read_flat_yaml(SETTINGS_PATH)
+    items = [
+        ("1", "Environment check"),
+        ("2", "Configure backend/model/effort"),
+        ("3", "Status"),
+        ("4", "Mock smoke test"),
+        ("5", "Real run / resume"),
+        ("6", "Validate results"),
+        ("7", "Quit"),
+    ]
     while True:
-        print("\nMatrAIx wiki assignment runner")
-        print("1. Environment check")
-        print("2. uv check / install")
-        print("3. Configure settings")
-        print("4. Status")
-        print("5. Mock smoke test")
-        print("6. Real run / resume")
-        print("7. Validate results")
-        print("8. Quit")
-        choice = input("Select [1-8]: ").strip() or "1"
+        print()
+        print(_bold(_cyan("  MatrAIx wiki assignment runner")))
+        print(_rule())
+        for num, label in items:
+            print(f"  {_bold(_cyan(num))}  {label}")
+        print(_rule())
+        choice = input(_bold("Select [1-7]: ")).strip() or "1"
+        # Divider so the action's output is visually separated from the menu.
+        print(_rule())
         if choice == "1":
             print_environment(PACKAGE_ROOT)
         elif choice == "2":
-            install_uv()
-        elif choice == "3":
             settings = configure_interactive(settings)
-        elif choice == "4":
+        elif choice == "3":
             run_status(PACKAGE_ROOT)
-        elif choice == "5":
+        elif choice == "4":
             mock_settings = {**DEFAULTS, **settings, "backend": "mock", "model": "mock-model"}
             rc = run_harness(mock_settings, smoke=True)  # throwaway: never touches the real run
             if rc != 0:
                 return rc
-        elif choice == "6":
-            settings = configure_interactive(settings)
-            rc = run_harness(settings, restart=False)
+        elif choice == "5":
+            # Run straight away with the saved settings (one keypress: "5").
+            # Configure only when nothing is saved yet; use option 2 to change.
+            if not settings:
+                settings = configure_interactive(settings)
+            run_settings = _normalize_interactive_settings(settings)
+            print(
+                _green(_bold("Starting real run: "))
+                + f"backend={run_settings['backend']} "
+                f"model={run_settings['model']} effort={run_settings['effort']} "
+                f"jobs={run_settings['jobs']}  " + _dim("(option 2 to change settings)")
+            )
+            rc = run_harness(run_settings, restart=False)
             if rc != 0:
                 return rc
-        elif choice == "7":
+        elif choice == "6":
             rc = run_validate(PACKAGE_ROOT)
             if rc != 0:
                 return rc
-        elif choice == "8":
+        elif choice == "7":
             return 0
         else:
-            print("Please choose a number from 1 to 8.")
+            print("Please choose a number from 1 to 7.")
 
+
+
+def _confirm_real_run(settings: dict[str, Any], *, assume_yes: bool) -> bool:
+    """Gate a real (non-mock) run so an accidental `--run` does not silently
+    spend a subscription. `--yes` (or a mock backend) skips the prompt; a
+    non-interactive shell without `--yes` is refused rather than run blindly."""
+    backend = str(settings.get("backend", ""))
+    if assume_yes or backend == "mock":
+        return True
+    if not sys.stdin.isatty():
+        print(
+            f"Refusing to start a real {backend} run without confirmation. "
+            "Re-run with --yes to proceed non-interactively (or --backend mock to smoke test).",
+            file=sys.stderr,
+        )
+        return False
+    prompt = (
+        f"About to run backend={backend} "
+        f"(model={settings.get('model', '')}, effort={settings.get('effort', '')}) "
+        "using your subscription/credentials. Continue? [y/N] "
+    )
+    try:
+        answer = input(prompt).strip().lower()
+    except EOFError:
+        return False
+    return answer in {"y", "yes"}
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--backend")
+    parser.add_argument("--backend", choices=DIRECT_BACKEND_CHOICES)
     parser.add_argument("--model")
-    parser.add_argument("--effort")
+    parser.add_argument(
+        "--effort",
+        choices=sorted({value for choices in EFFORT_CHOICES_BY_BACKEND.values() for value, _ in choices}),
+    )
     parser.add_argument("--jobs", type=int)
     parser.add_argument("--command-override", default=None)
     parser.add_argument("--yes", action="store_true")
@@ -500,7 +700,6 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--validate", action="store_true")
     parser.add_argument("--run", action="store_true")
     parser.add_argument("--restart", action="store_true")
-    parser.add_argument("--install-uv", action="store_true")
     return parser.parse_args(argv)
 
 
@@ -512,13 +711,14 @@ def main(argv: list[str] | None = None) -> int:
         write_flat_yaml(SETTINGS_PATH, settings)
         print(f"Wrote settings -> {SETTINGS_PATH}")
         return 0
-    if args.install_uv:
-        return install_uv(assume_yes=args.yes)
     if args.status:
         return run_status(PACKAGE_ROOT)
     if args.validate:
         return run_validate(PACKAGE_ROOT)
     if args.run:
+        if not _confirm_real_run(settings, assume_yes=args.yes):
+            print("Aborted — no run started.", file=sys.stderr)
+            return 1
         return run_harness(settings, restart=args.restart)
     return interactive_menu()
 

@@ -1,5 +1,7 @@
+import io
 import json
 import os
+import shlex
 import sqlite3
 import subprocess
 import sys
@@ -12,7 +14,9 @@ if str(KIT) not in sys.path:
     sys.path.insert(0, str(KIT))
 
 import assignment_runner  # noqa: E402  (stdlib-only; its module constants are unused here)
+import backends  # noqa: E402
 import conformance  # noqa: E402
+import codex_json_backend  # noqa: E402
 import harness  # noqa: E402
 import solver  # noqa: E402
 
@@ -106,6 +110,67 @@ def test_harness_resumes_after_failure(tmp_path, monkeypatch):
     assert errors == []
 
 
+def test_harness_stops_after_failure_budget(tmp_path, monkeypatch, capsys):
+    out = tmp_path / "results.jsonl"
+    tasks = tmp_path / "tasks.jsonl"
+    dims = tmp_path / "dimensions.json"
+    tasks.write_text(
+        '{"global_idx":0}\n{"global_idx":1}\n{"global_idx":2}\n',
+        encoding="utf-8",
+    )
+    dims.write_text(
+        json.dumps([{"id": "source_entity_type", "category": "C", "values": ["wiki_person"]}]),
+        encoding="utf-8",
+    )
+    calls = {"n": 0}
+
+    def always_fails(profile, dims, **kw):
+        calls["n"] += 1
+        raise RuntimeError("quota exhausted")
+
+    monkeypatch.setattr(harness.solver, "attribute", always_fails)
+
+    rc = harness.main(
+        ["--tasks", str(tasks), "--dimensions", str(dims), "--out", str(out)]
+        + ["--backend", "mock", "--jobs", "1", "--max-failures", "2"]
+    )
+
+    assert rc == 1
+    assert calls["n"] == 2
+    assert "Stopping after 2 failed unit(s)" in capsys.readouterr().err
+
+
+def test_harness_writes_failures_log_for_owner(tmp_path, monkeypatch):
+    """Failures are persisted to <out>.failures.jsonl (with the full per-unit
+    error + context) so a worker can send them to the owner; --restart clears it."""
+    out = tmp_path / "results.jsonl"
+    tasks = tmp_path / "tasks.jsonl"
+    dims = tmp_path / "dimensions.json"
+    tasks.write_text('{"global_idx":0}\n', encoding="utf-8")
+    dims.write_text(json.dumps([{"id": "x", "category": "C", "values": []}]), encoding="utf-8")
+    base = ["--tasks", str(tasks), "--dimensions", str(dims), "--out", str(out),
+            "--backend", "mock", "--jobs", "1"]
+
+    def boom(profile, dims, **kw):
+        raise RuntimeError("claude-code-acp exited 1: 401 Unauthorized\n[claude stdout]\n{...}")
+
+    monkeypatch.setattr(harness.solver, "attribute", boom)
+    assert harness.main(base) == 1
+
+    fl = harness.failures_path(out)
+    recs = [json.loads(l) for l in fl.read_text(encoding="utf-8").splitlines() if l.strip()]
+    assert recs and recs[0]["global_idx"] == 0 and recs[0]["category"] == "C"
+    assert recs[0]["backend"] == "mock"
+    assert "401 Unauthorized" in recs[0]["error"]  # full error preserved, not blank
+
+    # A clean run from scratch clears the stale failures log and writes no new one.
+    monkeypatch.setattr(harness.solver, "attribute", lambda p, d, **k: [
+        {"field_id": str(x["id"]), "value": None, "confidence": 0.0,
+         "evidence": "", "assignment_type": "unsupported"} for x in d])
+    assert harness.main(base + ["--restart"]) == 0
+    assert not fl.exists()  # no empty failures file on a clean run
+
+
 def test_harness_status_reports_without_running(tmp_path, monkeypatch, capsys):
     out = tmp_path / "results.jsonl"
     called = {"n": 0}
@@ -138,6 +203,11 @@ def test_harness_mock_run_is_conformant(tmp_path):
     assert len(results[0]["fields"]) == len(_dims())
 
 
+def test_collab_backend_registry_is_limited_to_package_choices():
+    assert sorted(backends.BACKENDS) == ["claude-code-acp", "codex-acp", "mock"]
+    assert backends.create_backend("codex-acp", None).effort == "high"
+
+
 def test_solver_sets_default_codex_command(monkeypatch):
     monkeypatch.delenv("WIKI_COLLAB_CODEX_CMD", raising=False)
 
@@ -146,6 +216,39 @@ def test_solver_sets_default_codex_command(monkeypatch):
     command = os.environ["WIKI_COLLAB_CODEX_CMD"]
     assert "codex_json_backend.py" in command
     assert sys.executable in command
+
+
+def test_solver_default_adapter_command_quotes_paths_with_spaces(monkeypatch, tmp_path):
+    monkeypatch.delenv("WIKI_COLLAB_CODEX_CMD", raising=False)
+    fake_kit = tmp_path / "pkg with spaces" / "collab_kit"
+    fake_kit.mkdir(parents=True)
+    monkeypatch.setattr(solver, "KIT_DIR", fake_kit)
+
+    solver._ensure_default_command("codex-acp")
+
+    argv = shlex.split(os.environ["WIKI_COLLAB_CODEX_CMD"])
+    assert argv == [sys.executable, str(fake_kit / "codex_json_backend.py")]
+
+
+def test_codex_json_backend_passes_reasoning_effort(monkeypatch):
+    captured: dict[str, list[str]] = {}
+
+    def fake_run(cmd, **kwargs):
+        captured["cmd"] = cmd
+        output_path = Path(cmd[cmd.index("--output-last-message") + 1])
+        output_path.write_text(json.dumps({"fields": []}), encoding="utf-8")
+        return subprocess.CompletedProcess(cmd, 0, stdout="", stderr="")
+
+    monkeypatch.setattr(codex_json_backend.subprocess, "run", fake_run)
+    monkeypatch.setattr(codex_json_backend.sys, "stdin", io.StringIO("prompt"))
+    monkeypatch.setenv("WIKI_COLLAB_CODEX_BIN", "codex-test")
+    monkeypatch.setenv("WIKI_COLLAB_REQUESTED_MODEL", "gpt-5.5")
+    monkeypatch.setenv("WIKI_COLLAB_EFFORT", "xhigh")
+
+    rc = codex_json_backend.main()
+
+    assert rc == 0
+    assert "model_reasoning_effort=xhigh" in captured["cmd"]
 
 
 # --- assignment_runner fixes -------------------------------------------------
@@ -207,3 +310,155 @@ def test_assignment_runner_smoke_does_not_touch_real_run(tmp_path):
     # ...and the throwaway output cleaned up.
     assert not (pkg / ".smoke_results.jsonl").exists()
     assert not (pkg / ".smoke_results.jsonl.progress.jsonl").exists()
+
+
+def test_configure_interactive_uses_codex_choices(tmp_path, monkeypatch):
+    monkeypatch.setattr(assignment_runner, "SETTINGS_PATH", tmp_path / "settings.yaml")
+    answers = iter(["1", "3", "2"])
+    monkeypatch.setattr("builtins.input", lambda _prompt: next(answers))
+
+    settings = assignment_runner.configure_interactive({})
+
+    assert settings["backend"] == "codex-acp"
+    assert settings["model"] == "gpt-5.5"
+    assert settings["effort"] == "xhigh"
+    assert settings["jobs"] == "2"
+    assert settings["command_override"] == ""
+
+
+def test_effort_menu_excludes_too_low_options():
+    for choices in assignment_runner.EFFORT_CHOICES_BY_BACKEND.values():
+        values = {value for value, _description in choices}
+        assert "minimal" not in values
+        assert "low" not in values
+
+
+def test_configure_interactive_normalizes_old_low_effort(tmp_path, monkeypatch):
+    monkeypatch.setattr(assignment_runner, "SETTINGS_PATH", tmp_path / "settings.yaml")
+    # The wizard now runs without a "keep these settings?" gate; accepting the
+    # defaults at each step (backend, effort, jobs) must surface the normalized
+    # effort ("low" is no longer valid -> defaults to "high"), never "low".
+    answers = iter(["", "", ""])
+    monkeypatch.setattr("builtins.input", lambda _prompt: next(answers))
+
+    settings = assignment_runner.configure_interactive({
+        "backend": "codex-acp",
+        "model": "gpt-5.5",
+        "effort": "low",
+        "jobs": "4",
+        "command_override": "",
+    })
+
+    assert settings["backend"] == "codex-acp"
+    assert settings["effort"] == "high"
+
+
+def test_configure_interactive_uses_claude_choices(tmp_path, monkeypatch):
+    monkeypatch.setattr(assignment_runner, "SETTINGS_PATH", tmp_path / "settings.yaml")
+    answers = iter(["2", "4", "4"])
+    monkeypatch.setattr("builtins.input", lambda _prompt: next(answers))
+
+    settings = assignment_runner.configure_interactive({})
+
+    assert settings["backend"] == "claude-code-acp"
+    assert settings["model"] == "claude-opus-4-8"
+    assert settings["effort"] == "max"
+    assert settings["jobs"] == "8"
+    assert settings["command_override"] == ""
+
+
+def test_assignment_runner_no_longer_accepts_install_uv_flag():
+    try:
+        assignment_runner.parse_args(["--install-uv"])
+    except SystemExit as exc:
+        assert exc.code == 2
+    else:
+        raise AssertionError("--install-uv should not be accepted")
+
+
+def test_configured_settings_normalizes_disallowed_direct_values(tmp_path, monkeypatch):
+    settings_path = tmp_path / "settings.yaml"
+    settings_path.write_text(
+        "backend: openai-api\nmodel: old-model\neffort: low\njobs: 99\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(assignment_runner, "SETTINGS_PATH", settings_path)
+    args = assignment_runner.parse_args(["--run"])
+
+    settings = assignment_runner.configured_settings(args)
+
+    assert settings["backend"] == "codex-acp"
+    assert settings["model"] == "gpt-5.5"
+    assert settings["effort"] == "high"
+    assert settings["jobs"] == "4"
+
+
+def test_check_progress_settings_rejects_missing_active_run(tmp_path, monkeypatch):
+    progress_path = tmp_path / "results.jsonl.progress.jsonl"
+    active_path = tmp_path / ".wiki_collab_active_run.yaml"
+    progress_path.write_text('{"global_idx":0,"category":"C","fields":[]}\n', encoding="utf-8")
+    monkeypatch.setattr(assignment_runner, "PROGRESS_PATH", progress_path)
+    monkeypatch.setattr(assignment_runner, "ACTIVE_RUN_PATH", active_path)
+
+    try:
+        assignment_runner._check_progress_settings(assignment_runner.DEFAULTS, restart=False)
+    except SystemExit as exc:
+        assert exc.code == 1
+    else:
+        raise AssertionError("progress without active-run metadata should be rejected")
+
+
+def test_print_environment_checks_selected_backend_cli(tmp_path, monkeypatch, capsys):
+    monkeypatch.setattr(assignment_runner, "SETTINGS_PATH", tmp_path / "settings.yaml")
+    monkeypatch.setattr(assignment_runner, "ensure_integrity", lambda root: [])
+
+    def fake_run(cmd, **kwargs):
+        return subprocess.CompletedProcess(cmd, 127, stdout="", stderr="missing")
+
+    monkeypatch.setattr(assignment_runner.subprocess, "run", fake_run)
+
+    rc = assignment_runner.print_environment(tmp_path)
+
+    assert rc == 1
+    captured = capsys.readouterr()
+    assert "Codex CLI" in captured.out
+    assert "FAIL" in captured.out
+
+
+def test_confirm_real_run_gates_non_mock(monkeypatch):
+    """--yes is meaningful: mock never prompts, --yes proceeds, an interactive
+    run honors y/N, and a non-interactive run without --yes is refused."""
+    ar = assignment_runner
+
+    class _FakeStdin:
+        def __init__(self, tty):
+            self._tty = tty
+
+        def isatty(self):
+            return self._tty
+
+    assert ar._confirm_real_run({"backend": "mock"}, assume_yes=False) is True
+    assert ar._confirm_real_run(
+        {"backend": "codex-acp", "model": "gpt-5.5", "effort": "high"}, assume_yes=True) is True
+
+    monkeypatch.setattr(ar.sys, "stdin", _FakeStdin(False))
+    assert ar._confirm_real_run({"backend": "codex-acp"}, assume_yes=False) is False  # refuse
+
+    monkeypatch.setattr(ar.sys, "stdin", _FakeStdin(True))
+    monkeypatch.setattr("builtins.input", lambda *a, **k: "y")
+    assert ar._confirm_real_run({"backend": "codex-acp"}, assume_yes=False) is True
+    monkeypatch.setattr("builtins.input", lambda *a, **k: "n")
+    assert ar._confirm_real_run({"backend": "codex-acp"}, assume_yes=False) is False
+
+
+def test_main_run_refuses_real_backend_without_yes(tmp_path, monkeypatch):
+    """A bare `--run` (default backend codex-acp) on a non-interactive shell must
+    NOT silently start a real run — it returns 1 before reaching run_harness."""
+    monkeypatch.setattr(assignment_runner, "SETTINGS_PATH", tmp_path / "none.yaml")
+
+    class _FakeStdin:
+        def isatty(self):
+            return False
+
+    monkeypatch.setattr(assignment_runner.sys, "stdin", _FakeStdin())
+    assert assignment_runner.main(["--run"]) == 1

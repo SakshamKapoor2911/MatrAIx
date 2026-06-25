@@ -108,6 +108,8 @@ def test_build_collab_package_writes_worker_facing_files(tmp_path: Path):
     assert (out_dir / "tasks.jsonl").exists()
     assert (out_dir / "dimensions.json").exists()
     assert (out_dir / "README.md").exists()
+    assert (out_dir / "run_assignment.sh").exists()
+    assert (out_dir / "package_manifest.json").exists()
     assert (out_dir / "collab_kit" / "solver.py").exists()
     assert not list((out_dir / "collab_kit").rglob("__pycache__"))
 
@@ -125,12 +127,29 @@ def test_build_collab_package_writes_worker_facing_files(tmp_path: Path):
     assert [task["global_idx"] for task in tasks] == [0, 1]
     assert all(len(task["input_sha256"]) == 64 for task in tasks)
 
+    manifest = json.loads((out_dir / "package_manifest.json").read_text(encoding="utf-8"))
+    assert manifest["assignment"]["assignment_id"] == "A0001"
+    assert manifest["assignment"]["range_start"] == 0
+    assert manifest["assignment"]["range_end"] == 2
+    assert manifest["files"]["tasks.jsonl"]["mode"] == "immutable"
+    assert len(manifest["files"]["tasks.jsonl"]["sha256"]) == 64
+    assert manifest["files"]["dimensions.json"]["mode"] == "immutable"
+    assert manifest["files"]["collab_kit/solver.py"]["mode"] == "editable"
+
     with tarfile.open(summary["archive_path"], "r:gz") as tar:
-        names = {member.name for member in tar.getmembers()}
-    assert "assignment.json" in names
-    assert "tasks.jsonl" in names
-    assert "dimensions.json" in names
-    assert "collab_kit/solver.py" in names
+        names = [member.name for member in tar.getmembers()]
+    assert len(names) == len(set(names))
+    # Every member must live under a single top-level folder named after the
+    # package, so extracting the archive never scatters files into the cwd.
+    top_levels = {name.split("/", 1)[0] for name in names}
+    assert top_levels == {out_dir.name}
+    assert f"{out_dir.name}/assignment.json" in names
+    assert f"{out_dir.name}/tasks.jsonl" in names
+    assert f"{out_dir.name}/dimensions.json" in names
+    assert f"{out_dir.name}/run_assignment.sh" in names
+    assert f"{out_dir.name}/package_manifest.json" in names
+    assert f"{out_dir.name}/collab_kit/solver.py" in names
+    assert f"{out_dir.name}/collab_kit/sample/results.jsonl" in names
     assert not any("__pycache__" in name for name in names)
 
 

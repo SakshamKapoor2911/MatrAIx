@@ -62,6 +62,7 @@ def _write_archive(path: Path, *, global_idx: int = 0, input_sha256: str = "i" *
             "prompt_sha256": "p" * 64,
             "protocol_sha256": "r" * 64,
             "runner_version": "0.1.0",
+            "effort": "high",
         },
         "fields": [
             {
@@ -88,6 +89,7 @@ def _write_archive(path: Path, *, global_idx: int = 0, input_sha256: str = "i" *
         "auth_mode": "none",
         "concurrency": 2,
         "runner_version": "0.1.0",
+        "effort": "high",
         "succeeded": 1,
         "failed": 0,
     }
@@ -167,4 +169,3 @@ def test_merge_archives_refuses_duplicate_global_idx(tmp_path: Path):
 
     with gzip.open(out, "rt", encoding="utf-8") as fh:
         assert sum(1 for _ in fh) == 1
-
