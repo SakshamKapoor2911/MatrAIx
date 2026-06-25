@@ -1413,6 +1413,7 @@ def schema_mapping_payload(
     user_row: dict[str, Any],
     dimension_batch: list[dict[str, Any]],
     evidence_profile: dict[str, Any],
+    recall_focus: bool = False,
 ) -> dict[str, Any]:
     dimensions = [
         {
@@ -1424,18 +1425,29 @@ def schema_mapping_payload(
         }
         for dim in dimension_batch
     ]
+    instructions = [
+        "Return strongly supported dimensions and weak/suggestive non-sensitive dimensions supported by the compact evidence profile.",
+        "Omit unsupported dimensions. Do not use product stereotypes as evidence for sensitive identity/status/condition dimensions.",
+        "Repeated sensitive-adjacent product/context evidence can support interests, topical engagement, needs, values, or preferences, but not asserted health conditions, family status, religion, politics, identity, or other sensitive attributes unless explicitly self-stated.",
+        "Use structured_memory to find candidate supported attributes, but cite evidence_item_ids and original review_ids for every returned attribute.",
+        "For each inferred dimension, choose exactly one allowed value from that dimension.",
+        "Every inferred dimension must include at least one evidence_item_id and at least one original review_id.",
+        "Use confidence between 0 and 1. Use 0.35-0.6 for weak/suggestive non-sensitive attributes, 0.6-0.8 for moderate repeated evidence, and >=0.8 only for explicit or strongly repeated evidence.",
+    ]
+    if recall_focus:
+        instructions.extend(
+            [
+                "This is a recall-focused second pass over high-value persona dimensions.",
+                "Actively search for additional low-to-moderate confidence attributes that may have been missed in the broad pass.",
+                "Prefer returning a weak but evidence-cited non-sensitive attribute over omitting it when the evidence plausibly supports one allowed value.",
+                "For sensitive-adjacent categories, return contextual needs/interests/preferences when supported; assert sensitive status or identity only from explicit self-statements.",
+            ]
+        )
     return {
         "task": "map_compact_amazon_review_evidence_profile_to_schema_dimensions",
         "user_id": user_row.get("user_id"),
-        "instructions": [
-            "Return strongly supported dimensions and weak/suggestive non-sensitive dimensions supported by the compact evidence profile.",
-            "Omit unsupported dimensions. Do not use product stereotypes as evidence for sensitive identity/status/condition dimensions.",
-            "Repeated sensitive-adjacent product/context evidence can support interests, topical engagement, needs, values, or preferences, but not asserted health conditions, family status, religion, politics, identity, or other sensitive attributes unless explicitly self-stated.",
-            "Use structured_memory to find candidate supported attributes, but cite evidence_item_ids and original review_ids for every returned attribute.",
-            "For each inferred dimension, choose exactly one allowed value from that dimension.",
-            "Every inferred dimension must include at least one evidence_item_id and at least one original review_id.",
-            "Use confidence between 0 and 1. Use 0.35-0.6 for weak/suggestive non-sensitive attributes, 0.6-0.8 for moderate repeated evidence, and >=0.8 only for explicit or strongly repeated evidence.",
-        ],
+        "instructions": instructions,
+        "recall_focus": recall_focus,
         "output_json_schema": {
             "inferred_attributes": [
                 {
@@ -1561,6 +1573,70 @@ def filter_dimensions_by_categories(
     categories: set[str],
 ) -> list[dict[str, Any]]:
     return [dim for dim in dimensions if str(dim["category"]) in categories]
+
+
+def dedupe_inferred_attributes(attributes: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    by_dimension: dict[str, dict[str, Any]] = {}
+    for attr in attributes:
+        dim_id = str(attr.get("dimension_id") or "")
+        if not dim_id:
+            continue
+        current = by_dimension.get(dim_id)
+        if current is None or float(attr.get("confidence") or 0) > float(
+            current.get("confidence") or 0
+        ):
+            by_dimension[dim_id] = attr
+    return sorted(by_dimension.values(), key=lambda item: str(item.get("dimension_id") or ""))
+
+
+def run_schema_mapping_batches(
+    user_row: dict[str, Any],
+    dimensions: list[dict[str, Any]],
+    evidence_profile: dict[str, Any],
+    valid_review_ids: set[str],
+    args: argparse.Namespace,
+    api_key: str,
+    stage_name: str = "schema_mapping",
+    recall_focus: bool = False,
+    dimensions_per_call: int | None = None,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], int]:
+    all_valid = []
+    all_rejected = []
+    request_count = 0
+    batch_size = dimensions_per_call or args.dimensions_per_call
+    dimension_batches = list(batched(dimensions, batch_size))
+    for batch_index, dimension_batch in enumerate(dimension_batches, start=1):
+        request_count += 1
+        log(
+            f"user={user_row.get('user_id')} {stage_name} batch "
+            f"{batch_index}/{len(dimension_batches)} dimensions={len(dimension_batch)} "
+            f"evidence_items={len(evidence_profile.get('evidence_items') or [])}"
+        )
+        task = schema_mapping_payload(
+            user_row,
+            dimension_batch,
+            evidence_profile,
+            recall_focus=recall_focus,
+        )
+        payload = {
+            "model": args.model,
+            "temperature": args.temperature,
+            "response_format": {"type": "json_object"},
+            "messages": [
+                {"role": "system", "content": SCHEMA_MAPPING_SYSTEM_PROMPT},
+                {"role": "user", "content": json.dumps(task, ensure_ascii=False)},
+            ],
+        }
+        response = openai_request(payload, api_key)
+        model_output = parse_model_json(response)
+        valid, rejected = validate_inferences(model_output, dimension_batch, valid_review_ids)
+        all_valid.extend(valid)
+        all_rejected.extend(rejected)
+        log(
+            f"user={user_row.get('user_id')} {stage_name} batch "
+            f"{batch_index}/{len(dimension_batches)} done valid={len(valid)} rejected={len(rejected)}"
+        )
+    return all_valid, all_rejected, request_count
 
 
 def openai_request(
@@ -2080,8 +2156,6 @@ def infer_user_from_evidence_profile(
     valid_review_ids = evidence_profile_review_ids(evidence_profile) or {
         row["review_id"] for row in review_context
     }
-    all_valid = []
-    all_rejected = []
     request_count = profile_request_count
     routed_categories: list[str] = []
     valid_routes: list[dict[str, Any]] = []
@@ -2131,33 +2205,55 @@ def infer_user_from_evidence_profile(
             f"categories={len(routed_categories)} dimensions={len(routed_dimensions)} "
             f"rejected={len(rejected_routes)}"
         )
-    dimension_batches = list(batched(routed_dimensions, args.dimensions_per_call))
-    for batch_index, dimension_batch in enumerate(dimension_batches, start=1):
-        request_count += 1
+    all_valid, all_rejected, mapping_request_count = run_schema_mapping_batches(
+        user_row,
+        routed_dimensions,
+        evidence_profile,
+        valid_review_ids,
+        args,
+        api_key,
+        stage_name="schema_mapping",
+    )
+    request_count += mapping_request_count
+    recall_pass_dimension_count = 0
+    recall_pass_valid_count = 0
+    recall_pass_rejected_count = 0
+    if args.schema_routing_mode == "recall":
+        recall_patterns = sorted(parse_csv_filter(args.recall_pass_categories) or [])
+        recall_dimensions = [
+            dim
+            for dim in dimensions
+            if category_matches(str(dim["category"]), recall_patterns)
+        ]
+        seen_dimensions = {str(attr.get("dimension_id") or "") for attr in all_valid}
+        recall_dimensions = [
+            dim for dim in recall_dimensions if str(dim["id"]) not in seen_dimensions
+        ]
+        recall_pass_dimension_count = len(recall_dimensions)
+        if recall_dimensions:
+            valid, rejected, recall_request_count = run_schema_mapping_batches(
+                user_row,
+                recall_dimensions,
+                evidence_profile,
+                valid_review_ids,
+                args,
+                api_key,
+                stage_name="schema_recall_mapping",
+                recall_focus=True,
+                dimensions_per_call=args.recall_dimensions_per_call,
+            )
+            request_count += recall_request_count
+            recall_pass_valid_count = len(valid)
+            recall_pass_rejected_count = len(rejected)
+            all_valid = dedupe_inferred_attributes(all_valid + valid)
+            all_rejected.extend(rejected)
         log(
-            f"user={user_row.get('user_id')} schema_mapping batch "
-            f"{batch_index}/{len(dimension_batches)} dimensions={len(dimension_batch)} "
-            f"evidence_items={len(evidence_profile.get('evidence_items') or [])}"
+            f"user={user_row.get('user_id')} schema_recall_mapping done "
+            f"dimensions={recall_pass_dimension_count} valid={recall_pass_valid_count} "
+            f"rejected={recall_pass_rejected_count}"
         )
-        task = schema_mapping_payload(user_row, dimension_batch, evidence_profile)
-        payload = {
-            "model": args.model,
-            "temperature": args.temperature,
-            "response_format": {"type": "json_object"},
-            "messages": [
-                {"role": "system", "content": SCHEMA_MAPPING_SYSTEM_PROMPT},
-                {"role": "user", "content": json.dumps(task, ensure_ascii=False)},
-            ],
-        }
-        response = openai_request(payload, api_key)
-        model_output = parse_model_json(response)
-        valid, rejected = validate_inferences(model_output, dimension_batch, valid_review_ids)
-        all_valid.extend(valid)
-        all_rejected.extend(rejected)
-        log(
-            f"user={user_row.get('user_id')} schema_mapping batch "
-            f"{batch_index}/{len(dimension_batches)} done valid={len(valid)} rejected={len(rejected)}"
-        )
+    else:
+        all_valid = dedupe_inferred_attributes(all_valid)
     return {
         "source": "amazon_reviews_2023",
         "inference_mode": "evidence_profile",
@@ -2169,6 +2265,9 @@ def infer_user_from_evidence_profile(
         "schema_routed_categories": routed_categories,
         "schema_category_routes": valid_routes,
         "rejected_schema_category_routes": rejected_routes,
+        "recall_pass_dimension_count": recall_pass_dimension_count,
+        "recall_pass_valid_count": recall_pass_valid_count,
+        "recall_pass_rejected_count": recall_pass_rejected_count,
         "evidence_mapping_path": str(args.evidence_mapping_path),
         "user_id": user_row.get("user_id"),
         "review_count": len(reviews),
@@ -2269,6 +2368,30 @@ def write_dry_run_prompts(
                     ),
                 }
             )
+        if args.schema_routing_mode == "recall":
+            recall_patterns = sorted(parse_csv_filter(args.recall_pass_categories) or [])
+            recall_dimensions = [
+                dim
+                for dim in dimensions
+                if category_matches(str(dim["category"]), recall_patterns)
+            ]
+            for batch_index, dimension_batch in enumerate(
+                batched(recall_dimensions, args.recall_dimensions_per_call), start=1
+            ):
+                rows.append(
+                    {
+                        "user_id": user_row.get("user_id"),
+                        "stage": "schema_recall_mapping",
+                        "batch_index": batch_index,
+                        "system_prompt": SCHEMA_MAPPING_SYSTEM_PROMPT,
+                        "user_payload": schema_mapping_payload(
+                            user_row,
+                            dimension_batch,
+                            placeholder_profile,
+                            recall_focus=True,
+                        ),
+                    }
+                )
     return write_jsonl(args.dry_run_prompts_path, rows)
 
 
@@ -2413,11 +2536,13 @@ def parse_args(argv: Iterable[str]) -> argparse.Namespace:
     )
     parser.add_argument(
         "--schema-routing-mode",
-        choices=("none", "category"),
+        choices=("none", "category", "recall"),
         default="none",
         help=(
-            "Optional hierarchical path. 'category' adds a schema-category router "
-            "before detailed dimension mapping; 'none' preserves the current path."
+            "Extraction path. 'none' preserves direct full-schema mapping; "
+            "'category' adds a schema-category router before mapping; "
+            "'recall' runs full-schema mapping plus an extra recall-focused "
+            "second pass over high-value categories."
         ),
     )
     parser.add_argument(
@@ -2438,6 +2563,24 @@ def parse_args(argv: Iterable[str]) -> argparse.Namespace:
             "Comma-separated schema category patterns always included in category "
             "routing mode to reduce router recall loss."
         ),
+    )
+    parser.add_argument(
+        "--recall-pass-categories",
+        default=(
+            "Personality:*,Values & Motivation,Risk & Decision,Behavior:*,"
+            "Expertise:*,Health:*,Worldview: Beliefs,Demographic: Family,"
+            "Demographic: Life Events,Social Identity, Relationships & Community"
+        ),
+        help=(
+            "Comma-separated category patterns for the recall-focused second pass "
+            "when --schema-routing-mode recall is used."
+        ),
+    )
+    parser.add_argument(
+        "--recall-dimensions-per-call",
+        type=int,
+        default=120,
+        help="Dimension batch size for the recall-focused second pass.",
     )
     parser.add_argument("--dimensions-per-call", type=int, default=200)
     parser.add_argument(

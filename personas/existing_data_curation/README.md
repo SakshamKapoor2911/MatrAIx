@@ -495,19 +495,27 @@ only when the review histories, product metadata, broad evidence mapping, or
 summary prompt behavior changes.
 
 The default schema-mapping path sends the compact review memory to fixed
-batches of persona dimensions. An optional hierarchical path can be enabled
-with `--schema-routing-mode category`: it first asks the model to route the
-review memory to likely schema categories, then maps only dimensions in the
-routed categories plus configurable always-included category patterns. This can
-save schema-mapping tokens and focus extraction, but it adds one router call per
-user and may lose recall if the router misses a category. By default, the
-router always includes broad high-yield groups such as `Interests:*`,
-`Behavior:*`, `Values & Motivation`, `Risk & Decision`, `Linguistic:*`, and
-`Expertise:*`, plus target groups for richer personas: `Personality:*`,
-`Health:*`, `Worldview: Beliefs`, `Demographic: Family`,
+batches of persona dimensions. Two optional alternatives are available:
+
+- `--schema-routing-mode category` first asks the model to route the review
+  memory to likely schema categories, then maps only dimensions in the routed
+  categories plus configurable always-included category patterns. This can save
+  schema-mapping tokens and focus extraction, but it adds one router call per
+  user and may lose recall if the router misses a category.
+- `--schema-routing-mode recall` is the recall-maximizing path. It runs the
+  full direct schema mapping first, then runs a second recall-focused pass over
+  high-value categories such as personality, values, decision style, behavior,
+  expertise, health, worldview, family/life context, and social/community
+  context. This costs more calls, but is intended to extract as many supported
+  attributes as possible.
+
+For category routing, the router always includes broad high-yield groups such
+as `Interests:*`, `Behavior:*`, `Values & Motivation`, `Risk & Decision`,
+`Linguistic:*`, and `Expertise:*`, plus target groups for richer personas:
+`Personality:*`, `Health:*`, `Worldview: Beliefs`, `Demographic: Family`,
 `Demographic: Life Events`, and `Social Identity, Relationships & Community`.
-These categories are made available to the mapper, but returned attributes
-still need evidence citations and calibrated confidence.
+These categories are made available to the mapper, but returned attributes still
+need evidence citations and calibrated confidence.
 
 Inference outputs include `review_corpus_stats` for the construction split:
 row count, text-review count, rating count, rating-only row count, total review
@@ -560,6 +568,19 @@ python scripts/infer_amazon_review_dimensions.py \
   --max-users 20 \
   --output raw/amazon_reviews_2023/persona_dimension_inference/inferred_dimensions_routed.jsonl \
   --yaml-output raw/amazon_reviews_2023/persona_dimension_inference/inferred_dimensions_routed.yaml
+```
+
+To maximize extracted attribute count, test the recall path:
+
+```bash
+python scripts/infer_amazon_review_dimensions.py \
+  --user-histories raw/amazon_reviews_2023/persona_dimension_inference/user_histories.jsonl \
+  --context-selection-strategy informative_category_temporal \
+  --schema-routing-mode recall \
+  --review-memory-output raw/amazon_reviews_2023/persona_dimension_inference/evidence_profiles.jsonl \
+  --max-users 20 \
+  --output raw/amazon_reviews_2023/persona_dimension_inference/inferred_dimensions_recall.jsonl \
+  --yaml-output raw/amazon_reviews_2023/persona_dimension_inference/inferred_dimensions_recall.yaml
 ```
 
 The primary inference output remains JSONL for resumable runs, with one user row
