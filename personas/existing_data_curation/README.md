@@ -505,9 +505,11 @@ batches of persona dimensions. Two optional alternatives are available:
 - `--schema-routing-mode scratchpad` uses the same category-routing step, then
   scans the routed schema dimensions in chunks while maintaining a structured,
   evidence-backed scratchpad across chunks. The scratchpad stores compact
-  signals, weak hypotheses, uncertainty notes, and explicit-only guardrails with
-  evidence anchors. This is intended to recover more qualitative attributes than
-  plain category routing without running the full recall second pass.
+  signals, weak hypotheses, matched dimension ids, uncertainty notes, and
+  explicit-only guardrails with evidence anchors. Attribute extraction remains
+  the primary task for each chunk; the scratchpad is working memory that helps
+  later chunks recover qualitative attributes without running the full recall
+  second pass.
 - `--schema-routing-mode recall` is the recall-maximizing path. It runs the
   full direct schema mapping first, then runs a second recall-focused pass over
   high-value categories such as personality, values, decision style, behavior,

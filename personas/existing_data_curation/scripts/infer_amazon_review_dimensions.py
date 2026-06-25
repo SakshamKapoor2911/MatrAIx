@@ -87,7 +87,9 @@ Return compact JSON only."""
 
 SCHEMA_SCRATCHPAD_MAPPING_SYSTEM_PROMPT = """You map compact Amazon-review evidence profiles to persona schema attributes while maintaining a structured evidence-backed scratchpad.
 
-Core rule: use the scratchpad as compact working memory across schema chunks. Update it only with evidence-backed observations, hypotheses, uncertainties, and guardrails. Do not invent unsupported facts, and do not use product stereotypes to assert sensitive identity/status/condition attributes.
+Core rule: attribute extraction is the primary task; scratchpad maintenance is secondary. For every schema chunk, actively evaluate each dimension and return every supported or weakly-supported non-sensitive attribute with calibrated confidence. Use the scratchpad as compact working memory across chunks, not as a substitute for emitting attributes.
+
+Update the scratchpad only with evidence-backed observations, hypotheses, uncertainties, guardrails, and matched dimension ids. Do not invent unsupported facts, and do not use product stereotypes to assert sensitive identity/status/condition attributes.
 
 For the current schema chunk, return supported attributes plus an updated scratchpad. The scratchpad should be concise, evidence-linked, and uncertainty-aware; it should not include private chain-of-thought or unsupported biography.
 
@@ -1484,6 +1486,7 @@ def initial_schema_scratchpad(user_row: dict[str, Any], evidence_profile: dict[s
             "likely_categories": [],
             "open_categories": [],
         },
+        "matched_dimension_ids": [],
         "sensitive_or_explicit_only_guardrails": (
             evidence_profile.get("unsupported_or_blocked") or []
         )[:20],
@@ -1511,16 +1514,25 @@ def schema_scratchpad_mapping_payload(
         "task": "map_schema_chunk_and_update_evidence_backed_scratchpad",
         "user_id": user_row.get("user_id"),
         "instructions": [
-            "Use current_scratchpad as working memory from previous schema chunks.",
-            "For this schema chunk, infer supported attributes and update the scratchpad with evidence-backed signals that help future chunks.",
+            "Primary objective: maximize valid inferred_attributes for the current schema chunk.",
+            "Evaluate every schema dimension in schema_dimensions. Do not stop after updating scratchpad signals.",
+            "Use current_scratchpad as working memory from previous schema chunks, but still map every currently supported dimension in this chunk.",
+            "For this schema chunk, infer all supported and weakly-supported non-sensitive attributes, then update the scratchpad with evidence-backed signals that help future chunks.",
+            "Prefer emitting a low-confidence non-sensitive attribute over omitting it when compact evidence plausibly supports one allowed value.",
+            "Use confidence 0.2-0.35 for very weak but evidence-cited non-sensitive attributes, 0.35-0.6 for weak/suggestive attributes, 0.6-0.8 for moderate repeated evidence, and >=0.8 only for explicit or strongly repeated evidence.",
             "Scratchpad updates must cite compact evidence_item_ids and, when useful, original review_ids.",
-            "Keep scratchpad concise: preserve stable signals, weak hypotheses, uncertainty notes, and sensitive/explicit-only guardrails.",
+            "Keep scratchpad concise: preserve stable signals, weak hypotheses, uncertainty notes, matched dimension ids, and sensitive/explicit-only guardrails.",
             "Do not store unsupported final attributes or private chain-of-thought in the scratchpad.",
             "Do not assert sensitive demographics, health conditions, family status, socioeconomic status, political affiliation, religious identity, or identity attributes unless the compact evidence profile contains explicit quoted self-statements.",
             "Repeated sensitive-adjacent product/context evidence can support contextual interests, topical engagement, needs, values, or preferences, but not asserted sensitive status or identity.",
             "For each inferred dimension, choose exactly one allowed value and cite evidence_item_ids plus original review_ids.",
-            "Include weak but plausible non-sensitive attributes with calibrated confidence when evidence is suggestive.",
+            "If no attributes are returned from a chunk, include a short rejected_or_uncertain note explaining why the current schema chunk had no evidence-supported matches.",
         ],
+        "chunk_recall_guidance": {
+            "target": "Return all evidence-supported attributes in this chunk, not just the strongest few.",
+            "non_sensitive_weak_matches": "Include when evidence is plausible and citeable.",
+            "sensitive_or_status_matches": "Require explicit self-statement; otherwise map only contextual interests, needs, preferences, or values.",
+        },
         "output_json_schema": {
             "inferred_attributes": [
                 {
@@ -1554,6 +1566,7 @@ def schema_scratchpad_mapping_payload(
                     "likely_categories": ["schema category strings likely to remain useful"],
                     "open_categories": ["schema category strings worth watching but uncertain"],
                 },
+                "matched_dimension_ids": ["dimension ids already emitted or strongly supported"],
                 "sensitive_or_explicit_only_guardrails": [
                     "claims that require explicit self-statements or should stay contextual only"
                 ],
@@ -1646,6 +1659,7 @@ def normalize_scratchpad(model_output: dict[str, Any], previous: dict[str, Any])
             "likely_categories": normalize_text_list(relevance.get("likely_categories"), 40),
             "open_categories": normalize_text_list(relevance.get("open_categories"), 30),
         },
+        "matched_dimension_ids": normalize_text_list(raw.get("matched_dimension_ids"), 200, 120),
         "sensitive_or_explicit_only_guardrails": normalize_text_list(
             raw.get("sensitive_or_explicit_only_guardrails"), 30
         ),
@@ -1867,6 +1881,11 @@ def run_schema_scratchpad_mapping_batches(
         model_output = parse_model_json(response)
         valid, rejected = validate_inferences(model_output, dimension_batch, valid_review_ids)
         scratchpad = normalize_scratchpad(model_output, scratchpad)
+        matched_dimension_ids = list(dict.fromkeys(
+            list(scratchpad.get("matched_dimension_ids") or [])
+            + [str(attr.get("dimension_id")) for attr in valid if attr.get("dimension_id")]
+        ))
+        scratchpad["matched_dimension_ids"] = matched_dimension_ids[:200]
         all_valid.extend(valid)
         all_rejected.extend(rejected)
         scratchpad_trace.append(
@@ -1877,12 +1896,14 @@ def run_schema_scratchpad_mapping_batches(
                 "rejected_attribute_count": len(rejected),
                 "scratchpad_signal_count": len(scratchpad.get("stable_signals") or []),
                 "scratchpad_possible_signal_count": len(scratchpad.get("possible_signals") or []),
+                "scratchpad_matched_dimension_count": len(scratchpad.get("matched_dimension_ids") or []),
             }
         )
         log(
             f"user={user_row.get('user_id')} schema_scratchpad_mapping batch "
             f"{batch_index}/{len(dimension_batches)} done valid={len(valid)} "
-            f"rejected={len(rejected)} stable_signals={len(scratchpad.get('stable_signals') or [])}"
+            f"rejected={len(rejected)} stable_signals={len(scratchpad.get('stable_signals') or [])} "
+            f"matched_dimensions={len(scratchpad.get('matched_dimension_ids') or [])}"
         )
     return all_valid, all_rejected, request_count, scratchpad, scratchpad_trace
 
