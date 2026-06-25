@@ -72,7 +72,7 @@ export function PersonaCatalog({ selectedId, onSelect }: PersonaCatalogProps) {
   const totalLabel = personasQuery.isLoading && all.length === 0 ? "…" : String(all.length);
 
   return (
-    <aside className="relative z-0 flex h-full w-[300px] flex-shrink-0 flex-col border-r border-border-soft bg-surface-container-low">
+    <aside className="relative z-0 flex h-[260px] w-full flex-shrink-0 flex-col border-b border-border-soft bg-surface-container-low lg:h-full lg:w-[300px] lg:border-b-0 lg:border-r">
       {/* Header: title, count, search, filter chips */}
       <div className="flex-shrink-0 border-b border-border-soft p-md pb-sm">
         <h2 className="mb-xs text-headline-sm font-headline-sm uppercase tracking-[0.05em] text-on-surface">

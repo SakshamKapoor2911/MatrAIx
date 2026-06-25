@@ -134,10 +134,10 @@ export function SurveyEvalCockpit({ options, taskType, onTaskTypeChange }: Surve
   }, [exportSnapshot, surveyResult]);
 
   return (
-    <div className="flex flex-1 overflow-hidden">
+    <div className="flex flex-1 flex-col overflow-y-auto lg:flex-row lg:overflow-hidden">
       <PersonaCatalog selectedId={persona?.id ?? null} onSelect={setPersona} />
 
-      <main className="relative z-0 flex min-w-0 flex-1 flex-col bg-background">
+      <main className="relative z-0 flex min-h-[640px] min-w-0 flex-1 flex-col bg-background lg:min-h-0">
         <TaskTypeSwitch value={taskType} onChange={onTaskTypeChange} disabled={isRunning} />
         <div className="flex flex-shrink-0 items-center justify-between border-b border-border-soft bg-surface-container-lowest px-lg py-sm">
           <div className="flex min-w-0 items-center gap-3">

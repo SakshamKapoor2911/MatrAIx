@@ -366,12 +366,12 @@ function ChatbotEvalCockpit({
   const environment = options?.environment ?? null;
 
   return (
-    <div className="flex flex-1 overflow-hidden">
+    <div className="flex flex-1 flex-col overflow-y-auto lg:flex-row lg:overflow-hidden">
       {/* LEFT — persona catalog */}
       <PersonaCatalog selectedId={persona?.id ?? null} onSelect={handleSelectPersona} />
 
       {/* CENTRE — run header + knob bar + trajectory */}
-      <main className="relative z-0 flex min-w-0 flex-1 flex-col bg-background">
+      <main className="relative z-0 flex min-h-[640px] min-w-0 flex-1 flex-col bg-background lg:min-h-0">
         <TaskTypeSwitch value={taskType} onChange={onTaskTypeChange} disabled={isRunning} />
         <RunHeader
           persona={persona}

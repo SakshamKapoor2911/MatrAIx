@@ -60,7 +60,7 @@ export function InspectorTabs({ active, onChange, evaluation, persona, prompts }
   }
 
   return (
-    <aside className="z-0 flex h-full w-[340px] flex-shrink-0 flex-col border-l border-border-soft bg-surface-container-lowest">
+    <aside className="z-0 flex h-[320px] w-full flex-shrink-0 flex-col border-t border-border-soft bg-surface-container-lowest lg:h-full lg:w-[340px] lg:border-l lg:border-t-0">
       {/* Tab header */}
       <div
         role="tablist"

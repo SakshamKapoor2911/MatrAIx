@@ -58,7 +58,7 @@ export function TopBar({
   const showSessionTools = mode === "normal";
 
   return (
-    <header className="relative z-20 flex h-16 flex-shrink-0 items-center gap-lg border-b border-border-soft bg-surface-container-lowest px-lg">
+    <header className="relative z-20 flex h-auto min-h-16 flex-shrink-0 flex-wrap items-center gap-x-lg gap-y-2 border-b border-border-soft bg-surface-container-lowest px-md py-2 sm:h-16 sm:flex-nowrap sm:px-lg sm:py-0">
       {/* Brand + ⌘K search */}
       <div className="flex flex-shrink-0 items-center gap-md">
         <span className="whitespace-nowrap text-headline-md font-headline-md font-bold tracking-[-0.01em] text-primary">

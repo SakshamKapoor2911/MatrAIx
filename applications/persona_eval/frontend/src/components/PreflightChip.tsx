@@ -103,7 +103,7 @@ export function PreflightChip() {
           aria-hidden
         />
         {label}
-        {sub && <span className="font-normal opacity-80">· {sub}</span>}
+        {sub && <span className="hidden font-normal opacity-80 sm:inline">· {sub}</span>}
       </button>
 
       {open && data && (
