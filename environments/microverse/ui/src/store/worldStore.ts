@@ -12,7 +12,7 @@ export interface PrevPos {
 export interface SpeechBubble {
   agentId: string
   text: string
-  kind: 'whisper' | 'broadcast'
+  kind: 'whisper' | 'broadcast' | 'thought'
   /** Wall-clock ms when the utterance arrived; lifetime is measured from here. */
   bornAt: number
 }
@@ -26,6 +26,10 @@ export const BUBBLE_TTL_MS = 3400
 const SPEECH_EVENTS: Record<string, SpeechBubble['kind']> = {
   WHISPER_SENT: 'whisper',
   BROADCAST_SENT: 'broadcast',
+  // A THOUGHT is the agent's real, model-authored stated `intention` surfaced as a
+  // private thought bubble (Protocol §4.2). Used by the real-run replay to expose the
+  // continuous inner monologue the engine logs even when agents aren't talking.
+  THOUGHT_SENT: 'thought',
 }
 
 const EMPTY_SNAPSHOT: WorldSnapshot = {

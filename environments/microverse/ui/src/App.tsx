@@ -21,6 +21,7 @@ export default function App() {
   useScrollReveal()
   const simRef = useRef<HTMLElement>(null)
   const [scale, setScale] = useState<'25' | '1000'>('25')
+  const [source, setSource] = useState<'demo' | 'replay'>('replay')
 
   const connected   = useWorldStore(s => s.connected)
   const tick        = useWorldStore(s => s.snapshot.tick)
@@ -456,21 +457,28 @@ export default function App() {
               <span className="mv-panel-label">WORLD VIEW</span>
               <div className="mv-scale-toggle" role="group" aria-label="Simulation scale">
                 <button
-                  className={`mv-scale-btn ${scale === '25' ? 'is-active' : ''}`}
-                  onClick={() => setScale('25')}
+                  className={`mv-scale-btn ${source === 'replay' ? 'is-active' : ''}`}
+                  onClick={() => setSource('replay')}
+                  title="Play back an actual finished run, reconstructed from the engine action log"
+                >
+                  ▶ Real run replay
+                </button>
+                <button
+                  className={`mv-scale-btn ${source === 'demo' && scale === '25' ? 'is-active' : ''}`}
+                  onClick={() => { setSource('demo'); setScale('25') }}
                 >
                   50×50 · 25 agents
                 </button>
                 <button
-                  className={`mv-scale-btn ${scale === '1000' ? 'is-active' : ''}`}
-                  onClick={() => setScale('1000')}
+                  className={`mv-scale-btn ${source === 'demo' && scale === '1000' ? 'is-active' : ''}`}
+                  onClick={() => { setSource('demo'); setScale('1000') }}
                 >
                   200×200 · 1000 agents
                 </button>
               </div>
             </div>
             <div className="mv-canvas-wrap">
-              <WorldCanvas scale={scale} />
+              <WorldCanvas scale={scale} source={source} />
             </div>
             <div className="mv-legend-head">
               <span className="mv-panel-label">LEGEND</span>

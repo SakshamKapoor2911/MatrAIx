@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { useWorldStore } from '../store/worldStore'
 import { createDemo, type Demo } from '../demo/driveDemo'
+import { createReplay, loadReplay } from '../demo/driveReplay'
 import { SCALE_25, SCALE_1000, type WorldScale } from '../demo/genWorld'
 import type { Agent, WorldSnapshot } from '../types/simulation'
 import { preloadAll, assetsReady, img, SIPHON_SRC, TILE } from '../render/assets'
@@ -16,6 +17,13 @@ const DEMO_TICK_MS = 900
 interface WorldCanvasProps {
   /** Which demo scale to drive when no live engine is connected. */
   scale: '25' | '1000'
+  /**
+   * Feed source when no live engine is connected:
+   *  - 'demo'   → synthetic rule-dramatizing world (driveDemo)
+   *  - 'replay' → playback of a real exported run (driveReplay, /replay.json);
+   *               falls back to 'demo' if the replay file is missing.
+   */
+  source?: 'demo' | 'replay'
 }
 
 function scaleOf(s: '25' | '1000'): WorldScale {
@@ -25,7 +33,7 @@ function scaleOf(s: '25' | '1000'): WorldScale {
 // ease-in-out cubic
 const ease = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2)
 
-export function WorldCanvas({ scale }: WorldCanvasProps) {
+export function WorldCanvas({ scale, source = 'demo' }: WorldCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const rafRef = useRef<number>(0)
 
@@ -44,37 +52,50 @@ export function WorldCanvas({ scale }: WorldCanvasProps) {
   // Kick off asset loading once.
   useEffect(() => { preloadAll() }, [])
 
-  // ── Demo lifecycle ────────────────────────────────────────────────────────
+  // ── Demo / replay lifecycle ─────────────────────────────────────────────────
   useEffect(() => {
-    const sc = scaleOf(scale)
-    const demo = createDemo(sc)
-    demoRef.current = demo
-    fadeRef.current = {}
-    facingRef.current = {}
-    bakeRef.current = null
-    bakeKeyRef.current = ''
-
-    const store = useWorldStore.getState()
-    store.applySnapshot(demo.snapshot, [])
-    store.selectAgent(null)
-
     let stopped = false
     let timer: ReturnType<typeof setTimeout> | undefined
-    function tickLoop() {
+
+    function startWith(demo: Demo) {
       if (stopped) return
-      if (!useWorldStore.getState().connected) {
-        const { snapshot, events } = demo.step()
-        useWorldStore.getState().applySnapshot(snapshot, events)
+      demoRef.current = demo
+      fadeRef.current = {}
+      facingRef.current = {}
+      bakeRef.current = null
+      bakeKeyRef.current = ''
+
+      const store = useWorldStore.getState()
+      store.applySnapshot(demo.snapshot, [])
+      store.selectAgent(null)
+
+      function tickLoop() {
+        if (stopped) return
+        if (!useWorldStore.getState().connected) {
+          const { snapshot, events } = demo.step()
+          useWorldStore.getState().applySnapshot(snapshot, events)
+        }
+        timer = setTimeout(tickLoop, DEMO_TICK_MS)
       }
       timer = setTimeout(tickLoop, DEMO_TICK_MS)
     }
-    timer = setTimeout(tickLoop, DEMO_TICK_MS)
+
+    if (source === 'replay') {
+      // Real-run playback. Load the exported action_log replay; if it's missing,
+      // fall back to the synthetic demo so the canvas is never blank.
+      loadReplay().then((data) => {
+        if (stopped) return
+        startWith(data ? createReplay(data) : createDemo(scaleOf(scale)))
+      })
+    } else {
+      startWith(createDemo(scaleOf(scale)))
+    }
 
     return () => {
       stopped = true
       if (timer) clearTimeout(timer)
     }
-  }, [scale])
+  }, [scale, source])
 
   // ── Renderer ──────────────────────────────────────────────────────────────
   useEffect(() => {
@@ -394,6 +415,8 @@ export function WorldCanvas({ scale }: WorldCanvasProps) {
         if (age01 < 0 || age01 > 1) continue
         drawSpeechBubble(ctx, anchor.cx, anchor.headY, cell, {
           text: b.text, kind: b.kind, age01, selected: b.agentId === selectedId,
+          // Clip to the canvas so bubbles never hide behind the panel top edge.
+          minTop: 4, minLeft: 4, maxRight: CW - 4,
         })
       }
 

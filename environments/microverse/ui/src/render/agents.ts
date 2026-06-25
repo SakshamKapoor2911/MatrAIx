@@ -258,9 +258,12 @@ function roundedBubble(
 // never pop. Pure draw — all lifetime state lives in the store; this only paints.
 const BUBBLE_FONT = '600 11px "JetBrains Mono", monospace'
 const BUBBLE_FILL = 'rgba(16,15,18,0.93)'
+const THOUGHT_FILL = 'rgba(18,20,30,0.88)'
 const WHISPER_STROKE = '#b6b1a7'
 const BROADCAST_STROKE = '#d7b988'
+const THOUGHT_STROKE = '#7f93b8'
 const BUBBLE_TEXT = '#ece9e2'
+const THOUGHT_TEXT = '#c4cde0'
 
 function wrapText(
   ctx: CanvasRenderingContext2D, text: string, maxWidth: number, maxLines: number,
@@ -291,11 +294,17 @@ function wrapText(
 
 export interface SpeechBubbleArgs {
   text: string
-  kind: 'whisper' | 'broadcast'
+  kind: 'whisper' | 'broadcast' | 'thought'
   /** 0→1 across the bubble's wall-clock lifetime (store TTL). */
   age01: number
   /** True for the currently-selected agent → bubble is emphasised. */
   selected: boolean
+  /** Top clip boundary (px). The bubble is kept fully below this so it never
+   *  hides behind the panel chrome / clips off the top of the canvas. */
+  minTop?: number
+  /** Left/right clip boundaries (px) so wide bubbles stay on the board. */
+  minLeft?: number
+  maxRight?: number
 }
 
 /**
@@ -317,10 +326,11 @@ export function drawSpeechBubble(
   const pad = Math.max(5, cell * 0.22)
   const maxW = Math.max(80, Math.min(180, cell * 7))
   const broadcast = b.kind === 'broadcast'
+  const thought = b.kind === 'thought'
 
   ctx.save()
-  ctx.globalAlpha = alpha
-  ctx.font = `${broadcast ? '700' : '600'} ${fontPx.toFixed(0)}px "JetBrains Mono", monospace`
+  ctx.globalAlpha = thought ? alpha * 0.92 : alpha
+  ctx.font = `${broadcast ? '700' : thought ? 'italic 500' : '600'} ${fontPx.toFixed(0)}px "JetBrains Mono", monospace`
   void BUBBLE_FONT
 
   const lines = wrapText(ctx, b.text, maxW, 3)
@@ -332,19 +342,33 @@ export function drawSpeechBubble(
   const bh = lines.length * lineH + pad * 1.4
   // Rise slightly as it ages so it feels like it lifts off the agent.
   const lift = b.age01 * cell * 0.25
-  const bx = cx - bw / 2
-  const by = anchorY - bh - cell * 0.18 - lift
+  let bx = cx - bw / 2
+  let by = anchorY - bh - cell * 0.18 - lift
+
+  // Keep the bubble on-board: clamp against the top (so it never hides behind the
+  // panel chrome) and the left/right edges. The tail/dots are only drawn when the
+  // bubble still sits above the agent after clamping.
+  const minTop = b.minTop ?? 2
+  const minLeft = b.minLeft ?? 2
+  const maxRight = b.maxRight ?? Infinity
+  if (by < minTop) by = minTop
+  if (bx < minLeft) bx = minLeft
+  if (bx + bw > maxRight) bx = maxRight - bw
+  const tailX = Math.max(bx + bw * 0.2, Math.min(cx, bx + bw * 0.8)) // keep tail under the body
+  const showTail = by + bh <= anchorY - cell * 0.08
 
   // Soft drop shadow for legibility over bright terrain.
   ctx.shadowColor = 'rgba(0,0,0,0.45)'
   ctx.shadowBlur = 6
   ctx.shadowOffsetY = 2
 
-  const stroke = broadcast ? BROADCAST_STROKE : WHISPER_STROKE
-  const r = Math.min(bw, bh) * 0.22
-  ctx.fillStyle = BUBBLE_FILL
+  const stroke = broadcast ? BROADCAST_STROKE : thought ? THOUGHT_STROKE : WHISPER_STROKE
+  const fill = thought ? THOUGHT_FILL : BUBBLE_FILL
+  const r = thought ? Math.min(bw, bh) * 0.42 : Math.min(bw, bh) * 0.22 // thoughts = puffy/round
+  ctx.fillStyle = fill
   ctx.strokeStyle = stroke
   ctx.lineWidth = b.selected ? 1.8 : broadcast ? 1.3 : 1
+  if (thought) ctx.setLineDash([3, 2]) // dashed cloud outline for an inner-voice feel
   ctx.beginPath()
   ctx.moveTo(bx + r, by)
   ctx.arcTo(bx + bw, by, bx + bw, by + bh, r)
@@ -354,31 +378,43 @@ export function drawSpeechBubble(
   ctx.closePath()
   ctx.fill()
   ctx.stroke()
+  ctx.setLineDash([])
 
-  // Tail pointing down to the agent.
   ctx.shadowColor = 'transparent'
-  const tw = Math.max(5, cell * 0.18)
-  ctx.beginPath()
-  ctx.moveTo(cx - tw, by + bh)
-  ctx.lineTo(cx, by + bh + cell * 0.22)
-  ctx.lineTo(cx + tw, by + bh)
-  ctx.closePath()
-  ctx.fillStyle = BUBBLE_FILL
-  ctx.fill()
-  ctx.strokeStyle = stroke
-  ctx.stroke()
+  if (thought && showTail) {
+    // Thought bubbles trail two shrinking "thinking dots" toward the agent instead of
+    // a pointed tail — the classic cartoon inner-monologue cue.
+    ctx.fillStyle = fill
+    ctx.strokeStyle = stroke
+    ctx.lineWidth = 1
+    const d1 = Math.max(2, cell * 0.12)
+    ctx.beginPath(); ctx.arc(tailX - cell * 0.05, by + bh + cell * 0.12, d1, 0, Math.PI * 2); ctx.fill(); ctx.stroke()
+    ctx.beginPath(); ctx.arc(tailX + cell * 0.08, by + bh + cell * 0.30, d1 * 0.6, 0, Math.PI * 2); ctx.fill(); ctx.stroke()
+  } else if (!thought && showTail) {
+    // Tail pointing down to the agent.
+    const tw = Math.max(5, cell * 0.18)
+    ctx.beginPath()
+    ctx.moveTo(tailX - tw, by + bh)
+    ctx.lineTo(tailX, by + bh + cell * 0.22)
+    ctx.lineTo(tailX + tw, by + bh)
+    ctx.closePath()
+    ctx.fillStyle = fill
+    ctx.fill()
+    ctx.strokeStyle = stroke
+    ctx.stroke()
+  }
 
-  // Broadcast badge dot so the two kinds read apart at a glance.
+  // Broadcast badge dot so the kinds read apart at a glance.
   if (broadcast) {
     ctx.fillStyle = BROADCAST_STROKE
     ctx.beginPath(); ctx.arc(bx + pad * 0.6, by + bh / 2, Math.max(1.5, fontPx * 0.16), 0, Math.PI * 2); ctx.fill()
   }
 
-  // Text.
-  ctx.fillStyle = BUBBLE_TEXT
+  // Text — centred on the (possibly clamped) box, not the anchor.
+  ctx.fillStyle = thought ? THOUGHT_TEXT : BUBBLE_TEXT
   ctx.textAlign = 'center'
   ctx.textBaseline = 'middle'
-  const x0 = cx
+  const x0 = bx + bw / 2
   let ty = by + pad * 0.7 + lineH / 2
   for (const ln of lines) {
     ctx.fillText(ln, x0, ty)
