@@ -191,6 +191,16 @@ _Benchmarks, evaluation, related work that doesn't fit above._
 - Emphasizes long-horizon interactions and human-like user behavior.
 - Relevance: provides evaluation settings for testing whether MatrAIx personas behave realistically when interacting with agents rather than only answering survey questions.
 
+### [How Far are LLMs from Being Our Digital Twins? A Benchmark for Persona-Based Behavior Chain Simulation](https://aclanthology.org/2025.findings-acl.813/)
+- Introduces BehaviorChain, a benchmark for evaluating whether LLMs can simulate continuous human behavior rather than only dialogue or survey responses.
+- Contains 1,001 personas and 15,846 behavior instances/chains with profile and history metadata, where models iteratively infer contextually appropriate behaviors.
+- Relevance: provides an action-sequence evaluation format for MatrAIxPersonaBench: given a persona, history, and dynamic context, predict the next plausible behavior.
+
+### [PersonaBench: Evaluating AI Models on Understanding Personal Information through Accessing Synthetic Private User Data](https://aclanthology.org/2025.findings-acl.49/)
+- Builds synthetic user profiles and private documents to evaluate whether AI models can understand personal information from simulated private user data.
+- Uses private documents such as conversation history, user-AI interactions, and app usage records to evaluate RAG pipelines on personal facts, preferences, and social connections.
+- Relevance: useful for MatrAIxPersona data construction if the project wants personas with document-grounded histories rather than only explicit profile fields.
+
 ### [SOTOPIA: Interactive Evaluation for Social Intelligence in Language Agents](https://arxiv.org/abs/2310.11667)(@heming03)
 - Introduces an open-ended environment for evaluating social intelligence in language agents through role-play interactions under diverse social scenarios.
 - Uses assigned roles, private social goals, interactive dialogue, and SOTOPIA-Eval to measure agents' goal completion, believability, and social reasoning.
