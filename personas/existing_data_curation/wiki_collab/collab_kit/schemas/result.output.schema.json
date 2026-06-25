@@ -22,7 +22,24 @@
         "backend": { "type": "string" },
         "model": { "type": ["string", "null"], "description": "e.g. claude-opus-4-8" },
         "effort": { "type": "string", "description": "medium | high | xhigh | max" },
-        "runner_version": { "type": "string" }
+        "runner_version": { "type": "string" },
+        "mixed_provenance": {
+          "type": "boolean",
+          "description": "True when fields in this record were produced by more than one backend/model/effort run."
+        },
+        "unit_runs": {
+          "type": "array",
+          "description": "Per-unit provenance entries used when mixed_provenance is true.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "backend": { "type": "string" },
+              "model": { "type": ["string", "null"] },
+              "effort": { "type": "string" },
+              "runner_version": { "type": "string" }
+            }
+          }
+        }
       }
     },
     "fields": {
@@ -48,6 +65,16 @@
           "assignment_type": {
             "type": "string",
             "enum": ["direct", "structured_claim", "summary_inference", "unsupported"]
+          },
+          "run": {
+            "type": "object",
+            "description": "The backend/model/effort run that produced this field, used to preserve provenance across resumed mixed-backend runs.",
+            "properties": {
+              "backend": { "type": "string" },
+              "model": { "type": ["string", "null"] },
+              "effort": { "type": "string" },
+              "runner_version": { "type": "string" }
+            }
           }
         }
       }

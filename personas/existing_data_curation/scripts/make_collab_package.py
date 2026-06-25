@@ -209,7 +209,9 @@ Claude Code uses `claude-opus-4-8`.
 The runner verifies checksums before every action, saves settings in
 `.wiki_collab_settings.yaml`, and resumes from `results.jsonl.progress.jsonl` if
 quota runs out. Repeated backend failures stop the run so you can fix auth/quota
-and resume later. The code is the same for everyone — only your credentials
+and resume later. You can switch backend/model/effort before resuming; completed
+units keep their original provenance, and mixed-backend results are marked in
+`results.jsonl`. The code is the same for everyone — only your credentials
 differ. `solver.py` ships with the owner's default extraction method and works
 as-is. You may improve `solver.py` to get better results; just keep the output
 contract unchanged and return only `results.jsonl` unless the owner asks for

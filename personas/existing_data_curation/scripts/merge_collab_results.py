@@ -112,6 +112,13 @@ def _is_attributed(field: dict[str, Any]) -> bool:
     return field.get("value") is not None and field.get("assignment_type") != "unsupported"
 
 
+def _runs_for_tally(row: dict[str, Any], run: dict[str, Any]) -> list[dict[str, Any]]:
+    unit_runs = run.get("unit_runs")
+    if run.get("mixed_provenance") and isinstance(unit_runs, list):
+        return [item for item in unit_runs if isinstance(item, dict)]
+    return [run] if run else []
+
+
 def merge_results(
     results_files: list[Path],
     *,
@@ -174,12 +181,19 @@ def merge_results(
 
             # provenance: which model/version/effort produced this record
             run = row.get("run") if isinstance(row.get("run"), dict) else {}
-            model = run.get("model") or row.get("model") or "(unspecified)"
-            effort = run.get("effort") or "(unspecified)"
-            rver = run.get("runner_version") or "(unspecified)"
-            models[model] = models.get(model, 0) + 1
-            efforts[effort] = efforts.get(effort, 0) + 1
-            runner_versions[rver] = runner_versions.get(rver, 0) + 1
+            tally_runs = _runs_for_tally(row, run)
+            if not tally_runs:
+                model = row.get("model") or "(unspecified)"
+                models[model] = models.get(model, 0) + 1
+                efforts["(unspecified)"] = efforts.get("(unspecified)", 0) + 1
+                runner_versions["(unspecified)"] = runner_versions.get("(unspecified)", 0) + 1
+            for tally_run in tally_runs:
+                model = tally_run.get("model") or row.get("model") or "(unspecified)"
+                effort = tally_run.get("effort") or "(unspecified)"
+                rver = tally_run.get("runner_version") or "(unspecified)"
+                models[model] = models.get(model, 0) + 1
+                efforts[effort] = efforts.get(effort, 0) + 1
+                runner_versions[rver] = runner_versions.get(rver, 0) + 1
             if not run:
                 warnings.append(f"{name}: global_idx {gi} has no run provenance (model/effort/version)")
 

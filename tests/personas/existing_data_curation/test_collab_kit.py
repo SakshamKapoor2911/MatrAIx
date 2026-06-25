@@ -110,6 +110,85 @@ def test_harness_resumes_after_failure(tmp_path, monkeypatch):
     assert errors == []
 
 
+def test_harness_can_resume_with_different_model_and_preserve_unit_provenance(
+    tmp_path, monkeypatch
+):
+    out = tmp_path / "results.jsonl"
+    tasks = tmp_path / "tasks.jsonl"
+    dims = tmp_path / "dimensions.json"
+    tasks.write_text('{"global_idx":0,"task_id":"t0","qid":"Q0"}\n', encoding="utf-8")
+    dims.write_text(
+        json.dumps(
+            [
+                {"id": "field_a", "category": "C1", "values": []},
+                {"id": "field_b", "category": "C2", "values": []},
+            ]
+        ),
+        encoding="utf-8",
+    )
+    base = [
+        "--tasks",
+        str(tasks),
+        "--dimensions",
+        str(dims),
+        "--out",
+        str(out),
+        "--backend",
+        "mock",
+        "--jobs",
+        "1",
+        "--max-failures",
+        "1",
+    ]
+
+    def first_model(profile, dims_batch, **kw):
+        if dims_batch[0]["category"] == "C2":
+            raise RuntimeError("quota exhausted")
+        return [
+            {
+                "field_id": "field_a",
+                "value": None,
+                "confidence": 0.0,
+                "evidence": "",
+                "assignment_type": "unsupported",
+            }
+        ]
+
+    monkeypatch.setattr(harness.solver, "attribute", first_model)
+    assert harness.main(base + ["--model", "first-model"]) == 1
+    progress_rows = [
+        json.loads(line)
+        for line in out.with_name(out.name + ".progress.jsonl").read_text().splitlines()
+        if line.strip()
+    ]
+    assert progress_rows[0]["run"]["model"] == "first-model"
+
+    def second_model(profile, dims_batch, **kw):
+        return [
+            {
+                "field_id": "field_b",
+                "value": None,
+                "confidence": 0.0,
+                "evidence": "",
+                "assignment_type": "unsupported",
+            }
+        ]
+
+    monkeypatch.setattr(harness.solver, "attribute", second_model)
+    assert harness.main(base + ["--model", "second-model"]) == 0
+    rows = [json.loads(line) for line in out.read_text().splitlines() if line.strip()]
+    assert rows[0]["model"] == "mixed"
+    assert rows[0]["run"]["mixed_provenance"] is True
+    assert {run["model"] for run in rows[0]["run"]["unit_runs"]} == {
+        "first-model",
+        "second-model",
+    }
+    assert {field["field_id"]: field["run"]["model"] for field in rows[0]["fields"]} == {
+        "field_a": "first-model",
+        "field_b": "second-model",
+    }
+
+
 def test_harness_stops_after_failure_budget(tmp_path, monkeypatch, capsys):
     out = tmp_path / "results.jsonl"
     tasks = tmp_path / "tasks.jsonl"
@@ -422,7 +501,11 @@ def test_check_progress_settings_rejects_missing_active_run(tmp_path, monkeypatc
     monkeypatch.setattr(assignment_runner, "ACTIVE_RUN_PATH", active_path)
 
     try:
-        assignment_runner._check_progress_settings(assignment_runner.DEFAULTS, restart=False)
+        assignment_runner._check_progress_settings(
+            assignment_runner.DEFAULTS,
+            restart=False,
+            warnings=[],
+        )
     except SystemExit as exc:
         assert exc.code == 1
     else:

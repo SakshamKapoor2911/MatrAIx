@@ -4,11 +4,13 @@
 Reads the owner's tasks.jsonl + dimensions.json, calls solver.attribute() for
 each (profile, category) unit, and writes results.jsonl in the contract format.
 It is SAFE TO STOP AND RE-RUN: every finished unit is checkpointed to
-`<out>.progress.jsonl`, so if your model quota runs out (or you Ctrl-C), just
-run the SAME command again later and it resumes where it left off — finished
-units are skipped, only the remaining ones are attempted.
+`<out>.progress.jsonl`, with its own run provenance. If your model quota runs
+out (or you Ctrl-C), rerun later and it resumes where it left off — finished
+units are skipped, only the remaining ones are attempted. When invoked through
+run_assignment.sh, you can switch backend/model/effort before resuming; mixed
+results preserve per-unit provenance.
 
-  # run (and resume — same command both times):
+  # run (and resume):
   python3 harness.py --tasks tasks.jsonl --dimensions dimensions.json \
       --out results.jsonl --backend claude-code-acp \
       --model claude-opus-4-8 --effort high --jobs 6
@@ -55,6 +57,7 @@ EFFORT_CHOICES_BY_BACKEND = {
 DEFAULT_MAX_FAILURES = 8
 
 Unit = tuple[int, str]  # (global_idx, category)
+UnitResult = dict[str, Any]  # {"fields": [...], "run": {...}}
 
 
 def run_provenance(backend: str, model: str | None, effort: str) -> dict[str, Any]:
@@ -196,9 +199,67 @@ class _Progress:
             self.stream.flush()
 
 
-def load_checkpoint(path: Path) -> dict[Unit, list[dict[str, Any]]]:
+def _dedupe_runs(runs: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    seen: set[str] = set()
+    unique: list[dict[str, Any]] = []
+    for run in runs:
+        if not isinstance(run, dict):
+            continue
+        key = json.dumps(run, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+        if key in seen:
+            continue
+        seen.add(key)
+        unique.append(run)
+    return unique
+
+
+def _common_assignment(runs: list[dict[str, Any]]) -> dict[str, Any] | None:
+    assignments = [
+        run.get("assignment")
+        for run in runs
+        if isinstance(run.get("assignment"), dict)
+    ]
+    if not assignments:
+        return None
+    comparable = [
+        {
+            key: value
+            for key, value in assignment.items()
+            if key != "settings_hash"
+        }
+        for assignment in assignments
+    ]
+    first = comparable[0]
+    if all(item == first for item in comparable):
+        return assignments[-1]
+    return None
+
+
+def _profile_run(base_run: dict[str, Any], unit_runs: list[dict[str, Any]]) -> dict[str, Any]:
+    unique_runs = _dedupe_runs(unit_runs)
+    if len(unique_runs) <= 1:
+        return dict(unique_runs[0]) if unique_runs else dict(base_run)
+    run = {
+        "backend": "mixed",
+        "model": "mixed",
+        "effort": "mixed",
+        "runner_version": base_run.get("runner_version", HARNESS_VERSION),
+        "mixed_provenance": True,
+        "unit_runs": unique_runs,
+    }
+    assignment = _common_assignment(unique_runs)
+    if assignment is not None:
+        run["assignment"] = assignment
+    return run
+
+
+def load_checkpoint(
+    path: Path,
+    *,
+    default_run: dict[str, Any] | None = None,
+) -> dict[Unit, UnitResult]:
     """Read finished units from a prior run. Tolerates a truncated last line."""
-    done: dict[Unit, list[dict[str, Any]]] = {}
+    done: dict[Unit, UnitResult] = {}
     if not path.exists():
         return done
     with open(path, encoding="utf-8") as fh:
@@ -212,34 +273,55 @@ def load_checkpoint(path: Path) -> dict[Unit, list[dict[str, Any]]]:
                 continue  # ignore a half-written final line from a hard kill
             gi, cat = rec.get("global_idx"), rec.get("category")
             if isinstance(gi, int) and isinstance(cat, str):
-                done[(gi, cat)] = rec.get("fields", [])
+                fields = rec.get("fields", [])
+                if not isinstance(fields, list):
+                    fields = []
+                run = rec.get("run")
+                if not isinstance(run, dict):
+                    run = default_run
+                done[(gi, cat)] = {"fields": fields, "run": run}
     return done
 
 
 def assemble_results(
     tasks: list[dict[str, Any]],
-    done: dict[Unit, list[dict[str, Any]]],
+    done: dict[Unit, UnitResult] | dict[Unit, list[dict[str, Any]]],
     run: dict[str, Any],
 ) -> list[dict[str, Any]]:
     """Union all finished category-units back into one record per profile."""
     per_profile: dict[int, dict[str, dict[str, Any]]] = {}
-    for (gi, _cat), fields in done.items():
+    per_profile_runs: dict[int, list[dict[str, Any]]] = {}
+    for (gi, _cat), unit_result in done.items():
+        if isinstance(unit_result, dict) and "fields" in unit_result:
+            fields = unit_result.get("fields", [])
+            unit_run = unit_result.get("run") if isinstance(unit_result.get("run"), dict) else run
+        else:
+            fields = unit_result
+            unit_run = run
+        if isinstance(unit_run, dict):
+            per_profile_runs.setdefault(gi, []).append(unit_run)
+        if not isinstance(fields, list):
+            continue
         bucket = per_profile.setdefault(gi, {})
         for f in fields:
             fid = f.get("field_id")
             if fid:
-                bucket[str(fid)] = f
+                field = dict(f)
+                if isinstance(unit_run, dict):
+                    field["run"] = unit_run
+                bucket[str(fid)] = field
     results = []
     for task in tasks:
         gi = task.get("global_idx")
+        profile_run = _profile_run(run, per_profile_runs.get(gi, []))
         results.append(
             {
                 "global_idx": gi,
                 "task_id": task.get("task_id"),
                 "qid": task.get("qid"),
                 "input_sha256": task.get("input_sha256"),
-                "model": run.get("model"),  # back-compat mirror of run.model
-                "run": run,
+                "model": profile_run.get("model"),  # back-compat mirror of run.model
+                "run": profile_run,
                 "fields": list(per_profile.get(gi, {}).values()),
             }
         )
@@ -254,9 +336,10 @@ def run_resumable(
     backend: str,
     model: str | None,
     effort: str,
+    run: dict[str, Any],
     jobs: int,
     max_failures: int = DEFAULT_MAX_FAILURES,
-) -> tuple[dict[Unit, list[dict[str, Any]]], int]:
+) -> tuple[dict[Unit, UnitResult], int]:
     """Attempt all not-yet-done (profile, category) units. Returns (done, failed)."""
     batches = group_by_category(dimensions)
     units: list[tuple[Unit, dict[str, Any], list[dict[str, Any]]]] = []
@@ -268,7 +351,7 @@ def run_resumable(
     ckpt = progress_path(out)
     fail_log = failures_path(out)
     ckpt.parent.mkdir(parents=True, exist_ok=True)
-    done = load_checkpoint(ckpt)
+    done = load_checkpoint(ckpt, default_run=run)
     pending = [u for u in units if u[0] not in done]
 
     total = len(units)
@@ -295,10 +378,10 @@ def run_resumable(
     def _record(key: Unit, fields: list[dict[str, Any]]) -> None:
         with lock:
             fh.write(json.dumps(
-                {"global_idx": key[0], "category": key[1], "fields": fields},
+                {"global_idx": key[0], "category": key[1], "run": run, "fields": fields},
                 ensure_ascii=False) + "\n")
             fh.flush()
-            done[key] = fields
+            done[key] = {"fields": fields, "run": run}
             progress.tick_done()
 
     def _record_failure(unit: tuple[Unit, dict[str, Any], list[dict[str, Any]]], exc: Exception) -> None:
@@ -334,7 +417,7 @@ def run_resumable(
                     if failed >= stop_after_failures:
                         progress.log(
                             f"Stopping after {failed} failed unit(s); fix quota/auth/errors "
-                            "and rerun the same command to resume."
+                            "and rerun to resume."
                         )
                         break
         else:
@@ -372,7 +455,7 @@ def run_resumable(
                                 stopping = True
                                 progress.log(
                                     f"Stopping after {failed} failed unit(s); fix quota/auth/errors "
-                                    "and rerun the same command to resume."
+                                    "and rerun to resume."
                                 )
                                 for pending_fut in futs:
                                     pending_fut.cancel()
@@ -450,7 +533,7 @@ def main(argv: list[str] | None = None) -> int:
         print(f"Progress: {n}/{total} units ({pct}%) | "
               f"{profiles_done}/{len(tasks)} profiles fully done | checkpoint: {ckpt}")
         if n < total:
-            print("Not finished. Re-run the same command (without --status) to continue.")
+            print("Not finished. Re-run without --status to continue.")
         else:
             print("All units done. Re-run without --status to write & validate results.jsonl.")
         return 0
@@ -461,13 +544,13 @@ def main(argv: list[str] | None = None) -> int:
                 stale.unlink()
         print(f"Discarded checkpoint {ckpt}; starting over.")
 
+    run = run_provenance(args.backend, args.model, args.effort)
     done, failed = run_resumable(
         tasks, dimensions, out=args.out, backend=args.backend,
-        model=args.model, effort=args.effort, jobs=args.jobs,
+        model=args.model, effort=args.effort, run=run, jobs=args.jobs,
         max_failures=args.max_failures,
     )
 
-    run = run_provenance(args.backend, args.model, args.effort)
     results = assemble_results(tasks, done, run)
     write_results(args.out, results)
     attributed = sum(
@@ -487,7 +570,7 @@ def main(argv: list[str] | None = None) -> int:
 
     if units_done < total:
         print(f"\nNOT COMPLETE — {total - units_done} unit(s) still pending "
-              f"(quota/errors?). Re-run the SAME command to finish; finished units are skipped.")
+              f"(quota/errors?). Re-run to finish; finished units are skipped.")
         # still validate what we have so the format is known-good
         errors, _ = conformance.check_results(results, dimensions, tasks)
         if errors:

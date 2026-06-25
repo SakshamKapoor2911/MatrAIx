@@ -122,6 +122,41 @@ def test_disjoint_merge_collects_all_and_tallies_provenance(tmp_path):
     assert report["provenance"]["efforts"] == {"high": 2, "max": 1}
 
 
+def test_merge_tallies_mixed_unit_runs(tmp_path):
+    result = tmp_path / "mixed.jsonl"
+    run_a = {"backend": "claude-code-acp", "model": "claude-opus-4-8", "effort": "high", "runner_version": "1.0.0"}
+    run_b = {"backend": "codex-acp", "model": "gpt-5.5", "effort": "high", "runner_version": "1.0.0"}
+    rec = _record(
+        0,
+        [
+            {**_field("region", "North America"), "run": run_a},
+            {**_field("gender_identity", "Man"), "run": run_b},
+        ],
+        model="mixed",
+    )
+    rec["run"] = {
+        "backend": "mixed",
+        "model": "mixed",
+        "effort": "mixed",
+        "runner_version": "1.0.0",
+        "mixed_provenance": True,
+        "unit_runs": [run_a, run_b],
+    }
+    _write(result, [rec])
+
+    records, report = mcr.merge_results([result], dimensions=None, db_path=None)
+
+    assert report["accepted"]
+    assert report["provenance"]["models"] == {
+        "claude-opus-4-8": 1,
+        "gpt-5.5": 1,
+    }
+    assert {field["run"]["model"] for field in records[0]["fields"]} == {
+        "claude-opus-4-8",
+        "gpt-5.5",
+    }
+
+
 def test_same_profile_across_files_unions_fields(tmp_path):
     a = tmp_path / "a.jsonl"
     b = tmp_path / "b.jsonl"

@@ -76,6 +76,7 @@ JOB_CHOICES = [
     ("1", "1 call at a time"),
 ]
 MAX_JOBS = 32  # upper bound for parallel model calls (quota/rate-limit safety)
+HARNESS_VERSION = "1.0.0"
 
 
 def _supports_color() -> bool:
@@ -384,7 +385,7 @@ def run_validate(root: Path = PACKAGE_ROOT) -> int:
     if total and done < total:
         print(
             f"WARN: results are INCOMPLETE — {done}/{total} units done. "
-            "Finish the run (re-run the same command) before sending results.jsonl.",
+            "Resume and finish the run before sending results.jsonl.",
             file=sys.stderr,
         )
         return 1
@@ -404,28 +405,81 @@ def _write_active_run(settings: dict[str, Any]) -> None:
     )
 
 
-def _check_progress_settings(settings: dict[str, Any], *, restart: bool) -> None:
+def _progress_has_legacy_rows(path: Path) -> bool:
+    if not path.exists():
+        return False
+    for line in path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        try:
+            rec = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        if not isinstance(rec.get("run"), dict):
+            return True
+    return False
+
+
+def _run_from_active_metadata(
+    active: dict[str, str],
+    *,
+    warnings: list[str],
+) -> dict[str, Any] | None:
+    if not (active.get("backend") and active.get("model") and active.get("effort")):
+        return None
+    settings = {**DEFAULTS, **active}
+    return {
+        "backend": active.get("backend"),
+        "model": active.get("model"),
+        "effort": active.get("effort"),
+        "runner_version": HARNESS_VERSION,
+        "assignment": build_assignment_provenance(PACKAGE_ROOT, settings, warnings),
+    }
+
+
+def _backfill_legacy_progress_run(path: Path, run: dict[str, Any]) -> None:
+    lines: list[str] = []
+    changed = False
+    for raw in path.read_text(encoding="utf-8").splitlines():
+        line = raw.strip()
+        if not line:
+            continue
+        try:
+            rec = json.loads(line)
+        except json.JSONDecodeError:
+            lines.append(raw)
+            continue
+        if not isinstance(rec.get("run"), dict):
+            rec["run"] = run
+            changed = True
+        lines.append(json.dumps(rec, ensure_ascii=False))
+    if changed:
+        path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def _check_progress_settings(
+    settings: dict[str, Any],
+    *,
+    restart: bool,
+    warnings: list[str],
+) -> None:
     if restart:
         return
     if not PROGRESS_PATH.exists():
         return
     active = read_flat_yaml(ACTIVE_RUN_PATH)
-    active_hash = active.get("settings_hash")
-    current_hash = settings_hash(settings)
-    if not active_hash:
+    if not _progress_has_legacy_rows(PROGRESS_PATH):
+        return
+    legacy_run = _run_from_active_metadata(active, warnings=warnings)
+    if legacy_run is None:
         print(
             "ERROR: existing progress has no active-run metadata; rerun with --restart "
             "to avoid mixing backend/model/effort provenance.",
             file=sys.stderr,
         )
         raise SystemExit(1)
-    if active_hash and active_hash != current_hash:
-        print(
-            "ERROR: existing progress was created with different backend/model/effort; "
-            "rerun with the previous settings or pass --restart.",
-            file=sys.stderr,
-        )
-        raise SystemExit(1)
+    _backfill_legacy_progress_run(PROGRESS_PATH, legacy_run)
 
 
 def run_harness(settings: dict[str, Any], *, restart: bool = False, smoke: bool = False) -> int:
@@ -434,7 +488,7 @@ def run_harness(settings: dict[str, Any], *, restart: bool = False, smoke: bool 
     # and leaves the persistent checkpoint, settings, and active-run untouched.
     out_rel = "../.smoke_results.jsonl" if smoke else "../results.jsonl"
     if not smoke:
-        _check_progress_settings(settings, restart=restart)
+        _check_progress_settings(settings, restart=restart, warnings=warnings)
         write_flat_yaml(SETTINGS_PATH, settings)
         _write_active_run(settings)
 

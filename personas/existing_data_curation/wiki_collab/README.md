@@ -32,9 +32,11 @@ The runner verifies package checksums before every action, stores settings in
 quota runs out. The menu offers Codex (`gpt-5.5`) or Claude Code
 (`claude-opus-4-8`), backend-specific effort choices, parallelism, smoke test,
 real run, environment/CLI health check, and validation. Repeated backend
-failures stop the run so they can fix auth/quota and resume later. They edit
-`collab_kit/solver.py` only if they want to improve the extraction method. They
-return `results.jsonl`.
+failures stop the run so they can fix auth/quota and resume later. If one
+backend runs out of quota, they can reconfigure to the other backend and
+continue; completed units keep per-unit provenance, and mixed-backend results
+are marked in `results.jsonl`. They edit `collab_kit/solver.py` only if they
+want to improve the extraction method. They return `results.jsonl`.
 
 **3. You — verify + merge every return** (run from the repo root):
 
@@ -50,8 +52,9 @@ PYTHONPATH=. python3 personas/existing_data_curation/scripts/merge_collab_result
 
 Checks format, verifies assignment hashes/ranges, verifies each
 `global_idx`/`task_id`/`qid`/`input_sha256` against the source DB, unions fields
-per profile, reports conflicts, and tallies model/effort/version. List each
-`--package-manifest` in the same order as its `--results` file.
+per profile, reports conflicts, and tallies model/effort/version, including
+mixed-backend resumes. List each `--package-manifest` in the same order as its
+`--results` file.
 
 ---
 
@@ -68,6 +71,47 @@ This directory contains two collaboration flows:
 For the current 1339-dimension attribution work, prefer the worker package
 flow. It gives collaborators only the files they need and keeps the exchange
 contract small.
+
+## Amazon Reviews 2023 Collaboration
+
+Amazon review collaboration uses a separate adapter and range runner. Build the
+SQLite profile DB from temporally split user histories:
+
+```bash
+python3 personas/existing_data_curation/scripts/build_amazon_collab_db.py \
+  --user-histories raw/amazon_reviews_2023/persona_dimension_inference/user_histories.jsonl \
+  --out-db /tmp/matraix-amazon-reviews-2023.sqlite \
+  --manifest /tmp/matraix-amazon-reviews-2023.manifest.json \
+  --dataset-id matraix_amazon_reviews_2023_v1 \
+  --product-metadata-sidecar raw/amazon_reviews_2023/persona_dimension_inference/product_metadata.jsonl
+```
+
+Run a worker range with the Amazon evidence-profile pipeline. The mock backend
+creates a schema-valid archive without API access:
+
+```bash
+python3 personas/existing_data_curation/worker_kit/run_amazon_range.py \
+  --db /tmp/matraix-amazon-reviews-2023.sqlite \
+  --protocol personas/existing_data_curation/protocols/amazon_review_persona_inference_v1 \
+  --range 0:100 \
+  --worker-id alice \
+  --dataset-id matraix_amazon_reviews_2023_v1 \
+  --dataset-sha256 DATASET_SHA256 \
+  --backend mock
+```
+
+Real runs use `--backend openai-api` and the same evidence-profile path. The
+runner defaults to `--schema-routing-mode recall`; use `category` or `none` only
+for explicit ablations. Validate returned archives with:
+
+```bash
+python3 personas/existing_data_curation/scripts/validate_amazon_results.py \
+  --archive results_alice_amazon_review_persona_inference_v1_0000000000_0000000100.tar.gz \
+  --db /tmp/matraix-amazon-reviews-2023.sqlite \
+  --assignment-json alice_assignment.json \
+  --prompt-sha256 PROMPT_SHA256 \
+  --schema-path personas/dimensions+new.json
+```
 
 ## Recommended: Owner Creates A Worker Package
 
@@ -136,7 +180,7 @@ Collaborator quickstart from the unpacked package:
 
 The menu's mock smoke test proves the files and contract line up. Real
 Claude/Codex runs use the collaborator's own CLI login. If quota runs out,
-the runner stops after repeated failures; rerun the same command later and
+the runner stops after repeated failures; rerun later and
 completed units are skipped.
 
 ## Advanced: SQLite Range Extraction

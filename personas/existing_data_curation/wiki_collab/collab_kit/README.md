@@ -73,8 +73,11 @@ Claude Code effort choices are `high`, `medium`, `xhigh`, and `max`.
 
 The run is **resumable**. Every finished (profile × category) unit is
 checkpointed to `<out>.progress.jsonl`, so you can stop any time — Ctrl-C, or
-your model quota runs out — and **just run the exact same command again later**
-to continue. Finished units are skipped; only the remaining ones are attempted.
+your model quota runs out — and run again later to continue. Finished units are
+skipped; only the remaining ones are attempted. You may reconfigure the
+backend/model/effort before resuming, for example switching from Claude Code to
+Codex after quota exhaustion; each completed unit keeps its own provenance in
+`results.jsonl`, and mixed-backend results are marked as mixed.
 A unit that errors (e.g. a 429) is left pending and retried on the next run.
 If repeated units fail, the runner stops instead of hammering a broken/quota-hit
 backend.
