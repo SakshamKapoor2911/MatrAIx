@@ -75,6 +75,7 @@ JOB_CHOICES = [
     ("8", "8 parallel calls"),
     ("1", "1 call at a time"),
 ]
+MAX_JOBS = 32  # upper bound for parallel model calls (quota/rate-limit safety)
 
 
 def _supports_color() -> bool:
@@ -230,8 +231,11 @@ def normalize_settings(settings: dict[str, Any]) -> dict[str, str]:
     effort_values = {value for value, _description in EFFORT_CHOICES_BY_BACKEND[backend]}
     if normalized.get("effort") not in effort_values:
         normalized["effort"] = DEFAULT_EFFORT_BY_BACKEND[backend]
-    if normalized.get("jobs") not in {value for value, _description in JOB_CHOICES}:
-        normalized["jobs"] = DEFAULTS["jobs"]
+    try:
+        jobs_n = int(normalized.get("jobs", DEFAULTS["jobs"]))
+    except (TypeError, ValueError):
+        jobs_n = int(DEFAULTS["jobs"])
+    normalized["jobs"] = str(max(1, min(MAX_JOBS, jobs_n)))
     normalized["command_override"] = normalized.get("command_override", "")
     return normalized
 
@@ -554,6 +558,28 @@ def _select_option(
         print(f"Please choose a number from 1 to {len(choices)}.")
 
 
+def _prompt_jobs(default: str) -> str:
+    """Ask for the number of parallel jobs as a free-typed integer (1..MAX_JOBS).
+
+    Enter keeps the default; the common preset values are shown only as a hint.
+    Re-prompts on anything out of range so the value is always usable."""
+    try:
+        default_n = max(1, min(MAX_JOBS, int(default)))
+    except (TypeError, ValueError):
+        default_n = int(DEFAULTS["jobs"])
+    common = ", ".join(sorted({value for value, _ in JOB_CHOICES}, key=int))
+    print(f"\n{_bold('Parallel jobs')} — how many model calls run at once.")
+    print(_dim(f"  Type any whole number 1-{MAX_JOBS} (common: {common}). "
+               "Higher = faster but heavier on your quota/CPU."))
+    while True:
+        raw = input(f"Number of parallel jobs [default {default_n}]: ").strip()
+        if not raw:
+            return str(default_n)
+        if raw.isdigit() and 1 <= int(raw) <= MAX_JOBS:
+            return str(int(raw))
+        print(f"Please enter a whole number from 1 to {MAX_JOBS}.")
+
+
 def _normalize_interactive_settings(settings: dict[str, str]) -> dict[str, str]:
     normalized = normalize_settings(settings)
     if normalized["backend"] == "mock":
@@ -583,7 +609,7 @@ def configure_interactive(existing: dict[str, str]) -> dict[str, str]:
         EFFORT_CHOICES_BY_BACKEND[backend],
         default_value=settings.get("effort") or DEFAULT_EFFORT_BY_BACKEND[backend],
     )
-    settings["jobs"] = _select_option("Parallel jobs", JOB_CHOICES, default_value=settings.get("jobs"))
+    settings["jobs"] = _prompt_jobs(settings.get("jobs") or DEFAULTS["jobs"])
     settings["command_override"] = ""
     write_flat_yaml(SETTINGS_PATH, settings)
     print(f"Wrote settings -> {SETTINGS_PATH}")

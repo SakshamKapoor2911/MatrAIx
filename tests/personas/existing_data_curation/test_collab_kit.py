@@ -355,7 +355,8 @@ def test_configure_interactive_normalizes_old_low_effort(tmp_path, monkeypatch):
 
 def test_configure_interactive_uses_claude_choices(tmp_path, monkeypatch):
     monkeypatch.setattr(assignment_runner, "SETTINGS_PATH", tmp_path / "settings.yaml")
-    answers = iter(["2", "4", "4"])
+    # backend=claude(2), effort=max(4), jobs= typed directly as "8"
+    answers = iter(["2", "4", "8"])
     monkeypatch.setattr("builtins.input", lambda _prompt: next(answers))
 
     settings = assignment_runner.configure_interactive({})
@@ -365,6 +366,25 @@ def test_configure_interactive_uses_claude_choices(tmp_path, monkeypatch):
     assert settings["effort"] == "max"
     assert settings["jobs"] == "8"
     assert settings["command_override"] == ""
+
+
+def test_prompt_jobs_accepts_custom_number(monkeypatch):
+    answers = iter(["12"])
+    monkeypatch.setattr("builtins.input", lambda _prompt: next(answers))
+    assert assignment_runner._prompt_jobs("4") == "12"
+
+
+def test_prompt_jobs_enter_keeps_default(monkeypatch):
+    answers = iter([""])
+    monkeypatch.setattr("builtins.input", lambda _prompt: next(answers))
+    assert assignment_runner._prompt_jobs("6") == "6"
+
+
+def test_prompt_jobs_reprompts_until_in_range(monkeypatch):
+    # too low, then above MAX_JOBS, then a valid value
+    answers = iter(["0", str(assignment_runner.MAX_JOBS + 1), "3"])
+    monkeypatch.setattr("builtins.input", lambda _prompt: next(answers))
+    assert assignment_runner._prompt_jobs("4") == "3"
 
 
 def test_assignment_runner_no_longer_accepts_install_uv_flag():
@@ -390,7 +410,8 @@ def test_configured_settings_normalizes_disallowed_direct_values(tmp_path, monke
     assert settings["backend"] == "codex-acp"
     assert settings["model"] == "gpt-5.5"
     assert settings["effort"] == "high"
-    assert settings["jobs"] == "4"
+    # jobs is now free-form numeric, clamped into [1, MAX_JOBS] (99 -> 32)
+    assert settings["jobs"] == str(assignment_runner.MAX_JOBS)
 
 
 def test_check_progress_settings_rejects_missing_active_run(tmp_path, monkeypatch):
