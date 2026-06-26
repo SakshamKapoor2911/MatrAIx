@@ -20,6 +20,9 @@ Amazon review personas and Amazon-derived outputs are not used in this selection
 - `nemotron_within_domain_diversity_projection.svg`: SVG plot used by the within-domain diversity visualization.
 - `nemotron_within_domain_cluster_visualization.md`: cluster-based within-domain visualization and cluster summaries.
 - `nemotron_within_domain_cluster_projection.svg`: SVG plot showing clusters within each application domain.
+- `nemotron_within_domain_cluster_projection_matplotlib.png`: Matplotlib-rendered within-domain cluster figure.
+- `nemotron_within_domain_cluster_projection_matplotlib.pdf`: PDF export of the Matplotlib-rendered cluster figure.
+- `nemotron_domain_user_characteristics.md`: qualitative summary of key user characteristics in each domain.
 
 ## Selection Goal
 
@@ -73,3 +76,5 @@ Use the diversity visualization file as a quick QA view for whether each domain'
 Use the within-domain diversity visualization to inspect whether the 50 selected users inside each application domain cover multiple overall profile regions.
 
 Use the cluster visualization to inspect the main persona groups inside each domain and the representative users for each group.
+
+Use the Matplotlib cluster figure for paper or slide drafts, and use the domain characteristics summary to describe the main types of users represented in each application domain.
