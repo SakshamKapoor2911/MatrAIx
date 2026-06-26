@@ -114,15 +114,15 @@ served at **`/docs`** when the app is running.
 
 The chatbot application adapter lives in
 `applications/tasks/chatbot_chat_api/environment/chatbot_api/harbor_api/`. It
-contains the RecAI, finance, and medical chatbot adapters. PersonaEval now calls
-these adapters directly from the FastAPI backend, so the demo no longer starts a
-Harbor run to execute chatbot, survey, or web simulations.
+contains the shared chatbot router and the RecAI, finance, and medical chatbot
+adapters. PersonaEval's FastAPI runtime calls these adapters through the same
+chat contract used by the UI.
 
 | Method | Path | Purpose |
 |---|---|---|
 | GET | `/health` | Adapter liveness check. |
-| POST | `/v1/session` | Create a recommender chat session. |
-| POST | `/v1/messages` | Send one user message and receive one recommender reply. |
+| POST | `/v1/session` | Create an application chat session. |
+| POST | `/v1/messages` | Send one user message and receive one chatbot reply. |
 | GET | `/v1/conversation?sessionId=...` | Fetch transcript and turns. |
 | GET | `/v1/recommendations?sessionId=...` | Fetch recommended item ids across turns. |
 
@@ -139,13 +139,29 @@ Local PersonaEval runtime:
 ```bash
 export OPENAI_API_KEY=...
 export ANTHROPIC_API_KEY=...   # or CLAUDE_API_KEY, when using Claude persona models
+export CHATBOT_API_URL=http://127.0.0.1:8000   # when a shared chatbot router is exposed on the host
 ./run_demo.sh
 ```
 
 The RecAI adapter uses the real RecAI / InteRecAgent path and still needs the
-resource bundle described above. The finance adapter uses OpenAI Agents SDK and
-expects an OpenBB MCP endpoint when a finance run starts. The medical adapter
-expects `MEDICAL_ASSISTANT_URL` to point at the medical assistant service.
+resource bundle described above. Finance and medical runs use an HTTP chatbot
+sidecar. The backend resolves their base URL in this order:
+`CHATBOT_UPSTREAM_FINANCE` or `CHATBOT_UPSTREAM_MEDICAL`, then legacy
+`FINANCE_CHATBOT_URL` or `MEDICAL_CHATBOT_URL`, then `CHATBOT_API_URL`, then the
+local defaults `http://127.0.0.1:8901` and `http://127.0.0.1:8902`.
+
+The shared chatbot router is the simplest local setup when it is exposed on the
+host. Set `CHATBOT_API_URL` to that router, then check app readiness with:
+
+```bash
+curl "http://127.0.0.1:8000/ready?applicationId=finance_openbb&applicationContext=financial_research"
+curl "http://127.0.0.1:8000/ready?applicationId=medical_assistant&applicationContext=medical_consultation"
+```
+
+The sidecars also have their own upstream settings. The finance sidecar needs
+`OPENAI_API_KEY` and uses `OPENBB_MCP_URL` for OpenBB tools. The medical sidecar
+uses `MEDICAL_ASSISTANT_URL` to reach the medical assistant service, and that
+service needs its own model and tool credentials when those features are enabled.
 
 ---
 
