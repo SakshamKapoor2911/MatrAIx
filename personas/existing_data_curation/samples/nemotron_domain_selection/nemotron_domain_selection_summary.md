@@ -14,6 +14,8 @@ Amazon review personas and Amazon-derived outputs are not used in this selection
 
 - `nemotron_test_users_50_per_domain.md`: detailed 50-user list for each domain, with links to the full Nemotron persona YAML files.
 - `nemotron_domain_selection_summary.md`: this short presentation summary.
+- `nemotron_domain_diversity_visualization.md`: overall-diversity summary and 2D projection of the selected users.
+- `nemotron_overall_diversity_projection.svg`: SVG plot used by the diversity visualization.
 
 ## Selection Goal
 
@@ -61,3 +63,5 @@ Use the detailed markdown file as the review surface. Each selected user row inc
 - the diversity role represented by that user
 
 The linked YAML file is the source of truth for the full persona.
+
+Use the diversity visualization file as a quick QA view for whether each domain's selected users cover different overall persona profiles in text-feature space.
