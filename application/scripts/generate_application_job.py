@@ -156,7 +156,9 @@ def main() -> None:
     sidecar = out_path.with_suffix(".meta.json")
     sidecar.write_text(json.dumps(meta, indent=2) + "\n", encoding="utf-8")
 
-    print(f"Matched {meta['matched_pool_size']} personas; selected {meta['sample_size']}")
+    print(
+        f"Matched {meta['matched_pool_size']} personas; selected {meta['sample_size']}"
+    )
     print(f"Job: {out_path}")
     print(f"Meta: {sidecar}")
     print(f"Run: uv run harbor run -c {out_path.relative_to(REPO_ROOT)}")
