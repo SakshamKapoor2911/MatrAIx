@@ -164,9 +164,14 @@ class AgentRunner:
         except Exception as e:
             return {"success": False, "error": str(e)}
 
-    def run(self, num_steps: int = 1) -> list[StepResult]:
+    def run(self, num_steps: int = 1, step_delay_s: float = 0.0) -> list[StepResult]:
         results = []
-        for _ in range(num_steps):
+        for n in range(num_steps):
             result = self.step()
             results.append(result)
+            # Pace steps so a long-horizon social sim evolves over wall-clock
+            # time instead of finishing in seconds. Skip the delay after the
+            # last step.
+            if step_delay_s > 0 and n < num_steps - 1:
+                time.sleep(step_delay_s)
         return results

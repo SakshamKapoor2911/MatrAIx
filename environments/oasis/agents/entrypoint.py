@@ -37,14 +37,15 @@ def main():
     )
 
     num_steps = int(os.environ.get("NUM_STEPS", "5"))
+    step_delay_s = float(os.environ.get("STEP_DELAY_S", "0"))
 
-    logger.info(f"Starting agent | persona={config.persona_path} | model={config.llm_model} | steps={num_steps}")
+    logger.info(f"Starting agent | persona={config.persona_path} | model={config.llm_model} | steps={num_steps} | step_delay={step_delay_s}s")
 
     agent = AgentRunner(config)
     user_id = agent.initialize()
     logger.info(f"Registered as user_id={user_id} ({agent.persona.name})")
 
-    results = agent.run(num_steps=num_steps)
+    results = agent.run(num_steps=num_steps, step_delay_s=step_delay_s)
 
     for r in results:
         actions_str = ", ".join(a["action"] for a in r.actions_taken)

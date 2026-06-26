@@ -11,7 +11,7 @@
 #
 # Env (set by the orchestrator when it `docker run`s this image):
 #   PERSONA_PATH     persona YAML to embody (path inside the image)
-#   PLATFORM_URL     shared platform, e.g. http://host.docker.internal:8000
+#   PLATFORM_URL     shared platform, e.g. http://127.0.0.1:8000
 #   LLM_MODEL        HF model id for this agent's private vLLM (default Qwen/Qwen3-4B)
 #   VLLM_PORT        local port for the in-container vLLM (default 8100)
 #   GPU_MEM_UTIL     vLLM --gpu-memory-utilization (default 0.40 -> ~2 agents/GPU)
@@ -37,11 +37,17 @@ echo "[agent ${AGENT_ID}] booting private vLLM: model=${LLM_MODEL} port=${VLLM_P
 
 # 1. Launch this agent's private vLLM in the background.
 #    (base image ships python3, not python)
+# Tool calling: the OASIS agent loop drives actions via OpenAI tool calls, so
+# vLLM must run with auto tool choice + a parser. Qwen3/Qwen2.5 use the "hermes"
+# parser. Override with TOOL_CALL_PARSER for other model families.
+TOOL_CALL_PARSER="${TOOL_CALL_PARSER:-hermes}"
 python3 -m vllm.entrypoints.openai.api_server \
     --model "${LLM_MODEL}" \
     --port "${VLLM_PORT}" \
     --gpu-memory-utilization "${GPU_MEM_UTIL}" \
     --max-model-len "${VLLM_MAX_LEN}" \
+    --enable-auto-tool-choice \
+    --tool-call-parser "${TOOL_CALL_PARSER}" \
     --no-enable-log-requests \
     > "/tmp/vllm_agent_${AGENT_ID}.log" 2>&1 &
 VLLM_PID=$!
