@@ -110,7 +110,7 @@ export function PreflightChip() {
         <div
           role="region"
           aria-label="Setup checklist"
-          className="panel absolute right-0 top-full z-30 mt-2 w-80 rounded-md border border-outline bg-surface-lowest p-3 shadow-2xl"
+          className="pop-in absolute right-0 top-full z-30 mt-2 w-80 max-w-[calc(100vw-1.5rem)] max-h-[70vh] overflow-y-auto custom-scrollbar rounded-md border border-outline bg-surface-lowest p-3 shadow-2xl"
         >
           <p className="hud mb-2 text-[10px] text-text-dim">
             Setup checklist

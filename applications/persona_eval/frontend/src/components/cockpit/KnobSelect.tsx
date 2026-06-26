@@ -226,7 +226,7 @@ function Listbox({
       tabIndex={-1}
       onKeyDown={onMenuKey}
       ref={(el) => el?.focus()}
-      className={`custom-scrollbar absolute left-0 top-full z-30 mt-1 max-h-72 overflow-auto rounded-md border border-outline bg-surface-lowest p-1 shadow-2xl outline-none ${widthClass}`}
+      className={`pop-in custom-scrollbar absolute left-0 top-full z-30 mt-1 max-h-72 overflow-auto rounded-md border border-outline bg-surface-lowest p-1 shadow-2xl outline-none ${widthClass}`}
     >
       {options.map((opt, idx) => {
         const isSelected = opt.value === value;

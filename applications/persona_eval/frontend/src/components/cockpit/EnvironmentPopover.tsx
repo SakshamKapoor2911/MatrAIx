@@ -168,7 +168,7 @@ export function EnvironmentPopover({ environment }: EnvironmentPopoverProps) {
           id={panelId}
           role="region"
           aria-label="Fixed environment"
-          className="panel absolute right-0 top-full z-30 mt-2 w-80 rounded-md border border-outline bg-surface-lowest p-3 shadow-2xl"
+          className="pop-in absolute right-0 top-full z-30 mt-2 w-80 max-w-[calc(100vw-1.5rem)] max-h-[70vh] overflow-y-auto custom-scrollbar rounded-md border border-outline bg-surface-lowest p-3 shadow-2xl"
         >
           <div className="mb-2 flex items-center justify-between gap-2">
             <p className="flex items-center gap-1 hud text-[10px] text-text-dim">

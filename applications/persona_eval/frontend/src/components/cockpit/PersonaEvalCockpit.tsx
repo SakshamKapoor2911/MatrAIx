@@ -706,12 +706,12 @@ function PersonaPickerModal({
   if (!open) return null;
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} aria-hidden />
+      <div className="fade-in absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} aria-hidden />
       <div
         role="dialog"
         aria-modal="true"
         aria-label="Choose a persona"
-        className="relative z-10 flex h-[80vh] w-full max-w-[380px] flex-col overflow-hidden rounded-md border border-outline bg-surface-lowest shadow-2xl"
+        className="pop-in relative z-10 flex h-[80vh] w-full max-w-[380px] flex-col overflow-hidden rounded-md border border-outline bg-surface-lowest shadow-2xl"
       >
         <div className="flex shrink-0 items-center justify-between border-b border-outline px-4 py-3">
           <span className="hud text-[10px] text-primary">Choose a persona</span>

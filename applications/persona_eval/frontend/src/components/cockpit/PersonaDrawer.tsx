@@ -119,14 +119,14 @@ export function PersonaDrawer({ open, onClose, persona, context, onUse }: Person
   return (
     <div className="fixed inset-0 z-50">
       {/* Scrim */}
-      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} aria-hidden />
+      <div className="fade-in absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} aria-hidden />
 
       {/* Slide-over panel */}
       <div
         role="dialog"
         aria-modal="true"
         aria-label={`Full profile for ${title}`}
-        className="absolute bottom-0 right-0 top-0 z-10 flex w-[420px] max-w-[92vw] flex-col border-l border-outline bg-surface-lowest shadow-2xl"
+        className="slide-in-right absolute bottom-0 right-0 top-0 z-10 flex w-[420px] max-w-[92vw] flex-col border-l border-outline bg-surface-lowest shadow-2xl"
       >
         {/* Header */}
         <div className="flex-shrink-0 border-b border-outline p-5">

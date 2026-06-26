@@ -159,20 +159,25 @@
   letter-spacing: 0.14em;
 }
 
-/* Bordered box with a top-left cyan corner bracket. Use on bg-surface panels. */
-.panel {
-  position: relative;
-}
-.panel::before {
-  content: "";
-  position: absolute;
-  top: -1px;
-  left: -1px;
-  width: 9px;
-  height: 9px;
-  border-top: 2px solid rgb(var(--primary));
-  border-left: 2px solid rgb(var(--primary));
-  pointer-events: none;
+/* Bordered box with a top-left cyan corner bracket. Use on bg-surface panels.
+   In @layer components so Tailwind positioning utilities (absolute/fixed/sticky)
+   still win — otherwise `.panel` here would override `.absolute` by source order
+   and break every popover/overlay that combines the two. */
+@layer components {
+  .panel {
+    position: relative;
+  }
+  .panel::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    width: 9px;
+    height: 9px;
+    border-top: 2px solid rgb(var(--primary));
+    border-left: 2px solid rgb(var(--primary));
+    pointer-events: none;
+  }
 }
 
 /* Cyan glow — RESERVED for the single primary CTA on a view. */
@@ -241,6 +246,65 @@
   }
   .animate-rb-spin {
     animation: rb-spin 0.7s linear infinite;
+  }
+
+  /* Overlay entrance — popovers, dropdowns, menus. ease-out, short. */
+  @keyframes pop-in {
+    from {
+      opacity: 0;
+      transform: translateY(-4px) scale(0.985);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .pop-in {
+    animation: pop-in 0.14s cubic-bezier(0.22, 1, 0.36, 1);
+    transform-origin: top;
+  }
+
+  /* Drawer / sheet slide-in from the right. */
+  @keyframes slide-in-right {
+    from {
+      opacity: 0;
+      transform: translateX(16px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .slide-in-right {
+    animation: slide-in-right 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Quiet rise-in for content that arrives (lists, results, panels). */
+  @keyframes rise-in {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .rise-in {
+    animation: rise-in 0.22s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  /* Backdrop / full-surface fade — scrims, full-screen overlays. */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  .fade-in {
+    animation: fade-in 0.15s ease-out;
   }
 }
 

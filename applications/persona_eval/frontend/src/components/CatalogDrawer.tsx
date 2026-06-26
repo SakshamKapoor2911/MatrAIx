@@ -111,7 +111,7 @@ export function CatalogDrawer({ open, onClose, selectedId, onSelect }: CatalogDr
 
   return (
     <div
-      className="fixed inset-0 z-50 flex flex-col bg-surface-dim"
+      className="fade-in fixed inset-0 z-50 flex flex-col bg-surface-dim"
       role="dialog"
       aria-modal="true"
       aria-label="Browse personas"
