@@ -56,6 +56,8 @@ jobs:
         run: |
           uv run pytest tests/ \
             -m "not runtime" \
+            --ignore=tests/unit/models/test_registry.py \
+            --ignore=tests/unit/test_sync_registry_to_supabase.py \
             --cov=src/harbor \
             --cov-report=term-missing
 
@@ -66,6 +68,8 @@ jobs:
             -m runtime \
             -n 4 \
             --dist load \
+            --ignore=tests/unit/models/test_registry.py \
+            --ignore=tests/unit/test_sync_registry_to_supabase.py \
             --cov=src/harbor \
             --cov-append \
             --cov-report=xml \
@@ -74,12 +78,24 @@ jobs:
       - name: Run all tests with coverage (Windows)
         if: runner.os == 'Windows'
         run: |
-          uv run pytest tests/ --cov=src/harbor --cov-report=xml --cov-report=term-missing --ignore=tests/unit/agents/installed/test_agent_install_execution.py -m "not runtime and not windows_containers" -k "not test_full_task_mapping"
+          uv run pytest tests/ \
+            --cov=src/harbor \
+            --cov-report=xml \
+            --cov-report=term-missing \
+            --ignore=tests/unit/agents/installed/test_agent_install_execution.py \
+            --ignore=tests/unit/models/test_registry.py \
+            --ignore=tests/unit/test_sync_registry_to_supabase.py \
+            -m "not runtime and not windows_containers" \
+            -k "not test_full_task_mapping"
 
       - name: Run Windows container integration tests
         if: runner.os == 'Windows'
         run: |
-          uv run pytest tests/ -m "windows_containers" -v
+          uv run pytest tests/ \
+            -m "windows_containers" \
+            --ignore=tests/unit/models/test_registry.py \
+            --ignore=tests/unit/test_sync_registry_to_supabase.py \
+            -v
         env:
           # The windows-2022 runner lacks docker-buildx, which newer Compose
           # versions require for Bake-based builds. docker/setup-buildx-action

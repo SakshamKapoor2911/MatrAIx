@@ -1,5 +1,10 @@
 """Canonical metadata for MatrAIx example tasks (application + persona bench).
 
+Application scenarios and persona bench tasks can share a folder slug (e.g.
+``example-survey_product-feedback``) but use separate catalogs:
+``APPLICATION_TASK_METADATA`` (FocusLoop open-text survey) vs
+``PERSONA_BENCH_TASK_METADATA`` (ClearQueue MCQ bench with grounding).
+
 Domain / vertical (first focus set):
   software | finance | healthcare | commerce-retail
 
@@ -19,6 +24,7 @@ Harbor ``[task].name`` (exactly one ``/``):
 from __future__ import annotations
 
 from pathlib import Path
+from typing import Any, cast
 
 import toml
 
@@ -27,18 +33,16 @@ DOMAIN_FINANCE = "finance"
 DOMAIN_HEALTHCARE = "healthcare"
 DOMAIN_COMMERCE_RETAIL = "commerce-retail"
 
-EXAMPLE_TASK_METADATA: dict[str, dict[str, object]] = {
+APPLICATION_TASK_METADATA: dict[str, dict[str, object]] = {
     "example-survey_product-feedback": {
         "type": "survey",
         "domain": DOMAIN_SOFTWARE,
-        "bench_dim_index": 47,
-        "bench_dim_id": "economic_motivation",
         "tags": [
-            "ClearQueue",
+            "FocusLoop",
             "product concept",
+            "family calendar",
+            "household coordination",
             "subscription pricing",
-            "tier selection",
-            "spending posture",
         ],
     },
     "example-chat-api_support_chatbot": {
@@ -135,6 +139,40 @@ EXAMPLE_TASK_METADATA: dict[str, dict[str, object]] = {
     },
 }
 
+PERSONA_BENCH_TASK_METADATA: dict[str, dict[str, object]] = {
+    "example-survey_product-feedback": {
+        "type": "survey",
+        "domain": DOMAIN_SOFTWARE,
+        "bench_dim_index": 47,
+        "bench_dim_id": "economic_motivation",
+        "tags": [
+            "ClearQueue",
+            "product concept",
+            "subscription pricing",
+            "tier selection",
+            "spending posture",
+        ],
+    },
+}
+
+# Backward-compatible alias used by persona bench tests and grounding helpers.
+EXAMPLE_TASK_METADATA = PERSONA_BENCH_TASK_METADATA
+
+
+def _bench_dim_index(spec: dict[str, object]) -> int | None:
+    raw = spec.get("bench_dim_index")
+    if isinstance(raw, int):
+        return raw
+    if isinstance(raw, str) and raw.isdigit():
+        return int(raw)
+    return None
+
+
+def _as_str_list(value: object) -> list[str]:
+    if not isinstance(value, list):
+        return []
+    return [str(item) for item in value]
+
 
 def _example_slug(dirname: str) -> str:
     slug = dirname.replace("_", "-")
@@ -158,9 +196,9 @@ def persona_bench_harbor_name(dirname: str, *, bench_dim_index: int | None = Non
 
 def build_application_task_toml_dict(dirname: str, *, difficulty: str = "easy") -> dict:
     """Build task.toml content from ``task_catalog`` for an application task."""
-    if dirname not in EXAMPLE_TASK_METADATA:
+    if dirname not in APPLICATION_TASK_METADATA:
         raise KeyError(
-            f"No catalog entry for {dirname!r}; add it to EXAMPLE_TASK_METADATA first"
+            f"No catalog entry for {dirname!r}; add it to APPLICATION_TASK_METADATA first"
         )
     data: dict = {
         "version": "1.0",
@@ -177,19 +215,18 @@ def build_application_task_toml_dict(dirname: str, *, difficulty: str = "easy") 
             "gpus": 0,
         },
     }
-    apply_example_metadata(data, dirname)
+    apply_task_metadata(data, dirname, APPLICATION_TASK_METADATA)
     return data
 
 
 def build_persona_task_toml_dict(dirname: str, *, difficulty: str = "easy") -> dict:
     """Build task.toml content from ``task_catalog`` for *dirname*."""
-    if dirname not in EXAMPLE_TASK_METADATA:
+    if dirname not in PERSONA_BENCH_TASK_METADATA:
         raise KeyError(
-            f"No catalog entry for {dirname!r}; add it to EXAMPLE_TASK_METADATA first"
+            f"No catalog entry for {dirname!r}; add it to PERSONA_BENCH_TASK_METADATA first"
         )
-    spec = EXAMPLE_TASK_METADATA[dirname]
-    dim_index = spec.get("bench_dim_index")
-    bench_dim_index = int(dim_index) if dim_index is not None else None
+    spec = PERSONA_BENCH_TASK_METADATA[dirname]
+    bench_dim_index = _bench_dim_index(spec)
     data: dict = {
         "version": "1.0",
         "artifacts": ["/app/output"],
@@ -209,13 +246,17 @@ def build_persona_task_toml_dict(dirname: str, *, difficulty: str = "easy") -> d
             "gpus": 0,
         },
     }
-    apply_example_metadata(data, dirname)
+    apply_task_metadata(data, dirname, PERSONA_BENCH_TASK_METADATA)
     return data
 
 
-def apply_example_metadata(data: dict, dirname: str) -> None:
+def apply_task_metadata(
+    data: dict,
+    dirname: str,
+    catalog: dict[str, dict[str, object]],
+) -> None:
     """Merge catalog metadata into a parsed task.toml dict."""
-    spec = EXAMPLE_TASK_METADATA.get(dirname)
+    spec = catalog.get(dirname)
     if spec is None:
         return
     task = data.setdefault("task", {})
@@ -232,7 +273,7 @@ def apply_example_metadata(data: dict, dirname: str) -> None:
         "difficulty": meta.get("difficulty", "easy"),
         "type": spec["type"],
         "domain": spec["domain"],
-        "tags": list(spec["tags"]),
+        "tags": _as_str_list(spec.get("tags")),
     }
     ordered.update(extra)
     data["metadata"] = ordered
@@ -248,7 +289,7 @@ def task_dirname_from_harbor_path(task_path: str) -> str:
 
 def get_task_catalog_entry(task_path: str) -> dict[str, object] | None:
     dirname = task_dirname_from_harbor_path(task_path)
-    spec = EXAMPLE_TASK_METADATA.get(dirname)
+    spec = PERSONA_BENCH_TASK_METADATA.get(dirname)
     return dict(spec) if spec is not None else None
 
 
@@ -300,7 +341,7 @@ def get_task_grounding_spec(
     grounding = entry.get("grounding")
     if not isinstance(grounding, dict):
         return None
-    return dict(grounding)
+    return {str(key): value for key, value in grounding.items()}
 
 
 def confounder_values_from_grounding(
@@ -311,12 +352,15 @@ def confounder_values_from_grounding(
     if not isinstance(raw, dict):
         return {}
     values: dict[str, str] = {}
-    for dim_id, spec in raw.items():
-        if isinstance(spec, str):
-            values[str(dim_id)] = spec
+    for dim_id, entry in raw.items():
+        if isinstance(entry, str):
+            values[str(dim_id)] = entry
             continue
-        if isinstance(spec, dict) and spec.get("value") is not None:
-            values[str(dim_id)] = str(spec["value"])
+        if isinstance(entry, dict):
+            entry_dict = cast(dict[str, Any], entry)
+            value = entry_dict.get("value")
+            if value is not None:
+                values[str(dim_id)] = str(value)
     return values
 
 

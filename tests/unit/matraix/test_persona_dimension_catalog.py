@@ -2,7 +2,19 @@
 
 from __future__ import annotations
 
-from matraix.persona_dimension_catalog import build_dimension_narrative
+import json
+from pathlib import Path
+
+from matraix.persona_dimension_catalog import build_dimension_narrative, load_dimension_catalog
+
+
+def test_dimensions_catalog_schema_version_is_1_0() -> None:
+    payload = json.loads(
+        Path("persona/dimensions.json").read_text(encoding="utf-8")
+    )
+    assert payload["schemaVersion"] == "1.0"
+    catalog = load_dimension_catalog("persona/dimensions.json")
+    assert catalog["schema_version"] == "1.0"
 
 
 def test_build_narrative_reads_like_biography() -> None:
