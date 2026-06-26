@@ -43,9 +43,13 @@ def validate_dimension(dim, idx):
     if "label" in dim and not isinstance(dim["label"], str):
         errors.append(f"  'label' must be string, got {type(dim['label']).__name__}")
     if "category" in dim and not isinstance(dim["category"], str):
-        errors.append(f"  'category' must be string, got {type(dim['category']).__name__}")
+        errors.append(
+            f"  'category' must be string, got {type(dim['category']).__name__}"
+        )
     if "description" in dim and not isinstance(dim["description"], str):
-        errors.append(f"  'description' must be string, got {type(dim['description']).__name__}")
+        errors.append(
+            f"  'description' must be string, got {type(dim['description']).__name__}"
+        )
     if "values" in dim and not isinstance(dim["values"], list):
         errors.append(f"  'values' must be list, got {type(dim['values']).__name__}")
 
@@ -112,20 +116,20 @@ def main():
             for error in errors:
                 print(error)
 
-    print(f"\n📊 Deprecated fields check:")
+    print("\n📊 Deprecated fields check:")
     if deprecated_count == 0:
-        print(f"✅ No deprecated fields found (contrib_id, synthlab)")
+        print("✅ No deprecated fields found (contrib_id, synthlab)")
     else:
         print(f"⚠️  Found {deprecated_count} dimensions with deprecated fields")
 
-    print(f"\n📝 Extra fields (non-standard, but allowed):")
+    print("\n📝 Extra fields (non-standard, but allowed):")
     if extra_fields_by_dim:
         sample_idx = next(iter(extra_fields_by_dim))
         sample_fields = extra_fields_by_dim[sample_idx]
         print(f"  Found extra fields: {sample_fields}")
         print(f"  ({len(extra_fields_by_dim)} dimensions have extra fields)")
     else:
-        print(f"  None (all dimensions use standard schema)")
+        print("  None (all dimensions use standard schema)")
 
     print("\n" + "=" * 70)
     print("DEPRECATED FIELD COUNT")
@@ -134,10 +138,12 @@ def main():
     synthlab_count = sum(1 for dim in dimensions if "synthlab" in dim)
     print(f"  contrib_id entries: {contrib_id_count}")
     print(f"  synthlab entries: {synthlab_count}")
-    print(f"  ✅ Expected: 0 of each (Phase 1 cleanup done)")
+    print("  ✅ Expected: 0 of each (Phase 1 cleanup done)")
 
     # Exit code
-    sys.exit(0 if invalid_count == 0 and contrib_id_count == 0 and synthlab_count == 0 else 1)
+    sys.exit(
+        0 if invalid_count == 0 and contrib_id_count == 0 and synthlab_count == 0 else 1
+    )
 
 
 if __name__ == "__main__":

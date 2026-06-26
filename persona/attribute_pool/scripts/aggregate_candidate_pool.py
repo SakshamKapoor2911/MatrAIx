@@ -59,101 +59,235 @@ def stable_id(source, original_id, label):
 
 
 def classify(text, source="", raw_category="", subcategory_hint=""):
-    hay = " ".join([text or "", source or "", raw_category or "", subcategory_hint or ""]).lower()
+    hay = " ".join(
+        [text or "", source or "", raw_category or "", subcategory_hint or ""]
+    ).lower()
 
     if any(k in source.lower() for k in ["ipip", "facet", "bfi", "hexaco"]):
         return "Personality Traits", subcategory_hint or "psychometric traits"
     if "schwartz" in source.lower() or "self-determination" in source.lower():
-        return "Values, Goals & Motivations", subcategory_hint or "values and motivation"
+        return (
+            "Values, Goals & Motivations",
+            subcategory_hint or "values and motivation",
+        )
 
     rules = [
         (
             "Demographics & Population Grounding",
             "demographics",
             [
-                "age", "gender", "sex", "race", "ethnic", "ethnicity", "nationality",
-                "citizen", "country", "region", "state", "city", "zipcode", "language",
-                "marital", "household", "income category", "education level",
-                "highest level of education", "occupation class",
+                "age",
+                "gender",
+                "sex",
+                "race",
+                "ethnic",
+                "ethnicity",
+                "nationality",
+                "citizen",
+                "country",
+                "region",
+                "state",
+                "city",
+                "zipcode",
+                "language",
+                "marital",
+                "household",
+                "income category",
+                "education level",
+                "highest level of education",
+                "occupation class",
             ],
         ),
         (
             "Life Context & Constraints",
             "life context and constraints",
             [
-                "health", "disability", "difficulty", "housing", "dwelling", "income",
-                "financial", "debt", "employment", "work week", "caregiving",
-                "family responsibilities", "stress", "lonely", "safety", "access",
-                "transportation", "mobility", "childcare",
+                "health",
+                "disability",
+                "difficulty",
+                "housing",
+                "dwelling",
+                "income",
+                "financial",
+                "debt",
+                "employment",
+                "work week",
+                "caregiving",
+                "family responsibilities",
+                "stress",
+                "lonely",
+                "safety",
+                "access",
+                "transportation",
+                "mobility",
+                "childcare",
             ],
         ),
         (
             "Personality Traits",
             "personality traits",
             [
-                "personality", "trait", "outgoing", "sociable", "organized",
-                "dependable", "anxious", "curious", "compassionate", "trusting",
-                "dominant", "quiet", "energy", "respectful", "emotional",
+                "personality",
+                "trait",
+                "outgoing",
+                "sociable",
+                "organized",
+                "dependable",
+                "anxious",
+                "curious",
+                "compassionate",
+                "trusting",
+                "dominant",
+                "quiet",
+                "energy",
+                "respectful",
+                "emotional",
             ],
         ),
         (
             "Values, Goals & Motivations",
             "values goals and motivations",
             [
-                "value", "values", "important to me", "goal", "motivation",
-                "achievement", "security", "autonomy", "benevolence", "tradition",
-                "self-direction", "ambition", "purpose", "moral priority",
-                "make my parents proud", "rich", "humble", "successful",
+                "value",
+                "values",
+                "important to me",
+                "goal",
+                "motivation",
+                "achievement",
+                "security",
+                "autonomy",
+                "benevolence",
+                "tradition",
+                "self-direction",
+                "ambition",
+                "purpose",
+                "moral priority",
+                "make my parents proud",
+                "rich",
+                "humble",
+                "successful",
             ],
         ),
         (
             "Worldview, Beliefs & Attitudes",
             "worldview beliefs and attitudes",
             [
-                "politic", "government", "trust", "religion", "religious", "church",
-                "attitude", "opinion", "belief", "believe", "climate", "environment",
-                "immigration", "inequality", "abortion", "gun", "tax", "policy",
-                "democracy", "science", "world", "future", "superpower",
-                "discrimination", "globalization", "institution",
+                "politic",
+                "government",
+                "trust",
+                "religion",
+                "religious",
+                "church",
+                "attitude",
+                "opinion",
+                "belief",
+                "believe",
+                "climate",
+                "environment",
+                "immigration",
+                "inequality",
+                "abortion",
+                "gun",
+                "tax",
+                "policy",
+                "democracy",
+                "science",
+                "world",
+                "future",
+                "superpower",
+                "discrimination",
+                "globalization",
+                "institution",
             ],
         ),
         (
             "Cognitive & Capability Profile",
             "cognitive and capability profile",
             [
-                "skill", "expertise", "literacy", "numeracy", "proficiency",
-                "knowledge", "reasoning", "problem-solving", "problem solving",
-                "decision", "learning", "education", "digital", "ai tools",
-                "internet", "language proficiency", "competence", "ability",
+                "skill",
+                "expertise",
+                "literacy",
+                "numeracy",
+                "proficiency",
+                "knowledge",
+                "reasoning",
+                "problem-solving",
+                "problem solving",
+                "decision",
+                "learning",
+                "education",
+                "digital",
+                "ai tools",
+                "internet",
+                "language proficiency",
+                "competence",
+                "ability",
             ],
         ),
         (
             "Behavioral Patterns & Preferences",
             "behavioral patterns and preferences",
             [
-                "hobby", "hobbies", "interest", "routine", "weekend", "media",
-                "social media", "podcast", "tv", "shopping", "travel", "dine",
-                "takeout", "exercise", "sports", "food", "culinary", "preference",
-                "consume", "use the internet", "dating apps",
+                "hobby",
+                "hobbies",
+                "interest",
+                "routine",
+                "weekend",
+                "media",
+                "social media",
+                "podcast",
+                "tv",
+                "shopping",
+                "travel",
+                "dine",
+                "takeout",
+                "exercise",
+                "sports",
+                "food",
+                "culinary",
+                "preference",
+                "consume",
+                "use the internet",
+                "dating apps",
             ],
         ),
         (
             "Social Identity, Relationships & Community",
             "social identity relationships and community",
             [
-                "community", "relationship", "friends", "family", "neighbor",
-                "cultural background", "culture", "social network", "belonging",
-                "membership", "organization", "civic", "local community",
-                "represented", "welcome", "people from different cultural",
+                "community",
+                "relationship",
+                "friends",
+                "family",
+                "neighbor",
+                "cultural background",
+                "culture",
+                "social network",
+                "belonging",
+                "membership",
+                "organization",
+                "civic",
+                "local community",
+                "represented",
+                "welcome",
+                "people from different cultural",
             ],
         ),
         (
             "Narrative Identity & Life History",
             "narrative identity and life history",
             [
-                "life story", "story of your life", "childhood", "formative",
-                "turning point", "crossroads", "personal journey", "identity changed",
-                "setbacks", "memory", "influence on your journey",
+                "life story",
+                "story of your life",
+                "childhood",
+                "formative",
+                "turning point",
+                "crossroads",
+                "personal journey",
+                "identity changed",
+                "setbacks",
+                "memory",
+                "influence on your journey",
             ],
         ),
     ]
@@ -269,7 +403,10 @@ def add_existing_matraix(candidates):
 
 
 def add_deeppersona_extended(candidates):
-    for filename in ["proposed_ATTR_sourced.json", "proposed_new_dimensions_ATTRLEVEL.json"]:
+    for filename in [
+        "proposed_ATTR_sourced.json",
+        "proposed_new_dimensions_ATTRLEVEL.json",
+    ]:
         path = OLD / filename
         if not path.exists():
             continue
@@ -314,7 +451,11 @@ def parse_gss_variables():
         for m in pattern.finditer(text):
             if m.group("h"):
                 heading = clean_text(m.group("h"))
-                if heading.isupper() or "VARIABLES" in heading.upper() or "INFORMATION" in heading.upper():
+                if (
+                    heading.isupper()
+                    or "VARIABLES" in heading.upper()
+                    or "INFORMATION" in heading.upper()
+                ):
                     current = [heading]
                 else:
                     if not current:
@@ -456,7 +597,11 @@ def add_ipip(candidates):
             code = clean_text(m.group("code")).rstrip("*")
             if not item or len(item) < 4:
                 continue
-            if len(item) > 180 or "technical report" in item.lower() or "survey numbers" in item.lower():
+            if (
+                len(item) > 180
+                or "technical report" in item.lower()
+                or "survey numbers" in item.lower()
+            ):
                 continue
             key = item.lower()
             if key in seen_items:
@@ -557,7 +702,11 @@ def add_standard_psych_constructs(candidates):
         "Agreeableness": ["Compassion", "Respectfulness", "Trust"],
         "Conscientiousness": ["Organization", "Productiveness", "Responsibility"],
         "Negative Emotionality": ["Anxiety", "Depression", "Emotional Volatility"],
-        "Open-Mindedness": ["Intellectual Curiosity", "Aesthetic Sensitivity", "Creative Imagination"],
+        "Open-Mindedness": [
+            "Intellectual Curiosity",
+            "Aesthetic Sensitivity",
+            "Creative Imagination",
+        ],
     }
     for domain, facets in bfi2.items():
         candidates.append(
@@ -603,10 +752,20 @@ def add_standard_psych_constructs(candidates):
     hexaco = {
         "Honesty-Humility": ["Sincerity", "Fairness", "Greed Avoidance", "Modesty"],
         "Emotionality": ["Fearfulness", "Anxiety", "Dependence", "Sentimentality"],
-        "Extraversion": ["Social Self-Esteem", "Social Boldness", "Sociability", "Liveliness"],
+        "Extraversion": [
+            "Social Self-Esteem",
+            "Social Boldness",
+            "Sociability",
+            "Liveliness",
+        ],
         "Agreeableness": ["Forgivingness", "Gentleness", "Flexibility", "Patience"],
         "Conscientiousness": ["Organization", "Diligence", "Perfectionism", "Prudence"],
-        "Openness to Experience": ["Aesthetic Appreciation", "Inquisitiveness", "Creativity", "Unconventionality"],
+        "Openness to Experience": [
+            "Aesthetic Appreciation",
+            "Inquisitiveness",
+            "Creativity",
+            "Unconventionality",
+        ],
         "Altruism": [],
     }
     for domain, facets in hexaco.items():
@@ -757,7 +916,6 @@ def add_wvs(candidates):
 def add_scope(candidates):
     path = DATASET / "scope_structured.jsonl"
     if not path.exists():
-        readme = DATASET / "scope_persona_README.md"
         facets = [
             "Demographic Information",
             "Sociodemographic Behavior",
@@ -923,11 +1081,31 @@ def add_nemotron_oasis(candidates):
     if oasis_path.exists():
         try:
             data = json.loads(oasis_path.read_text(encoding="utf-8"))
-            fields = sorted({k for item in data if isinstance(item, dict) for k in item.keys()})
+            fields = sorted(
+                {k for item in data if isinstance(item, dict) for k in item.keys()}
+            )
         except Exception:
-            fields = ["age", "gender", "mbti", "country", "profession", "interested_topics", "persona", "bio"]
+            fields = [
+                "age",
+                "gender",
+                "mbti",
+                "country",
+                "profession",
+                "interested_topics",
+                "persona",
+                "bio",
+            ]
     else:
-        fields = ["age", "gender", "mbti", "country", "profession", "interested_topics", "persona", "bio"]
+        fields = [
+            "age",
+            "gender",
+            "mbti",
+            "country",
+            "profession",
+            "interested_topics",
+            "persona",
+            "bio",
+        ]
     for field in fields:
         if field in {"realname", "username"}:
             continue
@@ -952,7 +1130,9 @@ def add_nemotron_oasis(candidates):
 
 
 def add_personahub_extended(candidates, max_lines=20000):
-    path = DATASET / "tencent_personahub" / "ElitePersonas" / "elite_personas.part1.jsonl"
+    path = (
+        DATASET / "tencent_personahub" / "ElitePersonas" / "elite_personas.part1.jsonl"
+    )
     if not path.exists():
         return
     domains = set()
@@ -1056,7 +1236,9 @@ def select_high_quality(candidates):
     room = max(0, TARGET_HIGH_QUALITY_COUNT - len(non_gss))
     gss_sorted = sorted(gss, key=lambda c: (-int(c["quality_score"]), c["original_id"]))
     selected = non_gss + gss_sorted[:room]
-    return sorted(selected, key=lambda c: (c["source"], c["primary_category"], c["label"].lower()))
+    return sorted(
+        selected, key=lambda c: (c["source"], c["primary_category"], c["label"].lower())
+    )
 
 
 def write_csv(path, rows):
@@ -1077,7 +1259,15 @@ def write_jsonl(path, rows):
 
 def write_summary(candidates, high_quality):
     summary_rows = []
-    for source, rows in sorted(defaultdict(list, {s: [r for r in candidates if r["source"] == s] for s in set(r["source"] for r in candidates)}).items()):
+    for source, rows in sorted(
+        defaultdict(
+            list,
+            {
+                s: [r for r in candidates if r["source"] == s]
+                for s in set(r["source"] for r in candidates)
+            },
+        ).items()
+    ):
         hq_count = sum(1 for r in high_quality if r["source"] == source)
         ext_count = len(rows)
         evidence = Counter(r["evidence_level"] for r in rows)
@@ -1125,7 +1315,9 @@ def write_summary(candidates, high_quality):
         "- DeepPersona auto-extractions and sampled PersonaHub domain labels are retained in the raw extended pool only by default because they are useful for coverage but need review, deduplication, and grounding before becoming final attributes.",
         "- This is a candidate pool, not a final schema. The next step is normalization, deduplication, and source-grounded graph construction.",
     ]
-    (OUT / "candidate_pool_build_report.md").write_text("\n".join(report) + "\n", encoding="utf-8")
+    (OUT / "candidate_pool_build_report.md").write_text(
+        "\n".join(report) + "\n", encoding="utf-8"
+    )
 
 
 def main():
@@ -1152,11 +1344,16 @@ def main():
     write_jsonl(OUT / "candidate_pool_high_quality.jsonl", high_quality)
     write_summary(candidates, high_quality)
 
-    print(json.dumps({
-        "high_quality_count": len(high_quality),
-        "raw_extended_count": len(candidates),
-        "output_dir": str(OUT),
-    }, indent=2))
+    print(
+        json.dumps(
+            {
+                "high_quality_count": len(high_quality),
+                "raw_extended_count": len(candidates),
+                "output_dir": str(OUT),
+            },
+            indent=2,
+        )
+    )
 
 
 if __name__ == "__main__":

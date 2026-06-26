@@ -1,9 +1,5 @@
 """Tests for iOS CUA decision materialization."""
 
-import json
-
-import pytest
-
 from matraix.agents.persona.ios_submission import extract_ios_decision_from_trajectory
 
 

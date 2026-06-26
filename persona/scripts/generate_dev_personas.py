@@ -29,7 +29,9 @@ def _default_out_dir(count: int) -> Path:
     return REPO_ROOT / "persona" / "datasets" / f"bench-dev-{count}"
 
 
-def _stratum_top_up_from_task(task_path: str) -> tuple[list[dict[str, str]], dict[str, object]]:
+def _stratum_top_up_from_task(
+    task_path: str,
+) -> tuple[list[dict[str, str]], dict[str, object]]:
     grounding = get_task_grounding_spec(task_path, repo_root=REPO_ROOT)
     if not grounding:
         raise SystemExit(f"No grounding.toml (or catalog grounding) for {task_path!r}")
@@ -58,7 +60,7 @@ def main() -> None:
         "--out",
         type=Path,
         default=None,
-        help=f"Output directory (default: persona/datasets/bench-dev-<count>)",
+        help="Output directory (default: persona/datasets/bench-dev-<count>)",
     )
     parser.add_argument("--smoke-id", default="0042")
     parser.add_argument(
@@ -127,7 +129,9 @@ def main() -> None:
 
     print(f"Wrote {manifest['count']} personas to {out}")
     print(f"Smoke: persona_{manifest['smoke_persona_id']}.yaml")
-    print(f"Dimensions: {manifest.get('dimension_count', len(manifest['dimension_ids']))} fields")
+    print(
+        f"Dimensions: {manifest.get('dimension_count', len(manifest['dimension_ids']))} fields"
+    )
     if stratum_top_up:
         print(
             f"Stratum top-up: {len(stratum_top_up)} cells × min {args.stratum_min} "
