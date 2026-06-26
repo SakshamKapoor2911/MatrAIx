@@ -152,6 +152,11 @@ def _split_assistant_content(content: str) -> tuple[str, str | None]:
     return text, None
 
 
+def _assistant_message_content(message: dict[str, Any]) -> str:
+    content = message.get("content")
+    return content if isinstance(content, str) else ""
+
+
 def _screenshot_map(result: dict[str, Any]) -> dict[str, str]:
     viz = result.get("visualization_data")
     if not isinstance(viz, dict):
@@ -282,7 +287,7 @@ def cocoa_to_atif(
 
         agent_step_number += 1
         message_text, reasoning = _split_assistant_content(
-            message.get("content") if isinstance(message.get("content"), str) else ""
+            _assistant_message_content(message)
         )
         tool_calls_raw = message.get("tool_calls") or []
 

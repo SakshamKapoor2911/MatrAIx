@@ -134,4 +134,13 @@ python = ".venv"
 
 [tool.ty.src]
 include = ["src/harbor", "src/matraix", "packages/rewardkit/src", "packages/harbor-langsmith/src"]
-exclude = ["src/harbor/cli/template-adapter", "src/harbor/cli/template-task", "src/harbor/agents/installed/openhands_sdk_runner.py", "src/harbor/agents/installed/acp_runner.py", "src/harbor/agents/installed/nemo_agent_run_wrapper.py"]
+exclude = [
+    "src/harbor/cli/template-adapter",
+    "src/harbor/cli/template-task",
+    "src/harbor/agents/installed/openhands_sdk_runner.py",
+    "src/harbor/agents/installed/acp_runner.py",
+    "src/harbor/agents/installed/nemo_agent_run_wrapper.py",
+    # In-container entrypoints; deps (cocoa-agent, browser-use) live in task images only.
+    "src/matraix/agents/installed/cocoa_runner.py",
+    "src/matraix/agents/installed/browser_use_runner.py",
+]
