@@ -13,18 +13,21 @@ PYTHONPATH=applications/persona_eval \
   python -m persona_eval.experiments --list-applications
 ```
 
-Registered chatbot targets:
+Registered targets:
 
 - `movie` or `recai:movie`
 - `beauty` or `recai:beauty_product`
 - `game` or `recai:game`
 - `finance` or `finance_openbb:financial_research`
 - `medical` or `medical_assistant:medical_consultation`
+- `survey` or `survey:product_attitudes_v1`
+- `web` or `web:ecommerce_product_discovery`
 
 The batch scheduler can launch many runs at once, but each application declares
 its own concurrency limit. RecAI targets are limited to one active run per
-domain because the native RecAI bridge uses process-global resources. Finance
-and medical targets allow higher HTTP-level concurrency.
+domain because the native RecAI bridge uses process-global resources. Finance,
+medical, survey, and web targets allow higher HTTP-level or local-runner
+concurrency.
 
 ## Start an Application API
 
@@ -60,7 +63,7 @@ Then use `--api-url http://127.0.0.1:8000`.
 
 ## Run 50 Parallel Persona Tests
 
-One target with 50 personas:
+One chatbot target with 50 personas:
 
 ```bash
 PYTHONPATH=applications/persona_eval \
@@ -88,6 +91,28 @@ PYTHONPATH=applications/persona_eval \
 The runner exits with status code `0` only when every run finishes without an
 error.
 
+Survey and web targets use the same command shape:
+
+```bash
+PYTHONPATH=applications/persona_eval \
+  python -m persona_eval.experiments \
+    --application survey \
+    --num-personas 50 \
+    --parallel 50
+
+PYTHONPATH=applications/persona_eval \
+  python -m persona_eval.experiments \
+    --application web \
+    --num-personas 50 \
+    --parallel 50
+```
+
+Survey runs are local structured submissions against the built-in survey
+instrument. Web runs use the task-owned ecommerce catalog as the non-Harbor
+representation of the hosted website and save a structured web trace. The
+browser/computer-use Harbor runtime is not required for these paper experiment
+runs.
+
 ## Output Layout
 
 By default, artifacts are written under:
@@ -104,16 +129,19 @@ Batch-level files:
 
 Per-run files:
 
-- `runs/<run_id>/events.ndjson`: intermediate persona and chatbot events.
-- `runs/<run_id>/transcript.json`: full application transcript.
-- `runs/<run_id>/application_result.json`: grounded items/results returned by the application.
-- `runs/<run_id>/persona_self_report.json`: post-interaction questionnaire filled by the simulated user.
-- `runs/<run_id>/evaluation_result.json`: compact score view.
-- `runs/<run_id>/run_metadata.json`: application readiness and stop reason.
+- `runs/<run_id>/events.ndjson`: intermediate persona and application events.
+- `runs/<run_id>/transcript.json`: chatbot transcript.
+- `runs/<run_id>/application_result.json`: grounded chatbot items/results.
+- `runs/<run_id>/persona_self_report.json`: chatbot post-interaction questionnaire.
+- `runs/<run_id>/evaluation_result.json`: compact chatbot score view.
+- `runs/<run_id>/run_metadata.json`: chatbot readiness and stop reason.
+- `runs/<run_id>/survey_result.json`: completed survey response for survey runs.
+- `runs/<run_id>/ecommerce_interaction.json`: selected product and website UX ratings for web runs.
+- `runs/<run_id>/web_trace.json`: structured non-Harbor web exploration trace.
 - `runs/<run_id>/experiment_run.json`: normalized run metadata.
 - `runs/<run_id>/error.json`: present only when that run fails.
 
 These files are intended for paper analysis scripts. `events.ndjson` is the
 main source for intermediate progress because it records persona requests,
-persona replies, chatbot requests, chatbot replies, application-result fetches,
-and final self-report events.
+persona replies, application requests, application responses, and final
+self-report events.

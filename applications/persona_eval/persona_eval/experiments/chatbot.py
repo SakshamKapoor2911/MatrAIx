@@ -230,6 +230,7 @@ class ChatbotExperimentRunner:
             )
             finished_at = self.now()
             artifacts = _artifact_names(output_dir)
+            recorded_artifacts = sorted(set(artifacts + ["experiment_run.json"]))
             run_payload = {
                 "runId": spec.run_id,
                 "status": "done",
@@ -239,12 +240,13 @@ class ChatbotExperimentRunner:
                 "persona": persona.to_dict(),
                 "application": application.to_dict(),
                 "metadata": metadata,
-                "artifacts": artifacts,
+                "artifacts": recorded_artifacts,
             }
             (output_dir / "experiment_run.json").write_text(
                 json.dumps(run_payload, ensure_ascii=False, indent=2) + "\n",
                 encoding="utf-8",
             )
+            artifacts = _artifact_names(output_dir)
             emit({"type": "run.completed", "status": "done", "artifacts": artifacts})
             return ExperimentRunResult(
                 run_id=spec.run_id,

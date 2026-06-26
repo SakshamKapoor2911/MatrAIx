@@ -14,6 +14,9 @@ from persona_eval.experiments.applications import (
 from persona_eval.experiments.batch import ExperimentBatchRunner, build_run_specs
 from persona_eval.experiments.chatbot import ChatbotExperimentRunner
 from persona_eval.experiments.models import ExperimentRunResult, ExperimentRunSpec
+from persona_eval.experiments.suite import ExperimentApplicationRunner
+from persona_eval.experiments.survey import SurveyExperimentRunner
+from persona_eval.experiments.web import WebExperimentRunner
 
 __all__ = [
     "ApplicationSpec",
@@ -21,6 +24,9 @@ __all__ = [
     "ExperimentBatchRunner",
     "ExperimentRunResult",
     "ExperimentRunSpec",
+    "ExperimentApplicationRunner",
+    "SurveyExperimentRunner",
+    "WebExperimentRunner",
     "build_run_specs",
     "get_application_spec",
     "list_application_specs",

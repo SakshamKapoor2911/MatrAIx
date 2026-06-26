@@ -111,6 +111,7 @@ def test_chatbot_experiment_runner_writes_artifacts_and_events(tmp_path):
     assert result.status == "done"
     assert "transcript.json" in result.artifacts
     assert "events.ndjson" in result.artifacts
+    assert "experiment_run.json" in result.artifacts
     transcript = json.loads((tmp_path / "run" / "transcript.json").read_text())
     assert len(transcript["turns"]) == 2
     events = [

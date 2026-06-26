@@ -14,9 +14,13 @@ def test_application_registry_covers_chatbot_targets():
         "recai:game",
         "finance_openbb:financial_research",
         "medical_assistant:medical_consultation",
+        "survey:product_attitudes_v1",
+        "web:ecommerce_product_discovery",
     }
     assert apps["recai:movie"].concurrency_limit == 1
     assert apps["finance_openbb:financial_research"].concurrency_limit > 1
+    assert apps["survey:product_attitudes_v1"].application_type == "survey"
+    assert apps["web:ecommerce_product_discovery"].application_type == "web"
 
 
 def test_parse_application_ref_accepts_short_aliases():
@@ -24,6 +28,8 @@ def test_parse_application_ref_accepts_short_aliases():
     assert parse_application_ref("recai/game").key == "recai:game"
     assert parse_application_ref("finance").application_id == "finance_openbb"
     assert parse_application_ref("medical").application_context == "medical_consultation"
+    assert parse_application_ref("survey").application_type == "survey"
+    assert parse_application_ref("web").application_type == "web"
 
 
 def test_chatbot_task_prompt_is_application_specific():

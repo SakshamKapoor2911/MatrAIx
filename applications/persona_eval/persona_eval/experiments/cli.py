@@ -13,7 +13,7 @@ from persona_eval.experiments.applications import (
     parse_application_ref,
 )
 from persona_eval.experiments.batch import ExperimentBatchRunner, build_run_specs
-from persona_eval.experiments.chatbot import ChatbotExperimentRunner
+from persona_eval.experiments.suite import ExperimentApplicationRunner
 from persona_eval.persona import get_persona, load_personas
 from persona_eval.types import DEFAULT_PERSONA_MODEL, Persona
 
@@ -108,7 +108,7 @@ def run_from_args(argv: Sequence[str]) -> int:
     )
     batch_id = args.batch_id or "batch_{}".format(uuid.uuid4().hex[:12])
     output_dir = Path(args.out) if args.out else default_output_root() / batch_id
-    runner = ChatbotExperimentRunner()
+    runner = ExperimentApplicationRunner()
     batch = ExperimentBatchRunner(
         applications=applications,
         personas=personas,

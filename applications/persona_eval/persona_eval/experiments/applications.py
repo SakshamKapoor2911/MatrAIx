@@ -19,6 +19,7 @@ class ApplicationSpec:
     label: str
     system_label: str
     description_key: str
+    task_id: str = ""
     concurrency_limit: int = 4
     min_turns: int = 3
 
@@ -32,6 +33,7 @@ class ApplicationSpec:
             "label": self.label,
             "systemLabel": self.system_label,
             "descriptionKey": self.description_key,
+            "taskId": self.task_id,
             "concurrencyLimit": self.concurrency_limit,
             "minTurns": self.min_turns,
         }
@@ -93,6 +95,32 @@ _REGISTRY: Dict[str, ApplicationSpec] = {
         description_key="medical_consultation",
         concurrency_limit=8,
     ),
+    "survey:product_attitudes_v1": ApplicationSpec(
+        key="survey:product_attitudes_v1",
+        application_type="survey",
+        application_id="survey_form",
+        application_context="product_attitudes_v1",
+        domain="survey",
+        label="Product attitudes survey",
+        system_label="survey form",
+        description_key="movie",
+        task_id="product_attitudes_v1",
+        concurrency_limit=16,
+        min_turns=1,
+    ),
+    "web:ecommerce_product_discovery": ApplicationSpec(
+        key="web:ecommerce_product_discovery",
+        application_type="web",
+        application_id="web_ecommerce_platform",
+        application_context="product_discovery",
+        domain="ecommerce",
+        label="Ecommerce product discovery website",
+        system_label="ecommerce website",
+        description_key="movie",
+        task_id="web-ecommerce-platform_product-discovery",
+        concurrency_limit=8,
+        min_turns=1,
+    ),
 }
 
 _ALIASES = {
@@ -106,6 +134,11 @@ _ALIASES = {
     "medical": "medical_assistant:medical_consultation",
     "medical_assistant": "medical_assistant:medical_consultation",
     "medical_consultation": "medical_assistant:medical_consultation",
+    "survey": "survey:product_attitudes_v1",
+    "product_attitudes_v1": "survey:product_attitudes_v1",
+    "web": "web:ecommerce_product_discovery",
+    "ecommerce": "web:ecommerce_product_discovery",
+    "ecommerce_product_discovery": "web:ecommerce_product_discovery",
 }
 
 
