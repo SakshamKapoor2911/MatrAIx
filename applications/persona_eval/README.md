@@ -76,6 +76,9 @@ things (a fresh clone has neither):
 `GET /api/preflight` (and the chip in the top bar) reports exactly what's ready
 vs. missing, in plain language.
 
+For headless paper experiments without Harbor or the frontend, see
+[`EXPERIMENTS.md`](EXPERIMENTS.md).
+
 ---
 
 ## API
