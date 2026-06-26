@@ -97,7 +97,7 @@ export function RunConfigBar({
   const styleValue = goalContextId ?? goalContexts[0]?.id ?? "";
 
   return (
-    <div className="flex shrink-0 flex-wrap items-center gap-x-5 gap-y-2 border-b border-border-soft bg-surface-container-lowest px-lg py-2.5 shadow-sm">
+    <div className="flex shrink-0 flex-wrap items-center gap-x-5 gap-y-2 border-b border-outline-dim bg-surface-lowest px-5 py-2.5">
       {applicationOptions.length > 0 && (
         <KnobSelect
           label="Application"
@@ -109,7 +109,7 @@ export function RunConfigBar({
       )}
       {engineOptions.length > 0 && (
         <KnobSelect
-          label="Application model"
+          label="App's model"
           value={engine}
           options={engineOptions}
           onChange={onEngine}
@@ -118,7 +118,7 @@ export function RunConfigBar({
       )}
       {personaModelOptions.length > 0 && (
         <KnobSelect
-          label="Persona model"
+          label="Simulated-user model"
           value={personaModel}
           options={personaModelOptions}
           onChange={onPersonaModel}
@@ -127,7 +127,7 @@ export function RunConfigBar({
       )}
       {domainOptions.length > 0 && (
         <KnobSelect
-          label="Domain"
+          label="Catalog · RecAI only"
           value={domain}
           options={domainOptions}
           onChange={(v) => onDomain(v as Domain)}
@@ -136,7 +136,7 @@ export function RunConfigBar({
       )}
       {styleOptions.length > 0 && (
         <KnobSelect
-          label="Conversation style"
+          label="How the user behaves"
           value={styleValue}
           options={styleOptions}
           onChange={onGoalContext}
@@ -149,10 +149,10 @@ export function RunConfigBar({
       <div className="flex flex-shrink-0 items-center gap-3">
         <label
           htmlFor={sliderId}
-          className="flex items-center gap-1 text-label-md font-label-md uppercase tracking-wider text-on-surface-variant"
+          className="flex items-center gap-1 hud text-[10px] text-text-dim"
         >
-          Max turns:{" "}
-          <span className="rounded bg-surface-container px-1.5 font-mono-sm text-mono-sm text-on-surface">
+          Conversation length (max turns):{" "}
+          <span className="rounded bg-surface-high px-1.5 font-mono text-[11px] text-text-variant">
             {maxTurns}
           </span>
         </label>
@@ -165,7 +165,7 @@ export function RunConfigBar({
           disabled={disabled}
           onChange={(e) => onMaxTurns(Number(e.target.value))}
           aria-valuetext={`${maxTurns} turns`}
-          className={`h-1 w-24 cursor-pointer appearance-none rounded-lg bg-outline-variant accent-primary disabled:cursor-not-allowed disabled:opacity-55 ${FOCUS_RING}`}
+          className={`h-1 w-24 cursor-pointer appearance-none rounded-lg bg-outline accent-primary disabled:cursor-not-allowed disabled:opacity-55 ${FOCUS_RING}`}
         />
       </div>
 

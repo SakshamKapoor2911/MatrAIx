@@ -54,7 +54,7 @@ function ResultRow({
   const meta = metaLine(item);
   const desc = item.description || item.displayText || "";
   return (
-    <div className="overflow-hidden rounded-lg border border-border-soft bg-surface-container-lowest transition-colors hover:border-primary">
+    <div className="overflow-hidden rounded-md border border-outline bg-surface transition-colors hover:border-primary">
       <button
         type="button"
         onClick={onToggle}
@@ -65,30 +65,31 @@ function ResultRow({
           <Sym name="movie" size={18} className="text-primary" />
         </span>
         <span className="min-w-0 flex-1">
-          <span className="block truncate text-body-md font-semibold text-on-surface">
+          <span className="block truncate text-sm font-semibold text-text-main">
             {item.title || item.itemId}
           </span>
-          {meta && <span className="mt-px block truncate text-body-sm text-on-surface-variant">{meta}</span>}
+          {meta && <span className="mt-px block truncate text-[12px] text-text-variant">{meta}</span>}
         </span>
-        <span className="flex-none rounded bg-surface-container px-1.5 py-0.5 font-mono-sm text-mono-sm text-on-surface-variant">
+        <span className="flex-none rounded bg-surface-low px-1.5 py-0.5 font-mono text-[10px] text-text-dim">
           {item.itemId}
         </span>
       </button>
       {expanded && (
-        <div className="border-t border-border-soft px-3 py-2.5">
+        <div className="border-t border-outline px-3 py-2.5">
           {desc ? (
-            <p className="line-clamp-6 text-body-sm leading-relaxed text-on-surface-variant">{desc}</p>
+            <p className="line-clamp-6 text-[12px] leading-relaxed text-text-variant">{desc}</p>
           ) : (
-            <p className="text-body-sm italic text-outline">No description in the catalog.</p>
+            <p className="text-[12px] italic text-text-dim">This item has no description on file.</p>
           )}
           {onInspect && (
             <button
               type="button"
               onClick={() => onInspect(item.itemId)}
-              className={`mt-2 inline-flex items-center gap-1 rounded text-label-md font-label-md font-medium text-primary hover:underline ${FOCUS_RING}`}
+              title="Paste it into a prompt to reference this item"
+              className={`mt-2 inline-flex items-center gap-1 rounded text-[11px] font-medium text-primary hover:underline ${FOCUS_RING}`}
             >
               <Sym name="content_copy" size={14} />
-              Copy id → {item.itemId}
+              Copy this item&apos;s id
             </button>
           )}
         </div>
@@ -141,47 +142,52 @@ export function CatalogDrawer({ open, onClose, domain, onInspectItem }: CatalogD
     <div className="fixed inset-0 z-50 flex justify-end" role="dialog" aria-modal="true" aria-label="Catalog search">
       {/* Scrim */}
       <div
-        className="absolute inset-0 bg-[oklch(0.3_0.03_280/.28)] backdrop-blur-[1px]"
+        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
         onClick={onClose}
         aria-hidden
       />
 
       {/* Panel */}
-      <div className="relative flex h-full w-[460px] max-w-[92vw] flex-col border-l border-border-soft bg-surface-container-low shadow-pop">
+      <div className="relative flex h-full w-[460px] max-w-[92vw] flex-col border-l border-outline bg-surface-lowest shadow-2xl">
         {/* Header */}
-        <div className="flex flex-shrink-0 items-center gap-2.5 border-b border-border-soft px-md py-3.5">
-          <Sym name="search" size={18} className="text-primary" />
-          <span className="text-headline-sm font-headline-sm uppercase tracking-wider text-on-surface">Catalog</span>
-          <span className="font-mono-sm text-mono-sm text-on-surface-variant">
-            {search.data ? `${search.data.total.toLocaleString()} matches` : "RecAI corpus"}
-          </span>
+        <div className="flex flex-shrink-0 items-start gap-2.5 border-b border-outline px-md py-3.5">
+          <Sym name="search" size={18} className="mt-0.5 text-primary" />
+          <div className="min-w-0 flex-1">
+            <div className="flex items-baseline gap-2">
+              <span className="hud text-[10px] text-primary">Catalog search</span>
+              <span className="font-mono text-[10px] text-text-dim">
+                {search.data ? `${search.data.total.toLocaleString()} matches` : "Type to search the catalog"}
+              </span>
+            </div>
+            <p className="mt-0.5 text-[11px] text-text-dim">Look up items the recommender can suggest</p>
+          </div>
           <button
             type="button"
             onClick={onClose}
             aria-label="Close catalog"
-            className={`ml-auto flex h-7 w-7 items-center justify-center rounded-md border border-outline-variant bg-surface-container-lowest text-on-surface-variant transition-colors hover:text-on-surface ${FOCUS_RING}`}
+            className={`flex h-7 w-7 flex-none items-center justify-center rounded-md border border-outline bg-surface-low text-text-variant transition-colors hover:border-primary hover:text-text-main ${FOCUS_RING}`}
           >
             <Sym name="close" size={16} />
           </button>
         </div>
 
         {/* Search box */}
-        <div className="flex-shrink-0 border-b border-border-soft px-md py-3">
-          <div className="flex items-center gap-2 rounded-lg border border-outline-variant bg-surface-container-lowest px-3 py-2 focus-within:border-primary focus-within:shadow-[0_0_0_3px_var(--primary-tint)]">
-            <Sym name="search" size={16} className="flex-none text-outline" />
+        <div className="flex-shrink-0 border-b border-outline px-md py-3">
+          <div className="flex items-center gap-2 rounded-md border border-outline bg-field px-3 py-2 focus-within:border-primary">
+            <Sym name="search" size={16} className="flex-none text-text-dim" />
             <input
               ref={inputRef}
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search titles, descriptions, genres…"
-              className="w-full bg-transparent text-body-md text-on-surface outline-none placeholder:text-outline"
+              placeholder="Search the catalog — titles, genres, or descriptions"
+              className="w-full bg-transparent text-[13px] text-text-main outline-none placeholder:text-text-dim"
             />
             {query && (
               <button
                 type="button"
                 onClick={() => setQuery("")}
                 aria-label="Clear search"
-                className={`flex-none rounded text-outline hover:text-on-surface ${FOCUS_RING}`}
+                className={`flex-none rounded text-text-dim hover:text-text-main ${FOCUS_RING}`}
               >
                 <Sym name="close" size={16} />
               </button>
@@ -196,10 +202,21 @@ export function CatalogDrawer({ open, onClose, domain, onInspectItem }: CatalogD
           ) : search.isLoading ? (
             <CatalogSkeleton />
           ) : items.length === 0 ? (
-            <div className="px-1 py-8 text-center text-body-sm leading-relaxed text-on-surface-variant">
-              {debouncedQuery
-                ? `No catalog items match “${debouncedQuery}”.`
-                : "Type to search the catalog, or browse the first results below."}
+            <div className="flex flex-col items-center px-4 py-10 text-center">
+              <div
+                className="mb-3 flex h-12 w-12 items-center justify-center rounded-md border border-dashed border-outline bg-surface-high"
+                aria-hidden
+              >
+                <Sym name="search" size={22} className="text-text-dim" />
+              </div>
+              <p className="font-display text-[15px] font-semibold text-text-main">
+                {debouncedQuery ? "No matches" : "Search the catalog"}
+              </p>
+              <p className="mt-1 max-w-[300px] text-[12px] leading-snug text-text-variant">
+                {debouncedQuery
+                  ? `No items match “${debouncedQuery}”. Try a shorter or different word.`
+                  : "Start typing to find an item, or browse the first matches below."}
+              </p>
             </div>
           ) : (
             items.map((item) => (
@@ -223,11 +240,11 @@ function CatalogSkeleton() {
   return (
     <div className="space-y-2" aria-hidden>
       {Array.from({ length: 6 }).map((_, i) => (
-        <div key={i} className="flex items-center gap-3 rounded-lg border border-border-soft px-3 py-2.5">
-          <div className="h-9 w-9 flex-none animate-rb-pulse rounded-md bg-surface-container-high" />
+        <div key={i} className="flex items-center gap-3 rounded-md border border-outline px-3 py-2.5">
+          <div className="h-9 w-9 flex-none animate-pulse rounded-md bg-surface-high" />
           <div className="min-w-0 flex-1 space-y-1.5">
-            <div className="h-3 w-2/3 animate-rb-pulse rounded bg-surface-container-high" />
-            <div className="h-2.5 w-1/3 animate-rb-pulse rounded bg-surface-container" />
+            <div className="h-3 w-2/3 animate-pulse rounded bg-surface-high" />
+            <div className="h-2.5 w-1/3 animate-pulse rounded bg-surface-low" />
           </div>
         </div>
       ))}
@@ -236,15 +253,24 @@ function CatalogSkeleton() {
 }
 
 function CatalogError({ error, onRetry }: { error: unknown; onRetry: () => void }) {
-  const message = error instanceof ApiError ? error.message : "Catalog search failed.";
+  const message =
+    error instanceof ApiError
+      ? error.message
+      : "That search didn't go through. Check the connection and try again.";
   return (
-    <div className="rounded-lg border border-error/40 bg-error-container/40 px-4 py-6 text-center">
-      <Sym name="error" fill={1} size={22} className="text-error" />
-      <p className="mt-1.5 break-words text-body-sm leading-relaxed text-on-surface-variant">{message}</p>
+    <div className="rounded-md border border-outline border-l-4 border-l-danger bg-surface px-4 py-5 text-center">
+      <div
+        className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-md border border-danger/30 bg-danger/10"
+        aria-hidden
+      >
+        <Sym name="error" fill={1} size={22} className="text-danger" />
+      </div>
+      <p className="font-display text-[15px] font-semibold text-text-main">Search failed</p>
+      <p className="mx-auto mt-1 max-w-[300px] break-words text-[12px] leading-snug text-text-variant">{message}</p>
       <button
         type="button"
         onClick={onRetry}
-        className={`mt-3 inline-flex items-center gap-1.5 rounded-md border border-outline-variant px-3 py-1.5 text-label-md font-label-md text-on-surface-variant transition-colors hover:bg-surface-container-low hover:text-on-surface ${FOCUS_RING}`}
+        className={`mt-3 inline-flex items-center gap-1.5 rounded-md border border-danger/40 bg-danger/10 px-3 py-1.5 text-[11px] font-medium text-danger transition-colors hover:bg-danger/20 ${FOCUS_RING}`}
       >
         <Sym name="refresh" size={15} />
         Try again

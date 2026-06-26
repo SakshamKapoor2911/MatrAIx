@@ -28,10 +28,10 @@ function normalizedPhase(value: string | null | undefined): string {
 }
 
 function personaStatus(phase: PersonaEvalRunPhase, jobPhase: string, hasPersona: boolean): Pick<PipelineNode, "status" | "tone"> {
-  if (!hasPersona) return { status: "Select persona", tone: "idle" };
-  if (phase === "error" || phase === "timeout") return { status: "Interrupted", tone: "error" };
+  if (!hasPersona) return { status: "Choose a persona", tone: "idle" };
+  if (phase === "error" || phase === "timeout") return { status: "Stopped early", tone: "error" };
   if (phase === "done") return { status: "Complete", tone: "done" };
-  if (phase === "building") return { status: "Preparing", tone: "active" };
+  if (phase === "building") return { status: "Getting ready", tone: "active" };
   if (phase === "running") {
     const active = jobPhase.includes("persona") || jobPhase.includes("user") || jobPhase.includes("simulat");
     return { status: active ? "Active" : "Connected", tone: active ? "active" : "done" };
@@ -44,17 +44,17 @@ function chatbotStatus(
   jobPhase: string,
   turnCount: number,
 ): Pick<PipelineNode, "status" | "tone"> {
-  if (phase === "error" || phase === "timeout") return { status: "Check run", tone: "error" };
+  if (phase === "error" || phase === "timeout") return { status: "Needs a look", tone: "error" };
   if (phase === "done") return { status: "Complete", tone: "done" };
-  if (phase === "building") return { status: "Warming", tone: "active" };
+  if (phase === "building") return { status: "Warming up", tone: "active" };
   if (phase === "running") {
     const active =
       jobPhase.includes("recommend") ||
       jobPhase.includes("recai") ||
       jobPhase.includes("agent") ||
       jobPhase.includes("turn");
-    if (active) return { status: "Serving chat", tone: "active" };
-    return turnCount > 0 ? { status: "Conversation open", tone: "done" } : { status: "Waiting", tone: "idle" };
+    if (active) return { status: "Replying", tone: "active" };
+    return turnCount > 0 ? { status: "Chatting", tone: "done" } : { status: "Waiting its turn", tone: "idle" };
   }
   return { status: "Ready", tone: "idle" };
 }
@@ -64,20 +64,20 @@ function scorerStatus(
   jobPhase: string,
   hasQuestionnaire: boolean,
 ): Pick<PipelineNode, "status" | "tone"> {
-  if (phase === "error" || phase === "timeout") return { status: "Pending artifacts", tone: "error" };
-  if (phase === "done") return hasQuestionnaire ? { status: "Complete", tone: "done" } : { status: "Awaiting score", tone: "idle" };
+  if (phase === "error" || phase === "timeout") return { status: "Nothing to score", tone: "error" };
+  if (phase === "done") return hasQuestionnaire ? { status: "Complete", tone: "done" } : { status: "Not scored yet", tone: "idle" };
   if (phase === "running") {
     const active = jobPhase.includes("eval") || jobPhase.includes("scor") || jobPhase.includes("verifier");
-    return active ? { status: "Scoring", tone: "active" } : { status: "Waiting", tone: "idle" };
+    return active ? { status: "Scoring", tone: "active" } : { status: "Waiting its turn", tone: "idle" };
   }
-  return { status: "Waiting", tone: "idle" };
+  return { status: "Waiting its turn", tone: "idle" };
 }
 
 function toneClass(tone: PipelineNode["tone"]): string {
-  if (tone === "active") return "border-primary/35 bg-primary-container/45 text-primary";
-  if (tone === "done") return "border-success/30 bg-success-container/55 text-on-success-container";
-  if (tone === "error") return "border-error/30 bg-error-container/55 text-on-error-container";
-  return "border-border-soft bg-surface-container text-on-surface-variant";
+  if (tone === "active") return "border-primary/40 bg-primary/10 text-primary";
+  if (tone === "done") return "border-secondary/40 bg-secondary/10 text-secondary";
+  if (tone === "error") return "border-danger/40 bg-danger/10 text-danger";
+  return "border-outline-dim bg-surface-low text-text-dim";
 }
 
 export function ComponentPipeline({
@@ -117,7 +117,7 @@ export function ComponentPipeline({
       key: "scorer",
       label: "Scorer",
       owner: environment?.scorer ?? "PersonaEval self-report scorer",
-      detail: "persona_self_report.json -> user_feedback.json",
+      detail: "Turns the user's self-report into the final scores.",
       icon: "fact_check",
       ...scorer,
     },
@@ -126,28 +126,36 @@ export function ComponentPipeline({
   return (
     <section
       aria-label="Persona evaluation component pipeline"
-      className="border-b border-border-soft bg-surface-container-lowest px-lg py-2.5"
+      className="border-b border-outline-dim bg-surface-lowest px-5 py-2.5"
     >
+      <p className="mb-2 hud text-[10px] text-text-dim">Pipeline</p>
+      {phase === "idle" && (
+        <p className="mb-2 text-[11px] leading-relaxed text-text-dim">
+          Your run flows left to right: the <strong className="font-semibold text-text-variant">Persona</strong> plays
+          the user, the <strong className="font-semibold text-text-variant">Chatbot</strong> is the app you&apos;re
+          testing, and the <strong className="font-semibold text-text-variant">Scorer</strong> rates the result.
+        </p>
+      )}
       <div className="grid grid-cols-1 gap-2 2xl:grid-cols-3">
         {nodes.map((node, index) => (
           <div key={node.key} className="flex min-w-0 items-center gap-2">
-            <div className="flex min-w-0 flex-1 items-start gap-2 rounded-md border border-border-soft bg-surface-container-low px-3 py-2">
+            <div className="flex min-w-0 flex-1 items-start gap-2 rounded-md border border-outline bg-surface-low px-3 py-2">
               <div className={`mt-0.5 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded border ${toneClass(node.tone)}`}>
                 <Sym name={node.icon} size={16} />
               </div>
               <div className="min-w-0 flex-1">
                 <div className="flex items-center justify-between gap-2">
-                  <p className="truncate text-label-md font-label-md uppercase tracking-wider text-on-surface">{node.label}</p>
+                  <p className="truncate hud text-[10px] text-text-main">{node.label}</p>
                   <span className={`shrink-0 rounded border px-1.5 py-0.5 text-[11px] font-medium ${toneClass(node.tone)}`}>
                     {node.status}
                   </span>
                 </div>
-                <p className="mt-0.5 truncate font-mono-sm text-mono-sm text-on-surface">{node.owner}</p>
-                <p className="mt-1 line-clamp-2 text-body-sm leading-snug text-on-surface-variant">{node.detail}</p>
+                <p className="mt-0.5 truncate font-mono text-[11px] text-text-variant">{node.owner}</p>
+                <p className="mt-1 line-clamp-2 text-[12px] leading-snug text-text-dim">{node.detail}</p>
               </div>
             </div>
             {index < nodes.length - 1 && (
-              <Sym name="arrow_forward" size={17} className="hidden flex-shrink-0 text-outline 2xl:inline-flex" />
+              <Sym name="arrow_forward" size={17} className="hidden flex-shrink-0 text-text-dim 2xl:inline-flex" />
             )}
           </div>
         ))}

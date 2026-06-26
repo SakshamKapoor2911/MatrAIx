@@ -29,12 +29,12 @@ export function RatingChip({ rating, size = "sm", className = "" }: RatingChipPr
     rating === null || rating === undefined || Number.isNaN(rating) ? null : rating / 10,
   );
   const color = SCORE_BAND_CLASS[band];
-  const pad = size === "md" ? "px-2.5 py-1 text-body-sm" : "px-2 py-0.5 text-mono-sm";
+  const pad = size === "md" ? "px-2.5 py-1 text-[13px]" : "px-2 py-0.5 text-[11px]";
 
   if (band === "none") {
     return (
       <span
-        className={`inline-flex items-center rounded-md border border-border-soft bg-surface-container font-mono-sm tabular-nums text-on-surface-variant ${pad} ${className}`}
+        className={`inline-flex items-center rounded-md border border-outline bg-surface-high font-mono tabular-nums text-text-dim ${pad} ${className}`}
         title="Not scored"
         aria-label="No rating"
       >
@@ -45,7 +45,7 @@ export function RatingChip({ rating, size = "sm", className = "" }: RatingChipPr
 
   return (
     <span
-      className={`inline-flex items-baseline rounded-md font-mono-sm font-semibold tabular-nums ${color.text} ${color.soft} ${pad} ${className}`}
+      className={`inline-flex items-baseline rounded-md font-mono font-semibold tabular-nums ${color.text} ${color.soft} ${pad} ${className}`}
       aria-label={`Rating ${rating} out of 10`}
     >
       {rating}

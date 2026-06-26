@@ -1,6 +1,5 @@
 /**
- * ToolPlanFold — the expandable "Tool plan / raw action" disclosure on a
- * RecBot turn.
+ * ToolPlanFold — the expandable "How the app decided" disclosure on an app turn.
  *
  * Ports the mockup's fold: a header button that expands to reveal (when the
  * data is present) the parsed tool-plan steps, the ranked items with their
@@ -56,7 +55,7 @@ export function ToolPlanFold({ plan, items, nativeRaw, open, onToggle }: ToolPla
   return (
     <div
       className={`overflow-hidden rounded-md border ${
-        open ? "border-outline-variant bg-surface-container-lowest" : "border-outline-variant bg-surface-container-low"
+        open ? "border-outline bg-surface-lowest" : "border-outline bg-surface-low"
       }`}
     >
       <button
@@ -64,13 +63,13 @@ export function ToolPlanFold({ plan, items, nativeRaw, open, onToggle }: ToolPla
         onClick={onToggle}
         aria-expanded={open}
         aria-controls={hasBody ? panelId : undefined}
-        className={`flex w-full items-center justify-between p-2 text-label-md font-label-md text-on-surface-variant transition-colors ${
-          open ? "border-b border-outline-variant bg-surface-container-low" : "hover:bg-surface-variant"
+        className={`flex w-full items-center justify-between p-2 hud text-[10px] text-text-dim transition-colors ${
+          open ? "border-b border-outline bg-surface-low" : "hover:bg-surface-high"
         } ${FOCUS_RING}`}
       >
         <span className="flex items-center gap-2">
           <Sym name="code" size={16} />
-          Tool plan / raw action
+          How the app decided (tools &amp; raw output)
         </span>
         <Sym name={open ? "expand_less" : "expand_more"} size={16} />
       </button>
@@ -78,21 +77,21 @@ export function ToolPlanFold({ plan, items, nativeRaw, open, onToggle }: ToolPla
       {open && (
         <div id={panelId}>
           {!hasBody && (
-            <p className="p-3 text-body-sm text-on-surface-variant">
-              No tool plan or raw action was recorded for this turn.
+            <p className="p-3 text-[13px] text-text-dim">
+              The app didn&apos;t expose any internal steps for this turn.
             </p>
           )}
 
           {hasPlan && (
-            <div className="border-b border-outline-variant p-3">
-              <p className="mb-2 text-[11px] font-medium uppercase tracking-wider text-on-surface-variant">Tool plan</p>
+            <div className="border-b border-outline p-3">
+              <p className="mb-2 hud text-[10px] text-text-dim">Steps the app took</p>
               <ol className="space-y-1.5">
                 {plan.map((step, i) => (
-                  <li key={i} className="flex items-center gap-2 text-body-sm text-on-surface">
-                    <span className="w-4 font-mono-sm text-mono-sm text-on-surface-variant">{i + 1}</span>
+                  <li key={i} className="flex items-center gap-2 font-mono text-[11px] text-text-variant">
+                    <span className="w-4 font-mono text-[11px] text-text-dim">{i + 1}</span>
                     <Sym name={iconForTool(step.tool)} size={15} className="text-primary" />
-                    <span className="font-mono-sm font-medium">{step.tool}</span>
-                    {step.detail && <span className="truncate text-on-surface-variant">{step.detail}</span>}
+                    <span className="font-medium">{step.tool}</span>
+                    {step.detail && <span className="truncate text-text-dim">{step.detail}</span>}
                   </li>
                 ))}
               </ol>
@@ -100,18 +99,18 @@ export function ToolPlanFold({ plan, items, nativeRaw, open, onToggle }: ToolPla
           )}
 
           {hasScores && (
-            <div className="border-b border-outline-variant p-3">
-              <p className="mb-2 text-[11px] font-medium uppercase tracking-wider text-on-surface-variant">
-                Ranked items · scores
+            <div className="border-b border-outline p-3">
+              <p className="mb-2 hud text-[10px] text-text-dim">
+                Candidates it ranked, with scores
               </p>
-              <div className="space-y-1 font-mono-sm text-mono-sm text-on-surface-variant">
+              <div className="space-y-1 font-mono text-[11px] text-text-dim">
                 {scored.map((item) => (
                   <div key={`${item.itemId}-${item.rank}`} className="flex items-center justify-between gap-3">
                     <span className="truncate">
                       {item.itemId}
                       {item.title ? ` · ${item.title}` : ""}
                     </span>
-                    <span className="flex-shrink-0 text-on-surface">{item.score?.toFixed(3)}</span>
+                    <span className="flex-shrink-0 text-text-variant">{item.score?.toFixed(3)}</span>
                   </div>
                 ))}
               </div>
@@ -119,7 +118,7 @@ export function ToolPlanFold({ plan, items, nativeRaw, open, onToggle }: ToolPla
           )}
 
           {hasRaw && (
-            <pre className="overflow-x-auto whitespace-pre-wrap break-words bg-surface p-3 font-mono-sm text-mono-sm text-on-surface-variant">
+            <pre className="overflow-x-auto whitespace-pre-wrap break-words bg-field p-3 font-mono text-[11px] text-text-variant">
               {nativeRaw}
             </pre>
           )}

@@ -2,14 +2,14 @@
  * RunDetail — one persisted persona-eval run, full-bleed.
  *
  * Header: persona + source, domain, goal context, date, and the `RatingChip`.
- * Body: the run's `transcript` rendered as alternating persona/RecBot rows. A
- * turn whose RecBot message reads as an error/empty hiccup is styled in
- * `text-error` so the failure shows honestly rather than passing as a normal
- * reply. Recommended items render as compact chips. The run's evaluator
+ * Body: the run's `transcript` rendered as alternating simulated-user / assistant
+ * rows. A turn whose assistant message reads as an error/empty hiccup is styled
+ * in the danger tone so the failure shows honestly rather than passing as a
+ * normal reply. Recommended items render as compact chips. The run's evaluator
  * scorecard closes the page via the cockpit's `Scorecard`.
  *
- * Styled to the Executive Precision tokens; skeleton loading, plain-language
- * error, and not-found states.
+ * Styled to the matrAIx tokens; skeleton loading, plain-language error, and
+ * not-found states.
  */
 import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -47,8 +47,8 @@ export function RunDetail({ runId, onBack }: RunDetailProps) {
   const run = useMemo(() => (query.data ? asRunDetail(query.data) : null), [query.data]);
 
   return (
-    <div className="min-h-0 flex-1 overflow-auto bg-background">
-      <div className="mx-auto w-full max-w-[860px] px-lg py-6">
+    <div className="min-h-0 flex-1 overflow-auto bg-surface-dim custom-scrollbar">
+      <div className="mx-auto w-full max-w-[860px] px-6 py-6">
         <BackButton onBack={onBack} />
 
         {query.isLoading ? (
@@ -78,9 +78,9 @@ function RunDetailBody({ run, runId }: { run: ReturnType<typeof asRunDetail>; ru
   return (
     <>
       {/* Header card */}
-      <header className="mt-3 rounded-xl border border-border-soft bg-surface-container-lowest p-4 shadow-soft">
+      <header className="mt-3 rounded-md border border-outline bg-surface p-4">
         <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-          <h1 className="text-headline-md font-headline-md text-on-surface">
+          <h1 className="font-display text-[15px] font-semibold text-text-main">
             {persona.name ?? "Unnamed persona"}
           </h1>
           <SourceTag source={persona.source ?? null} />
@@ -90,26 +90,29 @@ function RunDetailBody({ run, runId }: { run: ReturnType<typeof asRunDetail>; ru
             <RatingChip rating={overall} size="md" />
           </div>
         </div>
-        <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-body-sm text-on-surface-variant">
+        <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[13px] text-text-variant">
           <span className="flex items-center gap-1.5">
-            <Sym name="theater_comedy" size={14} className="text-outline" />
+            <Sym name="theater_comedy" size={14} className="text-text-dim" />
             {fmtGoalContext(config.goalContextId)}
           </span>
-          <span className="font-mono-sm text-mono-sm">{fmtRunDate(run.createdAt)}</span>
-          <span className="font-mono-sm text-mono-sm" title="Run id">
+          <span className="font-mono text-[11px]">{fmtRunDate(run.createdAt)}</span>
+          <span className="font-mono text-[11px]" title="Run id">
             {runId}
           </span>
         </div>
       </header>
 
+      <p className="mt-3 max-w-2xl text-[13px] leading-relaxed text-text-dim">
+        A simulated user chatted with the app for a few turns, then rated how well it understood and
+        met their needs.
+      </p>
+
       {/* Trajectory */}
       <section className="mt-5">
-        <div className="mb-2.5 text-label-md font-label-md uppercase tracking-wider text-on-surface-variant">
-          Trajectory
-        </div>
+        <div className="mb-2.5 hud text-[10px] text-primary">Transcript &amp; trace</div>
         {transcript.length === 0 ? (
-          <div className="rounded-xl border border-dashed border-border-soft bg-surface-container-lowest px-4 py-8 text-center text-body-sm text-on-surface-variant">
-            This run has no recorded turns.
+          <div className="rounded-md border border-dashed border-outline bg-surface-low px-4 py-8 text-center text-[13px] text-text-dim">
+            No conversation turns were recorded for this run.
           </div>
         ) : (
           <div className="flex flex-col gap-3">
@@ -123,24 +126,20 @@ function RunDetailBody({ run, runId }: { run: ReturnType<typeof asRunDetail>; ru
       {/* Evaluation scorecard (reuses the cockpit's Scorecard) */}
       {run.questionnaire && run.metricScores ? (
         <section className="mt-5">
-          <div className="mb-2.5 text-label-md font-label-md uppercase tracking-wider text-on-surface-variant">
-            Evaluation
-          </div>
+          <div className="mb-2.5 hud text-[10px] text-primary">Evaluation</div>
           <div className="-mx-md">
             <Scorecard questionnaire={run.questionnaire} metrics={run.metricScores} phase="done" />
           </div>
         </section>
       ) : (
-        <section className="mt-5 rounded-xl border border-dashed border-border-soft bg-surface-container-lowest px-4 py-6 text-center text-body-sm text-on-surface-variant">
-          This run finished without a recorded evaluation.
+        <section className="mt-5 rounded-md border border-dashed border-outline bg-surface-low px-4 py-6 text-center text-[13px] text-text-dim">
+          This run finished before a score was produced — there&apos;s no scorecard to show.
         </section>
       )}
 
       {/* Prompts */}
       <section className="mt-5">
-        <div className="mb-2.5 text-label-md font-label-md uppercase tracking-wider text-on-surface-variant">
-          Prompts
-        </div>
+        <div className="mb-2.5 hud text-[10px] text-primary">Prompts</div>
         <div className="-mx-md">
           <PromptPanel prompts={run.prompts ?? null} />
         </div>
@@ -149,16 +148,14 @@ function RunDetailBody({ run, runId }: { run: ReturnType<typeof asRunDetail>; ru
   );
 }
 
-/** One turn: a persona row and a RecBot row, with recommended-item chips. */
+/** One turn: a persona row and an assistant row, with recommended-item chips. */
 function TranscriptTurnRow({ turn, index }: { turn: RunTranscriptTurn; index: number }) {
   const hiccup = isAgentHiccup(turn.assistantMessage);
   const recs = turn.recommendedItems ?? [];
   return (
-    <article className="rounded-xl border border-border-soft bg-surface-container-lowest p-4 shadow-soft">
+    <article className="rounded-md border border-outline bg-surface p-4">
       <div className="mb-2 flex items-center gap-2">
-        <span className="text-label-md font-label-md uppercase tracking-wider text-on-surface-variant">
-          Turn {index + 1}
-        </span>
+        <span className="hud text-[9px] text-text-dim">Turn {index + 1}</span>
         {turn.decision && turn.decision !== "continue" && <DecisionTag decision={turn.decision} />}
       </div>
 
@@ -168,27 +165,27 @@ function TranscriptTurnRow({ turn, index }: { turn: RunTranscriptTurn; index: nu
           <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary/10" aria-hidden>
             <Sym name="face" fill={1} size={12} className="text-primary" />
           </span>
-          <span className="text-label-md font-label-md font-semibold text-on-surface-variant">Persona</span>
+          <span className="hud text-[9px] text-primary">Simulated user</span>
         </div>
-        <p className="whitespace-pre-wrap text-body-md leading-relaxed text-on-surface-variant">
-          {turn.userMessage || <span className="italic text-outline">(no message)</span>}
+        <p className="whitespace-pre-wrap text-[13px] leading-relaxed text-text-variant">
+          {turn.userMessage || <span className="italic text-text-dim">(no message)</span>}
         </p>
       </div>
 
-      {/* RecBot */}
+      {/* Assistant */}
       <div>
         <div className="mb-1 flex items-center gap-1.5">
-          <span className="flex h-5 w-5 items-center justify-center rounded-full bg-surface-container-high" aria-hidden>
-            <Sym name="smart_toy" fill={1} size={12} className="text-on-surface-variant" />
+          <span className="flex h-5 w-5 items-center justify-center rounded-full border border-outline bg-surface-high" aria-hidden>
+            <Sym name="smart_toy" fill={1} size={12} className="text-text-variant" />
           </span>
-          <span className="text-label-md font-label-md font-semibold text-on-surface-variant">RecBot</span>
+          <span className="hud text-[9px] text-text-variant">Assistant</span>
         </div>
         {hiccup ? (
-          <p className="whitespace-pre-wrap text-body-md italic leading-relaxed text-error">
-            RecBot did not return a reply for this turn.
+          <p className="whitespace-pre-wrap text-[13px] italic leading-relaxed text-danger">
+            The app didn&apos;t reply on this turn (it may have hit an error).
           </p>
         ) : (
-          <Markdown className="text-body-md text-on-surface">{turn.assistantMessage ?? ""}</Markdown>
+          <Markdown className="text-[13px] text-text-main">{turn.assistantMessage ?? ""}</Markdown>
         )}
 
         {recs.length > 0 && (
@@ -207,11 +204,11 @@ function TranscriptTurnRow({ turn, index }: { turn: RunTranscriptTurn; index: nu
 function DecisionTag({ decision }: { decision: string }) {
   const satisfied = decision === "satisfied";
   const cls = satisfied
-    ? "bg-success-container text-on-success-container"
-    : "bg-warning-container text-on-warning-container";
-  const label = satisfied ? "satisfied" : decision === "give_up" ? "gave up" : decision;
+    ? "text-secondary border border-secondary/30 bg-secondary/10"
+    : "text-warn border border-warn/30 bg-warn/10";
+  const label = satisfied ? "Got what they needed" : decision === "give_up" ? "Gave up" : decision;
   return (
-    <span className={`inline-flex items-center rounded-md px-1.5 py-px text-label-md font-label-md font-medium ${cls}`}>
+    <span className={`inline-flex items-center rounded px-1.5 py-px hud text-[9px] ${cls}`}>
       {label}
     </span>
   );
@@ -226,10 +223,10 @@ function BackButton({ onBack }: { onBack: () => void }) {
     <button
       type="button"
       onClick={onBack}
-      className={`flex items-center gap-1.5 rounded-md border border-outline-variant px-3 py-1.5 text-label-md font-label-md text-on-surface-variant transition-colors hover:bg-surface-container-low hover:text-on-surface ${FOCUS_RING}`}
+      className={`flex items-center gap-1.5 rounded-md border border-outline bg-surface-low px-3 py-1.5 text-[12px] text-text-variant transition-colors hover:border-primary hover:text-text-main ${FOCUS_RING}`}
     >
       <Sym name="arrow_back" size={16} />
-      Runs
+      All runs
     </button>
   );
 }
@@ -237,22 +234,22 @@ function BackButton({ onBack }: { onBack: () => void }) {
 function DetailLoading() {
   return (
     <div className="mt-3 space-y-4" aria-hidden>
-      <div className="h-24 animate-rb-pulse rounded-xl bg-surface-container" />
-      <div className="h-32 animate-rb-pulse rounded-xl bg-surface-container" />
-      <div className="h-32 animate-rb-pulse rounded-xl bg-surface-container" />
+      <div className="h-24 animate-pulse rounded-md bg-surface-high" />
+      <div className="h-32 animate-pulse rounded-md bg-surface-high" />
+      <div className="h-32 animate-pulse rounded-md bg-surface-high" />
     </div>
   );
 }
 
 function DetailNotFound() {
   return (
-    <div className="mt-5 rounded-xl border border-dashed border-border-soft bg-surface-container-lowest px-6 py-14 text-center">
-      <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-surface-container">
-        <Sym name="search_off" size={26} className="text-on-surface-variant" />
+    <div className="mt-5 rounded-md border border-dashed border-outline bg-surface px-6 py-14 text-center">
+      <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-md border border-dashed border-outline bg-surface-high">
+        <Sym name="search_off" size={26} className="text-text-dim" />
       </div>
-      <h2 className="text-headline-md font-headline-md text-on-surface">Run not found</h2>
-      <p className="mx-auto mt-2 max-w-sm text-body-md leading-relaxed text-on-surface-variant">
-        This run may have been removed. Head back to the list to pick another.
+      <h2 className="font-display text-[15px] font-semibold text-text-main">We couldn&apos;t find this run</h2>
+      <p className="mx-auto mt-2 max-w-sm text-[13px] leading-relaxed text-text-variant">
+        It may have been deleted. Go back to the list to pick another.
       </p>
     </div>
   );
@@ -261,20 +258,23 @@ function DetailNotFound() {
 function DetailError({ error, onRetry }: { error: unknown; onRetry: () => void }) {
   const notFound = error instanceof ApiError && error.status === 404;
   if (notFound) return <DetailNotFound />;
-  const message = error instanceof ApiError ? error.message : "This run could not be loaded.";
+  const message =
+    error instanceof ApiError
+      ? error.message
+      : "Something went wrong loading the details. Try again in a moment.";
   return (
-    <div className="mt-5 rounded-xl border border-error/40 bg-error-container/40 px-5 py-8 text-center">
-      <div className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-full bg-error/10">
-        <Sym name="error" fill={1} size={22} className="text-error" />
+    <div className="mt-5 rounded-md border border-outline border-l-4 border-l-danger bg-surface px-5 py-8 text-center">
+      <div className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-md border border-danger/30 bg-danger/10">
+        <Sym name="error" fill={1} size={22} className="text-danger" />
       </div>
-      <h2 className="text-headline-md font-headline-md text-on-surface">Couldn&apos;t load this run</h2>
-      <p className="mx-auto mt-1.5 max-w-md break-words text-body-sm leading-relaxed text-on-surface-variant">
+      <h2 className="font-display text-[15px] font-semibold text-text-main">We couldn&apos;t open this run</h2>
+      <p className="mx-auto mt-1.5 max-w-md break-words text-[13px] leading-relaxed text-text-variant">
         {message}
       </p>
       <button
         type="button"
         onClick={onRetry}
-        className={`mt-4 inline-flex items-center gap-1.5 rounded-md border border-outline-variant px-4 py-2 text-label-md font-label-md text-on-surface-variant transition-colors hover:bg-surface-container-low hover:text-on-surface ${FOCUS_RING}`}
+        className={`mt-4 inline-flex items-center gap-1.5 rounded-md border border-danger/40 bg-danger/10 px-4 py-2 text-[12px] text-danger transition-colors hover:bg-danger/20 ${FOCUS_RING}`}
       >
         <Sym name="refresh" size={16} />
         Try again

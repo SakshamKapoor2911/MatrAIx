@@ -3,73 +3,91 @@
 @tailwind utilities;
 
 /* ===========================================================================
-   PersonaEval — design tokens ("Executive Precision")
+   PersonaEval — design tokens ("matrAIx")
    ---------------------------------------------------------------------------
-   The canonical palette/type/radii/shadows are the "Executive Precision" system
-   defined in DESIGN.md and realized in the approved cockpit mockup
-   (tools/recbot-mockups/cockpit-stitch-v2.html). tailwind.config.ts maps every
-   token below into the Tailwind theme (e.g. `bg-surface-container-lowest`,
-   `text-on-surface-variant`, `shadow-soft`, `font-body-md`).
-
-   These are the Executive Precision tokens (indigo `#24389c` primary, the slate
-   surface ramp, tokenized semantic success/error/warning container pairs); hex
-   values lifted from DESIGN.md / the approved mockup. Every component renders
-   against these tokens — the earlier legacy oklch bridge has been removed now
-   that the whole app is ported.
+   Dark-first "mission control". Tokens are "R G B" triplets, consumed via
+   rgb(var(--x)/<alpha-value>) (see tailwind.config.ts) so every color supports
+   opacity utilities (bg-primary/10, border-secondary/25). Dark is the default
+   (:root); .light on <html> swaps the ramp (see src/hooks/useTheme.ts and the
+   pre-paint boot script in index.html).
    =========================================================================== */
 :root {
-  /* ---- Executive Precision palette (canonical) ---- */
-  --background: #f7f9fb;
-  --surface: #f7f9fb;
-  --surface-dim: #d8dadc;
-  --surface-bright: #f7f9fb;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #f2f4f6;
-  --surface-container: #eceef0;
-  --surface-container-high: #e6e8ea;
-  --surface-container-highest: #e0e3e5;
-  --on-surface: #191c1e;
-  --on-surface-variant: #454652;
-  --outline: #757684;
-  --outline-variant: #c5c5d4;
-  --border-soft: #e2e8f0;
+  color-scheme: dark;
 
-  --primary: #24389c;
-  --primary-container: #3f51b5;
-  --primary-tint: #eef0fb;
-  --on-primary: #ffffff;
-  --on-primary-container: #cacfff;
+  /* Surfaces — page → panels → inputs */
+  --surface-lowest: 14 14 15;   /* header, rails, inset wells */
+  --surface-dim: 19 19 20;      /* page background */
+  --surface-low: 28 27 28;      /* secondary fills, hover */
+  --surface: 32 31 32;          /* panels / cards */
+  --surface-high: 42 42 43;     /* raised chips, icon tiles */
+  --field: 13 13 14;            /* text inputs, code wells */
 
-  --secondary: #505f76;
+  /* Lines */
+  --outline: 63 72 82;          /* default borders, scrollbar thumb */
+  --outline-dim: 42 42 44;      /* hairlines, dividers */
 
-  /* Semantic — each with its container + on-container companion. */
-  --success: #059669;
-  --success-container: #d1fae5;
-  --on-success-container: #065f46;
-  --warning: #8f4700;
-  --warning-container: #ffdcc6;
-  --on-warning-container: #713700;
-  --error: #ba1a1a;
-  --error-container: #ffe4e6;
-  --on-error-container: #9f1239;
+  /* Brand */
+  --primary: 0 163 255;         /* cyan — primary CTA, active nav, accents */
+  --primary-dim: 0 98 157;      /* CTA hover */
+  --on-primary: 4 18 29;        /* text/icon on primary fills */
+  --secondary: 78 222 163;      /* mint — success / positive / "ready" */
+  --secondary-dim: 0 165 114;   /* mint hover */
 
-  /* Score scale (red → amber → green) — used ONLY for evaluation scores. */
-  --score-low: #9f1239;
-  --score-mid: #8f4700;
-  --score-high: #059669;
+  /* Text */
+  --text-main: 229 226 227;     /* headings, primary text */
+  --text-variant: 190 199 212;  /* body, labels */
+  --text-dim: 154 160 166;      /* captions, hints, placeholders */
 
-  /* ---- Type ---- */
+  /* Status */
+  --danger: 255 107 122;        /* errors, destructive, low scores */
+  --warn: 242 181 59;           /* warnings, mid scores */
+
+  /* Score ramp (evaluation results only) — derived from status + mint */
+  --score-low: 255 107 122;     /* = danger */
+  --score-mid: 242 181 59;      /* = warn */
+  --score-high: 78 222 163;     /* = secondary (mint) */
+
+  /* Type */
   --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --display: "Space Grotesk", var(--sans);
   --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
-  /* ---- Radii (8px standard; 12–16px large panels) ---- */
-  --radius-sm: 0.25rem;
-  --radius: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
+  /* Radii */
+  --radius-sm: 4px;
+  --radius: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+}
 
-  /* ---- Elevation ("Stacked Layer") ---- */
-  --sh-soft: 0 4px 6px -1px rgb(0 0 0 / 0.04), 0 2px 4px -1px rgb(0 0 0 / 0.02);
+:root.light {
+  color-scheme: light;
+
+  --surface-lowest: 255 255 255;
+  --surface-dim: 244 246 248;
+  --surface-low: 238 241 244;
+  --surface: 255 255 255;
+  --surface-high: 231 236 241;
+  --field: 237 241 245;
+
+  --outline: 203 213 225;
+  --outline-dim: 226 232 240;
+
+  --primary: 0 118 194;
+  --primary-dim: 0 92 152;
+  --on-primary: 255 255 255;
+  --secondary: 0 150 103;
+  --secondary-dim: 0 120 84;
+
+  --text-main: 17 23 31;
+  --text-variant: 55 65 81;
+  --text-dim: 100 116 139;
+
+  --danger: 190 50 70;
+  --warn: 176 120 16;
+
+  --score-low: 190 50 70;
+  --score-mid: 176 120 16;
+  --score-high: 0 150 103;
 }
 
 /* ===========================================================================
@@ -88,61 +106,99 @@
 
   body {
     font-family: var(--sans);
-    color: var(--on-surface);
-    background: var(--background);
+    color: rgb(var(--text-main));
+    background: rgb(var(--surface-dim));
     font-size: 14px;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
-    font-feature-settings: "cv05" 1, "ss01" 1;
   }
 
   ::selection {
-    background: var(--primary-tint);
+    background: rgb(var(--primary) / 0.25);
   }
 
-  /* One tokenized focus-visible ring on every interactive element:
-     2px primary at 2px offset (Executive Precision focus spec). */
+  /* One tokenized focus ring on every interactive element. */
   :focus-visible {
-    outline: 2px solid var(--primary);
+    outline: 2px solid rgb(var(--primary));
     outline-offset: 2px;
   }
 
-  /* Quiet, narrow scrollbars that fit the tool register. */
+  /* Thin, theme-aware scrollbars everywhere. */
   * {
     scrollbar-width: thin;
-    scrollbar-color: var(--border-soft) transparent;
+    scrollbar-color: rgb(var(--outline)) transparent;
   }
   *::-webkit-scrollbar {
     width: 9px;
     height: 9px;
   }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
   *::-webkit-scrollbar-thumb {
-    background: var(--border-soft);
+    background: rgb(var(--outline));
     border-radius: 9999px;
     border: 2px solid transparent;
     background-clip: padding-box;
   }
   *::-webkit-scrollbar-thumb:hover {
-    background: var(--outline);
-    background-clip: padding-box;
-  }
-  *::-webkit-scrollbar-track {
-    background: transparent;
+    background: rgb(var(--primary));
   }
 }
 
 /* ===========================================================================
-   Foundational helpers (NOT in an @layer, so they always ship — the icon font
-   reset + cockpit scrollbars must exist before any component references them).
-   The app shell + pane layout is composed with Tailwind utilities in `App.tsx`
-   (a flex column with an inline three-column grid), so no bespoke shell CSS is
-   needed here.
+   matrAIx utility classes (plain CSS, never purged — like .custom-scrollbar).
+   Font-family helpers (.font-sans/.font-display/.font-mono) are generated by
+   Tailwind from the fontFamily config, not hand-written here.
    =========================================================================== */
 
-/* ---- Material Symbols (Executive Precision icon set) ----
-   Loaded in index.html; default to the unfilled, regular-weight optical
-   setting. Components opt into FILL/weight via inline font-variation-settings,
-   mirroring the approved cockpit mockup. */
+/* Mono, uppercase, letter-spaced micro-label (HUD). Pair with text-text-dim. */
+.hud {
+  font-family: var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+/* Bordered box with a top-left cyan corner bracket. Use on bg-surface panels. */
+.panel {
+  position: relative;
+}
+.panel::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 9px;
+  height: 9px;
+  border-top: 2px solid rgb(var(--primary));
+  border-left: 2px solid rgb(var(--primary));
+  pointer-events: none;
+}
+
+/* Cyan glow — RESERVED for the single primary CTA on a view. */
+.glow {
+  box-shadow: 0 10px 34px -10px rgb(var(--primary) / 0.5);
+}
+
+/* Thin internal scrollbars for scroll panes (transcript, lists, code wells). */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgb(var(--outline));
+  border-radius: 9px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--primary));
+}
+
+/* ---- Material Symbols (icon set; lucide migration is a follow-up) ----
+   Default to the unfilled, regular-weight optical setting; components opt into
+   FILL/weight via inline font-variation-settings (the Sym primitive). */
 .material-symbols-outlined {
   font-family: "Material Symbols Outlined";
   font-weight: normal;
@@ -158,22 +214,6 @@
   font-feature-settings: "liga";
   -webkit-font-smoothing: antialiased;
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
-}
-
-/* ---- Thin internal scrollbars (cockpit panes) ---- */
-.custom-scrollbar::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: transparent;
-}
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: var(--outline-variant);
-  border-radius: 10px;
-}
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background-color: var(--outline);
 }
 
 /* ===========================================================================

@@ -3,7 +3,7 @@
  *
  * An auto-growing textarea framed by a focus ring, with the cold-start hint on
  * the left and a send button on the right. `⌘↵` / `Ctrl+↵` submits. Styled to
- * the Executive Precision tokens.
+ * the matrAIx tokens.
  *
  * Sending is delegated to the parent (which owns `useTurnJob`); the composer is
  * disabled while a turn is in flight and clears itself once a message is sent.
@@ -55,8 +55,8 @@ export function Composer({ onSend, phase, disabled }: ComposerProps) {
   }
 
   return (
-    <div className="flex-shrink-0 border-t border-border-soft bg-surface-container-lowest px-lg pb-4 pt-3">
-      <div className="mx-auto max-w-thread overflow-hidden rounded-xl border border-outline-variant bg-surface-container-lowest shadow-sm transition-shadow focus-within:border-primary focus-within:shadow-[0_0_0_3px_var(--primary-tint)]">
+    <div className="flex-shrink-0 border-t border-outline bg-surface-lowest px-lg pb-4 pt-3">
+      <div className="mx-auto max-w-thread overflow-hidden rounded-md border border-outline bg-field transition-colors focus-within:border-primary">
         <textarea
           ref={taRef}
           rows={1}
@@ -64,25 +64,25 @@ export function Composer({ onSend, phase, disabled }: ComposerProps) {
           disabled={blocked}
           onChange={(e) => setValue(e.target.value)}
           onKeyDown={onKeyDown}
-          placeholder="Reply as the user…  ⌘↵ to send"
-          aria-label="Message the recommender"
-          className="block w-full resize-none bg-transparent px-3.5 pb-1 pt-3 text-body-md leading-relaxed text-on-surface outline-none placeholder:text-outline disabled:cursor-not-allowed"
+          placeholder="Type a message as the user you're playing — press ⌘↵ to send"
+          aria-label="Type a message to RecAI"
+          className="block w-full resize-none bg-transparent px-3.5 pb-1 pt-3 text-[13px] leading-relaxed text-text-main outline-none placeholder:text-text-dim disabled:cursor-not-allowed"
         />
         <div className="flex items-center gap-2 px-2.5 pb-2 pt-1.5">
-          <span className="flex items-center gap-1.5 text-label-md font-label-md text-on-surface-variant">
-            <Sym name="schedule" size={14} className="text-outline" />
+          <span className="flex items-center gap-1.5 text-[11px] text-text-variant">
+            <Sym name="schedule" size={14} className="text-text-dim" />
             {isPending
               ? phase === "building"
-                ? "warming the recommender — first turn takes ~a minute"
-                : "running the turn…"
-              : "first turn warms the recommender (~min) · then fast"}
+                ? "Waking the recommender — the first message takes about a minute"
+                : "Sending your message…"
+              : "The first message wakes the recommender (about a minute), then replies are quick"}
           </span>
           <button
             type="button"
             onClick={submit}
             disabled={blocked || value.trim().length === 0}
             aria-label="Send message"
-            className={`ml-auto flex h-8 w-8 items-center justify-center rounded-md bg-primary text-on-primary transition-colors hover:bg-primary-container disabled:opacity-45 ${FOCUS_RING}`}
+            className={`ml-auto flex h-8 w-8 items-center justify-center rounded-md bg-primary text-on-primary transition-colors hover:bg-primary-dim disabled:opacity-45 ${FOCUS_RING}`}
           >
             {isPending ? (
               <Sym name="autorenew" size={16} className="animate-rb-spin" />

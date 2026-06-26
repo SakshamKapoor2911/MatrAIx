@@ -22,6 +22,14 @@ export interface EnvironmentPopoverProps {
   environment: ConfigEnvironment | null;
 }
 
+/** Plain-language tooltips for the fixed-stack rows (teaching, not data). */
+const ROW_TOOLTIPS: Record<string, string> = {
+  Selection: "How the app picks candidate items.",
+  Agent: "The agent that drives the app.",
+  Resources: "The data the agent draws on.",
+  Scorer: "Turns the user's self-report into scores.",
+};
+
 export function EnvironmentPopover({ environment }: EnvironmentPopoverProps) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -68,17 +76,17 @@ export function EnvironmentPopover({ environment }: EnvironmentPopoverProps) {
   ];
 
   return (
-    <div ref={rootRef} className="relative ml-auto flex flex-shrink-0 items-center gap-2 border-l border-border-soft pl-6">
+    <div ref={rootRef} className="relative ml-auto flex flex-shrink-0 items-center gap-2 border-l border-outline-dim pl-6">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-controls={panelId}
-        className={`flex items-center gap-1.5 rounded bg-surface-container-low px-3 py-1.5 text-body-sm font-medium text-on-surface-variant transition-colors hover:bg-surface-container ${FOCUS_RING}`}
+        className={`flex items-center gap-1.5 rounded border border-outline bg-surface-low px-3 py-1.5 text-[13px] font-medium text-text-variant transition-colors hover:border-primary ${FOCUS_RING}`}
       >
-        <Sym name="hub" size={16} className="text-outline" />
+        <Sym name="hub" size={16} className="text-text-dim" />
         {runtime}
-        <Sym name={open ? "expand_less" : "expand_more"} size={16} className="text-outline" />
+        <Sym name={open ? "expand_less" : "expand_more"} size={16} className="text-text-dim" />
       </button>
 
       {open && (
@@ -86,48 +94,60 @@ export function EnvironmentPopover({ environment }: EnvironmentPopoverProps) {
           id={panelId}
           role="region"
           aria-label="Fixed environment"
-          className="absolute right-0 top-full z-30 mt-2 w-80 rounded-lg border border-border-soft bg-surface-container-lowest p-3 shadow-pop"
+          className="panel absolute right-0 top-full z-30 mt-2 w-80 rounded-md border border-outline bg-surface-lowest p-3 shadow-2xl"
         >
-          <p className="mb-2 flex items-center gap-1 text-[11px] font-medium uppercase tracking-wider text-on-surface-variant">
-            <Sym name="lock" size={13} />
-            Harbor environment
-          </p>
+          <div className="mb-2 flex items-center justify-between gap-2">
+            <p className="flex items-center gap-1 hud text-[10px] text-text-dim">
+              <Sym name="lock" size={13} />
+              Test environment (Harbor)
+            </p>
+            <span
+              className="hud rounded border border-outline px-1.5 py-0.5 text-[8px] text-text-dim"
+              title="These are fixed by the Harbor test sandbox and can't be changed for this run."
+            >
+              Read-only
+            </span>
+          </div>
           <div className="space-y-2">
             {runtimeRows.map((r) => (
               <div key={r.label} className="flex items-center justify-between gap-3">
-                <span className="text-body-sm text-on-surface-variant">{r.label}</span>
-                <span className="truncate rounded bg-surface-container px-1.5 py-0.5 font-mono-sm text-mono-sm text-on-surface">
+                <span className="hud text-[9px] text-text-dim" title={ROW_TOOLTIPS[r.label]}>
+                  {r.label}
+                </span>
+                <span className="truncate font-mono text-[11px] text-text-variant">
                   {r.value}
                 </span>
               </div>
             ))}
           </div>
-          <div className="mt-3 border-t border-border-soft pt-3">
-            <p className="mb-2 flex items-center gap-1 text-[11px] font-medium uppercase tracking-wider text-on-surface-variant">
+          <div className="mt-3 border-t border-outline-dim pt-3">
+            <p className="mb-2 flex items-center gap-1 hud text-[10px] text-text-dim">
               <Sym name="storage" size={13} />
-              Application stack
+              What&apos;s running inside the app
             </p>
             <div className="space-y-2">
               {stackRows.map((r) => (
                 <div key={r.label} className="flex items-center justify-between gap-3">
-                  <span className="text-body-sm text-on-surface-variant">{r.label}</span>
-                  <span className="truncate rounded bg-surface-container px-1.5 py-0.5 font-mono-sm text-mono-sm text-on-surface">
+                  <span className="hud text-[9px] text-text-dim" title={ROW_TOOLTIPS[r.label]}>
+                    {r.label}
+                  </span>
+                  <span className="truncate font-mono text-[11px] text-text-variant">
                     {r.value}
                   </span>
                 </div>
               ))}
             </div>
           </div>
-          <div className="mt-3 border-t border-border-soft pt-3">
-            <p className="mb-2 flex items-center gap-1 text-[11px] font-medium uppercase tracking-wider text-on-surface-variant">
+          <div className="mt-3 border-t border-outline-dim pt-3">
+            <p className="mb-2 flex items-center gap-1 hud text-[10px] text-text-dim">
               <Sym name="account_tree" size={13} />
-              Prompt boundary
+              Who writes which prompt
             </p>
             <div className="space-y-2">
               {promptRows.map((r) => (
                 <div key={r.label} className="flex items-start justify-between gap-3">
-                  <span className="shrink-0 text-body-sm text-on-surface-variant">{r.label}</span>
-                  <span className="max-w-[12.5rem] text-right text-body-sm font-medium leading-snug text-on-surface">
+                  <span className="shrink-0 hud text-[9px] text-text-dim">{r.label}</span>
+                  <span className="max-w-[12.5rem] text-right text-[11px] leading-relaxed text-text-dim">
                     {r.value}
                   </span>
                 </div>

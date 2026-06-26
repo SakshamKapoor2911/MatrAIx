@@ -42,51 +42,62 @@ export function RunHeader({
   canExport,
   onOpenRuns,
 }: RunHeaderProps) {
-  const title = persona ? personaDescriptiveTitle(context, persona.blurb, persona.source) : "No persona selected";
+  const title = persona ? personaDescriptiveTitle(context, persona.blurb, persona.source) : "No persona chosen yet";
   const codename = persona ? personaCodename(persona.name, persona.id) : null;
 
   return (
-    <div className="flex flex-shrink-0 items-center justify-between border-b border-border-soft bg-surface-container-lowest px-lg py-sm">
+    <div className="flex flex-shrink-0 items-center justify-between border-b border-outline-dim bg-surface-lowest px-5 py-sm">
       <div className="flex min-w-0 items-center gap-3">
-        <h1 className="truncate text-display font-display text-on-surface">{title}</h1>
+        <h1 className="truncate font-display text-[20px] font-bold tracking-tight text-text-main">{title}</h1>
         {codename && (
-          <span className="flex-shrink-0 rounded bg-surface-container px-2 py-1 font-mono-sm text-mono-sm text-on-surface-variant">
+          <span className="flex-shrink-0 rounded bg-surface-high px-2 py-1 font-mono text-[11px] text-text-dim">
             {codename}
+          </span>
+        )}
+        {persona?.source && (
+          <span className="hud flex-shrink-0 rounded border border-secondary/30 bg-secondary/10 px-1.5 py-0.5 text-[9px] text-secondary">
+            {persona.source}
           </span>
         )}
       </div>
 
-      <div className="flex flex-shrink-0 items-center gap-3">
-        <button
-          type="button"
-          onClick={onOpenRuns}
-          className={`flex items-center gap-1.5 rounded-md px-3 py-2 text-label-md font-label-md text-on-surface-variant transition-colors hover:bg-surface-container-low hover:text-primary ${FOCUS_RING}`}
-        >
-          <Sym name="history" size={18} />
-          Runs
-        </button>
-        <button
-          type="button"
-          onClick={onExport}
-          disabled={!canExport}
-          className={`flex items-center gap-2 rounded-md border border-outline-variant px-4 py-2 text-label-md font-label-md text-on-surface-variant transition-colors hover:bg-surface-container-low hover:text-on-surface disabled:cursor-not-allowed disabled:opacity-55 ${FOCUS_RING}`}
-        >
-          <Sym name="download" size={18} />
-          Export log
-        </button>
-        <button
-          type="button"
-          onClick={onRun}
-          disabled={!persona || running}
-          className={`flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-label-md font-label-md text-on-primary shadow-sm transition-colors hover:bg-primary-container disabled:cursor-not-allowed disabled:opacity-55 ${FOCUS_RING}`}
-        >
-          {running ? (
-            <Sym name="autorenew" size={18} className="animate-rb-spin" />
-          ) : (
-            <Sym name="play_arrow" fill={1} size={18} />
-          )}
-          {running ? "Running…" : hasRun ? "Re-run eval" : "Run eval"}
-        </button>
+      <div className="flex flex-shrink-0 flex-col items-end gap-1">
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={onOpenRuns}
+            className={`flex items-center gap-1.5 rounded-md px-3 py-2 text-xs font-medium text-text-variant transition-colors hover:bg-surface hover:text-primary ${FOCUS_RING}`}
+          >
+            <Sym name="history" size={18} />
+            Past runs
+          </button>
+          <button
+            type="button"
+            onClick={onExport}
+            disabled={!canExport}
+            title="Save this conversation and its scores as a JSON file."
+            className={`flex items-center gap-2 rounded-md border border-outline bg-surface-low px-4 py-2 text-xs font-medium text-text-variant transition-colors hover:border-primary hover:text-text-main disabled:cursor-not-allowed disabled:opacity-55 ${FOCUS_RING}`}
+          >
+            <Sym name="download" size={18} />
+            Download transcript
+          </button>
+          <button
+            type="button"
+            onClick={onRun}
+            disabled={!persona || running}
+            className={`glow flex items-center gap-2 rounded-md bg-primary px-4 py-2 font-display text-sm font-semibold text-on-primary transition-colors hover:bg-primary-dim disabled:cursor-not-allowed disabled:opacity-55 ${FOCUS_RING}`}
+          >
+            {running ? (
+              <Sym name="autorenew" size={18} className="animate-rb-spin" />
+            ) : (
+              <Sym name="play_arrow" fill={1} size={18} />
+            )}
+            {running ? "Running…" : hasRun ? "Run again" : "Run simulation"}
+          </button>
+        </div>
+        <p className="max-w-[22rem] text-right text-[11px] leading-relaxed text-text-dim">
+          A simulated user chats with the app for a few turns, then rates how well it understood and met their needs.
+        </p>
       </div>
     </div>
   );

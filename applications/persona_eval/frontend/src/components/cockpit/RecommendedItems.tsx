@@ -33,35 +33,35 @@ export function RecommendedItems({ items, domain, title, icon }: RecommendedItem
   const headerLabel = title ?? `Recommended ${meta.noun}`;
 
   return (
-    <div className="mb-3 overflow-hidden rounded-lg border border-border-soft">
-      <div className="flex items-center justify-between border-b border-border-soft bg-surface-container-low px-3 py-2">
-        <span className="flex items-center gap-1.5 text-label-md font-label-md uppercase tracking-wider text-on-surface-variant">
+    <div className="mb-3 overflow-hidden rounded-md border border-outline">
+      <div className="flex items-center justify-between border-b border-outline bg-surface-low px-3 py-2">
+        <span className="flex items-center gap-1.5 hud text-[10px] text-text-dim">
           <Sym name={icon ?? meta.icon} fill={1} size={16} className="text-primary" />
           {headerLabel}
         </span>
-        <span className="font-mono-sm text-mono-sm text-on-surface-variant">
+        <span className="font-mono text-[11px] text-text-dim">
           {items.length} item{items.length === 1 ? "" : "s"}
         </span>
       </div>
-      <ul className="divide-y divide-border-soft">
+      <ul className="divide-y divide-outline-dim">
         {items.map((item) => (
-          <li key={`${item.itemId}-${item.rank}`} className="flex items-start gap-3 px-3 py-2 transition-colors hover:bg-surface-container-low">
+          <li key={`${item.itemId}-${item.rank}`} className="flex items-start gap-3 px-3 py-2 transition-colors hover:bg-surface-low">
             <span
-              className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-primary/10 text-[11px] font-bold text-primary"
+              className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-primary/10 font-mono text-[11px] font-bold text-primary"
               aria-hidden
             >
               {item.rank}
             </span>
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2">
-                <span className="flex-1 truncate text-body-md text-on-surface" title={item.title ?? item.itemId}>
+                <span className="flex-1 truncate text-[12px] font-semibold text-text-main" title={item.title ?? item.itemId}>
                   {item.title ?? item.itemId}
                 </span>
-                <span className="flex-shrink-0 rounded bg-surface-container px-1.5 py-0.5 font-mono-sm text-mono-sm text-on-surface-variant">
+                <span className="flex-shrink-0 rounded bg-surface-high px-1.5 py-0.5 font-mono text-[11px] text-text-dim">
                   {item.itemId}
                 </span>
               </div>
-              {item.meta && <p className="mt-0.5 text-body-sm text-on-surface-variant">{item.meta}</p>}
+              {item.meta && <p className="mt-0.5 text-[12px] text-text-dim">{item.meta}</p>}
             </div>
           </li>
         ))}

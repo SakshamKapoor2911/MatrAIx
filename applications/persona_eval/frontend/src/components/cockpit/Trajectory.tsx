@@ -90,10 +90,11 @@ export function Trajectory({
           <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
             <Sym name="groups" fill={1} size={26} className="text-primary" />
           </div>
-          <h3 className="text-headline-md font-headline-md text-on-surface">Pick a persona to begin</h3>
-          <p className="mx-auto mt-2 max-w-sm text-body-md leading-relaxed text-on-surface-variant">
-            Choose one of the curated personas on the left, set the run knobs above, then run the eval to watch a
-            persona drive a real conversation against RecBot.
+          <h3 className="font-display text-lg text-text-main">Start by choosing who to simulate</h3>
+          <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-text-variant">
+            Pick a persona on the left and an app to test, set your run options, then hit{" "}
+            <strong className="font-semibold text-text-main">Run simulation</strong> — you&apos;ll watch a stand-in
+            user chat with the app, turn by turn.
           </p>
         </div>
       </div>
@@ -104,13 +105,13 @@ export function Trajectory({
     <div ref={scrollRef} className="custom-scrollbar flex flex-1 flex-col items-center gap-md overflow-y-auto p-lg">
       {/* Scenario banner */}
       {(sutDescription || goalContext) && (
-        <div className="flex w-full max-w-3xl shrink-0 items-start gap-3 rounded-lg border border-border-soft bg-surface-container-lowest p-sm shadow-soft">
+        <div className="flex w-full max-w-3xl shrink-0 items-start gap-3 rounded-md border border-outline bg-surface-lowest p-sm">
           <Sym name="info" size={18} className="mt-0.5 text-primary" />
           <div>
-            <h4 className="mb-1 text-body-md font-semibold text-on-surface">
+            <h4 className="mb-1 font-display text-sm font-semibold text-text-main">
               Scenario · {goalContext?.label ?? "Realistic scenario"}
             </h4>
-            <p className="text-body-sm leading-relaxed text-on-surface-variant">
+            <p className="text-[13px] leading-relaxed text-text-variant">
               {sutDescription ?? goalContext?.description ?? ""}
             </p>
           </div>
@@ -126,7 +127,7 @@ export function Trajectory({
               key={turn.turnId ?? i}
               ref={(el) => registerTurnRef(i, el)}
               className={`flex flex-col gap-lg rounded-xl transition-colors ${
-                focused ? "bg-primary/5 ring-1 ring-primary/20" : ""
+                focused ? "bg-primary/5 ring-1 ring-primary/30" : ""
               }`}
             >
               <TurnMarker label={`Turn ${i + 1}`} />
@@ -143,31 +144,31 @@ export function Trajectory({
 
         {/* Loading skeleton while building, or while running before turns land. */}
         {isRunning && (turns.length === 0 || phase === "building") && (
-          <SkeletonTurn label={phase === "building" ? "Warming the chatbot application…" : liveStatus} />
+          <SkeletonTurn label={phase === "building" ? "Starting the app…" : liveStatus} />
         )}
 
         {/* Live "thinking" line once turns are streaming. */}
         {isRunning && turns.length > 0 && phase !== "building" && liveStatus && (
           <div className="flex items-center justify-center gap-2 py-2">
-            <Sym name="more_horiz" size={18} className="animate-rb-pulse text-on-surface-variant" />
-            <span className="text-body-sm text-on-surface-variant">{liveStatus}</span>
+            <Sym name="more_horiz" size={18} className="animate-rb-pulse text-text-dim" />
+            <span className="text-[13px] text-text-dim">{liveStatus}</span>
           </div>
         )}
 
         {/* Failed run — plain-language cause + Retry (preserves config). */}
         {failed && (
-          <div className="mx-auto w-full max-w-xl rounded-lg border border-error/40 bg-error-container/40 p-4">
+          <div className="mx-auto w-full max-w-xl rounded-md border border-danger/40 bg-danger/10 p-4">
             <div className="flex items-start gap-3">
-              <Sym name="error" fill={1} size={20} className="mt-0.5 text-error" />
+              <Sym name="error" fill={1} size={20} className="mt-0.5 text-danger" />
               <div className="min-w-0 flex-1">
-                <h4 className="text-body-md font-semibold text-on-surface">This run didn&apos;t finish</h4>
-                <p className="mt-1 break-words text-body-sm leading-relaxed text-on-surface-variant">
-                  {error ?? "The PersonaEval run stopped unexpectedly. Your configuration is unchanged."}
+                <h4 className="text-sm font-semibold text-text-main">The simulation didn&apos;t finish</h4>
+                <p className="mt-1 break-words text-[13px] leading-relaxed text-text-variant">
+                  {error ?? "It stopped before completing — your settings are untouched, so you can try again right away."}
                 </p>
                 <button
                   type="button"
                   onClick={onRetry}
-                  className={`mt-3 inline-flex items-center gap-1.5 rounded-md bg-primary px-3 py-1.5 text-label-md font-label-md text-on-primary shadow-sm transition-colors hover:bg-primary-container ${FOCUS_RING}`}
+                  className={`mt-3 inline-flex items-center gap-1.5 rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-on-primary transition-colors hover:bg-primary-dim ${FOCUS_RING}`}
                 >
                   <Sym name="refresh" size={16} />
                   Retry
@@ -180,25 +181,25 @@ export function Trajectory({
         {/* End-of-run marker. */}
         {done && turns.length > 0 && (
           <div className="my-1 flex w-full items-center">
-            <div className="flex-1 border-t border-border-soft" />
-            <span className="flex items-center gap-1 bg-background px-3 text-label-md font-label-md uppercase tracking-widest text-on-success-container">
+            <div className="flex-1 border-t border-outline-dim" />
+            <span className="flex items-center gap-1 bg-surface-dim px-3 hud text-[10px] text-secondary">
               <Sym name="flag" fill={1} size={14} />
               Run complete
             </span>
-            <div className="flex-1 border-t border-border-soft" />
+            <div className="flex-1 border-t border-outline-dim" />
           </div>
         )}
 
         {/* Empty: persona selected, no run yet — invite the operator to run. */}
         {hasPersona && phase === "idle" && turns.length === 0 && !failed && (
           <div className="mx-auto mt-8 max-w-md text-center">
-            <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-surface-container">
-              <Sym name="play_circle" size={26} className="text-on-surface-variant" />
+            <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-surface-high">
+              <Sym name="play_circle" size={26} className="text-text-dim" />
             </div>
-            <h3 className="text-headline-md font-headline-md text-on-surface">Ready to run</h3>
-            <p className="mx-auto mt-2 max-w-sm text-body-md leading-relaxed text-on-surface-variant">
-              Press <kbd className="rounded border border-border-soft bg-surface-container px-1.5 py-0.5 font-mono-sm text-mono-sm">R</kbd>{" "}
-              or use the Run button to start the eval for this persona.
+            <h3 className="font-display text-lg text-text-main">All set</h3>
+            <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-text-variant">
+              Press <kbd className="rounded border border-outline-dim bg-surface-high px-1.5 py-0.5 font-mono text-[11px]">R</kbd>{" "}
+              (or the Run button) to start the simulation for this persona.
             </p>
           </div>
         )}
@@ -214,18 +215,18 @@ function SkeletonTurn({ label }: { label: string | null }) {
       <TurnMarker label="Turn 1" />
       {/* Persona side (right) */}
       <div className="flex w-full flex-col items-end gap-1 pl-12">
-        <div className="h-3 w-28 animate-rb-pulse rounded bg-surface-container" />
-        <div className="h-16 w-2/3 animate-rb-pulse rounded-2xl rounded-tr-sm bg-surface-container-high" />
+        <div className="h-3 w-28 animate-rb-pulse rounded bg-surface-high" />
+        <div className="h-16 w-2/3 animate-rb-pulse rounded-2xl rounded-tr-sm bg-surface-high" />
       </div>
       {/* RecBot side (left) */}
       <div className="mt-3 flex w-full flex-col items-start gap-1 pr-12">
-        <div className="h-3 w-20 animate-rb-pulse rounded bg-surface-container" />
-        <div className="h-24 w-full animate-rb-pulse rounded-2xl rounded-tl-sm bg-surface-container-high" />
+        <div className="h-3 w-20 animate-rb-pulse rounded bg-surface-high" />
+        <div className="h-24 w-full animate-rb-pulse rounded-2xl rounded-tl-sm bg-surface-high" />
       </div>
       {label && (
         <div className="flex items-center justify-center gap-2 py-1">
           <Sym name="autorenew" size={16} className="animate-rb-spin text-primary" />
-          <span className="text-body-sm text-on-surface-variant">{label}</span>
+          <span className="text-[13px] text-text-dim">{label}</span>
         </div>
       )}
     </div>

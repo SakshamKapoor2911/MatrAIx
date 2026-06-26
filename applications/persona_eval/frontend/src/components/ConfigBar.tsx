@@ -72,8 +72,8 @@ export function ConfigBar({ config, options, disabled, onChange }: ConfigBarProp
       <div className="flex items-center gap-md" aria-hidden>
         {Array.from({ length: PLACEHOLDER_COUNT }).map((_, i) => (
           <div key={i} className="flex items-center gap-2 opacity-50">
-            <span className="h-3 w-12 animate-rb-pulse rounded bg-surface-container-high" />
-            <span className="h-7 w-24 animate-rb-pulse rounded bg-surface-container" />
+            <span className="h-3 w-12 animate-rb-pulse rounded bg-surface-high" />
+            <span className="h-7 w-24 animate-rb-pulse rounded bg-surface" />
           </div>
         ))}
       </div>
@@ -105,7 +105,7 @@ export function ConfigBar({ config, options, disabled, onChange }: ConfigBarProp
             />
             {knob.rebuildsAgent && (
               <span
-                className="flex items-center text-on-warning-container"
+                className="flex items-center text-warn"
                 title="Changing this re-warms the recommender — the next turn will be slower."
                 aria-label="Changing this re-warms the recommender; the next turn will be slower"
               >

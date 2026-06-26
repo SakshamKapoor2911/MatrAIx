@@ -157,7 +157,7 @@ export function fmtGoalContext(id: string | null | undefined): string {
 /** A quiet domain pill (reused across list / detail / compare headers). */
 export function DomainPill({ domain }: { domain: string | null | undefined }) {
   return (
-    <span className="inline-flex items-center rounded-md border border-border-soft bg-surface-container px-2 py-0.5 text-label-md font-label-md font-medium text-on-surface-variant">
+    <span className="inline-flex items-center rounded border border-outline bg-surface-high px-2 py-0.5 text-[11px] font-medium text-text-variant">
       {fmtDomain(domain)}
     </span>
   );
@@ -166,7 +166,7 @@ export function DomainPill({ domain }: { domain: string | null | undefined }) {
 /** A small muted source tag next to a persona name. */
 export function SourceTag({ source }: { source: string | null | undefined }) {
   return (
-    <span className="inline-flex items-center rounded bg-surface-container px-1.5 py-px font-mono-sm text-[10.5px] text-on-surface-variant">
+    <span className="inline-flex items-center rounded bg-surface-high px-1.5 py-px font-mono text-[10px] text-text-dim">
       {fmtSource(source)}
     </span>
   );
@@ -176,8 +176,8 @@ export function SourceTag({ source }: { source: string | null | undefined }) {
  * Grounding indicator — did the recommender actually return real catalog items,
  * or did the agent answer from base knowledge? A run can read smoothly (and even
  * self-score highly) while recommending nothing real, so we surface this plainly:
- * `N grounded` (green) when the corpus was used, `Ungrounded` (amber) when zero
- * catalog items were recommended.
+ * `N from the real catalog` (mint) when the corpus was used, `Nothing from the
+ * catalog` (amber) when zero catalog items were recommended.
  */
 export function GroundingChip({
   metrics,
@@ -190,19 +190,19 @@ export function GroundingChip({
   const grounded = count > 0;
   return (
     <span
-      className={`inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-label-md font-label-md font-medium ${
+      className={`inline-flex items-center gap-1 rounded border px-2 py-0.5 text-[11px] font-medium ${
         grounded
-          ? "bg-success-container text-on-success-container"
-          : "bg-warning-container text-warning"
+          ? "border-secondary/30 bg-secondary/10 text-secondary"
+          : "border-warn/30 bg-warn/10 text-warn"
       } ${className}`}
       title={
         grounded
-          ? `${count} item${count === 1 ? "" : "s"} recommended from the real catalog`
-          : "No catalog items recommended — the agent's suggestions aren't grounded in the corpus (base knowledge)"
+          ? `${count} suggestion${count === 1 ? "" : "s"} came from the real product catalog.`
+          : "The app suggested items but none came from the real product catalog — they're from the model's own knowledge, so treat them with care."
       }
     >
       <Sym name={grounded ? "inventory_2" : "warning"} size={13} />
-      {grounded ? `${count} grounded` : "Ungrounded"}
+      {grounded ? `${count} from the real catalog` : "Nothing from the catalog"}
     </span>
   );
 }
@@ -210,9 +210,9 @@ export function GroundingChip({
 /** A compact recommended-item chip (mono id + title) for trajectories. */
 export function RecChip({ item }: { item: RunRecItem }) {
   return (
-    <span className="inline-flex max-w-full items-center gap-1.5 rounded-md border border-border-soft bg-surface-container-lowest px-2 py-1 text-label-md">
-      <span className="font-mono-sm text-[10.5px] text-on-surface-variant">{item.id}</span>
-      {item.title && <span className="truncate text-on-surface-variant">{item.title}</span>}
+    <span className="inline-flex max-w-full items-center gap-1.5 rounded border border-outline bg-surface-low px-2 py-1 text-[11px]">
+      <span className="font-mono text-[10px] text-text-dim">{item.id}</span>
+      {item.title && <span className="truncate text-text-variant">{item.title}</span>}
     </span>
   );
 }

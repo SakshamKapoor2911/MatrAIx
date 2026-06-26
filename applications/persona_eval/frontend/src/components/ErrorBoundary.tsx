@@ -49,18 +49,18 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
     if (!error) return this.props.children;
 
     return (
-      <div className="grid min-h-screen place-items-center bg-background p-6 text-on-surface">
-        <div className="w-full max-w-md rounded-xl border border-border-soft bg-surface-container-lowest p-6 shadow-pop">
+      <div className="grid min-h-screen place-items-center bg-surface-dim p-6 text-text-main">
+        <div className="panel w-full max-w-md rounded-md border border-outline bg-surface p-6 shadow-2xl">
           <div className="flex items-center gap-2.5">
-            <Sym name="error" fill={1} size={22} className="flex-none text-error" />
-            <h1 className="text-headline-md font-headline-md text-on-surface">Something went wrong</h1>
+            <Sym name="error" fill={1} size={22} className="flex-none text-danger" />
+            <h1 className="font-display text-lg font-bold tracking-tight text-text-main">Something went wrong</h1>
           </div>
-          <p className="mt-2 text-body-md leading-relaxed text-on-surface-variant">
+          <p className="mt-2 text-[13px] leading-relaxed text-text-variant">
             PersonaEval hit an unexpected error and stopped rendering. Your data is safe — you can
             recover the view or reload the app.
           </p>
           {error.message && (
-            <pre className="mt-3 max-h-32 overflow-auto rounded-md border border-border-soft bg-surface-container-low px-3 py-2 font-mono-sm text-mono-sm leading-relaxed text-on-surface-variant">
+            <pre className="mt-3 max-h-32 overflow-auto rounded-md border border-outline bg-field px-3 py-2 font-mono text-[11px] leading-relaxed text-text-variant">
               {error.message}
             </pre>
           )}
@@ -68,7 +68,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
             <button
               type="button"
               onClick={this.handleReset}
-              className={`inline-flex items-center gap-1.5 rounded-md bg-primary px-4 py-2 text-label-md font-label-md text-on-primary shadow-sm transition-colors hover:bg-primary-container ${FOCUS_RING}`}
+              className={`inline-flex items-center gap-1.5 rounded-md bg-primary px-4 py-2 text-xs font-medium text-on-primary transition-colors hover:bg-primary-dim ${FOCUS_RING}`}
             >
               <Sym name="refresh" size={16} />
               Try again
@@ -76,7 +76,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
             <button
               type="button"
               onClick={this.handleReload}
-              className={`inline-flex items-center gap-1.5 rounded-md border border-outline-variant px-4 py-2 text-label-md font-label-md text-on-surface-variant transition-colors hover:bg-surface-container-low hover:text-on-surface ${FOCUS_RING}`}
+              className={`inline-flex items-center gap-1.5 rounded-md border border-outline px-4 py-2 text-xs font-medium text-text-variant transition-colors hover:bg-surface-low hover:text-text-main ${FOCUS_RING}`}
             >
               Reload
             </button>

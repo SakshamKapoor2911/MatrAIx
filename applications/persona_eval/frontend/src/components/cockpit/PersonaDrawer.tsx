@@ -16,6 +16,14 @@ import { FOCUS_RING, Sym, personaCodename, personaDescriptiveTitle } from "./coc
 import { usePersonaDetail } from "@/lib/usePersonaEval";
 import type { PersonaEvalPersona } from "@/lib/types";
 
+/** Per-source provenance-chip tone; unknown sources fall to the neutral default. */
+const SOURCE_TONE: Record<string, string> = {
+  Nemotron: "text-secondary border-secondary/30 bg-secondary/10",
+  OASIS: "text-primary border-primary/30 bg-primary/10",
+  PersonaHub: "text-warn border-warn/30 bg-warn/10",
+};
+const NEUTRAL_TONE = "text-text-variant border-outline bg-surface-high";
+
 export interface PersonaDrawerProps {
   open: boolean;
   onClose: () => void;
@@ -53,25 +61,35 @@ export function PersonaDrawer({ open, onClose, persona, context }: PersonaDrawer
   // raw "Source · ID" name repeated alongside the codename.
   const title = personaDescriptiveTitle(fullContext, persona.blurb, persona.source);
   const codename = personaCodename(persona.name, persona.id);
+  const tone = SOURCE_TONE[persona.source ?? ""] ?? NEUTRAL_TONE;
   const loading = detail.isLoading && !fullContext;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-6">
-      <div className="absolute inset-0 bg-on-surface/30" onClick={onClose} aria-hidden />
+      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} aria-hidden />
       <div
         role="dialog"
         aria-modal="true"
-        aria-label={`${title} full persona`}
-        className="relative z-10 flex max-h-[80vh] w-full max-w-2xl flex-col overflow-hidden rounded-xl border border-border-soft bg-surface-container-lowest shadow-pop"
+        aria-label={`Full profile for ${title}`}
+        className="relative z-10 flex max-h-[80vh] w-full max-w-2xl flex-col overflow-hidden rounded-md border border-outline bg-surface-lowest shadow-2xl"
       >
-        <div className="flex items-center justify-between border-b border-border-soft px-4 py-3">
-          <div className="min-w-0">
-            <h2 className="truncate text-headline-md font-headline-md text-on-surface">{title}</h2>
-            <p className="mt-0.5 flex items-center gap-2 text-body-sm text-on-surface-variant">
+        <div className="flex items-center gap-3 border-b border-outline px-4 py-3">
+          <div
+            className="flex h-10 w-10 flex-none items-center justify-center rounded border border-outline bg-surface-high"
+            aria-hidden
+          >
+            <Sym name="person" fill={1} size={22} className="text-text-variant" />
+          </div>
+          <div className="min-w-0 flex-1">
+            <div className="hud text-[9px] text-text-dim">Persona</div>
+            <h2 className="truncate font-display text-[18px] font-bold text-text-main">{title}</h2>
+            <p className="mt-0.5 flex items-center gap-2 text-[12px] text-text-variant">
               {persona.source && (
-                <span className="rounded bg-surface-container px-1.5 py-0.5 text-label-md">{persona.source}</span>
+                <span className={`rounded border px-1.5 py-0.5 text-[10px] font-medium ${tone}`}>
+                  {persona.source}
+                </span>
               )}
-              <span className="font-mono-sm">{codename}</span>
+              <span className="font-mono text-[10px] text-text-dim">{codename}</span>
             </p>
           </div>
           <button
@@ -79,26 +97,33 @@ export function PersonaDrawer({ open, onClose, persona, context }: PersonaDrawer
             type="button"
             onClick={onClose}
             aria-label="Close persona detail"
-            className={`flex h-8 w-8 items-center justify-center rounded-md text-on-surface-variant transition-colors hover:bg-surface-container ${FOCUS_RING}`}
+            className={`flex h-8 w-8 flex-none items-center justify-center rounded-md border border-outline text-text-variant transition-colors hover:border-primary hover:text-text-main ${FOCUS_RING}`}
           >
             <Sym name="close" size={20} />
           </button>
         </div>
-        <div className="custom-scrollbar overflow-y-auto p-4">
+        <div className="custom-scrollbar overflow-y-auto p-5 space-y-5">
           {loading ? (
             <div className="space-y-2" aria-label="Loading full persona" aria-busy>
               {[5, 7, 6, 4, 7, 5].map((w, i) => (
                 <div
                   key={i}
-                  className="h-3 animate-pulse rounded bg-surface-container"
+                  className="h-3 animate-pulse rounded bg-surface-high"
                   style={{ width: `${w * 10}%` }}
                 />
               ))}
             </div>
+          ) : fullContext || persona.blurb ? (
+            <div className="rounded-md border border-outline bg-surface p-4">
+              <div className="hud mb-2 text-[10px] text-text-dim">Raw record</div>
+              <pre className="whitespace-pre-wrap break-words rounded border border-outline bg-field p-3 font-mono text-[10.5px] leading-relaxed text-primary">
+                {fullContext || persona.blurb}
+              </pre>
+            </div>
           ) : (
-            <pre className="whitespace-pre-wrap break-words font-mono-sm text-mono-sm leading-relaxed text-on-surface-variant">
-              {fullContext || persona.blurb || "No persona context available."}
-            </pre>
+            <p className="text-[12px] italic leading-relaxed text-text-dim">
+              This persona has no extra profile text — the summary above is all we have.
+            </p>
           )}
         </div>
       </div>

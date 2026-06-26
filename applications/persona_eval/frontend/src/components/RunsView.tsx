@@ -9,10 +9,10 @@
  *   `run` + `compareWith`          → <RunCompare/>
  *
  * The list is a calm, scannable table of persisted persona-eval runs styled to
- * the Executive Precision tokens. Each row is a keyboard-focusable button that
- * opens the run; the only loud element is the `RatingChip`, the surface's
- * signature. A "Compare" toggle turns rows into a two-pick selection that
- * launches the baseline-anchored side-by-side compare.
+ * the matrAIx tokens. Each row is a keyboard-focusable button that opens the
+ * run; the only loud element is the `RatingChip`, the surface's signature. A
+ * "Compare" toggle turns rows into a two-pick selection that launches the
+ * baseline-anchored side-by-side compare.
  */
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -100,22 +100,25 @@ function RunsList({ openRun, compareRuns, onClose }: RunsListProps) {
   }
 
   return (
-    <div className="min-h-0 flex-1 overflow-auto bg-background">
-      <div className="mx-auto w-full max-w-[1100px] px-lg py-7">
+    <div className="min-h-0 flex-1 overflow-auto bg-surface-dim custom-scrollbar">
+      <div className="mx-auto w-full max-w-[1180px] px-6 py-7">
         {/* Header */}
         <div className="mb-5 flex flex-wrap items-center gap-x-3 gap-y-2">
           <button
             type="button"
             onClick={onClose}
-            className={`flex items-center gap-1.5 rounded-md border border-outline-variant px-3 py-1.5 text-label-md font-label-md text-on-surface-variant transition-colors hover:bg-surface-container-low hover:text-on-surface ${FOCUS_RING}`}
+            className={`flex items-center gap-1.5 rounded-md border border-outline bg-surface-low px-3 py-1.5 text-[12px] text-text-variant transition-colors hover:border-primary hover:text-text-main ${FOCUS_RING}`}
           >
             <Sym name="arrow_back" size={16} />
-            Cockpit
+            Back to cockpit
           </button>
-          <h1 className="text-display font-display text-on-surface">Runs</h1>
+          <div className="flex flex-col">
+            <span className="hud text-[10px] text-primary">PersonaEval · Runs</span>
+            <h1 className="font-display text-[22px] font-bold tracking-tight text-text-main">Runs</h1>
+          </div>
           {!query.isLoading && !query.isError && (
-            <span className="font-mono-sm text-mono-sm text-on-surface-variant">
-              {runs.length} {runs.length === 1 ? "run" : "runs"}
+            <span className="font-mono text-[11px] text-text-dim">
+              {runs.length} {runs.length === 1 ? "saved run" : "saved runs"}
             </span>
           )}
 
@@ -125,41 +128,47 @@ function RunsList({ openRun, compareRuns, onClose }: RunsListProps) {
                 type="button"
                 onClick={toggleCompareMode}
                 aria-pressed={comparing}
-                className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-label-md font-label-md transition-colors ${FOCUS_RING} ${
+                className={`flex items-center gap-1.5 rounded-md px-3 py-1.5 text-[12px] transition-colors ${FOCUS_RING} ${
                   comparing
-                    ? "bg-primary text-on-primary shadow-sm hover:bg-primary-container"
-                    : "border border-outline-variant text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface"
+                    ? "bg-primary text-on-primary hover:bg-primary-dim"
+                    : "border border-outline bg-surface-low text-text-variant hover:border-primary hover:text-text-main"
                 }`}
               >
                 <Sym name="compare_arrows" size={16} />
-                {comparing ? "Cancel compare" : "Compare"}
+                {comparing ? "Cancel" : "Compare two runs"}
               </button>
             )}
             <button
               type="button"
               onClick={() => query.refetch()}
               disabled={query.isFetching}
-              className={`flex items-center gap-1.5 rounded-md border border-outline-variant px-3 py-1.5 text-label-md font-label-md text-on-surface-variant transition-colors hover:bg-surface-container-low hover:text-on-surface disabled:opacity-55 ${FOCUS_RING}`}
+              className={`flex items-center gap-1.5 rounded-md border border-outline bg-surface-low px-3 py-1.5 text-[12px] text-text-variant transition-colors hover:border-primary hover:text-text-main disabled:opacity-55 ${FOCUS_RING}`}
             >
-              <Sym name="refresh" size={16} className={query.isFetching ? "animate-rb-spin" : ""} />
-              {query.isFetching ? "Refreshing…" : "Refresh"}
+              <Sym name="refresh" size={16} className={query.isFetching ? "animate-spin" : ""} />
+              {query.isFetching ? "Checking for new runs…" : "Refresh"}
             </button>
           </div>
 
+          <p className="w-full max-w-2xl text-[13px] leading-relaxed text-text-dim">
+            Each row is one simulation. Click it to read the full transcript and scores, or turn on
+            Compare to put two side by side.
+          </p>
+
           {comparing && (
-            <div className="flex w-full items-center gap-3 rounded-lg border border-primary/30 bg-primary/5 px-3 py-2">
+            <div className="flex w-full items-center gap-3 rounded-md border border-primary/30 bg-primary/10 px-3 py-2">
               <Sym name="compare_arrows" size={18} className="text-primary" />
-              <span className="text-body-sm text-on-surface-variant">
-                Pick two runs — the first is the baseline.{" "}
-                <span className="font-mono-sm text-on-surface-variant">{picks.length}/2 selected</span>
+              <span className="text-[13px] text-text-variant">
+                Pick two runs to compare. The first one you choose is the baseline; the second is
+                measured against it.{" "}
+                <span className="font-mono text-[11px] text-text-dim">({picks.length} of 2 chosen)</span>
               </span>
               <button
                 type="button"
                 onClick={launchCompare}
                 disabled={picks.length !== 2}
-                className={`ml-auto flex items-center gap-1.5 rounded-md bg-primary px-3 py-1.5 text-label-md font-label-md text-on-primary shadow-sm transition-colors hover:bg-primary-container disabled:opacity-55 ${FOCUS_RING}`}
+                className={`ml-auto flex items-center gap-1.5 rounded-md bg-primary px-3 py-1.5 text-[12px] text-on-primary transition-colors hover:bg-primary-dim disabled:opacity-55 ${FOCUS_RING}`}
               >
-                Compare 2 runs
+                Compare these two
               </button>
             </div>
           )}
@@ -204,21 +213,23 @@ const ROW_GRID =
 
 function RunsTable({ runs, comparing, picks, onOpen, onTogglePick }: RunsTableProps) {
   return (
-    <div className="overflow-hidden rounded-xl border border-border-soft bg-surface-container-lowest shadow-soft">
+    <div className="overflow-hidden rounded-md border border-outline bg-surface">
       {/* Column header */}
       <div
-        className={`${ROW_GRID} border-b border-border-soft bg-surface-container-low px-3.5 py-2 text-[10.5px] font-semibold uppercase tracking-[0.04em] text-on-surface-variant`}
+        className={`${ROW_GRID} border-b border-outline bg-surface-low px-3.5 py-2 hud text-[9px] text-text-dim`}
       >
         <span aria-hidden />
-        <span>Rating</span>
-        <span>Persona</span>
+        <span title="The simulated user's overall rating, out of 10. Green is great, amber is mixed, red means it fell short.">
+          Score
+        </span>
+        <span>Simulated user</span>
         <span>Domain</span>
-        <span>Goal context</span>
+        <span>Conversation style</span>
         <span className="text-right">Turns</span>
         <span className="text-right">When</span>
       </div>
 
-      <ul className="divide-y divide-border-soft">
+      <ul className="divide-y divide-outline-dim">
         {runs.map((run) => {
           const picked = picks.includes(run.id);
           const pickDisabled = comparing && !picked && picks.length >= 2;
@@ -230,7 +241,7 @@ function RunsTable({ runs, comparing, picks, onOpen, onTogglePick }: RunsTablePr
                 disabled={pickDisabled}
                 aria-pressed={comparing ? picked : undefined}
                 className={`${ROW_GRID} w-full px-3.5 py-2.5 text-left transition-colors ${FOCUS_RING} ${
-                  picked ? "bg-primary/5" : "hover:bg-surface-container-low"
+                  picked ? "bg-primary/10" : "hover:bg-surface-low"
                 } ${pickDisabled ? "cursor-not-allowed opacity-45" : ""}`}
               >
                 {/* Selection affordance (compare mode only) */}
@@ -240,7 +251,7 @@ function RunsTable({ runs, comparing, picks, onOpen, onTogglePick }: RunsTablePr
                       className={`flex h-4 w-4 items-center justify-center rounded border ${
                         picked
                           ? "border-primary bg-primary text-on-primary"
-                          : "border-outline-variant bg-surface-container-lowest"
+                          : "border-outline bg-surface-lowest"
                       }`}
                     >
                       {picked ? <Sym name="check" size={12} /> : null}
@@ -255,7 +266,7 @@ function RunsTable({ runs, comparing, picks, onOpen, onTogglePick }: RunsTablePr
 
                 {/* Persona + source */}
                 <span className="flex min-w-0 items-center gap-2">
-                  <span className="truncate text-body-md font-medium text-on-surface">
+                  <span className="truncate text-[13px] font-medium text-text-main">
                     {run.personaName ?? "Unnamed persona"}
                   </span>
                   <SourceTag source={run.source} />
@@ -267,17 +278,17 @@ function RunsTable({ runs, comparing, picks, onOpen, onTogglePick }: RunsTablePr
                 </span>
 
                 {/* Goal context */}
-                <span className="truncate text-body-sm text-on-surface-variant">
+                <span className="truncate text-[13px] text-text-variant">
                   {fmtGoalContext(run.goalContextId)}
                 </span>
 
                 {/* Turns */}
-                <span className="text-right font-mono-sm text-mono-sm tabular-nums text-on-surface-variant">
+                <span className="text-right font-mono text-[11px] tabular-nums text-text-variant">
                   {run.numTurns ?? "—"}
                 </span>
 
                 {/* When */}
-                <span className="text-right font-mono-sm text-mono-sm tabular-nums text-on-surface-variant">
+                <span className="text-right font-mono text-[11px] tabular-nums text-text-variant">
                   {fmtRunDate(run.createdAt)}
                 </span>
               </button>
@@ -295,16 +306,16 @@ function RunsTable({ runs, comparing, picks, onOpen, onTogglePick }: RunsTablePr
 
 function ListLoading() {
   return (
-    <div className="overflow-hidden rounded-xl border border-border-soft bg-surface-container-lowest shadow-soft" aria-hidden>
+    <div className="overflow-hidden rounded-md border border-outline bg-surface" aria-hidden>
       {Array.from({ length: 6 }).map((_, i) => (
         <div
           key={i}
-          className="flex items-center gap-3 border-b border-border-soft px-3.5 py-3.5 last:border-b-0"
+          className="flex items-center gap-3 border-b border-outline-dim px-3.5 py-3.5 last:border-b-0"
         >
-          <div className="h-5 w-12 animate-rb-pulse rounded-md bg-surface-container-high" />
-          <div className="h-3.5 w-48 animate-rb-pulse rounded bg-surface-container-high" />
-          <div className="h-5 w-16 animate-rb-pulse rounded-md bg-surface-container" />
-          <div className="ml-auto h-3.5 w-16 animate-rb-pulse rounded bg-surface-container" />
+          <div className="h-5 w-12 animate-pulse rounded-md bg-surface-high" />
+          <div className="h-3.5 w-48 animate-pulse rounded bg-surface-high" />
+          <div className="h-5 w-16 animate-pulse rounded-md bg-surface-high" />
+          <div className="ml-auto h-3.5 w-16 animate-pulse rounded bg-surface-high" />
         </div>
       ))}
     </div>
@@ -313,42 +324,45 @@ function ListLoading() {
 
 function ListEmpty({ onClose }: { onClose: () => void }) {
   return (
-    <div className="rounded-xl border border-dashed border-border-soft bg-surface-container-lowest px-6 py-14 text-center">
-      <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-surface-container">
-        <Sym name="history" size={26} className="text-on-surface-variant" />
+    <div className="rounded-md border border-dashed border-outline bg-surface px-6 py-14 text-center">
+      <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-md border border-dashed border-outline bg-surface-high">
+        <Sym name="history" size={26} className="text-text-dim" />
       </div>
-      <h2 className="text-headline-md font-headline-md text-on-surface">No runs yet</h2>
-      <p className="mx-auto mt-2 max-w-md text-body-md leading-relaxed text-on-surface-variant">
-        Launch a PersonaEval run from the cockpit. Completed runs land here, newest first — ready to
-        open or compare side by side.
+      <h2 className="font-display text-[15px] font-semibold text-text-main">No saved runs yet</h2>
+      <p className="mx-auto mt-2 max-w-md text-[13px] leading-relaxed text-text-variant">
+        Once you run a simulation, it&apos;s saved here so you can reopen it, read the full transcript
+        and scores, or compare two runs side by side. Head to the cockpit to start your first one.
       </p>
       <button
         type="button"
         onClick={onClose}
-        className={`mt-4 inline-flex items-center gap-1.5 rounded-md bg-primary px-4 py-2 text-label-md font-label-md text-on-primary shadow-sm transition-colors hover:bg-primary-container ${FOCUS_RING}`}
+        className={`mt-4 inline-flex items-center gap-1.5 rounded-md bg-primary px-4 py-2 text-[12px] text-on-primary glow transition-colors hover:bg-primary-dim ${FOCUS_RING}`}
       >
         <Sym name="play_arrow" fill={1} size={16} />
-        Go to the cockpit
+        Start your first run
       </button>
     </div>
   );
 }
 
 function ListError({ error, onRetry }: { error: unknown; onRetry: () => void }) {
-  const message = error instanceof ApiError ? error.message : "The runs list could not be loaded.";
+  const message =
+    error instanceof ApiError
+      ? error.message
+      : "Something went wrong fetching your saved runs. This is usually a brief connection hiccup.";
   return (
-    <div className="rounded-xl border border-error/40 bg-error-container/40 px-5 py-8 text-center">
-      <div className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-full bg-error/10">
-        <Sym name="error" fill={1} size={22} className="text-error" />
+    <div className="rounded-md border border-outline border-l-4 border-l-danger bg-surface px-5 py-8 text-center">
+      <div className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-md border border-danger/30 bg-danger/10">
+        <Sym name="error" fill={1} size={22} className="text-danger" />
       </div>
-      <h2 className="text-headline-md font-headline-md text-on-surface">Couldn&apos;t load runs</h2>
-      <p className="mx-auto mt-1.5 max-w-md break-words text-body-sm leading-relaxed text-on-surface-variant">
+      <h2 className="font-display text-[15px] font-semibold text-text-main">We couldn&apos;t load your runs</h2>
+      <p className="mx-auto mt-1.5 max-w-md break-words text-[13px] leading-relaxed text-text-variant">
         {message}
       </p>
       <button
         type="button"
         onClick={onRetry}
-        className={`mt-4 inline-flex items-center gap-1.5 rounded-md border border-outline-variant px-4 py-2 text-label-md font-label-md text-on-surface-variant transition-colors hover:bg-surface-container-low hover:text-on-surface ${FOCUS_RING}`}
+        className={`mt-4 inline-flex items-center gap-1.5 rounded-md border border-danger/40 bg-danger/10 px-4 py-2 text-[12px] text-danger transition-colors hover:bg-danger/20 ${FOCUS_RING}`}
       >
         <Sym name="refresh" size={16} />
         Try again

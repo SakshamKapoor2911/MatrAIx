@@ -60,13 +60,13 @@ export function InspectorTabs({ active, onChange, evaluation, persona, prompts }
   }
 
   return (
-    <aside className="z-0 flex h-[320px] w-full flex-shrink-0 flex-col border-t border-border-soft bg-surface-container-lowest lg:h-full lg:w-[340px] lg:border-l lg:border-t-0">
+    <aside className="z-0 flex h-[320px] w-full flex-shrink-0 flex-col border-t border-outline-dim bg-surface-lowest lg:h-full lg:w-[340px] lg:border-l lg:border-t-0">
       {/* Tab header */}
       <div
         role="tablist"
         aria-label="Inspector"
         aria-orientation="horizontal"
-        className="flex flex-shrink-0 items-center gap-lg border-b border-border-soft bg-surface px-md pt-sm"
+        className="flex flex-shrink-0 items-center gap-lg border-b border-outline-dim bg-surface px-md pt-sm"
       >
         {TABS.map((tab, i) => {
           const selected = tab.id === active;
@@ -81,10 +81,10 @@ export function InspectorTabs({ active, onChange, evaluation, persona, prompts }
               tabIndex={selected ? 0 : -1}
               onClick={() => onChange(tab.id)}
               onKeyDown={(e) => onKeyDown(e, i)}
-              className={`-mb-px flex select-none items-center gap-1.5 border-b-2 pb-2.5 text-headline-sm font-headline-sm transition-colors duration-200 ${FOCUS_RING} ${
+              className={`-mb-px flex select-none items-center gap-1.5 border-b-2 pb-2.5 font-semibold text-sm transition-colors duration-200 ${FOCUS_RING} ${
                 selected
                   ? "border-primary font-bold text-primary"
-                  : "border-transparent text-on-surface-variant hover:text-primary"
+                  : "border-transparent text-text-variant hover:text-primary"
               }`}
             >
               <Sym name={tab.icon} fill={selected ? 1 : 0} size={18} />

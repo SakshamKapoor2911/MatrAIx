@@ -1,5 +1,5 @@
 /**
- * Markdown — the one place RecBot/assistant reply text is rendered.
+ * Markdown — the one place RecAI/assistant reply text is rendered.
  *
  * The agent writes GitHub-flavoured-ish markdown in its replies (bold game
  * titles, `###` sub-headers, numbered / bulleted lists). Dropping that string
@@ -7,10 +7,10 @@
  * every assistant-text render site routes through this component instead.
  *
  * It wraps `react-markdown` with PRODUCT-appropriate, token-styled element
- * overrides — compact and legible at body-md, not a bloated prose article. The
- * overrides use the Executive Precision Tailwind tokens (`text-on-surface`,
- * `font-semibold`, the surface ramp) so rendered markdown matches the rest of
- * the UI and clears 4.5:1 contrast on a light surface.
+ * overrides — compact and legible at body size, not a bloated prose article. The
+ * overrides use the matrAIx Tailwind tokens (`text-text-main`, `font-semibold`,
+ * the surface ramp) so rendered markdown matches the rest of the UI and clears
+ * 4.5:1 contrast on its surface.
  *
  * Safety: `react-markdown` does NOT render raw HTML unless a `rehype-raw`-style
  * plugin is supplied (we supply none), so a reply containing `<script>` or any
@@ -32,7 +32,7 @@ import ReactMarkdown, { type Components } from "react-markdown";
  */
 const COMPONENTS: Components = {
   // Bold — the most common case (game / movie titles). Semibold, inherits colour.
-  strong: ({ node: _node, ...props }) => <strong className="font-semibold text-on-surface" {...props} />,
+  strong: ({ node: _node, ...props }) => <strong className="font-semibold text-text-main" {...props} />,
 
   // Emphasis — italic, inherits colour.
   em: ({ node: _node, ...props }) => <em className="italic" {...props} />,
@@ -42,31 +42,31 @@ const COMPONENTS: Components = {
 
   // Lists — disc / decimal, indented, with tight gaps between items.
   ul: ({ node: _node, ...props }) => (
-    <ul className="mb-2 ml-4 list-disc space-y-0.5 last:mb-0 marker:text-on-surface-variant" {...props} />
+    <ul className="mb-2 ml-4 list-disc space-y-0.5 last:mb-0 marker:text-text-variant" {...props} />
   ),
   ol: ({ node: _node, ...props }) => (
-    <ol className="mb-2 ml-4 list-decimal space-y-0.5 last:mb-0 marker:text-on-surface-variant" {...props} />
+    <ol className="mb-2 ml-4 list-decimal space-y-0.5 last:mb-0 marker:text-text-variant" {...props} />
   ),
   li: ({ node: _node, ...props }) => <li className="leading-normal" {...props} />,
 
-  // Sub-headings — a small bold heading (headline-sm-ish), not a giant H1/H2.
+  // Sub-headings — a small bold heading, not a giant H1/H2.
   h1: ({ node: _node, ...props }) => (
-    <h3 className="mb-1 mt-2 text-body-md font-semibold text-on-surface first:mt-0" {...props} />
+    <h3 className="mb-1 mt-2 text-[13px] font-semibold text-text-main first:mt-0" {...props} />
   ),
   h2: ({ node: _node, ...props }) => (
-    <h3 className="mb-1 mt-2 text-body-md font-semibold text-on-surface first:mt-0" {...props} />
+    <h3 className="mb-1 mt-2 text-[13px] font-semibold text-text-main first:mt-0" {...props} />
   ),
   h3: ({ node: _node, ...props }) => (
-    <h3 className="mb-1 mt-2 text-body-md font-semibold text-on-surface first:mt-0" {...props} />
+    <h3 className="mb-1 mt-2 text-[13px] font-semibold text-text-main first:mt-0" {...props} />
   ),
   h4: ({ node: _node, ...props }) => (
-    <h4 className="mb-1 mt-2 text-body-sm font-semibold uppercase tracking-wide text-on-surface-variant first:mt-0" {...props} />
+    <h4 className="mb-1 mt-2 text-[12px] font-semibold uppercase tracking-wide text-text-variant first:mt-0" {...props} />
   ),
 
   // Inline code — mono on a faint surface tint, kept readable at body size.
   code: ({ node: _node, ...props }) => (
     <code
-      className="rounded bg-surface-container-high px-1 py-0.5 font-mono-sm text-[0.9em] text-on-surface"
+      className="rounded bg-surface-high px-1 py-0.5 font-mono text-[0.9em] text-text-main"
       {...props}
     />
   ),
@@ -74,7 +74,7 @@ const COMPONENTS: Components = {
   // Links — primary, underlined, open safely in a new tab.
   a: ({ node: _node, ...props }) => (
     <a
-      className="font-medium text-primary underline underline-offset-2 hover:text-primary-container"
+      className="font-medium text-primary underline underline-offset-2 hover:text-primary-dim"
       target="_blank"
       rel="noreferrer noopener"
       {...props}
@@ -83,11 +83,11 @@ const COMPONENTS: Components = {
 
   // Blockquote — a quiet left rule, used sparingly by the agent.
   blockquote: ({ node: _node, ...props }) => (
-    <blockquote className="mb-2 border-l-2 border-border-soft pl-3 italic text-on-surface-variant last:mb-0" {...props} />
+    <blockquote className="mb-2 border-l-2 border-outline pl-3 italic text-text-variant last:mb-0" {...props} />
   ),
 
   // Horizontal rule — a soft divider.
-  hr: ({ node: _node, ...props }) => <hr className="my-2 border-border-soft" {...props} />,
+  hr: ({ node: _node, ...props }) => <hr className="my-2 border-outline" {...props} />,
 };
 
 export interface MarkdownProps {

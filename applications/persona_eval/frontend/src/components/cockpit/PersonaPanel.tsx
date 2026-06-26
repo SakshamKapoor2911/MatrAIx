@@ -62,10 +62,10 @@ export function PersonaPanel({ persona, context, onOpenRaw }: PersonaPanelProps)
   if (!persona) {
     return (
       <div className="p-md">
-        <div className="rounded-xl border border-dashed border-border-soft bg-surface-container-low px-4 py-10 text-center">
-          <Sym name="person_search" size={28} className="text-outline" />
-          <p className="mt-2 text-body-sm leading-relaxed text-on-surface-variant">
-            Select a persona from the catalog to see its profile.
+        <div className="rounded-md border border-dashed border-outline-dim bg-surface-low px-4 py-10 text-center">
+          <Sym name="person_search" size={28} className="text-text-dim" />
+          <p className="mt-2 text-[13px] leading-relaxed text-text-dim">
+            Choose a persona to see who you&apos;re simulating.
           </p>
         </div>
       </div>
@@ -86,11 +86,11 @@ export function PersonaPanel({ persona, context, onOpenRaw }: PersonaPanelProps)
           <Sym name="face" fill={1} size={48} className="text-primary" />
         </div>
         {/* Human framing for the codename: descriptive title as the heading. */}
-        <h3 className="text-center text-headline-md font-headline-md text-on-surface">{title}</h3>
-        <p className="mt-1 text-center text-body-sm text-on-surface-variant">{persona.source || "Persona"}</p>
-        <p className="mt-1 flex items-center gap-1 text-body-sm text-on-surface-variant">
+        <h3 className="text-center font-display text-lg text-text-main">{title}</h3>
+        <p className="mt-1 text-center text-[13px] text-text-dim">{persona.source || "Persona"}</p>
+        <p className="mt-1 flex items-center gap-1 text-[13px] text-text-dim">
           <Sym name="badge" size={14} />
-          <span className="font-mono-sm">{codename}</span>
+          <span className="font-mono text-[11px]">{codename}</span>
         </p>
       </div>
 
@@ -100,8 +100,8 @@ export function PersonaPanel({ persona, context, onOpenRaw }: PersonaPanelProps)
           <div className="grid grid-cols-2 gap-x-2 gap-y-2.5">
             {demographics.map((d) => (
               <div key={d.key} className={d.key === "occupation" || d.key === "location" ? "col-span-2" : ""}>
-                <p className="text-[11px] uppercase text-on-surface-variant">{humanizeToken(d.key)}</p>
-                <p className="text-body-sm text-on-surface" title={d.full}>
+                <p className="hud text-[10px] text-text-dim">{humanizeToken(d.key)}</p>
+                <p className="text-[13px] text-text-main" title={d.full}>
                   {d.full}
                 </p>
               </div>
@@ -113,7 +113,7 @@ export function PersonaPanel({ persona, context, onOpenRaw }: PersonaPanelProps)
       {/* Context block — a readable preview of the full profile (the complete
           record is one tap away via "Full persona"). */}
       <Section label="Context">
-        <p className="rounded-md border border-border-soft bg-surface-container-low p-3 text-body-sm leading-relaxed text-on-surface-variant">
+        <p className="rounded-md border border-outline-dim bg-surface-low p-3 text-[13px] leading-relaxed text-text-variant">
           {fullContext && fullContext.trim()
             ? firstParagraph(fullContext)
             : detail.isLoading
@@ -125,7 +125,7 @@ export function PersonaPanel({ persona, context, onOpenRaw }: PersonaPanelProps)
       {/* Trait sections from the parsed context (only those present). */}
       {sections.slice(0, 4).map((s) => (
         <Section key={s.label} label={s.label}>
-          <p className="whitespace-pre-wrap text-body-sm leading-relaxed text-on-surface-variant">{s.body}</p>
+          <p className="whitespace-pre-wrap text-[13px] leading-relaxed text-text-variant">{s.body}</p>
         </Section>
       ))}
 
@@ -134,7 +134,7 @@ export function PersonaPanel({ persona, context, onOpenRaw }: PersonaPanelProps)
         <button
           type="button"
           onClick={onOpenRaw}
-          className={`flex items-center gap-1 rounded-md px-1 py-0.5 text-label-md font-label-md text-on-surface-variant transition-colors hover:text-primary ${FOCUS_RING}`}
+          className={`flex items-center gap-1 rounded-md px-1 py-0.5 text-xs font-medium text-text-variant transition-colors hover:text-primary ${FOCUS_RING}`}
         >
           <Sym name="data_object" size={16} />
           Full persona
@@ -149,7 +149,7 @@ export function PersonaPanel({ persona, context, onOpenRaw }: PersonaPanelProps)
 function Section({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="mb-md">
-      <h4 className="mb-2 border-b border-border-soft pb-1 text-label-md font-label-md uppercase tracking-wider text-on-surface-variant">
+      <h4 className="mb-2 border-b border-outline-dim pb-1 hud text-[10px] text-text-dim">
         {label}
       </h4>
       {children}

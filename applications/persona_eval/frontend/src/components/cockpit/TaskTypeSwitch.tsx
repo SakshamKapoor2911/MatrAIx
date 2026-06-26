@@ -8,19 +8,19 @@ export interface TaskTypeSwitchProps {
   disabled?: boolean;
 }
 
-const OPTIONS: ReadonlyArray<{ value: PersonaEvalTaskType; label: string; icon: string }> = [
-  { value: "chatbot", label: "Chatbot", icon: "forum" },
-  { value: "survey", label: "Survey", icon: "fact_check" },
-  { value: "web", label: "Web", icon: "language" },
+const OPTIONS: ReadonlyArray<{ value: PersonaEvalTaskType; label: string; icon: string; hint: string }> = [
+  { value: "chatbot", label: "Chatbot", icon: "forum", hint: "A back-and-forth conversation." },
+  { value: "survey", label: "Survey", icon: "fact_check", hint: "A fixed questionnaire the user fills out." },
+  { value: "web", label: "Website", icon: "language", hint: "A real browser task the user completes." },
 ];
 
 export function TaskTypeSwitch({ value, onChange, disabled }: TaskTypeSwitchProps) {
   return (
-    <div className="flex flex-shrink-0 items-center gap-2 border-b border-border-soft bg-surface px-lg py-2">
-      <span className="text-label-md font-label-md uppercase tracking-wider text-on-surface-variant">
-        Application type
+    <div className="flex flex-shrink-0 items-center gap-2 border-b border-outline-dim bg-surface-lowest px-5 py-2.5">
+      <span className="hud text-[10px] text-text-dim">
+        What are you testing?
       </span>
-      <div className="flex overflow-hidden rounded-md border border-border-soft bg-surface-container-low">
+      <div className="inline-flex rounded-md border border-outline bg-surface-low p-1">
         {OPTIONS.map((option) => {
           const selected = option.value === value;
           return (
@@ -28,11 +28,12 @@ export function TaskTypeSwitch({ value, onChange, disabled }: TaskTypeSwitchProp
               key={option.value}
               type="button"
               disabled={disabled}
+              title={option.hint}
               onClick={() => onChange(option.value)}
-              className={`flex items-center gap-1.5 px-3 py-1.5 text-label-md font-label-md transition-colors disabled:cursor-not-allowed disabled:opacity-60 ${FOCUS_RING} ${
+              className={`flex items-center gap-1.5 rounded px-3 py-1.5 text-xs font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-60 ${FOCUS_RING} ${
                 selected
                   ? "bg-primary text-on-primary"
-                  : "text-on-surface-variant hover:bg-surface-container hover:text-on-surface"
+                  : "text-text-variant hover:bg-surface hover:text-text-main"
               }`}
             >
               <Sym name={option.icon} fill={selected ? 1 : 0} size={16} />

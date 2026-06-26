@@ -320,15 +320,15 @@ export default function App() {
         : turns.length - 1;
   const focusedTurn = focusedTurnIndex !== null ? turns[focusedTurnIndex] ?? null : null;
   const headerReq = useMemo(() => {
-    if (turnJob.phase === "building") return "warming…";
-    if (turnJob.phase === "running") return "running…";
-    if (turnJob.phase === "timeout") return "timed out";
+    if (turnJob.phase === "building") return "Warming up…";
+    if (turnJob.phase === "running") return "Working…";
+    if (turnJob.phase === "timeout") return "Timed out";
     if (focusedTurn) {
       const dur = fmtDuration(focusedTurn.durationSeconds);
       const n = (focusedTurnIndex ?? 0) + 1;
       return dur ? `turn ${n} · ${dur}` : `turn ${n}`;
     }
-    return turns.length > 0 ? `${turns.length} turns` : "no turns yet";
+    return turns.length > 0 ? `${turns.length} turns` : "No messages yet";
   }, [turnJob.phase, focusedTurn, focusedTurnIndex, turns.length]);
 
   // The shared TopBar — identical on both surfaces (it hides the Chat-only
@@ -410,11 +410,16 @@ export default function App() {
         />
 
         {/* Centre — manual conversation. */}
-        <main className="flex min-h-0 min-w-0 flex-col bg-background">
-          <div className="flex flex-shrink-0 items-center gap-2.5 border-b border-border-soft bg-surface-container-lowest px-lg py-3">
-            <span className="truncate text-body-md font-semibold text-on-surface">{headerTitle}</span>
-            <span className="flex-none text-body-sm text-on-surface-variant">/ conversation</span>
-            <span className="ml-auto flex-none rounded-full border border-border-soft bg-surface-container-low px-3 py-1 font-mono-sm text-mono-sm text-on-surface-variant">
+        <main className="flex min-h-0 min-w-0 flex-col bg-surface-dim">
+          <div className="flex flex-shrink-0 items-center gap-2.5 border-b border-outline bg-surface-lowest px-lg py-3">
+            <span className="truncate text-sm font-semibold text-text-main">{headerTitle}</span>
+            <span
+              className="flex-none text-[12px] text-text-variant"
+              title="You type as the user; RecAI replies. No persona is simulated here."
+            >
+              · manual chat
+            </span>
+            <span className="hud ml-auto flex-none rounded-full border border-outline px-2.5 py-1 text-[9px] text-text-variant">
               {headerReq}
             </span>
           </div>

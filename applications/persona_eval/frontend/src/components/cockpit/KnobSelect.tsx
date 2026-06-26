@@ -98,7 +98,7 @@ export function KnobSelect({ label, value, options, onChange, accent, disabled }
 
   return (
     <div ref={rootRef} className="flex flex-shrink-0 items-center gap-2">
-      <span className="text-label-md font-label-md uppercase tracking-wider text-on-surface-variant">{label}</span>
+      <span className="hud text-[10px] text-text-dim">{label}</span>
       <div className="relative">
         <button
           type="button"
@@ -108,14 +108,14 @@ export function KnobSelect({ label, value, options, onChange, accent, disabled }
           aria-haspopup="listbox"
           aria-expanded={open}
           aria-label={`${label}: ${currentLabel}`}
-          className={`flex items-center gap-2 rounded border px-3 py-1.5 text-body-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-55 ${FOCUS_RING} ${
+          className={`flex items-center gap-2 rounded border px-3 py-1.5 text-[13px] font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-55 ${FOCUS_RING} ${
             accent
-              ? "border-primary bg-primary/5 text-primary hover:bg-primary/10"
-              : "border-outline-variant bg-surface text-on-surface hover:border-primary"
+              ? "border-primary bg-primary/10 text-primary hover:bg-primary/15"
+              : "border-outline bg-field text-text-main hover:border-primary"
           }`}
         >
           {currentLabel}
-          <Sym name="expand_more" size={16} className={accent ? "" : "text-outline"} />
+          <Sym name="expand_more" size={16} className={accent ? "" : "text-text-dim"} />
         </button>
 
         {open && (
@@ -126,7 +126,7 @@ export function KnobSelect({ label, value, options, onChange, accent, disabled }
             tabIndex={-1}
             onKeyDown={onMenuKey}
             ref={(el) => el?.focus()}
-            className="absolute left-0 top-full z-30 mt-1 max-h-72 w-64 overflow-auto rounded-lg border border-border-soft bg-surface-container-lowest p-1 shadow-pop outline-none"
+            className="custom-scrollbar absolute left-0 top-full z-30 mt-1 max-h-72 w-64 overflow-auto rounded-md border border-outline bg-surface-lowest p-1 shadow-2xl outline-none"
           >
             {options.map((opt, idx) => {
               const isSelected = opt.value === value;
@@ -139,17 +139,17 @@ export function KnobSelect({ label, value, options, onChange, accent, disabled }
                   onMouseEnter={() => setActiveIndex(idx)}
                   onClick={() => commit(idx)}
                   className={`cursor-pointer rounded-md px-2.5 py-2 transition-colors ${
-                    isActive ? "bg-surface-container" : ""
+                    isActive ? "bg-surface-high" : ""
                   }`}
                 >
                   <div className="flex items-center justify-between gap-2">
-                    <span className={`text-body-sm font-medium ${isSelected ? "text-primary" : "text-on-surface"}`}>
+                    <span className={`text-[13px] font-medium ${isSelected ? "text-primary" : "text-text-main"}`}>
                       {opt.label}
                     </span>
                     {isSelected && <Sym name="check" size={16} className="text-primary" />}
                   </div>
                   {opt.description && (
-                    <p className="mt-0.5 text-[11px] leading-relaxed text-on-surface-variant">{opt.description}</p>
+                    <p className="mt-0.5 text-[11px] leading-relaxed text-text-dim">{opt.description}</p>
                   )}
                 </li>
               );

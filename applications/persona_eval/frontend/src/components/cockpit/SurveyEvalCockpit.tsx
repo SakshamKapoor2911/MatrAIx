@@ -34,12 +34,37 @@ function optionsFor(options: ConfigOptionsResponse | null, key: string): KnobOpt
 }
 
 function surveyStatusLine(phase: SurveyEvalRunPhase, jobPhase: string | null | undefined): string | null {
-  if (phase === "building") return "Preparing the survey respondent environment…";
+  if (phase === "building") return "Setting up the questionnaire…";
   if (phase !== "running") return null;
   const raw = (jobPhase ?? "").toLowerCase();
-  if (raw.includes("collect")) return "Collecting survey artifact…";
-  if (raw.includes("harbor")) return "Persona agent is completing the survey…";
-  return "Running the survey task…";
+  if (raw.includes("collect")) return "Saving the answers…";
+  if (raw.includes("harbor")) return "The simulated user is filling out the questionnaire…";
+  return "Running the questionnaire…";
+}
+
+/** Friendly chip word + tint + tooltip for a survey question type. Presentation only. */
+function questionTypeMeta(type: string): { label: string; tone: string; tooltip: string } {
+  switch (type) {
+    case "likert":
+      return { label: "Likert", tone: "text-primary border-primary/30 bg-primary/10", tooltip: "Rate on a 1–5 scale" };
+    case "single_choice":
+      return { label: "Single", tone: "text-secondary border-secondary/30 bg-secondary/10", tooltip: "Choose one option" };
+    case "multi_choice":
+      return { label: "Multi", tone: "text-warn border-warn/30 bg-warn/10", tooltip: "Choose all that apply" };
+    case "free_text":
+      return { label: "Free", tone: "text-text-dim border-outline bg-surface-high", tooltip: "Answer in their own words" };
+    default:
+      return { label: type, tone: "text-text-dim border-outline bg-surface-high", tooltip: type };
+  }
+}
+
+/** Friendly actor name for a trajectory row. Presentation only. */
+function trajectoryActor(actor: string): string {
+  const value = actor.toLowerCase();
+  if (value === "agent") return "Simulated user";
+  if (value === "system") return "System";
+  if (value === "scorer") return "Scorer";
+  return actor;
 }
 
 export function SurveyEvalCockpit({ options, taskType, onTaskTypeChange }: SurveyEvalCockpitProps) {
@@ -81,7 +106,7 @@ export function SurveyEvalCockpit({ options, taskType, onTaskTypeChange }: Surve
   const prompts = job?.prompts ?? surveyResult?.prompts ?? null;
   const hasRun = phase === "done" || phase === "error" || phase === "timeout";
   const status = surveyStatusLine(phase, job?.phase);
-  const title = persona ? personaDescriptiveTitle(null, persona.blurb, persona.source) : "No persona selected";
+  const title = persona ? personaDescriptiveTitle(null, persona.blurb, persona.source) : "No persona chosen yet";
   const codename = persona ? personaCodename(persona.name, persona.id) : null;
 
   useEffect(() => {
@@ -137,13 +162,13 @@ export function SurveyEvalCockpit({ options, taskType, onTaskTypeChange }: Surve
     <div className="flex flex-1 flex-col overflow-y-auto lg:flex-row lg:overflow-hidden">
       <PersonaCatalog selectedId={persona?.id ?? null} onSelect={setPersona} />
 
-      <main className="relative z-0 flex min-h-[640px] min-w-0 flex-1 flex-col bg-background lg:min-h-0">
+      <main className="relative z-0 flex min-h-[640px] min-w-0 flex-1 flex-col bg-surface-dim lg:min-h-0">
         <TaskTypeSwitch value={taskType} onChange={onTaskTypeChange} disabled={isRunning} />
-        <div className="flex flex-shrink-0 items-center justify-between border-b border-border-soft bg-surface-container-lowest px-lg py-sm">
+        <div className="flex flex-shrink-0 items-center justify-between border-b border-outline-dim bg-surface-lowest px-lg py-sm">
           <div className="flex min-w-0 items-center gap-3">
-            <h1 className="truncate text-display font-display text-on-surface">{title}</h1>
+            <h1 className="truncate font-display text-[26px] font-bold tracking-tight text-text-main">{title}</h1>
             {codename && (
-              <span className="flex-shrink-0 rounded bg-surface-container px-2 py-1 font-mono-sm text-mono-sm text-on-surface-variant">
+              <span className="flex-shrink-0 rounded bg-surface-high px-2 py-1 font-mono text-[11px] text-text-variant">
                 {codename}
               </span>
             )}
@@ -153,19 +178,19 @@ export function SurveyEvalCockpit({ options, taskType, onTaskTypeChange }: Surve
               type="button"
               onClick={handleExport}
               disabled={!exportSnapshot || !surveyResult}
-              className={`flex items-center gap-2 rounded-md border border-outline-variant px-4 py-2 text-label-md font-label-md text-on-surface-variant transition-colors hover:bg-surface-container-low hover:text-on-surface disabled:cursor-not-allowed disabled:opacity-55 ${FOCUS_RING}`}
+              className={`flex items-center gap-2 rounded-md border border-outline px-4 py-2 text-xs font-medium text-text-variant transition-colors hover:bg-surface-low hover:text-text-main disabled:cursor-not-allowed disabled:opacity-55 ${FOCUS_RING}`}
             >
               <Sym name="download" size={18} />
-              Export log
+              Download results
             </button>
             <button
               type="button"
               onClick={handleRun}
               disabled={!persona || !instrument || isRunning}
-              className={`flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-label-md font-label-md text-on-primary shadow-sm transition-colors hover:bg-primary-container disabled:cursor-not-allowed disabled:opacity-55 ${FOCUS_RING}`}
+              className={`glow flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-xs font-medium text-on-primary transition-colors hover:bg-primary-dim disabled:cursor-not-allowed disabled:opacity-55 ${FOCUS_RING}`}
             >
-              {isRunning ? <Sym name="autorenew" size={18} className="animate-rb-spin" /> : <Sym name="play_arrow" fill={1} size={18} />}
-              {isRunning ? "Running…" : hasRun ? "Re-run survey" : "Run survey"}
+              {isRunning ? <Sym name="autorenew" size={18} className="animate-spin" /> : <Sym name="play_arrow" fill={1} size={18} />}
+              {isRunning ? "Working…" : hasRun ? "Run it again" : "Run questionnaire"}
             </button>
           </div>
         </div>
@@ -179,6 +204,16 @@ export function SurveyEvalCockpit({ options, taskType, onTaskTypeChange }: Surve
           onPersonaModel={setPersonaModel}
           disabled={isRunning}
         />
+        {phase === "idle" && (
+          <div className="flex shrink-0 items-start gap-2.5 border-b border-outline-dim bg-primary/10 px-lg py-2.5">
+            <Sym name="lightbulb" fill={1} size={16} className="mt-0.5 flex-shrink-0 text-primary" />
+            <p className="text-[12px] leading-snug text-text-variant">
+              <span className="font-medium text-text-main">New here?</span> Pick a persona on the left and a
+              questionnaire above, then press Run. PersonaEval plays a simulated user who fills out the form, and
+              you&apos;ll see its answers and ratings.
+            </p>
+          </div>
+        )}
         <SurveyPipeline
           phase={phase}
           jobPhase={job?.phase}
@@ -195,6 +230,11 @@ export function SurveyEvalCockpit({ options, taskType, onTaskTypeChange }: Surve
           error={error}
           hasPersona={persona !== null}
           onRetry={handleRetry}
+          instrumentsLoading={instrumentsQuery.isLoading}
+          instrumentsError={instrumentsQuery.isError}
+          onReloadInstruments={() => {
+            void instrumentsQuery.refetch();
+          }}
         />
       </main>
 
@@ -229,10 +269,10 @@ function SurveyConfigBar({
   disabled: boolean;
 }) {
   return (
-    <div className="flex shrink-0 flex-wrap items-center gap-x-5 gap-y-2 border-b border-border-soft bg-surface-container-lowest px-lg py-2.5 shadow-sm">
+    <div className="flex shrink-0 flex-wrap items-center gap-x-5 gap-y-2 border-b border-outline-dim bg-surface-lowest px-lg py-2.5">
       {instrumentOptions.length > 0 && (
         <KnobSelect
-          label="Survey instrument"
+          label="Questionnaire"
           value={instrument}
           options={instrumentOptions}
           onChange={onInstrument}
@@ -242,7 +282,7 @@ function SurveyConfigBar({
       )}
       {personaModelOptions.length > 0 && (
         <KnobSelect
-          label="Persona model"
+          label="Simulated-user model"
           value={personaModel}
           options={personaModelOptions}
           onChange={onPersonaModel}
@@ -275,54 +315,60 @@ function SurveyPipeline({
     {
       key: "persona",
       label: "Persona",
-      owner: "Persona task runtime",
-      detail: `${personaModel} · persona prompt injection`,
+      owner: "The simulated user",
+      ownerTitle: undefined,
+      detail: "Acts as the user, guided by the persona profile",
       icon: "badge",
-      status: !hasPersona ? "Select persona" : failed ? "Interrupted" : phase === "done" ? "Complete" : running && rawPhase.includes("harbor") ? "Active" : "Ready",
+      status: !hasPersona ? "Select persona" : failed ? "Stopped" : phase === "done" ? "Complete" : running && rawPhase.includes("harbor") ? "Active" : "Ready",
       tone: !hasPersona ? "idle" : failed ? "error" : phase === "done" ? "done" : running ? "active" : "idle",
     },
     {
       key: "survey",
       label: "Survey",
-      owner: "survey_form task",
-      detail: instrument ? `${instrument.title} · ${instrument.questions.length} questions` : "Load survey instrument",
+      owner: "Questionnaire form",
+      ownerTitle: "survey_form",
+      detail: instrument ? `${instrument.title} · ${instrument.questions.length} questions` : "Choose a questionnaire to preview it",
       icon: "fact_check",
-      status: failed ? "Check run" : phase === "done" ? "Complete" : running ? "Collecting responses" : "Ready",
+      status: failed ? "Needs a look" : phase === "done" ? "Complete" : running ? "Filling it in" : "Ready",
       tone: failed ? "error" : phase === "done" ? "done" : running ? "active" : "idle",
     },
     {
       key: "artifact",
-      label: "Artifact",
-      owner: "survey_result.json",
-      detail: "answers + trajectory + completion",
+      label: "Answers",
+      owner: "Saved answers",
+      ownerTitle: "survey_result.json",
+      detail: "The answers, a step-by-step log, and a completeness check",
       icon: "description",
-      status: failed ? "Missing artifact" : hasResult ? "Available" : running ? "Waiting" : "Waiting",
+      status: failed ? "No answers yet" : hasResult ? "Ready to view" : running ? "Waiting" : "Waiting",
       tone: failed ? "error" : hasResult ? "done" : "idle",
     },
   ] as const;
 
   return (
-    <section aria-label="Survey component pipeline" className="border-b border-border-soft bg-surface-container-lowest px-lg py-2.5">
+    <section aria-label="Survey component pipeline" className="border-b border-outline-dim bg-surface-lowest px-lg py-2.5">
       <div className="grid grid-cols-1 gap-2 2xl:grid-cols-3">
         {nodes.map((node, index) => (
           <div key={node.key} className="flex min-w-0 items-center gap-2">
-            <div className="flex min-w-0 flex-1 items-start gap-2 rounded-md border border-border-soft bg-surface-container-low px-3 py-2">
+            <div className="flex min-w-0 flex-1 items-start gap-2 rounded-md border border-outline bg-surface-low px-3 py-2">
               <div className={`mt-0.5 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded border ${toneClass(node.tone)}`}>
                 <Sym name={node.icon} size={16} />
               </div>
               <div className="min-w-0 flex-1">
                 <div className="flex items-center justify-between gap-2">
-                  <p className="truncate text-label-md font-label-md uppercase tracking-wider text-on-surface">{node.label}</p>
-                  <span className={`shrink-0 rounded border px-1.5 py-0.5 text-[11px] font-medium ${toneClass(node.tone)}`}>
+                  <p className="truncate hud text-[10px] text-text-main">{node.label}</p>
+                  <span className={`shrink-0 rounded border px-1.5 py-0.5 hud text-[9px] ${toneClass(node.tone)}`}>
                     {node.status}
                   </span>
                 </div>
-                <p className="mt-0.5 truncate font-mono-sm text-mono-sm text-on-surface">{node.owner}</p>
-                <p className="mt-1 line-clamp-2 text-body-sm leading-snug text-on-surface-variant">{node.detail}</p>
+                <p className="mt-0.5 truncate font-mono text-[11px] text-text-variant" title={node.ownerTitle}>{node.owner}</p>
+                <p className="mt-1 line-clamp-2 text-[12px] leading-snug text-text-variant">{node.detail}</p>
+                {node.key === "persona" && (
+                  <p className="mt-0.5 truncate font-mono text-[10px] text-text-dim" title="Simulated-user model">{personaModel}</p>
+                )}
               </div>
             </div>
             {index < nodes.length - 1 && (
-              <Sym name="arrow_forward" size={17} className="hidden flex-shrink-0 text-outline 2xl:inline-flex" />
+              <Sym name="arrow_forward" size={17} className="hidden flex-shrink-0 text-text-dim 2xl:inline-flex" />
             )}
           </div>
         ))}
@@ -334,10 +380,10 @@ function SurveyPipeline({
 type PipelineTone = "idle" | "active" | "done" | "error";
 
 function toneClass(tone: PipelineTone): string {
-  if (tone === "active") return "border-primary/35 bg-primary-container/45 text-primary";
-  if (tone === "done") return "border-success/30 bg-success-container/55 text-on-success-container";
-  if (tone === "error") return "border-error/30 bg-error-container/55 text-on-error-container";
-  return "border-border-soft bg-surface-container text-on-surface-variant";
+  if (tone === "active") return "border-primary/40 bg-primary/10 text-primary";
+  if (tone === "done") return "border-secondary/30 bg-secondary/10 text-secondary";
+  if (tone === "error") return "border-danger/30 bg-danger/10 text-danger";
+  return "border-outline-dim bg-surface-high text-text-dim";
 }
 
 function SurveyWorkspace({
@@ -348,6 +394,9 @@ function SurveyWorkspace({
   error,
   hasPersona,
   onRetry,
+  instrumentsLoading,
+  instrumentsError,
+  onReloadInstruments,
 }: {
   instrument: SurveyInstrument | null;
   surveyResult: SurveyResult | null;
@@ -356,6 +405,9 @@ function SurveyWorkspace({
   error: string | null;
   hasPersona: boolean;
   onRetry: () => void;
+  instrumentsLoading: boolean;
+  instrumentsError: boolean;
+  onReloadInstruments: () => void;
 }) {
   const running = phase === "building" || phase === "running";
   const failed = phase === "error" || phase === "timeout" || (!running && !!error);
@@ -364,12 +416,13 @@ function SurveyWorkspace({
     return (
       <div className="custom-scrollbar flex flex-1 items-center justify-center overflow-y-auto p-lg">
         <div className="max-w-md text-center">
-          <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
+          <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-md bg-primary/10">
             <Sym name="groups" fill={1} size={26} className="text-primary" />
           </div>
-          <h3 className="text-headline-md font-headline-md text-on-surface">Pick a persona to begin</h3>
-          <p className="mx-auto mt-2 max-w-sm text-body-md leading-relaxed text-on-surface-variant">
-            Choose a persona and a survey instrument, then run the survey to collect the persona&apos;s structured response.
+          <h3 className="font-display text-lg font-semibold text-text-main">Choose a persona to start</h3>
+          <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-text-variant">
+            Pick a persona on the left and a questionnaire above, then press Run. A simulated user will fill it out and
+            you&apos;ll see its answers and ratings.
           </p>
         </div>
       </div>
@@ -379,29 +432,90 @@ function SurveyWorkspace({
   return (
     <div className="custom-scrollbar flex flex-1 justify-center overflow-y-auto p-lg">
       <div className="flex w-full max-w-4xl flex-col gap-md">
-        {instrument && <InstrumentPreview instrument={instrument} />}
+        {instrumentsError ? (
+          <div className="rounded-md border border-danger/30 bg-danger/10 p-4">
+            <div className="flex items-start gap-3">
+              <Sym name="error" fill={1} size={20} className="mt-0.5 text-danger" />
+              <div className="min-w-0 flex-1">
+                <h4 className="font-display text-[15px] font-semibold text-danger">Couldn&apos;t load questionnaires</h4>
+                <p className="mt-1 break-words text-[13px] leading-relaxed text-text-variant">
+                  We couldn&apos;t load the questionnaires. Check your connection and try again.
+                </p>
+                <button
+                  type="button"
+                  onClick={onReloadInstruments}
+                  className={`mt-3 inline-flex items-center gap-1.5 rounded-md border border-danger/40 bg-danger/10 px-3 py-1.5 text-xs font-medium text-danger transition-colors hover:bg-danger/20 ${FOCUS_RING}`}
+                >
+                  <Sym name="refresh" size={16} />
+                  Try again
+                </button>
+              </div>
+            </div>
+          </div>
+        ) : instrumentsLoading ? (
+          <div className="space-y-2" aria-hidden>
+            <p className="hud text-[10px] text-text-dim">Loading questionnaires…</p>
+            <div className="h-12 animate-pulse rounded-md bg-surface-high" />
+            <div className="h-12 animate-pulse rounded-md bg-surface-high" />
+            <div className="h-12 animate-pulse rounded-md bg-surface-high" />
+          </div>
+        ) : instrument ? (
+          <InstrumentPreview instrument={instrument} />
+        ) : (
+          <div className="rounded-md border border-dashed border-outline bg-surface-low px-4 py-10 text-center">
+            <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-md bg-primary/10">
+              <Sym name="fact_check" size={22} className="text-primary" />
+            </div>
+            <p className="text-[13px] leading-relaxed text-text-variant">
+              Pick a questionnaire above to preview its questions.
+            </p>
+          </div>
+        )}
         {running && (
-          <div className="flex items-center justify-center gap-2 rounded-lg border border-border-soft bg-surface-container-lowest px-4 py-4">
-            <Sym name="autorenew" size={18} className="animate-rb-spin text-primary" />
-            <span className="text-body-sm text-on-surface-variant">{status ?? "Running the survey task…"}</span>
+          <div className="rounded-md border border-outline bg-surface-lowest px-4 py-4">
+            <div className="flex items-center gap-2">
+              <Sym name="autorenew" size={16} className="animate-spin text-primary" />
+              <span className="hud text-[10px] text-primary">Running</span>
+            </div>
+            <p className="mt-2 text-[13px] text-text-main">Simulated user is answering…</p>
+            {status && <p className="mt-0.5 text-[12px] text-text-dim">{status}</p>}
+            <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-field">
+              {surveyResult ? (
+                <div
+                  className="h-full rounded-full bg-primary transition-all"
+                  style={{
+                    width: `${Math.round(
+                      (surveyResult.completion.numAnswered / Math.max(1, surveyResult.completion.numQuestions)) * 100,
+                    )}%`,
+                  }}
+                />
+              ) : (
+                <div className="h-full w-1/3 animate-pulse rounded-full bg-primary/60" />
+              )}
+            </div>
+            {surveyResult && (
+              <p className="mt-1.5 hud text-[9px] text-text-dim">
+                {surveyResult.completion.numAnswered} of {surveyResult.completion.numQuestions} answered
+              </p>
+            )}
           </div>
         )}
         {failed && (
-          <div className="rounded-lg border border-error/40 bg-error-container/40 p-4">
+          <div className="rounded-md border border-danger/30 bg-danger/10 p-4">
             <div className="flex items-start gap-3">
-              <Sym name="error" fill={1} size={20} className="mt-0.5 text-error" />
+              <Sym name="error" fill={1} size={20} className="mt-0.5 text-danger" />
               <div className="min-w-0 flex-1">
-                <h4 className="text-body-md font-semibold text-on-surface">This survey run didn&apos;t finish</h4>
-                <p className="mt-1 break-words text-body-sm leading-relaxed text-on-surface-variant">
-                  {error ?? "The survey run stopped unexpectedly. Your configuration is unchanged."}
+                <h4 className="font-display text-[15px] font-semibold text-danger">The questionnaire didn&apos;t finish</h4>
+                <p className="mt-1 break-words text-[13px] leading-relaxed text-text-variant">
+                  {error ?? "Something interrupted the run. Your setup is still here — press Try again."}
                 </p>
                 <button
                   type="button"
                   onClick={onRetry}
-                  className={`mt-3 inline-flex items-center gap-1.5 rounded-md bg-primary px-3 py-1.5 text-label-md font-label-md text-on-primary shadow-sm transition-colors hover:bg-primary-container ${FOCUS_RING}`}
+                  className={`mt-3 inline-flex items-center gap-1.5 rounded-md border border-danger/40 bg-danger/10 px-3 py-1.5 text-xs font-medium text-danger transition-colors hover:bg-danger/20 ${FOCUS_RING}`}
                 >
                   <Sym name="refresh" size={16} />
-                  Retry
+                  Try again
                 </button>
               </div>
             </div>
@@ -415,28 +529,43 @@ function SurveyWorkspace({
 
 function InstrumentPreview({ instrument }: { instrument: SurveyInstrument }) {
   return (
-    <section className="overflow-hidden rounded-xl border border-border-soft bg-surface-container-lowest shadow-soft">
-      <div className="border-b border-border-soft bg-surface-container-low px-4 py-3">
-        <h3 className="text-headline-sm font-headline-sm text-on-surface">{instrument.title}</h3>
-        <p className="mt-1 text-body-sm text-on-surface-variant">{instrument.description}</p>
-      </div>
-      <div className="divide-y divide-border-soft">
-        {instrument.questions.map((question, index) => (
-          <div key={question.id} className="grid grid-cols-[48px_minmax(0,1fr)_120px] gap-3 px-4 py-3">
-            <span className="font-mono-sm text-mono-sm text-on-surface-variant">Q{index + 1}</span>
-            <div className="min-w-0">
-              <p className="text-body-md text-on-surface">{question.prompt}</p>
-              {question.options.length > 0 && (
-                <p className="mt-1 truncate text-body-sm text-on-surface-variant">
-                  Options: {question.options.join(", ")}
-                </p>
-              )}
-            </div>
-            <span className="justify-self-end rounded border border-border-soft bg-surface-container px-2 py-1 font-mono-sm text-mono-sm text-on-surface-variant">
-              {question.type}
-            </span>
+    <section className="panel overflow-hidden rounded-md border border-outline bg-surface">
+      <div className="border-b border-outline px-4 py-3">
+        <p className="hud text-[10px] text-text-dim">Questionnaire preview</p>
+        <div className="mt-1 flex items-start justify-between gap-3">
+          <div className="min-w-0">
+            <h3 className="font-display text-[15px] font-semibold text-text-main">{instrument.title}</h3>
+            <p className="mt-1 text-[12px] leading-snug text-text-variant">{instrument.description}</p>
           </div>
-        ))}
+          <span className="shrink-0 hud text-[9px] text-text-dim">{instrument.questions.length} questions</span>
+        </div>
+      </div>
+      <div className="divide-y divide-outline-dim">
+        {instrument.questions.map((question, index) => {
+          const meta = questionTypeMeta(question.type);
+          return (
+            <div
+              key={question.id}
+              className="grid grid-cols-[48px_minmax(0,1fr)_120px] gap-3 px-4 py-3 transition-colors hover:bg-surface-low"
+            >
+              <span className="hud text-[10px] text-text-dim">Q{index + 1}</span>
+              <div className="min-w-0">
+                <p className="text-[13px] leading-relaxed text-text-main">{question.prompt}</p>
+                {question.options.length > 0 && (
+                  <p className="mt-1 truncate text-[11px] text-text-variant">
+                    Choices: {question.options.join(", ")}
+                  </p>
+                )}
+              </div>
+              <span
+                title={meta.tooltip}
+                className={`justify-self-end self-start rounded border px-1.5 py-0.5 hud text-[8px] ${meta.tone}`}
+              >
+                {meta.label}
+              </span>
+            </div>
+          );
+        })}
       </div>
     </section>
   );
@@ -444,19 +573,22 @@ function InstrumentPreview({ instrument }: { instrument: SurveyInstrument }) {
 
 function SurveyArtifact({ result }: { result: SurveyResult }) {
   return (
-    <section className="overflow-hidden rounded-xl border border-border-soft bg-surface-container-lowest shadow-soft">
-      <div className="flex items-center justify-between border-b border-border-soft bg-surface-container-low px-4 py-3">
+    <section className="panel overflow-hidden rounded-md border border-outline bg-surface">
+      <div className="flex items-center justify-between border-b border-outline px-4 py-3">
         <div>
-          <h3 className="text-headline-sm font-headline-sm text-on-surface">Survey artifact</h3>
-          <p className="mt-1 text-body-sm text-on-surface-variant">
+          <h3 className="font-display text-[15px] font-semibold text-text-main">Completed questionnaire</h3>
+          <p className="mt-1 text-[12px] text-text-variant">
             {result.completion.numAnswered} / {result.completion.numQuestions} questions answered
           </p>
         </div>
-        <span className={`rounded border px-2 py-1 text-label-md font-label-md ${result.completion.valid ? "border-success/40 bg-success-container text-on-success-container" : "border-error/40 bg-error-container text-on-error-container"}`}>
-          {result.completion.valid ? "Valid" : "Incomplete"}
+        <span
+          title="Complete means the persona answered every required question."
+          className={`rounded border px-1.5 py-0.5 hud text-[8px] ${result.completion.valid ? "text-secondary border-secondary/30 bg-secondary/10" : "text-danger border-danger/30 bg-danger/10"}`}
+        >
+          {result.completion.valid ? "Complete" : "Incomplete"}
         </span>
       </div>
-      <div className="divide-y divide-border-soft">
+      <div className="divide-y divide-outline-dim">
         {result.answers.map((answer) => (
           <AnswerRow key={answer.questionId} answer={answer} instrument={result.instrument} />
         ))}
@@ -478,19 +610,21 @@ function SurveyResults({
   if (running && !result) {
     return (
       <div className="space-y-3 p-md" aria-hidden>
-        <div className="h-20 animate-rb-pulse rounded-xl bg-surface-container" />
-        <div className="h-20 animate-rb-pulse rounded-xl bg-surface-container" />
-        <div className="h-20 animate-rb-pulse rounded-xl bg-surface-container" />
+        <div className="h-20 animate-pulse rounded-md bg-surface-high" />
+        <div className="h-20 animate-pulse rounded-md bg-surface-high" />
+        <div className="h-20 animate-pulse rounded-md bg-surface-high" />
       </div>
     );
   }
   if (!result) {
     return (
       <div className="p-md">
-        <div className="rounded-xl border border-dashed border-border-soft bg-surface-container-low px-4 py-10 text-center">
-          <Sym name="fact_check" size={28} className="text-outline" />
-          <p className="mt-2 text-body-sm leading-relaxed text-on-surface-variant">
-            Run a survey to see the persona&apos;s completed answers here.
+        <div className="rounded-md border border-dashed border-outline bg-surface-low px-4 py-10 text-center">
+          <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-md bg-primary/10">
+            <Sym name="fact_check" size={22} className="text-primary" />
+          </div>
+          <p className="text-[13px] leading-relaxed text-text-variant">
+            Run a questionnaire to see the simulated user&apos;s answers and ratings here.
           </p>
         </div>
       </div>
@@ -499,32 +633,36 @@ function SurveyResults({
   const meanLikert = result.completion.meanLikert;
   return (
     <div className="space-y-3 p-md">
-      <section className="rounded-xl border border-border-soft bg-surface-container-lowest p-3 shadow-soft">
+      <section className="panel rounded-md border border-outline bg-surface p-3">
         <div className="flex items-center justify-between">
-          <h3 className="text-headline-sm font-headline-sm uppercase tracking-wider text-on-surface">Survey result</h3>
-          <Sym name="verified" fill={1} size={18} className={result.completion.valid ? "text-success" : "text-error"} />
+          <h3 className="hud text-[10px] text-primary">Result summary</h3>
+          <Sym name="verified" fill={1} size={18} className={result.completion.valid ? "text-secondary" : "text-danger"} />
         </div>
         <div className="mt-3 grid grid-cols-3 gap-2">
           <MetricTile value={`${result.completion.numAnswered}/${result.completion.numQuestions}`} caption="Answered" />
           <MetricTile value={result.completion.valid ? "Yes" : "No"} caption="Valid" />
-          <MetricTile value={meanLikert == null ? "—" : meanLikert.toFixed(1)} caption="Mean Likert" />
+          <MetricTile
+            value={meanLikert == null ? "—" : meanLikert.toFixed(1)}
+            caption="Average rating"
+            hint="Average of the 1–5 ratings the persona gave across Likert questions."
+          />
         </div>
       </section>
-      <section className="overflow-hidden rounded-xl border border-border-soft bg-surface-container-lowest shadow-soft">
-        <div className="border-b border-border-soft bg-surface-container-low px-3 py-2">
-          <h3 className="text-headline-sm font-headline-sm text-on-surface">Answers</h3>
+      <section className="panel overflow-hidden rounded-md border border-outline bg-surface">
+        <div className="border-b border-outline px-3 py-2">
+          <h3 className="hud text-[10px] text-text-dim">Answers</h3>
         </div>
-        <div className="divide-y divide-border-soft">
+        <div className="divide-y divide-outline-dim">
           {result.answers.map((answer) => (
             <AnswerRow key={answer.questionId} answer={answer} instrument={instrument ?? result.instrument} compact />
           ))}
         </div>
       </section>
-      <section className="overflow-hidden rounded-xl border border-border-soft bg-surface-container-lowest shadow-soft">
-        <div className="border-b border-border-soft bg-surface-container-low px-3 py-2">
-          <h3 className="text-headline-sm font-headline-sm text-on-surface">Trajectory</h3>
+      <section className="panel overflow-hidden rounded-md border border-outline bg-surface">
+        <div className="border-b border-outline px-3 py-2">
+          <h3 className="hud text-[10px] text-text-dim">Step-by-step log</h3>
         </div>
-        <div className="max-h-72 divide-y divide-border-soft overflow-auto">
+        <div className="max-h-72 divide-y divide-outline-dim overflow-auto">
           {result.trajectory.map((event, index) => (
             <TrajectoryEventRow key={`${event.timestamp}-${index}`} event={event} />
           ))}
@@ -547,17 +685,17 @@ function AnswerRow({
   return (
     <div className={compact ? "px-3 py-3" : "grid grid-cols-[minmax(0,1fr)_180px] gap-4 px-4 py-3"}>
       <div className="min-w-0">
-        <p className="font-mono-sm text-mono-sm text-primary">{answer.questionId}</p>
-        <p className="mt-1 text-body-md leading-relaxed text-on-surface">{question?.prompt ?? answer.questionId}</p>
+        <p className="font-mono text-[10px] text-primary">{answer.questionId}</p>
+        <p className="mt-1 text-[13px] leading-relaxed text-text-main">{question?.prompt ?? answer.questionId}</p>
         {answer.rationale && (
-          <p className="mt-1 text-body-sm leading-relaxed text-on-surface-variant">{answer.rationale}</p>
+          <p className="mt-1 font-mono text-[11px] leading-relaxed text-text-dim">{answer.rationale}</p>
         )}
       </div>
       <div className={compact ? "mt-2" : "justify-self-end text-right"}>
-        <p className="font-mono text-sm text-on-surface">{formatSurveyValue(answer.value)}</p>
+        <p className="font-mono text-[12px] text-text-main">{formatSurveyValue(answer.value)}</p>
         {answer.confidence != null && (
-          <p className="mt-1 font-mono-sm text-mono-sm text-on-surface-variant">
-            confidence {(answer.confidence * 100).toFixed(0)}%
+          <p className="mt-1 font-mono text-[11px] text-text-variant">
+            {(answer.confidence * 100).toFixed(0)}% sure
           </p>
         )}
       </div>
@@ -569,25 +707,41 @@ function TrajectoryEventRow({ event }: { event: SurveyTrajectoryEvent }) {
   return (
     <div className="px-3 py-2">
       <div className="flex items-center justify-between gap-2">
-        <span className="truncate text-body-sm font-medium text-on-surface">
-          {event.actor} / {event.action}
+        <span className="truncate text-[12px] font-medium text-text-main">
+          {trajectoryActor(event.actor)} · {event.action}
         </span>
-        <span className="flex-shrink-0 font-mono-sm text-mono-sm text-on-surface-variant">{event.timestamp}</span>
+        <span className="flex-shrink-0 font-mono text-[11px] text-text-dim">{event.timestamp}</span>
       </div>
-      <pre className="mt-1 max-h-20 overflow-auto whitespace-pre-wrap break-words rounded bg-surface-container-low p-2 font-mono-sm text-mono-sm text-on-surface-variant">
+      <pre className="mt-1 max-h-20 overflow-auto whitespace-pre-wrap break-words rounded bg-field p-2 font-mono text-[11px] text-text-variant">
         {JSON.stringify({ context: event.context, outcome: event.outcome }, null, 2)}
       </pre>
     </div>
   );
 }
 
-function MetricTile({ value, caption }: { value: string; caption: string }) {
+function MetricTile({
+  value,
+  caption,
+  unit,
+  lead,
+  hint,
+}: {
+  value: string;
+  caption: string;
+  unit?: string;
+  lead?: boolean;
+  hint?: string;
+}) {
   return (
-    <div className="flex flex-col items-center justify-center rounded-lg border border-border-soft bg-surface-container-low py-2.5">
-      <span className="text-headline-md font-headline-md tabular-nums text-on-surface">{value}</span>
-      <span className="mt-0.5 text-center text-[10px] uppercase leading-tight tracking-wider text-on-surface-variant">
-        {caption}
-      </span>
+    <div
+      title={hint}
+      className={`rounded-md border border-outline bg-surface p-4 text-center ${lead ? "border-l-4 border-l-secondary" : ""}`}
+    >
+      <div className="flex items-baseline justify-center gap-0.5">
+        <span className="font-display text-[24px] font-bold tabular-nums text-text-main">{value}</span>
+        {unit && <span className="font-sans text-[12px] text-text-dim">{unit}</span>}
+      </div>
+      <span className={`mt-1 block hud text-[9px] ${lead ? "text-secondary" : "text-text-dim"}`}>{caption}</span>
     </div>
   );
 }

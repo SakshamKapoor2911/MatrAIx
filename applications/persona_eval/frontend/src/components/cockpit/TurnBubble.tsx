@@ -2,11 +2,11 @@
  * TurnBubble — one conversational bubble in the cockpit trajectory.
  *
  * Ports the mockup's two bubble styles:
- *   - persona (the simulated user): right-aligned, indigo fill, white text;
- *   - RecBot (the agent under test): left-aligned, neutral white + border,
- *     carrying its recommended-item card and the "Tool plan / raw action" fold.
+ *   - persona (the simulated user): right-aligned, on a bordered surface;
+ *   - app reply (the agent under test): left-aligned, neutral surface + border,
+ *     carrying its recommended-item card and the "How the app decided" fold.
  *
- * A RecBot turn that produced no reply text (a backend hiccup) is rendered
+ * An app turn that produced no reply text (a backend hiccup) is rendered
  * honestly — the failure shows as an italic error line rather than passing as a
  * normal reply. Per-turn metadata shows ONLY the real wall-clock latency
  * (`durationSeconds`); tokens/cost are not tracked, so they are never shown.
@@ -41,7 +41,7 @@ function BubbleHeader({
   if (side === "persona") {
     return (
       <div className="mb-1 flex items-center gap-2">
-        <span className="text-label-md font-label-md font-medium text-on-surface-variant">{personaName} · Persona</span>
+        <span className="hud text-[10px] text-text-dim">{personaName} · Persona</span>
         <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10" aria-hidden>
           <Sym name="face" fill={1} size={14} className="text-primary" />
         </div>
@@ -50,10 +50,10 @@ function BubbleHeader({
   }
   return (
     <div className="mb-1 flex items-center gap-2">
-      <div className="flex h-6 w-6 items-center justify-center rounded-full bg-surface-container-highest" aria-hidden>
-        <Sym name="smart_toy" fill={1} size={14} className="text-on-surface-variant" />
+      <div className="flex h-6 w-6 items-center justify-center rounded-full bg-surface-high" aria-hidden>
+        <Sym name="smart_toy" fill={1} size={14} className="text-primary" />
       </div>
-      <span className="text-label-md font-label-md font-medium text-on-surface-variant">RecBot</span>
+      <span className="hud text-[10px] text-primary">The app</span>
     </div>
   );
 }
@@ -63,14 +63,14 @@ export interface PersonaBubbleProps {
   personaName: string;
 }
 
-/** The persona's message (right-aligned, indigo). */
+/** The persona's message (right-aligned, on a bordered surface). */
 export function PersonaBubble({ message, personaName }: PersonaBubbleProps) {
   return (
     <div className="flex w-full flex-col items-end gap-1 pl-12">
       <BubbleHeader side="persona" personaName={personaName} />
-      <div className="rounded-2xl rounded-tr-sm bg-primary p-md text-on-primary shadow-soft">
-        <p className="text-body-md leading-relaxed">
-          {message?.trim() ? message : <span className="italic opacity-80">(no message)</span>}
+      <div className="rounded-md rounded-tr-sm border border-outline bg-surface-low p-md text-text-main">
+        <p className="text-[13px] leading-relaxed">
+          {message?.trim() ? message : <span className="italic text-text-dim">(the user said nothing)</span>}
         </p>
       </div>
     </div>
@@ -88,7 +88,7 @@ export interface RecBotBubbleProps {
   onToggleFold: () => void;
 }
 
-/** The RecBot reply (left-aligned, neutral) with items + tool-plan fold. */
+/** The app reply (left-aligned, neutral) with items + tool-plan fold. */
 export function RecBotBubble({
   turn,
   domain,
@@ -104,13 +104,13 @@ export function RecBotBubble({
   return (
     <div className="mt-3 flex w-full flex-col items-start gap-1 pr-12">
       <BubbleHeader side="recbot" personaName="" />
-      <div className="w-full rounded-2xl rounded-tl-sm border border-border-soft bg-surface-container-lowest p-md shadow-soft">
+      <div className="w-full rounded-md rounded-tl-sm border border-outline bg-surface p-md">
         {hiccup ? (
-          <p className="text-body-md italic leading-relaxed text-error">
-            RecBot did not return a reply for this turn.
+          <p className="text-[13px] italic leading-relaxed text-danger">
+            The app didn&apos;t reply on this turn.
           </p>
         ) : (
-          <Markdown className="mb-3 text-body-md text-on-surface">{turn.assistantMessage ?? ""}</Markdown>
+          <Markdown className="mb-3 text-[13px] leading-relaxed text-text-main">{turn.assistantMessage ?? ""}</Markdown>
         )}
 
         {items.length > 0 && (
@@ -129,7 +129,7 @@ export function RecBotBubble({
       {/* Per-turn metadata — REAL latency only (tokens/cost are not tracked). */}
       {latency && (
         <div className="ml-2 mt-1 flex items-center gap-3">
-          <span className="flex items-center gap-1 font-mono-sm text-mono-sm text-on-surface-variant">
+          <span className="flex items-center gap-1 font-mono text-[11px] text-text-dim">
             <Sym name="timer" size={12} />
             {latency}
           </span>
@@ -143,12 +143,12 @@ export function RecBotBubble({
 export function TurnMarker({ label, children }: { label: string; children?: ReactNode }) {
   return (
     <div className="my-1 flex w-full items-center">
-      <div className="flex-1 border-t border-border-soft" />
-      <span className="flex items-center gap-1 bg-background px-3 text-label-md font-label-md uppercase tracking-widest text-on-surface-variant">
+      <div className="flex-1 border-t border-outline-dim" />
+      <span className="flex items-center gap-1 bg-surface-dim px-3 hud text-[10px] text-text-dim">
         {children}
         {label}
       </span>
-      <div className="flex-1 border-t border-border-soft" />
+      <div className="flex-1 border-t border-outline-dim" />
     </div>
   );
 }

@@ -40,12 +40,12 @@ export function Scorecard({ questionnaire, metrics, phase }: ScorecardProps) {
   if (!questionnaire || !metrics) {
     return (
       <div className="p-md">
-        <div className="rounded-xl border border-dashed border-border-soft bg-surface-container-low px-4 py-10 text-center">
-          <Sym name="fact_check" size={28} className="text-outline" />
-          <p className="mt-2 text-body-sm leading-relaxed text-on-surface-variant">
+        <div className="rounded-md border border-dashed border-outline-dim bg-surface-low px-4 py-10 text-center">
+          <Sym name="fact_check" size={28} className="text-text-dim" />
+          <p className="mt-2 text-[13px] leading-relaxed text-text-dim">
             {phase === "error" || phase === "timeout"
-              ? "This run ended before an evaluation was produced."
-              : "Run an eval to see the persona's scorecard here."}
+              ? "This run stopped before it could be scored."
+              : "Run a simulation and the scores will appear here."}
           </p>
         </div>
       </div>
@@ -55,19 +55,27 @@ export function Scorecard({ questionnaire, metrics, phase }: ScorecardProps) {
   const overall = clamp(questionnaire.overallRating, 10);
   const overallBand = scoreBand(overall / 10);
   const overallColor = SCORE_BAND_CLASS[overallBand];
+  const overallBorder =
+    overallBand === "high"
+      ? "border-l-score-high"
+      : overallBand === "mid"
+        ? "border-l-score-mid"
+        : overallBand === "low"
+          ? "border-l-score-low"
+          : "border-l-outline";
 
   return (
     <div className="p-md">
-      <div className="overflow-hidden rounded-xl border border-border-soft bg-surface-container-lowest shadow-soft">
+      <div className="panel overflow-hidden rounded-md border border-outline bg-surface-lowest">
         {/* Card header */}
-        <div className="flex items-center justify-between border-b border-border-soft bg-surface-container-low px-3 py-2.5">
+        <div className="flex items-center justify-between border-b border-outline bg-surface-low px-3 py-2.5">
           <div className="flex items-center gap-2">
             <Sym name="verified" fill={1} size={18} className="text-primary" />
-            <h3 className="text-headline-sm font-headline-sm uppercase tracking-wider text-on-surface">Evaluation</h3>
+            <h3 className="hud text-[11px] text-primary">Scorecard</h3>
           </div>
-          <span className="flex items-center gap-1 text-label-md font-label-md text-on-surface-variant">
-            <span className="h-2 w-2 rounded-full bg-success" aria-hidden />
-            Completed
+          <span className="flex items-center gap-1 hud text-[10px] text-text-dim">
+            <span className="h-2 w-2 rounded-full bg-secondary" aria-hidden />
+            Scored
           </span>
         </div>
 
@@ -76,21 +84,21 @@ export function Scorecard({ questionnaire, metrics, phase }: ScorecardProps) {
           <div className="mb-3 flex items-start gap-3">
             <div className="flex flex-shrink-0 flex-col items-center">
               <div className="flex items-baseline gap-0.5" aria-label={`Overall rating ${overall} out of 10`}>
-                <span className={`text-[40px] font-bold leading-none tracking-tight tabular-nums ${overallColor.text}`}>
+                <span className={`font-display text-[44px] font-bold leading-none tracking-tight tabular-nums ${overallColor.text}`}>
                   {overall}
                 </span>
-                <span className="text-headline-md font-headline-md text-on-surface-variant">/ 10</span>
+                <span className="text-[13px] text-text-dim">/ 10</span>
               </div>
-              <span className="mt-1 text-center text-[10px] uppercase tracking-wider text-on-surface-variant">
-                Persona self-rating
+              <span className="mt-1 text-center hud text-[10px] text-text-dim">
+                How the user rated it
               </span>
               {/* Grounding: the self-rating measures the conversation; this says
                   whether the recommender actually returned real catalog items. */}
               <GroundingChip metrics={metrics} className="mt-1.5" />
             </div>
             {questionnaire.ratingReason && (
-              <div className="flex-1 border-l border-border-soft pl-3">
-                <p className="text-body-md italic leading-relaxed text-on-surface">
+              <div className={`flex-1 border-l-2 pl-3 ${overallBorder}`}>
+                <p className="text-[12px] italic leading-relaxed text-text-variant">
                   &ldquo;{questionnaire.ratingReason}&rdquo;
                 </p>
               </div>
@@ -100,13 +108,13 @@ export function Scorecard({ questionnaire, metrics, phase }: ScorecardProps) {
           {/* Criterion rows */}
           <div className="mb-3 space-y-2.5">
             <CriterionRow
-              label="Constraint satisfaction"
+              label="Did it respect the must-haves?"
               score={questionnaire.constraintSatisfaction}
               max={5}
               rationale={questionnaire.constraintRationale}
             />
             <CriterionRow
-              label="Preference satisfaction"
+              label="Did it match their tastes?"
               score={questionnaire.preferenceSatisfaction}
               max={5}
               rationale={questionnaire.preferenceRationale}
@@ -123,11 +131,17 @@ export function Scorecard({ questionnaire, metrics, phase }: ScorecardProps) {
           <div className="mt-3 grid grid-cols-3 gap-2">
             <MetricTile
               value={metrics.turnsToRecommendation === null ? "—" : String(metrics.turnsToRecommendation)}
-              caption="Turns to first rec"
+              caption="Turns to first suggestion"
             />
-            <MetricTile value={String(metrics.numTurns)} caption="Turns" />
-            <MetricTile value={String(metrics.recommendedItemCount)} caption="Items recommended" />
+            <MetricTile value={String(metrics.numTurns)} caption="Total turns" />
+            <MetricTile value={String(metrics.recommendedItemCount)} caption="Items suggested" />
           </div>
+
+          {/* Scale hint — what the colours mean. */}
+          <p className="mt-3 text-[10px] leading-relaxed text-text-dim">
+            Scores read <span className="text-secondary">green</span> when the app did well,{" "}
+            <span className="text-warn">amber</span> when so-so, <span className="text-danger">red</span> when it missed.
+          </p>
         </div>
       </div>
     </div>
@@ -155,7 +169,7 @@ function CriterionRow({
   return (
     <div>
       <div className="mb-1 flex items-center justify-between">
-        <span className="flex items-center gap-1.5 text-body-sm font-medium text-on-surface">
+        <span className="flex items-center gap-1.5 text-[12px] font-medium text-text-main">
           <Sym
             name={passing ? "check_circle" : band === "low" ? "cancel" : "remove_circle"}
             fill={1}
@@ -164,35 +178,35 @@ function CriterionRow({
           />
           {label}
         </span>
-        <span className={`text-body-sm font-semibold tabular-nums ${color.text}`}>
+        <span className={`font-mono text-[12px] font-bold tabular-nums ${color.text}`}>
           {value} / {max}
         </span>
       </div>
-      <div className="h-1.5 w-full overflow-hidden rounded-full bg-surface-container-high">
+      <div className="h-1.5 w-full overflow-hidden rounded-full bg-field">
         <div className={`h-full rounded-full transition-[width] duration-200 ${color.bar}`} style={{ width: `${pct}%` }} />
       </div>
-      {rationale && <p className="mt-1 text-body-sm leading-relaxed text-on-surface-variant">{rationale}</p>}
+      {rationale && <p className="mt-1 text-[11px] leading-snug text-text-dim">{rationale}</p>}
     </div>
   );
 }
 
-/** The clarifying-questions callout (green when useful, neutral when not). */
+/** The clarifying-questions callout (mint when useful, neutral when not). */
 function ClarifyingLine({ asked, notes }: { asked: boolean; notes: string }) {
   return (
     <div
       className={`flex items-start gap-2 rounded-md border px-3 py-2 ${
-        asked ? "border-success/40 bg-success-container" : "border-border-soft bg-surface-container-low"
+        asked ? "border-secondary/40 bg-secondary/10" : "border-outline-dim bg-surface-low text-text-dim"
       }`}
     >
       <Sym
         name={asked ? "help" : "help_outline"}
         fill={asked ? 1 : 0}
         size={18}
-        className={`mt-0.5 ${asked ? "text-on-success-container" : "text-on-surface-variant"}`}
+        className={`mt-0.5 ${asked ? "text-secondary" : "text-text-dim"}`}
       />
-      <span className="text-body-sm text-on-surface">
-        <span className="font-semibold">Clarifying questions</span>
-        {asked ? " — asked useful ones" : " — none asked"}
+      <span className="text-[12px] text-text-main">
+        <span className="font-semibold">Follow-up questions</span>
+        {asked ? " — asked helpful ones" : " — didn't ask any"}
         {notes ? `. ${notes}` : "."}
       </span>
     </div>
@@ -202,9 +216,9 @@ function ClarifyingLine({ asked, notes }: { asked: boolean; notes: string }) {
 /** A compact metric tile (big value + caption). */
 function MetricTile({ value, caption }: { value: string; caption: string }) {
   return (
-    <div className="flex flex-col items-center justify-center rounded-lg border border-border-soft bg-surface-container-low py-2.5">
-      <span className="text-headline-md font-headline-md tabular-nums text-on-surface">{value}</span>
-      <span className="mt-0.5 text-center text-[10px] uppercase leading-tight tracking-wider text-on-surface-variant">
+    <div className="flex flex-col items-center justify-center rounded-md border border-outline bg-surface py-2.5">
+      <span className="font-display text-[22px] font-bold tabular-nums text-text-main">{value}</span>
+      <span className="mt-0.5 text-center hud text-[10px] leading-tight text-text-dim">
         {caption}
       </span>
     </div>
@@ -215,21 +229,21 @@ function MetricTile({ value, caption }: { value: string; caption: string }) {
 function ScorecardSkeleton() {
   return (
     <div className="p-md" aria-hidden>
-      <div className="overflow-hidden rounded-xl border border-border-soft bg-surface-container-lowest shadow-soft">
-        <div className="border-b border-border-soft bg-surface-container-low px-3 py-2.5">
-          <div className="h-4 w-28 animate-rb-pulse rounded bg-surface-container-high" />
+      <div className="overflow-hidden rounded-md border border-outline bg-surface-lowest">
+        <div className="border-b border-outline bg-surface-low px-3 py-2.5">
+          <div className="h-4 w-28 animate-rb-pulse rounded bg-surface-high" />
         </div>
         <div className="space-y-3 p-3">
           <div className="flex items-center gap-3">
-            <div className="h-10 w-14 animate-rb-pulse rounded bg-surface-container-high" />
-            <div className="h-10 flex-1 animate-rb-pulse rounded bg-surface-container" />
+            <div className="h-10 w-14 animate-rb-pulse rounded bg-surface-high" />
+            <div className="h-10 flex-1 animate-rb-pulse rounded bg-surface-high" />
           </div>
-          <div className="h-8 w-full animate-rb-pulse rounded bg-surface-container" />
-          <div className="h-8 w-full animate-rb-pulse rounded bg-surface-container" />
+          <div className="h-8 w-full animate-rb-pulse rounded bg-surface-high" />
+          <div className="h-8 w-full animate-rb-pulse rounded bg-surface-high" />
           <div className="grid grid-cols-3 gap-2">
-            <div className="h-14 animate-rb-pulse rounded-lg bg-surface-container" />
-            <div className="h-14 animate-rb-pulse rounded-lg bg-surface-container" />
-            <div className="h-14 animate-rb-pulse rounded-lg bg-surface-container" />
+            <div className="h-14 animate-rb-pulse rounded-md bg-surface-high" />
+            <div className="h-14 animate-rb-pulse rounded-md bg-surface-high" />
+            <div className="h-14 animate-rb-pulse rounded-md bg-surface-high" />
           </div>
         </div>
       </div>

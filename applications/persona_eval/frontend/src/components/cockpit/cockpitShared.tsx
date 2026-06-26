@@ -28,7 +28,7 @@ import type { CSSProperties, ReactNode } from "react";
  * keyboard focus across buttons, tabs, knobs, links, and sliders.
  */
 export const FOCUS_RING =
-  "outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface-container-lowest";
+  "outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface-lowest";
 
 // ---------------------------------------------------------------------------
 // Material Symbols glyph
@@ -327,10 +327,10 @@ export function scoreBand(normalized: number | null | undefined): ScoreBand {
  * base semantic colour; soft backgrounds use the `*-container` token.
  */
 export const SCORE_BAND_CLASS: Record<ScoreBand, { text: string; bar: string; soft: string }> = {
-  high: { text: "text-on-success-container", bar: "bg-success", soft: "bg-success-container" },
-  mid: { text: "text-on-warning-container", bar: "bg-warning", soft: "bg-warning-container" },
-  low: { text: "text-on-error-container", bar: "bg-error", soft: "bg-error-container" },
-  none: { text: "text-on-surface-variant", bar: "bg-outline-variant", soft: "bg-surface-container-high" },
+  high: { text: "text-score-high", bar: "bg-score-high", soft: "bg-score-high/15" },
+  mid: { text: "text-score-mid", bar: "bg-score-mid", soft: "bg-score-mid/15" },
+  low: { text: "text-score-low", bar: "bg-score-low", soft: "bg-score-low/15" },
+  none: { text: "text-text-dim", bar: "bg-outline", soft: "bg-surface-high" },
 };
 
 // ---------------------------------------------------------------------------

@@ -23,7 +23,7 @@ export interface ChatConfigBarProps {
 
 export function ChatConfigBar({ config, options, environment, disabled, onChange }: ChatConfigBarProps) {
   return (
-    <div className="flex flex-shrink-0 flex-wrap items-center gap-x-5 gap-y-2 border-b border-border-soft bg-surface-container-lowest px-lg py-2.5 shadow-sm">
+    <div className="flex flex-shrink-0 flex-wrap items-center gap-x-5 gap-y-2 border-b border-outline bg-surface-lowest px-lg py-2.5">
       <ConfigBar config={config} options={options} disabled={disabled} onChange={onChange} />
       <EnvironmentPopover environment={environment} />
     </div>

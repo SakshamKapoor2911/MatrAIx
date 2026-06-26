@@ -55,13 +55,13 @@ function liveStatusLine(
   phase: PersonaEvalRunPhase,
   isRunning: boolean,
 ): string | null {
-  if (phase === "building") return "Warming the chatbot application — this first turn can take a minute.";
+  if (phase === "building") return "Starting the app — the first reply can take up to a minute.";
   if (!isRunning) return null;
   const raw = (job?.phase ?? "").toLowerCase();
-  if (raw.includes("persona") || raw.includes("user") || raw.includes("simulat")) return "Persona is thinking…";
+  if (raw.includes("persona") || raw.includes("user") || raw.includes("simulat")) return "The simulated user is typing…";
   if (raw.includes("chatbot") || raw.includes("application") || raw.includes("agent") || raw.includes("recai") || raw.includes("turn"))
-    return "Chatbot application is thinking…";
-  if (raw.includes("eval")) return "Scoring the conversation…";
+    return "The app is thinking…";
+  if (raw.includes("eval")) return "Scoring how it went…";
   if (job?.phase) return `${job.phase}…`;
   return "Running the PersonaEval…";
 }
@@ -381,7 +381,7 @@ function ChatbotEvalCockpit({
       <PersonaCatalog selectedId={persona?.id ?? null} onSelect={handleSelectPersona} />
 
       {/* CENTRE — run header + knob bar + trajectory */}
-      <main className="relative z-0 flex min-h-[640px] min-w-0 flex-1 flex-col bg-background lg:min-h-0">
+      <main className="relative z-0 flex min-h-[640px] min-w-0 flex-1 flex-col bg-surface-dim lg:min-h-0">
         <TaskTypeSwitch value={taskType} onChange={onTaskTypeChange} disabled={isRunning} />
         <RunHeader
           persona={persona}

@@ -69,38 +69,51 @@ export function PersonaCatalog({ selectedId, onSelect }: PersonaCatalogProps) {
     return all.filter((p) => p.source === filter);
   }, [all, filter]);
 
-  const totalLabel = personasQuery.isLoading && all.length === 0 ? "…" : String(all.length);
+  const totalLabel =
+    personasQuery.isLoading && all.length === 0 ? "Loading personas…" : `${all.length} personas ready`;
 
   return (
-    <aside className="relative z-0 flex h-[260px] w-full flex-shrink-0 flex-col border-b border-border-soft bg-surface-container-low lg:h-full lg:w-[300px] lg:border-b-0 lg:border-r">
+    <aside className="relative z-0 flex h-[260px] w-full flex-shrink-0 flex-col border-b border-outline bg-surface-lowest lg:h-full lg:w-[300px] lg:border-b-0 lg:border-r">
       {/* Header: title, count, search, filter chips */}
-      <div className="flex-shrink-0 border-b border-border-soft p-md pb-sm">
-        <h2 className="mb-xs text-headline-sm font-headline-sm uppercase tracking-[0.05em] text-on-surface">
-          Persona Catalog
-        </h2>
-        <p className="mb-sm text-body-sm text-on-surface-variant">{totalLabel} personas</p>
+      <div className="flex-shrink-0 border-b border-outline p-md pb-sm">
+        <div className="mb-xs">
+          <div className="hud text-[10px] text-primary">Persona catalog</div>
+          <h2 className="font-display text-[15px] font-bold text-text-main">Pick who to simulate</h2>
+        </div>
+        <p className="hud mb-sm text-[9px] text-text-dim">{totalLabel}</p>
 
         <div className="relative mb-sm w-full">
           <Sym
             name="search"
             size={18}
-            className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-outline"
+            className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-text-dim"
           />
           <input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search personas…"
+            placeholder='Search by role, age, or trait — e.g. "manager" or "student"'
             aria-label="Search personas"
-            className={`w-full rounded-md border border-outline-variant bg-surface-container-lowest py-1.5 pl-10 pr-3 text-body-sm text-on-surface outline-none transition-all placeholder:text-outline focus:border-primary ${FOCUS_RING}`}
+            className={`w-full rounded-md border border-outline bg-field py-1.5 pl-10 pr-3 text-[13px] text-text-main outline-none transition-all placeholder:text-text-dim focus:border-primary ${FOCUS_RING}`}
           />
         </div>
 
         <div className="flex flex-wrap items-center gap-1.5" role="group" aria-label="Filter by source">
-          <FilterChip label="All" active={filter === "all"} onClick={() => setFilter("all")} />
-          <FilterChip label="Curated" active={filter === "curated"} onClick={() => setFilter("curated")} />
+          <FilterChip label="All sources" active={filter === "all"} onClick={() => setFilter("all")} />
+          <FilterChip
+            label="Curated"
+            title="Hand-picked personas we ship by default"
+            active={filter === "curated"}
+            onClick={() => setFilter("curated")}
+          />
           {sources.map((s) => (
-            <FilterChip key={s} label={s} active={filter === s} onClick={() => setFilter(s)} />
+            <FilterChip
+              key={s}
+              label={s}
+              title={`Source dataset: ${s}`}
+              active={filter === s}
+              onClick={() => setFilter(s)}
+            />
           ))}
         </div>
       </div>
@@ -124,16 +137,27 @@ export function PersonaCatalog({ selectedId, onSelect }: PersonaCatalogProps) {
 }
 
 /** A pill-shaped source filter chip. */
-function FilterChip({ label, active, onClick }: { label: string; active: boolean; onClick: () => void }) {
+function FilterChip({
+  label,
+  active,
+  onClick,
+  title,
+}: {
+  label: string;
+  active: boolean;
+  onClick: () => void;
+  title?: string;
+}) {
   return (
     <button
       type="button"
       onClick={onClick}
+      title={title}
       aria-pressed={active}
-      className={`rounded-full px-2.5 py-1 text-label-md font-label-md transition-colors ${FOCUS_RING} ${
+      className={`rounded-full border px-2.5 py-1 text-[11px] font-medium transition-colors ${FOCUS_RING} ${
         active
-          ? "bg-primary text-on-primary"
-          : "bg-surface-container text-on-surface-variant hover:bg-surface-container-high"
+          ? "border-primary bg-primary text-on-primary"
+          : "border-outline bg-surface text-text-variant hover:border-primary hover:text-text-main"
       }`}
     >
       {label}
@@ -146,14 +170,14 @@ function CatalogSkeleton() {
   return (
     <div aria-hidden className="space-y-1">
       {Array.from({ length: 7 }).map((_, i) => (
-        <div key={i} className="mb-1 flex items-start gap-sm rounded-lg p-sm pl-3">
-          <div className="h-10 w-10 flex-shrink-0 animate-rb-pulse rounded-full bg-surface-container-high" />
+        <div key={i} className="mb-1 flex items-start gap-sm rounded-md p-sm pl-3">
+          <div className="h-10 w-10 flex-shrink-0 animate-pulse rounded bg-surface-high" />
           <div className="flex-1 space-y-2 py-1">
-            <div className="h-3 w-2/3 animate-rb-pulse rounded bg-surface-container-high" />
-            <div className="h-2.5 w-1/2 animate-rb-pulse rounded bg-surface-container" />
+            <div className="h-3 w-2/3 animate-pulse rounded bg-surface-high" />
+            <div className="h-2.5 w-1/2 animate-pulse rounded bg-surface-low" />
             <div className="flex gap-1">
-              <div className="h-3.5 w-10 animate-rb-pulse rounded bg-surface-container" />
-              <div className="h-3.5 w-6 animate-rb-pulse rounded bg-surface-container" />
+              <div className="h-3.5 w-10 animate-pulse rounded bg-surface-low" />
+              <div className="h-3.5 w-6 animate-pulse rounded bg-surface-low" />
             </div>
           </div>
         </div>
@@ -165,10 +189,20 @@ function CatalogSkeleton() {
 /** Empty state — no personas match the current search. */
 function CatalogEmpty({ query }: { query: string }) {
   return (
-    <div className="px-3 py-8 text-center">
-      <Sym name="search_off" size={28} className="text-outline" />
-      <p className="mt-2 text-body-sm text-on-surface-variant">
-        {query ? `No personas match “${query}”.` : "No personas available."}
+    <div className="flex flex-col items-center px-3 py-8 text-center">
+      <div
+        className="mb-3 flex h-12 w-12 items-center justify-center rounded-md border border-dashed border-outline bg-surface-high"
+        aria-hidden
+      >
+        <Sym name="search_off" size={24} className="text-text-dim" />
+      </div>
+      <p className="font-display text-[15px] font-semibold text-text-main">
+        {query ? "No matches" : "No personas yet"}
+      </p>
+      <p className="mt-1 max-w-[260px] text-[12px] leading-snug text-text-variant">
+        {query
+          ? `Nothing matches “${query}”. Try a role like “nurse” or a broader term.`
+          : "No personas to show yet. Try clearing the source filter."}
       </p>
     </div>
   );
@@ -177,15 +211,23 @@ function CatalogEmpty({ query }: { query: string }) {
 /** Error state — the catalog failed to load, with a retry. */
 function CatalogError({ onRetry }: { onRetry: () => void }) {
   return (
-    <div className="px-3 py-8 text-center">
-      <Sym name="error" size={28} className="text-error" />
-      <p className="mt-2 text-body-sm text-on-surface-variant">Couldn&apos;t load the persona catalog.</p>
+    <div className="rounded-md border border-outline border-l-4 border-l-danger bg-surface px-4 py-6 text-center">
+      <div
+        className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-md border border-danger/30 bg-danger/10"
+        aria-hidden
+      >
+        <Sym name="error" size={24} className="text-danger" />
+      </div>
+      <p className="font-display text-[15px] font-semibold text-text-main">Couldn&apos;t load personas</p>
+      <p className="mx-auto mt-1 max-w-[260px] text-[12px] leading-snug text-text-variant">
+        We couldn&apos;t load the personas. Check the backend is running, then retry.
+      </p>
       <button
         type="button"
         onClick={onRetry}
-        className={`mt-3 rounded-md border border-outline-variant bg-surface-container px-3 py-1.5 text-label-md font-label-md text-on-surface-variant transition-colors hover:border-primary hover:text-primary ${FOCUS_RING}`}
+        className={`mt-3 inline-flex items-center rounded-md border border-danger/40 bg-danger/10 px-3 py-1.5 text-[11px] font-medium text-danger transition-colors hover:bg-danger/20 ${FOCUS_RING}`}
       >
-        Retry
+        Try again
       </button>
     </div>
   );

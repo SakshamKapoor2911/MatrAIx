@@ -1,101 +1,65 @@
 import type { Config } from "tailwindcss";
 
 /**
- * Tailwind theme for PersonaEval — the "Executive Precision" design system
- * (see `DESIGN.md` for the authoritative token values, and
- * `tools/recbot-mockups/cockpit-stitch-v2.html` for the approved cockpit).
+ * Tailwind theme for PersonaEval — the "matrAIx" design system.
  *
- * The theme is the **Executive Precision** palette + type scale: the canonical
- * names `surface*`, `on-surface*`, `primary*`, `border-soft`, the semantic
- * `success`/`error`/`warning` container pairs, and the Inter/JetBrains-Mono
- * `display`/`headline-*`/`body-*`/`label-md`/`mono-sm` scale. These mirror the
- * mockup's `tailwind.config` exactly so the React app renders in the same
- * palette + faces. Color values are tokenized (no arbitrary hex in component
- * JSX); semantic colors carry their `-container` / `on-` pairs.
+ * Dark-first; tokens live in src/index.css as "R G B" triplets and are consumed
+ * via rgb(var(--x)/<alpha-value>) so opacity utilities (bg-primary/10,
+ * border-secondary/25) work for every color. Three faces only: font-sans
+ * (Inter, default UI), font-display (Space Grotesk, headings + the matrAIx
+ * wordmark), font-mono (JetBrains Mono, data + the uppercase `.hud` micro-label).
  *
- * Use the names directly in JSX, e.g. `bg-surface-container-lowest
- * border-border-soft text-on-surface-variant font-body-md rounded-lg
- * shadow-soft`.
+ * Use the names directly in JSX, e.g. `bg-surface border border-outline
+ * rounded-md text-text-variant font-mono`. The score-low/mid/high colors are
+ * for evaluation scores ONLY (never use the primary accent to express a score).
  */
 export default {
   content: ["./index.html", "./src/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        surface: "var(--surface)",
-        "surface-dim": "var(--surface-dim)",
-        "surface-bright": "var(--surface-bright)",
-        "surface-container-lowest": "var(--surface-container-lowest)",
-        "surface-container-low": "var(--surface-container-low)",
-        "surface-container": "var(--surface-container)",
-        "surface-container-high": "var(--surface-container-high)",
-        "surface-container-highest": "var(--surface-container-highest)",
-        "on-surface": "var(--on-surface)",
-        "on-surface-variant": "var(--on-surface-variant)",
-        outline: "var(--outline)",
-        "outline-variant": "var(--outline-variant)",
-        "border-soft": "var(--border-soft)",
+        "surface-lowest": "rgb(var(--surface-lowest) / <alpha-value>)",
+        "surface-dim": "rgb(var(--surface-dim) / <alpha-value>)",
+        "surface-low": "rgb(var(--surface-low) / <alpha-value>)",
+        surface: "rgb(var(--surface) / <alpha-value>)",
+        "surface-high": "rgb(var(--surface-high) / <alpha-value>)",
+        field: "rgb(var(--field) / <alpha-value>)",
 
-        primary: {
-          DEFAULT: "var(--primary)",
-          container: "var(--primary-container)",
-          tint: "var(--primary-tint)",
-        },
-        "on-primary": "var(--on-primary)",
-        "on-primary-container": "var(--on-primary-container)",
+        outline: "rgb(var(--outline) / <alpha-value>)",
+        "outline-dim": "rgb(var(--outline-dim) / <alpha-value>)",
 
-        secondary: "var(--secondary)",
+        primary: "rgb(var(--primary) / <alpha-value>)",
+        "primary-dim": "rgb(var(--primary-dim) / <alpha-value>)",
+        "on-primary": "rgb(var(--on-primary) / <alpha-value>)",
+        secondary: "rgb(var(--secondary) / <alpha-value>)",
+        "secondary-dim": "rgb(var(--secondary-dim) / <alpha-value>)",
 
-        // Semantic colors — tokenized with their container / on-container pairs.
-        success: {
-          DEFAULT: "var(--success)",
-          container: "var(--success-container)",
-        },
-        "on-success-container": "var(--on-success-container)",
-        warning: {
-          DEFAULT: "var(--warning)",
-          container: "var(--warning-container)",
-        },
-        "on-warning-container": "var(--on-warning-container)",
-        error: {
-          DEFAULT: "var(--error)",
-          container: "var(--error-container)",
-        },
-        "on-error-container": "var(--on-error-container)",
+        "text-main": "rgb(var(--text-main) / <alpha-value>)",
+        "text-variant": "rgb(var(--text-variant) / <alpha-value>)",
+        "text-dim": "rgb(var(--text-dim) / <alpha-value>)",
+
+        danger: "rgb(var(--danger) / <alpha-value>)",
+        warn: "rgb(var(--warn) / <alpha-value>)",
+
+        // Evaluation score ramp only (red → amber → mint).
+        "score-low": "rgb(var(--score-low) / <alpha-value>)",
+        "score-mid": "rgb(var(--score-mid) / <alpha-value>)",
+        "score-high": "rgb(var(--score-high) / <alpha-value>)",
       },
       fontFamily: {
-        // Executive Precision: Inter for UI, JetBrains Mono for machine data.
-        display: ["Inter", "system-ui", "sans-serif"],
-        "headline-md": ["Inter", "system-ui", "sans-serif"],
-        "headline-sm": ["Inter", "system-ui", "sans-serif"],
-        "body-lg": ["Inter", "system-ui", "sans-serif"],
-        "body-md": ["Inter", "system-ui", "sans-serif"],
-        "body-sm": ["Inter", "system-ui", "sans-serif"],
-        "label-md": ["Inter", "system-ui", "sans-serif"],
-        "mono-sm": ["JetBrains Mono", "ui-monospace", "monospace"],
-      },
-      fontSize: {
-        // Executive Precision type scale (size + lineHeight/tracking/weight).
-        display: ["24px", { lineHeight: "32px", letterSpacing: "-0.02em", fontWeight: "600" }],
-        "headline-md": ["18px", { lineHeight: "24px", letterSpacing: "-0.01em", fontWeight: "600" }],
-        "headline-sm": ["14px", { lineHeight: "20px", letterSpacing: "0.05em", fontWeight: "600" }],
-        "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
-        "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
-        "body-sm": ["13px", { lineHeight: "18px", fontWeight: "400" }],
-        "label-md": ["12px", { lineHeight: "16px", fontWeight: "500" }],
-        "mono-sm": ["12px", { lineHeight: "16px", fontWeight: "400" }],
+        sans: ["Inter", "system-ui", "sans-serif"],
+        display: ["Space Grotesk", "Inter", "sans-serif"],
+        mono: ["JetBrains Mono", "ui-monospace", "monospace"],
       },
       borderRadius: {
-        // Executive Precision radii (8px standard; 12–16px large panels; pill).
-        sm: "0.25rem",
-        DEFAULT: "0.5rem",
-        lg: "0.75rem",
-        xl: "1rem",
-        full: "9999px",
+        sm: "4px",
+        DEFAULT: "6px",
+        md: "8px",
+        lg: "10px",
+        // `xl`, `2xl`, `full` fall through to Tailwind defaults.
       },
+      // Layout-only; intentionally retained from the prior config.
       spacing: {
-        // Executive Precision 8px grid (4px for tight components).
         xs: "4px",
         sm: "8px",
         md: "16px",
@@ -105,15 +69,7 @@ export default {
         gutter: "16px",
         "container-max": "1440px",
       },
-      boxShadow: {
-        // Executive Precision "Stacked Layer" elevation. `shadow-sm` keeps
-        // Tailwind's built-in subtle shadow for small raised controls.
-        soft: "0 4px 6px -1px rgb(0 0 0 / 0.04), 0 2px 4px -1px rgb(0 0 0 / 0.02)",
-        pop: "0 12px 24px -6px rgb(0 0 0 / 0.08), 0 4px 8px -4px rgb(0 0 0 / 0.04)",
-      },
-      maxWidth: {
-        thread: "680px",
-      },
+      maxWidth: { thread: "680px" },
     },
   },
   plugins: [],
