@@ -94,13 +94,13 @@ function PlanStepRow({ step, last }: { step: PlanStep; last: boolean }) {
 function RecItemRow({ item }: { item: RecommendedItem }) {
   const score = fmtScore(item.score);
   return (
-    <div className="flex items-center gap-2.5 rounded border border-outline bg-surface-low px-2.5 py-2">
+    <div className="flex items-start gap-2.5 rounded border border-outline bg-surface-low px-2.5 py-2">
       <span className="w-4 flex-none text-center font-mono text-[11px] text-text-dim">{item.rank}</span>
       <div className="min-w-0 flex-1">
-        <div className="truncate text-[12px] font-medium text-text-main">{item.title ?? item.itemId}</div>
+        <div className="break-words text-[12px] font-medium text-text-main">{item.title ?? item.itemId}</div>
         <div className="font-mono text-[11px] text-text-dim">{item.itemId}</div>
       </div>
-      {score && <span className="font-mono text-[11px] font-semibold tabular-nums text-primary">{score}</span>}
+      {score && <span className="flex-none font-mono text-[11px] font-semibold tabular-nums text-primary">{score}</span>}
     </div>
   );
 }

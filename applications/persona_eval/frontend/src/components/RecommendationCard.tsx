@@ -40,9 +40,9 @@ export function RecommendationCard({ item, onSelect }: RecommendationCardProps) 
           Best match
         </span>
       )}
-      <div className="mb-1 flex items-center gap-2">
-        {rank && <span className="font-mono text-[10px] font-bold text-primary">{rank}</span>}
-        <span className={`min-w-0 truncate text-[12px] font-semibold text-text-main ${isBest ? "pr-12" : ""}`}>
+      <div className="mb-1 flex items-start gap-2">
+        {rank && <span className="flex-none font-mono text-[10px] font-bold text-primary">{rank}</span>}
+        <span className={`min-w-0 break-words text-[12px] font-semibold text-text-main ${isBest ? "pr-12" : ""}`}>
           {title}
         </span>
       </div>
@@ -50,7 +50,7 @@ export function RecommendationCard({ item, onSelect }: RecommendationCardProps) 
         <p className="line-clamp-2 text-[11px] leading-snug text-text-variant">{item.meta}</p>
       )}
       <div className="mt-1.5 flex items-center gap-2 font-mono text-[10px] text-text-dim">
-        <span className="min-w-0 truncate">{item.itemId}</span>
+        <span className="min-w-0 truncate" title={item.itemId}>{item.itemId}</span>
         {hasScore && <span className="ml-auto flex-none tabular-nums">{item.score!.toFixed(3)}</span>}
       </div>
     </button>

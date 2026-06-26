@@ -32,7 +32,7 @@ import {
   type RunTranscriptTurn,
 } from "./runsShared";
 import { PromptPanel } from "./cockpit/PromptPanel";
-import { FOCUS_RING, SCORE_BAND_CLASS, Sym, scoreBand } from "./cockpit/cockpitShared";
+import { FOCUS_RING, SCORE_BAND_CLASS, Sym, humanizeToken, scoreBand } from "./cockpit/cockpitShared";
 import { Markdown } from "./Markdown";
 import { api, ApiError } from "@/lib/api";
 import type {
@@ -380,7 +380,7 @@ function DecisionTag({ decision }: { decision: string }) {
   const cls = satisfied
     ? "text-secondary border border-secondary/30 bg-secondary/10"
     : "text-warn border border-warn/30 bg-warn/10";
-  const label = satisfied ? "Got what they needed" : decision === "give_up" ? "Gave up" : decision;
+  const label = satisfied ? "Got what they needed" : decision === "give_up" ? "Gave up" : humanizeToken(decision);
   return (
     <span className={`inline-flex items-center rounded px-1.5 py-px hud text-[9px] ${cls}`}>{label}</span>
   );
@@ -628,7 +628,7 @@ function trajectoryActor(actor: string): string {
   if (value === "agent") return "Simulated user";
   if (value === "system") return "System";
   if (value === "scorer") return "Scorer";
-  return actor;
+  return humanizeToken(actor);
 }
 
 // ===========================================================================

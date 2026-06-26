@@ -351,7 +351,7 @@ function SideHeader({ run, runId, role }: { run: RunDetailView; runId: string; r
       <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-text-variant">
         <span>{fmtGoalContext(config.goalContextId)}</span>
         <span className="font-mono text-[11px]">{fmtRunDate(run.createdAt)}</span>
-        <span className="max-w-[180px] truncate font-mono text-[11px]" title="Run id">
+        <span className="max-w-[180px] truncate font-mono text-[11px]" title={`Run id: ${runId}`}>
           {runId}
         </span>
       </div>
@@ -378,7 +378,7 @@ function DeltaRow({ dim }: { dim: Dimension }) {
   return (
     <li className="grid grid-cols-[minmax(0,1.4fr)_72px_72px_minmax(0,1fr)] items-start gap-x-3 py-2.5">
       <div className="min-w-0">
-        <div className="truncate text-[13px] font-medium text-text-main">{dim.label}</div>
+        <div className="break-words text-[13px] font-medium text-text-main">{dim.label}</div>
         {/* Mini paired bars: baseline (muted) over candidate (primary). */}
         <div className="mt-1 space-y-1" aria-hidden>
           <div className="h-1 overflow-hidden rounded-full bg-field">

@@ -36,6 +36,7 @@ import { SurveyEvalCockpit } from "./SurveyEvalCockpit";
 import { WebEvalCockpit } from "./WebEvalCockpit";
 import { type PersonaEvalTaskType } from "./TaskTypeSwitch";
 import { FOCUS_RING, Sym, personaCodename, personaDescriptiveTitle } from "./cockpitShared";
+import { fmtDomain } from "../runsShared";
 import { listGoalContexts } from "@/lib/api";
 import { usePersonaEval, type PersonaEvalRunPhase } from "@/lib/usePersonaEval";
 import type {
@@ -249,7 +250,7 @@ function ChatbotEvalCockpit({
     return knob?.options ?? [];
   }, [options]);
   const appName = APP_NAME[applicationId] ?? applicationOptions.find((o) => o.value === applicationId)?.label ?? "The app";
-  const runContext = `${appName}${applicationId === "recai" ? ` · ${domain}` : ""}`;
+  const runContext = `${appName}${applicationId === "recai" ? ` · ${fmtDomain(domain)}` : ""}`;
 
   // --- Actions ------------------------------------------------------------
   const handleRun = useCallback(() => {
@@ -643,7 +644,7 @@ function TargetPersonaPanel({ persona, onChange }: { persona: PersonaEvalPersona
           </div>
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="min-w-0 max-w-full truncate font-display text-[16px] font-semibold text-text-main">{title}</span>
+              <span className="min-w-0 break-words font-display text-[16px] font-semibold text-text-main">{title}</span>
               {persona.source && (
                 <span className="hud rounded border border-secondary/30 bg-secondary/10 px-1.5 py-0.5 text-[8px] text-secondary">
                   {persona.source}

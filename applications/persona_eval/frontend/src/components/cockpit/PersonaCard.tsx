@@ -94,6 +94,7 @@ function PersonaCardInner({ persona, selected, onSelect }: PersonaCardProps) {
 
       {/* Role / occupation heading. */}
       <h3
+        title={heading}
         className={`truncate font-display text-[14px] font-semibold ${
           selected ? "text-primary" : "text-text-main"
         }`}

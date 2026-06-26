@@ -42,6 +42,7 @@ import {
   personaCodename,
   personaDescriptiveTitle,
 } from "./cockpitShared";
+import { fmtDomain } from "../runsShared";
 import type { PersonaEvalTaskType } from "./TaskTypeSwitch";
 
 export interface WebEvalCockpitProps {
@@ -502,7 +503,7 @@ function WebPipeline({
       title: task ? `${task.title} · ${task.siteUrl}` : "Website host",
     },
     { key: "trace", label: "Trace", icon: "route", tone: traceTone },
-    { key: "evaluation", label: "Evaluation", sub: "objective_result", icon: "rate_review", tone: evalTone },
+    { key: "evaluation", label: "Evaluation", sub: "Objective result", icon: "rate_review", tone: evalTone },
   ];
 
   return (
@@ -639,7 +640,7 @@ function WebsiteTaskCard({ task }: { task: WebEvalTask }) {
           <p className="mt-0.5 text-[11px] text-text-variant">This is the goal the simulated visitor will try to complete.</p>
         </div>
         <span
-          title="Site"
+          title={task.siteName}
           className="hud shrink-0 truncate rounded border border-outline px-1.5 py-0.5 text-[8px] text-text-dim"
         >
           {task.siteName}
@@ -701,9 +702,9 @@ function WebResults({
   return (
     <section className="space-y-5">
       {/* Run identity line */}
-      <div className="hud flex items-center gap-2 text-[9px] text-text-variant">
+      <div className="hud flex items-start gap-2 text-[9px] text-text-variant">
         <Sym name="language" size={16} className="shrink-0 text-primary" />
-        <span className="min-w-0 truncate">Run · {headerBits.join(" · ")}</span>
+        <span className="min-w-0 break-words">Run · {headerBits.join(" · ")}</span>
       </div>
 
       {/* Live "browsing" banner */}
@@ -953,7 +954,7 @@ function DriverArtifactsNote() {
       <div className="flex flex-wrap gap-1.5">
         {["trajectory", "application_result", "objective_result"].map((name) => (
           <span key={name} className="rounded border border-outline px-2 py-0.5 font-mono text-[10px] text-text-variant">
-            {name}
+            {fmtDomain(name)}
           </span>
         ))}
       </div>

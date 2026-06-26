@@ -30,6 +30,7 @@ import { Sym } from "@/components/cockpit/cockpitShared";
 import { PersonaEvalCockpit } from "@/components/cockpit/PersonaEvalCockpit";
 import { RunsView } from "@/components/RunsView";
 import { AppFooter } from "@/components/AppFooter";
+import { fmtDomain } from "@/components/runsShared";
 
 import { api, sessionExportUrl } from "@/lib/api";
 import { sessionKeys, useTurnJob } from "@/lib/useTurnJob";
@@ -79,7 +80,7 @@ function appLabel(id: ApplicationId | undefined): string {
     case "finance_openbb":
       return "OpenBB";
     case "medical_assistant":
-      return "Medical";
+      return "Medical assistant";
     default:
       return "RecAI";
   }
@@ -327,8 +328,8 @@ export default function App() {
     : null;
   const headerTitle = session?.title ?? "New session";
   // Honest footer context per surface (real config values, no fabrication).
-  const chatFooterContext = `chatbot · ${appLabel(config?.applicationId)} · ${config?.domain ?? "movie"}`;
-  const pevalFooterContext = `chatbot · RecAI · ${pevalDomain}`;
+  const chatFooterContext = `chatbot · ${appLabel(config?.applicationId)} · ${fmtDomain(config?.domain ?? "movie")}`;
+  const pevalFooterContext = `chatbot · RecAI · ${fmtDomain(pevalDomain)}`;
   // The index the inspector/thread actually highlight: the pinned turn from the
   // URL, or — when following latest (no pin) — the most recent turn.
   const focusedTurnIndex =
@@ -437,7 +438,7 @@ export default function App() {
         {/* Centre — manual conversation. */}
         <main className="flex min-h-0 min-w-0 flex-1 flex-col bg-surface-dim">
           <div className="flex flex-shrink-0 items-center gap-2.5 border-b border-outline bg-surface-lowest px-5 py-3">
-            <span className="min-w-0 truncate text-[14px] font-semibold text-text-main">{headerTitle}</span>
+            <span className="min-w-0 truncate text-[14px] font-semibold text-text-main" title={headerTitle}>{headerTitle}</span>
             <span
               className="flex-none text-[12px] text-text-variant"
               title="You type as the user; RecAI replies. No persona is simulated here."

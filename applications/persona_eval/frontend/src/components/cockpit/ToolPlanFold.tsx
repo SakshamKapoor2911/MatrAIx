@@ -87,11 +87,11 @@ export function ToolPlanFold({ plan, items, nativeRaw, open, onToggle }: ToolPla
               <p className="mb-2 hud text-[10px] text-text-dim">Steps the app took</p>
               <ol className="space-y-1.5">
                 {plan.map((step, i) => (
-                  <li key={i} className="flex items-center gap-2 font-mono text-[11px] text-text-variant">
-                    <span className="w-4 font-mono text-[11px] text-text-dim">{i + 1}</span>
-                    <Sym name={iconForTool(step.tool)} size={15} className="text-primary" />
+                  <li key={i} className="flex items-start gap-2 font-mono text-[11px] text-text-variant">
+                    <span className="w-4 shrink-0 font-mono text-[11px] text-text-dim">{i + 1}</span>
+                    <Sym name={iconForTool(step.tool)} size={15} className="shrink-0 text-primary" />
                     <span className="shrink-0 font-medium">{step.tool}</span>
-                    {step.detail && <span className="min-w-0 truncate text-text-variant">{step.detail}</span>}
+                    {step.detail && <span className="min-w-0 break-words text-text-variant">{step.detail}</span>}
                   </li>
                 ))}
               </ol>
@@ -105,8 +105,8 @@ export function ToolPlanFold({ plan, items, nativeRaw, open, onToggle }: ToolPla
               </p>
               <div className="space-y-1 font-mono text-[11px] text-text-variant">
                 {scored.map((item) => (
-                  <div key={`${item.itemId}-${item.rank}`} className="flex items-center justify-between gap-3">
-                    <span className="min-w-0 truncate">
+                  <div key={`${item.itemId}-${item.rank}`} className="flex items-start justify-between gap-3">
+                    <span className="min-w-0 break-words">
                       {item.itemId}
                       {item.title ? ` · ${item.title}` : ""}
                     </span>

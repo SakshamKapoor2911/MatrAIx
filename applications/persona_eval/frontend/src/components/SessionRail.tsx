@@ -11,6 +11,7 @@
  * the top nav / ⌘K, so the rail stays focused on sessions.
  */
 import { FOCUS_RING, Sym } from "./cockpit/cockpitShared";
+import { fmtDomain } from "./runsShared";
 import type { SessionSummary } from "@/lib/types";
 
 /** Compact relative age for a session's `createdAt` ("2m ago", "yesterday"). */
@@ -34,7 +35,7 @@ function relativeAge(iso: string | undefined): string {
 /** Compose the rail sub-line: `{domain} · {n} turns · {age}` (honest fields only). */
 function subLine(s: SessionSummary): string {
   const parts: string[] = [];
-  if (s.config?.domain) parts.push(s.config.domain);
+  if (s.config?.domain) parts.push(fmtDomain(s.config.domain));
   parts.push(`${s.turnCount} turn${s.turnCount === 1 ? "" : "s"}`);
   const age = relativeAge(s.createdAt);
   if (age) parts.push(age);
@@ -140,15 +141,16 @@ export function SessionRail({
                 >
                   <div
                     className={`truncate text-[13px] ${active ? "font-medium text-text-main" : "text-text-variant"}`}
+                    title={s.title || "Untitled chat"}
                   >
                     {s.title || "Untitled chat"}
                   </div>
                   <div
-                    className="hud mt-1 flex items-center gap-1.5 text-[9px] text-text-dim"
+                    className="hud mt-1 flex items-start gap-1.5 text-[9px] text-text-dim"
                     title={`Ranker: ${s.config?.rankerMode ?? "—"} · Model: ${s.config?.engine ?? "—"} — change these in the bar above`}
                   >
-                    {active && <span className="h-1.5 w-1.5 flex-none rounded-full bg-secondary" aria-hidden />}
-                    <span className="min-w-0 truncate">{subLine(s)}</span>
+                    {active && <span className="mt-px h-1.5 w-1.5 flex-none rounded-full bg-secondary" aria-hidden />}
+                    <span className="min-w-0 break-words">{subLine(s)}</span>
                   </div>
                 </button>
               );

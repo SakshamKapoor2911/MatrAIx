@@ -140,7 +140,7 @@ export function PersonaDrawer({ open, onClose, persona, context, onUse }: Person
               </div>
               <div className="min-w-0">
                 <div className="hud mb-1.5 text-[9px] text-text-dim">Persona</div>
-                <h2 className="truncate font-display text-[18px] font-bold leading-none tracking-tight text-text-main">
+                <h2 title={title} className="truncate font-display text-[18px] font-bold leading-none tracking-tight text-text-main">
                   {title}
                 </h2>
                 <div className="mt-2 flex min-w-0 items-center gap-2">
@@ -187,11 +187,11 @@ export function PersonaDrawer({ open, onClose, persona, context, onUse }: Person
                 {demographics.length > 0 ? (
                   <div className="space-y-2.5 text-[12px]">
                     {demographics.map((d) => (
-                      <div key={d.key} className="flex items-center justify-between gap-3">
+                      <div key={d.key} className="flex items-start justify-between gap-3">
                         <span className="hud flex-none text-[9px] text-text-dim">
                           {humanizeToken(d.key)}
                         </span>
-                        <span className="min-w-0 truncate text-right font-mono text-text-variant" title={d.full}>
+                        <span className="min-w-0 break-words text-right font-mono text-text-variant" title={d.full}>
                           {d.full}
                         </span>
                       </div>

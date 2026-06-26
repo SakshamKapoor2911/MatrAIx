@@ -112,7 +112,7 @@ export function ComponentPipeline({
       owner: environment?.applicationApi ?? "chatbot-api sidecar",
       ...chatbotStatus(phase, raw, turnCount),
     },
-    { key: "scorer", label: "Scorer", icon: "fact_check", owner: "self-report", ...scorerStatus(phase, raw, hasQuestionnaire) },
+    { key: "scorer", label: "Scorer", icon: "fact_check", owner: "Self-report scorer", ...scorerStatus(phase, raw, hasQuestionnaire) },
   ];
 
   if (variant === "live") {

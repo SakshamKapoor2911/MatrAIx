@@ -89,6 +89,9 @@ export function ConfigBar({ config, options, disabled, onChange }: ConfigBarProp
         const key = knob.key as keyof SessionConfig;
         const value = config[key];
         if (value === undefined) return null;
+        // Domain is a RecAI-only concept — the other chatbot apps (OpenBB,
+        // Medical) have no domains, so don't show a Domain knob for them.
+        if (knob.key === "domain" && config.applicationId !== "recai") return null;
         const knobOptions: KnobOption[] = knob.options.map((o) => ({
           value: o.value,
           label: o.label,

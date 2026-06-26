@@ -90,7 +90,7 @@ export function PersonaPanel({ persona, context, onOpenRaw }: PersonaPanelProps)
         <p className="mt-1 text-center text-[13px] text-text-variant">{persona.source || "Persona"}</p>
         <p className="mt-1 flex max-w-full items-center gap-1 text-[13px] text-text-variant">
           <Sym name="badge" size={14} className="shrink-0" />
-          <span className="min-w-0 truncate font-mono text-[11px]">{codename}</span>
+          <span className="min-w-0 truncate font-mono text-[11px]" title={codename}>{codename}</span>
         </p>
       </div>
 

@@ -49,7 +49,7 @@ export function AppFooter({ context }: AppFooterProps) {
         <div className="hud flex min-w-0 items-center gap-3 text-[9px]">
           <span className="flex-none text-text-variant">PersonaEval</span>
           <span className="flex-none text-outline">·</span>
-          <span className="min-w-0 truncate">{context}</span>
+          <span className="min-w-0 truncate" title={context}>{context}</span>
         </div>
         <div
           className="hud flex flex-shrink-0 items-center gap-2 text-[9px] text-text-variant"

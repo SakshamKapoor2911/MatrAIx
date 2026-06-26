@@ -135,6 +135,10 @@ _BUNDLE_REFERENCED_KEYS = (
 #: bundle is the source of truth for every selectable domain.
 _BUNDLE_DOMAINS = ("movie", "beauty_product", "game")
 
+#: Friendly display labels for the resource domains, so the checklist never shows
+#: a raw token like "beauty_product".
+_DOMAIN_LABELS = {"movie": "Movies", "beauty_product": "Beauty products", "game": "Games"}
+
 
 def preflight_checks(catalog: Any) -> List[Dict[str, Any]]:
     """Compute the user-facing, interface-aware readiness checklist.
@@ -261,24 +265,25 @@ def _recai_resources_check(interecagent_root: str) -> Dict[str, Any]:
     a single plain-language line — the per-domain status lives in ``detail`` —
     instead of one row per domain.
     """
+    def _label(domain: str) -> str:
+        return _DOMAIN_LABELS.get(domain, domain.replace("_", " ").capitalize())
+
     installed: List[str] = []
     missing: List[str] = []
     for domain in _BUNDLE_DOMAINS:
         if _bundle_check(interecagent_root, domain)["ok"]:
-            installed.append(domain)
+            installed.append(_label(domain))
         else:
-            missing.append(domain)
+            missing.append(_label(domain))
     if not missing:
         ok = True
-        detail = "Native resource bundles installed ({}).".format(", ".join(_BUNDLE_DOMAINS))
+        detail = "Resource bundles installed for {}.".format(", ".join(installed))
     elif installed:
         ok = False
-        detail = "Installed: {}. Missing: {}.".format(
-            ", ".join(installed), ", ".join(missing)
-        )
+        detail = "Installed: {}. Missing: {}.".format(", ".join(installed), ", ".join(missing))
     else:
         ok = False
-        detail = "Native resource bundles not installed ({}).".format(", ".join(missing))
+        detail = "Resource bundles not installed for {}.".format(", ".join(missing))
     return {"group": "Chatbot", "name": "RecAI resources", "ok": ok, "detail": detail}
 
 

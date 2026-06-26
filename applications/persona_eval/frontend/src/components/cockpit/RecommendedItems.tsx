@@ -34,10 +34,10 @@ export function RecommendedItems({ items }: RecommendedItemsProps) {
                 Best match
               </div>
             )}
-            <div className="mb-1 flex items-center gap-2">
-              <span className="font-mono text-[10px] font-bold text-primary">{String(item.rank).padStart(2, "0")}</span>
+            <div className="mb-1 flex items-start gap-2">
+              <span className="shrink-0 font-mono text-[10px] font-bold text-primary">{String(item.rank).padStart(2, "0")}</span>
               <span
-                className={`truncate text-[12px] font-semibold text-text-main ${isBest ? "pr-12" : ""}`}
+                className={`min-w-0 break-words text-[12px] font-semibold text-text-main ${isBest ? "pr-12" : ""}`}
                 title={title}
               >
                 {title}

@@ -270,7 +270,10 @@ export function GroundingChip({
 /** A compact recommended-item chip (mono id + title) for trajectories. */
 export function RecChip({ item }: { item: RunRecItem }) {
   return (
-    <span className="inline-flex max-w-full items-center gap-1.5 rounded border border-outline bg-surface-low px-2 py-1 text-[11px]">
+    <span
+      className="inline-flex max-w-full items-center gap-1.5 rounded border border-outline bg-surface-low px-2 py-1 text-[11px]"
+      title={item.title ?? undefined}
+    >
       <span className="font-mono text-[10px] text-text-dim">{item.id}</span>
       {item.title && <span className="truncate text-text-variant">{item.title}</span>}
     </span>

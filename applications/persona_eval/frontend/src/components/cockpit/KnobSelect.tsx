@@ -135,7 +135,7 @@ export function KnobSelect({
                 : "border-outline bg-field text-text-main hover:border-primary"
             }`}
           >
-            <span className="min-w-0 truncate">{currentLabel}</span>
+            <span className="min-w-0 truncate" title={currentLabel}>{currentLabel}</span>
             <Sym
               name="expand_more"
               size={16}
@@ -249,7 +249,10 @@ function Listbox({
             className={`cursor-pointer rounded-md px-2.5 py-2 transition-colors ${isActive ? "bg-surface-high" : ""}`}
           >
             <div className="flex items-center justify-between gap-2">
-              <span className={`min-w-0 truncate text-[13px] font-medium ${isSelected ? "text-primary" : "text-text-main"}`}>
+              <span
+                title={opt.label}
+                className={`min-w-0 truncate text-[13px] font-medium ${isSelected ? "text-primary" : "text-text-main"}`}
+              >
                 {opt.label}
               </span>
               {isSelected && <Sym name="check" size={16} className="shrink-0 text-primary" />}

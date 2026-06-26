@@ -34,6 +34,17 @@ const APP_ENVIRONMENT: Record<ApplicationId, { selection: string; agent: string;
   medical_assistant: { selection: "Clinical retrieval", agent: "Medical assistant agent", resources: "Medical knowledge base" },
 };
 
+/**
+ * Friendly display labels for the few raw stack tokens the environment block can
+ * carry (translate DISPLAY ONLY — the underlying token/value is never changed).
+ * Unknown values pass through untouched, so already-friendly labels stay as-is.
+ */
+const FRIENDLY_ENV: Record<string, string> = {
+  recai_resources: "RecAI resource bundle",
+  "self-report": "Self-report scorer",
+};
+const friendlyEnv = (value: string): string => FRIENDLY_ENV[value] ?? value;
+
 export interface EnvironmentPanelProps {
   environment: ConfigEnvironment | null;
   /** Selected adapter — picks the per-app Selection / Agent / Resources facts. */
@@ -43,9 +54,9 @@ export interface EnvironmentPanelProps {
 /** One label/value row of the read-only Harbor panel. */
 function EnvRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex items-center justify-between gap-2">
-      <span className="hud text-[9px] text-text-dim">{label}</span>
-      <span className="max-w-[160px] truncate font-mono text-[11px] text-text-variant">{value}</span>
+    <div className="flex items-start justify-between gap-2">
+      <span className="hud shrink-0 text-[9px] text-text-dim">{label}</span>
+      <span className="min-w-0 break-words text-right font-mono text-[11px] text-text-variant">{friendlyEnv(value)}</span>
     </div>
   );
 }
@@ -159,7 +170,7 @@ export function EnvironmentPopover({ environment }: EnvironmentPopoverProps) {
         className={`flex items-center gap-1.5 rounded border border-outline bg-surface-low px-3 py-1.5 text-[13px] font-medium text-text-variant transition ease-out hover:border-primary hover:text-text-main active:scale-[0.98] ${FOCUS_RING}`}
       >
         <Sym name="hub" size={16} className="shrink-0 text-text-dim" />
-        <span className="min-w-0 truncate">{runtime}</span>
+        <span className="min-w-0 truncate" title={runtime}>{runtime}</span>
         <Sym name={open ? "expand_less" : "expand_more"} size={16} className="shrink-0 text-text-dim" />
       </button>
 
@@ -184,12 +195,12 @@ export function EnvironmentPopover({ environment }: EnvironmentPopoverProps) {
           </div>
           <div className="space-y-2">
             {runtimeRows.map((r) => (
-              <div key={r.label} className="flex items-center justify-between gap-3">
-                <span className="hud text-[9px] text-text-dim" title={ROW_TOOLTIPS[r.label]}>
+              <div key={r.label} className="flex items-start justify-between gap-3">
+                <span className="hud shrink-0 text-[9px] text-text-dim" title={ROW_TOOLTIPS[r.label]}>
                   {r.label}
                 </span>
-                <span className="truncate font-mono text-[11px] text-text-variant">
-                  {r.value}
+                <span className="min-w-0 break-words text-right font-mono text-[11px] text-text-variant">
+                  {friendlyEnv(r.value)}
                 </span>
               </div>
             ))}
@@ -201,12 +212,12 @@ export function EnvironmentPopover({ environment }: EnvironmentPopoverProps) {
             </p>
             <div className="space-y-2">
               {stackRows.map((r) => (
-                <div key={r.label} className="flex items-center justify-between gap-3">
-                  <span className="hud text-[9px] text-text-dim" title={ROW_TOOLTIPS[r.label]}>
+                <div key={r.label} className="flex items-start justify-between gap-3">
+                  <span className="hud shrink-0 text-[9px] text-text-dim" title={ROW_TOOLTIPS[r.label]}>
                     {r.label}
                   </span>
-                  <span className="truncate font-mono text-[11px] text-text-variant">
-                    {r.value}
+                  <span className="min-w-0 break-words text-right font-mono text-[11px] text-text-variant">
+                    {friendlyEnv(r.value)}
                   </span>
                 </div>
               ))}

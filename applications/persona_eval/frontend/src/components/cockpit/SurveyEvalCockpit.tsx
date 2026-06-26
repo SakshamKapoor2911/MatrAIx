@@ -38,11 +38,13 @@ import { PromptPanel } from "./PromptPanel";
 import {
   FOCUS_RING,
   Sym,
+  humanizeToken,
   parseDemographics,
   parseDemographicsFromBlurb,
   personaCodename,
   personaDescriptiveTitle,
 } from "./cockpitShared";
+import { fmtDomain } from "../runsShared";
 import type { PersonaEvalTaskType } from "./TaskTypeSwitch";
 
 export interface SurveyEvalCockpitProps {
@@ -454,12 +456,12 @@ function SurveyPipeline({
     {
       key: "survey",
       label: "Survey",
-      sub: "survey_form driver",
+      sub: "Survey form driver",
       icon: "fact_check",
       tone: surveyTone,
-      title: instrument ? `${instrument.title} · ${instrument.questions.length} questions` : "survey_form",
+      title: instrument ? `${instrument.title} · ${instrument.questions.length} questions` : "Survey form",
     },
-    { key: "artifact", label: "Artifact", sub: "survey_result", icon: "description", tone: artifactTone },
+    { key: "artifact", label: "Artifact", sub: "Survey result", icon: "description", tone: artifactTone },
   ];
 
   return (
@@ -605,7 +607,7 @@ function InstrumentPreview({ instrument }: { instrument: SurveyInstrument }) {
           return (
             <div
               key={question.id}
-              className="flex items-center gap-3 rounded border border-outline bg-surface-low px-3 py-2.5"
+              className="flex items-start gap-3 rounded border border-outline bg-surface-low px-3 py-2.5"
             >
               <span
                 title={meta.tooltip}
@@ -613,7 +615,7 @@ function InstrumentPreview({ instrument }: { instrument: SurveyInstrument }) {
               >
                 {meta.label}
               </span>
-              <span className="min-w-0 flex-1 truncate text-[12px] text-text-variant">{question.prompt}</span>
+              <span className="min-w-0 flex-1 break-words text-[12px] text-text-variant">{question.prompt}</span>
             </div>
           );
         })}
@@ -666,8 +668,8 @@ function SurveyLive({
       {/* Header */}
       <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-start">
         <div className="min-w-0">
-          <div className="hud mb-2 truncate text-[10px] text-primary">
-            Survey · {activeInstrument?.id ?? activeInstrument?.title ?? "questionnaire"}
+          <div className="hud mb-2 break-words text-[10px] text-primary">
+            Survey · {humanizeToken(activeInstrument?.id ?? activeInstrument?.title ?? "questionnaire")}
           </div>
           <h2 className="font-display text-[22px] font-bold tracking-tight text-text-main">
             {running ? "Persona is answering" : failed ? "The questionnaire didn’t finish" : "Completed questionnaire"}
@@ -685,7 +687,7 @@ function SurveyLive({
               <Sym name="person" fill={1} size={16} className="text-primary" />
             </div>
             <div className="min-w-0">
-              <div className="truncate text-[12px] font-semibold leading-tight text-text-main">{personaTitle}</div>
+              <div className="truncate text-[12px] font-semibold leading-tight text-text-main" title={personaTitle}>{personaTitle}</div>
               <div className="hud mt-1 whitespace-nowrap text-[8px] text-text-dim">
                 {[persona.source, personaCode].filter(Boolean).join(" · ")}
               </div>
@@ -942,7 +944,10 @@ function TrajectoryFold({ events }: { events: SurveyTrajectoryEvent[] }) {
           {events.map((event, index) => (
             <div key={`${event.timestamp}-${index}`} className="px-4 py-2.5">
               <div className="flex items-center justify-between gap-2">
-                <span className="truncate text-[12px] font-medium text-text-main">
+                <span
+                  className="truncate text-[12px] font-medium text-text-main"
+                  title={`${trajectoryActor(event.actor)} · ${event.action}`}
+                >
                   {trajectoryActor(event.actor)} · {event.action}
                 </span>
                 <span className="shrink-0 font-mono text-[11px] text-text-dim">{event.timestamp}</span>
@@ -966,7 +971,7 @@ function DriverArtifactsNote() {
         <h3 className="hud flex items-center gap-1.5 text-[10px] text-text-dim">
           <Sym name="fact_check" size={14} /> Driver &amp; artifacts
         </h3>
-        <span className="hud rounded border border-outline px-1.5 py-0.5 text-[8px] text-text-dim">survey_form</span>
+        <span className="hud rounded border border-outline px-1.5 py-0.5 text-[8px] text-text-dim">Survey form</span>
       </div>
       <p className="mb-3 text-[12px] leading-relaxed text-text-variant">
         No fixed application stack — the persona fills the questionnaire directly.
@@ -975,7 +980,7 @@ function DriverArtifactsNote() {
       <div className="flex flex-wrap gap-1.5">
         {["survey_result", "answers", "trajectory", "metrics"].map((name) => (
           <span key={name} className="rounded border border-outline px-2 py-0.5 font-mono text-[10px] text-text-variant">
-            {name}
+            {fmtDomain(name)}
           </span>
         ))}
       </div>

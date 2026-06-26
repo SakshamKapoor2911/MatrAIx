@@ -281,7 +281,10 @@ function RunsTable({ runs, comparing, picks, onOpen, onTogglePick }: RunsTablePr
 
                 {/* Persona + source */}
                 <span className="flex min-w-0 items-center gap-2">
-                  <span className="truncate text-[13px] font-medium text-text-main">
+                  <span
+                    className="truncate text-[13px] font-medium text-text-main"
+                    title={run.personaName ?? "Unnamed persona"}
+                  >
                     {run.personaName ?? "Unnamed persona"}
                   </span>
                   <SourceTag source={run.source} />

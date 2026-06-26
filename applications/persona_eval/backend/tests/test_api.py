@@ -88,10 +88,11 @@ def test_preflight_validates_real_resource_bundle(client):
     body = client.get("/api/preflight").json()
     res = next(c for c in body["checks"] if c["name"] == "RecAI resources")
     assert res["group"] == "Chatbot"
-    # Collapsed across every supported domain (movie / beauty_product / game),
-    # which are named in the plain-language detail.
-    for domain in ("movie", "beauty_product", "game"):
-        assert domain in res["detail"]
+    # Collapsed across every supported domain, named in FRIENDLY form in the
+    # plain-language detail (no raw tokens like "beauty_product").
+    for label in ("Movies", "Beauty products", "Games"):
+        assert label in res["detail"]
+    assert "beauty_product" not in res["detail"]
 
 
 def test_config_options(client):

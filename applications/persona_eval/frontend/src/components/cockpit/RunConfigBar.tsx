@@ -17,6 +17,7 @@ import { useId } from "react";
 
 import { KnobSelect, type KnobOption } from "./KnobSelect";
 import { FOCUS_RING, Sym } from "./cockpitShared";
+import { fmtDomain } from "../runsShared";
 import type { ApplicationId, ConfigKnob, Domain, GoalContext } from "@/lib/types";
 
 /** Min/max for the max-turns slider (mirrors the backend's accepted range). */
@@ -77,7 +78,8 @@ export function RunConfigBar({
 
   const engineOptions = optionsFor(knobs, "engine");
   const personaModelOptions = optionsFor(knobs, "personaModel");
-  const domainOptions = applicationId === "recai" ? optionsFor(knobs, "domain") : [];
+  const domainOptions =
+    applicationId === "recai" ? optionsFor(knobs, "domain").map((o) => ({ ...o, label: fmtDomain(o.label) })) : [];
   const styleOptions: KnobOption[] = goalContexts.map((g) => ({
     value: g.id,
     label: g.label,
