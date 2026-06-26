@@ -47,6 +47,7 @@ def test_local_survey_runner_returns_result_and_prompts(monkeypatch):
     instrument = SurveyInstrument(
         id="survey1",
         title="Survey",
+        description="A survey about a concrete feature.",
         questions=[SurveyQuestion(id="fit", prompt="This fits me.")],
     )
 
@@ -62,6 +63,38 @@ def test_local_survey_runner_returns_result_and_prompts(monkeypatch):
     assert result.metrics.num_answered == 1
     assert result.prompts["personaPrompt"]
     assert result.prompts["taskPrompt"]
+    assert "Survey: A survey about a concrete feature." in result.prompts["taskPrompt"]
+    assert [event.action for event in result.trajectory] == [
+        "survey_started",
+        "ask_question",
+        "answer_question",
+        "survey_completed",
+    ]
+    assert [event.actor for event in result.trajectory] == [
+        "system",
+        "assistant",
+        "user",
+        "system",
+    ]
+    assert result.trajectory[1].context == {
+        "instrumentId": "survey1",
+        "questionId": "fit",
+        "questionIndex": 1,
+        "questionType": "likert",
+        "construct": "",
+    }
+    assert result.trajectory[1].outcome["prompt"] == "This fits me."
+    assert result.trajectory[2].outcome == {
+        "questionId": "fit",
+        "value": 5,
+        "rationale": "It fits the persona's needs.",
+        "confidence": 0.9,
+    }
+    assert result.trajectory[-1].outcome == {
+        "numAnswered": 1,
+        "missingRequiredQuestionIds": [],
+        "valid": True,
+    }
     assert client.calls
 
 

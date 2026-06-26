@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from datetime import datetime, timedelta, timezone
 from typing import Any, Callable, Dict, List, Optional
 
 from backend.service.survey_types import (
@@ -45,11 +46,11 @@ def build_survey_task_prompt(
     )
     return "\n".join(
         [
-            "You are completing a product concept survey.",
-            "Read the product context and answer each survey question as the assigned persona.",
+            "You are completing a market research survey.",
+            "Read the survey context and answer each question as the assigned persona.",
             "",
-            "Product concept:",
-            "PersonaEval helps teams evaluate interactive applications by running simulated users with specified personas.",
+            "Survey context:",
+            "{}: {}".format(instrument.title, instrument.description),
             "",
             "Survey instrument JSON:",
             json.dumps(instrument.to_dict(), ensure_ascii=False, indent=2),
@@ -95,15 +96,7 @@ class LocalSurveyEvalRunner:
         raw = client.complete_json(prompts["personaPrompt"], task_prompt)
         answers = _normalize_answers(raw.get("answers"), instrument)
         metrics = _metrics(answers, instrument)
-        trajectory = [
-            TrajectoryEvent(
-                timestamp=created_at,
-                actor="persona",
-                action="survey_submitted",
-                context={"instrumentId": instrument.id},
-                outcome={"numAnswered": metrics.num_answered},
-            )
-        ]
+        trajectory = _build_trajectory(instrument, answers, created_at)
         result = SurveyEvalResult(
             config=config,
             persona=persona,
@@ -116,6 +109,99 @@ class LocalSurveyEvalRunner:
         )
         emit({"type": "done", "result": result.to_dict()})
         return result
+
+
+def _event_timestamp(created_at: str, offset_seconds: int) -> str:
+    try:
+        base = datetime.fromisoformat(created_at.replace("Z", "+00:00"))
+    except ValueError:
+        return created_at
+    return (
+        base.astimezone(timezone.utc) + timedelta(seconds=offset_seconds)
+    ).isoformat().replace("+00:00", "Z")
+
+
+def _build_trajectory(
+    instrument: SurveyInstrument,
+    answers: List[SurveyAnswer],
+    created_at: str,
+) -> List[TrajectoryEvent]:
+    answer_by_id = {answer.question_id: answer for answer in answers}
+    missing_required = [
+        question.id
+        for question in instrument.questions
+        if question.required and question.id not in answer_by_id
+    ]
+    events = [
+        TrajectoryEvent(
+            timestamp=_event_timestamp(created_at, 0),
+            actor="system",
+            action="survey_started",
+            context={
+                "instrumentId": instrument.id,
+                "instrumentTitle": instrument.title,
+                "numQuestions": len(instrument.questions),
+            },
+            outcome={"status": "started"},
+        )
+    ]
+
+    offset = 1
+    for index, question in enumerate(instrument.questions, start=1):
+        question_context = {
+            "instrumentId": instrument.id,
+            "questionId": question.id,
+            "questionIndex": index,
+            "questionType": question.type,
+            "construct": question.construct,
+        }
+        events.append(
+            TrajectoryEvent(
+                timestamp=_event_timestamp(created_at, offset),
+                actor="assistant",
+                action="ask_question",
+                context=question_context,
+                outcome={
+                    "prompt": question.prompt,
+                    "options": list(question.options),
+                },
+            )
+        )
+        offset += 1
+
+        answer = answer_by_id.get(question.id)
+        if answer is None:
+            continue
+        events.append(
+            TrajectoryEvent(
+                timestamp=_event_timestamp(created_at, offset),
+                actor="user",
+                action="answer_question",
+                context=question_context,
+                outcome={
+                    "questionId": answer.question_id,
+                    "value": answer.value,
+                    "rationale": answer.rationale,
+                    "confidence": answer.confidence,
+                },
+            )
+        )
+        offset += 1
+
+    events.append(
+        TrajectoryEvent(
+            timestamp=_event_timestamp(created_at, offset),
+            actor="system",
+            action="survey_completed",
+            context={"instrumentId": instrument.id},
+            outcome={
+                "numAnswered": len(answers),
+                "missingRequiredQuestionIds": missing_required,
+                "valid": not missing_required,
+            },
+        )
+    )
+    return events
 
 
 def _normalize_answers(raw_answers: Any, instrument: SurveyInstrument) -> List[SurveyAnswer]:

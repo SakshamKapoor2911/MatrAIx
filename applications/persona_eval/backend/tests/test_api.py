@@ -75,6 +75,18 @@ def test_preflight_does_not_leak_env_var_names(client):
             assert token not in check["detail"]
 
 
+def test_interecagent_root_falls_back_to_task_app_path(monkeypatch):
+    from backend.api.app import _interecagent_root
+
+    monkeypatch.delenv("INTERECAGENT_ROOT", raising=False)
+    root = _interecagent_root().replace("\\", "/")
+    expected_suffix = (
+        "/applications/tasks/chatbot_chat_api/environment/chatbot_api/recai/InteRecAgent"
+    )
+    assert expected_suffix in root
+    assert "/application/tasks/" not in root
+
+
 def test_preflight_catalog_check_ok(client):
     # The app is built over the temp catalog, so that check should pass.
     body = client.get("/api/preflight").json()

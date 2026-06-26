@@ -145,6 +145,108 @@ def test_run_turn_sync_uses_in_process_bridge(catalog, config_manager, set_run_t
     assert view["assistantMessage"] == "in-process answer"
 
 
+def test_run_turn_sync_retries_retry_sentinel_before_state_mutation(
+    catalog, config_manager, set_run_turn
+):
+    from backend.tests.conftest import (
+        ChatMessage,
+        NativeAction,
+        RecBotTrace,
+        RecBotTurnResult,
+    )
+
+    calls = []
+
+    def flaky(request):
+        calls.append([dict(message) for message in request.messages])
+        if len(calls) == 1:
+            return RecBotTurnResult(
+                turn_id="bad",
+                assistant_message=ChatMessage(
+                    "assistant", "Something went wrong, please retry."
+                ),
+                native_action=NativeAction(
+                    raw="Action: RankingTool\nAction Input: []",
+                    raw_tool_plan=[{"tool": "Rank", "detail": "retry sentinel"}],
+                ),
+                trace=RecBotTrace(
+                    raw_tool_plan=[{"tool": "Rank", "detail": "retry sentinel"}],
+                    recommended_item_ids=[],
+                ),
+            )
+        return RecBotTurnResult(
+            turn_id="good",
+            assistant_message=ChatMessage("assistant", "Try these instead."),
+            trace=RecBotTrace(recommended_item_ids=[]),
+        )
+
+    set_run_turn(flaky)
+    session = RecBotSession(
+        id="ses_retry",
+        title="t",
+        config=config_manager.normalize(None),
+        catalog=catalog,
+        config_manager=config_manager,
+    )
+    view = session.run_turn_sync("recommend something")
+
+    assert len(calls) == 2
+    assert calls[0] == [{"role": "user", "content": "recommend something"}]
+    assert calls[1] == calls[0]
+    assert view["turnId"] == "good"
+    assert view["assistantMessage"] == "Try these instead."
+    assert [m["content"] for m in session.messages] == [
+        "recommend something",
+        "Try these instead.",
+    ]
+    assert len(session.turns) == 1
+
+
+def test_run_turn_sync_retries_likely_truncated_response(
+    catalog, config_manager, set_run_turn
+):
+    from backend.tests.conftest import ChatMessage, RecBotTrace, RecBotTurnResult
+
+    calls = []
+
+    def flaky(request):
+        calls.append(request)
+        if len(calls) == 1:
+            return RecBotTurnResult(
+                turn_id="truncated",
+                assistant_message=ChatMessage(
+                    "assistant",
+                    (
+                        "Here are a few films that match your request for "
+                        "contemporary intimate character studies with the"
+                    ),
+                ),
+                trace=RecBotTrace(recommended_item_ids=[]),
+            )
+        return RecBotTurnResult(
+            turn_id="complete",
+            assistant_message=ChatMessage(
+                "assistant", "Here are a few complete recommendations."
+            ),
+            trace=RecBotTrace(recommended_item_ids=[]),
+        )
+
+    set_run_turn(flaky)
+    session = RecBotSession(
+        id="ses_retry_truncated",
+        title="t",
+        config=config_manager.normalize(None),
+        catalog=catalog,
+        config_manager=config_manager,
+    )
+    view = session.run_turn_sync("recommend something recent")
+
+    assert len(calls) == 2
+    assert view["turnId"] == "complete"
+    assert view["assistantMessage"] == "Here are a few complete recommendations."
+    assert len(session.turns) == 1
+
+
 def test_session_to_dict_and_from_dict_roundtrip(catalog, config_manager):
     session = RecBotSession(
         id="ses_rt",

@@ -649,7 +649,7 @@ class StartSurveyEvalRequest(BaseModel):
     """Body for ``POST /api/survey-eval``."""
 
     personaId: str
-    instrumentId: str = "product_attitudes_v1"
+    instrumentId: str = "chatgpt_images_market_research_v1"
     personaModel: Optional[str] = None
 
     @field_validator("personaModel")

@@ -38,6 +38,30 @@ if TYPE_CHECKING:  # pragma: no cover - typing only, avoids spawning threads
 
 __all__ = ["ChatTurn", "RecBotSession", "SessionManager"]
 
+_AGENT_ERROR_PREFIX = "Something went wrong, please retry."
+_TURN_ATTEMPTS = 2
+_TRUNCATION_TAIL_WORDS = {
+    "a",
+    "an",
+    "and",
+    "as",
+    "at",
+    "because",
+    "but",
+    "by",
+    "for",
+    "from",
+    "in",
+    "into",
+    "of",
+    "on",
+    "or",
+    "that",
+    "the",
+    "to",
+    "with",
+}
+
 
 def _now_iso() -> str:
     """UTC timestamp in ISO-8601 with a trailing ``Z``."""
@@ -46,6 +70,29 @@ def _now_iso() -> str:
 
 def _new_id(prefix: str) -> str:
     return "{}_{}".format(prefix, uuid.uuid4().hex[:12])
+
+
+def _assistant_needs_retry(value: Any) -> bool:
+    """Return true for RecAI turns that should not enter chat history yet."""
+    if not isinstance(value, str):
+        return True
+    text = value.strip()
+    if not text or text.startswith(_AGENT_ERROR_PREFIX):
+        return True
+    return _looks_truncated(text)
+
+
+def _looks_truncated(text: str) -> bool:
+    """Heuristic for occasional RecAI/OpenAI responses cut off mid-sentence."""
+    stripped = text.strip()
+    if len(stripped) < 80:
+        return False
+    if stripped[-1] in ".?!)]}\"'":
+        return False
+    if stripped[-1] in ",;:":
+        return True
+    words = stripped.lower().split()
+    return bool(words and words[-1].strip(".,;:!?)]}\"'") in _TRUNCATION_TAIL_WORDS)
 
 
 @dataclass
@@ -270,16 +317,26 @@ class RecBotSession:
         #    run the turn in-process so this module stays importable without
         #    RecAI installed.
         request = self.build_request(user_message)
-        started = time.monotonic()
         from recbot.interecagent_bridge import run_turn  # lazy import
 
-        result = run_turn(request)
-        duration_seconds = round(time.monotonic() - started, 3)
+        turn_view: Dict[str, Any] = {}
+        total_duration_seconds = 0.0
+        for attempt in range(_TURN_ATTEMPTS):
+            started = time.monotonic()
+            result = run_turn(request)
+            total_duration_seconds += time.monotonic() - started
 
-        # 4) Build the UI view (TraceView normalizes result -> dict itself).
-        turn_view = TraceView.from_result(
-            result, self._catalog, duration_seconds=duration_seconds
-        )
+            # 4) Build the UI view (TraceView normalizes result -> dict itself).
+            turn_view = TraceView.from_result(
+                result,
+                self._catalog,
+                duration_seconds=round(total_duration_seconds, 3),
+            )
+            if (
+                attempt >= _TURN_ATTEMPTS - 1
+                or not _assistant_needs_retry(turn_view.get("assistantMessage"))
+            ):
+                break
 
         # 5) Update conversation state.
         assistant_text = turn_view.get("assistantMessage")

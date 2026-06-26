@@ -142,7 +142,7 @@ export function SurveyEvalCockpit({ options, taskType, onTaskTypeChange }: Surve
   const [personaModel, setPersonaModel] = useState<string>(
     options?.environment.personaModel ?? "anthropic/claude-haiku-4-5",
   );
-  const [instrumentId, setInstrumentId] = useState<string>("product_attitudes_v1");
+  const [instrumentId, setInstrumentId] = useState<string>("chatgpt_images_market_research_v1");
   const [catalogOpen, setCatalogOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [exportSnapshot, setExportSnapshot] = useState<{
@@ -923,7 +923,7 @@ function AnswerValue({ answer, question }: { answer: SurveyAnswer; question: Sur
   );
 }
 
-/** Collapsible step-by-step log. */
+/** Collapsible telemetry trajectory. */
 function TrajectoryFold({ events }: { events: SurveyTrajectoryEvent[] }) {
   const [open, setOpen] = useState(false);
   return (
@@ -934,7 +934,7 @@ function TrajectoryFold({ events }: { events: SurveyTrajectoryEvent[] }) {
         aria-expanded={open}
         className={`flex w-full items-center justify-between gap-2 border-b border-outline px-4 py-3 text-left transition-colors hover:bg-surface-low active:bg-surface-high ${FOCUS_RING}`}
       >
-        <span className="hud text-[10px] text-text-dim">Step-by-step log</span>
+        <span className="hud text-[10px] text-text-dim">Trajectory</span>
         <span className="flex items-center gap-2">
           <span className="hud text-[9px] text-text-dim">{events.length} events</span>
           <Sym name={open ? "expand_more" : "chevron_right"} size={18} className="text-text-dim" />

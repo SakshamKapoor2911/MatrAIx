@@ -307,7 +307,7 @@ def _interecagent_root() -> str:
     repo_root = os.path.abspath(os.path.join(os.path.dirname(here), "..", "..", "..", ".."))
     return os.path.join(
         repo_root,
-        "application",
+        "applications",
         "tasks",
         "chatbot_chat_api",
         "environment",
