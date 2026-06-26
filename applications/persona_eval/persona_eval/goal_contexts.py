@@ -7,28 +7,13 @@ _SCENARIO_DEFAULT = """You are a real user of a {domain} recommendation system.
 
 {sut_description}
 
-Your assigned persona — stay in character at all times:
+Your assigned persona (stay in character at all times):
 {persona_context}
 
 Based on your assigned persona, first decide what kind of products/items you \
 realistically want from this {domain} recommender and what constraints and \
 preferences matter most to you. Then behave like a genuine human user:
-- Do NOT reveal everything at once — share your needs gradually, as a real person \
-would, and answer the agent's follow-up questions naturally.
-- React to the agent's recommendations: if they fit your needs, say so; if not, \
-push back or refine.
-- Keep messages short and conversational (1-3 sentences)."""
-
-_GRADUAL_REVEAL = """You are role-playing a real user of a {domain} recommendation system.
-
-{sut_description}
-
-Your persona — stay in character at all times:
-{persona_context}
-
-Behave like a realistic human user:
-- Decide what you realistically want and which constraints matter most to you.
-- Do NOT reveal everything at once — share preferences gradually, as a real person \
+- Do NOT reveal everything at once: share your needs gradually, as a real person \
 would, and answer the agent's follow-up questions naturally.
 - React to the agent's recommendations: if they fit your needs, say so; if not, \
 push back or refine.
@@ -51,19 +36,16 @@ class GoalContext:
         }
 
 
+# One realistic-scenario context today. This is kept as a registry on purpose, so
+# specific scenarios (for example, steering a movie persona toward a scary film)
+# can be added later without touching the API route or the UI.
 _REGISTRY: Dict[str, GoalContext] = {
     "scenario_default": GoalContext(
         id="scenario_default",
         label="Realistic scenario",
-        description="Persona derives a realistic per-domain need or goal and "
-        "reveals relevant details gradually.",
+        description="The persona settles on a realistic need for the domain and "
+        "reveals it gradually, the way a real user would.",
         template=_SCENARIO_DEFAULT,
-    ),
-    "gradual_reveal": GoalContext(
-        id="gradual_reveal",
-        label="Gradual reveal",
-        description="Classic gradual-reveal user simulator prompt.",
-        template=_GRADUAL_REVEAL,
     ),
 }
 

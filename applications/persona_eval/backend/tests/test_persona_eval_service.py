@@ -206,11 +206,12 @@ def test_goal_context_id_defaults_and_reaches_factory(tmp_path):
 def test_goal_context_id_passes_through(tmp_path):
     record = []
     svc = _service(record, runs_dir=tmp_path)
-    job_id = svc.start("game", "game-x", 6, "gradual_reveal", now=lambda: "t")
+    # Any id forwards through the service unchanged (the registry can grow later).
+    job_id = svc.start("game", "game-x", 6, "future_scenario", now=lambda: "t")
     view = _wait_done(svc, job_id)
     assert view["status"] == "done"
-    assert view["goalContextId"] == "gradual_reveal"
-    assert record == [("gpt-4o-mini", "gradual_reveal", "game")]
+    assert view["goalContextId"] == "future_scenario"
+    assert record == [("gpt-4o-mini", "future_scenario", "game")]
 
 
 def test_persona_model_reaches_config(tmp_path):

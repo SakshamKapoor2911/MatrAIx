@@ -3,13 +3,13 @@ from persona_eval.goal_contexts import load_goal_contexts, get_goal_context
 
 def test_registry_has_seeded_contexts():
     ids = {gc.id for gc in load_goal_contexts()}
-    assert {"scenario_default", "gradual_reveal"} <= ids
+    assert ids == {"scenario_default"}  # gradual_reveal collapsed into one realistic scenario
 
 
 def test_goal_context_labels():
     labels = {gc.id: gc.label for gc in load_goal_contexts()}
     assert labels["scenario_default"] == "Realistic scenario"
-    assert labels["gradual_reveal"] == "Gradual reveal"
+    assert "gradual_reveal" not in labels  # collapsed; no longer offered
 
 
 def test_template_consumes_required_fields():

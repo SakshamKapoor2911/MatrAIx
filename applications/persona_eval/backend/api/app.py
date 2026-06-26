@@ -140,7 +140,9 @@ _BUNDLE_DOMAINS = ("movie", "beauty_product", "game")
 _DOMAIN_LABELS = {"movie": "Movies", "beauty_product": "Beauty products", "game": "Games"}
 
 
-def preflight_checks(catalog: Any) -> List[Dict[str, Any]]:
+def preflight_checks(
+    catalog: Any, domain_sizes: Optional[Dict[str, int]] = None
+) -> List[Dict[str, Any]]:
     """Compute the user-facing, interface-aware readiness checklist.
 
     Reports each probe as ``{"group", "name", "ok", "detail"}`` regardless of
@@ -174,20 +176,20 @@ def preflight_checks(catalog: Any) -> List[Dict[str, Any]]:
         }
     )
 
-    # Browsable catalog. Readiness is "has items", not a file path. The size is
-    # the default domain's corpus (movie), so name the domain in the detail so it
-    # doesn't read as the whole catalog.
+    # Browsable catalog. Readiness is "has items", not a file path. Report every
+    # domain's size (movie / beauty / game), so the count never reads as the whole
+    # catalog when it is really one domain's corpus.
     size = getattr(catalog, "size", 0)
-    cat_domain = getattr(catalog, "domain", None) or "movie"
     if getattr(catalog, "available", False) and size:
-        checks.append(
-            {
-                "group": "Core",
-                "name": "Catalog",
-                "ok": True,
-                "detail": "{:,} items loaded from the default ({}) catalog.".format(size, cat_domain),
-            }
-        )
+        if domain_sizes:
+            per = ", ".join(
+                "{} {:,}".format(_DOMAIN_LABELS.get(d, d.replace("_", " ").capitalize()), n)
+                for d, n in domain_sizes.items()
+            )
+            detail = "Browsable items by domain: {}.".format(per)
+        else:
+            detail = "{:,} items loaded.".format(size)
+        checks.append({"group": "Core", "name": "Catalog", "ok": True, "detail": detail})
     else:
         checks.append(
             {
@@ -425,7 +427,14 @@ def create_app(catalog_path: Optional[str] = None) -> FastAPI:
         "/api/preflight", response_model=schemas.PreflightResponse, tags=["health"]
     )
     def preflight(services: AppState = Depends(get_services)) -> Dict[str, Any]:
-        checks = preflight_checks(services.catalog)
+        # Per-domain browsable catalog sizes (each cached by get_bundle_catalog),
+        # so the Catalog check shows every domain, not just the default (movie).
+        domain_sizes: Dict[str, int] = {}
+        for domain in _BUNDLE_DOMAINS:
+            idx = services.catalog_for(domain)
+            if getattr(idx, "available", False) and getattr(idx, "size", 0):
+                domain_sizes[domain] = idx.size
+        checks = preflight_checks(services.catalog, domain_sizes)
         ready = all(c["ok"] for c in checks)
         return {"ready": ready, "checks": checks}
 

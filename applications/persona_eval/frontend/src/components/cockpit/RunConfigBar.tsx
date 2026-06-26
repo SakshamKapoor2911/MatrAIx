@@ -127,15 +127,23 @@ export function RunConfigBar({
           />
         )}
         {styleOptions.length > 0 && (
-          <KnobSelect
-            block
-            accent
-            label="Conversation style"
-            value={styleValue}
-            options={styleOptions}
-            onChange={onGoalContext}
-            disabled={disabled}
-          />
+          <div>
+            <KnobSelect
+              block
+              accent
+              label="Conversation style"
+              value={styleValue}
+              options={styleOptions}
+              onChange={onGoalContext}
+              disabled={disabled}
+            />
+            {styleOptions.length === 1 && (
+              <p className="mt-1.5 text-[11px] leading-snug text-text-dim">
+                One scenario for now. Targeted scenarios, like steering the persona toward a
+                specific goal, are coming soon.
+              </p>
+            )}
+          </div>
         )}
 
         {/* Max-turns slider: full width, label linked to the input. */}

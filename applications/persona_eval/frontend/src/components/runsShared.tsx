@@ -194,9 +194,10 @@ export function fmtSource(source: string | null | undefined): string {
 }
 
 /**
- * Friendly label for a goal-context id (the conversation style), mirroring the
- * cockpit knob copy: `scenario_default` → "Realistic scenario", `gradual_reveal`
- * → "Gradual reveal". Unknown ids are humanized; a missing id reads as a dash.
+ * Friendly label for a goal-context id (the conversation style). `scenario_default`
+ * ("Realistic scenario") is the only current option; `gradual_reveal` is retained
+ * only so older runs that used it still render a name. Unknown ids are humanized; a
+ * missing id reads as a dash.
  */
 const GOAL_CONTEXT_LABELS: Record<string, string> = {
   scenario_default: "Realistic scenario",

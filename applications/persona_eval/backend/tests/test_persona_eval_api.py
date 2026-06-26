@@ -212,7 +212,8 @@ def test_persona_eval_goal_contexts(client):
     assert resp.status_code == 200, resp.text
     body = resp.json()
     ids = {gc["id"] for gc in body["goalContexts"]}
-    assert {"scenario_default", "gradual_reveal"} <= ids
+    assert {"scenario_default"} <= ids
+    assert "gradual_reveal" not in ids  # collapsed into the single realistic scenario
     gc = next(g for g in body["goalContexts"] if g["id"] == "scenario_default")
     assert set(gc.keys()) >= {"id", "label", "description"}
 
@@ -245,17 +246,19 @@ def test_start_persona_eval_default_max_turns(client, fake_persona_eval):
 
 
 def test_start_persona_eval_passes_goal_context(client, fake_persona_eval):
+    # The route forwards goalContextId as-is (it does not validate against the
+    # registry), so future scenario ids need no route change.
     resp = client.post(
         "/api/persona-eval",
         json={
             "domain": "game",
             "personaId": "game-lapsed-coop",
-            "goalContextId": "gradual_reveal",
+            "goalContextId": "future_scenario",
         },
     )
     assert resp.status_code == 200, resp.text
     assert fake_persona_eval.started == [
-        ("game", "game-lapsed-coop", 8, "gradual_reveal")
+        ("game", "game-lapsed-coop", 8, "future_scenario")
     ]
 
 
