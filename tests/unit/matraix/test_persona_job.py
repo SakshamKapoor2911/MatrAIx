@@ -41,7 +41,9 @@ def test_build_job_config_controlled_probe_cohort(tmp_path: Path) -> None:
     paths = {agent["kwargs"]["persona_path"] for agent in job["agents"]}
     assert len(paths) == 4
     for rel_path in paths:
-        assert rel_path.startswith("persona/datasets/_generated/cohorts/")
+        assert Path(rel_path).as_posix().startswith(
+            "persona/datasets/_generated/cohorts/"
+        )
 
     shutil.rmtree(REPO_ROOT / "persona" / "datasets" / "_generated", ignore_errors=True)
 

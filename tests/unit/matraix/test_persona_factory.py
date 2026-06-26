@@ -112,7 +112,9 @@ async def test_persona_claude_code_writes_meta(
     meta = json.loads(meta_path.read_text())
     assert meta["agent"] == "persona-claude-code"
     assert meta["display_name"] == "persona-0042"
-    assert meta["persona_path"].endswith("persona/datasets/bench-dev-2000/persona_0042.yaml")
+    assert Path(meta["persona_path"]).as_posix().endswith(
+        "persona/datasets/bench-dev-2000/persona_0042.yaml"
+    )
 
 
 def test_persona_browser_use_injects_persona_system(
