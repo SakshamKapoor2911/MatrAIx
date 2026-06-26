@@ -119,7 +119,7 @@ export function PersonaCatalog({ selectedId, onSelect }: PersonaCatalogProps) {
       </div>
 
       {/* List */}
-      <div className="custom-scrollbar flex-1 space-y-unit overflow-y-auto p-sm">
+      <div className="custom-scrollbar flex-1 space-y-2 overflow-y-auto p-sm">
         {personasQuery.isLoading && all.length === 0 ? (
           <CatalogSkeleton />
         ) : personasQuery.isError ? (
@@ -165,21 +165,18 @@ function FilterChip({
   );
 }
 
-/** A handful of shimmering placeholder rows while the catalog loads. */
+/** A handful of shimmering placeholder cards while the catalog loads. */
 function CatalogSkeleton() {
   return (
-    <div aria-hidden className="space-y-1">
-      {Array.from({ length: 7 }).map((_, i) => (
-        <div key={i} className="mb-1 flex items-start gap-sm rounded-md p-sm pl-3">
-          <div className="h-10 w-10 flex-shrink-0 animate-pulse rounded bg-surface-high" />
-          <div className="flex-1 space-y-2 py-1">
-            <div className="h-3 w-2/3 animate-pulse rounded bg-surface-high" />
-            <div className="h-2.5 w-1/2 animate-pulse rounded bg-surface-low" />
-            <div className="flex gap-1">
-              <div className="h-3.5 w-10 animate-pulse rounded bg-surface-low" />
-              <div className="h-3.5 w-6 animate-pulse rounded bg-surface-low" />
-            </div>
+    <div aria-hidden className="space-y-2">
+      {Array.from({ length: 6 }).map((_, i) => (
+        <div key={i} className="rounded-md border border-outline bg-surface p-4">
+          <div className="mb-3 flex items-start justify-between">
+            <div className="h-10 w-10 animate-pulse rounded bg-surface-high" />
+            <div className="h-3.5 w-14 animate-pulse rounded bg-surface-low" />
           </div>
+          <div className="h-3.5 w-2/3 animate-pulse rounded bg-surface-high" />
+          <div className="mt-2 h-2.5 w-1/2 animate-pulse rounded bg-surface-low" />
         </div>
       ))}
     </div>

@@ -1,25 +1,23 @@
 /**
- * Trajectory — the cockpit's centre conversation feed.
+ * Trajectory — the live-run conversation thread.
  *
- * Ports the mockup's pure-conversation view: a slim scenario banner, then the
- * turn-by-turn trajectory (a "Turn N" marker, the persona bubble on the right,
- * the RecBot reply on the left with its recommended-item card + tool-plan
- * fold), closed by a "Run complete" marker once the run finishes.
+ * Ports the mockup's live-run thread (`app-redesign-v3.html:483-535`): a
+ * centered `max-w-2xl` column of turns — each a persona bubble (right) and the
+ * app reply (left) with its recommended-item cards + tool-plan fold — closed,
+ * while a turn is mid-flight, by a shimmering "generating" app bubble with a
+ * blinking cursor.
  *
- * Each job turn carries both the persona message and the RecBot reply, so one
- * `TurnView` renders one marker + two bubbles. The component covers the live
- * states the run can be in:
- *   - loading: a skeleton transcript while a run is building / before turns land;
- *   - failed: a plain-language cause + a Retry that preserves the config;
- *   - empty: a teaching empty state when no persona is selected / no run yet.
- *
- * Tool-plan fold state + the focused turn (for J/K navigation) are owned by the
- * parent so the keyboard shortcuts can drive every fold/turn at once; this
- * component registers each turn's DOM node so the parent can scroll to it.
+ * Each job turn carries both the persona message and the app reply, so one
+ * `TurnView` renders both bubbles. The thread covers the live states a run can
+ * be in: warming (a skeleton turn), streaming (bubbles + the generating
+ * placeholder), failed (a plain-language cause + a Retry that preserves config),
+ * and done (the settled transcript). Tool-plan fold state + the focused turn
+ * (J/K nav) are owned by the parent; this component registers each turn's DOM
+ * node so the parent can scroll to it.
  */
 import { useEffect, useRef } from "react";
 
-import { PersonaBubble, RecBotBubble, TurnMarker } from "./TurnBubble";
+import { PersonaBubble, RecBotBubble } from "./TurnBubble";
 import { FOCUS_RING, Sym } from "./cockpitShared";
 import type { Domain, GoalContext, TurnView } from "@/lib/types";
 import type { PersonaEvalRunPhase } from "@/lib/usePersonaEval";
@@ -27,7 +25,8 @@ import type { PersonaEvalRunPhase } from "@/lib/usePersonaEval";
 export interface TrajectoryProps {
   turns: TurnView[];
   domain: Domain;
-  personaName: string;
+  /** App display name (RecAI / OpenBB / Medical Assistant). */
+  appName: string;
   /** SUT description for the scenario banner. */
   sutDescription: string | null;
   /** The goal-context the run used (for the scenario heading). */
@@ -38,8 +37,6 @@ export interface TrajectoryProps {
   liveStatus: string | null;
   /** Error text from a failed / timed-out run, if any. */
   error: string | null;
-  /** Whether a persona is selected (drives the empty state). */
-  hasPersona: boolean;
   /** Which tool-plan folds are open (by turn index). */
   expandedTurns: Set<number>;
   onToggleTurn: (index: number) => void;
@@ -54,13 +51,12 @@ export interface TrajectoryProps {
 export function Trajectory({
   turns,
   domain,
-  personaName,
+  appName,
   sutDescription,
   goalContext,
   phase,
   liveStatus,
   error,
-  hasPersona,
   expandedTurns,
   onToggleTurn,
   focusedTurnIndex,
@@ -69,72 +65,45 @@ export function Trajectory({
 }: TrajectoryProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const isRunning = phase === "building" || phase === "running";
-  // A run failed when it ended in error/timeout, OR when the start call itself
-  // failed (e.g. the backend was unreachable) — that surfaces as an `error`
-  // with no in-flight run, which we still want to show as a failure + Retry.
   const failed = phase === "error" || phase === "timeout" || (!isRunning && !!error);
-  const done = phase === "done";
 
-  // Auto-scroll to the latest content as turns land while running.
+  // Auto-scroll to the latest content as turns land / status changes.
   useEffect(() => {
     if (!isRunning) return;
     const el = scrollRef.current;
     if (el) el.scrollTop = el.scrollHeight;
   }, [turns.length, isRunning, liveStatus]);
 
-  // --- Empty: no persona selected (teach) ---------------------------------
-  if (!hasPersona && phase === "idle" && turns.length === 0) {
-    return (
-      <div ref={scrollRef} className="custom-scrollbar flex flex-1 items-center justify-center overflow-y-auto p-lg">
-        <div className="max-w-md text-center">
-          <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
-            <Sym name="groups" fill={1} size={26} className="text-primary" />
-          </div>
-          <h3 className="font-display text-lg text-text-main">Start by choosing who to simulate</h3>
-          <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-text-variant">
-            Pick a persona on the left and an app to test, set your run options, then hit{" "}
-            <strong className="font-semibold text-text-main">Run simulation</strong> — you&apos;ll watch a stand-in
-            user chat with the app, turn by turn.
-          </p>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div ref={scrollRef} className="custom-scrollbar flex flex-1 flex-col items-center gap-md overflow-y-auto p-lg">
-      {/* Scenario banner */}
-      {(sutDescription || goalContext) && (
-        <div className="flex w-full max-w-3xl shrink-0 items-start gap-3 rounded-md border border-outline bg-surface-lowest p-sm">
-          <Sym name="info" size={18} className="mt-0.5 text-primary" />
-          <div>
-            <h4 className="mb-1 font-display text-sm font-semibold text-text-main">
-              Scenario · {goalContext?.label ?? "Realistic scenario"}
-            </h4>
-            <p className="text-[13px] leading-relaxed text-text-variant">
-              {sutDescription ?? goalContext?.description ?? ""}
-            </p>
+    <div ref={scrollRef} className="custom-scrollbar flex min-h-0 flex-1 flex-col overflow-y-auto bg-surface-dim px-5 py-7 md:px-8">
+      <div className="mx-auto w-full max-w-2xl space-y-7">
+        {/* Scenario banner — the real SUT / goal-context context. */}
+        {(sutDescription || goalContext) && (
+          <div className="flex items-start gap-2.5 rounded-md border border-outline bg-surface-lowest px-4 py-3">
+            <Sym name="info" size={16} className="mt-0.5 shrink-0 text-primary" />
+            <div className="min-w-0">
+              <div className="hud mb-1 text-[9px] text-primary">Scenario · {goalContext?.label ?? "Realistic"}</div>
+              <p className="text-[12px] leading-relaxed text-text-variant">
+                {sutDescription ?? goalContext?.description ?? ""}
+              </p>
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* Trajectory feed */}
-      <div className="flex w-full max-w-3xl shrink-0 flex-col gap-lg pb-md">
+        {/* Turns — persona ask + app reply. */}
         {turns.map((turn, i) => {
           const focused = i === focusedTurnIndex;
           return (
             <div
               key={turn.turnId ?? i}
               ref={(el) => registerTurnRef(i, el)}
-              className={`flex flex-col gap-lg rounded-xl transition-colors ${
-                focused ? "bg-primary/5 ring-1 ring-primary/30" : ""
-              }`}
+              className={`space-y-7 rounded-md transition-colors ${focused ? "bg-primary/5 p-3 ring-1 ring-primary/30" : ""}`}
             >
-              <TurnMarker label={`Turn ${i + 1}`} />
-              <PersonaBubble message={turn.userMessage} personaName={personaName} />
+              <PersonaBubble message={turn.userMessage} />
               <RecBotBubble
                 turn={turn}
                 domain={domain}
+                appName={appName}
                 foldOpen={expandedTurns.has(i)}
                 onToggleFold={() => onToggleTurn(i)}
               />
@@ -142,22 +111,17 @@ export function Trajectory({
           );
         })}
 
-        {/* Loading skeleton while building, or while running before turns land. */}
+        {/* Warming (cold start, before any turn) — a skeleton turn. */}
         {isRunning && (turns.length === 0 || phase === "building") && (
           <SkeletonTurn label={phase === "building" ? "Starting the app…" : liveStatus} />
         )}
 
-        {/* Live "thinking" line once turns are streaming. */}
-        {isRunning && turns.length > 0 && phase !== "building" && liveStatus && (
-          <div className="flex items-center justify-center gap-2 py-2">
-            <Sym name="more_horiz" size={18} className="animate-rb-pulse text-text-dim" />
-            <span className="text-[13px] text-text-dim">{liveStatus}</span>
-          </div>
-        )}
+        {/* Streaming — a generating app bubble after the settled turns. */}
+        {phase === "running" && turns.length > 0 && <GeneratingBubble appName={appName} />}
 
-        {/* Failed run — plain-language cause + Retry (preserves config). */}
+        {/* Failed — plain-language cause + Retry (preserves config). */}
         {failed && (
-          <div className="mx-auto w-full max-w-xl rounded-md border border-danger/40 bg-danger/10 p-4">
+          <div className="rounded-md border border-danger/40 bg-danger/10 p-4">
             <div className="flex items-start gap-3">
               <Sym name="error" fill={1} size={20} className="mt-0.5 text-danger" />
               <div className="min-w-0 flex-1">
@@ -177,51 +141,47 @@ export function Trajectory({
             </div>
           </div>
         )}
-
-        {/* End-of-run marker. */}
-        {done && turns.length > 0 && (
-          <div className="my-1 flex w-full items-center">
-            <div className="flex-1 border-t border-outline-dim" />
-            <span className="flex items-center gap-1 bg-surface-dim px-3 hud text-[10px] text-secondary">
-              <Sym name="flag" fill={1} size={14} />
-              Run complete
-            </span>
-            <div className="flex-1 border-t border-outline-dim" />
-          </div>
-        )}
-
-        {/* Empty: persona selected, no run yet — invite the operator to run. */}
-        {hasPersona && phase === "idle" && turns.length === 0 && !failed && (
-          <div className="mx-auto mt-8 max-w-md text-center">
-            <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-surface-high">
-              <Sym name="play_circle" size={26} className="text-text-dim" />
-            </div>
-            <h3 className="font-display text-lg text-text-main">All set</h3>
-            <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-text-variant">
-              Press <kbd className="rounded border border-outline-dim bg-surface-high px-1.5 py-0.5 font-mono text-[11px]">R</kbd>{" "}
-              (or the Run button) to start the simulation for this persona.
-            </p>
-          </div>
-        )}
       </div>
     </div>
   );
 }
 
-/** A shimmering placeholder turn shown while a run warms / before turns land. */
+/** A shimmering "generating" app bubble (mockup `:519-532`). */
+function GeneratingBubble({ appName }: { appName: string }) {
+  return (
+    <div className="flex w-full flex-col items-start pr-10" aria-live="polite">
+      <div className="hud mb-1.5 ml-1 flex items-center gap-2 text-[9px] text-primary">
+        <Sym name="smart_toy" fill={1} size={14} />
+        <span>{appName} · generating</span>
+        <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" aria-hidden />
+      </div>
+      <div className="w-full rounded-md rounded-tl-sm border border-outline bg-surface px-4 py-4">
+        <div className="space-y-3" aria-hidden>
+          <div className="h-2.5 w-[92%] animate-rb-pulse rounded bg-surface-high" />
+          <div className="h-2.5 w-[76%] animate-rb-pulse rounded bg-surface-high" />
+          <div className="flex items-center gap-1.5">
+            <div className="h-2.5 w-[42%] animate-rb-pulse rounded bg-surface-high" />
+            <span className="h-3.5 w-px animate-pulse bg-primary" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/** A skeleton turn shown while a run warms / before turns land. */
 function SkeletonTurn({ label }: { label: string | null }) {
   return (
-    <div className="flex w-full flex-col gap-lg" aria-hidden>
-      <TurnMarker label="Turn 1" />
+    <div className="space-y-7" aria-hidden>
       {/* Persona side (right) */}
-      <div className="flex w-full flex-col items-end gap-1 pl-12">
-        <div className="h-3 w-28 animate-rb-pulse rounded bg-surface-high" />
-        <div className="h-16 w-2/3 animate-rb-pulse rounded-2xl rounded-tr-sm bg-surface-high" />
-      </div>
-      {/* RecBot side (left) */}
-      <div className="mt-3 flex w-full flex-col items-start gap-1 pr-12">
+      <div className="flex w-full flex-col items-end gap-1 pl-10">
         <div className="h-3 w-20 animate-rb-pulse rounded bg-surface-high" />
-        <div className="h-24 w-full animate-rb-pulse rounded-2xl rounded-tl-sm bg-surface-high" />
+        <div className="h-14 w-2/3 animate-rb-pulse rounded-md rounded-tr-sm bg-surface-high" />
+      </div>
+      {/* App side (left) */}
+      <div className="flex w-full flex-col items-start gap-1 pr-10">
+        <div className="h-3 w-16 animate-rb-pulse rounded bg-surface-high" />
+        <div className="h-24 w-full animate-rb-pulse rounded-md rounded-tl-sm bg-surface-high" />
       </div>
       {label && (
         <div className="flex items-center justify-center gap-2 py-1">

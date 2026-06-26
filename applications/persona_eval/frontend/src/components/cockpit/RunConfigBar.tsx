@@ -1,28 +1,23 @@
 /**
- * RunConfigBar — the cockpit's editable knobs + read-only environment facts.
+ * RunConfigBar — the cockpit's "Run configuration" panel.
  *
- * Ports the mockup's config bar: RecBot model · Persona model · Domain ·
- * Conversation style knobs (the `KnobSelect` dropdowns), a Max-turns slider,
- * and the right-aligned
- * `EnvironmentPopover` of fixed-stack facts. The knob choices + their
- * descriptions come from the backend config metadata (`engine`/`domain` knobs)
- * and the goal-contexts (the "Conversation style"); the slider drives the run's
- * `maxTurns`.
+ * Ports the mockup's Run-configuration card (`app-redesign-v3.html:170-184`): a
+ * titled panel (`tune` icon + "Run configuration") over a 2-col grid of
+ * field-style knobs — Application model (`engine`), Persona model, Domain
+ * (RecAI-only), Conversation style (the accent knob) — and a full-width Max-turns
+ * slider.
  *
- * The Conversation-style knob is the highlighted (primary-bordered) one, as in
- * the mockup. The slider is explicitly linked to its label (`htmlFor`/`id`) so
- * a screen reader announces "Max turns" when it lands on the control, and its
- * live value is shown beside the label.
- *
- * Presentational w.r.t. the run: the parent owns the selected values and the
- * change callbacks; while a run is in flight the knobs are disabled.
+ * The application adapter itself is chosen by the card picker above (the
+ * cockpit), and the read-only Harbor facts live in their own right-rail panel,
+ * so this panel is purely the editable run knobs. Knob options + their
+ * descriptions come from the backend config metadata; the slider drives
+ * `maxTurns`. Presentational: the parent owns the values + change callbacks.
  */
 import { useId } from "react";
 
-import { EnvironmentPopover } from "./EnvironmentPopover";
 import { KnobSelect, type KnobOption } from "./KnobSelect";
-import { FOCUS_RING } from "./cockpitShared";
-import type { ApplicationId, ConfigEnvironment, ConfigKnob, Domain, GoalContext } from "@/lib/types";
+import { FOCUS_RING, Sym } from "./cockpitShared";
+import type { ApplicationId, ConfigKnob, Domain, GoalContext } from "@/lib/types";
 
 /** Min/max for the max-turns slider (mirrors the backend's accepted range). */
 const TURNS_MIN = 1;
@@ -31,14 +26,11 @@ const TURNS_MAX = 20;
 export interface RunConfigBarProps {
   /** Config knob metadata from `/api/config/options` (engine, domain, …). */
   knobs: ConfigKnob[];
-  /** Read-only fixed-stack facts. */
-  environment: ConfigEnvironment | null;
   /** Goal contexts (the "Conversation style" options). */
   goalContexts: GoalContext[];
 
-  /** Selected chatbot application adapter. */
+  /** Selected chatbot application adapter (gates the RecAI-only Domain knob). */
   applicationId: ApplicationId;
-  onApplicationId: (value: ApplicationId) => void;
   /** Selected model (engine) value. */
   engine: string;
   onEngine: (value: string) => void;
@@ -67,12 +59,10 @@ function optionsFor(knobs: ConfigKnob[], key: string): KnobOption[] {
 
 export function RunConfigBar({
   knobs,
-  environment,
   goalContexts,
   engine,
   onEngine,
   applicationId,
-  onApplicationId,
   personaModel,
   onPersonaModel,
   domain,
@@ -86,7 +76,6 @@ export function RunConfigBar({
   const sliderId = useId();
 
   const engineOptions = optionsFor(knobs, "engine");
-  const applicationOptions = optionsFor(knobs, "applicationId");
   const personaModelOptions = optionsFor(knobs, "personaModel");
   const domainOptions = applicationId === "recai" ? optionsFor(knobs, "domain") : [];
   const styleOptions: KnobOption[] = goalContexts.map((g) => ({
@@ -97,79 +86,75 @@ export function RunConfigBar({
   const styleValue = goalContextId ?? goalContexts[0]?.id ?? "";
 
   return (
-    <div className="flex shrink-0 flex-wrap items-center gap-x-5 gap-y-2 border-b border-outline-dim bg-surface-lowest px-5 py-2.5">
-      {applicationOptions.length > 0 && (
-        <KnobSelect
-          label="Application"
-          value={applicationId}
-          options={applicationOptions}
-          onChange={(v) => onApplicationId(v as ApplicationId)}
-          disabled={disabled}
-        />
-      )}
-      {engineOptions.length > 0 && (
-        <KnobSelect
-          label="App's model"
-          value={engine}
-          options={engineOptions}
-          onChange={onEngine}
-          disabled={disabled}
-        />
-      )}
-      {personaModelOptions.length > 0 && (
-        <KnobSelect
-          label="Simulated-user model"
-          value={personaModel}
-          options={personaModelOptions}
-          onChange={onPersonaModel}
-          disabled={disabled}
-        />
-      )}
-      {domainOptions.length > 0 && (
-        <KnobSelect
-          label="Catalog · RecAI only"
-          value={domain}
-          options={domainOptions}
-          onChange={(v) => onDomain(v as Domain)}
-          disabled={disabled}
-        />
-      )}
-      {styleOptions.length > 0 && (
-        <KnobSelect
-          label="How the user behaves"
-          value={styleValue}
-          options={styleOptions}
-          onChange={onGoalContext}
-          accent
-          disabled={disabled}
-        />
-      )}
-
-      {/* Max-turns slider — label linked to the input via htmlFor/id. */}
-      <div className="flex flex-shrink-0 items-center gap-3">
-        <label
-          htmlFor={sliderId}
-          className="flex items-center gap-1 hud text-[10px] text-text-dim"
-        >
-          Conversation length (max turns):{" "}
-          <span className="rounded bg-surface-high px-1.5 font-mono text-[11px] text-text-variant">
-            {maxTurns}
-          </span>
-        </label>
-        <input
-          id={sliderId}
-          type="range"
-          min={TURNS_MIN}
-          max={TURNS_MAX}
-          value={maxTurns}
-          disabled={disabled}
-          onChange={(e) => onMaxTurns(Number(e.target.value))}
-          aria-valuetext={`${maxTurns} turns`}
-          className={`h-1 w-24 cursor-pointer appearance-none rounded-lg bg-outline accent-primary disabled:cursor-not-allowed disabled:opacity-55 ${FOCUS_RING}`}
-        />
+    <div className="rounded-md border border-outline bg-surface p-5">
+      <div className="mb-5 flex items-center gap-2 border-b border-outline pb-3.5">
+        <Sym name="tune" size={16} className="text-primary" />
+        <h3 className="hud text-[10px] text-primary">Run configuration</h3>
       </div>
 
-      <EnvironmentPopover environment={environment} />
+      <div className="grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
+        {engineOptions.length > 0 && (
+          <KnobSelect
+            block
+            label="Application model"
+            value={engine}
+            options={engineOptions}
+            onChange={onEngine}
+            disabled={disabled}
+          />
+        )}
+        {personaModelOptions.length > 0 && (
+          <KnobSelect
+            block
+            label="Persona model"
+            value={personaModel}
+            options={personaModelOptions}
+            onChange={onPersonaModel}
+            disabled={disabled}
+          />
+        )}
+        {domainOptions.length > 0 && (
+          <KnobSelect
+            block
+            label="Domain"
+            labelAccent="· RecAI"
+            value={domain}
+            options={domainOptions}
+            onChange={(v) => onDomain(v as Domain)}
+            disabled={disabled}
+          />
+        )}
+        {styleOptions.length > 0 && (
+          <KnobSelect
+            block
+            accent
+            label="Conversation style"
+            value={styleValue}
+            options={styleOptions}
+            onChange={onGoalContext}
+            disabled={disabled}
+          />
+        )}
+
+        {/* Max-turns slider — full width, label linked to the input. */}
+        <label htmlFor={sliderId} className="block sm:col-span-2">
+          <span className="hud mb-2.5 block text-[9px] text-text-dim">
+            Max turns
+            <span className="ml-1 font-mono normal-case tracking-normal text-text-variant">{maxTurns}</span>
+          </span>
+          <input
+            id={sliderId}
+            type="range"
+            min={TURNS_MIN}
+            max={TURNS_MAX}
+            value={maxTurns}
+            disabled={disabled}
+            onChange={(e) => onMaxTurns(Number(e.target.value))}
+            aria-valuetext={`${maxTurns} turns`}
+            className={`w-full cursor-pointer accent-primary disabled:cursor-not-allowed disabled:opacity-55 ${FOCUS_RING}`}
+          />
+        </label>
+      </div>
     </div>
   );
 }

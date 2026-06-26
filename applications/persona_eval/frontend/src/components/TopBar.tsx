@@ -1,21 +1,21 @@
 /**
- * TopBar — the fixed application header.
+ * TopBar — the fixed application header (mockup `app-redesign-v3.html:62-91`).
  *
- * Carries the matrAIx wordmark + ⌘K search on the left, the two top-level
- * surfaces (`Chat | PersonaEval`) as a primary-underlined tab row in the middle,
- * and a right-aligned cluster (the readiness chip, the light/dark theme toggle,
- * and — in Chat — the Export / Save / New-chat actions).
+ * Left: the matrAIx wordmark (matr · cyan AI · x) + a 4-item nav — Chat ·
+ * PersonaEval · Runs · Catalog — with the active surface primary-underlined.
+ * Right: the ⌘K "Search catalog" pill, the readiness chip, the light/dark theme
+ * toggle, and a context primary button (New chat in Chat / New run in
+ * PersonaEval). Export / Save appear only on the Chat surface.
  *
- * There are exactly two surfaces: the separate "Runs" top-mode is gone — Runs
- * history + Compare now live INSIDE PersonaEval. The Chat config knobs live in
- * a dedicated bar below the header (see `ChatConfigBar`), not in this row, so the
- * nav stays clean at every width.
+ * Nav routing is delegated to the parent (`App` owns `useUrlState`): Chat /
+ * PersonaEval switch the surface, Runs opens the PersonaEval Runs sub-view, and
+ * Catalog opens the ⌘K catalog drawer.
  */
 import { PreflightChip } from "./PreflightChip";
 import { FOCUS_RING, Sym } from "./cockpit/cockpitShared";
 import { useTheme } from "@/hooks/useTheme";
 
-/** The two top-level surfaces. Runs live inside PersonaEval, not up here. */
+/** The two top-level surfaces. Runs is a sub-view inside PersonaEval. */
 export type StudioMode = "normal" | "persona-eval";
 
 export interface TopBarProps {
@@ -23,7 +23,7 @@ export interface TopBarProps {
   onExport: () => void;
   /** Persist the active session to disk. Disabled when no session is active. */
   onSave: () => void;
-  /** Create a new session. */
+  /** Create a new session (Chat) — the context primary button. */
   onNew: () => void;
   /** True while a save request is in flight (Save button busy state). */
   saving?: boolean;
@@ -33,15 +33,13 @@ export interface TopBarProps {
   mode: StudioMode;
   /** Switch the surface. */
   onModeChange: (mode: StudioMode) => void;
-  /** Open the catalog search (the ⌘K palette). */
+  /** True when the PersonaEval Runs sub-view is showing (drives the Runs tab). */
+  runsActive: boolean;
+  /** Open the PersonaEval Runs history sub-view. */
+  onOpenRuns: () => void;
+  /** Open the catalog search (the ⌘K palette / Catalog nav item). */
   onOpenSearch: () => void;
 }
-
-/** The two surfaces, with labels for the nav row. */
-const MODES: ReadonlyArray<{ value: StudioMode; label: string }> = [
-  { value: "normal", label: "Chat" },
-  { value: "persona-eval", label: "PersonaEval" },
-];
 
 export function TopBar({
   onExport,
@@ -51,102 +49,132 @@ export function TopBar({
   hasSession,
   mode,
   onModeChange,
+  runsActive,
+  onOpenRuns,
   onOpenSearch,
 }: TopBarProps) {
-  // The session actions belong to Chat only. PersonaEval owns its own actions
-  // inside the cockpit.
   const showSessionTools = mode === "normal";
   const { theme, toggle } = useTheme();
   const nextIsLight = theme === "dark";
 
+  // The four nav surfaces, with their active rule + handler.
+  const nav: Array<{ key: string; label: string; active: boolean; onClick: () => void }> = [
+    { key: "chat", label: "Chat", active: mode === "normal", onClick: () => onModeChange("normal") },
+    {
+      key: "peval",
+      label: "PersonaEval",
+      active: mode === "persona-eval" && !runsActive,
+      onClick: () => onModeChange("persona-eval"),
+    },
+    { key: "runs", label: "Runs", active: mode === "persona-eval" && runsActive, onClick: onOpenRuns },
+    { key: "catalog", label: "Catalog", active: false, onClick: onOpenSearch },
+  ];
+
   return (
-    <header className="relative z-20 flex h-auto min-h-14 flex-shrink-0 flex-wrap items-center gap-x-lg gap-y-2 border-b border-outline bg-surface-lowest px-md py-2 sm:h-14 sm:flex-nowrap sm:px-lg sm:py-0">
-      {/* Brand + ⌘K search */}
-      <div className="flex flex-shrink-0 items-center gap-md">
-        <span className="whitespace-nowrap font-display text-[19px] font-bold tracking-tight text-text-main">
-          matr<span className="text-primary">AI</span>x
-        </span>
-        <button
-          type="button"
-          onClick={onOpenSearch}
-          aria-label="Search the catalog of personas and items — press Command-K"
-          className={`hidden items-center gap-2 rounded-md border border-outline bg-surface-low py-1.5 pl-4 pr-3 text-[12px] text-text-dim transition-colors hover:border-primary hover:text-text-variant xl:flex ${FOCUS_RING}`}
-        >
-          <Sym name="search" size={16} className="text-text-dim" />
-          <span className="whitespace-nowrap text-text-variant">Search personas &amp; items</span>
-          <kbd className="ml-2 rounded border border-outline bg-surface px-1.5 py-px font-mono text-[10px] text-text-variant">
-            ⌘K
-          </kbd>
-        </button>
-      </div>
+    <header className="relative z-20 flex-shrink-0 border-b border-outline bg-surface-lowest">
+      <div className="flex h-14 items-center justify-between gap-4 px-5">
+        {/* Brand + nav */}
+        <div className="flex min-w-0 items-center gap-8">
+          <button
+            type="button"
+            onClick={() => onModeChange("normal")}
+            aria-label="matrAIx home"
+            className={`whitespace-nowrap font-display text-[19px] font-bold tracking-tight text-text-main ${FOCUS_RING}`}
+          >
+            matr<span className="text-primary">AI</span>x
+          </button>
+          <nav className="hidden h-14 items-stretch gap-7 text-[13px] font-medium md:flex" aria-label="Application surface">
+            {nav.map(({ key, label, active, onClick }) => (
+              <button
+                key={key}
+                type="button"
+                onClick={onClick}
+                aria-current={active ? "page" : undefined}
+                className={`flex h-14 items-center border-b-2 transition-colors ${FOCUS_RING} ${
+                  active
+                    ? "border-primary text-primary"
+                    : "border-transparent text-text-variant hover:text-text-main"
+                }`}
+              >
+                {label}
+              </button>
+            ))}
+          </nav>
+        </div>
 
-      {/* Two surfaces: Chat | PersonaEval (primary-underlined tabs) */}
-      <nav className="flex h-full flex-shrink-0 items-end gap-lg" aria-label="Application surface">
-        {MODES.map(({ value, label }) => {
-          const active = value === mode;
-          return (
-            <button
-              key={value}
-              type="button"
-              aria-current={active ? "page" : undefined}
-              onClick={() => !active && onModeChange(value)}
-              className={`-mb-px whitespace-nowrap border-b-2 pb-[18px] pt-5 text-[13px] font-medium transition-colors duration-200 ${FOCUS_RING} ${
-                active
-                  ? "border-primary font-bold text-primary"
-                  : "border-transparent text-text-variant hover:text-text-main"
-              }`}
-            >
-              {label}
-            </button>
-          );
-        })}
-      </nav>
+        {/* Right cluster */}
+        <div className="flex flex-shrink-0 items-center gap-2.5">
+          <button
+            type="button"
+            onClick={onOpenSearch}
+            aria-label="Search the catalog of personas and items — press Command-K"
+            className={`hidden items-center gap-2 rounded-md border border-outline bg-surface-low py-1.5 pl-3 pr-2 text-[12px] text-text-dim transition-colors hover:border-primary hover:text-text-variant lg:flex ${FOCUS_RING}`}
+          >
+            <Sym name="search" size={14} className="text-text-dim" />
+            <span className="whitespace-nowrap">Search catalog</span>
+            <kbd className="ml-1 rounded border border-outline bg-surface px-1.5 py-px font-mono text-[10px] text-text-variant">
+              ⌘K
+            </kbd>
+          </button>
 
-      {/* Right cluster: readiness + theme toggle + (Chat only) session actions */}
-      <div className="ml-auto flex flex-shrink-0 items-center gap-sm">
-        <PreflightChip />
+          <PreflightChip />
 
-        <button
-          type="button"
-          onClick={toggle}
-          aria-label={nextIsLight ? "Switch to light theme" : "Switch to dark theme"}
-          title={nextIsLight ? "Switch to light theme" : "Switch to dark theme"}
-          className={`grid h-9 w-9 flex-none place-items-center rounded-md border border-outline text-text-variant transition-colors hover:border-primary hover:text-text-main ${FOCUS_RING}`}
-        >
-          <Sym name={nextIsLight ? "light_mode" : "dark_mode"} size={18} />
-        </button>
+          <button
+            type="button"
+            onClick={toggle}
+            aria-label={nextIsLight ? "Switch to light theme" : "Switch to dark theme"}
+            title="Toggle light / dark"
+            className={`grid h-9 w-9 flex-none place-items-center rounded-md border border-outline text-text-variant transition-colors hover:border-primary hover:text-text-main ${FOCUS_RING}`}
+          >
+            <Sym name={nextIsLight ? "light_mode" : "dark_mode"} size={18} />
+          </button>
 
-        {showSessionTools && (
-          <>
-            <button
-              type="button"
-              onClick={onExport}
-              disabled={!hasSession}
-              title="Download this chat as a file"
-              className={`flex items-center gap-1.5 rounded-md border border-outline px-3 py-1.5 text-xs font-medium text-text-variant transition-colors hover:bg-surface-low hover:text-text-main disabled:cursor-not-allowed disabled:opacity-55 ${FOCUS_RING}`}
-            >
-              <Sym name="download" size={16} />
-              Export
-            </button>
-            <button
-              type="button"
-              onClick={onSave}
-              disabled={!hasSession || saving}
-              title="Save this chat to the server"
-              className={`rounded-md border border-outline px-3 py-1.5 text-xs font-medium text-text-variant transition-colors hover:bg-surface-low hover:text-text-main disabled:cursor-not-allowed disabled:opacity-55 ${FOCUS_RING}`}
-            >
-              {saving ? "Saving…" : "Save"}
-            </button>
+          {showSessionTools && (
+            <>
+              <button
+                type="button"
+                onClick={onExport}
+                disabled={!hasSession}
+                title="Download this chat as a file"
+                className={`hidden items-center gap-1.5 rounded-md border border-outline px-3 py-1.5 text-xs font-medium text-text-variant transition-colors hover:bg-surface-low hover:text-text-main disabled:cursor-not-allowed disabled:opacity-55 sm:flex ${FOCUS_RING}`}
+              >
+                <Sym name="download" size={16} />
+                Export
+              </button>
+              <button
+                type="button"
+                onClick={onSave}
+                disabled={!hasSession || saving}
+                title="Save this chat to the server"
+                className={`hidden rounded-md border border-outline px-3 py-1.5 text-xs font-medium text-text-variant transition-colors hover:bg-surface-low hover:text-text-main disabled:cursor-not-allowed disabled:opacity-55 sm:flex ${FOCUS_RING}`}
+              >
+                {saving ? "Saving…" : "Save"}
+              </button>
+            </>
+          )}
+
+          {/* Context primary button: New chat (Chat) / New run (PersonaEval) */}
+          {showSessionTools ? (
             <button
               type="button"
               onClick={onNew}
-              className={`flex items-center gap-1.5 rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-on-primary transition-colors hover:bg-primary-dim ${FOCUS_RING}`}
+              className={`flex items-center gap-2 rounded-md bg-primary px-3.5 py-2 text-[12px] font-semibold text-on-primary transition-colors hover:bg-primary-dim ${FOCUS_RING}`}
             >
               <Sym name="add" size={16} />
-              New chat
+              <span className="hidden sm:inline">New chat</span>
             </button>
-          </>
-        )}
+          ) : (
+            <button
+              type="button"
+              onClick={() => onModeChange("persona-eval")}
+              title="Configure and launch a new evaluation run"
+              className={`flex items-center gap-2 rounded-md bg-primary px-3.5 py-2 text-[12px] font-semibold text-on-primary transition-colors hover:bg-primary-dim ${FOCUS_RING}`}
+            >
+              <Sym name="play_arrow" fill={1} size={16} />
+              <span className="hidden sm:inline">New run</span>
+            </button>
+          )}
+        </div>
       </div>
     </header>
   );

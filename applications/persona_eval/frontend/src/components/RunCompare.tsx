@@ -28,6 +28,8 @@ import {
   fmtRunDate,
   fmtSource,
   isAgentHiccup,
+  runApplicationType,
+  type RunApplicationType,
   type RunDetailView,
   type RunTranscriptTurn,
 } from "./runsShared";
@@ -114,25 +116,52 @@ function improvement(d: Dimension): number | null {
   return d.lowerIsBetter ? -raw : raw;
 }
 
-// ---------------------------------------------------------------------------
-// Loaded body
-// ---------------------------------------------------------------------------
-
-function CompareBody({
-  runA,
-  runB,
-  idA,
-  idB,
-}: {
-  runA: RunDetailView;
-  runB: RunDetailView;
-  idA: string;
-  idB: string;
-}) {
-  const [orderByRegressions, setOrderByRegressions] = useState(false);
-  const diffs = configDiffs(runA, runB);
-
-  const dimensions: Dimension[] = [
+/** The scored dimensions for a compare, keyed by the runs' shared kind. */
+function dimensionsFor(
+  appType: RunApplicationType,
+  runA: RunDetailView,
+  runB: RunDetailView,
+): Dimension[] {
+  if (appType === "survey") {
+    const a = runA.surveyResult?.completion;
+    const b = runB.surveyResult?.completion;
+    return [
+      { label: "Average agreement", max: 5, a: a?.meanLikert ?? null, b: b?.meanLikert ?? null },
+      {
+        label: "Questions answered",
+        max: Math.max(a?.numQuestions ?? 0, b?.numQuestions ?? 0, 1),
+        a: a?.numAnswered ?? null,
+        b: b?.numAnswered ?? null,
+      },
+      {
+        label: "Answers valid",
+        max: 1,
+        a: a ? (a.valid ? 1 : 0) : null,
+        b: b ? (b.valid ? 1 : 0) : null,
+      },
+    ];
+  }
+  if (appType === "web") {
+    const a = runA.webResult;
+    const b = runB.webResult;
+    return [
+      {
+        label: "Met the persona's need",
+        max: 10,
+        a: a?.needSatisfaction ?? null,
+        b: b?.needSatisfaction ?? null,
+      },
+      { label: "Ease of use", max: 10, a: a?.easeOfUse ?? null, b: b?.easeOfUse ?? null },
+      {
+        label: "Overall experience",
+        max: 10,
+        a: a?.overallExperienceRating ?? null,
+        b: b?.overallExperienceRating ?? null,
+      },
+    ];
+  }
+  // chatbot (the live path)
+  return [
     {
       label: "Overall satisfaction",
       max: 10,
@@ -160,11 +189,41 @@ function CompareBody({
     },
     {
       label: "Items suggested",
-      max: Math.max(runA.metricScores?.recommendedItemCount ?? 0, runB.metricScores?.recommendedItemCount ?? 0, 1),
+      max: Math.max(
+        runA.metricScores?.recommendedItemCount ?? 0,
+        runB.metricScores?.recommendedItemCount ?? 0,
+        1,
+      ),
       a: runA.metricScores?.recommendedItemCount ?? null,
       b: runB.metricScores?.recommendedItemCount ?? null,
     },
   ];
+}
+
+// ---------------------------------------------------------------------------
+// Loaded body
+// ---------------------------------------------------------------------------
+
+function CompareBody({
+  runA,
+  runB,
+  idA,
+  idB,
+}: {
+  runA: RunDetailView;
+  runB: RunDetailView;
+  idA: string;
+  idB: string;
+}) {
+  const [orderByRegressions, setOrderByRegressions] = useState(false);
+  const diffs = configDiffs(runA, runB);
+
+  // The scored dimensions are keyed by the runs' shared kind. Compare only pairs
+  // same-type runs, and today the list only surfaces chatbot runs, so the
+  // chatbot set is the live path; survey/web sets read the result shapes already
+  // declared in types.ts and stay dormant until those run kinds persist.
+  const appType = runApplicationType(runA);
+  const dimensions = dimensionsFor(appType, runA, runB);
 
   // Order by regressions: most-negative improvement first; ties keep input order.
   const ordered = orderByRegressions
@@ -245,11 +304,16 @@ function CompareBody({
         </p>
       </div>
 
-      {/* Aligned per-turn trajectories. */}
-      <div className="mt-4">
-        <div className="mb-2.5 hud text-[10px] text-primary">The two conversations, turn by turn</div>
-        <AlignedTrajectories runA={runA} runB={runB} />
-      </div>
+      {/* Aligned per-turn transcripts (the chatbot path; the only kind the runs
+          list lets you pick two of today). TODO: when survey/web runs persist,
+          swap this for an aligned answers diff / step list per spec §5.4 — until
+          then a non-chatbot pair falls back to the empty-transcript note. */}
+      {appType === "chatbot" && (
+        <div className="mt-4">
+          <div className="mb-2.5 hud text-[10px] text-primary">The two conversations, turn by turn</div>
+          <AlignedTrajectories runA={runA} runB={runB} />
+        </div>
+      )}
     </div>
   );
 }

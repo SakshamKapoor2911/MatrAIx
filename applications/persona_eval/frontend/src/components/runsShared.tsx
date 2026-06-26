@@ -8,8 +8,17 @@
  * read boundary — into the fields they actually render, rather than threading
  * `unknown` through the components.
  */
-import { Sym } from "./cockpit/cockpitShared";
-import type { Domain, PersonaEvalMetricScores, PersonaEvalResult } from "@/lib/types";
+import type { ReactNode } from "react";
+
+import { SCORE_BAND_CLASS, Sym, type ScoreBand } from "./cockpit/cockpitShared";
+import type {
+  Domain,
+  PersonaEvalMetricScores,
+  PersonaEvalResult,
+  SurveyResult,
+  WebResult,
+  WebTrace,
+} from "@/lib/types";
 
 // ---------------------------------------------------------------------------
 // Narrowed run-detail shapes (what RunDetail / RunCompare actually read)
@@ -42,7 +51,17 @@ export interface RunConfig {
   resourceMode?: string | null;
   maxTurns?: number | null;
   goalContextId?: string | null;
+  /** Which chatbot adapter was under test (`recai` / `finance_openbb` / …). */
+  applicationId?: string | null;
 }
+
+/**
+ * Which kind of app a run exercised. The debrief picks its shape from this.
+ * Today the runs endpoints only persist chatbot (`PersonaEvalResult`) runs, so
+ * `runApplicationType` resolves to `"chatbot"`; the survey/web branches activate
+ * only if the loaded artifact carries the matching result object (see below).
+ */
+export type RunApplicationType = "chatbot" | "survey" | "web";
 
 /** The persona block we surface in headers. */
 export interface RunPersona {
@@ -65,11 +84,52 @@ export type RunDetailView = Omit<
   persona: RunPersona;
   transcript: RunTranscriptTurn[];
   recommendedItemIds: { perTurn?: unknown; final?: string[] | null } & Record<string, unknown>;
+  // ---------------------------------------------------------------------------
+  // Option-aware fields the data layer MAY hand over (render-what-we-get).
+  // TODO: the runs list/detail endpoints (`api.listPersonaEvalRuns` /
+  // `api.getPersonaEvalRun`) currently only persist chatbot runs, so these are
+  // absent today and the debrief renders the chatbot shape. The survey/web
+  // bodies read the `SurveyResult` / `WebResult` / `WebTrace` shapes already
+  // declared in `types.ts`; they light up unchanged once those run kinds persist.
+  // ---------------------------------------------------------------------------
+  /** Discriminator the artifact may carry; absent → resolved from the payload. */
+  applicationType?: RunApplicationType | string | null;
+  /** Survey artifact, present only on a persisted survey run. */
+  surveyResult?: SurveyResult | null;
+  /** Web result + browser trace, present only on a persisted web run. */
+  webResult?: WebResult | null;
+  webTrace?: WebTrace | null;
+  trace?: WebTrace | null;
+  /** Human labels a survey/web artifact may carry for the run-meta line. */
+  instrumentTitle?: string | null;
+  taskTitle?: string | null;
+  siteName?: string | null;
 };
 
 /** Narrow a raw `PersonaEvalResult` into the richer `RunDetailView` shape. */
 export function asRunDetail(raw: PersonaEvalResult): RunDetailView {
   return raw as unknown as RunDetailView;
+}
+
+/**
+ * Resolve which debrief shape a loaded run should render. Prefers an explicit
+ * `applicationType` discriminator, then falls back to sniffing which result
+ * object the artifact carries. Defaults to `"chatbot"` (the only kind the runs
+ * data layer persists today).
+ */
+export function runApplicationType(run: RunDetailView): RunApplicationType {
+  const explicit = (run.applicationType ?? "").toString().toLowerCase();
+  if (explicit === "survey" || explicit === "web" || explicit === "chatbot") {
+    return explicit;
+  }
+  if (run.webResult || run.webTrace || run.trace) return "web";
+  if (run.surveyResult) return "survey";
+  return "chatbot";
+}
+
+/** The browser trace, wherever the artifact stashed it. */
+export function runWebTrace(run: RunDetailView): WebTrace | null {
+  return run.webTrace ?? run.trace ?? null;
 }
 
 // ---------------------------------------------------------------------------
@@ -214,5 +274,105 @@ export function RecChip({ item }: { item: RunRecItem }) {
       <span className="font-mono text-[10px] text-text-dim">{item.id}</span>
       {item.title && <span className="truncate text-text-variant">{item.title}</span>}
     </span>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Option-aware helpers + tiles (chatbot / survey / web debrief shapes)
+// ---------------------------------------------------------------------------
+
+/** Friendly display name for the chatbot adapter that was under test. */
+const APP_DISPLAY_NAMES: Record<string, string> = {
+  recai: "RecAI",
+  finance_openbb: "OpenBB",
+  medical_assistant: "Medical assistant",
+};
+
+/** The app's real name for the transcript label + meta line (defaults to RecAI). */
+export function appName(applicationId: string | null | undefined): string {
+  if (!applicationId) return "RecAI";
+  return APP_DISPLAY_NAMES[applicationId] ?? fmtDomain(applicationId);
+}
+
+/** Per-kind glyph + label for the list "Kind" tag (Material Symbols, like the cockpit switch). */
+const APP_TYPE_META: Record<RunApplicationType, { icon: string; label: string }> = {
+  chatbot: { icon: "forum", label: "Chatbot" },
+  survey: { icon: "fact_check", label: "Survey" },
+  web: { icon: "language", label: "Web" },
+};
+
+/**
+ * A small app-type tag for the runs list, so a (future) mixed list reads at a
+ * glance. Renders from whatever type the summary carries; absent → chatbot.
+ */
+export function AppTypeTag({ type }: { type?: string | null }) {
+  const key: RunApplicationType = type === "survey" || type === "web" ? type : "chatbot";
+  const meta = APP_TYPE_META[key];
+  return (
+    <span
+      className="inline-flex items-center gap-1 rounded border border-outline bg-surface-high px-1.5 py-0.5 text-[11px] text-text-variant"
+      title="Which kind of app was tested — a chatbot, a survey, or a website."
+    >
+      <Sym name={meta.icon} size={13} />
+      {meta.label}
+    </span>
+  );
+}
+
+/** Read a run summary's app type defensively (the summary may not carry one). */
+export function runSummaryAppType(summary: unknown): RunApplicationType {
+  const t = ((summary as { applicationType?: string | null } | null)?.applicationType ?? "").toString().toLowerCase();
+  if (t === "survey" || t === "web") return t;
+  return "chatbot";
+}
+
+/** Map a score band to its left-rule accent class (mirrors the cockpit Scorecard). */
+export function bandBorderL(band: ScoreBand): string {
+  switch (band) {
+    case "high":
+      return "border-l-score-high";
+    case "mid":
+      return "border-l-score-mid";
+    case "low":
+      return "border-l-score-low";
+    default:
+      return "border-l-outline";
+  }
+}
+
+/**
+ * A debrief headline tile: HUD caption + a big `font-display` value (+ optional
+ * unit). When `band` is supplied the value is score-coloured via
+ * `SCORE_BAND_CLASS`; `lead` adds the mockup's `border-l-4` accent (band-tinted,
+ * or mint when the tile carries no score).
+ */
+export function StatTile({
+  caption,
+  value,
+  unit,
+  band,
+  lead = false,
+}: {
+  caption: string;
+  value: ReactNode;
+  unit?: string;
+  band?: ScoreBand;
+  lead?: boolean;
+}) {
+  const color = band ? SCORE_BAND_CLASS[band] : null;
+  const leadBorder = lead ? `border-l-4 ${band ? bandBorderL(band) : "border-l-secondary"}` : "";
+  const captionTone = lead ? (color ? color.text : "text-secondary") : "text-text-dim";
+  return (
+    <div className={`flex flex-col justify-center rounded-md border border-outline bg-surface p-4 ${leadBorder}`}>
+      <span className={`hud text-[9px] ${captionTone}`}>{caption}</span>
+      <div className="mt-1.5 flex items-baseline gap-1">
+        <span
+          className={`font-display text-[26px] font-bold leading-none tabular-nums ${color ? color.text : "text-text-main"}`}
+        >
+          {value}
+        </span>
+        {unit && <span className="font-sans text-[13px] text-text-dim">{unit}</span>}
+      </div>
+    </div>
   );
 }

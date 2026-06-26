@@ -1,18 +1,30 @@
 /**
- * PersonaDrawer — the full persona context, shown in a dismissible modal.
+ * PersonaDrawer — the persona detail slide-over (mockup `data-view="drawer"`).
  *
- * The Persona inspector tab shows a curated summary; the "Raw" affordance opens
- * this drawer with the persona's complete record — its full humanized context
- * block (verbatim) plus its identity — for the operator who wants everything.
- * It is honest: it renders exactly the text the backend provides, with no
- * fabricated structure.
+ * A right-anchored, focus-trapped, Escape-dismissible dialog that restores focus
+ * to its opener on close. It ports the mockup's sectioned layout: an avatar +
+ * name + source + id header, then Demographics, Goal context, and a Raw record
+ * panel (with Copy), closed by a "Use this persona" footer CTA.
  *
- * A focus-trapped, Escape-dismissible dialog (role="dialog", aria-modal) that
- * restores focus to the opener on close.
+ * Honest data: the personas API returns only `{id, name, source, blurb}` plus a
+ * humanized `context` *text block* — there are no structured demographic/trait
+ * fields. So Demographics is parsed best-effort (render-if-present), Goal context
+ * is the parsed prose sections, and Raw record is the verbatim context text. A
+ * Traits panel is intentionally omitted because curated personas carry no
+ * discrete trait list — we never fabricate one.
  */
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
-import { FOCUS_RING, Sym, personaCodename, personaDescriptiveTitle } from "./cockpitShared";
+import {
+  FOCUS_RING,
+  Sym,
+  humanizeToken,
+  parseDemographics,
+  parseDemographicsFromBlurb,
+  parsePersonaSections,
+  personaCodename,
+  personaDescriptiveTitle,
+} from "./cockpitShared";
 import { usePersonaDetail } from "@/lib/usePersonaEval";
 import type { PersonaEvalPersona } from "@/lib/types";
 
@@ -31,11 +43,14 @@ export interface PersonaDrawerProps {
   /** A run-loaded context, if richer than the catalog's; otherwise the drawer
    * fetches the persona's full record itself. */
   context: string | null;
+  /** Optional: confirm this persona as the run target (footer CTA). */
+  onUse?: (persona: PersonaEvalPersona) => void;
 }
 
-export function PersonaDrawer({ open, onClose, persona, context }: PersonaDrawerProps) {
+export function PersonaDrawer({ open, onClose, persona, context, onUse }: PersonaDrawerProps) {
   const closeRef = useRef<HTMLButtonElement>(null);
   const previouslyFocused = useRef<HTMLElement | null>(null);
+  const [copied, setCopied] = useState(false);
   // Fetch the complete humanized profile (cached by id) so the drawer shows the
   // *full* persona, not the truncated list blurb. Prefer a run-loaded context.
   const detail = usePersonaDetail(persona?.id ?? null);
@@ -54,55 +69,104 @@ export function PersonaDrawer({ open, onClose, persona, context }: PersonaDrawer
     };
   }, [open, onClose]);
 
+  const fullContext = context && context.trim() ? context : detail.data?.context ?? null;
+
+  // Demographics — parse the full context, falling back to the collapsed blurb.
+  const demographics = useMemo(() => {
+    if (fullContext) {
+      const fromContext = parseDemographics(fullContext);
+      if (fromContext.length > 0) return fromContext;
+    }
+    return parseDemographicsFromBlurb(persona?.blurb);
+  }, [fullContext, persona?.blurb]);
+
+  // Goal context — the parsed prose sections (excluding Demographics, already a
+  // grid above). Only from the multi-line context, never the collapsed blurb.
+  const sections = useMemo(() => {
+    if (!fullContext) return [];
+    return parsePersonaSections(fullContext)
+      .filter((s) => !/^demographics$/i.test(s.label))
+      .filter((s) => s.body)
+      .slice(0, 4);
+  }, [fullContext]);
+
+  useEffect(() => {
+    if (!copied) return;
+    const id = window.setTimeout(() => setCopied(false), 1200);
+    return () => window.clearTimeout(id);
+  }, [copied]);
+
   if (!open || !persona) return null;
 
-  const fullContext = context && context.trim() ? context : detail.data?.context ?? null;
-  // Human-readable heading (descriptive role) + machine codename, instead of the
-  // raw "Source · ID" name repeated alongside the codename.
+  // Human-readable heading (descriptive role) + machine codename.
   const title = personaDescriptiveTitle(fullContext, persona.blurb, persona.source);
   const codename = personaCodename(persona.name, persona.id);
   const tone = SOURCE_TONE[persona.source ?? ""] ?? NEUTRAL_TONE;
   const loading = detail.isLoading && !fullContext;
+  const rawText = fullContext || persona.blurb || "";
+
+  function handleCopy() {
+    if (!rawText) return;
+    void navigator.clipboard?.writeText(rawText);
+    setCopied(true);
+  }
+
+  function handleUse() {
+    if (persona) onUse?.(persona);
+    onClose();
+  }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-6">
+    <div className="fixed inset-0 z-50">
+      {/* Scrim */}
       <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} aria-hidden />
+
+      {/* Slide-over panel */}
       <div
         role="dialog"
         aria-modal="true"
         aria-label={`Full profile for ${title}`}
-        className="relative z-10 flex max-h-[80vh] w-full max-w-2xl flex-col overflow-hidden rounded-md border border-outline bg-surface-lowest shadow-2xl"
+        className="absolute bottom-0 right-0 top-0 z-10 flex w-[420px] max-w-[92vw] flex-col border-l border-outline bg-surface-lowest shadow-2xl"
       >
-        <div className="flex items-center gap-3 border-b border-outline px-4 py-3">
-          <div
-            className="flex h-10 w-10 flex-none items-center justify-center rounded border border-outline bg-surface-high"
-            aria-hidden
-          >
-            <Sym name="person" fill={1} size={22} className="text-text-variant" />
+        {/* Header */}
+        <div className="flex-shrink-0 border-b border-outline p-5">
+          <div className="flex items-start justify-between gap-3">
+            <div className="flex min-w-0 items-start gap-3.5">
+              <div
+                className="flex h-12 w-12 flex-none items-center justify-center rounded-md border border-outline bg-surface-high"
+                aria-hidden
+              >
+                <Sym name="person" fill={1} size={24} className="text-primary" />
+              </div>
+              <div className="min-w-0">
+                <div className="hud mb-1.5 text-[9px] text-text-dim">Persona</div>
+                <h2 className="truncate font-display text-[18px] font-bold leading-none tracking-tight text-text-main">
+                  {title}
+                </h2>
+                <div className="mt-2 flex items-center gap-2">
+                  {persona.source && (
+                    <span className={`hud rounded border px-1.5 py-0.5 text-[8px] ${tone}`}>
+                      {persona.source}
+                    </span>
+                  )}
+                  <span className="font-mono text-[10px] text-text-dim">{codename}</span>
+                </div>
+              </div>
+            </div>
+            <button
+              ref={closeRef}
+              type="button"
+              onClick={onClose}
+              aria-label="Close persona detail"
+              className={`flex h-8 w-8 flex-none items-center justify-center rounded-md border border-outline text-text-variant transition-colors hover:border-primary hover:text-text-main ${FOCUS_RING}`}
+            >
+              <Sym name="close" size={18} />
+            </button>
           </div>
-          <div className="min-w-0 flex-1">
-            <div className="hud text-[9px] text-text-dim">Persona</div>
-            <h2 className="truncate font-display text-[18px] font-bold text-text-main">{title}</h2>
-            <p className="mt-0.5 flex items-center gap-2 text-[12px] text-text-variant">
-              {persona.source && (
-                <span className={`rounded border px-1.5 py-0.5 text-[10px] font-medium ${tone}`}>
-                  {persona.source}
-                </span>
-              )}
-              <span className="font-mono text-[10px] text-text-dim">{codename}</span>
-            </p>
-          </div>
-          <button
-            ref={closeRef}
-            type="button"
-            onClick={onClose}
-            aria-label="Close persona detail"
-            className={`flex h-8 w-8 flex-none items-center justify-center rounded-md border border-outline text-text-variant transition-colors hover:border-primary hover:text-text-main ${FOCUS_RING}`}
-          >
-            <Sym name="close" size={20} />
-          </button>
         </div>
-        <div className="custom-scrollbar overflow-y-auto p-5 space-y-5">
+
+        {/* Body */}
+        <div className="custom-scrollbar flex-1 space-y-5 overflow-y-auto p-5">
           {loading ? (
             <div className="space-y-2" aria-label="Loading full persona" aria-busy>
               {[5, 7, 6, 4, 7, 5].map((w, i) => (
@@ -113,18 +177,89 @@ export function PersonaDrawer({ open, onClose, persona, context }: PersonaDrawer
                 />
               ))}
             </div>
-          ) : fullContext || persona.blurb ? (
-            <div className="rounded-md border border-outline bg-surface p-4">
-              <div className="hud mb-2 text-[10px] text-text-dim">Raw record</div>
-              <pre className="whitespace-pre-wrap break-words rounded border border-outline bg-field p-3 font-mono text-[10.5px] leading-relaxed text-primary">
-                {fullContext || persona.blurb}
-              </pre>
-            </div>
           ) : (
-            <p className="text-[12px] italic leading-relaxed text-text-dim">
-              This persona has no extra profile text — the summary above is all we have.
-            </p>
+            <>
+              {/* Demographics */}
+              <div className="panel rounded-md border border-outline bg-surface p-4">
+                <h3 className="hud mb-3.5 text-[10px] text-text-dim">Demographics</h3>
+                {demographics.length > 0 ? (
+                  <div className="space-y-2.5 text-[12px]">
+                    {demographics.map((d) => (
+                      <div key={d.key} className="flex items-center justify-between gap-3">
+                        <span className="hud flex-none text-[9px] text-text-dim">
+                          {humanizeToken(d.key)}
+                        </span>
+                        <span className="text-right font-mono text-text-variant" title={d.full}>
+                          {d.full}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-[12px] italic leading-snug text-text-dim">
+                    No demographics on file for this persona.
+                  </p>
+                )}
+              </div>
+
+              {/* Goal context */}
+              {sections.length > 0 && (
+                <div className="rounded-md border border-outline bg-surface p-4">
+                  <h3 className="hud mb-3 text-[10px] text-text-dim">Goal context</h3>
+                  <div className="space-y-3">
+                    {sections.map((s) => (
+                      <div key={s.label || "context"}>
+                        {s.label && (
+                          <div className="hud mb-1 text-[9px] text-text-dim">{s.label}</div>
+                        )}
+                        <p className="whitespace-pre-wrap text-[12px] leading-relaxed text-text-variant">
+                          {s.body}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Raw record */}
+              {rawText ? (
+                <div className="rounded-md border border-outline bg-surface p-4">
+                  <div className="mb-3 flex items-center justify-between">
+                    <h3 className="hud text-[10px] text-text-dim">Raw record</h3>
+                    <button
+                      type="button"
+                      onClick={handleCopy}
+                      className={`flex items-center gap-1.5 rounded border border-outline px-2 py-1 text-text-dim transition-colors hover:border-primary hover:text-text-main ${FOCUS_RING}`}
+                    >
+                      <Sym name="content_copy" size={12} />
+                      <span className="hud text-[8px]">{copied ? "Copied" : "Copy"}</span>
+                    </button>
+                  </div>
+                  <div className="custom-scrollbar overflow-x-auto rounded border border-outline bg-field p-3">
+                    <pre className="whitespace-pre-wrap break-words font-mono text-[10.5px] leading-relaxed text-primary">
+                      {rawText}
+                    </pre>
+                  </div>
+                </div>
+              ) : (
+                <p className="text-[12px] italic leading-relaxed text-text-dim">
+                  This persona has no extra profile text — the summary above is all we have.
+                </p>
+              )}
+            </>
           )}
+        </div>
+
+        {/* Footer */}
+        <div className="flex-shrink-0 border-t border-outline p-4">
+          <button
+            type="button"
+            onClick={handleUse}
+            className={`glow flex w-full items-center justify-center gap-2 rounded-md bg-primary py-3.5 text-[13px] font-semibold text-on-primary transition-colors hover:bg-primary-dim ${FOCUS_RING}`}
+          >
+            <Sym name="check" size={16} />
+            Use this persona
+          </button>
         </div>
       </div>
     </div>

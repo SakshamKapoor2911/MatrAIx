@@ -1,12 +1,17 @@
 /**
- * PersonaCard — one selectable row in the cockpit's left persona catalog.
+ * PersonaCard — one selectable persona, used both as a row in the cockpit's
+ * left catalog rail and as a cell in the ⌘K catalog grid.
  *
- * Leads with the persona's role/occupation (a human descriptive title derived
- * from real persona text — never fabricated), demotes the dataset source to a
- * tinted provenance chip in the top-right, and carries an `Age · Sex · id` HUD
- * micro-label. An optional one-line trait sits below when it adds something the
- * heading does not. The selected row shows the matrAIx corner bracket (`.panel`)
- * with a cyan border and `aria-pressed`; idle rows stay quiet until hover.
+ * Ports the mockup's catalog card (`app-redesign-v3.html:1297`): a top row with
+ * a square avatar tile (left) and a source-tinted provenance chip (right), then
+ * the persona's role/occupation as the display heading, an `Age · Sex · id` HUD
+ * micro-line, and an optional one-line trait below. Every card carries the
+ * matrAIx corner bracket (`.panel`); the selected card turns its border + glyph
+ * cyan and sets `aria-pressed` (color is never the only selection cue).
+ *
+ * Honest data: the heading/meta are derived from the persona's real text via the
+ * `cockpitShared` parsers — never fabricated. A field that does not parse is
+ * simply not shown.
  *
  * Purely presentational: the parent owns selection + the persona data.
  */
@@ -22,9 +27,9 @@ import {
 import type { PersonaEvalPersona } from "@/lib/types";
 
 /**
- * Per-source provenance-chip tone (port of the mockup's `srcColor`). Unknown
- * sources fall to the neutral default — we never invent a tone for a source we
- * don't recognise.
+ * Per-source provenance-chip tone (port of the mockup's `srcColor`,
+ * `app-redesign-v3.html:1294`). Unknown sources fall to the neutral default — we
+ * never invent a tone for a source we don't recognise.
  */
 const SOURCE_TONE: Record<string, string> = {
   Nemotron: "text-secondary border-secondary/30 bg-secondary/10",
@@ -48,7 +53,7 @@ function PersonaCardInner({ persona, selected, onSelect }: PersonaCardProps) {
   const occupation = demographics.find((c) => c.key === "occupation");
   // Age · Sex · id — render only the parts that genuinely parse (id is always present).
   const metaLabel = [age?.text, sex?.text, codename].filter(Boolean).join(" · ");
-  // Surface the parsed occupation as a secondary line only when it adds something
+  // Surface the parsed occupation as a one-line trait only when it adds something
   // the heading does not (avoid repeating the heading).
   const traitLine = occupation && occupation.full !== heading ? occupation.full : null;
   const tone = SOURCE_TONE[persona.source ?? ""] ?? NEUTRAL_TONE;
@@ -59,52 +64,52 @@ function PersonaCardInner({ persona, selected, onSelect }: PersonaCardProps) {
       onClick={() => onSelect(persona)}
       aria-pressed={selected}
       aria-label={persona.source ? `${heading}, ${persona.source}` : heading}
-      className={`group relative mb-1 w-full rounded-md border p-4 text-left transition-colors duration-200 ${FOCUS_RING} ${
-        selected ? "panel border-primary bg-surface" : "border-outline bg-surface hover:border-primary"
+      className={`panel group relative w-full rounded-md border bg-surface p-4 text-left transition-colors duration-200 ${FOCUS_RING} ${
+        selected ? "border-primary" : "border-outline hover:border-primary"
       }`}
     >
-      <div className="flex items-start gap-sm">
-        <div
-          className={`flex h-10 w-10 flex-shrink-0 items-center justify-center rounded border border-outline ${
-            selected ? "bg-primary/10" : "bg-surface-high"
+      {/* Top row: avatar tile + source-tinted provenance chip. */}
+      <div className="mb-3 flex items-start justify-between gap-2">
+        <span
+          className={`flex h-10 w-10 flex-none items-center justify-center rounded border border-outline transition-colors ${
+            selected
+              ? "bg-primary/10 text-primary"
+              : "bg-surface-high text-text-variant group-hover:text-primary"
           }`}
           aria-hidden
         >
-          <Sym
-            name="person"
-            fill={1}
-            size={22}
-            className={selected ? "text-primary" : "text-text-variant group-hover:text-primary"}
-          />
-        </div>
-        <div className="min-w-0 flex-1">
-          <div className="mb-1 flex items-start justify-between gap-2">
-            <h3
-              className={`min-w-0 flex-1 truncate font-display text-[14px] font-semibold ${
-                selected ? "text-primary" : "text-text-main"
-              }`}
-            >
-              {heading}
-            </h3>
-            {persona.source && (
-              <span
-                title={`Source dataset: ${persona.source}`}
-                className={`flex-none rounded border px-1.5 py-0.5 text-[10px] font-medium ${tone}`}
-              >
-                {persona.source}
-              </span>
-            )}
-          </div>
-          {metaLabel && (
-            <p title="Age · sex · persona id" className="hud truncate text-[8px] text-text-dim">
-              {metaLabel}
-            </p>
-          )}
-          {traitLine && (
-            <p className="mt-1 truncate text-[11px] leading-snug text-text-variant">{traitLine}</p>
-          )}
-        </div>
+          <Sym name="person" fill={1} size={20} />
+        </span>
+        {persona.source && (
+          <span
+            title={`Source dataset: ${persona.source}`}
+            className={`hud flex-none rounded border px-1.5 py-0.5 text-[8px] ${tone}`}
+          >
+            {persona.source}
+          </span>
+        )}
       </div>
+
+      {/* Role / occupation heading. */}
+      <h3
+        className={`truncate font-display text-[14px] font-semibold ${
+          selected ? "text-primary" : "text-text-main"
+        }`}
+      >
+        {heading}
+      </h3>
+
+      {/* Age · Sex · id micro-label. */}
+      {metaLabel && (
+        <p title="Age · sex · persona id" className="hud mt-0.5 truncate text-[8px] text-text-dim">
+          {metaLabel}
+        </p>
+      )}
+
+      {/* Optional one-line trait. */}
+      {traitLine && (
+        <p className="mt-2 line-clamp-2 text-[11px] leading-snug text-text-variant">{traitLine}</p>
+      )}
     </button>
   );
 }

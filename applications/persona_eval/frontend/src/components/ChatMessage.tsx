@@ -1,15 +1,18 @@
 /**
- * ChatMessage — a single conversational row in the Chat workbench thread.
+ * ChatMessage — a single conversational bubble in the Chat workbench thread.
  *
- * The debug thread keeps a calm, scannable row layout (not the cockpit's
- * left/right bubble trajectory): an avatar + name + descriptor on top, then the
- * message body, then (for assistant turns) the recommendation cards. Styled to
- * the matrAIx tokens.
+ * Ports the matrAIx chat bubble design (mockup `app-redesign-v3.html:309-321`):
+ * the user ("You") sits on the RIGHT with a top-right-clipped bubble; RecAI sits
+ * on the LEFT with a top-left-clipped, full-width bubble that holds the reply
+ * text and — when the turn recommended items — a 2-up grid of recommendation
+ * cards. A row of honest meta chips (tool-call OK / item count / latency) sits
+ * just below the RecAI bubble.
  *
  * It is intentionally presentational: the parent `ChatThread` decides what to
- * render (persisted turns, the optimistic in-flight bubble, the thinking
- * placeholder) and passes the pieces in. Assistant rows can be made clickable
- * (to focus the turn in the inspector) via `onClick`.
+ * render (persisted turns, the optimistic in-flight bubble) and passes the
+ * pieces in. The RecAI bubble can be made clickable (to focus the turn in the
+ * inspector) via `onClick`; it stays a focusable `role=button` wrapper — not a
+ * `<button>` — so the inner RecommendationCard buttons remain valid HTML.
  */
 import type { ReactNode } from "react";
 
@@ -17,65 +20,82 @@ import { RecommendationCard } from "./RecommendationCard";
 import { Sym } from "./cockpit/cockpitShared";
 import type { RecommendedItem } from "@/lib/types";
 
+/** One small fact chip shown under a RecAI bubble. */
+export interface MetaChip {
+  key: string;
+  label: string;
+  /** `positive` → mint (connected/ok); default → quiet outline. */
+  tone?: "positive" | "default";
+}
+
 export interface ChatMessageProps {
   role: "user" | "assistant";
-  /** Avatar label: initials for the user, unused for the bot (icon). */
-  avatar: string;
-  /** Display name shown next to the avatar ("You" / "RecAI"). */
+  /** Display name shown in the label above the bubble ("You" / "RecAI"). */
   name: string;
-  /** Small grey descriptor after the name ("· Turn 3 · recommended 3 items"). */
-  tag?: string;
-  /** The message body. A string renders as the reply text; a node is used
-   *  verbatim (e.g. the "thinking" placeholder). */
+  /** The message body. A string (user) or a node (assistant markdown). */
   children: ReactNode;
-  /** Recommendation cards to render under an assistant message. */
+  /** Recommendation cards to render inside an assistant bubble. */
   recommendations?: RecommendedItem[];
+  /** Honest fact chips shown below an assistant bubble. */
+  meta?: MetaChip[];
   /** Inspect a recommended item. */
   onSelectItem?: (itemId: string) => void;
-  /** Make the assistant row clickable to focus the turn. */
+  /** Make the assistant bubble clickable to focus the turn. */
   onClick?: () => void;
-  /** Highlight this row as the inspector's active turn. */
+  /** Highlight this bubble as the inspector's active turn. */
   active?: boolean;
+  /** Tooltip / aria description for the clickable assistant bubble. */
+  title?: string;
 }
+
+const CHIP_TONE: Record<NonNullable<MetaChip["tone"]>, string> = {
+  positive: "border-secondary/25 bg-secondary/10 text-secondary",
+  default: "border-outline text-text-dim",
+};
 
 export function ChatMessage({
   role,
-  avatar,
   name,
-  tag,
   children,
   recommendations,
+  meta,
   onSelectItem,
   onClick,
   active,
+  title,
 }: ChatMessageProps) {
-  const isUser = role === "user";
-
-  const body = (
-    <div className="mx-auto max-w-thread">
-      <div className="mb-1.5 flex items-center gap-2">
-        {isUser ? (
-          <span className="flex h-6 w-6 flex-none items-center justify-center rounded-full bg-surface-high text-[10px] font-semibold text-text-variant">
-            {avatar}
-          </span>
-        ) : (
-          <span className="flex h-6 w-6 flex-none items-center justify-center rounded-full bg-primary/10" aria-hidden>
-            <Sym name="smart_toy" fill={1} size={14} className="text-primary" />
-          </span>
-        )}
-        <span className={`text-[12px] font-semibold ${isUser ? "text-text-dim" : "text-primary"}`}>{name}</span>
-        {tag && <span className="text-[12px] text-text-variant">{tag}</span>}
+  // --- User: right-aligned bubble ----------------------------------------
+  if (role === "user") {
+    return (
+      <div className="flex flex-col items-end pl-10">
+        <div className="hud mb-1.5 mr-1 text-[9px] text-text-dim">{name}</div>
+        <div className="whitespace-pre-wrap rounded-md rounded-tr-sm border border-outline bg-surface px-4 py-3 text-[13px] leading-relaxed text-text-main">
+          {children}
+        </div>
       </div>
-      <div
-        className={`text-[13px] leading-relaxed ${
-          isUser ? "whitespace-pre-wrap text-text-variant" : "text-text-main"
-        }`}
-      >
+    );
+  }
+
+  // --- Assistant (RecAI): left-aligned, full-width bubble ----------------
+  const hasRecs = Boolean(recommendations && recommendations.length > 0);
+  const clickable = Boolean(onClick);
+
+  const bubble = (
+    <div
+      className={`w-full rounded-md rounded-tl-sm border bg-surface px-4 py-4 transition-colors ${
+        active ? "border-primary/60" : "border-outline"
+      } ${clickable ? "hover:border-primary/60" : ""}`}
+    >
+      <div className={hasRecs ? "mb-4 border-b border-outline pb-4 text-[13px] leading-relaxed" : "text-[13px] leading-relaxed"}>
         {children}
       </div>
-      {!isUser && recommendations && recommendations.length > 0 && (
-        <div className="mt-2.5 flex flex-col gap-1.5">
-          {recommendations.map((r) => (
+      {hasRecs && (
+        <div
+          className="grid grid-cols-1 gap-3 sm:grid-cols-2"
+          // Inspecting an item shouldn't also fire the bubble's focus-turn click.
+          onClick={(e) => e.stopPropagation()}
+        >
+          {recommendations!.map((r) => (
             <RecommendationCard key={r.itemId} item={r} onSelect={onSelectItem} />
           ))}
         </div>
@@ -83,33 +103,45 @@ export function ChatMessage({
     </div>
   );
 
-  // Assistant rows are clickable (focus the turn); user rows are static. The row
-  // is a non-button focusable wrapper (not a <button>) because RecommendationCard
-  // renders its own <button> inside `body` — nesting interactive controls is
-  // invalid HTML and would let item clicks bubble to the row's inspect action.
-  if (!isUser && onClick) {
-    return (
-      <div
-        role="button"
-        tabIndex={0}
-        onClick={onClick}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            onClick();
-          }
-        }}
-        className={`block w-full px-lg py-2 text-left transition-colors focus-visible:outline-none ${
-          active ? "bg-primary/5" : "hover:bg-surface"
-        }`}
-        title="Inspect this turn"
-      >
-        {body}
+  return (
+    <div className="flex flex-col items-start pr-10">
+      <div className="hud mb-1.5 ml-1 flex items-center gap-2 text-[9px] text-primary">
+        <Sym name="smart_toy" fill={1} size={14} className="text-primary" />
+        {name}
       </div>
-    );
-  }
-
-  return <div className="px-lg py-2">{body}</div>;
+      {clickable ? (
+        <div
+          role="button"
+          tabIndex={0}
+          onClick={onClick}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              onClick!();
+            }
+          }}
+          title={title ?? "Inspect this turn"}
+          className="w-full text-left focus-visible:outline-none"
+        >
+          {bubble}
+        </div>
+      ) : (
+        bubble
+      )}
+      {meta && meta.length > 0 && (
+        <div className="mt-2.5 flex flex-wrap gap-2">
+          {meta.map((chip) => (
+            <span
+              key={chip.key}
+              className={`hud rounded border px-2 py-1 text-[8px] ${CHIP_TONE[chip.tone ?? "default"]}`}
+            >
+              {chip.label}
+            </span>
+          ))}
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default ChatMessage;

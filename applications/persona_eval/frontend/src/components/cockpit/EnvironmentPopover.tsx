@@ -16,10 +16,84 @@
 import { useEffect, useId, useRef, useState } from "react";
 
 import { FOCUS_RING, Sym } from "./cockpitShared";
-import type { ConfigEnvironment } from "@/lib/types";
+import type { ApplicationId, ConfigEnvironment } from "@/lib/types";
 
 export interface EnvironmentPopoverProps {
   environment: ConfigEnvironment | null;
+}
+
+/**
+ * Per-app Selection / Agent / Resources — fixed infrastructure facts that differ
+ * by adapter (the data layer exposes a single `ConfigEnvironment`, so these are
+ * a presentational constant, in the same spirit as `DOMAIN_META`). Falls back to
+ * the `environment` block when an app isn't mapped (never fabricated).
+ */
+const APP_ENVIRONMENT: Record<ApplicationId, { selection: string; agent: string; resources: string }> = {
+  recai: { selection: "SASRec ranker", agent: "InteRecAgent", resources: "recai_resources" },
+  finance_openbb: { selection: "Finance tool selection", agent: "OpenBB research agent", resources: "OpenBB data providers" },
+  medical_assistant: { selection: "Clinical retrieval", agent: "Medical assistant agent", resources: "Medical knowledge base" },
+};
+
+export interface EnvironmentPanelProps {
+  environment: ConfigEnvironment | null;
+  /** Selected adapter — picks the per-app Selection / Agent / Resources facts. */
+  applicationId: ApplicationId;
+}
+
+/** One label/value row of the read-only Harbor panel. */
+function EnvRow({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex items-center justify-between gap-2">
+      <span className="hud text-[9px] text-text-dim">{label}</span>
+      <span className="max-w-[160px] truncate font-mono text-[11px] text-text-variant">{value}</span>
+    </div>
+  );
+}
+
+/**
+ * EnvironmentPanel — the cockpit's read-only "Harbor environment" right-rail
+ * panel (mockup `app-redesign-v3.html:250-264`). A persistent facts surface
+ * (not the popover): Runtime / Chatbot API / Selection / Agent / Resources /
+ * Scorer, plus the prompt-boundary footer. Per-app Selection/Agent/Resources
+ * come from `APP_ENVIRONMENT`, falling back to the `environment` block.
+ */
+export function EnvironmentPanel({ environment, applicationId }: EnvironmentPanelProps) {
+  const app = APP_ENVIRONMENT[applicationId];
+  const promptOwnership = environment?.promptOwnership ?? {
+    personaSystemPrompt: "Persona prompt from task runtime",
+    taskPrompt: "Application provides the chatbot simulation prompt",
+  };
+
+  return (
+    <div className="rounded-md border border-outline bg-surface-lowest p-5">
+      <div className="mb-4 flex items-center justify-between">
+        <h3 className="hud flex items-center gap-1.5 text-[10px] text-text-dim">
+          <Sym name="dns" size={14} />
+          Harbor environment
+        </h3>
+        <span
+          className="hud rounded border border-outline px-1.5 py-0.5 text-[8px] text-text-dim"
+          title="These are fixed by the Harbor test sandbox and can't be changed for this run."
+        >
+          Read-only
+        </span>
+      </div>
+      <div className="space-y-3 text-[12px]">
+        <EnvRow label="Runtime" value={environment?.runtime ?? "Harbor"} />
+        <EnvRow label="Chatbot API" value={environment?.applicationApi ?? "chatbot-api sidecar"} />
+        <EnvRow label="Selection" value={app?.selection ?? environment?.ranker ?? "application ranking"} />
+        <EnvRow label="Agent" value={app?.agent ?? environment?.agent ?? "chatbot application adapter"} />
+        <EnvRow label="Resources" value={app?.resources ?? environment?.resources ?? "adapter resources"} />
+        <EnvRow label="Scorer" value={environment?.scorer ?? "self-report"} />
+      </div>
+      <div className="mt-4 border-t border-outline pt-3">
+        <div className="hud mb-1.5 text-[8px] text-text-dim">Prompt boundary</div>
+        <p className="text-[11px] leading-relaxed text-text-dim">
+          {promptOwnership.personaSystemPrompt} · {promptOwnership.taskPrompt}
+        </p>
+      </div>
+    </div>
+  );
 }
 
 /** Plain-language tooltips for the fixed-stack rows (teaching, not data). */

@@ -1,15 +1,18 @@
 /**
- * KnobSelect — one editable config knob in the cockpit's run-config bar.
+ * KnobSelect — one editable config knob (a description-rich dropdown).
  *
- * A minimalist dropdown (label + current value + chevron) matching the mockup's
- * knobs: the *border* turns primary when the knob is "active" (the highlighted
- * conversation-style knob), never the background fill. Opening reveals a small
- * menu of `{value,label,description}` options; selecting one calls `onChange`.
+ * Two presentations, same description-carrying listbox:
+ *   - inline (default): a compact "label + value + chevron" used by the Chat
+ *     workbench config bars (unchanged contract);
+ *   - `block`: the mockup's full-width field — a `.hud` label above a
+ *     field-styled trigger (`bg-field border rounded`) with the value on the
+ *     left and a chevron on the right — used inside the cockpit's "Run
+ *     configuration" grid (`app-redesign-v3.html:173-180`).
  *
- * Implemented as a button + a positioned menu (not a native `<select>`) so the
- * option descriptions from the config metadata can be shown. The menu is a
- * keyboard-operable listbox: Up/Down move, Enter/Space select, Escape closes,
- * and arrow/typeahead focus is managed via roving `tabIndex`.
+ * Implemented as a button + a positioned listbox (not a native `<select>`) so
+ * the per-option `description` from the config metadata can be shown — a feature
+ * a native select can't offer. The menu is keyboard-operable (Up/Down move,
+ * Enter/Space select, Escape closes) via roving focus.
  */
 import { useEffect, useId, useRef, useState } from "react";
 
@@ -32,9 +35,22 @@ export interface KnobSelectProps {
   /** Render with the primary border (the highlighted knob in the mockup). */
   accent?: boolean;
   disabled?: boolean;
+  /** Full-width field layout (label above), for the cockpit "Run options" grid. */
+  block?: boolean;
+  /** A normal-case accent suffix appended to the label (e.g. "· RecAI"). */
+  labelAccent?: string;
 }
 
-export function KnobSelect({ label, value, options, onChange, accent, disabled }: KnobSelectProps) {
+export function KnobSelect({
+  label,
+  value,
+  options,
+  onChange,
+  accent,
+  disabled,
+  block,
+  labelAccent,
+}: KnobSelectProps) {
   const [open, setOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -96,6 +112,51 @@ export function KnobSelect({ label, value, options, onChange, accent, disabled }
     }
   }
 
+  // --- Block (full-width field) layout — the cockpit "Run options" grid. -----
+  if (block) {
+    return (
+      <div ref={rootRef} className="block">
+        <span className="hud mb-1.5 block text-[9px] text-text-dim">
+          {label}
+          {labelAccent && <span className="ml-1 normal-case tracking-normal text-primary">{labelAccent}</span>}
+        </span>
+        <div className="relative">
+          <button
+            type="button"
+            disabled={disabled}
+            onClick={() => !disabled && setOpen((v) => !v)}
+            onKeyDown={onButtonKey}
+            aria-haspopup="listbox"
+            aria-expanded={open}
+            aria-label={`${label}: ${currentLabel}`}
+            className={`flex w-full items-center justify-between gap-2 rounded border px-3 py-2.5 text-left text-[13px] transition-colors disabled:cursor-not-allowed disabled:opacity-55 ${FOCUS_RING} ${
+              accent
+                ? "border-primary bg-primary/10 text-primary hover:bg-primary/15"
+                : "border-outline bg-field text-text-main hover:border-primary"
+            }`}
+          >
+            <span className="truncate">{currentLabel}</span>
+            <Sym name="expand_more" size={16} className={accent ? "" : "text-text-dim"} />
+          </button>
+          {open && (
+            <Listbox
+              menuId={menuId}
+              label={label}
+              options={options}
+              value={value}
+              activeIndex={activeIndex}
+              setActiveIndex={setActiveIndex}
+              onMenuKey={onMenuKey}
+              commit={commit}
+              widthClass="w-full"
+            />
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  // --- Inline (compact) layout — Chat workbench config bars. ------------------
   return (
     <div ref={rootRef} className="flex flex-shrink-0 items-center gap-2">
       <span className="hud text-[10px] text-text-dim">{label}</span>
@@ -117,47 +178,81 @@ export function KnobSelect({ label, value, options, onChange, accent, disabled }
           {currentLabel}
           <Sym name="expand_more" size={16} className={accent ? "" : "text-text-dim"} />
         </button>
-
         {open && (
-          <ul
-            id={menuId}
-            role="listbox"
-            aria-label={label}
-            tabIndex={-1}
-            onKeyDown={onMenuKey}
-            ref={(el) => el?.focus()}
-            className="custom-scrollbar absolute left-0 top-full z-30 mt-1 max-h-72 w-64 overflow-auto rounded-md border border-outline bg-surface-lowest p-1 shadow-2xl outline-none"
-          >
-            {options.map((opt, idx) => {
-              const isSelected = opt.value === value;
-              const isActive = idx === activeIndex;
-              return (
-                <li
-                  key={opt.value}
-                  role="option"
-                  aria-selected={isSelected}
-                  onMouseEnter={() => setActiveIndex(idx)}
-                  onClick={() => commit(idx)}
-                  className={`cursor-pointer rounded-md px-2.5 py-2 transition-colors ${
-                    isActive ? "bg-surface-high" : ""
-                  }`}
-                >
-                  <div className="flex items-center justify-between gap-2">
-                    <span className={`text-[13px] font-medium ${isSelected ? "text-primary" : "text-text-main"}`}>
-                      {opt.label}
-                    </span>
-                    {isSelected && <Sym name="check" size={16} className="text-primary" />}
-                  </div>
-                  {opt.description && (
-                    <p className="mt-0.5 text-[11px] leading-relaxed text-text-dim">{opt.description}</p>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
+          <Listbox
+            menuId={menuId}
+            label={label}
+            options={options}
+            value={value}
+            activeIndex={activeIndex}
+            setActiveIndex={setActiveIndex}
+            onMenuKey={onMenuKey}
+            commit={commit}
+            widthClass="w-64"
+          />
         )}
       </div>
     </div>
+  );
+}
+
+/** The shared description-carrying listbox (used by both layouts). */
+function Listbox({
+  menuId,
+  label,
+  options,
+  value,
+  activeIndex,
+  setActiveIndex,
+  onMenuKey,
+  commit,
+  widthClass,
+}: {
+  menuId: string;
+  label: string;
+  options: KnobOption[];
+  value: string;
+  activeIndex: number;
+  setActiveIndex: (i: number) => void;
+  onMenuKey: (e: React.KeyboardEvent) => void;
+  commit: (i: number) => void;
+  widthClass: string;
+}) {
+  return (
+    <ul
+      id={menuId}
+      role="listbox"
+      aria-label={label}
+      tabIndex={-1}
+      onKeyDown={onMenuKey}
+      ref={(el) => el?.focus()}
+      className={`custom-scrollbar absolute left-0 top-full z-30 mt-1 max-h-72 overflow-auto rounded-md border border-outline bg-surface-lowest p-1 shadow-2xl outline-none ${widthClass}`}
+    >
+      {options.map((opt, idx) => {
+        const isSelected = opt.value === value;
+        const isActive = idx === activeIndex;
+        return (
+          <li
+            key={opt.value}
+            role="option"
+            aria-selected={isSelected}
+            onMouseEnter={() => setActiveIndex(idx)}
+            onClick={() => commit(idx)}
+            className={`cursor-pointer rounded-md px-2.5 py-2 transition-colors ${isActive ? "bg-surface-high" : ""}`}
+          >
+            <div className="flex items-center justify-between gap-2">
+              <span className={`text-[13px] font-medium ${isSelected ? "text-primary" : "text-text-main"}`}>
+                {opt.label}
+              </span>
+              {isSelected && <Sym name="check" size={16} className="text-primary" />}
+            </div>
+            {opt.description && (
+              <p className="mt-0.5 text-[11px] leading-relaxed text-text-dim">{opt.description}</p>
+            )}
+          </li>
+        );
+      })}
+    </ul>
   );
 }
 

@@ -26,13 +26,16 @@ import { ChatThread } from "@/components/ChatThread";
 import { Composer } from "@/components/Composer";
 import { TurnInspector } from "@/components/TurnInspector";
 import { CatalogDrawer } from "@/components/CatalogDrawer";
+import { Sym } from "@/components/cockpit/cockpitShared";
 import { PersonaEvalCockpit } from "@/components/cockpit/PersonaEvalCockpit";
 import { RunsView } from "@/components/RunsView";
+import { AppFooter } from "@/components/AppFooter";
 
 import { api, sessionExportUrl } from "@/lib/api";
 import { sessionKeys, useTurnJob } from "@/lib/useTurnJob";
 import { useUrlState } from "@/lib/useUrlState";
 import type {
+  ApplicationId,
   ConfigOptionsResponse,
   Domain,
   Session,
@@ -70,6 +73,18 @@ function fmtDuration(seconds: number | null | undefined): string | null {
   return `~${m}m ${s}s`;
 }
 
+/** Human label for a chatbot application id (the honest footer context). */
+function appLabel(id: ApplicationId | undefined): string {
+  switch (id) {
+    case "finance_openbb":
+      return "OpenBB";
+    case "medical_assistant":
+      return "Medical";
+    default:
+      return "RecAI";
+  }
+}
+
 export default function App() {
   const queryClient = useQueryClient();
 
@@ -99,7 +114,8 @@ export default function App() {
 
   // --- Runs navigation handlers (PersonaEval -> Runs sub-view) ------------
   const openRunsList = useCallback(() => {
-    setUrlState({ view: "runs", run: null, compareWith: null });
+    // Also sets the surface so the Runs nav works from the Chat surface too.
+    setUrlState({ mode: "persona-eval", view: "runs", run: null, compareWith: null });
   }, [setUrlState]);
   const openRun = useCallback(
     (id: string) => {
@@ -310,6 +326,9 @@ export default function App() {
     ? (session.config as unknown as SessionConfig)
     : null;
   const headerTitle = session?.title ?? "New session";
+  // Honest footer context per surface (real config values, no fabrication).
+  const chatFooterContext = `chatbot · ${appLabel(config?.applicationId)} · ${config?.domain ?? "movie"}`;
+  const pevalFooterContext = `chatbot · RecAI · ${pevalDomain}`;
   // The index the inspector/thread actually highlight: the pinned turn from the
   // URL, or — when following latest (no pin) — the most recent turn.
   const focusedTurnIndex =
@@ -343,6 +362,8 @@ export default function App() {
       hasSession={Boolean(activeId)}
       mode={mode}
       onModeChange={setMode}
+      runsActive={runsViewActive}
+      onOpenRuns={openRunsList}
       onOpenSearch={() => setCatalogOpen(true)}
     />
   );
@@ -371,6 +392,7 @@ export default function App() {
             onDomainChange={setPevalDomain}
           />
         )}
+        <AppFooter context={pevalFooterContext} />
         <CatalogDrawer
           open={catalogOpen}
           onClose={() => setCatalogOpen(false)}
@@ -399,22 +421,25 @@ export default function App() {
         onChange={handleConfigChange}
       />
 
-      <div className="grid min-h-0 flex-1 grid-cols-[280px_minmax(0,1fr)_340px]">
+      <div className="flex min-h-0 flex-1">
         <SessionRail
           sessions={sessions}
           activeId={activeId}
           loading={sessionsQuery.isLoading}
+          error={sessionsQuery.isError}
           onSelect={handleSelectSession}
           onNew={handleNew}
-          onOpenCatalog={() => setCatalogOpen(true)}
+          onRetry={() => {
+            void sessionsQuery.refetch();
+          }}
         />
 
         {/* Centre — manual conversation. */}
-        <main className="flex min-h-0 min-w-0 flex-col bg-surface-dim">
-          <div className="flex flex-shrink-0 items-center gap-2.5 border-b border-outline bg-surface-lowest px-lg py-3">
-            <span className="truncate text-sm font-semibold text-text-main">{headerTitle}</span>
+        <main className="flex min-h-0 min-w-0 flex-1 flex-col bg-surface-dim">
+          <div className="flex flex-shrink-0 items-center gap-2.5 border-b border-outline bg-surface-lowest px-5 py-3">
+            <span className="truncate text-[14px] font-semibold text-text-main">{headerTitle}</span>
             <span
-              className="flex-none text-[12px] text-text-variant"
+              className="flex-none text-[12px] text-text-dim"
               title="You type as the user; RecAI replies. No persona is simulated here."
             >
               · manual chat
@@ -424,23 +449,56 @@ export default function App() {
             </span>
           </div>
 
-          <ChatThread
-            turns={turns}
-            activeTurnIndex={focusedTurnIndex}
-            pendingMessage={turnJob.pendingMessage}
-            phase={turnJob.phase}
-            error={turnJob.error}
-            userId={OPERATOR_ID}
-            onSelectTurn={handleSelectTurn}
-            onSelectItem={() => setCatalogOpen(true)}
-            onRetry={turnJob.retry}
-          />
+          {activeId && sessionQuery.isError ? (
+            <div className="flex min-h-0 flex-1 items-center justify-center p-6">
+              <div className="panel w-full max-w-md rounded-md border border-l-4 border-danger/40 border-l-danger bg-danger/10 p-5">
+                <div className="flex items-start gap-3">
+                  <Sym name="error" fill={1} size={20} className="mt-0.5 flex-none text-danger" />
+                  <div className="min-w-0">
+                    <div className="text-[13px] font-semibold text-text-main">Couldn&apos;t open this chat</div>
+                    <p className="mt-0.5 text-[12px] leading-relaxed text-text-variant">
+                      It may have been removed, or the backend is offline.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        void sessionQuery.refetch();
+                      }}
+                      className="mt-3 inline-flex items-center gap-1.5 rounded-md border border-danger/40 bg-danger/10 px-3 py-1.5 text-xs font-medium text-danger transition-colors hover:bg-danger/20"
+                    >
+                      <Sym name="refresh" size={16} />
+                      Retry
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <ChatThread
+              turns={turns}
+              activeTurnIndex={focusedTurnIndex}
+              pendingMessage={turnJob.pendingMessage}
+              phase={turnJob.phase}
+              error={turnJob.error}
+              userId={OPERATOR_ID}
+              onSelectTurn={handleSelectTurn}
+              onSelectItem={() => setCatalogOpen(true)}
+              onRetry={turnJob.retry}
+            />
+          )}
 
           <Composer onSend={handleSend} phase={turnJob.phase} disabled={false} />
         </main>
 
-        <TurnInspector turns={turns} activeIndex={focusedTurnIndex} onSelectIndex={handleSelectTurn} />
+        <TurnInspector
+          turns={turns}
+          activeIndex={focusedTurnIndex}
+          onSelectIndex={handleSelectTurn}
+          onScoreInPersonaEval={() => setMode("persona-eval")}
+        />
       </div>
+
+      <AppFooter context={chatFooterContext} />
 
       <CatalogDrawer
         open={catalogOpen}

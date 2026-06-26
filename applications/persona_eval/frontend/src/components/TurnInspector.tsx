@@ -1,18 +1,27 @@
 /**
  * TurnInspector — the Chat workbench right-hand analysis pane.
  *
- * Renders the selected turn's `TurnView`: the tool-plan timeline
- * (BufferStore → HardFilter → Rank → Map) with per-step status nodes, the
- * resolved recommended items with scores, and a collapsible raw native-action
- * block. Styled to the matrAIx tokens.
+ * Ports the matrAIx tabbed inspector (mockup `app-redesign-v3.html:325-336`):
+ * a header with a jump-to-turn picker, a Trace / Output / Scores tab strip, and
+ * a scrolling body that renders the selected turn's `TurnView`.
  *
- * A `<select>` in the header lets the operator jump between turns; when no turn
- * is selected (fresh session) the body shows a quiet teaching empty state.
+ *   - Trace  — the tool-plan timeline (BufferStore → HardFilter → Rank → Map),
+ *              one status node per `PlanStep`.
+ *   - Output — the resolved recommended items + a collapsible, copyable raw
+ *              native-action block.
+ *   - Scores — an HONEST teaching panel: a manual chat turn isn't scored, so it
+ *              surfaces the real per-turn signals we have (latency, item count,
+ *              whether RecAI asked a question) and points to PersonaEval for the
+ *              full Overall / Constraint / Preference scorecard.
+ *
+ * The active tab is local presentation state; the turn data plumbing is unchanged.
  */
 import { useState } from "react";
 
-import { FOCUS_RING, Sym } from "./cockpit/cockpitShared";
+import { FOCUS_RING, Sym, fmtLatency } from "./cockpit/cockpitShared";
 import type { PlanStep, RecommendedItem, TurnView } from "@/lib/types";
+
+type InspectorTab = "trace" | "output" | "scores";
 
 /** A plan-step tool → a representative Material Symbol. */
 const TOOL_ICON: Record<string, string> = {
@@ -62,10 +71,7 @@ function PlanStepRow({ step, last }: { step: PlanStep; last: boolean }) {
     <div className="flex gap-3 pb-3 last:pb-0">
       <div className="flex flex-none flex-col items-center">
         <div className={`flex h-[22px] w-[22px] items-center justify-center rounded-full border ${nodeClass}`}>
-          <Sym
-            name={error ? "close" : pending ? "more_horiz" : "check"}
-            size={13}
-          />
+          <Sym name={error ? "close" : pending ? "more_horiz" : "check"} size={13} />
         </div>
         {!last && <div className="mt-1 w-px flex-1 bg-outline" />}
       </div>
@@ -99,32 +105,61 @@ function RecItemRow({ item }: { item: RecommendedItem }) {
   );
 }
 
-/** Collapsible raw native-action block. */
+/** Pretty-print arbitrary tool output, falling back to String() on cycles. */
+function safeJson(value: unknown): string {
+  try {
+    return JSON.stringify(value, null, 2);
+  } catch {
+    return String(value);
+  }
+}
+
+/** Collapsible + copyable raw native-action block. */
 function NativeRaw({ raw, toolOutputs }: { raw: string | null; toolOutputs: unknown }) {
   const [open, setOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
   const hasOutputs =
     toolOutputs !== null && toolOutputs !== undefined && !(Array.isArray(toolOutputs) && toolOutputs.length === 0);
 
   const body = raw && raw.trim().length > 0 ? raw : "RecAI didn't emit a raw action for this turn.";
 
+  const copy = () => {
+    const text = hasOutputs ? `${body}\n\n# tool outputs\n${safeJson(toolOutputs)}` : body;
+    void navigator.clipboard?.writeText(text).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1200);
+    });
+  };
+
   return (
-    <div className="border-t border-outline px-md py-4">
+    <div>
       <SectionHeader label="RecAI's raw output" />
       <div className="overflow-hidden rounded-md border border-outline">
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-expanded={open}
-          className={`flex w-full items-center justify-between p-2 text-xs font-medium text-text-variant transition-colors ${
-            open ? "border-b border-outline bg-surface-low" : "bg-surface-low hover:bg-surface-high"
-          } ${FOCUS_RING}`}
+        <div
+          className={`flex w-full items-center justify-between text-xs font-medium text-text-variant ${
+            open ? "border-b border-outline bg-surface-low" : "bg-surface-low"
+          }`}
         >
-          <span className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            className={`flex flex-1 items-center gap-2 p-2 transition-colors hover:bg-surface-high ${FOCUS_RING}`}
+          >
             <Sym name="code" size={16} />
             raw model action
-          </span>
-          <Sym name={open ? "expand_less" : "expand_more"} size={16} />
-        </button>
+            <Sym name={open ? "expand_less" : "expand_more"} size={16} className="ml-auto" />
+          </button>
+          <button
+            type="button"
+            onClick={copy}
+            title="Copy raw output"
+            aria-label="Copy raw output"
+            className={`flex-none border-l border-outline p-2 text-text-dim transition-colors hover:text-text-main ${FOCUS_RING}`}
+          >
+            <Sym name={copied ? "check" : "content_copy"} size={14} />
+          </button>
+        </div>
         {open && (
           <>
             <pre className="panel overflow-x-auto whitespace-pre-wrap break-words bg-surface p-3 font-mono text-[10.5px] leading-relaxed text-text-variant">
@@ -144,13 +179,14 @@ function NativeRaw({ raw, toolOutputs }: { raw: string | null; toolOutputs: unkn
   );
 }
 
-/** Pretty-print arbitrary tool output, falling back to String() on cycles. */
-function safeJson(value: unknown): string {
-  try {
-    return JSON.stringify(value, null, 2);
-  } catch {
-    return String(value);
-  }
+/** A compact stat card for the Scores tab. */
+function StatCard({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-md border border-outline bg-surface p-4">
+      <div className="hud text-[9px] text-text-dim">{label}</div>
+      <div className="mt-1.5 font-display text-[20px] font-bold tabular-nums text-text-main">{value}</div>
+    </div>
+  );
 }
 
 /** Quiet teaching empty state when no turn is selected. */
@@ -158,7 +194,7 @@ function InspectorEmpty() {
   return (
     <div className="flex h-full items-center justify-center px-6">
       <div className="max-w-[260px] text-center">
-        <div className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-xl border border-outline bg-surface-high">
+        <div className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-md border border-outline bg-surface-high">
           <Sym name="manage_search" size={24} className="text-text-variant" />
         </div>
         <p className="text-[12px] leading-relaxed text-text-variant">
@@ -176,23 +212,33 @@ export interface TurnInspectorProps {
   /** Index of the focused turn, or `null` for the empty state. */
   activeIndex: number | null;
   onSelectIndex: (index: number) => void;
+  /** Jump to the PersonaEval surface (the honest "score this" link target). */
+  onScoreInPersonaEval?: () => void;
 }
 
-export function TurnInspector({ turns, activeIndex, onSelectIndex }: TurnInspectorProps) {
+const TABS: ReadonlyArray<{ value: InspectorTab; label: string }> = [
+  { value: "trace", label: "Trace" },
+  { value: "output", label: "Output" },
+  { value: "scores", label: "Scores" },
+];
+
+export function TurnInspector({ turns, activeIndex, onSelectIndex, onScoreInPersonaEval }: TurnInspectorProps) {
+  const [tab, setTab] = useState<InspectorTab>("trace");
   const turn = activeIndex !== null ? turns[activeIndex] ?? null : null;
 
   const plan: PlanStep[] = turn?.plan ?? [];
   const recs: RecommendedItem[] = turn?.recommendedItems ?? [];
   const allOk = plan.length > 0 && plan.every((s) => s.status === "ok");
+  const askedQuestion = recs.length === 0;
+  const latency = fmtLatency(turn?.durationSeconds);
 
   return (
-    <aside className="flex min-h-0 flex-col border-l border-outline bg-surface-lowest">
+    <aside className="hidden min-h-0 w-[360px] flex-shrink-0 flex-col border-l border-outline bg-surface-lowest xl:flex">
       {/* Header with turn picker */}
-      <div className="flex flex-shrink-0 items-center gap-2.5 border-b border-outline px-md py-3.5">
-        <Sym name="manage_search" size={18} className="text-primary" />
+      <div className="flex flex-shrink-0 items-center justify-between gap-2.5 border-b border-outline bg-surface px-4 py-3">
         <span className="hud text-[10px] text-primary">Turn inspector</span>
-        {turns.length > 0 && activeIndex !== null && (
-          <div className="ml-auto inline-flex items-center gap-1.5 rounded-md border border-outline bg-surface-low px-2 py-1 font-mono text-[11px] text-text-dim">
+        {turns.length > 0 && activeIndex !== null ? (
+          <div className="inline-flex items-center gap-1.5 rounded-md border border-outline bg-surface-low px-2 py-1 font-mono text-[11px] text-text-dim">
             <span>turn</span>
             <div className="relative inline-flex items-center">
               <select
@@ -210,40 +256,63 @@ export function TurnInspector({ turns, activeIndex, onSelectIndex }: TurnInspect
               <Sym name="expand_more" size={14} className="pointer-events-none absolute right-0 text-text-dim" />
             </div>
           </div>
+        ) : (
+          <span className="hud text-[9px] text-text-dim">no turn</span>
         )}
       </div>
 
+      {/* Tab strip */}
+      <div className="flex flex-shrink-0 items-center gap-5 border-b border-outline px-4 text-[12px]">
+        {TABS.map(({ value, label }) => {
+          const active = value === tab;
+          return (
+            <button
+              key={value}
+              type="button"
+              onClick={() => setTab(value)}
+              aria-current={active ? "true" : undefined}
+              className={`-mb-px border-b-2 py-2.5 transition-colors ${FOCUS_RING} ${
+                active
+                  ? "border-primary text-primary"
+                  : "border-transparent text-text-dim hover:text-text-variant"
+              }`}
+            >
+              {label}
+            </button>
+          );
+        })}
+      </div>
+
       {/* Body */}
-      <div className="custom-scrollbar min-h-0 flex-1 overflow-auto">
+      <div className="custom-scrollbar min-h-0 flex-1 space-y-5 overflow-auto p-4">
         {!turn ? (
           <InspectorEmpty />
-        ) : (
+        ) : tab === "trace" ? (
+          <div>
+            <SectionHeader
+              label="Execution trace"
+              count={
+                plan.length > 0
+                  ? `${plan.length} step${plan.length === 1 ? "" : "s"}${allOk ? " · all OK" : ""}`
+                  : undefined
+              }
+            />
+            {plan.length > 0 ? (
+              <div className="flex flex-col rounded-md border border-outline bg-surface p-3.5">
+                {plan.map((step, i) => (
+                  <PlanStepRow key={i} step={step} last={i === plan.length - 1} />
+                ))}
+              </div>
+            ) : (
+              <p className="text-[12px] leading-relaxed text-text-variant">
+                No tool steps were recorded for this turn.
+              </p>
+            )}
+          </div>
+        ) : tab === "output" ? (
           <>
-            {/* Tool plan */}
-            <div className="border-b border-outline px-md py-4">
-              <SectionHeader
-                label="What RecAI did"
-                count={plan.length > 0 ? `${plan.length} step${plan.length === 1 ? "" : "s"}${allOk ? " · all OK" : ""}` : undefined}
-              />
-              {plan.length > 0 ? (
-                <div className="flex flex-col">
-                  {plan.map((step, i) => (
-                    <PlanStepRow key={i} step={step} last={i === plan.length - 1} />
-                  ))}
-                </div>
-              ) : (
-                <p className="text-[12px] leading-relaxed text-text-variant">
-                  No tool steps were recorded for this turn.
-                </p>
-              )}
-            </div>
-
-            {/* Recommended items */}
-            <div className="border-b border-outline px-md py-4">
-              <SectionHeader
-                label="Items it recommended"
-                count={recs.length > 0 ? `${recs.length} items` : undefined}
-              />
+            <div>
+              <SectionHeader label="Items it recommended" count={recs.length > 0 ? `${recs.length} items` : undefined} />
               {recs.length > 0 ? (
                 <div className="space-y-1.5">
                   {recs.map((item) => (
@@ -256,10 +325,36 @@ export function TurnInspector({ turns, activeIndex, onSelectIndex }: TurnInspect
                 </p>
               )}
             </div>
-
-            {/* Native raw */}
             <NativeRaw raw={turn.nativeRaw ?? null} toolOutputs={turn.rawToolOutputs} />
           </>
+        ) : (
+          /* Scores — honest teaching panel */
+          <div className="space-y-5">
+            <div>
+              <SectionHeader label="Per-turn signals" />
+              <div className="grid grid-cols-3 gap-3">
+                <StatCard label="Latency" value={latency ?? "—"} />
+                <StatCard label="Items" value={String(recs.length)} />
+                <StatCard label="Asked Q" value={askedQuestion ? "Yes" : "No"} />
+              </div>
+            </div>
+            <p className="text-[12px] leading-relaxed text-text-variant">
+              This is a manual chat, so it isn&apos;t scored. What we can show: it replied
+              {latency ? ` in ${latency}` : ""}, recommended {recs.length} item{recs.length === 1 ? "" : "s"}
+              {askedQuestion ? ", and asked a clarifying question" : ""}. For Overall / Constraint /
+              Preference scores, run this persona in PersonaEval.
+            </p>
+            {onScoreInPersonaEval && (
+              <button
+                type="button"
+                onClick={onScoreInPersonaEval}
+                className={`inline-flex items-center gap-1.5 text-[12px] font-medium text-primary transition-colors hover:text-primary-dim ${FOCUS_RING}`}
+              >
+                Score this persona in PersonaEval
+                <Sym name="arrow_forward" size={14} />
+              </button>
+            )}
+          </div>
         )}
       </div>
     </aside>

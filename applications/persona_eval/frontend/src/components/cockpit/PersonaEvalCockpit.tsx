@@ -1,23 +1,22 @@
 /**
- * PersonaEvalCockpit — the PersonaEval surface (ports cockpit-stitch-v2.html).
+ * PersonaEvalCockpit — the PersonaEval chatbot surface (ports the matrAIx
+ * `app-redesign-v3.html` cockpit + liverun screens).
  *
- * The full three-column cockpit (the PersonaEval surface):
- *   - LEFT   `PersonaCatalog` — the curated persona catalog;
- *   - CENTRE `RunHeader` + `RunConfigBar` + `Trajectory` — the run identity, the
- *     editable knobs / fixed-environment facts, and the pure conversation;
- *   - RIGHT  `InspectorTabs` — Evaluation (`Scorecard`) · Persona (`PersonaPanel`) · Prompts.
+ * Two flows off one shared state:
+ *   - IDLE  (`data-view="cockpit"`) — a centered "Configure a simulation" setup
+ *     form: header + app-type switch, a compact Pipeline strip, then a 12-col
+ *     grid (LEFT 8: application cards · run-configuration knobs · target persona;
+ *     RIGHT 4: the read-only Harbor panel · the glowing Run-eval CTA · a hint).
+ *   - RUNNING/DONE (`data-view="liverun"`) — the live-run layout: the stateful
+ *     Pipeline strip, the Trajectory thread (persona/app bubbles with items +
+ *     tool-plan fold), the right Inspector tabs (Evaluation / Persona / Prompts),
+ *     and a bottom status bar.
  *
- * It owns the cross-component state (selected persona, run knobs, the run via
- * `usePersonaEval`, the inspector tab, the open tool-plan folds, the focused
- * turn) and the keyboard shortcuts the brief requires:
- *   R run / re-run · J/K move between turns · 1/2/3 switch inspector tab ·
- *   E expand / collapse all tool-plans.
- * Shortcuts are ignored while typing in a field. Transitions respect
- * `prefers-reduced-motion` via the global utility fallbacks in `index.css`.
- *
- * Data is honest: it wires the real personas / goal-contexts / config / run
- * endpoints and renders the real run shape (real per-turn latency; no tokens or
- * cost, which aren't tracked).
+ * It owns all cross-component state (selected persona, run knobs, the run via
+ * `usePersonaEval`, inspector tab, open tool-plan folds, focused turn) and the
+ * keyboard shortcuts (R run · J/K move turns · 1/2/3 inspector tab · E expand
+ * folds). Data is honest: real personas / goal-contexts / config / run shape
+ * (real per-turn latency; no tokens or cost, which aren't tracked).
  */
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -26,6 +25,7 @@ import { PersonaCatalog } from "./PersonaCatalog";
 import { RunHeader } from "./RunHeader";
 import { RunConfigBar } from "./RunConfigBar";
 import { ComponentPipeline } from "./ComponentPipeline";
+import { EnvironmentPanel } from "./EnvironmentPopover";
 import { Trajectory } from "./Trajectory";
 import { InspectorTabs, type InspectorTab } from "./InspectorTabs";
 import { Scorecard } from "./Scorecard";
@@ -34,12 +34,14 @@ import { PersonaDrawer } from "./PersonaDrawer";
 import { PromptPanel } from "./PromptPanel";
 import { SurveyEvalCockpit } from "./SurveyEvalCockpit";
 import { WebEvalCockpit } from "./WebEvalCockpit";
-import { TaskTypeSwitch, type PersonaEvalTaskType } from "./TaskTypeSwitch";
+import { type PersonaEvalTaskType } from "./TaskTypeSwitch";
+import { FOCUS_RING, Sym, personaCodename, personaDescriptiveTitle } from "./cockpitShared";
 import { listGoalContexts } from "@/lib/api";
 import { usePersonaEval, type PersonaEvalRunPhase } from "@/lib/usePersonaEval";
 import type {
   ApplicationId,
   ConfigOptionsResponse,
+  ConfigOptionValue,
   Domain,
   Engine,
   GoalContext,
@@ -48,6 +50,18 @@ import type {
   PersonaEvalJobView,
   PersonaEvalPersona,
 } from "@/lib/types";
+
+/** Per-app display name + icon (presentational; the data layer is app-agnostic). */
+const APP_NAME: Record<string, string> = {
+  recai: "RecAI",
+  finance_openbb: "OpenBB",
+  medical_assistant: "Medical Assistant",
+};
+const APP_ICON: Record<string, string> = {
+  recai: "recommend",
+  finance_openbb: "show_chart",
+  medical_assistant: "stethoscope",
+};
 
 /** Map the job's coarse phase into a single "what's happening now" line. */
 function liveStatusLine(
@@ -75,9 +89,8 @@ function isTypingTarget(el: EventTarget | null): boolean {
 
 /**
  * A frozen copy of the persona + run controls captured the moment a run reaches
- * the terminal `done` state. The export is built from this — never the live
- * controls — so changing a knob after a run finishes cannot mislabel the
- * already-completed transcript.
+ * `done`. The export is built from this — never the live controls — so changing
+ * a knob after a run finishes cannot mislabel the completed transcript.
  */
 interface ExportSnapshot {
   persona: { id: string; name: string; source: string } | null;
@@ -104,22 +117,10 @@ export interface PersonaEvalCockpitProps {
 export function PersonaEvalCockpit({ options, onOpenRuns, onDomainChange }: PersonaEvalCockpitProps) {
   const [taskType, setTaskType] = useState<PersonaEvalTaskType>("chatbot");
   if (taskType === "survey") {
-    return (
-      <SurveyEvalCockpit
-        options={options}
-        taskType={taskType}
-        onTaskTypeChange={setTaskType}
-      />
-    );
+    return <SurveyEvalCockpit options={options} taskType={taskType} onTaskTypeChange={setTaskType} />;
   }
   if (taskType === "web") {
-    return (
-      <WebEvalCockpit
-        options={options}
-        taskType={taskType}
-        onTaskTypeChange={setTaskType}
-      />
-    );
+    return <WebEvalCockpit options={options} taskType={taskType} onTaskTypeChange={setTaskType} />;
   }
   return (
     <ChatbotEvalCockpit
@@ -144,12 +145,12 @@ function ChatbotEvalCockpit({
   taskType,
   onTaskTypeChange,
 }: ChatbotEvalCockpitProps) {
-  const { run, job, phase, isRunning, error, timedOut, retry } = usePersonaEval();
+  const { run, job, phase, isRunning, error, timedOut, retry, reset } = usePersonaEval();
 
   // --- Selection + run knobs ---------------------------------------------
   const [persona, setPersona] = useState<PersonaEvalPersona | null>(null);
   const [applicationId, setApplicationId] = useState<ApplicationId>(
-    ((options?.defaults.applicationId as ApplicationId | undefined) ?? "recai"),
+    (options?.defaults.applicationId as ApplicationId | undefined) ?? "recai",
   );
   const [domain, setDomain] = useState<Domain>((options?.defaults.domain as Domain) ?? "movie");
   const [engine, setEngine] = useState<string>(options?.defaults.engine ?? "gpt-4o-mini");
@@ -158,12 +159,9 @@ function ChatbotEvalCockpit({
   );
   const [goalContextId, setGoalContextId] = useState<string | null>(null);
   const [maxTurns, setMaxTurns] = useState<number>(8);
-  // Frozen persona + controls captured when a run reaches `done`; the export is
-  // built from this, never the (possibly since-changed) live controls.
   const [exportSnapshot, setExportSnapshot] = useState<ExportSnapshot | null>(null);
 
-  // Adopt the canonical defaults once config metadata arrives (without
-  // clobbering an operator's explicit change).
+  // Adopt the canonical defaults once config metadata arrives.
   const adoptedDefaults = useRef(false);
   useEffect(() => {
     if (adoptedDefaults.current || !options) return;
@@ -174,8 +172,7 @@ function ChatbotEvalCockpit({
     setPersonaModel(options.environment.personaModel ?? "anthropic/claude-haiku-4-5");
   }, [options]);
 
-  // Mirror the run domain up so the shared (⌘K) catalog drawer browses the
-  // same domain's corpus the operator is evaluating against.
+  // Mirror the run domain up so the shared (⌘K) catalog drawer matches it.
   useEffect(() => {
     onDomainChange?.(domain);
   }, [domain, onDomainChange]);
@@ -197,8 +194,8 @@ function ChatbotEvalCockpit({
   const activeGoalContext =
     goalContexts.find((g) => g.id === (goalContextId ?? goalContexts[0]?.id)) ?? null;
 
-  // Live persona + controls, kept in a ref so the "run finished" effect can
-  // freeze them into `exportSnapshot` without re-running when a control changes.
+  // Live persona + controls, mirrored to a ref so the "run finished" effect can
+  // freeze them without re-running when a control changes.
   const liveControls = useMemo<ExportSnapshot>(
     () => ({
       persona: persona ? { id: persona.id, name: persona.name, source: persona.source } : null,
@@ -217,10 +214,6 @@ function ChatbotEvalCockpit({
   const liveControlsRef = useRef(liveControls);
   liveControlsRef.current = liveControls;
 
-  // Freeze the export snapshot the moment the run finishes. Depending only on
-  // `phase` (and reading controls from the ref) means a later knob change does
-  // not re-run this and cannot overwrite the frozen snapshot. A fresh run clears
-  // the snapshot back to null (see `handleRun`).
   useEffect(() => {
     if (phase === "done") {
       setExportSnapshot((prev) => prev ?? liveControlsRef.current);
@@ -232,17 +225,31 @@ function ChatbotEvalCockpit({
   const [expandedTurns, setExpandedTurns] = useState<Set<number>>(new Set());
   const [focusedTurnIndex, setFocusedTurnIndex] = useState<number | null>(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [pickerOpen, setPickerOpen] = useState(false);
   const turnRefs = useRef<Map<number, HTMLDivElement>>(new Map());
 
+  // --- Elapsed clock (live status bar) -----------------------------------
+  const runStartedAtRef = useRef<number | null>(null);
+  const [, setNowTick] = useState(0);
+  useEffect(() => {
+    if (!isRunning) return;
+    const id = window.setInterval(() => setNowTick(Date.now()), 1000);
+    return () => window.clearInterval(id);
+  }, [isRunning]);
+
   const turns = useMemo(() => job?.turns ?? [], [job]);
-  const personaName = job?.personaName ?? persona?.name ?? "Persona";
-  // SUT description: from the live job, else (no run yet) the goal-context blurb.
   const sutDescription = job?.sutDescription ?? null;
   const status = liveStatusLine(job, phase, isRunning);
-  const hasRun = phase === "done" || phase === "error" || phase === "timeout";
   const questionnaire = job?.questionnaire ?? null;
   const metrics = job?.metricScores ?? null;
   const prompts = job?.prompts ?? null;
+
+  const applicationOptions: ConfigOptionValue[] = useMemo(() => {
+    const knob = (options?.knobs ?? []).find((k) => k.key === "applicationId");
+    return knob?.options ?? [];
+  }, [options]);
+  const appName = APP_NAME[applicationId] ?? applicationOptions.find((o) => o.value === applicationId)?.label ?? "The app";
+  const runContext = `${appName}${applicationId === "recai" ? ` · ${domain}` : ""}`;
 
   // --- Actions ------------------------------------------------------------
   const handleRun = useCallback(() => {
@@ -250,6 +257,7 @@ function ChatbotEvalCockpit({
     setExpandedTurns(new Set());
     setFocusedTurnIndex(null);
     setExportSnapshot(null);
+    runStartedAtRef.current = Date.now();
     run({
       domain: requestDomain,
       applicationId,
@@ -267,9 +275,13 @@ function ChatbotEvalCockpit({
     else handleRun();
   }, [timedOut, phase, retry, handleRun]);
 
-  const handleSelectPersona = useCallback((next: PersonaEvalPersona) => {
-    setPersona(next);
-  }, []);
+  const handleNewRun = useCallback(() => {
+    reset();
+    setFocusedTurnIndex(null);
+    setExpandedTurns(new Set());
+  }, [reset]);
+
+  const handleSelectPersona = useCallback((next: PersonaEvalPersona) => setPersona(next), []);
 
   const registerTurnRef = useCallback((index: number, el: HTMLDivElement | null) => {
     if (el) turnRefs.current.set(index, el);
@@ -304,10 +316,6 @@ function ChatbotEvalCockpit({
   );
 
   // --- Export (client-side JSON of the completed run) ---------------------
-  // Built from the frozen `exportSnapshot` (persona + controls as they were when
-  // the run finished), never the live controls — so editing a knob afterwards
-  // cannot mislabel the already-completed transcript. Enabled only once a
-  // snapshot exists (i.e. a run has reached `done`).
   const handleExport = useCallback(() => {
     if (!exportSnapshot || turns.length === 0) return;
     const payload = {
@@ -374,94 +382,467 @@ function ChatbotEvalCockpit({
 
   const knobs = options?.knobs ?? [];
   const environment = options?.environment ?? null;
+  const showSetup = phase === "idle";
+  const canExport = exportSnapshot !== null && turns.length > 0;
+  const elapsedSeconds =
+    isRunning && runStartedAtRef.current ? Math.max(0, Math.floor((Date.now() - runStartedAtRef.current) / 1000)) : 0;
 
-  return (
-    <div className="flex flex-1 flex-col overflow-y-auto lg:flex-row lg:overflow-hidden">
-      {/* LEFT — persona catalog */}
-      <PersonaCatalog selectedId={persona?.id ?? null} onSelect={handleSelectPersona} />
+  // ---------------------------------------------------------------------------
+  // IDLE — the centered "Configure a simulation" setup form.
+  // ---------------------------------------------------------------------------
+  const setupView = (
+    <div className="flex min-h-0 flex-1 flex-col">
+      <div className="custom-scrollbar flex-1 overflow-y-auto bg-surface-dim">
+        <div className="mx-auto w-full max-w-[1180px] px-6 py-7">
+          <RunHeader taskType={taskType} onTaskTypeChange={onTaskTypeChange} running={isRunning} />
 
-      {/* CENTRE — run header + knob bar + trajectory */}
-      <main className="relative z-0 flex min-h-[640px] min-w-0 flex-1 flex-col bg-surface-dim lg:min-h-0">
-        <TaskTypeSwitch value={taskType} onChange={onTaskTypeChange} disabled={isRunning} />
-        <RunHeader
-          persona={persona}
-          context={null}
-          running={isRunning}
-          hasRun={hasRun}
-          onRun={handleRun}
-          onExport={handleExport}
-          canExport={exportSnapshot !== null && turns.length > 0}
-          onOpenRuns={onOpenRuns}
-        />
-        <RunConfigBar
-          knobs={knobs}
-          environment={environment}
-          goalContexts={goalContexts}
-          applicationId={applicationId}
-          onApplicationId={setApplicationId}
-          engine={engine}
-          onEngine={setEngine}
-          personaModel={personaModel}
-          onPersonaModel={setPersonaModel}
-          domain={domain}
-          onDomain={setDomain}
-          goalContextId={goalContextId}
-          onGoalContext={setGoalContextId}
-          maxTurns={maxTurns}
-          onMaxTurns={setMaxTurns}
-          disabled={isRunning}
-        />
-        <ComponentPipeline
-          environment={environment}
-          engine={engine}
-          personaModel={personaModel}
-          phase={phase}
-          jobPhase={job?.phase}
-          hasPersona={persona !== null}
-          turnCount={turns.length}
-          hasQuestionnaire={questionnaire !== null}
-        />
+          <div className="mb-5">
+            <ComponentPipeline
+              variant="setup"
+              environment={environment}
+              engine={engine}
+              personaModel={personaModel}
+              phase={phase}
+              jobPhase={job?.phase}
+              hasPersona={persona !== null}
+              turnCount={turns.length}
+              hasQuestionnaire={questionnaire !== null}
+            />
+          </div>
+
+          <div className="grid grid-cols-1 gap-5 lg:grid-cols-12">
+            {/* LEFT (8) */}
+            <div className="space-y-5 lg:col-span-8">
+              <ApplicationPicker
+                options={applicationOptions}
+                value={applicationId}
+                onChange={(v) => setApplicationId(v as ApplicationId)}
+                disabled={isRunning}
+              />
+              <RunConfigBar
+                knobs={knobs}
+                goalContexts={goalContexts}
+                applicationId={applicationId}
+                engine={engine}
+                onEngine={setEngine}
+                personaModel={personaModel}
+                onPersonaModel={setPersonaModel}
+                domain={domain}
+                onDomain={setDomain}
+                goalContextId={goalContextId}
+                onGoalContext={setGoalContextId}
+                maxTurns={maxTurns}
+                onMaxTurns={setMaxTurns}
+                disabled={isRunning}
+              />
+              <TargetPersonaPanel persona={persona} onChange={() => setPickerOpen(true)} />
+            </div>
+
+            {/* RIGHT (4) */}
+            <div className="space-y-5 lg:col-span-4">
+              <EnvironmentPanel environment={environment} applicationId={applicationId} />
+
+              {error && (
+                <div className="rounded-md border border-danger/40 bg-danger/10 p-3">
+                  <div className="flex items-start gap-2">
+                    <Sym name="error" fill={1} size={18} className="mt-0.5 text-danger" />
+                    <div className="min-w-0">
+                      <p className="text-[12px] font-semibold text-text-main">Couldn&apos;t start the run</p>
+                      <p className="mt-0.5 break-words text-[11px] text-text-variant">{error}</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              <button
+                type="button"
+                onClick={handleRun}
+                disabled={!persona || isRunning}
+                title={!persona ? "Choose a persona first." : undefined}
+                className={`glow flex w-full items-center justify-center gap-2.5 rounded-md bg-primary py-4 text-on-primary transition-colors hover:bg-primary-dim disabled:cursor-not-allowed disabled:opacity-55 ${FOCUS_RING}`}
+              >
+                <Sym name="play_arrow" fill={1} size={20} />
+                <span className="font-display text-[18px] font-bold tracking-tight">Run eval</span>
+              </button>
+              <p className="text-center text-[11px] leading-relaxed text-text-dim">
+                A simulated user chats with the app for a few turns, then rates how well it understood and met their needs.
+              </p>
+              <div className="flex items-center justify-center pt-1">
+                <button
+                  type="button"
+                  onClick={onOpenRuns}
+                  className={`hud text-[9px] text-primary hover:underline ${FOCUS_RING}`}
+                >
+                  Past runs →
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  // ---------------------------------------------------------------------------
+  // RUNNING / DONE — the live-run layout.
+  // ---------------------------------------------------------------------------
+  const liveView = (
+    <div className="flex min-h-0 flex-1 flex-col bg-surface-dim">
+      {/* Pipeline strip */}
+      <div className="shrink-0 border-b border-outline bg-surface-lowest px-5 py-3">
+        <div className="flex items-center gap-3">
+          <ComponentPipeline
+            variant="live"
+            environment={environment}
+            engine={engine}
+            personaModel={personaModel}
+            phase={phase}
+            jobPhase={job?.phase}
+            hasPersona={persona !== null}
+            turnCount={turns.length}
+            hasQuestionnaire={questionnaire !== null}
+          />
+          <div className="ml-auto flex shrink-0 items-center gap-3">
+            <span className="hud hidden text-[9px] text-text-dim sm:inline">{runContext}</span>
+            <button
+              type="button"
+              onClick={handleNewRun}
+              className={`flex items-center gap-1.5 rounded-md border border-outline bg-surface-low px-3 py-1.5 text-[12px] text-text-variant transition-colors hover:border-primary hover:text-text-main ${FOCUS_RING}`}
+            >
+              <Sym name="tune" size={14} />
+              New run
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Body: thread + inspector */}
+      <div className="flex min-h-0 flex-1 flex-col overflow-hidden lg:flex-row">
         <Trajectory
           turns={turns}
           domain={domain}
-          personaName={personaName}
+          appName={appName}
           sutDescription={sutDescription}
           goalContext={activeGoalContext}
           phase={phase}
           liveStatus={status}
           error={error}
-          hasPersona={persona !== null}
           expandedTurns={expandedTurns}
           onToggleTurn={toggleTurnFold}
           focusedTurnIndex={focusedTurnIndex}
           registerTurnRef={registerTurnRef}
           onRetry={handleRetry}
         />
-      </main>
+        <InspectorTabs
+          active={tab}
+          onChange={setTab}
+          evaluation={<Scorecard questionnaire={questionnaire} metrics={metrics} phase={phase} />}
+          persona={<PersonaPanel persona={persona} context={null} onOpenRaw={() => setDrawerOpen(true)} />}
+          prompts={<PromptPanel prompts={prompts} />}
+        />
+      </div>
 
-      {/* RIGHT — inspector tabs */}
-      <InspectorTabs
-        active={tab}
-        onChange={setTab}
-        evaluation={<Scorecard questionnaire={questionnaire} metrics={metrics} phase={phase} />}
-        persona={
-          <PersonaPanel persona={persona} context={null} onOpenRaw={() => setDrawerOpen(true)} />
-        }
-        prompts={<PromptPanel prompts={prompts} />}
+      {/* Bottom status bar */}
+      <LiveStatusBar
+        phase={phase}
+        turnCount={turns.length}
+        maxTurns={maxTurns}
+        elapsedSeconds={elapsedSeconds}
+        jobId={job?.jobId ?? null}
+        error={error}
+        canExport={canExport}
+        onExport={handleExport}
+        onOpenRuns={onOpenRuns}
+        onRetry={handleRetry}
       />
+    </div>
+  );
 
+  return (
+    <>
+      {showSetup ? setupView : liveView}
+      <PersonaPickerModal
+        open={pickerOpen}
+        onClose={() => setPickerOpen(false)}
+        selectedId={persona?.id ?? null}
+        onSelect={handleSelectPersona}
+      />
       <PersonaDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} persona={persona} context={null} />
+    </>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Setup-form sub-components (presentational, local to the cockpit).
+// ---------------------------------------------------------------------------
+
+/** The 3-card application picker (RecAI / OpenBB / Medical), mockup `:148-168`. */
+function ApplicationPicker({
+  options,
+  value,
+  onChange,
+  disabled,
+}: {
+  options: ConfigOptionValue[];
+  value: string;
+  onChange: (value: string) => void;
+  disabled?: boolean;
+}) {
+  if (options.length === 0) return null;
+  return (
+    <div className="panel rounded-md border border-outline bg-surface p-5">
+      <div className="mb-3.5 flex items-center justify-between">
+        <h3 className="hud text-[10px] text-text-dim">Application</h3>
+        <span className="hud text-[9px] text-text-dim">{options.length} adapters</span>
+      </div>
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+        {options.map((opt) => {
+          const active = opt.value === value;
+          return (
+            <button
+              key={opt.value}
+              type="button"
+              disabled={disabled}
+              aria-pressed={active}
+              onClick={() => onChange(opt.value)}
+              className={`relative rounded-md border p-3.5 text-left transition-all hover:border-primary disabled:cursor-not-allowed disabled:opacity-60 ${FOCUS_RING} ${
+                active ? "border-primary bg-primary/[0.07]" : "border-outline bg-surface-low"
+              }`}
+            >
+              {active && <Sym name="check" size={14} className="absolute right-3 top-3 text-primary" />}
+              <div className="mb-3 grid h-9 w-9 place-items-center rounded border border-outline bg-surface-high">
+                <Sym name={APP_ICON[opt.value] ?? "apps"} size={20} className={active ? "text-primary" : "text-text-variant"} />
+              </div>
+              <div className="text-[13px] font-semibold text-text-main">{opt.label}</div>
+              <div className="mt-0.5 text-[11px] leading-snug text-text-dim">{opt.description}</div>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+/** The "Target persona" panel — avatar + identity + Change, mockup `:233-244`. */
+function TargetPersonaPanel({ persona, onChange }: { persona: PersonaEvalPersona | null; onChange: () => void }) {
+  const title = persona ? personaDescriptiveTitle(null, persona.blurb, persona.source) : null;
+  const codename = persona ? personaCodename(persona.name, persona.id) : null;
+
+  return (
+    <div className="panel rounded-md border border-outline bg-surface p-5">
+      <div className="mb-3.5 flex items-center justify-between">
+        <h3 className="hud text-[10px] text-text-dim">Target persona</h3>
+        <button type="button" onClick={onChange} className={`hud text-[9px] text-primary hover:underline ${FOCUS_RING}`}>
+          Browse catalog →
+        </button>
+      </div>
+      {persona ? (
+        <div className="flex items-center gap-4">
+          <div className="grid h-14 w-14 shrink-0 place-items-center rounded-md border border-outline bg-surface-high">
+            <Sym name="face" fill={1} size={24} className="text-primary" />
+          </div>
+          <div className="min-w-0 flex-1">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="truncate font-display text-[16px] font-semibold text-text-main">{title}</span>
+              {persona.source && (
+                <span className="hud rounded border border-secondary/30 bg-secondary/10 px-1.5 py-0.5 text-[8px] text-secondary">
+                  {persona.source}
+                </span>
+              )}
+              <span className="font-mono text-[10px] text-text-dim">{codename}</span>
+            </div>
+            <p className="mt-0.5 line-clamp-2 text-[12px] leading-snug text-text-variant">{persona.blurb}</p>
+          </div>
+          <button
+            type="button"
+            onClick={onChange}
+            className={`shrink-0 rounded-md border border-outline bg-surface-low px-3.5 py-2 text-[12px] text-text-variant transition-colors hover:border-primary hover:text-text-main ${FOCUS_RING}`}
+          >
+            Change
+          </button>
+        </div>
+      ) : (
+        <button
+          type="button"
+          onClick={onChange}
+          className={`flex w-full items-center gap-4 rounded-md border border-dashed border-outline bg-surface-low p-3 text-left transition-colors hover:border-primary ${FOCUS_RING}`}
+        >
+          <div className="grid h-14 w-14 shrink-0 place-items-center rounded-md border border-dashed border-outline bg-surface-high">
+            <Sym name="person_search" size={24} className="text-text-dim" />
+          </div>
+          <div>
+            <div className="font-display text-[15px] font-semibold text-text-main">Choose a persona</div>
+            <p className="mt-0.5 text-[12px] leading-snug text-text-variant">
+              PersonaEval needs a target persona before it can run.
+            </p>
+          </div>
+        </button>
+      )}
+    </div>
+  );
+}
+
+/** A modal that hosts the existing `PersonaCatalog` for selecting a persona. */
+function PersonaPickerModal({
+  open,
+  onClose,
+  selectedId,
+  onSelect,
+}: {
+  open: boolean;
+  onClose: () => void;
+  selectedId: string | null;
+  onSelect: (persona: PersonaEvalPersona) => void;
+}) {
+  useEffect(() => {
+    if (!open) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") onClose();
+    }
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open, onClose]);
+
+  if (!open) return null;
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} aria-hidden />
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-label="Choose a persona"
+        className="relative z-10 flex h-[80vh] w-full max-w-[380px] flex-col overflow-hidden rounded-md border border-outline bg-surface-lowest shadow-2xl"
+      >
+        <div className="flex shrink-0 items-center justify-between border-b border-outline px-4 py-3">
+          <span className="hud text-[10px] text-primary">Choose a persona</span>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close"
+            className={`grid h-8 w-8 place-items-center rounded-md border border-outline text-text-variant transition-colors hover:border-primary hover:text-text-main ${FOCUS_RING}`}
+          >
+            <Sym name="close" size={18} />
+          </button>
+        </div>
+        <div className="flex min-h-0 flex-1 [&_aside]:!h-full [&_aside]:!w-full [&_aside]:!border-0">
+          <PersonaCatalog
+            selectedId={selectedId}
+            onSelect={(p) => {
+              onSelect(p);
+              onClose();
+            }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/** The live-run bottom status bar (mockup `:537-547`). */
+function LiveStatusBar({
+  phase,
+  turnCount,
+  maxTurns,
+  elapsedSeconds,
+  jobId,
+  error,
+  canExport,
+  onExport,
+  onOpenRuns,
+  onRetry,
+}: {
+  phase: PersonaEvalRunPhase;
+  turnCount: number;
+  maxTurns: number;
+  elapsedSeconds: number;
+  jobId: string | null;
+  error: string | null;
+  canExport: boolean;
+  onExport: () => void;
+  onOpenRuns: () => void;
+  onRetry: () => void;
+}) {
+  const building = phase === "building";
+  const running = phase === "running";
+  const done = phase === "done";
+  const failed = phase === "error" || phase === "timeout";
+  const pct = done ? 100 : running ? Math.min(100, Math.round((turnCount / Math.max(1, maxTurns)) * 100)) : building ? 12 : 100;
+
+  return (
+    <div className="shrink-0 border-t border-outline bg-surface-lowest px-5 py-3">
+      <div className="flex items-center gap-3">
+        {building || running ? (
+          <Sym name="autorenew" size={14} className="shrink-0 animate-rb-spin text-primary" />
+        ) : done ? (
+          <Sym name="check_circle" fill={1} size={14} className="shrink-0 text-secondary" />
+        ) : (
+          <Sym name="error" fill={1} size={14} className="shrink-0 text-danger" />
+        )}
+
+        <span className="min-w-0 truncate text-[12px] text-text-variant">
+          {building && "Starting the app — the first reply can take up to a minute."}
+          {running && (
+            <>
+              Running eval <span className="text-text-dim">·</span> turn {turnCount} of {maxTurns}{" "}
+              <span className="text-text-dim">·</span> {elapsedSeconds}s elapsed
+            </>
+          )}
+          {done && (
+            <>
+              Run complete <span className="text-text-dim">·</span> {turnCount} turn{turnCount === 1 ? "" : "s"}
+            </>
+          )}
+          {failed && <span className="text-danger">{error ?? "The run stopped before completing."}</span>}
+        </span>
+
+        <div className="ml-auto flex shrink-0 items-center gap-2.5">
+          {failed && (
+            <button
+              type="button"
+              onClick={onRetry}
+              className={`flex items-center gap-1.5 rounded-md border border-danger/40 bg-danger/10 px-3 py-1.5 text-[12px] font-medium text-danger transition-colors hover:bg-danger/20 ${FOCUS_RING}`}
+            >
+              <Sym name="refresh" size={14} />
+              Retry
+            </button>
+          )}
+          {(done || failed) && (
+            <button
+              type="button"
+              onClick={onExport}
+              disabled={!canExport}
+              title="Save this conversation and its scores as a JSON file."
+              className={`flex items-center gap-1.5 rounded-md border border-outline bg-surface-low px-3 py-1.5 text-[12px] text-text-variant transition-colors hover:border-primary hover:text-text-main disabled:cursor-not-allowed disabled:opacity-55 ${FOCUS_RING}`}
+            >
+              <Sym name="download" size={14} />
+              Download
+            </button>
+          )}
+          <button
+            type="button"
+            onClick={onOpenRuns}
+            className={`hidden items-center gap-1.5 rounded-md px-2.5 py-1.5 text-[12px] text-text-variant transition-colors hover:text-primary sm:flex ${FOCUS_RING}`}
+          >
+            <Sym name="history" size={14} />
+            Past runs
+          </button>
+          {jobId && <span className="hud hidden font-mono text-[9px] text-text-dim md:inline">{jobId.slice(0, 8)}</span>}
+        </div>
+      </div>
+
+      <div className="mt-2.5 h-0.5 w-full overflow-hidden rounded-full bg-field">
+        <div
+          className={`h-full rounded-full transition-[width] duration-500 ${failed ? "bg-danger" : done ? "bg-secondary" : "bg-primary"} ${building ? "animate-pulse" : ""}`}
+          style={{ width: `${pct}%` }}
+        />
+      </div>
     </div>
   );
 }
 
 function contextForApplication(applicationId: ApplicationId, domain: Domain): string {
-  if (applicationId === "finance_openbb") {
-    return "financial_research";
-  }
-  if (applicationId === "medical_assistant") {
-    return "medical_consultation";
-  }
+  if (applicationId === "finance_openbb") return "financial_research";
+  if (applicationId === "medical_assistant") return "medical_consultation";
   return domain;
 }
 

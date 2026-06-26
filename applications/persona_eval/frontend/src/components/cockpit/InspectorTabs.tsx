@@ -1,16 +1,15 @@
 /**
- * InspectorTabs — the cockpit's right inspector, as a real ARIA tablist.
+ * InspectorTabs — the live-run right inspector, as a real ARIA tablist.
  *
- * Replaces the mockup's hidden-radio CSS trick with a proper, fully
- * keyboard-operable tablist (acceptance criterion):
- *   - `role="tablist"` wrapping two `role="tab"` buttons, each
- *     `aria-selected` + `aria-controls` its `role="tabpanel"`;
- *   - roving `tabIndex` (only the active tab is in the tab order);
- *   - ArrowLeft/ArrowRight (+ Home/End) move between tabs and move focus;
- *   - the active tab gets the primary underline + weight, like the mockup.
+ * Ports the mockup's inspector aside (`app-redesign-v3.html:325-336`): a header
+ * bar ("Inspector"), a row of underline tabs, then the scrollable panel body.
+ * The three panels are Evaluation (`Scorecard`) · Persona (`PersonaPanel`) ·
+ * Prompts (`PromptPanel`).
  *
- * The active tab is controlled by the parent so the global `1`/`2` shortcuts can
- * switch tabs too; selecting a tab here also moves DOM focus to it.
+ * A proper, fully keyboard-operable tablist: `role="tablist"` over `role="tab"`
+ * buttons (`aria-selected` + `aria-controls`), roving `tabIndex`, and
+ * ArrowLeft/Right (+ Home/End) to move + focus. The active tab is controlled by
+ * the parent so the global `1`/`2`/`3` shortcuts switch tabs too.
  */
 import { useRef } from "react";
 
@@ -35,6 +34,7 @@ export interface InspectorTabsProps {
 
 export function InspectorTabs({ active, onChange, evaluation, persona, prompts }: InspectorTabsProps) {
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const activeLabel = TABS.find((t) => t.id === active)?.label ?? "";
 
   function focusTab(index: number) {
     const clamped = (index + TABS.length) % TABS.length;
@@ -60,13 +60,19 @@ export function InspectorTabs({ active, onChange, evaluation, persona, prompts }
   }
 
   return (
-    <aside className="z-0 flex h-[320px] w-full flex-shrink-0 flex-col border-t border-outline-dim bg-surface-lowest lg:h-full lg:w-[340px] lg:border-l lg:border-t-0">
-      {/* Tab header */}
+    <aside className="z-0 flex h-[340px] w-full flex-shrink-0 flex-col border-t border-outline bg-surface-lowest lg:h-full lg:w-[360px] lg:border-l lg:border-t-0">
+      {/* Header bar */}
+      <div className="flex shrink-0 items-center justify-between border-b border-outline bg-surface px-4 py-3">
+        <span className="hud text-[10px] text-primary">Inspector</span>
+        <span className="hud text-[9px] text-text-dim">{activeLabel}</span>
+      </div>
+
+      {/* Underline tabs */}
       <div
         role="tablist"
         aria-label="Inspector"
         aria-orientation="horizontal"
-        className="flex flex-shrink-0 items-center gap-lg border-b border-outline-dim bg-surface px-md pt-sm"
+        className="flex shrink-0 items-center gap-5 border-b border-outline px-4"
       >
         {TABS.map((tab, i) => {
           const selected = tab.id === active;
@@ -81,43 +87,26 @@ export function InspectorTabs({ active, onChange, evaluation, persona, prompts }
               tabIndex={selected ? 0 : -1}
               onClick={() => onChange(tab.id)}
               onKeyDown={(e) => onKeyDown(e, i)}
-              className={`-mb-px flex select-none items-center gap-1.5 border-b-2 pb-2.5 font-semibold text-sm transition-colors duration-200 ${FOCUS_RING} ${
-                selected
-                  ? "border-primary font-bold text-primary"
-                  : "border-transparent text-text-variant hover:text-primary"
+              className={`-mb-px flex select-none items-center gap-1.5 border-b-2 py-2.5 text-[12px] font-medium transition-colors ${FOCUS_RING} ${
+                selected ? "border-primary text-primary" : "border-transparent text-text-dim hover:text-text-variant"
               }`}
             >
-              <Sym name={tab.icon} fill={selected ? 1 : 0} size={18} />
+              <Sym name={tab.icon} fill={selected ? 1 : 0} size={16} />
               {tab.label}
             </button>
           );
         })}
       </div>
 
-      {/* Tab panels */}
+      {/* Panels */}
       <div className="custom-scrollbar flex-1 overflow-y-auto">
-        <div
-          role="tabpanel"
-          id="inspector-panel-evaluation"
-          aria-labelledby="inspector-tab-evaluation"
-          hidden={active !== "evaluation"}
-        >
+        <div role="tabpanel" id="inspector-panel-evaluation" aria-labelledby="inspector-tab-evaluation" hidden={active !== "evaluation"}>
           {active === "evaluation" && evaluation}
         </div>
-        <div
-          role="tabpanel"
-          id="inspector-panel-persona"
-          aria-labelledby="inspector-tab-persona"
-          hidden={active !== "persona"}
-        >
+        <div role="tabpanel" id="inspector-panel-persona" aria-labelledby="inspector-tab-persona" hidden={active !== "persona"}>
           {active === "persona" && persona}
         </div>
-        <div
-          role="tabpanel"
-          id="inspector-panel-prompts"
-          aria-labelledby="inspector-tab-prompts"
-          hidden={active !== "prompts"}
-        >
+        <div role="tabpanel" id="inspector-panel-prompts" aria-labelledby="inspector-tab-prompts" hidden={active !== "prompts"}>
           {active === "prompts" && prompts}
         </div>
       </div>

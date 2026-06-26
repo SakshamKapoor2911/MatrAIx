@@ -20,7 +20,14 @@ import { useQuery } from "@tanstack/react-query";
 import { RatingChip } from "./RatingChip";
 import { RunDetail } from "./RunDetail";
 import { RunCompare } from "./RunCompare";
-import { DomainPill, SourceTag, fmtGoalContext, fmtRunDate } from "./runsShared";
+import {
+  AppTypeTag,
+  DomainPill,
+  SourceTag,
+  fmtGoalContext,
+  fmtRunDate,
+  runSummaryAppType,
+} from "./runsShared";
 import { FOCUS_RING, Sym } from "./cockpit/cockpitShared";
 import { api, ApiError } from "@/lib/api";
 import type { PersonaEvalRunSummary, PersonaEvalRunsResponse } from "@/lib/types";
@@ -209,11 +216,11 @@ interface RunsTableProps {
 
 /** Shared grid template so the header and every row align exactly. */
 const ROW_GRID =
-  "grid grid-cols-[28px_64px_minmax(0,1.6fr)_minmax(0,0.9fr)_minmax(0,1.1fr)_64px_80px] items-center gap-3";
+  "grid grid-cols-[28px_64px_72px_minmax(0,1.6fr)_minmax(0,0.9fr)_minmax(0,1.1fr)_64px_80px] items-center gap-3";
 
 function RunsTable({ runs, comparing, picks, onOpen, onTogglePick }: RunsTableProps) {
   return (
-    <div className="overflow-hidden rounded-md border border-outline bg-surface">
+    <div className="panel overflow-hidden rounded-md border border-outline bg-surface">
       {/* Column header */}
       <div
         className={`${ROW_GRID} border-b border-outline bg-surface-low px-3.5 py-2 hud text-[9px] text-text-dim`}
@@ -222,6 +229,7 @@ function RunsTable({ runs, comparing, picks, onOpen, onTogglePick }: RunsTablePr
         <span title="The simulated user's overall rating, out of 10. Green is great, amber is mixed, red means it fell short.">
           Score
         </span>
+        <span title="Which kind of app was tested — a chatbot, a survey, or a website.">Kind</span>
         <span>Simulated user</span>
         <span>Domain</span>
         <span>Conversation style</span>
@@ -262,6 +270,11 @@ function RunsTable({ runs, comparing, picks, onOpen, onTogglePick }: RunsTablePr
                 {/* Rating — the scannable signature */}
                 <span className="flex">
                   <RatingChip rating={run.overallRating ?? null} />
+                </span>
+
+                {/* Kind — app-type tag (chatbot today; forward-compatible) */}
+                <span className="flex">
+                  <AppTypeTag type={runSummaryAppType(run)} />
                 </span>
 
                 {/* Persona + source */}
