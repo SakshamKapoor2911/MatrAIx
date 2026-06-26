@@ -107,6 +107,7 @@ addopts = ["-v", "--tb=short", "--strict-markers", "--strict-config"]
 markers = [
     "asyncio: marks tests as async tests",
     "runtime: marks tests as runtime tests (may need docker)",
+    "matraix_smoke: MatrAIx Docker smoke (oracle hello-world, no API key)",
     "unit: marks tests as unit tests (fast, no external dependencies)",
     "integration: marks tests as integration tests (requires external services, could be mocked)",
     "windows_containers: marks tests requiring Docker in Windows container mode",

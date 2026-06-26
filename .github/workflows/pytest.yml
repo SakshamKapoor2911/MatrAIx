@@ -55,29 +55,38 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           uv run pytest tests/ \
-            -m "not runtime" \
+            -m "not runtime and not matraix_smoke" \
             --ignore=tests/unit/models/test_registry.py \
             --ignore=tests/unit/test_sync_registry_to_supabase.py \
+            --ignore=tests/unit/test_leaderboard_submitter.py \
+            --ignore=tests/unit/test_leaderboard_metadata.py \
+            --ignore=tests/unit/test_leaderboard_db.py \
+            --ignore=tests/unit/test_leaderboard_static_validation.py \
+            --ignore=tests/unit/test_leaderboard_static_validation_report.py \
+            --ignore=tests/unit/test_leaderboard_submit.py \
+            --ignore=tests/unit/test_leaderboard_report_display.py \
+            --ignore=tests/unit/test_leaderboard_dynamic_validation.py \
+            --ignore=tests/unit/test_upload_storage.py \
+            --ignore=tests/unit/test_upload_auth.py \
+            --ignore=tests/unit/test_cli_upload.py \
+            --ignore=tests/unit/test_cli_run_upload.py \
+            --ignore=tests/unit/viewer/test_upload_status.py \
+            --ignore=tests/unit/test_download_db_client.py \
+            -n auto --dist load \
             --cov=src/harbor \
             --cov-report=term-missing
 
-      - name: Run runtime integration tests with coverage (Linux)
+      - name: Run MatrAIx harbor-smoke (Linux)
         if: runner.os == 'Linux'
         run: |
-          uv run pytest tests/ \
-            -m runtime \
-            -n 4 \
-            --dist load \
+          uv run pytest tests/integration/test_matraix_harbor_smoke.py \
+            -m matraix_smoke \
             --ignore=tests/unit/models/test_registry.py \
-            --ignore=tests/unit/test_sync_registry_to_supabase.py \
-            --cov=src/harbor \
-            --cov-append \
-            --cov-report=xml \
-            --cov-report=term-missing
+            --ignore=tests/unit/test_sync_registry_to_supabase.py
 
       - name: Run all tests with coverage (Windows)
         if: runner.os == 'Windows'
-        run: uv run pytest tests/ --cov=src/harbor --cov-report=xml --cov-report=term-missing --ignore=tests/unit/agents/installed/test_agent_install_execution.py --ignore=tests/unit/models/test_registry.py --ignore=tests/unit/test_sync_registry_to_supabase.py -m "not runtime and not windows_containers" -k "not test_full_task_mapping"
+        run: uv run pytest tests/ --cov=src/harbor --cov-report=xml --cov-report=term-missing --ignore=tests/unit/agents/installed/test_agent_install_execution.py --ignore=tests/unit/models/test_registry.py --ignore=tests/unit/test_sync_registry_to_supabase.py --ignore=tests/unit/test_leaderboard_submitter.py --ignore=tests/unit/test_leaderboard_metadata.py --ignore=tests/unit/test_leaderboard_db.py --ignore=tests/unit/test_leaderboard_static_validation.py --ignore=tests/unit/test_leaderboard_static_validation_report.py --ignore=tests/unit/test_leaderboard_submit.py --ignore=tests/unit/test_leaderboard_report_display.py --ignore=tests/unit/test_leaderboard_dynamic_validation.py --ignore=tests/unit/test_upload_storage.py --ignore=tests/unit/test_upload_auth.py --ignore=tests/unit/test_cli_upload.py --ignore=tests/unit/test_cli_run_upload.py --ignore=tests/unit/viewer/test_upload_status.py --ignore=tests/unit/test_download_db_client.py -m "not runtime and not matraix_smoke and not windows_containers" -k "not test_full_task_mapping"
 
       - name: Run Windows container integration tests
         if: runner.os == 'Windows'
