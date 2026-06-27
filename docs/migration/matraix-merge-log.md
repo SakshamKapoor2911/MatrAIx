@@ -348,3 +348,29 @@ This log records the curated migration from MatrAIx into PersonaBench.
     `harbor` Python namespace used by the runtime.
   - Package build backend uses setuptools to match the root PersonaBench
     project.
+
+### Step 16: Import optional Rewardkit package
+
+- Branch: `codex/packages-rewardkit`
+- Source repository: `MatrAIx-ai/MatrAIx`
+- Source reference: `origin/main` at `e50592a4cbfca86b3207e1f9d5247ca9f93ee4d0`
+- Purpose: restore the Harbor Rewardkit grading toolkit as an optional package
+  while keeping package code isolated under `packages/`.
+- Imported into:
+  - `packages/rewardkit/`
+  - `.github/workflows/pytest.yml`
+  - `packages/README.md`
+  - `pyproject.toml`
+  - `tests/environment/test_optional_packages.py`
+- Excluded:
+  - `packages/matraix/`
+  - publish scripts and credentials.
+- Compatibility adjustments:
+  - Package build backend uses setuptools to match the root PersonaBench
+    project.
+  - The superseded Apache license classifier was removed while keeping the
+    explicit `Apache-2.0` license expression.
+  - Rewardkit prompt markdown files are declared as package data.
+  - CI installs and runs Rewardkit tests explicitly as optional package tests.
+  - Root pytest markers include `unit` and `asyncio` to keep optional package
+    test output readable.

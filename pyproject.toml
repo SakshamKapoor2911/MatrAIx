@@ -94,3 +94,7 @@ personabench = [
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 python_files = ["test_*.py"]
+markers = [
+    "asyncio: marks tests as async tests",
+    "unit: marks tests as unit tests",
+]

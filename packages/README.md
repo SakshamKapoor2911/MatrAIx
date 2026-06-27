@@ -15,3 +15,4 @@ Rules:
 Current packages:
 
 - `harbor-langsmith/`: LangSmith plugin for Harbor jobs.
+- `rewardkit/`: lightweight grading toolkit for environment-based tasks.
