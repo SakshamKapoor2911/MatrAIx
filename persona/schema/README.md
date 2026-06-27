@@ -1,0 +1,24 @@
+# Persona Schema
+
+This directory contains the persona dimension catalog and schema validation
+tools.
+
+## Files
+
+- `dimensions.json`: unified persona dimension space imported from MatrAIx.
+- `validators/schema_validator.py`: validates required dimension fields and
+  checks that deprecated fields are absent.
+
+## Validate
+
+Run from the repository root:
+
+```bash
+python3 persona/schema/validators/schema_validator.py
+```
+
+The validator also accepts an explicit path:
+
+```bash
+python3 persona/schema/validators/schema_validator.py persona/schema/dimensions.json
+```
