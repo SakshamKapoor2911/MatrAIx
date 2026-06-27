@@ -12,6 +12,8 @@ Current scope:
   validation helpers.
 - `backend/service/survey_instruments.py`: built-in survey instruments migrated
   from MatrAIx PersonaEval work.
+- `backend/service/recommender_eval.py`: recommender chat artifact mapping,
+  PersonaEval result dataclasses, and Harbor prompt/persona helpers.
 
 Deferred scope:
 

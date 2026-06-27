@@ -974,3 +974,28 @@ This log records the curated migration from MatrAIx into PersonaBench.
     contract.
   - Full RecAI/backend/frontend migration remains separate application tooling
     work; generated recommender catalog/persona fixture files stay external.
+
+### Step 40: Import recommender PersonaEval artifact helpers
+
+- Branch: `codex/application-recommender-eval-artifacts`
+- Source repository: `MatrAIx-ai/MatrAIx`
+- Source PRs:
+  - `#75`, `v1 evaluation flow`
+  - `#76`, `Add Harbor-backed recommender persona eval`
+- PersonaBench snapshot PRs:
+  - `#74`
+  - `#73`
+- Purpose: preserve the pure Python artifact/result contract for recommender
+  persona evaluation without importing the full historical backend, frontend,
+  generated data, or raw app snapshot.
+- Imported into:
+  - `application/persona_eval/backend/service/recommender_eval.py`
+- Updated:
+  - `application/persona_eval/README.md`
+- Source handling:
+  - Result dataclasses, prompt construction, Harbor persona YAML writing, and
+    artifact mapping are adapted to the clean `application/persona_eval/`
+    module.
+  - Legacy `MATRIX_*` environment variable wiring, API endpoints, subprocess
+    Harbor runner integration, and frontend UI remain deferred until the
+    application tooling surface is migrated cleanly.
