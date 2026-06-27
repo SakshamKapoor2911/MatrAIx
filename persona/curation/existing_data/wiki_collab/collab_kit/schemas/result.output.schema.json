@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Persona-attribution result record",
+  "description": "One line of results.jsonl. You produce these; the owner ingests them. This is THE contract — conformance.py enforces it on both sides.",
+  "type": "object",
+  "required": ["global_idx", "fields"],
+  "properties": {
+    "global_idx": {
+      "type": "integer",
+      "description": "MUST equal the input task's global_idx (this is how the owner joins your output back)."
+    },
+    "task_id": { "type": "string" },
+    "qid": { "type": "string" },
+    "model": {
+      "type": ["string", "null"],
+      "description": "Back-compat mirror of run.model."
+    },
+    "run": {
+      "type": "object",
+      "description": "Provenance the harness stamps on every record: which model/version/effort produced it.",
+      "properties": {
+        "backend": { "type": "string" },
+        "model": { "type": ["string", "null"], "description": "e.g. claude-opus-4-8" },
+        "effort": { "type": "string", "description": "medium | high | xhigh | max" },
+        "runner_version": { "type": "string" },
+        "mixed_provenance": {
+          "type": "boolean",
+          "description": "True when fields in this record were produced by more than one backend/model/effort run."
+        },
+        "unit_runs": {
+          "type": "array",
+          "description": "Per-unit provenance entries used when mixed_provenance is true.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "backend": { "type": "string" },
+              "model": { "type": ["string", "null"] },
+              "effort": { "type": "string" },
+              "runner_version": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "fields": {
+      "type": "array",
+      "description": "One entry per persona dimension you attempted. Unattempted dimensions may be omitted; unsupported ones use value null.",
+      "items": {
+        "type": "object",
+        "required": ["field_id", "value", "confidence", "evidence", "assignment_type"],
+        "properties": {
+          "field_id": {
+            "type": "string",
+            "description": "Must be an id from the dimensions spec the owner shipped."
+          },
+          "value": {
+            "type": ["string", "null"],
+            "description": "Must be one of that dimension's allowed values (verbatim), or null when unsupported."
+          },
+          "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+          "evidence": {
+            "type": "string",
+            "description": "Short quote copied from profile_text. Required (non-empty) whenever value is not null."
+          },
+          "assignment_type": {
+            "type": "string",
+            "enum": ["direct", "structured_claim", "summary_inference", "unsupported"]
+          },
+          "run": {
+            "type": "object",
+            "description": "The backend/model/effort run that produced this field, used to preserve provenance across resumed mixed-backend runs.",
+            "properties": {
+              "backend": { "type": "string" },
+              "model": { "type": ["string", "null"] },
+              "effort": { "type": "string" },
+              "runner_version": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+}
