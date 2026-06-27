@@ -23,6 +23,7 @@ SMOKE_PERSONA_ID = "0001"
 SMOKE_PERSONA_PATH = f"{DEFAULT_DATASET}/persona_{SMOKE_PERSONA_ID}.yaml"
 DEFAULT_GROUNDING_JOBS_DIR = "configs/jobs/persona-task-grounding-job-recipe"
 GENERATED_COHORTS_DIR = "persona/datasets/_generated/cohorts"
+DEFAULT_DIMENSIONS_SCHEMA = "persona/schema/dimensions.json"
 
 
 def get_nested(data: dict[str, Any], dotted_path: str) -> Any:
@@ -258,7 +259,7 @@ def sample_personas_probe_stratified(
 
     probe_key = probe_dimension_key(probe_dimension)
     values = probe_values or values_for_dimension(
-        probe_key, catalog_path=str(repo_root / "persona" / "dimensions.json")
+        probe_key, catalog_path=str(repo_root / DEFAULT_DIMENSIONS_SCHEMA)
     )
     if not values:
         raise ValueError(f"No catalog values for probe dimension {probe_key!r}")
@@ -358,7 +359,7 @@ def build_confounder_probe_cohort(
 
     probe_key = probe_dimension_key(probe_dimension)
     values = probe_values or values_for_dimension(
-        probe_key, catalog_path=str(repo_root / "persona" / "dimensions.json")
+        probe_key, catalog_path=str(repo_root / DEFAULT_DIMENSIONS_SCHEMA)
     )
     if not values:
         raise ValueError(f"No catalog values for probe dimension {probe_key!r}")
@@ -648,10 +649,12 @@ def build_job_config(spec: dict[str, Any], *, repo_root: Path) -> dict[str, Any]
     ]
 
     verifier_env: dict[str, str] = {
+        "PERSONABENCH_PROBE_DIMENSION": probe_dimension,
         "MATRAIX_PROBE_DIMENSION": probe_dimension,
         **(spec.get("verifier", {}).get("env") or {}),
     }
     if probe_value is not None:
+        verifier_env["PERSONABENCH_PROBE_VALUE"] = str(probe_value)
         verifier_env["MATRAIX_PROBE_VALUE"] = str(probe_value)
 
     return {

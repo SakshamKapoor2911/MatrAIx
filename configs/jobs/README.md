@@ -22,7 +22,8 @@ Deferred from the MatrAIx source recipes:
 - `harbor-smoke-local.yaml`, because it points at `examples/tasks/hello-world`,
   which is not part of the curated PersonaBench main tree.
 - `personaBench-example-survey-local.yaml` and persona grounding recipes,
-  because `persona/tasks/` has not been imported yet.
+  because they should be regenerated against curated sample or external
+  PersonaBench datasets instead of copied from the source tree.
 - Generated random-sample recipes that reference
   `persona/datasets/bench-dev-2000/`, because that full dataset is intentionally
   external to git.

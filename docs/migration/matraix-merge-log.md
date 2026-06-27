@@ -204,3 +204,33 @@ This log records the curated migration from MatrAIx into PersonaBench.
   - Recipe persona paths point at
     `persona/datasets/bench-dev-sample/persona_0042.yaml`.
   - Recipe documentation records what remains deferred and why.
+
+### Step 10: Import PersonaBench task layer
+
+- Branch: `codex/persona-bench-tasks`
+- PersonaBench PR: `#134`
+- Source repository: `MatrAIx-ai/MatrAIx`
+- Source reference: `origin/main` at `e50592a4cbfca86b3207e1f9d5247ca9f93ee4d0`
+- Purpose: bring over the curated persona grounding task, reporting, scripts,
+  validators, and pure persona generation utilities without importing the full
+  generated persona pool or generated job recipes.
+- Imported into:
+  - `persona/tasks/`
+  - `persona/reporting/`
+  - `persona/scripts/`
+  - `persona/validators/`
+  - `src/personabench/persona_grounding.py`
+  - `src/personabench/persona_consistency.py`
+  - `src/personabench/persona_generator.py`
+  - `tests/unit/personabench/`
+- Excluded:
+  - full `persona/datasets/bench-dev-2000/`
+  - generated `persona/datasets/_generated/` cohorts and dev pools
+  - generated `configs/jobs/persona-task-grounding-job-recipe/*.yaml`
+  - historical `jobs/` outputs
+- Compatibility adjustments:
+  - Task registry names use `personabench/persona-bench-*`.
+  - Default schema paths use `persona/schema/dimensions.json`.
+  - Local generated datasets go under ignored `persona/datasets/_generated/`.
+  - Persona grounding verifier env now prefers `PERSONABENCH_PROBE_*` while
+    retaining `MATRAIX_PROBE_*` fallback for migrated task compatibility.

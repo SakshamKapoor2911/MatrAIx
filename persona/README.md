@@ -10,8 +10,10 @@ persona/
   schema/       Dimensions, attributes, validators, and schema docs.
   datasets/     Small curated persona sets and sample fixtures.
   curation/     Scripts and manifests for building persona data.
-  bench/        Persona adherence and grounding tasks.
-  reporting/    Persona quality and coverage analysis.
+  tasks/        Persona grounding tasks and task-local verifiers.
+  scripts/      Persona pool and grounding job generation.
+  validators/   Schema validation utilities.
+  reporting/    Persona grounding job rollups.
 ```
 
 Do not place runtime engines, product scenarios, or raw generated job outputs
@@ -25,6 +27,8 @@ The first curated import brought in:
 - `schema/validators/schema_validator.py`
 - `curation/attribute_pool/` docs and pipeline scripts
 - two sample personas under `datasets/bench-dev-sample/`
+- `tasks/`, `scripts/`, `validators/`, and `reporting/` for the curated
+  persona grounding task layer
 
 Large MatrAIx generated outputs were intentionally excluded. See
 `docs/migration/matraix-merge-log.md`.

@@ -185,15 +185,36 @@ Still deferred:
 
 - `harbor-smoke-local.yaml`, because it points at unimported
   `examples/tasks/hello-world`.
-- `personaBench-*` and persona grounding recipes, because `persona/tasks/`
-  has not been imported yet.
+- `personaBench-*` and persona grounding recipes, because they should be
+  regenerated against curated sample or external PersonaBench datasets instead
+  of copied from source snapshots.
 - Generated random-sample recipes that reference the external
   `persona/datasets/bench-dev-2000/` dataset.
 - All historical `jobs/` outputs.
 
-### Wave 7: PersonaBench tasks and annotation tooling
+### Wave 7: PersonaBench task layer
 
-Import persona adherence tasks, grounding specs, and annotation tools.
+Import persona grounding tasks, grounding specs, reporting, and script entry
+points without importing full generated persona pools.
+
+Status: scoped in branch `codex/persona-bench-tasks`.
+
+Imported in this wave:
+
+- `persona/tasks/`
+- `persona/reporting/`
+- `persona/scripts/`
+- `persona/validators/`
+- `src/personabench/persona_grounding.py`
+- `src/personabench/persona_consistency.py`
+- `src/personabench/persona_generator.py`
+- focused unit tests under `tests/unit/personabench/`
+
+Still deferred:
+
+- Full `persona/datasets/bench-dev-2000/` and generated cohorts.
+- Generated `configs/jobs/persona-task-grounding-job-recipe/*.yaml` outputs.
+- Annotation tooling not required to run the curated task layer.
 
 Primary sources:
 
