@@ -123,3 +123,34 @@ This log records the curated migration from MatrAIx into PersonaBench.
     artifacts referenced by module READMEs.
   - Raw snapshot PRs remain preservation artifacts, not clean-main merge
     candidates.
+
+### Step 7: Import environment runtime foundation
+
+- Branch: `codex/environment-runtime-foundation`
+- Source repository: `MatrAIx-ai/MatrAIx`
+- Source reference: `origin/main` at `e50592a4cbfca86b3207e1f9d5247ca9f93ee4d0`
+- Purpose: bring over the Harbor runtime package needed to execute curated
+  PersonaBench application and persona tasks, without importing raw snapshots
+  or historical job outputs.
+- Imported into:
+  - `src/harbor/`
+  - root `pyproject.toml`
+  - `tests/environment/`
+- Excluded:
+  - `src/matraix/agents/`
+  - `packages/rewardkit/`
+  - `packages/harbor-langsmith/`
+  - `configs/jobs/`
+  - `jobs/`
+  - standalone `apps/viewer`
+  - bulk `adapters/` and `examples/`
+- Compatibility adjustments:
+  - The root project remains `personabench`; the imported runtime keeps the
+    `harbor` Python namespace and CLI entrypoints.
+  - Harbor version discovery now falls back from the upstream `harbor`
+    distribution name to the PersonaBench distribution name.
+  - Runtime package data is declared explicitly so CLI templates are included
+    in built distributions.
+  - `AgentFactory` no longer points at deferred `matraix.agents` import paths;
+    persona agent registrations are reserved for the follow-up
+    `environment/persona-agents` PR.

@@ -125,6 +125,25 @@ Out of scope:
 - `apps/viewer`
 - unrelated example jobs
 
+Status: scoped in branch `codex/environment-runtime-foundation`.
+
+Imported in this wave:
+
+- `src/harbor/` as the environment runtime Python package.
+- `harbor`, `hr`, and `hb` console script metadata.
+- Runtime package data needed by CLI templates and local environment backends.
+
+Still deferred:
+
+- `src/matraix/agents/` persona agents, because they depend on this runtime
+  foundation and should land as a separate `environment/persona-agents` PR.
+  The runtime foundation keeps persona `AgentName` values but does not register
+  deferred agent import paths.
+- `packages/rewardkit/` and `packages/harbor-langsmith/`, unless a later
+  verifier or tracing PR proves they are required in `main`.
+- `configs/jobs/`, raw `jobs/` outputs, standalone `apps/viewer`, bulk
+  adapters, and examples.
+
 ### Wave 5: Persona agents
 
 Import persona-enabled agents only after the runtime foundation is present.
