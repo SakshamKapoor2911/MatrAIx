@@ -9,6 +9,7 @@ import tomllib
 ROOT = Path(__file__).resolve().parents[2]
 PERSONA_SURVEY = ROOT / "application/tasks/persona-survey"
 RECOMMENDER_CHAT = ROOT / "application/tasks/recommender-agent_chat_api"
+INTERFACE_ROOT = ROOT / "application/tasks/interface"
 
 
 def test_persona_survey_task_metadata_is_clean() -> None:
@@ -171,3 +172,30 @@ def test_recommender_chat_sidecar_contract() -> None:
     assert len(conversation["messages"]) == 6
     assert recommendations["total"] >= 1
     assert recommendations["recommendedItems"][0]["itemId"].startswith("movie-")
+
+
+def test_application_task_interface_manifest_uses_clean_task_paths() -> None:
+    manifest = json.loads((INTERFACE_ROOT / "manifest.json").read_text(encoding="utf-8"))
+
+    assert manifest["schemaVersion"] == "application-task-interface-v1"
+    assert set(manifest["applicationTypes"]) == {"survey", "chatbot", "web"}
+    assert manifest["applicationTypes"]["survey"]["canonicalTask"] == (
+        "application/tasks/persona-survey"
+    )
+    assert manifest["applicationTypes"]["chatbot"]["canonicalTask"] == (
+        "application/tasks/recommender-agent_chat_api"
+    )
+    assert manifest["applicationTypes"]["web"]["canonicalTask"] == (
+        "application/tasks/example-web-playwright_books-interest"
+    )
+
+
+def test_application_task_interface_docs_cover_each_protocol() -> None:
+    for dirname in ("survey", "chatbot", "web"):
+        doc = INTERFACE_ROOT / dirname / "README.md"
+        assert doc.is_file(), doc
+        text = doc.read_text(encoding="utf-8")
+        assert "Task instruction" in text
+        assert "Interaction protocol" in text
+        assert "Evaluation contract" in text
+        assert "applications/tasks/" not in text

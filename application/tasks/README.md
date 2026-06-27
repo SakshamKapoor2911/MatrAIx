@@ -39,6 +39,12 @@ the scenario, task metadata, and verifier.
 Persona benchmark tasks should live under `persona/bench/` or a later
 `persona/tasks/` import, not in this module.
 
+## Interface
+
+[`interface/`](interface/) records the shared application-task protocol for
+survey, chatbot, and web/computer-use tasks. Use it to decide where a new task
+belongs and which artifacts its verifier should expect.
+
 ## Docker (`persona-claude-code` tasks)
 
 [`_docker/install-claude-code.sh`](_docker/install-claude-code.sh) pre-bakes
