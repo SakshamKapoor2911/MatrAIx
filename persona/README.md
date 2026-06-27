@@ -3,12 +3,12 @@
 This module owns persona data, schema, curation, and persona adherence
 evaluation.
 
-Planned layout:
+Current layout:
 
 ```text
 persona/
   schema/       Dimensions, attributes, validators, and schema docs.
-  datasets/     Small curated persona sets.
+  datasets/     Small curated persona sets and sample fixtures.
   curation/     Scripts and manifests for building persona data.
   bench/        Persona adherence and grounding tasks.
   reporting/    Persona quality and coverage analysis.
@@ -16,3 +16,15 @@ persona/
 
 Do not place runtime engines, product scenarios, or raw generated job outputs
 here. Those belong in `environment/`, `application/`, or external storage.
+
+## Imported from MatrAIx
+
+The first curated import brought in:
+
+- `schema/dimensions.json`
+- `schema/validators/schema_validator.py`
+- `curation/attribute_pool/` docs and pipeline scripts
+- two sample personas under `datasets/bench-dev-sample/`
+
+Large MatrAIx generated outputs were intentionally excluded. See
+`docs/migration/matraix-merge-log.md`.

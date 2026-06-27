@@ -30,3 +30,28 @@ This log records the curated migration from MatrAIx into PersonaBench.
   - Do not merge raw snapshot directories into `main`.
   - Curate files into `persona/`, `application/`, or `environment/`.
   - Record every import source in this log.
+- PersonaBench PR: `#126`
+- Result: merged
+- Merge commit: `e039ce86b42c0ab91cf27d74a25ee09864b08ee5`
+
+### Step 3: Import curated Persona core assets
+
+- Branch: `codex/persona-core-curated-import`
+- Source repository: `MatrAIx-ai/MatrAIx`
+- Source reference: `origin/main` at `e50592a4cbfca86b3207e1f9d5247ca9f93ee4d0`
+- Purpose: bring over Persona-owned schema, curation scripts, and tiny sample
+  dataset fixtures without importing raw snapshots or large generated outputs.
+- Imported into:
+  - `persona/schema/`
+  - `persona/curation/attribute_pool/`
+  - `persona/datasets/bench-dev-sample/`
+- Excluded:
+  - full `persona/datasets/bench-dev-2000/`
+  - generated attribute-pool `outputs/`
+  - raw curation input dumps under the original `persona/attribute_pool/dataset/`
+- Compatibility adjustments:
+  - Curation scripts now resolve paths relative to
+    `persona/curation/attribute_pool/`.
+  - Raw/reference inputs live under `sources/`.
+  - Generated outputs live under ignored `outputs/`.
+  - The schema validator defaults to `persona/schema/dimensions.json`.
