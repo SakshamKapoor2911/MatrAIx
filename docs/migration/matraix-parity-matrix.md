@@ -32,7 +32,7 @@ linked from documentation after upload to external artifact storage.
 |---|---:|---:|---|---|---|
 | `.github/` | 8 | 14.5 KiB | `.github/` | `partial` | Safe CODEOWNERS, labeler, pytest, and Ruff workflows are imported. Claude automation remains excluded until secrets and review policy are explicit. |
 | Root metadata | 15 | 0.93 MiB | root files | `partial` | Keep PersonaBench branding. Review `LICENSE`, `NOTICE`, `CITATION.cff`, `.python-version`, `uv.lock`, and contributor docs one by one. |
-| `adapters/` | 1,483 | 16.4 MiB | `environment/adapters/` | `needs-curated-import` | Do not dump the adapter zoo at repo root. Import adapters in small batches with manifests, dependencies, smoke commands, and external-data notes. |
+| `adapters/` | 1,483 | 16.4 MiB | `environment/adapters/` | `partial` | Adapter foundation and `simpleqa` are imported with manifests and adapter-local `_generated/` output. Continue adapter imports in small batches; do not dump the adapter zoo at repo root. |
 | `application/` | 88 | 81.1 KiB | `application/` | `merged-clean` | Curated tasks, reporting, and job-generation utilities are already present. Future changes should stay under `application/`. |
 | `apps/viewer/` | 64 | 750.0 KiB | `apps/viewer/` | `merged-clean` | Viewer source was imported as repo-local tooling. Generated build output and `node_modules` stay out of git. |
 | `configs/jobs/` | 18 | 18.4 KiB | `configs/jobs/` | `partial` | Curated runnable application recipes and the `harbor-smoke-local.yaml` runtime smoke recipe are present. Import only additional recipes whose referenced tasks, agents, and sample datasets exist. |
@@ -57,7 +57,7 @@ The following PRs are the clean-main continuation path approved for migration:
 | 2 | Safe GitHub metadata | `.github` workflows, PR template updates, CODEOWNERS, labeler config, and CI assumptions that still apply. | Secrets, deploy workflows, branch-protection-breaking behavior. |
 | 3 | Minimal examples and smoke recipes | Runtime examples required by curated smoke jobs, likely starting with `examples/tasks/hello-world` and `harbor-smoke-local.yaml`. | Full example job outputs under `examples/jobs/` and `jobs/`. |
 | 4 | Optional packages | `packages/rewardkit` and `packages/harbor-langsmith` as isolated optional package PRs, or a single PR if the dependency graph requires both together. | Publishing credentials, generated build artifacts. |
-| 5 | Adapter foundation | `environment/adapters/README.md`, adapter manifest format, and a first small adapter batch. | Bulk import of all 1,483 adapter files. |
+| 5 | Adapter foundation | `environment/adapters/README.md`, adapter manifest format, and `simpleqa` as the first focused adapter import. | Bulk import of all 1,483 adapter files, generated datasets, and adapter lockfiles. |
 | 6 | External artifact handoff | Expand artifact inventory and add placeholder HuggingFace slots for persona data, job outputs, and large fixtures. | Uploading binary artifacts into git. |
 
 ## Adapter Import Rules
