@@ -402,3 +402,28 @@ This log records the curated migration from MatrAIx into PersonaBench.
   - The adapter package uses setuptools and declares template package data.
   - Adapter manifests record source path, commit, dependencies, external data,
     smoke commands, and intentionally excluded source paths.
+
+### Step 18: Expand external artifact handoff checklist
+
+- Branch: `codex/external-artifact-handoff`
+- Source repository: `MatrAIx-ai/MatrAIx`
+- Source reference: `origin/main` at `e50592a4cbfca86b3207e1f9d5247ca9f93ee4d0`
+- Purpose: give maintainers a concrete upload checklist for large MatrAIx
+  artifacts that should stay outside clean `main`.
+- Documentation updated:
+  - `migration/matraix/README.md`
+  - `docs/migration/matraix-parity-matrix.md`
+  - `docs/migration/matraix-merge-log.md`
+- Recorded artifact groups:
+  - tracked `origin/main` persona attribute-pool outputs
+  - tracked `origin/main` full generated persona cohort
+  - tracked `origin/main` historical `jobs/` outputs
+  - tracked binary docs assets and deferred adapter lockfiles/fixtures
+  - local side artifacts under the migration workspace, including PRISM,
+    curated personas, Amazon reviews, and wiki-collab worker archives
+- Policy:
+  - Keep published URL cells as `TODO` until each artifact is uploaded.
+  - Do not commit these artifacts or dependency directories into
+    PersonaBench `main`.
+  - After upload, add the actual HuggingFace URLs to the module README that
+    consumes each artifact.
