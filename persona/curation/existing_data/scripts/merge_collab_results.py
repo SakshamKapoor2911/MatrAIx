@@ -23,7 +23,7 @@ Output: one merged record per global_idx (JSONL, gzip if --out ends in .gz):
   python3 scripts/merge_collab_results.py \
       --results alice.jsonl --results bob.jsonl \
       --dimensions persona/schema/dimensions.json \
-      --db /tmp/matraix-wiki-profiles.sqlite \
+      --db /tmp/personabench-wiki-profiles.sqlite \
       --out merged.jsonl.gz --report merge_report.json
 
 Exit 0 if accepted, 1 if any blocking errors were found (nothing is written

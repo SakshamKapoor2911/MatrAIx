@@ -5,9 +5,10 @@ external datasets. It is the clean PersonaBench home for the useful parts of
 the old MatrAIx `personas/existing_data_curation/` pipeline.
 
 The current import establishes the source manifests, Wikipedia-derived persona
-foundation, and collaborator packaging loop. Amazon Reviews 2023 integration
-and optional Modal/HuggingFace indexing are intentionally staged in follow-up
-PRs so `main` remains reviewable.
+foundation, collaborator packaging loop, and Amazon Reviews 2023 persona
+pipeline. Optional Modal/HuggingFace indexing remains dependency-light by
+default: helper code is present, but cloud dependencies are only needed when you
+run that path.
 
 ## Current Scope
 
@@ -18,12 +19,13 @@ Available in this wave:
 - local SQLite profile database builder
 - worker-facing collaboration package creation
 - plain `results.jsonl` validation, merge, and audit helpers
+- Amazon Reviews 2023 history normalization, persona inference, package
+  creation, validation, holdout evaluation, and small test fixtures
 - small JSONL fixtures under `examples/`
 
 Deferred to follow-up PRs:
 
-- Amazon Reviews 2023 evidence and fold-voting pipeline
-- optional Modal/HuggingFace cloud indexer
+- optional dependency metadata and docs for Modal/HuggingFace cloud indexing
 - React curation cockpit
 - full generated persona outputs
 
@@ -32,6 +34,8 @@ Deferred to follow-up PRs:
 ```text
 persona/curation/existing_data/
   manifests/      Dataset and grounding-source metadata.
+  protocols/      Prompt/schema contracts for evidence-profile inference.
+  samples/        Small fixtures suitable for git.
   scripts/        Repo-local curation CLIs.
   wiki_collab/    Shared wiki collaboration contracts and worker kit.
   worker_kit/     Owner-side range runner utilities.
@@ -102,6 +106,42 @@ The convenience wrapper `scripts/make_package.sh` is an owner-side template for
 the same flow. Edit the local `CLEAN_DIR` if your cleaned Wikipedia text lives
 somewhere else.
 
+## Amazon Reviews 2023
+
+Use `samples/amazon_reviews_2023/user_histories_sample.jsonl` for a local smoke
+test that does not require the full dataset:
+
+```bash
+python persona/curation/existing_data/scripts/make_amazon_collab_package.py \
+  --user-histories persona/curation/existing_data/samples/amazon_reviews_2023/user_histories_sample.jsonl \
+  --dimensions persona/schema/dimensions.json \
+  --range 0:2 \
+  --out-dir /tmp/personabench_amazon_collab_A0001 \
+  --assignment-id A0001 \
+  --worker-id smoke \
+  --dataset-id amazon_reviews_2023_sample \
+  --dataset-sha256 dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd \
+  --force
+```
+
+For real data, build or retrieve user histories externally, keep them under an
+ignored local path such as `raw/amazon_reviews_2023/`, then run:
+
+```bash
+python persona/curation/existing_data/scripts/infer_amazon_review_dimensions.py \
+  --user-histories /path/to/user_histories.jsonl \
+  --schema-path persona/schema/dimensions.json \
+  --evidence-mapping-path persona/curation/existing_data/amazon_review_evidence_mapping.json \
+  --output persona/curation/existing_data/raw/amazon_reviews_2023/persona_dimension_inference/inferred_dimensions.jsonl
+```
+
+Real inference requires the configured OpenAI-compatible model environment; add
+`--dry-run` when you only want to inspect prompts locally. Returned Amazon
+worker archives can be checked with
+`scripts/validate_amazon_results.py`; rating-holdout evaluation and readable
+reports live in `evaluate_amazon_persona_rating_holdout.py` and
+`render_amazon_inference_report.py`.
+
 ## Validate And Merge Results
 
 Validate a returned archive against the owner-side SQLite database and
@@ -154,6 +194,5 @@ Expected external artifacts include:
 
 The source pipeline was migrated from local MatrAIx branch
 `codex/amazon-review-collab-integration` at commit `87fe1dafb`. The source
-branch contains additional Amazon and collaborator package work that is staged
-for later PersonaBench PRs. The collaborator package work has since been
-curated into this module; Amazon Reviews 2023 remains a follow-up migration.
+branch contains additional generated artifacts and UI work that remain outside
+this clean module.

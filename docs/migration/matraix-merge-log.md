@@ -560,3 +560,52 @@ This log records the curated migration from MatrAIx into PersonaBench.
   - Default schema references point to `persona/schema/dimensions.json`.
   - The worker package remains self-contained and excludes local progress,
     archives, caches, and Python bytecode.
+
+### Step 23: Import Amazon Reviews 2023 persona pipeline
+
+- Branch: `codex/persona-amazon-reviews-pipeline`
+- Source repository: local `/data2/zonglin/persona_ai/MatrAIx`
+- Source branch: `codex/amazon-review-collab-integration`
+- Source reference: `87fe1dafb fix: preserve amazon min support fold texts`
+- Source base: `MatrAIx-ai/MatrAIx@origin/main`
+  `e50592a4cbfca86b3207e1f9d5247ca9f93ee4d0`
+- Purpose: add the Amazon Reviews 2023 existing-data path for user-history
+  normalization, evidence-profile inference, collaborator packaging,
+  validation, and rating-holdout evaluation while keeping raw Amazon data and
+  generated outputs outside git.
+- Imported into:
+  - `persona/curation/existing_data/`
+  - `persona/curation/existing_data/protocols/`
+  - `persona/curation/existing_data/samples/`
+  - `persona/curation/existing_data/scripts/`
+  - `persona/curation/existing_data/wiki_collab/`
+  - `persona/curation/existing_data/worker_kit/`
+  - `tests/persona/curation/existing_data/`
+- Included:
+  - Amazon Reviews 2023 manifest, evidence mapping, pool statistics, and small
+    sample fixtures
+  - Amazon inference protocol prompts and schemas
+  - fetch/analyze/retrieve/infer/build-package/validate/evaluate/report helper
+    scripts
+  - Amazon collaborator profile database and range runner utilities
+  - Modal/HuggingFace helper module as optional code; tests use a local Modal
+    stub and do not require cloud dependencies
+  - focused Amazon tests and a local package smoke path using
+    `samples/amazon_reviews_2023/user_histories_sample.jsonl`
+- Excluded:
+  - raw Amazon Reviews 2023 downloads
+  - generated user-history exports, SQLite databases, inference JSONL outputs,
+    reports, worker packages, and returned archives
+  - Modal/HuggingFace optional dependency metadata, which is staged for a
+    follow-up docs/dependency PR
+  - React curation cockpit and built frontend assets
+  - Superpowers implementation plans
+- Compatibility adjustments:
+  - Old `personas.existing_data_curation` imports are rewritten to
+    `persona.curation.existing_data`.
+  - Default schema references point to `persona/schema/dimensions.json`.
+  - User-facing worker package titles and default app identifiers are renamed
+    from MatrAIx to PersonaBench.
+  - `candidate_users_top100.jsonl` remains a candidate-pool sample; the
+    package smoke uses the new `user_histories_sample.jsonl` fixture because
+    package creation requires rows with embedded `reviews`.
