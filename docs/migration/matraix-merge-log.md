@@ -500,7 +500,6 @@ This log records the curated migration from MatrAIx into PersonaBench.
 - Imported into:
   - `persona/curation/existing_data/`
   - `tests/persona/curation/existing_data/`
-  - `docs/superpowers/plans/2026-06-27-persona-existing-data-pipeline.md`
 - Included:
   - external source manifests
   - Wikipedia person-page extraction and cleanup helpers
