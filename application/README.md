@@ -7,6 +7,7 @@ Current layout:
 
 ```text
 application/
+  persona_eval/ Reusable PersonaEval survey/backend helpers.
   tasks/       Runnable survey, chat, web, and product tasks.
   metrics/     Application-side scoring and evaluation logic.
   cohorts/     Persona cohort specifications used by scenarios.
@@ -24,6 +25,8 @@ stubs only:
 - `tasks/`: survey, chat, web, and computer-use example tasks
 - `scripts/`: application job generation helpers
 - `reporting/`: placeholder aggregation surface for application batch reports
+- `persona_eval/`: PersonaEval survey types and curated built-in survey
+  instruments
 
 Agents, curated job recipes, and runtime wiring are imported in later PRs. Until
 then, keep new contributions scoped to task folders and avoid adding repo-root
