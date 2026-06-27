@@ -142,11 +142,23 @@ For real data, build or retrieve user histories externally, keep them under an
 ignored local path such as `raw/amazon_reviews_2023/`, then run:
 
 ```bash
+python persona/curation/existing_data/scripts/select_amazon_top_reviewers.py \
+  --repo-id MatrAIx/MatrAIx \
+  --artifact amazon/modal_artifacts/amazon_reviews_2018_2023_eligible_users_min30_verified70_text2000 \
+  --top-k 10000 \
+  --output-dir persona/curation/existing_data/outputs/amazon_reviews_2023/top_reviewers
+
 python persona/curation/existing_data/scripts/export_hf_amazon_user_histories.py \
-  --user-ids /path/to/amazon_reviewer_ids.md \
+  --user-ids persona/curation/existing_data/outputs/amazon_reviews_2023/top_reviewers/amazon_top_10000_rich_persona_reviewer_ids_2018_2023.txt \
   --max-users 100 \
   --output persona/curation/existing_data/raw/amazon_reviews_2023/user_histories.jsonl
 ```
+
+The reviewer selector ranks the eligible-user HF Parquet artifact by text
+volume, text-review count, category breadth, history length, review count, and
+verified-purchase share. It writes a ranked JSONL/CSV table, user-id list,
+summary JSON, and Markdown report under ignored `outputs/`. Upload reusable
+queues to external storage instead of committing them.
 
 The HF export path reads user-bucketed Parquet artifacts and writes the
 `user_histories.jsonl` format consumed by inference and packaging. You can also
@@ -269,7 +281,8 @@ Expected external artifacts include:
 - SQLite profile databases and manifests
 - generated worker packages and returned result archives
 - full curated persona YAML outputs
-- Amazon review histories, profile databases, and inference outputs
+- Amazon reviewer queues, review histories, profile databases, and inference
+  outputs
 
 After uploading an artifact, replace the corresponding `TODO` in
 `migration/matraix/README.md` with the published URL and link that URL from the

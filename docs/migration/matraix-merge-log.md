@@ -905,3 +905,23 @@ This log records the curated migration from MatrAIx into PersonaBench.
     template under the clean `application/` module.
   - Old `applications/PLAN.md`, team rosters, old root README changes,
     duplicated persona schema/data files, and raw curation folders are excluded.
+
+### Step 37: Import Amazon top reviewer selector
+
+- Branch: `codex/amazon-top-reviewer-selector`
+- Source repository: `MatrAIx-ai/MatrAIx`
+- Source PR: `#125`, `Add Amazon top 10K reviewer inference queue`
+- PersonaBench snapshot PR: `#64`
+- Purpose: preserve the reproducible reviewer-queue selection logic without
+  committing generated top-10K CSV/JSONL/ID artifacts to clean `main`.
+- Imported into:
+  - `persona/curation/existing_data/scripts/select_amazon_top_reviewers.py`
+- Updated:
+  - `persona/curation/existing_data/README.md`
+  - `migration/matraix/README.md`
+- Source handling:
+  - The selector now writes into ignored `outputs/` by default.
+  - Generated top-reviewer queue files from the source snapshot are listed in
+    the external artifact checklist for HuggingFace upload.
+  - Existing Amazon HF export, inference, packaging, and validation tools remain
+    the downstream path for producing worker packages.
