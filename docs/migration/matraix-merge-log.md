@@ -721,3 +721,31 @@ This log records the curated migration from MatrAIx into PersonaBench.
   - PersonaEval backend tests and runner integration
   - recommender-agent task and sidecar, which depend on the deferred
     recommendation chatbot backend.
+
+### Step 29: Import PersonaEval survey instruments
+
+- Branch: `codex/persona-eval-backend`
+- Source repository: `MatrAIx-ai/MatrAIx`
+- Source PR: `#89`, `[codex] Add real-feature survey instruments`
+- PersonaBench snapshot PR: `#68`
+- Purpose: preserve the built-in PersonaEval survey instruments as an
+  application-owned backend foundation without pulling in API routes, frontend
+  code, Harbor runners, or historical experiment outputs.
+- Imported into:
+  - `application/persona_eval/backend/service/survey_types.py`
+  - `application/persona_eval/backend/service/survey_instruments.py`
+  - `tests/application/persona_eval/test_survey_instruments.py`
+- Updated:
+  - `application/README.md`
+- Compatibility adjustments:
+  - The source instrument registry imported `SurveyInstrument` and
+    `SurveyQuestion` from the old monolithic `harbor_survey_eval.py` runner.
+    PersonaBench splits those lightweight dataclasses into `survey_types.py` so
+    survey schema code can land before runner/API migration.
+  - The import path now follows the clean `application/persona_eval/` layout
+    instead of the source `applications/persona_eval/` tree.
+- Deferred:
+  - `applications/persona_eval/backend/api/`
+  - `applications/persona_eval/backend/service/harbor_survey_eval.py`
+  - `applications/persona_eval/frontend/`
+  - experiment configs, traces, caches, and generated outputs.
