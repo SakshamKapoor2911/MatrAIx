@@ -8,6 +8,8 @@ This plan guides imports from `MatrAIx-ai/MatrAIx` into PersonaBench.
 - PersonaBench migration provenance was merged in PR #125.
 - Raw migration PRs are available as screening artifacts, but most should not
   be merged directly.
+- The current clean-main source-to-target status is tracked in
+  `docs/migration/matraix-parity-matrix.md`.
 
 ## Merge Policy
 

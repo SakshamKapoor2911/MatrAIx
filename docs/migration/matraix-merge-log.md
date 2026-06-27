@@ -256,3 +256,20 @@ This log records the curated migration from MatrAIx into PersonaBench.
   - The private frontend package name is `personabench-viewer`.
   - Architecture docs define `apps/` as repo-local tooling, not a fourth
     business module.
+
+### Step 12: Add clean-main parity matrix
+
+- Branch: `codex/migration-parity-audit`
+- Source repository: `MatrAIx-ai/MatrAIx`
+- Source reference: `origin/main` at `e50592a4cbfca86b3207e1f9d5247ca9f93ee4d0`
+- Purpose: record the remaining source-to-target gaps before importing GitHub
+  metadata, examples, optional packages, adapters, and external artifact
+  references.
+- Documentation added:
+  - `docs/migration/matraix-parity-matrix.md`
+- Policy:
+  - PersonaBench `main` targets clean functional parity, not byte-for-byte
+    source-tree parity.
+  - Large generated artifacts and historical run outputs stay external to git.
+  - Remaining imports should land as focused curated PRs with source mapping,
+    explicit exclusions, and validation notes.
