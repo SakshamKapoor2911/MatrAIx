@@ -185,6 +185,7 @@ This log records the curated migration from MatrAIx into PersonaBench.
 ### Step 9: Import curated application job recipes
 
 - Branch: `codex/configs-job-recipes`
+- PersonaBench PR: `#133`
 - Source repository: `MatrAIx-ai/MatrAIx`
 - Source reference: `origin/main` at `e50592a4cbfca86b3207e1f9d5247ca9f93ee4d0`
 - Purpose: add small Harbor job recipes that exercise curated application
