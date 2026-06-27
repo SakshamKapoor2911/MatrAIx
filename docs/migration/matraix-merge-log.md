@@ -127,6 +127,7 @@ This log records the curated migration from MatrAIx into PersonaBench.
 ### Step 7: Import environment runtime foundation
 
 - Branch: `codex/environment-runtime-foundation`
+- PersonaBench PR: `#131`
 - Source repository: `MatrAIx-ai/MatrAIx`
 - Source reference: `origin/main` at `e50592a4cbfca86b3207e1f9d5247ca9f93ee4d0`
 - Purpose: bring over the Harbor runtime package needed to execute curated
