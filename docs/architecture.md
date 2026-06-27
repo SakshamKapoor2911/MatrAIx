@@ -4,6 +4,8 @@ PersonaBench keeps team ownership separate from runtime plumbing. The public
 contract is the three-module layout: `persona/`, `application/`, and
 `environment/`.
 
+![MatrAIx architecture](assets/matraix-architecture.png)
+
 ## Persona Module
 
 `persona/` owns the definition and evaluation of simulated people.
@@ -19,6 +21,12 @@ Expected contents:
 
 Large raw dumps and generated outputs should not be committed unless they are
 small, curated fixtures needed for tests or examples.
+
+Persona grounding tasks use the persona dimensions to generate controlled
+cohorts and verify that task behavior follows the selected probe value rather
+than confounders:
+
+![Persona grounding flow](assets/persona-grounding-flow.png)
 
 ## Application Module
 
@@ -60,3 +68,6 @@ only used by one module, keep it with that module.
 The MatrAIx migration PRs are provenance and raw material. Do not merge raw
 snapshot directories into `main`. Each import PR should curate content into the
 module that owns it and cite the source in the PR body.
+
+Research notes migrated from MatrAIx live in `docs/research/`; they are working
+references rather than a fully refreshed bibliography.

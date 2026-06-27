@@ -427,3 +427,28 @@ This log records the curated migration from MatrAIx into PersonaBench.
     PersonaBench `main`.
   - After upload, add the actual HuggingFace URLs to the module README that
     consumes each artifact.
+
+### Step 19: Import curated architecture and research docs
+
+- Branch: `codex/docs-architecture-research`
+- Source repository: `MatrAIx-ai/MatrAIx`
+- Source reference: `origin/main` at `e50592a4cbfca86b3207e1f9d5247ca9f93ee4d0`
+- Purpose: preserve the useful explanatory architecture diagrams and persona
+  related-work notes without importing the old project-management document set.
+- Imported into:
+  - `docs/assets/matraix-architecture.png`
+  - `docs/assets/persona-grounding-flow.png`
+  - `docs/research/README.md`
+  - `docs/research/persona-related-work.md`
+  - `docs/architecture.md`
+  - `README.md`
+- Excluded:
+  - `docs/personas/PLAN.md` task assignments and owner placeholders
+  - branch-protection setup notes
+  - PR management playbooks
+  - historical current-state and known-issues notes
+  - Superpowers implementation plans
+- Compatibility adjustments:
+  - The architecture page references the imported images from `docs/assets/`.
+  - The related-work section is recast as a research note rather than a team
+    planning document.
