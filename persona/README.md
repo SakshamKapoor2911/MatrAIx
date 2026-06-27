@@ -19,6 +19,29 @@ persona/
 Do not place runtime engines, product scenarios, or raw generated job outputs
 here. Those belong in `environment/`, `application/`, or external storage.
 
+## Data Pipeline
+
+PersonaBench keeps runnable persona curation code in git and keeps
+large/generated data outside `main`.
+
+Canonical flow:
+
+```text
+fetch or index source data
+  -> normalize and clean records
+  -> build local profile DB or JSONL histories
+  -> infer or assign persona dimensions
+  -> validate outputs
+  -> create collaborator package
+  -> merge returned results
+  -> upload generated artifacts externally
+```
+
+Start with [persona curation](curation/README.md) and the
+[existing-data pipeline](curation/existing_data/README.md). Large artifact
+upload slots are tracked in
+[migration/matraix/README.md](../migration/matraix/README.md).
+
 ## Imported from MatrAIx
 
 The first curated import brought in:
