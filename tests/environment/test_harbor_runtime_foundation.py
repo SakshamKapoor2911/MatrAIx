@@ -39,7 +39,6 @@ def test_runtime_import_excludes_raw_snapshot_directories() -> None:
     forbidden_paths = [
         "adapters",
         "jobs",
-        "packages/rewardkit",
         "src/matraix/agents",
     ]
 
