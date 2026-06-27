@@ -197,6 +197,10 @@ Expected external artifacts include:
 - full curated persona YAML outputs
 - Amazon review histories, profile databases, and inference outputs
 
+After uploading an artifact, replace the corresponding `TODO` in
+`migration/matraix/README.md` with the published URL and link that URL from the
+workflow section above if it is required to reproduce a command.
+
 ## Provenance
 
 The source pipeline was migrated from local MatrAIx branch

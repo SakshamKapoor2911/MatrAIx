@@ -92,6 +92,8 @@ After upload, record the public artifact location in:
 - `migration/matraix/README.md`
 - `persona/datasets/README.md`
 - task-specific or adapter-specific README files that require the artifact
+- `persona/curation/existing_data/README.md` for Wikipedia/Amazon curation
+  artifacts
 
 ## Contributor Guidance
 

@@ -77,6 +77,29 @@ uv run harbor run -c configs/jobs/example-job-recipe/appSim-example-survey-local
 More setup, optional package, adapter, viewer, and artifact details are in
 [Running PersonaBench](docs/running.md).
 
+## Persona Data Pipeline
+
+PersonaBench keeps runnable curation code in git and keeps large/generated data
+outside `main`.
+
+Canonical flow:
+
+```text
+fetch or index source data
+  -> normalize and clean records
+  -> build local profile DB or JSONL histories
+  -> infer or assign persona dimensions
+  -> validate outputs
+  -> create collaborator package
+  -> merge returned results
+  -> upload generated artifacts externally
+```
+
+Start with [persona curation](persona/curation/README.md) and the
+[existing-data pipeline](persona/curation/existing_data/README.md). Large
+artifact upload slots are tracked in
+[migration/matraix/README.md](migration/matraix/README.md).
+
 ## Research Notes
 
 The old MatrAIx literature review lived inside team planning files. Clean main

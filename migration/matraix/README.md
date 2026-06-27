@@ -22,6 +22,20 @@ committed to PersonaBench `main`. Upload these artifacts to HuggingFace or
 another approved external storage location, then update module READMEs with the
 published URLs.
 
+The artifact handoff should follow the same curation flow used by the code:
+
+```text
+source raw data
+  -> cleaned/normalized records
+  -> local profile DB or user-history JSONL
+  -> inferred/assigned persona fields
+  -> validation or evaluation report
+  -> packaged dataset or collaborator return archive
+```
+
+Upload the smallest useful reproducible artifact at each stage. Do not upload
+dependency directories, local caches, credentials, or unredacted logs.
+
 Use one HuggingFace dataset repository for migration artifacts, for example:
 
 ```text
@@ -78,6 +92,8 @@ workspace is cleaned.
 | Required | `/data2/zonglin/persona_ai/MatrAIx/personas/attribute_pool/outputs/` | 402 MiB | `matraix/local/personas/attribute_pool/outputs/` | TODO | Local path mirrors tracked `persona/attribute_pool/outputs/`. |
 | Required | `/data2/zonglin/persona_ai/MatrAIx/personas/attribute_pool/dataset/scope_structured.jsonl` | 35 MiB | `matraix/local/personas/attribute_pool/sources/scope_structured.jsonl` | TODO | Local path mirrors tracked `persona/attribute_pool/dataset/scope_structured.jsonl`. |
 | Required | `/data2/zonglin/persona_ai/MatrAIx/raw/amazon_reviews_2023/` | 31 MiB | `matraix/local/raw/amazon_reviews_2023/` | TODO | Amazon review curation artifacts. |
+| Required | `/data2/zonglin/persona_ai/MatrAIx/raw/amazon_reviews_2023/persona_dimension_inference/user_histories.jsonl` | 16 MiB | `matraix/local/amazon_reviews_2023/persona_dimension_inference/user_histories.jsonl` | TODO | Full Amazon user histories consumed by `make_amazon_collab_package.py` and inference scripts. |
+| Required | `/data2/zonglin/persona_ai/MatrAIx/raw/amazon_reviews_2023/amazon_profiles.sqlite` | 15 MiB | `matraix/local/amazon_reviews_2023/amazon_profiles.sqlite` | TODO | Local Amazon profile database for worker-range validation. |
 | Optional | `/data2/zonglin/persona_ai/MatrAIx/personas/A_10000_20000/` | 83 MiB | `matraix/local/wiki_collab/A_10000_20000/` | TODO | Wiki/Amazon collaboration package directory. |
 | Optional | `/data2/zonglin/persona_ai/MatrAIx/A_10000_20000_worker.tar.gz` | 15 MiB | `matraix/local/wiki_collab/A_10000_20000_worker.tar.gz` | TODO | Worker package archive; duplicate also exists inside `personas/A_10000_20000/`. |
 | Optional | `/data2/zonglin/persona_ai/MatrAIx/A_20000_30000_worker.tar.gz` | 16 MiB | `matraix/local/wiki_collab/A_20000_30000_worker.tar.gz` | TODO | Worker package archive. |

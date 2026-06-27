@@ -631,3 +631,26 @@ This log records the curated migration from MatrAIx into PersonaBench.
   - any raw Amazon data or generated Modal/HuggingFace artifacts
   - default dependency changes for users who do not run the cloud indexing path
   - Superpowers implementation plans
+
+### Step 25: Document persona data pipeline and artifact handoff
+
+- Branch: `codex/persona-data-pipeline-docs`
+- Purpose: make the migrated persona data pipeline understandable for future
+  contributors and keep large generated artifacts out of `main`.
+- Updated:
+  - `README.md`
+  - `persona/curation/README.md`
+  - `persona/curation/existing_data/README.md`
+  - `persona/datasets/README.md`
+  - `migration/matraix/README.md`
+  - `docs/migration/matraix-merge-log.md`
+  - `docs/migration/matraix-parity-matrix.md`
+- Included:
+  - canonical source-to-package curation flow
+  - collaborator package and external artifact guidance
+  - explicit dataset slots for full persona cohorts, attribute-pool outputs,
+    existing-data curated personas, and Amazon Reviews 2023 generated artifacts
+- Excluded:
+  - uploading artifacts to HuggingFace
+  - adding raw/generated data to git
+  - Superpowers implementation plans
