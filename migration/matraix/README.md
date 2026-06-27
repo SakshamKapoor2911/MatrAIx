@@ -22,61 +22,94 @@ committed to PersonaBench `main`. Upload these artifacts to HuggingFace or
 another approved external storage location, then update module READMEs with the
 published URLs.
 
-Recommended HuggingFace layout:
+Use one HuggingFace dataset repository for migration artifacts, for example:
 
 ```text
-attribute_pool/outputs/
-attribute_pool/sources/scope_structured.jsonl
-existing_data_curation/curated_personas.tar.gz
-existing_data_curation/raw/prism_alignment/
-amazon_reviews_2023/
-wiki_collab/A_10000_20000_worker.tar.gz
+hf://<org>/<matraix-artifacts-dataset>/matraix/
 ```
 
-Primary upload targets:
+Keep the published URL column as `TODO` until each artifact is uploaded. After
+upload, replace `TODO` with the actual HuggingFace file or directory URL and
+update the module README that consumes that artifact.
 
-Sizes and local paths below come from the local MatrAIx working copy inspected
-on 2026-06-27. Some MatrAIx `origin/main` paths use `persona/...`, while local
-large data artifacts are currently under `personas/...`.
+### Source Snapshot: MatrAIx `origin/main`
 
-| Priority | Local source path | Approx. size | Suggested HF path | Notes |
-|---|---:|---:|---|---|
-| Required | `/data2/zonglin/persona_ai/MatrAIx/personas/attribute_pool/outputs/` | 402 MiB | `attribute_pool/outputs/` | Generated attribute-pool CSV/JSONL/GraphML outputs. In `MatrAIx origin/main`, equivalent tracked paths appear under `persona/attribute_pool/outputs/`. |
-| Required | `/data2/zonglin/persona_ai/MatrAIx/personas/attribute_pool/dataset/scope_structured.jsonl` | 35 MiB | `attribute_pool/sources/scope_structured.jsonl` | SCOPE structured source data used by attribute-pool curation. |
-| Required | `/data2/zonglin/persona_ai/MatrAIx/personas/existing_data_curation/curated_personas/` | 669 MiB | `existing_data_curation/curated_personas.tar.gz` | Directory contains 130,709 small files. Tar before upload. |
-| Required | `/data2/zonglin/persona_ai/MatrAIx/personas/existing_data_curation/raw/prism_alignment/` | 211 MiB | `existing_data_curation/raw/prism_alignment/` | Raw PRISM alignment files: `metadata.jsonl`, `utterances.jsonl`, `conversations.jsonl`. |
-| Required | `/data2/zonglin/persona_ai/MatrAIx/raw/amazon_reviews_2023/` | 31 MiB | `amazon_reviews_2023/` | Amazon review curation artifacts, including `amazon_profiles.sqlite` and `persona_dimension_inference/user_histories.jsonl`. |
-| Optional | `/data2/zonglin/persona_ai/MatrAIx/personas/A_10000_20000/` | 83 MiB | `wiki_collab/A_10000_20000/` | Wiki/Amazon collaboration package directory. |
-| Optional | `/data2/zonglin/persona_ai/MatrAIx/A_10000_20000_worker.tar.gz` | 15 MiB | `wiki_collab/A_10000_20000_worker.tar.gz` | Worker package archive. Duplicate copy also exists under `personas/A_10000_20000/`. |
-| Optional | `/data2/zonglin/persona_ai/MatrAIx/A_20000_30000_worker.tar.gz` | 16 MiB | `wiki_collab/A_20000_30000_worker.tar.gz` | Worker package archive. |
-| Optional | `/data2/zonglin/persona_ai/MatrAIx/A_30000_40000_worker.tar.gz` | 16 MiB | `wiki_collab/A_30000_40000_worker.tar.gz` | Worker package archive. |
-| Optional | `/data2/zonglin/persona_ai/MatrAIx/applications/recommendation_chatbot_eval/data/catalogs/game.parquet` | 5 MiB | `application/recommendation_chatbot_eval/data/catalogs/game.parquet` | Application-specific recommender catalog fixture. |
+Sizes below come from `MatrAIx-ai/MatrAIx@origin/main`
+`e50592a4cbfca86b3207e1f9d5247ca9f93ee4d0`, inspected on 2026-06-27 with
+`git ls-tree -r -l origin/main`.
 
-Not recommended for upload:
+| Priority | Source path | Approx. size | Suggested HuggingFace path | Published URL | Notes |
+|---|---|---:|---|---|---|
+| Required | `persona/attribute_pool/outputs/` | 402 MiB, 49 files | `matraix/persona/attribute_pool/outputs/` | TODO | Generated CSV/JSONL/GraphML outputs. Do not put these back into `main`. |
+| Required | `persona/attribute_pool/dataset/scope_structured.jsonl` | 35 MiB | `matraix/persona/attribute_pool/sources/scope_structured.jsonl` | TODO | SCOPE structured input used by attribute-pool curation. |
+| Required | `persona/datasets/bench-dev-2000/` | 12 MiB, 2,004 files | `matraix/persona/datasets/bench-dev-2000/` | TODO | Full generated persona benchmark cohort. PersonaBench `main` keeps only the tiny sample. |
+| Required | `jobs/` | 64 MiB, 509 files | `matraix/jobs/historical/` | TODO | Historical run outputs, including trajectories, screenshots, recordings, and result JSON. |
+| Optional | `docs/assets/persona-grounding-flow.png` | 1.6 MiB | `matraix/docs/assets/persona-grounding-flow.png` | TODO | Upload if docs need the original binary asset. |
+| Optional | `docs/assets/matraix-architecture.png` | 1.1 MiB | `matraix/docs/assets/matraix-architecture.png` | TODO | Upload if docs need the original binary asset. |
+| Defer | `adapters/**/uv.lock` and adapter fixtures | 11 MiB across 262 files | `matraix/adapters/source-fixtures/` | TODO | Prefer adapter-local regenerated locks. Upload only if a curated adapter PR requires exact source reproduction. |
+| Defer | root `uv.lock` | 0.9 MiB | `matraix/root/uv.lock` | TODO | Keep out of clean main until dependency policy is explicit. |
 
-| Local path | Reason |
-|---|---|
-| `/data2/zonglin/persona_ai/MatrAIx/personas/existing_data_curation/wiki_collab/frontend/node_modules/` | Reinstall from package lock instead of storing dependencies. |
-| `/data2/zonglin/persona_ai/MatrAIx/applications/recommendation_chatbot_eval/frontend/node_modules/` | Reinstall from package lock instead of storing dependencies. |
+Largest individual tracked files in `origin/main`:
 
-Largest individual tracked/generated files observed during migration:
+| Source path | Approx. size |
+|---|---:|
+| `persona/attribute_pool/outputs/normalized/candidate_pool_raw_extended_normalized.jsonl` | 67 MiB |
+| `persona/attribute_pool/outputs/step5_embedding_llm_dedup/embedding_retrieved_pairs.csv` | 50 MiB |
+| `persona/attribute_pool/outputs/normalized/candidate_pool_raw_extended_normalized.csv` | 40 MiB |
+| `persona/attribute_pool/dataset/scope_structured.jsonl` | 35 MiB |
+| `persona/attribute_pool/outputs/candidate_pool_raw_extended.jsonl` | 32 MiB |
+| `persona/attribute_pool/outputs/step3_dedup_categorize/candidate_assignments_high_quality.jsonl` | 28 MiB |
+| `persona/attribute_pool/outputs/normalized/candidate_pool_high_quality_normalized.jsonl` | 23 MiB |
+| `persona/attribute_pool/outputs/candidate_pool_raw_extended.csv` | 21 MiB |
+| `jobs/appSim-example-computer-use-macos-local/macos-notification-preferences__kkygzz8/agent/recording.mp4` | 6 MiB |
+| `jobs/appSim-example-web-cocoa-local/books-interest-cocoa__cARWDzg/result.json` | 4 MiB |
+
+### Local Side Artifacts
+
+The local MatrAIx working copy also contains untracked or branch-local data
+under `/data2/zonglin/persona_ai/MatrAIx`. These are not clean-main source
+imports, but they are useful to preserve externally before the migration
+workspace is cleaned.
+
+| Priority | Local source path | Approx. size | Suggested HuggingFace path | Published URL | Notes |
+|---|---|---:|---|---|---|
+| Required | `/data2/zonglin/persona_ai/MatrAIx/personas/existing_data_curation/curated_personas/` | 669 MiB, 130,709 files | `matraix/local/personas/existing_data_curation/curated_personas.tar.gz` | TODO | Tar before upload; many tiny files. |
+| Required | `/data2/zonglin/persona_ai/MatrAIx/personas/existing_data_curation/raw/prism_alignment/` | 211 MiB | `matraix/local/personas/existing_data_curation/raw/prism_alignment/` | TODO | Raw PRISM alignment files. |
+| Required | `/data2/zonglin/persona_ai/MatrAIx/personas/attribute_pool/outputs/` | 402 MiB | `matraix/local/personas/attribute_pool/outputs/` | TODO | Local path mirrors tracked `persona/attribute_pool/outputs/`. |
+| Required | `/data2/zonglin/persona_ai/MatrAIx/personas/attribute_pool/dataset/scope_structured.jsonl` | 35 MiB | `matraix/local/personas/attribute_pool/sources/scope_structured.jsonl` | TODO | Local path mirrors tracked `persona/attribute_pool/dataset/scope_structured.jsonl`. |
+| Required | `/data2/zonglin/persona_ai/MatrAIx/raw/amazon_reviews_2023/` | 31 MiB | `matraix/local/raw/amazon_reviews_2023/` | TODO | Amazon review curation artifacts. |
+| Optional | `/data2/zonglin/persona_ai/MatrAIx/personas/A_10000_20000/` | 83 MiB | `matraix/local/wiki_collab/A_10000_20000/` | TODO | Wiki/Amazon collaboration package directory. |
+| Optional | `/data2/zonglin/persona_ai/MatrAIx/A_10000_20000_worker.tar.gz` | 15 MiB | `matraix/local/wiki_collab/A_10000_20000_worker.tar.gz` | TODO | Worker package archive; duplicate also exists inside `personas/A_10000_20000/`. |
+| Optional | `/data2/zonglin/persona_ai/MatrAIx/A_20000_30000_worker.tar.gz` | 16 MiB | `matraix/local/wiki_collab/A_20000_30000_worker.tar.gz` | TODO | Worker package archive. |
+| Optional | `/data2/zonglin/persona_ai/MatrAIx/A_30000_40000_worker.tar.gz` | 16 MiB | `matraix/local/wiki_collab/A_30000_40000_worker.tar.gz` | TODO | Worker package archive. |
+| Optional | `/data2/zonglin/persona_ai/MatrAIx/applications/recommendation_chatbot_eval/data/catalogs/game.parquet` | 5 MiB | `matraix/local/application/recommendation_chatbot_eval/data/catalogs/game.parquet` | TODO | Application-specific recommender catalog fixture. |
+
+Largest local side-artifact files:
 
 | Local source path | Approx. size |
 |---|---:|
 | `/data2/zonglin/persona_ai/MatrAIx/personas/existing_data_curation/raw/prism_alignment/metadata.jsonl` | 81 MiB |
-| `/data2/zonglin/persona_ai/MatrAIx/personas/attribute_pool/outputs/normalized/candidate_pool_raw_extended_normalized.jsonl` | 67 MiB |
 | `/data2/zonglin/persona_ai/MatrAIx/personas/existing_data_curation/raw/prism_alignment/utterances.jsonl` | 65 MiB |
 | `/data2/zonglin/persona_ai/MatrAIx/personas/existing_data_curation/raw/prism_alignment/conversations.jsonl` | 58 MiB |
+| `/data2/zonglin/persona_ai/MatrAIx/personas/attribute_pool/outputs/normalized/candidate_pool_raw_extended_normalized.jsonl` | 67 MiB |
 | `/data2/zonglin/persona_ai/MatrAIx/personas/attribute_pool/outputs/step5_embedding_llm_dedup/embedding_retrieved_pairs.csv` | 50 MiB |
-| `/data2/zonglin/persona_ai/MatrAIx/personas/attribute_pool/outputs/normalized/candidate_pool_raw_extended_normalized.csv` | 40 MiB |
 | `/data2/zonglin/persona_ai/MatrAIx/personas/A_10000_20000/A_10000_20000_worker/tasks.jsonl` | 40 MiB |
-| `/data2/zonglin/persona_ai/MatrAIx/personas/attribute_pool/dataset/scope_structured.jsonl` | 35 MiB |
-| `/data2/zonglin/persona_ai/MatrAIx/personas/attribute_pool/outputs/candidate_pool_raw_extended.jsonl` | 32 MiB |
-| `/data2/zonglin/persona_ai/MatrAIx/personas/attribute_pool/outputs/step3_dedup_categorize/candidate_assignments_high_quality.jsonl` | 28 MiB |
+| `/data2/zonglin/persona_ai/MatrAIx/raw/amazon_reviews_2023/persona_dimension_inference/user_histories.jsonl` | 16 MiB |
+| `/data2/zonglin/persona_ai/MatrAIx/raw/amazon_reviews_2023/amazon_profiles.sqlite` | 15 MiB |
 
-After upload, update the relevant module READMEs:
+Do not upload dependency directories:
+
+| Local path | Reason |
+|---|---|
+| `/data2/zonglin/persona_ai/MatrAIx/personas/existing_data_curation/wiki_collab/frontend/node_modules/` | Reinstall from package metadata instead of storing dependency trees. |
+| `/data2/zonglin/persona_ai/MatrAIx/applications/recommendation_chatbot_eval/frontend/node_modules/` | Reinstall from package metadata instead of storing dependency trees. |
+
+### README Updates After Upload
+
+After upload, update the relevant module READMEs with actual artifact URLs:
 
 - `persona/curation/attribute_pool/README.md`
 - `persona/datasets/README.md`
+- `environment/adapters/<adapter-name>/README.md` for adapter-required data
 - future `persona/bench/` documentation
 - future application-specific README files that need external fixtures

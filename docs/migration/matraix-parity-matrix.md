@@ -38,9 +38,9 @@ linked from documentation after upload to external artifact storage.
 | `configs/jobs/` | 18 | 18.4 KiB | `configs/jobs/` | `partial` | Curated runnable application recipes and the `harbor-smoke-local.yaml` runtime smoke recipe are present. Import only additional recipes whose referenced tasks, agents, and sample datasets exist. |
 | `docs/` | 15 | 2.8 MiB | `docs/` | `partial` | Keep architecture and migration docs curated. Large images and legacy planning docs need review before import. |
 | `examples/` | 367 | 394.7 KiB | `examples/` or module-local examples | `partial` | The `hello-world` runtime smoke task is imported. Remaining examples need focused review before import. |
-| `jobs/` | 509 | 64.3 MiB | external storage | `external-artifact` | Historical run outputs, screenshots, videos, and trajectories do not belong in `main`. Upload selected artifacts and link them from docs. |
+| `jobs/` | 509 | 64.3 MiB | external storage | `external-artifact` | Historical run outputs, screenshots, videos, and trajectories do not belong in `main`. Upload selected artifacts using the slots in `migration/matraix/README.md`, then link them from docs. |
 | `packages/` | 66 | 303.6 KiB | `packages/` | `partial` | `harbor-langsmith` and `rewardkit` are imported as optional packages. The legacy `packages/matraix` namespace and publish scripts remain excluded. |
-| `persona/` | 2,098 | 451.2 MiB | `persona/` plus external storage | `partial` | Schema, curation, sample data, tasks, reporting, scripts, and validators are curated. Full generated datasets and attribute-pool outputs stay external. |
+| `persona/` | 2,098 | 451.2 MiB | `persona/` plus external storage | `partial` | Schema, curation, sample data, tasks, reporting, scripts, and validators are curated. Full generated datasets and attribute-pool outputs stay external and are listed in `migration/matraix/README.md`. |
 | `rfcs/` | 4 | 131.5 KiB | `docs/rfcs/` or `rfcs/` | `deferred` | Import only if the RFC is still part of active contributor guidance. |
 | `scripts/` | 4 | 37.2 KiB | module-local scripts | `partial` | Move package publish scripts with packages, adapter validation with adapters, and skill installation docs with contributor tooling. |
 | `skills/` | 4 | 39.9 KiB | contributor tooling docs | `deferred` | Preserve as provenance for now. Import only if the repository will support Codex skill-driven task creation. |
@@ -58,7 +58,7 @@ The following PRs are the clean-main continuation path approved for migration:
 | 3 | Minimal examples and smoke recipes | Runtime examples required by curated smoke jobs, likely starting with `examples/tasks/hello-world` and `harbor-smoke-local.yaml`. | Full example job outputs under `examples/jobs/` and `jobs/`. |
 | 4 | Optional packages | `packages/rewardkit` and `packages/harbor-langsmith` as isolated optional package PRs, or a single PR if the dependency graph requires both together. | Publishing credentials, generated build artifacts. |
 | 5 | Adapter foundation | `environment/adapters/README.md`, adapter manifest format, and `simpleqa` as the first focused adapter import. | Bulk import of all 1,483 adapter files, generated datasets, and adapter lockfiles. |
-| 6 | External artifact handoff | Expand artifact inventory and add placeholder HuggingFace slots for persona data, job outputs, and large fixtures. | Uploading binary artifacts into git. |
+| 6 | External artifact handoff | Expanded artifact inventory and placeholder HuggingFace slots for persona data, job outputs, local side artifacts, and large fixtures. | Uploading binary artifacts into git. |
 
 ## Adapter Import Rules
 
