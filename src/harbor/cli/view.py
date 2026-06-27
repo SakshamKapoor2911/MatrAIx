@@ -303,7 +303,7 @@ def _run_production_mode(
     app = create_app(folder, mode=mode, static_dir=static_dir)
 
     folder_label = "Tasks folder" if mode == "tasks" else "Jobs folder"
-    console.print("[green]Starting MatrAIx Viewer[/green]")
+    console.print("[green]Starting PersonaBench Viewer[/green]")
     console.print(f"  {folder_label}: {folder}")
     console.print(f"  Mode: {mode}")
     console.print(f"  Server: http://{host}:{port}")
@@ -335,7 +335,7 @@ def _run_dev_mode(
         raise SystemExit(1)
 
     folder_label = "Tasks folder" if mode == "tasks" else "Jobs folder"
-    console.print("[green]Starting MatrAIx Viewer (dev mode)[/green]")
+    console.print("[green]Starting PersonaBench Viewer (dev mode)[/green]")
     console.print(f"  {folder_label}: {folder}")
     console.print(f"  Mode: {mode}")
     console.print(f"  Backend API: http://{host}:{backend_port}")

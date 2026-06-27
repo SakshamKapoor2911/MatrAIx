@@ -10,6 +10,7 @@ The repository is organized around three contribution modules:
 persona/       Persona schemas, datasets, curation pipelines, and persona bench tasks.
 application/   Product and research scenarios that consume personas.
 environment/   Runtime, agents, job recipes, viewer, and execution infrastructure.
+apps/          Repo-local tool frontends paired with runtime APIs.
 ```
 
 The rule of thumb is simple:
@@ -19,6 +20,8 @@ The rule of thumb is simple:
 - `application/` defines what scenario, product, or workflow the simulated user
   interacts with.
 - `environment/` defines how the simulation runs, logs, and verifies work.
+- `apps/` contains developer-facing tool frontends, currently the viewer UI for
+  `harbor view`.
 
 Shared libraries may live under `packages/` when they are genuinely reusable.
 Large generated outputs, raw dumps, and migration snapshots should not be

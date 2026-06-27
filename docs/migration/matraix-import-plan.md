@@ -63,8 +63,9 @@ Primary sources:
 - `#116`
 - `#119`
 
-Status: mostly done for schema/curation in PersonaBench PR #127. Full
-`persona/bench` remains a future wave.
+Status: schema/curation landed in PersonaBench PR #127, and the persona task
+layer landed in PR #134. Full generated persona datasets remain external to
+git.
 
 ### Wave 2: Application examples
 
@@ -228,8 +229,23 @@ Primary sources:
 
 ### Wave 8: Optional viewer and tooling
 
-Evaluate whether `apps/viewer` should remain under `apps/viewer` or move under
-`environment/tools/viewer`. Do not place viewer code at repository root.
+Decision: keep the React frontend under `apps/viewer`, because Harbor's
+`view` CLI already resolves that source path and the backend API lives in
+`src/harbor/viewer/`. Document `apps/` as repo-local tooling, not a fourth
+business module.
+
+Status: scoped in branch `codex/viewer-tooling`.
+
+Imported in this wave:
+
+- `apps/viewer/`
+- `tests/unit/viewer/`
+
+Still deferred:
+
+- built `apps/viewer/build/` output
+- `node_modules/`
+- any unrelated adapters or example snapshots
 
 ### Wave 9: Data curation and larger datasets
 

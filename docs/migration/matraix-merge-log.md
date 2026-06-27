@@ -234,3 +234,25 @@ This log records the curated migration from MatrAIx into PersonaBench.
   - Local generated datasets go under ignored `persona/datasets/_generated/`.
   - Persona grounding verifier env now prefers `PERSONABENCH_PROBE_*` while
     retaining `MATRAIX_PROBE_*` fallback for migrated task compatibility.
+
+### Step 11: Import viewer frontend tooling
+
+- Branch: `codex/viewer-tooling`
+- PersonaBench PR: pending
+- Source repository: `MatrAIx-ai/MatrAIx`
+- Source reference: `origin/main` at `e50592a4cbfca86b3207e1f9d5247ca9f93ee4d0`
+- Purpose: bring over the frontend source for `harbor view` now that the
+  viewer backend API is already present in `src/harbor/viewer/`.
+- Imported into:
+  - `apps/viewer/`
+  - `apps/README.md`
+  - `tests/unit/viewer/`
+- Excluded:
+  - `apps/viewer/build/`
+  - `apps/viewer/node_modules/`
+  - generated static viewer assets under `src/harbor/viewer/static/`
+- Compatibility adjustments:
+  - Viewer UI and CLI display text use PersonaBench branding.
+  - The private frontend package name is `personabench-viewer`.
+  - Architecture docs define `apps/` as repo-local tooling, not a fourth
+    business module.

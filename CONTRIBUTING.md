@@ -9,7 +9,8 @@ must explain the boundary crossing in the PR body.
 | --- | --- | --- |
 | `persona/` | Persona schema, attributes, curated datasets, persona curation scripts, persona adherence tasks | Runtime drivers, product scenarios, checked-in job outputs |
 | `application/` | Survey/chat/web/product scenarios, application metrics, application task fixtures | Persona source datasets, runtime engines |
-| `environment/` | Harbor/runtime code, persona agent adapters, job recipes, viewer, execution backends | Persona schema decisions, application-specific research claims |
+| `environment/` | Harbor/runtime code, persona agent adapters, job recipes, viewer backend, execution backends | Persona schema decisions, application-specific research claims |
+| `apps/` | Repo-local tool frontends such as the `harbor view` UI | Generated builds, datasets, task definitions |
 | `packages/` | Reusable libraries used by multiple modules | One-off scripts or generated outputs |
 
 ## PR Expectations

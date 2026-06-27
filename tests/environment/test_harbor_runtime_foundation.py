@@ -38,7 +38,6 @@ def test_harbor_console_scripts_are_registered() -> None:
 def test_runtime_import_excludes_raw_snapshot_directories() -> None:
     forbidden_paths = [
         "adapters",
-        "apps",
         "jobs",
         "packages/rewardkit",
         "packages/harbor-langsmith",
@@ -47,6 +46,13 @@ def test_runtime_import_excludes_raw_snapshot_directories() -> None:
 
     for relative_path in forbidden_paths:
         assert not (ROOT / relative_path).exists(), relative_path
+
+    apps_dir = ROOT / "apps"
+    if apps_dir.exists():
+        assert sorted(path.name for path in apps_dir.iterdir()) == [
+            "README.md",
+            "viewer",
+        ]
 
 
 def test_runtime_factory_does_not_reference_deferred_matraix_agents() -> None:

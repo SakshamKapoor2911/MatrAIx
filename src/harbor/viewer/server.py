@@ -1,4 +1,4 @@
-"""FastAPI server for the MatrAIx Viewer."""
+"""FastAPI server for the PersonaBench Viewer."""
 
 import html
 import json
@@ -137,8 +137,8 @@ def create_app(
             await callback()
 
     app = FastAPI(
-        title="MatrAIx Viewer",
-        description="API for browsing MatrAIx simulation jobs and trials",
+        title="PersonaBench Viewer",
+        description="API for browsing PersonaBench simulation jobs and trials",
         version="0.1.0",
         lifespan=lifespan,
     )
@@ -1009,9 +1009,7 @@ def _register_job_endpoints(app: FastAPI, jobs_dir: Path) -> None:
           * ``unavailable`` — network / RPC error reaching Harbor Hub.
           * ``unknown`` — unexpected error; conservative fallback.
         """
-        from harbor.constants import HARBOR_VIEWER_JOBS_URL
         from harbor.models.job.result import JobResult
-        from harbor.upload.db_client import UploadDB
 
         job_dir = _validate_job_path(job_name)
         if not job_dir.exists():
@@ -1028,6 +1026,9 @@ def _register_job_endpoints(app: FastAPI, jobs_dir: Path) -> None:
             return {"status": "unknown", "job_id": None, "view_url": None}
 
         job_id = str(job_result.id)
+        from harbor.constants import HARBOR_VIEWER_JOBS_URL
+        from harbor.upload.db_client import UploadDB
+
         db = UploadDB()
         try:
             await db.get_user_id()

@@ -14,7 +14,7 @@ Expected contents:
   schema docs.
 - `persona/datasets/` for curated, small, reviewable persona sets.
 - `persona/curation/` for scripts and manifests that build persona data.
-- `persona/bench/` for persona adherence and grounding tasks.
+- `persona/tasks/` for persona adherence and grounding tasks.
 - `persona/reporting/` for analysis of persona quality and coverage.
 
 Large raw dumps and generated outputs should not be committed unless they are
@@ -43,7 +43,8 @@ Expected contents:
 - `environment/runtime/` for job and trial execution code.
 - `environment/agents/` for persona-conditioned agents and model wrappers.
 - `environment/jobs/` for reusable job recipe schemas and templates.
-- `environment/viewer/` for result inspection UI.
+- `src/harbor/viewer/` for the viewer backend API.
+- `apps/viewer/` for the viewer frontend source paired with `harbor view`.
 - `environment/adapters/` for optional external benchmark adapters.
 
 Persona agents live here because they are execution mechanisms. The persona
