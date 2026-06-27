@@ -31,7 +31,8 @@ jobs:
         run: |
           uv venv --python 3.12
           uv pip install -e .
+          uv pip install -e packages/harbor-langsmith
           uv pip install pytest pytest-asyncio
 
       - name: Run curated test suite
-        run: uv run pytest tests/
+        run: uv run pytest tests/ packages/harbor-langsmith/tests/

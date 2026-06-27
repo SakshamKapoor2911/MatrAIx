@@ -39,7 +39,7 @@ linked from documentation after upload to external artifact storage.
 | `docs/` | 15 | 2.8 MiB | `docs/` | `partial` | Keep architecture and migration docs curated. Large images and legacy planning docs need review before import. |
 | `examples/` | 367 | 394.7 KiB | `examples/` or module-local examples | `partial` | The `hello-world` runtime smoke task is imported. Remaining examples need focused review before import. |
 | `jobs/` | 509 | 64.3 MiB | external storage | `external-artifact` | Historical run outputs, screenshots, videos, and trajectories do not belong in `main`. Upload selected artifacts and link them from docs. |
-| `packages/` | 66 | 303.6 KiB | `packages/` | `needs-curated-import` | Import `rewardkit` and `harbor-langsmith` as optional packages only when their dependencies and tests are explicit. |
+| `packages/` | 66 | 303.6 KiB | `packages/` | `partial` | `harbor-langsmith` is imported as an optional package. Import `rewardkit` in a separate PR with its own test and dependency review. |
 | `persona/` | 2,098 | 451.2 MiB | `persona/` plus external storage | `partial` | Schema, curation, sample data, tasks, reporting, scripts, and validators are curated. Full generated datasets and attribute-pool outputs stay external. |
 | `rfcs/` | 4 | 131.5 KiB | `docs/rfcs/` or `rfcs/` | `deferred` | Import only if the RFC is still part of active contributor guidance. |
 | `scripts/` | 4 | 37.2 KiB | module-local scripts | `partial` | Move package publish scripts with packages, adapter validation with adapters, and skill installation docs with contributor tooling. |

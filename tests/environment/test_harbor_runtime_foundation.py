@@ -40,7 +40,6 @@ def test_runtime_import_excludes_raw_snapshot_directories() -> None:
         "adapters",
         "jobs",
         "packages/rewardkit",
-        "packages/harbor-langsmith",
         "src/matraix/agents",
     ]
 

@@ -326,3 +326,25 @@ This log records the curated migration from MatrAIx into PersonaBench.
 - Compatibility adjustments:
   - Job recipe docs now list `harbor-smoke-local.yaml` as the preferred
     no-API-key runtime smoke recipe.
+
+### Step 15: Import optional Harbor LangSmith package
+
+- Branch: `codex/packages-harbor-langsmith`
+- Source repository: `MatrAIx-ai/MatrAIx`
+- Source reference: `origin/main` at `e50592a4cbfca86b3207e1f9d5247ca9f93ee4d0`
+- Purpose: restore the LangSmith Harbor job plugin as an optional package
+  without reintroducing the legacy `matraix` package namespace.
+- Imported into:
+  - `packages/harbor-langsmith/`
+  - `packages/README.md`
+  - `.github/workflows/pytest.yml`
+  - `tests/environment/test_optional_packages.py`
+- Excluded:
+  - `packages/matraix/`
+  - `packages/rewardkit/`, which remains a separate follow-up package PR.
+  - publish scripts and credentials.
+- Compatibility adjustments:
+  - Package dependency targets the PersonaBench distribution while keeping the
+    `harbor` Python namespace used by the runtime.
+  - Package build backend uses setuptools to match the root PersonaBench
+    project.
