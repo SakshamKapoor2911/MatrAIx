@@ -609,3 +609,25 @@ This log records the curated migration from MatrAIx into PersonaBench.
   - `candidate_users_top100.jsonl` remains a candidate-pool sample; the
     package smoke uses the new `user_histories_sample.jsonl` fixture because
     package creation requires rows with embedded `reviews`.
+
+### Step 24: Add optional Amazon Modal/HuggingFace dependency extra
+
+- Branch: `codex/persona-amazon-modal-extra`
+- Source repository: local `/data2/zonglin/persona_ai/MatrAIx`
+- Source branch: `codex/amazon-review-collab-integration`
+- Source reference: `87fe1dafb fix: preserve amazon min support fold texts`
+- Purpose: make the optional Amazon Reviews 2023 Modal/HuggingFace helper path
+  installable without adding cloud/indexing dependencies to the default
+  PersonaBench install.
+- Updated:
+  - `pyproject.toml`
+  - `persona/curation/existing_data/README.md`
+  - `docs/migration/matraix-merge-log.md`
+- Included:
+  - `amazon-modal` optional dependency group for Modal, HuggingFace, Parquet,
+    dataset loading, and progress utilities
+  - README install note for `modal_amazon_user_index.py`
+- Excluded:
+  - any raw Amazon data or generated Modal/HuggingFace artifacts
+  - default dependency changes for users who do not run the cloud indexing path
+  - Superpowers implementation plans
