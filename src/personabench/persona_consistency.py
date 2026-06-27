@@ -12,6 +12,58 @@ DEFAULT_CATALOG_PATH = "persona/schema/dimensions.json"
 # Core catalog block (index 1-47): demographics, career, values, interaction state, etc.
 # Excludes fam_* / att_* floods that start at index 48+.
 CORE_DEV_MAX_INDEX = 47
+CORE_DEV_DIMENSION_IDS = (
+    "age_bracket",
+    "region",
+    "gender_identity",
+    "urbanicity",
+    "socioeconomic_band",
+    "primary_language",
+    "english_proficiency",
+    "multilingualism",
+    "register",
+    "domain",
+    "subject_specialty",
+    "domain_characteristics",
+    "highest_education",
+    "academic_field",
+    "institution_tier",
+    "research_output",
+    "seniority",
+    "company_size",
+    "role_function",
+    "years_experience",
+    "linkedin_activity",
+    "life_stage",
+    "major_life_events",
+    "cultural_background",
+    "tech_savviness",
+    "dominant_trait",
+    "risk_tolerance",
+    "decision_style",
+    "values_priority",
+    "political_lean",
+    "religiosity",
+    "neurotype",
+    "emotional_state",
+    "intent",
+    "query_complexity",
+    "expertise_gap",
+    "tone_expected",
+    "trust_level",
+    "safety_sensitivity",
+    "time_pressure",
+    "prior_context",
+    "device_context",
+    "modality_pref",
+    "accessibility_needs",
+    "learning_style",
+    "media_diet",
+    "economic_motivation",
+)
+CORE_DEV_DIMENSION_ORDER = {
+    dim_id: index for index, dim_id in enumerate(CORE_DEV_DIMENSION_IDS, start=1)
+}
 
 # life_stage must be plausible for age_bracket (no counterfactual life arcs).
 LIFE_STAGE_BY_AGE: dict[str, list[str]] = {
@@ -55,6 +107,10 @@ CONSTRAINED_DIMENSIONS = frozenset(
 )
 
 
+def _canonical_age_bracket(age_bracket: str) -> str:
+    return age_bracket.replace("–", "-")
+
+
 def _repo_root() -> Path:
     return Path(__file__).resolve().parents[2]
 
@@ -65,12 +121,20 @@ def _load_catalog_rows(catalog_path: str) -> list[dict[str, Any]]:
     if not path.is_file():
         path = _repo_root() / catalog_path
     payload = json.loads(path.read_text(encoding="utf-8"))
-    rows = [
-        r
-        for r in payload.get("dimensions") or []
-        if isinstance(r, dict) and r.get("id")
-    ]
-    return sorted(rows, key=lambda r: (int(r.get("index") or 99999), str(r["id"])))
+    rows = []
+    for position, row in enumerate(payload.get("dimensions") or []):
+        if isinstance(row, dict) and row.get("id"):
+            rows.append({**row, "_catalog_order": position})
+    return sorted(rows, key=lambda r: (_catalog_order(r), str(r["id"])))
+
+
+def _catalog_order(row: dict[str, Any]) -> int:
+    if row.get("index") is not None:
+        return int(row["index"])
+    dim_id = str(row["id"])
+    if dim_id in CORE_DEV_DIMENSION_ORDER:
+        return CORE_DEV_DIMENSION_ORDER[dim_id]
+    return CORE_DEV_MAX_INDEX + 1 + int(row.get("_catalog_order") or 99999)
 
 
 def load_dev_dimension_ids(
@@ -80,8 +144,12 @@ def load_dev_dimension_ids(
     ids: list[str] = []
     for row in _load_catalog_rows(catalog_path):
         dim_id = str(row["id"])
-        index = int(row.get("index") or 99999)
-        if index <= CORE_DEV_MAX_INDEX or dim_id.startswith("cog_"):
+        index = _catalog_order(row)
+        if (
+            index <= CORE_DEV_MAX_INDEX
+            or dim_id in CORE_DEV_DIMENSION_ORDER
+            or dim_id.startswith("cog_")
+        ):
             ids.append(dim_id)
     return tuple(ids)
 
@@ -95,11 +163,12 @@ def load_dev_dimension_index_order(
     for row in _load_catalog_rows(catalog_path):
         dim_id = str(row["id"])
         if dim_id in dev_ids:
-            order[dim_id] = int(row.get("index") or 99999)
+            order[dim_id] = _catalog_order(row)
     return order
 
 
 def allowed_years_experience(*, age_bracket: str, seniority: str) -> list[str]:
+    age_bracket = _canonical_age_bracket(age_bracket)
     if seniority == "Retired":
         return ["11-20", "20+"]
     if seniority in ("Student / intern",):
@@ -116,10 +185,12 @@ def allowed_years_experience(*, age_bracket: str, seniority: str) -> list[str]:
 
 
 def allowed_life_stages(age_bracket: str) -> list[str]:
+    age_bracket = _canonical_age_bracket(age_bracket)
     return list(LIFE_STAGE_BY_AGE.get(age_bracket, []))
 
 
 def allowed_seniorities(*, life_stage: str, age_bracket: str) -> list[str]:
+    age_bracket = _canonical_age_bracket(age_bracket)
     options = list(SENIORITY_BY_LIFE_STAGE.get(life_stage, []))
     if age_bracket in ("13-17", "18-24"):
         return [s for s in options if s in ("Student / intern", "Entry", "Mid")]
@@ -133,6 +204,7 @@ def allowed_seniorities(*, life_stage: str, age_bracket: str) -> list[str]:
 
 
 def allowed_education(*, age_bracket: str, life_stage: str) -> list[str]:
+    age_bracket = _canonical_age_bracket(age_bracket)
     base = list(EDUCATION_BY_AGE.get(age_bracket, []))
     if life_stage == "Student" and age_bracket in ("13-17", "18-24"):
         return [

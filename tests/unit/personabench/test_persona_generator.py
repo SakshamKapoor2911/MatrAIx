@@ -28,6 +28,35 @@ def test_validate_rejects_counterfactual_combo() -> None:
     assert any("life_stage" in err for err in errors)
 
 
+def test_validate_accepts_v2_age_bracket_dash_style() -> None:
+    assert (
+        validate_dimensions(
+            {
+                "age_bracket": "18–24",
+                "life_stage": "Early career",
+                "seniority": "Entry",
+                "years_experience": "0-2",
+                "highest_education": "Bachelor's",
+            }
+        )
+        == []
+    )
+
+
+def test_dev_dimension_ids_include_core_catalog_fields() -> None:
+    from personabench.persona_consistency import load_dev_dimension_ids
+
+    dev_ids = set(load_dev_dimension_ids())
+
+    assert {
+        "age_bracket",
+        "socioeconomic_band",
+        "tech_savviness",
+        "risk_tolerance",
+        "economic_motivation",
+    } <= dev_ids
+
+
 def test_generate_pool_has_no_violations() -> None:
     personas = generate_persona_pool(count=50, seed=99)
     for entry in personas:

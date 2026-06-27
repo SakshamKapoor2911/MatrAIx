@@ -68,7 +68,8 @@ def test_persona_task_toml_matches_catalog(task_toml: Path) -> None:
 
 def test_persona_bench_dim_index_matches_dimensions_json() -> None:
     dims = json.loads(DIMENSIONS_JSON.read_text(encoding="utf-8"))["dimensions"]
-    id_by_index = {d["index"]: d["id"] for d in dims}
+    id_by_index = {d["index"]: d["id"] for d in dims if "index" in d}
+    dimension_ids = {d["id"] for d in dims}
     for dirname, spec in EXAMPLE_TASK_METADATA.items():
         if not dirname.startswith("example-"):
             continue
@@ -79,7 +80,9 @@ def test_persona_bench_dim_index_matches_dimensions_json() -> None:
             continue
         dim_id = spec.get("bench_dim_id")
         if dim_id is not None:
-            assert id_by_index[int(index)] == dim_id, dirname
+            assert dim_id in dimension_ids, dirname
+            if id_by_index:
+                assert id_by_index[int(index)] == dim_id, dirname
         grounding = load_grounding_toml(
             f"persona/tasks/{dirname}",
             repo_root=REPO_ROOT,

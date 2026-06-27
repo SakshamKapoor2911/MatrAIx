@@ -828,3 +828,27 @@ This log records the curated migration from MatrAIx into PersonaBench.
   - The old plan file is converted into a research note.
   - The source rename PR is absorbed by using a stable docs path from the
     start.
+
+### Step 34: Import coding persona dimensions v2
+
+- Branch: `codex/persona-schema-coding-v2`
+- Source repository: `MatrAIx-ai/MatrAIx`
+- Source PR: `#82`, `Add coding persona dimensions v2`
+- PersonaBench snapshot PR: `#112`
+- Purpose: bring the merged MatrAIx v2 persona dimension catalog into the
+  clean `persona/schema` module without restoring raw snapshot outputs.
+- Updated:
+  - `persona/schema/dimensions.json`
+  - `persona/schema/README.md`
+  - `persona/curation/existing_data/wiki_collab/collab_kit/README.md`
+- Imported schema:
+  - `schemaVersion`: `2.0`
+  - `targetDimensions`: `1412`
+  - Delta from the previous clean schema: 73 new dimensions, no removed
+    dimension IDs.
+- Source handling:
+  - Older closed Attribute Schema snapshots (`#83`, `#84`, `#88`) contain the
+    same v1 schema plus superseded v2 drafts and generated intermediate files.
+  - Raw attribute-pool outputs, raw datasets, parquet catalogs, curated persona
+    dumps, and application UI/backend files from the snapshot branch are
+    intentionally excluded from this schema-only PR.
