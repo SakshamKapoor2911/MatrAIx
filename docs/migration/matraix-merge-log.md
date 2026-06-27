@@ -62,6 +62,9 @@ This log records the curated migration from MatrAIx into PersonaBench.
 ### Step 4: Import application task definitions
 
 - Branch: `codex/application-tasks-curated-import`
+- PersonaBench PR: `#128`
+- Result: merged
+- Merge commit: `7b23de31303cdc91b63ae28c70602206ee414b4f`
 - Source repository: `MatrAIx-ai/MatrAIx`
 - Source reference: `origin/main` at `e50592a4cbfca86b3207e1f9d5247ca9f93ee4d0`
 - Purpose: bring over application-owned task definitions and the reporting
@@ -79,3 +82,25 @@ This log records the curated migration from MatrAIx into PersonaBench.
   - Local temporary output directories use `/tmp/personabench-*`.
   - Example README persona paths point at
     `persona/datasets/bench-dev-sample/`.
+
+### Step 5: Import shared utility package
+
+- Branch: `codex/shared-utility-package-import`
+- Source repository: `MatrAIx-ai/MatrAIx`
+- Source reference: `origin/main` at `e50592a4cbfca86b3207e1f9d5247ca9f93ee4d0`
+- Purpose: bring over pure Python utilities needed for persona sampling,
+  task catalogs, and application job generation without importing agents or the
+  Harbor runtime.
+- Imported into:
+  - `src/personabench/`
+  - `application/scripts/`
+  - root `pyproject.toml`
+- Deferred:
+  - `src/matraix/agents/`
+  - Harbor runtime code
+  - checked-in `configs/jobs/` recipes
+- Compatibility adjustments:
+  - Package/import namespace is `personabench`, not `matraix`.
+  - Default schema path is `persona/schema/dimensions.json`.
+  - Default dataset path is `persona/datasets/bench-dev-sample`.
+  - `task_catalog.py` uses the Python standard-library `tomllib`.

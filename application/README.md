@@ -22,8 +22,9 @@ The first application import brings in example task definitions and reporting
 stubs only:
 
 - `tasks/`: survey, chat, web, and computer-use example tasks
+- `scripts/`: application job generation helpers
 - `reporting/`: placeholder aggregation surface for application batch reports
 
-The shared Python package, agents, job recipes, and runtime wiring are imported
-in later PRs. Until then, keep new contributions scoped to task folders and
-avoid adding repo-root scripts or generated job outputs.
+Agents, curated job recipes, and runtime wiring are imported in later PRs. Until
+then, keep new contributions scoped to task folders and avoid adding repo-root
+scripts or generated job outputs.
