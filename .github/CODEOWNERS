@@ -1,29 +1,37 @@
 # MatrAIx CODEOWNERS — default reviewers on PRs
 #
-# Team reviewers: Persona @YuexingHao · Environment @JianhengHou · Application @ShirleyHuang11 · Docs @XiaominLi1998 (+ all leads on docs paths)
+# Uses GitHub org teams (Settings → Teams). Labels (team: persona, …) are separate;
+# only entries here trigger review requests.
+#
+# Persona  @MatrAIx-ai/persona-team-maintainers
+# Environment @MatrAIx-ai/env-eng-team-maintainers
+# Application @MatrAIx-ai/application-team-maintainers
+
 # --- Persona team ---
-/persona/                    @YuexingHao
+/persona/                    @MatrAIx-ai/persona-team-maintainers
 
-# --- Application team ---
-/application/                @ShirleyHuang11
+# --- Application team (Harbor tasks under application/) ---
+/application/                @MatrAIx-ai/application-team-maintainers
+/applications/               @MatrAIx-ai/application-team-maintainers
 
-# --- Documentation (all team leads + docs lead) ---
-/docs/                       @XiaominLi1998 @YuexingHao @JianhengHou @ShirleyHuang11
-/CONTRIBUTING.md             @XiaominLi1998 @YuexingHao @JianhengHou @ShirleyHuang11
-/README.md                   @XiaominLi1998 @YuexingHao @JianhengHou @ShirleyHuang11
+# --- Documentation (all maintainer teams) ---
+/docs/                       @MatrAIx-ai/persona-team-maintainers @MatrAIx-ai/env-eng-team-maintainers @MatrAIx-ai/application-team-maintainers
+/CONTRIBUTING.md             @MatrAIx-ai/persona-team-maintainers @MatrAIx-ai/env-eng-team-maintainers @MatrAIx-ai/application-team-maintainers
+/README.md                   @MatrAIx-ai/persona-team-maintainers @MatrAIx-ai/env-eng-team-maintainers @MatrAIx-ai/application-team-maintainers
 
 # --- Environment team (Harbor runtime, agents, jobs, viewer, packages, CI) ---
-/src/                        @JianhengHou
-/configs/                    @JianhengHou
-/apps/                       @JianhengHou
-/packages/                   @JianhengHou
-/adapters/                   @JianhengHou
-/examples/                   @JianhengHou
-/tests/                      @JianhengHou
-/skills/                     @JianhengHou
-/.github/                    @JianhengHou @YuexingHao
-/pyproject.toml              @JianhengHou
-/uv.lock                     @JianhengHou
+/src/                        @MatrAIx-ai/env-eng-team-maintainers
+/configs/                    @MatrAIx-ai/env-eng-team-maintainers
+/apps/                       @MatrAIx-ai/env-eng-team-maintainers
+/packages/                   @MatrAIx-ai/env-eng-team-maintainers
+/adapters/                   @MatrAIx-ai/env-eng-team-maintainers
+/examples/                   @MatrAIx-ai/env-eng-team-maintainers
+/tests/                      @MatrAIx-ai/env-eng-team-maintainers
+/skills/                     @MatrAIx-ai/env-eng-team-maintainers
+/.github/                    @MatrAIx-ai/env-eng-team-maintainers @MatrAIx-ai/persona-team-maintainers
+/.gitignore                  @MatrAIx-ai/env-eng-team-maintainers
+/pyproject.toml              @MatrAIx-ai/env-eng-team-maintainers
+/uv.lock                     @MatrAIx-ai/env-eng-team-maintainers
 
 # Admin fallback (unmatched paths)
-*                            @YuexingHao
+*                            @MatrAIx-ai/persona-team-maintainers
