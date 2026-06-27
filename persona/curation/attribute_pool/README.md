@@ -9,6 +9,8 @@ does not import the large generated `outputs/` tree.
 ## Included
 
 - `docs/`: method notes and theoretical-basis documents.
+  - `industry_related_persona_attributes.md` maps common application domains
+    to useful schema attributes for cohort selection.
 - `scripts/`: pipeline scripts for aggregation, normalization, deduplication,
   graph preparation, and final merge construction.
 - `sources/`: small source notes that explain the input datasets. Large raw

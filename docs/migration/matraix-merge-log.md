@@ -789,3 +789,21 @@ This log records the curated migration from MatrAIx into PersonaBench.
   - SOTOPIA was also present in source PR `#77`, but it is already covered in
     `docs/research/environment-related-work.md`, so it is not duplicated here.
   - Owner-line edits from source PR `#77` are intentionally excluded.
+
+### Step 32: Import industry-to-attribute mapping note
+
+- Branch: `codex/persona-industry-attribute-map`
+- Source repository: `MatrAIx-ai/MatrAIx`
+- Source PR: `#74`, `Add Summary of Industry-Related Persona Attributes from
+  Attribute Schema`
+- PersonaBench snapshot PR: `#110`
+- Purpose: preserve the domain-to-attribute mapping for movie, beauty, game,
+  finance, health, and coding scenarios without restoring the old `personas/`
+  planning folder.
+- Imported into:
+  - `persona/curation/attribute_pool/docs/industry_related_persona_attributes.md`
+- Updated:
+  - `persona/curation/attribute_pool/README.md`
+- Compatibility adjustments:
+  - The old filename with spaces is replaced by a stable snake_case doc name.
+  - The source table is reformatted into maintainable per-domain sections.
