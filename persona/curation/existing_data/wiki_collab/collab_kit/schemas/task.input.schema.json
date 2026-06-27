@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Persona-attribution input task",
+  "description": "One line of tasks.jsonl. The owner sends these; do not change the shape.",
+  "type": "object",
+  "required": ["global_idx", "task_id", "qid", "profile_text"],
+  "properties": {
+    "global_idx": {
+      "type": "integer",
+      "description": "Stable id of this profile in the owner's dataset. Echo it back unchanged in the result."
+    },
+    "task_id": { "type": "string" },
+    "qid": { "type": "string", "description": "Wikidata QID, e.g. Q91." },
+    "title": { "type": "string" },
+    "source_url": { "type": "string" },
+    "input_sha256": {
+      "type": "string",
+      "description": "Owner-computed hash of the profile input payload. Keep it unchanged if you echo it in downstream outputs."
+    },
+    "profile_text": {
+      "type": "string",
+      "description": "The text you attribute persona dimensions from. Evidence quotes must be copied from here."
+    }
+  }
+}

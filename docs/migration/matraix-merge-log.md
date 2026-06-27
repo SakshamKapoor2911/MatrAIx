@@ -519,3 +519,44 @@ This log records the curated migration from MatrAIx into PersonaBench.
   - Default schema references point to `persona/schema/dimensions.json`.
   - README is scoped to the files that actually land in this wave, so later
     Amazon and collaborator-package commands are not advertised early.
+
+### Step 22: Import persona collaboration packaging tools
+
+- Branch: `codex/persona-collab-packaging-tools`
+- Source repository: local `/data2/zonglin/persona_ai/MatrAIx`
+- Source branch: `codex/amazon-review-collab-integration`
+- Source reference: `87fe1dafb fix: preserve amazon min support fold texts`
+- Source base: `MatrAIx-ai/MatrAIx@origin/main`
+  `e50592a4cbfca86b3207e1f9d5247ca9f93ee4d0`
+- Purpose: add the owner-to-collaborator loop for existing-data persona
+  curation without importing raw snapshots or generated worker outputs.
+- Imported into:
+  - `persona/curation/existing_data/scripts/`
+  - `persona/curation/existing_data/wiki_collab/`
+  - `persona/curation/existing_data/worker_kit/`
+  - `tests/persona/curation/existing_data/`
+- Included:
+  - worker-facing `collab_kit/` with schemas, harness, conformance checker,
+    CLI adapters, assignment runner, sample inputs, and returned
+    `results.jsonl` documentation
+  - owner-side package builder, package wrapper template, plain-result merge,
+    and audit helpers
+  - range worker kit utilities and focused package/runner/merge tests
+  - source worktree-only collaborator documentation:
+    `wiki_collab/collab_kit/RESULTS_JSONL_README.md`
+- Excluded:
+  - raw source dumps, local SQLite databases, worker archives, and returned
+    generated results
+  - Amazon Reviews 2023 data-source scripts and evidence/protocol files, which
+    are staged for the next PR
+  - Modal/HuggingFace cloud indexer
+  - React curation cockpit and built frontend assets
+  - Superpowers implementation plans
+- Compatibility adjustments:
+  - Worker-facing labels, email subjects, and package defaults are renamed from
+    MatrAIx to PersonaBench.
+  - Repo-root detection is updated for the `persona/curation/existing_data/`
+    target layout.
+  - Default schema references point to `persona/schema/dimensions.json`.
+  - The worker package remains self-contained and excludes local progress,
+    archives, caches, and Python bytecode.
