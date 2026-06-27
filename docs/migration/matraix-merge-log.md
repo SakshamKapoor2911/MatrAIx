@@ -999,3 +999,27 @@ This log records the curated migration from MatrAIx into PersonaBench.
   - Legacy `MATRIX_*` environment variable wiring, API endpoints, subprocess
     Harbor runner integration, and frontend UI remain deferred until the
     application tooling surface is migrated cleanly.
+
+### Step 41: Import application task interface docs
+
+- Branch: `codex/application-task-interface-docs`
+- Source repository: `MatrAIx-ai/MatrAIx`
+- Source PR:
+  - `#86`, `Generalize Type 2 chatbot applications`
+- PersonaBench snapshot PR:
+  - `#70`
+- Purpose: preserve the survey/chatbot/web application task protocol layer
+  without importing the full generalized PersonaEval backend, frontend, or
+  generated application data.
+- Imported into:
+  - `application/tasks/interface/`
+- Updated:
+  - `application/tasks/README.md`
+- Source handling:
+  - The source `applications/tasks/application_interface/` docs are adapted to
+    the clean `application/tasks/` layout.
+  - Canonical paths now point at existing PersonaBench tasks:
+    `persona-survey`, `recommender-agent_chat_api`, and
+    `example-web-playwright_books-interest`.
+  - The full `applications/persona_eval` app stack from this source PR remains
+    deferred for separate curated application tooling work.
