@@ -140,6 +140,18 @@ For real data, build or retrieve user histories externally, keep them under an
 ignored local path such as `raw/amazon_reviews_2023/`, then run:
 
 ```bash
+python persona/curation/existing_data/scripts/export_hf_amazon_user_histories.py \
+  --user-ids /path/to/amazon_reviewer_ids.md \
+  --max-users 100 \
+  --output persona/curation/existing_data/raw/amazon_reviews_2023/user_histories.jsonl
+```
+
+The HF export path reads user-bucketed Parquet artifacts and writes the
+`user_histories.jsonl` format consumed by inference and packaging. You can also
+produce the same JSONL from the Modal/HuggingFace indexing helpers or another
+trusted preprocessing job.
+
+```bash
 python persona/curation/existing_data/scripts/infer_amazon_review_dimensions.py \
   --user-histories /path/to/user_histories.jsonl \
   --schema-path persona/schema/dimensions.json \
@@ -153,6 +165,23 @@ worker archives can be checked with
 `scripts/validate_amazon_results.py`; rating-holdout evaluation and readable
 reports live in `evaluate_amazon_persona_rating_holdout.py` and
 `render_amazon_inference_report.py`.
+
+The rating-holdout evaluator writes blind prediction targets that can be scored
+against persona-grounded model predictions:
+
+```bash
+python persona/curation/existing_data/scripts/evaluate_amazon_persona_rating_holdout.py \
+  --user-histories persona/curation/existing_data/raw/amazon_reviews_2023/user_histories.jsonl
+
+python persona/curation/existing_data/scripts/predict_amazon_persona_holdout_ratings.py \
+  --prediction-targets persona/curation/existing_data/raw/amazon_reviews_2023/persona_rating_holdout_eval/prediction_targets.jsonl \
+  --inference-output persona/curation/existing_data/raw/amazon_reviews_2023/persona_dimension_inference/inferred_dimensions.jsonl \
+  --dry-run
+```
+
+Remove `--dry-run` and set `OPENAI_API_KEY` to write
+`persona_predictions.jsonl`, then pass that file back to
+`evaluate_amazon_persona_rating_holdout.py --predictions`.
 
 The optional Modal/HuggingFace indexing helpers in `modal_amazon_user_index.py`
 need extra cloud/data dependencies:
