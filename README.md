@@ -89,6 +89,7 @@ keeps the useful references as module-specific research notes:
 
 - [Persona related work](docs/research/persona-related-work.md)
 - [Application related work](docs/research/application-related-work.md)
+- [Application areas taxonomy](docs/research/application-areas-taxonomy.md)
 - [Environment related work](docs/research/environment-related-work.md)
 
 The source environment review was much thinner than the application and

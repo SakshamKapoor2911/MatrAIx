@@ -654,3 +654,21 @@ This log records the curated migration from MatrAIx into PersonaBench.
   - uploading artifacts to HuggingFace
   - adding raw/generated data to git
   - Superpowers implementation plans
+
+### Step 26: Import application areas taxonomy
+
+- Branch: `codex/application-areas-taxonomy`
+- Source repository: `MatrAIx-ai/MatrAIx`
+- Source PR: `#24`, `Propose a new Application Areas Taxonomy`
+- PersonaBench snapshot PR: `#81`
+- Purpose: preserve the application-area taxonomy as a clean research note
+  without importing the old planning tree or snapshot wrapper directory.
+- Imported into:
+  - `docs/research/application-areas-taxonomy.md`
+- Updated:
+  - `docs/research/README.md`
+  - `README.md`
+- Excluded:
+  - `MatrAIx_PR_024/`
+  - old `applications/PLAN.md`, `environments/PLAN.md`, and
+    `personas/PLAN.md` planning files from the snapshot.
