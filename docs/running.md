@@ -32,10 +32,16 @@ uv pip install -e environment/adapters/simpleqa
 
 ## Verify The Checkout
 
-Run the curated Python test suite:
+Run the curated Python test suite after installing the optional packages above:
 
 ```bash
 uv run pytest tests/ packages/harbor-langsmith/tests/ packages/rewardkit/tests/
+```
+
+If you only installed the root package, run the core tests:
+
+```bash
+uv run pytest tests/
 ```
 
 Run Ruff:

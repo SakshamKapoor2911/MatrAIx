@@ -455,3 +455,33 @@ This log records the curated migration from MatrAIx into PersonaBench.
     planning document.
   - Clean-main run commands are documented against curated recipes and
     adapter-local generated paths.
+
+### Step 20: Expand README and module research reviews
+
+- Branch: `codex/docs-readme-literature-review`
+- Source repository: `MatrAIx-ai/MatrAIx`
+- Source reference: `origin/main` at `e50592a4cbfca86b3207e1f9d5247ca9f93ee4d0`
+- Purpose: answer the README and literature-review gap left by Step 19, which
+  imported a condensed persona-only research note but did not yet expose
+  application or environment related work.
+- Updated:
+  - `README.md`
+  - `docs/running.md`
+  - `docs/research/README.md`
+  - `docs/research/persona-related-work.md`
+  - `docs/research/application-related-work.md`
+  - `docs/research/environment-related-work.md`
+  - `docs/migration/matraix-parity-matrix.md`
+- Source handling:
+  - Application related work is migrated from `docs/applications/PLAN.md` and
+    stripped of old task assignments.
+  - Environment related work is migrated from `docs/environments/PLAN.md`.
+  - The source environment review only had three complete entries; its agent
+    environment and telemetry subsections were placeholders. The clean note
+    records that source gap and cross-links environment-relevant benchmark
+    entries originally written in the application review.
+- Compatibility adjustments:
+  - README now points to the three module research notes and includes a compact
+    quick-start path.
+  - Research docs remain notes, not a fresh bibliography or source-verification
+    pass.

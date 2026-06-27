@@ -12,6 +12,11 @@ source are marked below.
 The notes are grouped by how each work informs PersonaBench: persona data,
 generation methods, and evaluation or simulation methodology.
 
+The original import in the architecture-docs PR intentionally condensed the
+Persona plan into a research note. This file keeps that curated form while the
+companion application and environment notes now restore the missing module
+coverage from the source MatrAIx planning docs.
+
 ## Persona Data
 
 ### [Scaling Synthetic Data Creation with 1,000,000,000 Personas (Persona-Hub)](https://arxiv.org/abs/2406.20094)
