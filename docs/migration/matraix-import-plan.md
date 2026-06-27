@@ -29,10 +29,21 @@ Recommended handling:
 
 ## Recommended Import Waves
 
+The migration proceeds on two parallel lines:
+
+1. **Clean Main line:** `main` contains only curated, organized code and docs.
+   Raw snapshots remain review artifacts and should not be merged directly.
+2. **Unmerged PR Preservation line:** every MatrAIx PR that was not merged into
+   MatrAIx `main` remains available as a PersonaBench snapshot PR or a future
+   curated port PR. Preserve source PR number, source branch, source commit,
+   and original author metadata.
+
 ### Wave 0: Architecture and contribution guardrails
 
 Create module READMEs, contribution guidance, and migration logs. This prevents
 future imports from landing at repository root.
+
+Status: done in PersonaBench PR #126.
 
 ### Wave 1: Persona core
 
@@ -52,21 +63,10 @@ Primary sources:
 - `#116`
 - `#119`
 
-### Wave 2: PersonaBench tasks and annotation tooling
+Status: mostly done for schema/curation in PersonaBench PR #127. Full
+`persona/bench` remains a future wave.
 
-Import persona adherence tasks, grounding specs, and annotation tools.
-
-Primary sources:
-
-- `#45`
-- `#46`
-- `#47`
-- `#51`
-- `#57`
-- `#61`
-- `#121`
-
-### Wave 3: Application examples
+### Wave 2: Application examples
 
 Import runnable scenarios that consume personas. Keep fixtures small and move
 application metrics into `application/`.
@@ -85,24 +85,83 @@ Primary sources:
 - `#74`
 - `#76`
 
-### Wave 4: Environment runtime
+Status: task definitions and reporting placeholders imported in PersonaBench
+PR #128. Application job generation utilities imported in PR #129.
 
-Import only the runtime pieces needed by curated persona and application tasks.
-Do not bring in every adapter by default.
+### Wave 3: Shared utility package
+
+Import pure Python utilities that can run without the full environment runtime.
+
+Status: done in PersonaBench PR #129.
+
+Imported:
+
+- `src/personabench/`
+- `application/scripts/generate_application_job.py`
+- root `pyproject.toml`
+
+Deferred:
+
+- persona agents
+- Harbor/runtime implementation
+- checked-in job recipes
+
+### Wave 4: Environment runtime foundation
+
+Import the minimal runtime needed to execute curated application and persona
+tasks. Do not bring in every adapter, app, job output, or viewer at once.
+
+Scope:
+
+- runtime primitives needed by `application/tasks/*`
+- task execution model
+- Docker/use-computer environment glue needed by curated tasks
+- small tests or smoke checks proving the runtime imports cleanly
+
+Out of scope:
+
+- generated `jobs/` outputs
+- bulk `adapters/`
+- `apps/viewer`
+- unrelated example jobs
+
+### Wave 5: Persona agents
+
+Import persona-enabled agents only after the runtime foundation is present.
+
+Candidate agents:
+
+- `persona-claude-code`
+- `persona-computer-1`
+- `persona-browser-use`
+- `persona-cocoa`
+- other persona adapters that can import cleanly against the runtime foundation
+
+### Wave 6: Curated job recipes
+
+Import only job recipes that can run against the curated runtime and sample
+datasets. Keep generated jobs and historical outputs outside git.
+
+### Wave 7: PersonaBench tasks and annotation tooling
+
+Import persona adherence tasks, grounding specs, and annotation tools.
 
 Primary sources:
 
-- `#36`
-- `#42`
-- `#52`
-- `#53`
-- `#54`
-- `#55`
-- `#58`
-- `#59`
-- `#60`
+- `#45`
+- `#46`
+- `#47`
+- `#51`
+- `#57`
+- `#61`
+- `#121`
 
-### Wave 5: Data curation and larger datasets
+### Wave 8: Optional viewer and tooling
+
+Evaluate whether `apps/viewer` should remain under `apps/viewer` or move under
+`environment/tools/viewer`. Do not place viewer code at repository root.
+
+### Wave 9: Data curation and larger datasets
 
 Import scripts, manifests, and small samples. Put large outputs in external
 storage or Git LFS only after a maintainer decision.
@@ -123,3 +182,24 @@ Primary sources:
 - `#87`
 - `#88`
 - `#104-#110`
+
+## Open PR Preservation
+
+Do not close or overwrite PersonaBench snapshot PRs until their source PR has
+either been explicitly rejected or ported into a curated PR.
+
+Current handling policy:
+
+- Keep raw snapshot PRs open or clearly labeled as archive/do-not-merge.
+- For each useful MatrAIx open PR, create a new curated port PR against
+  PersonaBench `main`.
+- Use titles like
+  `[port matraix#128][persona] Add annotation package tool`.
+- In each curated port PR body, record:
+  - source repository
+  - source PR number
+  - source branch
+  - source commit
+  - original author
+  - files intentionally excluded
+- Never merge a raw full-tree snapshot into clean `main`.

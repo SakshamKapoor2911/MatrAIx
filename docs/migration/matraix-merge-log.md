@@ -86,6 +86,9 @@ This log records the curated migration from MatrAIx into PersonaBench.
 ### Step 5: Import shared utility package
 
 - Branch: `codex/shared-utility-package-import`
+- PersonaBench PR: `#129`
+- Result: merged
+- Merge commit: `3909c5baf53a8a104ff0ad4114884d4fcbd91834`
 - Source repository: `MatrAIx-ai/MatrAIx`
 - Source reference: `origin/main` at `e50592a4cbfca86b3207e1f9d5247ca9f93ee4d0`
 - Purpose: bring over pure Python utilities needed for persona sampling,
@@ -104,3 +107,19 @@ This log records the curated migration from MatrAIx into PersonaBench.
   - Default schema path is `persona/schema/dimensions.json`.
   - Default dataset path is `persona/datasets/bench-dev-sample`.
   - `task_catalog.py` uses the Python standard-library `tomllib`.
+
+### Step 6: Document external artifact handoff and next waves
+
+- Branch: `codex/document-external-artifacts`
+- Purpose: record large MatrAIx artifacts that should be uploaded to external
+  storage, and update the clean-main migration plan.
+- Documentation updated:
+  - `migration/matraix/README.md`
+  - `docs/migration/matraix-import-plan.md`
+- Policy:
+  - Large generated outputs, raw datasets, and historical job artifacts stay
+    out of PersonaBench `main`.
+  - HuggingFace or other approved external storage should hold the large
+    artifacts referenced by module READMEs.
+  - Raw snapshot PRs remain preservation artifacts, not clean-main merge
+    candidates.
