@@ -30,7 +30,7 @@ linked from documentation after upload to external artifact storage.
 
 | MatrAIx path | Source files | Source size | PersonaBench target | Status | Handling |
 |---|---:|---:|---|---|---|
-| `.github/` | 8 | 14.5 KiB | `.github/` | `partial` | Import safe repo metadata, workflow, and ownership files in a dedicated metadata PR after checking secrets and branch assumptions. |
+| `.github/` | 8 | 14.5 KiB | `.github/` | `partial` | Safe CODEOWNERS, labeler, pytest, and Ruff workflows are imported. Claude automation remains excluded until secrets and review policy are explicit. |
 | Root metadata | 15 | 0.93 MiB | root files | `partial` | Keep PersonaBench branding. Review `LICENSE`, `NOTICE`, `CITATION.cff`, `.python-version`, `uv.lock`, and contributor docs one by one. |
 | `adapters/` | 1,483 | 16.4 MiB | `environment/adapters/` | `needs-curated-import` | Do not dump the adapter zoo at repo root. Import adapters in small batches with manifests, dependencies, smoke commands, and external-data notes. |
 | `application/` | 88 | 81.1 KiB | `application/` | `merged-clean` | Curated tasks, reporting, and job-generation utilities are already present. Future changes should stay under `application/`. |

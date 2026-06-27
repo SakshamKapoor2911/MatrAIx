@@ -6,6 +6,7 @@ Select the owning module:
 - [ ] `application/`
 - [ ] `environment/`
 - [ ] `packages/`
+- [ ] `apps/`
 - [ ] docs or migration metadata only
 
 ## Summary

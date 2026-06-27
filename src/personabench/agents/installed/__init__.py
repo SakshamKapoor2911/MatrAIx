@@ -4,6 +4,11 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+__all__ = [
+    "BrowserUseHarborAgent",
+    "CocoaHarborAgent",
+]
+
 if TYPE_CHECKING:
     from personabench.agents.installed.browser_use import BrowserUseHarborAgent
     from personabench.agents.installed.cocoa import CocoaHarborAgent
@@ -15,8 +20,6 @@ _LAZY_IMPORTS = {
     ),
     "CocoaHarborAgent": ("personabench.agents.installed.cocoa", "CocoaHarborAgent"),
 }
-
-__all__ = sorted(_LAZY_IMPORTS)
 
 
 def __getattr__(name: str):

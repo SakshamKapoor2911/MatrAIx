@@ -273,3 +273,32 @@ This log records the curated migration from MatrAIx into PersonaBench.
   - Large generated artifacts and historical run outputs stay external to git.
   - Remaining imports should land as focused curated PRs with source mapping,
     explicit exclusions, and validation notes.
+
+### Step 13: Import safe GitHub metadata and CI
+
+- Branch: `codex/github-metadata-ci`
+- Source repository: `MatrAIx-ai/MatrAIx`
+- Source reference: `origin/main` at `e50592a4cbfca86b3207e1f9d5247ca9f93ee4d0`
+- Purpose: restore repository metadata that supports clean-main review and CI
+  without copying workflows that depend on MatrAIx organization teams,
+  unavailable secrets, or unimported test paths.
+- Imported or adapted into:
+  - `.github/CODEOWNERS`
+  - `.github/labeler.yml`
+  - `.github/workflows/pr-labeler.yml`
+  - `.github/workflows/pytest.yml`
+  - `.github/workflows/ruff.yml`
+  - `.github/PULL_REQUEST_TEMPLATE.md`
+  - `src/personabench/agents/installed/__init__.py`
+  - `src/personabench/agents/persona/__init__.py`
+- Excluded:
+  - Claude automation workflows that require `ANTHROPIC_API_KEY`.
+  - Source pytest ignores and smoke jobs that reference unimported MatrAIx
+    tests, examples, jobs, or `uv.lock`.
+  - Source type-check workflow until PersonaBench has an agreed type-check
+    scope.
+  - Ruff format check until the already-imported source files are formatted in
+    a dedicated cleanup PR.
+- Compatibility adjustments:
+  - Lazy persona-agent package exports use literal `__all__` declarations so
+    the restored Ruff workflow passes without changing import behavior.

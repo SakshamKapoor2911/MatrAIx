@@ -4,6 +4,19 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+__all__ = [
+    "Persona",
+    "PersonaBrowserUse",
+    "PersonaClaudeCode",
+    "PersonaCocoa",
+    "PersonaCodex",
+    "PersonaComputer1",
+    "PersonaGeminiCli",
+    "PersonaOpenHandsSDK",
+    "load_persona",
+    "resolve_persona_path",
+]
+
 if TYPE_CHECKING:
     from personabench.agents.persona.browser_use import PersonaBrowserUse
     from personabench.agents.persona.claude_code import PersonaClaudeCode
@@ -48,8 +61,6 @@ _LAZY_IMPORTS = {
         "resolve_persona_path",
     ),
 }
-
-__all__ = sorted(_LAZY_IMPORTS)
 
 
 def __getattr__(name: str):
