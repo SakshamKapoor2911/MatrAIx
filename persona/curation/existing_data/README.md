@@ -142,6 +142,13 @@ worker archives can be checked with
 reports live in `evaluate_amazon_persona_rating_holdout.py` and
 `render_amazon_inference_report.py`.
 
+The optional Modal/HuggingFace indexing helpers in `modal_amazon_user_index.py`
+need extra cloud/data dependencies:
+
+```bash
+pip install -e ".[amazon-modal]"
+```
+
 ## Validate And Merge Results
 
 Validate a returned archive against the owner-side SQLite database and

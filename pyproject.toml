@@ -34,6 +34,13 @@ hr = "harbor.cli.main:app"
 hb = "harbor.cli.main:app"
 
 [project.optional-dependencies]
+amazon-modal = [
+    "datasets>=4.4.1",
+    "huggingface-hub>=0.36.0",
+    "modal>=1.4.0",
+    "pyarrow>=22.0.0",
+    "tqdm>=4.66.0",
+]
 cloud = [
     "personabench[cwsandbox]",
     "personabench[daytona]",
