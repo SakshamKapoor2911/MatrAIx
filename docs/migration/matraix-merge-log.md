@@ -1077,3 +1077,39 @@ This log records the curated migration from MatrAIx into PersonaBench.
   - `npm ci` in `apps/viewer/` completed, but `npm run typecheck` could not run
     on this machine because Node v18.19.1 is below the Node 20+ requirement and
     Rollup's optional native dependency was unavailable under that install.
+
+### Step 43: Fix viewer Node/npm environment reproducibility
+
+- Branch: `codex/viewer-node20-environment`
+- Purpose: make the imported viewer frontend reproducible on Linux CI and
+  local development machines after Step 42 restored the frontend helper
+  modules.
+- Updated:
+  - `.github/workflows/viewer.yml`
+  - `apps/viewer/.node-version`
+  - `apps/viewer/.nvmrc`
+  - `apps/viewer/package.json`
+  - `apps/viewer/package-lock.json`
+  - `apps/viewer/README.md`
+  - `apps/viewer/CLAUDE.md`
+  - `docs/running.md`
+  - `tests/unit/viewer/test_frontend_environment.py`
+- Source handling:
+  - The viewer now declares Node.js 20.19.0 as its tested local runtime and
+    CI uses the same version file before running `npm ci` and
+    `npm run typecheck`.
+  - The viewer docs now use the npm lockfile workflow instead of the stale
+    Bun-only commands.
+  - The npm lockfile preserves Linux x64 native optional package entries for
+    esbuild, Rollup, Tailwind oxide, and lightningcss. This keeps Linux
+    `npm ci` installs from missing the native package required by Rollup and
+    Vite.
+- Verification:
+  - `PATH=/tmp/personabench-node-v20.19.0/bin:$PATH npm ci` passed in
+    `apps/viewer/`.
+  - `PATH=/tmp/personabench-node-v20.19.0/bin:$PATH npm run typecheck` passed
+    in `apps/viewer/`.
+  - `PATH=/tmp/personabench-node-v20.19.0/bin:$PATH npm run build` passed in
+    `apps/viewer/`.
+  - `.venv/bin/python -m pytest tests/` passed with 658 passed, 2 skipped.
+  - `.venv/bin/ruff check .` passed.

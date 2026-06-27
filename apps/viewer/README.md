@@ -4,11 +4,20 @@ Web UI for browsing and inspecting PersonaBench simulation jobs, trials, and tra
 
 ## Development
 
+Use Node.js 20.19.0 or newer. The checked-in `.node-version` and `.nvmrc`
+files pin the tested local runtime, and CI typechecks the viewer with the same
+version.
+
+Install dependencies from the npm lockfile:
+
+```bash
+npm ci
+```
+
 Start the frontend dev server with hot reloading:
 
 ```bash
-bun install
-bun dev
+npm run dev
 ```
 
 The frontend will be available at `http://localhost:5173`.
@@ -26,7 +35,13 @@ This starts both the backend API server and the frontend dev server with proper 
 Build the production bundle:
 
 ```bash
-bun run build
+npm run build
+```
+
+Typecheck the viewer before opening a PR:
+
+```bash
+npm run typecheck
 ```
 
 Output is written to `build/client/` with static assets ready to be served.
@@ -41,7 +56,7 @@ harbor view ./jobs --build
 
 # Option 2: Manual build + copy
 cd apps/viewer
-bun run build
+npm run build
 rm -rf ../../src/harbor/viewer/static
 cp -r build/client ../../src/harbor/viewer/static
 ```

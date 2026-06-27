@@ -8,6 +8,7 @@ snapshots, generated jobs, and full persona datasets are intentionally excluded.
 
 - Python 3.12.
 - [`uv`](https://docs.astral.sh/uv/) for local virtual environments.
+- Node.js 20.19.0 or newer for the optional viewer frontend in `apps/viewer/`.
 - Docker for Harbor task execution.
 - Optional model API keys for non-oracle agents, usually via `.env` or shell
   exports such as `ANTHROPIC_API_KEY` and `OPENAI_API_KEY`.
@@ -87,6 +88,19 @@ uv run harbor view jobs --build
 
 The viewer frontend source lives in `apps/viewer/`; generated frontend build
 output and job artifacts should stay out of git.
+
+To work on the viewer itself:
+
+```bash
+cd apps/viewer
+npm ci
+npm run typecheck
+npm run dev
+```
+
+The viewer pins its tested local runtime in `apps/viewer/.node-version` and
+`apps/viewer/.nvmrc`. CI uses the same version file before running
+`npm run typecheck`.
 
 ## Run The SimpleQA Adapter
 
