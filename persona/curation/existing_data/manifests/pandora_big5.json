@@ -1,0 +1,12 @@
+{
+  "id": "pandora_big5",
+  "source": {
+    "type": "huggingface_dataset",
+    "repo_id": "jingjietan/pandora-big5",
+    "url": "https://huggingface.co/datasets/jingjietan/pandora-big5"
+  },
+  "dimensions_claimed": 6,
+  "format": "parquet",
+  "license": "apache-2.0",
+  "notes": "Big-Five-only derivative of the TakeLab PANDORA Reddit dataset. ~3M rows across train/validation/test parquet shards under data/. Attribute fields: O, C, E, A, N (Big Five scores, 0-100) and ptype (personality type, 0-31); plus a raw 'text' field. The full PANDORA (adding MBTI, Enneagram, and demographics: age/gender/location) is request-gated at https://psy.takelab.fer.hr/datasets/all/pandora/. License apache-2.0 is set by the HF uploader; underlying PANDORA terms may differ, so confirm provenance before redistributing raw data (DATASHEET TODO)."
+}

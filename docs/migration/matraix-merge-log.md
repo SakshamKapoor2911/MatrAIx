@@ -485,3 +485,38 @@ This log records the curated migration from MatrAIx into PersonaBench.
     quick-start path.
   - Research docs remain notes, not a fresh bibliography or source-verification
     pass.
+
+### Step 21: Import persona existing-data wiki foundation
+
+- Branch: `codex/persona-wiki-amazon-migration`
+- Source repository: local `/data2/zonglin/persona_ai/MatrAIx`
+- Source branch: `codex/amazon-review-collab-integration`
+- Source reference: `87fe1dafb fix: preserve amazon min support fold texts`
+- Source base: `MatrAIx-ai/MatrAIx@origin/main`
+  `e50592a4cbfca86b3207e1f9d5247ca9f93ee4d0`
+- Purpose: start the existing-data curation migration with the Wikipedia/source
+  foundation needed before collaboration packaging and Amazon review
+  integration.
+- Imported into:
+  - `persona/curation/existing_data/`
+  - `tests/persona/curation/existing_data/`
+  - `docs/superpowers/plans/2026-06-27-persona-existing-data-pipeline.md`
+- Included:
+  - external source manifests
+  - Wikipedia person-page extraction and cleanup helpers
+  - local SQLite wiki profile database builder
+  - wiki assignment, validation, and merge helpers needed by the foundation
+  - small wiki/sample fixtures and targeted tests
+- Excluded:
+  - `curated_personas/`
+  - raw source dumps, generated outputs, logs, SQLite databases, and worker
+    archives
+  - Amazon Reviews 2023 pipeline code, which is staged for a follow-up PR
+  - Modal/HuggingFace cloud indexer
+  - React curation cockpit and built frontend assets
+- Compatibility adjustments:
+  - Old `personas.existing_data_curation` imports are rewritten to
+    `persona.curation.existing_data`.
+  - Default schema references point to `persona/schema/dimensions.json`.
+  - README is scoped to the files that actually land in this wave, so later
+    Amazon and collaborator-package commands are not advertised early.

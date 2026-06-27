@@ -1,0 +1,12 @@
+{
+  "id": "wildchat_allenai",
+  "source": {
+    "type": "huggingface_dataset",
+    "repo_id": "allenai/WildChat-1M",
+    "url": "https://huggingface.co/datasets/allenai/WildChat-1M"
+  },
+  "dimensions_claimed": 3,
+  "format": "parquet",
+  "license": "odc-by",
+  "notes": "WildChat: 1M ChatGPT Interaction Logs in the Wild (Conover et al., arXiv:2405.01470). 838K non-toxic conversations with geographic and behavioral metadata. Includes 204K+ unique contributors. Columns: conversation_id, model (gpt-3.5-turbo or gpt-4), timestamp, conversation (nested: role, content, language, redacted, toxic), language, toxicity/moderation flags, state (U.S.), country, hashed_ip. NOTE: Paper explicitly prioritizes privacy—NO traditional persona demographics (age, gender, education, occupation) are collected. Dimensions are geographic (state, country) and technical/behavioral only."
+}
