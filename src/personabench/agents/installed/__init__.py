@@ -1,0 +1,30 @@
+"""PersonaBench-installed agents for Docker web scenarios."""
+
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from personabench.agents.installed.browser_use import BrowserUseHarborAgent
+    from personabench.agents.installed.cocoa import CocoaHarborAgent
+
+_LAZY_IMPORTS = {
+    "BrowserUseHarborAgent": (
+        "personabench.agents.installed.browser_use",
+        "BrowserUseHarborAgent",
+    ),
+    "CocoaHarborAgent": ("personabench.agents.installed.cocoa", "CocoaHarborAgent"),
+}
+
+__all__ = sorted(_LAZY_IMPORTS)
+
+
+def __getattr__(name: str):
+    if name not in _LAZY_IMPORTS:
+        raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+
+    module_path, attr_name = _LAZY_IMPORTS[name]
+    import importlib
+
+    module = importlib.import_module(module_path)
+    return getattr(module, attr_name)

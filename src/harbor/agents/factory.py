@@ -56,8 +56,27 @@ class AgentFactory:
         AgentName.DEVIN: "harbor.agents.installed.devin:Devin",
         AgentName.TRAE_AGENT: "harbor.agents.installed.trae_agent:TraeAgent",
         AgentName.COMPUTER_1: "harbor.agents.computer_1:Computer1",
-        # Persona-specific agents are registered in the follow-up
-        # environment/persona-agents migration once their package is imported.
+        AgentName.PERSONA_CLAUDE_CODE: (
+            "personabench.agents.persona.claude_code:PersonaClaudeCode"
+        ),
+        AgentName.PERSONA_COMPUTER_1: (
+            "personabench.agents.persona.computer_1:PersonaComputer1"
+        ),
+        AgentName.PERSONA_OPENHANDS_SDK: (
+            "personabench.agents.persona.openhands_sdk:PersonaOpenHandsSDK"
+        ),
+        AgentName.BROWSER_USE: (
+            "personabench.agents.installed.browser_use:BrowserUseHarborAgent"
+        ),
+        AgentName.COCOA: "personabench.agents.installed.cocoa:CocoaHarborAgent",
+        AgentName.PERSONA_BROWSER_USE: (
+            "personabench.agents.persona.browser_use:PersonaBrowserUse"
+        ),
+        AgentName.PERSONA_COCOA: "personabench.agents.persona.cocoa:PersonaCocoa",
+        AgentName.PERSONA_GEMINI_CLI: (
+            "personabench.agents.persona.gemini_cli:PersonaGeminiCli"
+        ),
+        AgentName.PERSONA_CODEX: "personabench.agents.persona.codex:PersonaCodex",
     }
 
     @classmethod

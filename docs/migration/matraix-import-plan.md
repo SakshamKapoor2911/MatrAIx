@@ -125,7 +125,7 @@ Out of scope:
 - `apps/viewer`
 - unrelated example jobs
 
-Status: scoped in branch `codex/environment-runtime-foundation`.
+Status: merged in PersonaBench PR #131.
 
 Imported in this wave:
 
@@ -133,12 +133,8 @@ Imported in this wave:
 - `harbor`, `hr`, and `hb` console script metadata.
 - Runtime package data needed by CLI templates and local environment backends.
 
-Still deferred:
+Still deferred after runtime foundation:
 
-- `src/matraix/agents/` persona agents, because they depend on this runtime
-  foundation and should land as a separate `environment/persona-agents` PR.
-  The runtime foundation keeps persona `AgentName` values but does not register
-  deferred agent import paths.
 - `packages/rewardkit/` and `packages/harbor-langsmith/`, unless a later
   verifier or tracing PR proves they are required in `main`.
 - `configs/jobs/`, raw `jobs/` outputs, standalone `apps/viewer`, bulk
@@ -155,6 +151,23 @@ Candidate agents:
 - `persona-browser-use`
 - `persona-cocoa`
 - other persona adapters that can import cleanly against the runtime foundation
+
+Status: scoped in branch `codex/environment-persona-agents`.
+
+Imported in this wave:
+
+- `src/personabench/agents/persona/`
+- `src/personabench/agents/installed/browser_use.py`
+- `src/personabench/agents/installed/cocoa.py`
+- Harbor `AgentFactory` registrations for persona agent names and the
+  browser-use/cocoa installed adapters.
+
+Still deferred:
+
+- Checked-in job recipes that exercise these agents.
+- Historical job outputs.
+- Standalone `apps/viewer`.
+- Bulk adapter and example directories.
 
 ### Wave 6: Curated job recipes
 

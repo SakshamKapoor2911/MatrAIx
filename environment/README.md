@@ -17,6 +17,9 @@ src/harbor/
   trial/       Trial execution loop.
   verifier/    Verification orchestration.
   viewer/      Runtime viewer backend used by the `harbor view` CLI.
+src/personabench/agents/
+  installed/   PersonaBench-owned installed-agent adapters.
+  persona/     Persona-conditioned Harbor agents and prompt templates.
 ```
 
 Planned environment-owned directories:
@@ -42,10 +45,6 @@ owner, execution path, and intentionally excluded artifacts.
 
 Deferred from the runtime foundation import:
 
-- Persona-specific agents from `src/matraix/agents/`.
-  `AgentName` keeps the persona identifiers for config compatibility, but
-  `AgentFactory` will not register those names until the agents are imported
-  under a PersonaBench-owned namespace.
 - Checked-in `configs/jobs/` recipes.
 - Historical `jobs/` outputs.
 - Standalone `apps/viewer` and other UI/tooling packages.
