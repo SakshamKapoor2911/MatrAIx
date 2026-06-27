@@ -66,6 +66,17 @@ APPLICATION_TASK_METADATA: dict[str, dict[str, object]] = {
             "delivery investigation",
         ],
     },
+    "recommender-agent_chat_api": {
+        "type": "chat",
+        "domain": DOMAIN_COMMERCE_RETAIL,
+        "tags": [
+            "recommender agent",
+            "conversational recommendation",
+            "product discovery",
+            "multi turn chat",
+            "recommendation grounding",
+        ],
+    },
     "example-web-playwright_books-interest": {
         "type": "web",
         "domain": DOMAIN_COMMERCE_RETAIL,

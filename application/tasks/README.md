@@ -10,6 +10,8 @@ recipes are intentionally imported in later PRs.
 ## Naming
 
 - **`example-*`** — reference tasks in the repo (copy from these).
+- **`recommender-agent_chat_api`** — clean import of the MatrAIx recommender
+  chat task with a task-local HTTP sidecar for smoke runs.
 - **Your task** — `application/tasks/<your-task-name>/` (any folder name you choose).
 
 ## New Task

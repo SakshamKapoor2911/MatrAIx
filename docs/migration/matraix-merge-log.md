@@ -948,3 +948,29 @@ This log records the curated migration from MatrAIx into PersonaBench.
   - The old `assign_wikipedia_persona_fields.py` Claude CLI flow and prompt are
     excluded because the current wiki/Amazon collaboration package uses the
     tested `wiki_collab/collab_kit` contract instead.
+
+### Step 39: Import recommender chat API task
+
+- Branch: `codex/application-recommender-chat-task`
+- Source repository: `MatrAIx-ai/MatrAIx`
+- Source PRs:
+  - `#72`, `app: add Harbor recommender chat task`
+- PersonaBench snapshot PR:
+  - `#76`
+- Purpose: preserve the recommender chat application task contract without
+  importing the full historical recommendation evaluation app, generated
+  catalogs, or persona fixture bundle into clean `main`.
+- Imported into:
+  - `application/tasks/recommender-agent_chat_api/`
+- Updated:
+  - `application/tasks/README.md`
+  - `src/personabench/task_catalog.py`
+- Source handling:
+  - The task name is normalized from `matraix/...` to
+    `personabench/application-recommender-agent-chat-api`.
+  - The source compose file referenced the full
+    `applications/recommendation_chatbot_eval` app. The clean task instead
+    includes a task-local REST sidecar that implements the same smoke-test HTTP
+    contract.
+  - Full RecAI/backend/frontend migration remains separate application tooling
+    work; generated recommender catalog/persona fixture files stay external.
