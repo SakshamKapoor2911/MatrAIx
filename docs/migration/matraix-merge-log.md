@@ -852,3 +852,30 @@ This log records the curated migration from MatrAIx into PersonaBench.
   - Raw attribute-pool outputs, raw datasets, parquet catalogs, curated persona
     dumps, and application UI/backend files from the snapshot branch are
     intentionally excluded from this schema-only PR.
+
+### Step 35: Import AutoPersona research proposal
+
+- Branch: `codex/autopersona-research-note`
+- Source repository: `MatrAIx-ai/MatrAIx`
+- Source PRs:
+  - `#36`, `Attribute Schema`
+  - `#50`, `Attribute Schema`
+  - `#51`, `Persona Attributes Schema`
+- PersonaBench snapshot PRs:
+  - `#88`
+  - `#84`
+  - `#83`
+- Purpose: preserve the AutoPersona causal schema-learning proposal without
+  restoring raw attribute schema workspaces, generated outputs, or old planning
+  folders.
+- Imported into:
+  - `docs/research/autopersona.md`
+- Updated:
+  - `docs/research/README.md`
+- Source handling:
+  - The AutoPersona document is identical across the three source snapshots.
+  - Attribute-pool scripts, manifests, and v2 schema material from these
+    snapshots were already handled by the clean persona curation/schema
+    migrations.
+  - Raw dataset files, html/pdf references, candidate-pool outputs, graph
+    files, and intermediate dedup artifacts remain excluded from `main`.
