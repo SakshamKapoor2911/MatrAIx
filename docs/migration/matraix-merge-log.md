@@ -879,3 +879,29 @@ This log records the curated migration from MatrAIx into PersonaBench.
     migrations.
   - Raw dataset files, html/pdf references, candidate-pool outputs, graph
     files, and intermediate dedup artifacts remain excluded from `main`.
+
+### Step 36: Import application domain catalog and scenario template
+
+- Branch: `codex/application-domain-template-docs`
+- Source repository: `MatrAIx-ai/MatrAIx`
+- Source PRs:
+  - `#46`, `docs: add application-domains brainstorming catalog`
+  - `#49`, `docs: re-propose Application Template (runnable handoff to
+    Environment team)`
+- PersonaBench snapshot PRs:
+  - `#86`
+  - `#85`
+- Purpose: preserve the detailed application-domain benchmark catalog and the
+  scenario handoff template without restoring the old team planning layout.
+- Imported into:
+  - `docs/research/application-domain-benchmark-catalog.md`
+- Updated:
+  - `docs/research/README.md`
+  - `application/README.md`
+- Source handling:
+  - The old `applications/application_domains_brainstorming.md` is renamed and
+    linked from the research docs.
+  - The source application README is adapted into a concise scenario handoff
+    template under the clean `application/` module.
+  - Old `applications/PLAN.md`, team rosters, old root README changes,
+    duplicated persona schema/data files, and raw curation folders are excluded.

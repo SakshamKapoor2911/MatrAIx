@@ -9,6 +9,7 @@ are not a claim that the bibliography is complete or freshly revalidated.
 - [AutoPersona causal schema-learning proposal](autopersona.md)
 - [Application related work](application-related-work.md)
 - [Application areas taxonomy](application-areas-taxonomy.md)
+- [Application domain benchmark catalog](application-domain-benchmark-catalog.md)
 - [Environment related work](environment-related-work.md)
 
 Coverage notes:
