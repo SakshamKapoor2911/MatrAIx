@@ -374,3 +374,31 @@ This log records the curated migration from MatrAIx into PersonaBench.
   - CI installs and runs Rewardkit tests explicitly as optional package tests.
   - Root pytest markers include `unit` and `asyncio` to keep optional package
     test output readable.
+
+### Step 17: Add adapter foundation and SimpleQA adapter
+
+- Branch: `codex/adapters-foundation-simpleqa`
+- Source repository: `MatrAIx-ai/MatrAIx`
+- Source reference: `origin/main` at `e50592a4cbfca86b3207e1f9d5247ca9f93ee4d0`
+- Purpose: establish the clean PersonaBench adapter layout and import one
+  focused external benchmark adapter without restoring a top-level `adapters/`
+  directory.
+- Imported into:
+  - `environment/adapters/README.md`
+  - `environment/adapters/manifest.schema.json`
+  - `environment/adapters/simpleqa/`
+  - `.github/workflows/pytest.yml`
+  - `tests/environment/test_adapters_foundation.py`
+- Excluded:
+  - `adapters/simpleqa/uv.lock`
+  - generated SimpleQA task directories
+  - full bulk import of the remaining MatrAIx adapter tree
+  - historical `jobs/` outputs
+- Compatibility adjustments:
+  - SimpleQA generated data defaults to
+    `environment/adapters/simpleqa/_generated/simpleqa`.
+  - Job recipes point at adapter-local `_generated/` paths instead of top-level
+    `datasets/`.
+  - The adapter package uses setuptools and declares template package data.
+  - Adapter manifests record source path, commit, dependencies, external data,
+    smoke commands, and intentionally excluded source paths.

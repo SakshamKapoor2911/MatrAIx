@@ -9,6 +9,7 @@ Current layout:
 ```text
 environment/
   README.md    Module boundary and contribution guidance.
+  adapters/    Curated external benchmark adapters.
 src/harbor/
   agents/      Base and installed agent wrappers.
   cli/         Harbor CLI entrypoints and templates.
@@ -29,7 +30,6 @@ environment/
   agents/      Persona-conditioned agents and model wrappers.
   jobs/        Curated job recipe schemas and reusable templates.
   viewer/      Result inspection UI, if it remains in this repository.
-  adapters/    Optional external benchmark adapters.
 ```
 
 The runtime foundation exposes the `harbor`, `hr`, and `hb` console scripts
@@ -43,9 +43,14 @@ Do not add raw generated job outputs, full application snapshots, or benchmark
 adapter dumps here. Import those as curated PRs with a README explaining the
 owner, execution path, and intentionally excluded artifacts.
 
+External benchmark adapters live under `environment/adapters/<adapter-name>/`
+with a manifest, adapter-local package metadata, and ignored `_generated/`
+output. Do not restore a top-level `adapters/` directory or write generated
+datasets to shared root paths.
+
 Deferred from the runtime foundation import:
 
 - Checked-in `configs/jobs/` recipes.
 - Historical `jobs/` outputs.
 - Standalone `apps/viewer` and other UI/tooling packages.
-- Bulk adapter and example directories.
+- Bulk adapter directories beyond focused, manifest-backed imports.
