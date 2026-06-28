@@ -96,10 +96,6 @@ workspace is cleaned.
 | Required | `/data2/zonglin/persona_ai/MatrAIx/raw/amazon_reviews_2023/amazon_profiles.sqlite` | 15 MiB | `matraix/local/amazon_reviews_2023/amazon_profiles.sqlite` | TODO | Local Amazon profile database for worker-range validation. |
 | Required | `MatrAIx PR #125: personas/existing_data_curation/samples/amazon_reviews_2023/top_reviewers/` | 15 MiB, 5 files | `matraix/local/amazon_reviews_2023/top_reviewers/` | TODO | Top-10K rich-persona reviewer queue. PersonaBench `main` keeps the selector script and README instructions, not the generated CSV/JSONL/ID list. |
 | Optional | `MatrAIx PR #72: applications/recommendation_chatbot_eval/data/` | 9.4 MiB, 339 files | `matraix/local/application/recommendation_chatbot_eval/data/` | TODO | Catalog parquet files and generated persona fixtures for the full recommender evaluation app. The clean main task uses a tiny task-local sidecar instead. |
-| Optional | `/data2/zonglin/persona_ai/MatrAIx/personas/A_10000_20000/` | 83 MiB | `matraix/local/wiki_collab/A_10000_20000/` | TODO | Wiki/Amazon collaboration package directory. |
-| Optional | `/data2/zonglin/persona_ai/MatrAIx/A_10000_20000_worker.tar.gz` | 15 MiB | `matraix/local/wiki_collab/A_10000_20000_worker.tar.gz` | TODO | Worker package archive; duplicate also exists inside `personas/A_10000_20000/`. |
-| Optional | `/data2/zonglin/persona_ai/MatrAIx/A_20000_30000_worker.tar.gz` | 16 MiB | `matraix/local/wiki_collab/A_20000_30000_worker.tar.gz` | TODO | Worker package archive. |
-| Optional | `/data2/zonglin/persona_ai/MatrAIx/A_30000_40000_worker.tar.gz` | 16 MiB | `matraix/local/wiki_collab/A_30000_40000_worker.tar.gz` | TODO | Worker package archive. |
 | Optional | `/data2/zonglin/persona_ai/MatrAIx/applications/recommendation_chatbot_eval/data/catalogs/game.parquet` | 5 MiB | `matraix/local/application/recommendation_chatbot_eval/data/catalogs/game.parquet` | TODO | Application-specific recommender catalog fixture. |
 
 Largest local side-artifact files:
@@ -111,7 +107,6 @@ Largest local side-artifact files:
 | `/data2/zonglin/persona_ai/MatrAIx/personas/existing_data_curation/raw/prism_alignment/conversations.jsonl` | 58 MiB |
 | `/data2/zonglin/persona_ai/MatrAIx/personas/attribute_pool/outputs/normalized/candidate_pool_raw_extended_normalized.jsonl` | 67 MiB |
 | `/data2/zonglin/persona_ai/MatrAIx/personas/attribute_pool/outputs/step5_embedding_llm_dedup/embedding_retrieved_pairs.csv` | 50 MiB |
-| `/data2/zonglin/persona_ai/MatrAIx/personas/A_10000_20000/A_10000_20000_worker/tasks.jsonl` | 40 MiB |
 | `/data2/zonglin/persona_ai/MatrAIx/raw/amazon_reviews_2023/persona_dimension_inference/user_histories.jsonl` | 16 MiB |
 | `/data2/zonglin/persona_ai/MatrAIx/raw/amazon_reviews_2023/amazon_profiles.sqlite` | 15 MiB |
 
