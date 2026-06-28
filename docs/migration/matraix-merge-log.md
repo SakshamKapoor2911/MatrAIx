@@ -1151,3 +1151,48 @@ This log records the curated migration from MatrAIx into PersonaBench.
   - `.venv/bin/python -m pip wheel --no-deps .` passed, and the built wheel
     contains `harbor`, `personabench`, `personabench.agents`, and persona agent
     prompt templates.
+
+### Step 45: Clean-import PersonaEval from PR 62 / MatrAIx PR 127
+
+- Branch: `codex/persona-eval-pr62-clean-import`
+- Source PR:
+  - PersonaBench PR #62 is a raw snapshot wrapper for MatrAIx PR #127, titled
+    "matrAIx UI/UX redesign of the PersonaEval frontend".
+  - The raw `MatrAIx_PR_127/` snapshot directory was not merged into `main`.
+- Imported into:
+  - `application/persona_eval/backend/`
+  - `application/persona_eval/frontend/`
+  - `application/persona_eval/persona_eval/`
+  - `application/persona_eval/data/personas/`
+  - `application/tasks/web-ecommerce-platform_product-discovery/`
+- Preserved/adapted:
+  - Existing clean-main survey helper imports under
+    `application.persona_eval.backend.service.*`.
+  - Current `application/tasks/recommender-agent_chat_api/` sidecar path,
+    replacing old `applications/tasks/chatbot_chat_api` references.
+  - Current `application/tasks/persona-survey/` survey task path, replacing old
+    `applications/tasks/survey_form` runtime config.
+  - Frontend visible branding now uses `PersonaEval`; superpowers/redesign
+    workspace references were removed from imported frontend docs.
+- Source handling:
+  - The PR #62 snapshot tree was missing `frontend/src/lib/*` even though the
+    frontend imports it. Those files were imported from the actual PR 127 head
+    branch `remotes/matraix-pr127/ui/matraix-redesign`.
+  - The ecommerce web task is small and task-owned, so it was moved into
+    `application/tasks/` instead of keeping a missing `applications/tasks/...`
+    reference.
+  - Full native RecAI / InteRecAgent code, large resource bundles, generated
+    outputs, and raw snapshot folders remain excluded. `RECAI_ENV_NOTES.md`
+    records this as deferred runtime work.
+- Verification:
+  - `PYTHONPATH=application/persona_eval .venv/bin/python -m pytest application/persona_eval/persona_eval/tests -q`
+    passed with 35 passed.
+  - `PYTHONPATH=application/persona_eval .venv/bin/python -m pytest application/persona_eval/backend/tests -q`
+    passed with 228 passed, 6 skipped, 1 warning.
+  - `PYTHONPATH=. .venv/bin/python -m pytest tests/application/persona_eval -q`
+    passed with 9 passed.
+  - `.venv/bin/ruff check application/persona_eval tests/application/persona_eval`
+    passed.
+  - `npm ci && npm run build` passed in `application/persona_eval/frontend/`;
+    npm still reports 1 moderate and 1 high audit finding, and Vite reports a
+    non-fatal chunk-size warning.
