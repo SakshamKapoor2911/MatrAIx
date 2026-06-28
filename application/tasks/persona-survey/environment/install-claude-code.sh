@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+# Pre-install Claude Code + runtime deps for persona-claude-code Docker tasks.
+#
+# Harbor builds each task from its own environment/ directory, so task Dockerfiles
+# need a local copy of this file. Run scripts/sync_docker_snippets.py to update
+# all managed task-local copies.
 set -euo pipefail
 
 export DEBIAN_FRONTEND=noninteractive
