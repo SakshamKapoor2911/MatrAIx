@@ -102,9 +102,6 @@ Largest local side-artifact files:
 
 | Local source path | Approx. size |
 |---|---:|
-| `/data2/zonglin/persona_ai/MatrAIx/personas/existing_data_curation/raw/prism_alignment/metadata.jsonl` | 81 MiB |
-| `/data2/zonglin/persona_ai/MatrAIx/personas/existing_data_curation/raw/prism_alignment/utterances.jsonl` | 65 MiB |
-| `/data2/zonglin/persona_ai/MatrAIx/personas/existing_data_curation/raw/prism_alignment/conversations.jsonl` | 58 MiB |
 | `/data2/zonglin/persona_ai/MatrAIx/personas/attribute_pool/outputs/normalized/candidate_pool_raw_extended_normalized.jsonl` | 67 MiB |
 | `/data2/zonglin/persona_ai/MatrAIx/personas/attribute_pool/outputs/step5_embedding_llm_dedup/embedding_retrieved_pairs.csv` | 50 MiB |
 | `/data2/zonglin/persona_ai/MatrAIx/raw/amazon_reviews_2023/persona_dimension_inference/user_histories.jsonl` | 16 MiB |
