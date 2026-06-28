@@ -48,8 +48,15 @@ belongs and which artifacts its verifier should expect.
 
 ## Docker (`persona-claude-code` tasks)
 
-[`_docker/install-claude-code.sh`](_docker/install-claude-code.sh) pre-bakes
-Claude Code + `uv` into the image. Copy it into `environment/` when authoring
-survey or chat tasks (see `example-survey_product-feedback` /
-`example-chat-*`). Web and computer-use tasks use different base images and do
-not use this script.
+[`../../environment/docker-snippets/install-claude-code.sh`](../../environment/docker-snippets/install-claude-code.sh)
+is the canonical install script that pre-bakes Claude Code + `uv` into survey
+and chat task images. Harbor builds from each task's own `environment/`
+directory, so task Dockerfiles use a task-local copy. After adding or editing a
+Claude Code task, run:
+
+```bash
+python scripts/sync_docker_snippets.py --write
+```
+
+Web and computer-use tasks use different base images and do not use this
+script.
