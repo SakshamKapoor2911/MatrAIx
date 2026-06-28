@@ -477,7 +477,7 @@ where `<adapter_name>` is the folder name with dashes converted to underscores.
 - [ ] Numbers (task counts, run counts, dataset sizes) match parity_experiment.json
 - [ ] Reproduction commands reference files that actually exist
 - [ ] Hyperlinks are valid (not broken or placeholder URLs)
-- [ ] Format matches the template at harbor/src/harbor/cli/template-adapter/README.md; no missing sections
+- [ ] Format matches the template at environment/runtime/harbor/cli/template-adapter/README.md; no missing sections
 - [ ] "Usage: Create Task Directories" documents the invocation as `uv run <folder>` where `<folder>` is the adapter folder name; flag forms like `python main.py`, `python -m ...main`, `python run_adapter.py`, `uv run python main.py`, or `uv run run_adapter.py` (skip if the adapter still uses the legacy flat layout)
 - [ ] Content reads naturally (not overly AI-generated)
 
@@ -498,12 +498,12 @@ The `task.toml` here follows the task schema documented at
 - [ ] URLs in adapter_pr, dataset_pr, parity_pr are valid format
 - [ ] Metric values (mean ± sample SEM) are consistent with run data arrays
 - [ ] No data inconsistencies between README parity table and JSON
-- [ ] Format matches the template at harbor/src/harbor/cli/template-adapter/parity_experiment.json; no missing entries
+- [ ] Format matches the template at environment/runtime/harbor/cli/template-adapter/parity_experiment.json; no missing entries
 
 ## 5. adapter_metadata.json
 - [ ] adapter_builders populated with the adapter authors' names and emails, not the authors of the original benchmark
 - [ ] Benchmark sizes match across adapter_metadata.json and parity_experiment.json
-- [ ] Format matches the template at harbor/src/harbor/cli/template-adapter/adapter_metadata.json; no missing entries
+- [ ] Format matches the template at environment/runtime/harbor/cli/template-adapter/adapter_metadata.json; no missing entries
 
 ## 6. Parity verification
 - [ ] README includes clear instructions for reproducing parity results on both sides
@@ -768,7 +768,7 @@ def _build_prompt(
 
 def _find_validator_module():
     """Import validate_adapter from scripts/validate_adapter.py."""
-    # Walk up from this file: src/harbor/cli -> harbor root
+    # Walk up from this file: environment/runtime/harbor/cli -> harbor root
     candidates = [
         Path(__file__).resolve().parents[3] / "scripts" / "validate_adapter.py",
         Path.cwd() / "scripts" / "validate_adapter.py",

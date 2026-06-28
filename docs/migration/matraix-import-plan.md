@@ -132,7 +132,9 @@ Status: merged in PersonaBench PR #131.
 
 Imported in this wave:
 
-- `src/harbor/` as the environment runtime Python package.
+- `src/harbor/` as the environment runtime Python package. This was later
+  relocated to `environment/runtime/harbor/` while keeping the `harbor.*`
+  import namespace.
 - `harbor`, `hr`, and `hb` console script metadata.
 - Runtime package data needed by CLI templates and local environment backends.
 
@@ -159,9 +161,12 @@ Status: scoped in branch `codex/environment-persona-agents`.
 
 Imported in this wave:
 
-- `src/personabench/agents/persona/`
-- `src/personabench/agents/installed/browser_use.py`
-- `src/personabench/agents/installed/cocoa.py`
+- `src/personabench/agents/persona/`, later relocated to
+  `environment/agents/personabench/agents/persona/`.
+- `src/personabench/agents/installed/browser_use.py`, later relocated to
+  `environment/agents/personabench/agents/installed/browser_use.py`.
+- `src/personabench/agents/installed/cocoa.py`, later relocated to
+  `environment/agents/personabench/agents/installed/cocoa.py`.
 - Harbor `AgentFactory` registrations for persona agent names and the
   browser-use/cocoa installed adapters.
 
@@ -233,8 +238,8 @@ Primary sources:
 
 Decision: keep the React frontend under `apps/viewer`, because Harbor's
 `view` CLI already resolves that source path and the backend API lives in
-`src/harbor/viewer/`. Document `apps/` as repo-local tooling, not a fourth
-business module.
+`environment/runtime/harbor/viewer/`. Document `apps/` as repo-local tooling,
+not a fourth business module.
 
 Status: scoped in branch `codex/viewer-tooling`.
 

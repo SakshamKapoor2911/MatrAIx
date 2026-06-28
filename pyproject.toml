@@ -79,8 +79,65 @@ all = ["personabench[cloud]", "personabench[computer-1]", "personabench[tinker]"
 requires = ["setuptools>=69", "wheel"]
 build-backend = "setuptools.build_meta"
 
-[tool.setuptools.packages.find]
-where = ["src"]
+[tool.setuptools]
+packages = [
+    "harbor",
+    "harbor.agents",
+    "harbor.agents.computer_1",
+    "harbor.agents.computer_1.providers",
+    "harbor.agents.installed",
+    "harbor.agents.installed.cline",
+    "harbor.agents.terminus_2",
+    "harbor.analyze",
+    "harbor.analyze.prompts",
+    "harbor.auth",
+    "harbor.cli",
+    "harbor.cli.admin",
+    "harbor.cli.annotator",
+    "harbor.cli.debug_checker",
+    "harbor.cli.plugins",
+    "harbor.cli.quality_checker",
+    "harbor.db",
+    "harbor.download",
+    "harbor.environments",
+    "harbor.environments.daytona",
+    "harbor.environments.docker",
+    "harbor.environments.singularity",
+    "harbor.leaderboard",
+    "harbor.llms",
+    "harbor.mappers",
+    "harbor.metrics",
+    "harbor.models",
+    "harbor.models.agent",
+    "harbor.models.dataset",
+    "harbor.models.job",
+    "harbor.models.metric",
+    "harbor.models.package",
+    "harbor.models.task",
+    "harbor.models.trajectories",
+    "harbor.models.trial",
+    "harbor.models.verifier",
+    "harbor.publisher",
+    "harbor.registry",
+    "harbor.registry.client",
+    "harbor.registry.client.harbor",
+    "harbor.storage",
+    "harbor.tasks",
+    "harbor.trial",
+    "harbor.upload",
+    "harbor.utils",
+    "harbor.verifier",
+    "harbor.viewer",
+    "personabench",
+    "personabench.agents",
+    "personabench.agents.installed",
+    "personabench.agents.persona",
+]
+
+[tool.setuptools.package-dir]
+harbor = "environment/runtime/harbor"
+personabench = "src/personabench"
+"personabench.agents" = "environment/agents/personabench/agents"
 
 [tool.setuptools.package-data]
 harbor = [

@@ -33,13 +33,29 @@ def test_harbor_console_scripts_are_registered() -> None:
         "hr": "harbor.cli.main:app",
         "hb": "harbor.cli.main:app",
     }
+    assert pyproject["tool"]["setuptools"]["package-dir"] == {
+        "harbor": "environment/runtime/harbor",
+        "personabench": "src/personabench",
+        "personabench.agents": "environment/agents/personabench/agents",
+    }
+    packages = set(pyproject["tool"]["setuptools"]["packages"])
+    assert {
+        "harbor",
+        "harbor.cli",
+        "harbor.environments",
+        "personabench",
+        "personabench.agents",
+        "personabench.agents.persona",
+    } <= packages
 
 
 def test_runtime_import_excludes_raw_snapshot_directories() -> None:
     forbidden_paths = [
         "adapters",
         "jobs",
+        "src/harbor",
         "src/matraix/agents",
+        "src/personabench/agents",
     ]
 
     for relative_path in forbidden_paths:
@@ -54,7 +70,9 @@ def test_runtime_import_excludes_raw_snapshot_directories() -> None:
 
 
 def test_runtime_factory_does_not_reference_deferred_matraix_agents() -> None:
-    factory_source = (ROOT / "src/harbor/agents/factory.py").read_text()
+    factory_source = (
+        ROOT / "environment/runtime/harbor/agents/factory.py"
+    ).read_text()
 
     assert "matraix.agents" not in factory_source
 
@@ -62,7 +80,7 @@ def test_runtime_factory_does_not_reference_deferred_matraix_agents() -> None:
 def test_runtime_import_has_no_large_files() -> None:
     large_files = [
         path
-        for path in (ROOT / "src/harbor").rglob("*")
+        for path in (ROOT / "environment/runtime/harbor").rglob("*")
         if path.is_file() and path.stat().st_size > 1_000_000
     ]
 

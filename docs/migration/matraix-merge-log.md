@@ -1113,3 +1113,41 @@ This log records the curated migration from MatrAIx into PersonaBench.
     `apps/viewer/`.
   - `.venv/bin/python -m pytest tests/` passed with 658 passed, 2 skipped.
   - `.venv/bin/ruff check .` passed.
+
+### Step 44: Move environment-owned Python code under `environment/`
+
+- Branch: `codex/environment-code-layout`
+- Purpose: make the clean-main module boundary visible in the source tree by
+  moving environment runtime and agent implementations out of top-level `src/`.
+- Moved:
+  - `src/harbor/` -> `environment/runtime/harbor/`
+  - `src/personabench/agents/` ->
+    `environment/agents/personabench/agents/`
+- Kept stable:
+  - Public imports remain `harbor.*` and `personabench.agents.*`.
+  - Console scripts remain `harbor`, `hr`, and `hb`.
+  - Shared PersonaBench utilities remain under `src/personabench/`.
+- Updated:
+  - `pyproject.toml` now uses explicit `package-dir` mappings instead of
+    multi-root namespace discovery. This prevents
+    `environment/agents/personabench` from shadowing the real
+    `src/personabench/__init__.py`.
+  - Environment/application/architecture docs now point contributors at the
+    new environment-owned paths.
+  - Tests now guard against restoring `src/harbor/` or
+    `src/personabench/agents/`.
+  - `harbor view` source/static path resolution now follows the new
+    `environment/runtime/harbor/` location, and viewer build/dev commands use
+    the npm lockfile workflow documented for `apps/viewer/`.
+- Verification:
+  - `.venv/bin/python -m pip install -e .` passed.
+  - Import smoke confirmed `harbor` resolves from
+    `environment/runtime/harbor/`, `personabench` resolves from
+    `src/personabench/`, and `personabench.agents` resolves from
+    `environment/agents/personabench/agents/`.
+  - `.venv/bin/harbor --help` passed.
+  - `.venv/bin/ruff check .` passed.
+  - `.venv/bin/python -m pytest tests/` passed with 659 passed, 2 skipped.
+  - `.venv/bin/python -m pip wheel --no-deps .` passed, and the built wheel
+    contains `harbor`, `personabench`, `personabench.agents`, and persona agent
+    prompt templates.

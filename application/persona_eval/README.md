@@ -4,7 +4,7 @@
 persona studies. It is separate from:
 
 - `persona/`, which owns persona schemas, datasets, and curation pipelines.
-- `environment/` and `src/harbor/`, which own runtime execution.
+- `environment/runtime/harbor/`, which owns runtime execution.
 
 Current scope:
 

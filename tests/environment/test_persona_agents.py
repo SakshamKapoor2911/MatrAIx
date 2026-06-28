@@ -10,7 +10,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 def test_persona_agents_use_personabench_namespace() -> None:
     agent_files = [
         path
-        for path in (ROOT / "src/personabench/agents").rglob("*")
+        for path in (ROOT / "environment/agents/personabench/agents").rglob("*")
         if path.is_file() and path.suffix in {".j2", ".py"}
     ]
 
@@ -21,7 +21,9 @@ def test_persona_agents_use_personabench_namespace() -> None:
 
 
 def test_harbor_factory_registers_personabench_persona_agents() -> None:
-    factory_source = (ROOT / "src/harbor/agents/factory.py").read_text()
+    factory_source = (
+        ROOT / "environment/runtime/harbor/agents/factory.py"
+    ).read_text()
 
     expected_imports = [
         "personabench.agents.persona.claude_code:PersonaClaudeCode",

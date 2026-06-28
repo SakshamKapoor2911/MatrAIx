@@ -13,7 +13,7 @@ linked from documentation after upload to external artifact storage.
 | Repository | Ref | Commit |
 |---|---|---|
 | Source | `MatrAIx-ai/MatrAIx@origin/main` | `e50592a4cbfca86b3207e1f9d5247ca9f93ee4d0` |
-| Target | `ElegantLin/PersonaBench@origin/main` | `a8cbbd5dbf53588b4a85de1a3d8dda4f87ca0c73` |
+| Target | `ElegantLin/PersonaBench@origin/main` | `6151ff1b90d7a6d192d6606319f593ff59d6399f` |
 
 ## Status Vocabulary
 
@@ -44,7 +44,7 @@ linked from documentation after upload to external artifact storage.
 | `rfcs/` | 4 | 131.5 KiB | `docs/rfcs/` or `rfcs/` | `deferred` | Import only if the RFC is still part of active contributor guidance. |
 | `scripts/` | 4 | 37.2 KiB | module-local scripts | `partial` | Move package publish scripts with packages, adapter validation with adapters, and skill installation docs with contributor tooling. |
 | `skills/` | 4 | 39.9 KiB | contributor tooling docs | `deferred` | Preserve as provenance for now. Import only if the repository will support Codex skill-driven task creation. |
-| `src/` | 339 | 3.2 MiB | `src/harbor/`, `src/personabench/` | `merged-clean` | Runtime and utility packages are imported under stable namespaces. The old `src/matraix/` namespace should not be restored. |
+| `src/` | 339 | 3.2 MiB | `environment/runtime/harbor/`, `environment/agents/personabench/agents/`, `src/personabench/` | `merged-clean` | Runtime and agent packages live under the environment module while keeping stable `harbor.*` and `personabench.agents.*` import namespaces. Shared utility code remains under `src/personabench/`. The old `src/matraix/` namespace should not be restored. |
 | `tests/` | 293 | 2.7 MiB | `tests/` | `partial` | Focused tests exist for curated modules, plus selected Harbor model, task, agent, oracle, and computer-1 runtime tests. Registry tests that require the old root `registry.json` and tests for unimported adapters remain excluded. |
 
 ## Remaining PR Plan
@@ -104,7 +104,8 @@ Future contributions should preserve the module boundary:
 - Runtime, agents, environments, tools, and external benchmark adapters go under `environment/`.
 - Repo-local UI tools go under `apps/`.
 - Shared Python utilities go under `src/personabench/`.
-- Harbor runtime code remains under `src/harbor/`.
+- Harbor runtime code remains under `environment/runtime/harbor/`.
+- PersonaBench runtime agents remain under `environment/agents/personabench/agents/`.
 - Historical provenance and source mapping stay under `migration/`.
 
 If a contribution needs a new top-level directory, document why in the PR body

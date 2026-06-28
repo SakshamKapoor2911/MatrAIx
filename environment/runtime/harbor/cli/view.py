@@ -12,10 +12,10 @@ from typer import Argument, Option
 console = Console(stderr=True)
 
 # Path to static viewer files (built in CI)
-STATIC_DIR = Path(__file__).parent.parent / "viewer" / "static"
+STATIC_DIR = Path(__file__).resolve().parents[1] / "viewer" / "static"
 
 # Path to viewer source (for dev mode)
-VIEWER_DIR = Path(__file__).parent.parent.parent.parent / "apps" / "viewer"
+VIEWER_DIR = Path(__file__).resolve().parents[4] / "apps" / "viewer"
 
 
 def _parse_port_range(port_str: str) -> tuple[int, int]:
@@ -27,11 +27,11 @@ def _parse_port_range(port_str: str) -> tuple[int, int]:
     return port, port
 
 
-def _has_bun() -> bool:
-    """Check if bun is available."""
+def _has_npm() -> bool:
+    """Check if npm is available."""
     import shutil
 
-    return shutil.which("bun") is not None
+    return shutil.which("npm") is not None
 
 
 def _build_viewer() -> bool:
@@ -43,10 +43,10 @@ def _build_viewer() -> bool:
         console.print(f"[red]Error:[/red] Viewer source not found at {VIEWER_DIR}")
         return False
 
-    if not _has_bun():
+    if not _has_npm():
         console.print(
-            "[red]Error:[/red] bun is required to build the viewer. "
-            "Install it from https://bun.com"
+            "[red]Error:[/red] npm is required to build the viewer. "
+            "Install Node.js 20.19.0 or newer and run from the repository checkout."
         )
         return False
 
@@ -55,7 +55,7 @@ def _build_viewer() -> bool:
     # Install dependencies
     console.print("  Installing dependencies...")
     result = subprocess.run(
-        ["bun", "install"],
+        ["npm", "ci"],
         cwd=VIEWER_DIR,
         capture_output=True,
         text=True,
@@ -68,7 +68,7 @@ def _build_viewer() -> bool:
     # Build
     console.print("  Building frontend...")
     result = subprocess.run(
-        ["bun", "run", "build"],
+        ["npm", "run", "build"],
         cwd=VIEWER_DIR,
         capture_output=True,
         text=True,
@@ -327,10 +327,10 @@ def _run_dev_mode(
         console.print("  Dev mode requires the viewer source code.")
         raise SystemExit(1)
 
-    if not _has_bun():
+    if not _has_npm():
         console.print(
-            "[red]Error:[/red] bun is required for dev mode. "
-            "Install it from https://bun.com"
+            "[red]Error:[/red] npm is required for dev mode. "
+            "Install Node.js 20.19.0 or newer and run from the repository checkout."
         )
         raise SystemExit(1)
 
@@ -345,13 +345,13 @@ def _run_dev_mode(
     # Install frontend dependencies
     console.print("  Installing frontend dependencies...")
     result = subprocess.run(
-        ["bun", "install"],
+        ["npm", "ci"],
         cwd=VIEWER_DIR,
         capture_output=True,
         text=True,
     )
     if result.returncode != 0:
-        console.print(f"[red]Error:[/red] bun install failed:\n{result.stderr}")
+        console.print(f"[red]Error:[/red] npm ci failed:\n{result.stderr}")
         raise SystemExit(1)
 
     # Start frontend dev server in subprocess
@@ -359,7 +359,7 @@ def _run_dev_mode(
     frontend_env["VITE_API_URL"] = f"http://{host}:{backend_port}"
 
     frontend_proc = subprocess.Popen(
-        ["bun", "run", "dev"],
+        ["npm", "run", "dev"],
         cwd=VIEWER_DIR,
         env=frontend_env,
     )
@@ -383,7 +383,7 @@ def _run_dev_mode(
             port=backend_port,
             log_level="info",
             reload=True,
-            reload_dirs=[str(Path(__file__).parent.parent / "viewer")],
+            reload_dirs=[str(Path(__file__).resolve().parents[1] / "viewer")],
         )
     finally:
         # Always clean up frontend after uvicorn exits

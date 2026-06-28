@@ -49,12 +49,12 @@ copying persona datasets into application-specific folders.
 
 Expected contents:
 
-- `src/harbor/` for job and trial execution, runtime models, verifier
+- `environment/runtime/harbor/` for job and trial execution, runtime models, verifier
   orchestration, CLI entrypoints, installed agents, and viewer backend APIs.
-- `src/personabench/agents/` for PersonaBench-owned persona agent adapters and
-  prompt templates.
+- `environment/agents/personabench/agents/` for PersonaBench-owned persona
+  agent adapters and prompt templates.
 - `configs/jobs/` for curated runnable Harbor job recipes.
-- `src/harbor/viewer/` for the viewer backend API.
+- `environment/runtime/harbor/viewer/` for the viewer backend API.
 - `apps/viewer/` for the viewer frontend source paired with `harbor view`.
 - `environment/adapters/` for optional external benchmark adapters.
 

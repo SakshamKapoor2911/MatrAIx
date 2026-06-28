@@ -48,7 +48,7 @@ Output is written to `build/client/` with static assets ready to be served.
 
 ### Deploying changes to `harbor view`
 
-`harbor view` serves static files from `src/harbor/viewer/static/`, **not** directly from `apps/viewer/build/client/`. After editing frontend code, you need to both build and copy the output. The easiest way:
+`harbor view` serves static files from `environment/runtime/harbor/viewer/static/`, **not** directly from `apps/viewer/build/client/`. After editing frontend code, you need to both build and copy the output. The easiest way:
 
 ```bash
 # Option 1: Let harbor do it (recommended)
@@ -57,8 +57,8 @@ harbor view ./jobs --build
 # Option 2: Manual build + copy
 cd apps/viewer
 npm run build
-rm -rf ../../src/harbor/viewer/static
-cp -r build/client ../../src/harbor/viewer/static
+rm -rf ../../environment/runtime/harbor/viewer/static
+cp -r build/client ../../environment/runtime/harbor/viewer/static
 ```
 
 After either option, restart the `harbor view` server for changes to take effect.

@@ -22,7 +22,8 @@ Related runtime and recipe surfaces live outside this module:
   application job fixtures.
 - `configs/jobs/example-job-recipe/` contains local smoke recipes for the
   example application tasks.
-- `src/harbor/` and `src/personabench/agents/` own execution and agent wiring.
+- `environment/runtime/harbor/` and `environment/agents/personabench/agents/`
+  own execution and agent wiring.
 
 ## Scenario Handoff Template
 

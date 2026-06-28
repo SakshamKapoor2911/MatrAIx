@@ -44,3 +44,18 @@ def test_viewer_docs_use_npm_lockfile_workflow() -> None:
     assert "npm ci" in readme
     assert "npm run typecheck" in readme
     assert "bun install" not in readme
+
+
+def test_viewer_cli_paths_follow_environment_runtime_layout() -> None:
+    from harbor.cli import view
+
+    assert view.VIEWER_DIR == VIEWER_ROOT
+    assert view.STATIC_DIR == ROOT / "environment/runtime/harbor/viewer/static"
+
+    source = (ROOT / "environment/runtime/harbor/cli/view.py").read_text(
+        encoding="utf-8"
+    )
+    assert '["npm", "ci"]' in source
+    assert '["npm", "run", "build"]' in source
+    assert '["npm", "run", "dev"]' in source
+    assert "bun" not in source
