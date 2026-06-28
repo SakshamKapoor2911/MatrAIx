@@ -37,8 +37,8 @@ Expected contents:
 - `application/tasks/` for runnable survey, chat, web, and product tasks.
 - `application/reporting/` for application result summaries.
 - `application/scripts/` for application job generation helpers.
-- `application/persona_eval/` for reusable PersonaEval survey and recommender
-  evaluation helpers.
+- `application/persona_eval/` for the PersonaEval app/API/frontend plus survey,
+  chatbot, and web evaluation helpers.
 
 Applications should reference persona data through documented inputs instead of
 copying persona datasets into application-specific folders.
