@@ -8,14 +8,21 @@ Current layout:
 ```text
 application/
   persona_eval/ Reusable PersonaEval survey/backend helpers.
-  tasks/       Runnable survey, chat, web, and product tasks.
-  metrics/     Application-side scoring and evaluation logic.
-  cohorts/     Persona cohort specifications used by scenarios.
   reporting/   Application result summaries.
+  scripts/     Application job generation helpers.
+  tasks/       Runnable survey, chat, web, and product tasks.
 ```
 
 Applications should depend on persona inputs by reference. They should not copy
 large persona datasets into application folders.
+
+Related runtime and recipe surfaces live outside this module:
+
+- `configs/jobs/application-task-job-recipe/` contains curated multi-persona
+  application job fixtures.
+- `configs/jobs/example-job-recipe/` contains local smoke recipes for the
+  example application tasks.
+- `src/harbor/` and `src/personabench/agents/` own execution and agent wiring.
 
 ## Scenario Handoff Template
 
@@ -56,10 +63,9 @@ Outputs: conversation trajectory and per-metric score report.
 For broader domain inspiration, see
 [`docs/research/application-domain-benchmark-catalog.md`](../docs/research/application-domain-benchmark-catalog.md).
 
-## Imported from MatrAIx
+## Current Imported Scope
 
-The first application import brings in example task definitions and reporting
-stubs only:
+The clean import currently includes:
 
 - `tasks/`: survey, chat, web, and computer-use example tasks
 - `scripts/`: application job generation helpers
@@ -67,6 +73,6 @@ stubs only:
 - `persona_eval/`: PersonaEval survey types and curated built-in survey
   instruments
 
-Agents, curated job recipes, and runtime wiring are imported in later PRs. Until
-then, keep new contributions scoped to task folders and avoid adding repo-root
-scripts or generated job outputs.
+Keep new application contributions scoped to application-owned task, script,
+reporting, or PersonaEval folders. Do not add repo-root scripts, copy persona
+datasets into application folders, or commit generated job outputs.

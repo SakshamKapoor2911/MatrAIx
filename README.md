@@ -56,6 +56,7 @@ uv pip install -e .
 uv pip install pytest pytest-asyncio
 uv pip install -e packages/harbor-langsmith
 uv pip install -e packages/rewardkit
+uv pip install -e environment/adapters/simpleqa
 uv run pytest tests/ packages/harbor-langsmith/tests/ packages/rewardkit/tests/
 uv run ruff check .
 ```
@@ -82,14 +83,27 @@ More setup, optional package, adapter, viewer, and artifact details are in
 Persona schema, datasets, curation pipelines, collaborator packages, and
 artifact handoff guidance live under [persona/](persona/README.md).
 
+Useful entry points:
+
+- [Existing-data curation](persona/curation/existing_data/README.md) documents
+  the Wikipedia and Amazon package-generation flow.
+- `persona/curation/existing_data/scripts/make_package.py` is the preferred
+  owner-facing package generator for both `--source wiki` and
+  `--source amazon`.
+- [Artifact handoff](migration/matraix/README.md) lists large generated data
+  that stays outside `main` until uploaded externally.
+
 ## Research Notes
 
 The old MatrAIx literature review lived inside team planning files. Clean main
 keeps the useful references as module-specific research notes:
 
 - [Persona related work](docs/research/persona-related-work.md)
+- [Behavior-grounded personas](docs/research/behavior-grounded-personas.md)
+- [AutoPersona causal schema-learning proposal](docs/research/autopersona.md)
 - [Application related work](docs/research/application-related-work.md)
 - [Application areas taxonomy](docs/research/application-areas-taxonomy.md)
+- [Application domain benchmark catalog](docs/research/application-domain-benchmark-catalog.md)
 - [Environment related work](docs/research/environment-related-work.md)
 
 The source environment review was much thinner than the application and

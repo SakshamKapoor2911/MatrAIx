@@ -29,7 +29,8 @@ uv run harbor run \
   -e use-computer
 ```
 
-Generated job configs are deferred to a later runtime/config migration PR.
+The curated local job recipe is
+`configs/jobs/example-job-recipe/appSim-example-computer-use-macos-local.yaml`.
 
 Oracle check (no LLM; writes the decision file directly):
 

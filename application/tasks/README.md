@@ -4,8 +4,8 @@ Task definitions for **application product research**. These were migrated from
 MatrAIx and organized under the PersonaBench `application/` module.
 
 This import contains task folders, task-local environments, tests, and reference
-solutions. The shared runtime package, agent implementations, and generated job
-recipes are intentionally imported in later PRs.
+solutions. Runtime and agent wiring live under `src/harbor/` and
+`src/personabench/agents/`; curated runnable recipes live under `configs/jobs/`.
 
 ## Naming
 
@@ -36,8 +36,8 @@ the scenario, task metadata, and verifier.
 | **domain** | Vertical: `software` · `finance` · `healthcare` · `commerce-retail` |
 | **tags** | Task-specific labels; do not repeat `type` or `domain`. |
 
-Persona benchmark tasks should live under `persona/bench/` or a later
-`persona/tasks/` import, not in this module.
+Persona benchmark and grounding tasks should live under `persona/tasks/`, not
+in this module.
 
 ## Interface
 

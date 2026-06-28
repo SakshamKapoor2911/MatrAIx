@@ -20,5 +20,8 @@ Coverage notes:
   sections. The environment note preserves those entries and adds
   environment-relevant benchmark references that were originally written in the
   application review.
+- Adapter-local benchmark README links from the old MatrAIx adapter tree are
+  not exhaustively indexed here. Add them through focused adapter imports or a
+  dedicated external-benchmark index instead of bloating the module reviews.
 - These files intentionally exclude old task assignments, owner placeholders
   outside source attribution, and PR/project-management notes.

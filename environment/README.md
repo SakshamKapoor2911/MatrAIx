@@ -10,6 +10,10 @@ Current layout:
 environment/
   README.md    Module boundary and contribution guidance.
   adapters/    Curated external benchmark adapters.
+configs/jobs/
+  application-task-job-recipe/ Curated application job fixtures.
+  example-job-recipe/          Local smoke and example recipes.
+  persona-task-grounding-job-recipe/ Curated persona grounding job fixtures.
 src/harbor/
   agents/      Base and installed agent wrappers.
   cli/         Harbor CLI entrypoints and templates.
@@ -21,15 +25,8 @@ src/harbor/
 src/personabench/agents/
   installed/   PersonaBench-owned installed-agent adapters.
   persona/     Persona-conditioned Harbor agents and prompt templates.
-```
-
-Planned environment-owned directories:
-
-```text
-environment/
-  agents/      Persona-conditioned agents and model wrappers.
-  jobs/        Curated job recipe schemas and reusable templates.
-  viewer/      Result inspection UI, if it remains in this repository.
+apps/viewer/
+  React frontend source paired with `src/harbor/viewer/`.
 ```
 
 The runtime foundation exposes the `harbor`, `hr`, and `hb` console scripts
@@ -48,9 +45,10 @@ with a manifest, adapter-local package metadata, and ignored `_generated/`
 output. Do not restore a top-level `adapters/` directory or write generated
 datasets to shared root paths.
 
-Deferred from the runtime foundation import:
+Still excluded from clean `main`:
 
-- Checked-in `configs/jobs/` recipes.
-- Historical `jobs/` outputs.
-- Standalone `apps/viewer` and other UI/tooling packages.
+- Historical `jobs/` outputs, recordings, screenshots, and trajectories.
 - Bulk adapter directories beyond focused, manifest-backed imports.
+- Generated adapter datasets and downloaded benchmark corpora.
+- Raw MatrAIx snapshots or dependency lockfiles that are not required by a
+  curated adapter PR.
