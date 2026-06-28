@@ -321,9 +321,9 @@ export default function TaskDefinitions() {
         <PageHeaderMeta>
           <TruncatedHeaderItem
             className="text-sm text-muted-foreground"
-            title="Browse PersonaBench task definitions"
+            title="Browse MatrAIx task definitions"
           >
-            Browse PersonaBench task definitions
+            Browse MatrAIx task definitions
           </TruncatedHeaderItem>
           <PageHeaderHints>
             <span className="flex items-center gap-1">

@@ -35,8 +35,8 @@ BASE_DIR = SCRIPT_DIR.parent
 DEFAULT_OUTPUT = BASE_DIR / "outputs" / "wiki_persona_seeds.jsonl"
 DEFAULT_LANGUAGE = "en"
 DEFAULT_USER_AGENT = (
-    "PersonaBenchWikipediaPersonaSeeds/0.1 "
-    "(research curation; https://github.com/ElegantLin/PersonaBench)"
+    "MatrAIxWikipediaPersonaSeeds/0.1 "
+    "(research curation; https://github.com/MatrAIx-ai/MatrAIx)"
 )
 
 VALID_ENTITY_TYPES = {"real_person", "fictional_character"}

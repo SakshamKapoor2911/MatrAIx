@@ -8,7 +8,7 @@ export function Navbar() {
           to="/"
           className="text-sm font-semibold tracking-tight hover:text-foreground/80"
         >
-          PersonaBench
+          MatrAIx
         </Link>
       </div>
     </header>

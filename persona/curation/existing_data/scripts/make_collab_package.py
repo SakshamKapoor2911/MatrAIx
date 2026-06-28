@@ -179,7 +179,7 @@ def write_package_manifest(out_dir: Path, assignment: dict[str, Any]) -> None:
 
 
 def write_worker_readme(out_dir: Path) -> None:
-    readme = """# PersonaBench Persona Attribution Assignment
+    readme = """# MatrAIx Persona Attribution Assignment
 
 You received a self-contained assignment package. Work inside this directory.
 Requires Python 3.10+; no Python packages need to be installed.

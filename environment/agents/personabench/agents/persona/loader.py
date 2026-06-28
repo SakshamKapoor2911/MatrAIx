@@ -24,7 +24,7 @@ SCHEMA_V2 = "v2"
 
 @dataclass(frozen=True)
 class Persona:
-    """Persona profile for PersonaBench agents.
+    """Persona profile for MatrAIx agents.
 
     Supports schema v0 (flat fields) and v1 (nested domains — see docs/personas/).
     """

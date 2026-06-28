@@ -1,4 +1,4 @@
-"""PersonaBench-installed agents for Docker web scenarios."""
+"""MatrAIx-installed agents for Docker web scenarios."""
 
 from __future__ import annotations
 

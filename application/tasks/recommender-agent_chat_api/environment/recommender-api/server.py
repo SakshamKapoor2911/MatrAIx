@@ -1,4 +1,4 @@
-"""Tiny recommendation chat API used by the PersonaBench smoke task."""
+"""Tiny recommendation chat API used by the MatrAIx smoke task."""
 
 from __future__ import annotations
 

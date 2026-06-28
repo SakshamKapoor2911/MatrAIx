@@ -693,7 +693,7 @@ def interactive_menu() -> int:
     ]
     while True:
         print()
-        print(_bold(_cyan("  PersonaBench wiki assignment runner")))
+        print(_bold(_cyan("  MatrAIx wiki assignment runner")))
         print(_rule())
         for num, label in items:
             print(f"  {_bold(_cyan(num))}  {label}")

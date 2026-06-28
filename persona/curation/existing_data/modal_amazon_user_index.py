@@ -40,7 +40,7 @@ DEFAULT_ELIGIBLE_REVIEW_PREFIX = "amazon_reviews_2018_2023_user_buckets_min30_ve
 DEFAULT_DERIVED_ELIGIBLE_USERS_PREFIX = "amazon_reviews_2018_2023_eligible_users_min30_verified70_text3000"
 DEFAULT_DERIVED_REVIEW_PREFIX = "amazon_reviews_2018_2023_user_buckets_min30_verified70_text3000"
 DEFAULT_METADATA_PREFIX = "amazon_reviews_2023_metadata_by_parent_asin_bucket_v2"
-DEFAULT_HF_REPO_ID = "ElegantLin/PersonaBench"
+DEFAULT_HF_REPO_ID = "MatrAIx/MatrAIx"
 DEFAULT_HF_AMAZON_PREFIX = "amazon/modal_artifacts"
 CURRENT_MODAL_ARTIFACT_PREFIXES = [
     DEFAULT_STATS_PREFIX,

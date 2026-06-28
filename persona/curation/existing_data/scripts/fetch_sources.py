@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fetch external persona datasets used for PersonaBench curation.
+"""Fetch external persona datasets used for MatrAIx curation.
 
 Default behavior is sample-first for large HuggingFace datasets. Use
 `--mode full` only when you intentionally want full source artifacts under the
@@ -128,7 +128,7 @@ def stream_download(url: str, dest: Path, force: bool = False) -> Path:
     log(f"Downloading {url}")
     request = urllib.request.Request(
         url,
-        headers={"User-Agent": "PersonaBench-data-curation/0.1"},
+        headers={"User-Agent": "MatrAIx-data-curation/0.1"},
     )
     try:
         with urllib.request.urlopen(request) as response, open(tmp_dest, "wb") as fh:
