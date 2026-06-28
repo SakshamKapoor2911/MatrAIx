@@ -41,7 +41,7 @@ def _create_llm(model: str):
 
 
 def promote_browser_use_outputs(agent: Any) -> list[str]:
-    """Copy browser-use sandbox files into /app/output."""
+    """Copy browser-use sandbox files into PersonaBench /app/output."""
     promoted: list[str] = []
     file_system = getattr(agent, "file_system", None)
     if file_system is None:
@@ -121,7 +121,7 @@ def history_to_atif(
     session_id: str | None = None,
     promoted_outputs: list[str] | None = None,
 ) -> dict[str, Any]:
-    """Convert browser-use AgentHistoryList to ATIF-v1.6 for the viewer."""
+    """Convert browser-use AgentHistoryList to ATIF-v1.6 for the PersonaBench viewer."""
     images_dir = trajectory_path.parent / "images"
     steps: list[dict[str, Any]] = []
     step_id = 1

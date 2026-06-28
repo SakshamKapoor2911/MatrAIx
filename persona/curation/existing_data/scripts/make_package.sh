@@ -5,8 +5,6 @@
 #   ./make_package.sh 0:100
 #
 # Input is the slice (START:END, half-open). Defaults are for wiki packages.
-# Wiki packages need either an existing DB/MANIFEST pair or
-# CLEAN_DIR=/path/to/person_pages_clean so the owner-side DB can be built.
 # To package Amazon histories, set SOURCE=amazon and USER_HISTORIES locally:
 #
 #   SOURCE=amazon USER_HISTORIES=/path/to/user_histories.jsonl ./make_package.sh 0:10 bob
@@ -26,7 +24,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/../../../.." && pwd)"
 SOURCE="${SOURCE:-wiki}"
-CLEAN_DIR="${CLEAN_DIR:-}"
+CLEAN_DIR="${CLEAN_DIR:-/data2/zonglin/wiki_dumps/enwiki/20260601/person_text_derivatives/person_pages_clean}"
 case "${SOURCE}" in
   wiki)
     DEFAULT_DATASET_ID="personabench_wiki_profiles_20260601_v1"
@@ -106,14 +104,6 @@ PACKAGE_ARGS=(
 if [[ "${SOURCE}" == "wiki" ]]; then
   # Build the profile DB once (owner only). Reused on later runs.
   if [[ ! -f "${DB}" || ! -f "${MANIFEST}" ]]; then
-    if [[ -z "${CLEAN_DIR}" ]]; then
-      echo "SOURCE=wiki requires CLEAN_DIR=/path/to/person_pages_clean when DB or MANIFEST is missing" >&2
-      exit 2
-    fi
-    if [[ ! -d "${CLEAN_DIR}" ]]; then
-      echo "CLEAN_DIR does not exist or is not a directory: ${CLEAN_DIR}" >&2
-      exit 2
-    fi
     echo ">> building profile DB (one-time): ${DB}"
     python3 persona/curation/existing_data/scripts/build_wiki_profile_db.py \
       --clean-dir "${CLEAN_DIR}" \

@@ -1,10 +1,10 @@
 # Notification preferences (iOS)
 
-MatrAIx **mobile** computer-use task: open **Settings → Notifications** on an iPhone 17 simulator (use.computer, iOS 26.4), review one app, and submit a JSON decision.
+PersonaBench **mobile** computer-use task: open **Settings → Notifications** on an iPhone 17 simulator (use.computer, iOS 26.4), review one app, and submit a JSON decision.
 
 Requires **`use-computer`** with **`platform: ios`**, not Docker.
 
-Uses **`persona-computer-1`** → use.computer **`IOSAgent`**. The instruction is written for the persona; MatrAIx materializes the submitted JSON to `decision.json` on the simulator host for scoring.
+Uses **`persona-computer-1`** → use.computer **`IOSAgent`**. The instruction is written for the persona; PersonaBench materializes the submitted JSON to `decision.json` on the simulator host for scoring.
 
 ```bash
 uv sync --extra use-computer --extra computer-1

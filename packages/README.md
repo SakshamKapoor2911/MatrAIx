@@ -1,6 +1,6 @@
 # Optional Packages
 
-This directory contains optional packages that extend the MatrAIx Harbor
+This directory contains optional packages that extend the PersonaBench Harbor
 runtime without becoming part of the default install path.
 
 Rules:

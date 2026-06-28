@@ -1,6 +1,6 @@
 # Docker Snippets
 
-Shared Docker helper scripts for MatrAIx task images.
+Shared Docker helper scripts for PersonaBench task images.
 
 Harbor builds each task from its own `environment/` directory, so task
 Dockerfiles cannot reliably `COPY` files from this shared directory. Keep the

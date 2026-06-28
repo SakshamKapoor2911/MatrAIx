@@ -1,6 +1,6 @@
 # Example Tasks
 
-These tasks are generic Harbor examples, not MatrAIx benchmark tasks.
+These tasks are generic Harbor examples, not PersonaBench benchmark tasks.
 
 Included:
 

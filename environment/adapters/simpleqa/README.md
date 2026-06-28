@@ -2,7 +2,7 @@
 
 This adapter converts OpenAI SimpleQA into Harbor-compatible task directories.
 It was migrated from `MatrAIx-ai/MatrAIx/adapters/simpleqa` into the
-MatrAIx environment module so external benchmark adapters do not create a
+PersonaBench environment module so external benchmark adapters do not create a
 top-level adapter tree.
 
 SimpleQA is a short-form factuality benchmark with 4,326 fact-seeking
@@ -40,7 +40,7 @@ under `_generated/` and should not be committed.
 
 ## Install
 
-From the MatrAIx repository root:
+From the PersonaBench repository root:
 
 ```bash
 python -m pip install -e environment/adapters/simpleqa

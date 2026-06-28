@@ -1,6 +1,6 @@
 # Bookshop browsing (Playwright)
 
-MatrAIx **Playwright** web task on a live public site. Chromium is driven through the **Playwright Python API** (DOM automation), not screenshot-based CUA.
+PersonaBench **Playwright** web task on a live public site. Chromium is driven through the **Playwright Python API** (DOM automation), not screenshot-based CUA.
 
 - URL: https://books.toscrape.com/
 - Output: `/app/output/book_interest.json`

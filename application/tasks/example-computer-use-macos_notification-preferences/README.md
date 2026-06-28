@@ -1,6 +1,6 @@
 # Notification preferences (macOS)
 
-MatrAIx **macOS** computer-use task: the persona opens real **System Settings → Notifications**, reviews an app, and writes a structured JSON preference to disk.
+PersonaBench **macOS** computer-use task: the persona opens real **System Settings → Notifications**, reviews an app, and writes a structured JSON preference to disk.
 
 Requires the **use-computer** environment (remote macOS desktop sandbox), not Docker.
 

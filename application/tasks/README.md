@@ -1,7 +1,7 @@
 # Application Tasks
 
 Task definitions for **application product research**. These were migrated from
-MatrAIx and organized under the MatrAIx `application/` module.
+MatrAIx and organized under the PersonaBench `application/` module.
 
 This import contains task folders, task-local environments, tests, and reference
 solutions. Runtime and agent wiring live under `environment/runtime/harbor/` and

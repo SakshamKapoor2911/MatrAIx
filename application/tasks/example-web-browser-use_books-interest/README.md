@@ -1,6 +1,6 @@
 # Bookshop browsing (browser-use)
 
-MatrAIx **browser-use** web task on a live public site. Chromium is driven by the [browser-use](https://github.com/browser-use/browser-use) agent loop (DOM + optional vision), not terminal Playwright scripts or CUA screenshots.
+PersonaBench **browser-use** web task on a live public site. Chromium is driven by the [browser-use](https://github.com/browser-use/browser-use) agent loop (DOM + optional vision), not terminal Playwright scripts or CUA screenshots.
 
 - URL: https://books.toscrape.com/
 - Output: `/app/output/book_interest.json`

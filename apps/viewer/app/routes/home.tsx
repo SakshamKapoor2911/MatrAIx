@@ -793,9 +793,9 @@ export default function Home() {
         <PageHeaderMeta>
           <TruncatedHeaderItem
             className="text-sm text-muted-foreground"
-            title="Browse and inspect MatrAIx simulation jobs"
+            title="Browse and inspect PersonaBench simulation jobs"
           >
-            Browse and inspect MatrAIx simulation jobs
+            Browse and inspect PersonaBench simulation jobs
           </TruncatedHeaderItem>
           <PageHeaderHints>
             <span className="flex items-center gap-1">
