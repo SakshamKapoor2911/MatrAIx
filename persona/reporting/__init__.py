@@ -1,1 +1,0 @@
-"""Persona dimension grounding reporting."""

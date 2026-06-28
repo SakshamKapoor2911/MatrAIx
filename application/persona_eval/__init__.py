@@ -1,2 +1,0 @@
-"""PersonaEval application helpers."""
-

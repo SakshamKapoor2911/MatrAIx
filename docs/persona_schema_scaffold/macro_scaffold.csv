@@ -1,0 +1,16 @@
+macro_variable,schema_attribute,value_type,module,parents,source_of_distribution,local_conditional,notes
+country,,categorical,demographics,[],census/IPUMS/UN population,P(country),Add scaffold variable; current schema starts at broad region.
+region_state,region,categorical,geography,"[""country""]",census/ACS/IPUMS/geocoding,P(region_state | country),Use state/province/region where data exists; map to schema `region` when needed.
+urbanicity,urbanicity,categorical,geography,"[""country"", ""region_state""]",census/ACS/rural-urban codes,"P(urbanicity | country, region_state)",
+age_bucket,age_bracket,ordered_bucket,demographics,"[""country"", ""region_state""]",census/ACS/IPUMS,"P(age_bucket | country, region_state)",
+gender,gender_identity,categorical,demographics,"[""country"", ""age_bucket""]",census/ACS/survey,"P(gender | country, age_bucket)",Official sources may need survey augmentation for nonbinary categories.
+language,primary_language,categorical,language_communication,"[""country"", ""region_state"", ""age_bucket""]",census/ACS language-at-home/survey,"P(language | country, region_state, age_bucket)",
+education_level,highest_education,ordinal,education,"[""country"", ""age_bucket"", ""gender""]",census/ACS/NCES,"P(education_level | country, age_bucket, gender)",
+employment_status,,categorical,work_career,"[""country"", ""age_bucket"", ""education_level""]",ACS/CPS/labor force survey,"P(employment_status | country, age_bucket, education_level)",New scaffold variable.
+occupation_family,role_function,categorical,work_career,"[""country"", ""age_bucket"", ""education_level"", ""employment_status""]",ACS/CPS/BLS/OES/ISCO/SOC,"P(occupation_family | country, age_bucket, education_level, employment_status)",`role_function` is the closest existing schema attribute.
+income_bucket,socioeconomic_band,ordered_bucket,income_finance,"[""country"", ""occupation_family"", ""education_level"", ""age_bucket""]",census/ACS/CPS income tables,"P(income_bucket | country, occupation_family, education_level, age_bucket)",`socioeconomic_band` is a proxy; explicit income_bucket may be added.
+household_type,life_stage,categorical,household_family,"[""country"", ""age_bucket"", ""income_bucket""]",census/ACS household/family tables,"P(household_type | country, age_bucket, income_bucket)",
+marital_status,,categorical,household_family,"[""country"", ""age_bucket"", ""gender""]",census/ACS,"P(marital_status | country, age_bucket, gender)",New scaffold variable.
+children_status,,categorical,household_family,"[""country"", ""age_bucket"", ""household_type"", ""marital_status""]",census/ACS fertility/household tables,"P(children_status | country, age_bucket, household_type, marital_status)",New scaffold variable.
+english_proficiency,english_proficiency,ordinal,language_communication,"[""country"", ""language"", ""education_level""]",census/ACS language proficiency/survey,"P(english_proficiency | country, language, education_level)",
+digital_fluency,tech_savviness,ordinal,technology_digital,"[""age_bucket"", ""education_level"", ""occupation_family"", ""urbanicity"", ""income_bucket""]",survey/NTIA/Eurostat/OECD/model-derived,"P(digital_fluency | age_bucket, education_level, occupation_family, urbanicity, income_bucket)",Not purely census; calibrate from digital access surveys.

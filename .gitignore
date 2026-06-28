@@ -15,8 +15,6 @@ downloads/
 eggs/
 .eggs/
 lib/
-!apps/viewer/app/lib/
-!apps/viewer/app/lib/**
 lib64/
 parts/
 sdist/
@@ -201,7 +199,7 @@ cython_debug/
 #   that can be found at https://github.com/github/gitignore/blob/main/Global/VisualStudioCode.gitignore
 #   and can be added to the global gitignore or merged into this file. However, if you prefer, 
 #   you could uncomment the following to ignore the entire vscode folder
-.vscode/
+# .vscode/
 # Temporary file for partial code execution
 tempCodeRunnerFile.py
 
@@ -218,20 +216,3 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
-
-# PersonaBench migration outputs and large generated Persona artifacts.
-persona/curation/attribute_pool/outputs/
-persona/curation/attribute_pool/sources/acs_pums/*.csv
-persona/curation/attribute_pool/sources/raw/
-persona/datasets/bench-dev-*/
-!persona/datasets/bench-dev-sample/
-!persona/datasets/bench-dev-sample/**
-persona/datasets/_generated/
-configs/jobs/application-task-job-recipe/*.yaml
-configs/jobs/application-task-job-recipe/*.meta.json
-!configs/jobs/application-task-job-recipe/appSim-example-survey-product-feedback-random-n4.yaml
-!configs/jobs/application-task-job-recipe/appSim-example-survey-product-feedback-random-n4.meta.json
-configs/jobs/persona-task-grounding-job-recipe/*.yaml
-configs/jobs/persona-task-grounding-job-recipe/*.meta.json
-!configs/jobs/persona-task-grounding-job-recipe/personaBench-example-survey-product-feedback-economic-motivation-pg2.yaml
-!configs/jobs/persona-task-grounding-job-recipe/personaBench-example-survey-product-feedback-economic-motivation-pg2.meta.json
