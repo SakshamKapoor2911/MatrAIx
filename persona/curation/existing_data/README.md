@@ -27,9 +27,8 @@ Available in this wave:
   plot-rendering helpers
 - small JSONL fixtures under `examples/`
 
-Deferred to follow-up PRs:
+Still excluded from this clean module:
 
-- optional dependency metadata and docs for Modal/HuggingFace cloud indexing
 - React curation cockpit
 - full generated persona outputs
 

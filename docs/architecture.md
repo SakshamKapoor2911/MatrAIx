@@ -35,9 +35,10 @@ than confounders:
 Expected contents:
 
 - `application/tasks/` for runnable survey, chat, web, and product tasks.
-- `application/metrics/` for application-side scoring and evaluation.
-- `application/cohorts/` for persona cohort specifications used by scenarios.
 - `application/reporting/` for application result summaries.
+- `application/scripts/` for application job generation helpers.
+- `application/persona_eval/` for reusable PersonaEval survey and recommender
+  evaluation helpers.
 
 Applications should reference persona data through documented inputs instead of
 copying persona datasets into application-specific folders.
@@ -48,9 +49,11 @@ copying persona datasets into application-specific folders.
 
 Expected contents:
 
-- `environment/runtime/` for job and trial execution code.
-- `environment/agents/` for persona-conditioned agents and model wrappers.
-- `environment/jobs/` for reusable job recipe schemas and templates.
+- `src/harbor/` for job and trial execution, runtime models, verifier
+  orchestration, CLI entrypoints, installed agents, and viewer backend APIs.
+- `src/personabench/agents/` for PersonaBench-owned persona agent adapters and
+  prompt templates.
+- `configs/jobs/` for curated runnable Harbor job recipes.
 - `src/harbor/viewer/` for the viewer backend API.
 - `apps/viewer/` for the viewer frontend source paired with `harbor view`.
 - `environment/adapters/` for optional external benchmark adapters.
