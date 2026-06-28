@@ -130,7 +130,7 @@ collab_kit/
 ## For the owner
 
 - Send each worker a `tasks.jsonl` (a disjoint slice of your dataset) + a
-  `dimensions.json` (any subset of the 1412-dim catalog;
+  `dimensions.json` (any subset of the 1339-dim catalog;
   `protocols/persona_attribution_by_category/<slug>/category_manifest.json`
   already has the `{id,label,description,values}` shape, and
   `persona/schema/dimensions.json` is the full catalog).

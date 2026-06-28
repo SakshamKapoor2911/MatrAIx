@@ -23,7 +23,7 @@ from collections import defaultdict
 
 def load_dimensions(filepath):
     """Load dimensions from JSON file."""
-    with open(filepath) as f:
+    with open(filepath, encoding="utf-8") as f:
         data = json.load(f)
     return data.get("dimensions", [])
 
