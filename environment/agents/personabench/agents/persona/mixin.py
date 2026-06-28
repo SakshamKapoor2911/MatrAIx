@@ -1,4 +1,4 @@
-"""Shared persona injection helpers for MatrAIx agents."""
+"""Shared persona injection helpers for PersonaBench agents."""
 
 from __future__ import annotations
 
