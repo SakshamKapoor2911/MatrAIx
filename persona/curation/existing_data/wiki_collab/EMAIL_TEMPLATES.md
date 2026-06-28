@@ -2,7 +2,7 @@
 
 ## Assignment Email
 
-Subject: MatrAIx wiki extraction assignment `{assignment_id}`
+Subject: PersonaBench wiki extraction assignment `{assignment_id}`
 
 Hi `{worker_id}`,
 
@@ -65,7 +65,7 @@ Thanks.
 
 ## Return Email
 
-Subject: MatrAIx wiki extraction return `{assignment_id}`
+Subject: PersonaBench wiki extraction return `{assignment_id}`
 
 Hi,
 

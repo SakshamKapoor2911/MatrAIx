@@ -1,7 +1,6 @@
 # MatrAIx Merge Log
 
-This log records the curated migration work used to rebuild a clean MatrAIx
-`main`.
+This log records the curated migration from MatrAIx into PersonaBench.
 
 ## 2026-06-27
 
@@ -206,7 +205,7 @@ This log records the curated migration work used to rebuild a clean MatrAIx
     `persona/datasets/bench-dev-sample/persona_0042.yaml`.
   - Recipe documentation records what remains deferred and why.
 
-### Step 10: Import persona task layer
+### Step 10: Import PersonaBench task layer
 
 - Branch: `codex/persona-bench-tasks`
 - PersonaBench PR: `#134`
@@ -269,7 +268,7 @@ This log records the curated migration work used to rebuild a clean MatrAIx
 - Documentation added:
   - `docs/migration/matraix-parity-matrix.md`
 - Policy:
-  - Clean `main` targets functional parity, not byte-for-byte
+  - PersonaBench `main` targets clean functional parity, not byte-for-byte
     source-tree parity.
   - Large generated artifacts and historical run outputs stay external to git.
   - Remaining imports should land as focused curated PRs with source mapping,
@@ -490,7 +489,7 @@ This log records the curated migration work used to rebuild a clean MatrAIx
 ### Step 21: Import persona existing-data wiki foundation
 
 - Branch: `codex/persona-wiki-amazon-migration`
-- Source repository: local MatrAIx checkout
+- Source repository: local `/data2/zonglin/persona_ai/MatrAIx`
 - Source branch: `codex/amazon-review-collab-integration`
 - Source reference: `87fe1dafb fix: preserve amazon min support fold texts`
 - Source base: `MatrAIx-ai/MatrAIx@origin/main`
@@ -524,7 +523,7 @@ This log records the curated migration work used to rebuild a clean MatrAIx
 ### Step 22: Import persona collaboration packaging tools
 
 - Branch: `codex/persona-collab-packaging-tools`
-- Source repository: local MatrAIx checkout
+- Source repository: local `/data2/zonglin/persona_ai/MatrAIx`
 - Source branch: `codex/amazon-review-collab-integration`
 - Source reference: `87fe1dafb fix: preserve amazon min support fold texts`
 - Source base: `MatrAIx-ai/MatrAIx@origin/main`
@@ -565,7 +564,7 @@ This log records the curated migration work used to rebuild a clean MatrAIx
 ### Step 23: Import Amazon Reviews 2023 persona pipeline
 
 - Branch: `codex/persona-amazon-reviews-pipeline`
-- Source repository: local MatrAIx checkout
+- Source repository: local `/data2/zonglin/persona_ai/MatrAIx`
 - Source branch: `codex/amazon-review-collab-integration`
 - Source reference: `87fe1dafb fix: preserve amazon min support fold texts`
 - Source base: `MatrAIx-ai/MatrAIx@origin/main`
@@ -614,7 +613,7 @@ This log records the curated migration work used to rebuild a clean MatrAIx
 ### Step 24: Add optional Amazon Modal/HuggingFace dependency extra
 
 - Branch: `codex/persona-amazon-modal-extra`
-- Source repository: local MatrAIx checkout
+- Source repository: local `/data2/zonglin/persona_ai/MatrAIx`
 - Source branch: `codex/amazon-review-collab-integration`
 - Source reference: `87fe1dafb fix: preserve amazon min support fold texts`
 - Purpose: make the optional Amazon Reviews 2023 Modal/HuggingFace helper path
@@ -1028,7 +1027,7 @@ This log records the curated migration work used to rebuild a clean MatrAIx
 ### Step 42: Import parity items 1, 2, 3, and 5 from MatrAIx main
 
 - Branch: `codex/matraix-parity-1235`
-- Source repository: local MatrAIx checkout
+- Source repository: local `/data2/zonglin/MatrAIx`
 - Source base: `MatrAIx-ai/MatrAIx@main`
 - Source commit: `e50592a4cbfca86b3207e1f9d5247ca9f93ee4d0`
 - Purpose: close the functional gaps identified in the main-vs-PersonaBench
@@ -1152,3 +1151,21 @@ This log records the curated migration work used to rebuild a clean MatrAIx
   - `.venv/bin/python -m pip wheel --no-deps .` passed, and the built wheel
     contains `harbor`, `personabench`, `personabench.agents`, and persona agent
     prompt templates.
+
+### Step 45: Curate publication plan from early MatrAIx README
+
+- Branch: `codex/publication-plan-docs`
+- Source PR: PersonaBench `#28`, imported from
+  `MatrAIx-ai/MatrAIx@3efb36b90d24fab955921d825d3b66d35b702593`
+- Purpose: preserve the project-level publication roadmap without merging the
+  raw stacked `MatrAIx/README.md` snapshot.
+- Updated:
+  - `README.md`
+- Source handling:
+  - The old README wording was adapted to the clean PersonaBench root README.
+  - The migration keeps the two-paper plan: persona data/benchmark and user
+    simulation.
+  - Deprecated conference-target wording from the older README was not
+    restored.
+- Verification:
+  - `git diff --check` passed.

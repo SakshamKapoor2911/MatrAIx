@@ -263,7 +263,7 @@ def cocoa_to_atif(
     agent_version: str = "unknown",
     session_id: str | None = None,
 ) -> dict[str, Any]:
-    """Convert a CocoaAgent result dict to ATIF-v1.6 for the viewer."""
+    """Convert a CocoaAgent result dict to ATIF-v1.6 for the PersonaBench viewer."""
     conversation = _cocoa_conversation(result)
     execution_trace = _cocoa_execution_trace(result)
     screenshots = _screenshot_map(result)

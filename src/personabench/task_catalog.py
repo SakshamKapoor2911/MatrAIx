@@ -1,4 +1,4 @@
-"""Canonical metadata for MatrAIx example tasks (application + persona bench).
+"""Canonical metadata for PersonaBench example tasks (application + persona bench).
 
 Application scenarios and persona bench tasks can share a folder slug (e.g.
 ``example-survey_product-feedback``) but use separate catalogs:
@@ -11,7 +11,7 @@ Domain / vertical (first focus set):
 Tags are **task topic** labels (what the scenario is about). Use short
 human-readable phrases (spaces allowed). Do not repeat ``type`` / ``domain``.
 
-Harbor also supports ``[task].keywords`` for registry package search; MatrAIx
+Harbor also supports ``[task].keywords`` for registry package search; PersonaBench
 example tasks omit it and use ``metadata.tags`` only.
 
 Harbor ``[task].name`` (exactly one ``/``):

@@ -1,6 +1,6 @@
 # Acme support chat (REST API)
 
-MatrAIx chat task with a **mock Acme support bot** exposed as a REST API compose sidecar. The persona agent must call HTTP endpoints (`POST /v1/messages`, `GET /v1/conversation`) for a multi-turn conversation, then save the transcript to `/app/output/transcript.json`.
+PersonaBench chat task with a **mock Acme support bot** exposed as a REST API compose sidecar. The persona agent must call HTTP endpoints (`POST /v1/messages`, `GET /v1/conversation`) for a multi-turn conversation, then save the transcript to `/app/output/transcript.json`.
 
 Requires **Docker Compose** (local `docker` environment). Not supported on cloud providers yet.
 

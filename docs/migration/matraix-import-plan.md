@@ -1,12 +1,11 @@
 # MatrAIx Import Plan
 
-This plan guides imports from `MatrAIx-ai/MatrAIx` into the clean MatrAIx
-module layout.
+This plan guides imports from `MatrAIx-ai/MatrAIx` into PersonaBench.
 
 ## Current State
 
 - MatrAIx main at inspection time: `e50592a4cbfca86b3207e1f9d5247ca9f93ee4d0`.
-- Migration provenance was merged in PR #125.
+- PersonaBench migration provenance was merged in PR #125.
 - Raw migration PRs are available as screening artifacts, but most should not
   be merged directly.
 - The current clean-main source-to-target status is tracked in
@@ -37,9 +36,9 @@ The migration proceeds on two parallel lines:
 1. **Clean Main line:** `main` contains only curated, organized code and docs.
    Raw snapshots remain review artifacts and should not be merged directly.
 2. **Unmerged PR Preservation line:** every MatrAIx PR that was not merged into
-   MatrAIx `main` remains available as a snapshot PR or a future curated port
-   PR. Preserve source PR number, source branch, source commit, and original
-   author metadata.
+   MatrAIx `main` remains available as a PersonaBench snapshot PR or a future
+   curated port PR. Preserve source PR number, source branch, source commit,
+   and original author metadata.
 
 ### Wave 0: Architecture and contribution guardrails
 
@@ -195,13 +194,13 @@ Still deferred:
 - `harbor-smoke-local.yaml`, because it points at unimported
   `examples/tasks/hello-world`.
 - `personaBench-*` and persona grounding recipes, because they should be
-  regenerated against curated sample or external persona datasets instead
+  regenerated against curated sample or external PersonaBench datasets instead
   of copied from source snapshots.
 - Generated random-sample recipes that reference the external
   `persona/datasets/bench-dev-2000/` dataset.
 - All historical `jobs/` outputs.
 
-### Wave 7: Persona task layer
+### Wave 7: PersonaBench task layer
 
 Import persona grounding tasks, grounding specs, reporting, and script entry
 points without importing full generated persona pools.
@@ -279,14 +278,14 @@ Primary sources:
 
 ## Open PR Preservation
 
-Do not close or overwrite snapshot PRs until their source PR has either been
-explicitly rejected or ported into a curated PR.
+Do not close or overwrite PersonaBench snapshot PRs until their source PR has
+either been explicitly rejected or ported into a curated PR.
 
 Current handling policy:
 
 - Keep raw snapshot PRs open or clearly labeled as archive/do-not-merge.
-- For each useful MatrAIx open PR, create a new curated port PR against clean
-  `main`.
+- For each useful MatrAIx open PR, create a new curated port PR against
+  PersonaBench `main`.
 - Use titles like
   `[port matraix#128][persona] Add annotation package tool`.
 - In each curated port PR body, record:

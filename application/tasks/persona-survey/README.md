@@ -1,6 +1,6 @@
 # Persona Survey
 
-MatrAIx application task for structured persona surveys. The Harbor
+PersonaBench application task for structured persona surveys. The Harbor
 `persona-claude-code` agent acts as the respondent using Harbor's native persona
 prompt injection. The application runner appends a survey instrument and maps
 the saved artifact into answers, metrics, and the telemetry-style trajectory.

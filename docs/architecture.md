@@ -1,6 +1,6 @@
-# MatrAIx Architecture
+# PersonaBench Architecture
 
-MatrAIx keeps team ownership separate from runtime plumbing. The public
+PersonaBench keeps team ownership separate from runtime plumbing. The public
 contract is the three-module layout: `persona/`, `application/`, and
 `environment/`.
 
@@ -51,7 +51,7 @@ Expected contents:
 
 - `environment/runtime/harbor/` for job and trial execution, runtime models, verifier
   orchestration, CLI entrypoints, installed agents, and viewer backend APIs.
-- `environment/agents/personabench/agents/` for MatrAIx-owned persona
+- `environment/agents/personabench/agents/` for PersonaBench-owned persona
   agent adapters and prompt templates.
 - `configs/jobs/` for curated runnable Harbor job recipes.
 - `environment/runtime/harbor/viewer/` for the viewer backend API.

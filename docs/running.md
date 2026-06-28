@@ -1,7 +1,7 @@
-# Running MatrAIx
+# Running PersonaBench
 
-This guide documents the curated MatrAIx `main` workflow after the clean-main
-migration. It uses only paths that exist in clean `main`; raw MatrAIx
+This guide documents the curated PersonaBench `main` workflow after the
+MatrAIx migration. It uses only paths that exist in clean `main`; raw MatrAIx
 snapshots, generated jobs, and full persona datasets are intentionally excluded.
 
 ## Prerequisites
