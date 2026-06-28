@@ -3,7 +3,6 @@
 import html
 import json
 import math
-import re
 import shutil
 from contextlib import asynccontextmanager
 from pathlib import Path
@@ -76,16 +75,6 @@ class UploadJobRequest(BaseModel):
     visibility: str | None = None
 
 
-class PersonaSynthesisRequest(BaseModel):
-    """Request body for schema-grounded persona synthesis."""
-
-    count: int = 10
-    seed: int = 42
-    output_name: str | None = None
-    max_attempts_per_persona: int = 1000
-    preview_dimensions: int = 32
-
-
 class TaskGroupStats(TypedDict):
     """Stats accumulated for a task group."""
 
@@ -124,7 +113,6 @@ def _uncached_input(n_input: int | None, n_cache: int | None) -> int | None:
 # desktop screenshots (PNG/WebP) routinely exceed 1 MB.
 MAX_FILE_SIZE = 1024 * 1024
 MAX_IMAGE_FILE_SIZE = 10 * 1024 * 1024
-_PERSONA_OUTPUT_NAME_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_.-]{0,79}$")
 
 
 def create_app(
@@ -216,8 +204,6 @@ def create_app(
             output_cost_per_token=output_rate,
         )
 
-    _register_persona_synthesis_endpoints(app)
-
     if mode == "tasks":
         _register_task_endpoints(app, folder, cleanup_callbacks)
     else:
@@ -248,120 +234,6 @@ def create_app(
             return FileResponse(static_dir / "index.html")
 
     return app
-
-
-def _persona_generated_datasets_dir() -> Path:
-    from personabench.persona_synthesis import repo_root
-
-    return repo_root() / "persona" / "datasets" / "_generated"
-
-
-def _persona_output_dir(output_name: str | None, count: int) -> Path:
-    name = (output_name or "").strip() or f"synthetic-human-{count}"
-    if not _PERSONA_OUTPUT_NAME_RE.fullmatch(name):
-        raise HTTPException(
-            status_code=400,
-            detail=(
-                "output_name must start with a letter or number and contain only "
-                "letters, numbers, '.', '_', or '-'"
-            ),
-        )
-    base = _persona_generated_datasets_dir().resolve()
-    out_dir = (base / name).resolve()
-    if base != out_dir and base not in out_dir.parents:
-        raise HTTPException(status_code=400, detail="output_name resolves outside _generated")
-    return out_dir
-
-
-def _validate_persona_synthesis_request(request: PersonaSynthesisRequest) -> None:
-    if request.count < 1 or request.count > 1000:
-        raise HTTPException(status_code=400, detail="count must be between 1 and 1000")
-    if request.max_attempts_per_persona < 1 or request.max_attempts_per_persona > 10000:
-        raise HTTPException(
-            status_code=400,
-            detail="max_attempts_per_persona must be between 1 and 10000",
-        )
-    if request.preview_dimensions < 1 or request.preview_dimensions > 200:
-        raise HTTPException(
-            status_code=400,
-            detail="preview_dimensions must be between 1 and 200",
-        )
-
-
-def _register_persona_synthesis_endpoints(app: FastAPI) -> None:
-    """Register endpoints for the schema-grounded persona synthesis tool."""
-
-    @app.get("/api/persona-synthesis")
-    def get_persona_synthesis_info() -> dict[str, Any]:
-        from personabench.persona_synthesis import (
-            DEFAULT_CATALOG_PATH,
-            DEFAULT_CONSTRAINTS_PATH,
-            load_catalog_values,
-            load_dimension_catalog,
-            load_readable_constraints,
-            load_synthesis_dimension_ids,
-            summarize_constraint_compatibility,
-        )
-
-        catalog = load_dimension_catalog()
-        catalog_values = load_catalog_values()
-        dimension_ids = load_synthesis_dimension_ids()
-        rules = load_readable_constraints()
-        compatibility = summarize_constraint_compatibility(
-            rules=rules,
-            catalog_values=catalog_values,
-            generated_dimension_ids=dimension_ids,
-        )
-        return {
-            "catalog_path": DEFAULT_CATALOG_PATH,
-            "constraints_path": DEFAULT_CONSTRAINTS_PATH,
-            "schema_version": str(catalog.get("schemaVersion", "")),
-            "target_dimensions": catalog.get("targetDimensions"),
-            "dimension_count": len(dimension_ids),
-            "dimension_set": "all-catalog-dimensions",
-            "constraint_count": len(rules),
-            "constraint_validation": compatibility,
-            "default_output_dir": str(_persona_generated_datasets_dir()),
-        }
-
-    @app.post("/api/persona-synthesis")
-    def run_persona_synthesis(request: PersonaSynthesisRequest) -> dict[str, Any]:
-        from personabench.persona_synthesis import synthesize_persona_dataset
-
-        _validate_persona_synthesis_request(request)
-        out_dir = _persona_output_dir(request.output_name, request.count)
-
-        if out_dir.exists():
-            shutil.rmtree(out_dir)
-
-        manifest = synthesize_persona_dataset(
-            out_dir=out_dir,
-            count=request.count,
-            seed=request.seed,
-            max_attempts_per_persona=request.max_attempts_per_persona,
-        )
-        first_persona = (manifest.get("personas") or [None])[0]
-        dimensions = first_persona.get("dimensions", {}) if first_persona else {}
-        sample_dimensions = dict(
-            list(dimensions.items())[: request.preview_dimensions]
-        )
-        persona_paths = [entry["path"] for entry in manifest.get("personas", [])[:10]]
-        return {
-            "output_dir": str(out_dir),
-            "manifest_path": str(out_dir / "manifest.json"),
-            "count": manifest["count"],
-            "seed": manifest["seed"],
-            "schema_version": manifest["schema_version"],
-            "dimension_set": manifest["dimension_set"],
-            "dimension_count": manifest["dimension_count"],
-            "schema_grounding": manifest["schema_grounding"],
-            "constraint_validation": manifest["constraint_validation"],
-            "sampling": manifest["sampling"],
-            "sample_persona_id": first_persona.get("persona_id") if first_persona else None,
-            "sample_dimension_total": len(dimensions),
-            "sample_dimensions": sample_dimensions,
-            "generated_files": ["manifest.json", *persona_paths],
-        }
 
 
 def _validate_return_to(return_to: str | None, request: Request) -> str | None:

@@ -3,7 +3,6 @@ import { type RouteConfig, index, route } from "@react-router/dev/routes";
 export default [
   index("routes/home.tsx"),
   route("compare", "routes/compare.tsx"),
-  route("persona-synthesis", "routes/persona-synthesis.tsx"),
   route("jobs/:jobName", "routes/job.tsx"),
   route(
     "jobs/:jobName/tasks/:source/:agent/:modelProvider/:modelName/:taskName",

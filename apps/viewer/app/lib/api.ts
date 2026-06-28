@@ -30,98 +30,10 @@ export interface ViewerConfig {
   jobs_dir?: string;
 }
 
-export interface PersonaSynthesisInfo {
-  catalog_path: string;
-  constraints_path: string;
-  schema_version: string;
-  target_dimensions: number;
-  dimension_count: number;
-  dimension_set: string;
-  constraint_count: number;
-  default_output_dir: string;
-  constraint_validation: {
-    source_rule_count: number;
-    catalog_valid_rule_count: number;
-    not_in_current_catalog_count: number;
-    applicable_to_generated_dimensions_count: number;
-    not_in_current_catalog_examples: Array<Record<string, string>>;
-  };
-}
-
-export interface PersonaSynthesisRequest {
-  count: number;
-  seed: number;
-  output_name?: string;
-  max_attempts_per_persona: number;
-  preview_dimensions: number;
-}
-
-export interface PersonaSynthesisResult {
-  output_dir: string;
-  manifest_path: string;
-  count: number;
-  seed: number;
-  schema_version: string;
-  dimension_set: string;
-  dimension_count: number;
-  schema_grounding: {
-    validation: {
-      status: string;
-      checked_personas: number;
-      rejected_attempts: number;
-    };
-  };
-  constraint_validation: {
-    validation: {
-      status: string;
-      checked_personas: number;
-      rejected_attempts: number;
-      source_rule_count: number;
-      catalog_valid_rule_count: number;
-      not_in_current_catalog_count: number;
-      applicable_to_generated_dimensions_count: number;
-      not_in_current_catalog_examples: Array<Record<string, string>>;
-    };
-  };
-  sampling: {
-    method: string;
-    attempts: number;
-  };
-  sample_persona_id: string | null;
-  sample_dimension_total: number;
-  sample_dimensions: Record<string, string>;
-  generated_files: string[];
-}
-
 export async function fetchConfig(): Promise<ViewerConfig> {
   const response = await fetch(`${API_BASE}/api/config`);
   if (!response.ok) {
     throw new Error(`Failed to fetch config: ${response.statusText}`);
-  }
-  return response.json();
-}
-
-export async function fetchPersonaSynthesisInfo(): Promise<PersonaSynthesisInfo> {
-  const response = await fetch(`${API_BASE}/api/persona-synthesis`);
-  if (!response.ok) {
-    throw new Error(
-      `Failed to fetch persona synthesis info: ${response.statusText}`
-    );
-  }
-  return response.json();
-}
-
-export async function runPersonaSynthesis(
-  request: PersonaSynthesisRequest
-): Promise<PersonaSynthesisResult> {
-  const response = await fetch(`${API_BASE}/api/persona-synthesis`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(request),
-  });
-  if (!response.ok) {
-    const detail = await response.text();
-    throw new Error(detail || response.statusText);
   }
   return response.json();
 }

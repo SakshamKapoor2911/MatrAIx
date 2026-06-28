@@ -3,6 +3,7 @@ import { createJavaScriptRegexEngine } from "shiki/engine/javascript";
 import { toJsxRuntime } from "hast-util-to-jsx-runtime";
 import { Fragment, jsx, jsxs } from "react/jsx-runtime";
 import type { HighlighterCore } from "shiki/core";
+import type { Root } from "hast";
 
 // Import only the languages we need
 import langBash from "shiki/langs/bash.mjs";
@@ -22,7 +23,6 @@ export const defaultThemes = {
 
 // Supported languages
 const langs = [langBash, langJson, langMarkdown, langPython, langToml];
-type HighlightedRoot = ReturnType<HighlighterCore["codeToHast"]>;
 
 // Language aliases
 const langAliases: Record<string, string> = {
@@ -108,7 +108,7 @@ export async function highlight(
       defaultColor: false,
     });
 
-    return hastToJsx(hast, { components: options.components });
+    return hastToJsx(hast as Root, { components: options.components });
   })();
 
   cache.set(cacheKey, promise);
@@ -116,7 +116,7 @@ export async function highlight(
 }
 
 function hastToJsx(
-  hast: HighlightedRoot,
+  hast: Root,
   options: { components?: Record<string, React.ComponentType<unknown>> }
 ): React.ReactNode {
   return toJsxRuntime(hast, {
