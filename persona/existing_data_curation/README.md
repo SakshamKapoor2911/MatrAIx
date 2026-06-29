@@ -158,6 +158,15 @@ python3 persona/existing_data_curation/amazon/evaluation/predict_amazon_persona_
 Use `--llm-backend claude --model opus` for Claude Code subscriptions. Use
 `--dry-run` on either LLM script to write prompts without invoking a backend.
 
+For Claude Code subscriptions, `--model opus` selects the model and
+`--llm-effort` selects the reasoning budget passed to `claude --effort`.
+Supported effort values are `low`, `medium`, `high`, `xhigh`, and `max`.
+Use `--llm-effort high` for extraction/inference because schema mapping is
+quality-sensitive. Use `--llm-effort medium` for large prediction runs, then
+raise it to `high` for final evaluations or unstable batches. Reserve `xhigh`
+or `max` for small final checks because they are slower and consume more
+subscription capacity.
+
 ## Collaborator Contract
 
 Each archive contains `assignment.json`, `tasks.jsonl`, `dimensions.json`,
