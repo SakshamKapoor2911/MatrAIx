@@ -1,10 +1,10 @@
 # MatrAIx Main Parity Matrix
 
 This document records how `MatrAIx-ai/MatrAIx` `main` maps into the curated
-MatrAIx repository layout.
+PersonaBench repository layout.
 
-It is intentionally not a byte-for-byte parity target. MatrAIx `main` should
-remain a clean, runnable distribution of the codebase. Raw
+It is intentionally not a byte-for-byte parity target. PersonaBench `main`
+should remain a clean, runnable distribution of the MatrAIx codebase. Raw
 snapshots, generated jobs, and large persona artifacts stay outside git and are
 linked from documentation after upload to external artifact storage.
 
@@ -19,7 +19,7 @@ linked from documentation after upload to external artifact storage.
 
 | Status | Meaning |
 |---|---|
-| `merged-clean` | Curated code is already present in clean `main` with module-appropriate paths and tests. |
+| `merged-clean` | Curated code is already present in PersonaBench with module-appropriate paths and tests. |
 | `partial` | Some useful source material has been imported, but remaining source paths still need a follow-up PR or external handoff. |
 | `needs-curated-import` | Source material is useful, but should be imported in a focused PR after path, dependency, and test review. |
 | `external-artifact` | Material is too large or generated and should be uploaded outside git, then linked from docs. |
@@ -28,14 +28,14 @@ linked from documentation after upload to external artifact storage.
 
 ## Top-Level Source Inventory
 
-| MatrAIx path | Source files | Source size | Clean target | Status | Handling |
+| MatrAIx path | Source files | Source size | PersonaBench target | Status | Handling |
 |---|---:|---:|---|---|---|
 | `.github/` | 8 | 14.5 KiB | `.github/` | `partial` | Safe CODEOWNERS, labeler, pytest, and Ruff workflows are imported. Claude automation remains excluded until secrets and review policy are explicit. |
-| Root metadata | 15 | 0.93 MiB | root files | `partial` | Use MatrAIx-facing docs branding while preserving Python package/import compatibility. Review `LICENSE`, `NOTICE`, `CITATION.cff`, `.python-version`, `uv.lock`, and contributor docs one by one. |
+| Root metadata | 15 | 0.93 MiB | root files | `partial` | Keep PersonaBench branding. Review `LICENSE`, `NOTICE`, `CITATION.cff`, `.python-version`, `uv.lock`, and contributor docs one by one. |
 | `adapters/` | 1,483 | 16.4 MiB | `environment/adapters/` | `partial` | Adapter foundation and `simpleqa` are imported with manifests and adapter-local `_generated/` output. Continue adapter imports in small batches; do not dump the adapter zoo at repo root. |
 | `application/` | 88 | 81.1 KiB | `application/` | `merged-clean` | Curated tasks, reporting, and job-generation utilities are already present. Future changes should stay under `application/`. |
 | `apps/viewer/` | 64 | 750.0 KiB | `apps/viewer/` | `merged-clean` | Viewer source was imported as repo-local tooling, including the `app/lib/` frontend helper modules required by `~/lib/*` imports. Generated build output and `node_modules` stay out of git. |
-| `configs/jobs/` | 18 | 18.4 KiB | `configs/jobs/` | `merged-clean` | Source job recipes are present or adapted against checked-in clean-main paths. Generated application and grounding fixtures are checked in only when every referenced task and persona exists in the curated sample dataset. |
+| `configs/jobs/` | 18 | 18.4 KiB | `configs/jobs/` | `merged-clean` | Source job recipes are present or adapted against checked-in PersonaBench paths. Generated application and grounding fixtures are checked in only when every referenced task and persona exists in the curated sample dataset. |
 | `docs/` | 15 | 2.8 MiB | `docs/` | `partial` | Architecture diagrams, running guide, and persona/application/environment related-work notes are imported. Legacy planning, branch-protection, and team-management docs remain excluded unless they become active contributor guidance. |
 | `examples/` | 367 | 394.7 KiB | `examples/` or module-local examples | `partial` | All source `examples/tasks/` runtime examples are imported. Source `examples/jobs/`, `examples/configs/`, `examples/agents/`, `examples/metrics/`, and `examples/prompts/` remain excluded as generated outputs or upstream sample scaffolding that is not needed by clean main. |
 | `jobs/` | 509 | 64.3 MiB | external storage | `external-artifact` | Historical run outputs, screenshots, videos, and trajectories do not belong in `main`. Upload selected artifacts using the slots in `migration/matraix/README.md`, then link them from docs. |
@@ -105,8 +105,7 @@ Future contributions should preserve the module boundary:
 - Repo-local UI tools go under `apps/`.
 - Shared Python utilities go under `src/personabench/`.
 - Harbor runtime code remains under `environment/runtime/harbor/`.
-- Persona runtime agents remain under `environment/agents/personabench/agents/`
-  for import compatibility.
+- PersonaBench runtime agents remain under `environment/agents/personabench/agents/`.
 - Historical provenance and source mapping stay under `migration/`.
 
 If a contribution needs a new top-level directory, document why in the PR body

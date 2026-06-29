@@ -21,7 +21,7 @@ here. Those belong in `environment/`, `application/`, or external storage.
 
 ## Data Pipeline
 
-MatrAIx keeps runnable persona curation code in git and keeps
+PersonaBench keeps runnable persona curation code in git and keeps
 large/generated data outside `main`.
 
 Canonical flow:
@@ -41,9 +41,6 @@ Start with [persona curation](curation/README.md) and the
 [existing-data pipeline](curation/existing_data/README.md). Large artifact
 upload slots are tracked in
 [migration/matraix/README.md](../migration/matraix/README.md).
-Real profile databases, manifests, raw histories, and full generated datasets
-are external dependencies with `TODO` URL slots; keep local paths out of code
-and documentation.
 
 ## Imported from MatrAIx
 
@@ -51,6 +48,7 @@ The first curated import brought in:
 
 - `schema/dimensions.json`
 - `schema/validators/schema_validator.py`
+- `curation/attribute_pool/` docs and pipeline scripts
 - two sample personas under `datasets/bench-dev-sample/`
 - `tasks/`, `scripts/`, `validators/`, and `reporting/` for the curated
   persona grounding task layer

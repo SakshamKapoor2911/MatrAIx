@@ -27,6 +27,6 @@ Plugin kwargs (CLI `--pk` or job config `kwargs:`) mirror the constructor option
 `dataset_name`, `experiment_name`, `endpoint`, `api_key`, `workspace_id`,
 `sync_dataset`, and `fail_fast`.
 
-This package depends on the root distribution because this repository
+This package depends on the PersonaBench distribution because this repository
 ships the Harbor runtime under the `harbor` Python namespace while publishing
 the root distribution as `personabench`.

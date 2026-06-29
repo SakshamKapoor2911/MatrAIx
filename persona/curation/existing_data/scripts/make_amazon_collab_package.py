@@ -443,7 +443,7 @@ def package_dimensions(
 
 
 def write_amazon_worker_readme(out_dir: Path) -> None:
-    readme = """# MatrAIx Amazon Reviewer Attribution Assignment
+    readme = """# PersonaBench Amazon Reviewer Attribution Assignment
 
 You received a self-contained assignment package. Work inside this directory.
 Requires Python 3.10+; no Python packages need to be installed.

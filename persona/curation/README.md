@@ -10,6 +10,8 @@ a storage plan.
 
 ## Current Pipelines
 
+- `attribute_pool/`: schema and attribute-pool curation notes from MatrAIx.
+  Large generated candidate pools remain external.
 - `existing_data/`: source manifests, Wikipedia profile extraction, worker
   packaging, result validation/merge, and Amazon Reviews 2023 persona
   inference/packaging utilities.

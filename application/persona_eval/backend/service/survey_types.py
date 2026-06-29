@@ -5,6 +5,11 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any
 
+try:
+    from persona_eval.types import DEFAULT_PERSONA_MODEL, Persona
+except ModuleNotFoundError:  # repo-root imports use the package-qualified path
+    from application.persona_eval.persona_eval.types import DEFAULT_PERSONA_MODEL, Persona
+
 QUESTION_TYPES = {"likert", "single_choice", "multi_choice", "free_text"}
 
 
@@ -92,3 +97,116 @@ class SurveyInstrument:
             "questions": [question.to_dict() for question in self.questions],
         }
 
+
+@dataclass
+class SurveyEvalConfig:
+    """Runtime config for local survey evaluation."""
+
+    persona_model: str = DEFAULT_PERSONA_MODEL
+    mode: str = "local_persona_survey"
+    require_rationale: bool = True
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "personaModel": self.persona_model,
+            "mode": self.mode,
+            "requireRationale": self.require_rationale,
+        }
+
+
+@dataclass
+class SurveyAnswer:
+    """One simulated persona answer to a survey question."""
+
+    question_id: str
+    value: Any
+    rationale: str = ""
+    confidence: float | None = None
+
+    @classmethod
+    def from_dict(cls, data: dict[str, Any]) -> "SurveyAnswer":
+        question_id = str(data.get("questionId", data.get("question_id", ""))).strip()
+        if not question_id:
+            raise ValueError("answer.questionId is required")
+        confidence = data.get("confidence")
+        if confidence is not None:
+            try:
+                confidence = max(0.0, min(1.0, float(confidence)))
+            except (TypeError, ValueError):
+                confidence = None
+        return cls(
+            question_id=question_id,
+            value=data.get("value"),
+            rationale=str(data.get("rationale", "")),
+            confidence=confidence,
+        )
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "questionId": self.question_id,
+            "value": self.value,
+            "rationale": self.rationale,
+            "confidence": self.confidence,
+        }
+
+
+@dataclass
+class TrajectoryEvent:
+    """One event in a survey/web evaluation trajectory."""
+
+    timestamp: str
+    actor: str
+    action: str
+    context: dict[str, Any] = field(default_factory=dict)
+    outcome: dict[str, Any] = field(default_factory=dict)
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "timestamp": self.timestamp,
+            "actor": self.actor,
+            "action": self.action,
+            "context": dict(self.context),
+            "outcome": dict(self.outcome),
+        }
+
+
+@dataclass
+class SurveyMetrics:
+    """Aggregate survey completion metrics."""
+
+    num_questions: int
+    num_answered: int
+    mean_likert: float | None = None
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "numQuestions": self.num_questions,
+            "numAnswered": self.num_answered,
+            "meanLikert": self.mean_likert,
+        }
+
+
+@dataclass
+class SurveyEvalResult:
+    """Full local survey evaluation result."""
+
+    config: SurveyEvalConfig
+    persona: Persona
+    instrument: SurveyInstrument
+    answers: list[SurveyAnswer]
+    trajectory: list[TrajectoryEvent]
+    metrics: SurveyMetrics
+    created_at: str
+    prompts: dict[str, str]
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "config": self.config.to_dict(),
+            "persona": self.persona.to_dict(),
+            "instrument": self.instrument.to_dict(),
+            "trajectory": [event.to_dict() for event in self.trajectory],
+            "answers": [answer.to_dict() for answer in self.answers],
+            "metrics": self.metrics.to_dict(),
+            "createdAt": self.created_at,
+            "prompts": dict(self.prompts),
+        }

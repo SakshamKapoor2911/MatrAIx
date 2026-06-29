@@ -2,7 +2,7 @@
 
 **Notice:**
 1. This is the template file for harbor adapter README. Please follow this structure and fill the contents and/or replace parts if necessary. If a prior version of the adapter code and README exists (i.e., under the `terminal-bench` repo), you could reuse some sections, but make sure they align with the new requirements and commands.
-2. In MatrAIx, adapter source lives under `environment/adapters/{{ADAPTER_ID}}` and generated task directories should default to `environment/adapters/{{ADAPTER_ID}}/_generated/{{ADAPTER_ID}}`. Do not write generated benchmark data to top-level `datasets/` or `jobs/`.
+2. In PersonaBench, adapter source lives under `environment/adapters/{{ADAPTER_ID}}` and generated task directories should default to `environment/adapters/{{ADAPTER_ID}}/_generated/{{ADAPTER_ID}}`. Do not write generated benchmark data to top-level `datasets/` or `jobs/`.
 3. Read and understand our tutorial before you go — [agent version](https://www.harborframework.com/docs/datasets/adapters) or [human version](https://www.harborframework.com/docs/datasets/adapters-human).
 
 ## Overview

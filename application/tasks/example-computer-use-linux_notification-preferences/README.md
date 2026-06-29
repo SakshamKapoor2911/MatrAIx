@@ -1,6 +1,6 @@
 # Notification preferences (Linux)
 
-MatrAIx **Linux desktop** computer-use task: the persona opens **XFCE Settings → Notifications** (Notify OSD) in a Docker Xvfb desktop and writes a JSON preference to disk.
+PersonaBench **Linux desktop** computer-use task: the persona opens **XFCE Settings → Notifications** (Notify OSD) in a Docker Xvfb desktop and writes a JSON preference to disk.
 
 Requires **`persona-computer-1`** with default **Docker** environment (Harbor `Computer1`). No `USE_COMPUTER_API_KEY`.
 

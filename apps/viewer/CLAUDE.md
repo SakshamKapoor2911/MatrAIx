@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What This Is
 
-MatrAIx Viewer is a React SPA for browsing and inspecting MatrAIx simulation jobs, trials, and agent trajectories. It operates in two modes: "jobs" mode (browse evaluation results) and "tasks" mode (browse task definitions). The mode is determined by the backend API config.
+PersonaBench Viewer is a React SPA for browsing and inspecting PersonaBench simulation jobs, trials, and agent trajectories. It operates in two modes: "jobs" mode (browse evaluation results) and "tasks" mode (browse task definitions). The mode is determined by the backend API config.
 
 ## Commands
 

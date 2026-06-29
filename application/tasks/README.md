@@ -1,7 +1,7 @@
 # Application Tasks
 
 Task definitions for **application product research**. These were migrated from
-MatrAIx and organized under the MatrAIx `application/` module.
+MatrAIx and organized under the PersonaBench `application/` module.
 
 This import contains task folders, task-local environments, tests, and reference
 solutions. Runtime and agent wiring live under `environment/runtime/harbor/` and
@@ -13,6 +13,8 @@ solutions. Runtime and agent wiring live under `environment/runtime/harbor/` and
 - **`example-*`** — reference tasks in the repo (copy from these).
 - **`recommender-agent_chat_api`** — clean import of the MatrAIx recommender
   chat task with a task-local HTTP sidecar for smoke runs.
+- **`web-ecommerce-platform_product-discovery`** — deterministic ecommerce web
+  task used by the PersonaEval web cockpit.
 - **Your task** — `application/tasks/<your-task-name>/` (any folder name you choose).
 
 ## New Task

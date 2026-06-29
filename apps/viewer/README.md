@@ -1,6 +1,6 @@
-# MatrAIx Viewer
+# PersonaBench Viewer
 
-Web UI for browsing and inspecting MatrAIx simulation jobs, trials, and trajectories.
+Web UI for browsing and inspecting PersonaBench simulation jobs, trials, and trajectories.
 
 ## Development
 

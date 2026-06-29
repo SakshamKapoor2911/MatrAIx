@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate a local dev persona pool from the MatrAIx dimension schema."""
+"""Generate a local dev persona pool from the PersonaBench dimension schema."""
 
 from __future__ import annotations
 
