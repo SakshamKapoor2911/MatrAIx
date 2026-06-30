@@ -72,17 +72,6 @@ def _web_task(tmp_path):
     )
 
 
-def _appworld_task():
-    from backend.service.appworld_types import AppWorldEvalTask
-
-    return AppWorldEvalTask(
-        id="appworld-demo-personal-admin",
-        title="AppWorld personal admin task",
-        app_name="AppWorld",
-        description="Complete a task across AppWorld-style app APIs.",
-    )
-
-
 def test_benchflow_survey_runner_maps_artifact_to_existing_result_shape():
     client = FakeBenchFlowClient(
         {
@@ -215,58 +204,6 @@ def test_benchflow_web_runner_maps_artifact_and_trace(tmp_path):
     assert result.to_dict()["webResult"]["overallExperienceRating"] == 8
     assert result.trace.events[0]["actions"][0]["name"] == "click"
     assert result.trace.screenshots_dir == trace_dir
-
-
-def test_benchflow_appworld_runner_maps_artifact_and_trace():
-    from backend.service.appworld_types import AppWorldEvalConfig
-    from backend.service.benchflow_appworld_eval import BenchFlowAppWorldEvalRunner
-
-    client = FakeBenchFlowClient(
-        {
-            "appworld_result.json": {
-                "task_id": "appworld-demo-personal-admin",
-                "success": True,
-                "score": 1.0,
-                "outcome": "Calendar invite and email draft completed.",
-                "reason": "The task reached the expected AppWorld state.",
-            },
-            "trace.json": {
-                "events": [
-                    {
-                        "step": 1,
-                        "source": "agent",
-                        "message": "Inspected calendar state.",
-                        "actions": [
-                            {
-                                "name": "appworld_api_call",
-                                "arguments": {"app": "calendar", "method": "list_events"},
-                            }
-                        ],
-                    }
-                ],
-                "raw": {"benchflowRunId": "bf_appworld_1"},
-            },
-        }
-    )
-
-    result = BenchFlowAppWorldEvalRunner(client=client)(
-        _persona(),
-        _appworld_task(),
-        AppWorldEvalConfig(persona_model="openai/gpt-4o-mini"),
-        created_at="2026-06-29T00:00:00Z",
-    )
-
-    assert client.requests[0]["taskType"] == "appworld"
-    assert client.requests[0]["payload"]["task"]["id"] == (
-        "appworld-demo-personal-admin"
-    )
-    assert client.requests[0]["payload"]["config"]["mode"] == (
-        "benchflow_persona_appworld"
-    )
-    assert ("bf_appworld_1", "appworld_result.json") in client.artifact_requests
-    assert result.appworld_result.success is True
-    assert result.appworld_result.score == 1.0
-    assert result.trace.events[0]["actions"][0]["name"] == "appworld_api_call"
 
 
 def test_benchflow_persona_eval_runner_maps_chatbot_artifacts():
@@ -412,7 +349,6 @@ def test_runtime_env_selects_benchflow_services(monkeypatch, tmp_path):
     assert state.persona_eval._runner.__class__.__name__ == "BenchFlowPersonaEvalRunner"
     assert state.survey_eval._runner.__class__.__name__ == "BenchFlowSurveyEvalRunner"
     assert state.web_eval._runner.__class__.__name__ == "BenchFlowWebEvalRunner"
-    assert state.appworld_eval._runner.__class__.__name__ == "BenchFlowAppWorldEvalRunner"
 
 
 def test_benchflow_client_allows_scalar_json_artifacts(monkeypatch):

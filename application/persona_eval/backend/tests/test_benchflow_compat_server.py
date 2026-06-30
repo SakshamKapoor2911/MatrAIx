@@ -103,40 +103,6 @@ def test_compat_server_can_drive_benchflow_web_runner_without_auth(tmp_path):
     assert result.trace.events[0]["screenshotUrl"].startswith("http://127.0.0.1:9000")
 
 
-def test_compat_server_mock_appworld_run_exposes_artifacts(tmp_path):
-    app = create_app(runs_dir=tmp_path)
-    client = TestClient(app)
-
-    created = client.post(
-        "/v1/runs",
-        json={
-            "taskType": "appworld",
-            "payload": {
-                "task": {
-                    "id": "appworld-demo-personal-admin",
-                    "title": "AppWorld personal admin task",
-                },
-                "persona": {"id": "p1", "name": "Persona One"},
-            },
-        },
-    )
-    assert created.status_code == 200
-    run_id = created.json()["id"]
-
-    status = _wait_terminal(client, run_id)
-    assert status["status"] == "succeeded"
-
-    result = client.get(f"/v1/runs/{run_id}/artifacts/appworld_result.json")
-    assert result.status_code == 200
-    assert result.json()["task_id"] == "appworld-demo-personal-admin"
-    assert result.json()["success"] is True
-
-    trace = client.get(f"/v1/runs/{run_id}/artifacts/trace.json")
-    assert trace.status_code == 200
-    assert trace.json()["events"][0]["actions"][0]["name"] == "appworld_api_call"
-    assert trace.json()["raw"]["trajectory"][0]["action"] == "list_apps"
-
-
 def _wait_terminal(client: TestClient, run_id: str) -> dict[str, object]:
     deadline = time.time() + 5
     while True:

@@ -238,33 +238,6 @@ def build_web_eval_service() -> "WebEvalService":
     )
 
 
-def build_appworld_eval_service() -> "AppWorldEvalService":
-    """Construct the process-wide AppWorld eval service."""
-    from backend.service.appworld_eval_service import AppWorldEvalService
-    from backend.service.appworld_tasks import (
-        get_appworld_eval_task,
-        list_appworld_eval_tasks,
-    )
-    from persona_eval.persona import get_persona
-
-    runtime = persona_eval_runtime()
-    if runtime == "benchflow":
-        from backend.service.benchflow_appworld_eval import BenchFlowAppWorldEvalRunner
-
-        runner = BenchFlowAppWorldEvalRunner()
-    else:
-        from backend.service.local_appworld_eval import LocalAppWorldEvalRunner
-
-        runner = LocalAppWorldEvalRunner()
-
-    return AppWorldEvalService(
-        get_persona=get_persona,
-        get_task=get_appworld_eval_task,
-        list_tasks=list_appworld_eval_tasks,
-        runner=runner,
-    )
-
-
 def build_state(catalog_path: Optional[str] = None) -> AppState:
     """Construct a fresh, fully-wired :class:`AppState`.
 

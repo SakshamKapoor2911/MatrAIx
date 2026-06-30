@@ -8,8 +8,8 @@ This module provides the tiny HTTP shape consumed by :mod:`benchflow_client`:
 
 By default it runs in deterministic mock mode so developers can validate the
 MatrAIx BenchFlow path locally without credentials. If
-``BENCHFLOW_COMPAT_WEB_COMMAND`` or ``BENCHFLOW_COMPAT_APPWORLD_COMMAND`` is set,
-the server runs that command and reads artifacts from ``BENCHFLOW_OUTPUT_DIR``.
+``BENCHFLOW_COMPAT_WEB_COMMAND`` is set, the server runs that command and reads
+artifacts from ``BENCHFLOW_OUTPUT_DIR``.
 """
 
 from __future__ import annotations
@@ -157,18 +157,13 @@ def _run_inline() -> bool:
 def _execute_run(store: CompatStore, run: CompatRun) -> None:
     store.update(run, status="running")
     try:
-        if run.task_type not in {"web", "appworld"}:
-            raise ValueError("compat server supports taskType=web or taskType=appworld")
-        if run.task_type == "web":
-            command = os.environ.get("BENCHFLOW_COMPAT_WEB_COMMAND", "").strip()
-        else:
-            command = os.environ.get("BENCHFLOW_COMPAT_APPWORLD_COMMAND", "").strip()
+        if run.task_type != "web":
+            raise ValueError("compat server currently supports only taskType=web")
+        command = os.environ.get("BENCHFLOW_COMPAT_WEB_COMMAND", "").strip()
         if command:
             artifacts = _run_command(run, command)
-        elif run.task_type == "web":
-            artifacts = _mock_web_artifacts(run)
         else:
-            artifacts = _mock_appworld_artifacts(run)
+            artifacts = _mock_web_artifacts(run)
         store.update(run, status="succeeded", artifacts=artifacts)
     except Exception as exc:  # noqa: BLE001 - surfaced through run status
         store.update(run, status="failed", error="{}: {}".format(type(exc).__name__, exc))
@@ -202,10 +197,10 @@ def _run_command(run: CompatRun, command: str) -> dict[str, Any]:
                 (completed.stderr or completed.stdout or "").strip()[:1000],
             )
         )
-    return _load_output_artifacts(run.output_dir, run.task_type)
+    return _load_output_artifacts(run.output_dir)
 
 
-def _load_output_artifacts(output_dir: Path, task_type: str) -> dict[str, Any]:
+def _load_output_artifacts(output_dir: Path) -> dict[str, Any]:
     artifacts: dict[str, Any] = {}
     for path in output_dir.iterdir() if output_dir.is_dir() else []:
         if not path.is_file():
@@ -216,10 +211,7 @@ def _load_output_artifacts(output_dir: Path, task_type: str) -> dict[str, Any]:
             artifacts[path.name] = path.read_text(encoding="utf-8").strip()
     if "trace.json" not in artifacts:
         raise ValueError("command did not produce trace.json")
-    if task_type == "appworld":
-        if "appworld_result.json" not in artifacts:
-            raise ValueError("command did not produce appworld_result.json")
-    elif (
+    if (
         "web_result.json" not in artifacts
         and "ecommerce_interaction.json" not in artifacts
     ):
@@ -292,54 +284,6 @@ def _mock_web_artifacts(run: CompatRun) -> dict[str, Any]:
         "trace.json": trace,
     }
     return artifacts
-
-
-def _mock_appworld_artifacts(run: CompatRun) -> dict[str, Any]:
-    task = run.payload.get("task") if isinstance(run.payload, dict) else {}
-    task = task if isinstance(task, dict) else {}
-    task_id = str(task.get("id") or "appworld-demo-personal-admin")
-    appworld_result = {
-        "task_id": task_id,
-        "success": True,
-        "score": 1.0,
-        "outcome": "Calendar invite and email draft completed.",
-        "reason": "The compatibility server completed a deterministic AppWorld mock run.",
-    }
-    trace = {
-        "events": [
-            {
-                "step": 1,
-                "source": "agent",
-                "message": "Listed available AppWorld apps.",
-                "actions": [
-                    {
-                        "name": "appworld_api_call",
-                        "arguments": {"app": "system", "method": "list_apps"},
-                    }
-                ],
-            },
-            {
-                "step": 2,
-                "source": "agent",
-                "message": "Updated the target AppWorld state and checked completion.",
-                "actions": [
-                    {
-                        "name": "appworld_api_call",
-                        "arguments": {"app": "calendar", "method": "create_event"},
-                    }
-                ],
-            },
-        ],
-        "raw": {
-            "benchflowRunId": run.id,
-            "mode": "mock",
-            "trajectory": [
-                {"observation": "available apps", "action": "list_apps"},
-                {"observation": "target state", "action": "create_event"},
-            ],
-        },
-    }
-    return {"appworld_result.json": appworld_result, "trace.json": trace}
 
 
 def _artifact(run: CompatRun, name: str) -> Any:
