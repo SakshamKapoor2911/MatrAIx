@@ -41,7 +41,7 @@ Use this when you only need the PersonaEval backend and local deterministic
 surface runners.
 
 ```bash
-PYTHONPATH=.:application/persona_eval:environment/runtime \
+PYTHONPATH=application/persona_eval \
   .venv/bin/python -m uvicorn backend.api.app:app \
   --host 127.0.0.1 --port 8765 --workers 1
 ```

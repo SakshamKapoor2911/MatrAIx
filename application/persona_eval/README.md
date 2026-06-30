@@ -79,9 +79,9 @@ See [REST_API.md](REST_API.md) for the full endpoint-by-endpoint contract,
 including request bodies, polling responses, persisted run shapes, and the
 dev-only BenchFlow-compatible runner API.
 
-See [UNIFIED_RUNTIME.md](UNIFIED_RUNTIME.md) for the local, Harbor, and
-BenchFlow-backed startup commands. AppWorld is available through local and
-BenchFlow modes; Harbor mode reports AppWorld as unsupported.
+See [UNIFIED_RUNTIME.md](UNIFIED_RUNTIME.md) for the local and BenchFlow-backed
+startup commands that run the chatbot, survey, web, and AppWorld surfaces
+through one backend.
 
 | Method | Path | Purpose |
 |---|---|---|

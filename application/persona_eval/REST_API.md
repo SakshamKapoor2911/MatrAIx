@@ -961,15 +961,15 @@ Errors:
 
 ## BenchFlow-Compatible Runner API
 
-`environment.integrations.persona_eval.benchflow.compat_server:app` is a dev/test service used by
+`backend.service.benchflow_compat_server:app` is a dev/test service used by
 MatrAIx to exercise the BenchFlow runtime boundary without a deployed BenchFlow
 cluster. It is not mounted on the PersonaEval `/api` app.
 
 Start it with:
 
 ```bash
-PYTHONPATH=.:application/persona_eval:environment/runtime \
-  python -m uvicorn environment.integrations.persona_eval.benchflow.compat_server:app \
+PYTHONPATH=application/persona_eval \
+  python -m uvicorn backend.service.benchflow_compat_server:app \
   --host 127.0.0.1 --port 9000
 ```
 
