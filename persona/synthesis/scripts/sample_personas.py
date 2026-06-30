@@ -11,8 +11,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))
 
-from persona.synthesis.sampler import DEFAULT_GRAPH_PATH  # noqa: E402
-from persona.synthesis.sampler import PersonaForwardSampler, SamplingConfig  # noqa: E402
+from persona.synthesis.sampler import DEFAULT_GRAPH_PATH, sample_to_file_parallel  # noqa: E402
 
 
 def main() -> None:
@@ -23,17 +22,34 @@ def main() -> None:
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--format", choices=["jsonl", "csv"], default="jsonl")
     parser.add_argument(
+        "--workers",
+        type=int,
+        default=1,
+        help="Number of worker processes for batch-level parallel generation.",
+    )
+    parser.add_argument(
+        "--batch-size",
+        type=int,
+        default=None,
+        help="Rows per generated shard. Defaults to a near-even split across workers.",
+    )
+    parser.add_argument(
         "--include-hidden",
         action="store_true",
         help="Emit source-proxy and audit-only nodes marked emit:false.",
     )
     args = parser.parse_args()
 
-    sampler = PersonaForwardSampler(
+    meta = sample_to_file_parallel(
         args.graph,
-        SamplingConfig(seed=args.seed, emit_only=not args.include_hidden),
+        n=args.n,
+        out=args.out,
+        fmt=args.format,
+        seed=args.seed,
+        emit_only=not args.include_hidden,
+        workers=args.workers,
+        batch_size=args.batch_size,
     )
-    meta = sampler.sample_to_file(args.n, args.out, args.format)
     print(json.dumps(meta, indent=2))
 
 

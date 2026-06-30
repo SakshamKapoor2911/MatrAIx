@@ -3,7 +3,10 @@ from __future__ import annotations
 import csv
 import json
 import math
+import shutil
+import tempfile
 import time
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from collections import defaultdict
 from dataclasses import dataclass
 from pathlib import Path
@@ -12,6 +15,7 @@ from typing import Any, Dict, List, Mapping, Optional
 import numpy as np
 
 EPS = 1e-12
+_WORKER_SAMPLER: "PersonaForwardSampler | None" = None
 
 
 def _normalize(x: Any) -> np.ndarray:
@@ -289,3 +293,187 @@ class PersonaForwardSampler:
             "graph": str(self.graph_path),
             "seed": self.config.seed,
         }
+
+
+def _planned_batches(n: int, workers: int, batch_size: int | None) -> tuple[List[int], int]:
+    if n <= 0:
+        raise ValueError("n must be positive")
+    if workers <= 0:
+        raise ValueError("workers must be positive")
+    if batch_size is not None and batch_size <= 0:
+        raise ValueError("batch_size must be positive when provided")
+
+    effective_batch_size = batch_size or math.ceil(n / workers)
+    batches = []
+    remaining = n
+    while remaining > 0:
+        size = min(effective_batch_size, remaining)
+        batches.append(size)
+        remaining -= size
+    return batches, effective_batch_size
+
+
+def _batch_seeds(seed: int, count: int) -> List[int]:
+    rng = np.random.default_rng(seed)
+    return [int(v) for v in rng.integers(0, 2**63 - 1, size=count)]
+
+
+def _emitted_node_count(graph_path: str | Path, emit_only: bool) -> int:
+    with Path(graph_path).open("r", encoding="utf-8") as f:
+        graph = json.load(f)
+    nodes = graph.get("nodes", [])
+    if not emit_only:
+        return len(nodes)
+    return sum(1 for node in nodes if node.get("emit", True) is not False)
+
+
+def _worker_init(graph_path: str, emit_only: bool, eps: float) -> None:
+    global _WORKER_SAMPLER
+    _WORKER_SAMPLER = PersonaForwardSampler(
+        graph_path,
+        SamplingConfig(seed=0, emit_only=emit_only, eps=eps),
+    )
+
+
+def _write_shard(
+    sampler: PersonaForwardSampler,
+    *,
+    n: int,
+    seed: int,
+    out: Path,
+    fmt: str,
+) -> None:
+    sampler.rng = np.random.default_rng(seed)
+    idx = sampler.sample_indices(n)
+    if fmt == "jsonl":
+        sampler.write_jsonl(idx, out)
+    elif fmt == "csv":
+        sampler.write_csv(idx, out)
+    else:
+        raise ValueError(f"Unsupported format: {fmt}")
+
+
+def _worker_sample(task: tuple[int, int, int, str, str]) -> tuple[int, int, str]:
+    batch_index, n, seed, fmt, shard_path = task
+    if _WORKER_SAMPLER is None:
+        raise RuntimeError("Parallel sampler worker was not initialized")
+    _write_shard(
+        _WORKER_SAMPLER,
+        n=n,
+        seed=seed,
+        out=Path(shard_path),
+        fmt=fmt,
+    )
+    return batch_index, n, shard_path
+
+
+def _merge_shards(shards: List[Path], out: Path, fmt: str) -> None:
+    out.parent.mkdir(parents=True, exist_ok=True)
+    with out.open("w", encoding="utf-8", newline="") as dest:
+        for index, shard in enumerate(shards):
+            with shard.open("r", encoding="utf-8", newline="") as src:
+                if fmt == "csv" and index > 0:
+                    next(src, None)
+                shutil.copyfileobj(src, dest)
+
+
+def sample_to_file_parallel(
+    graph_path: str | Path,
+    *,
+    n: int,
+    out: str | Path,
+    fmt: str = "jsonl",
+    seed: int = 42,
+    emit_only: bool = True,
+    workers: int = 1,
+    batch_size: int | None = None,
+    eps: float = EPS,
+) -> Dict[str, Any]:
+    """Sample personas with optional batch-level process concurrency.
+
+    The sampling semantics are identical to ``PersonaForwardSampler``. Parallel
+    mode only shards the requested row count into independent batches with
+    deterministic child seeds, then merges shard files in batch order.
+    """
+    if fmt not in {"jsonl", "csv"}:
+        raise ValueError(f"Unsupported format: {fmt}")
+
+    graph_path = Path(graph_path)
+    out = Path(out)
+    workers = int(workers)
+    batches, effective_batch_size = _planned_batches(n, workers, batch_size)
+
+    if workers == 1 and len(batches) == 1:
+        sampler = PersonaForwardSampler(
+            graph_path,
+            SamplingConfig(seed=seed, emit_only=emit_only, eps=eps),
+        )
+        meta = sampler.sample_to_file(n, out, fmt)
+        meta.update(
+            {
+                "workers": 1,
+                "requested_workers": workers,
+                "batch_size": effective_batch_size,
+                "batches": 1,
+                "parallel": False,
+            }
+        )
+        return meta
+
+    start = time.time()
+    seeds = _batch_seeds(seed, len(batches))
+    out.parent.mkdir(parents=True, exist_ok=True)
+    actual_workers = min(workers, len(batches))
+    shard_results: List[tuple[int, int, str]] = []
+
+    with tempfile.TemporaryDirectory(
+        prefix=f"{out.name}.shards.",
+        dir=str(out.parent),
+    ) as tmp:
+        tmp_dir = Path(tmp)
+        tasks = [
+            (i, size, seeds[i], fmt, str(tmp_dir / f"batch_{i:06d}.{fmt}"))
+            for i, size in enumerate(batches)
+        ]
+        if actual_workers == 1:
+            sampler = PersonaForwardSampler(
+                graph_path,
+                SamplingConfig(seed=0, emit_only=emit_only, eps=eps),
+            )
+            for task in tasks:
+                batch_index, size, batch_seed, task_fmt, shard_path = task
+                _write_shard(
+                    sampler,
+                    n=size,
+                    seed=batch_seed,
+                    out=Path(shard_path),
+                    fmt=task_fmt,
+                )
+                shard_results.append((batch_index, size, shard_path))
+        else:
+            with ProcessPoolExecutor(
+                max_workers=actual_workers,
+                initializer=_worker_init,
+                initargs=(str(graph_path), emit_only, eps),
+            ) as pool:
+                futures = [pool.submit(_worker_sample, task) for task in tasks]
+                for future in as_completed(futures):
+                    shard_results.append(future.result())
+
+        shard_results.sort(key=lambda row: row[0])
+        _merge_shards([Path(row[2]) for row in shard_results], out, fmt)
+
+    return {
+        "samples": n,
+        "out": str(out),
+        "format": fmt,
+        "elapsed_seconds": time.time() - start,
+        "emitted_nodes": _emitted_node_count(graph_path, emit_only),
+        "graph": str(graph_path),
+        "seed": seed,
+        "workers": actual_workers,
+        "requested_workers": workers,
+        "batch_size": effective_batch_size,
+        "batches": len(batches),
+        "parallel": actual_workers > 1,
+    }

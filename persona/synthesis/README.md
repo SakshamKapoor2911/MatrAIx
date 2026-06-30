@@ -97,6 +97,22 @@ uv run python persona/synthesis/scripts/sample_personas.py \
   --out /tmp/personas_1000.jsonl
 ```
 
+Generate larger batches with process-level shard concurrency:
+
+```bash
+uv run python persona/synthesis/scripts/sample_personas.py \
+  --n 100000 \
+  --seed 42 \
+  --workers 8 \
+  --batch-size 12500 \
+  --out /tmp/personas_100000.jsonl
+```
+
+Parallel generation splits the requested count into deterministic seed shards,
+writes temporary shard files, merges them in batch order, and deletes the
+temporary files before returning. The underlying forward-sampling semantics are
+unchanged.
+
 Generate the committed 10,000-sample quality report:
 
 ```bash
