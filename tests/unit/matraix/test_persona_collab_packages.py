@@ -425,3 +425,83 @@ def test_stackoverflow_evidence_mapping_filters_catalog_categories() -> None:
     assert config["source"]["repo_id"] == "MatrAIx2026/MatrAIx2026"
     assert config["source"]["artifact_prefix"] == "StackExchange_Persona"
 
+
+def test_stackoverflow_collab_package_builds_extractable_archive(tmp_path: Path) -> None:
+    from persona.existing_data_curation.scripts.make_stackoverflow_collab_package import (
+        build_stackoverflow_collab_package,
+    )
+    from persona.existing_data_curation.wiki_collab.core import sha256_file
+
+    histories = tmp_path / "so_histories.jsonl"
+    _write_jsonl(
+        histories,
+        [
+            {
+                "user_id": "42",
+                "posts": [
+                    {
+                        "post_id": "101",
+                        "post_type": "question",
+                        "timestamp": 1_704_067_200,
+                        "tags": ["python", "pandas"],
+                        "title": "How do I merge dataframes safely?",
+                        "text": "I compared several approaches before asking here.",
+                        "score": 12,
+                        "accepted": None,
+                    },
+                    {
+                        "post_id": "102",
+                        "post_type": "answer",
+                        "timestamp": 1_707_004_800,
+                        "tags": ["python"],
+                        "title": "",
+                        "text": "Use explicit validation and check the docs first.",
+                        "score": 30,
+                        "accepted": True,
+                    },
+                ],
+            }
+        ],
+    )
+
+    out_dir = tmp_path / "SO_0_1_carol"
+    summary = build_stackoverflow_collab_package(
+        user_histories_path=histories,
+        dimensions_path=_dimensions_file(tmp_path),
+        out_dir=out_dir,
+        assignment_id="SO_0_1",
+        worker_id="carol",
+        dataset_id="so_test",
+        dataset_sha256=sha256_file(histories),
+        range_start=0,
+        range_end=1,
+        cv_folds=2,
+        min_support_folds=2,
+        all_dimensions=True,
+        force=True,
+    )
+
+    tasks = _read_jsonl(out_dir / "tasks.jsonl")
+    assignment = json.loads((out_dir / "assignment.json").read_text())
+
+    assert Path(summary["archive_path"]).is_file()
+    assert tasks[0]["source"] == "stackoverflow_persona"
+    assert tasks[0]["task_id"] == "stackoverflow_persona:42"
+    assert tasks[0]["qid"] == "so_user:42"
+    assert tasks[0]["effective_cv_folds"] == 2
+    assert len(tasks[0]["cv_fold_texts"]) == 2
+    assert tasks[0]["cv_fold_texts"][0]["post_ids"] == ["p0001"]
+    assert tasks[0]["tags"] == ["pandas", "python"]
+    assert "type: question" in tasks[0]["profile_text"]
+    assert "accepted: true" in tasks[0]["profile_text"]
+    assert assignment["source"] == "stackoverflow_persona"
+    assert assignment["dimensions_scope"] == "all"
+    assert assignment["max_posts_per_user"] == 90
+
+    with tarfile.open(summary["archive_path"], "r:gz") as archive:
+        names = set(archive.getnames())
+
+    assert "SO_0_1_carol/tasks.jsonl" in names
+    assert "SO_0_1_carol/README.md" in names
+    assert "SO_0_1_carol/collab_kit/conformance.py" in names
+
