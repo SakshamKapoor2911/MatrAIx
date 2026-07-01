@@ -310,9 +310,17 @@ def test_package_owner_scripts_document_portable_data_inputs() -> None:
     amazon_wrapper = (
         repo_root / "persona/existing_data_curation/scripts/make_amazon_package.sh"
     ).read_text(encoding="utf-8")
+    stackoverflow_wrapper = (
+        repo_root
+        / "persona/existing_data_curation/scripts/make_stackoverflow_package.sh"
+    ).read_text(encoding="utf-8")
     amazon_exporter = (
         repo_root
         / "persona/existing_data_curation/scripts/export_hf_amazon_user_histories.py"
+    ).read_text(encoding="utf-8")
+    stackoverflow_exporter = (
+        repo_root
+        / "persona/existing_data_curation/scripts/export_hf_stackoverflow_user_histories.py"
     ).read_text(encoding="utf-8")
     owner_readme = (
         repo_root / "persona/existing_data_curation/README.md"
@@ -322,17 +330,41 @@ def test_package_owner_scripts_document_portable_data_inputs() -> None:
             repo_root / "persona/existing_data_curation/configs/amazon_reviews_2023.json"
         ).read_text(encoding="utf-8")
     )
+    stackexchange_manifest = json.loads(
+        (
+            repo_root
+            / "persona/existing_data_curation/configs/stackexchange_persona.json"
+        ).read_text(encoding="utf-8")
+    )
 
-    checked_text = "\n".join([wiki_wrapper, amazon_wrapper, amazon_exporter, owner_readme])
+    checked_text = "\n".join(
+        [
+            wiki_wrapper,
+            amazon_wrapper,
+            stackoverflow_wrapper,
+            amazon_exporter,
+            stackoverflow_exporter,
+            owner_readme,
+        ]
+    )
     assert "/data2/" not in checked_text
     assert "zonglin" not in checked_text
     assert 'SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"' in wiki_wrapper
     assert 'SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"' in amazon_wrapper
+    assert (
+        'SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"'
+        in stackoverflow_wrapper
+    )
     assert ': "${WIKI_CLEAN_DIR:?Set WIKI_CLEAN_DIR' in wiki_wrapper
     assert '"MatrAIx/MatrAIx"' not in amazon_exporter
+    assert '"MatrAIx/MatrAIx"' not in stackoverflow_exporter
     assert "load_default_source_config" in amazon_exporter
+    assert "load_default_source_config" in stackoverflow_exporter
     assert amazon_manifest["source"]["repo_id"] == "MatrAIx2026/MatrAIx2026"
     assert amazon_manifest["format"] == "partitioned parquet"
+    assert stackexchange_manifest["source"]["repo_id"] == "MatrAIx2026/MatrAIx2026"
+    assert stackexchange_manifest["format"] == "partitioned parquet (by year)"
+    assert "Stack Overflow Packages" in owner_readme
 
 
 def test_amazon_downstream_workflows_are_subscription_based() -> None:
