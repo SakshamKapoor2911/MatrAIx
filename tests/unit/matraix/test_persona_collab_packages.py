@@ -623,7 +623,6 @@ def test_stackoverflow_collab_package_builds_extractable_archive(tmp_path: Path)
                         "tags": ["python"],
                         "title": "",
                         "text": "Use explicit validation and check the docs first.",
-                        "score": 30,
                         "accepted": True,
                     },
                 ],
@@ -661,6 +660,7 @@ def test_stackoverflow_collab_package_builds_extractable_archive(tmp_path: Path)
     assert tasks[0]["tags"] == ["pandas", "python"]
     assert "type: question" in tasks[0]["profile_text"]
     assert "accepted: true" in tasks[0]["profile_text"]
+    assert "score: unknown" in tasks[0]["profile_text"]
     assert assignment["source"] == "stackoverflow_persona"
     assert assignment["dimensions_scope"] == "all"
     assert assignment["max_posts_per_user"] == 90
@@ -671,6 +671,123 @@ def test_stackoverflow_collab_package_builds_extractable_archive(tmp_path: Path)
     assert "SO_0_1_carol/tasks.jsonl" in names
     assert "SO_0_1_carol/README.md" in names
     assert "SO_0_1_carol/collab_kit/conformance.py" in names
+
+
+def test_stackoverflow_merge_accepts_package_results_with_db(tmp_path: Path) -> None:
+    import json as _json
+    from persona.existing_data_curation.scripts.make_stackoverflow_collab_package import (
+        build_stackoverflow_collab_package,
+    )
+    from persona.existing_data_curation.wiki_collab.stackoverflow_collab import (
+        build_stackoverflow_profile_database,
+    )
+    from persona.existing_data_curation.wiki_collab.core import sha256_file
+    from persona.existing_data_curation.scripts import merge_collab_results
+
+    histories = tmp_path / "so_histories.jsonl"
+    _write_jsonl(
+        histories,
+        [
+            {
+                "user_id": "42",
+                "posts": [
+                    {
+                        "post_id": "101",
+                        "post_type": "question",
+                        "timestamp": 1_704_067_200,
+                        "tags": ["python"],
+                        "title": "How do I merge dataframes safely?",
+                        "text": "I compared several approaches before asking here.",
+                        "score": 12,
+                        "accepted": None,
+                    },
+                    {
+                        "post_id": "102",
+                        "post_type": "answer",
+                        "timestamp": 1_707_004_800,
+                        "tags": ["python"],
+                        "title": "",
+                        "text": "Use explicit validation and check the docs first.",
+                        "score": None,
+                        "accepted": True,
+                    },
+                ],
+            }
+        ],
+    )
+
+    dims_path = _dimensions_file(tmp_path)
+    out_dir = tmp_path / "SO_0_1_merge_test"
+    build_stackoverflow_collab_package(
+        user_histories_path=histories,
+        dimensions_path=dims_path,
+        out_dir=out_dir,
+        assignment_id="SO_0_1",
+        worker_id="merge_test",
+        dataset_id="so_merge_test",
+        dataset_sha256=sha256_file(histories),
+        range_start=0,
+        range_end=1,
+        cv_folds=2,
+        min_support_folds=2,
+        all_dimensions=True,
+        create_archive=False,
+        force=True,
+    )
+
+    db_path = tmp_path / "so_profiles.sqlite"
+    build_stackoverflow_profile_database(
+        user_histories=histories,
+        out_db=db_path,
+        manifest_path=tmp_path / "so_manifest.json",
+        dataset_id="so_merge_test",
+    )
+
+    tasks = _read_jsonl(out_dir / "tasks.jsonl")
+    task = tasks[0]
+    dimensions = _json.loads((out_dir / "dimensions.json").read_text(encoding="utf-8"))
+    if isinstance(dimensions, dict):
+        dimensions = dimensions.get("dimensions", dimensions)
+
+    results = [
+        {
+            "global_idx": task["global_idx"],
+            "task_id": task["task_id"],
+            "qid": task["qid"],
+            "input_sha256": task["input_sha256"],
+            "run": {"model": "test-model", "effort": "low", "runner_version": "0.0.1"},
+            "fields": [
+                {
+                    "field_id": dim["id"],
+                    "value": None,
+                    "confidence": 0,
+                    "evidence": "",
+                    "assignment_type": "unsupported",
+                }
+                for dim in dimensions
+            ],
+        }
+    ]
+
+    results_path = tmp_path / "results.jsonl"
+    _write_jsonl(results_path, results)
+
+    out_path = tmp_path / "merged.jsonl"
+    report_path = tmp_path / "merge_report.json"
+    exit_code = merge_collab_results.main([
+        "--results", str(results_path),
+        "--db", str(db_path),
+        "--dimensions", str(out_dir / "dimensions.json"),
+        "--out", str(out_path),
+        "--report", str(report_path),
+    ])
+
+    assert exit_code == 0, _json.dumps(
+        _json.loads(report_path.read_text(encoding="utf-8")).get("errors", []),
+        indent=2,
+    )
+    merged = _read_jsonl(out_path)
+    assert any(rec["global_idx"] == task["global_idx"] for rec in merged)
 
 
 def _load_solver_module():
@@ -749,6 +866,26 @@ def test_solver_routes_fold_tasks_through_fold_voting(monkeypatch) -> None:
     assert solver.merge_fold_fields is solver.merge_amazon_fold_fields
 
 
+def test_limit_fold_texts_preserves_minimum_visible_folds() -> None:
+    from persona.existing_data_curation.scripts.history_package_common import (
+        FOLD_TRUNCATION_MARKER,
+        build_cv_fold_texts,
+        join_fold_texts,
+        limit_fold_texts_for_profile,
+    )
+
+    rendered = [(f"p{i:04d}", f"[p{i:04d}]\ntext: " + ("x" * 200)) for i in range(1, 5)]
+    fold_texts = build_cv_fold_texts(rendered, 4, id_field="post_ids")
+    full_length = len(join_fold_texts(fold_texts))
+
+    limited = limit_fold_texts_for_profile(fold_texts, 260, effective_min_support=2)
+    joined = join_fold_texts(limited)
+    assert len(joined) <= 260 < full_length
+    assert FOLD_TRUNCATION_MARKER in joined
+    visible = [fold for fold in limited if fold["profile_text"]]
+    assert len(visible) >= 2
+
+
 def test_stackoverflow_collab_db_matches_package_identity(tmp_path: Path) -> None:
     from persona.existing_data_curation.wiki_collab.stackoverflow_collab import (
         build_stackoverflow_profile_database,
@@ -783,4 +920,5 @@ def test_stackoverflow_collab_db_matches_package_identity(tmp_path: Path) -> Non
     assert rows[0].qid == "so_user:42"
     assert rows[0].user_id == "42"
     assert rows[0].payload["posts"][0]["post_id"] == "1"
+    assert len(rows[0].source_payload_sha256) == 64
 
