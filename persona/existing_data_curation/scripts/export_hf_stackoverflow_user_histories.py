@@ -162,7 +162,11 @@ def _post_type_of(row: dict[str, Any]) -> str:
     if raw is None:
         return "post"
     text = str(raw).strip().lower()
-    return POST_TYPE_ID_MAP.get(text, text or "post")
+    if text in POST_TYPE_ID_MAP:
+        return POST_TYPE_ID_MAP[text]
+    if text.isdigit():
+        return "post"
+    return text or "post"
 
 
 def normalize_post(row: dict[str, Any]) -> dict[str, Any]:

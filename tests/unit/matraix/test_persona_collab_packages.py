@@ -465,6 +465,16 @@ def test_hf_stackoverflow_exporter_writes_normalized_user_histories(
                 "Score": 12,
             },
             {
+                "OwnerUserId": 42,
+                "Id": 103,
+                "PostTypeId": 5,
+                "CreationDate": "2024-03-01T00:00:00Z",
+                "Tags": "",
+                "Title": "Tag wiki entry",
+                "Body": "<p>Wiki body.</p>",
+                "Score": 0,
+            },
+            {
                 "OwnerUserId": 999,
                 "Id": 300,
                 "PostTypeId": 1,
@@ -496,8 +506,8 @@ def test_hf_stackoverflow_exporter_writes_normalized_user_histories(
     assert len(histories) == 1
     record = histories[0]
     assert record["user_id"] == "42"
-    assert record["post_count"] == 2
-    first, second = record["posts"]
+    assert record["post_count"] == 3
+    first, second, third = record["posts"]
     assert first["post_id"] == "101"
     assert first["post_type"] == "question"
     assert first["tags"] == ["python", "pandas"]
@@ -506,6 +516,7 @@ def test_hf_stackoverflow_exporter_writes_normalized_user_histories(
     assert second["post_type"] == "answer"
     assert second["title"] == ""
     assert second["site"] == "stackoverflow"
+    assert third["post_type"] == "post"
 
 
 def test_hf_stackoverflow_exporter_accepts_user_grouped_rows(
