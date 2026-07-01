@@ -9,7 +9,6 @@ import sqlite3
 from pathlib import Path
 from typing import Any
 
-from persona.existing_data_curation.wiki_collab.amazon_collab import create_schema
 from persona.existing_data_curation.wiki_collab.core import (
     canonical_json,
     compute_input_sha256,
@@ -23,6 +22,27 @@ STACKOVERFLOW_SOURCE_TYPE = "stackoverflow_persona"
 STACKOVERFLOW_PROTOCOL_ID = "stackoverflow_persona_inference_v1"
 
 
+def create_schema(conn: sqlite3.Connection) -> None:
+    conn.executescript(
+        """
+        drop table if exists profiles;
+        create table profiles (
+          global_idx integer primary key,
+          task_id text not null unique,
+          qid text not null,
+          title text not null,
+          source_url text not null,
+          source_type text not null,
+          user_id text not null,
+          profile_text text not null,
+          payload_json text not null,
+          source_payload_sha256 text not null
+        );
+        create index profiles_user_id_idx on profiles(user_id);
+        """
+    )
+
+
 @dataclass(frozen=True)
 class StackOverflowProfileRow:
     global_idx: int
@@ -31,7 +51,7 @@ class StackOverflowProfileRow:
     title: str
     source_url: str
     user_id: str
-    input_sha256: str
+    source_payload_sha256: str
     payload: dict[str, Any]
 
 
@@ -79,7 +99,7 @@ def build_stackoverflow_profile_database(
             """
             insert into profiles (
               global_idx, task_id, qid, title, source_url, source_type, user_id,
-              profile_text, payload_json, input_sha256
+              profile_text, payload_json, source_payload_sha256
             ) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
@@ -121,7 +141,7 @@ def load_stackoverflow_profiles(
         _row_from_sqlite(dict(row))
         for row in conn.execute(
             """
-            select global_idx, task_id, qid, title, source_url, user_id, payload_json, input_sha256
+            select global_idx, task_id, qid, title, source_url, user_id, payload_json, source_payload_sha256
             from profiles
             where global_idx >= ? and global_idx < ?
             order by global_idx
@@ -141,7 +161,7 @@ def _row_from_sqlite(row: dict[str, Any]) -> StackOverflowProfileRow:
         title=str(row["title"]),
         source_url=str(row["source_url"]),
         user_id=str(row["user_id"]),
-        input_sha256=str(row["input_sha256"]),
+        source_payload_sha256=str(row["source_payload_sha256"]),
         payload=json.loads(row["payload_json"]),
     )
 

@@ -249,10 +249,18 @@ identity checks match what collaborators echo back.
 > latent identity-check mismatch. We do not replicate it; it will be reported
 > as review feedback on #143 (not fixed in this branch).
 
-The DB's `input_sha256` fingerprints the raw user-history payload (like
-amazon's), which is parameter-independent; package task hashes are
-parameter-dependent by design. Merge behavior with both will be confirmed
-against `merge_collab_results.py` during implementation.
+The SO DB uses its own `profiles` schema WITHOUT an `input_sha256` column.
+`merge_collab_results.py` checks that column against the results' echoed task
+hash whenever present (column-presence-gated check, lines 91–93 and 211–221).
+Package-task hashes are parameter-dependent (computed from the rendered
+task payload), while a stored raw-payload hash would be parameter-independent
+— so the two can never match. To avoid this mismatch the raw fingerprint is
+stored as `source_payload_sha256` for owner-side audits; the absence of
+`input_sha256` causes merge to skip the hash check entirely. Merge
+compatibility (task_id/qid identity checks passing, hash check skipped) is
+proven by `test_stackoverflow_merge_accepts_package_results_with_db`, which
+builds a package and DB from the same histories file, synthesizes a conformant
+`results.jsonl`, and asserts `merge_collab_results.main` returns 0.
 
 ## 8. Wrapper, config, docs
 
