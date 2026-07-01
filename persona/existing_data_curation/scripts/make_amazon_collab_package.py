@@ -11,7 +11,7 @@ import argparse
 import json
 from pathlib import Path
 import sys
-from typing import Any, Iterable
+from typing import Any
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -34,9 +34,18 @@ from persona.existing_data_curation.scripts.make_collab_package import (  # noqa
     write_jsonl,
     write_package_manifest,
 )
+from persona.existing_data_curation.scripts.history_package_common import (  # noqa: E402
+    build_cv_fold_texts,
+    compact_text,
+    join_fold_texts,
+    limit_fold_texts_for_profile,
+    load_history_range,
+    require_positive,
+    sorted_by_time,
+    spread_across_time,
+)
 from persona.existing_data_curation.wiki_collab.core import (  # noqa: E402
     canonical_json,
-    load_jsonl,
     parse_range,
     sha256_file,
     sha256_text,
@@ -45,23 +54,6 @@ from persona.existing_data_curation.wiki_collab.core import (  # noqa: E402
 
 
 SOURCE = "amazon_reviews_2023"
-FOLD_TEXT_SEPARATOR = "\n\n"
-FOLD_TRUNCATION_MARKER = "[fold truncated]"
-
-
-def _require_positive(name: str, value: int) -> None:
-    if value <= 0:
-        raise ValueError(f"{name} must be positive, got {value}")
-
-
-def _compact_text(value: Any, max_chars: int) -> str:
-    text = "" if value is None else str(value)
-    text = " ".join(text.split())
-    if len(text) <= max_chars:
-        return text
-    if max_chars <= 16:
-        return text[:max_chars]
-    return text[: max_chars - 15].rstrip() + " ... [truncated]"
 
 
 def _review_timestamp(review: dict[str, Any]) -> int | None:
@@ -73,33 +65,6 @@ def _review_date(review: dict[str, Any]) -> str:
     if raw_date:
         return str(raw_date)
     return timestamp_to_date(review.get("timestamp")) or "unknown"
-
-
-def _sorted_reviews(reviews: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
-    indexed = [(idx, dict(review)) for idx, review in enumerate(reviews)]
-    indexed.sort(
-        key=lambda item: (
-            _review_timestamp(item[1]) is None,
-            _review_timestamp(item[1]) or 0,
-            item[0],
-        )
-    )
-    return [review for _idx, review in indexed]
-
-
-def _spread_across_time(
-    reviews: list[dict[str, Any]], max_reviews_per_user: int
-) -> list[dict[str, Any]]:
-    if len(reviews) <= max_reviews_per_user:
-        return reviews
-    if max_reviews_per_user == 1:
-        return [reviews[len(reviews) // 2]]
-    last = len(reviews) - 1
-    chosen_indexes = [
-        round(pos * last / (max_reviews_per_user - 1))
-        for pos in range(max_reviews_per_user)
-    ]
-    return [reviews[idx] for idx in chosen_indexes]
 
 
 def _review_category(review: dict[str, Any]) -> str:
@@ -175,137 +140,9 @@ def _render_review(
         f"title: {_review_title(review)}",
         f"verified: {_review_verified(review)}",
         f"helpful_vote: {_review_helpful_vote(review)}",
-        f"text: {_compact_text(_review_text(review), max_review_text_chars)}",
+        f"text: {compact_text(_review_text(review), max_review_text_chars)}",
     ]
     return "\n".join(lines)
-
-
-def _render_fold(
-    fold_id: int,
-    effective_cv_folds: int,
-    reviews: list[tuple[str, dict[str, Any]]],
-    *,
-    max_review_text_chars: int,
-) -> str:
-    lines = [f"=== Fold {fold_id}/{effective_cv_folds} ==="]
-    for rendered_review_id, review in reviews:
-        lines.append(
-            _render_review(
-                review,
-                rendered_review_id=rendered_review_id,
-                max_review_text_chars=max_review_text_chars,
-            )
-        )
-    return "\n\n".join(lines)
-
-
-def _profile_text(fold_texts: list[dict[str, Any]]) -> str:
-    return FOLD_TEXT_SEPARATOR.join(
-        str(fold["profile_text"]) for fold in fold_texts if fold["profile_text"]
-    )
-
-
-def _fold_heading(fold: dict[str, Any], effective_cv_folds: int) -> str:
-    text = str(fold.get("profile_text") or "")
-    if text:
-        return text.splitlines()[0]
-    return f"=== Fold {fold.get('fold_id', '?')}/{effective_cv_folds} ==="
-
-
-def _minimum_fold_text(fold: dict[str, Any], effective_cv_folds: int) -> str:
-    return f"{_fold_heading(fold, effective_cv_folds)}\n{FOLD_TRUNCATION_MARKER}"
-
-
-def _minimum_join_chars(
-    fold_texts: list[dict[str, Any]],
-    *,
-    effective_cv_folds: int,
-) -> int:
-    if not fold_texts:
-        return 0
-    return sum(
-        len(_minimum_fold_text(fold, effective_cv_folds)) for fold in fold_texts
-    ) + len(FOLD_TEXT_SEPARATOR) * (len(fold_texts) - 1)
-
-
-def _truncate_fold_text(
-    text: str,
-    *,
-    minimum_text: str,
-    max_chars: int,
-) -> str:
-    if len(text) <= max_chars:
-        return text
-
-    marker = "\n" + FOLD_TRUNCATION_MARKER
-    prefix_chars = max_chars - len(marker)
-    heading = minimum_text.splitlines()[0]
-    if prefix_chars <= len(heading):
-        return minimum_text
-
-    prefix = text[:prefix_chars].rstrip()
-    if len(prefix) < len(heading) or not prefix.startswith(heading):
-        prefix = heading
-    return prefix + marker
-
-
-def _limit_fold_texts_for_profile(
-    fold_texts: list[dict[str, Any]],
-    max_profile_text_chars: int,
-    *,
-    effective_min_support: int,
-) -> list[dict[str, Any]]:
-    if len(_profile_text(fold_texts)) <= max_profile_text_chars:
-        return fold_texts
-
-    effective_cv_folds = len(fold_texts)
-    min_visible_folds = min(effective_min_support, effective_cv_folds)
-    min_required_chars = _minimum_join_chars(
-        fold_texts[:min_visible_folds],
-        effective_cv_folds=effective_cv_folds,
-    )
-    if max_profile_text_chars < min_required_chars:
-        raise ValueError(
-            "max_profile_text_chars is too small to include at least "
-            f"{min_visible_folds} fold "
-            f"sections: got {max_profile_text_chars}, need at least "
-            f"{min_required_chars}"
-        )
-
-    limited_folds: list[dict[str, Any]] = []
-    used_chars = 0
-    visible_folds = 0
-
-    for idx, fold in enumerate(fold_texts):
-        limited_fold = dict(fold)
-        separator_chars = len(FOLD_TEXT_SEPARATOR) if visible_folds else 0
-        remaining_chars = max_profile_text_chars - used_chars - separator_chars
-        required_future_folds = max(0, min_visible_folds - (visible_folds + 1))
-        future_folds = fold_texts[idx + 1 : idx + 1 + required_future_folds]
-        future_reserve_chars = _minimum_join_chars(
-            future_folds,
-            effective_cv_folds=effective_cv_folds,
-        )
-        if future_folds:
-            future_reserve_chars += len(FOLD_TEXT_SEPARATOR)
-
-        available_chars = remaining_chars - future_reserve_chars
-        minimum_text = _minimum_fold_text(fold, effective_cv_folds)
-        if available_chars < len(minimum_text):
-            limited_fold["profile_text"] = ""
-            limited_folds.append(limited_fold)
-            continue
-
-        limited_fold["profile_text"] = _truncate_fold_text(
-            str(fold["profile_text"]),
-            minimum_text=minimum_text,
-            max_chars=available_chars,
-        )
-        used_chars += separator_chars + len(limited_fold["profile_text"])
-        visible_folds += 1
-        limited_folds.append(limited_fold)
-
-    return limited_folds
 
 
 def amazon_input_payload(task: dict[str, Any]) -> dict[str, Any]:
@@ -339,8 +176,8 @@ def build_task(
             f"({len(usable_reviews)} usable of {len(raw_reviews)} raw reviews)"
         )
 
-    sorted_reviews = _sorted_reviews(usable_reviews)
-    selected_reviews = _spread_across_time(sorted_reviews, max_reviews_per_user)
+    sorted_reviews = sorted_by_time(usable_reviews, _review_timestamp)
+    selected_reviews = spread_across_time(sorted_reviews, max_reviews_per_user)
     usable_review_count = len(selected_reviews)
     effective_cv_folds = min(cv_folds, usable_review_count)
     if effective_cv_folds < 2:
@@ -355,29 +192,20 @@ def build_task(
         )
 
     rendered_reviews = [
-        (f"r{idx:04d}", review) for idx, review in enumerate(selected_reviews, start=1)
-    ]
-    reviews_by_fold: list[list[tuple[str, dict[str, Any]]]] = [
-        [] for _ in range(effective_cv_folds)
-    ]
-    for idx, rendered_review in enumerate(rendered_reviews):
-        reviews_by_fold[idx % effective_cv_folds].append(rendered_review)
-
-    cv_fold_texts = []
-    for fold_idx, fold_reviews in enumerate(reviews_by_fold, start=1):
-        cv_fold_texts.append(
-            {
-                "fold_id": fold_idx,
-                "review_ids": [rendered_review_id for rendered_review_id, _ in fold_reviews],
-                "profile_text": _render_fold(
-                    fold_idx,
-                    effective_cv_folds,
-                    fold_reviews,
-                    max_review_text_chars=max_review_text_chars,
-                ),
-            }
+        (
+            f"r{idx:04d}",
+            _render_review(
+                review,
+                rendered_review_id=f"r{idx:04d}",
+                max_review_text_chars=max_review_text_chars,
+            ),
         )
-    cv_fold_texts = _limit_fold_texts_for_profile(
+        for idx, review in enumerate(selected_reviews, start=1)
+    ]
+    cv_fold_texts = build_cv_fold_texts(
+        rendered_reviews, effective_cv_folds, id_field="review_ids"
+    )
+    cv_fold_texts = limit_fold_texts_for_profile(
         cv_fold_texts,
         max_profile_text_chars,
         effective_min_support=effective_min_support,
@@ -390,7 +218,7 @@ def build_task(
         "qid": f"amazon_user:{user_id}",
         "title": f"Amazon reviewer {user_id}",
         "source_url": f"amazon-reviews-2023://user/{user_id}",
-        "profile_text": _profile_text(cv_fold_texts),
+        "profile_text": join_fold_texts(cv_fold_texts),
         "source": SOURCE,
         "user_id": user_id,
         "review_count": len(raw_reviews),
@@ -403,25 +231,6 @@ def build_task(
     }
     task["input_sha256"] = sha256_text(canonical_json(amazon_input_payload(task)))
     return task
-
-
-def load_history_range(
-    path: Path, range_start: int, range_end: int
-) -> list[tuple[int, dict[str, Any]]]:
-    expected_count = range_end - range_start
-    rows: list[tuple[int, dict[str, Any]]] = []
-    for offset, row in enumerate(load_jsonl(path)):
-        if offset < range_start:
-            continue
-        if offset >= range_end:
-            break
-        rows.append((offset, row))
-    if len(rows) != expected_count:
-        raise ValueError(
-            f"range [{range_start}, {range_end}) expected {expected_count} rows, got "
-            f"{len(rows)}"
-        )
-    return rows
 
 
 def package_dimensions(
@@ -507,16 +316,16 @@ def build_amazon_collab_package(
             "range_start must be >= 0 and less than range_end, got "
             f"range_start={range_start}, range_end={range_end}"
         )
-    _require_positive("cv_folds", cv_folds)
-    _require_positive("min_support_folds", min_support_folds)
+    require_positive("cv_folds", cv_folds)
+    require_positive("min_support_folds", min_support_folds)
     if min_support_folds > cv_folds:
         raise ValueError(
             "min_support_folds must be <= cv_folds, got "
             f"min_support_folds={min_support_folds}, cv_folds={cv_folds}"
         )
-    _require_positive("max_reviews_per_user", max_reviews_per_user)
-    _require_positive("max_review_text_chars", max_review_text_chars)
-    _require_positive("max_profile_text_chars", max_profile_text_chars)
+    require_positive("max_reviews_per_user", max_reviews_per_user)
+    require_positive("max_review_text_chars", max_review_text_chars)
+    require_positive("max_profile_text_chars", max_profile_text_chars)
 
     prepare_out_dir(out_dir, force=force)
     histories = load_history_range(user_histories_path, range_start, range_end)

@@ -373,3 +373,25 @@ def test_amazon_downstream_workflows_are_subscription_based() -> None:
     assert "codex" in backend_text
     assert "claude" in backend_text
 
+
+def test_build_cv_fold_texts_uses_custom_id_field() -> None:
+    from persona.existing_data_curation.scripts.history_package_common import (
+        build_cv_fold_texts,
+    )
+
+    fold_texts = build_cv_fold_texts(
+        [
+            ("p0001", "[p0001]\ntext: alpha"),
+            ("p0002", "[p0002]\ntext: beta"),
+            ("p0003", "[p0003]\ntext: gamma"),
+        ],
+        2,
+        id_field="post_ids",
+    )
+
+    assert [fold["fold_id"] for fold in fold_texts] == [1, 2]
+    assert fold_texts[0]["post_ids"] == ["p0001", "p0003"]
+    assert fold_texts[1]["post_ids"] == ["p0002"]
+    assert fold_texts[0]["profile_text"].startswith("=== Fold 1/2 ===")
+    assert "[p0003]" in fold_texts[0]["profile_text"]
+
