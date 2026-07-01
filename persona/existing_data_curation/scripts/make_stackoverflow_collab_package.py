@@ -142,7 +142,7 @@ def _render_post(
         f"type: {_post_type(post)}",
         f"tags: {', '.join(tags) if tags else '(none)'}",
         f"title: {_post_title(post)}",
-        f"score: {post.get('score', 'unknown')}",
+        f"score: {post['score'] if post.get('score') is not None else 'unknown'}",
         f"accepted: {_post_accepted(post)}",
         f"text: {compact_text(_post_text(post), max_post_text_chars)}",
     ]
