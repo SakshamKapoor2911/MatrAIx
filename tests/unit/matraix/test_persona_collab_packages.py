@@ -716,3 +716,39 @@ def test_solver_routes_fold_tasks_through_fold_voting(monkeypatch) -> None:
     assert "Stack Overflow" in prompt
     assert solver.merge_fold_fields is solver.merge_amazon_fold_fields
 
+
+def test_stackoverflow_collab_db_matches_package_identity(tmp_path: Path) -> None:
+    from persona.existing_data_curation.wiki_collab.stackoverflow_collab import (
+        build_stackoverflow_profile_database,
+        load_stackoverflow_profiles,
+    )
+
+    histories = tmp_path / "so_db_histories.jsonl"
+    _write_jsonl(
+        histories,
+        [
+            {
+                "user_id": "42",
+                "posts": [
+                    {"post_id": "1", "post_type": "question", "title": "T", "text": "A"},
+                    {"post_id": "2", "post_type": "answer", "title": "", "text": "B"},
+                ],
+            }
+        ],
+    )
+
+    manifest = build_stackoverflow_profile_database(
+        user_histories=histories,
+        out_db=tmp_path / "so_profiles.sqlite",
+        manifest_path=tmp_path / "so_manifest.json",
+        dataset_id="so_test",
+    )
+    assert manifest["row_count"] == 1
+    assert manifest["source_type"] == "stackoverflow_persona"
+
+    rows = load_stackoverflow_profiles(tmp_path / "so_profiles.sqlite", 0, 1)
+    assert rows[0].task_id == "stackoverflow_persona:42"
+    assert rows[0].qid == "so_user:42"
+    assert rows[0].user_id == "42"
+    assert rows[0].payload["posts"][0]["post_id"] == "1"
+
