@@ -86,6 +86,14 @@ const COMPONENTS: Components = {
     <blockquote className="mb-2 border-l-2 border-outline pl-3 italic text-text-variant last:mb-0" {...props} />
   ),
 
+  // Fenced code blocks (docs / YAML records).
+  pre: ({ node: _node, ...props }) => (
+    <pre
+      className="mb-2 overflow-x-auto rounded-md border border-outline/40 bg-field p-3 font-mono text-[10px] leading-relaxed text-primary last:mb-0"
+      {...props}
+    />
+  ),
+
   // Horizontal rule: a soft divider.
   hr: ({ node: _node, ...props }) => <hr className="my-2 border-outline" {...props} />,
 };

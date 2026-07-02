@@ -236,31 +236,27 @@ def _action_view(call: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def _screenshot_file_from_observation(step: Dict[str, Any]) -> Optional[str]:
-    observation = step.get("observation")
-    if not isinstance(observation, dict):
-        return None
-    results = observation.get("results")
-    if not isinstance(results, list):
-        return None
-    for result in results:
-        if not isinstance(result, dict):
-            continue
-        content = result.get("content")
-        if not isinstance(content, list):
-            continue
-        for item in content:
-            if not isinstance(item, dict) or item.get("type") != "image":
+    from backend.service.harbor_web_trace import screenshot_file_from_step
+
+    return screenshot_file_from_step(step)
+
+
+def _step_message_text(step: Dict[str, Any]) -> str:
+    message = step.get("message", "")
+    if isinstance(message, str):
+        return message
+    if isinstance(message, list):
+        parts: List[str] = []
+        for item in message:
+            if not isinstance(item, dict):
                 continue
-            source = item.get("source")
-            if not isinstance(source, dict):
-                continue
-            path = source.get("path")
-            if not isinstance(path, str):
-                continue
-            filename = Path(path).name
-            if filename.startswith("screenshot_") and filename.endswith(".webp"):
-                return filename
-    return None
+            if item.get("type") == "text":
+                text = item.get("text")
+                if isinstance(text, str) and text.strip():
+                    parts.append(text.strip())
+        if parts:
+            return "\n\n".join(parts)
+    return str(message) if message else ""
 
 
 def _trace_from_trajectory(trajectory: Dict[str, Any]) -> WebTrace:
@@ -279,7 +275,7 @@ def _trace_from_trajectory(trajectory: Dict[str, Any]) -> WebTrace:
             event = {
                 "step": index,
                 "source": str(step.get("source", "")),
-                "message": str(step.get("message", "")),
+                "message": _step_message_text(step),
                 "actions": actions,
             }
             screenshot_file = _screenshot_file_from_observation(step)

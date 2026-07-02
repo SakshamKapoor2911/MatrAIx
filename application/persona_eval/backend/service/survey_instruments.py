@@ -287,9 +287,139 @@ def _commerce_nike_air_max_dn_dynamic_air_v1() -> SurveyInstrument:
     )
 
 
+def _product_feedback_v1() -> SurveyInstrument:
+    """ClearQueue / FocusLoop pricing & fit survey (Harbor content task)."""
+    choice = lambda ids: list(ids)  # noqa: E731
+    return SurveyInstrument(
+        id="product_feedback_v1",
+        title="Survey Product Feedback",
+        description=(
+            "Pricing and product-fit survey for a family coordination app concept. "
+            "Answer as the assigned persona using the choice ids listed for each question."
+        ),
+        questions=[
+            SurveyQuestion(
+                id="q0",
+                prompt="After trying the free version, your realistic plan is…",
+                type="single_choice",
+                options=choice(
+                    [
+                        "q0_use_free_wont_pay",
+                        "q0_pay_when_roi_clear",
+                        "q0_subscribe_paid_launch",
+                        "q0_free_never_decide_tier",
+                        "q0_not_interested",
+                    ]
+                ),
+                construct="default_pay_intent",
+            ),
+            SurveyQuestion(
+                id="q1",
+                prompt="Plus vs Pro ($5 more per month)…",
+                type="single_choice",
+                options=choice(
+                    [
+                        "q1_reject_both_tiers",
+                        "q1_plus_after_sustained_use",
+                        "q1_happy_plus_or_pro",
+                        "q1_wont_compare_tiers",
+                    ]
+                ),
+                construct="tier_receptivity",
+            ),
+            SurveyQuestion(
+                id="q2",
+                prompt="Annual vs monthly billing…",
+                type="single_choice",
+                options=choice(
+                    [
+                        "q2_monthly_cancel_anytime",
+                        "q2_annual_after_long_use",
+                        "q2_prepay_annual_plus",
+                        "q2_billing_no_preference",
+                    ]
+                ),
+                construct="prepay_willingness",
+            ),
+            SurveyQuestion(
+                id="q3",
+                prompt="A limited $1 first-month Plus promo…",
+                type="single_choice",
+                options=choice(
+                    [
+                        "q3_skip_even_one_dollar",
+                        "q3_one_dollar_try_cancel",
+                        "q3_grab_dollar_promo",
+                        "q3_ignore_promo",
+                    ]
+                ),
+                construct="promo_reaction",
+            ),
+            SurveyQuestion(
+                id="q4",
+                prompt="A friend uses a paid organizer app…",
+                type="single_choice",
+                options=choice(
+                    [
+                        "q4_seek_free_alternative",
+                        "q4_compare_pay_if_wins",
+                        "q4_pay_best_no_hunt",
+                        "q4_switch_only_effortless",
+                    ]
+                ),
+                construct="switch_behavior",
+            ),
+            SurveyQuestion(
+                id="q5",
+                prompt="Ads on free vs paying to remove them…",
+                type="single_choice",
+                options=choice(
+                    [
+                        "q5_ads_not_worth_paying",
+                        "q5_ads_pay_if_plus_useful",
+                        "q5_pay_primarily_adfree",
+                        "q5_ads_irrelevant_to_tier",
+                    ]
+                ),
+                construct="ads_tradeoff",
+            ),
+            SurveyQuestion(
+                id="q6",
+                prompt="Overall, the product's pricing feels…",
+                type="single_choice",
+                options=choice(
+                    [
+                        "q6_too_expensive_stay_free",
+                        "q6_fair_if_use_justifies",
+                        "q6_premium_price_ok",
+                        "q6_pricing_unnoticed",
+                    ]
+                ),
+                construct="price_stance",
+            ),
+            SurveyQuestion(
+                id="overall_interest",
+                prompt="Overall interest in this product (1 = not interested, 5 = very interested)",
+                type="likert",
+                min_value=1,
+                max_value=5,
+                construct="overall_interest",
+            ),
+            SurveyQuestion(
+                id="would_try_beta",
+                prompt="Would you try a beta version?",
+                type="single_choice",
+                options=["false", "true"],
+                construct="beta_intent",
+            ),
+        ],
+    )
+
+
 def _registry() -> dict[str, SurveyInstrument]:
     instruments = [
         _product_attitudes_v1(),
+        _product_feedback_v1(),
         _software_claude_code_vscode_checkpoints_v1(),
         _finance_robinhood_cortex_digests_v1(),
         _healthcare_cvs_app_prescription_ai_v1(),

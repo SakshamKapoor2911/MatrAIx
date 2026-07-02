@@ -26,7 +26,7 @@ Design notes:
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Literal, Optional
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
@@ -60,9 +60,6 @@ __all__ = [
     "GoalContext",
     "GoalContextsResponse",
     "PersonaEvalJobView",
-    "PersonaEvalRunSummary",
-    "PersonaEvalRunsResponse",
-    "PersonaEvalResultView",
     "SurveyQuestion",
     "SurveyInstrument",
     "SurveyInstrumentsResponse",
@@ -72,6 +69,8 @@ __all__ = [
     "WebEvalTasksResponse",
     "StartWebEvalRequest",
     "WebEvalJobView",
+    "CuaEvalTask",
+    "CuaEvalTasksResponse",
     "AppWorldEvalTask",
     "AppWorldEvalTasksResponse",
     "StartAppWorldEvalRequest",
@@ -117,6 +116,8 @@ class PreflightCheck(BaseModel):
     #: Optional adapters (the finance/medical sidecars) report their status but
     #: do not gate overall readiness, and render muted rather than as an error.
     optional: bool = False
+    #: When set, maps this probe to a chatbot application card in the cockpit.
+    applicationId: Optional[str] = None
 
 
 class PreflightResponse(BaseModel):
@@ -124,6 +125,29 @@ class PreflightResponse(BaseModel):
 
     ready: bool
     checks: List[PreflightCheck]
+
+
+class ChatbotSidecarStatus(BaseModel):
+    """Reachability of one chatbot HTTP sidecar."""
+
+    applicationId: str
+    ok: bool
+    healthUrl: str
+    canStart: bool = True
+    detail: str
+
+
+class ChatbotSidecarsResponse(BaseModel):
+    """``GET /api/chatbot-sidecars`` payload."""
+
+    sidecars: List[ChatbotSidecarStatus]
+
+
+class StartChatbotSidecarResponse(BaseModel):
+    """``POST /api/chatbot-sidecars/{application_id}/start`` payload."""
+
+    sidecar: ChatbotSidecarStatus
+    started: bool = True
 
 
 # --------------------------------------------------------------------------- #
@@ -565,59 +589,6 @@ class PersonaEvalJobView(BaseModel):
 
 
 # --------------------------------------------------------------------------- #
-# Persisted persona-eval runs (durable artifacts)
-# --------------------------------------------------------------------------- #
-class PersonaEvalRunSummary(BaseModel):
-    """One entry in ``GET /api/persona-eval/runs``.
-
-    A newest-first summary of a persisted run, built from the stored
-    ``<jobId>.json`` artifact by
-    :meth:`backend.service.persona_eval_service.PersonaEvalService.list_runs`.
-    Permissive so the service can enrich the summary without breaking the schema.
-    """
-
-    model_config = ConfigDict(extra="allow")
-
-    id: str
-    createdAt: Optional[str] = None
-    domain: Optional[str] = None
-    personaName: Optional[str] = None
-    source: Optional[str] = None
-    goalContextId: Optional[str] = None
-    overallRating: Optional[int] = None
-    numTurns: Optional[int] = None
-
-
-class PersonaEvalRunsResponse(BaseModel):
-    """``GET /api/persona-eval/runs`` payload."""
-
-    runs: List[PersonaEvalRunSummary]
-
-
-class PersonaEvalResultView(BaseModel):
-    """``GET /api/persona-eval/runs/{id}`` payload — the full stored run.
-
-    Mirrors :meth:`persona_eval.types.PersonaEvalResult.to_dict` plus the top-level
-    ``id`` injected at persist time. Permissive (``extra="allow"``) so the stored
-    artifact round-trips without forcing the service to construct pydantic
-    objects.
-    """
-
-    model_config = ConfigDict(extra="allow")
-
-    id: str
-    createdAt: Optional[str] = None
-    config: Dict[str, Any] = Field(default_factory=dict)
-    persona: Dict[str, Any] = Field(default_factory=dict)
-    sutDescription: Optional[str] = None
-    transcript: List[Dict[str, Any]] = Field(default_factory=list)
-    recommendedItemIds: Dict[str, Any] = Field(default_factory=dict)
-    questionnaire: Optional[Dict[str, Any]] = None
-    metricScores: Optional[Dict[str, Any]] = None
-    prompts: Optional[Dict[str, str]] = None
-
-
-# --------------------------------------------------------------------------- #
 # Survey eval
 # --------------------------------------------------------------------------- #
 class SurveyQuestion(BaseModel):
@@ -650,6 +621,27 @@ class SurveyInstrumentsResponse(BaseModel):
     """``GET /api/survey-eval/instruments`` payload."""
 
     instruments: List[SurveyInstrument]
+
+
+class SurveyHarborTask(BaseModel):
+    """A Harbor example-survey task available for persona-agent testing."""
+
+    model_config = ConfigDict(extra="allow")
+
+    id: str
+    title: str
+    description: str = ""
+    taskPath: str
+    instrumentId: str = ""
+    profileMarkdown: str = ""
+    instructionMarkdown: str = ""
+    surveyKind: Literal["example", "contributing"] = "contributing"
+
+
+class SurveyHarborTasksResponse(BaseModel):
+    """``GET /api/survey-eval/harbor-tasks`` payload."""
+
+    tasks: List[SurveyHarborTask]
 
 
 class StartSurveyEvalRequest(BaseModel):
@@ -707,6 +699,7 @@ class WebEvalTask(BaseModel):
     siteName: str
     siteUrl: str
     description: str = ""
+    taskPath: str = ""
     outputArtifact: str = "ecommerce_interaction.json"
     submissionProfile: str = "ecommerce_interaction"
 
@@ -755,6 +748,31 @@ class WebEvalJobView(BaseModel):
     trace: Optional[Dict[str, Any]] = None
     prompts: Optional[Dict[str, str]] = None
     error: Optional[str] = None
+
+
+# --------------------------------------------------------------------------- #
+# CUA (computer-use) eval
+# --------------------------------------------------------------------------- #
+class CuaEvalTask(BaseModel):
+    """A Harbor computer-use task available for persona-agent testing."""
+
+    model_config = ConfigDict(extra="allow")
+
+    id: str
+    title: str
+    platform: str
+    description: str = ""
+    taskPath: str
+    outputArtifact: str = "decision.json"
+    cuaSubmissionProfile: Optional[str] = None
+    environmentLabel: str = "persona-computer-1"
+    cuaBackend: str = "docker"
+
+
+class CuaEvalTasksResponse(BaseModel):
+    """``GET /api/cua-eval/tasks`` payload."""
+
+    tasks: List[CuaEvalTask]
 
 
 # --------------------------------------------------------------------------- #
@@ -816,3 +834,204 @@ class AppWorldEvalJobView(BaseModel):
     trace: Optional[Dict[str, Any]] = None
     prompts: Optional[Dict[str, str]] = None
     error: Optional[str] = None
+
+
+# --------------------------------------------------------------------------- #
+# Harbor batch jobs (jobs_dir — canonical artifact root)
+# --------------------------------------------------------------------------- #
+class HarborJobLaunchRequest(BaseModel):
+    """Body for ``POST /api/harbor/jobs``."""
+
+    taskPath: str
+    sampleSize: int = 1
+    seed: int = 42
+    personaPool: str = "persona/datasets/bench-dev-sample"
+    personaIds: Optional[List[str]] = None
+    personaSources: Optional[List[str]] = None
+    personaFilters: Optional[Dict[str, str]] = None
+    cohortId: Optional[str] = None
+    agentName: Optional[str] = None
+    personaModel: Optional[str] = None
+    nConcurrentTrials: int = 2
+    mode: str = "auto"
+    jobName: Optional[str] = None
+    surveyInstrumentId: Optional[str] = None
+    cuaSubmissionProfile: Optional[str] = None
+    cuaBackend: Optional[str] = None
+    chatDomain: Optional[str] = None
+    chatApplicationId: Optional[str] = None
+    chatApplicationContext: Optional[str] = None
+    chatGoalContextId: Optional[str] = None
+    chatMaxTurns: Optional[int] = None
+
+    @field_validator("mode")
+    @classmethod
+    def _validate_mode(cls, value: str) -> str:
+        normalized = value.strip().lower()
+        if normalized not in {"auto", "force_docker", "smoke"}:
+            raise ValueError("mode must be one of auto, force_docker, smoke")
+        return normalized
+
+    @field_validator("personaModel")
+    @classmethod
+    def _validate_persona_model(cls, value: Optional[str]) -> Optional[str]:
+        if value is None:
+            return value
+        if value not in SUPPORTED_PERSONA_MODELS:
+            raise ValueError(
+                "personaModel must be one of {}".format(list(SUPPORTED_PERSONA_MODELS))
+            )
+        return value
+
+
+class HarborJobLaunchResponse(BaseModel):
+    jobName: str
+    configPath: Optional[str] = None
+    jobsDir: Optional[str] = None
+    agentName: Optional[str] = None
+    taskType: Optional[str] = None
+    trialProfile: Optional[str] = None
+    mode: Optional[str] = None
+
+
+class HarborJobsListResponse(BaseModel):
+    model_config = ConfigDict(extra="allow")
+
+    jobs: List[Dict[str, Any]]
+
+
+class HarborJobDetailView(BaseModel):
+    model_config = ConfigDict(extra="allow")
+
+    jobName: str
+    jobsDir: Optional[str] = None
+    config: Optional[Dict[str, Any]] = None
+    result: Optional[Dict[str, Any]] = None
+    trials: List[Dict[str, Any]] = Field(default_factory=list)
+    launch: Optional[Dict[str, Any]] = None
+
+
+class PersonaPoolCatalogResponse(BaseModel):
+    model_config = ConfigDict(extra="allow")
+
+    pool: str
+    count: int
+    smokePersonaId: Optional[str] = None
+    sourceCounts: Dict[str, int] = Field(default_factory=dict)
+    schemaVersion: Optional[str] = None
+    dimensionCategoriesPath: Optional[str] = None
+    dimensionCategories: Dict[str, Any] = Field(default_factory=dict)
+
+
+class PersonaPoolSampleRequest(BaseModel):
+    pool: str = "persona/datasets/bench-dev-sample"
+    sampleSize: int = 4
+    seed: int = 42
+    sources: Optional[List[str]] = None
+    dimensionFilters: Optional[Dict[str, Any]] = None
+    stratifyFields: Optional[List[str]] = None
+    sampleSizePerValueGroup: Optional[int] = None
+
+
+class PersonaPoolPersonaCard(BaseModel):
+    model_config = ConfigDict(extra="allow")
+
+    personaId: str
+    name: Optional[str] = None
+    source: Optional[str] = None
+    path: Optional[str] = None
+    dimensions: Dict[str, str] = Field(default_factory=dict)
+
+
+class PersonaPoolCardsResponse(BaseModel):
+    model_config = ConfigDict(extra="allow")
+
+    pool: str
+    personas: List[PersonaPoolPersonaCard] = Field(default_factory=list)
+
+
+class PersonaPoolPersonaDetailResponse(PersonaPoolPersonaCard):
+    model_config = ConfigDict(extra="allow")
+
+    pool: str
+    yaml: str = ""
+    profileMarkdown: str = ""
+
+
+class TaskDetailResponse(BaseModel):
+    model_config = ConfigDict(extra="allow")
+
+    taskPath: str
+    title: str = ""
+    description: str = ""
+    metaType: str = ""
+    taskName: str = ""
+    instructionMarkdown: str = ""
+    profileMarkdown: str = ""
+
+
+class PersonaPoolSampleResponse(BaseModel):
+    model_config = ConfigDict(extra="allow")
+
+    pool: str
+    matchedCount: int
+    sampleSize: int
+    seed: int
+    personaIds: List[str]
+    personas: List[Dict[str, Any]] = Field(default_factory=list)
+
+
+class PersonaCohortSaveRequest(BaseModel):
+    cohortId: str
+    name: Optional[str] = None
+    description: Optional[str] = None
+    pool: str = "persona/datasets/bench-dev-sample"
+    kind: str = "recipe"
+    seed: int = 42
+    sampleSize: int = 4
+    sources: Optional[List[str]] = None
+    dimensionFilters: Optional[Dict[str, str]] = None
+    personaIds: Optional[List[str]] = None
+
+    @field_validator("kind")
+    @classmethod
+    def _validate_kind(cls, value: str) -> str:
+        normalized = value.strip().lower()
+        if normalized not in {"recipe", "frozen"}:
+            raise ValueError("kind must be recipe or frozen")
+        return normalized
+
+
+class PersonaCohortSummary(BaseModel):
+    model_config = ConfigDict(extra="allow")
+
+    cohortId: str
+    name: str
+    kind: str
+    pool: str
+    sampleSize: int
+    matchedCount: int
+    personaCount: int
+    createdAt: Optional[str] = None
+
+
+class PersonaCohortListResponse(BaseModel):
+    cohorts: List[PersonaCohortSummary] = Field(default_factory=list)
+
+
+class PersonaCohortDetailResponse(BaseModel):
+    model_config = ConfigDict(extra="allow")
+
+    cohortId: str
+    name: str
+    description: str = ""
+    createdAt: Optional[str] = None
+    pool: str
+    kind: str
+    seed: int
+    sampleSize: int
+    sources: List[str] = Field(default_factory=list)
+    dimensionFilters: Dict[str, str] = Field(default_factory=dict)
+    matchedCount: int
+    personaIds: List[str] = Field(default_factory=list)
+    personas: List[Dict[str, Any]] = Field(default_factory=list)

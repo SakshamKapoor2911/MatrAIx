@@ -1,0 +1,147 @@
+{
+    "id": "b6b619a6-8c7d-4056-ab22-2174154516b2",
+    "task_name": "personabench/application-web-cocoa-books-interest",
+    "trial_name": "example-web-cocoa_books-interest__ieG45BT",
+    "trial_uri": "file:///Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/jobs/pe-example-web-cocoa-books-interest-34191c14/example-web-cocoa_books-interest__ieG45BT",
+    "task_id": {
+        "path": "application/tasks/example-web-cocoa_books-interest"
+    },
+    "source": null,
+    "task_checksum": "2d506eed6e0b666374fbbea8d9b91072a6f30e9c434f4a7f82f78675d1e62342",
+    "config": {
+        "task": {
+            "path": "application/tasks/example-web-cocoa_books-interest",
+            "git_url": null,
+            "git_commit_id": null,
+            "name": null,
+            "ref": null,
+            "overwrite": false,
+            "download_dir": null,
+            "source": null
+        },
+        "trial_name": "example-web-cocoa_books-interest__ieG45BT",
+        "trials_dir": "jobs/pe-example-web-cocoa-books-interest-34191c14",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "persona-cocoa",
+            "import_path": null,
+            "model_name": "anthropic/claude-haiku-4-5",
+            "skills": [],
+            "override_timeout_sec": null,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "extra_allowed_hosts": [],
+            "kwargs": {
+                "persona_path": "persona/datasets/bench-dev-sample/persona_0030.yaml"
+            },
+            "env": {},
+            "mcp_servers": []
+        },
+        "environment": {
+            "type": "docker",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "cpu_enforcement_policy": "auto",
+            "memory_enforcement_policy": "auto",
+            "override_cpus": null,
+            "override_memory_mb": null,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "override_tpu": null,
+            "mounts": null,
+            "extra_docker_compose": [],
+            "env": {},
+            "kwargs": {},
+            "extra_allowed_hosts": []
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "env": {},
+            "disable": false
+        },
+        "artifacts": [],
+        "extra_instruction_paths": [],
+        "job_id": "4660ba63-0d31-4962-be7d-e1029e0b9018"
+    },
+    "agent_info": {
+        "name": "persona-cocoa",
+        "version": "unknown",
+        "model_info": {
+            "name": "claude-haiku-4-5",
+            "provider": "anthropic"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 0,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 0,
+        "cost_usd": 0.0,
+        "rollout_details": null,
+        "metadata": {
+            "cocoa": {
+                "final_result": "Task completed",
+                "is_done": true,
+                "is_successful": true,
+                "urls": [
+                    "https://books.toscrape.com/",
+                    "https://books.toscrape.com/catalogue/sapiens-a-brief-history-of-humankind_996/index.html"
+                ],
+                "action_names": [
+                    "browser_navigate",
+                    "dom_mark_elements",
+                    "dom_click",
+                    "dom_mark_elements",
+                    "dom_click",
+                    "dom_scroll",
+                    "dom_mark_elements",
+                    "dom_click",
+                    "dom_get_text",
+                    "browser_navigate",
+                    "file_list",
+                    "file_write",
+                    "file_list",
+                    "shell_execute",
+                    "shell_execute",
+                    "shell_execute",
+                    "shell_execute",
+                    "shell_execute",
+                    "task_complete"
+                ],
+                "promoted_outputs": [],
+                "status": "success",
+                "iterations": 19
+            }
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-07-01T21:45:21.362567Z",
+    "finished_at": "2026-07-01T21:48:33.945970Z",
+    "environment_setup": {
+        "started_at": "2026-07-01T21:45:21.366679Z",
+        "finished_at": "2026-07-01T21:45:56.450868Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-07-01T21:45:56.878291Z",
+        "finished_at": "2026-07-01T21:46:04.464124Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-07-01T21:46:04.466364Z",
+        "finished_at": "2026-07-01T21:48:26.322623Z"
+    },
+    "verifier": {
+        "started_at": "2026-07-01T21:48:27.588535Z",
+        "finished_at": "2026-07-01T21:48:30.901462Z"
+    },
+    "step_results": null
+}

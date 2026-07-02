@@ -1,0 +1,422 @@
+{
+  "schemaVersion": "1.0",
+  "description": "Hierarchical UI grouping for persona dimensions. devProfile covers the 82-field bench-dev persona YAML; categoryIndex maps full dimensions.json categories.",
+  "personaSources": [
+    "Nemotron",
+    "OASIS",
+    "PersonaHub",
+    "PRIMEX"
+  ],
+  "topLevelGroups": [
+    {
+      "id": "behavior",
+      "label": "Behavior & habits"
+    },
+    {
+      "id": "state",
+      "label": "Current state"
+    },
+    {
+      "id": "demographic",
+      "label": "Demographic & cultural"
+    },
+    {
+      "id": "expertise",
+      "label": "Expertise & domain"
+    },
+    {
+      "id": "external",
+      "label": "Extended catalog"
+    },
+    {
+      "id": "health",
+      "label": "Health"
+    },
+    {
+      "id": "interests",
+      "label": "Interests & lifestyle"
+    },
+    {
+      "id": "linguistic",
+      "label": "Language & communication"
+    },
+    {
+      "id": "learning",
+      "label": "Learning & education"
+    },
+    {
+      "id": "personality",
+      "label": "Personality & traits"
+    },
+    {
+      "id": "professional",
+      "label": "Professional & career"
+    },
+    {
+      "id": "risk_decision",
+      "label": "Risk & decision-making"
+    },
+    {
+      "id": "skills",
+      "label": "Skills & tools"
+    },
+    {
+      "id": "values",
+      "label": "Values & motivation"
+    },
+    {
+      "id": "worldview",
+      "label": "Worldview & beliefs"
+    }
+  ],
+  "devProfile": {
+    "dimensionCount": 82,
+    "groups": [
+      {
+        "id": "behavior",
+        "label": "Behavior & habits",
+        "dimensionIds": [
+          "time_pressure",
+          "modality_pref",
+          "accessibility_needs",
+          "media_diet"
+        ]
+      },
+      {
+        "id": "state",
+        "label": "Current state",
+        "dimensionIds": [
+          "emotional_state",
+          "intent",
+          "query_complexity",
+          "prior_context",
+          "device_context"
+        ]
+      },
+      {
+        "id": "demographic",
+        "label": "Demographic & cultural",
+        "dimensionIds": [
+          "age_bracket",
+          "region",
+          "gender_identity",
+          "urbanicity",
+          "socioeconomic_band",
+          "register",
+          "life_stage",
+          "major_life_events",
+          "cultural_background"
+        ]
+      },
+      {
+        "id": "expertise",
+        "label": "Expertise & domain",
+        "dimensionIds": [
+          "domain",
+          "subject_specialty",
+          "tech_savviness",
+          "expertise_gap"
+        ]
+      },
+      {
+        "id": "linguistic",
+        "label": "Language & communication",
+        "dimensionIds": [
+          "primary_language",
+          "english_proficiency",
+          "multilingualism",
+          "tone_expected",
+          "cog_verbosity",
+          "cog_formality",
+          "cog_directness",
+          "cog_humor",
+          "cog_detail_orientation",
+          "cog_abstraction",
+          "cog_optimism",
+          "cog_patience",
+          "cog_curiosity",
+          "cog_skepticism",
+          "cog_open_mindedness",
+          "cog_assertiveness",
+          "cog_emotional_expressiveness",
+          "cog_conflict_approach",
+          "cog_feedback_receptiveness",
+          "cog_ambiguity_tolerance",
+          "cog_perfectionism",
+          "cog_procrastination",
+          "cog_multitasking",
+          "cog_attention_span",
+          "cog_learning_pace",
+          "cog_question_asking",
+          "cog_decision_speed",
+          "cog_confidence_calibration",
+          "cog_numeracy_comfort",
+          "cog_reading_vs_watching",
+          "cog_visual_vs_verbal",
+          "cog_big_picture_vs_detail",
+          "cog_risk_framing",
+          "cog_empathy_expression",
+          "cog_storytelling",
+          "cog_precision_of_language",
+          "cog_use_of_jargon",
+          "cog_emoji_use",
+          "cog_politeness"
+        ]
+      },
+      {
+        "id": "learning",
+        "label": "Learning & education",
+        "dimensionIds": [
+          "highest_education",
+          "academic_field",
+          "institution_tier",
+          "learning_style"
+        ]
+      },
+      {
+        "id": "personality",
+        "label": "Personality & traits",
+        "dimensionIds": [
+          "domain_characteristics",
+          "dominant_trait",
+          "neurotype"
+        ]
+      },
+      {
+        "id": "professional",
+        "label": "Professional & career",
+        "dimensionIds": [
+          "research_output",
+          "seniority",
+          "company_size",
+          "role_function",
+          "years_experience",
+          "linkedin_activity"
+        ]
+      },
+      {
+        "id": "risk_decision",
+        "label": "Risk & decision-making",
+        "dimensionIds": [
+          "risk_tolerance",
+          "decision_style"
+        ]
+      },
+      {
+        "id": "values",
+        "label": "Values & motivation",
+        "dimensionIds": [
+          "values_priority",
+          "religiosity",
+          "economic_motivation"
+        ]
+      },
+      {
+        "id": "worldview",
+        "label": "Worldview & beliefs",
+        "dimensionIds": [
+          "political_lean",
+          "trust_level",
+          "safety_sensitivity"
+        ]
+      }
+    ]
+  },
+  "categoryIndex": [
+    {
+      "category": "Behavior: Habits",
+      "groupId": "behavior",
+      "groupLabel": "Behavior & habits"
+    },
+    {
+      "category": "Behavior: Preferences",
+      "groupId": "behavior",
+      "groupLabel": "Behavior & habits"
+    },
+    {
+      "category": "Behavior: Time",
+      "groupId": "behavior",
+      "groupLabel": "Behavior & habits"
+    },
+    {
+      "category": "Behavior: Work",
+      "groupId": "behavior",
+      "groupLabel": "Behavior & habits"
+    },
+    {
+      "category": "Demographic: Core",
+      "groupId": "demographic",
+      "groupLabel": "Demographic & cultural"
+    },
+    {
+      "category": "Demographic: Cultural",
+      "groupId": "demographic",
+      "groupLabel": "Demographic & cultural"
+    },
+    {
+      "category": "Demographic: Family",
+      "groupId": "demographic",
+      "groupLabel": "Demographic & cultural"
+    },
+    {
+      "category": "Demographic: Geographic",
+      "groupId": "demographic",
+      "groupLabel": "Demographic & cultural"
+    },
+    {
+      "category": "Demographic: Geography",
+      "groupId": "demographic",
+      "groupLabel": "Demographic & cultural"
+    },
+    {
+      "category": "Demographic: Life Events",
+      "groupId": "demographic",
+      "groupLabel": "Demographic & cultural"
+    },
+    {
+      "category": "Expertise: Domains",
+      "groupId": "expertise",
+      "groupLabel": "Expertise & domain"
+    },
+    {
+      "category": "Expertise: Skills",
+      "groupId": "expertise",
+      "groupLabel": "Expertise & domain"
+    },
+    {
+      "category": "External: Datasets",
+      "groupId": "external",
+      "groupLabel": "Extended catalog"
+    },
+    {
+      "category": "Health: Fitness",
+      "groupId": "health",
+      "groupLabel": "Health"
+    },
+    {
+      "category": "Health: Lifestyle",
+      "groupId": "health",
+      "groupLabel": "Health"
+    },
+    {
+      "category": "Health: Physical",
+      "groupId": "health",
+      "groupLabel": "Health"
+    },
+    {
+      "category": "Interests: Culture",
+      "groupId": "interests",
+      "groupLabel": "Interests & lifestyle"
+    },
+    {
+      "category": "Interests: Food",
+      "groupId": "interests",
+      "groupLabel": "Interests & lifestyle"
+    },
+    {
+      "category": "Interests: Hobbies",
+      "groupId": "interests",
+      "groupLabel": "Interests & lifestyle"
+    },
+    {
+      "category": "Interests: Media",
+      "groupId": "interests",
+      "groupLabel": "Interests & lifestyle"
+    },
+    {
+      "category": "Interests: Sports",
+      "groupId": "interests",
+      "groupLabel": "Interests & lifestyle"
+    },
+    {
+      "category": "Interests: Topics",
+      "groupId": "interests",
+      "groupLabel": "Interests & lifestyle"
+    },
+    {
+      "category": "Learning: Academic",
+      "groupId": "learning",
+      "groupLabel": "Learning & education"
+    },
+    {
+      "category": "Learning: Style",
+      "groupId": "learning",
+      "groupLabel": "Learning & education"
+    },
+    {
+      "category": "Linguistic: Communication",
+      "groupId": "linguistic",
+      "groupLabel": "Language & communication"
+    },
+    {
+      "category": "Linguistic: Language",
+      "groupId": "linguistic",
+      "groupLabel": "Language & communication"
+    },
+    {
+      "category": "Personality: Big Five",
+      "groupId": "personality",
+      "groupLabel": "Personality & traits"
+    },
+    {
+      "category": "Personality: Character",
+      "groupId": "personality",
+      "groupLabel": "Personality & traits"
+    },
+    {
+      "category": "Personality: MBTI",
+      "groupId": "personality",
+      "groupLabel": "Personality & traits"
+    },
+    {
+      "category": "Personality: Relationships",
+      "groupId": "personality",
+      "groupLabel": "Personality & traits"
+    },
+    {
+      "category": "Professional: Career",
+      "groupId": "professional",
+      "groupLabel": "Professional & career"
+    },
+    {
+      "category": "Professional: Industry",
+      "groupId": "professional",
+      "groupLabel": "Professional & career"
+    },
+    {
+      "category": "Professional: Role",
+      "groupId": "professional",
+      "groupLabel": "Professional & career"
+    },
+    {
+      "category": "Risk & Decision",
+      "groupId": "risk_decision",
+      "groupLabel": "Risk & decision-making"
+    },
+    {
+      "category": "Skills: Programming",
+      "groupId": "skills",
+      "groupLabel": "Skills & tools"
+    },
+    {
+      "category": "Skills: Tools",
+      "groupId": "skills",
+      "groupLabel": "Skills & tools"
+    },
+    {
+      "category": "State: Emotional",
+      "groupId": "state",
+      "groupLabel": "Current state"
+    },
+    {
+      "category": "Values & Motivation",
+      "groupId": "values",
+      "groupLabel": "Values & motivation"
+    },
+    {
+      "category": "Worldview: Beliefs",
+      "groupId": "worldview",
+      "groupLabel": "Worldview & beliefs"
+    }
+  ]
+}

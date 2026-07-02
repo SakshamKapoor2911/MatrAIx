@@ -97,16 +97,12 @@ export default function App() {
   const mode = parseMode(urlState.mode);
   const activeId = urlState.session;
   const activeTurnIndex = parseTurnIndex(urlState.turn);
-  // Runs now live inside PersonaEval. The runs sub-view is URL-driven:
-  //   view=runs                  → the runs history list
-  //   run set                    → that run's detail
-  //   run + compareWith          → the side-by-side compare
-  // A `run`/`compareWith` selection implies the runs sub-view even without
-  // `view=runs`, so a shared deep link to a run still resolves.
-  const activeRunId = urlState.run;
-  const compareWithRunId = urlState.compareWith;
+  // Runs sub-view is URL-driven: harborJob / harborTrial for job and trial debrief.
+  const activeHarborJobId = urlState.harborJob;
+  const activeHarborTrialId = urlState.harborTrial;
   const runsViewActive =
-    mode === "persona-eval" && (urlState.view === "runs" || activeRunId !== null);
+    mode === "persona-eval" &&
+    (urlState.view === "runs" || activeHarborJobId !== null || activeHarborTrialId !== null);
 
   const [catalogOpen, setCatalogOpen] = useState(false);
   // The persona-eval cockpit's active domain, mirrored up so the shared (⌘K)
@@ -118,27 +114,33 @@ export default function App() {
 
   // --- Runs navigation handlers (PersonaEval -> Runs sub-view) ------------
   const openRunsList = useCallback(() => {
-    // Also sets the surface so the Runs nav works from the Chat surface too.
-    setUrlState({ mode: "persona-eval", view: "runs", run: null, compareWith: null });
+    setUrlState({ mode: "persona-eval", view: "runs", harborJob: null, harborTrial: null });
   }, [setUrlState]);
-  const openRun = useCallback(
-    (id: string) => {
-      setUrlState({ view: "runs", run: id, compareWith: null });
+  const openHarborJob = useCallback(
+    (jobName: string) => {
+      setUrlState({ view: "runs", harborJob: jobName, harborTrial: null });
     },
     [setUrlState],
   );
-  const compareRuns = useCallback(
-    (a: string, b: string) => {
-      setUrlState({ view: "runs", run: a, compareWith: b });
+  const openHarborTrial = useCallback(
+    (jobName: string, trialName: string) => {
+      setUrlState({
+        view: "runs",
+        harborJob: jobName,
+        harborTrial: trialName,
+      });
     },
     [setUrlState],
   );
   const backToRunsList = useCallback(() => {
-    setUrlState({ view: "runs", run: null, compareWith: null });
+    setUrlState({ view: "runs", harborJob: null, harborTrial: null });
+  }, [setUrlState]);
+  const backToHarborJob = useCallback(() => {
+    setUrlState({ view: "runs", harborTrial: null });
   }, [setUrlState]);
   /** Leave the Runs sub-view, back to the cockpit. */
   const closeRunsView = useCallback(() => {
-    setUrlState({ view: null, run: null, compareWith: null });
+    setUrlState({ view: null, harborJob: null, harborTrial: null });
   }, [setUrlState]);
 
   const setMode = useCallback(
@@ -148,8 +150,8 @@ export default function App() {
       setUrlState({
         mode: next === "normal" ? null : next,
         view: null,
-        run: null,
-        compareWith: null,
+        harborJob: null,
+        harborTrial: null,
       });
     },
     [setUrlState],
@@ -426,20 +428,25 @@ export default function App() {
         {topBar}
         {runsViewActive ? (
           <RunsView
-            runId={activeRunId}
-            compareWith={compareWithRunId}
-            openRun={openRun}
-            compareRuns={compareRuns}
+            harborJobId={activeHarborJobId}
+            harborTrialId={activeHarborTrialId}
+            openHarborJob={openHarborJob}
+            openHarborTrial={openHarborTrial}
             backToList={backToRunsList}
+            backToHarborJob={backToHarborJob}
             onClose={closeRunsView}
           />
         ) : (
-          <PersonaEvalCockpit
-            options={optionsQuery.data ?? null}
-            onOpenRuns={openRunsList}
-            onDomainChange={setPevalDomain}
-            onFooterContextChange={setPevalFooter}
-          />
+          <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
+            <PersonaEvalCockpit
+              options={optionsQuery.data ?? null}
+              onOpenRuns={openRunsList}
+              onOpenHarborJob={openHarborJob}
+              onOpenHarborTrial={openHarborTrial}
+              onDomainChange={setPevalDomain}
+              onFooterContextChange={setPevalFooter}
+            />
+          </div>
         )}
         <AppFooter context={pevalFooter} />
         <CatalogDrawer

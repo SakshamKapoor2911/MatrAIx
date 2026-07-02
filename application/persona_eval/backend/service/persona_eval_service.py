@@ -7,16 +7,11 @@ partly shared across runs.
 
 from __future__ import annotations
 
-import json
-import os
-import tempfile
 import threading
 from dataclasses import dataclass, field
-from pathlib import Path
 import inspect
 from typing import Any, Callable, Dict, List, Optional
 
-from backend.service import run_store
 from persona_eval.runner import run_persona_eval as _default_runner
 from persona_eval.types import DEFAULT_PERSONA_MODEL, PersonaEvalConfig
 
@@ -27,15 +22,6 @@ def _new_persona_eval_id() -> str:
     import uuid
 
     return "wt_" + uuid.uuid4().hex[:12]
-
-
-def _default_runs_dir() -> Path:
-    """Canonical cache dir for persona-eval run artifacts (gitignored).
-
-    Delegates to the shared :mod:`run_store` so chatbot, survey, and web runs all
-    persist to (and are listed from) the same directory.
-    """
-    return run_store.default_runs_dir()
 
 
 def _normalize_prompts(value: Any) -> Optional[Dict[str, str]]:
@@ -96,7 +82,6 @@ class PersonaEvalService:
         simulator_factory: Callable[[str, str, str], Any],
         runner: Callable[..., Any] = _default_runner,
         engine: str = "gpt-4o-mini",
-        runs_dir: Optional[Path] = None,
     ) -> None:
         self._session_builder = session_builder
         self._get_persona = get_persona
@@ -104,7 +89,6 @@ class PersonaEvalService:
         self._simulator_factory = simulator_factory
         self._runner = runner
         self._engine = engine
-        self._runs_dir = Path(runs_dir) if runs_dir is not None else _default_runs_dir()
         self._guard = threading.Lock()
         self._progress: Dict[str, PersonaEvalProgress] = {}
 
@@ -155,71 +139,6 @@ class PersonaEvalService:
         with self._guard:
             progress = self._progress.get(job_id)
             return progress.to_view() if progress else None
-
-    # ------------------------------------------------------------------ #
-    # Persisted runs (durable artifacts under ``runs_dir``)
-    # ------------------------------------------------------------------ #
-    def _persist_run(self, job_id: str, result: Any) -> None:
-        """Write ``result.to_dict()`` (plus a top-level ``id``) atomically.
-
-        Best-effort: a write failure must not fail the run itself, so a finished
-        run still reports ``done`` even if its artifact could not be saved.
-        """
-        try:
-            payload = result.to_dict()
-        except Exception:  # noqa: BLE001 - non-serializable runner result
-            return
-        payload["id"] = job_id
-        try:
-            self._runs_dir.mkdir(parents=True, exist_ok=True)
-            target = self._runs_dir / "{}.json".format(job_id)
-            fd, tmp = tempfile.mkstemp(dir=str(self._runs_dir), suffix=".tmp")
-            try:
-                with os.fdopen(fd, "w", encoding="utf-8") as fh:
-                    json.dump(payload, fh, ensure_ascii=False, indent=2)
-                os.replace(tmp, str(target))
-            finally:
-                if os.path.exists(tmp):
-                    os.unlink(tmp)
-        except Exception:  # noqa: BLE001 - persistence is best-effort
-            return
-
-    def _load_run(self, path: Path) -> Optional[Dict[str, Any]]:
-        try:
-            with path.open("r", encoding="utf-8") as fh:
-                data = json.load(fh)
-            return data if isinstance(data, dict) else None
-        except Exception:  # noqa: BLE001 - skip unreadable/corrupt artifacts
-            return None
-
-    def list_runs(self) -> List[Dict[str, Any]]:
-        """Newest-first run summaries read from disk (chatbot, survey, and web).
-
-        Each summary carries an ``applicationType`` plus the chatbot fields
-        (``domain``/``goalContextId``/``numTurns`` — ``None`` for survey/web) and
-        a per-type ``overallRating``; corrupt/unreadable artifacts are skipped.
-        """
-        summaries = [
-            run_store.summarize_record(record)
-            for record in run_store.iter_run_records(self._runs_dir)
-        ]
-        summaries.sort(key=lambda s: s.get("createdAt") or "", reverse=True)
-        return summaries
-
-    def get_run(self, run_id: str) -> Optional[Dict[str, Any]]:
-        """The full stored result for ``run_id``, or ``None`` if absent.
-
-        Guarantees a top-level ``id`` even for legacy artifacts (e.g. CLI-written
-        runs keyed by persona id) that predate ``_persist_run``'s id injection, so
-        the ``PersonaEvalResultView`` response contract always holds.
-        """
-        path = self._runs_dir / "{}.json".format(run_id)
-        if not path.is_file():
-            return None
-        data = self._load_run(path)
-        if data is not None:
-            data["id"] = data.get("id") or run_id
-        return data
 
     def _run(
         self,
@@ -288,7 +207,6 @@ class PersonaEvalService:
                     created_at=now(),
                     on_event=on_event,
                 )
-                self._persist_run(progress.job_id, result)
                 try:
                     result_payload = result.to_dict()
                 except Exception:  # noqa: BLE001 - progress can finish without rich result metadata

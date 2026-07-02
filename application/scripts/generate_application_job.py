@@ -6,15 +6,31 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import sys
 from pathlib import Path
 
 import yaml
 
-from personabench.application_job import build_application_job_config
+from personabench.application_job import (
+    build_application_job_config,
+    collect_run_env_exports,
+)
 from personabench.persona_job import DEFAULT_DATASET, parse_stratify_field_args
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_JOBS_DIR = REPO_ROOT / "configs" / "jobs" / "application-task-job-recipe"
+_PERSONA_EVAL_BACKEND = REPO_ROOT / "application" / "persona_eval"
+_EXECUTION_MODES = frozenset({"auto", "force_docker", "smoke"})
+
+
+def _ensure_repo_import_paths() -> None:
+    for path in (str(REPO_ROOT), str(_PERSONA_EVAL_BACKEND)):
+        if path not in sys.path:
+            sys.path.insert(0, path)
+
+
+def _ensure_persona_eval_backend_on_path() -> None:
+    _ensure_repo_import_paths()
 
 
 def _display_path(path: Path) -> str:
@@ -34,12 +50,53 @@ def _default_job_name(
     task: str,
     stratify_fields: list[str],
     sample_size: int,
+    execution_mode: str,
 ) -> str:
     task_slug = _slug(Path(task).name)
+    mode_suffix = "" if execution_mode == "force_docker" else f"-{execution_mode}"
     if stratify_fields:
         dim_slug = "-".join(_slug(field.split(".")[-1]) for field in stratify_fields)
-        return f"{task_slug}-{dim_slug}-n{sample_size}"
-    return f"{task_slug}-n{sample_size}"
+        return f"{task_slug}{mode_suffix}-{dim_slug}-n{sample_size}"
+    return f"{task_slug}{mode_suffix}-n{sample_size}"
+
+
+def _format_run_env_comment(exports: list[tuple[str, str]]) -> str:
+    if not exports:
+        return ""
+    lines = ["# Run (after exporting API keys):"]
+    lines.append("#   export ANTHROPIC_API_KEY=...")
+    if any(name == "MATRIX_CHATBOT_DOMAIN" for name, _ in exports):
+        lines.append("#   export OPENAI_API_KEY=...   # user-sim engine default")
+    for name, value in exports:
+        lines.append(f"#   export {name}={value}")
+    lines.append(f"#   uv run harbor run -c <this-file>")
+    lines.append("#")
+    return "\n".join(lines) + "\n"
+
+
+def _resolve_auto_launch(
+    *,
+    task_path: str,
+    execution_mode: str,
+    agent_name: str | None,
+    repo_root: Path,
+) -> tuple[str, str]:
+    _ensure_persona_eval_backend_on_path()
+    from backend.service.harbor_job_service import resolve_agent_name, resolve_trial_profile
+
+    trial_profile = resolve_trial_profile(
+        task_path,
+        mode=execution_mode,
+        repo_root=repo_root,
+    )
+    agent = resolve_agent_name(
+        task_path,
+        repo_root=repo_root,
+        explicit=agent_name,
+        mode=execution_mode,
+        trial_profile=trial_profile,
+    )
+    return trial_profile, agent
 
 
 def main() -> None:
@@ -54,6 +111,13 @@ def main() -> None:
         type=int,
         default=1,
         help="Number of personas / trials (default: 1)",
+    )
+    parser.add_argument(
+        "--persona-ids",
+        nargs="*",
+        default=[],
+        metavar="ID",
+        help="Explicit persona ids (pool or application/persona_eval catalog). Skips random sampling.",
     )
     parser.add_argument(
         "--stratify",
@@ -78,6 +142,20 @@ def main() -> None:
     )
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument(
+        "--execution-mode",
+        choices=sorted(_EXECUTION_MODES),
+        default="force_docker",
+        help=(
+            "Harbor execution mode. Use 'auto' for json_survey / user_sim_chat host "
+            "profiles (default: force_docker)."
+        ),
+    )
+    parser.add_argument(
+        "--cua-backend",
+        default=None,
+        help="CUA backend override (e.g. macos, ios, docker) when execution-mode is auto.",
+    )
+    parser.add_argument(
         "--name",
         default=None,
         help="Job basename for output YAML (default: derived from task + stratify fields)",
@@ -87,7 +165,11 @@ def main() -> None:
         default=None,
         help="Harbor job_name / jobs/<job_name>/ directory (default: same as --name)",
     )
-    parser.add_argument("--agent-name", default="persona-claude-code")
+    parser.add_argument(
+        "--agent-name",
+        default=None,
+        help="Override Harbor agent (default: derived from task + execution mode)",
+    )
     parser.add_argument("--model-name", default="anthropic/claude-sonnet-4-6")
     parser.add_argument(
         "--out",
@@ -103,22 +185,37 @@ def main() -> None:
     else:
         stratify_fields = []
 
+    persona_ids = [value.strip() for value in args.persona_ids if value.strip()]
+    if persona_ids and stratify_fields:
+        parser.error("--persona-ids cannot be combined with --stratify")
+
+    execution_mode = args.execution_mode
+    trial_profile, resolved_agent = _resolve_auto_launch(
+        task_path=args.task,
+        execution_mode=execution_mode,
+        agent_name=args.agent_name,
+        repo_root=REPO_ROOT,
+    )
+    agent_name = args.agent_name or resolved_agent
+
     job_slug = args.name or _default_job_name(
         task=args.task,
         stratify_fields=stratify_fields,
-        sample_size=args.sample_size,
+        sample_size=len(persona_ids) if persona_ids else args.sample_size,
+        execution_mode=execution_mode,
     )
     job_name = args.job_name or job_slug
 
-    spec = {
+    spec: dict[str, object] = {
         "name": job_slug,
         "stratify_fields": stratify_fields,
-        "sample_size": args.sample_size,
         "seed": args.seed,
         "persona_pool": args.dataset,
         "task": args.task,
+        "execution_mode": execution_mode,
+        "trial_profile": trial_profile,
         "agent": {
-            "name": args.agent_name,
+            "name": agent_name,
             "model_name": args.model_name,
         },
         "job": {
@@ -127,12 +224,29 @@ def main() -> None:
             "n_attempts": 1,
             "n_concurrent_trials": 1,
             "timeout_multiplier": 1.0,
-            "environment": {"type": "docker", "delete": True},
         },
     }
+    if persona_ids:
+        spec["persona_ids"] = persona_ids
+    else:
+        spec["sample_size"] = args.sample_size
+    if args.cua_backend:
+        spec["cua_backend"] = args.cua_backend
+
+    if execution_mode == "force_docker" and not args.cua_backend:
+        spec["job"]["environment"] = {"type": "docker", "delete": True}
 
     job_config = build_application_job_config(spec, repo_root=REPO_ROOT)
     meta = job_config.pop("_job_meta")
+
+    if args.cua_backend:
+        from personabench.application_job import resolve_job_environment
+
+        job_config["environment"] = resolve_job_environment(
+            execution_mode=execution_mode,
+            trial_profile=trial_profile,
+            cua_backend=args.cua_backend,
+        )
 
     out_path = args.out
     if out_path is None:
@@ -142,18 +256,25 @@ def main() -> None:
         out_path = REPO_ROOT / out_path
     out_path.parent.mkdir(parents=True, exist_ok=True)
 
+    run_env_exports = collect_run_env_exports(
+        trial_profile=trial_profile,
+        task_path=args.task,
+        repo_root=REPO_ROOT,
+    )
     stratify_line = (
         ", ".join(stratify_fields) if stratify_fields else "none (random sample)"
     )
     header = (
         f"# Generated by application/scripts/generate_application_job.py\n"
         f"# Task: {args.task}\n"
+        f"# Execution mode: {execution_mode} | trial profile: {trial_profile}\n"
+        f"# Agent: {agent_name} | harbor task: {job_config['tasks'][0]['path']}\n"
         f"# Stratify: {stratify_line} | "
         f"sample={meta['sample_size']} from pool={meta['matched_pool_size']} | "
         f"seed={meta['seed']}\n"
         f"# Personas: {', '.join(meta['selected_persona_ids'])}\n"
         f"#\n"
-        f"#   uv run harbor run -c {_display_path(out_path)}\n\n"
+        f"{_format_run_env_comment(run_env_exports)}"
     )
     out_path.write_text(
         header + yaml.safe_dump(job_config, sort_keys=False),
@@ -166,9 +287,17 @@ def main() -> None:
     print(
         f"Matched {meta['matched_pool_size']} personas; selected {meta['sample_size']}"
     )
+    print(f"Execution mode: {execution_mode} | trial profile: {trial_profile}")
+    print(f"Agent: {agent_name} | harbor task: {job_config['tasks'][0]['path']}")
     print(f"Job: {out_path}")
     print(f"Meta: {sidecar}")
-    print(f"Run: uv run harbor run -c {_display_path(out_path)}")
+    print("Run:")
+    print("  export ANTHROPIC_API_KEY=...")
+    if any(name == "MATRIX_CHATBOT_DOMAIN" for name, _ in run_env_exports):
+        print("  export OPENAI_API_KEY=...   # user-sim engine default")
+    for name, value in run_env_exports:
+        print(f"  export {name}={value}")
+    print(f"  uv run harbor run -c {_display_path(out_path)}")
 
 
 if __name__ == "__main__":

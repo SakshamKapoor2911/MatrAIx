@@ -2,8 +2,16 @@
 
 import os
 from pathlib import Path
+from typing import TYPE_CHECKING
 
-from harbor.viewer.server import create_app
+if TYPE_CHECKING:
+    from fastapi import FastAPI
+
+
+def create_app(folder: Path, *, mode: str = "jobs") -> "FastAPI":
+    from harbor.viewer.server import create_app as _create_app
+
+    return _create_app(folder, mode=mode)
 
 
 def create_app_from_env():

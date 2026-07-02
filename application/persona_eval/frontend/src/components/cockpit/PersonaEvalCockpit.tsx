@@ -18,40 +18,53 @@
  * folds). Data is honest: real personas / goal-contexts / config / run shape
  * (real per-turn latency; no tokens or cost, which aren't tracked).
  */
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
 
-import { PersonaCatalog } from "./PersonaCatalog";
 import { RunHeader } from "./RunHeader";
-import { RunConfigBar } from "./RunConfigBar";
-import { ComponentPipeline } from "./ComponentPipeline";
-import { EnvironmentPanel } from "./EnvironmentPopover";
 import { Trajectory } from "./Trajectory";
 import { InspectorTabs, type InspectorTab } from "./InspectorTabs";
 import { Scorecard } from "./Scorecard";
-import { PersonaPanel } from "./PersonaPanel";
+import { InstructionPanel } from "./InstructionPanel";
 import { PersonaDrawer } from "./PersonaDrawer";
-import { PromptPanel } from "./PromptPanel";
 import { SurveyEvalCockpit } from "./SurveyEvalCockpit";
 import { WebEvalCockpit } from "./WebEvalCockpit";
-import { AppWorldEvalCockpit } from "./AppWorldEvalCockpit";
+import { CuaEvalCockpit } from "./CuaEvalCockpit";
 import { type PersonaEvalTaskType } from "./TaskTypeSwitch";
-import { FOCUS_RING, Sym, personaCodename, personaDescriptiveTitle } from "./cockpitShared";
 import { fmtDomain } from "../runsShared";
-import { listGoalContexts } from "@/lib/api";
-import { usePersonaEval, type PersonaEvalRunPhase } from "@/lib/usePersonaEval";
+import { CockpitSetupShell } from "./setup/CockpitSetupShell";
+import { PersonaSamplingRail } from "./setup/PersonaSamplingRail";
+import { CockpitPipelineDiagram } from "./setup/CockpitPipelineDiagram";
+import { TaskSelectionRail } from "./setup/TaskSelectionRail";
+import { BatchTrialGrid } from "./setup/BatchTrialGrid";
+import { CockpitLiveStage } from "./setup/CockpitLiveStage";
+import { RunLaunchBar } from "./setup/RunLaunchBar";
+import {
+  batchProgressPct as computeBatchProgressPct,
+  resolveRunLaunchPhase,
+  useCockpitBatchJob,
+} from "./setup/useCockpitBatchJob";
+import {
+  emptyPersonaDimensionFilters,
+  type PersonaSamplingMode,
+} from "./setup/personaSamplingTypes";
+import { api, listGoalContexts, ApiError } from "@/lib/api";
+import { useHarborCockpitRun, type HarborCockpitPhase } from "@/lib/useHarborCockpitRun";
+import { useCockpitInstruction } from "@/lib/useCockpitInstruction";
+import { mapChatbotDebriefToJobView, mapChatbotLiveToJobView, isRewardOnlyTrialFailure } from "@/lib/harborCockpitMappers";
+import { type PersonaEvalRunPhase } from "@/lib/usePersonaEval";
 import type {
   ApplicationId,
   ConfigOptionsResponse,
   ConfigOptionValue,
   Domain,
-  Engine,
   GoalContext,
   GoalContextsResponse,
-  PersonaModel,
   PersonaEvalJobView,
   PersonaEvalPersona,
+  ChatbotSidecarStatus,
 } from "@/lib/types";
+import { HARBOR_CHAT_TASKS, HARBOR_TASK_PATHS } from "@/lib/types";
 
 /** Per-app display name + icon (presentational; the data layer is app-agnostic). */
 const APP_NAME: Record<string, string> = {
@@ -59,21 +72,19 @@ const APP_NAME: Record<string, string> = {
   finance_openbb: "OpenBB",
   medical_assistant: "Medical Assistant",
 };
-const APP_ICON: Record<string, string> = {
-  recai: "recommend",
-  finance_openbb: "show_chart",
-  medical_assistant: "stethoscope",
-};
 
 /** Map the job's coarse phase into a single "what's happening now" line. */
 function liveStatusLine(
   job: PersonaEvalJobView | null,
-  phase: PersonaEvalRunPhase,
+  phase: HarborCockpitPhase,
   isRunning: boolean,
+  harborPhase?: string | null,
 ): string | null {
-  if (phase === "building") return "Starting the app. The first reply can take up to a minute.";
+  if (phase === "launching") return "Launching Harbor job…";
   if (!isRunning) return null;
-  const raw = (job?.phase ?? "").toLowerCase();
+  const raw = (harborPhase ?? job?.phase ?? "").toLowerCase();
+  if (raw.includes("harbor")) return "Harbor is running the trial…";
+  if (raw.includes("trial")) return "Waiting for trial artifacts…";
   if (raw.includes("persona") || raw.includes("user") || raw.includes("simulat")) return "The simulated user is typing…";
   if (raw.includes("chatbot") || raw.includes("application") || raw.includes("agent") || raw.includes("recai") || raw.includes("turn"))
     return "The app is thinking…";
@@ -112,75 +123,107 @@ export interface PersonaEvalCockpitProps {
   options: ConfigOptionsResponse | null;
   /** Navigate to the Runs surface. */
   onOpenRuns: () => void;
+  /** Open a Harbor batch job detail in the Runs sub-view. */
+  onOpenHarborJob?: (jobName: string) => void;
+  /** Open a Harbor trial debrief in the Runs sub-view. */
+  onOpenHarborTrial?: (jobName: string, trialName: string) => void;
   /** Report the active run domain up (so the shared catalog drawer can match it). */
   onDomainChange?: (domain: Domain) => void;
   /** Report the honest footer context up (task type + active app/instrument/site). */
   onFooterContextChange?: (context: string) => void;
 }
 
+/** Keep inactive cockpits mounted (hidden) so setup + run state survives type switches. */
+function CockpitPanel({ active, children }: { active: boolean; children: ReactNode }) {
+  return (
+    <div
+      className={active ? "flex min-h-0 flex-1 flex-col overflow-hidden" : "hidden"}
+      aria-hidden={!active}
+    >
+      {children}
+    </div>
+  );
+}
+
 export function PersonaEvalCockpit({
   options,
   onOpenRuns,
+  onOpenHarborJob,
+  onOpenHarborTrial,
   onDomainChange,
   onFooterContextChange,
 }: PersonaEvalCockpitProps) {
   const [taskType, setTaskType] = useState<PersonaEvalTaskType>("chatbot");
-  if (taskType === "survey") {
+
     return (
+    <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
+      <CockpitPanel active={taskType === "chatbot"}>
+        <ChatbotEvalCockpit
+          options={options}
+          onOpenRuns={onOpenRuns}
+          onOpenHarborJob={onOpenHarborJob}
+          onOpenHarborTrial={onOpenHarborTrial}
+          onDomainChange={onDomainChange}
+          onFooterContextChange={onFooterContextChange}
+          taskType={taskType}
+          onTaskTypeChange={setTaskType}
+          isActive={taskType === "chatbot"}
+        />
+      </CockpitPanel>
+      <CockpitPanel active={taskType === "survey"}>
       <SurveyEvalCockpit
         options={options}
         taskType={taskType}
         onTaskTypeChange={setTaskType}
         onFooterContextChange={onFooterContextChange}
-      />
-    );
-  }
-  if (taskType === "web") {
-    return (
+        onOpenHarborJob={onOpenHarborJob}
+        onOpenHarborTrial={onOpenHarborTrial}
+          isActive={taskType === "survey"}
+        />
+      </CockpitPanel>
+      <CockpitPanel active={taskType === "web"}>
       <WebEvalCockpit
         options={options}
         taskType={taskType}
         onTaskTypeChange={setTaskType}
         onFooterContextChange={onFooterContextChange}
-      />
-    );
-  }
-  if (taskType === "appworld") {
-    return (
-      <AppWorldEvalCockpit
+        onOpenHarborJob={onOpenHarborJob}
+        onOpenHarborTrial={onOpenHarborTrial}
+          isActive={taskType === "web"}
+        />
+      </CockpitPanel>
+      <CockpitPanel active={taskType === "cua"}>
+        <CuaEvalCockpit
         options={options}
         taskType={taskType}
         onTaskTypeChange={setTaskType}
         onFooterContextChange={onFooterContextChange}
-      />
-    );
-  }
-  return (
-    <ChatbotEvalCockpit
-      options={options}
-      onOpenRuns={onOpenRuns}
-      onDomainChange={onDomainChange}
-      onFooterContextChange={onFooterContextChange}
-      taskType={taskType}
-      onTaskTypeChange={setTaskType}
+      onOpenHarborJob={onOpenHarborJob}
+      onOpenHarborTrial={onOpenHarborTrial}
+          isActive={taskType === "cua"}
     />
+      </CockpitPanel>
+    </div>
   );
 }
 
 interface ChatbotEvalCockpitProps extends PersonaEvalCockpitProps {
   taskType: PersonaEvalTaskType;
   onTaskTypeChange: (value: PersonaEvalTaskType) => void;
+  isActive: boolean;
 }
 
 function ChatbotEvalCockpit({
   options,
-  onOpenRuns,
+  onOpenHarborJob,
   onDomainChange,
   onFooterContextChange,
   taskType,
   onTaskTypeChange,
+  isActive,
 }: ChatbotEvalCockpitProps) {
-  const { run, job, phase, isRunning, error, timedOut, retry, reset } = usePersonaEval();
+  const { run, job, phase, isRunning, error, timedOut, retry, reset, harborPhase, harborJobName, harborTrialName } =
+    useHarborCockpitRun<PersonaEvalJobView>();
 
   // --- Selection + run knobs ---------------------------------------------
   const [persona, setPersona] = useState<PersonaEvalPersona | null>(null);
@@ -194,7 +237,40 @@ function ChatbotEvalCockpit({
   );
   const [goalContextId, setGoalContextId] = useState<string | null>(null);
   const [maxTurns, setMaxTurns] = useState<number>(8);
+  const [sidecarStartingId, setSidecarStartingId] = useState<string | null>(null);
+  const [sidecarActionError, setSidecarActionError] = useState<string | null>(null);
+  const [samplingMode, setSamplingMode] = useState<PersonaSamplingMode>("single");
+  const [selectedPersonaIds, setSelectedPersonaIds] = useState<string[]>([]);
+  const [groupFilters, setGroupFilters] = useState(emptyPersonaDimensionFilters());
+  const [stratifyFields, setStratifyFields] = useState<string[]>(["age_bracket", "region"]);
+  const [sampleSize, setSampleSize] = useState(4);
+  const [seed] = useState(42);
+  const [parallelTrials, setParallelTrials] = useState(2);
+  const [launchError, setLaunchError] = useState<string | null>(null);
+  const {
+    batchJobName,
+    setBatchJobName,
+    batchLive,
+    clearBatch,
+    isBatchActive,
+    batchComplete,
+    batchGridCells,
+    expectedTrialCount,
+  } = useCockpitBatchJob(selectedPersonaIds, parallelTrials);
   const [exportSnapshot, setExportSnapshot] = useState<ExportSnapshot | null>(null);
+
+  useEffect(() => {
+    const id = selectedPersonaIds[0];
+    if (!id) {
+      setPersona(null);
+      return;
+    }
+    setPersona({
+      id,
+      name: `persona-${id}`,
+      source: "bench-dev-sample",
+    });
+  }, [selectedPersonaIds]);
 
   // Adopt the canonical defaults once config metadata arrives.
   const adoptedDefaults = useRef(false);
@@ -229,6 +305,41 @@ function ChatbotEvalCockpit({
   const activeGoalContext =
     goalContexts.find((g) => g.id === (goalContextId ?? goalContexts[0]?.id)) ?? null;
 
+  useEffect(() => {
+    if (!goalContextId && goalContexts[0]?.id) {
+      setGoalContextId(goalContexts[0].id);
+    }
+  }, [goalContextId, goalContexts]);
+
+  const sidecarsQuery = useQuery({
+    queryKey: ["chatbot-sidecars"],
+    queryFn: api.getChatbotSidecars,
+    refetchInterval: sidecarStartingId ? 3_000 : 15_000,
+  });
+  const sidecarsByApp = useMemo(() => {
+    const map: Record<string, ChatbotSidecarStatus> = {};
+    for (const sidecar of sidecarsQuery.data?.sidecars ?? []) {
+      map[sidecar.applicationId] = sidecar;
+    }
+    return map;
+  }, [sidecarsQuery.data]);
+
+  const handleStartSidecar = useCallback(
+    async (appId: string) => {
+      setSidecarActionError(null);
+      setSidecarStartingId(appId);
+      try {
+        await api.startChatbotSidecar(appId);
+        await sidecarsQuery.refetch();
+      } catch (e) {
+        setSidecarActionError(e instanceof Error ? e.message : "Failed to start sidecar");
+      } finally {
+        setSidecarStartingId(null);
+      }
+    },
+    [sidecarsQuery],
+  );
+
   // Live persona + controls, mirrored to a ref so the "run finished" effect can
   // freeze them without re-running when a control changes.
   const liveControls = useMemo<ExportSnapshot>(
@@ -260,7 +371,6 @@ function ChatbotEvalCockpit({
   const [expandedTurns, setExpandedTurns] = useState<Set<number>>(new Set());
   const [focusedTurnIndex, setFocusedTurnIndex] = useState<number | null>(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [pickerOpen, setPickerOpen] = useState(false);
   const turnRefs = useRef<Map<number, HTMLDivElement>>(new Map());
 
   // --- Elapsed clock (live status bar) -----------------------------------
@@ -273,12 +383,11 @@ function ChatbotEvalCockpit({
   }, [isRunning]);
 
   const turns = useMemo(() => job?.turns ?? [], [job]);
+  const draftTurn = job?.draftTurn ?? null;
   const sutDescription = job?.sutDescription ?? null;
-  const status = liveStatusLine(job, phase, isRunning);
+  const status = liveStatusLine(job, phase, isRunning, harborPhase);
   const questionnaire = job?.questionnaire ?? null;
   const metrics = job?.metricScores ?? null;
-  const prompts = job?.prompts ?? null;
-
   const applicationOptions: ConfigOptionValue[] = useMemo(() => {
     const knob = (options?.knobs ?? []).find((k) => k.key === "applicationId");
     return knob?.options ?? [];
@@ -288,8 +397,9 @@ function ChatbotEvalCockpit({
 
   // Report the honest footer context up (task type + app + domain for RecAI).
   useEffect(() => {
+    if (!isActive) return;
     onFooterContextChange?.(`chatbot · ${runContext}`);
-  }, [runContext, onFooterContextChange]);
+  }, [isActive, runContext, onFooterContextChange]);
 
   // --- Actions ------------------------------------------------------------
   const handleRun = useCallback(() => {
@@ -297,18 +407,81 @@ function ChatbotEvalCockpit({
     setExpandedTurns(new Set());
     setFocusedTurnIndex(null);
     setExportSnapshot(null);
+    setLaunchError(null);
     runStartedAtRef.current = Date.now();
-    run({
-      domain: requestDomain,
-      applicationId,
-      applicationContext,
+    const taskPath = HARBOR_CHAT_TASKS[applicationId] ?? HARBOR_TASK_PATHS.chatbot;
+    void run({
+      taskPath,
       personaId: persona.id,
-      goalContextId: goalContextId ?? undefined,
-      maxTurns,
-      engine: engine as Engine,
-      personaModel: personaModel as PersonaModel,
+      personaModel,
+      mode: "auto",
+      chatDomain: requestDomain,
+      chatApplicationId: applicationId,
+      chatApplicationContext: requestDomain,
+      chatGoalContextId: goalContextId ?? "scenario_default",
+      chatMaxTurns: maxTurns,
+      mapDebrief: (debrief, ctx) =>
+        mapChatbotDebriefToJobView(debrief, ctx, {
+          personaId: persona.id,
+          personaName: persona.name,
+          domain: requestDomain,
+          applicationId,
+        }),
+      mapLive: (live, ctx) =>
+        mapChatbotLiveToJobView(live, ctx, {
+          personaId: persona.id,
+          personaName: persona.name,
+          domain: requestDomain,
+          applicationId,
+          goalContextId: goalContextId ?? "scenario_default",
+        }),
     });
-  }, [persona, isRunning, run, requestDomain, applicationId, applicationContext, goalContextId, maxTurns, engine, personaModel]);
+  }, [persona, isRunning, run, applicationId, personaModel, requestDomain, goalContextId, maxTurns]);
+
+  const isBatchRun = samplingMode !== "single" || selectedPersonaIds.length > 1;
+
+  const handleLaunch = useCallback(async () => {
+    if (selectedPersonaIds.length === 0 || isRunning) return;
+    if (isBatchRun) {
+      setLaunchError(null);
+      try {
+        const taskPath = HARBOR_CHAT_TASKS[applicationId] ?? HARBOR_TASK_PATHS.chatbot;
+        const launched = await api.launchHarborJob({
+          taskPath,
+          sampleSize: selectedPersonaIds.length,
+          seed,
+          personaModel,
+          personaIds: selectedPersonaIds,
+          nConcurrentTrials: Math.min(parallelTrials, selectedPersonaIds.length),
+          mode: "auto",
+          chatDomain: requestDomain,
+          chatApplicationId: applicationId,
+          chatApplicationContext: requestDomain,
+          chatGoalContextId: goalContextId ?? "scenario_default",
+          chatMaxTurns: maxTurns,
+        });
+        setBatchJobName(launched.jobName);
+      } catch (exc) {
+        const message = exc instanceof ApiError ? exc.message : exc instanceof Error ? exc.message : String(exc);
+        setLaunchError(message);
+      }
+      return;
+    }
+    handleRun();
+  }, [
+    selectedPersonaIds,
+    isRunning,
+    isBatchRun,
+    applicationId,
+    seed,
+    personaModel,
+    parallelTrials,
+    requestDomain,
+    goalContextId,
+    maxTurns,
+    onOpenHarborJob,
+    handleRun,
+  ]);
 
   const handleRetry = useCallback(() => {
     if (timedOut || phase === "error") retry();
@@ -317,11 +490,11 @@ function ChatbotEvalCockpit({
 
   const handleNewRun = useCallback(() => {
     reset();
+    clearBatch();
+    setLaunchError(null);
     setFocusedTurnIndex(null);
     setExpandedTurns(new Set());
-  }, [reset]);
-
-  const handleSelectPersona = useCallback((next: PersonaEvalPersona) => setPersona(next), []);
+  }, [reset, clearBatch]);
 
   const registerTurnRef = useCallback((index: number, el: HTMLDivElement | null) => {
     if (el) turnRefs.current.set(index, el);
@@ -375,6 +548,8 @@ function ChatbotEvalCockpit({
     URL.revokeObjectURL(url);
   }, [exportSnapshot, turns, questionnaire, metrics]);
 
+  const canExport = exportSnapshot !== null && turns.length > 0;
+
   // --- Keyboard shortcuts -------------------------------------------------
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
@@ -383,7 +558,7 @@ function ChatbotEvalCockpit({
         case "r":
         case "R":
           e.preventDefault();
-          handleRun();
+          void handleLaunch();
           break;
         case "j":
         case "J":
@@ -401,11 +576,7 @@ function ChatbotEvalCockpit({
           break;
         case "2":
           e.preventDefault();
-          setTab("persona");
-          break;
-        case "3":
-          e.preventDefault();
-          setTab("prompts");
+          setTab("instruction");
           break;
         case "e":
         case "E":
@@ -418,468 +589,221 @@ function ChatbotEvalCockpit({
     }
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
-  }, [handleRun, moveFocus, toggleExpandAll]);
+  }, [handleLaunch, moveFocus, toggleExpandAll]);
 
   const knobs = options?.knobs ?? [];
-  const environment = options?.environment ?? null;
-  const showSetup = phase === "idle";
-  const canExport = exportSnapshot !== null && turns.length > 0;
+  const personaModelKnob = knobs.find((k) => k.key === "personaModel");
+  const personaModelOptions =
+    personaModelKnob?.options.map((o) => ({ value: o.value, label: o.label })) ?? [
+      { value: personaModel, label: personaModel },
+    ];
+  const engineKnob = knobs.find((k) => k.key === "engine");
+  const engineOptions = engineKnob?.options ?? [];
+  const domainKnob = knobs.find((k) => k.key === "domain");
+  const domainOptions =
+    applicationId === "recai"
+      ? (domainKnob?.options ?? []).map((o) => ({ ...o, label: fmtDomain(o.label) }))
+      : [];
+  const chatTransport =
+    applicationId === "finance_openbb" ? "mcp" : applicationId === "medical_assistant" ? "api" : "sidecar";
+  const verifierOnlyFailure = isRewardOnlyTrialFailure(error ?? job?.error ?? null, {
+    transcript: turns,
+    questionnaire: questionnaire ?? undefined,
+  });
+  const pipelinePhase = (
+    !verifierOnlyFailure && (job?.status === "error" || phase === "error")
+      ? "error"
+      : phase === "launching"
+        ? "building"
+        : phase
+  ) as PersonaEvalRunPhase;
   const elapsedSeconds =
     isRunning && runStartedAtRef.current ? Math.max(0, Math.floor((Date.now() - runStartedAtRef.current) / 1000)) : 0;
+  const showLiveCenter = phase !== "idle" || Boolean(batchJobName);
+  const showInspector = phase !== "idle" && !batchJobName;
+  const runBusy = isRunning || isBatchActive;
+  const chatTaskPath = HARBOR_CHAT_TASKS[applicationId] ?? HARBOR_TASK_PATHS.chatbot;
+  const instructionView = useCockpitInstruction({
+    taskPath: chatTaskPath,
+    fallbackTitle: appName,
+    harborJobName,
+    harborTrialName,
+    enabled: phase !== "idle",
+  });
 
-  // ---------------------------------------------------------------------------
-  // IDLE: the centered "Configure a simulation" setup form.
-  // ---------------------------------------------------------------------------
-  const setupView = (
-    <div className="flex min-h-0 flex-1 flex-col">
-      <div className="custom-scrollbar flex-1 overflow-y-auto bg-surface-dim">
-        <div className="mx-auto w-full max-w-[1180px] px-6 py-7">
-          <RunHeader taskType={taskType} onTaskTypeChange={onTaskTypeChange} running={isRunning} />
-
-          <div className="mb-5">
-            <ComponentPipeline
-              variant="setup"
-              environment={environment}
-              engine={engine}
-              personaModel={personaModel}
-              phase={phase}
-              jobPhase={job?.phase}
-              hasPersona={persona !== null}
-              turnCount={turns.length}
-              hasQuestionnaire={questionnaire !== null}
-            />
-          </div>
-
-          <div className="grid grid-cols-1 gap-5 lg:grid-cols-12">
-            {/* LEFT (8) */}
-            <div className="space-y-5 lg:col-span-8">
-              <ApplicationPicker
-                options={applicationOptions}
-                value={applicationId}
-                onChange={(v) => setApplicationId(v as ApplicationId)}
-                disabled={isRunning}
-              />
-              <RunConfigBar
-                knobs={knobs}
-                goalContexts={goalContexts}
-                applicationId={applicationId}
-                engine={engine}
-                onEngine={setEngine}
-                personaModel={personaModel}
-                onPersonaModel={setPersonaModel}
-                domain={domain}
-                onDomain={setDomain}
-                goalContextId={goalContextId}
-                onGoalContext={setGoalContextId}
-                maxTurns={maxTurns}
-                onMaxTurns={setMaxTurns}
-                disabled={isRunning}
-              />
-              <TargetPersonaPanel persona={persona} onChange={() => setPickerOpen(true)} />
-            </div>
-
-            {/* RIGHT (4) */}
-            <div className="space-y-5 lg:col-span-4">
-              <EnvironmentPanel environment={environment} applicationId={applicationId} />
-
-              {error && (
-                <div className="rise-in rounded-md border border-danger/40 bg-danger/10 p-3">
-                  <div className="flex items-start gap-2">
-                    <Sym name="error" fill={1} size={18} className="mt-0.5 text-danger" />
-                    <div className="min-w-0">
-                      <p className="text-[12px] font-semibold text-text-main">Couldn&apos;t start the run</p>
-                      <p className="mt-0.5 break-words text-[11px] text-text-variant">{error}</p>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              <button
-                type="button"
-                onClick={handleRun}
-                disabled={!persona || isRunning}
-                title={!persona ? "Choose a persona first." : undefined}
-                className={`glow flex w-full items-center justify-center gap-2.5 rounded-md bg-primary py-4 text-on-primary transition ease-out hover:bg-primary-dim active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-55 disabled:active:scale-100 ${FOCUS_RING}`}
-              >
-                <Sym name="play_arrow" fill={1} size={20} />
-                <span className="font-display text-[18px] font-bold tracking-tight">Run eval</span>
-              </button>
-              <p className="text-center text-[11px] leading-relaxed text-text-variant">
-                A simulated user chats with the app for a few turns, then rates how well it understood and met their needs.
-              </p>
-              <div className="flex items-center justify-center pt-1">
-                <button
-                  type="button"
-                  onClick={onOpenRuns}
-                  className={`hud text-[9px] text-primary underline-offset-2 transition-opacity hover:underline active:opacity-70 ${FOCUS_RING}`}
-                >
-                  Past runs →
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  const runLaunchPhase = resolveRunLaunchPhase(
+    batchJobName,
+    batchComplete,
+    batchLive.error,
+    phase,
   );
 
-  // ---------------------------------------------------------------------------
-  // RUNNING / DONE: the live-run layout.
-  // ---------------------------------------------------------------------------
-  const liveView = (
-    <div className="flex min-h-0 flex-1 flex-col bg-surface-dim">
-      {/* Pipeline strip */}
-      <div className="shrink-0 border-b border-outline bg-surface-lowest px-5 py-3">
-        <div className="flex items-center gap-3">
-          <ComponentPipeline
-            variant="live"
-            environment={environment}
-            engine={engine}
-            personaModel={personaModel}
-            phase={phase}
-            jobPhase={job?.phase}
-            hasPersona={persona !== null}
-            turnCount={turns.length}
-            hasQuestionnaire={questionnaire !== null}
-          />
-          <div className="ml-auto flex shrink-0 items-center gap-3">
-            <span className="hud hidden text-[9px] text-text-dim sm:inline">{runContext}</span>
-            <button
-              type="button"
-              onClick={handleNewRun}
-              className={`flex items-center gap-1.5 rounded-md border border-outline bg-surface-low px-3 py-1.5 text-[12px] text-text-variant transition ease-out hover:border-primary hover:text-text-main active:scale-[0.98] ${FOCUS_RING}`}
-            >
-              <Sym name="tune" size={14} />
-              New run
-            </button>
-          </div>
-        </div>
-      </div>
+  const runProgressPct = batchJobName
+    ? computeBatchProgressPct(
+        batchJobName,
+        batchLive.live?.completedTrials,
+        expectedTrialCount,
+      )
+    : pipelinePhase === "done"
+      ? 100
+      : pipelinePhase === "building"
+        ? 12
+        : pipelinePhase === "running"
+          ? Math.min(100, Math.round((turns.length / Math.max(1, maxTurns)) * 100))
+          : 0;
 
-      {/* Body: thread + inspector */}
-      <div className="flex min-h-0 flex-1 flex-col overflow-hidden lg:flex-row">
+  const runProgressLabel = batchJobName
+    ? `Harbor job · ${batchLive.live?.completedTrials ?? 0}/${expectedTrialCount} trials`
+    : pipelinePhase === "building"
+      ? "Starting the app…"
+      : pipelinePhase === "running"
+        ? `Turn ${turns.length} of ${maxTurns} · ${elapsedSeconds}s`
+        : pipelinePhase === "done"
+          ? `Run complete · ${turns.length} turn${turns.length === 1 ? "" : "s"}`
+          : pipelinePhase === "error" || pipelinePhase === "timeout"
+            ? error ?? "The run stopped before completing."
+            : undefined;
+
+  const cockpitView = (
+    <CockpitSetupShell
+      header={<RunHeader taskType={taskType} onTaskTypeChange={onTaskTypeChange} />}
+      left={
+        <PersonaSamplingRail
+                personaModel={personaModel}
+          onPersonaModelChange={setPersonaModel}
+          personaModelOptions={personaModelOptions}
+          mode={samplingMode}
+          onModeChange={setSamplingMode}
+          selectedPersonaIds={selectedPersonaIds}
+          onSelectedPersonaIdsChange={setSelectedPersonaIds}
+          sampleSize={sampleSize}
+          onSampleSizeChange={setSampleSize}
+          seed={seed}
+          filters={groupFilters}
+          onFiltersChange={setGroupFilters}
+          stratifyFields={stratifyFields}
+          onStratifyFieldsChange={setStratifyFields}
+          disabled={runBusy}
+        />
+      }
+      center={
+        <div className="flex h-full min-h-0 w-full flex-col gap-2">
+          {showLiveCenter ? (
+            <CockpitLiveStage className="min-h-0 flex-1">
+              {batchJobName ? (
+                <BatchTrialGrid trials={batchGridCells} jobLabel={batchJobName} />
+              ) : (
         <Trajectory
           turns={turns}
+                  draftTurn={draftTurn}
+                  livePhase={job?.phase ?? harborPhase}
           domain={domain}
           appName={appName}
           sutDescription={sutDescription}
           goalContext={activeGoalContext}
-          phase={phase}
+          phase={pipelinePhase}
           liveStatus={status}
-          error={error}
+          error={verifierOnlyFailure ? null : error}
           expandedTurns={expandedTurns}
           onToggleTurn={toggleTurnFold}
           focusedTurnIndex={focusedTurnIndex}
           registerTurnRef={registerTurnRef}
           onRetry={handleRetry}
         />
+              )}
+            </CockpitLiveStage>
+          ) : (
+            <div className="flex min-h-0 flex-1 flex-col">
+              <CockpitPipelineDiagram
+                className="h-full"
+                taskType={taskType}
+                chatTransport={chatTransport}
+                hasPersona={selectedPersonaIds.length > 0}
+                hasTask={Boolean(applicationId)}
+              />
+            </div>
+          )}
+          <RunLaunchBar
+            canRun={selectedPersonaIds.length > 0 && !runBusy}
+            isBatch={isBatchRun}
+            personaCount={selectedPersonaIds.length}
+            parallelTrials={parallelTrials}
+            onParallelTrialsChange={setParallelTrials}
+            isRunning={runBusy}
+            onRun={() => void handleLaunch()}
+            error={launchError ?? (verifierOnlyFailure ? null : error) ?? batchLive.error}
+            runPhase={runLaunchPhase}
+            progressPct={runProgressPct}
+            progressLabel={runProgressLabel}
+            progressSublabel={
+              batchJobName && batchComplete
+                ? "All trials finished — open Runs for debrief."
+                : undefined
+            }
+            onNewRun={showLiveCenter ? handleNewRun : undefined}
+            onViewJob={
+              batchJobName && batchComplete && onOpenHarborJob
+                ? () => onOpenHarborJob(batchJobName)
+                : undefined
+            }
+            onDownload={!batchJobName ? handleExport : undefined}
+            canDownload={canExport}
+          />
+        </div>
+      }
+      right={
+        showInspector ? (
         <InspectorTabs
           active={tab}
           onChange={setTab}
-          evaluation={<Scorecard questionnaire={questionnaire} metrics={metrics} phase={phase} />}
-          persona={<PersonaPanel persona={persona} context={null} onOpenRaw={() => setDrawerOpen(true)} />}
-          prompts={<PromptPanel prompts={prompts} />}
+          evaluation={<Scorecard questionnaire={questionnaire} metrics={metrics} phase={pipelinePhase} />}
+          instruction={
+            <InstructionPanel
+              title={instructionView.title}
+              markdown={instructionView.markdown}
+              loading={instructionView.loading}
+              error={instructionView.error}
+            />
+          }
         />
-      </div>
-
-      {/* Bottom status bar */}
-      <LiveStatusBar
-        phase={phase}
-        turnCount={turns.length}
-        maxTurns={maxTurns}
-        elapsedSeconds={elapsedSeconds}
-        jobId={job?.jobId ?? null}
-        error={error}
-        canExport={canExport}
-        onExport={handleExport}
-        onOpenRuns={onOpenRuns}
-        onRetry={handleRetry}
-      />
-    </div>
-  );
-
-  return (
-    <>
-      {showSetup ? setupView : liveView}
-      <PersonaPickerModal
-        open={pickerOpen}
-        onClose={() => setPickerOpen(false)}
-        selectedId={persona?.id ?? null}
-        onSelect={handleSelectPersona}
-      />
-      <PersonaDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} persona={persona} context={null} />
-    </>
-  );
-}
-
-// ---------------------------------------------------------------------------
-// Setup-form sub-components (presentational, local to the cockpit).
-// ---------------------------------------------------------------------------
-
-/** The 3-card application picker (RecAI / OpenBB / Medical), mockup `:148-168`. */
-function ApplicationPicker({
-  options,
-  value,
-  onChange,
-  disabled,
-}: {
-  options: ConfigOptionValue[];
-  value: string;
-  onChange: (value: string) => void;
-  disabled?: boolean;
-}) {
-  if (options.length === 0) return null;
-  return (
-    <div className="panel rounded-md border border-outline bg-surface p-5">
-      <div className="mb-3.5 flex items-center justify-between">
-        <h3 className="hud text-[10px] text-text-dim">Application</h3>
-        <span className="hud text-[9px] text-text-dim">{options.length} adapters</span>
-      </div>
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-        {options.map((opt) => {
-          const active = opt.value === value;
-          return (
-            <button
-              key={opt.value}
-              type="button"
-              disabled={disabled}
-              aria-pressed={active}
-              onClick={() => onChange(opt.value)}
-              className={`relative rounded-md border p-3.5 text-left transition-all ease-out hover:border-primary active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60 disabled:active:scale-100 ${FOCUS_RING} ${
-                active ? "border-primary bg-primary/[0.07]" : "border-outline bg-surface-low hover:bg-surface"
-              }`}
-            >
-              {active && <Sym name="check" size={14} className="absolute right-3 top-3 text-primary" />}
-              <div className="mb-3 grid h-9 w-9 place-items-center rounded border border-outline bg-surface-high">
-                <Sym name={APP_ICON[opt.value] ?? "apps"} size={20} className={active ? "text-primary" : "text-text-variant"} />
-              </div>
-              <div className="text-[13px] font-semibold text-text-main">{opt.label}</div>
-              <div className="mt-0.5 line-clamp-2 text-[11px] leading-snug text-text-variant">{opt.description}</div>
-            </button>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-
-/** The "Target persona" panel: avatar + identity + Change, mockup `:233-244`. */
-function TargetPersonaPanel({ persona, onChange }: { persona: PersonaEvalPersona | null; onChange: () => void }) {
-  const title = persona ? personaDescriptiveTitle(null, persona.blurb, persona.source) : null;
-  const codename = persona ? personaCodename(persona.name, persona.id) : null;
-
-  return (
-    <div className="panel rounded-md border border-outline bg-surface p-5">
-      <div className="mb-3.5 flex items-center justify-between">
-        <h3 className="hud text-[10px] text-text-dim">Target persona</h3>
-        <button type="button" onClick={onChange} className={`hud text-[9px] text-primary underline-offset-2 transition-opacity hover:underline active:opacity-70 ${FOCUS_RING}`}>
-          Browse catalog →
-        </button>
-      </div>
-      {persona ? (
-        <div className="rise-in flex items-center gap-4">
-          <div className="grid h-14 w-14 shrink-0 place-items-center rounded-md border border-outline bg-surface-high">
-            <Sym name="face" fill={1} size={24} className="text-primary" />
-          </div>
-          <div className="min-w-0 flex-1">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="min-w-0 break-words font-display text-[16px] font-semibold text-text-main">{title}</span>
-              {persona.source && (
-                <span className="hud rounded border border-secondary/30 bg-secondary/10 px-1.5 py-0.5 text-[8px] text-secondary">
-                  {persona.source}
-                </span>
-              )}
-              <span className="font-mono text-[10px] text-text-dim">{codename}</span>
-            </div>
-            <p className="mt-0.5 line-clamp-2 text-[12px] leading-snug text-text-variant">{persona.blurb}</p>
-          </div>
-          <button
-            type="button"
-            onClick={onChange}
-            className={`shrink-0 rounded-md border border-outline bg-surface-low px-3 py-1.5 text-[12px] text-text-variant transition ease-out hover:border-primary hover:text-text-main active:scale-[0.98] ${FOCUS_RING}`}
-          >
-            Change
-          </button>
-        </div>
-      ) : (
-        <button
-          type="button"
-          onClick={onChange}
-          className={`flex w-full items-center gap-4 rounded-md border border-dashed border-outline bg-surface-low p-3 text-left transition ease-out hover:border-primary hover:bg-surface active:scale-[0.99] ${FOCUS_RING}`}
-        >
-          <div className="grid h-14 w-14 shrink-0 place-items-center rounded-md border border-dashed border-outline bg-surface-high">
-            <Sym name="person_search" size={24} className="text-text-dim" />
-          </div>
-          <div>
-            <div className="font-display text-[16px] font-semibold text-text-main">Choose a persona</div>
-            <p className="mt-0.5 text-[12px] leading-snug text-text-variant">
-              PersonaEval needs a target persona before it can run.
-            </p>
-          </div>
-        </button>
-      )}
-    </div>
-  );
-}
-
-/** A modal that hosts the existing `PersonaCatalog` for selecting a persona. */
-function PersonaPickerModal({
-  open,
-  onClose,
-  selectedId,
-  onSelect,
-}: {
-  open: boolean;
-  onClose: () => void;
-  selectedId: string | null;
-  onSelect: (persona: PersonaEvalPersona) => void;
-}) {
-  useEffect(() => {
-    if (!open) return;
-    function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") onClose();
-    }
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, [open, onClose]);
-
-  if (!open) return null;
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <div className="fade-in absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} aria-hidden />
-      <div
-        role="dialog"
-        aria-modal="true"
-        aria-label="Choose a persona"
-        className="pop-in relative z-10 flex h-[80vh] w-full max-w-[380px] flex-col overflow-hidden rounded-md border border-outline bg-surface-lowest shadow-2xl"
-      >
-        <div className="flex shrink-0 items-center justify-between border-b border-outline px-4 py-3">
-          <span className="hud text-[10px] text-primary">Choose a persona</span>
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Close"
-            className={`grid h-8 w-8 place-items-center rounded-md border border-outline text-text-variant transition ease-out hover:border-primary hover:text-text-main active:scale-95 ${FOCUS_RING}`}
-          >
-            <Sym name="close" size={18} />
-          </button>
-        </div>
-        <div className="flex min-h-0 flex-1 [&_aside]:!h-full [&_aside]:!w-full [&_aside]:!border-0">
-          <PersonaCatalog
-            selectedId={selectedId}
-            onSelect={(p) => {
-              onSelect(p);
-              onClose();
-            }}
-          />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/** The live-run bottom status bar (mockup `:537-547`). */
-function LiveStatusBar({
-  phase,
-  turnCount,
-  maxTurns,
-  elapsedSeconds,
-  jobId,
-  error,
-  canExport,
-  onExport,
-  onOpenRuns,
-  onRetry,
-}: {
-  phase: PersonaEvalRunPhase;
-  turnCount: number;
-  maxTurns: number;
-  elapsedSeconds: number;
-  jobId: string | null;
-  error: string | null;
-  canExport: boolean;
-  onExport: () => void;
-  onOpenRuns: () => void;
-  onRetry: () => void;
-}) {
-  const building = phase === "building";
-  const running = phase === "running";
-  const done = phase === "done";
-  const failed = phase === "error" || phase === "timeout";
-  const pct = done ? 100 : running ? Math.min(100, Math.round((turnCount / Math.max(1, maxTurns)) * 100)) : building ? 12 : 100;
-
-  return (
-    <div className="shrink-0 border-t border-outline bg-surface-lowest px-5 py-3">
-      <div className="flex items-center gap-3">
-        {building || running ? (
-          <Sym name="autorenew" size={14} className="shrink-0 animate-rb-spin text-primary" />
-        ) : done ? (
-          <Sym name="check_circle" fill={1} size={14} className="shrink-0 text-secondary" />
         ) : (
-          <Sym name="error" fill={1} size={14} className="shrink-0 text-danger" />
-        )}
+          <TaskSelectionRail
+            taskType={taskType}
+            chatOptions={applicationOptions}
+            selectedChatAppId={applicationId}
+            onChatAppChange={(v) => setApplicationId(v as ApplicationId)}
+            sidecarsByApp={sidecarsByApp}
+            sidecarsLoading={sidecarsQuery.isLoading}
+            surveyTasks={[]}
+            webTasks={[]}
+            cuaTasks={[]}
+            selectedTaskId={applicationId}
+            onSelectTask={() => undefined}
+            engine={engine}
+            onEngineChange={setEngine}
+            engineOptions={engineOptions}
+            domain={domain}
+            onDomainChange={(v) => setDomain(v as Domain)}
+            domainOptions={domainOptions}
+        maxTurns={maxTurns}
+            onMaxTurnsChange={setMaxTurns}
+            onStartSidecar={handleStartSidecar}
+            sidecarStartingId={sidecarStartingId}
+            sidecarActionError={sidecarActionError}
+            disabled={runBusy}
+          />
+        )
+      }
+    />
+  );
 
-        <span className="min-w-0 truncate text-[12px] text-text-variant">
-          {building && "Starting the app. The first reply can take up to a minute."}
-          {running && (
-            <>
-              Running eval <span className="text-text-dim">·</span> turn {turnCount} of {maxTurns}{" "}
-              <span className="text-text-dim">·</span> {elapsedSeconds}s elapsed
-            </>
-          )}
-          {done && (
-            <>
-              Run complete <span className="text-text-dim">·</span> {turnCount} turn{turnCount === 1 ? "" : "s"}
-            </>
-          )}
-          {failed && <span className="text-danger">{error ?? "The run stopped before completing."}</span>}
-        </span>
-
-        <div className="ml-auto flex shrink-0 items-center gap-2.5">
-          {failed && (
-            <button
-              type="button"
-              onClick={onRetry}
-              className={`flex items-center gap-1.5 rounded-md border border-danger/40 bg-danger/10 px-3 py-1.5 text-[12px] font-medium text-danger transition ease-out hover:bg-danger/20 active:scale-[0.98] ${FOCUS_RING}`}
-            >
-              <Sym name="refresh" size={14} />
-              Retry
-            </button>
-          )}
-          {(done || failed) && (
-            <button
-              type="button"
-              onClick={onExport}
-              disabled={!canExport}
-              title="Save this conversation and its scores as a JSON file."
-              className={`flex items-center gap-1.5 rounded-md border border-outline bg-surface-low px-3 py-1.5 text-[12px] text-text-variant transition ease-out hover:border-primary hover:text-text-main active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-55 disabled:active:scale-100 ${FOCUS_RING}`}
-            >
-              <Sym name="download" size={14} />
-              Download
-            </button>
-          )}
-          <button
-            type="button"
-            onClick={onOpenRuns}
-            className={`hidden items-center gap-1.5 rounded-md px-2.5 py-1.5 text-[12px] text-text-variant transition ease-out hover:text-primary active:scale-[0.98] sm:flex ${FOCUS_RING}`}
-          >
-            <Sym name="history" size={14} />
-            Past runs
-          </button>
-          {jobId && <span className="hud hidden font-mono text-[9px] text-text-dim md:inline">{jobId.slice(0, 8)}</span>}
-        </div>
-      </div>
-
-      <div className="mt-2.5 h-0.5 w-full overflow-hidden rounded-full bg-field">
-        <div
-          className={`h-full rounded-full transition-[width] duration-500 ${failed ? "bg-danger" : done ? "bg-secondary" : "bg-primary"} ${building ? "animate-pulse" : ""}`}
-          style={{ width: `${pct}%` }}
-        />
-      </div>
+  return (
+    <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
+      {cockpitView}
+      <PersonaDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} persona={persona} context={null} />
     </div>
   );
 }
-
 function contextForApplication(applicationId: ApplicationId, domain: Domain): string {
   if (applicationId === "finance_openbb") return "financial_research";
   if (applicationId === "medical_assistant") return "medical_consultation";

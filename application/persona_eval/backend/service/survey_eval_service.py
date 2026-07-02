@@ -8,7 +8,6 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional
 
-from backend.service import run_store
 from backend.service.config import persona_model as default_persona_model
 from backend.service.survey_types import (
     SurveyEvalConfig,
@@ -95,13 +94,11 @@ class SurveyEvalService:
         get_instrument: Callable[[str], SurveyInstrument],
         list_instruments: Callable[[], List[SurveyInstrument]],
         runner: Callable[..., SurveyEvalResult],
-        runs_dir: Optional[Path] = None,
     ) -> None:
         self._get_persona = get_persona
         self._get_instrument = get_instrument
         self._list_instruments = list_instruments
         self._runner = runner
-        self._runs_dir = runs_dir or run_store.default_runs_dir()
         self._guard = threading.Lock()
         self._progress: Dict[str, SurveyEvalProgress] = {}
 
@@ -203,20 +200,6 @@ class SurveyEvalService:
                     on_event=on_event,
                 )
                 result_view = survey_result_view(result)
-                # Persist as a run BEFORE marking done so a "done" run is always
-                # already saved (it shows in Runs and survives a restart).
-                # Best-effort: never fails the run.
-                run_store.persist_run(
-                    self._runs_dir,
-                    {
-                        "id": progress.job_id,
-                        "applicationType": "survey",
-                        "createdAt": result_view.get("createdAt"),
-                        "persona": run_store.persona_summary(persona),
-                        "instrumentTitle": instrument.title,
-                        "surveyResult": result_view,
-                    },
-                )
                 with self._guard:
                     progress.survey_result = result_view
                     progress.prompts = result_view.get("prompts")

@@ -1,0 +1,114 @@
+{
+    "id": "e6255dbb-9eb8-46bb-9f3d-16854fde020a",
+    "task_name": "personabench/application-computer-use-ios-notification-preferences",
+    "trial_name": "example-computer-use-ios_notific__qPtgEze",
+    "trial_uri": "file:///Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/jobs/pe-example-computer-use-ios-notification-preferences-eb05f4c0/example-computer-use-ios_notific__qPtgEze",
+    "task_id": {
+        "path": "application/tasks/example-computer-use-ios_notification-preferences"
+    },
+    "source": null,
+    "task_checksum": "c2bc39bf8bf791d02e980a053f2fe6c74794df98044f581e6312a508e054edac",
+    "config": {
+        "task": {
+            "path": "application/tasks/example-computer-use-ios_notification-preferences",
+            "git_url": null,
+            "git_commit_id": null,
+            "name": null,
+            "ref": null,
+            "overwrite": false,
+            "download_dir": null,
+            "source": null
+        },
+        "trial_name": "example-computer-use-ios_notific__qPtgEze",
+        "trials_dir": "jobs/pe-example-computer-use-ios-notification-preferences-eb05f4c0",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "persona-computer-1",
+            "import_path": null,
+            "model_name": "anthropic/claude-sonnet-4-6",
+            "skills": [],
+            "override_timeout_sec": null,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "extra_allowed_hosts": [],
+            "kwargs": {
+                "persona_path": "persona/datasets/bench-dev-sample/persona_0001.yaml",
+                "cua_backend": "ios"
+            },
+            "env": {},
+            "mcp_servers": []
+        },
+        "environment": {
+            "type": "use-computer",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "cpu_enforcement_policy": "auto",
+            "memory_enforcement_policy": "auto",
+            "override_cpus": null,
+            "override_memory_mb": null,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "override_tpu": null,
+            "mounts": null,
+            "extra_docker_compose": [],
+            "env": {},
+            "kwargs": {
+                "platform": "ios"
+            },
+            "extra_allowed_hosts": []
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "env": {},
+            "disable": false
+        },
+        "artifacts": [],
+        "extra_instruction_paths": [],
+        "job_id": "9934da57-fa6b-483d-b288-0d4296096b1d"
+    },
+    "agent_info": {
+        "name": "persona-computer-1",
+        "version": "1.0.0",
+        "model_info": {
+            "name": "claude-sonnet-4-6",
+            "provider": "anthropic"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": null,
+        "n_cache_tokens": null,
+        "n_output_tokens": null,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": null,
+    "exception_info": {
+        "exception_type": "HTTPStatusError",
+        "exception_message": "Server error '502 Bad Gateway' for url 'https://api.use.computer/v1/sandboxes/sb-a8e3082827c83eba41b832b8d8a44ba4/files?path=%2Fapp%2Finput%2Fpersona.yaml'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/502",
+        "exception_traceback": "Traceback (most recent call last):\n  File \"/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/environment/runtime/harbor/trial/trial.py\", line 295, in run\n    await self._run()\n  File \"/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/environment/runtime/harbor/trial/single_step.py\", line 33, in _run\n    await self._run_agent()\n  File \"/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/environment/runtime/harbor/trial/single_step.py\", line 68, in _run_agent\n    await self._run_agent_phase(\n    ...<4 lines>...\n    )\n  File \"/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/environment/runtime/harbor/trial/trial.py\", line 379, in _run_agent_phase\n    await asyncio.wait_for(\n    ...<6 lines>...\n    )\n  File \"/Users/jianhenghou/.local/share/uv/python/cpython-3.13.11-macos-aarch64-none/lib/python3.13/asyncio/tasks.py\", line 507, in wait_for\n    return await fut\n           ^^^^^^^^^\n  File \"/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/environment/agents/personabench/agents/persona/computer_1.py\", line 186, in run\n    await self._prepare_persona_trial(environment)\n  File \"/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/environment/agents/personabench/agents/persona/mixin.py\", line 79, in _prepare_persona_trial\n    await environment.upload_file(\n    ...<2 lines>...\n    )\n  File \"/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/environment/runtime/harbor/environments/use_computer.py\", line 315, in upload_file\n    await self.sandbox.upload(str(source_path), remote_path)\n  File \"/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/.venv/lib/python3.13/site-packages/use_computer/core/sandbox.py\", line 585, in upload\n    await self.upload_bytes(data, remote_path)\n  File \"/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/.venv/lib/python3.13/site-packages/use_computer/core/sandbox.py\", line 594, in upload_bytes\n    resp.raise_for_status()\n    ~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/.venv/lib/python3.13/site-packages/httpx/_models.py\", line 829, in raise_for_status\n    raise HTTPStatusError(message, request=request, response=self)\nhttpx.HTTPStatusError: Server error '502 Bad Gateway' for url 'https://api.use.computer/v1/sandboxes/sb-a8e3082827c83eba41b832b8d8a44ba4/files?path=%2Fapp%2Finput%2Fpersona.yaml'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/502\n",
+        "occurred_at": "2026-07-01T16:52:03.616605"
+    },
+    "started_at": "2026-07-01T23:51:42.135430Z",
+    "finished_at": "2026-07-01T23:52:21.599916Z",
+    "environment_setup": {
+        "started_at": "2026-07-01T23:51:42.139400Z",
+        "finished_at": "2026-07-01T23:51:51.910747Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-07-01T23:51:52.049779Z",
+        "finished_at": "2026-07-01T23:51:56.340158Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-07-01T23:51:56.340252Z",
+        "finished_at": "2026-07-01T23:52:03.081161Z"
+    },
+    "verifier": null,
+    "step_results": null
+}

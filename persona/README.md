@@ -49,7 +49,7 @@ The first curated import brought in:
 - `schema/dimensions.json`
 - `schema/validators/schema_validator.py`
 - `curation/attribute_pool/` docs and pipeline scripts
-- two sample personas under `datasets/bench-dev-sample/`
+- 500 dev personas under `datasets/bench-dev-sample/` (82 dimensions, version 1.0)
 - `tasks/`, `scripts/`, `validators/`, and `reporting/` for the curated
   persona grounding task layer
 

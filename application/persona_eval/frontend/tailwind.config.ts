@@ -33,6 +33,8 @@ export default {
         "on-primary": "rgb(var(--on-primary) / <alpha-value>)",
         secondary: "rgb(var(--secondary) / <alpha-value>)",
         "secondary-dim": "rgb(var(--secondary-dim) / <alpha-value>)",
+        accent: "rgb(var(--accent) / <alpha-value>)",
+        "accent-dim": "rgb(var(--accent-dim) / <alpha-value>)",
 
         "text-main": "rgb(var(--text-main) / <alpha-value>)",
         "text-variant": "rgb(var(--text-variant) / <alpha-value>)",

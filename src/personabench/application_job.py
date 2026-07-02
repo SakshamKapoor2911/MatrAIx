@@ -2,8 +2,12 @@
 
 from __future__ import annotations
 
+import re
+import sys
 from pathlib import Path
 from typing import Any
+
+import yaml
 
 from personabench.persona_job import (
     load_manifest,
@@ -12,6 +16,80 @@ from personabench.persona_job import (
 )
 
 DEFAULT_APPLICATION_JOBS_DIR = "configs/jobs/application-task-job-recipe"
+PERSONA_EVAL_DATA_DIR = "application/persona_eval/data/personas"
+_EXECUTION_MODES = frozenset({"auto", "force_docker", "smoke"})
+_NATIVE_TRIAL_PROFILES = frozenset({"json_survey", "user_sim_chat"})
+_HARBOR_TASK_BY_PROFILE: dict[str, str] = {
+    "json_survey": "application/tasks/persona-survey",
+}
+
+
+def resolve_harbor_task_path(task_path: str, *, trial_profile: str) -> str:
+    """Map cockpit tasks to Harbor-native task paths for lightweight profiles."""
+    return _HARBOR_TASK_BY_PROFILE.get(trial_profile, task_path)
+
+
+def collect_run_env_exports(
+    *,
+    trial_profile: str,
+    task_path: str,
+    repo_root: Path,
+) -> list[tuple[str, str]]:
+    """Return ``(VAR, value)`` pairs to export before ``harbor run``."""
+    _ = repo_root
+    exports: list[tuple[str, str]] = []
+    if trial_profile == "json_survey":
+        folder = Path(task_path.strip().replace("\\", "/")).name
+        repo = str(repo_root.resolve())
+        if repo not in sys.path:
+            sys.path.insert(0, repo)
+        from environment.integrations.persona_eval.survey_task_content import (
+            instrument_id_for_task_folder,
+        )
+
+        instrument_id = instrument_id_for_task_folder(folder)
+        if instrument_id:
+            exports.append(("MATRIX_SURVEY_INSTRUMENT_ID", instrument_id))
+    elif trial_profile == "user_sim_chat":
+        exports.extend(
+            [
+                ("MATRIX_CHATBOT_DOMAIN", "movie"),
+                ("MATRIX_CHATBOT_APPLICATION_ID", "recai"),
+                ("MATRIX_CHATBOT_MAX_TURNS", "8"),
+            ]
+        )
+    return exports
+
+
+def resolve_job_environment(
+    *,
+    execution_mode: str,
+    trial_profile: str,
+    cua_backend: str | None = None,
+) -> dict[str, Any]:
+    """Pick the Harbor environment block for a job spec."""
+    if cua_backend:
+        normalized = cua_backend.strip().lower().replace("-", "_")
+        if normalized in {
+            "macos",
+            "ios",
+            "use_computer",
+            "use_computer_desktop",
+            "desktop",
+            "anthropic",
+            "anthropic_cua",
+            "ubuntu",
+        }:
+            env: dict[str, Any] = {"type": "use-computer", "delete": True}
+            if normalized == "ios":
+                env["kwargs"] = {"platform": "ios"}
+            return env
+        if normalized in {"docker", "linux", "docker_computer1", "computer1", "computer_1"}:
+            return {"type": "docker", "delete": True}
+
+    if execution_mode == "auto" and trial_profile in _NATIVE_TRIAL_PROFILES:
+        return {"type": "host", "delete": True}
+    return {"type": "docker", "delete": True}
 
 
 def select_personas(
@@ -41,6 +119,83 @@ def select_personas(
     return matched, chosen
 
 
+def _normalize_pool_persona_id(value: str) -> str:
+    text = value.strip()
+    if re.fullmatch(r"\d+", text):
+        return text.zfill(4)
+    if text.startswith("persona_"):
+        return text.removeprefix("persona_").zfill(4) if text[8:].isdigit() else text
+    return text
+
+
+def _persona_entry_from_path(path: Path, *, repo_root: Path) -> dict[str, Any]:
+    raw = yaml.safe_load(path.read_text(encoding="utf-8"))
+    if not isinstance(raw, dict):
+        raise ValueError("persona file is not a mapping: {}".format(path))
+    persona_id = str(raw.get("persona_id") or raw.get("id") or path.stem)
+    return {
+        "persona_id": persona_id,
+        "path": str(path.relative_to(repo_root)),
+        **raw,
+    }
+
+
+def resolve_persona_entries(
+    persona_ids: list[str],
+    *,
+    persona_pool: str,
+    repo_root: Path,
+) -> list[dict[str, Any]]:
+    """Resolve explicit persona ids to manifest-style entries."""
+    if not persona_ids:
+        raise ValueError("persona_ids must not be empty")
+
+    pool = load_manifest(repo_root / persona_pool, repo_root=repo_root)
+    by_id: dict[str, dict[str, Any]] = {}
+    for entry in pool:
+        for key in (
+            str(entry.get("persona_id") or ""),
+            str(entry.get("id") or ""),
+            Path(str(entry.get("path", ""))).stem,
+        ):
+            if not key:
+                continue
+            by_id[key] = entry
+            normalized = _normalize_pool_persona_id(key)
+            if normalized != key:
+                by_id[normalized] = entry
+
+    chosen: list[dict[str, Any]] = []
+    seen_paths: set[str] = set()
+    for raw_id in persona_ids:
+        persona_id = raw_id.strip()
+        if not persona_id:
+            raise ValueError("persona_ids must not contain empty values")
+
+        entry = by_id.get(persona_id) or by_id.get(_normalize_pool_persona_id(persona_id))
+        if entry is None:
+            app_path = repo_root / PERSONA_EVAL_DATA_DIR / "{}.yaml".format(persona_id)
+            if app_path.is_file():
+                entry = _persona_entry_from_path(app_path, repo_root=repo_root)
+            else:
+                pool_path = (
+                    repo_root
+                    / persona_pool
+                    / "persona_{}.yaml".format(_normalize_pool_persona_id(persona_id))
+                )
+                if pool_path.is_file():
+                    entry = _persona_entry_from_path(pool_path, repo_root=repo_root)
+                else:
+                    raise ValueError("unknown persona: {}".format(persona_id))
+
+        path = str(entry.get("path") or "")
+        if path in seen_paths:
+            continue
+        seen_paths.add(path)
+        chosen.append(entry)
+    return chosen
+
+
 def build_application_job_config(
     spec: dict[str, Any], *, repo_root: Path
 ) -> dict[str, Any]:
@@ -49,16 +204,32 @@ def build_application_job_config(
     sample_size_total = spec.get("sample_size")
     seed = int(spec.get("seed", 42))
     stratify_fields = list(spec.get("stratify_fields") or [])
+    persona_ids = list(spec.get("persona_ids") or [])
+    execution_mode = str(spec.get("execution_mode") or "auto").strip().lower()
+    trial_profile = str(spec.get("trial_profile") or "docker_agent").strip()
+    cua_backend = spec.get("cua_backend")
+    if execution_mode not in _EXECUTION_MODES:
+        raise ValueError(
+            "execution_mode must be one of {}".format(sorted(_EXECUTION_MODES))
+        )
 
     pool = load_manifest(pool_dir, repo_root=repo_root)
-    matched, chosen = select_personas(
-        pool,
-        sample_size=sample_size_total,
-        sample_size_per_value_group=per_value_group,
-        seed=seed,
-        stratify_fields=stratify_fields or None,
-        repo_root=repo_root,
-    )
+    if persona_ids:
+        matched = pool
+        chosen = resolve_persona_entries(
+            persona_ids,
+            persona_pool=spec["persona_pool"],
+            repo_root=repo_root,
+        )
+    else:
+        matched, chosen = select_personas(
+            pool,
+            sample_size=sample_size_total,
+            sample_size_per_value_group=per_value_group,
+            seed=seed,
+            stratify_fields=stratify_fields or None,
+            repo_root=repo_root,
+        )
 
     agent_spec = spec["agent"]
     job_spec = spec.get("job", {})
@@ -82,10 +253,14 @@ def build_application_job_config(
         "quiet": job_spec.get("quiet", False),
         "environment": job_spec.get(
             "environment",
-            {"type": "docker", "delete": True},
+            resolve_job_environment(
+                execution_mode=execution_mode,
+                trial_profile=trial_profile,
+                cua_backend=str(cua_backend) if cua_backend else None,
+            ),
         ),
         "agents": agents,
-        "tasks": [{"path": spec["task"]}],
+        "tasks": [{"path": resolve_harbor_task_path(spec["task"], trial_profile=trial_profile)}],
         "_job_meta": {
             "job_slug": job_slug,
             "task": spec["task"],
@@ -95,6 +270,9 @@ def build_application_job_config(
             "stratify_fields": stratify_fields,
             "matched_pool_size": len(matched),
             "selected_persona_ids": [entry["persona_id"] for entry in chosen],
+            "persona_ids": persona_ids,
+            "execution_mode": execution_mode,
+            "trial_profile": trial_profile,
         },
     }
     verifier = spec.get("verifier")

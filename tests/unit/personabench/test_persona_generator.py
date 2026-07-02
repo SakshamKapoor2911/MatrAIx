@@ -61,6 +61,8 @@ def test_generate_pool_has_no_violations() -> None:
     personas = generate_persona_pool(count=50, seed=99)
     for entry in personas:
         assert validate_dimensions(entry["dimensions"]) == []
+        assert entry.get("source") in {"Nemotron", "OASIS", "PersonaHub", "PRIMEX"}
+        assert entry.get("version") == "1.0"
 
 
 def test_top_up_strata_adds_consistent_personas() -> None:
@@ -113,7 +115,13 @@ def test_checked_in_sample_manifest_is_consistent() -> None:
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     assert manifest["count"] == len(manifest["personas"])
     assert manifest["count"] >= 2
+    assert manifest.get("schema_version") == "1.0"
     for entry in manifest["personas"]:
         rel_path = entry if isinstance(entry, str) else entry["path"]
-        payload = yaml.safe_load((MANIFEST.parent / rel_path).read_text(encoding="utf-8"))
+        if not isinstance(rel_path, str):
+            rel_path = rel_path.split("/")[-1]
+        yaml_path = MANIFEST.parent / Path(rel_path).name
+        payload = yaml.safe_load(yaml_path.read_text(encoding="utf-8"))
         assert validate_dimensions(payload["dimensions"]) == []
+        assert payload.get("version") == "1.0"
+        assert payload.get("source") in {"Nemotron", "OASIS", "PersonaHub", "PRIMEX"}

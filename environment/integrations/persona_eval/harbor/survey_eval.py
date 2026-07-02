@@ -290,6 +290,42 @@ def _normalize_prompts(
     }
 
 
+def build_survey_instruction_markdown(*, instrument: SurveyInstrument) -> str:
+    """Human-readable survey brief for cockpit review (no artifact paths)."""
+    lines = [
+        "# {}".format(instrument.title),
+        "",
+        instrument.description.strip()
+        if instrument.description
+        else "Answer each question as the assigned persona.",
+        "",
+        "## Questions",
+        "",
+    ]
+    for index, question in enumerate(instrument.questions, start=1):
+        lines.append("### {}. {}".format(index, question.prompt))
+        if question.construct:
+            lines.append("*Construct: {}*".format(question.construct))
+        if question.type == "likert":
+            lines.append(
+                "**Type:** Likert scale ({}–{})".format(
+                    question.min_value, question.max_value
+                )
+            )
+        elif question.type == "single_choice":
+            lines.append("**Type:** Choose one")
+            for option in question.options:
+                lines.append("- {}".format(option))
+        elif question.type == "multi_choice":
+            lines.append("**Type:** Choose all that apply")
+            for option in question.options:
+                lines.append("- {}".format(option))
+        elif question.type == "free_text":
+            lines.append("**Type:** Free text")
+        lines.append("")
+    return "\n".join(lines)
+
+
 def build_survey_task_prompt(
     *, instrument: SurveyInstrument, require_rationale: bool = True
 ) -> str:

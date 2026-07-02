@@ -9,9 +9,9 @@ and link it from the README for the pipeline that produced it.
 
 ## Current Datasets
 
-- `bench-dev-sample/`: small curated fixture set copied from the MatrAIx
-  `bench-dev-2000` pool for schema examples, smoke tests, and curated job
-  recipes. It is not a replacement for the full external cohort.
+- `bench-dev-sample/`: dev persona pool (500 profiles, 82 dimensions each) for
+  schema examples, smoke tests, PersonaEval UI, and curated job recipes.
+  Dimension UI groups live in `persona/schema/dimension_categories.json`.
 
 ## External Dataset Slots
 

@@ -73,13 +73,11 @@ class AppWorldEvalService:
         get_task: Callable[[str], AppWorldEvalTask],
         list_tasks: Callable[[], List[AppWorldEvalTask]],
         runner: Callable[..., AppWorldEvalResult],
-        runs_dir: Optional[Path] = None,
     ) -> None:
         self._get_persona = get_persona
         self._get_task = get_task
         self._list_tasks = list_tasks
         self._runner = runner
-        self._runs_dir = runs_dir or run_store.default_runs_dir()
         self._guard = threading.Lock()
         self._progress: Dict[str, AppWorldEvalProgress] = {}
 
@@ -116,26 +114,7 @@ class AppWorldEvalService:
     def view(self, job_id: str) -> Optional[Dict[str, Any]]:
         with self._guard:
             progress = self._progress.get(job_id)
-            if progress is not None:
-                return progress.to_view()
-        record = run_store.load_run(self._runs_dir, job_id)
-        if record is None or record.get("applicationType") != "appworld":
-            return None
-        return {
-            "jobId": record.get("id"),
-            "applicationType": "appworld",
-            "taskId": record.get("taskId"),
-            "taskTitle": record.get("taskTitle"),
-            "appName": record.get("appName"),
-            "personaId": (record.get("persona") or {}).get("id"),
-            "personaName": run_store.friendly_persona_name(record.get("persona") or {}),
-            "status": "done",
-            "phase": None,
-            "appworldResult": record.get("appworldResult"),
-            "trace": record.get("appworldTrace"),
-            "prompts": record.get("prompts"),
-            "error": None,
-        }
+            return progress.to_view() if progress else None
 
     def _run(
         self,
@@ -183,21 +162,6 @@ class AppWorldEvalService:
             result_view = appworld_result_view(result)
             appworld_result = result_view.get("appworldResult")
             trace = result_view.get("trace")
-            run_store.persist_run(
-                self._runs_dir,
-                {
-                    "id": progress.job_id,
-                    "applicationType": "appworld",
-                    "createdAt": result_view.get("createdAt"),
-                    "persona": run_store.persona_summary(persona),
-                    "taskId": task.id,
-                    "taskTitle": task.title,
-                    "appName": task.app_name,
-                    "appworldResult": appworld_result,
-                    "appworldTrace": trace,
-                    "prompts": result_view.get("prompts"),
-                },
-            )
             with self._guard:
                 progress.appworld_result = appworld_result
                 progress.trace = trace

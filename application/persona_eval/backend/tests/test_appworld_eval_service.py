@@ -19,13 +19,12 @@ def _persona(_persona_id: str) -> Persona:
     )
 
 
-def test_appworld_eval_service_persists_trace_and_reloads_view(tmp_path):
+def test_appworld_eval_service_returns_trace_in_job_view():
     service = AppWorldEvalService(
         get_persona=_persona,
         get_task=get_appworld_eval_task,
         list_tasks=list_appworld_eval_tasks,
         runner=LocalAppWorldEvalRunner(),
-        runs_dir=tmp_path,
     )
 
     job_id = service.start(
@@ -39,19 +38,7 @@ def test_appworld_eval_service_persists_trace_and_reloads_view(tmp_path):
     assert view["applicationType"] == "appworld"
     assert view["appworldResult"]["success"] is True
     assert view["trace"]["events"][0]["actions"][0]["name"] == "appworld_api_call"
-
-    reloaded = AppWorldEvalService(
-        get_persona=_persona,
-        get_task=get_appworld_eval_task,
-        list_tasks=list_appworld_eval_tasks,
-        runner=LocalAppWorldEvalRunner(),
-        runs_dir=tmp_path,
-    )
-    persisted = reloaded.view(job_id)
-
-    assert persisted is not None
-    assert persisted["status"] == "done"
-    assert persisted["trace"]["raw"]["trajectory"][0]["action"] == "list_apps"
+    assert view["trace"]["raw"]["trajectory"][0]["action"] == "list_apps"
 
 
 def _wait_done(service: AppWorldEvalService, job_id: str) -> dict[str, object]:

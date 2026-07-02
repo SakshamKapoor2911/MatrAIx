@@ -42,11 +42,29 @@ export interface PreflightCheck {
   detail: string;
   group?: string | null;
   optional?: boolean;
+  applicationId?: string | null;
 }
 
 export interface PreflightResponse {
   ready: boolean;
   checks: PreflightCheck[];
+}
+
+export interface ChatbotSidecarStatus {
+  applicationId: string;
+  ok: boolean;
+  healthUrl: string;
+  canStart: boolean;
+  detail: string;
+}
+
+export interface ChatbotSidecarsResponse {
+  sidecars: ChatbotSidecarStatus[];
+}
+
+export interface StartChatbotSidecarResponse {
+  sidecar: ChatbotSidecarStatus;
+  started: boolean;
 }
 
 export interface RecommendedItem {
@@ -164,6 +182,14 @@ export interface PersonaEvalMetricScores {
   [key: string]: string | number | boolean | null | undefined;
 }
 
+export interface HarborDraftTurn {
+  turnIndex?: number;
+  userMessage?: string;
+  assistantMessage?: string;
+  recommendedItems?: RecommendedItem[];
+  durationSeconds?: number | null;
+}
+
 export interface PersonaEvalJobView {
   jobId: string;
   domain: string;
@@ -176,6 +202,7 @@ export interface PersonaEvalJobView {
   status: string;
   phase?: string | null;
   turns: TurnView[];
+  draftTurn?: HarborDraftTurn | null;
   questionnaire?: PersonaEvalQuestionnaire | null;
   metricScores?: PersonaEvalMetricScores | null;
   prompts?: PersonaEvalPrompts | null;
@@ -195,22 +222,6 @@ export interface PersonaEvalResult {
   prompts?: PersonaEvalPrompts | null;
   applicationType?: string | null;
   [key: string]: unknown;
-}
-
-export interface PersonaEvalRunSummary {
-  id: string;
-  createdAt?: string | null;
-  applicationType?: string | null;
-  domain?: string | null;
-  personaName?: string | null;
-  source?: string | null;
-  goalContextId?: string | null;
-  overallRating?: number | null;
-  numTurns?: number | null;
-}
-
-export interface PersonaEvalRunsResponse {
-  runs: PersonaEvalRunSummary[];
 }
 
 export interface SurveyQuestion {
@@ -235,6 +246,20 @@ export interface SurveyInstrumentsResponse {
   instruments: SurveyInstrument[];
 }
 
+export interface SurveyHarborTask {
+  id: string;
+  title: string;
+  description: string;
+  taskPath: string;
+  instrumentId: string;
+  profileMarkdown?: string;
+  surveyKind?: "example" | "contributing";
+}
+
+export interface SurveyHarborTasksResponse {
+  tasks: SurveyHarborTask[];
+}
+
 export interface SurveyAnswer {
   questionId: string;
   value: string | number | boolean | string[] | null;
@@ -248,6 +273,13 @@ export interface SurveyTrajectoryEvent {
   action: string;
   context?: Record<string, unknown>;
   outcome?: Record<string, unknown>;
+}
+
+/** Harbor test.sh verifier outcome from reward.txt (+ optional stdout). */
+export interface VerifierSummary {
+  passed: boolean;
+  reward: number;
+  detail?: string | null;
 }
 
 export interface SurveyResult {
@@ -278,6 +310,8 @@ export interface SurveyEvalJobView {
   status: string;
   phase?: string | null;
   surveyResult?: SurveyResult | null;
+  instructionMarkdown?: string | null;
+  verifier?: VerifierSummary | null;
   prompts?: PersonaEvalPrompts | null;
   error?: string | null;
 }
@@ -288,8 +322,10 @@ export interface WebEvalTask {
   siteName: string;
   siteUrl: string;
   description: string;
+  taskPath?: string;
   outputArtifact: string;
   submissionProfile: string;
+  profileMarkdown?: string;
 }
 
 export interface WebEvalTasksResponse {
@@ -341,6 +377,7 @@ export interface WebEvalJobView {
   phase?: string | null;
   webResult?: WebResult | null;
   trace?: WebTrace | null;
+  verifier?: VerifierSummary | null;
   prompts?: PersonaEvalPrompts | null;
   error?: string | null;
 }
@@ -385,3 +422,247 @@ export interface AppWorldEvalJobView {
   prompts?: PersonaEvalPrompts | null;
   error?: string | null;
 }
+
+export interface CuaEvalTask {
+  id: string;
+  title: string;
+  platform: string;
+  description?: string;
+  taskPath: string;
+  outputArtifact?: string;
+  cuaSubmissionProfile?: string | null;
+  environmentLabel?: string;
+  /** Harbor persona-computer-1 backend: docker | macos | ios (use.computer). */
+  cuaBackend?: string;
+  profileMarkdown?: string;
+}
+
+export interface CuaEvalTasksResponse {
+  tasks: CuaEvalTask[];
+}
+
+export interface CuaResult {
+  success: boolean;
+  score: number;
+  artifactName?: string | null;
+  artifact?: Record<string, unknown> | null;
+  createdAt?: string | null;
+}
+
+export interface CuaEvalJobView {
+  jobId: string;
+  applicationType: "cua";
+  taskId: string;
+  taskTitle: string;
+  platform: string;
+  personaId: string;
+  personaName: string;
+  status: string;
+  phase?: string | null;
+  cuaResult?: CuaResult | null;
+  trace?: WebTrace | null;
+  verifier?: VerifierSummary | null;
+  prompts?: PersonaEvalPrompts | null;
+  error?: string | null;
+}
+
+export type HarborJobListStatus = "running" | "success" | "failed";
+
+export interface HarborJobSummary {
+  jobName: string;
+  trialCount: number;
+  completedTrials?: number;
+  startedAt?: string | null;
+  updatedAt?: string | null;
+  finishedAt?: string | null;
+  jobResult?: Record<string, unknown> | null;
+  status?: HarborJobListStatus;
+  failedTrials?: number;
+  launchStatus?: string | null;
+}
+
+export interface HarborJobsListResponse {
+  jobs: HarborJobSummary[];
+}
+
+export interface HarborTrialView {
+  trialName: string;
+  completed?: boolean;
+  succeeded?: boolean;
+  error?: string | null;
+  result?: Record<string, unknown> | null;
+}
+
+export interface HarborTrialEvent {
+  type: string;
+  phase?: string;
+  turn?: TurnView;
+  prompts?: PersonaEvalPrompts;
+  [key: string]: unknown;
+}
+
+export interface HarborTrialEventsResponse {
+  events: HarborTrialEvent[];
+  offset: number;
+}
+
+export interface HarborJobLiveTrial {
+  trialName: string;
+  personaId?: string | null;
+  personaName?: string | null;
+  completed?: boolean;
+  succeeded?: boolean | null;
+  error?: string | null;
+  phase?: string | null;
+  stage?: string | null;
+  hasInstruction?: boolean;
+}
+
+export interface HarborJobLiveResponse {
+  jobName: string;
+  launchStatus?: string | null;
+  trialCount: number;
+  completedTrials: number;
+  trials: HarborJobLiveTrial[];
+}
+
+export interface HarborLaunchView {
+  status?: string;
+  configPath?: string | null;
+  error?: string | null;
+  startedAt?: string | null;
+  finishedAt?: string | null;
+  exitCode?: number | null;
+}
+
+export interface HarborJobDetail {
+  jobName: string;
+  jobsDir?: string | null;
+  config?: Record<string, unknown> | null;
+  result?: Record<string, unknown> | null;
+  trials: HarborTrialView[];
+  launch?: HarborLaunchView | null;
+}
+
+export interface HarborJobLaunchResponse {
+  jobName: string;
+  configPath?: string | null;
+  jobsDir?: string | null;
+  agentName?: string | null;
+  taskType?: string | null;
+  trialProfile?: string | null;
+  mode?: string | null;
+}
+
+export interface PersonaPoolDimensionOption {
+  id: string;
+  values: string[];
+}
+
+export interface PersonaPoolDimensionGroup {
+  id: string;
+  label: string;
+  dimensionIds: string[];
+  dimensions: PersonaPoolDimensionOption[];
+}
+
+export interface PersonaPoolCatalog {
+  pool: string;
+  count: number;
+  smokePersonaId?: string | null;
+  sourceCounts?: Record<string, number>;
+  schemaVersion?: string | null;
+  dimensionCategoriesPath?: string | null;
+  dimensionCategories: {
+    schemaVersion?: string | null;
+    personaSources?: string[];
+    devProfile?: {
+      dimensionCount?: number | null;
+      groups?: PersonaPoolDimensionGroup[];
+    };
+  };
+}
+
+export interface PersonaPoolSampleResult {
+  pool: string;
+  matchedCount: number;
+  sampleSize: number;
+  seed: number;
+  personaIds: string[];
+  personas: Array<{
+    personaId: string;
+    source?: string;
+    path?: string;
+    name?: string;
+    dimensions?: Record<string, string>;
+  }>;
+  stratifyFields?: string[];
+}
+
+export interface PersonaPoolPersonaCard {
+  personaId: string;
+  name?: string;
+  source?: string;
+  path?: string;
+  dimensions: Record<string, string>;
+}
+
+export interface PersonaPoolCardsResponse {
+  pool: string;
+  personas: PersonaPoolPersonaCard[];
+}
+
+export interface PersonaPoolPersonaDetail extends PersonaPoolPersonaCard {
+  pool: string;
+  yaml?: string;
+  profileMarkdown?: string;
+  dimensions: Record<string, string>;
+}
+
+export interface TaskDetail {
+  taskPath: string;
+  title?: string;
+  description?: string;
+  metaType?: string;
+  taskName?: string;
+  instructionMarkdown?: string;
+  profileMarkdown?: string;
+}
+
+/** Unified persona pool for all PersonaEval cockpit sampling. */
+export const PERSONA_BENCH_POOL = "persona/datasets/bench-dev-sample";
+
+export interface PersonaCohortSummary {
+  cohortId: string;
+  name: string;
+  kind: "recipe" | "frozen" | string;
+  pool: string;
+  sampleSize: number;
+  matchedCount: number;
+  personaCount: number;
+  createdAt?: string | null;
+}
+
+export interface PersonaCohortDetail extends PersonaCohortSummary {
+  description?: string;
+  seed: number;
+  sources: string[];
+  dimensionFilters: Record<string, string>;
+  personaIds: string[];
+  personas: Array<{ personaId: string; source?: string; path?: string }>;
+}
+
+/** Default Harbor task paths for cockpit launch (one trial per persona). */
+export const HARBOR_TASK_PATHS = {
+  chatbot: "application/tasks/recommender-agent_chat_api",
+  survey: "application/tasks/persona-survey",
+  web: "application/tasks/example-web-playwright_books-interest",
+  cuaLinux: "application/tasks/example-computer-use-linux_notification-preferences",
+  cuaWeb: "application/tasks/example-web-cua_books-interest",
+} as const;
+
+export const HARBOR_CHAT_TASKS: Record<string, string> = {
+  recai: HARBOR_TASK_PATHS.chatbot,
+  finance_openbb: "application/tasks/example-chat-mcp_support_chatbot",
+  medical_assistant: "application/tasks/example-chat-api_support_chatbot",
+};

@@ -318,7 +318,7 @@ def write_reference_cohort_persona(
     out_id = f"{base_id}-ref-{slug}-{suffix}"
     payload = {
         "persona_id": out_id,
-        "version": template.get("version", "2.0"),
+        "version": template.get("version", "1.0"),
         "dimensions": dict(template.get("dimensions") or {}),
     }
     if not isinstance(payload["dimensions"], dict):
@@ -431,7 +431,7 @@ def write_controlled_cohort_persona(
     out_id = f"{persona_id}-probe-{slug}"
     payload = {
         "persona_id": out_id,
-        "version": anchor.get("version", "2.0"),
+        "version": anchor.get("version", "1.0"),
         "dimensions": dict(anchor.get("dimensions") or {}),
     }
     if not isinstance(payload["dimensions"], dict):

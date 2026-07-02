@@ -44,14 +44,31 @@ def build_survey_task_prompt(
         if require_rationale
         else "Rationales are optional."
     )
-    return "\n".join(
+    from backend.service.survey_task_registry import survey_instruction_markdown_for_instrument
+    from environment.integrations.persona_eval.harbor.persona_eval import _repo_root
+
+    task_instruction = survey_instruction_markdown_for_instrument(
+        instrument.id,
+        repo_root=_repo_root(),
+    )
+    lines = [
+        "You are completing a market research survey via one-shot JSON completion.",
+        "Read the product context and questions below. Answer as the assigned persona.",
+        "Use exact questionId and choice_id values from the instrument.",
+        "",
+    ]
+    if task_instruction:
+        lines.extend(["## Task instruction", "", task_instruction, ""])
+    else:
+        lines.extend(
+            [
+                "Survey context:",
+                "{}: {}".format(instrument.title, instrument.description),
+                "",
+            ]
+        )
+    lines.extend(
         [
-            "You are completing a market research survey.",
-            "Read the survey context and answer each question as the assigned persona.",
-            "",
-            "Survey context:",
-            "{}: {}".format(instrument.title, instrument.description),
-            "",
             "Survey instrument JSON:",
             json.dumps(instrument.to_dict(), ensure_ascii=False, indent=2),
             "",
@@ -60,6 +77,7 @@ def build_survey_task_prompt(
             '{"answers":[{"questionId":"<id>","value":<answer>,"rationale":"<reason>","confidence":0.0}]}',
         ]
     )
+    return "\n".join(lines)
 
 
 class LocalSurveyEvalRunner:

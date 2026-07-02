@@ -5,7 +5,6 @@ import time
 from pathlib import Path
 
 from backend.api.deps import build_state
-from backend.service import run_store
 from backend.service.benchflow_client import BenchFlowClient, BenchFlowRun
 from backend.service.benchflow_persona_eval import BenchFlowPersonaEvalRunner
 from backend.service.benchflow_survey_eval import BenchFlowSurveyEvalRunner
@@ -399,7 +398,6 @@ def test_benchflow_web_service_persists_webp_screenshots(tmp_path):
         get_task=lambda _task_id: _web_task(tmp_path),
         list_tasks=lambda: [_web_task(tmp_path)],
         runner=BenchFlowWebEvalRunner(client=client),
-        runs_dir=tmp_path / "runs",
     )
 
     job_id = service.start(
@@ -417,9 +415,7 @@ def test_benchflow_web_service_persists_webp_screenshots(tmp_path):
 
     assert view is not None
     assert view["status"] == "done"
-    record = run_store.load_run(tmp_path / "runs", job_id)
-    assert record is not None
-    assert record["webTrace"]["events"][0]["screenshotFile"] == "screenshot_001.webp"
+    assert view["trace"]["events"][0]["screenshotFile"] == "screenshot_001.webp"
     service._progress.clear()
     assert service.screenshot_path(job_id, "screenshot_001.webp").is_file()
 
@@ -450,7 +446,6 @@ def test_benchflow_web_service_preserves_remote_screenshot_urls(tmp_path):
         get_task=lambda _task_id: _web_task(tmp_path),
         list_tasks=lambda: [_web_task(tmp_path)],
         runner=BenchFlowWebEvalRunner(client=client),
-        runs_dir=tmp_path / "runs",
     )
 
     job_id = service.start(
@@ -525,7 +520,6 @@ def test_benchflow_web_service_persists_webarena_trajectory(tmp_path):
         get_task=lambda _task_id: _web_task(tmp_path),
         list_tasks=lambda: [_web_task(tmp_path)],
         runner=BenchFlowWebEvalRunner(client=client),
-        runs_dir=tmp_path / "runs",
     )
 
     job_id = service.start(
@@ -552,11 +546,6 @@ def test_benchflow_web_service_persists_webarena_trajectory(tmp_path):
         == "https://benchflow.example/runs/1/step-2.webp"
     )
     assert view["trace"]["raw"]["trajectory"][0]["observation"] == "home"
-
-    record = run_store.load_run(tmp_path / "runs", job_id)
-    assert record is not None
-    assert record["webTrace"]["events"] == view["trace"]["events"]
-    assert record["webTrace"]["raw"]["trajectory"][1]["action"] == "click"
 
 
 def test_benchflow_web_service_does_not_fabricate_local_url_for_remote_path(tmp_path):
@@ -585,7 +574,6 @@ def test_benchflow_web_service_does_not_fabricate_local_url_for_remote_path(tmp_
         get_task=lambda _task_id: _web_task(tmp_path),
         list_tasks=lambda: [_web_task(tmp_path)],
         runner=BenchFlowWebEvalRunner(client=client),
-        runs_dir=tmp_path / "runs",
     )
 
     job_id = service.start(

@@ -26,12 +26,14 @@
   --outline: 63 72 82;          /* default borders, scrollbar thumb */
   --outline-dim: 42 42 44;      /* hairlines, dividers */
 
-  /* Brand */
-  --primary: 0 163 255;         /* cyan — primary CTA, active nav, accents */
-  --primary-dim: 0 98 157;      /* CTA hover */
-  --on-primary: 4 18 29;        /* text/icon on primary fills */
-  --secondary: 78 222 163;      /* mint — success / positive / "ready" */
-  --secondary-dim: 0 165 114;   /* mint hover */
+  /* Brand — same blue ramp in dark and light */
+  --primary: 0 118 194;
+  --primary-dim: 0 92 152;
+  --on-primary: 255 255 255;
+  --secondary: 78 222 163;      /* mint — success / available */
+  --secondary-dim: 0 165 114;
+  --accent: 167 139 250;        /* violet — pipeline / transport accents */
+  --accent-dim: 124 58 237;
 
   /* Text */
   --text-main: 229 226 227;     /* headings, primary text */
@@ -77,6 +79,8 @@
   --on-primary: 255 255 255;
   --secondary: 0 150 103;
   --secondary-dim: 0 120 84;
+  --accent: 109 40 217;
+  --accent-dim: 91 33 182;
 
   --text-main: 17 23 31;
   --text-variant: 55 65 81;
@@ -183,6 +187,299 @@
 /* Cyan glow — RESERVED for the single primary CTA on a view. */
 .glow {
   box-shadow: 0 10px 34px -10px rgb(var(--primary) / 0.5);
+}
+
+/* Frosted glass panels for the cockpit setup shell. */
+@layer components {
+  .glass-panel {
+    border: 1px solid rgb(var(--outline) / 0.45);
+    background: linear-gradient(
+      145deg,
+      rgb(var(--surface) / 0.72) 0%,
+      rgb(var(--surface-low) / 0.55) 100%
+    );
+    backdrop-filter: blur(18px) saturate(1.35);
+    -webkit-backdrop-filter: blur(18px) saturate(1.35);
+    box-shadow:
+      0 1px 0 rgb(255 255 255 / 0.04) inset,
+      0 18px 48px -28px rgb(0 0 0 / 0.55);
+  }
+
+  .glass-panel-strong {
+    border: 1px solid rgb(var(--primary) / 0.22);
+    background: linear-gradient(
+      160deg,
+      rgb(var(--surface) / 0.88) 0%,
+      rgb(var(--surface-lowest) / 0.65) 100%
+    );
+    backdrop-filter: blur(22px) saturate(1.5);
+    -webkit-backdrop-filter: blur(22px) saturate(1.5);
+  }
+
+  .cockpit-mesh-bg {
+    background:
+      radial-gradient(ellipse 75% 50% at 12% -8%, rgb(var(--primary) / 0.1), transparent 55%),
+      radial-gradient(ellipse 60% 45% at 88% 100%, rgb(var(--primary) / 0.06), transparent 50%),
+      rgb(var(--surface-dim));
+  }
+
+  .glass-panel-rail {
+    border-left: 3px solid rgb(var(--primary) / 0.45);
+    box-shadow:
+      inset 4px 0 20px -16px rgb(var(--primary) / 0.25),
+      0 1px 0 rgb(255 255 255 / 0.04) inset,
+      0 18px 48px -28px rgb(0 0 0 / 0.55);
+  }
+
+  .cockpit-field-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgb(var(--text-dim));
+  }
+
+  /* Filled tone chips — shared by persona dims, transport, status. */
+  .tone-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border-radius: 9999px;
+    border: 1px solid transparent;
+    padding: 0.25rem 0.6rem;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1.25;
+  }
+
+  .tone-chip__key {
+    font-weight: 600;
+  }
+
+  .tone-chip--primary .tone-chip__key {
+    color: rgb(var(--primary));
+  }
+
+  .tone-chip--accent .tone-chip__key {
+    color: rgb(var(--accent));
+  }
+
+  .tone-chip--secondary .tone-chip__key {
+    color: rgb(var(--secondary));
+  }
+
+  .tone-chip--warn .tone-chip__key {
+    color: rgb(var(--warn));
+  }
+
+  .tone-chip--danger .tone-chip__key {
+    color: rgb(var(--danger));
+  }
+
+  .tone-chip__dot {
+    height: 0.375rem;
+    width: 0.375rem;
+    flex-shrink: 0;
+    border-radius: 9999px;
+    background: currentColor;
+  }
+
+  .tone-chip--pulse-dot .tone-chip__dot {
+    animation: cockpit-chip-pulse 1.4s ease-in-out infinite;
+  }
+
+  .tone-chip--primary {
+    border-color: rgb(var(--primary) / 0.42);
+    background-color: rgb(var(--primary) / 0.22);
+    color: rgb(var(--text-main));
+  }
+
+  .tone-chip--accent {
+    border-color: rgb(var(--accent) / 0.42);
+    background-color: rgb(var(--accent) / 0.22);
+    color: rgb(var(--text-main));
+  }
+
+  .tone-chip--secondary {
+    border-color: rgb(var(--secondary) / 0.45);
+    background-color: rgb(var(--secondary) / 0.22);
+    color: rgb(var(--text-main));
+  }
+
+  .tone-chip--warn {
+    border-color: rgb(var(--warn) / 0.45);
+    background-color: rgb(var(--warn) / 0.22);
+    color: rgb(var(--text-main));
+  }
+
+  .tone-chip--danger {
+    border-color: rgb(var(--danger) / 0.45);
+    background-color: rgb(var(--danger) / 0.2);
+    color: rgb(var(--text-main));
+  }
+
+  .tone-chip--primary .tone-chip__dot {
+    background: rgb(var(--primary));
+  }
+
+  .tone-chip--accent .tone-chip__dot {
+    background: rgb(var(--accent));
+  }
+
+  .tone-chip--secondary .tone-chip__dot {
+    background: rgb(var(--secondary));
+  }
+
+  .tone-chip--warn .tone-chip__dot {
+    background: rgb(var(--warn));
+  }
+
+  .tone-chip--danger .tone-chip__dot {
+    background: rgb(var(--danger));
+  }
+
+  .tone-chip--solid {
+    font-weight: 600;
+  }
+
+  /* Selected / emphasized — stronger tint, text stays main (not inverted). */
+  .tone-chip--solid.tone-chip--primary {
+    border-color: rgb(var(--primary) / 0.58);
+    background-color: rgb(var(--primary) / 0.3);
+    color: rgb(var(--text-main));
+  }
+
+  .tone-chip--solid.tone-chip--accent {
+    border-color: rgb(var(--accent) / 0.58);
+    background-color: rgb(var(--accent) / 0.3);
+    color: rgb(var(--text-main));
+  }
+
+  .tone-chip--solid.tone-chip--secondary {
+    border-color: rgb(var(--secondary) / 0.58);
+    background-color: rgb(var(--secondary) / 0.3);
+    color: rgb(var(--text-main));
+  }
+
+  .tone-chip--solid.tone-chip--warn {
+    border-color: rgb(var(--warn) / 0.58);
+    background-color: rgb(var(--warn) / 0.32);
+    color: rgb(var(--text-main));
+  }
+
+  .tone-chip--solid.tone-chip--danger {
+    border-color: rgb(var(--danger) / 0.58);
+    background-color: rgb(var(--danger) / 0.28);
+    color: rgb(var(--text-main));
+  }
+
+  .tone-chip--muted {
+    border-color: rgb(var(--outline) / 0.45);
+    background-color: rgb(var(--surface-high) / 0.9);
+    color: rgb(var(--text-dim));
+  }
+
+  :root.light .tone-chip--primary {
+    background-color: rgb(var(--primary) / 0.14);
+  }
+
+  :root.light .tone-chip--accent {
+    background-color: rgb(var(--accent) / 0.14);
+  }
+
+  :root.light .tone-chip--secondary {
+    background-color: rgb(var(--secondary) / 0.14);
+  }
+
+  :root.light .tone-chip--warn {
+    background-color: rgb(var(--warn) / 0.16);
+  }
+
+  :root.light .tone-chip--danger {
+    background-color: rgb(var(--danger) / 0.12);
+  }
+
+  :root.light .tone-chip--solid.tone-chip--primary {
+    background-color: rgb(var(--primary) / 0.2);
+  }
+
+  :root.light .tone-chip--solid.tone-chip--accent {
+    background-color: rgb(var(--accent) / 0.2);
+  }
+
+  :root.light .tone-chip--solid.tone-chip--secondary {
+    background-color: rgb(var(--secondary) / 0.2);
+  }
+
+  :root.light .tone-chip--solid.tone-chip--warn {
+    background-color: rgb(var(--warn) / 0.22);
+  }
+
+  :root.light .tone-chip--solid.tone-chip--danger {
+    background-color: rgb(var(--danger) / 0.16);
+  }
+
+  .persona-card--selected {
+    border-color: rgb(var(--primary) / 0.55);
+    background-color: rgb(var(--primary) / 0.2);
+    box-shadow:
+      inset 4px 0 0 0 rgb(var(--primary)),
+      0 0 0 1px rgb(var(--primary) / 0.2);
+  }
+
+  :root.light .persona-card--selected {
+    background-color: rgb(var(--primary) / 0.12);
+  }
+
+  .cockpit-segment {
+    display: flex;
+    gap: 0.25rem;
+    border-radius: 0.375rem;
+    border: 1px solid rgb(var(--outline) / 0.55);
+    background: rgb(var(--surface-low));
+    padding: 0.25rem;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.04);
+  }
+
+  .cockpit-segment--grid {
+    display: grid;
+  }
+
+  .cockpit-segment__btn {
+    border: none;
+    border-radius: 0.25rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: rgb(var(--text-dim));
+    background: transparent;
+    transition:
+      background-color 0.15s ease,
+      color 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+
+  .cockpit-segment__btn:hover:not(:disabled):not(.cockpit-segment__btn--active) {
+    background-color: rgb(var(--surface));
+    color: rgb(var(--text-variant));
+  }
+
+  .cockpit-segment__btn--active {
+    background-color: rgb(var(--primary));
+    color: rgb(var(--on-primary));
+    box-shadow: 0 4px 14px -4px rgb(var(--primary) / 0.65);
+  }
+
+  @keyframes cockpit-chip-pulse {
+    0%,
+    100% {
+      opacity: 0.45;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
 }
 
 /* Thin internal scrollbars for scroll panes (transcript, lists, code wells). */

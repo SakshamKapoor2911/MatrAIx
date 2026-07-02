@@ -13,7 +13,7 @@
  */
 import { FOCUS_RING, Sym } from "./cockpitShared";
 
-export type PersonaEvalTaskType = "chatbot" | "survey" | "web" | "appworld";
+export type PersonaEvalTaskType = "chatbot" | "survey" | "web" | "cua";
 
 export interface TaskTypeSwitchProps {
   value: PersonaEvalTaskType;
@@ -28,14 +28,14 @@ const OPTIONS: ReadonlyArray<{ value: PersonaEvalTaskType; label: string; icon: 
   { value: "chatbot", label: "Chatbot", icon: "forum", hint: "A back-and-forth conversation." },
   { value: "survey", label: "Survey", icon: "fact_check", hint: "A fixed questionnaire the user fills out." },
   { value: "web", label: "Web", icon: "language", hint: "A real browser task the user completes." },
-  { value: "appworld", label: "AppWorld", icon: "apps", hint: "An API-driven AppWorld task." },
+  { value: "cua", label: "CUA", icon: "smart_toy", hint: "Computer-use agent on desktop or browser tasks." },
 ];
 
 export function TaskTypeSwitch({ value, onChange, disabled, showLabel = true, className = "" }: TaskTypeSwitchProps) {
   return (
     <div className={className}>
-      {showLabel && <div className="hud mb-1.5 text-[9px] text-text-dim">Application type</div>}
-      <div className="inline-flex rounded-md border border-outline bg-surface-low p-1">
+      {showLabel && <div className="hud mb-1.5 text-[9px] text-primary">Application type</div>}
+      <div className="cockpit-segment inline-flex">
         {OPTIONS.map((option) => {
           const selected = option.value === value;
           return (
@@ -46,10 +46,8 @@ export function TaskTypeSwitch({ value, onChange, disabled, showLabel = true, cl
               title={option.hint}
               aria-pressed={selected}
               onClick={() => onChange(option.value)}
-              className={`flex items-center gap-1.5 rounded px-3 py-1.5 text-[12px] font-medium transition ease-out active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-60 disabled:active:scale-100 ${FOCUS_RING} ${
-                selected
-                  ? "bg-primary text-on-primary"
-                  : "text-text-variant hover:bg-surface hover:text-text-main"
+              className={`cockpit-segment__btn flex items-center gap-1.5 px-3 py-1.5 text-[12px] transition ease-out active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-60 disabled:active:scale-100 ${FOCUS_RING} ${
+                selected ? "cockpit-segment__btn--active" : ""
               }`}
             >
               <Sym name={option.icon} fill={selected ? 1 : 0} size={14} />

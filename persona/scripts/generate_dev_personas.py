@@ -10,6 +10,8 @@ from pathlib import Path
 from personabench.persona_consistency import validate_dimensions
 from personabench.persona_dimension_catalog import values_for_dimension
 from personabench.persona_generator import (
+    DEFAULT_PERSONA_VERSION,
+    PERSONA_SOURCES,
     build_probe_strata,
     generate_persona_pool,
     write_persona_dataset,
@@ -77,6 +79,27 @@ def main() -> None:
         default=0,
         help="Minimum personas per confounder×probe stratum when --task is set (default: 0)",
     )
+    parser.add_argument(
+        "--version",
+        default=DEFAULT_PERSONA_VERSION,
+        help=f"Persona YAML version field (default: {DEFAULT_PERSONA_VERSION})",
+    )
+    parser.add_argument(
+        "--sources",
+        nargs="+",
+        default=list(PERSONA_SOURCES),
+        help="Provenance labels assigned randomly per persona",
+    )
+    parser.add_argument(
+        "--manifest-name",
+        default=None,
+        help="Optional manifest name (e.g. bench-dev-sample)",
+    )
+    parser.add_argument(
+        "--manifest-description",
+        default=None,
+        help="Optional manifest description",
+    )
     args = parser.parse_args()
 
     out = args.out if args.out is not None else _default_out_dir(args.count)
@@ -90,12 +113,18 @@ def main() -> None:
             raise SystemExit("--task requires --stratum-min >= 1")
         stratum_top_up, grounding_meta = _stratum_top_up_from_task(args.task)
 
+    sources = tuple(args.sources)
+    if not sources:
+        raise SystemExit("--sources must list at least one label")
+
     personas = generate_persona_pool(
         count=args.count,
         seed=args.seed,
         smoke_persona_id=args.smoke_id,
         stratum_top_up=stratum_top_up,
         min_per_stratum=args.stratum_min,
+        persona_version=args.version,
+        sources=sources,
     )
 
     violations = 0
@@ -114,6 +143,9 @@ def main() -> None:
         kind=f"bench-dev-{args.count}",
         seed=args.seed,
         smoke_persona_id=args.smoke_id,
+        persona_version=args.version,
+        manifest_name=args.manifest_name,
+        manifest_description=args.manifest_description,
     )
     if stratum_top_up and args.stratum_min > 0:
         manifest["stratum_top_up"] = {
@@ -132,6 +164,8 @@ def main() -> None:
     print(
         f"Dimensions: {manifest.get('dimension_count', len(manifest['dimension_ids']))} fields"
     )
+    if manifest.get("source_counts"):
+        print(f"Sources: {manifest['source_counts']}")
     if stratum_top_up:
         print(
             f"Stratum top-up: {len(stratum_top_up)} cells × min {args.stratum_min} "

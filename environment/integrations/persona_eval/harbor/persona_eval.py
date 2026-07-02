@@ -48,6 +48,13 @@ def resolve_repo_root(file_path: Path) -> Path:
             and parts[index + 2] == "persona_eval"
         ):
             return _path_prefix(parts, index)
+    for index in range(len(parts) - 2):
+        if (
+            parts[index] == "environment"
+            and parts[index + 1] == "agents"
+            and parts[index + 2] == "personabench"
+        ):
+            return _path_prefix(parts, index)
     for index in range(len(parts) - 1):
         if parts[index] == "backend" and parts[index + 1] == "service":
             return _path_prefix(parts, index)
@@ -110,6 +117,15 @@ def _default_harbor_command() -> Sequence[str]:
     binary = os.environ.get("MATRIX_HARBOR_BIN") or os.environ.get("HARBOR_BIN")
     if binary:
         return (binary, "run")
+
+    # Persona agents (persona-user-sim, persona-json-survey, …) live in this
+    # repo's Harbor fork, not in the globally installed harbor CLI.
+    try:
+        venv_harbor = _repo_root() / ".venv" / "bin" / "harbor"
+        if venv_harbor.is_file():
+            return (str(venv_harbor), "run")
+    except ValueError:
+        pass
 
     found = shutil.which("harbor")
     return (found or "harbor", "run")

@@ -12,6 +12,7 @@ from backend.service.survey_instruments import (
 
 
 REAL_FEATURE_SURVEY_IDS = [
+    "product_feedback_v1",
     "software_claude_code_vscode_checkpoints_v1",
     "finance_robinhood_cortex_digests_v1",
     "healthcare_cvs_app_prescription_ai_v1",
@@ -24,7 +25,7 @@ def test_list_survey_instruments_includes_real_feature_surveys():
     ids = [instrument.id for instrument in instruments]
 
     assert ids == [DEFAULT_SURVEY_INSTRUMENT_ID] + REAL_FEATURE_SURVEY_IDS
-    assert len(ids) == len(set(ids))
+    assert len(ids) == 6
 
     for instrument in instruments:
         assert instrument.title

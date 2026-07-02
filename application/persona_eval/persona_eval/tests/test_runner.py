@@ -1,5 +1,11 @@
 from persona_eval.runner import run_persona_eval
 from persona_eval.types import Persona, PersonaEvalConfig, Questionnaire, SimulatorTurn
+import pytest
+
+
+@pytest.fixture(autouse=True)
+def disable_user_sim_v2(monkeypatch):
+    monkeypatch.setenv("MATRIX_USER_SIM_V2", "0")
 
 
 class FakeSession:

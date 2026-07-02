@@ -18,12 +18,17 @@
 import { useEffect, useRef } from "react";
 
 import { PersonaBubble, RecBotBubble } from "./TurnBubble";
-import { FOCUS_RING, Sym } from "./cockpitShared";
-import type { Domain, GoalContext, TurnView } from "@/lib/types";
+import { draftTurnToView } from "@/lib/harborCockpitMappers";
+import { Sym, FOCUS_RING } from "./cockpitShared";
+import type { Domain, GoalContext, HarborDraftTurn, TurnView } from "@/lib/types";
 import type { PersonaEvalRunPhase } from "@/lib/usePersonaEval";
 
 export interface TrajectoryProps {
   turns: TurnView[];
+  /** In-progress turn (persona and/or assistant message before turn event). */
+  draftTurn?: HarborDraftTurn | null;
+  /** Agent phase string from events (recommender_thinking, persona_thinking, …). */
+  livePhase?: string | null;
   domain: Domain;
   /** App display name (RecAI / OpenBB / Medical Assistant). */
   appName: string;
@@ -50,6 +55,8 @@ export interface TrajectoryProps {
 
 export function Trajectory({
   turns,
+  draftTurn = null,
+  livePhase = null,
   domain,
   appName,
   sutDescription,
@@ -66,13 +73,18 @@ export function Trajectory({
   const scrollRef = useRef<HTMLDivElement>(null);
   const isRunning = phase === "building" || phase === "running";
   const failed = phase === "error" || phase === "timeout" || (!isRunning && !!error);
+  const draft = draftTurn?.userMessage ? draftTurnToView(draftTurn) : null;
+  const waitingForAssistant =
+    isRunning && draftTurn?.userMessage && !draftTurn?.assistantMessage && livePhase === "recommender_thinking";
+  const personaThinking =
+    isRunning && draftTurn?.assistantMessage && livePhase === "persona_thinking";
 
   // Auto-scroll to the latest content as turns land / status changes.
   useEffect(() => {
     if (!isRunning) return;
     const el = scrollRef.current;
     if (el) el.scrollTop = el.scrollHeight;
-  }, [turns.length, isRunning, liveStatus]);
+  }, [turns.length, draftTurn?.userMessage, draftTurn?.assistantMessage, isRunning, liveStatus, livePhase]);
 
   return (
     <div ref={scrollRef} className="custom-scrollbar flex min-h-0 flex-1 flex-col overflow-y-auto bg-surface-dim px-5 py-7 md:px-8">
@@ -111,13 +123,34 @@ export function Trajectory({
           );
         })}
 
+        {/* In-progress turn: persona bubble, then assistant or generating placeholder. */}
+        {draft && (
+          <div className="rise-in space-y-7">
+            <PersonaBubble message={draft.userMessage} />
+            {draft.assistantMessage ? (
+              <RecBotBubble
+                turn={draft}
+                domain={domain}
+                appName={appName}
+                foldOpen={false}
+                onToggleFold={() => undefined}
+              />
+            ) : waitingForAssistant ? (
+              <GeneratingBubble appName={appName} />
+            ) : null}
+            {personaThinking && <PersonaThinkingBubble />}
+          </div>
+        )}
+
         {/* Warming (cold start, before any turn): a skeleton turn. */}
-        {isRunning && (turns.length === 0 || phase === "building") && (
+        {isRunning && turns.length === 0 && !draft && (phase === "building" || !livePhase) && (
           <SkeletonTurn label={phase === "building" ? "Starting the app…" : liveStatus} />
         )}
 
-        {/* Streaming: a generating app bubble after the settled turns. */}
-        {phase === "running" && turns.length > 0 && <GeneratingBubble appName={appName} />}
+        {/* Legacy fallback when no draft events yet but turns exist */}
+        {isRunning && turns.length > 0 && !draft && livePhase === "recommender_thinking" && (
+          <GeneratingBubble appName={appName} />
+        )}
 
         {/* Failed: plain-language cause + Retry (preserves config). */}
         {failed && (
@@ -141,6 +174,24 @@ export function Trajectory({
             </div>
           </div>
         )}
+      </div>
+    </div>
+  );
+}
+
+/** Persona is composing the next message after the app replied. */
+function PersonaThinkingBubble() {
+  return (
+    <div className="flex w-full flex-col items-end pl-10" aria-live="polite">
+      <div className="hud mb-1.5 mr-1 flex items-center gap-2 text-[9px] text-text-dim">
+        <span>Persona · thinking</span>
+        <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" aria-hidden />
+      </div>
+      <div className="max-w-[70%] rounded-md rounded-tr-sm border border-outline bg-surface px-4 py-3">
+        <div className="space-y-2" aria-hidden>
+          <div className="h-2.5 w-40 animate-rb-pulse rounded bg-surface-high" />
+          <div className="h-2.5 w-28 animate-rb-pulse rounded bg-surface-high" />
+        </div>
       </div>
     </div>
   );

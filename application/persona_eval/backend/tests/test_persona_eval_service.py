@@ -60,7 +60,7 @@ def _fake_runner(session, persona, sut, config, simulator, *, created_at, on_eve
     return res
 
 
-def _service(record=None, runs_dir=None, configs=None):
+def _service(record=None, configs=None):
     def simulator_factory(engine, gid, domain):
         if record is not None:
             record.append((engine, gid, domain))
@@ -74,7 +74,6 @@ def _service(record=None, runs_dir=None, configs=None):
         sut_for=lambda d: "desc",
         simulator_factory=simulator_factory,
         runner=_fake_runner,
-        runs_dir=runs_dir,
     )
 
 
@@ -88,8 +87,8 @@ def _wait_done(svc, job_id, timeout=2.0):
     return svc.view(job_id)
 
 
-def test_start_runs_and_streams_turns_then_done(tmp_path):
-    svc = _service(runs_dir=tmp_path)
+def test_start_runs_and_streams_turns_then_done():
+    svc = _service()
     job_id = svc.start("game", "game-x", 6, now=lambda: "t")
     view = _wait_done(svc, job_id)
     assert view["status"] == "done"
@@ -100,7 +99,7 @@ def test_start_runs_and_streams_turns_then_done(tmp_path):
     assert view["metricScores"]["turnsToRecommendation"] == 2
 
 
-def test_runner_return_populates_final_progress_without_done_event(tmp_path):
+def test_runner_return_populates_final_progress_without_done_event():
     def runner_without_done(
         session, persona, sut, config, simulator, *, created_at, on_event
     ):
@@ -124,7 +123,6 @@ def test_runner_return_populates_final_progress_without_done_event(tmp_path):
         sut_for=lambda d: "desc",
         simulator_factory=lambda e, g, d2: object(),
         runner=runner_without_done,
-        runs_dir=tmp_path,
     )
     job_id = svc.start("game", "game-x", 6, now=lambda: "t")
     view = _wait_done(svc, job_id)
@@ -133,7 +131,7 @@ def test_runner_return_populates_final_progress_without_done_event(tmp_path):
     assert view["metricScores"]["numTurns"] == 1
 
 
-def test_prompt_event_and_result_prompts_reach_progress_and_persistence(tmp_path):
+def test_prompt_event_and_result_prompts_reach_progress():
     class ResultWithPrompts:
         def __init__(self, config, persona, sut, created_at):
             self.config = config
@@ -178,7 +176,6 @@ def test_prompt_event_and_result_prompts_reach_progress_and_persistence(tmp_path
         sut_for=lambda d: "desc",
         simulator_factory=lambda e, g, d2: object(),
         runner=runner_with_prompts,
-        runs_dir=tmp_path,
     )
 
     job_id = svc.start("game", "game-x", 6, now=lambda: "t")
@@ -189,13 +186,11 @@ def test_prompt_event_and_result_prompts_reach_progress_and_persistence(tmp_path
         "harborPrompt": "Harbor persona prompt",
         "taskPrompt": "Application task prompt",
     }
-    stored = json.loads((tmp_path / "{}.json".format(job_id)).read_text())
-    assert stored["prompts"] == view["prompts"]
 
 
-def test_goal_context_id_defaults_and_reaches_factory(tmp_path):
+def test_goal_context_id_defaults_and_reaches_factory():
     record = []
-    svc = _service(record, runs_dir=tmp_path)
+    svc = _service(record)
     job_id = svc.start("game", "game-x", 6, now=lambda: "t")
     view = _wait_done(svc, job_id)
     assert view["status"] == "done"
@@ -203,9 +198,9 @@ def test_goal_context_id_defaults_and_reaches_factory(tmp_path):
     assert record == [("gpt-4o-mini", "scenario_default", "game")]
 
 
-def test_goal_context_id_passes_through(tmp_path):
+def test_goal_context_id_passes_through():
     record = []
-    svc = _service(record, runs_dir=tmp_path)
+    svc = _service(record)
     # Any id forwards through the service unchanged (the registry can grow later).
     job_id = svc.start("game", "game-x", 6, "future_scenario", now=lambda: "t")
     view = _wait_done(svc, job_id)
@@ -214,9 +209,9 @@ def test_goal_context_id_passes_through(tmp_path):
     assert record == [("gpt-4o-mini", "future_scenario", "game")]
 
 
-def test_persona_model_reaches_config(tmp_path):
+def test_persona_model_reaches_config():
     configs = []
-    svc = _service(runs_dir=tmp_path, configs=configs)
+    svc = _service(configs=configs)
     job_id = svc.start(
         "game",
         "game-x",
@@ -229,9 +224,8 @@ def test_persona_model_reaches_config(tmp_path):
     assert configs[0].persona_model == "anthropic/claude-sonnet-4-6"
 
 
-def test_no_persona_domain_validation(tmp_path):
-    # Persona is domain-free; any persona may run against any domain.
-    svc = _service(runs_dir=tmp_path)
+def test_no_persona_domain_validation():
+    svc = _service()
     job_id = svc.start("movie", "game-x", 6, now=lambda: "t")
     view = _wait_done(svc, job_id)
     assert view["status"] == "done"
@@ -239,92 +233,6 @@ def test_no_persona_domain_validation(tmp_path):
 
 def test_view_unknown_job_is_none():
     assert _service().view("nope") is None
-
-
-def test_done_run_is_persisted_to_runs_dir(tmp_path):
-    svc = _service(runs_dir=tmp_path)
-    job_id = svc.start("game", "game-x", 6, now=lambda: "t")
-    view = _wait_done(svc, job_id)
-    assert view["status"] == "done"
-    path = tmp_path / "{}.json".format(job_id)
-    assert path.exists()
-    stored = json.loads(path.read_text())
-    # The stored artifact is the full result.to_dict() plus a top-level id.
-    assert stored["id"] == job_id
-    assert stored["questionnaire"]["overallRating"] == 8
-    assert stored["persona"]["name"] == "Marco"
-    assert stored["config"]["domain"] == "game"
-    assert stored["createdAt"] == "t"
-    assert "transcript" in stored and "recommendedItemIds" in stored
-
-
-def test_list_runs_returns_newest_first_summaries(tmp_path):
-    svc = _service(runs_dir=tmp_path)
-    first = _wait_done(
-        svc, svc.start("game", "game-x", 6, now=lambda: "2026-01-01T00:00:00Z")
-    )
-    second = _wait_done(
-        svc, svc.start("movie", "game-x", 6, now=lambda: "2026-02-02T00:00:00Z")
-    )
-    assert first["status"] == "done" and second["status"] == "done"
-    runs = svc.list_runs()
-    assert len(runs) == 2
-    # newest-first by createdAt
-    assert runs[0]["createdAt"] == "2026-02-02T00:00:00Z"
-    assert runs[1]["createdAt"] == "2026-01-01T00:00:00Z"
-    summary = runs[0]
-    assert set(summary.keys()) >= {
-        "id",
-        "createdAt",
-        "domain",
-        "personaName",
-        "source",
-        "goalContextId",
-        "overallRating",
-        "numTurns",
-    }
-    assert summary["domain"] == "movie"
-    assert summary["personaName"] == "Marco"
-    assert summary["source"] == "Nemotron"
-    assert summary["goalContextId"] == "scenario_default"
-    assert summary["overallRating"] == 8
-    assert summary["numTurns"] == 2
-
-
-def test_get_run_round_trips(tmp_path):
-    svc = _service(runs_dir=tmp_path)
-    job_id = svc.start("game", "game-x", 6, now=lambda: "t")
-    _wait_done(svc, job_id)
-    run = svc.get_run(job_id)
-    assert run is not None
-    assert run["id"] == job_id
-    assert run["questionnaire"]["overallRating"] == 8
-    assert svc.get_run("nope") is None
-
-
-def test_get_run_injects_id_for_legacy_artifact(tmp_path):
-    # CLI-written artifacts predate _persist_run's id injection (no top-level id);
-    # get_run must still satisfy the PersonaEvalResultView contract (id required).
-    (tmp_path / "legacy-persona.json").write_text(
-        json.dumps(
-            {
-                "config": {"domain": "game"},
-                "questionnaire": {"overallRating": 7},
-            }
-        ),
-        encoding="utf-8",
-    )
-    svc = _service(runs_dir=tmp_path)
-    run = svc.get_run("legacy-persona")
-    assert run is not None and run["id"] == "legacy-persona"
-
-
-def test_no_persistence_without_runs_dir(tmp_path):
-    # Default runs_dir is the canonical cache dir; tests inject one. With none
-    # injected and no disk writes expected, list_runs is still callable.
-    svc = _service(runs_dir=tmp_path)
-    assert svc.list_runs() == []
-    assert svc.get_run("nope") is None
 
 
 def test_runner_exception_marks_error():

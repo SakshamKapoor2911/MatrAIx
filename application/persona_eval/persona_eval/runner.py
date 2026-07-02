@@ -10,7 +10,8 @@ from persona_eval.types import (
 def _items_id_title(turn_view: Dict[str, Any]) -> List[Dict[str, Any]]:
     out = []
     for item in turn_view.get("recommendedItems", []) or []:
-        out.append({"id": str(item.get("itemId", item.get("id"))), "title": item.get("title")})
+        item_id = str(item.get("itemId", item.get("id", "")))
+        out.append({"id": item_id, "itemId": item_id, "title": item.get("title")})
     return out
 
 
@@ -23,7 +24,25 @@ def run_persona_eval(
     *,
     created_at: str,
     on_event: Optional[Callable[[Dict[str, Any]], None]] = None,
+    task_path: Optional[str] = None,
+    persona_yaml_path: Optional[str] = None,
+    repo_root: Optional[Any] = None,
 ) -> PersonaEvalResult:
+    from persona_eval.user_sim.runner import run_persona_eval_v2, user_sim_v2_enabled
+
+    if user_sim_v2_enabled():
+        return run_persona_eval_v2(
+            session,
+            persona,
+            sut_description,
+            config,
+            created_at=created_at,
+            on_event=on_event,
+            task_path=task_path,
+            persona_yaml_path=persona_yaml_path,
+            repo_root=repo_root,
+        )
+
     def emit(event: Dict[str, Any]) -> None:
         if on_event is not None:
             on_event(event)

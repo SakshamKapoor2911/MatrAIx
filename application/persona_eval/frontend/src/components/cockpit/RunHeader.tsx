@@ -1,34 +1,38 @@
 /**
- * RunHeader: the cockpit setup-form header (mockup `app-redesign-v3.html:99-113`).
- *
- * The eyebrow ("PersonaEval · Cockpit"), the "Configure a simulation" title and
- * its friendly subtitle on the left; the application-type segmented switch
- * (`TaskTypeSwitch`) on the right. Presentational. The parent owns the task
- * type + run lifecycle; the switch is disabled while a run is in flight.
+ * Compact cockpit header — title + subtitle on the left, task-type switch on the right.
+ * (No "Persona Cockpit" breadcrumb banner.)
  */
 import { TaskTypeSwitch, type PersonaEvalTaskType } from "./TaskTypeSwitch";
 
 export interface RunHeaderProps {
   taskType: PersonaEvalTaskType;
   onTaskTypeChange: (value: PersonaEvalTaskType) => void;
-  /** A run is in flight (disables switching task type). */
-  running: boolean;
 }
 
-export function RunHeader({ taskType, onTaskTypeChange, running }: RunHeaderProps) {
+const SUBTITLES: Record<PersonaEvalTaskType, string> = {
+  chatbot:
+    "Pick personas and a chat application, then launch. Watch the simulated user converse bubble-by-bubble.",
+  survey:
+    "Pick a persona and a questionnaire, then launch. A simulated user fills out the form and we score the responses.",
+  web: "Pick personas and a web task, then launch. The simulated user completes the site in a real browser trace.",
+  cua: "Pick personas and a CUA task, then launch. The agent completes computer-use scenarios step by step.",
+};
+
+export function RunHeader({ taskType, onTaskTypeChange }: RunHeaderProps) {
+  const subtitleClass =
+    taskType === "survey"
+      ? "mt-1 text-[12px] leading-relaxed text-text-variant sm:whitespace-nowrap sm:text-[13px]"
+      : "mt-1 max-w-2xl text-[12px] leading-relaxed text-text-variant sm:text-[13px]";
+
   return (
-    <div className="mb-5 flex flex-col justify-between gap-3 md:flex-row md:items-end">
-      <div>
-        <div className="hud mb-2 text-[10px] text-primary">PersonaEval · Cockpit</div>
-        <h1 className="font-display text-[26px] font-bold tracking-tight text-text-main">Configure a simulation</h1>
-        <p className="mt-1 text-[13px] leading-relaxed text-text-variant">
-          Pick a persona and an app, choose your run options, then launch. PersonaEval role-plays the user and scores
-          how the app responds.
-        </p>
+    <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+      <div className="min-w-0 flex-1 pr-2 sm:pr-4">
+        <h1 className="font-display text-[20px] font-bold leading-tight tracking-tight text-text-main sm:text-[22px]">
+          Configure a simulation
+        </h1>
+        <p className={subtitleClass}>{SUBTITLES[taskType]}</p>
       </div>
-      <div className="shrink-0">
-        <TaskTypeSwitch value={taskType} onChange={onTaskTypeChange} disabled={running} />
-      </div>
+      <TaskTypeSwitch value={taskType} onChange={onTaskTypeChange} className="shrink-0" />
     </div>
   );
 }

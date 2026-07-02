@@ -11,7 +11,10 @@ Runtime and agent wiring live under `environment/runtime/harbor/` and
 
 ## Naming
 
-- **`example-*`** — reference tasks in the repo (copy from these).
+- **`example-*`** — reference tasks in the repo (copy from these). For surveys, only
+  **`example-survey_product-feedback`** is the reference; other `survey_*` folders are
+  real application benchmark tasks.
+- **`survey_*`** — application survey tasks (json_survey / complete_json).
 - **`recommender-agent_chat_api`** — clean import of the MatrAIx recommender
   chat task with an environment-side HTTP sidecar for smoke runs.
 - **`web-ecommerce-platform_product-discovery`** — deterministic ecommerce web

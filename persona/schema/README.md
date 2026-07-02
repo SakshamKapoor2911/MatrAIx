@@ -8,6 +8,9 @@ tools.
 - `dimensions.json`: unified persona dimension catalog imported from MatrAIx.
   The current catalog uses schema version `2.0` and contains 1412
   dimensions, including the coding persona dimensions from MatrAIx PR #82.
+- `dimension_categories.json`: hierarchical UI grouping for the 82-field dev
+  persona profile and a category index for the full catalog (see
+  `devProfile.groups` for nested dimension pickers).
 - `validators/schema_validator.py`: validates required dimension fields and
   checks that deprecated fields are absent.
 

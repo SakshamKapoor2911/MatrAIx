@@ -1,38 +1,27 @@
 /**
  * InspectorTabs: the live-run right inspector, as a real ARIA tablist.
  *
- * Ports the mockup's inspector aside (`app-redesign-v3.html:325-336`): a header
- * bar ("Inspector"), a row of underline tabs, then the scrollable panel body.
- * The three panels are Evaluation (`Scorecard`) · Persona (`PersonaPanel`) ·
- * Prompts (`PromptPanel`).
- *
- * A proper, fully keyboard-operable tablist: `role="tablist"` over `role="tab"`
- * buttons (`aria-selected` + `aria-controls`), roving `tabIndex`, and
- * ArrowLeft/Right (+ Home/End) to move + focus. The active tab is controlled by
- * the parent so the global `1`/`2`/`3` shortcuts switch tabs too.
+ * Two panels: Evaluation (scorecard) · Instruction (task document).
  */
 import { useRef } from "react";
 
 import { FOCUS_RING, Sym } from "./cockpitShared";
 
-export type InspectorTab = "evaluation" | "persona" | "prompts";
+export type InspectorTab = "evaluation" | "instruction";
 
 const TABS: ReadonlyArray<{ id: InspectorTab; label: string; icon: string }> = [
   { id: "evaluation", label: "Evaluation", icon: "verified" },
-  { id: "persona", label: "Persona", icon: "person" },
-  { id: "prompts", label: "Prompts", icon: "terminal" },
+  { id: "instruction", label: "Instruction", icon: "description" },
 ];
 
 export interface InspectorTabsProps {
   active: InspectorTab;
   onChange: (tab: InspectorTab) => void;
-  /** Panel content keyed by tab id. */
   evaluation: React.ReactNode;
-  persona: React.ReactNode;
-  prompts: React.ReactNode;
+  instruction: React.ReactNode;
 }
 
-export function InspectorTabs({ active, onChange, evaluation, persona, prompts }: InspectorTabsProps) {
+export function InspectorTabs({ active, onChange, evaluation, instruction }: InspectorTabsProps) {
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const activeLabel = TABS.find((t) => t.id === active)?.label ?? "";
 
@@ -61,13 +50,11 @@ export function InspectorTabs({ active, onChange, evaluation, persona, prompts }
 
   return (
     <aside className="z-0 flex h-[340px] w-full flex-shrink-0 flex-col border-t border-outline bg-surface-lowest lg:h-full lg:w-[360px] lg:border-l lg:border-t-0">
-      {/* Header bar */}
       <div className="flex shrink-0 items-center justify-between border-b border-outline bg-surface px-4 py-3">
         <span className="hud text-[10px] text-primary">Inspector</span>
         <span className="hud text-[9px] text-text-dim">{activeLabel}</span>
       </div>
 
-      {/* Underline tabs */}
       <div
         role="tablist"
         aria-label="Inspector"
@@ -98,16 +85,12 @@ export function InspectorTabs({ active, onChange, evaluation, persona, prompts }
         })}
       </div>
 
-      {/* Panels */}
       <div className="custom-scrollbar flex-1 overflow-y-auto">
         <div role="tabpanel" id="inspector-panel-evaluation" aria-labelledby="inspector-tab-evaluation" hidden={active !== "evaluation"}>
           {active === "evaluation" && evaluation}
         </div>
-        <div role="tabpanel" id="inspector-panel-persona" aria-labelledby="inspector-tab-persona" hidden={active !== "persona"}>
-          {active === "persona" && persona}
-        </div>
-        <div role="tabpanel" id="inspector-panel-prompts" aria-labelledby="inspector-tab-prompts" hidden={active !== "prompts"}>
-          {active === "prompts" && prompts}
+        <div role="tabpanel" id="inspector-panel-instruction" aria-labelledby="inspector-tab-instruction" hidden={active !== "instruction"}>
+          {active === "instruction" && instruction}
         </div>
       </div>
     </aside>

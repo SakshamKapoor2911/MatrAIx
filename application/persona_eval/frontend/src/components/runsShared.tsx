@@ -92,8 +92,7 @@ export type RunDetailView = Omit<
   prompts?: PersonaEvalResult["prompts"];
   // ---------------------------------------------------------------------------
   // Option-aware fields the data layer MAY hand over (render-what-we-get).
-  // TODO: the runs list/detail endpoints (`api.listPersonaEvalRuns` /
-  // `api.getPersonaEvalRun`) currently only persist chatbot runs, so these are
+  // Harbor trial debrief payloads reuse the PersonaEvalResult shape.
   // absent today and the debrief renders the chatbot shape. The survey/web/AppWorld
   // bodies read the result/trace shapes already
   // declared in `types.ts`; they light up unchanged once those run kinds persist.

@@ -1,10 +1,15 @@
 from __future__ import annotations
 
 import json
+import os
 import sys
 from pathlib import Path
 
-OUTPUT_DIR = Path("/app/output")
+OUTPUT_DIR = Path(
+    os.environ.get("PERSONABENCH_OUTPUT_DIR")
+    or os.environ.get("MATRIX_OUTPUT_DIR")
+    or "/app/output"
+)
 RESULT_PATH = OUTPUT_DIR / "survey_result.json"
 EVENT_KEYS = {"timestamp", "actor", "action", "context", "outcome"}
 

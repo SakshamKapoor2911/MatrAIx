@@ -5,11 +5,11 @@ export interface UrlState {
   session: string | null;
   turn: string | null;
   view: string | null;
-  run: string | null;
-  compareWith: string | null;
+  harborJob: string | null;
+  harborTrial: string | null;
 }
 
-const KEYS = ["mode", "session", "turn", "view", "run", "compareWith"] as const;
+const KEYS = ["mode", "session", "turn", "view", "harborJob", "harborTrial"] as const;
 const STORAGE_KEY = "personaeval.urlState";
 
 function readSearch(): URLSearchParams {

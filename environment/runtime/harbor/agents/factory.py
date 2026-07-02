@@ -77,6 +77,12 @@ class AgentFactory:
             "personabench.agents.persona.gemini_cli:PersonaGeminiCli"
         ),
         AgentName.PERSONA_CODEX: "personabench.agents.persona.codex:PersonaCodex",
+        AgentName.PERSONA_JSON_SURVEY: (
+            "personabench.agents.persona.json_survey:PersonaJsonSurvey"
+        ),
+        AgentName.PERSONA_USER_SIM: (
+            "personabench.agents.persona.user_sim:PersonaUserSim"
+        ),
     }
 
     @classmethod

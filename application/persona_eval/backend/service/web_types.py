@@ -19,12 +19,21 @@ class WebEvalTask:
     submission_profile: str = "persona_eval_final_json"
 
     def to_dict(self) -> Dict[str, Any]:
+        task_path = self.task_path
+        if isinstance(task_path, Path):
+            parts = task_path.parts
+            if "application" in parts and "tasks" in parts:
+                idx = parts.index("tasks")
+                task_path = "/".join(parts[idx - 1 :])
+            else:
+                task_path = str(task_path)
         return {
             "id": self.id,
             "title": self.title,
             "siteName": self.site_name,
             "siteUrl": self.site_url,
             "description": self.description,
+            "taskPath": str(task_path),
             "outputArtifact": self.output_artifact,
             "submissionProfile": self.submission_profile,
         }

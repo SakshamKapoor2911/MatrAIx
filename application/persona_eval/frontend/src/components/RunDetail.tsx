@@ -42,14 +42,14 @@ import type {
 } from "@/lib/types";
 
 export interface RunDetailProps {
-  runId: string;
+  harborTrial: { jobName: string; trialName: string };
   onBack: () => void;
 }
 
-export function RunDetail({ runId, onBack }: RunDetailProps) {
+export function RunDetail({ harborTrial, onBack }: RunDetailProps) {
   const query = useQuery<PersonaEvalResult>({
-    queryKey: ["persona-eval-run", runId],
-    queryFn: () => api.getPersonaEvalRun(runId),
+    queryKey: ["harbor-trial-debrief", harborTrial.jobName, harborTrial.trialName],
+    queryFn: () => api.getHarborTrialDebrief(harborTrial.jobName, harborTrial.trialName),
   });
 
   const run = useMemo(() => (query.data ? asRunDetail(query.data) : null), [query.data]);
@@ -62,7 +62,9 @@ export function RunDetail({ runId, onBack }: RunDetailProps) {
         <div className="mb-5 flex flex-wrap items-start justify-between gap-4">
           <div>
             <BackButton onBack={onBack} />
-            <h1 className="font-display text-[22px] font-bold tracking-tight text-text-main">Run debrief</h1>
+            <h1 className="font-display text-[22px] font-bold tracking-tight text-text-main">
+              Trial debrief
+            </h1>
           </div>
           {run && <RunTypeReflection active={appType} />}
         </div>

@@ -154,7 +154,7 @@ export function TopBar({
           )}
 
           {/* Context primary button: New chat (Chat) / New run (PersonaEval) */}
-          {showSessionTools ? (
+          {showSessionTools && (
             <button
               type="button"
               onClick={onNew}
@@ -162,16 +162,6 @@ export function TopBar({
             >
               <Sym name="add" size={16} />
               <span className="hidden sm:inline">New chat</span>
-            </button>
-          ) : (
-            <button
-              type="button"
-              onClick={() => onModeChange("persona-eval")}
-              title="Configure and launch a new evaluation run"
-              className={`flex items-center gap-2 rounded-md bg-primary h-9 px-3.5 text-[12px] font-semibold text-on-primary transition hover:bg-primary-dim active:scale-[0.98] ${FOCUS_RING}`}
-            >
-              <Sym name="play_arrow" fill={1} size={16} />
-              <span className="hidden sm:inline">New run</span>
             </button>
           )}
         </div>

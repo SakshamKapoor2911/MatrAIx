@@ -10,11 +10,21 @@ from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional
 from urllib.parse import quote
 
-from backend.service import run_store
 from backend.service.config import persona_model as default_persona_model
 from backend.service.web_types import WebEvalConfig, WebEvalResult, WebEvalTask
 
 _WEB_RUN_LOCK = threading.Lock()
+
+
+def _web_screenshots_dir(job_id: str) -> Path:
+    return (
+        Path(__file__).resolve().parents[4]
+        / "data"
+        / "cache"
+        / "persona_eval"
+        / "web_screenshots"
+        / job_id
+    )
 
 
 def _new_web_eval_id() -> str:
@@ -121,13 +131,11 @@ class WebEvalService:
         get_task: Callable[[str], WebEvalTask],
         list_tasks: Callable[[], List[WebEvalTask]],
         runner: Callable[..., WebEvalResult],
-        runs_dir: Optional[Path] = None,
     ) -> None:
         self._get_persona = get_persona
         self._get_task = get_task
         self._list_tasks = list_tasks
         self._runner = runner
-        self._runs_dir = runs_dir or run_store.default_runs_dir()
         self._guard = threading.Lock()
         self._progress: Dict[str, WebEvalProgress] = {}
 
@@ -179,9 +187,7 @@ class WebEvalService:
             progress = self._progress.get(job_id)
             screenshots_dir = progress.screenshots_dir if progress is not None else None
         if screenshots_dir is None:
-            # Fall back to the durable per-run screenshots so a persisted web run
-            # keeps its trace images after a restart (the in-memory job is gone).
-            screenshots_dir = run_store.web_screenshots_dir(self._runs_dir, job_id)
+            screenshots_dir = _web_screenshots_dir(job_id)
         base = screenshots_dir.resolve()
         path = (screenshots_dir / safe_name).resolve()
         if path.parent != base or not path.is_file():
@@ -246,25 +252,9 @@ class WebEvalService:
                     result_view.get("trace"),
                     local_screenshots=has_local_screenshots,
                 )
-                # Copy the trace screenshots to a durable per-run dir and persist
-                # the run BEFORE marking done, so a "done" run is always already
-                # saved and survives a restart. Both are best-effort.
                 _copy_screenshots(
                     result.trace.screenshots_dir,
-                    run_store.web_screenshots_dir(self._runs_dir, progress.job_id),
-                )
-                run_store.persist_run(
-                    self._runs_dir,
-                    {
-                        "id": progress.job_id,
-                        "applicationType": "web",
-                        "createdAt": result_view.get("createdAt"),
-                        "persona": run_store.persona_summary(persona),
-                        "siteName": task.site_name,
-                        "taskTitle": task.title,
-                        "webResult": web_result,
-                        "webTrace": trace,
-                    },
+                    _web_screenshots_dir(progress.job_id),
                 )
                 with self._guard:
                     progress.web_result = web_result

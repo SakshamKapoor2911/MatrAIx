@@ -21,6 +21,8 @@ from personabench.persona_consistency import (
 )
 
 DEFAULT_CATALOG_PATH = "persona/schema/dimensions.json"
+DEFAULT_PERSONA_VERSION = "1.0"
+PERSONA_SOURCES = ("Nemotron", "OASIS", "PersonaHub", "PRIMEX")
 
 
 def _repo_root() -> Path:
@@ -118,6 +120,28 @@ def _count_stratum(personas: list[dict[str, Any]], stratum: dict[str, str]) -> i
     return sum(1 for entry in personas if _stratum_match(entry["dimensions"], stratum))
 
 
+def _pick_source(rng: random.Random, sources: tuple[str, ...]) -> str:
+    if not sources:
+        raise ValueError("sources must not be empty")
+    return rng.choice(sources)
+
+
+def _persona_entry(
+    *,
+    persona_id: str,
+    dimensions: dict[str, str],
+    version: str,
+    source_rng: random.Random,
+    sources: tuple[str, ...],
+) -> dict[str, Any]:
+    return {
+        "persona_id": persona_id,
+        "version": version,
+        "source": _pick_source(source_rng, sources),
+        "dimensions": dimensions,
+    }
+
+
 def top_up_strata(
     personas: list[dict[str, Any]],
     *,
@@ -127,6 +151,8 @@ def top_up_strata(
     catalog: dict[str, list[str]],
     dev_dimension_ids: tuple[str, ...],
     catalog_path: str,
+    persona_version: str = DEFAULT_PERSONA_VERSION,
+    sources: tuple[str, ...] = PERSONA_SOURCES,
     max_attempts_per_stratum: int = 500,
 ) -> list[dict[str, Any]]:
     """Append consistent personas until each stratum meets *min_per_stratum*."""
@@ -154,11 +180,13 @@ def top_up_strata(
                 fixed_dimensions=stratum,
             )
             out.append(
-                {
-                    "persona_id": str(next_index).zfill(4),
-                    "version": "2.0",
-                    "dimensions": dimensions,
-                }
+                _persona_entry(
+                    persona_id=str(next_index).zfill(4),
+                    dimensions=dimensions,
+                    version=persona_version,
+                    source_rng=rng,
+                    sources=sources,
+                )
             )
             next_index += 1
     return out
@@ -183,6 +211,8 @@ def generate_persona_pool(
     smoke_persona_id: str = "0042",
     stratum_top_up: list[dict[str, str]] | None = None,
     min_per_stratum: int = 0,
+    persona_version: str = DEFAULT_PERSONA_VERSION,
+    sources: tuple[str, ...] = PERSONA_SOURCES,
 ) -> list[dict[str, Any]]:
     """Build *count* personas with roughly even age_bracket coverage."""
     cat_path = str(catalog_path or DEFAULT_CATALOG_PATH)
@@ -207,11 +237,13 @@ def generate_persona_pool(
                 age_bracket=age,
             )
             personas.append(
-                {
-                    "persona_id": persona_id,
-                    "version": "2.0",
-                    "dimensions": dimensions,
-                }
+                _persona_entry(
+                    persona_id=persona_id,
+                    dimensions=dimensions,
+                    version=persona_version,
+                    source_rng=rng,
+                    sources=sources,
+                )
             )
             persona_index += 1
 
@@ -224,7 +256,13 @@ def generate_persona_pool(
             catalog=catalog,
             dev_dimension_ids=dev_ids,
             catalog_path=cat_path,
+            persona_version=persona_version,
+            sources=sources,
         )
+
+    source_rng = random.Random(seed + 7)
+    for entry in personas:
+        entry["source"] = _pick_source(source_rng, sources)
 
     smoke_rng = random.Random(seed + 42)
     smoke_dims = generate_persona_dimensions(
@@ -233,11 +271,13 @@ def generate_persona_pool(
         dev_dimension_ids=dev_ids,
         catalog_path=cat_path,
     )
-    smoke_entry = {
-        "persona_id": smoke_persona_id,
-        "version": "2.0",
-        "dimensions": smoke_dims,
-    }
+    smoke_entry = _persona_entry(
+        persona_id=smoke_persona_id,
+        dimensions=smoke_dims,
+        version=persona_version,
+        source_rng=source_rng,
+        sources=sources,
+    )
     for index, entry in enumerate(personas):
         if entry["persona_id"] == smoke_persona_id:
             personas[index] = smoke_entry
@@ -255,6 +295,9 @@ def write_persona_dataset(
     seed: int,
     smoke_persona_id: str,
     catalog_path: str = DEFAULT_CATALOG_PATH,
+    persona_version: str = DEFAULT_PERSONA_VERSION,
+    manifest_name: str | None = None,
+    manifest_description: str | None = None,
 ) -> dict[str, Any]:
     out_dir.mkdir(parents=True, exist_ok=True)
     dev_ids = load_dev_dimension_ids(catalog_path=catalog_path)
@@ -264,7 +307,8 @@ def write_persona_dataset(
         rel_path = f"{out_dir.relative_to(repo_root)}/persona_{persona_id}.yaml"
         payload = {
             "persona_id": persona_id,
-            "version": entry.get("version", "2.0"),
+            "version": entry.get("version", persona_version),
+            "source": entry.get("source"),
             "dimensions": entry["dimensions"],
         }
         (repo_root / rel_path).write_text(
@@ -274,20 +318,34 @@ def write_persona_dataset(
             {
                 "persona_id": persona_id,
                 "path": rel_path,
+                "source": entry.get("source"),
                 "dimensions": entry["dimensions"],
             }
         )
 
-    manifest = {
+    source_counts: dict[str, int] = {}
+    for entry in manifest_personas:
+        source = entry.get("source")
+        if source:
+            source_counts[source] = source_counts.get(source, 0) + 1
+
+    manifest: dict[str, Any] = {
         "kind": kind,
         "count": len(manifest_personas),
         "seed": seed,
-        "schema_version": "2.0",
+        "schema_version": persona_version,
         "smoke_persona_id": smoke_persona_id,
         "dimension_ids": list(dev_ids),
         "dimension_count": len(dev_ids),
+        "dimension_categories": "persona/schema/dimension_categories.json",
+        "persona_sources": list(PERSONA_SOURCES),
+        "source_counts": source_counts,
         "personas": manifest_personas,
     }
+    if manifest_name:
+        manifest["name"] = manifest_name
+    if manifest_description:
+        manifest["description"] = manifest_description
     (out_dir / "manifest.json").write_text(
         json.dumps(manifest, indent=2) + "\n", encoding="utf-8"
     )

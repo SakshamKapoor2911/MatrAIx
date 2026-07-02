@@ -93,51 +93,6 @@ class _FakePersonaEvalService:
     def view(self, job_id: str) -> Optional[Dict[str, Any]]:
         return self._view if job_id == "wt_fake123" else None
 
-    def list_runs(self) -> list:
-        return [
-            {
-                "id": "wt_run1",
-                "createdAt": "2026-02-02T00:00:00Z",
-                "domain": "movie",
-                "personaName": "Marco",
-                "source": "Nemotron",
-                "goalContextId": "scenario_default",
-                "overallRating": 8,
-                "numTurns": 2,
-            }
-        ]
-
-    def get_run(self, run_id: str) -> Optional[Dict[str, Any]]:
-        if run_id != "wt_run1":
-            return None
-        return {
-            "id": "wt_run1",
-            "createdAt": "2026-02-02T00:00:00Z",
-            "config": {"domain": "movie", "goalContextId": "scenario_default"},
-            "persona": {
-                "id": "game-lapsed-coop",
-                "name": "Marco",
-                "source": "Nemotron",
-            },
-            "sutDescription": "desc",
-            "transcript": [
-                {
-                    "turnIndex": 1,
-                    "userMessage": "u1",
-                    "assistantMessage": "a1",
-                    "recommendedItems": [{"id": "6574", "title": "X"}],
-                    "decision": "satisfied",
-                }
-            ],
-            "recommendedItemIds": {"perTurn": [["6574"]], "final": ["6574"]},
-            "questionnaire": {"overallRating": 8},
-            "metricScores": {"numTurns": 1},
-            "prompts": {
-                "harborPrompt": "Harbor persona prompt",
-                "taskPrompt": "Application task prompt",
-            },
-        }
-
 
 @pytest.fixture()
 def fake_persona_eval(app):
@@ -387,44 +342,6 @@ def test_get_persona_eval_job_view(client, fake_persona_eval):
 
 def test_get_persona_eval_job_unknown_404(client, fake_persona_eval):
     resp = client.get("/api/persona-eval/jobs/wt_nope")
-    assert resp.status_code == 404
-
-
-# --------------------------------------------------------------------------- #
-# Runs (list / get)
-# --------------------------------------------------------------------------- #
-def test_list_persona_eval_runs(client, fake_persona_eval):
-    resp = client.get("/api/persona-eval/runs")
-    assert resp.status_code == 200, resp.text
-    body = resp.json()
-    assert isinstance(body["runs"], list) and len(body["runs"]) == 1
-    run = body["runs"][0]
-    assert run["id"] == "wt_run1"
-    assert run["domain"] == "movie"
-    assert run["personaName"] == "Marco"
-    assert run["source"] == "Nemotron"
-    assert run["goalContextId"] == "scenario_default"
-    assert run["overallRating"] == 8
-    assert run["numTurns"] == 2
-
-
-def test_get_persona_eval_run(client, fake_persona_eval):
-    resp = client.get("/api/persona-eval/runs/wt_run1")
-    assert resp.status_code == 200, resp.text
-    body = resp.json()
-    assert body["id"] == "wt_run1"
-    assert body["persona"]["name"] == "Marco"
-    assert body["questionnaire"]["overallRating"] == 8
-    assert body["transcript"][0]["recommendedItems"][0]["id"] == "6574"
-    assert body["recommendedItemIds"]["final"] == ["6574"]
-    assert body["prompts"] == {
-        "harborPrompt": "Harbor persona prompt",
-        "taskPrompt": "Application task prompt",
-    }
-
-
-def test_get_persona_eval_run_unknown_404(client, fake_persona_eval):
-    resp = client.get("/api/persona-eval/runs/wt_nope")
     assert resp.status_code == 404
 
 
