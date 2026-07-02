@@ -4,7 +4,7 @@ Synthetic dev persona pool for docs, smoke tests, Harbor tasks, and PersonaEval 
 
 | Field | Value |
 |-------|-------|
-| Checked-in count | 500 (`persona_0001` … `persona_0500`) |
+| Checked-in count | 200 (`persona_0001` … `persona_0200`) |
 | Schema | v2 YAML (`persona_id`, `version`, `source`, `dimensions`) |
 | Persona version | `1.0` |
 | Source labels | `Nemotron`, `OASIS`, `PersonaHub`, `PRIMEX` (random per persona) |
@@ -18,7 +18,7 @@ Regenerate:
 
 ```bash
 uv run python persona/scripts/generate_dev_personas.py \
-  --count 500 \
+  --count 200 \
   --seed 42 \
   --out persona/datasets/bench-dev-sample \
   --smoke-id 0042 \
