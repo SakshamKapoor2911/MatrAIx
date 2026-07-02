@@ -1,8 +1,7 @@
 # Persona Survey
 
-PersonaBench application task for structured persona surveys. The Harbor
-`persona-claude-code` agent acts as the respondent using Harbor's native persona
-prompt injection. The application runner appends a survey instrument and maps
+PersonaBench application task for structured persona surveys. A persona agent
+acts as the respondent. The application runner appends a survey instrument and maps
 the saved artifact into answers, metrics, and the telemetry-style trajectory.
 
 ## Expected artifact
@@ -24,18 +23,14 @@ shape:
 }
 ```
 
-## Local smoke
-
-After the Harbor runtime is available:
+## Smoke run
 
 ```bash
-uv run harbor run \
-  -a persona-claude-code \
-  -m "${PERSONABENCH_HARBOR_PERSONA_MODEL:-anthropic/claude-haiku-4-5}" \
-  --ak persona_path=persona/datasets/bench-dev-sample/persona_0042.yaml \
-  -p application/tasks/persona-survey
+uv run python application/scripts/generate_application_job.py \
+  --task application/tasks/persona-survey \
+  --execution-mode auto \
+  --persona-ids 0042
+# Script prints export lines and the job YAML path — then: harbor run -c …
 ```
 
-Production-style survey runners are imported separately from the task
-definition. They should append the survey instrument as an extra instruction and
-choose the configured persona model for the run.
+See [Application Quickstart](../../QUICKSTART.md).

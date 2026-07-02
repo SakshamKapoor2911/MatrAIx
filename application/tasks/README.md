@@ -5,16 +5,14 @@ MatrAIx and organized under the PersonaBench `application/` module.
 
 This import contains application task folders, tests, and reference solutions.
 Runtime build contexts live under `environment/task-environments/application/`.
-Runtime and agent wiring live under `environment/runtime/harbor/` and
-`environment/agents/personabench/agents/`; curated runnable recipes live under
-`configs/jobs/`.
+Generated job recipes land under `configs/jobs/` (see [QUICKSTART.md](../QUICKSTART.md)).
 
 ## Naming
 
 - **`example-*`** — reference tasks in the repo (copy from these). For surveys, only
   **`example-survey_product-feedback`** is the reference; other `survey_*` folders are
   real application benchmark tasks.
-- **`survey_*`** — application survey tasks (json_survey / complete_json).
+- **`survey_*`** — application survey tasks.
 - **`recommender-agent_chat_api`** — clean import of the MatrAIx recommender
   chat task with an environment-side HTTP sidecar for smoke runs.
 - **`web-ecommerce-platform_product-discovery`** — deterministic ecommerce web
@@ -53,18 +51,12 @@ in this module.
 survey, chatbot, and web/computer-use tasks. Use it to decide where a new task
 belongs and which artifacts its verifier should expect.
 
-## Docker (`persona-claude-code` tasks)
+## Task environment
 
-[`../../environment/docker-snippets/install-claude-code.sh`](../../environment/docker-snippets/install-claude-code.sh)
-is the canonical install script that pre-bakes Claude Code + `uv` into survey
-and chat task images. Harbor resolves `[environment].definition` to
-`environment/task-environments/<definition>` and packages that directory as the
-task archive's `environment/` folder. After adding or editing a Claude Code
-task, run:
+Put Docker and runtime fixtures under
+`environment/task-environments/application/<your-task-name>/`.
+Harbor resolves `[environment].definition` to that folder.
 
-```bash
-python scripts/sync_docker_snippets.py --write
-```
-
-Web and computer-use tasks use different base images and do not use this
-script.
+Survey and chat reference tasks run in **auto** mode without building a task image
+(see [QUICKSTART.md](../QUICKSTART.md)). Web and computer-use tasks need a
+Dockerfile in the task environment directory.

@@ -78,6 +78,9 @@ uv run harbor run -c configs/jobs/example-job-recipe/appSim-example-survey-local
 More setup, optional package, adapter, viewer, and artifact details are in
 [Running PersonaBench](docs/running.md).
 
+Application contributors (UI demo, Harbor tasks, new scenarios): see
+[application/QUICKSTART.md](application/QUICKSTART.md).
+
 ## Persona Data
 
 Persona schema, datasets, curation pipelines, collaborator packages, and

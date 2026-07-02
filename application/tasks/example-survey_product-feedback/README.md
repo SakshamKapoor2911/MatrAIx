@@ -7,21 +7,20 @@ PersonaBench **survey** reference task: read a product brief and structured ques
 
 See [Application Tasks](../README.md).
 
-## Suggested setup (non-binding)
-
-| Field | Value |
-|-------|-------|
-| Agent | `persona-claude-code` |
-| Environment | `docker` (default) |
-| Persona | `persona/datasets/bench-dev-sample/persona_0042.yaml` |
+## Smoke run
 
 ```bash
-uv run harbor run \
-  -a persona-claude-code \
-  -m anthropic/claude-sonnet-4-6 \
-  --ak persona_path=persona/datasets/bench-dev-sample/persona_0042.yaml \
-  -p application/tasks/example-survey_product-feedback
+uv run python application/scripts/generate_application_job.py \
+  --task application/tasks/example-survey_product-feedback \
+  --execution-mode auto \
+  --persona-ids 0042
+
+export ANTHROPIC_API_KEY="sk-ant-..."
+export MATRIX_SURVEY_INSTRUMENT_ID=product_feedback_v1
+uv run harbor run -c configs/jobs/application-task-job-recipe/example-survey_product-feedback-auto-n1.yaml
 ```
+
+See [Application Quickstart](../../QUICKSTART.md) for the UI path and full env vars.
 
 ## What this exercises
 

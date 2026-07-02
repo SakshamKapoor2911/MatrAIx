@@ -12,15 +12,15 @@ The script supports:
 
 - `--sample-size`
 - `--persona-ids` for explicit personas (skips random sampling)
-- `--execution-mode auto` for host-native `json_survey` / `user_sim_chat` contracts
+- `--execution-mode auto` — recommended; same as PersonaEval UI Mode **auto**
 - repeated or comma-separated `--stratify`
 - `--name`
 - `--job-name`
 - `--dataset`
 
-## Auto mode (json survey / user simulator)
+## Auto mode (recommended)
 
-Generate a host-native Harbor contract (same logic as PersonaEval UI):
+Generate a job recipe (same logic as PersonaEval UI Mode **auto**):
 
 ```bash
 uv run python application/scripts/generate_application_job.py \
@@ -52,5 +52,3 @@ export MATRIX_CHATBOT_APPLICATION_ID=recai
 export MATRIX_CHATBOT_MAX_TURNS=8
 uv run harbor run -c configs/jobs/application-task-job-recipe/recommender-agent_chat_api-auto-n1.yaml
 ```
-
-`--execution-mode force_docker` (default) keeps the legacy Docker + `persona-claude-code` path.

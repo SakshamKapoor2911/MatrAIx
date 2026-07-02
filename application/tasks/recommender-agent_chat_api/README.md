@@ -31,21 +31,23 @@ The persona agent writes:
 The verifier checks artifact shape, multi-turn coverage, session consistency,
 and recommendation grounding.
 
-## Suggested Setup
-
-| Field | Value |
-|---|---|
-| Agent | `persona-claude-code` |
-| Environment | `docker` |
-| Persona | `persona/datasets/bench-dev-sample/persona_0042.yaml` |
+## Smoke run
 
 ```bash
-uv run harbor run \
-  -a persona-claude-code \
-  -m anthropic/claude-sonnet-4-6 \
-  --ak persona_path=persona/datasets/bench-dev-sample/persona_0042.yaml \
-  -p application/tasks/recommender-agent_chat_api
+uv run python application/scripts/generate_application_job.py \
+  --task application/tasks/recommender-agent_chat_api \
+  --execution-mode auto \
+  --persona-ids 0042
+
+export ANTHROPIC_API_KEY="sk-ant-..."
+export OPENAI_API_KEY="sk-..."
+export MATRIX_CHATBOT_DOMAIN=movie
+export MATRIX_CHATBOT_APPLICATION_ID=recai
+export MATRIX_CHATBOT_MAX_TURNS=8
+uv run harbor run -c configs/jobs/application-task-job-recipe/recommender-agent_chat_api-auto-n1.yaml
 ```
+
+See [Application Quickstart](../../QUICKSTART.md) for the UI path.
 
 The environment-side sidecar is intentionally lightweight. A production RecAI or
 catalog-backed recommender can replace

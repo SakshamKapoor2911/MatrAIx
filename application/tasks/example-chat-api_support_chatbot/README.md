@@ -6,27 +6,15 @@ Requires **Docker Compose** (local `docker` environment). Not supported on cloud
 
 For the MCP variant, see [`example-chat-mcp_support_chatbot`](../example-chat-mcp_support_chatbot/).
 
-## Suggested setup (non-binding)
+## Smoke run
 
-| Field | Value |
-|-------|-------|
-| Agent | `persona-claude-code` |
-| Environment | `docker` (default) |
-| Persona | `persona/datasets/bench-dev-sample/persona_0042.yaml` |
-
-```bash
-uv run harbor run \
-  -a persona-claude-code \
-  -m anthropic/claude-sonnet-4-6 \
-  --ak persona_path=persona/datasets/bench-dev-sample/persona_0042.yaml \
-  -p application/tasks/example-chat-api_support_chatbot
-```
-
-Oracle check (no API key):
+**No API key** — validates Docker + verifier:
 
 ```bash
 uv run harbor run -p application/tasks/example-chat-api_support_chatbot -a oracle
 ```
+
+**Full run** — PersonaEval UI or terminal auto mode: [Application Quickstart](../../QUICKSTART.md).
 
 ## Layout
 

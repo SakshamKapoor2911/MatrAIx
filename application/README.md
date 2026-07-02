@@ -16,14 +16,10 @@ application/
 Applications should depend on persona inputs by reference. They should not copy
 large persona datasets into application folders.
 
-Related runtime and recipe surfaces live outside this module:
+Related surfaces outside this module:
 
-- `configs/jobs/application-task-job-recipe/` contains curated multi-persona
-  application job fixtures.
-- `configs/jobs/example-job-recipe/` contains local smoke recipes for the
-  example application tasks.
-- `environment/runtime/harbor/` and `environment/agents/personabench/agents/`
-  own execution and agent wiring.
+- `configs/jobs/application-task-job-recipe/` — generated multi-persona job recipes
+- `configs/jobs/example-job-recipe/` — local smoke recipes for example tasks
 
 ## Scenario Handoff Template
 
@@ -77,3 +73,9 @@ The clean import currently includes:
 Keep new application contributions scoped to application-owned task, script,
 reporting, or PersonaEval folders. Do not add repo-root scripts, copy persona
 datasets into application folders, or commit generated job outputs.
+
+## Quickstart
+
+Contributors: start with **[QUICKSTART.md](QUICKSTART.md)** — visual PersonaEval
+demo, terminal runs for existing tasks, and creating a new task in three short
+sections.
