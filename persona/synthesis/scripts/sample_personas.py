@@ -25,7 +25,12 @@ def main() -> None:
         default=None,
         help="Output path. Omit to benchmark generation without saving samples.",
     )
-    parser.add_argument("--format", choices=["jsonl", "csv"], default="jsonl")
+    parser.add_argument(
+        "--format",
+        choices=["codes", "jsonl", "csv"],
+        default="codes",
+        help="Saved output format. Defaults to compact binary codes; use jsonl/csv only for inspection.",
+    )
     parser.add_argument(
         "--workers",
         type=int,

@@ -55,20 +55,19 @@ Stop the temporary server with `Ctrl-C`.
 
 The page embeds the full graph payload:
 
-- 1,339 schema attributes
-- 1,230 default-emitted attributes
-- 109 hidden schema attributes
+- 1,224 schema/emitted persona attributes
+- 0 hidden schema attributes
 - 18 latent/helper graph nodes
-- 1,357 total graph nodes
-- 6,937 directed proposal edges
-- 40 category lanes
+- 1,242 total graph nodes
+- 6,830 directed proposal edges
+- 36 category lanes
 
 Layout semantics:
 
 - X position follows `proposal_view.topological_order`.
 - Y position groups nodes by category.
 - Node size scales with directed degree.
-- Hidden schema attributes and latent/helper nodes render with lower opacity.
+- Latent/helper nodes render with lower opacity.
 - Each node inspector labels the node as `attribute` or `latent/helper`.
 
 Controls:

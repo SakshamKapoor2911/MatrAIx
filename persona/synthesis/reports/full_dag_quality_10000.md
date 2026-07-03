@@ -5,7 +5,7 @@
 - Graph: `persona/synthesis/graph/full_dag.json`
 - Samples: 10,000
 - Seed: 42
-- Generated at: 2026-06-30T05:42:18+00:00
+- Generated at: 2026-07-03T01:55:03+00:00
 - Python: 3.13.14
 - Platform: macOS-15.6-arm64-arm-64bit-Mach-O
 
@@ -13,25 +13,25 @@
 
 | Step | Time |
 | --- | ---: |
-| Load and compile sampler | 0.3969s |
-| Static validation | 0.2710s |
-| Sample integer-coded DAG rows | 1.5679s |
-| Marginal audit | 0.0075s |
-| Consistency audit | 1.3448s |
-| End-to-end report runtime | 3.5881s |
+| Load and compile sampler | 0.4284s |
+| Static validation | 0.2783s |
+| Sample integer-coded DAG rows | 1.5726s |
+| Marginal audit | 0.0077s |
+| Consistency audit | 1.3706s |
+| End-to-end report runtime | 3.6577s |
 
-Sampling throughput: 6378.0 samples/sec.
-End-to-end throughput: 2787.0 samples/sec.
+Sampling throughput: 6359.0 samples/sec.
+End-to-end throughput: 2734.0 samples/sec.
 
 ## Static Graph Validation
 
 - Validation passed: `true`
-- Nodes: 1,357
-- Emitted nodes: 1,230
-- Directed proposal edges: 6,937
-- Full CPT overlays: 53
-- Full CPT rows: 13,491
-- Conditional masks: 95
+- Nodes: 1,242
+- Emitted nodes: 1,224
+- Directed proposal edges: 6,830
+- Full CPT overlays: 54
+- Full CPT rows: 17,645
+- Conditional masks: 172
 - Missing refs: 0
 - Duplicate node ids: 0
 - Duplicate directed pairs: 0
@@ -41,17 +41,16 @@ End-to-end throughput: 2787.0 samples/sec.
 ## Consistency Audit
 
 - Personas with hard issues: 0 (0.00%)
-- Personas with hard or strong issues: 3 (0.03%)
-- Personas with any flagged issue: 29 (0.29%)
-- Severity issue counts: `{"soft": 26, "strong": 3}`
-- Group issue counts: `{"finance": 29}`
+- Personas with hard or strong issues: 0 (0.00%)
+- Personas with any flagged issue: 15 (0.15%)
+- Severity issue counts: `{"soft": 15}`
+- Group issue counts: `{"finance": 15}`
 
 Top consistency rules:
 
 | Rule | Severity | Group | Count | Share |
 | --- | --- | --- | ---: | ---: |
-| `unbanked_mobile_wallet_or_crypto_payment` | soft | finance | 26 | 0.26% |
-| `minor_active_investment` | strong | finance | 3 | 0.03% |
+| `unbanked_mobile_wallet_or_crypto_payment` | soft | finance | 15 | 0.15% |
 
 ## Focus-Node Marginal Drift
 
@@ -59,24 +58,24 @@ TVD is total variation distance between the sample marginal and the node prior.
 
 | Node | TVD vs prior | Top sampled values |
 | --- | ---: | --- |
-| `life_stage` | 0.1742 | Mid-life: sample 24.97%, prior 14.29%; Early career: sample 17.95%, prior 14.29%; Student: sample 16.43%, prior 14.29%; Parent of young kids: sample 15.21%, prior 14.29% |
-| `seniority` | 0.1458 | Student / intern: sample 24.30%, prior 17.00%; Entry: sample 19.65%, prior 14.50%; Mid: sample 17.51%, prior 25.50%; Senior: sample 11.84%, prior 15.00% |
-| `role_function` | 0.1271 | Operations: sample 31.85%, prior 28.75%; Engineering: sample 10.62%, prior 11.25%; Sales / GTM: sample 9.40%, prior 10.00%; Research: sample 7.81%, prior 2.50% |
-| `years_experience` | 0.1105 | 0-2: sample 29.44%, prior 25.50%; 11-20: sample 21.90%, prior 22.00%; 20+: sample 19.61%, prior 12.50%; 6-10: sample 16.75%, prior 21.00% |
-| `english_proficiency` | 0.1031 | None: sample 37.95%, prior 29.00%; Basic (A1-A2): sample 18.35%, prior 18.00%; Intermediate (B1-B2): sample 15.57%, prior 17.00%; Fluent (C1-C2): sample 15.51%, prior 14.50% |
-| `tech_savviness` | 0.0642 | Comfortable: sample 30.56%, prior 33.50%; Cautious adopter: sample 25.48%, prior 25.00%; Reluctant: sample 18.75%, prior 15.50%; Digital native: sample 15.02%, prior 18.50% |
-| `highest_education` | 0.0631 | Secondary: sample 45.99%, prior 42.00%; Primary: sample 21.32%, prior 19.00%; Bachelor's: sample 11.17%, prior 14.50%; No formal: sample 9.83%, prior 10.50% |
-| `domain` | 0.0127 | Agriculture: sample 24.55%, prior 24.00%; Manufacturing: sample 11.99%, prior 12.00%; Business & Management: sample 10.13%, prior 10.00%; Hospitality: sample 7.21%, prior 7.00% |
-| `demo_religion_affiliation` | 0.0116 | Christian: sample 28.81%, prior 28.80%; Muslim: sample 24.98%, prior 25.60%; Hindu: sample 15.16%, prior 14.90%; None: sample 9.58%, prior 9.30% |
-| `primary_language` | 0.0116 | English: sample 21.14%, prior 21.50%; Mandarin: sample 20.69%, prior 20.50%; Hindi: sample 10.70%, prior 10.50%; Spanish: sample 10.31%, prior 10.00% |
-| `demo_employment_status` | 0.0100 | Full-time: sample 33.85%, prior 33.50%; Student: sample 13.80%, prior 13.50%; Retired: sample 10.74%, prior 11.00%; Self-employed: sample 10.66%, prior 10.50% |
-| `demo_ethnicity_broad` | 0.0098 | South Asian: sample 25.36%, prior 25.00%; East Asian: sample 20.71%, prior 20.50%; Black / African: sample 14.18%, prior 14.50%; White / European: sample 10.55%, prior 10.50% |
-| `demo_children_count` | 0.0095 | None: sample 41.78%, prior 42.00%; 2 children: sample 17.83%, prior 17.50%; 3+ children: sample 16.52%, prior 16.00%; 1 child: sample 12.77%, prior 13.50% |
-| `urbanicity` | 0.0078 | Rural: sample 34.53%, prior 34.50%; Dense urban: sample 24.69%, prior 24.50%; Suburban: sample 20.25%, prior 21.00%; Small town: sample 19.06%, prior 18.50% |
-| `age_bracket` | 0.0076 | 25-34: sample 19.78%, prior 19.70%; 35-44: sample 17.29%, prior 17.10%; 45-54: sample 14.47%, prior 14.50%; 18-24: sample 14.09%, prior 13.60% |
-| `region` | 0.0070 | South Asia: sample 25.37%, prior 25.23%; East Asia: sample 19.74%, prior 19.41%; Sub-Saharan Africa: sample 16.69%, prior 16.85%; Southeast Asia: sample 8.69%, prior 8.78% |
-| `socioeconomic_band` | 0.0050 | Lower-middle: sample 33.39%, prior 33.00%; Low income: sample 33.14%, prior 33.50%; Middle: sample 21.61%, prior 21.50%; Upper-middle: sample 9.50%, prior 9.50% |
-| `gender_identity` | 0.0028 | Man: sample 50.02%, prior 49.80%; Woman: sample 49.27%, prior 49.50%; Non-binary: sample 0.33%, prior 0.30%; Self-described: sample 0.23%, prior 0.20% |
+| `seniority` | 0.1390 | Student / intern: sample 39.13%, prior 34.00%; Entry: sample 18.59%, prior 10.00%; Mid: sample 14.42%, prior 17.00%; Retired: sample 9.48%, prior 18.30% |
+| `role_function` | 0.1214 | Operations: sample 31.26%, prior 28.75%; Engineering: sample 11.01%, prior 11.25%; Sales / GTM: sample 9.54%, prior 10.00%; Research: sample 7.99%, prior 2.50% |
+| `english_proficiency` | 0.1062 | None: sample 39.03%, prior 29.00%; Basic (A1-A2): sample 18.28%, prior 18.00%; Intermediate (B1-B2): sample 15.03%, prior 17.00%; Fluent (C1-C2): sample 14.81%, prior 14.50% |
+| `life_stage` | 0.1017 | Student: sample 35.49%, prior 30.00%; Mid-life: sample 20.29%, prior 19.00%; Early career: sample 13.28%, prior 13.00%; Career change: sample 10.97%, prior 8.00% |
+| `demo_children_count` | 0.0611 | None: sample 55.00%, prior 60.00%; 3+ children: sample 12.39%, prior 11.00%; 2 children: sample 12.02%, prior 12.00%; Adult children: sample 11.20%, prior 6.50% |
+| `highest_education` | 0.0519 | Secondary: sample 36.72%, prior 36.00%; Primary: sample 21.60%, prior 24.50%; No formal: sample 20.49%, prior 16.50%; Bachelor's: sample 7.15%, prior 8.00% |
+| `years_experience` | 0.0376 | 0-2: sample 44.79%, prior 42.00%; 11-20: sample 17.25%, prior 18.00%; 20+: sample 13.97%, prior 13.00%; 6-10: sample 12.83%, prior 14.00% |
+| `demo_employment_status` | 0.0300 | Student: sample 33.34%, prior 33.00%; Full-time: sample 24.28%, prior 24.50%; Homemaker: sample 11.13%, prior 8.50%; Retired: sample 9.48%, prior 10.50% |
+| `tech_savviness` | 0.0198 | Comfortable: sample 29.55%, prior 28.00%; Cautious adopter: sample 24.22%, prior 25.00%; Reluctant: sample 18.03%, prior 18.00%; Digital native: sample 14.80%, prior 16.00% |
+| `domain` | 0.0168 | Agriculture: sample 23.31%, prior 24.00%; Manufacturing: sample 12.13%, prior 12.00%; Business & Management: sample 10.10%, prior 10.00%; Education: sample 7.51%, prior 7.00% |
+| `region` | 0.0150 | South Asia: sample 25.39%, prior 25.23%; East Asia: sample 18.70%, prior 19.41%; Sub-Saharan Africa: sample 17.04%, prior 16.85%; Southeast Asia: sample 8.34%, prior 8.78% |
+| `age_bracket` | 0.0149 | 25-34: sample 14.58%, prior 14.50%; 5-12: sample 13.55%, prior 13.00%; 35-44: sample 13.26%, prior 13.30%; 45-54: sample 11.12%, prior 11.50% |
+| `primary_language` | 0.0125 | English: sample 21.13%, prior 21.50%; Mandarin: sample 19.76%, prior 20.50%; Hindi: sample 10.73%, prior 10.50%; Spanish: sample 9.99%, prior 10.00% |
+| `demo_ethnicity_broad` | 0.0122 | South Asian: sample 25.22%, prior 25.00%; East Asian: sample 19.77%, prior 20.50%; Black / African: sample 14.29%, prior 14.50%; White / European: sample 10.96%, prior 10.50% |
+| `demo_religion_affiliation` | 0.0119 | Christian: sample 29.01%, prior 28.80%; Muslim: sample 26.16%, prior 25.60%; Hindu: sample 15.21%, prior 14.90%; None: sample 9.14%, prior 9.30% |
+| `urbanicity` | 0.0074 | Rural: sample 35.24%, prior 34.50%; Dense urban: sample 24.13%, prior 24.50%; Suburban: sample 20.97%, prior 21.00%; Small town: sample 18.18%, prior 18.50% |
+| `socioeconomic_band` | 0.0062 | Lower-middle: sample 33.17%, prior 33.00%; Low income: sample 33.14%, prior 33.50%; Middle: sample 21.95%, prior 21.50%; Upper-middle: sample 9.25%, prior 9.50% |
+| `gender_identity` | 0.0056 | Man: sample 50.23%, prior 49.80%; Woman: sample 49.04%, prior 49.50%; Self-described: sample 0.33%, prior 0.20%; Non-binary: sample 0.26%, prior 0.30% |
 
 ## Interpretation
 

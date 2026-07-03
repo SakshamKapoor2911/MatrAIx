@@ -17,6 +17,11 @@ import numpy as np
 
 EPS = 1e-12
 _WORKER_SAMPLER: "PersonaForwardSampler | None" = None
+COMPACT_CODES_FORMAT_VERSION = 1
+
+
+def codes_schema_path(codes_path: str | Path) -> Path:
+    return Path(f"{codes_path}.schema.json")
 
 
 def _normalize(x: Any) -> np.ndarray:
@@ -36,6 +41,15 @@ def _align_dist(dist: Any, values: List[str], source_values: Optional[List[str]]
         m = {v: float(p) for v, p in zip(source_values, dist)}
         return _normalize([m.get(v, 0.0) for v in values])
     return _normalize(dist)
+
+
+def _codes_dtype_for_value_counts(value_counts: List[int]) -> np.dtype:
+    max_count = max(value_counts, default=0)
+    if max_count <= np.iinfo(np.uint8).max + 1:
+        return np.dtype("uint8")
+    if max_count <= np.iinfo(np.uint16).max + 1:
+        return np.dtype("uint16")
+    return np.dtype("uint32")
 
 
 @dataclass(frozen=True)
@@ -75,6 +89,7 @@ class PersonaForwardSampler:
         self.full_cpts = self._compile_full_cpts()
         self.masks = self._compile_masks()
         self.replaced_parents, self.gamma = self._compile_node_shrinkage()
+        self.required_nodes = self._compile_required_nodes()
 
     def _compile_pairwise_edges(self) -> Dict[str, List[Dict[str, Any]]]:
         out: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
@@ -180,6 +195,34 @@ class PersonaForwardSampler:
             gamma[nid] = 1.0 / max(1.0, math.sqrt(max(sum(w * w for w in weights), self.config.eps)))
         return replaced, gamma
 
+    def _compile_required_nodes(self) -> set[str]:
+        if not self.config.emit_only:
+            return set(self.nodes)
+
+        required = set(self.emit_nodes)
+        parents_by_target: Dict[str, set[str]] = defaultdict(set)
+        for edge in self.graph.get("directed_proposal_edges", []):
+            source, target = edge.get("source"), edge.get("target")
+            if source in self.nodes and target in self.nodes:
+                parents_by_target[target].add(source)
+        for cpt in self.graph.get("full_cpts", []):
+            target = cpt.get("target")
+            if target in self.nodes:
+                parents_by_target[target].update(p for p in cpt.get("parents", []) if p in self.nodes)
+        for mask in self.graph.get("conditional_masks", []):
+            target = mask.get("target")
+            if target in self.nodes:
+                parents_by_target[target].update(p for p in mask.get("condition", {}) if p in self.nodes)
+
+        stack = list(required)
+        while stack:
+            nid = stack.pop()
+            for parent in parents_by_target.get(nid, set()):
+                if parent not in required:
+                    required.add(parent)
+                    stack.append(parent)
+        return required
+
     @staticmethod
     def _condition_rows(idx: Dict[str, np.ndarray], cond: List[tuple[str, np.ndarray]], n: int) -> np.ndarray | None:
         if not cond:
@@ -196,6 +239,8 @@ class PersonaForwardSampler:
         idx: Dict[str, np.ndarray] = {}
         for nid in self.topological_order:
             if nid not in self.nodes:
+                continue
+            if nid not in self.required_nodes:
                 continue
             k = len(self.values[nid])
             logits = np.tile(self.logprior[nid], (n, 1))
@@ -244,10 +289,58 @@ class PersonaForwardSampler:
             idx[nid] = (cum < u[:, None]).sum(axis=1).astype(np.int16)
 
         # If graph contains nodes outside topological order, sample them from priors.
-        for nid in self.nodes:
+        for nid in self.required_nodes:
             if nid not in idx:
                 idx[nid] = self.rng.choice(len(self.values[nid]), size=n, p=self.prior[nid]).astype(np.int16)
         return idx
+
+    def _codes_dtype(self) -> np.dtype:
+        return _codes_dtype_for_value_counts([len(self.values[nid]) for nid in self.emit_nodes])
+
+    def codes_matrix(self, idx: Dict[str, np.ndarray]) -> np.ndarray:
+        n = len(next(iter(idx.values()))) if idx else 0
+        dtype = self._codes_dtype()
+        matrix = np.empty((n, len(self.emit_nodes)), dtype=dtype)
+        for col, nid in enumerate(self.emit_nodes):
+            matrix[:, col] = idx[nid].astype(dtype, copy=False)
+        return matrix
+
+    def write_codes(self, idx: Dict[str, np.ndarray], out: str | Path) -> Dict[str, Any]:
+        Path(out).parent.mkdir(parents=True, exist_ok=True)
+        matrix = self.codes_matrix(idx)
+        matrix.tofile(out)
+        return {
+            "dtype": str(matrix.dtype),
+            "shape": [int(matrix.shape[0]), int(matrix.shape[1])],
+            "bytes": int(matrix.nbytes),
+        }
+
+    def codes_schema(self, n: int, out: str | Path) -> Dict[str, Any]:
+        dtype = self._codes_dtype()
+        return {
+            "format": "persona_codes",
+            "format_version": COMPACT_CODES_FORMAT_VERSION,
+            "code_base": 0,
+            "dtype": str(dtype),
+            "shape": [int(n), len(self.emit_nodes)],
+            "codes_path": str(out),
+            "columns": [
+                {
+                    "id": nid,
+                    "label": self.nodes[nid].get("label", nid),
+                    "category": self.nodes[nid].get("category"),
+                    "values": self.values[nid],
+                }
+                for nid in self.emit_nodes
+            ],
+            "graph": str(self.graph_path),
+            "emit_only": self.config.emit_only,
+        }
+
+    def write_codes_schema(self, n: int, out: str | Path) -> Path:
+        schema_path = codes_schema_path(out)
+        schema_path.write_text(json.dumps(self.codes_schema(n, out), indent=2), encoding="utf-8")
+        return schema_path
 
     def decode_row(self, idx: Dict[str, np.ndarray], row: int, *, include_hidden: Optional[bool] = None) -> Dict[str, str]:
         if include_hidden is None:
@@ -276,16 +369,19 @@ class PersonaForwardSampler:
             for i in range(n):
                 w.writerow(self.decode_row(idx, i))
 
-    def sample_to_file(self, n: int, out: str | Path, fmt: str = "jsonl") -> Dict[str, Any]:
+    def sample_to_file(self, n: int, out: str | Path, fmt: str = "codes") -> Dict[str, Any]:
         start = time.time()
         idx = self.sample_indices(n)
         if fmt == "jsonl":
             self.write_jsonl(idx, out)
         elif fmt == "csv":
             self.write_csv(idx, out)
+        elif fmt == "codes":
+            codes_meta = self.write_codes(idx, out)
+            schema_path = self.write_codes_schema(n, out)
         else:
             raise ValueError(f"Unsupported format: {fmt}")
-        return {
+        meta = {
             "samples": n,
             "out": str(out),
             "format": fmt,
@@ -294,6 +390,15 @@ class PersonaForwardSampler:
             "graph": str(self.graph_path),
             "seed": self.config.seed,
         }
+        if fmt == "codes":
+            meta.update(
+                {
+                    "schema_out": str(schema_path),
+                    "storage_bytes": codes_meta["bytes"],
+                    "dtype": codes_meta["dtype"],
+                }
+            )
+        return meta
 
 
 def _planned_batches(n: int, workers: int, batch_size: int | None) -> tuple[List[int], int]:
@@ -350,6 +455,8 @@ def _write_shard(
         sampler.write_jsonl(idx, out)
     elif fmt == "csv":
         sampler.write_csv(idx, out)
+    elif fmt == "codes":
+        sampler.write_codes(idx, out)
     else:
         raise ValueError(f"Unsupported format: {fmt}")
 
@@ -361,8 +468,8 @@ def _sample_without_saving(
     seed: int,
 ) -> int:
     sampler.rng = np.random.default_rng(seed)
-    idx = sampler.sample_indices(n)
-    return len(next(iter(idx.values())))
+    sampler.sample_indices(n)
+    return n
 
 
 def _worker_sample(task: tuple[int, int, int, str, str]) -> tuple[int, int, str]:
@@ -425,6 +532,13 @@ def _run_tasks_with_forked_sampler(
 
 def _merge_shards(shards: List[Path], out: Path, fmt: str) -> None:
     out.parent.mkdir(parents=True, exist_ok=True)
+    if fmt == "codes":
+        with out.open("wb") as dest:
+            for shard in shards:
+                with shard.open("rb") as src:
+                    shutil.copyfileobj(src, dest)
+        return
+
     with out.open("w", encoding="utf-8", newline="") as dest:
         for index, shard in enumerate(shards):
             with shard.open("r", encoding="utf-8", newline="") as src:
@@ -438,7 +552,7 @@ def sample_to_file_parallel(
     *,
     n: int,
     out: str | Path | None,
-    fmt: str = "jsonl",
+    fmt: str = "codes",
     seed: int = 42,
     emit_only: bool = True,
     workers: int = 1,
@@ -453,7 +567,7 @@ def sample_to_file_parallel(
     in batch order; when ``out`` is ``None``, samples are generated and discarded
     after timing.
     """
-    if fmt not in {"jsonl", "csv"}:
+    if fmt not in {"jsonl", "csv", "codes"}:
         raise ValueError(f"Unsupported format: {fmt}")
 
     graph_path = Path(graph_path)
@@ -592,12 +706,26 @@ def sample_to_file_parallel(
         shard_results.sort(key=lambda row: row[0])
         _merge_shards([Path(row[2]) for row in shard_results], out_path, fmt)
 
+    codes_meta: Dict[str, Any] = {}
+    if fmt == "codes":
+        schema_sampler = PersonaForwardSampler(
+            graph_path,
+            SamplingConfig(seed=seed, emit_only=emit_only, eps=eps),
+        )
+        schema_path = schema_sampler.write_codes_schema(n, out_path)
+        codes_meta = {
+            "schema_out": str(schema_path),
+            "storage_bytes": out_path.stat().st_size,
+            "dtype": schema_sampler._codes_dtype().name,
+        }
+
     return {
         "samples": n,
         "out": str(out_path),
         "format": fmt,
         "saved": True,
         "elapsed_seconds": time.time() - start,
+        **codes_meta,
         "emitted_nodes": _emitted_node_count(graph_path, emit_only),
         "graph": str(graph_path),
         "seed": seed,
