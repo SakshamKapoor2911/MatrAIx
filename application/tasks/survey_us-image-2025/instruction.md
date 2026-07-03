@@ -2,128 +2,130 @@
 
 You are a survey respondent. Answer every question below exactly as your assigned
 persona would — based on their demographics, values, and circumstances. This
-survey is adapted from the Pew Research Center topline **"Spring 2025 Global
-Attitudes Survey (U.S. Image), June 11, 2025"**
-(source: https://www.pewresearch.org/wp-content/uploads/sites/20/2025/06/gap_2025_06_11_us-image-2025_topline.pdf).
+survey is **paraphrased and adapted** from the Pew Research Center topline
+**"Spring 2025 Global Attitudes Survey (U.S. Image), June 11, 2025"**
+(source: https://www.pewresearch.org/wp-content/uploads/sites/20/2025/06/gap_2025_06_11_us-image-2025_topline.pdf);
+the question and answer wording here is original, and only the survey's topics and
+constructs derive from that source.
 
 Choose exactly one option (its `choice_id`) per question. Do not leave any question
 blank and do not copy placeholder values.
 
 ## Questions
 
-### q0 — Do you have a very favorable, somewhat favorable, somewhat unfavorable, or very unfavorable opinion of the United States?
-- `a` — Very favorable
-- `b` — Somewhat favorable
-- `c` — Somewhat unfavorable
-- `d` — Very unfavorable
+### q0 — Overall, is your view of the United States strongly positive, mildly positive, mildly negative, or strongly negative?
+- `a` — Strongly positive
+- `b` — Mildly positive
+- `c` — Mildly negative
+- `d` — Strongly negative
 
-### q1 — How much confidence do you have in U.S. President Donald Trump to do the right thing regarding world affairs?
-- `a` — A lot of confidence
-- `b` — Some confidence
-- `c` — Not too much confidence
-- `d` — No confidence at all
+### q1 — How much do you trust U.S. President Donald Trump to act appropriately when it comes to international affairs?
+- `a` — A great deal of trust
+- `b` — A fair amount of trust
+- `c` — Not very much trust
+- `d` — No trust whatsoever
 
-### q2 — How much confidence do you have in Chinese President Xi Jinping to do the right thing regarding world affairs?
-- `a` — A lot of confidence
-- `b` — Some confidence
-- `c` — Not too much confidence
-- `d` — No confidence at all
+### q2 — How much do you trust Chinese President Xi Jinping to act appropriately when it comes to international affairs?
+- `a` — A great deal of trust
+- `b` — A fair amount of trust
+- `c` — Not very much trust
+- `d` — No trust whatsoever
 
-### q3 — How much confidence do you have in Russian President Vladimir Putin to do the right thing regarding world affairs?
-- `a` — A lot of confidence
-- `b` — Some confidence
-- `c` — Not too much confidence
-- `d` — No confidence at all
+### q3 — How much do you trust Russian President Vladimir Putin to act appropriately when it comes to international affairs?
+- `a` — A great deal of trust
+- `b` — A fair amount of trust
+- `c` — Not very much trust
+- `d` — No trust whatsoever
 
-### q4 — How much confidence do you have in French President Emmanuel Macron to do the right thing regarding world affairs?
-- `a` — A lot of confidence
-- `b` — Some confidence
-- `c` — Not too much confidence
-- `d` — No confidence at all
+### q4 — How much do you trust French President Emmanuel Macron to act appropriately when it comes to international affairs?
+- `a` — A great deal of trust
+- `b` — A fair amount of trust
+- `c` — Not very much trust
+- `d` — No trust whatsoever
 
-### q5 — Do you think of U.S. President Donald Trump as well-qualified to be president?
+### q5 — Would you describe U.S. President Donald Trump as well-suited for the presidency?
 - `a` — Yes
 - `b` — No
 
-### q6 — Do you think of U.S. President Donald Trump as a strong leader?
+### q6 — Would you describe U.S. President Donald Trump as a forceful leader?
 - `a` — Yes
 - `b` — No
 
-### q7 — Do you think of U.S. President Donald Trump as honest?
+### q7 — Would you describe U.S. President Donald Trump as truthful?
 - `a` — Yes
 - `b` — No
 
-### q8 — Do you think of U.S. President Donald Trump as dangerous?
+### q8 — Would you describe U.S. President Donald Trump as a threat?
 - `a` — Yes
 - `b` — No
 
-### q9 — Do you think of U.S. President Donald Trump as able to understand complex problems?
+### q9 — Would you describe U.S. President Donald Trump as capable of grasping complicated issues?
 - `a` — Yes
 - `b` — No
 
-### q10 — Do you think of U.S. President Donald Trump as diplomatic?
+### q10 — Would you describe U.S. President Donald Trump as diplomatic?
 - `a` — Yes
 - `b` — No
 
-### q11 — Do you think of U.S. President Donald Trump as arrogant?
+### q11 — Would you describe U.S. President Donald Trump as arrogant?
 - `a` — Yes
 - `b` — No
 
-### q12 — How much confidence do you have in U.S. President Donald Trump to handle global economic problems?
-- `a` — A lot of confidence
-- `b` — Some confidence
-- `c` — Not too much confidence
-- `d` — No confidence at all
+### q12 — How much do you trust U.S. President Donald Trump to deal with worldwide economic troubles?
+- `a` — A great deal of trust
+- `b` — A fair amount of trust
+- `c` — Not very much trust
+- `d` — No trust whatsoever
 
-### q13 — How much confidence do you have in U.S. President Donald Trump to handle climate change?
-- `a` — A lot of confidence
-- `b` — Some confidence
-- `c` — Not too much confidence
-- `d` — No confidence at all
+### q13 — How much do you trust U.S. President Donald Trump to deal with climate change?
+- `a` — A great deal of trust
+- `b` — A fair amount of trust
+- `c` — Not very much trust
+- `d` — No trust whatsoever
 
-### q14 — How much confidence do you have in U.S. President Donald Trump to handle relations between China and the United States?
-- `a` — A lot of confidence
-- `b` — Some confidence
-- `c` — Not too much confidence
-- `d` — No confidence at all
+### q14 — How much do you trust U.S. President Donald Trump to manage the U.S.–China relationship?
+- `a` — A great deal of trust
+- `b` — A fair amount of trust
+- `c` — Not very much trust
+- `d` — No trust whatsoever
 
-### q15 — How much confidence do you have in U.S. President Donald Trump to handle the conflict between Russia and Ukraine?
-- `a` — A lot of confidence
-- `b` — Some confidence
-- `c` — Not too much confidence
-- `d` — No confidence at all
+### q15 — How much do you trust U.S. President Donald Trump to manage the war between Russia and Ukraine?
+- `a` — A great deal of trust
+- `b` — A fair amount of trust
+- `c` — Not very much trust
+- `d` — No trust whatsoever
 
-### q16 — How much confidence do you have in U.S. President Donald Trump to handle the conflict between Israel and its neighbors?
-- `a` — A lot of confidence
-- `b` — Some confidence
-- `c` — Not too much confidence
-- `d` — No confidence at all
+### q16 — How much do you trust U.S. President Donald Trump to manage the dispute between Israel and its neighbors?
+- `a` — A great deal of trust
+- `b` — A fair amount of trust
+- `c` — Not very much trust
+- `d` — No trust whatsoever
 
-### q17 — How much confidence do you have in U.S. President Donald Trump to handle United States' immigration policies?
-- `a` — A lot of confidence
-- `b` — Some confidence
-- `c` — Not too much confidence
-- `d` — No confidence at all
+### q17 — How much do you trust U.S. President Donald Trump to manage immigration policy in the United States?
+- `a` — A great deal of trust
+- `b` — A fair amount of trust
+- `c` — Not very much trust
+- `d` — No trust whatsoever
 
-### q18 — Thinking about democracy in the United States, would you say it works very well, somewhat well, somewhat poorly or very poorly?
+### q18 — When you consider how democracy functions in the United States, would you say it performs very well, fairly well, fairly badly, or very badly?
 - `a` — Very well
-- `b` — Somewhat well
-- `c` — Somewhat poorly
-- `d` — Very poorly
+- `b` — Fairly well
+- `c` — Fairly badly
+- `d` — Very badly
 
-### q19 — In the United States, are the conflicts between people who support different political parties very strong, strong, not very strong or are there no conflicts at all?
-- `a` — Very strong conflicts
-- `b` — Strong conflicts
-- `c` — Not very strong conflicts
-- `d` — There are no conflicts at all
+### q19 — Within the United States, how intense are the tensions between backers of rival political parties — very intense, intense, not very intense, or nonexistent?
+- `a` — Very intense conflicts
+- `b` — Intense conflicts
+- `c` — Not very intense conflicts
+- `d` — No conflicts at all
 
-### q20 — Today, which ONE of the following do you think is the world's leading economic power?
+### q20 — As of today, which SINGLE one of these do you regard as the top economic power in the world?
 - `a` — The United States
 - `b` — China
 - `c` — Japan
-- `d` — The countries of the European Union
-- `e` — Other
-- `f` — None; there is no leading economic power
+- `d` — The nations of the European Union
+- `e` — Some other country
+- `f` — None; no single country leads economically
 
 ## Output
 
@@ -141,3 +143,4 @@ Save your submission to `/app/output/survey_responses.json`:
 - Include one response object for every question q0…q20 listed above.
 - `choice_id` must be one of the option letters listed under that question.
 - Pick the option that best fits **your** persona; do not copy the `"..."` placeholder.
+</output>

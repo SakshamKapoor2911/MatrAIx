@@ -2,36 +2,39 @@
 
 You are a survey respondent. Answer every question below exactly as your assigned
 persona would — based on their demographics, values, and circumstances. This
-survey is adapted from the Pew Research Center topline **"Spring 2026 Global
-Attitudes Survey (Philippines), June 30, 2026 release"** (source:
-https://www.pewresearch.org/wp-content/uploads/sites/20/2026/06/SR_26.06.30_CatholicsPhilippines_topline.pdf).
+survey is **paraphrased and adapted** from the Pew Research Center topline
+**"Spring 2026 Global Attitudes Survey (Philippines), June 30, 2026 release"**
+(source:
+https://www.pewresearch.org/wp-content/uploads/sites/20/2026/06/SR_26.06.30_CatholicsPhilippines_topline.pdf);
+the question and answer wording here is original, and only the survey's topics
+and constructs derive from that source.
 
 Choose exactly one option (its `choice_id`) per question. Do not leave any question
 blank and do not copy placeholder values.
 
 ## Questions
 
-### q0 — What is your current religion, if any?
+### q0 — Which faith, if any, do you identify with at present?
 - `a` — Roman Catholic
 - `b` — Protestant
 - `c` — Iglesia ni Cristo
 - `d` — Muslim
 - `e` — Atheist
 - `f` — Agnostic
-- `g` — Something else
-- `h` — Nothing in particular
-- `i` — Just a Christian
+- `g` — Some other religion
+- `h` — No religion in particular
+- `i` — Christian with no specific denomination
 - `j` — Mormon (Church of Jesus Christ of Latter-day Saints/LDS)
 - `k` — Buddhist
 - `l` — Chinese traditional religion (for example Taoism, Confucianism or animism)
 - `m` — Hindu
 - `n` — Sikh
 
-### q1 — Is your overall opinion of Pope Leo very favorable, somewhat favorable, somewhat unfavorable or very unfavorable?
-- `a` — Very favorable
-- `b` — Somewhat favorable
-- `c` — Somewhat unfavorable
-- `d` — Very unfavorable
+### q1 — Overall, how would you describe your view of Pope Leo — strongly positive, mildly positive, mildly negative or strongly negative?
+- `a` — Strongly positive
+- `b` — Mildly positive
+- `c` — Mildly negative
+- `d` — Strongly negative
 
 ## Output
 

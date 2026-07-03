@@ -2,16 +2,18 @@
 
 ## Introduction
 
-This folder is an **empty persona-survey template** adapted from a Pew Research
-Center public opinion survey. It restates the survey's real questions and answer
-options as an agent task: a simulated **persona** reads [`instruction.md`](instruction.md)
-and answers every question the way that persona would, choosing one option per
-question and saving the result as JSON.
+This folder is an **empty persona-survey template** whose design is adapted from a
+Pew Research Center public opinion survey. It re-expresses the survey's topics and
+answer scales — **in original, paraphrased wording** — as an agent task: a
+simulated **persona** reads [`instruction.md`](instruction.md) and answers every
+question the way that persona would, choosing one option per question and saving
+the result as JSON.
 
-The template is intentionally **empty** — it carries the question wording and
-response options only. All of Pew's published aggregate results (the response
-percentages, trend rows, sample sizes, and survey-programming notes) have been
-removed, so a persona's answers reflect the persona, not Pew's reported figures.
+The template is intentionally **empty**: it carries only paraphrased question
+wording and response options. Pew's verbatim question text is **not reproduced**,
+and all of Pew's published results (response percentages, trend rows, sample
+sizes, and survey-programming notes) are omitted — so a persona's answers reflect
+the persona, not Pew's reported figures.
 
 - **Questions:** 33 (33 single-choice)
 - **Task file:** [`instruction.md`](instruction.md)
@@ -20,14 +22,13 @@ removed, so a persona's answers reflect the persona, not Pew's reported figures.
 
 ## Sources
 
-Adapted from the Pew Research Center topline questionnaire:
+Survey design adapted from a Pew Research Center topline questionnaire:
 
-- **Instrument:** News and Social Media (American Trends Panel Wave 73, fielded August 31–September 7, 2020; released January 2021)
+- **Source instrument:** News and Social Media (American Trends Panel Wave 73, fielded August 31–September 7, 2020; released January 2021)
 - **Publisher:** [Pew Research Center](https://www.pewresearch.org) — © Pew Research Center
 - **Topline PDF:** <https://www.pewresearch.org/journalism/wp-content/uploads/sites/8/2021/01/PJ_2021.01.12_News-and-Social-Media_TOPLINE.pdf>
 
-
-> Questions and response options are reproduced from the Pew Research Center
-> topline for research use. Redistribution is subject to Pew Research Center's
-> terms of use. This template adds no results and makes no claim of endorsement
-> by Pew Research Center.
+> The question and answer wording in this template is **original** (paraphrased);
+> only the survey's topics and measured constructs derive from the Pew Research
+> Center topline cited above. No Pew text or results are reproduced. This template
+> is not affiliated with, sponsored by, or endorsed by Pew Research Center.

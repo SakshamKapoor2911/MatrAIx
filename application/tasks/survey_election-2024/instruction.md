@@ -2,193 +2,194 @@
 
 You are a survey respondent. Answer every question below exactly as your assigned
 persona would — based on their demographics, values, and circumstances. This
-survey is adapted from the Pew Research Center topline **"2024 Pew Research Center's
+survey is **paraphrased and adapted** from the Pew Research Center topline **"2024 Pew Research Center's
 American Trends Panel Wave 159 Politics Survey, November 12-17, 2024"**
-(source: https://www.pewresearch.org/wp-content/uploads/sites/20/2024/12/PP_2024.12.3_election-2024_TOPLINE.pdf).
+(source: https://www.pewresearch.org/wp-content/uploads/sites/20/2024/12/PP_2024.12.3_election-2024_TOPLINE.pdf);
+the question and answer wording here is original, and only the survey's topics and constructs derive from that source.
 
 Choose exactly one option (its `choice_id`) per question. Do not leave any question
 blank and do not copy placeholder values.
 
 ## Questions
 
-### q0 — Which of the following statements best describes you?
-- `a` — I did not vote in the November 2024 election
-- `b` — I planned to vote but wasn't able to
-- `c` — I definitely voted in the November 2024 election
+### q0 — Which of these statements fits your situation best?
+- `a` — I stayed home and did not cast a ballot in the November 2024 election
+- `b` — I intended to vote but was unable to
+- `c` — I am certain that I cast a ballot in the November 2024 election
 
-### q1 — In the 2024 presidential election, who did you vote for?
+### q1 — For the 2024 race for president, which candidate got your vote?
 - `a` — Donald Trump, the Republican
 - `b` — Kamala Harris, the Democrat
-- `c` — Robert F. Kennedy Jr., a third party candidate
-- `d` — Chase Oliver, the Libertarian Party candidate
-- `e` — Jill Stein, the Green Party candidate
-- `f` — Cornel West, a third party candidate
-- `g` — Claudia De la Cruz, the Socialism and Liberation Party candidate
-- `h` — Another candidate
-- `i` — I did not vote for a candidate for president
+- `c` — Robert F. Kennedy Jr., running outside the two major parties
+- `d` — Chase Oliver, running for the Libertarian Party
+- `e` — Jill Stein, running for the Green Party
+- `f` — Cornel West, running outside the two major parties
+- `g` — Claudia De la Cruz, running for the Party for Socialism and Liberation
+- `h` — Some other candidate
+- `i` — I skipped the presidential contest and voted for no one
 
-### q2 — Do you wish that you had voted in the election?
+### q2 — Looking back, do you regret not casting a ballot in the election?
 - `a` — Yes
 - `b` — No
 
-### q3 — There are lots of different reasons why many people don't vote. For you personally, how much of a reason, if at all, is the following for why you did not vote: "I didn't think my vote would make a difference"?
+### q3 — People skip voting for all sorts of reasons. In your own case, how much did this factor into why you didn't vote: "I felt my ballot wouldn't change the outcome"?
 - `a` — Major reason
 - `b` — Minor reason
 - `c` — Not a reason
 
-### q4 — There are lots of different reasons why many people don't vote. For you personally, how much of a reason, if at all, is the following for why you did not vote: "I didn't care who won"?
+### q4 — People skip voting for all sorts of reasons. In your own case, how much did this factor into why you didn't vote: "The result didn't matter to me either way"?
 - `a` — Major reason
 - `b` — Minor reason
 - `c` — Not a reason
 
-### q5 — There are lots of different reasons why many people don't vote. For you personally, how much of a reason, if at all, is the following for why you did not vote: "I'm not registered or not eligible to vote"?
+### q5 — People skip voting for all sorts of reasons. In your own case, how much did this factor into why you didn't vote: "I'm either not registered or not allowed to vote"?
 - `a` — Major reason
 - `b` — Minor reason
 - `c` — Not a reason
 
-### q6 — There are lots of different reasons why many people don't vote. For you personally, how much of a reason, if at all, is the following for why you did not vote: "It was too inconvenient for me to vote"?
+### q6 — People skip voting for all sorts of reasons. In your own case, how much did this factor into why you didn't vote: "Casting a ballot was too much of a hassle for me"?
 - `a` — Major reason
 - `b` — Minor reason
 - `c` — Not a reason
 
-### q7 — There are lots of different reasons why many people don't vote. For you personally, how much of a reason, if at all, is the following for why you did not vote: "I don't like politics"?
+### q7 — People skip voting for all sorts of reasons. In your own case, how much did this factor into why you didn't vote: "Politics just isn't something I enjoy"?
 - `a` — Major reason
 - `b` — Minor reason
 - `c` — Not a reason
 
-### q8 — There are lots of different reasons why many people don't vote. For you personally, how much of a reason, if at all, is the following for why you did not vote: "I forgot to vote"?
+### q8 — People skip voting for all sorts of reasons. In your own case, how much did this factor into why you didn't vote: "It slipped my mind to vote"?
 - `a` — Major reason
 - `b` — Minor reason
 - `c` — Not a reason
 
-### q9 — Would you say that your vote for Trump was more a vote…
-- `a` — For Trump
-- `b` — Against Harris
+### q9 — Would you describe your ballot for Trump primarily as a vote…
+- `a` — In support of Trump
+- `b` — In opposition to Harris
 
-### q10 — Would you say that your vote for Harris was more a vote…
-- `a` — For Harris
-- `b` — Against Trump
+### q10 — Would you describe your ballot for Harris primarily as a vote…
+- `a` — In support of Harris
+- `b` — In opposition to Trump
 
-### q11 — As far as you can remember, when did you make up your mind about who you were going to vote for in the presidential election?
-- `a` — Last few days before Election Day
-- `b` — The last week before Election Day
-- `c` — In October
-- `d` — In September
-- `e` — Before September
+### q11 — To the best of your recollection, at what point did you settle on your choice for the presidential race?
+- `a` — Within the final days ahead of Election Day
+- `b` — During the final week before Election Day
+- `c` — Sometime in October
+- `d` — Sometime in September
+- `e` — At some point before September
 
-### q12 — Do you think the elections this November in your community were run and administered…
+### q12 — In your view, how well were this November's elections managed and carried out where you live?
 - `a` — Very well
 - `b` — Somewhat well
 - `c` — Not too well
 - `d` — Not at all well
 
-### q13 — Do you think the elections this November in the United States were run and administered…
+### q13 — In your view, how well were this November's elections managed and carried out across the country?
 - `a` — Very well
 - `b` — Somewhat well
 - `c` — Not too well
 - `d` — Not at all well
 
-### q14 — Overall, was voting in the election this November for you personally...
+### q14 — On the whole, how would you describe your own experience of casting a ballot this November?
 - `a` — Very easy
 - `b` — Somewhat easy
 - `c` — Somewhat difficult
 - `d` — Very difficult
 
-### q15 — Now that the campaign is over, how satisfied were you with the choice of presidential candidates? Would you say that you were…
+### q15 — With the campaign now behind us, how content were you with the slate of presidential candidates? Would you say you were…
 - `a` — Very satisfied
 - `b` — Fairly satisfied
 - `c` — Not too satisfied
 - `d` — Not at all satisfied
 
-### q16 — Would you say the 2024 presidential campaign was...
-- `a` — Made you feel proud of the country
-- `b` — Did not make you feel proud of the country
+### q16 — Would you say that the 2024 race for president...
+- `a` — Left you feeling proud of the nation
+- `b` — Did not leave you feeling proud of the nation
 
-### q17 — Would you say the 2024 presidential campaign was...
-- `a` — Too negative
-- `b` — Not too negative
+### q17 — Would you say that the 2024 race for president...
+- `a` — Was overly negative
+- `b` — Was not overly negative
 
-### q18 — Would you say the 2024 presidential campaign was...
-- `a` — Focused on important policy debates
-- `b` — Not focused on important policy debates
+### q18 — Would you say that the 2024 race for president...
+- `a` — Centered on meaningful policy discussion
+- `b` — Did not center on meaningful policy discussion
 
-### q19 — Would you say the 2024 presidential campaign was...
-- `a` — Interesting
-- `b` — Dull
+### q19 — Would you say that the 2024 race for president...
+- `a` — Held your interest
+- `b` — Was boring
 
-### q20 — How did you vote in the election?
-- `a` — In person at a polling place
-- `b` — By absentee or mail-in ballot
+### q20 — By what method did you cast your ballot in the election?
+- `a` — In person at a voting site
+- `b` — Through an absentee or mail-in ballot
 
-### q21 — When did you vote?
-- `a` — On Election Day
-- `b` — Before Election Day
+### q21 — At what time did you cast your ballot?
+- `a` — On Election Day itself
+- `b` — Ahead of Election Day
 
-### q22 — How did you return your absentee or mail-in ballot?
-- `a` — In person to an election official or poll worker
-- `b` — At a designated dropbox
-- `c` — By mail
+### q22 — By what means did you submit your absentee or mail-in ballot?
+- `a` — Handed directly to a poll worker or election official
+- `b` — Placed in an official drop box
+- `c` — Sent through the postal mail
 
-### q23 — When did you mail or return your absentee or mail-in ballot?
-- `a` — In the week leading up to Election Day
-- `b` — Before that
+### q23 — At what point did you send in or drop off your absentee or mail-in ballot?
+- `a` — During the final week before Election Day
+- `b` — Earlier than that
 
-### q24 — When you went to vote, approximately how long did you have to wait in line to vote?
-- `a` — Did not wait at all
-- `b` — Less than 10 minutes
-- `c` — 10 to 30 minutes
-- `d` — 31 minutes to 1 hour
-- `e` — More than 1 hour
+### q24 — About how long was the wait in line when you went to cast your ballot?
+- `a` — There was no wait at all
+- `b` — Under 10 minutes
+- `c` — Between 10 and 30 minutes
+- `d` — Between 31 minutes and an hour
+- `e` — Over an hour
 
-### q25 — Is this the first time you have ever voted by mail or absentee ballot?
-- `a` — Yes, this is the first time I have ever voted by mail or absentee ballot
-- `b` — No, I have voted by mail or absentee ballot before
+### q25 — Was this your very first time casting a ballot by mail or absentee?
+- `a` — Yes, this was my first time ever casting a mail or absentee ballot
+- `b` — No, I have used a mail or absentee ballot in the past
 
-### q26 — Is this the first time you have ever voted early?
-- `a` — Yes, this is the first time I have ever voted early
-- `b` — No, I have voted early before
+### q26 — Was this your very first time voting early?
+- `a` — Yes, this was my first time ever voting early
+- `b` — No, I have voted early in the past
 
-### q27 — Is this the first time you have ever voted in person on Election Day?
-- `a` — Yes, this is the first time I have ever voted in person on Election Day
-- `b` — No, I have voted in person on Election Day before
+### q27 — Was this your very first time voting in person on Election Day?
+- `a` — Yes, this was my first time ever voting in person on Election Day
+- `b` — No, I have voted in person on Election Day in the past
 
-### q28 — How confident are you that your vote was accurately counted?
+### q28 — How sure are you that your own ballot was tallied correctly?
 - `a` — Very confident
 - `b` — Somewhat confident
 - `c` — Not too confident
 - `d` — Not at all confident
 
-### q29 — How confident are you that votes cast in person at polling places across the United States were counted as voters intended in the elections this November?
+### q29 — How sure are you that ballots cast in person at voting sites nationwide were tallied the way voters meant in this November's elections?
 - `a` — Very confident
 - `b` — Somewhat confident
 - `c` — Not too confident
 - `d` — Not at all confident
 
-### q30 — How confident are you that votes cast by absentee or mail-in ballot across the United States were counted as voters intended in the elections this November?
+### q30 — How sure are you that ballots submitted by absentee or mail nationwide were tallied the way voters meant in this November's elections?
 - `a` — Very confident
 - `b` — Somewhat confident
 - `c` — Not too confident
 - `d` — Not at all confident
 
-### q31 — How confident, if at all, are you that people who were not legally qualified to vote are prevented from casting a ballot?
+### q31 — How sure are you, if at all, that individuals who lack the legal right to vote are kept from submitting a ballot?
 - `a` — Very confident
 - `b` — Somewhat confident
 - `c` — Not too confident
 - `d` — Not at all confident
 
-### q32 — How confident, if at all, are you that people who were legally qualified and want to vote are able to cast a ballot?
+### q32 — How sure are you, if at all, that individuals who are legally eligible and wish to vote can actually submit a ballot?
 - `a` — Very confident
 - `b` — Somewhat confident
 - `c` — Not too confident
 - `d` — Not at all confident
 
-### q33 — In politics today, do you consider yourself a…
+### q33 — When it comes to politics these days, which label do you use for yourself?
 - `a` — Republican
 - `b` — Democrat
 - `c` — Independent
-- `d` — Something else
+- `d` — Some other affiliation
 
-### q34 — As of today do you lean more to…
+### q34 — At this point, which side do you tilt toward?
 - `a` — The Republican Party
 - `b` — The Democratic Party
 

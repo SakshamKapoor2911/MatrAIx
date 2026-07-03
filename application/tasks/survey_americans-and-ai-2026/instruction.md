@@ -1,294 +1,296 @@
 # Americans and AI 2026 — Persona Survey
 
 You are a survey respondent. Answer every question below exactly as your assigned
-persona would — based on their demographics, values, and circumstances. This
-survey is adapted from the Pew Research Center topline **"2026 Pew Research
+persona would — based on their demographics, values, and circumstances. This survey
+is **paraphrased and adapted** from the Pew Research Center topline **"2026 Pew Research
 Center's American Trends Panel, Wave 187: Survey on Artificial Intelligence,
 February 17-23, 2026"** (source:
-https://www.pewresearch.org/wp-content/uploads/sites/20/2026/06/PI_2026.06.17_Americans-and-AI_TOPLINE.pdf).
+https://www.pewresearch.org/wp-content/uploads/sites/20/2026/06/PI_2026.06.17_Americans-and-AI_TOPLINE.pdf);
+the question and answer wording here is original, and only the survey's topics and
+constructs derive from that source.
 
 Choose exactly one option (its `choice_id`) per question. Do not leave any question
 blank and do not copy placeholder values.
 
 ## Questions
 
-### q0 — How much have you heard or read about artificial intelligence (AI)?
-- `a` — A lot
-- `b` — A little
-- `c` — Nothing at all
+### q0 — To what extent have you encountered information about artificial intelligence (AI)?
+- `a` — A great deal
+- `b` — A small amount
+- `c` — None whatsoever
 
-### q1 — In just a few words, what is the first type of artificial intelligence (AI) that comes to mind when you think of AI?
+### q1 — Using only a few words, when artificial intelligence (AI) crosses your mind, which kind of AI pops up first?
 _(Open-ended free-text question — answer in a few words in your own voice; there are no fixed options.)_
 
-### q2 — Just your impression, how often do you interact with artificial intelligence (AI)?
-- `a` — Almost constantly
-- `b` — Several times a day
-- `c` — About once a day
-- `d` — Several times a week
-- `e` — Less often
+### q2 — Off the top of your head, what is the frequency of your encounters with artificial intelligence (AI)?
+- `a` — Nearly all the time
+- `b` — A handful of times each day
+- `c` — Roughly once daily
+- `d` — A few times each week
+- `e` — Not as frequently
 
-### q3 — Do you think that the impact of artificial intelligence (AI) on society over the next 20 years will be...
-- `a` — Very positive
-- `b` — Somewhat positive
-- `c` — Equally positive and negative
-- `d` — Somewhat negative
-- `e` — Very negative
-- `f` — Not sure
+### q3 — Over the coming two decades, how do you expect artificial intelligence (AI) to affect society...
+- `a` — Highly beneficial
+- `b` — Fairly beneficial
+- `c` — Beneficial and harmful in equal measure
+- `d` — Fairly harmful
+- `e` — Highly harmful
+- `f` — Uncertain
 
-### q4 — Do you think that the impact of artificial intelligence (AI) on you, personally over the next 20 years will be...
-- `a` — Very positive
-- `b` — Somewhat positive
-- `c` — Equally positive and negative
-- `d` — Somewhat negative
-- `e` — Very negative
-- `f` — Not sure
+### q4 — Over the coming two decades, how do you expect artificial intelligence (AI) to affect you personally...
+- `a` — Highly beneficial
+- `b` — Fairly beneficial
+- `c` — Beneficial and harmful in equal measure
+- `d` — Fairly harmful
+- `e` — Highly harmful
+- `f` — Uncertain
 
-### q5 — Do you think artificial intelligence (AI) is advancing...
-- `a` — Too quickly
-- `b` — Too slowly
-- `c` — At about the right pace
-- `d` — Not sure
+### q5 — In your view, is the progress of artificial intelligence (AI) happening...
+- `a` — At too fast a pace
+- `b` — At too slow a pace
+- `c` — At roughly the right speed
+- `d` — Uncertain
 
-### q6 — Do you think the increased use of artificial intelligence (AI) will make your personal information...
-- `a` — More secure
-- `b` — Less secure
-- `c` — Will not make much difference
-- `d` — Not sure
+### q6 — In your view, will the growing use of artificial intelligence (AI) make your personal data...
+- `a` — Safer
+- `b` — Less safe
+- `c` — Have little effect either way
+- `d` — Uncertain
 
-### q7 — Do you ever read artificial intelligence (AI) summaries at the top of a search engine result?
+### q7 — Do you ever look at the artificial intelligence (AI) summaries shown above search engine results?
 - `a` — Yes
 - `b` — No
-- `c` — Not sure
+- `c` — Uncertain
 
-### q8 — How much confidence do you have in the U.S. government to regulate the use of artificial intelligence (AI) effectively?
-- `a` — A great deal
-- `b` — Quite a bit
-- `c` — Some
-- `d` — Not too much
+### q8 — How much faith do you place in the U.S. government to oversee artificial intelligence (AI) use effectively?
+- `a` — A very large amount
+- `b` — A considerable amount
+- `c` — A moderate amount
+- `d` — Not much
 - `e` — None
-- `f` — Not sure
+- `f` — Uncertain
 
-### q9 — How much confidence do you have in U.S. companies to develop and use artificial intelligence (AI) responsibly?
-- `a` — A great deal
-- `b` — Quite a bit
-- `c` — Some
-- `d` — Not too much
+### q9 — How much faith do you place in U.S. companies to build and apply artificial intelligence (AI) responsibly?
+- `a` — A very large amount
+- `b` — A considerable amount
+- `c` — A moderate amount
+- `d` — Not much
 - `e` — None
-- `f` — Not sure
+- `f` — Uncertain
 
-### q10 — What is your current work situation?
-- `a` — Work full time for pay
-- `b` — Work part time for pay
-- `c` — Not currently working for pay
-- `d` — Unable to work due to a disability
+### q10 — Which best describes your employment status right now?
+- `a` — Employed full time for pay
+- `b` — Employed part time for pay
+- `c` — Not employed for pay at present
+- `d` — Prevented from working because of a disability
 - `e` — Retired
 
-### q11 — Do you have a thermostat at home?
+### q11 — Is there a thermostat in your home?
 - `a` — Yes, I have this
 - `b` — No, I do not have this
 
-### q12 — Do you have a doorbell at home?
+### q12 — Is there a doorbell at your home?
 - `a` — Yes, I have this
 - `b` — No, I do not have this
 
-### q13 — Do you have a vacuum at home?
+### q13 — Is there a vacuum in your home?
 - `a` — Yes, I have this
 - `b` — No, I do not have this
 
-### q14 — Some thermostats use artificial intelligence (AI) to do things like learning cooling and heating patterns on its own to adjust the temperature, including models of Google Nest thermostats. Do you have a thermostat that uses AI?
-- `a` — Yes, I have this
-- `b` — No, I do not have this
-- `c` — Not sure
-
-### q15 — Some doorbells use artificial intelligence (AI) to do things like recognize a person or package at your door and send an alert, including models of Ring and Eufy video doorbells. Do you have a doorbell that uses AI?
+### q14 — Certain thermostats rely on artificial intelligence (AI) for tasks such as automatically learning your heating and cooling habits to set the temperature, such as some Google Nest thermostat models. Does your thermostat rely on AI?
 - `a` — Yes, I have this
 - `b` — No, I do not have this
 - `c` — Not sure
 
-### q16 — Some vacuums use artificial intelligence (AI) to clean on its own by doing things like figuring out a room's layout and recognizing objects in its path, including models of Roomba and Shark Robot vacuums. Do you have a vacuum that uses AI?
+### q15 — Certain doorbells rely on artificial intelligence (AI) for tasks such as identifying a person or package at the door and notifying you, such as some Ring and Eufy video doorbell models. Does your doorbell rely on AI?
 - `a` — Yes, I have this
 - `b` — No, I do not have this
 - `c` — Not sure
 
-### q17 — Do you have a smartwatch, such as an Apple Watch or Google Pixel Watch?
+### q16 — Certain vacuums rely on artificial intelligence (AI) to clean by themselves through tasks such as mapping a room and identifying obstacles in their way, such as some Roomba and Shark Robot vacuum models. Does your vacuum rely on AI?
 - `a` — Yes, I have this
 - `b` — No, I do not have this
 - `c` — Not sure
 
-### q18 — Do you have a smart speaker, such as an Amazon Echo or Apple Homepod?
+### q17 — Do you own a smartwatch, for instance an Apple Watch or Google Pixel Watch?
 - `a` — Yes, I have this
 - `b` — No, I do not have this
 - `c` — Not sure
 
-### q19 — How much have you heard about artificial intelligence (AI) chatbots like ChatGPT, Gemini or Copilot?
-- `a` — A lot
-- `b` — A little
-- `c` — Nothing at all
+### q18 — Do you own a smart speaker, for instance an Amazon Echo or Apple Homepod?
+- `a` — Yes, I have this
+- `b` — No, I do not have this
+- `c` — Not sure
 
-### q20 — Do you ever use an artificial intelligence (AI) chatbot like ChatGPT, Gemini or Copilot?
-- `a` — Yes, I do
-- `b` — No, I do not
-
-### q21 — About how often do you use an artificial intelligence (AI) chatbot like ChatGPT, Gemini or Copilot?
-- `a` — Almost constantly
-- `b` — Several times a day
-- `c` — About once a day
-- `d` — Several times a week
-- `e` — Less often
-
-### q22 — How confident are you in your ability to use artificial intelligence (AI) chatbots?
-- `a` — Extremely confident
-- `b` — Very confident
-- `c` — Somewhat confident
-- `d` — Not too confident
-- `e` — Not at all confident
-
-### q23 — How much do you enjoy using artificial intelligence (AI) chatbots?
+### q19 — To what extent are you familiar with artificial intelligence (AI) chatbots such as ChatGPT, Gemini or Copilot?
 - `a` — A great deal
-- `b` — A fair amount
-- `c` — Some
-- `d` — Not too much
-- `e` — Not at all
+- `b` — A small amount
+- `c` — None whatsoever
 
-### q24 — Do you ever use ChatGPT?
+### q20 — Do you ever make use of an artificial intelligence (AI) chatbot such as ChatGPT, Gemini or Copilot?
+- `a` — Yes, I do
+- `b` — No, I do not
+
+### q21 — Roughly how frequently do you make use of an artificial intelligence (AI) chatbot such as ChatGPT, Gemini or Copilot?
+- `a` — Nearly all the time
+- `b` — A handful of times each day
+- `c` — Roughly once daily
+- `d` — A few times each week
+- `e` — Not as frequently
+
+### q22 — How self-assured do you feel about your skill in using artificial intelligence (AI) chatbots?
+- `a` — Exceptionally self-assured
+- `b` — Highly self-assured
+- `c` — Moderately self-assured
+- `d` — Not very self-assured
+- `e` — Not self-assured whatsoever
+
+### q23 — To what degree do you find using artificial intelligence (AI) chatbots enjoyable?
+- `a` — A very large degree
+- `b` — A moderate degree
+- `c` — A slight degree
+- `d` — Not very much
+- `e` — Not whatsoever
+
+### q24 — Do you ever make use of ChatGPT?
 - `a` — Yes, I use this
 - `b` — No, I do not use this
 
-### q25 — Do you ever use Claude?
+### q25 — Do you ever make use of Claude?
 - `a` — Yes, I use this
 - `b` — No, I do not use this
 
-### q26 — Do you ever use Gemini?
+### q26 — Do you ever make use of Gemini?
 - `a` — Yes, I use this
 - `b` — No, I do not use this
 
-### q27 — Do you ever use Copilot?
+### q27 — Do you ever make use of Copilot?
 - `a` — Yes, I use this
 - `b` — No, I do not use this
 
-### q28 — Do you ever use Meta AI?
+### q28 — Do you ever make use of Meta AI?
 - `a` — Yes, I use this
 - `b` — No, I do not use this
 
-### q29 — Do you ever use Character.ai?
+### q29 — Do you ever make use of Character.ai?
 - `a` — Yes, I use this
 - `b` — No, I do not use this
 
-### q30 — Do you ever use Grok?
+### q30 — Do you ever make use of Grok?
 - `a` — Yes, I use this
 - `b` — No, I do not use this
 
-### q31 — Do you ever use artificial intelligence (AI) chatbots to get medical advice?
+### q31 — Do you ever turn to artificial intelligence (AI) chatbots for medical guidance?
 - `a` — Yes, I do
 - `b` — No, I do not
 
-### q32 — Do you ever use artificial intelligence (AI) chatbots to get diet and fitness information?
+### q32 — Do you ever turn to artificial intelligence (AI) chatbots for nutrition and exercise details?
 - `a` — Yes, I do
 - `b` — No, I do not
 
-### q33 — Do you ever use artificial intelligence (AI) chatbots for emotional support or advice?
+### q33 — Do you ever turn to artificial intelligence (AI) chatbots for emotional comfort or guidance?
 - `a` — Yes, I do
 - `b` — No, I do not
 
-### q34 — Do you ever use artificial intelligence (AI) chatbots for companionship?
+### q34 — Do you ever turn to artificial intelligence (AI) chatbots for companionship?
 - `a` — Yes, I do
 - `b` — No, I do not
 
-### q35 — Do you ever use artificial intelligence (AI) chatbots to search for information?
+### q35 — Do you ever turn to artificial intelligence (AI) chatbots to look up information?
 - `a` — Yes, I do
 - `b` — No, I do not
 
-### q36 — Do you ever use artificial intelligence (AI) chatbots for tasks at work?
+### q36 — Do you ever turn to artificial intelligence (AI) chatbots for job-related tasks?
 - `a` — Yes, I do
 - `b` — No, I do not
 
-### q37 — Do you ever use artificial intelligence (AI) chatbots to create or edit images or videos?
+### q37 — Do you ever turn to artificial intelligence (AI) chatbots to make or modify images or videos?
 - `a` — Yes, I do
 - `b` — No, I do not
 
-### q38 — Do you ever use artificial intelligence (AI) chatbots to get news?
+### q38 — Do you ever turn to artificial intelligence (AI) chatbots to keep up with the news?
 - `a` — Yes, I do
 - `b` — No, I do not
 
-### q39 — Do you ever use artificial intelligence (AI) chatbots for fun or entertainment?
+### q39 — Do you ever turn to artificial intelligence (AI) chatbots for amusement or entertainment?
 - `a` — Yes, I do
 - `b` — No, I do not
 
-### q40 — Do you think using artificial intelligence (AI) chatbots helps or hurts how creative you are?
-- `a` — Helps a lot
-- `b` — Helps a little
-- `c` — Neither helps nor hurts
-- `d` — Hurts a little
-- `e` — Hurts a lot
+### q40 — In your view, does using artificial intelligence (AI) chatbots boost or damage your creativity?
+- `a` — Boosts it greatly
+- `b` — Boosts it slightly
+- `c` — Neither boosts nor damages
+- `d` — Damages it slightly
+- `e` — Damages it greatly
 
-### q41 — Do you think using artificial intelligence (AI) chatbots helps or hurts how productive you are?
-- `a` — Helps a lot
-- `b` — Helps a little
-- `c` — Neither helps nor hurts
-- `d` — Hurts a little
-- `e` — Hurts a lot
+### q41 — In your view, does using artificial intelligence (AI) chatbots boost or damage your productivity?
+- `a` — Boosts it greatly
+- `b` — Boosts it slightly
+- `c` — Neither boosts nor damages
+- `d` — Damages it slightly
+- `e` — Damages it greatly
 
-### q42 — Do you think using artificial intelligence (AI) chatbots helps or hurts how happy you are?
-- `a` — Helps a lot
-- `b` — Helps a little
-- `c` — Neither helps nor hurts
-- `d` — Hurts a little
-- `e` — Hurts a lot
+### q42 — In your view, does using artificial intelligence (AI) chatbots boost or damage your happiness?
+- `a` — Boosts it greatly
+- `b` — Boosts it slightly
+- `c` — Neither boosts nor damages
+- `d` — Damages it slightly
+- `e` — Damages it greatly
 
-### q43 — Do you think using artificial intelligence (AI) chatbots helps or hurts how informed you are?
-- `a` — Helps a lot
-- `b` — Helps a little
-- `c` — Neither helps nor hurts
-- `d` — Hurts a little
-- `e` — Hurts a lot
+### q43 — In your view, does using artificial intelligence (AI) chatbots boost or damage how well informed you are?
+- `a` — Boosts it greatly
+- `b` — Boosts it slightly
+- `c` — Neither boosts nor damages
+- `d` — Damages it slightly
+- `e` — Damages it greatly
 
-### q44 — Do you think using artificial intelligence (AI) chatbots helps or hurts your relationships with other people?
-- `a` — Helps a lot
-- `b` — Helps a little
-- `c` — Neither helps nor hurts
-- `d` — Hurts a little
-- `e` — Hurts a lot
+### q44 — In your view, does using artificial intelligence (AI) chatbots boost or damage your relationships with others?
+- `a` — Boosts it greatly
+- `b` — Boosts it slightly
+- `c` — Neither boosts nor damages
+- `d` — Damages it slightly
+- `e` — Damages it greatly
 
-### q45 — How likely are you to use an artificial intelligence (AI) chatbot in the next 12 months?
-- `a` — Extremely likely
-- `b` — Very likely
-- `c` — Somewhat likely
-- `d` — Not too likely
-- `e` — Not at all likely
+### q45 — What are the chances you will use an artificial intelligence (AI) chatbot within the next 12 months?
+- `a` — Exceptionally likely
+- `b` — Highly likely
+- `c` — Moderately likely
+- `d` — Not very likely
+- `e` — Not likely whatsoever
 - `f` — Not sure
 
-### q46 — How much is "I don't know how to use them" a reason why you do not use artificial intelligence (AI) chatbots?
-- `a` — Major reason
-- `b` — Minor reason
-- `c` — Not a reason
+### q46 — To what extent is "I don't know how to use them" behind your not using artificial intelligence (AI) chatbots?
+- `a` — A key reason
+- `b` — A minor reason
+- `c` — Not a factor
 
-### q47 — How much is "I'm not interested in using them" a reason why you do not use artificial intelligence (AI) chatbots?
-- `a` — Major reason
-- `b` — Minor reason
-- `c` — Not a reason
+### q47 — To what extent is "I'm not interested in using them" behind your not using artificial intelligence (AI) chatbots?
+- `a` — A key reason
+- `b` — A minor reason
+- `c` — Not a factor
 
-### q48 — How much is "I don't trust them to give accurate information" a reason why you do not use artificial intelligence (AI) chatbots?
-- `a` — Major reason
-- `b` — Minor reason
-- `c` — Not a reason
+### q48 — To what extent is "I don't trust them to give accurate information" behind your not using artificial intelligence (AI) chatbots?
+- `a` — A key reason
+- `b` — A minor reason
+- `c` — Not a factor
 
-### q49 — How much is "I think others will judge me for using them" a reason why you do not use artificial intelligence (AI) chatbots?
-- `a` — Major reason
-- `b` — Minor reason
-- `c` — Not a reason
+### q49 — To what extent is "I think others will judge me for using them" behind your not using artificial intelligence (AI) chatbots?
+- `a` — A key reason
+- `b` — A minor reason
+- `c` — Not a factor
 
-### q50 — How much is "I'm concerned about how my personal information will be used" a reason why you do not use artificial intelligence (AI) chatbots?
-- `a` — Major reason
-- `b` — Minor reason
-- `c` — Not a reason
+### q50 — To what extent is "I'm concerned about how my personal information will be used" behind your not using artificial intelligence (AI) chatbots?
+- `a` — A key reason
+- `b` — A minor reason
+- `c` — Not a factor
 
-### q51 — In politics today, do you consider yourself a:
+### q51 — When it comes to politics these days, which label fits you:
 - `a` — Republican
 - `b` — Democrat
 - `c` — Independent
-- `d` — Something else
+- `d` — Some other affiliation
 
-### q52 — As of today do you lean more to the Republican Party or the Democratic Party?
+### q52 — At this point, which party do you tilt toward, the Republican Party or the Democratic Party?
 - `a` — The Republican Party
 - `b` — The Democratic Party
 
