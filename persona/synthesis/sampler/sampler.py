@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import csv
+import gzip
 import json
 import math
 import multiprocessing as mp
@@ -9,7 +10,7 @@ import tempfile
 import time
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from collections import defaultdict
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Mapping, Optional
 
@@ -17,7 +18,25 @@ import numpy as np
 
 EPS = 1e-12
 _WORKER_SAMPLER: "PersonaForwardSampler | None" = None
-COMPACT_CODES_FORMAT_VERSION = 1
+COMPACT_CODES_FORMAT_VERSION = 2
+_NIBBLE_MAX_VALUES = 16
+# Fast deflate keeps per-worker compression far above disk throughput; each
+# shard is an independent gzip member, so concatenation stays a valid stream.
+_GZIP_LEVEL = 1
+_CODES_COMPRESSIONS = {"none", "gzip"}
+
+
+def _compress_payload(payload: np.ndarray, compression: str) -> bytes:
+    if compression == "gzip":
+        return gzip.compress(payload.reshape(-1).data, compresslevel=_GZIP_LEVEL, mtime=0)
+    raise ValueError(f"Unsupported codes compression: {compression!r}")
+
+
+def _normalize_compression(compress: str | None) -> str:
+    compression = compress or "none"
+    if compression not in _CODES_COMPRESSIONS:
+        raise ValueError(f"Unsupported codes compression: {compress!r}")
+    return compression
 
 
 def codes_schema_path(codes_path: str | Path) -> Path:
@@ -52,11 +71,55 @@ def _codes_dtype_for_value_counts(value_counts: List[int]) -> np.dtype:
     return np.dtype("uint32")
 
 
+def _pack_nibbles(matrix: np.ndarray) -> np.ndarray:
+    """Pack a uint8 code matrix with values <= 15 into two codes per byte.
+
+    Column 2i occupies the low nibble and column 2i+1 the high nibble of byte i,
+    so each row stays a fixed-width block of ceil(cols / 2) bytes.
+    """
+    n, cols = matrix.shape
+    packed = np.zeros((n, (cols + 1) // 2), dtype=np.uint8)
+    even = matrix[:, 0::2]
+    odd = matrix[:, 1::2]
+    np.copyto(packed[:, : even.shape[1]], even)
+    if odd.shape[1]:
+        packed[:, : odd.shape[1]] |= odd << 4
+    return packed
+
+
+def _unpack_nibbles(packed: np.ndarray, cols: int) -> np.ndarray:
+    n = packed.shape[0]
+    out = np.empty((n, packed.shape[1] * 2), dtype=np.uint8)
+    out[:, 0::2] = packed & 0x0F
+    out[:, 1::2] = packed >> 4
+    return out[:, :cols]
+
+
 @dataclass(frozen=True)
 class SamplingConfig:
     seed: int = 42
     emit_only: bool = True
     eps: float = EPS
+
+
+@dataclass
+class _NodePlan:
+    """Precompiled per-node sampling step.
+
+    All log-ratio tables are pre-scaled by ``gamma * weight`` and stored as
+    float32 so the sampling loop only gathers and accumulates. Tables are laid
+    out value-major, shape ``(k, ...)``, so per-row work in the sampling loop
+    runs along the contiguous sample axis.
+    """
+
+    nid: str
+    k: int
+    logprior: np.ndarray  # (k, 1) float32
+    cpts: List[tuple] = field(default_factory=list)  # (parents, multipliers, lut (k, code_space))
+    edges: List[tuple] = field(default_factory=list)  # (source, scaled_logratio (k, k_source))
+    masks: List[tuple] = field(default_factory=list)  # (conds | None, value_mult (k, 1))
+    static_cdf: np.ndarray | None = None
+    static_total: float = 0.0
 
 
 class PersonaForwardSampler:
@@ -69,6 +132,11 @@ class PersonaForwardSampler:
 
     Pairwise and full-CPT contributions are represented as log-likelihood ratios against
     the target node prior. Conditional masks implement explicit local hard/soft guards.
+
+    Compilation folds ``gamma_i`` and the per-edge/per-CPT weights into float32
+    lookup tables. Sampling then draws each node with an unnormalized inverse-CDF,
+    which selects values with exactly the normalized proposal probabilities while
+    avoiding intermediate normalization passes.
     """
 
     def __init__(self, graph_path: str | Path, config: SamplingConfig | None = None):
@@ -90,6 +158,7 @@ class PersonaForwardSampler:
         self.masks = self._compile_masks()
         self.replaced_parents, self.gamma = self._compile_node_shrinkage()
         self.required_nodes = self._compile_required_nodes()
+        self._compile_plan()
 
     def _compile_pairwise_edges(self) -> Dict[str, List[Dict[str, Any]]]:
         out: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
@@ -139,6 +208,7 @@ class PersonaForwardSampler:
                 {
                     "parents": parents,
                     "multipliers": np.array(multipliers, dtype=np.int64),
+                    "code_space": m,
                     "weight": float(cpt.get("cpt_weight", 1.0)),
                     "replace": bool(cpt.get("replace_pairwise_parent_edges", False)),
                     "lookup": lookup,
@@ -223,79 +293,200 @@ class PersonaForwardSampler:
                     stack.append(parent)
         return required
 
-    @staticmethod
-    def _condition_rows(idx: Dict[str, np.ndarray], cond: List[tuple[str, np.ndarray]], n: int) -> np.ndarray | None:
-        if not cond:
-            return None
-        row_mask = np.ones(n, dtype=bool)
-        for p, allowed in cond:
-            if len(allowed) == 0:
-                return np.zeros(n, dtype=bool)
-            row_mask &= np.isin(idx[p], allowed)
-        return row_mask
+    def _compile_plan(self) -> None:
+        """Build the fully vectorizable per-node execution plan.
+
+        A parent contributes to a target only when it is sampled earlier in the
+        topological order; the availability checks the sampling loop used to run
+        per batch are resolved once here.
+        """
+        topo_pos: Dict[str, int] = {}
+        for i, nid in enumerate(self.topological_order):
+            if nid in self.nodes and nid not in topo_pos:
+                topo_pos[nid] = i
+
+        def sampled_before(parent: str, pos: int) -> bool:
+            return (
+                parent in self.required_nodes
+                and topo_pos.get(parent, math.inf) < pos
+            )
+
+        self._plan: List[_NodePlan] = []
+        for nid in topo_pos:
+            if nid not in self.required_nodes:
+                continue
+            pos = topo_pos[nid]
+            k = len(self.values[nid])
+            gamma = self.gamma[nid]
+            logprior32 = self.logprior[nid].astype(np.float32)
+            plan = _NodePlan(nid=nid, k=k, logprior=np.ascontiguousarray(logprior32[:, None]))
+
+            for cpt in self.full_cpts.get(nid, []):
+                if not all(sampled_before(p, pos) for p in cpt["parents"]):
+                    continue
+                lut = np.zeros((cpt["code_space"], k), dtype=np.float32)
+                scale = gamma * cpt["weight"]
+                for code, logratio in cpt["lookup"].items():
+                    lut[code] = scale * logratio
+                plan.cpts.append(
+                    (
+                        tuple(cpt["parents"]),
+                        tuple(int(m) for m in cpt["multipliers"]),
+                        np.ascontiguousarray(lut.T),
+                    )
+                )
+
+            repl = self.replaced_parents[nid]
+            for edge in self.in_edges.get(nid, []):
+                if edge["source"] in repl or not sampled_before(edge["source"], pos):
+                    continue
+                scaled = ((gamma * edge["weight"]) * edge["logratio"]).astype(np.float32)
+                plan.edges.append((edge["source"], np.ascontiguousarray(scaled.T)))
+
+            for mask in self.masks.get(nid, []):
+                if any(len(allowed) == 0 for _, allowed in mask["condition"]):
+                    continue  # empty allowed set can never match any row
+                missing = [p for p, _ in mask["condition"] if not sampled_before(p, pos)]
+                if missing:
+                    raise ValueError(
+                        f"Conditional mask on {nid!r} depends on {missing!r} "
+                        "which is not sampled before the target"
+                    )
+                conds = []
+                for p, allowed in mask["condition"]:
+                    lut = np.zeros(len(self.values[p]), dtype=bool)
+                    lut[allowed] = True
+                    conds.append((p, lut))
+                value_mult32 = mask["value_mult"].astype(np.float32)
+                plan.masks.append(
+                    (
+                        conds or None,
+                        np.ascontiguousarray(value_mult32[:, None]),
+                    )
+                )
+
+            if not plan.cpts and not plan.edges and all(c is None for c, _ in plan.masks):
+                probs = np.exp(logprior32 - logprior32.max())
+                for _, value_mult in plan.masks:
+                    probs *= value_mult[:, 0]
+                plan.static_cdf = np.cumsum(probs, dtype=np.float32)
+                plan.static_total = float(plan.static_cdf[-1])
+                plan.masks = []
+            self._plan.append(plan)
+
+        # Required nodes outside the topological order fall back to prior draws,
+        # in stable graph declaration order.
+        self._prior_only_nodes = [
+            nid for nid in self.nodes if nid in self.required_nodes and nid not in topo_pos
+        ]
+        self._plan_max_k = max((p.k for p in self._plan), default=1)
+        self._index_dtype = _codes_dtype_for_value_counts(
+            [len(self.values[nid]) for nid in self.required_nodes]
+        )
 
     def sample_indices(self, n: int) -> Dict[str, np.ndarray]:
         """Sample N personas and return integer-coded node values."""
         idx: Dict[str, np.ndarray] = {}
-        for nid in self.topological_order:
-            if nid not in self.nodes:
+        rng = self.rng
+        out_dtype = self._index_dtype
+        kmax = self._plan_max_k
+        # All per-node work runs in reused value-major (k, n) views of these
+        # buffers, keeping the hot loop allocation-free and every reduction a
+        # contiguous pass along the sample axis.
+        ws_flat = np.empty(kmax * n, dtype=np.float32)
+        gb_flat = np.empty(kmax * n, dtype=np.float32)
+        below_flat = np.empty(kmax * n, dtype=bool)
+        u = np.empty(n, dtype=np.float64)
+        bounds = np.empty(n, dtype=np.float32)
+        code = np.empty(n, dtype=np.int64)
+        tmp = np.empty(n, dtype=np.int64)
+        sel = np.empty(n, dtype=np.int64)
+
+        for plan in self._plan:
+            k = plan.k
+            rng.random(out=u)
+
+            if plan.static_cdf is not None:
+                np.multiply(u, plan.static_total, out=u)
+                bounds[:] = u
+                found = np.searchsorted(plan.static_cdf, bounds, side="left")
+                np.minimum(found, k - 1, out=found)
+                idx[plan.nid] = found.astype(out_dtype)
                 continue
-            if nid not in self.required_nodes:
-                continue
-            k = len(self.values[nid])
-            logits = np.tile(self.logprior[nid], (n, 1))
-            gamma = self.gamma[nid]
 
-            for cpt in self.full_cpts.get(nid, []):
-                if not all(p in idx for p in cpt["parents"]):
+            logits = ws_flat[: k * n].reshape(k, n)
+            gathered = gb_flat[: k * n].reshape(k, n)
+            np.copyto(logits, plan.logprior)
+
+            for parents, multipliers, lut in plan.cpts:
+                code[:] = 0
+                for p, mult in zip(parents, multipliers):
+                    tmp[:] = idx[p]
+                    tmp *= mult
+                    code += tmp
+                # Codes and indices are in-bounds by construction; clip mode
+                # skips numpy's buffered bounds-checked path.
+                np.take(lut, code, axis=1, out=gathered, mode="clip")
+                logits += gathered
+
+            for source, scaled_logratio in plan.edges:
+                np.take(scaled_logratio, idx[source], axis=1, out=gathered, mode="clip")
+                logits += gathered
+
+            logits -= logits.max(axis=0, keepdims=True)
+            probs = logits
+            np.exp(probs, out=probs)
+
+            for conds, value_mult in plan.masks:
+                if conds is None:
+                    probs *= value_mult
                     continue
-                code = np.zeros(n, dtype=np.int64)
-                for j, p in enumerate(cpt["parents"]):
-                    code += idx[p].astype(np.int64) * int(cpt["multipliers"][j])
-                for cd in np.unique(code):
-                    lr = cpt["lookup"].get(int(cd))
-                    if lr is not None:
-                        logits[code == cd] += gamma * cpt["weight"] * lr
-
-            repl = self.replaced_parents[nid]
-            for edge in self.in_edges.get(nid, []):
-                if edge["source"] in repl or edge["source"] not in idx:
+                rows = conds[0][1][idx[conds[0][0]]]
+                for p, lut in conds[1:]:
+                    rows &= lut[idx[p]]
+                row_ids = np.flatnonzero(rows)
+                if row_ids.size == 0:
                     continue
-                logits += gamma * edge["weight"] * edge["logratio"][idx[edge["source"]]]
+                sub = probs[:, row_ids]
+                sub *= value_mult
+                dead = sub.sum(axis=0) <= 0.0
+                if dead.any():
+                    # Should not occur for validated full DAG graphs; keep fallback for robustness.
+                    sub[:, dead] = 1.0
+                probs[:, row_ids] = sub
 
-            logits -= logits.max(axis=1, keepdims=True)
-            probs = np.exp(logits)
-            probs /= probs.sum(axis=1, keepdims=True)
+            # Unnormalized inverse-CDF draw: P(sel = j) = probs[j] / probs.sum().
+            # Row-by-row accumulation is a contiguous vector add per value and
+            # outruns ufunc.accumulate along the value axis.
+            for j in range(1, k):
+                probs[j] += probs[j - 1]
+            np.multiply(u, probs[-1], out=u)
+            bounds[:] = u
+            below = below_flat[: k * n].reshape(k, n)
+            np.less(probs, bounds, out=below)
+            np.sum(below, axis=0, dtype=np.int64, out=sel)
+            np.minimum(sel, k - 1, out=sel)
+            idx[plan.nid] = sel.astype(out_dtype)
 
-            for mask in self.masks.get(nid, []):
-                rows = self._condition_rows(idx, mask["condition"], n)
-                if rows is None:
-                    probs *= mask["value_mult"][None, :]
-                    probs /= probs.sum(axis=1, keepdims=True)
-                elif rows.any():
-                    probs[rows] *= mask["value_mult"][None, :]
-                    s = probs[rows].sum(axis=1, keepdims=True)
-                    zero = s[:, 0] <= 0
-                    if zero.any():
-                        # Should not occur for validated full DAG graphs; keep fallback for robustness.
-                        probs[rows][zero] = 1.0 / k
-                        s = probs[rows].sum(axis=1, keepdims=True)
-                    probs[rows] /= s
-
-            probs = np.maximum(probs, 0)
-            probs /= probs.sum(axis=1, keepdims=True)
-            u = self.rng.random(n)
-            cum = np.cumsum(probs, axis=1)
-            idx[nid] = (cum < u[:, None]).sum(axis=1).astype(np.int16)
-
-        # If graph contains nodes outside topological order, sample them from priors.
-        for nid in self.required_nodes:
-            if nid not in idx:
-                idx[nid] = self.rng.choice(len(self.values[nid]), size=n, p=self.prior[nid]).astype(np.int16)
+        for nid in self._prior_only_nodes:
+            idx[nid] = rng.choice(len(self.values[nid]), size=n, p=self.prior[nid]).astype(out_dtype)
         return idx
 
     def _codes_dtype(self) -> np.dtype:
         return _codes_dtype_for_value_counts([len(self.values[nid]) for nid in self.emit_nodes])
+
+    def _codes_packing(self) -> str:
+        if self._codes_dtype() == np.dtype("uint8") and all(
+            len(self.values[nid]) <= _NIBBLE_MAX_VALUES for nid in self.emit_nodes
+        ):
+            return "nibble"
+        return "none"
+
+    def _codes_row_bytes(self) -> int:
+        cols = len(self.emit_nodes)
+        if self._codes_packing() == "nibble":
+            return (cols + 1) // 2
+        return cols * self._codes_dtype().itemsize
 
     def codes_matrix(self, idx: Dict[str, np.ndarray]) -> np.ndarray:
         n = len(next(iter(idx.values()))) if idx else 0
@@ -305,24 +496,43 @@ class PersonaForwardSampler:
             matrix[:, col] = idx[nid].astype(dtype, copy=False)
         return matrix
 
-    def write_codes(self, idx: Dict[str, np.ndarray], out: str | Path) -> Dict[str, Any]:
-        Path(out).parent.mkdir(parents=True, exist_ok=True)
+    def encoded_codes(self, idx: Dict[str, np.ndarray]) -> np.ndarray:
+        """Return the on-disk representation of a sampled batch."""
         matrix = self.codes_matrix(idx)
-        matrix.tofile(out)
+        if self._codes_packing() == "nibble":
+            return _pack_nibbles(matrix)
+        return matrix
+
+    def write_codes(self, idx: Dict[str, np.ndarray], out: str | Path, *, compress: str | None = None) -> Dict[str, Any]:
+        Path(out).parent.mkdir(parents=True, exist_ok=True)
+        compression = _normalize_compression(compress)
+        n = len(next(iter(idx.values()))) if idx else 0
+        payload = self.encoded_codes(idx)
+        if compression == "none":
+            payload.tofile(out)
+            stored = int(payload.nbytes)
+        else:
+            blob = _compress_payload(payload, compression)
+            Path(out).write_bytes(blob)
+            stored = len(blob)
         return {
-            "dtype": str(matrix.dtype),
-            "shape": [int(matrix.shape[0]), int(matrix.shape[1])],
-            "bytes": int(matrix.nbytes),
+            "dtype": str(self._codes_dtype()),
+            "shape": [n, len(self.emit_nodes)],
+            "bytes": stored,
+            "packing": self._codes_packing(),
+            "compression": compression,
         }
 
-    def codes_schema(self, n: int, out: str | Path) -> Dict[str, Any]:
-        dtype = self._codes_dtype()
+    def codes_schema(self, n: int, out: str | Path, *, compress: str | None = None) -> Dict[str, Any]:
         return {
             "format": "persona_codes",
             "format_version": COMPACT_CODES_FORMAT_VERSION,
             "code_base": 0,
-            "dtype": str(dtype),
+            "dtype": str(self._codes_dtype()),
             "shape": [int(n), len(self.emit_nodes)],
+            "packing": self._codes_packing(),
+            "row_bytes": self._codes_row_bytes(),
+            "compression": _normalize_compression(compress),
             "codes_path": str(out),
             "columns": [
                 {
@@ -337,9 +547,11 @@ class PersonaForwardSampler:
             "emit_only": self.config.emit_only,
         }
 
-    def write_codes_schema(self, n: int, out: str | Path) -> Path:
+    def write_codes_schema(self, n: int, out: str | Path, *, compress: str | None = None) -> Path:
         schema_path = codes_schema_path(out)
-        schema_path.write_text(json.dumps(self.codes_schema(n, out), indent=2), encoding="utf-8")
+        schema_path.write_text(
+            json.dumps(self.codes_schema(n, out, compress=compress), indent=2), encoding="utf-8"
+        )
         return schema_path
 
     def decode_row(self, idx: Dict[str, np.ndarray], row: int, *, include_hidden: Optional[bool] = None) -> Dict[str, str]:
@@ -369,7 +581,7 @@ class PersonaForwardSampler:
             for i in range(n):
                 w.writerow(self.decode_row(idx, i))
 
-    def sample_to_file(self, n: int, out: str | Path, fmt: str = "codes") -> Dict[str, Any]:
+    def sample_to_file(self, n: int, out: str | Path, fmt: str = "codes", *, compress: str | None = None) -> Dict[str, Any]:
         start = time.time()
         idx = self.sample_indices(n)
         if fmt == "jsonl":
@@ -377,8 +589,8 @@ class PersonaForwardSampler:
         elif fmt == "csv":
             self.write_csv(idx, out)
         elif fmt == "codes":
-            codes_meta = self.write_codes(idx, out)
-            schema_path = self.write_codes_schema(n, out)
+            codes_meta = self.write_codes(idx, out, compress=compress)
+            schema_path = self.write_codes_schema(n, out, compress=compress)
         else:
             raise ValueError(f"Unsupported format: {fmt}")
         meta = {
@@ -396,6 +608,8 @@ class PersonaForwardSampler:
                     "schema_out": str(schema_path),
                     "storage_bytes": codes_meta["bytes"],
                     "dtype": codes_meta["dtype"],
+                    "packing": codes_meta["packing"],
+                    "compression": codes_meta["compression"],
                 }
             )
         return meta
@@ -424,15 +638,6 @@ def _batch_seeds(seed: int, count: int) -> List[int]:
     return [int(v) for v in rng.integers(0, 2**63 - 1, size=count)]
 
 
-def _emitted_node_count(graph_path: str | Path, emit_only: bool) -> int:
-    with Path(graph_path).open("r", encoding="utf-8") as f:
-        graph = json.load(f)
-    nodes = graph.get("nodes", [])
-    if not emit_only:
-        return len(nodes)
-    return sum(1 for node in nodes if node.get("emit", True) is not False)
-
-
 def _worker_init(graph_path: str, emit_only: bool, eps: float) -> None:
     global _WORKER_SAMPLER
     _WORKER_SAMPLER = PersonaForwardSampler(
@@ -448,6 +653,7 @@ def _write_shard(
     seed: int,
     out: Path,
     fmt: str,
+    compress: str | None = None,
 ) -> None:
     sampler.rng = np.random.default_rng(seed)
     idx = sampler.sample_indices(n)
@@ -456,9 +662,24 @@ def _write_shard(
     elif fmt == "csv":
         sampler.write_csv(idx, out)
     elif fmt == "codes":
-        sampler.write_codes(idx, out)
+        sampler.write_codes(idx, out, compress=compress)
     else:
         raise ValueError(f"Unsupported format: {fmt}")
+
+
+def _write_codes_at_offset(
+    sampler: PersonaForwardSampler,
+    *,
+    n: int,
+    seed: int,
+    out: Path,
+    offset: int,
+) -> None:
+    sampler.rng = np.random.default_rng(seed)
+    payload = sampler.encoded_codes(sampler.sample_indices(n))
+    with out.open("r+b") as f:
+        f.seek(offset)
+        f.write(payload.reshape(-1).data)
 
 
 def _sample_without_saving(
@@ -472,8 +693,8 @@ def _sample_without_saving(
     return n
 
 
-def _worker_sample(task: tuple[int, int, int, str, str]) -> tuple[int, int, str]:
-    batch_index, n, seed, fmt, shard_path = task
+def _worker_sample(task: tuple[int, int, int, str, str, str | None]) -> tuple[int, int, str]:
+    batch_index, n, seed, fmt, shard_path, compress = task
     if _WORKER_SAMPLER is None:
         raise RuntimeError("Parallel sampler worker was not initialized")
     _write_shard(
@@ -482,8 +703,23 @@ def _worker_sample(task: tuple[int, int, int, str, str]) -> tuple[int, int, str]
         seed=seed,
         out=Path(shard_path),
         fmt=fmt,
+        compress=compress,
     )
     return batch_index, n, shard_path
+
+
+def _worker_sample_codes_at_offset(task: tuple[int, int, int, str, int]) -> tuple[int, int]:
+    batch_index, n, seed, out_path, offset = task
+    if _WORKER_SAMPLER is None:
+        raise RuntimeError("Parallel sampler worker was not initialized")
+    _write_codes_at_offset(
+        _WORKER_SAMPLER,
+        n=n,
+        seed=seed,
+        out=Path(out_path),
+        offset=offset,
+    )
+    return batch_index, n
 
 
 def _worker_sample_without_saving(task: tuple[int, int, int]) -> tuple[int, int]:
@@ -500,25 +736,30 @@ def _fork_context() -> mp.context.BaseContext | None:
     return mp.get_context("fork")
 
 
-def _run_tasks_with_forked_sampler(
-    graph_path: str | Path,
+def _run_worker_tasks(
+    parent_sampler: PersonaForwardSampler,
     *,
-    emit_only: bool,
-    eps: float,
     workers: int,
     tasks: List[Any],
     worker_fn: Callable[[Any], Any],
-) -> List[Any] | None:
+) -> List[Any]:
+    """Run tasks in a process pool, preferring fork to reuse the parent's compiled sampler."""
     fork_context = _fork_context()
     if fork_context is None:
-        return None
+        graph_path = str(parent_sampler.graph_path)
+        emit_only = parent_sampler.config.emit_only
+        eps = parent_sampler.config.eps
+        with ProcessPoolExecutor(
+            max_workers=workers,
+            initializer=_worker_init,
+            initargs=(graph_path, emit_only, eps),
+        ) as pool:
+            futures = [pool.submit(worker_fn, task) for task in tasks]
+            return [future.result() for future in as_completed(futures)]
 
     global _WORKER_SAMPLER
     previous_sampler = _WORKER_SAMPLER
-    _WORKER_SAMPLER = PersonaForwardSampler(
-        graph_path,
-        SamplingConfig(seed=0, emit_only=emit_only, eps=eps),
-    )
+    _WORKER_SAMPLER = parent_sampler
     try:
         with ProcessPoolExecutor(
             max_workers=workers,
@@ -558,89 +799,37 @@ def sample_to_file_parallel(
     workers: int = 1,
     batch_size: int | None = None,
     eps: float = EPS,
+    compress: str | None = None,
 ) -> Dict[str, Any]:
     """Sample personas with optional batch-level process concurrency.
 
     The sampling semantics are identical to ``PersonaForwardSampler``. Parallel
     mode only shards the requested row count into independent batches with
-    deterministic child seeds. When ``out`` is provided, shard files are merged
-    in batch order; when ``out`` is ``None``, samples are generated and discarded
-    after timing.
+    deterministic child seeds. Uncompressed codes shards are written directly
+    into their row offsets of the output file; compressed codes shards become
+    independent gzip members concatenated in batch order, and jsonl/csv shards
+    are written to temporary files and merged in batch order. When ``out`` is
+    ``None``, samples are generated and discarded after timing.
     """
     if fmt not in {"jsonl", "csv", "codes"}:
         raise ValueError(f"Unsupported format: {fmt}")
+    compression = _normalize_compression(compress)
+    if compression != "none" and fmt != "codes":
+        raise ValueError(f"Compression is only supported for codes output, not {fmt!r}")
 
     graph_path = Path(graph_path)
     out_path = Path(out) if out is not None else None
     workers = int(workers)
     batches, effective_batch_size = _planned_batches(n, workers, batch_size)
     actual_workers = min(workers, len(batches))
+    seeds = _batch_seeds(seed, len(batches))
 
-    if out_path is None:
-        start = time.time()
-        seeds = _batch_seeds(seed, len(batches))
-        rows_sampled = 0
-        if actual_workers == 1:
-            sampler = PersonaForwardSampler(
-                graph_path,
-                SamplingConfig(seed=0, emit_only=emit_only, eps=eps),
-            )
-            for size, batch_seed in zip(batches, seeds):
-                rows_sampled += _sample_without_saving(
-                    sampler,
-                    n=size,
-                    seed=batch_seed,
-                )
-        else:
-            tasks = [(i, size, seeds[i]) for i, size in enumerate(batches)]
-            results = _run_tasks_with_forked_sampler(
-                graph_path,
-                emit_only=emit_only,
-                eps=eps,
-                workers=actual_workers,
-                tasks=tasks,
-                worker_fn=_worker_sample_without_saving,
-            )
-            if results is None:
-                with ProcessPoolExecutor(
-                    max_workers=actual_workers,
-                    initializer=_worker_init,
-                    initargs=(str(graph_path), emit_only, eps),
-                ) as pool:
-                    futures = [
-                        pool.submit(_worker_sample_without_saving, task)
-                        for task in tasks
-                    ]
-                    for future in as_completed(futures):
-                        rows_sampled += future.result()[1]
-            else:
-                for _, rows in results:
-                    rows_sampled += rows
-
-        elapsed = time.time() - start
-        return {
-            "samples": rows_sampled,
-            "out": None,
-            "format": fmt,
-            "saved": False,
-            "elapsed_seconds": elapsed,
-            "sampling_throughput_per_second": rows_sampled / elapsed if elapsed > 0 else 0.0,
-            "emitted_nodes": _emitted_node_count(graph_path, emit_only),
-            "graph": str(graph_path),
-            "seed": seed,
-            "workers": actual_workers,
-            "requested_workers": workers,
-            "batch_size": effective_batch_size,
-            "batches": len(batches),
-            "parallel": actual_workers > 1,
-        }
-
-    if workers == 1 and len(batches) == 1:
+    if out_path is not None and workers == 1 and len(batches) == 1:
         sampler = PersonaForwardSampler(
             graph_path,
             SamplingConfig(seed=seed, emit_only=emit_only, eps=eps),
         )
-        meta = sampler.sample_to_file(n, out_path, fmt)
+        meta = sampler.sample_to_file(n, out_path, fmt, compress=compress)
         meta.update(
             {
                 "workers": 1,
@@ -654,79 +843,24 @@ def sample_to_file_parallel(
         return meta
 
     start = time.time()
-    seeds = _batch_seeds(seed, len(batches))
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    shard_results: List[tuple[int, int, str]] = []
+    parent_sampler = PersonaForwardSampler(
+        graph_path,
+        SamplingConfig(seed=0, emit_only=emit_only, eps=eps),
+    )
 
-    with tempfile.TemporaryDirectory(
-        prefix=f"{out_path.name}.shards.",
-        dir=str(out_path.parent),
-    ) as tmp:
-        tmp_dir = Path(tmp)
-        tasks = [
-            (i, size, seeds[i], fmt, str(tmp_dir / f"batch_{i:06d}.{fmt}"))
-            for i, size in enumerate(batches)
-        ]
+    def run_batches(tasks: List[Any], worker_fn: Callable[[Any], Any], inline_fn: Callable[[Any], Any]) -> List[Any]:
         if actual_workers == 1:
-            sampler = PersonaForwardSampler(
-                graph_path,
-                SamplingConfig(seed=0, emit_only=emit_only, eps=eps),
-            )
-            for task in tasks:
-                batch_index, size, batch_seed, task_fmt, shard_path = task
-                _write_shard(
-                    sampler,
-                    n=size,
-                    seed=batch_seed,
-                    out=Path(shard_path),
-                    fmt=task_fmt,
-                )
-                shard_results.append((batch_index, size, shard_path))
-        else:
-            results = _run_tasks_with_forked_sampler(
-                graph_path,
-                emit_only=emit_only,
-                eps=eps,
-                workers=actual_workers,
-                tasks=tasks,
-                worker_fn=_worker_sample,
-            )
-            if results is None:
-                with ProcessPoolExecutor(
-                    max_workers=actual_workers,
-                    initializer=_worker_init,
-                    initargs=(str(graph_path), emit_only, eps),
-                ) as pool:
-                    futures = [pool.submit(_worker_sample, task) for task in tasks]
-                    for future in as_completed(futures):
-                        shard_results.append(future.result())
-            else:
-                shard_results.extend(results)
-
-        shard_results.sort(key=lambda row: row[0])
-        _merge_shards([Path(row[2]) for row in shard_results], out_path, fmt)
-
-    codes_meta: Dict[str, Any] = {}
-    if fmt == "codes":
-        schema_sampler = PersonaForwardSampler(
-            graph_path,
-            SamplingConfig(seed=seed, emit_only=emit_only, eps=eps),
+            return [inline_fn(task) for task in tasks]
+        return _run_worker_tasks(
+            parent_sampler,
+            workers=actual_workers,
+            tasks=tasks,
+            worker_fn=worker_fn,
         )
-        schema_path = schema_sampler.write_codes_schema(n, out_path)
-        codes_meta = {
-            "schema_out": str(schema_path),
-            "storage_bytes": out_path.stat().st_size,
-            "dtype": schema_sampler._codes_dtype().name,
-        }
 
-    return {
-        "samples": n,
-        "out": str(out_path),
+    base_meta = {
         "format": fmt,
-        "saved": True,
-        "elapsed_seconds": time.time() - start,
-        **codes_meta,
-        "emitted_nodes": _emitted_node_count(graph_path, emit_only),
+        "emitted_nodes": len(parent_sampler.emit_nodes),
         "graph": str(graph_path),
         "seed": seed,
         "workers": actual_workers,
@@ -735,3 +869,117 @@ def sample_to_file_parallel(
         "batches": len(batches),
         "parallel": actual_workers > 1,
     }
+
+    if out_path is None:
+        tasks = [(i, size, seeds[i]) for i, size in enumerate(batches)]
+        results = run_batches(
+            tasks,
+            _worker_sample_without_saving,
+            lambda task: (
+                task[0],
+                _sample_without_saving(parent_sampler, n=task[1], seed=task[2]),
+            ),
+        )
+        rows_sampled = sum(rows for _, rows in results)
+        elapsed = time.time() - start
+        return {
+            "samples": rows_sampled,
+            "out": None,
+            "saved": False,
+            "elapsed_seconds": elapsed,
+            "sampling_throughput_per_second": rows_sampled / elapsed if elapsed > 0 else 0.0,
+            **base_meta,
+        }
+
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+
+    if fmt == "codes" and compression == "none":
+        row_bytes = parent_sampler._codes_row_bytes()
+        offsets = [0]
+        for size in batches[:-1]:
+            offsets.append(offsets[-1] + size * row_bytes)
+        partial_path = out_path.with_name(out_path.name + ".partial")
+        try:
+            with partial_path.open("wb") as f:
+                f.truncate(n * row_bytes)
+            tasks = [
+                (i, size, seeds[i], str(partial_path), offsets[i])
+                for i, size in enumerate(batches)
+            ]
+
+            def inline_codes(task: tuple[int, int, int, str, int]) -> tuple[int, int]:
+                batch_index, size, batch_seed, path, offset = task
+                _write_codes_at_offset(
+                    parent_sampler,
+                    n=size,
+                    seed=batch_seed,
+                    out=Path(path),
+                    offset=offset,
+                )
+                return batch_index, size
+
+            run_batches(tasks, _worker_sample_codes_at_offset, inline_codes)
+            partial_path.replace(out_path)
+        except BaseException:
+            partial_path.unlink(missing_ok=True)
+            raise
+        schema_path = parent_sampler.write_codes_schema(n, out_path, compress=compress)
+        return {
+            "samples": n,
+            "out": str(out_path),
+            "saved": True,
+            "elapsed_seconds": time.time() - start,
+            "schema_out": str(schema_path),
+            "storage_bytes": out_path.stat().st_size,
+            "dtype": parent_sampler._codes_dtype().name,
+            "packing": parent_sampler._codes_packing(),
+            "compression": compression,
+            **base_meta,
+        }
+
+    shard_results: List[tuple[int, int, str]] = []
+    with tempfile.TemporaryDirectory(
+        prefix=f"{out_path.name}.shards.",
+        dir=str(out_path.parent),
+    ) as tmp:
+        tmp_dir = Path(tmp)
+        tasks = [
+            (i, size, seeds[i], fmt, str(tmp_dir / f"batch_{i:06d}.{fmt}"), compress)
+            for i, size in enumerate(batches)
+        ]
+
+        def inline_shard(task: tuple[int, int, int, str, str, str | None]) -> tuple[int, int, str]:
+            batch_index, size, batch_seed, task_fmt, shard_path, task_compress = task
+            _write_shard(
+                parent_sampler,
+                n=size,
+                seed=batch_seed,
+                out=Path(shard_path),
+                fmt=task_fmt,
+                compress=task_compress,
+            )
+            return batch_index, size, shard_path
+
+        shard_results = run_batches(tasks, _worker_sample, inline_shard)
+        shard_results.sort(key=lambda row: row[0])
+        _merge_shards([Path(row[2]) for row in shard_results], out_path, fmt)
+
+    meta = {
+        "samples": n,
+        "out": str(out_path),
+        "saved": True,
+        "elapsed_seconds": time.time() - start,
+        **base_meta,
+    }
+    if fmt == "codes":
+        schema_path = parent_sampler.write_codes_schema(n, out_path, compress=compress)
+        meta.update(
+            {
+                "schema_out": str(schema_path),
+                "storage_bytes": out_path.stat().st_size,
+                "dtype": parent_sampler._codes_dtype().name,
+                "packing": parent_sampler._codes_packing(),
+                "compression": compression,
+            }
+        )
+    return meta

@@ -141,6 +141,27 @@ value:
 /tmp/personas_1000000.codes.schema.json
 ```
 
+Because every emitted attribute currently has at most 16 values, the writer
+nibble-packs two codes per byte (schema `format_version: 2`, `packing:
+"nibble"`), which halves the artifact while keeping a fixed `row_bytes` stride
+for random row access. The decoder still reads unpacked `format_version: 1`
+artifacts such as the committed comparison samples.
+
+Pass `--compress gzip` to trade random access for another ~1.6x of space. Each
+batch becomes an independent gzip member, so parallel generation and
+deterministic output bytes are preserved, and the decoder streams the
+concatenated members transparently:
+
+```bash
+uv run python persona/synthesis/scripts/sample_personas.py \
+  --n 1000000 \
+  --seed 42 \
+  --workers 8 \
+  --batch-size 25000 \
+  --compress gzip \
+  --out /tmp/personas_1000000.codes.gz
+```
+
 Decode compact codes back to JSONL or CSV when a text artifact is needed:
 
 ```bash
@@ -171,10 +192,12 @@ uv run python persona/synthesis/scripts/sample_personas.py \
   --batch-size 25000
 ```
 
-Parallel generation splits the requested count into deterministic seed shards,
-writes temporary shard files only when `--out` is provided, merges saved shards
-in batch order, and deletes temporary files before returning. The underlying
-forward-sampling semantics are unchanged.
+Parallel generation splits the requested count into deterministic seed shards.
+Uncompressed codes shards are written by workers directly into their row
+offsets of the output file (no merge pass); compressed codes shards are
+concatenated as gzip members in batch order; jsonl/csv shards use temporary
+files merged in batch order. The underlying forward-sampling semantics are
+unchanged.
 
 Use the saved form when the generated personas are the artifact. Use the no-save
 form when measuring sampler throughput or stress-testing generation. Saved JSONL
@@ -196,23 +219,46 @@ Sampler concurrency notes:
   a good default for large runs; `10,000` to `50,000` keeps peak memory bounded
   without materially changing throughput.
 - Avoid one giant `sample_indices(N)` call for very large `N`. The sampler is
-  vectorized within each node, so a single huge batch repeatedly allocates large
-  `(N x values)` arrays. Large jobs should use shards.
-- Shard seeds are derived deterministically from `--seed`, and shards are
-  merged in batch order, so repeated runs with the same arguments produce the
-  same output order.
+  vectorized within each node, so a single huge batch allocates large
+  `(values x N)` work buffers. Large jobs should use shards.
+- Shard seeds are derived deterministically from `--seed`, and shard bytes land
+  in batch order, so repeated runs with the same arguments produce the same
+  output bytes regardless of worker count.
 - JSONL/CSV materialization is still more expensive than integer-coded sampling.
   Keep committed/generated sample artifacts in `codes` format unless a
   human-readable debug file is explicitly needed.
 
-Recent benchmark on this graph:
+Benchmarks on the same 28-core machine, before and after the compiled-plan
+sampler rewrite (v4.4 graph, seed 42, 8 workers, 25k-row shards):
 
-| Mode | Count | Output | Time | Throughput |
+| Mode | Count | Output | Before | After |
 | --- | ---: | ---: | ---: | ---: |
-| No-save, 8 workers, 25k-row shards | 1,000,000 | none | 23.02s | 43.4k/s |
-| Saved JSONL, 4 actual workers, 2.5k-row shards | 10,000 | 372MB | 1.95s | 5.1k/s |
-| Saved codes, 4 actual workers, 2.5k-row shards | 10,000 | 12.3MB + 296KB schema | 1.32s | 7.6k/s |
-| Saved codes, 8 workers, 25k-row shards | 1,000,000 | 1.23GB + 296KB schema | 25.17s | 39.7k/s |
+| No-save | 1,000,000 | none | 42.6s (23.5k/s) | 6.6s (150.6k/s) |
+| Saved codes | 1,000,000 | 1.29GB → 645MB + 318KB schema | 45.9s | 7.7s |
+| Saved codes `--compress gzip` | 1,000,000 | 408MB + 318KB schema | n/a | 9.0s |
+| Single-process `sample_indices` | 20,000 | in-memory | 5.1s (3.9k/s) | 0.7s (27.7k/s) |
+
+With 24 workers the no-save rate reaches ~205k rows/s on the same machine.
+
+## Scaling To Billions Of Rows
+
+Generation cost is linear in rows and embarrassingly parallel across shards, so
+multi-billion-row jobs are mostly a storage decision. At the current 1,290
+emitted attributes, projected artifact sizes and single-machine times for
+8 billion personas:
+
+| Artifact | Bytes/row | 8B-row size | Time at ~205k rows/s |
+| --- | ---: | ---: | ---: |
+| Codes (packed, default) | 645 | 5.2TB | ~11h |
+| Codes + `--compress gzip` | ~408 | ~3.3TB | ~12h |
+| Legacy unpacked codes | 1,290 | 10.3TB | n/a |
+
+For jobs that size, split the run into independent invocations (for example
+80 x 100M rows), each with its own `--seed` and `--out` file. Every invocation
+is deterministic and restartable on its own, files stay below filesystem and
+tooling limits, and invocations can run on different machines concurrently.
+Peak RAM stays bounded by `--batch-size` per worker (a few hundred MB each), so
+`--workers` can be set to the core count.
 
 Generate the committed 10,000-sample quality report:
 

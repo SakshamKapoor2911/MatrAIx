@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import gzip
 import json
 import sys
 from pathlib import Path
@@ -16,6 +17,9 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))
 
 from persona.synthesis.sampler import codes_schema_path  # noqa: E402
+from persona.synthesis.sampler.sampler import _unpack_nibbles  # noqa: E402
+
+_DECODE_CHUNK_ROWS = 8192
 
 
 def _load_schema(codes_path: Path, schema_path: Path | None = None) -> dict[str, Any]:
@@ -24,22 +28,58 @@ def _load_schema(codes_path: Path, schema_path: Path | None = None) -> dict[str,
         schema = json.load(f)
     if schema.get("format") != "persona_codes":
         raise ValueError(f"Unsupported schema format: {schema.get('format')!r}")
-    if schema.get("format_version") != 1:
+    if schema.get("format_version") not in (1, 2):
         raise ValueError(f"Unsupported persona codes version: {schema.get('format_version')!r}")
     return schema
+
+
+def _iter_code_chunks(codes_path: Path, schema: dict[str, Any]) -> Any:
+    """Yield decoded integer-code chunks of shape (rows_chunk, cols)."""
+    rows, cols = schema["shape"]
+    packing = schema.get("packing", "none")
+    compression = schema.get("compression", "none")
+    if packing == "nibble":
+        row_bytes = schema.get("row_bytes", (cols + 1) // 2)
+        row_dtype = np.uint8
+    elif packing == "none":
+        row_dtype = np.dtype(schema["dtype"])
+        row_bytes = cols * row_dtype.itemsize
+    else:
+        raise ValueError(f"Unsupported codes packing: {packing!r}")
+
+    def as_codes(raw: np.ndarray) -> np.ndarray:
+        if packing == "nibble":
+            return _unpack_nibbles(raw, cols)
+        return raw.view(row_dtype).reshape(-1, cols)
+
+    if compression == "gzip":
+        with gzip.open(codes_path, "rb") as f:
+            remaining = rows
+            while remaining > 0:
+                take = min(remaining, _DECODE_CHUNK_ROWS)
+                blob = f.read(take * row_bytes)
+                if len(blob) != take * row_bytes:
+                    raise ValueError(f"Truncated codes stream in {codes_path}")
+                yield as_codes(np.frombuffer(blob, dtype=np.uint8).reshape(take, row_bytes))
+                remaining -= take
+    elif compression == "none":
+        raw = np.memmap(codes_path, dtype=np.uint8, mode="r", shape=(rows, row_bytes))
+        for start in range(0, rows, _DECODE_CHUNK_ROWS):
+            yield as_codes(np.asarray(raw[start : min(start + _DECODE_CHUNK_ROWS, rows)]))
+    else:
+        raise ValueError(f"Unsupported codes compression: {compression!r}")
 
 
 def _iter_decoded_rows(
     codes_path: Path,
     schema: dict[str, Any],
 ) -> Any:
-    rows, cols = schema["shape"]
-    matrix = np.memmap(codes_path, dtype=np.dtype(schema["dtype"]), mode="r", shape=(rows, cols))
     columns = schema["columns"]
     values = [col["values"] for col in columns]
     names = [col["id"] for col in columns]
-    for row in matrix:
-        yield {name: value_map[int(code)] for name, value_map, code in zip(names, values, row)}
+    for chunk in _iter_code_chunks(codes_path, schema):
+        for row in chunk:
+            yield {name: value_map[int(code)] for name, value_map, code in zip(names, values, row)}
 
 
 def decode_codes_to_file(

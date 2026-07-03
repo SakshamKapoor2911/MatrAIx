@@ -48,6 +48,12 @@ def main() -> None:
         action="store_true",
         help="Emit source-proxy and audit-only nodes marked emit:false.",
     )
+    parser.add_argument(
+        "--compress",
+        choices=["gzip"],
+        default=None,
+        help="Compress codes output (one gzip member per batch). Trades random access for ~1.6x less space.",
+    )
     args = parser.parse_args()
 
     meta = sample_to_file_parallel(
@@ -59,6 +65,7 @@ def main() -> None:
         emit_only=not args.include_hidden,
         workers=args.workers,
         batch_size=args.batch_size,
+        compress=args.compress,
     )
     print(json.dumps(meta, indent=2))
 

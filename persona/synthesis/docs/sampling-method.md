@@ -28,7 +28,9 @@ This keeps dense multi-parent nodes from becoming too sharp. Full CPTs can mark
 `replace_pairwise_parent_edges=true`; in that case pairwise edges from those
 parents to the same target are skipped to avoid double counting.
 
-Conditional masks are applied after the proposal distribution is normalized:
+Conditional masks multiply the proposal distribution before the draw (the
+implementation samples by inverse CDF on the unnormalized masked proposal,
+which selects values with exactly the normalized probabilities):
 
 - `bad_values` with `bad_value_multiplier=0` are hard guards.
 - `downweight_values` are soft penalties.
