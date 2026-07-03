@@ -94,7 +94,7 @@ def test_simulator_data_root_from_container_path() -> None:
 def test_section_info_candidates_include_versioned_and_mobile_mirror() -> None:
     data_root = Path("/tmp/sim/data")
     paths = section_info_candidates(data_root)
-    joined = "\n".join(str(path) for path in paths)
+    joined = "\n".join(path.as_posix() for path in paths)
     assert "VersionedSectionInfo.plist" in joined
     assert "SectionInfo.plist" in joined
     assert "private/var/mobile" in joined
