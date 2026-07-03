@@ -170,7 +170,7 @@ def _first_nonblank(review: dict[str, Any], keys: tuple[str, ...], default: str 
 
 
 def _review_title(review: dict[str, Any]) -> str:
-    return _first_nonblank(review, ("title", "review_title"), "(untitled)")
+    return _first_nonblank(review, ("title", "review_title", "product_title"), "(untitled)")
 
 
 def _review_title_evidence(review: dict[str, Any]) -> str:
@@ -506,7 +506,7 @@ def build_task(
     )
     if len(selected_reviews) < 2:
         raise ValueError(
-            f"user {user_id}: fewer than 2 text reviews after filtering "
+            f"user {user_id}: fewer than 2 usable reviews after filtering "
             f"({len(selected_reviews)} selected text reviews of {len(raw_reviews)} "
             "construction rows)"
         )
@@ -684,7 +684,7 @@ def build_amazon_collab_package(
     range_end: int,
     cv_folds: int = 3,
     min_support_folds: int = 2,
-    max_reviews_per_user: int = 200,
+    max_reviews_per_user: int = 90,
     max_review_text_chars: int = 900,
     max_profile_text_chars: int = 70000,
     all_dimensions: bool = False,
@@ -792,7 +792,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--dataset-sha256", required=True)
     parser.add_argument("--cv-folds", type=int, default=3)
     parser.add_argument("--min-support-folds", type=int, default=2)
-    parser.add_argument("--max-reviews-per-user", type=int, default=200)
+    parser.add_argument("--max-reviews-per-user", type=int, default=90)
     parser.add_argument("--max-review-text-chars", type=int, default=900)
     parser.add_argument("--max-profile-text-chars", type=int, default=70000)
     parser.add_argument("--all-dimensions", action="store_true")

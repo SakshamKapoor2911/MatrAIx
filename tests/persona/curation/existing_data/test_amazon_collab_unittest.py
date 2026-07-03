@@ -135,10 +135,13 @@ class AmazonCollabTests(unittest.TestCase):
                 dataset_id="amazon-test-v1",
                 product_metadata_sidecar=product_sidecar,
             )
-            with sqlite3.connect(db) as conn:
+            conn = sqlite3.connect(db)
+            try:
                 payload = json.loads(
                     conn.execute("select payload_json from profiles where global_idx = 0").fetchone()[0]
                 )
+            finally:
+                conn.close()
             self.assertEqual(payload["reviews"][0]["review_id"], "r1")
             self.assertEqual(
                 payload["reviews"][0]["product_metadata"]["title"],

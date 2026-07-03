@@ -5,6 +5,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+import pytest
+
 from persona.curation.existing_data.scripts.make_collab_package import (
     build_collab_package,
 )
@@ -117,6 +119,9 @@ def test_status_reports_manifest_and_progress(tmp_path: Path):
 
 
 def test_run_assignment_prefers_existing_python_over_uv(tmp_path: Path):
+    if os.name == "nt":
+        pytest.skip("run_assignment.sh is a POSIX shell launcher")
+
     package = make_package(tmp_path)
     fake_bin = tmp_path / "fake-bin"
     fake_bin.mkdir()

@@ -154,7 +154,7 @@ def iter_reference_manifests() -> Iterable[dict[str, Any]]:
         manifest = load_json(path)
         source_type = manifest.get("source", {}).get("type")
         if source_type in REFERENCE_SOURCE_TYPES:
-            manifest["_manifest_path"] = str(path.relative_to(BASE_DIR))
+            manifest["_manifest_path"] = path.relative_to(BASE_DIR).as_posix()
             yield manifest
 
 

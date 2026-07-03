@@ -125,11 +125,25 @@ def parse_categories(value: str) -> list[str]:
 
 
 def list_relevant_shards(
-    repo_files: list[str],
-    artifact_prefix: str,
-    buckets: set[str],
-    categories: set[str],
+    repo_files: list[str] | None = None,
+    artifact_prefix: str = "",
+    buckets: set[str] | None = None,
+    categories: set[str] | None = None,
+    *,
+    repo_id: str | None = None,
+    token: str | bool | None = None,
 ) -> list[str]:
+    if repo_files is None:
+        if repo_id is None:
+            raise TypeError("repo_files or repo_id is required")
+        from huggingface_hub import list_repo_files
+
+        repo_files = list_repo_files(repo_id, repo_type="dataset", token=token)
+    if buckets is None:
+        raise TypeError("buckets is required")
+    if categories is None:
+        raise TypeError("categories is required")
+
     prefix = artifact_prefix.rstrip("/") + "/"
     wanted = []
     for filename in repo_files:

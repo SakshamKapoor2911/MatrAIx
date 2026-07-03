@@ -22,15 +22,15 @@ REPO_ROOT = Path(__file__).resolve().parents[4]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from persona.curation.existing_data.scripts.export_hf_amazon_user_histories import (
+from persona.curation.existing_data.scripts.export_hf_amazon_user_histories import (  # noqa: E402
     compact_product_info,
     list_relevant_metadata_shards,
     read_shard_rows,
 )
-from persona.curation.existing_data.scripts.make_amazon_collab_package import (
+from persona.curation.existing_data.scripts.make_amazon_collab_package import (  # noqa: E402
     _select_high_signal_text_reviews,
 )
-from persona.curation.existing_data.scripts.prepare_hf_amazon_user_histories import (
+from persona.curation.existing_data.scripts.prepare_hf_amazon_user_histories import (  # noqa: E402
     category_review_stats,
     review_text,
 )

@@ -130,7 +130,7 @@ def _manifest_file_entry(path: Path, *, root: Path, mode: str) -> dict[str, Any]
         "mode": mode,
         "sha256": sha256_file(path),
         "bytes": path.stat().st_size,
-        "path": str(path.relative_to(root)),
+        "path": path.relative_to(root).as_posix(),
     }
 
 
@@ -152,12 +152,12 @@ def write_package_manifest(out_dir: Path, assignment: dict[str, Any]) -> None:
     files: dict[str, Any] = {}
     for path in immutable:
         if path.exists():
-            rel = str(path.relative_to(out_dir))
+            rel = path.relative_to(out_dir).as_posix()
             files[rel] = _manifest_file_entry(path, root=out_dir, mode="immutable")
 
     solver = out_dir / "collab_kit" / "solver.py"
     if solver.exists():
-        rel = str(solver.relative_to(out_dir))
+        rel = solver.relative_to(out_dir).as_posix()
         files[rel] = _manifest_file_entry(solver, root=out_dir, mode="editable")
 
     manifest = {

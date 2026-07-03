@@ -63,7 +63,7 @@ def build_package(
     categories: list[str] | None = None,
     cv_folds: int = 3,
     min_support_folds: int = 2,
-    max_reviews_per_user: int = 200,
+    max_reviews_per_user: int = 90,
     max_review_text_chars: int = 900,
     max_profile_text_chars: int = 70000,
     all_dimensions: bool = False,
@@ -137,7 +137,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--user-histories", type=Path, help="Amazon user histories JSONL.")
     parser.add_argument("--cv-folds", type=int, default=3)
     parser.add_argument("--min-support-folds", type=int, default=2)
-    parser.add_argument("--max-reviews-per-user", type=int, default=200)
+    parser.add_argument("--max-reviews-per-user", type=int, default=90)
     parser.add_argument("--max-review-text-chars", type=int, default=900)
     parser.add_argument("--max-profile-text-chars", type=int, default=70000)
     parser.add_argument("--all-dimensions", action="store_true")
