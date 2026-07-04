@@ -159,9 +159,9 @@ def test_prompt_bundle_separates_persona_and_task():
     assert "Prefer plainspoken end-user language" in bundle["harborPrompt"]
     assert "## Task instruction" in bundle["harborPrompt"]
     assert "## Task context" in bundle["harborPrompt"]
-    assert "## Output schema" in report_prompt
     assert "## Task instruction" in report_prompt
     assert "## Task context" in report_prompt
+    assert "## Output schema" not in report_prompt
 
 
 def test_public_runner_delegates_to_user_sim(monkeypatch):

@@ -13,8 +13,9 @@ application/tasks/example-survey_product-feedback/
 ├── input/              # Task-owned content (survey, chat, web docs)
 │   ├── context.md
 │   ├── questionnaire.yaml    # survey
-│   ├── output_schema.md
-│   └── chatbot.yaml          # chat
+│   ├── output_schema.md      # survey only
+│   ├── self_report_schema.yaml  # chatbot / web / os-app (under input/)
+│   └── chatbot.yaml          # chat (under input/)
 ├── tests/              # Verifier — runs after the agent; scores output / trajectory
 │   ├── test.sh
 │   └── test_*.py       # optional helpers
@@ -76,8 +77,10 @@ Task-owned materials the agent reads:
 
 - **Survey:** `instruction.md` (optional if task-root copy exists), `context.md`,
   `questionnaire.yaml`, `output_schema.md`
-- **Chat:** `context.md`, `protocol.md`, `output_schema.md`, `chatbot.yaml`
-- **Web:** optional `self_report_schema.yaml`, extra context docs
+- **Chat:** `context.md`, `protocol.md`, `chatbot.yaml`, `self_report_schema.yaml`
+  (all under `input/`)
+- **Web / OS-app:** `self_report_schema.yaml` under `input/`; task-result JSON
+  schema inline in `instruction.md` (no `input/output_schema.md`)
 
 These files are copied or mounted into `/app/input/` by the shared runtime.
 

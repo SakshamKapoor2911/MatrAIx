@@ -24,46 +24,68 @@ Each application task defines these parts:
 
 ## Authoring Bundle
 
-All application tasks share the same contributor layout:
+Each runnable task lives under `application/tasks/<task-name>/` and always
+includes `instruction.md`, `task.toml`, `tests/`, and `reporting.json`.
+Supplementary files differ by application type:
 
-`application/tasks/<task-name>/`
+### Survey
 
-- `instruction.md` — the single task instruction
-- `input/` — supplementary materials that vary by application type
+```text
+instruction.md                 # short scenario; points to output_schema
+input/
+  context.md                   # product concept (optional)
+  questionnaire.yaml           # structured questions
+  output_schema.md             # survey_result.json contract
+```
 
-Shared supplementary files across interactive tasks:
+### Chatbot
 
-- `input/context.md` — optional scenario or application background
-- `input/output_schema.md` — contributor-owned artifact contract
-- `input/self_report_schema.yaml` — optional post-run persona self-report
+```text
+instruction.md                 # conversation goal
+input/
+  context.md                   # application background (optional)
+  protocol.md                  # chat API / MCP contract (optional)
+  chatbot.yaml                 # runtime connection metadata
+  self_report_schema.yaml      # user_feedback.json
+```
 
-Type-specific supplements:
+Platform-managed harness artifacts (`transcript.json`,
+`application_result.json`) are documented in
+[`chatbot/eval_artifacts.md`](chatbot/eval_artifacts.md), not in per-task files.
 
-| File | chatbot | web | survey |
+### Web / OS-app
+
+```text
+instruction.md                 # scenario + inline task-result JSON schema
+input/
+  self_report_schema.yaml      # user_feedback.json (optional)
+```
+
+Web and OS/app tasks do **not** use `input/output_schema.md`. The submission
+shape (for example `quote_choice.json` or `decision.json`) is written directly
+in `instruction.md`, and the verifier enforces it. Persona self-report uses the
+same `input/self_report_schema.yaml` convention as chatbot tasks.
+
+### Quick reference
+
+| Concern | survey | chatbot | web / os-app |
 |---|---|---|---|
-| `input/context.md` | application background | site notes | product concept |
-| `input/output_schema.md` | `user_feedback.json`, etc. | task result JSON | `survey_result.json` |
-| `input/protocol.md` | chat API / MCP contract | — | — |
-| `input/chatbot.yaml` | yes | — | — |
-| `input/questionnaire.yaml` | — | — | yes |
+| Scenario | `instruction.md` | `instruction.md` | `instruction.md` |
+| Background context | `input/context.md` | `input/context.md` | usually in `instruction.md` |
+| Task result JSON | `input/output_schema.md` | platform-managed | inline in `instruction.md` |
+| Persona self-report | — | `input/self_report_schema.yaml` | `input/self_report_schema.yaml` |
+| Structured questions | `input/questionnaire.yaml` | — | — |
+| Transport / runtime | — | `input/protocol.md`, `input/chatbot.yaml` | shared environment |
 
-Keep transport details, API tables, and output schemas out of `instruction.md`
-when they belong in `input/protocol.md` or `input/output_schema.md`.
-
-When a task needs machine-readable runtime behavior, keep the meaning task-owned:
-
-- chatbot tasks can declare persona-visible structured fields in
-  `input/chatbot.yaml`
-- interactive tasks can declare post-use persona questions in
-  `input/self_report_schema.yaml`
-- `input/output_schema.md` remains human-readable documentation for contributors
-  and reviewers rather than a parser target
+Keep transport details and API tables out of `instruction.md` when they belong in
+`input/protocol.md` (chatbot). Survey tasks should keep the response contract in
+`input/output_schema.md` and reference it from a short `instruction.md`.
 
 ## Interface Folders
 
 | Interface | Folder | Canonical task |
 |---|---|---|
-| Survey | `survey/` | `application/tasks/persona-survey` |
+| Survey | `survey/` | `application/tasks/example-survey_product-feedback` |
 | Chatbot | `chatbot/` | `application/tasks/recommender-agent_chat_api` |
 | Browser / computer-use | `web/` | `application/tasks/example-web-playwright_quote-choice` |
 | OS / app | `os-app/` | `application/tasks/example-computer-use-ios_notification-preferences` |

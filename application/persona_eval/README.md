@@ -176,7 +176,7 @@ persona/datasets/bench-dev-sample/
 Related application tasks live outside this app directory:
 
 ```text
-application/tasks/persona-survey/
+application/tasks/example-survey_product-feedback/
 application/tasks/recommender-agent_chat_api/
 application/tasks/example-web-playwright_quote-choice/
 ```

@@ -179,7 +179,7 @@ For **macOS / iOS** screenshot CUA (system settings, not live web), use
 
 1. Choose a mode from the table above.
 2. Copy the closest `example-web-*` task; reuse the decision JSON contract or
-   document a new schema in the task README and `output_schema.md`.
+   document a new schema inline in `instruction.md` and the task README.
 3. Set `network_mode = "public"` where the agent must reach the internet.
 4. Point `[environment].definition` at the matching `shared-web-*` runtime (or
    create a task-specific environment only when the stack is genuinely new).

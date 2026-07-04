@@ -859,10 +859,6 @@ class HarborJobService:
         resolved_chat_task_path: str | None = None
         if trial_profile == "json_survey":
             normalized_task_path = task_path.strip().replace("\\", "/")
-            if normalized_task_path == "application/tasks/persona-survey":
-                raise ValueError(
-                    "survey host runs require a concrete survey task path, not application/tasks/persona-survey"
-                )
             resolved_survey_task_path = normalized_task_path
         elif trial_profile == "user_sim_chat":
             resolved_chat_task_path = task_path.strip().replace("\\", "/")

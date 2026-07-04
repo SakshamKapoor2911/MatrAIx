@@ -53,6 +53,21 @@ with:
 - `questionnaire.yaml`
 - `output_schema.md`
 
+For chatbot tasks, keep contributor-facing docs under `input/`:
+
+- `context.md`
+- `protocol.md` (when the API/MCP contract should stay separate)
+- `chatbot.yaml`
+- `self_report_schema.yaml` (persona self-report for `user_feedback.json`)
+
+Platform-managed chat artifacts (`transcript.json`, `application_result.json`) are
+documented in [`../task-spec/chatbot/eval_artifacts.md`](../task-spec/chatbot/eval_artifacts.md),
+not in per-task `output_schema.md`.
+
+For web and OS/app tasks, put the task-result JSON schema inline in
+`instruction.md` and optional persona self-report in
+`input/self_report_schema.yaml`. These tasks do not use `input/output_schema.md`.
+
 Do not create `application/tasks/<your-task-name>/environment/` for surveys.
 Harbor treats a task-local `environment/` as the full runtime environment, which
 would shadow the shared `application/shared-survey-form` runtime instead of

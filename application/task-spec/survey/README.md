@@ -95,10 +95,6 @@ Notes:
 
 ## Canonical Task
 
-`application/tasks/persona-survey`
-
-The product-feedback survey remains as a lightweight reference task:
-
 `application/tasks/example-survey_product-feedback`
 
 The canonical shared runtime lives under:

@@ -22,7 +22,7 @@ def test_application_task_spec_manifest_groups_core_protocols() -> None:
         "os-app",
     }
     assert manifest["applicationTypes"]["survey"]["canonicalTask"] == (
-        "application/tasks/persona-survey"
+        "application/tasks/example-survey_product-feedback"
     )
     assert manifest["applicationTypes"]["chatbot"]["canonicalTask"] == (
         "application/tasks/recommender-agent_chat_api"
@@ -51,13 +51,15 @@ def test_application_tasks_do_not_embed_runtime_environments() -> None:
 
 
 def test_canonical_survey_task_shape() -> None:
-    task = TASKS_ROOT / "persona-survey"
+    task = TASKS_ROOT / "example-survey_product-feedback"
     raw = tomllib.loads((task / "task.toml").read_text(encoding="utf-8"))
 
-    assert raw["task"]["name"] == "personabench/application-persona-survey"
+    assert raw["task"]["name"] == "personabench/application-survey-product-feedback"
     assert raw["metadata"]["type"] == "survey"
-    assert raw["metadata"]["domain"] == "persona-research"
+    assert raw["metadata"]["domain"] == "software"
     assert "/app/output" in raw["artifacts"]
+    assert raw["environment"]["definition"] == "application/shared-survey-form"
+    assert (task / "input" / "questionnaire.yaml").is_file()
     assert "test_state.py" in (
         task / "tests" / "test.sh"
     ).read_text(encoding="utf-8")
@@ -87,6 +89,8 @@ def test_canonical_chatbot_task_shape() -> None:
     assert raw["environment"]["definition"] == "application/shared-chat-api-recommender"
     assert "/app/output" in raw["artifacts"]
     assert (env / "recommender-api" / "server.py").is_file()
+    assert (task / "input" / "self_report_schema.yaml").is_file()
+    assert not (task / "input" / "output_schema.md").exists()
 
 
 def test_canonical_web_task_shape() -> None:
@@ -101,6 +105,8 @@ def test_canonical_web_task_shape() -> None:
     assert raw["metadata"]["domain"] == "arts-culture"
     assert raw["environment"]["definition"] == "application/shared-web-playwright"
     assert "/app/output" in raw["artifacts"]
+    assert (task / "input" / "self_report_schema.yaml").is_file()
+    assert "quote_choice.json" in (task / "instruction.md").read_text(encoding="utf-8")
     dockerfile = (env / "Dockerfile").read_text(encoding="utf-8")
     assert "playwright" in dockerfile.lower()
     assert "python" in dockerfile.lower()

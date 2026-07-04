@@ -28,10 +28,6 @@ def _write_task(repo, rel_path: str, *, metadata_type: str, schema_text: str | N
         "# Instruction\nComplete the task realistically.",
         encoding="utf-8",
     )
-    (input_dir / "output_schema.md").write_text(
-        "Write the expected task outputs into JSON or text files.",
-        encoding="utf-8",
-    )
     if schema_text is not None:
         (input_dir / "self_report_schema.yaml").write_text(schema_text, encoding="utf-8")
     return task_dir

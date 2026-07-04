@@ -83,11 +83,11 @@ def test_get_task_detail_reads_split_survey_content_bundle(tmp_path):
     assert detail["questionnaire"]["questions"][0]["optionDetails"][0]["label"] == "Alpha option"
 
 
-def test_get_task_detail_reads_chat_output_schema_bundle(tmp_path):
+def test_get_task_detail_reads_chat_self_report_schema(tmp_path):
     task_dir = tmp_path / "application" / "tasks" / "example-chat-demo"
-    env_dir = tmp_path / "environment" / "task-environments" / "application" / "example-chat-demo" / "content"
+    input_dir = task_dir / "input"
     task_dir.mkdir(parents=True)
-    env_dir.mkdir(parents=True)
+    input_dir.mkdir(parents=True)
     (task_dir / "task.toml").write_text(
         "\n".join(
             [
@@ -95,8 +95,6 @@ def test_get_task_detail_reads_chat_output_schema_bundle(tmp_path):
                 'type = "chat"',
                 "[task]",
                 'name = "demo/chat"',
-                "[environment]",
-                'definition = "application/example-chat-demo"',
                 "",
             ]
         ),
@@ -106,9 +104,20 @@ def test_get_task_detail_reads_chat_output_schema_bundle(tmp_path):
         "# Demo Chat Task\n\nHave a natural support conversation.\n",
         encoding="utf-8",
     )
-    (env_dir / "context.md").write_text("Order #4521 is late.", encoding="utf-8")
-    (env_dir / "output_schema.md").write_text(
-        'Write valid JSON to `/app/output/transcript.json`.',
+    (input_dir / "context.md").write_text("Order #4521 is late.", encoding="utf-8")
+    (input_dir / "self_report_schema.yaml").write_text(
+        "\n".join(
+            [
+                "artifactName: user_feedback.json",
+                "fields:",
+                "  - key: satisfaction",
+                "    prompt: How satisfied were you?",
+                "    kind: integer",
+                "    minimum: 1",
+                "    maximum: 5",
+                "",
+            ]
+        ),
         encoding="utf-8",
     )
 
@@ -117,7 +126,9 @@ def test_get_task_detail_reads_chat_output_schema_bundle(tmp_path):
     assert detail["metaType"] == "chatbot"
     assert detail["instructionMarkdown"] == "# Demo Chat Task\n\nHave a natural support conversation."
     assert detail["contextMarkdown"] == "Order #4521 is late."
-    assert "transcript.json" in detail["outputSchemaMarkdown"]
+    assert "user_feedback.json" in detail["outputSchemaMarkdown"]
+    assert "satisfaction" in detail["outputSchemaMarkdown"]
+    assert "Persona self-report" in detail["profileMarkdown"]
     assert detail["questionnaire"] is None
 
 
@@ -224,4 +235,5 @@ def test_get_task_detail_ignores_shared_environment_content_without_task_input(t
 
     assert detail["instructionMarkdown"] == "# Shared Chat Task\n\nTask-root instruction only."
     assert detail["contextMarkdown"] == ""
-    assert detail["outputSchemaMarkdown"] == ""
+    assert "user_feedback.json" in detail["outputSchemaMarkdown"]
+    assert "Persona self-report" in detail["profileMarkdown"]

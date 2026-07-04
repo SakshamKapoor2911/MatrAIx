@@ -170,11 +170,11 @@ def test_build_application_job_config_auto_survey_uses_host_environment(tmp_path
     meta = job.pop("_job_meta")
     assert meta["trial_profile"] == "json_survey"
     assert job["environment"] == {"type": "host", "delete": True}
-    assert job["tasks"][0]["path"] == "application/tasks/persona-survey"
+    assert job["tasks"][0]["path"] == "application/tasks/example-survey_product-feedback"
     assert resolve_harbor_task_path(
         "application/tasks/example-survey_product-feedback",
         trial_profile="json_survey",
-    ) == "application/tasks/persona-survey"
+    ) == "application/tasks/example-survey_product-feedback"
 
 
 def test_build_application_job_config_rejects_unknown_mode(tmp_path: Path) -> None:

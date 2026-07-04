@@ -35,8 +35,8 @@ Canonical contributor-facing docs:
 - `application/tasks/recommender-agent_chat_api/instruction.md`
 - `application/tasks/recommender-agent_chat_api/input/context.md`
 - `application/tasks/recommender-agent_chat_api/input/protocol.md`
-- `application/tasks/recommender-agent_chat_api/input/output_schema.md`
 - `application/tasks/recommender-agent_chat_api/input/chatbot.yaml`
+- `application/tasks/recommender-agent_chat_api/input/self_report_schema.yaml`
 
 ## Smoke run
 

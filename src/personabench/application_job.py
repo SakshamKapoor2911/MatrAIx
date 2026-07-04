@@ -17,14 +17,12 @@ from personabench.persona_job import (
 DEFAULT_APPLICATION_JOBS_DIR = "configs/jobs/application-task-job-recipe"
 _EXECUTION_MODES = frozenset({"auto", "force_docker", "smoke"})
 _NATIVE_TRIAL_PROFILES = frozenset({"json_survey", "user_sim_chat"})
-_HARBOR_TASK_BY_PROFILE: dict[str, str] = {
-    "json_survey": "application/tasks/persona-survey",
-}
 
 
 def resolve_harbor_task_path(task_path: str, *, trial_profile: str) -> str:
-    """Map cockpit tasks to Harbor-native task paths for lightweight profiles."""
-    return _HARBOR_TASK_BY_PROFILE.get(trial_profile, task_path)
+    """Return the Harbor task path for a job (same as the configured task path)."""
+    _ = trial_profile
+    return task_path
 
 
 def collect_run_env_exports(

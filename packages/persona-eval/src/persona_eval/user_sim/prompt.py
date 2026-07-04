@@ -82,7 +82,6 @@ def assemble_report_system_prompt(
         "## Persona\n{}".format(render_persona_block(persona, persona_yaml_path=persona_yaml_path)),
         _section("Task instruction", task_bundle.instruction_markdown),
         _section("Task context", task_bundle.context_markdown),
-        _section("Output schema", task_bundle.output_schema_markdown),
     ]
     return "\n\n".join(block for block in blocks if block.strip())
 

@@ -185,13 +185,18 @@ def test_map_trial_debrief_chatbot_enriches_prompts_from_events(tmp_path: Path) 
 
 def test_map_trial_debrief_survey_from_events_without_output_dir(tmp_path: Path) -> None:
     repo = tmp_path
-    task_dir = repo / "application" / "tasks" / "persona-survey"
+    task_dir = repo / "application" / "tasks" / "example-survey_product-feedback"
     task_dir.mkdir(parents=True)
     (task_dir / "task.toml").write_text('[metadata]\ntype = "survey"\n', encoding="utf-8")
+    (task_dir / "input").mkdir()
+    (task_dir / "input" / "questionnaire.yaml").write_text(
+        "schemaVersion: '1.0'\nid: product_feedback_v1\ntitle: Survey\nquestions: []\n",
+        encoding="utf-8",
+    )
     trial_dir = repo / "jobs" / "job-survey-events" / "trial-a"
     trial_dir.mkdir(parents=True)
     (trial_dir / "config.json").write_text(
-        json.dumps({"task": {"path": "application/tasks/persona-survey"}}),
+        json.dumps({"task": {"path": "application/tasks/example-survey_product-feedback"}}),
         encoding="utf-8",
     )
     (trial_dir / "result.json").write_text(

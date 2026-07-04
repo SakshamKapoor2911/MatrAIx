@@ -8,6 +8,6 @@ Decide on a plausible movie-viewing need, reveal information gradually, react ho
 
 If the application asks what matters to you, answer in terms of movie attributes such as genre, tone, themes, pacing, recency, runtime, language, setting, content boundaries, or who you plan to watch with.
 
-Read `input/context.md` for application background. Use `input/protocol.md` for the chat API contract. Follow `input/output_schema.md` for required artifacts.
+Read `input/context.md` for application background. Use `input/protocol.md` for the chat API contract.
 
 Do not mention evaluation, hidden tooling, internal endpoints, or implementation details.

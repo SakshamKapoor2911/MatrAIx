@@ -170,48 +170,9 @@ def test_launch_with_explicit_persona_ids(tmp_path, monkeypatch):
     assert "# Mode: auto" in text
     assert "# Trial profile: json_survey" in text
     assert "type: host" in text
-    assert "application/tasks/persona-survey" in text
+    assert "application/tasks/example-survey_product-feedback" in text
     assert service._executor.calls
     assert service._executor.calls[0][0].__name__ == "_run_local_distributed"
-    service.shutdown()
-
-
-def test_launch_rejects_generic_persona_survey_task_path(tmp_path, monkeypatch):
-    repo = tmp_path
-    jobs_dir = repo / "jobs"
-    jobs_dir.mkdir()
-    pool = repo / "persona" / "datasets" / "bench-dev-sample"
-    pool.mkdir(parents=True)
-    (pool / "persona_0042.yaml").write_text(
-        "persona_id: '0042'\nversion: '1.0'\nsource: Nemotron\ndimensions: {}\n",
-        encoding="utf-8",
-    )
-
-    def _fake_run(command, *, cwd, env):
-        return 0
-
-    monkeypatch.setattr(
-        "environment.integrations.persona_eval.harbor.persona_eval._repo_root",
-        lambda: repo,
-    )
-    service = HarborJobService(
-        repo_root=repo,
-        jobs_dir=jobs_dir,
-        generated_configs_dir=repo / "configs" / "jobs" / "application-task-job-recipe",
-        command_runner=_fake_run,
-        harbor_command=("echo", "harbor"),
-    )
-
-    import pytest
-
-    with pytest.raises(ValueError, match="concrete survey task path"):
-        service.launch(
-            task_path="application/tasks/persona-survey",
-            persona_ids=["0042"],
-            persona_model="anthropic/claude-haiku-4-5",
-            execution_mode="auto",
-            job_name="generic-persona-survey-job",
-        )
     service.shutdown()
 
 

@@ -97,8 +97,12 @@ def write_survey_task(questionnaire_id: str, *, repo: Path | None = None) -> Pat
         )
     tests_dir = task_dir / "tests"
     tests_dir.mkdir(exist_ok=True)
-    persona_test_state = root / "application" / "tasks" / "persona-survey" / "tests" / "test_state.py"
-    persona_verifier_env = root / "application" / "tasks" / "persona-survey" / "tests" / "verifier_env.sh"
+    persona_test_state = (
+        root / "application" / "tasks" / "example-survey_product-feedback" / "tests" / "test_state.py"
+    )
+    persona_verifier_env = (
+        root / "application" / "tasks" / "example-survey_product-feedback" / "tests" / "verifier_env.sh"
+    )
     (tests_dir / "test_state.py").write_text(
         persona_test_state.read_text(encoding="utf-8"),
         encoding="utf-8",

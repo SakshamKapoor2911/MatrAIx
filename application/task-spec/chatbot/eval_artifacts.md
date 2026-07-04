@@ -12,9 +12,8 @@ responsibility beyond implementing the verifier. The harness and verifier
 produce these files for traceability, UI debrief, and downstream scoring.
 
 Task `instruction.md` files describe **how to interact with the chatbot** only.
-They should not ask the agent to save files under `/app/output/` or to read
-transcript shape from `input/output_schema.md` — those artifacts are
-platform-managed (below).
+They should not ask the agent to save files under `/app/output/` — harness and
+verifier artifacts are platform-managed (below).
 
 ## Where `/app/output/` lives
 
@@ -96,13 +95,12 @@ Slim **eval-run summary** written by the PersonaEval harness after the chat loop
 
 Do **not** add SUT-specific fields here. Objective task metrics belong in
 `verifier/structured_output.json` (below); subjective feedback belongs in
-`user_feedback.json` (see task `input/output_schema.md`).
+`user_feedback.json` (see task `input/self_report_schema.yaml`).
 
 ### `user_feedback.json`
 
 Written by the persona self-report step when the task defines
-`input/self_report_schema.yaml`. Document field semantics in the task's
-`input/output_schema.md` (task-owned artifact).
+`input/self_report_schema.yaml`. Field semantics live in that YAML file.
 
 Common fields across chatbot tasks:
 
@@ -144,7 +142,6 @@ Typical contents:
 - `contexts`: normalized metrics such as `task_outcome`, `conversation_summary`,
   and `user_feedback`
 
-Do **not** document this file in per-task `input/output_schema.md`. Contributors
-implement the verifier and emit contexts that match the shared contract; batch
-reporting and PersonaEval UI consume the normalized shape from the trial
-`verifier/` directory.
+Do **not** duplicate this shape in per-task docs. Contributors implement the
+verifier and emit contexts that match the shared contract; batch reporting and
+PersonaEval UI consume the normalized shape from the trial `verifier/` directory.

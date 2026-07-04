@@ -10,11 +10,13 @@ import yaml
 from environment.integrations.persona_eval.task_content_bundle import (
     content_dir_for_task_path,
     input_dir_for_task_path,
+    task_dir_from_path,
 )
 from persona_eval.user_sim.self_report_contract import (
     DEFAULT_CHATBOT_SELF_REPORT_SCHEMA,
     SelfReportField,
     SelfReportSchema,
+    schema_prompt_block,
 )
 
 
@@ -92,11 +94,13 @@ def load_self_report_schema_for_task_path(
     repo_root: Path,
     fallback_to_default: bool = True,
 ) -> SelfReportSchema | None:
+    task_dir = task_dir_from_path(task_path, repo_root=repo_root)
     input_dir = input_dir_for_task_path(task_path, repo_root=repo_root)
     content_dir = content_dir_for_task_path(task_path, repo_root=repo_root)
     candidates: list[Path] = []
     if input_dir is not None:
         candidates.append(input_dir / "self_report_schema.yaml")
+    candidates.append(task_dir / "self_report_schema.yaml")
     if content_dir is not None:
         candidates.append(content_dir / "self_report_schema.yaml")
     for candidate in candidates:
@@ -106,3 +110,17 @@ def load_self_report_schema_for_task_path(
     if fallback_to_default:
         return DEFAULT_CHATBOT_SELF_REPORT_SCHEMA
     return None
+
+
+def render_self_report_schema_markdown(schema: SelfReportSchema) -> str:
+    """Human-readable self-report contract for cockpit task detail panels."""
+    parts = [
+        "Platform-managed harness artifacts are documented in "
+        "`application/task-spec/chatbot/eval_artifacts.md`.",
+        "",
+        "Persona self-report artifact: `{}`".format(schema.artifact_name),
+    ]
+    if schema.instructions.strip():
+        parts.extend(["", schema.instructions.strip()])
+    parts.extend(["", schema_prompt_block(schema)])
+    return "\n".join(parts).strip()

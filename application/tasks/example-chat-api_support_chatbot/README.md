@@ -24,7 +24,7 @@ application/tasks/example-chat-api_support_chatbot/
 │   ├── chatbot.yaml
 │   ├── instruction.md
 │   ├── context.md
-│   └── output_schema.md
+│   └── self_report_schema.yaml
 └── ...
 
 environment/

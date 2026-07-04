@@ -22,20 +22,18 @@ supplementary materials under `input/`:
 - `instruction.md` — the single task instruction (goal, interaction style, stop
   conditions)
 - `input/context.md` — optional scenario or application background
-- `input/output_schema.md` — task-owned artifacts only (typically
-  `user_feedback.json`)
 - `input/protocol.md` — optional chat API or MCP contract when the agent needs
   transport details separate from the persona task
 - `input/chatbot.yaml` — runtime connection metadata
-- `input/self_report_schema.yaml` — optional machine-readable persona self-report
-  prompts
+- `input/self_report_schema.yaml` — machine-readable persona self-report prompts
+  for `user_feedback.json`
 
 Platform-managed eval artifacts (`transcript.json`, `application_result.json`) are
-documented in [`eval_artifacts.md`](eval_artifacts.md), not in per-task
-`output_schema.md`.
+documented in [`eval_artifacts.md`](eval_artifacts.md). Chatbot tasks do **not**
+use per-task `input/output_schema.md`; subjective feedback is owned by
+`self_report_schema.yaml`.
 
-Keep human-readable artifact docs in `output_schema.md`, not inside the root
-task `instruction.md`. Use machine-readable files for runtime-owned behavior:
+Use machine-readable files for runtime-owned behavior:
 
 - `chatbot.yaml` owns transport metadata plus `personaExposure.fields[]` for
   structured response fields that should be visible to the persona
@@ -47,7 +45,7 @@ interactive tasks. Chatbot tasks reuse that shared channel, then add
 conversation-specific feedback fields when needed.
 
 This keeps prompt assembly, runtime behavior, and contributor docs aligned
-without parsing prose out of `instruction.md` or `output_schema.md`.
+without parsing prose out of `instruction.md`.
 
 Shared chatbot environments should contain only runtime assets such as
 Dockerfiles, sidecars, and helper scripts. Do not put task-specific prose in
