@@ -51,14 +51,14 @@ Shared chatbot environments should contain only runtime assets such as
 Dockerfiles, sidecars, and helper scripts. Do not put task-specific prose in
 `shared-chat-*`.
 
-## Persona-Sensitive Reporting Contract
+## Reporting contract
 
-For tasks where reviewers care about **how different personas experience,
-trust, and resolve conversations differently**, use a shared semantic contract
- on top of the generic `structured_output.json` / `reporting.json` mechanism.
+Chatbot tasks use one shared reporting contract. It covers execution outcome,
+conversation process, and persona self-report — the usual questions product
+studies ask about chat experiences.
 
-The goal is to make chatbot batch reporting answer the same core questions
-across tasks:
+The contract is built on the generic `structured_output.json` /
+`reporting.json` mechanism and should answer:
 
 - was the user's goal actually resolved
 - what happened in the conversation before the outcome
@@ -291,8 +291,8 @@ usually:
 
 See the example templates in this folder:
 
-- `persona_sensitive_structured_output.example.json`
-- `persona_sensitive_reporting.example.json`
+- `chatbot_structured_output.example.json`
+- `chatbot_reporting.example.json`
 
 ## Canonical Task
 

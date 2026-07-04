@@ -176,13 +176,13 @@ feedback context.
 | `effort_rating` | `score` | `numerical` | Perceived effort or friction |
 | `clarity_of_next_step` | `evidence` | `categorical` | Whether the next action felt clear |
 
-## Persona-Aware Layer
+## Persona reporting layer
 
 When the benchmark is not only "can the agent finish the task" but also "did it
-act in a persona-consistent way", add a persona layer on top of the core task
-metrics.
+act in a persona-consistent way" or "did different personas make different
+choices", add the **persona layer** on top of the execution metrics above.
 
-Do not require persona fields for every OS/app task. Use them when:
+Use the persona layer when:
 
 - the persona changes what should be chosen
 - the persona changes which tradeoff is correct
@@ -279,9 +279,10 @@ Recommended persona-specific metrics:
 - `not_triggered`
 - `unknown`
 
-### Persona Reporting Pattern
+### Persona reporting pattern
 
-For persona-aware OS/app tasks, the default `reporting.json` should usually:
+When the persona layer applies, extend `reporting.json` with rules from
+`os_app_persona_reporting.example.json`. It should usually:
 
 - summarize `feedback_reason` by `need_constraint_satisfaction` when shared
   feedback exists
@@ -410,7 +411,14 @@ Avoid publishing three near-identical settings tasks. A better starter set is:
 These three archetypes cover a large share of practical OS/app tasks without
 repeating the same benchmark pattern.
 
-## Example Templates
+## Example templates
+
+**Execution layer**
 
 - `os_app_metric_structured_output.example.json`
 - `os_app_metric_reporting.example.json`
+
+**Persona layer** (merge into the same task files when persona variation matters)
+
+- `os_app_persona_structured_output.example.json`
+- `os_app_persona_reporting.example.json`

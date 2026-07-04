@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "1.0",
+  "artifactType": "personabench.trial_evaluation",
+  "taskType": "desktop",
+  "contexts": [
+    {
+      "key": "persona_alignment.primary",
+      "label": "Persona alignment",
+      "contextType": "persona_alignment",
+      "facets": [
+        {
+          "key": "persona_alignment_status",
+          "label": "Persona alignment status",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "aligned"
+        },
+        {
+          "key": "persona_alignment_score",
+          "label": "Persona alignment score",
+          "role": "score",
+          "kind": "numerical",
+          "value": 1.0
+        },
+        {
+          "key": "persona_preference_axis_primary",
+          "label": "Primary persona axis",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "convenience"
+        },
+        {
+          "key": "persona_signal_source",
+          "label": "Persona signal source",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "multiple"
+        },
+        {
+          "key": "persona_alignment_explanation",
+          "label": "Persona alignment explanation",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "The agent preserved the user's preference for a quick, low-friction workflow by creating the event directly from the provided attachment without extra optional edits."
+        }
+      ]
+    },
+    {
+      "key": "persona_constraint.quick_workflow",
+      "label": "Quick workflow preference",
+      "contextType": "persona_constraint",
+      "facets": [
+        {
+          "key": "persona_constraint_key",
+          "label": "Persona constraint key",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "quick_workflow"
+        },
+        {
+          "key": "persona_constraint_type",
+          "label": "Persona constraint type",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "speed"
+        },
+        {
+          "key": "persona_constraint_priority",
+          "label": "Persona constraint priority",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "soft"
+        },
+        {
+          "key": "persona_constraint_status",
+          "label": "Persona constraint status",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "satisfied"
+        },
+        {
+          "key": "persona_constraint_evidence",
+          "label": "Persona constraint evidence",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "The run stayed within a short workflow and did not open unrelated apps or settings."
+        }
+      ]
+    }
+  ]
+}

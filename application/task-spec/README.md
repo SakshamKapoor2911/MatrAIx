@@ -1,12 +1,23 @@
 # Application Task Spec
 
-This directory defines the shared **application task spec** used by survey,
-chatbot, web/computer-use, and OS/app tasks. Runnable task folders stay in
-`application/tasks/<task-name>/`; this `task-spec/` directory is the
-cross-protocol index, authoring standard, and evaluation contract.
+This directory is the **authoring standard** for PersonaBench application
+tasks. If you are adding or editing a task under `application/tasks/`, start
+here.
 
-> Formerly `application/tasks/interface/`. The runtime **protocol surface** and
-> per-type **contracts** (artifact, evaluation, metrics) live in the sections below.
+**Doc map**
+
+| If you need… | Read |
+|---|---|
+| Which files belong in a task folder | [Authoring bundle](#authoring-bundle) |
+| How batch reporting works | [Reporting and evaluation](#reporting-and-evaluation) |
+| Survey questionnaire + output schema | [`survey/README.md`](survey/README.md) |
+| Chatbot artifacts + conversation metrics | [`chatbot/README.md`](chatbot/README.md), [`chatbot/eval_artifacts.md`](chatbot/eval_artifacts.md) |
+| Web / browser task metrics | [`web/README.md`](web/README.md) |
+| OS / app task metrics | [`os-app/README.md`](os-app/README.md) |
+| Copy-paste job setup | [`../tasks/README.md`](../tasks/README.md), [`../task-guide.md`](../task-guide.md) |
+
+Runnable examples live under `application/tasks/example-*`. Each task type also
+has a **canonical task** listed in [Task type specs](#task-type-specs).
 
 ## Common Contract
 
@@ -81,30 +92,146 @@ same `input/self_report_schema.yaml` convention as chatbot tasks.
 | Structured questions | `input/questionnaire.yaml` | — | — |
 | Transport / runtime | — | `input/protocol.md`, `input/chatbot.yaml` | shared environment |
 
-### Evaluation and reporting pipeline
+## Reporting and evaluation
 
-Keep these three layers separate:
+Batch reporting turns many persona trials into one job-level summary (Cockpit
+**Runs**, job `aggregation.json`). As a task contributor you own the **facts**
+and the **aggregation policy**; the platform owns job execution and UI.
 
-1. **Authoring** — task-owned prompts and schemas (`instruction.md`,
-   `input/output_schema.md`, `input/self_report_schema.yaml`, …)
-2. **Verifier output** — runtime facts extracted into
-   `verifier/structured_output.json` (for example `task_outcome`,
-   `conversation_summary`, `user_feedback`)
-3. **Batch reporting** — aggregation policy in task-root `reporting.json`
-   (`contextRules`, later LLM/judge directives) consumed into job
-   `aggregation.json`
+### End-to-end flow
 
-Removing chatbot `output_schema.md` does **not** change this split. Chatbot
-tasks still define batch reporting in `reporting.json`, while platform harness
-artifacts stay documented in `task-spec/chatbot/eval_artifacts.md`.
+```text
+One trial
+  agent runs task  →  artifacts on disk  →  tests/ verifier
+                                              ↓
+                               verifier/structured_output.json   ← facts for ONE trial
 
-Keep transport details and API tables out of `instruction.md` when they belong in
-`input/protocol.md` (chatbot). Survey tasks should keep the response contract in
-`input/output_schema.md` and reference it from a short `instruction.md`.
+Many trials (one job)
+  all structured_output.json files  +  task reporting.json
+                                              ↓
+                               job aggregation.json              ← batch summary
+```
 
-## Interface Folders
+### Three layers — who owns what
 
-| Interface | Folder | Canonical task |
+| Layer | File | Written by | What it contains |
+|---|---|---|---|
+| **Authoring** | `instruction.md`, `input/*`, `self_report_schema.yaml` | Task contributor | Scenario, schemas, self-report questions |
+| **Verifier output** | `verifier/structured_output.json` | Task verifier (`tests/`) | Normalized **contexts** and **facets** for one trial |
+| **Batch reporting** | `reporting.json` | Task contributor | Rules for summarizing contexts across trials |
+| **Job output** | `aggregation.json` | Platform | Aggregated summaries, judge results, coverage |
+
+Keep these separate:
+
+- The **verifier** reads trial artifacts and writes **facts** (`structured_output.json`).
+- **`reporting.json`** declares how those facts should be **summarized or judged**
+  across trials. Do not hide reporting policy inside verifier code.
+
+### Contributor checklist
+
+For every task:
+
+1. **`tests/`** — validate outputs and emit `structured_output.json` with shared
+   context names where possible (`task_outcome`, `user_feedback`, …).
+2. **`reporting.json`** — at minimum `{ "schemaVersion": "1.0", "contextRules": [] }`;
+   add rules when you want bucketed LLM summaries or judge scans.
+3. **Interactive tasks only** — optional `input/self_report_schema.yaml` for
+   post-run persona questions → `user_feedback.json` → `user_feedback` context.
+
+### `structured_output.json` (verifier)
+
+Each trial's verifier should extract **contexts**: typed slices of evaluation
+(for example `task_outcome`, `conversation_summary`, `user_feedback`). Each
+context holds **facets**: small named fields (`outcome_status`, `feedback_reason`,
+…).
+
+Use the shared context and facet names from the type-specific README when you
+can. That keeps batch reports comparable across tasks of the same family.
+
+### `reporting.json` (batch policy)
+
+`reporting.json` lists **context rules**. Each rule:
+
+- **matches** trials that emitted a given `contextType`
+- **summaryDirectives** — group trials by one facet and summarize another (often
+  with `summaryKind: "llm_bucket_summary"`)
+- **judgeDirectives** (optional) — scan text facets for configured signals
+
+Minimal starter:
+
+```json
+{
+  "schemaVersion": "1.0",
+  "contextRules": []
+}
+```
+
+Example rule (summarize `outcome_reason` grouped by `outcome_status`):
+
+```json
+{
+  "match": { "contextType": "task_outcome" },
+  "summaryDirectives": [
+    {
+      "id": "task_outcome.reason_by_status",
+      "title": "Outcome reason by status",
+      "targetFacetKey": "outcome_reason",
+      "groupByFacetKey": "outcome_status",
+      "groupByMode": "categorical",
+      "summaryKind": "llm_bucket_summary"
+    }
+  ]
+}
+```
+
+Copy from the canonical task for your type, or from the example JSON templates
+in the type folder (see table below).
+
+When PersonaEval runs with `PERSONAEVAL_REPORTING_ENABLE_LLM=1`, `llm_*`
+directives run in the background and results are cached in the job's
+`aggregation.json`. See [`../tasks/README.md`](../tasks/README.md) for UI and
+operational notes.
+
+### Type-specific reporting guides
+
+Reporting templates are split into **layers** you can combine in one task
+`reporting.json`. Most product studies care about both **execution** (did the
+run succeed, what broke) and **persona variation** (did choices or experience
+differ by persona).
+
+| Type | Execution layer | Persona layer | Notes |
+|---|---|---|---|
+| Survey | per-question contexts from verifier | usually N/A | copy canonical task |
+| Chatbot | [`chatbot_reporting.example.json`](chatbot/chatbot_reporting.example.json) | same file | chatbot baseline already covers outcome + conversation + feedback |
+| Web | [`web_metric_reporting.example.json`](web/web_metric_reporting.example.json) | [`web/persona_sensitive_reporting.example.json`](web/persona_sensitive_reporting.example.json) | merge `contextRules[]` when you need both |
+| OS / app | [`os_app_metric_reporting.example.json`](os-app/os_app_metric_reporting.example.json) | [`os_app_persona_reporting.example.json`](os-app/os_app_persona_reporting.example.json) | merge `contextRules[]` when you need both |
+
+Structured-output examples follow the same split where applicable:
+
+- Chatbot: `chatbot/chatbot_structured_output.example.json`
+- Web: `web/web_metric_structured_output.example.json`, `web/persona_sensitive_structured_output.example.json`
+- OS / app: `os-app/os_app_metric_structured_output.example.json`, `os-app/os_app_persona_structured_output.example.json`
+
+Survey tasks usually summarize per-question responses from survey answer
+contexts. Start from
+[`example-survey_product-feedback/reporting.json`](../tasks/example-survey_product-feedback/reporting.json).
+Type READMEs define required facets and recommended patterns for each layer.
+
+### Authoring vs reporting (quick reminder)
+
+| Concern | Where it lives |
+|---|---|
+| What the persona should do | `instruction.md`, `input/*` |
+| What one trial produced | trial artifacts + `structured_output.json` |
+| How to aggregate many trials | `reporting.json` |
+| Platform harness artifacts (chatbot) | [`chatbot/eval_artifacts.md`](chatbot/eval_artifacts.md) |
+
+Do not embed batch reporting policy in verifier code. Keep transport details and
+API tables in `input/protocol.md` (chatbot) rather than in `instruction.md`.
+
+## Task type specs
+
+| Type | Folder | Canonical task |
 |---|---|---|
 | Survey | `survey/` | `application/tasks/example-survey_product-feedback` |
 | Chatbot | `chatbot/` | `application/tasks/recommender-agent_chat_api` |
@@ -146,12 +273,12 @@ If a task starts in a browser but the real benchmark target is a broader
 operating workflow, prefer `os-app/`. If the browser is the product under test,
 prefer `web/`.
 
-## Shared Core For `web` And `os-app`
+## Shared core for `web` and `os-app`
 
-`web/` and `os-app/` should remain separate scenario contracts, but they should
-reuse one shared core so that verifier outputs and reporting stay comparable.
-Across all interactive task families, they should also reuse one shared
-subjective feedback channel whenever the task collects post-run self-report.
+If you author **web** or **OS/app** tasks, read this section when writing
+verifier output and `reporting.json`. It defines the shared context names and
+facet keys that batch reporting expects. For full metric templates and reporting
+patterns, use [`web/README.md`](web/README.md) and [`os-app/README.md`](os-app/README.md).
 
 For a machine-readable companion to this section, see
 `shared_core_metric_contract.example.json`.
@@ -271,10 +398,9 @@ For persona-aware tasks:
 - Use the same shared enums for common fields whenever possible so batch reports
   can compare `web` and `os-app` runs directly.
 
-## Shared Subjective Channel For Interactive Tasks
+## Shared subjective channel (interactive tasks)
 
-When an interactive task asks the persona for post-run subjective feedback, use
-the same shared mechanism across `chatbot`, `web`, and `os-app`:
+When a task collects post-run persona feedback (`chatbot`, `web`, `os-app`):
 
 - write the raw artifact to `user_feedback.json`
 - define task-owned questions in `input/self_report_schema.yaml`

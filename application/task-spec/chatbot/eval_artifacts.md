@@ -118,7 +118,7 @@ Common fields across chatbot tasks:
 The task verifier reads this file and copies normalized facets into
 `verifier/structured_output.json` under a `user_feedback` context (for example
 `clarification_questions_useful`, `feedback_reason`, `trust_level`) per the
-[`README.md`](README.md) persona-sensitive reporting contract.
+[`README.md`](README.md) reporting contract.
 
 ## Verifier artifacts (`verifier/`)
 

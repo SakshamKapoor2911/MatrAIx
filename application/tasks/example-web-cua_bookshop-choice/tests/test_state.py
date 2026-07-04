@@ -25,6 +25,155 @@ EXPLORATION_STYLES = {"quick_pick", "compared_multiple", "deep_research", "hesit
 SATISFACTION_BUCKETS = {"yes", "partially", "no"}
 
 
+def _navigation_path_type(exploration_style: str) -> str:
+    return {
+        "quick_pick": "direct",
+        "compared_multiple": "browse_compare",
+        "deep_research": "browse_compare",
+        "hesitant": "direct",
+    }.get(exploration_style, "direct")
+
+
+def _build_execution_contexts(
+    *,
+    output: Path,
+    subject_id: str,
+    subject_label: str,
+    exploration_style: str,
+) -> list[dict[str, object]]:
+    navigation_path_type = _navigation_path_type(exploration_style)
+    style_text = exploration_style.replace("_", " ")
+    return [
+        {
+            "key": "task_outcome.primary",
+            "label": "Task outcome",
+            "contextType": "task_outcome",
+            "facets": [
+                {
+                    "key": "outcome_status",
+                    "label": "Outcome status",
+                    "role": "primary",
+                    "kind": "categorical",
+                    "value": "passed",
+                },
+                {
+                    "key": "goal_completion_ratio",
+                    "label": "Goal completion ratio",
+                    "role": "score",
+                    "kind": "numerical",
+                    "value": 1.0,
+                },
+                {
+                    "key": "goal_completion_bucket",
+                    "label": "Goal completion bucket",
+                    "role": "primary",
+                    "kind": "categorical",
+                    "value": "complete",
+                },
+                {
+                    "key": "verifier_mode",
+                    "label": "Verifier mode",
+                    "role": "evidence",
+                    "kind": "categorical",
+                    "value": "artifact_exact",
+                },
+                {
+                    "key": "primary_failure_reason",
+                    "label": "Primary failure reason",
+                    "role": "primary",
+                    "kind": "categorical",
+                    "value": "none",
+                },
+                {
+                    "key": "outcome_explanation",
+                    "label": "Outcome explanation",
+                    "role": "explanation",
+                    "kind": "textual",
+                    "value": (
+                        f"The persona completed the web task and saved a valid {output.name} artifact."
+                    ),
+                },
+                {
+                    "key": "completion_evidence",
+                    "label": "Completion evidence",
+                    "role": "evidence",
+                    "kind": "textual",
+                    "value": (
+                        f"Saved {output.name} with decision subject {subject_label.strip()}."
+                    ),
+                },
+            ],
+        },
+        {
+            "key": "web_artifact.primary",
+            "label": "Web artifact",
+            "contextType": "web_artifact",
+            "facets": [
+                {
+                    "key": "artifact_type",
+                    "label": "Artifact type",
+                    "role": "primary",
+                    "kind": "categorical",
+                    "value": "task_submission",
+                },
+                {
+                    "key": "artifact_status",
+                    "label": "Artifact status",
+                    "role": "primary",
+                    "kind": "categorical",
+                    "value": "correct",
+                },
+                {
+                    "key": "artifact_subject_label",
+                    "label": "Artifact subject label",
+                    "role": "evidence",
+                    "kind": "textual",
+                    "value": subject_label.strip(),
+                },
+                {
+                    "key": "artifact_subject_id",
+                    "label": "Artifact subject id",
+                    "role": "evidence",
+                    "kind": "categorical",
+                    "value": subject_id.strip(),
+                },
+                {
+                    "key": "artifact_evidence",
+                    "label": "Artifact evidence",
+                    "role": "explanation",
+                    "kind": "textual",
+                    "value": (
+                        f"The submission artifact {output.name} matches the persona decision."
+                    ),
+                },
+            ],
+        },
+        {
+            "key": "web_interaction.primary",
+            "label": "Web interaction",
+            "contextType": "web_interaction",
+            "facets": [
+                {
+                    "key": "navigation_path_type",
+                    "label": "Navigation path type",
+                    "role": "primary",
+                    "kind": "categorical",
+                    "value": navigation_path_type,
+                },
+                {
+                    "key": "web_interaction_notes",
+                    "label": "Web interaction notes",
+                    "role": "explanation",
+                    "kind": "textual",
+                    "value": (
+                        f"The persona used a {style_text} browsing pattern before submitting."
+                    ),
+                },
+            ],
+        },
+    ]
+
+
 def _verifier_dir() -> Path:
     base = (
         os.environ.get("HARBOR_VERIFIER_DIR")
@@ -129,7 +278,13 @@ def test_output_schema():
     source_artifacts: dict[str, object] = {
         "taskOutput": str(OUTPUT),
     }
-    contexts: list[dict[str, object]] = [
+    execution_contexts = _build_execution_contexts(
+        output=OUTPUT,
+        subject_id=subject_id.strip(),
+        subject_label=subject_label.strip(),
+        exploration_style=exploration_style,
+    )
+    contexts: list[dict[str, object]] = execution_contexts + [
         {
             "key": "decision.primary",
             "label": "Primary decision",

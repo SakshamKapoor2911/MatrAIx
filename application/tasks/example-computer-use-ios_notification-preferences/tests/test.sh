@@ -254,30 +254,23 @@ contexts = [
         ],
     },
     {
-        "key": "settings_change.primary",
-        "label": "Settings change decision",
-        "contextType": "settings_change",
+        "key": "decision.primary",
+        "label": "Primary decision",
+        "contextType": "decision",
         "facets": [
             {
-                "key": "settings_area",
-                "label": "Settings area",
+                "key": "decision_outcome",
+                "label": "Decision outcome",
                 "role": "primary",
                 "kind": "categorical",
-                "value": "photos_privacy",
+                "value": "selected",
             },
             {
-                "key": "app_reviewed",
-                "label": "App reviewed",
-                "role": "evidence",
-                "kind": "textual",
-                "value": app.strip(),
-            },
-            {
-                "key": "photo_access_level",
-                "label": "Photo access level",
+                "key": "basis_primary",
+                "label": "Primary basis",
                 "role": "primary",
                 "kind": "categorical",
-                "value": level,
+                "value": "privacy",
             },
             {
                 "key": "reason",
@@ -286,9 +279,96 @@ contexts = [
                 "kind": "textual",
                 "value": reason.strip(),
             },
+            {
+                "key": "decision_subject_id",
+                "label": "Decision subject ID",
+                "role": "evidence",
+                "kind": "categorical",
+                "value": app.strip().lower().replace(" ", "_"),
+            },
+            {
+                "key": "decision_subject_label",
+                "label": "Decision subject label",
+                "role": "evidence",
+                "kind": "textual",
+                "value": app.strip(),
+            },
+            {
+                "key": "photo_access_level",
+                "label": "Photo access level",
+                "role": "evidence",
+                "kind": "categorical",
+                "value": level,
+            },
+        ],
+    },
+    {
+        "key": "persona_alignment.primary",
+        "label": "Persona alignment",
+        "contextType": "persona_alignment",
+        "facets": [
+            {
+                "key": "persona_alignment_status",
+                "label": "Persona alignment status",
+                "role": "primary",
+                "kind": "categorical",
+                "value": "aligned",
+            },
+            {
+                "key": "persona_preference_axis_primary",
+                "label": "Primary preference axis",
+                "role": "primary",
+                "kind": "categorical",
+                "value": "privacy",
+            },
+            {
+                "key": "persona_alignment_explanation",
+                "label": "Persona alignment explanation",
+                "role": "explanation",
+                "kind": "textual",
+                "value": reason.strip(),
+            },
+            {
+                "key": "persona_alignment_score",
+                "label": "Persona alignment score",
+                "role": "score",
+                "kind": "numerical",
+                "value": 1.0,
+            },
         ],
     },
 ]
+if level in {"selected_photos", "none"}:
+    contexts.append(
+        {
+            "key": "persona_constraint.primary",
+            "label": "Persona constraint",
+            "contextType": "persona_constraint",
+            "facets": [
+                {
+                    "key": "persona_constraint_type",
+                    "label": "Persona constraint type",
+                    "role": "primary",
+                    "kind": "categorical",
+                    "value": "privacy",
+                },
+                {
+                    "key": "persona_constraint_status",
+                    "label": "Persona constraint status",
+                    "role": "primary",
+                    "kind": "categorical",
+                    "value": "satisfied",
+                },
+                {
+                    "key": "persona_constraint_evidence",
+                    "label": "Persona constraint evidence",
+                    "role": "explanation",
+                    "kind": "textual",
+                    "value": reason.strip(),
+                },
+            ],
+        }
+    )
 if feedback is not None:
     source_artifacts["userFeedback"] = str(feedback_path)
     feedback_facets = [

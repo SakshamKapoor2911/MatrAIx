@@ -136,9 +136,9 @@ diagnostics include:
 - `incorrect`
 - `not_produced`
 
-### Default Reporting Pattern
+### Default reporting pattern (execution layer)
 
-For web tasks, the default `reporting.json` should usually:
+For web tasks, start with the **execution layer** in `reporting.json`:
 
 - summarize `outcome_explanation` by `outcome_status`
 - summarize `web_interaction_notes` by `navigation_path_type`
@@ -147,19 +147,19 @@ For web tasks, the default `reporting.json` should usually:
   recurring web failure signals such as navigation failure, search misuse,
   form misunderstanding, or live-site brittleness
 
-See the shared web metric templates in this folder:
+Templates:
 
 - `web_metric_structured_output.example.json`
 - `web_metric_reporting.example.json`
 
-## Persona-Sensitive Reporting Contract
+## Persona reporting layer
 
-For tasks where reviewers care about **how different personas choose
-different outcomes**, use a shared semantic reporting contract on top of the
-generic `structured_output.json` / `reporting.json` mechanism.
+When reviewers also care about **how different personas choose different
+outcomes or rate the experience**, add the **persona layer** on top of the
+execution layer. Merge the `contextRules[]` from both templates into one task
+`reporting.json` when you need both.
 
-The goal is not to force every task into identical business fields. The goal is
-to make batch reporting answer the same core questions across tasks:
+The persona layer should help batch reporting answer:
 
 - what the persona chose
 - why they chose it
@@ -325,9 +325,9 @@ near-duplicates.
 - Do not bake reporting policy into the verifier; use `reporting.json` for
   summaries and judges.
 
-### Default Reporting Pattern
+### Persona layer reporting pattern
 
-For persona-sensitive web tasks, the default `reporting.json` should usually:
+When the persona layer applies, extend `reporting.json` with rules that usually:
 
 - summarize `feedback_reason` by `need_constraint_satisfaction` when shared
   feedback exists
@@ -336,12 +336,12 @@ For persona-sensitive web tasks, the default `reporting.json` should usually:
 - optionally judge `reason` for reusable signals like price / quality /
   convenience / trust / novelty
 
-See the example templates in this folder:
+Persona layer templates:
 
-- `web_metric_structured_output.example.json`
-- `web_metric_reporting.example.json`
 - `persona_sensitive_structured_output.example.json`
 - `persona_sensitive_reporting.example.json`
+
+Combine with the execution layer templates listed above when a study needs both.
 
 For native app and cross-app operating templates, see `../os-app/`.
 
