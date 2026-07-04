@@ -1,9 +1,12 @@
-# Application Task Interface
+# Application Task Spec
 
-This directory defines the shared application task interface used by survey,
+This directory defines the shared **application task spec** used by survey,
 chatbot, web/computer-use, and OS/app tasks. Runnable task folders stay in
-`application/tasks/<task-name>/`; this interface directory is the
-cross-protocol index and contract.
+`application/tasks/<task-name>/`; this `task-spec/` directory is the
+cross-protocol index, authoring standard, and evaluation contract.
+
+> Formerly `application/tasks/interface/`. The runtime **protocol surface** and
+> per-type **contracts** (artifact, evaluation, metrics) live in the sections below.
 
 ## Common Contract
 

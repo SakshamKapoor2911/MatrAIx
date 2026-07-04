@@ -20,6 +20,7 @@ guides, adapted to the PersonaBench layout (shared runtimes, **Mode → auto**,
 |-----|---------|
 | [QUICKSTART.md](QUICKSTART.md) | Zero → first run → batch → Cockpit → new task |
 | [task-guide.md](task-guide.md) | Application task folder structure and reference scenarios |
+| [task-spec/](task-spec/) | Shared specs for survey, chatbot, web, and OS-app tasks |
 | [web-interaction.md](web-interaction.md) | Playwright vs browser-use vs Cocoa vs CUA for live-web tasks |
 | [choosing-an-agent.md](choosing-an-agent.md) | Agent ↔ form mapping, models, and API keys |
 | [tasks/README.md](tasks/README.md) | Contributor checklist, reporting, interface contracts |
@@ -102,6 +103,7 @@ For broader domain inspiration, see
 
 ```text
 application/
+  task-spec/    Shared specs for survey, chatbot, web, and OS-app tasks.
   persona_eval/ PersonaEval app, API, simulator, and frontend workbench.
   scripts/      Job generation (`generate_application_job.py`) and batch rollups (`report_job.py`).
   tasks/        Runnable survey, chat, web, and product tasks (each with `reporting.json`).

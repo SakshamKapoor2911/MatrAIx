@@ -1012,7 +1012,7 @@ This log records the curated migration from MatrAIx into PersonaBench.
   without importing the full generalized PersonaEval backend, frontend, or
   generated application data.
 - Imported into:
-  - `application/tasks/interface/`
+  - `application/task-spec/` (renamed from `application/tasks/interface/`)
 - Updated:
   - `application/tasks/README.md`
 - Source handling:

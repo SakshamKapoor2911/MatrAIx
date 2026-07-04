@@ -105,8 +105,8 @@ Each task should define batch reporting policy here (even if minimal):
 }
 ```
 
-See [tasks/README.md](tasks/README.md) and the interface docs under
-[tasks/interface/](tasks/interface/).
+See [tasks/README.md](tasks/README.md) and the task specs under
+[task-spec/](task-spec/).
 
 ## Conventions
 
@@ -209,4 +209,4 @@ Full list: [`configs/jobs/README.md`](../configs/jobs/README.md).
 - [QUICKSTART.md](QUICKSTART.md) — install through Cockpit play
 - [web-interaction.md](web-interaction.md) — live-web modes
 - [choosing-an-agent.md](choosing-an-agent.md) — agents and API keys
-- [tasks/interface/](tasks/interface/) — shared metric and artifact contracts
+- [task-spec/](task-spec/) — shared metric and artifact contracts

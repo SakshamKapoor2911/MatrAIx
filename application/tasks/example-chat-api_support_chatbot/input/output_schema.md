@@ -2,7 +2,7 @@
 
 Document **task-owned** artifacts here. Platform-managed eval files
 (`transcript.json`, `application_result.json`) are described in
-[`application/tasks/interface/chatbot/eval_artifacts.md`](../../interface/chatbot/eval_artifacts.md).
+[`application/task-spec/chatbot/eval_artifacts.md`](../../../task-spec/chatbot/eval_artifacts.md).
 
 ## `user_feedback.json`
 

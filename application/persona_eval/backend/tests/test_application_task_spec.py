@@ -8,13 +8,13 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[4]
 TASKS_ROOT = REPO_ROOT / "application" / "tasks"
 ENVIRONMENTS_ROOT = REPO_ROOT / "environment" / "task-environments" / "application"
-INTERFACE_ROOT = TASKS_ROOT / "interface"
+TASK_SPEC_ROOT = REPO_ROOT / "application" / "task-spec"
 
 
-def test_application_interface_manifest_groups_core_protocols() -> None:
-    manifest = json.loads((INTERFACE_ROOT / "manifest.json").read_text(encoding="utf-8"))
+def test_application_task_spec_manifest_groups_core_protocols() -> None:
+    manifest = json.loads((TASK_SPEC_ROOT / "manifest.json").read_text(encoding="utf-8"))
 
-    assert manifest["schemaVersion"] == "application-task-interface-v1"
+    assert manifest["schemaVersion"] == "application-task-spec-v1"
     assert set(manifest["applicationTypes"]) == {
         "survey",
         "chatbot",
@@ -35,9 +35,9 @@ def test_application_interface_manifest_groups_core_protocols() -> None:
     )
 
 
-def test_application_interface_docs_exist_for_each_protocol() -> None:
+def test_application_task_spec_docs_exist_for_each_protocol() -> None:
     for dirname in ("survey", "chatbot", "web"):
-        doc = INTERFACE_ROOT / dirname / "README.md"
+        doc = TASK_SPEC_ROOT / dirname / "README.md"
         assert doc.is_file(), doc
         text = doc.read_text(encoding="utf-8")
         assert "Task instruction" in text

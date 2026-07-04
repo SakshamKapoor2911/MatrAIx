@@ -58,7 +58,7 @@ Harbor treats a task-local `environment/` as the full runtime environment, which
 would shadow the shared `application/shared-survey-form` runtime instead of
 extending it.
 
-See [`interface/survey/README.md`](interface/survey/README.md) for the structured
+See [`../task-spec/survey/README.md`](../task-spec/survey/README.md) for the structured
 questionnaire contract.
 
 ## Reporting Policy
@@ -92,18 +92,18 @@ directives; the UI can surface `queued` / `running` / `completed` style
 reporting states from the job aggregation view.
 
 For web / computer-use tasks, prefer the shared contracts in
-[`interface/os-app/README.md`](interface/os-app/README.md) and
-[`interface/web/README.md`](interface/web/README.md) rather than inventing new
+[`../task-spec/os-app/README.md`](../task-spec/os-app/README.md) and
+[`../task-spec/web/README.md`](../task-spec/web/README.md) rather than inventing new
 metrics from scratch.
 
-- `interface/os-app/README.md` is the main app benchmark contract for
+- `../task-spec/os-app/README.md` is the main app benchmark contract for
   native desktop/mobile and cross-app operating tasks.
-- `interface/web/README.md` is the web-task contract for browser-mediated tasks,
+- `../task-spec/web/README.md` is the web-task contract for browser-mediated tasks,
   including its own web-specific metrics and browser-specific persona decision
   contract.
 
 For persona-sensitive chatbot tasks, prefer the shared semantic contract in
-[`interface/chatbot/README.md`](interface/chatbot/README.md) rather than
+[`../task-spec/chatbot/README.md`](../task-spec/chatbot/README.md) rather than
 inventing new outcome / feedback keys per task. That contract standardizes the
 minimum `task_outcome` / `conversation_summary` contexts, shared facet keys
 like `outcome_status`, `resolution_basis`, `feedback_reason`, and
@@ -163,9 +163,9 @@ Example shape:
 Persona benchmark and grounding tasks should live under `persona/tasks/`, not
 in this module.
 
-## Interface
+## Task spec
 
-[`interface/`](interface/) records the shared application-task protocol for
+[`../task-spec/`](../task-spec/) records the shared application-task spec for
 survey, chatbot, and web/computer-use tasks. Use it to decide where a new task
 belongs and which artifacts its verifier should expect.
 

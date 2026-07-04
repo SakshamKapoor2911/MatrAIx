@@ -11,7 +11,7 @@ import tomllib
 ROOT = Path(__file__).resolve().parents[2]
 PERSONA_SURVEY = ROOT / "application/tasks/persona-survey"
 RECOMMENDER_CHAT = ROOT / "application/tasks/recommender-agent_chat_api"
-INTERFACE_ROOT = ROOT / "application/tasks/interface"
+TASK_SPEC_ROOT = ROOT / "application/task-spec"
 
 
 def test_persona_survey_task_metadata_is_clean() -> None:
@@ -166,15 +166,15 @@ def test_recommender_chat_sidecar_contract() -> None:
     assert recommendations["recommendedItems"][0]["itemId"].startswith("movie-")
 
 
-def test_application_task_interface_manifest_uses_clean_task_paths() -> None:
-    manifest = json.loads((INTERFACE_ROOT / "manifest.json").read_text(encoding="utf-8"))
+def test_application_task_spec_manifest_uses_clean_task_paths() -> None:
+    manifest = json.loads((TASK_SPEC_ROOT / "manifest.json").read_text(encoding="utf-8"))
 
-    assert manifest["schemaVersion"] == "application-task-interface-v1"
+    assert manifest["schemaVersion"] == "application-task-spec-v1"
     assert set(manifest["applicationTypes"]) == {
         "survey",
         "chatbot",
         "web",
-        "appworld",
+        "os-app",
     }
     assert manifest["applicationTypes"]["survey"]["canonicalTask"] == (
         "application/tasks/persona-survey"
@@ -185,17 +185,22 @@ def test_application_task_interface_manifest_uses_clean_task_paths() -> None:
     assert manifest["applicationTypes"]["web"]["canonicalTask"] == (
         "application/tasks/example-web-playwright_quote-choice"
     )
-    assert manifest["applicationTypes"]["appworld"]["canonicalTask"] == (
-        "external:appworld"
+    assert manifest["applicationTypes"]["os-app"]["canonicalTask"] == (
+        "application/tasks/example-computer-use-ios_notification-preferences"
     )
 
 
-def test_application_task_interface_docs_cover_each_protocol() -> None:
-    for dirname in ("survey", "chatbot", "web", "appworld"):
-        doc = INTERFACE_ROOT / dirname / "README.md"
+def test_application_task_spec_docs_cover_each_protocol() -> None:
+    for dirname in ("survey", "chatbot", "web"):
+        doc = TASK_SPEC_ROOT / dirname / "README.md"
         assert doc.is_file(), doc
         text = doc.read_text(encoding="utf-8")
         assert "Task instruction" in text
         assert "Interaction protocol" in text
         assert "Evaluation contract" in text
         assert "applications/tasks/" not in text
+
+    os_app_doc = TASK_SPEC_ROOT / "os-app" / "README.md"
+    assert os_app_doc.is_file()
+    os_app_text = os_app_doc.read_text(encoding="utf-8")
+    assert "evaluation and reporting contract" in os_app_text.lower()

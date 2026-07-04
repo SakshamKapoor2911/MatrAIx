@@ -49,7 +49,7 @@ On **use.computer macOS** (computer-use tasks only), Harbor remaps `/app` →
 `/Users/lume` in shell commands. Verifiers resolve this automatically;
 **instructions always say `/app/output/`**.
 
-Full metric contract: [tasks/interface/web/README.md](tasks/interface/web/README.md).
+Full metric contract: [task-spec/web/README.md](task-spec/web/README.md).
 
 ## Playwright mode
 
