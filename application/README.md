@@ -103,24 +103,28 @@ For broader domain inspiration, see
 ```text
 application/
   persona_eval/ PersonaEval app, API, simulator, and frontend workbench.
-  reporting/   Application result summaries.
-  scripts/     Application job generation helpers.
-  tasks/       Runnable survey, chat, web, and product tasks.
+  scripts/      Job generation (`generate_application_job.py`) and batch rollups (`report_job.py`).
+  tasks/        Runnable survey, chat, web, and product tasks (each with `reporting.json`).
   QUICKSTART.md, task-guide.md, web-interaction.md, choosing-an-agent.md
 ```
+
+**Batch reporting** is not a separate folder. It lives in:
+
+- per-task **`reporting.json`** — context rules, summaries, judge directives
+- **`scripts/report_job.py`** — refreshes `jobs/<job_name>/aggregation.json`
+- **PersonaEval** — optional LLM reporting when `PERSONAEVAL_REPORTING_ENABLE_LLM=1`
 
 Applications should depend on persona inputs by reference. They should not copy
 large persona datasets into application folders.
 
 Keep new application contributions scoped to application-owned task, script,
-reporting, or PersonaEval folders. Do not commit generated job outputs under
-`jobs/`.
+or PersonaEval folders. Do not commit generated job outputs under `jobs/`.
 
 ## Contributing
 
 - new task scenarios under `application/tasks/`
 - domain-specific benchmarks
-- evaluation metrics (`packages/rewardkit/`, `reporting.json`)
-- analysis templates (`application/reporting/`)
+- evaluation metrics (`packages/rewardkit/`, per-task `reporting.json`)
+- batch rollups via `application/scripts/report_job.py`
 
 See [../CONTRIBUTING.md](../CONTRIBUTING.md) if present in your checkout.
