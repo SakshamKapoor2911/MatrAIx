@@ -32,6 +32,7 @@ Supplementary files differ by application type:
 
 ```text
 instruction.md                 # short scenario; points to output_schema
+reporting.json                 # batch aggregation policy (contextRules)
 input/
   context.md                   # product concept (optional)
   questionnaire.yaml           # structured questions
@@ -42,6 +43,7 @@ input/
 
 ```text
 instruction.md                 # conversation goal
+reporting.json                 # batch aggregation policy (contextRules)
 input/
   context.md                   # application background (optional)
   protocol.md                  # chat API / MCP contract (optional)
@@ -57,6 +59,7 @@ Platform-managed harness artifacts (`transcript.json`,
 
 ```text
 instruction.md                 # scenario + inline task-result JSON schema
+reporting.json                 # batch aggregation policy (contextRules)
 input/
   self_report_schema.yaml      # user_feedback.json (optional)
 ```
@@ -74,8 +77,26 @@ same `input/self_report_schema.yaml` convention as chatbot tasks.
 | Background context | `input/context.md` | `input/context.md` | usually in `instruction.md` |
 | Task result JSON | `input/output_schema.md` | platform-managed | inline in `instruction.md` |
 | Persona self-report | — | `input/self_report_schema.yaml` | `input/self_report_schema.yaml` |
+| Batch reporting policy | `reporting.json` | `reporting.json` | `reporting.json` |
 | Structured questions | `input/questionnaire.yaml` | — | — |
 | Transport / runtime | — | `input/protocol.md`, `input/chatbot.yaml` | shared environment |
+
+### Evaluation and reporting pipeline
+
+Keep these three layers separate:
+
+1. **Authoring** — task-owned prompts and schemas (`instruction.md`,
+   `input/output_schema.md`, `input/self_report_schema.yaml`, …)
+2. **Verifier output** — runtime facts extracted into
+   `verifier/structured_output.json` (for example `task_outcome`,
+   `conversation_summary`, `user_feedback`)
+3. **Batch reporting** — aggregation policy in task-root `reporting.json`
+   (`contextRules`, later LLM/judge directives) consumed into job
+   `aggregation.json`
+
+Removing chatbot `output_schema.md` does **not** change this split. Chatbot
+tasks still define batch reporting in `reporting.json`, while platform harness
+artifacts stay documented in `task-spec/chatbot/eval_artifacts.md`.
 
 Keep transport details and API tables out of `instruction.md` when they belong in
 `input/protocol.md` (chatbot). Survey tasks should keep the response contract in
