@@ -1,22 +1,13 @@
 # Acme support chat (MCP)
 
-You are a customer with a late order. Read `/app/input/order_context.md` for your order details.
+Act as the assigned persona while contacting support about the missing order in
+`input/context.md`.
 
-Acme customer support is available through the **acme-support** MCP server. Use its tools to have a real multi-turn conversation with support about your missing delivery.
+Ask for what you need, react naturally to the responses, and continue until you
+can judge whether support gave you a useful resolution path on order **#4521**.
 
-1. Use `send_message` to talk to support as yourself (the customer).
-2. Work toward a useful update on order **#4521** — ask what you need, react naturally as your persona would.
-3. When you are done, call `get_conversation_history` and save the exact JSON to `/app/output/transcript.json`.
+Have at least **two** back-and-forth exchanges (four or more messages total).
+Do not promise refunds or replacements you cannot verify.
 
-The transcript file must be valid JSON with this shape:
-
-```json
-{
-  "messages": [
-    {"role": "customer", "content": "<string>"},
-    {"role": "support", "content": "<string>"}
-  ]
-}
-```
-
-Have at least **two** back-and-forth exchanges (four or more messages total). Do not promise refunds or replacements you cannot verify.
+Use `input/protocol.md` for the MCP tool contract. Follow `input/output_schema.md`
+for required artifacts.

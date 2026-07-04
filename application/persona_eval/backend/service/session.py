@@ -202,7 +202,7 @@ class RecBotSession:
 
         Persisted turns are passed through :func:`normalize_turn_view` so legacy
         artifacts (``turnId`` stored as an int, missing ``plan`` /
-        ``recommendedItems``) are coerced to the wire contract on read — the
+        ``personaExposure``) are coerced to the wire contract on read — the
         session re-serializes clean and ``GET /api/sessions/{id}`` no longer
         500s on response validation.
         """
@@ -377,7 +377,6 @@ class RecBotSession:
         if self._direct_session is None:
             self._direct_session = DirectApplicationSession(
                 PersonaEvalConfig(
-                    domain=str(self.config.get("domain") or ""),
                     application_id=application_id,
                     application_context=_SIDECAR_APPLICATION_CONTEXT.get(application_id, ""),
                     engine=str(self.config.get("engine") or "gpt-4o-mini"),
@@ -394,7 +393,7 @@ class RecBotSession:
                 "userMessage": user_message,
                 "assistantMessage": turn.get("assistantMessage") or "",
                 "plan": [],
-                "recommendedItems": turn.get("recommendedItems") or [],
+                "personaExposure": turn.get("personaExposure") or [],
                 "durationSeconds": duration_seconds,
                 "raw": turn,
             }

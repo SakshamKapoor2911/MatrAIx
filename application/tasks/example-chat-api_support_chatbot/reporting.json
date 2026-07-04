@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "1.0",
+  "contextRules": [
+    {
+      "match": {
+        "contextType": "task_outcome"
+      },
+      "summaryDirectives": [
+        {
+          "id": "task_outcome.reason_by_status",
+          "title": "Outcome reason by status",
+          "targetFacetKey": "outcome_reason",
+          "groupByFacetKey": "outcome_status",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ],
+      "judgeDirectives": [
+        {
+          "id": "task_outcome.reason_signal_scan",
+          "title": "Outcome signal scan",
+          "targetFacetKey": "outcome_reason",
+          "groupByFacetKey": "outcome_status",
+          "groupByMode": "categorical",
+          "judgeKind": "llm_signal_judge",
+          "prompt": "Read the outcome reason and classify which reusable support-chat signals are explicitly present.",
+          "rubric": "Mark a signal true only when the reason clearly states or strongly implies that signal.",
+          "signals": [
+            {
+              "key": "resolution_signal",
+              "label": "Useful status update delivered",
+              "valueType": "boolean"
+            },
+            {
+              "key": "followup_signal",
+              "label": "Further follow-up still required",
+              "valueType": "boolean"
+            },
+            {
+              "key": "handoff_signal",
+              "label": "External or human handoff required",
+              "valueType": "boolean"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "conversation_summary"
+      },
+      "summaryDirectives": [
+        {
+          "id": "conversation_summary.notes_by_path",
+          "title": "Process notes by conversation path",
+          "targetFacetKey": "process_notes",
+          "groupByFacetKey": "conversation_path",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ]
+    }
+  ]
+}

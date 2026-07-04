@@ -15,7 +15,7 @@ def test_collect_run_env_exports_survey() -> None:
         task_path="application/tasks/example-survey_product-feedback",
         repo_root=REPO_ROOT,
     )
-    assert exports == [("MATRIX_SURVEY_INSTRUMENT_ID", "product_feedback_v1")]
+    assert exports == [("MATRIX_SURVEY_TASK_PATH", "application/tasks/example-survey_product-feedback")]
 
 
 def test_collect_run_env_exports_chat() -> None:
@@ -24,5 +24,4 @@ def test_collect_run_env_exports_chat() -> None:
         task_path="application/tasks/recommender-agent_chat_api",
         repo_root=REPO_ROOT,
     )
-    assert ("MATRIX_CHATBOT_DOMAIN", "movie") in exports
-    assert ("MATRIX_CHATBOT_APPLICATION_ID", "recai") in exports
+    assert exports == [("MATRIX_CHATBOT_TASK_PATH", "application/tasks/recommender-agent_chat_api")]

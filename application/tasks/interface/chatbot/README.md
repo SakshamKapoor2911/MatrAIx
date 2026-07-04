@@ -7,10 +7,294 @@ through a chat API.
 
 - Task instruction: describe the chatbot application and the user's goal context.
 - Interaction protocol: multi-turn user and assistant messages through the task controller.
-- Task-specific environment: a chatbot API sidecar and any application-specific resources.
+- Runtime environment: a shared or dedicated chatbot sidecar stack plus any required resources.
 - Stop conditions: max turns, persona done signal, terminal chatbot state, or task failure.
-- Artifacts: transcript, application result, persona self-report, and evaluation result.
+- Artifacts: transcript and eval-run summary (platform-managed), persona self-report, and evaluation result.
 - Evaluation contract: artifact validation, optional objective checks, and persona self-report.
+
+## Authoring Bundle
+
+Contributor-facing chatbot docs use one task instruction at the task root and
+supplementary materials under `input/`:
+
+`application/tasks/<task-name>/`
+
+- `instruction.md` — the single task instruction (goal, interaction style, stop
+  conditions)
+- `input/context.md` — optional scenario or application background
+- `input/output_schema.md` — task-owned artifacts only (typically
+  `user_feedback.json`)
+- `input/protocol.md` — optional chat API or MCP contract when the agent needs
+  transport details separate from the persona task
+- `input/chatbot.yaml` — runtime connection metadata
+- `input/self_report_schema.yaml` — optional machine-readable persona self-report
+  prompts
+
+Platform-managed eval artifacts (`transcript.json`, `application_result.json`) are
+documented in [`eval_artifacts.md`](eval_artifacts.md), not in per-task
+`output_schema.md`.
+
+Keep human-readable artifact docs in `output_schema.md`, not inside the root
+task `instruction.md`. Use machine-readable files for runtime-owned behavior:
+
+- `chatbot.yaml` owns transport metadata plus `personaExposure.fields[]` for
+  structured response fields that should be visible to the persona
+- `self_report_schema.yaml` owns the post-chat self-report contract written to
+  `user_feedback.json`
+
+`user_feedback.json` is the shared subjective feedback artifact across
+interactive tasks. Chatbot tasks reuse that shared channel, then add
+conversation-specific feedback fields when needed.
+
+This keeps prompt assembly, runtime behavior, and contributor docs aligned
+without parsing prose out of `instruction.md` or `output_schema.md`.
+
+Shared chatbot environments should contain only runtime assets such as
+Dockerfiles, sidecars, and helper scripts. Do not put task-specific prose in
+`shared-chat-*`.
+
+## Persona-Sensitive Reporting Contract
+
+For tasks where reviewers care about **how different personas experience,
+trust, and resolve conversations differently**, use a shared semantic contract
+ on top of the generic `structured_output.json` / `reporting.json` mechanism.
+
+The goal is to make chatbot batch reporting answer the same core questions
+across tasks:
+
+- was the user's goal actually resolved
+- what happened in the conversation before the outcome
+- how the persona rated the interaction
+- whether policy / trust / coordination issues changed the result
+
+This contract is informed by two complementary views:
+
+- **Tau Bench / Tau2 Bench** style evaluation:
+  end-state correctness, policy-following, communication adequacy, and
+  reliability across repeated trials (`pass^k`)
+- **persona-facing service quality**:
+  satisfaction, effort, trust, feeling understood, and whether the next step
+  was clear
+
+Keep using the platform's existing artifact shape:
+
+- verifier writes `verifier/structured_output.json`
+- task root defines `reporting.json`
+- both continue to use `contexts[]`, `facets[]`, `summaryDirectives[]`, and
+  `judgeDirectives[]`
+
+This contract adds shared context types, facet keys, and small enums so
+contributors can extend task-specific details without breaking cross-task
+reporting.
+
+### Minimum Contexts
+
+Persona-sensitive chatbot tasks should emit these contexts when applicable:
+
+1. `task_outcome`
+   The main result of the interaction. This is the only required context.
+2. `conversation_summary`
+   Lightweight process / effort summary for the exchange. Recommended for all
+   tasks.
+3. `user_feedback`
+   Post-chat satisfaction, trust, or usefulness feedback. This is the shared
+   interactive-task subjective channel and is recommended whenever the task
+   collects self-report.
+4. `policy_and_trust`
+   Optional objective review of policy compliance, groundedness, escalation, or
+   bounded empathy.
+5. `coordination`
+   Optional coordination summary for Tau2-style dual-control or follow-up
+   heavy tasks where the user must take actions too.
+
+If a task cannot produce a stable `task_outcome`, it is probably not yet a
+strong persona-sensitive chatbot benchmark.
+
+### Required Facets For `task_outcome`
+
+The `task_outcome` context should contain these standard facets:
+
+| Facet key | Role | Kind | Required | Notes |
+|---|---|---|---|---|
+| `outcome_status` | `primary` | `categorical` | Yes | Standard resolution bucket |
+| `resolution_basis` | `primary` | `categorical` | Yes | What evidence grounded the outcome classification |
+| `outcome_reason` | `explanation` | `textual` | Yes | Why the interaction ended in that outcome |
+| `next_step_owner` | `evidence` | `categorical` | Prefer | Who owns the next meaningful action |
+| `task_goal_label` | `evidence` | `textual` | Optional | Task-specific human label for the user's goal |
+
+### Required Facets For `conversation_summary`
+
+The `conversation_summary` context should contain these standard facets:
+
+| Facet key | Role | Kind | Required | Notes |
+|---|---|---|---|---|
+| `conversation_path` | `primary` | `categorical` | Yes | Shared process bucket |
+| `user_turn_count` | `score` | `numerical` | Yes | Number of user turns |
+| `assistant_turn_count` | `score` | `numerical` | Yes | Number of assistant turns |
+| `message_count` | `score` | `numerical` | Yes | Total visible messages |
+| `process_notes` | `explanation` | `textual` | Prefer | Short narrative of how the conversation progressed |
+| `clarification_question_count` | `score` | `numerical` | Optional | Count of explicit clarification turns when available |
+
+### Recommended Facets For `user_feedback`
+
+If the task collects self-report, keep it in a separate `user_feedback`
+context. Reuse the shared feedback keys when possible, then add
+conversation-specific fields only when chat semantics truly need them:
+
+| Facet key | Role | Kind |
+|---|---|---|
+| `overall_experience_rating` | `score` | `numerical` |
+| `feedback_reason` | `explanation` | `textual` |
+| `need_constraint_satisfaction` | `evidence` | `categorical` |
+| `personal_preference_satisfaction` | `evidence` | `categorical` |
+| `clarification_questions_useful` | `primary` | `categorical` |
+| `trust_level` | `score` | `numerical` |
+| `effort_rating` | `score` | `numerical` |
+| `felt_understood` | `evidence` | `categorical` |
+
+### Recommended Facets For `policy_and_trust`
+
+Use a `policy_and_trust` context when objective policy or trust checks matter:
+
+| Facet key | Role | Kind |
+|---|---|---|
+| `policy_compliance` | `primary` | `categorical` |
+| `groundedness_primary` | `primary` | `categorical` |
+| `policy_notes` | `explanation` | `textual` |
+| `handoff_appropriateness` | `evidence` | `categorical` |
+
+### Recommended Facets For `coordination`
+
+Use a `coordination` context for follow-up heavy or dual-control tasks:
+
+| Facet key | Role | Kind |
+|---|---|---|
+| `coordination_mode` | `primary` | `categorical` |
+| `state_change_achieved` | `evidence` | `categorical` |
+| `user_action_required` | `evidence` | `categorical` |
+| `guidance_quality` | `primary` | `categorical` |
+| `coordination_notes` | `explanation` | `textual` |
+
+### Shared Enumerations
+
+Contributors should reuse these enums where possible instead of inventing
+near-duplicates.
+
+`outcome_status`
+
+- `resolved`
+- `partially_resolved`
+- `unresolved`
+- `escalated`
+- `abandoned`
+- `blocked`
+
+`resolution_basis`
+
+- `tool_state`
+- `conversation_commitment`
+- `user_feedback`
+- `policy_guardrail`
+- `other`
+
+`conversation_path`
+
+- `direct_resolution`
+- `clarify_then_resolve`
+- `clarify_then_partial`
+- `handoff_or_followup`
+- `stalled`
+- `other`
+
+`need_constraint_satisfaction` / `personal_preference_satisfaction`
+
+- `yes`
+- `partially`
+- `no`
+
+`next_step_owner`
+
+- `none`
+- `agent`
+- `user`
+- `external`
+- `shared`
+
+`policy_compliance`
+
+- `pass`
+- `warn`
+- `fail`
+- `not_evaluated`
+
+`groundedness_primary`
+
+- `verified`
+- `mixed`
+- `unsupported`
+- `not_evaluated`
+
+`coordination_mode`
+
+- `agent_only`
+- `user_followup_required`
+- `shared_world`
+- `handoff`
+- `other`
+
+`guidance_quality`
+
+- `clear`
+- `partial`
+- `confusing`
+- `not_applicable`
+
+For boolean-like evidence fields such as `clarification_questions_useful`,
+`felt_understood`, `state_change_achieved`, or `user_action_required`, encode
+them as categorical `true` / `false` values.
+
+### Tau Bench Mapping
+
+This contract is intentionally compatible with Tau Bench style evaluation:
+
+- **DB / end-state checks** should usually map into `task_outcome`, often with
+  `resolution_basis = tool_state`
+- **ACTION / path strictness** should only be enforced when the exact action
+  path is uniquely required; otherwise prefer end-state semantics
+- **communication adequacy** should inform `conversation_summary`,
+  `user_feedback`, or `policy_and_trust`
+- **pass^k** is a job-level reliability metric over repeated trials, not a
+  single-trial facet; the per-trial contract should make that aggregation easy
+  by exposing stable outcome categories
+
+### Contributor Extension Rules
+
+- Keep the standard facet keys exactly as written above.
+- Put task-specific additions behind a `task_` prefix, for example
+  `task_domain`, `task_resolution_channel`, or `task_recommended_item_count`.
+- Prefer a small shared enum plus `other` instead of inventing near-synonym
+  categories for every task.
+- Keep `outcome_reason`, `process_notes`, and `feedback_reason` as natural
+  language from the relevant perspective.
+- Do not bake reporting policy into the verifier; use `reporting.json` for
+  summaries and judges.
+
+### Default Reporting Pattern
+
+For persona-sensitive chatbot tasks, the default `reporting.json` should
+usually:
+
+- summarize `outcome_reason` by `outcome_status`
+- summarize `process_notes` by `conversation_path`
+- summarize `feedback_reason` by `clarification_questions_useful` when feedback
+  exists
+- optionally judge `outcome_reason` / `feedback_reason` for reusable signals
+  like effort, trust, empathy, policy blocks, or follow-up burden
+
+See the example templates in this folder:
+
+- `persona_sensitive_structured_output.example.json`
+- `persona_sensitive_reporting.example.json`
 
 ## Canonical Task
 
@@ -19,3 +303,9 @@ through a chat API.
 The recommender task hosts a small REST sidecar that follows the same contract
 as heavier chatbot applications: session creation, message exchange,
 conversation export, and final recommendation export.
+
+Shared runtime examples live under:
+
+- `environment/task-environments/application/shared-chat-api-recommender`
+- `environment/task-environments/application/shared-chat-api-support`
+- `environment/task-environments/application/shared-chat-mcp-support`

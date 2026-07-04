@@ -1,0 +1,93 @@
+Traceback (most recent call last):
+  File "/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/.venv/lib/python3.13/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/.venv/lib/python3.13/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/.venv/lib/python3.13/site-packages/httpcore/_async/connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/.venv/lib/python3.13/site-packages/httpcore/_async/connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        pool_request.request
+        ^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/.venv/lib/python3.13/site-packages/httpcore/_async/connection.py", line 103, in handle_async_request
+    return await self._connection.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/.venv/lib/python3.13/site-packages/httpcore/_async/http11.py", line 136, in handle_async_request
+    raise exc
+  File "/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/.venv/lib/python3.13/site-packages/httpcore/_async/http11.py", line 86, in handle_async_request
+    await self._send_request_headers(**kwargs)
+  File "/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/.venv/lib/python3.13/site-packages/httpcore/_async/http11.py", line 144, in _send_request_headers
+    with map_exceptions({h11.LocalProtocolError: LocalProtocolError}):
+         ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jianhenghou/.local/share/uv/python/cpython-3.13.11-macos-aarch64-none/lib/python3.13/contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/.venv/lib/python3.13/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.LocalProtocolError: Illegal header value b'Bearer uc_live_d913adc832e3025ef089e84b09d4d99bedc224d459bc2bad '
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/environment/runtime/harbor/trial/trial.py", line 294, in run
+    await self._prepare()
+  File "/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/environment/runtime/harbor/trial/trial.py", line 321, in _prepare
+    await self._setup_agent_environment()
+  File "/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/environment/runtime/harbor/trial/trial.py", line 979, in _setup_agent_environment
+    await self._start_agent_environment()
+  File "/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/environment/runtime/harbor/trial/trial.py", line 985, in _start_agent_environment
+    await asyncio.wait_for(
+    ...<4 lines>...
+    )
+  File "/Users/jianhenghou/.local/share/uv/python/cpython-3.13.11-macos-aarch64-none/lib/python3.13/asyncio/tasks.py", line 507, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/environment/runtime/harbor/environments/use_computer.py", line 253, in start
+    self._sandbox = await self._client.create(**self._create_kwargs())
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/.venv/lib/python3.13/site-packages/use_computer/core/client.py", line 579, in create
+    resp = await self._http.post("/v1/sandboxes", json=body, timeout=180.0)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/.venv/lib/python3.13/site-packages/httpx/_client.py", line 1859, in post
+    return await self.request(
+           ^^^^^^^^^^^^^^^^^^^
+    ...<13 lines>...
+    )
+    ^
+  File "/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/.venv/lib/python3.13/site-packages/httpx/_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/.venv/lib/python3.13/site-packages/httpx/_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/.venv/lib/python3.13/site-packages/httpx/_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/.venv/lib/python3.13/site-packages/httpx/_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/.venv/lib/python3.13/site-packages/httpx/_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/.venv/lib/python3.13/site-packages/use_computer/core/retry.py", line 94, in handle_async_request
+    resp = await self._transport.handle_async_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/.venv/lib/python3.13/site-packages/httpx/_transports/default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/jianhenghou/.local/share/uv/python/cpython-3.13.11-macos-aarch64-none/lib/python3.13/contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/.venv/lib/python3.13/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.LocalProtocolError: Illegal header value b'Bearer uc_live_d913adc832e3025ef089e84b09d4d99bedc224d459bc2bad '

@@ -19,12 +19,13 @@ from personabench.persona_job import DEFAULT_DATASET, parse_stratify_field_args
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_JOBS_DIR = REPO_ROOT / "configs" / "jobs" / "application-task-job-recipe"
+_PERSONA_EVAL_CORE = REPO_ROOT / "packages" / "persona-eval" / "src"
 _PERSONA_EVAL_BACKEND = REPO_ROOT / "application" / "persona_eval"
 _EXECUTION_MODES = frozenset({"auto", "force_docker", "smoke"})
 
 
 def _ensure_repo_import_paths() -> None:
-    for path in (str(REPO_ROOT), str(_PERSONA_EVAL_BACKEND)):
+    for path in (str(REPO_ROOT), str(_PERSONA_EVAL_CORE), str(_PERSONA_EVAL_BACKEND)):
         if path not in sys.path:
             sys.path.insert(0, path)
 
@@ -146,8 +147,8 @@ def main() -> None:
         choices=sorted(_EXECUTION_MODES),
         default="force_docker",
         help=(
-            "Harbor execution mode. Use 'auto' for json_survey / user_sim_chat host "
-            "profiles (default: force_docker)."
+            "Harbor execution mode. Use 'auto' for native host survey/chat profiles "
+            "(default: force_docker)."
         ),
     )
     parser.add_argument(

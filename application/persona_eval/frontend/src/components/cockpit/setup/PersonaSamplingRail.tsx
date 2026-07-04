@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { api, ApiError } from "@/lib/api";
 import { PERSONA_BENCH_POOL, type PersonaPoolPersonaCard } from "@/lib/types";
 import { FOCUS_RING, Sym } from "../cockpitShared";
+import { CockpitSelect, type CockpitSelectOption } from "./CockpitSelect";
 import { BenchPersonaCard } from "./BenchPersonaCard";
 import { BenchPersonaDetailModal } from "./BenchPersonaDetailModal";
 import { CockpitRailHeader } from "./CockpitRailHeader";
@@ -25,6 +26,13 @@ const TAB_LABELS: Record<PersonaSamplingMode, string> = {
 /** Default showcase personas from bench-dev-sample (smoke + spread). */
 const QUICK_PICK_PERSONA_IDS = ["0042", "0001", "0328", "0058", "0012", "0020", "0030", "0040"];
 
+const SAMPLE_SIZE_MAX = 500;
+
+function clampSampleSize(value: number): number {
+  if (!Number.isFinite(value)) return 4;
+  return Math.min(SAMPLE_SIZE_MAX, Math.max(2, Math.round(value)));
+}
+
 function fallbackQuickPickCards(): PersonaPoolPersonaCard[] {
   return QUICK_PICK_PERSONA_IDS.map((personaId) => ({
     personaId,
@@ -37,7 +45,7 @@ function fallbackQuickPickCards(): PersonaPoolPersonaCard[] {
 export interface PersonaSamplingRailProps {
   personaModel: string;
   onPersonaModelChange: (model: string) => void;
-  personaModelOptions: Array<{ value: string; label: string }>;
+  personaModelOptions: CockpitSelectOption[];
   mode: PersonaSamplingMode;
   onModeChange: (mode: PersonaSamplingMode) => void;
   selectedPersonaIds: string[];
@@ -161,44 +169,35 @@ export function PersonaSamplingRail({
   }, [filters, mode, onSelectedPersonaIdsChange, sampleSize, seed, stratifyFields]);
 
   const filterCount = activeFilterCount(filters);
+  const poolCount = catalogQuery.data?.count;
   const modelLabel =
-    taskType === "survey" || taskType === "chatbot" ? "Persona model" : null;
+    taskType === "survey" || taskType === "chatbot" || taskType === "web" || taskType === "os-app"
+      ? "Persona model"
+      : null;
   const modelHint =
-    taskType === "survey"
-      ? "Model that simulates the user side of the evaluation."
-      : taskType === "chatbot"
-        ? "Model that simulates the user side of the evaluation."
-        : null;
+    taskType === "survey" || taskType === "chatbot"
+      ? "llm that plays the simulated user in this evaluation."
+      : taskType === "web"
+        ? "llm that powers the web agent — shared across all capability levels."
+        : taskType === "os-app"
+          ? "base llm for the computer-use agent — passed through to Harbor."
+          : null;
   const showModelSelector = modelLabel !== null;
 
   return (
     <aside className="glass-panel glass-panel-rail relative flex h-full min-h-0 flex-col rounded-xl p-4">
-      <CockpitRailHeader
-        eyebrow="Personas"
-        title="Simulated users"
-        subtitle="bench-dev-sample · pick or sample a cohort"
-      />
+      <CockpitRailHeader label="Persona" />
 
-      <div className="mb-4">
+      <div className="mb-3">
         {showModelSelector && (
-          <label className="cockpit-field-label flex flex-col gap-2">
-            {modelLabel}
-            <select
-              value={personaModel}
-              disabled={disabled}
-              onChange={(e) => onPersonaModelChange(e.target.value)}
-              className="h-9 rounded-lg border border-outline/50 bg-surface/60 px-2.5 text-[13px] font-medium text-text-main backdrop-blur"
-            >
-              {personaModelOptions.map((opt) => (
-                <option key={opt.value} value={opt.value}>
-                  {opt.label}
-                </option>
-              ))}
-            </select>
-            {modelHint && (
-              <span className="text-[10px] leading-relaxed text-text-dim">{modelHint}</span>
-            )}
-          </label>
+          <CockpitSelect
+            label="Persona model"
+            value={personaModel}
+            options={personaModelOptions}
+            disabled={disabled}
+            onChange={onPersonaModelChange}
+            hint={modelHint ?? undefined}
+          />
         )}
       </div>
 
@@ -219,48 +218,55 @@ export function PersonaSamplingRail({
       </div>
 
       {mode !== "single" && (
-        <div className="mb-3 space-y-3 rounded-lg border border-outline/35 bg-surface/25 p-3">
-          <label className="flex flex-col gap-2 text-[11px] text-text-variant">
-            <div className="flex items-center justify-between">
-              <span>Sample size</span>
-              <span className="font-mono text-[12px] text-text-main">{sampleSize}</span>
-            </div>
-            <input
-              type="range"
-              min={2}
-              max={24}
-              value={sampleSize}
-              disabled={disabled}
-              onChange={(e) => onSampleSizeChange(Number(e.target.value))}
-              className="accent-primary"
-            />
-          </label>
-          <div className="flex flex-wrap items-center gap-2">
-            <button
-              type="button"
-              disabled={disabled}
-              onClick={() => setFilterOpen(true)}
-              className={`inline-flex items-center gap-1.5 rounded-md border border-outline/50 bg-surface/50 px-3 py-1.5 text-[11px] text-text-main ${FOCUS_RING}`}
-            >
-              <Sym name="tune" size={14} />
-              Filters
-              {filterCount > 0 && (
-                <span className="rounded-full bg-primary/20 px-1.5 text-[9px] text-primary">{filterCount}</span>
-              )}
-            </button>
-            {filterCount > 0 && (
-              <span className="text-[10px] text-text-dim">{filterCount} groups active</span>
-            )}
-          </div>
+        <div className="mb-2 space-y-2">
           <button
             type="button"
-            disabled={disabled || generating}
-            onClick={() => void handleGenerate()}
-            className={`flex w-full items-center justify-center gap-2 rounded-md bg-surface-high/80 py-2 text-[12px] text-text-main hover:bg-surface-high ${FOCUS_RING}`}
+            disabled={disabled}
+            onClick={() => setFilterOpen(true)}
+            className={`flex w-full items-center gap-2 rounded-lg border border-outline/40 bg-surface/40 px-2.5 py-2 text-left transition hover:border-primary/35 hover:bg-surface/55 ${FOCUS_RING}`}
           >
-            <Sym name="auto_awesome" size={16} className="text-primary" />
-            {generating ? "Generating…" : "Generate preview"}
+            <Sym name="tune" size={16} className="shrink-0 text-primary" />
+            <span className="min-w-0 flex-1 text-[11px] font-medium text-text-main">Persona filters</span>
+            {filterCount > 0 ? (
+              <span className="rounded-full bg-primary/15 px-1.5 font-mono text-[9px] text-primary">
+                {filterCount}
+              </span>
+            ) : null}
+            <Sym name="chevron_right" size={16} className="shrink-0 text-text-dim" />
           </button>
+
+          <div className="flex items-end gap-2">
+            <label className="flex w-[4.25rem] shrink-0 flex-col gap-0.5">
+              <span className="text-[10px] text-text-dim">
+                Sample{typeof poolCount === "number" ? ` · ${poolCount}` : ""}
+              </span>
+              <input
+                type="number"
+                inputMode="numeric"
+                min={2}
+                max={SAMPLE_SIZE_MAX}
+                step={1}
+                value={sampleSize}
+                disabled={disabled}
+                onChange={(e) => {
+                  const raw = e.target.value;
+                  if (raw === "") return;
+                  onSampleSizeChange(clampSampleSize(Number(raw)));
+                }}
+                onBlur={(e) => onSampleSizeChange(clampSampleSize(Number(e.target.value)))}
+                className={`h-9 w-full rounded-lg border border-outline/50 bg-surface/60 px-1.5 text-center font-mono text-[13px] text-text-main disabled:opacity-50 ${FOCUS_RING}`}
+              />
+            </label>
+            <button
+              type="button"
+              disabled={disabled || generating}
+              onClick={() => void handleGenerate()}
+              className={`flex h-9 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-lg bg-surface-high/90 text-[11px] font-medium text-text-main hover:bg-surface-high disabled:opacity-50 ${FOCUS_RING}`}
+            >
+              <Sym name="auto_awesome" size={15} className="text-primary" />
+              {generating ? "Generating…" : "Generate preview"}
+            </button>
+          </div>
           {generateError && <p className="text-[10px] text-danger">{generateError}</p>}
         </div>
       )}
@@ -277,6 +283,7 @@ export function PersonaSamplingRail({
             key={persona.personaId}
             persona={persona}
             selected={selectedPersonaIds.includes(persona.personaId)}
+            disabled={disabled}
             onToggle={() => togglePersona(persona.personaId)}
             onOpenDetail={() => setDetailPersona(persona)}
           />

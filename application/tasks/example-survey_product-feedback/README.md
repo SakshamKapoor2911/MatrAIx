@@ -1,9 +1,18 @@
 # Product concept survey (FocusLoop)
 
-PersonaBench **survey** reference task: read a product brief and structured questions, then submit persona-aligned answers as JSON.
+PersonaBench **survey** reference task: read product context and a structured
+questionnaire, then submit persona-aligned answers as JSON.
 
-- Inputs: `/app/input/product_brief.md`, `/app/input/survey_questions.md`
-- Output: `/app/output/survey_responses.json`
+Canonical task-owned content lives in:
+
+- `application/tasks/example-survey_product-feedback/instruction.md`
+- `application/tasks/example-survey_product-feedback/input/context.md`
+- `application/tasks/example-survey_product-feedback/input/questionnaire.yaml`
+- `application/tasks/example-survey_product-feedback/input/output_schema.md`
+
+This task now reuses the shared `application/shared-survey-form` runtime
+environment. The platform derives runtime prompts and task-detail UI from the
+task-local `input/` bundle.
 
 See [Application Tasks](../README.md).
 
@@ -16,7 +25,7 @@ uv run python application/scripts/generate_application_job.py \
   --persona-ids 0042
 
 export ANTHROPIC_API_KEY="sk-ant-..."
-export MATRIX_SURVEY_INSTRUMENT_ID=product_feedback_v1
+export MATRIX_SURVEY_TASK_PATH=application/tasks/example-survey_product-feedback
 uv run harbor run -c configs/jobs/application-task-job-recipe/example-survey_product-feedback-auto-n1.yaml
 ```
 
@@ -24,6 +33,6 @@ See [Application Quickstart](../../QUICKSTART.md) for the UI path and full env v
 
 ## What this exercises
 
-- Persona voice in **written survey** responses (not chat or browser)
+- Task-local survey docs in `input/` plus the shared `shared-survey-form` runtime
 - `/app/input` → read materials → `/app/output` submission contract
 - Schema verifier (question coverage + interest scale)

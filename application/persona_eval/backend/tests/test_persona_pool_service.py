@@ -163,3 +163,25 @@ def test_get_catalog_and_sample_with_filters(tmp_path, monkeypatch):
     )
     assert sampled["matchedCount"] == 1
     assert sampled["personaIds"] == ["0002"]
+
+
+def test_list_persona_cards_all_personas(tmp_path, monkeypatch):
+    repo = tmp_path
+    _write_pool(repo)
+    monkeypatch.setattr(
+        "environment.integrations.persona_eval.harbor.persona_eval._repo_root",
+        lambda: repo,
+    )
+    service = PersonaPoolService(repo_root=repo)
+
+    shuffled = service.list_persona_cards(limit=2, seed=99)
+    assert len(shuffled["personas"]) == 2
+
+    all_cards = service.list_persona_cards(limit=2, all_personas=True)
+    assert [card["personaId"] for card in all_cards["personas"]] == ["0001", "0002"]
+
+    page_two = service.list_persona_cards(limit=1, offset=1, all_personas=True)
+    assert [card["personaId"] for card in page_two["personas"]] == ["0002"]
+
+    full_pool = service.list_persona_cards(limit=500, all_personas=True)
+    assert [card["personaId"] for card in full_pool["personas"]] == ["0001", "0002"]

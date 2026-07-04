@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "1.0",
+  "contextRules": [
+    {
+      "match": {
+        "contextType": "question_response"
+      },
+      "summaryDirectives": [
+        {
+          "id": "question.reason_by_response",
+          "title": "Reason by selected response",
+          "targetFacetKey": "reason",
+          "groupByFacetKey": "response",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ]
+    }
+  ]
+}

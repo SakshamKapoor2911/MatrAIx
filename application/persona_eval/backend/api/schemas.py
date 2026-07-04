@@ -28,7 +28,7 @@ from __future__ import annotations
 
 from typing import Any, Dict, List, Literal, Optional
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
+from pydantic import AliasChoices, BaseModel, ConfigDict, Field, field_validator, model_validator
 
 __all__ = [
     "HealthResponse",
@@ -40,7 +40,7 @@ __all__ = [
     "ConfigOptionsResponse",
     "ChatMessageModel",
     "PlanStep",
-    "RecommendedItem",
+    "PersonaExposureField",
     "TurnView",
     "SessionConfig",
     "Session",
@@ -63,12 +63,16 @@ __all__ = [
     "SurveyQuestion",
     "SurveyInstrument",
     "SurveyInstrumentsResponse",
+    "ChatbotEvalTask",
+    "ChatbotEvalTasksResponse",
     "StartSurveyEvalRequest",
     "SurveyEvalJobView",
     "WebEvalTask",
     "WebEvalTasksResponse",
     "StartWebEvalRequest",
     "WebEvalJobView",
+    "OsAppEvalTask",
+    "OsAppEvalTasksResponse",
     "CuaEvalTask",
     "CuaEvalTasksResponse",
     "AppWorldEvalTask",
@@ -82,7 +86,12 @@ __all__ = [
 #: :class:`~backend.service.config.ConfigManager` (movie / beauty_product /
 #: game) so a bad domain is rejected here with a clean 422.
 SUPPORTED_DOMAINS = ("movie", "beauty_product", "game")
-SUPPORTED_APPLICATION_IDS = ("recai", "finance_openbb", "medical_assistant")
+SUPPORTED_APPLICATION_IDS = (
+    "recai",
+    "finance_openbb",
+    "medical_assistant",
+    "acme_support_mcp",
+)
 DEFAULT_APPLICATION_CONTEXTS = {
     "finance_openbb": "financial_research",
     "medical_assistant": "medical_consultation",
@@ -93,6 +102,14 @@ SUPPORTED_PERSONA_MODELS = (
     "openai/gpt-4o-mini",
     "openai/gpt-4o",
 )
+
+
+def _resolved_recai_context(
+    *,
+    domain: Optional[str],
+    application_context: Optional[str],
+) -> str:
+    return str(application_context or domain or "movie").strip()
 
 
 # --------------------------------------------------------------------------- #
@@ -249,25 +266,15 @@ class PlanStep(BaseModel):
         return value if isinstance(value, str) else str(value)
 
 
-class RecommendedItem(BaseModel):
-    """A recommended item, resolved against the catalog where possible."""
+class PersonaExposureField(BaseModel):
+    """One task-configured field visible to the persona or UI on a turn."""
 
     model_config = ConfigDict(extra="allow")
 
-    itemId: str
-    rank: Optional[int] = None
-    title: Optional[str] = None
-    meta: Optional[str] = None
-    score: Optional[float] = None
-
-    @field_validator("itemId", mode="before")
-    @classmethod
-    def _coerce_item_id(cls, value: Any) -> str:
-        # The native backend keys items by int id; legacy artifacts may persist
-        # that int. Coerce to the contract's string id so old runs still open.
-        if value is None:
-            return ""
-        return value if isinstance(value, str) else str(value)
+    key: Optional[str] = None
+    label: Optional[str] = None
+    format: Optional[str] = "text"
+    value: Any = None
 
 
 class TurnView(BaseModel):
@@ -285,7 +292,7 @@ class TurnView(BaseModel):
     userMessage: Optional[str] = None
     assistantMessage: Optional[str] = None
     plan: List[PlanStep] = Field(default_factory=list)
-    recommendedItems: List[RecommendedItem] = Field(default_factory=list)
+    personaExposure: List[PersonaExposureField] = Field(default_factory=list)
     nativeRaw: Optional[str] = None
     rawToolOutputs: Any = None
 
@@ -429,19 +436,18 @@ class CatalogSearchResponse(BaseModel):
 class StartPersonaEvalRequest(BaseModel):
     """Body for ``POST /api/persona-eval``.
 
-    ``applicationId`` selects the chatbot application adapter. ``domain`` is the
-    legacy RecAI context; non-RecAI applications use ``applicationContext`` for
-    their own context and normalize ``domain`` to that value.
-    ``maxTurns`` is bounded to a sensible 1..20 so a demo run cannot wedge the
-    process-global persona-eval lock for an unbounded number of turns.
+    ``applicationId`` selects the chatbot application adapter.
+    ``applicationContext`` is the primary chatbot context knob; ``domain`` is a
+    legacy RecAI compatibility alias and is mirrored from the resolved context.
+    ``maxTurns`` is optional. When omitted, the chatbot run is unbounded and
+    stops only when the user simulator ends the conversation.
     """
 
     domain: Optional[str] = None
     applicationId: str = "recai"
     applicationContext: Optional[str] = None
     personaId: str
-    maxTurns: int = Field(default=8, ge=1, le=20)
-    goalContextId: Optional[str] = None
+    maxTurns: Optional[int] = Field(default=None, ge=1)
     #: The OpenAI chat model that drives the recommender (per-run
     #: ``INTERECAGENT_ENGINE``). ``None`` falls back to the service default
     #: (``ConfigManager.DEFAULTS['engine']``).
@@ -464,13 +470,18 @@ class StartPersonaEvalRequest(BaseModel):
     @model_validator(mode="after")
     def _normalize_application_context(self) -> "StartPersonaEvalRequest":
         if self.applicationId == "recai":
-            self.domain = self.domain or "movie"
-            if self.domain not in SUPPORTED_DOMAINS:
+            resolved_context = _resolved_recai_context(
+                domain=self.domain,
+                application_context=self.applicationContext,
+            )
+            if resolved_context not in SUPPORTED_DOMAINS:
                 raise ValueError(
-                    "domain must be one of {}".format(list(SUPPORTED_DOMAINS))
+                    "applicationContext/domain must be one of {}".format(
+                        list(SUPPORTED_DOMAINS)
+                    )
                 )
-            if self.applicationContext is None:
-                self.applicationContext = self.domain
+            self.applicationContext = resolved_context
+            self.domain = resolved_context
             return self
 
         default_context = DEFAULT_APPLICATION_CONTEXTS.get(self.applicationId)
@@ -490,7 +501,6 @@ class StartPersonaEvalRequest(BaseModel):
                 "personaModel must be one of {}".format(list(SUPPORTED_PERSONA_MODELS))
             )
         return value
-
 
 class SubmitPersonaEvalResponse(BaseModel):
     """Response of ``POST /api/persona-eval``."""
@@ -517,16 +527,12 @@ class PersonaEvalPersonasResponse(BaseModel):
     """``GET /api/persona-eval/personas`` payload.
 
     The full (un-filtered) persona catalog, honoring optional ``q``/``limit``
-    search. ``sutDescription`` is returned only when an optional ``domain`` is
-    supplied (the system-under-test blurb for that domain); otherwise omitted.
+    search.
     """
 
     model_config = ConfigDict(extra="allow")
 
     personas: List[PersonaSummary]
-    sutDescription: Optional[str] = None
-
-
 class PersonaEvalPersonaDetail(BaseModel):
     """``GET /api/persona-eval/personas/{id}`` payload — one full persona.
 
@@ -539,23 +545,6 @@ class PersonaEvalPersonaDetail(BaseModel):
     name: str
     source: str
     context: str
-
-
-class GoalContext(BaseModel):
-    """A selectable goal/context prompt. Mirrors
-    :meth:`persona_eval.goal_contexts.GoalContext.to_dict` (sans ``template``)."""
-
-    model_config = ConfigDict(extra="allow")
-
-    id: str
-    label: str
-    description: str
-
-
-class GoalContextsResponse(BaseModel):
-    """``GET /api/persona-eval/goal-contexts`` payload."""
-
-    goalContexts: List[GoalContext]
 
 
 class PersonaEvalJobView(BaseModel):
@@ -578,7 +567,6 @@ class PersonaEvalJobView(BaseModel):
     personaId: str
     personaName: str
     sutDescription: str
-    goalContextId: Optional[str] = None
     status: str
     phase: Optional[str] = None
     turns: List[TurnView] = Field(default_factory=list)
@@ -592,7 +580,7 @@ class PersonaEvalJobView(BaseModel):
 # Survey eval
 # --------------------------------------------------------------------------- #
 class SurveyQuestion(BaseModel):
-    """One survey question in a task-owned survey instrument."""
+    """One survey question in a task-owned questionnaire."""
 
     model_config = ConfigDict(extra="allow", populate_by_name=True)
 
@@ -600,6 +588,7 @@ class SurveyQuestion(BaseModel):
     prompt: str
     type: str
     options: List[str] = Field(default_factory=list)
+    optionDetails: List[Dict[str, str]] = Field(default_factory=list)
     minValue: Optional[int] = None
     maxValue: Optional[int] = None
     construct_: str = Field(default="", alias="construct")
@@ -607,7 +596,7 @@ class SurveyQuestion(BaseModel):
 
 
 class SurveyInstrument(BaseModel):
-    """A survey instrument available for persona-agent completion."""
+    """A task-backed survey questionnaire available for persona-agent completion."""
 
     model_config = ConfigDict(extra="allow")
 
@@ -635,7 +624,15 @@ class SurveyHarborTask(BaseModel):
     instrumentId: str = ""
     profileMarkdown: str = ""
     instructionMarkdown: str = ""
+    contextMarkdown: str = ""
+    questionnaireMarkdown: str = ""
+    outputSchemaMarkdown: str = ""
+    questionnaire: Optional[SurveyInstrument] = None
     surveyKind: Literal["example", "contributing"] = "contributing"
+    metaType: str = "survey"
+    domain: str = ""
+    difficulty: str = "easy"
+    taskKind: Literal["example", "task"] = "task"
 
 
 class SurveyHarborTasksResponse(BaseModel):
@@ -687,6 +684,38 @@ class SurveyEvalJobView(BaseModel):
 
 
 # --------------------------------------------------------------------------- #
+# Chatbot eval
+# --------------------------------------------------------------------------- #
+class ChatbotEvalTask(BaseModel):
+    """A Harbor chatbot task available for persona-agent testing."""
+
+    model_config = ConfigDict(extra="allow")
+
+    id: str
+    title: str
+    description: str = ""
+    taskPath: str
+    transport: str = "http"
+    applicationId: str = ""
+    applicationContext: str = ""
+    defaultDomain: str = ""
+    metaType: str = "chatbot"
+    domain: str = ""
+    difficulty: str = "easy"
+    taskKind: Literal["example", "task"] = "task"
+    available: Optional[bool] = None
+    canStart: bool = False
+    healthUrl: str = ""
+    statusDetail: str = ""
+
+
+class ChatbotEvalTasksResponse(BaseModel):
+    """``GET /api/chatbot-eval/tasks`` payload."""
+
+    tasks: List[ChatbotEvalTask]
+
+
+# --------------------------------------------------------------------------- #
 # Web eval
 # --------------------------------------------------------------------------- #
 class WebEvalTask(BaseModel):
@@ -700,8 +729,12 @@ class WebEvalTask(BaseModel):
     siteUrl: str
     description: str = ""
     taskPath: str = ""
-    outputArtifact: str = "ecommerce_interaction.json"
-    submissionProfile: str = "ecommerce_interaction"
+    metaType: str = "web"
+    domain: str = ""
+    difficulty: str = "easy"
+    taskKind: Literal["example", "task"] = "task"
+    outputArtifact: str = "web_result.json"
+    submissionProfile: str = "web_result"
 
 
 class WebEvalTasksResponse(BaseModel):
@@ -714,7 +747,7 @@ class StartWebEvalRequest(BaseModel):
     """Body for ``POST /api/web-eval``."""
 
     personaId: str
-    taskId: str = "web-ecommerce-platform_product-discovery"
+    taskId: str = "web-playwright-quote-choice"
     personaModel: Optional[str] = None
 
     @field_validator("personaModel")
@@ -751,10 +784,10 @@ class WebEvalJobView(BaseModel):
 
 
 # --------------------------------------------------------------------------- #
-# CUA (computer-use) eval
+# OS app (computer-use) eval
 # --------------------------------------------------------------------------- #
-class CuaEvalTask(BaseModel):
-    """A Harbor computer-use task available for persona-agent testing."""
+class OsAppEvalTask(BaseModel):
+    """A Harbor OS app (computer-use) task available for persona-agent testing."""
 
     model_config = ConfigDict(extra="allow")
 
@@ -763,16 +796,26 @@ class CuaEvalTask(BaseModel):
     platform: str
     description: str = ""
     taskPath: str
+    metaType: str = ""
+    os: str = ""
+    domain: str = ""
+    difficulty: str = "easy"
+    taskKind: Literal["example", "task"] = "task"
     outputArtifact: str = "decision.json"
-    cuaSubmissionProfile: Optional[str] = None
+    osAppSubmissionProfile: Optional[str] = None
     environmentLabel: str = "persona-computer-1"
-    cuaBackend: str = "docker"
+    osAppBackend: str = "docker"
 
 
-class CuaEvalTasksResponse(BaseModel):
-    """``GET /api/cua-eval/tasks`` payload."""
+class OsAppEvalTasksResponse(BaseModel):
+    """``GET /api/os-app-eval/tasks`` payload."""
 
-    tasks: List[CuaEvalTask]
+    tasks: List[OsAppEvalTask]
+
+
+# Deprecated aliases (older clients).
+CuaEvalTask = OsAppEvalTask
+CuaEvalTasksResponse = OsAppEvalTasksResponse
 
 
 # --------------------------------------------------------------------------- #
@@ -854,14 +897,19 @@ class HarborJobLaunchRequest(BaseModel):
     personaModel: Optional[str] = None
     nConcurrentTrials: int = 2
     mode: str = "auto"
+    plane: Optional[str] = None
     jobName: Optional[str] = None
-    surveyInstrumentId: Optional[str] = None
-    cuaSubmissionProfile: Optional[str] = None
-    cuaBackend: Optional[str] = None
+    osAppSubmissionProfile: Optional[str] = Field(
+        None,
+        validation_alias=AliasChoices("osAppSubmissionProfile", "cuaSubmissionProfile"),
+    )
+    osAppBackend: Optional[str] = Field(
+        None,
+        validation_alias=AliasChoices("osAppBackend", "cuaBackend"),
+    )
     chatDomain: Optional[str] = None
     chatApplicationId: Optional[str] = None
     chatApplicationContext: Optional[str] = None
-    chatGoalContextId: Optional[str] = None
     chatMaxTurns: Optional[int] = None
 
     @field_validator("mode")
@@ -870,6 +918,16 @@ class HarborJobLaunchRequest(BaseModel):
         normalized = value.strip().lower()
         if normalized not in {"auto", "force_docker", "smoke"}:
             raise ValueError("mode must be one of auto, force_docker, smoke")
+        return normalized
+
+    @field_validator("plane")
+    @classmethod
+    def _validate_plane(cls, value: Optional[str]) -> Optional[str]:
+        if value is None:
+            return value
+        normalized = value.strip().lower()
+        if normalized not in {"harbor", "remote"}:
+            raise ValueError("plane must be one of harbor, remote")
         return normalized
 
     @field_validator("personaModel")
@@ -883,6 +941,45 @@ class HarborJobLaunchRequest(BaseModel):
             )
         return value
 
+    @field_validator("chatApplicationId")
+    @classmethod
+    def _validate_chat_application_id(cls, value: Optional[str]) -> Optional[str]:
+        if value is None:
+            return value
+        if value not in SUPPORTED_APPLICATION_IDS:
+            raise ValueError(
+                "chatApplicationId must be one of {}".format(
+                    list(SUPPORTED_APPLICATION_IDS)
+                )
+            )
+        return value
+
+    @model_validator(mode="after")
+    def _normalize_chat_application_context(self) -> "HarborJobLaunchRequest":
+        if not self.chatApplicationId:
+            return self
+        if self.chatApplicationId == "recai":
+            resolved_context = _resolved_recai_context(
+                domain=self.chatDomain,
+                application_context=self.chatApplicationContext,
+            )
+            if resolved_context not in SUPPORTED_DOMAINS:
+                raise ValueError(
+                    "chatApplicationContext/chatDomain must be one of {}".format(
+                        list(SUPPORTED_DOMAINS)
+                    )
+                )
+            self.chatApplicationContext = resolved_context
+            self.chatDomain = resolved_context
+            return self
+
+        default_context = DEFAULT_APPLICATION_CONTEXTS.get(self.chatApplicationId)
+        self.chatApplicationContext = self.chatApplicationContext or default_context
+        if not self.chatApplicationContext:
+            raise ValueError("chatApplicationContext is required")
+        self.chatDomain = None
+        return self
+
 
 class HarborJobLaunchResponse(BaseModel):
     jobName: str
@@ -892,6 +989,7 @@ class HarborJobLaunchResponse(BaseModel):
     taskType: Optional[str] = None
     trialProfile: Optional[str] = None
     mode: Optional[str] = None
+    plane: Optional[str] = None
 
 
 class HarborJobsListResponse(BaseModel):
@@ -967,6 +1065,10 @@ class TaskDetailResponse(BaseModel):
     metaType: str = ""
     taskName: str = ""
     instructionMarkdown: str = ""
+    contextMarkdown: str = ""
+    questionnaireMarkdown: str = ""
+    outputSchemaMarkdown: str = ""
+    questionnaire: Optional[SurveyInstrument] = None
     profileMarkdown: str = ""
 
 

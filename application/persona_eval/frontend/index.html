@@ -7,14 +7,14 @@
       name="description"
       content="Try out your chatbot, survey, or website against realistic simulated users and see how well it performs — before real people do."
     />
-    <title>PersonaEval — test your app with simulated users</title>
+    <title>MatrAIx — simulate users across your applications</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <!-- Set the theme class before paint to avoid a light/dark flash. -->
     <script>
       (function () {
         try {
           var t = localStorage.getItem("personaeval-theme");
-          if (t === "light" || (!t && matchMedia("(prefers-color-scheme: light)").matches)) {
+          if (t !== "dark") {
             document.documentElement.classList.add("light");
           }
         } catch (e) {}

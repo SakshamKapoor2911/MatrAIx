@@ -1,0 +1,27 @@
+{
+  "task": {
+    "path": "application/tasks/recommender-agent_chat_api"
+  },
+  "trial_name": "recommender-agent_chat_api__6649425",
+  "trials_dir": "/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/jobs/pe-recommender-agent-chat-api-4b29e19e",
+  "timeout_multiplier": 1.0,
+  "agent_timeout_multiplier": null,
+  "verifier_timeout_multiplier": null,
+  "agent_setup_timeout_multiplier": null,
+  "environment_build_timeout_multiplier": null,
+  "agent": {
+    "name": "persona-user-sim",
+    "model_name": "anthropic/claude-haiku-4-5",
+    "kwargs": {
+      "persona_path": "persona/datasets/bench-dev-sample/persona_0012.yaml"
+    }
+  },
+  "environment": {
+    "type": "host",
+    "delete": true
+  },
+  "verifier": {},
+  "artifacts": [],
+  "extra_instruction_paths": [],
+  "job_id": "edc962c3-5b03-4eae-a549-4ce497943b38"
+}

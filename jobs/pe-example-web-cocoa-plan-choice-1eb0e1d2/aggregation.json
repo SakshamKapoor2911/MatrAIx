@@ -1,0 +1,721 @@
+{
+  "schemaVersion": "1.0",
+  "artifactType": "job_aggregation",
+  "generatedAt": "2026-07-04T20:23:31Z",
+  "coverage": {
+    "trialCount": 1,
+    "completedTrials": 1,
+    "pendingTrials": 0,
+    "artifactReadyTrials": 1,
+    "completedWithoutArtifactTrials": 0
+  },
+  "fields": [
+    {
+      "key": "decision.primary.basis_primary",
+      "facetKey": "basis_primary",
+      "contextKey": "decision.primary",
+      "contextLabel": "Primary decision",
+      "label": "Primary basis",
+      "kind": "categorical",
+      "role": "primary",
+      "group": "decision.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 1,
+      "missingCount": 0,
+      "categorical": {
+        "count": 1,
+        "distinctCount": 1,
+        "counts": [
+          {
+            "value": "fit",
+            "count": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "decision.primary.decision_outcome",
+      "facetKey": "decision_outcome",
+      "contextKey": "decision.primary",
+      "contextLabel": "Primary decision",
+      "label": "Decision outcome",
+      "kind": "categorical",
+      "role": "primary",
+      "group": "decision.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 1,
+      "missingCount": 0,
+      "categorical": {
+        "count": 1,
+        "distinctCount": 1,
+        "counts": [
+          {
+            "value": "selected",
+            "count": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "decision.primary.decision_subject_id",
+      "facetKey": "decision_subject_id",
+      "contextKey": "decision.primary",
+      "contextLabel": "Primary decision",
+      "label": "Decision subject ID",
+      "kind": "categorical",
+      "role": "evidence",
+      "group": "decision.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 1,
+      "missingCount": 0,
+      "categorical": {
+        "count": 1,
+        "distinctCount": 1,
+        "counts": [
+          {
+            "value": "developer",
+            "count": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "decision.primary.decision_subject_label",
+      "facetKey": "decision_subject_label",
+      "contextKey": "decision.primary",
+      "contextLabel": "Primary decision",
+      "label": "Decision subject label",
+      "kind": "textual",
+      "role": "evidence",
+      "group": "decision.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 1,
+      "missingCount": 0,
+      "textual": {
+        "count": 1,
+        "uniqueCount": 1,
+        "samples": [
+          "Developer"
+        ],
+        "summary": "All 1 available trials reported the same text: \"Developer\"",
+        "summaryType": "heuristic"
+      }
+    },
+    {
+      "key": "decision.primary.reason",
+      "facetKey": "reason",
+      "contextKey": "decision.primary",
+      "contextLabel": "Primary decision",
+      "label": "Reason",
+      "kind": "textual",
+      "role": "explanation",
+      "group": "decision.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 1,
+      "missingCount": 0,
+      "textual": {
+        "count": 1,
+        "uniqueCount": 1,
+        "samples": [
+          "After examining all three plans methodically, the Developer plan satisfies every requirement for small personal Python projects and lightweight web apps without introducing unnecessary complexity or financial ambiguity. The Beginner plan's severe constraints — 100 CPU-seconds per day, 512 MB storage, no SSH, and restricted outbound internet — introduce operational risk incompatible with even modest experimentation; this is particularly intolerable given a security-first disposition and low tolerance for unexpected failure. The Custom plan's variable pricing range ($10 to $500/month) provides no bounded guarantee, which conflicts with the need for predictable cost control. The Developer plan presents a fixed $10/month commitment, one web app, 5 GB disk, 5,000 CPU-seconds per day, full SSH access, unrestricted outbound internet, and a 30-day no-quibble money-back guarantee — a clearly scoped, verifiable, and sufficient set of capabilities for the stated purpose, cancellable at any time."
+        ],
+        "summary": "All 1 available trials reported the same text: \"After examining all three plans methodically, the Developer plan satisfies every requirement for small personal Python…\"",
+        "summaryType": "heuristic"
+      }
+    },
+    {
+      "key": "decision.primary.task_price_text",
+      "facetKey": "task_price_text",
+      "contextKey": "decision.primary",
+      "contextLabel": "Primary decision",
+      "label": "Displayed price",
+      "kind": "textual",
+      "role": "evidence",
+      "group": "decision.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 1,
+      "missingCount": 0,
+      "textual": {
+        "count": 1,
+        "uniqueCount": 1,
+        "samples": [
+          "$10/month"
+        ],
+        "summary": "All 1 available trials reported the same text: \"$10/month\"",
+        "summaryType": "heuristic"
+      }
+    },
+    {
+      "key": "decision.process.comparison_notes",
+      "facetKey": "comparison_notes",
+      "contextKey": "decision.process",
+      "contextLabel": "Decision process",
+      "label": "Comparison notes",
+      "kind": "textual",
+      "role": "explanation",
+      "group": "decision.process",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 1,
+      "missingCount": 0,
+      "textual": {
+        "count": 1,
+        "uniqueCount": 1,
+        "samples": [
+          "The persona described a compared multiple comparison pattern before picking this plan."
+        ],
+        "summary": "All 1 available trials reported the same text: \"The persona described a compared multiple comparison pattern before picking this plan.\"",
+        "summaryType": "heuristic"
+      }
+    },
+    {
+      "key": "decision.process.exploration_style",
+      "facetKey": "exploration_style",
+      "contextKey": "decision.process",
+      "contextLabel": "Decision process",
+      "label": "Exploration style",
+      "kind": "categorical",
+      "role": "primary",
+      "group": "decision.process",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 1,
+      "missingCount": 0,
+      "categorical": {
+        "count": 1,
+        "distinctCount": 1,
+        "counts": [
+          {
+            "value": "compared_multiple",
+            "count": 1
+          }
+        ]
+      }
+    }
+  ],
+  "contexts": [
+    {
+      "key": "decision.primary",
+      "label": "Primary decision",
+      "contextType": "decision",
+      "summaryDirectives": [
+        {
+          "id": "decision.reason_by_outcome",
+          "title": "Reason by decision outcome",
+          "targetFacetKey": "reason",
+          "groupByFacetKey": "decision_outcome",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        },
+        {
+          "id": "decision.reason_by_basis_primary",
+          "title": "Reason by primary basis",
+          "targetFacetKey": "reason",
+          "groupByFacetKey": "basis_primary",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ],
+      "judgeDirectives": [
+        {
+          "id": "decision.reason_signal_scan",
+          "title": "Reason signal scan",
+          "targetFacetKey": "reason",
+          "groupByFacetKey": "basis_primary",
+          "groupByMode": "categorical",
+          "judgeKind": "llm_signal_judge",
+          "prompt": "Read the persona's reason and mark which reusable decision signals are explicitly present.",
+          "rubric": "Mark a signal true only when the reason clearly states or strongly implies that signal.",
+          "signals": [
+            {
+              "key": "price_signal",
+              "label": "Price sensitivity",
+              "valueType": "boolean"
+            },
+            {
+              "key": "quality_signal",
+              "label": "Quality emphasis",
+              "valueType": "boolean"
+            },
+            {
+              "key": "convenience_signal",
+              "label": "Convenience emphasis",
+              "valueType": "boolean"
+            },
+            {
+              "key": "trust_signal",
+              "label": "Trust emphasis",
+              "valueType": "boolean"
+            },
+            {
+              "key": "novelty_signal",
+              "label": "Novelty seeking",
+              "valueType": "boolean"
+            },
+            {
+              "key": "fit_signal",
+              "label": "Needs fit emphasis",
+              "valueType": "boolean"
+            }
+          ]
+        }
+      ],
+      "facets": [
+        {
+          "key": "decision.primary.decision_outcome",
+          "facetKey": "decision_outcome",
+          "contextKey": "decision.primary",
+          "contextLabel": "Primary decision",
+          "label": "Decision outcome",
+          "kind": "categorical",
+          "role": "primary",
+          "group": "decision.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 1,
+          "missingCount": 0,
+          "categorical": {
+            "count": 1,
+            "distinctCount": 1,
+            "counts": [
+              {
+                "value": "selected",
+                "count": 1
+              }
+            ]
+          }
+        },
+        {
+          "key": "decision.primary.basis_primary",
+          "facetKey": "basis_primary",
+          "contextKey": "decision.primary",
+          "contextLabel": "Primary decision",
+          "label": "Primary basis",
+          "kind": "categorical",
+          "role": "primary",
+          "group": "decision.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 1,
+          "missingCount": 0,
+          "categorical": {
+            "count": 1,
+            "distinctCount": 1,
+            "counts": [
+              {
+                "value": "fit",
+                "count": 1
+              }
+            ]
+          }
+        },
+        {
+          "key": "decision.primary.reason",
+          "facetKey": "reason",
+          "contextKey": "decision.primary",
+          "contextLabel": "Primary decision",
+          "label": "Reason",
+          "kind": "textual",
+          "role": "explanation",
+          "group": "decision.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 1,
+          "missingCount": 0,
+          "textual": {
+            "count": 1,
+            "uniqueCount": 1,
+            "samples": [
+              "After examining all three plans methodically, the Developer plan satisfies every requirement for small personal Python projects and lightweight web apps without introducing unnecessary complexity or financial ambiguity. The Beginner plan's severe constraints — 100 CPU-seconds per day, 512 MB storage, no SSH, and restricted outbound internet — introduce operational risk incompatible with even modest experimentation; this is particularly intolerable given a security-first disposition and low tolerance for unexpected failure. The Custom plan's variable pricing range ($10 to $500/month) provides no bounded guarantee, which conflicts with the need for predictable cost control. The Developer plan presents a fixed $10/month commitment, one web app, 5 GB disk, 5,000 CPU-seconds per day, full SSH access, unrestricted outbound internet, and a 30-day no-quibble money-back guarantee — a clearly scoped, verifiable, and sufficient set of capabilities for the stated purpose, cancellable at any time."
+            ],
+            "summary": "All 1 available trials reported the same text: \"After examining all three plans methodically, the Developer plan satisfies every requirement for small personal Python…\"",
+            "summaryType": "heuristic"
+          }
+        },
+        {
+          "key": "decision.primary.decision_subject_id",
+          "facetKey": "decision_subject_id",
+          "contextKey": "decision.primary",
+          "contextLabel": "Primary decision",
+          "label": "Decision subject ID",
+          "kind": "categorical",
+          "role": "evidence",
+          "group": "decision.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 1,
+          "missingCount": 0,
+          "categorical": {
+            "count": 1,
+            "distinctCount": 1,
+            "counts": [
+              {
+                "value": "developer",
+                "count": 1
+              }
+            ]
+          }
+        },
+        {
+          "key": "decision.primary.decision_subject_label",
+          "facetKey": "decision_subject_label",
+          "contextKey": "decision.primary",
+          "contextLabel": "Primary decision",
+          "label": "Decision subject label",
+          "kind": "textual",
+          "role": "evidence",
+          "group": "decision.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 1,
+          "missingCount": 0,
+          "textual": {
+            "count": 1,
+            "uniqueCount": 1,
+            "samples": [
+              "Developer"
+            ],
+            "summary": "All 1 available trials reported the same text: \"Developer\"",
+            "summaryType": "heuristic"
+          }
+        },
+        {
+          "key": "decision.primary.task_price_text",
+          "facetKey": "task_price_text",
+          "contextKey": "decision.primary",
+          "contextLabel": "Primary decision",
+          "label": "Displayed price",
+          "kind": "textual",
+          "role": "evidence",
+          "group": "decision.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 1,
+          "missingCount": 0,
+          "textual": {
+            "count": 1,
+            "uniqueCount": 1,
+            "samples": [
+              "$10/month"
+            ],
+            "summary": "All 1 available trials reported the same text: \"$10/month\"",
+            "summaryType": "heuristic"
+          }
+        }
+      ],
+      "summaries": [
+        {
+          "id": "decision.reason_by_outcome",
+          "title": "Reason by decision outcome",
+          "targetFacetKey": "reason",
+          "groupByFacetKey": "decision_outcome",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary",
+          "instruction": null,
+          "status": "ready_for_llm",
+          "overall": {
+            "count": 1,
+            "uniqueCount": 1,
+            "samples": [
+              "After examining all three plans methodically, the Developer plan satisfies every requirement for small personal Python projects and lightweight web apps without introducing unnecessary complexity or financial ambiguity. The Beginner plan's severe constraints — 100 CPU-seconds per day, 512 MB storage, no SSH, and restricted outbound internet — introduce operational risk incompatible with even modest experimentation; this is particularly intolerable given a security-first disposition and low tolerance for unexpected failure. The Custom plan's variable pricing range ($10 to $500/month) provides no bounded guarantee, which conflicts with the need for predictable cost control. The Developer plan presents a fixed $10/month commitment, one web app, 5 GB disk, 5,000 CPU-seconds per day, full SSH access, unrestricted outbound internet, and a 30-day no-quibble money-back guarantee — a clearly scoped, verifiable, and sufficient set of capabilities for the stated purpose, cancellable at any time."
+            ],
+            "summary": "All 1 available trials reported the same text: \"After examining all three plans methodically, the Developer plan satisfies every requirement for small personal Python…\"",
+            "summaryType": "heuristic"
+          },
+          "buckets": [
+            {
+              "bucket": "selected",
+              "count": 1,
+              "samples": [
+                "After examining all three plans methodically, the Developer plan satisfies every requirement for small personal Python projects and lightweight web apps without introducing unnecessary complexity or financial ambiguity. The Beginner plan's severe constraints — 100 CPU-seconds per day, 512 MB storage, no SSH, and restricted outbound internet — introduce operational risk incompatible with even modest experimentation; this is particularly intolerable given a security-first disposition and low tolerance for unexpected failure. The Custom plan's variable pricing range ($10 to $500/month) provides no bounded guarantee, which conflicts with the need for predictable cost control. The Developer plan presents a fixed $10/month commitment, one web app, 5 GB disk, 5,000 CPU-seconds per day, full SSH access, unrestricted outbound internet, and a 30-day no-quibble money-back guarantee — a clearly scoped, verifiable, and sufficient set of capabilities for the stated purpose, cancellable at any time."
+              ],
+              "summary": "All 1 available trials reported the same text: \"After examining all three plans methodically, the Developer plan satisfies every requirement for small personal Python…\"",
+              "summaryType": "heuristic"
+            }
+          ],
+          "llmFingerprint": "9f0306c962256f021352aa374e9420d21823cb4a405186ca21afbd0d1c425964"
+        },
+        {
+          "id": "decision.reason_by_basis_primary",
+          "title": "Reason by primary basis",
+          "targetFacetKey": "reason",
+          "groupByFacetKey": "basis_primary",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary",
+          "instruction": null,
+          "status": "ready_for_llm",
+          "overall": {
+            "count": 1,
+            "uniqueCount": 1,
+            "samples": [
+              "After examining all three plans methodically, the Developer plan satisfies every requirement for small personal Python projects and lightweight web apps without introducing unnecessary complexity or financial ambiguity. The Beginner plan's severe constraints — 100 CPU-seconds per day, 512 MB storage, no SSH, and restricted outbound internet — introduce operational risk incompatible with even modest experimentation; this is particularly intolerable given a security-first disposition and low tolerance for unexpected failure. The Custom plan's variable pricing range ($10 to $500/month) provides no bounded guarantee, which conflicts with the need for predictable cost control. The Developer plan presents a fixed $10/month commitment, one web app, 5 GB disk, 5,000 CPU-seconds per day, full SSH access, unrestricted outbound internet, and a 30-day no-quibble money-back guarantee — a clearly scoped, verifiable, and sufficient set of capabilities for the stated purpose, cancellable at any time."
+            ],
+            "summary": "All 1 available trials reported the same text: \"After examining all three plans methodically, the Developer plan satisfies every requirement for small personal Python…\"",
+            "summaryType": "heuristic"
+          },
+          "buckets": [
+            {
+              "bucket": "fit",
+              "count": 1,
+              "samples": [
+                "After examining all three plans methodically, the Developer plan satisfies every requirement for small personal Python projects and lightweight web apps without introducing unnecessary complexity or financial ambiguity. The Beginner plan's severe constraints — 100 CPU-seconds per day, 512 MB storage, no SSH, and restricted outbound internet — introduce operational risk incompatible with even modest experimentation; this is particularly intolerable given a security-first disposition and low tolerance for unexpected failure. The Custom plan's variable pricing range ($10 to $500/month) provides no bounded guarantee, which conflicts with the need for predictable cost control. The Developer plan presents a fixed $10/month commitment, one web app, 5 GB disk, 5,000 CPU-seconds per day, full SSH access, unrestricted outbound internet, and a 30-day no-quibble money-back guarantee — a clearly scoped, verifiable, and sufficient set of capabilities for the stated purpose, cancellable at any time."
+              ],
+              "summary": "All 1 available trials reported the same text: \"After examining all three plans methodically, the Developer plan satisfies every requirement for small personal Python…\"",
+              "summaryType": "heuristic"
+            }
+          ],
+          "llmFingerprint": "83f4bd7f1c97d899b189b1d963463e674c61d380a4aaa1a599f281165823fe96"
+        }
+      ],
+      "judges": [
+        {
+          "id": "decision.reason_signal_scan",
+          "title": "Reason signal scan",
+          "targetFacetKey": "reason",
+          "groupByFacetKey": "basis_primary",
+          "groupByMode": "categorical",
+          "judgeKind": "llm_signal_judge",
+          "prompt": "Read the persona's reason and mark which reusable decision signals are explicitly present.",
+          "rubric": "Mark a signal true only when the reason clearly states or strongly implies that signal.",
+          "signals": [
+            {
+              "key": "price_signal",
+              "label": "Price sensitivity",
+              "valueType": "boolean",
+              "description": null
+            },
+            {
+              "key": "quality_signal",
+              "label": "Quality emphasis",
+              "valueType": "boolean",
+              "description": null
+            },
+            {
+              "key": "convenience_signal",
+              "label": "Convenience emphasis",
+              "valueType": "boolean",
+              "description": null
+            },
+            {
+              "key": "trust_signal",
+              "label": "Trust emphasis",
+              "valueType": "boolean",
+              "description": null
+            },
+            {
+              "key": "novelty_signal",
+              "label": "Novelty seeking",
+              "valueType": "boolean",
+              "description": null
+            },
+            {
+              "key": "fit_signal",
+              "label": "Needs fit emphasis",
+              "valueType": "boolean",
+              "description": null
+            }
+          ],
+          "status": "ready_for_llm",
+          "overall": {
+            "count": 1,
+            "samples": [
+              "After examining all three plans methodically, the Developer plan satisfies every requirement for small personal Python…"
+            ]
+          },
+          "buckets": [
+            {
+              "bucket": "fit",
+              "count": 1,
+              "samples": [
+                "After examining all three plans methodically, the Developer plan satisfies every requirement for small personal Python…"
+              ]
+            }
+          ],
+          "llmFingerprint": "c2a848327fb5f6a8dfe34439b43db3d2496800b3765c4ad3c52a6fa3352721dd"
+        }
+      ],
+      "relationships": [
+        {
+          "type": "text_by_primary_category",
+          "primaryFacetKey": "decision.primary.decision_outcome",
+          "textFacetKey": "decision.primary.reason",
+          "buckets": [
+            {
+              "category": "selected",
+              "count": 1,
+              "samples": [
+                "After examining all three plans methodically, the Developer plan satisfies every requirement for small personal Python projects and lightweight web apps without introducing unnecessary complexity or financial ambiguity. The Beginner plan's severe constraints — 100 CPU-seconds per day, 512 MB storage, no SSH, and restricted outbound internet — introduce operational risk incompatible with even modest experimentation; this is particularly intolerable given a security-first disposition and low tolerance for unexpected failure. The Custom plan's variable pricing range ($10 to $500/month) provides no bounded guarantee, which conflicts with the need for predictable cost control. The Developer plan presents a fixed $10/month commitment, one web app, 5 GB disk, 5,000 CPU-seconds per day, full SSH access, unrestricted outbound internet, and a 30-day no-quibble money-back guarantee — a clearly scoped, verifiable, and sufficient set of capabilities for the stated purpose, cancellable at any time."
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text_by_primary_category",
+          "primaryFacetKey": "decision.primary.decision_outcome",
+          "textFacetKey": "decision.primary.decision_subject_label",
+          "buckets": [
+            {
+              "category": "selected",
+              "count": 1,
+              "samples": [
+                "Developer"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text_by_primary_category",
+          "primaryFacetKey": "decision.primary.decision_outcome",
+          "textFacetKey": "decision.primary.task_price_text",
+          "buckets": [
+            {
+              "category": "selected",
+              "count": 1,
+              "samples": [
+                "$10/month"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "decision.process",
+      "label": "Decision process",
+      "contextType": "decision_process",
+      "summaryDirectives": [],
+      "judgeDirectives": [],
+      "facets": [
+        {
+          "key": "decision.process.exploration_style",
+          "facetKey": "exploration_style",
+          "contextKey": "decision.process",
+          "contextLabel": "Decision process",
+          "label": "Exploration style",
+          "kind": "categorical",
+          "role": "primary",
+          "group": "decision.process",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 1,
+          "missingCount": 0,
+          "categorical": {
+            "count": 1,
+            "distinctCount": 1,
+            "counts": [
+              {
+                "value": "compared_multiple",
+                "count": 1
+              }
+            ]
+          }
+        },
+        {
+          "key": "decision.process.comparison_notes",
+          "facetKey": "comparison_notes",
+          "contextKey": "decision.process",
+          "contextLabel": "Decision process",
+          "label": "Comparison notes",
+          "kind": "textual",
+          "role": "explanation",
+          "group": "decision.process",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 1,
+          "missingCount": 0,
+          "textual": {
+            "count": 1,
+            "uniqueCount": 1,
+            "samples": [
+              "The persona described a compared multiple comparison pattern before picking this plan."
+            ],
+            "summary": "All 1 available trials reported the same text: \"The persona described a compared multiple comparison pattern before picking this plan.\"",
+            "summaryType": "heuristic"
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "type": "text_by_primary_category",
+          "primaryFacetKey": "decision.process.exploration_style",
+          "textFacetKey": "decision.process.comparison_notes",
+          "buckets": [
+            {
+              "category": "compared_multiple",
+              "count": 1,
+              "samples": [
+                "The persona described a compared multiple comparison pattern before picking this plan."
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "reporting": {
+    "status": "ready",
+    "llmEnabled": false,
+    "model": "openai/gpt-4o-mini",
+    "totalUnits": 3,
+    "summaryUnits": 2,
+    "judgeUnits": 1,
+    "readyUnits": 3,
+    "completedUnits": 0,
+    "failedUnits": 0,
+    "updatedAt": "2026-07-04T20:23:31Z"
+  }
+}

@@ -11,17 +11,18 @@ set -uo pipefail
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$HERE"
 REPO_ROOT="$(cd "${HERE}/../.." && pwd)"
-CHATBOT_API_DIR="${REPO_ROOT}/environment/task-environments/application/recommender-agent_chat_api/recommender-api"
+PERSONA_EVAL_CORE_DIR="${REPO_ROOT}/packages/persona-eval/src"
+CHATBOT_API_DIR="${REPO_ROOT}/environment/task-environments/application/shared-chat-api-recommender/recommender-api"
 
 # Optional: load local secrets (e.g. OPENAI_API_KEY) from .env.local if present.
 if [[ -f .env.local ]]; then set -a; . ./.env.local; set +a; fi
 
 # Python interpreter: $VENV/bin/python if VENV is set, else `python` on PATH
-# (activate the project venv first — see RECAI_ENV_NOTES.md).
+# (activate the project venv first — see README.md).
 PY="${VENV:+$VENV/bin/}python"
 HOST="${HOST:-127.0.0.1}"
 PORT="${PORT:-8765}"
-export PYTHONPATH="${REPO_ROOT}:${REPO_ROOT}/environment/runtime:${HERE}:${CHATBOT_API_DIR}${PYTHONPATH:+:${PYTHONPATH}}"
+export PYTHONPATH="${REPO_ROOT}:${REPO_ROOT}/environment/runtime:${PERSONA_EVAL_CORE_DIR}:${HERE}:${CHATBOT_API_DIR}${PYTHONPATH:+:${PYTHONPATH}}"
 export TOKENIZERS_PARALLELISM="${TOKENIZERS_PARALLELISM:-false}"
 
 if [[ ! -d frontend/dist ]]; then

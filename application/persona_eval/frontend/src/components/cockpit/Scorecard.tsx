@@ -16,7 +16,6 @@
  * state before any run / when a run finished without an evaluation.
  */
 import { SCORE_BAND_CLASS, Sym, scoreBand } from "./cockpitShared";
-import { GroundingChip } from "../runsShared";
 import type { PersonaEvalMetricScores, PersonaEvalQuestionnaire } from "@/lib/types";
 import type { PersonaEvalRunPhase } from "@/lib/usePersonaEval";
 
@@ -92,9 +91,6 @@ export function Scorecard({ questionnaire, metrics, phase }: ScorecardProps) {
               <span className="mt-1 text-center hud text-[10px] text-text-dim">
                 How the user rated it
               </span>
-              {/* Grounding: the self-rating measures the conversation; this says
-                  whether the recommender actually returned real catalog items. */}
-              <GroundingChip metrics={metrics} className="mt-1.5" />
             </div>
             {questionnaire.ratingReason && (
               <div className={`flex-1 border-l-2 pl-3 ${overallBorder}`}>
@@ -128,13 +124,8 @@ export function Scorecard({ questionnaire, metrics, phase }: ScorecardProps) {
           />
 
           {/* Metrics strip: real counts only (no tokens / cost). */}
-          <div className="mt-3 grid grid-cols-3 gap-2">
-            <MetricTile
-              value={metrics.turnsToRecommendation === null ? "N/A" : String(metrics.turnsToRecommendation)}
-              caption="Turns to first suggestion"
-            />
+          <div className="mt-3 grid grid-cols-1 gap-2">
             <MetricTile value={String(metrics.numTurns)} caption="Total turns" />
-            <MetricTile value={String(metrics.recommendedItemCount)} caption="Items suggested" />
           </div>
 
           {/* Scale hint: what the colours mean. */}

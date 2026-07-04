@@ -1,4 +1,4 @@
-"""Host-native Harbor environment for json_survey / user_sim_chat trials."""
+"""Host-native Harbor environment for native survey/chat trial profiles."""
 
 from __future__ import annotations
 
@@ -20,7 +20,9 @@ from harbor.models.environment_type import EnvironmentType
 from harbor.models.task.config import EnvironmentConfig
 from harbor.models.trial.paths import EnvironmentPaths, TrialPaths
 
-_CONTAINER_PATH_PREFIXES = ("/app/", "/logs/", "/tests/")
+_CONTAINER_PATH_PATTERN = re.compile(
+    r"/(?:app|tests)(?:/[^\s'\"`;]+)?|/logs/verifier(?:/[^\s'\"`;]+)?"
+)
 
 
 class HostEnvironment(BaseEnvironment):
@@ -76,29 +78,43 @@ class HostEnvironment(BaseEnvironment):
         if not parts:
             raise ValueError("container path must not be empty")
         if parts[0] == "app":
-            return self.trial_paths.host_artifact_path(
+            host_path = self.trial_paths.host_artifact_path(
                 MAIN_SERVICE_NAME, "/" + "/".join(parts)
             )
-        if len(parts) >= 2 and parts[0] == "logs" and parts[1] == "verifier":
+        elif len(parts) >= 2 and parts[0] == "logs" and parts[1] == "verifier":
             rel = Path(*parts[2:]) if len(parts) > 2 else Path(".")
-            return self.trial_paths.verifier_dir / rel
-        if parts[0] == "tests":
+            host_path = self.trial_paths.verifier_dir / rel
+        elif parts[0] == "tests":
             rel = Path(*parts[1:]) if len(parts) > 1 else Path(".")
-            return self._tests_root / rel
-        raise ValueError("unsupported host container path: {}".format(container_path))
+            host_path = self._tests_root / rel
+        else:
+            raise ValueError("unsupported host container path: {}".format(container_path))
+        return host_path.resolve()
 
     def _rewrite_command_paths(self, command: str) -> str:
         rewritten = command
-        for prefix in _CONTAINER_PATH_PREFIXES:
-            if prefix not in rewritten:
-                continue
-            pattern = re.compile(re.escape(prefix) + r"[^\s'\"`;]+")
-            for match in pattern.findall(rewritten):
-                host_path = self.resolve_container_path(match.rstrip("/"))
-                if match.endswith("/"):
-                    host_path = host_path / ""
-                rewritten = rewritten.replace(match, str(host_path), 1)
+        for match in _CONTAINER_PATH_PATTERN.findall(rewritten):
+            host_path = self.resolve_container_path(match.rstrip("/"))
+            if match.endswith("/"):
+                host_path = host_path / ""
+            rewritten = rewritten.replace(match, str(host_path), 1)
         return rewritten
+
+    @staticmethod
+    def _normalize_shell_invocation(command: str) -> str:
+        """Run verifier scripts via bash; direct execution is brittle on host."""
+        return re.sub(
+            r"\(\s*('(?:[^']|\\')*\.sh'|\"(?:[^\"]|\\\")*\.sh\")\s*\)",
+            r"bash \1",
+            command,
+        )
+
+    def _ensure_redirect_targets(self, command: str) -> None:
+        for match in re.finditer(r">\s*('([^']+)'|\"([^\"]+)\")", command):
+            target = match.group(2) or match.group(3)
+            if not target:
+                continue
+            Path(target).parent.mkdir(parents=True, exist_ok=True)
 
     def _discover_sidecar_services(self) -> list[str]:
         compose_path = self.environment_dir / "docker-compose.yaml"
@@ -230,8 +246,33 @@ class HostEnvironment(BaseEnvironment):
         port_line = (port_result.stdout or "").strip().splitlines()[-1]
         host, _, port = port_line.rpartition(":")
         api_url = "http://{}:{}".format(host or "127.0.0.1", port)
+        await self._wait_for_sidecar_port(host or "127.0.0.1", int(port))
         marker = self.trial_paths.trial_dir / self._sidecar_api_marker
         marker.write_text(api_url + "\n", encoding="utf-8")
+
+    async def _wait_for_sidecar_port(
+        self,
+        host: str,
+        port: int,
+        *,
+        timeout_sec: float = 30.0,
+    ) -> None:
+        deadline = asyncio.get_running_loop().time() + timeout_sec
+        while asyncio.get_running_loop().time() < deadline:
+            try:
+                reader, writer = await asyncio.open_connection(host, port)
+                writer.close()
+                await writer.wait_closed()
+                return
+            except OSError:
+                await asyncio.sleep(0.5)
+        raise RuntimeError(
+            "chat sidecar did not become reachable at {}:{} within {}s".format(
+                host,
+                port,
+                int(timeout_sec),
+            )
+        )
 
     async def start(self, force_build: bool) -> None:
         self._workspace_root.mkdir(parents=True, exist_ok=True)
@@ -279,7 +320,9 @@ class HostEnvironment(BaseEnvironment):
 
     async def download_file(self, source_path: str, target_path: Path | str) -> None:
         source = self.resolve_container_path(source_path)
-        destination = Path(target_path)
+        destination = Path(target_path).resolve()
+        if source.resolve() == destination:
+            return
         destination.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(source, destination)
 
@@ -287,7 +330,12 @@ class HostEnvironment(BaseEnvironment):
         source = self.resolve_container_path(source_dir.rstrip("/") + "/.")
         if source.name == ".":
             source = source.parent
-        destination = Path(target_dir)
+        source = source.resolve()
+        destination = Path(target_dir).resolve()
+        # Host uploads land directly under the artifact mount; collection must not
+        # rmtree/copytree the same path (that wipes agent output before verify).
+        if source == destination:
+            return
         if destination.exists():
             shutil.rmtree(destination)
         shutil.copytree(source, destination)
@@ -301,15 +349,22 @@ class HostEnvironment(BaseEnvironment):
         user: str | int | None = None,
     ) -> ExecResult:
         del user
-        rewritten = self._rewrite_command_paths(command)
-        workdir = self._workspace_root
+        self._workspace_root.mkdir(parents=True, exist_ok=True)
+        self._tests_root.mkdir(parents=True, exist_ok=True)
+        self.trial_paths.verifier_dir.mkdir(parents=True, exist_ok=True)
+        output_dir = self.resolve_container_path("/app/output")
+        output_dir.mkdir(parents=True, exist_ok=True)
+
+        rewritten = self._normalize_shell_invocation(self._rewrite_command_paths(command))
+        self._ensure_redirect_targets(rewritten)
+        workdir = self._workspace_root.resolve()
         if cwd:
             workdir = self.resolve_container_path(cwd)
-        output_dir = self.resolve_container_path("/app/output")
         merged_env = dict(env or {})
-        merged_env.setdefault("MATRIX_OUTPUT_DIR", str(output_dir))
-        merged_env.setdefault("PERSONABENCH_OUTPUT_DIR", str(output_dir))
-        merged_env.setdefault("HARBOR_VERIFIER_DIR", str(self.trial_paths.verifier_dir))
+        merged_env["MATRIX_OUTPUT_DIR"] = str(output_dir)
+        merged_env["PERSONABENCH_OUTPUT_DIR"] = str(output_dir)
+        merged_env["HARBOR_VERIFIER_DIR"] = str(self.trial_paths.verifier_dir.resolve())
+        merged_env["HARBOR_TESTS_DIR"] = str(self._tests_root.resolve())
         return await self._run_command(
             ["bash", "-c", rewritten],
             cwd=workdir,

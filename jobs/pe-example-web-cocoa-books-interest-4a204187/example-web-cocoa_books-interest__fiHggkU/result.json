@@ -1,0 +1,152 @@
+{
+    "id": "46afcae9-c6ff-4d29-adb5-deb1a922f135",
+    "task_name": "personabench/application-web-cocoa-books-interest",
+    "trial_name": "example-web-cocoa_books-interest__fiHggkU",
+    "trial_uri": "file:///Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/jobs/pe-example-web-cocoa-books-interest-4a204187/example-web-cocoa_books-interest__fiHggkU",
+    "task_id": {
+        "path": "application/tasks/example-web-cocoa_books-interest"
+    },
+    "source": null,
+    "task_checksum": "2d506eed6e0b666374fbbea8d9b91072a6f30e9c434f4a7f82f78675d1e62342",
+    "config": {
+        "task": {
+            "path": "application/tasks/example-web-cocoa_books-interest",
+            "git_url": null,
+            "git_commit_id": null,
+            "name": null,
+            "ref": null,
+            "overwrite": false,
+            "download_dir": null,
+            "source": null
+        },
+        "trial_name": "example-web-cocoa_books-interest__fiHggkU",
+        "trials_dir": "jobs/pe-example-web-cocoa-books-interest-4a204187",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "persona-cocoa",
+            "import_path": null,
+            "model_name": "anthropic/claude-haiku-4-5",
+            "skills": [],
+            "override_timeout_sec": null,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "extra_allowed_hosts": [],
+            "kwargs": {
+                "persona_path": "persona/datasets/bench-dev-sample/persona_0020.yaml"
+            },
+            "env": {},
+            "mcp_servers": []
+        },
+        "environment": {
+            "type": "docker",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "cpu_enforcement_policy": "auto",
+            "memory_enforcement_policy": "auto",
+            "override_cpus": null,
+            "override_memory_mb": null,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "override_tpu": null,
+            "mounts": null,
+            "extra_docker_compose": [],
+            "env": {},
+            "kwargs": {},
+            "extra_allowed_hosts": []
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "env": {},
+            "disable": false
+        },
+        "artifacts": [],
+        "extra_instruction_paths": [],
+        "job_id": "053d0bb3-014c-45e7-b0e8-4c353d2e810f"
+    },
+    "agent_info": {
+        "name": "persona-cocoa",
+        "version": "unknown",
+        "model_info": {
+            "name": "claude-haiku-4-5",
+            "provider": "anthropic"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 0,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 0,
+        "cost_usd": 0.0,
+        "rollout_details": null,
+        "metadata": {
+            "cocoa": {
+                "final_result": "Task completed",
+                "is_done": true,
+                "is_successful": true,
+                "urls": [
+                    "https://books.toscrape.com/",
+                    "https://books.toscrape.com/catalogue/category/books/food-and-drink_33/index.html",
+                    "https://books.toscrape.com/catalogue/category/books/nonfiction_13/index.html",
+                    "https://books.toscrape.com/catalogue/the-omnivores-dilemma-a-natural-history-of-four-meals_854/index.html"
+                ],
+                "action_names": [
+                    "browser_screenshot",
+                    "browser_navigate",
+                    "dom_mark_elements",
+                    "dom_click",
+                    "dom_mark_elements",
+                    "dom_click",
+                    "dom_get_text",
+                    "browser_navigate",
+                    "dom_get_text",
+                    "browser_navigate",
+                    "dom_get_text",
+                    "dom_query_selector",
+                    "browser_navigate",
+                    "shell_execute",
+                    "file_write",
+                    "shell_execute",
+                    "shell_execute",
+                    "shell_execute",
+                    "code_execute",
+                    "shell_execute",
+                    "shell_execute",
+                    "task_complete"
+                ],
+                "promoted_outputs": [],
+                "status": "success",
+                "iterations": 22
+            }
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-07-02T04:17:23.585661Z",
+    "finished_at": "2026-07-02T04:22:10.316227Z",
+    "environment_setup": {
+        "started_at": "2026-07-02T04:17:23.590964Z",
+        "finished_at": "2026-07-02T04:17:54.639620Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-07-02T04:17:55.156057Z",
+        "finished_at": "2026-07-02T04:18:04.949394Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-07-02T04:18:04.950372Z",
+        "finished_at": "2026-07-02T04:22:00.300079Z"
+    },
+    "verifier": {
+        "started_at": "2026-07-02T04:22:01.498956Z",
+        "finished_at": "2026-07-02T04:22:06.638008Z"
+    },
+    "step_results": null
+}

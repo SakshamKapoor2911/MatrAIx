@@ -1,6 +1,7 @@
 import { FOCUS_RING, Sym } from "../cockpitShared";
 import type { PersonaPoolPersonaCard } from "@/lib/types";
-import { DIMENSION_CHIP_TONES, ToneChip } from "./ToneChip";
+import { CHIP_TEXT_CLASS, personaDimChipTone } from "./taskCardLabels";
+import { ToneChip } from "./ToneChip";
 
 const DIM_LABELS: Record<string, string> = {
   age_bracket: "Age",
@@ -14,6 +15,7 @@ const DIM_LABELS: Record<string, string> = {
 export interface BenchPersonaCardProps {
   persona: PersonaPoolPersonaCard;
   selected?: boolean;
+  disabled?: boolean;
   onToggle?: () => void;
   onOpenDetail?: () => void;
 }
@@ -21,25 +23,29 @@ export interface BenchPersonaCardProps {
 export function BenchPersonaCard({
   persona,
   selected = false,
+  disabled = false,
   onToggle,
   onOpenDetail,
 }: BenchPersonaCardProps) {
   const dims = Object.entries(persona.dimensions ?? {}).slice(0, 4);
   return (
     <div
-      className={`w-full rounded-lg border p-3 transition-all duration-200 ${
+      className={`flex h-[8.75rem] w-full flex-col overflow-hidden rounded-lg border p-3 transition-all duration-200 ${
         selected
           ? "persona-card--selected"
-          : "border-outline/45 bg-surface/40 hover:border-primary/30 hover:bg-surface/70"
+          : disabled
+            ? "border-outline/45 bg-surface/30 opacity-80"
+            : "border-outline/45 bg-surface/40 hover:border-primary/30 hover:bg-surface/70"
       }`}
     >
-      <div className="mb-2.5 flex items-start justify-between gap-2">
+      <div className="mb-2.5 flex h-[2.25rem] items-start justify-between gap-2">
         <button
           type="button"
+          disabled={disabled}
           onClick={onToggle}
-          className={`min-w-0 flex-1 text-left ${FOCUS_RING}`}
+          className={`min-w-0 flex-1 text-left disabled:cursor-default disabled:opacity-80 ${FOCUS_RING}`}
         >
-          <p className="font-display text-[14px] font-semibold leading-tight text-text-main">
+          <p className="truncate font-display text-[14px] font-semibold leading-tight text-text-main">
             {persona.name ?? `persona-${persona.personaId}`}
           </p>
           <p className="mt-0.5 font-mono text-[10px] tracking-wide text-text-dim">{persona.personaId}</p>
@@ -59,19 +65,27 @@ export function BenchPersonaCard({
             </button>
           )}
           {selected && (
-            <ToneChip tone="primary" solid className="text-[9px] uppercase tracking-wide">
+            <ToneChip tone="primary" solid className={CHIP_TEXT_CLASS}>
               Selected
             </ToneChip>
           )}
         </div>
       </div>
-      <button type="button" onClick={onToggle} className={`w-full text-left ${FOCUS_RING}`}>
-        <div className="flex flex-wrap gap-1.5">
+      <button
+        type="button"
+        disabled={disabled}
+        onClick={onToggle}
+        className={`mt-auto w-full text-left disabled:cursor-default disabled:opacity-80 ${FOCUS_RING}`}
+      >
+        <div className="grid h-[3.25rem] grid-cols-2 gap-1.5 overflow-hidden">
           {dims.map(([key, value], index) => (
-            <span key={key} title={key}>
-              <ToneChip tone={DIMENSION_CHIP_TONES[index % DIMENSION_CHIP_TONES.length]}>
+            <span key={key} title={`${DIM_LABELS[key] ?? key}: ${value}`} className="block min-w-0">
+              <ToneChip
+                tone={personaDimChipTone(key, index)}
+                className={`${CHIP_TEXT_CLASS} flex w-full min-w-0`}
+              >
                 <span className="tone-chip__key">{DIM_LABELS[key] ?? key}: </span>
-                {value}
+                <span className="min-w-0 truncate">{value}</span>
               </ToneChip>
             </span>
           ))}

@@ -1,6 +1,8 @@
-# Notification preferences (macOS)
+# Calendar + reminder handoff (macOS)
 
-PersonaBench **macOS** computer-use task: the persona opens real **System Settings → Notifications**, reviews an app, and writes a structured JSON preference to disk.
+PersonaBench **macOS** computer-use task: turn a short scheduling brief into a
+two-artifact cross-app handoff, with one calendar event line and one reminder
+line.
 
 Requires the **use-computer** environment (remote macOS desktop sandbox), not Docker.
 
@@ -32,7 +34,7 @@ uv run harbor run \
 The curated local job recipe is
 `configs/jobs/example-job-recipe/appSim-example-computer-use-macos-local.yaml`.
 
-Oracle check (no LLM; writes the decision file directly):
+Oracle check (no LLM; writes the artifact files directly):
 
 ```bash
 uv run harbor run -p application/tasks/example-computer-use-macos_notification-preferences -a oracle -e use-computer
@@ -42,18 +44,17 @@ uv run harbor run -p application/tasks/example-computer-use-macos_notification-p
 
 Submissions are written inside the sandbox to:
 
-`/tmp/personabench-macos-notification-preferences/decision.json`
+- `/tmp/personabench-macos-calendar-reminder-handoff/handoff.txt`
+- `/tmp/personabench-macos-calendar-reminder-handoff/plan.json`
 
-Harbor downloads that directory after the trial (`artifacts` in `task.toml`). On the host:
+Harbor downloads that directory after the trial (`artifacts` in `task.toml`). On
+the host:
 
-`jobs/<job>/<trial>/artifacts/tmp/personabench-macos-notification-preferences/decision.json`
+`jobs/<job>/<trial>/artifacts/tmp/personabench-macos-calendar-reminder-handoff/`
 
 Check `artifacts/manifest.json` in the trial directory if a file is missing (`status: ok` vs `failed`).
 
-## vs iOS `ios-notification-preferences`
+The verifier checks:
 
-| | this task | iOS |
-|--|-----------|-----|
-| Platform | macOS (`use-computer`, default) | iOS Simulator (`platform: ios`) |
-| Settings UI | System Settings → Notifications | Settings app → Notifications |
-| Output dir | `/tmp/personabench-macos-notification-preferences/` | `/tmp/personabench-ios-notification-preferences/` |
+- `handoff.txt` matches the expected two-line format
+- `plan.json` contains the expected calendar title, reminder title, and location

@@ -4,6 +4,12 @@ import json
 from datetime import datetime, timedelta, timezone
 from typing import Any, Callable, Dict, List, Optional
 
+from backend.service.survey_instruction_builder import (
+    render_survey_context_markdown,
+    render_survey_output_schema_markdown,
+    render_survey_questionnaire_markdown,
+    render_survey_task_instruction_markdown,
+)
 from backend.service.survey_types import (
     SurveyAnswer,
     SurveyEvalConfig,
@@ -11,6 +17,7 @@ from backend.service.survey_types import (
     SurveyInstrument,
     SurveyMetrics,
     SurveyQuestion,
+    SurveyTaskContent,
     TrajectoryEvent,
 )
 from persona_eval.model_client import build_json_client
@@ -39,45 +46,35 @@ def persona_system_prompt(persona: Persona) -> str:
 def build_survey_task_prompt(
     *, instrument: SurveyInstrument, require_rationale: bool = True
 ) -> str:
-    rationale = (
-        "Include a concise rationale for every answer."
-        if require_rationale
-        else "Rationales are optional."
-    )
-    from backend.service.survey_task_registry import survey_instruction_markdown_for_instrument
     from environment.integrations.persona_eval.harbor.persona_eval import _repo_root
+    from environment.integrations.persona_eval.survey_task_content import (
+        load_survey_task_content_for_questionnaire_id,
+    )
 
-    task_instruction = survey_instruction_markdown_for_instrument(
+    task_content = load_survey_task_content_for_questionnaire_id(
         instrument.id,
         repo_root=_repo_root(),
+        fallback_questionnaire=instrument,
     )
-    lines = [
-        "You are completing a market research survey via one-shot JSON completion.",
-        "Read the product context and questions below. Answer as the assigned persona.",
-        "Use exact questionId and choice_id values from the instrument.",
-        "",
-    ]
-    if task_instruction:
-        lines.extend(["## Task instruction", "", task_instruction, ""])
-    else:
-        lines.extend(
-            [
-                "Survey context:",
-                "{}: {}".format(instrument.title, instrument.description),
-                "",
-            ]
+    if task_content is None:
+        task_content = SurveyTaskContent(
+            title=instrument.title,
+            instruction_markdown=render_survey_task_instruction_markdown(instrument).strip(),
+            context_markdown=render_survey_context_markdown(instrument).strip(),
+            questionnaire_markdown=render_survey_questionnaire_markdown(instrument).strip(),
+            output_schema_markdown=render_survey_output_schema_markdown(instrument).strip(),
+            instrument=instrument,
         )
-    lines.extend(
-        [
-            "Survey instrument JSON:",
-            json.dumps(instrument.to_dict(), ensure_ascii=False, indent=2),
-            "",
-            rationale,
-            "Return strict JSON with this shape:",
-            '{"answers":[{"questionId":"<id>","value":<answer>,"rationale":"<reason>","confidence":0.0}]}',
-        ]
-    )
-    return "\n".join(lines)
+    lines: list[str] = []
+    if task_content.instruction_markdown.strip():
+        lines.extend(["## Task instruction", "", task_content.instruction_markdown.strip(), ""])
+    if task_content.context_markdown.strip():
+        lines.extend(["## Context", "", task_content.context_markdown.strip(), ""])
+    if task_content.questionnaire_markdown.strip():
+        lines.extend(["## Questionnaire", "", task_content.questionnaire_markdown.strip(), ""])
+    if task_content.output_schema_markdown.strip():
+        lines.extend(["## Output schema", "", task_content.output_schema_markdown.strip(), ""])
+    return "\n".join(lines).strip()
 
 
 class LocalSurveyEvalRunner:

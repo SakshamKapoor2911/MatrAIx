@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 
 import type { PersonaPoolCatalog } from "@/lib/types";
 import { FOCUS_RING, Sym } from "../cockpitShared";
@@ -35,6 +36,15 @@ export function PersonaFilterModal({
   useEffect(() => {
     if (open) setDraft(filters);
   }, [open, filters]);
+
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
 
   const sources = catalog?.dimensionCategories?.personaSources ?? [];
   const groups = catalog?.dimensionCategories?.devProfile?.groups ?? [];
@@ -102,19 +112,26 @@ export function PersonaFilterModal({
     onStratifyFieldsChange(next);
   };
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+  return createPortal(
+    <div className="fixed inset-0 z-[70] flex items-center justify-center p-4 sm:p-6">
       <button
         type="button"
-        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+        className="absolute inset-0 bg-surface-dim/75 backdrop-blur-sm"
         aria-label="Close filters"
         onClick={onClose}
       />
-      <div className="glass-panel-strong relative z-10 flex max-h-[min(88vh,760px)] w-full max-w-3xl flex-col overflow-hidden rounded-xl">
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="persona-filter-modal-title"
+        className="glass-panel-strong relative z-10 flex max-h-[min(88vh,760px)] w-full max-w-4xl flex-col overflow-hidden rounded-xl shadow-2xl"
+      >
         <div className="flex items-center justify-between border-b border-outline/40 px-5 py-4">
           <div>
             <p className="hud text-[9px] text-primary">bench-dev-sample</p>
-            <h2 className="font-display text-[18px] font-semibold text-text-main">Persona filters</h2>
+            <h2 id="persona-filter-modal-title" className="font-display text-[18px] font-semibold text-text-main">
+              Persona filters
+            </h2>
           </div>
           <button type="button" onClick={onClose} className={`rounded-md p-2 text-text-variant hover:bg-surface-high ${FOCUS_RING}`}>
             <Sym name="close" size={20} />
@@ -278,6 +295,7 @@ export function PersonaFilterModal({
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

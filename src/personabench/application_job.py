@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import re
-import sys
 from pathlib import Path
 from typing import Any
 
@@ -16,7 +15,6 @@ from personabench.persona_job import (
 )
 
 DEFAULT_APPLICATION_JOBS_DIR = "configs/jobs/application-task-job-recipe"
-PERSONA_EVAL_DATA_DIR = "application/persona_eval/data/personas"
 _EXECUTION_MODES = frozenset({"auto", "force_docker", "smoke"})
 _NATIVE_TRIAL_PROFILES = frozenset({"json_survey", "user_sim_chat"})
 _HARBOR_TASK_BY_PROFILE: dict[str, str] = {
@@ -39,25 +37,9 @@ def collect_run_env_exports(
     _ = repo_root
     exports: list[tuple[str, str]] = []
     if trial_profile == "json_survey":
-        folder = Path(task_path.strip().replace("\\", "/")).name
-        repo = str(repo_root.resolve())
-        if repo not in sys.path:
-            sys.path.insert(0, repo)
-        from environment.integrations.persona_eval.survey_task_content import (
-            instrument_id_for_task_folder,
-        )
-
-        instrument_id = instrument_id_for_task_folder(folder)
-        if instrument_id:
-            exports.append(("MATRIX_SURVEY_INSTRUMENT_ID", instrument_id))
+        exports.append(("MATRIX_SURVEY_TASK_PATH", task_path))
     elif trial_profile == "user_sim_chat":
-        exports.extend(
-            [
-                ("MATRIX_CHATBOT_DOMAIN", "movie"),
-                ("MATRIX_CHATBOT_APPLICATION_ID", "recai"),
-                ("MATRIX_CHATBOT_MAX_TURNS", "8"),
-            ]
-        )
+        exports.append(("MATRIX_CHATBOT_TASK_PATH", task_path))
     return exports
 
 
@@ -174,19 +156,15 @@ def resolve_persona_entries(
 
         entry = by_id.get(persona_id) or by_id.get(_normalize_pool_persona_id(persona_id))
         if entry is None:
-            app_path = repo_root / PERSONA_EVAL_DATA_DIR / "{}.yaml".format(persona_id)
-            if app_path.is_file():
-                entry = _persona_entry_from_path(app_path, repo_root=repo_root)
+            pool_path = (
+                repo_root
+                / persona_pool
+                / "persona_{}.yaml".format(_normalize_pool_persona_id(persona_id))
+            )
+            if pool_path.is_file():
+                entry = _persona_entry_from_path(pool_path, repo_root=repo_root)
             else:
-                pool_path = (
-                    repo_root
-                    / persona_pool
-                    / "persona_{}.yaml".format(_normalize_pool_persona_id(persona_id))
-                )
-                if pool_path.is_file():
-                    entry = _persona_entry_from_path(pool_path, repo_root=repo_root)
-                else:
-                    raise ValueError("unknown persona: {}".format(persona_id))
+                raise ValueError("unknown persona: {}".format(persona_id))
 
         path = str(entry.get("path") or "")
         if path in seen_paths:

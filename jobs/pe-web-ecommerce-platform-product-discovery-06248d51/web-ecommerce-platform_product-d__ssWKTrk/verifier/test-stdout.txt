@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/tests/test_state.py", line 61, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/tests/test_state.py", line 53, in main
+    test_output_exists()
+  File "/tests/test_state.py", line 30, in test_output_exists
+    assert OUTPUT.is_file(), f"Missing {OUTPUT}"
+           ^^^^^^^^^^^^^^^^
+AssertionError: Missing /app/output/ecommerce_interaction.json

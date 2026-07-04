@@ -1,0 +1,37 @@
+artifactName: user_feedback.json
+instructions: |
+  Reflect honestly as the persona after finishing this web task.
+  Base your answers on the option you chose, how easy the site felt to use,
+  and how confident you feel about the result.
+fields:
+  - key: needConstraintSatisfaction
+    prompt: How well did the final choice satisfy your core need or constraints?
+    kind: enum
+    choices: [yes, partially, no]
+  - key: personalPreferenceSatisfaction
+    prompt: How well did the final choice match your personal preferences or taste?
+    kind: enum
+    choices: [yes, partially, no]
+  - key: overallExperienceRating
+    prompt: Overall, how would you rate the experience from 1 to 10?
+    kind: integer
+    minimum: 1
+    maximum: 10
+  - key: reason
+    prompt: Briefly explain the rating in your own voice.
+  - key: trustLevel
+    prompt: "Optional: how much did you trust the final result from 1 to 10?"
+    kind: integer
+    minimum: 1
+    maximum: 10
+    required: false
+  - key: effortRating
+    prompt: "Optional: how effortful did the task feel from 1 to 10, where higher means more effort?"
+    kind: integer
+    minimum: 1
+    maximum: 10
+    required: false
+  - key: clarityOfNextStep
+    prompt: "Optional: did the next step feel clear after you finished?"
+    kind: boolean
+    required: false

@@ -32,22 +32,22 @@ def test_resolve_persona_entries_from_pool(tmp_path: Path) -> None:
     assert chosen[0]["persona_id"] == "0042"
 
 
-def test_resolve_persona_entries_from_persona_eval_catalog(tmp_path: Path) -> None:
+def test_resolve_persona_entries_accepts_persona_prefixed_ids(tmp_path: Path) -> None:
     repo = tmp_path
-    catalog = repo / "application" / "persona_eval" / "data" / "personas"
-    catalog.mkdir(parents=True)
-    (catalog / "Nemotron_ABC123.yaml").write_text(
-        "id: Nemotron_ABC123\nname: Test User\nsource: Nemotron\n",
+    pool = repo / "persona" / "datasets" / "bench-dev-sample"
+    pool.mkdir(parents=True)
+    (pool / "persona_0042.yaml").write_text(
+        "persona_id: '0042'\nversion: '1.0'\nsource: Nemotron\ndimensions: {}\n",
         encoding="utf-8",
     )
 
     chosen = resolve_persona_entries(
-        ["Nemotron_ABC123"],
+        ["persona_0042"],
         persona_pool="persona/datasets/bench-dev-sample",
         repo_root=repo,
     )
     assert len(chosen) == 1
-    assert chosen[0]["path"] == "application/persona_eval/data/personas/Nemotron_ABC123.yaml"
+    assert chosen[0]["path"] == "persona/datasets/bench-dev-sample/persona_0042.yaml"
 
 
 def test_build_application_job_config_with_explicit_persona_ids(tmp_path: Path) -> None:
@@ -142,7 +142,7 @@ def test_build_application_job_config_macos_cua_uses_use_computer(tmp_path: Path
     )
     job.pop("_job_meta")
     assert job["environment"] == {"type": "use-computer", "delete": True}
-    assert job["agents"][0]["kwargs"]["cua_backend"] is None  # injected later by harbor_job_service
+    assert "cua_backend" not in job["agents"][0]["kwargs"]  # injected later by harbor_job_service
 
 
 def test_build_application_job_config_auto_survey_uses_host_environment(tmp_path: Path) -> None:

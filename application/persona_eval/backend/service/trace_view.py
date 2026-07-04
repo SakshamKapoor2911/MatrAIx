@@ -24,9 +24,8 @@ shape is (approximately)::
       "userMessage": "...",
       "assistantMessage": "...",
       "plan": [{"tool": "HardFilter", "detail": "...", "status": "ok"}, ...],
-      "recommendedItems": [
-          {"itemId": "cmu:54166", "title": "...", "meta": "...", "score": 0.91},
-          ...
+      "personaExposure": [
+          {"key": "...", "label": "...", "format": "item_list", "value": [...]},
       ],
       "nativeRaw": <stringified native_action.raw>,
       "rawToolOutputs": <trace.raw_tool_outputs as-is>,
@@ -44,33 +43,17 @@ import json
 import re
 from typing import Any, Dict, List, Optional
 
-__all__ = ["TraceView", "normalize_turn_view"]
+from environment.integrations.persona_eval.persona_exposure import (
+    coerce_turn_view,
+    item_list_from_exposure,
+)
+
+__all__ = ["TraceView", "normalize_turn_view", "item_list_from_exposure"]
 
 
 def normalize_turn_view(view: Any) -> Dict[str, Any]:
-    """Coerce a (possibly legacy-shaped) persisted ``TurnView`` dict to contract.
-
-    Older persisted sessions stored ``turnId`` as an int (the native backend's
-    0-based turn index) and could omit ``plan`` / ``recommendedItems``; the wire
-    contract treats ``turnId`` as a string and those collections as lists. This
-    coerces a stored turn so :class:`~backend.api.schemas.TurnView` validation
-    passes and an old session opens instead of returning a 500. Non-dict input
-    yields an empty dict; unknown keys are preserved as-is.
-    """
-    if not isinstance(view, dict):
-        return {}
-    out = dict(view)
-    turn_id = out.get("turnId")
-    if turn_id is not None and not isinstance(turn_id, str):
-        out["turnId"] = str(turn_id)
-    conv_id = out.get("conversationId")
-    if conv_id is not None and not isinstance(conv_id, str):
-        out["conversationId"] = str(conv_id)
-    if not isinstance(out.get("plan"), list):
-        out["plan"] = []
-    if not isinstance(out.get("recommendedItems"), list):
-        out["recommendedItems"] = []
-    return out
+    """Coerce a (possibly legacy-shaped) persisted ``TurnView`` dict to contract."""
+    return coerce_turn_view(view)
 
 # Canonical InteRecAgent tool names we know how to render. Matching is
 # case-insensitive and tolerant of suffixes like "Tool".
@@ -154,9 +137,19 @@ class TraceView:
         plan = TraceView._build_plan(raw_plan, native_raw_value)
 
         recommended_ids = _string_list(trace.get("recommended_item_ids"))
-        recommended_items = TraceView._resolve_items(
+        resolved_items = TraceView._resolve_items(
             recommended_ids, trace, catalog
         )
+        persona_exposure: List[Dict[str, Any]] = []
+        if resolved_items:
+            persona_exposure.append(
+                {
+                    "key": "structuredItems",
+                    "label": "Structured details",
+                    "format": "item_list",
+                    "value": resolved_items,
+                }
+            )
 
         # The real recbot backend produces an int turn_id, but the wire/UI
         # contract treats turnId as a string; coerce so API response validation
@@ -169,7 +162,7 @@ class TraceView:
             "userMessage": user_message,
             "assistantMessage": assistant_message,
             "plan": plan,
-            "recommendedItems": recommended_items,
+            "personaExposure": persona_exposure,
             "nativeRaw": native_raw,
             "rawToolOutputs": trace.get("raw_tool_outputs"),
             "durationSeconds": (

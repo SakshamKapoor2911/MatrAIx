@@ -1,0 +1,122 @@
+schemaVersion: "1.0"
+id: product_feedback_v1
+title: Survey Product Feedback
+description: Pricing and product-fit survey for the FocusLoop concept.
+questions:
+  - id: q0
+    prompt: After trying the free version, your realistic plan is...
+    type: single_choice
+    construct: default_pay_intent
+    required: true
+    options:
+      - id: q0_use_free_wont_pay
+        label: Keep using free. I avoid paying when I can and would only upgrade if I absolutely have to.
+      - id: q0_pay_when_roi_clear
+        label: Start free, then upgrade once the time savings clearly justify the price.
+      - id: q0_subscribe_paid_launch
+        label: Subscribe to Plus or better at launch because I want the full experience immediately.
+      - id: q0_free_never_decide_tier
+        label: Use free and probably never think much about tiers.
+      - id: q0_not_interested
+        label: Skip the rest because this product is not for me.
+  - id: q1
+    prompt: Plus vs Pro ($5 more per month)...
+    type: single_choice
+    construct: tier_receptivity
+    required: true
+    options:
+      - id: q1_reject_both_tiers
+        label: I would not pay for either tier because paid plans are outside my budget.
+      - id: q1_plus_after_sustained_use
+        label: Plus only after sustained use proves value; Pro is not worth the extra $5.
+      - id: q1_happy_plus_or_pro
+        label: I would happily take Plus or Pro; the extra $5 for Pro feels fine.
+      - id: q1_wont_compare_tiers
+        label: I would not spend effort comparing Plus vs Pro.
+  - id: q2
+    prompt: Annual vs monthly billing...
+    type: single_choice
+    construct: prepay_willingness
+    required: true
+    options:
+      - id: q2_monthly_cancel_anytime
+        label: Monthly only. I refuse to prepay and want to cancel the moment it stops being worth it.
+      - id: q2_annual_after_long_use
+        label: I would prepay annually only after a long trial proves steady value.
+      - id: q2_prepay_annual_plus
+        label: I would prepay annually on Plus upfront without waiting.
+      - id: q2_billing_no_preference
+        label: Monthly vs annual does not matter to me.
+  - id: q3
+    prompt: A limited $1 first-month Plus promo...
+    type: single_choice
+    construct: promo_reaction
+    required: true
+    options:
+      - id: q3_skip_even_one_dollar
+        label: I would skip it. It is not worth even $1 or the signup hassle.
+      - id: q3_one_dollar_try_cancel
+        label: I would try it at $1 and cancel unless value becomes obvious within the month.
+      - id: q3_grab_dollar_promo
+        label: I would grab the $1 Plus month right away.
+      - id: q3_ignore_promo
+        label: I would ignore the promo unless I was already planning to upgrade.
+  - id: q4
+    prompt: A friend uses a paid organizer app...
+    type: single_choice
+    construct: switch_behavior
+    required: true
+    options:
+      - id: q4_seek_free_alternative
+        label: I would look for a free alternative first, even if the paid app seems good.
+      - id: q4_compare_pay_if_wins
+        label: I would compare a few options and pay only if one clearly beats staying free.
+      - id: q4_pay_best_no_hunt
+        label: I would pay for the best app without hunting for a free version first.
+      - id: q4_switch_only_effortless
+        label: I would not switch unless it was basically handed to me ready to go.
+  - id: q5
+    prompt: Ads on free vs paying to remove them...
+    type: single_choice
+    construct: ads_tradeoff
+    required: true
+    options:
+      - id: q5_ads_not_worth_paying
+        label: Ads are annoying, but not enough to make me pay.
+      - id: q5_ads_pay_if_plus_useful
+        label: Ads bother me, but I would pay only if Plus is useful beyond ad-free.
+      - id: q5_pay_primarily_adfree
+        label: Removing ads alone is enough value for me to pay.
+      - id: q5_ads_irrelevant_to_tier
+        label: Ads would not factor into whether I upgrade.
+  - id: q6
+    prompt: Overall, the product's pricing feels...
+    type: single_choice
+    construct: price_stance
+    required: true
+    options:
+      - id: q6_too_expensive_stay_free
+        label: Too expensive for what I would use; I would leave before paying.
+      - id: q6_fair_if_use_justifies
+        label: Fair only if my daily use clearly justifies the subscription.
+      - id: q6_premium_price_ok
+        label: Reasonable. I would pay for premium convenience.
+      - id: q6_pricing_unnoticed
+        label: I do not really notice or care about the pricing.
+  - id: overall_interest
+    prompt: Overall interest in this product.
+    type: likert
+    construct: overall_interest
+    required: true
+    minValue: 1
+    maxValue: 5
+  - id: would_try_beta
+    prompt: Would you try a beta version?
+    type: single_choice
+    construct: beta_intent
+    required: true
+    options:
+      - id: "true"
+        label: Yes, I would try the beta.
+      - id: "false"
+        label: No, I would not try the beta.

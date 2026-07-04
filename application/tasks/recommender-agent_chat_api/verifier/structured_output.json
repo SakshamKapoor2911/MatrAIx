@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "1.0",
+  "artifactType": "personabench.trial_evaluation",
+  "taskType": "chatbot",
+  "presenceCheck": {
+    "passed": true,
+    "requiredArtifacts": [
+      "transcript.json"
+    ],
+    "missingArtifacts": []
+  },
+  "sourceArtifacts": {
+    "transcript": "/private/var/folders/9d/g1kf84k52dz538sqv8w4pnj40000gn/T/pytest-of-jianhenghou/pytest-158/test_recommender_chat_verifier0/output/transcript.json",
+    "userFeedback": "/private/var/folders/9d/g1kf84k52dz538sqv8w4pnj40000gn/T/pytest-of-jianhenghou/pytest-158/test_recommender_chat_verifier0/output/user_feedback.json"
+  },
+  "contexts": [
+    {
+      "key": "chat.transcript_summary",
+      "label": "Transcript summary",
+      "contextType": "conversation_summary",
+      "facets": [
+        {
+          "key": "user_turn_count",
+          "label": "User turn count",
+          "role": "score",
+          "kind": "numerical",
+          "value": 3
+        },
+        {
+          "key": "assistant_turn_count",
+          "label": "Assistant turn count",
+          "role": "score",
+          "kind": "numerical",
+          "value": 3
+        },
+        {
+          "key": "message_count",
+          "label": "Message count",
+          "role": "score",
+          "kind": "numerical",
+          "value": 6
+        }
+      ]
+    },
+    {
+      "key": "chat.user_feedback",
+      "label": "User feedback",
+      "contextType": "feedback",
+      "facets": [
+        {
+          "key": "overall_experience_rating",
+          "label": "Overall experience rating",
+          "role": "score",
+          "kind": "numerical",
+          "value": 8
+        },
+        {
+          "key": "clarification_questions_useful",
+          "label": "Clarification questions useful",
+          "role": "primary",
+          "kind": "categorical",
+          "value": true
+        },
+        {
+          "key": "feedback_reason",
+          "label": "Feedback reason",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "The recommendation fit the quiet drama request."
+        },
+        {
+          "key": "need_constraint_satisfaction",
+          "label": "Need/constraint satisfaction",
+          "role": "evidence",
+          "kind": "textual",
+          "value": "yes"
+        },
+        {
+          "key": "personal_preference_satisfaction",
+          "label": "Preference satisfaction",
+          "role": "evidence",
+          "kind": "textual",
+          "value": "partially"
+        }
+      ]
+    }
+  ]
+}

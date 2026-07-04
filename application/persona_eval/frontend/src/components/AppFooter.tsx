@@ -47,7 +47,9 @@ export function AppFooter({ context }: AppFooterProps) {
     <footer className="flex-shrink-0 border-t border-outline bg-surface-lowest">
       <div className="flex items-center justify-between gap-4 px-5 py-2 text-text-dim">
         <div className="hud flex min-w-0 items-center gap-3 text-[9px]">
-          <span className="flex-none text-text-variant">PersonaEval</span>
+          <span className="flex-none text-text-variant">
+            Matr<span className="text-primary">AI</span>x
+          </span>
           <span className="flex-none text-outline">·</span>
           <span className="min-w-0 truncate" title={context}>{context}</span>
         </div>

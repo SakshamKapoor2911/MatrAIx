@@ -7,7 +7,7 @@
 import type { ReactNode } from "react";
 import { SCORE_BAND_CLASS, Sym, scoreBand } from "./cockpitShared";
 import type { HarborCockpitPhase } from "@/lib/useHarborCockpitRun";
-import type { CuaResult, SurveyResult, VerifierSummary, WebResult } from "@/lib/types";
+import type { OsAppResult, SurveyResult, VerifierSummary, WebResult } from "@/lib/types";
 
 export type TaskEvalPhase = HarborCockpitPhase;
 
@@ -128,7 +128,7 @@ function CriterionRow({
   );
 }
 
-function VerifierStrip({ verifier }: { verifier: VerifierSummary }) {
+export function VerifierStrip({ verifier }: { verifier: VerifierSummary }) {
   const passed = verifier.passed;
   return (
     <div
@@ -139,7 +139,7 @@ function VerifierStrip({ verifier }: { verifier: VerifierSummary }) {
       <div className="flex items-center gap-2">
         <Sym name={passed ? "task_alt" : "error"} fill={1} size={18} className={passed ? "text-secondary" : "text-danger"} />
         <span className="text-[12px] font-semibold text-text-main">
-          Harbor verifier · {passed ? "Passed" : "Failed"}
+          Verifier · {passed ? "Passed" : "Failed"}
         </span>
         <span className="ml-auto font-mono text-[11px] tabular-nums text-text-variant">
           reward {verifier.reward}
@@ -314,19 +314,19 @@ export function SurveyEvalScorecard({ surveyResult, verifier, phase }: SurveyEva
   );
 }
 
-export interface CuaEvalScorecardProps {
-  cuaResult: CuaResult | null;
+export interface OsAppEvalScorecardProps {
+  osAppResult: OsAppResult | null;
   verifier?: VerifierSummary | null;
   traceStepCount?: number;
   phase: TaskEvalPhase;
 }
 
-export function CuaEvalScorecard({ cuaResult, verifier, traceStepCount = 0, phase }: CuaEvalScorecardProps) {
-  if (runningPhase(phase) && !cuaResult) return <ScorecardSkeleton />;
-  if (!cuaResult) return <EmptyScorecard phase={phase} />;
+export function OsAppEvalScorecard({ osAppResult, verifier, traceStepCount = 0, phase }: OsAppEvalScorecardProps) {
+  if (runningPhase(phase) && !osAppResult) return <ScorecardSkeleton />;
+  if (!osAppResult) return <EmptyScorecard phase={phase} />;
 
-  const reward = cuaResult.score ?? (cuaResult.success ? 1 : 0);
-  const passed = cuaResult.success;
+  const reward = osAppResult.score ?? (osAppResult.success ? 1 : 0);
+  const passed = osAppResult.success;
   const band = passed ? "high" : "low";
   const color = SCORE_BAND_CLASS[band];
   const displayReward = reward >= 0 && reward <= 1 ? `${Math.round(reward * 100)}%` : String(reward);
@@ -340,7 +340,7 @@ export function CuaEvalScorecard({ cuaResult, verifier, traceStepCount = 0, phas
               {displayReward}
             </span>
           </div>
-          <span className="mt-1 text-center hud text-[10px] text-text-dim">Harbor verifier reward</span>
+          <span className="mt-1 text-center hud text-[10px] text-text-dim">Verifier reward</span>
         </div>
         <div className={`flex-1 border-l-2 pl-3 ${passed ? "border-l-score-high" : "border-l-score-low"}`}>
           <p className="text-[12px] leading-relaxed text-text-variant">
@@ -365,10 +365,10 @@ export function CuaEvalScorecard({ cuaResult, verifier, traceStepCount = 0, phas
         <MetricTile value={String(traceStepCount)} caption="Trace steps" />
       </div>
 
-      {cuaResult.artifactName ? (
+      {osAppResult.artifactName ? (
         <div className="mt-3 flex items-center gap-2 rounded-md border border-outline bg-surface px-3 py-2 text-[11px] text-text-variant">
           <Sym name="description" size={16} className="text-primary" />
-          Output artifact · <span className="font-mono text-text-main">{cuaResult.artifactName}</span>
+          Output artifact · <span className="font-mono text-text-main">{osAppResult.artifactName}</span>
         </div>
       ) : null}
 

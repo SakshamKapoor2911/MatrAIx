@@ -22,7 +22,12 @@ import { useQuery } from "@tanstack/react-query";
 import { listWebEvalTasks, api, ApiError } from "@/lib/api";
 import { FALLBACK_WEB_TASKS } from "@/lib/fallbackTasks";
 import { mergeTaskCatalog } from "@/lib/mergeTaskCatalog";
-import { suggestedWebPersonaAgent, webPersonaAgentLabel, WEB_PERSONA_AGENTS } from "@/lib/personaAgentCatalog";
+import {
+  findWebPersonaAgent,
+  personaModelPipelineLabel,
+  suggestedWebPersonaAgent,
+  WEB_PERSONA_AGENTS,
+} from "@/lib/personaAgentCatalog";
 import type {
   ConfigOptionsResponse,
   PersonaEvalPersona,
@@ -31,11 +36,10 @@ import type {
   WebEvalTasksResponse,
   WebResult,
   WebTrace,
-  WebTraceEvent,
 } from "@/lib/types";
 import { useHarborCockpitRun, type HarborCockpitPhase } from "@/lib/useHarborCockpitRun";
 import { useCockpitInstruction } from "@/lib/useCockpitInstruction";
-import { mapWebDebriefToJobView, attachHarborTraceScreenshotUrls } from "@/lib/harborCockpitMappers";
+import { mapWebDebriefToJobView, attachHarborTraceScreenshotUrls, formatCockpitRunError } from "@/lib/harborCockpitMappers";
 import { RunHeader } from "./RunHeader";
 import { PersonaDrawer } from "./PersonaDrawer";
 import { InspectorTabs, type InspectorTab } from "./InspectorTabs";
@@ -49,10 +53,14 @@ import { CockpitRunCenter } from "./setup/CockpitRunCenter";
 import { useSetupPersonaSampling } from "./setup/useSetupPersonaSampling";
 import {
   batchProgressPct as computeBatchProgressPct,
+  BATCH_RUN_COMPLETE_HINT,
+  formatBatchProgressLabel,
   resolveRunLaunchPhase,
   useCockpitBatchJob,
 } from "./setup/useCockpitBatchJob";
+import { useCockpitRunCancel } from "./setup/useCockpitRunCancel";
 import { webEvalTaskCards } from "./setup/cockpitTaskCards";
+import { HarborTraceReplay } from "./HarborTraceReplay";
 import {
   FOCUS_RING,
   Sym,
@@ -88,65 +96,13 @@ function webStatusLine(
   jobPhase: string | null | undefined,
   harborPhase?: string | null,
 ): string | null {
-  if (phase === "launching") return "Launching Harbor job…";
+  if (phase === "launching") return "Launching batch…";
   if (phase !== "running") return null;
   const raw = (harborPhase ?? jobPhase ?? "").toLowerCase();
-  if (raw.includes("harbor") || raw.includes("trial")) return "Harbor is running the web trial…";
+  if (raw.includes("harbor") || raw.includes("trial")) return "Running web trial…";
   if (raw.includes("collect")) return "Saving the results and step screenshots…";
   if (raw.includes("web")) return "The simulated visitor is using the site…";
   return "Running the website test…";
-}
-
-/**
- * A short, friendly summary of a step's first browser action (verb + target),
- * e.g. "clicked Add to cart" / "typed “a search”" / "went to /store". Reads the
- * existing `event.actions[0]`; presentation only, no data change.
- */
-function summarizeAction(event: WebTraceEvent): string | null {
-  const action = event.actions[0];
-  if (!action || !action.name) return null;
-  const name = action.name.toLowerCase();
-  const args = action.arguments ?? {};
-  let target: string | null = null;
-  for (const value of Object.values(args)) {
-    if (typeof value === "string" && value.trim()) {
-      target = value.trim();
-      break;
-    }
-  }
-  const clip = (text: string) => (text.length > 28 ? text.slice(0, 27) + "…" : text);
-  if (name.includes("click")) return target ? `clicked ${clip(target)}` : "clicked";
-  if (name.includes("type") || name.includes("fill") || name.includes("input")) {
-    return target ? `typed “${clip(target)}”` : "typed";
-  }
-  if (name.includes("nav") || name.includes("goto") || name.includes("visit") || name.includes("open")) {
-    return target ? `went to ${clip(target)}` : "navigated";
-  }
-  if (name.includes("search")) return target ? `searched ${clip(target)}` : "searched";
-  if (name.includes("select")) return "selected an option";
-  if (name.includes("submit")) return "submitted the form";
-  if (name.includes("scroll")) return "scrolled";
-  if (name.includes("back")) return "went back";
-  return name.replace(/_/g, " ");
-}
-
-/** A `name(arg)` mono signature for a step (mockup: `goto(/store)` / `add_to_cart()`). */
-function actionSignature(event: WebTraceEvent): string {
-  const action = event.actions[0];
-  if (action?.name) {
-    const args = action.arguments ?? {};
-    let arg = "";
-    for (const value of Object.values(args)) {
-      if (typeof value === "string" && value.trim()) {
-        arg = value.trim();
-        break;
-      }
-    }
-    if (arg.length > 22) arg = arg.slice(0, 21) + "…";
-    return `${action.name}(${arg})`;
-  }
-  const message = (event.message ?? "").trim();
-  return message.length > 28 ? message.slice(0, 27) + "…" : message;
 }
 
 function formatDate(value: string | null | undefined): string | null {
@@ -168,10 +124,11 @@ export function WebEvalCockpit({
   onTaskTypeChange,
   onFooterContextChange,
   onOpenHarborJob,
+  onOpenHarborTrial,
   isActive = true,
 }: WebEvalCockpitProps) {
-  const { run, job, phase, isRunning, error, timedOut, retry, reset, harborPhase, harborJobName, harborTrialName } =
-    useHarborCockpitRun<WebEvalJobView>();
+  const { run, job, phase, isRunning, error, timedOut, retry, reset, harborPhase, harborJobName, harborTrialName, cancelRun, cancelBusy: harborCancelBusy } =
+    useHarborCockpitRun<WebEvalJobView>({ taskKind: "web" });
   const [liveTrace, setLiveTrace] = useState<WebTrace | null>(null);
   const {
     persona,
@@ -192,7 +149,7 @@ export function WebEvalCockpit({
     parallelTrials,
     setParallelTrials,
     isBatchRun,
-  } = useSetupPersonaSampling(options);
+  } = useSetupPersonaSampling(options, "web");
   const [taskId, setTaskId] = useState<string>("");
   const [webAgentByTaskId, setWebAgentByTaskId] = useState<Record<string, string>>({});
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -200,14 +157,17 @@ export function WebEvalCockpit({
   const [launchError, setLaunchError] = useState<string | null>(null);
   const {
     batchJobName,
+    batchTaskId,
     setBatchJobName,
     batchLive,
     clearBatch,
+    cancelBatch,
+    cancelBusy,
     isBatchActive,
     batchComplete,
     batchGridCells,
     expectedTrialCount,
-  } = useCockpitBatchJob(selectedPersonaIds, parallelTrials);
+  } = useCockpitBatchJob(selectedPersonaIds, parallelTrials, "web");
   const [exportSnapshot, setExportSnapshot] = useState<{
     persona: { id: string; name: string; source: string } | null;
     taskId: string;
@@ -233,9 +193,20 @@ export function WebEvalCockpit({
   );
   const task = tasks.find((item) => item.id === taskId) ?? tasks[0] ?? null;
 
+  const pipelinePersonaModelLabel = useMemo(
+    () => personaModelPipelineLabel(personaModel, personaModelOptions),
+    [personaModel, personaModelOptions],
+  );
+
   useEffect(() => {
-    if (!task && tasks.length > 0) setTaskId(tasks[0].id);
-  }, [task, tasks]);
+    if (batchTaskId) {
+      setTaskId(batchTaskId);
+      return;
+    }
+    if (!taskId && tasks.length > 0) {
+      setTaskId(tasks[0].id);
+    }
+  }, [batchTaskId, taskId, tasks]);
 
   const resolveWebAgent = useCallback(
     (id: string) => webAgentByTaskId[id] ?? suggestedWebPersonaAgent(id),
@@ -289,6 +260,7 @@ export function WebEvalCockpit({
   }, [phase, harborJobName, harborTrialName]);
 
   const failed = phase === "error" || phase === "timeout" || job?.status === "error";
+  const displayError = formatCockpitRunError(error ?? job?.error ?? null);
   const status = webStatusLine(phase, job?.phase, harborPhase);
 
   useEffect(() => {
@@ -339,7 +311,7 @@ export function WebEvalCockpit({
           nConcurrentTrials: Math.min(parallelTrials, selectedPersonaIds.length),
           mode: "auto",
         });
-        setBatchJobName(launched.jobName);
+        setBatchJobName(launched.jobName, { taskId: task.id });
       } catch (exc) {
         const message = exc instanceof ApiError ? exc.message : exc instanceof Error ? exc.message : String(exc);
         setLaunchError(message);
@@ -364,6 +336,18 @@ export function WebEvalCockpit({
     clearBatch();
     setLaunchError(null);
   }, [reset, clearBatch]);
+
+  const { onCancelRun, cancelRunBusy } = useCockpitRunCancel({
+    batchJobName,
+    batchComplete,
+    cancelBatch,
+    batchCancelBusy: cancelBusy,
+    harborJobName,
+    isRunning,
+    cancelRun,
+    harborCancelBusy,
+    setError: setLaunchError,
+  });
 
   const handleRetry = useCallback(() => {
     if (timedOut || phase === "error") retry();
@@ -427,7 +411,10 @@ export function WebEvalCockpit({
             ? 20
             : 0;
   const runProgressLabel = batchJobName
-    ? `Harbor job · ${batchLive.live?.completedTrials ?? 0}/${expectedTrialCount} trials`
+    ? formatBatchProgressLabel(
+        batchLive.live?.completedTrials ?? 0,
+        expectedTrialCount,
+      )
     : phase === "launching"
       ? "Launching web trial…"
       : phase === "running"
@@ -437,7 +424,7 @@ export function WebEvalCockpit({
         : phase === "done"
           ? `Web run complete · ${stepCount} steps`
           : failed
-            ? error ?? "The website test didn't finish."
+            ? displayError ?? "The website test didn't finish."
             : undefined;
   const canExport = exportSnapshot !== null && webResult !== null;
 
@@ -449,7 +436,7 @@ export function WebEvalCockpit({
                 trace={trace}
                 phase={phase}
                 status={status}
-                error={error}
+                error={displayError}
                 persona={persona}
                 onRetry={handleRetry}
               />
@@ -486,8 +473,9 @@ export function WebEvalCockpit({
             <CockpitPipelineDiagram
               className="h-full"
               taskType="web"
-              webPersonaAgentLabel={
-                task ? webPersonaAgentLabel(resolveWebAgent(task.id)) : undefined
+              personaModelLabel={pipelinePersonaModelLabel}
+              webCapabilityTierId={
+                task ? findWebPersonaAgent(resolveWebAgent(task.id))?.tier : undefined
               }
               hasPersona={selectedPersonaIds.length > 0}
               hasTask={Boolean(task?.taskPath)}
@@ -500,7 +488,7 @@ export function WebEvalCockpit({
           progressPct={runProgressPct}
           progressLabel={runProgressLabel}
           progressSublabel={
-            batchJobName && batchComplete ? "All trials finished — open Runs for debrief." : undefined
+            batchJobName && batchComplete ? BATCH_RUN_COMPLETE_HINT : undefined
           }
           canRun={selectedPersonaIds.length > 0 && Boolean(task?.taskPath) && !runBusy}
           isBatch={isBatchRun}
@@ -509,11 +497,15 @@ export function WebEvalCockpit({
           onParallelTrialsChange={setParallelTrials}
           runBusy={runBusy}
           onRun={() => void handleLaunch()}
-          error={launchError ?? error ?? batchLive.error}
+          error={formatCockpitRunError(launchError ?? error ?? batchLive.error)}
           onNewRun={showLiveCenter ? handleNewRun : undefined}
+          onCancelRun={onCancelRun}
+          cancelRunBusy={cancelRunBusy}
           onViewJob={
             batchJobName && batchComplete && onOpenHarborJob
               ? () => onOpenHarborJob(batchJobName)
+              : !batchJobName && harborJobName && harborTrialName && onOpenHarborTrial
+                ? () => onOpenHarborTrial(harborJobName, harborTrialName)
               : undefined
           }
           onDownload={!batchJobName ? handleExport : undefined}
@@ -540,11 +532,7 @@ export function WebEvalCockpit({
         ) : (
         <TaskSelectionRail
           taskType="web"
-          chatOptions={[]}
-          selectedChatAppId=""
-          onChatAppChange={() => undefined}
-          sidecarsByApp={{}}
-          sidecarsLoading={false}
+          chatTasks={[]}
           surveyTasks={[]}
           webTasks={taskCards}
           cuaTasks={[]}
@@ -558,7 +546,6 @@ export function WebEvalCockpit({
           domainOptions={[]}
           maxTurns={8}
           onMaxTurnsChange={() => undefined}
-          webPersonaAgentOptions={WEB_PERSONA_AGENTS}
           resolveWebPersonaAgent={resolveWebAgent}
           onWebPersonaAgentChange={(id, agent) =>
             setWebAgentByTaskId((prev) => ({ ...prev, [id]: agent }))
@@ -657,7 +644,7 @@ function WebResults({
             <Sym name="route" size={14} /> Browser trace · {trace.events.length} step
             {trace.events.length === 1 ? "" : "s"}
           </h3>
-          <WebTraceGrid trace={trace} autoFollowLatest={running} />
+          <HarborTraceReplay trace={trace} autoFollowLatest={running} />
         </div>
       )}
 
@@ -670,237 +657,6 @@ function WebResults({
         </div>
       )}
     </section>
-  );
-}
-
-/** Screenshot-tile grid + scrubber replay + per-step detail panel. */
-function WebTraceGrid({
-  trace,
-  autoFollowLatest = false,
-}: {
-  trace: WebTrace;
-  autoFollowLatest?: boolean;
-}) {
-  const [selected, setSelected] = useState<number | null>(null);
-  const [scrubIndex, setScrubIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const events = trace.events;
-
-  useEffect(() => {
-    if (!autoFollowLatest || isPlaying) return;
-    setScrubIndex(Math.max(0, events.length - 1));
-  }, [autoFollowLatest, events.length, isPlaying]);
-
-  useEffect(() => {
-    if (!isPlaying) return;
-    if (scrubIndex >= events.length - 1) {
-      setIsPlaying(false);
-      return;
-    }
-    const id = window.setInterval(() => {
-      setScrubIndex((prev) => {
-        const next = Math.min(prev + 1, events.length - 1);
-        const nextEvent = events[next];
-        if (nextEvent) setSelected(nextEvent.step);
-        if (next >= events.length - 1) setIsPlaying(false);
-        return next;
-      });
-    }, 1200);
-    return () => window.clearInterval(id);
-  }, [isPlaying, scrubIndex, events]);
-
-  useEffect(() => {
-    setScrubIndex((prev) => Math.min(prev, Math.max(0, events.length - 1)));
-  }, [events.length]);
-
-  if (events.length === 0) {
-    return (
-      <div className="rise-in rounded-md border border-dashed border-outline bg-surface-low px-4 py-6 text-center text-[12px] text-text-variant">
-        This run finished without recording any steps.
-      </div>
-    );
-  }
-
-  const activeStep = events[Math.min(scrubIndex, events.length - 1)]?.step ?? events[0].step;
-  const selectedEvent = selected != null ? events.find((event) => event.step === selected) ?? null : null;
-  const previewEvent = events[Math.min(scrubIndex, events.length - 1)];
-
-  return (
-    <div className="space-y-3">
-      <div className="flex flex-wrap items-center gap-3 rounded-md border border-outline/50 bg-surface-low px-3 py-2">
-        <button
-          type="button"
-          onClick={() => {
-            if (isPlaying) {
-              setIsPlaying(false);
-              return;
-            }
-            if (scrubIndex >= events.length - 1) {
-              setScrubIndex(0);
-              setSelected(events[0]?.step ?? null);
-            }
-            setIsPlaying(true);
-          }}
-          aria-label={isPlaying ? "Pause trace replay" : "Play trace replay"}
-          className={`grid h-8 w-8 place-items-center rounded-full border border-outline/60 text-primary transition hover:border-primary/50 active:scale-95 ${FOCUS_RING}`}
-        >
-          <Sym name={isPlaying ? "pause_circle" : "play_circle"} size={18} />
-        </button>
-        <input
-          type="range"
-          min={0}
-          max={Math.max(0, events.length - 1)}
-          value={scrubIndex}
-          onChange={(e) => {
-            setIsPlaying(false);
-            const next = Number(e.target.value);
-            setScrubIndex(next);
-            setSelected(events[next]?.step ?? null);
-          }}
-          className="min-w-[120px] flex-1 accent-primary"
-        />
-        <span className="font-mono text-[10px] text-text-dim">
-          Step {previewEvent.step} / {events.length}
-        </span>
-      </div>
-
-      {previewEvent?.screenshotUrl && (
-        <div className="overflow-hidden rounded-md border border-outline bg-surface-low">
-          <img
-            src={previewEvent.screenshotUrl}
-            alt={`Step ${previewEvent.step}`}
-            className="max-h-[280px] w-full object-contain bg-surface-lowest"
-          />
-        </div>
-      )}
-
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-        {events.map((event, index) => (
-          <TraceTile
-            key={event.step}
-            index={index}
-            event={event}
-            active={event.step === activeStep}
-            onClick={() => {
-              setSelected((prev) => (prev === event.step ? null : event.step));
-              setScrubIndex(index);
-            }}
-          />
-        ))}
-      </div>
-      {selectedEvent && (
-        <TraceDetail key={selectedEvent.step} event={selectedEvent} onClose={() => setSelected(null)} />
-      )}
-    </div>
-  );
-}
-
-function TraceTile({
-  index,
-  event,
-  active,
-  onClick,
-}: {
-  index: number;
-  event: WebTraceEvent;
-  active: boolean;
-  onClick: () => void;
-}) {
-  const [imgError, setImgError] = useState(false);
-  const hint = summarizeAction(event);
-  const showImage = Boolean(event.screenshotUrl) && !imgError;
-
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      style={{ animationDelay: `${Math.min(index, 6) * 30}ms` }}
-      className={`rise-in overflow-hidden rounded-md border bg-surface text-left transition active:scale-[0.98] ${FOCUS_RING} ${
-        active ? "border-primary" : "border-outline hover:border-primary/60 hover:bg-surface-low"
-      }`}
-    >
-      <div className="grid aspect-video place-items-center border-b border-outline bg-surface-low text-text-dim">
-        {showImage ? (
-          <img
-            src={event.screenshotUrl as string}
-            alt={`Browser screenshot for step ${event.step}`}
-            className="h-full w-full bg-surface-lowest object-cover"
-            loading="lazy"
-            onError={() => setImgError(true)}
-          />
-        ) : (
-          <Sym name="image" size={24} />
-        )}
-      </div>
-      <div className="p-2.5">
-        <div className="hud truncate text-[8px] text-text-dim">
-          Step {event.step} · {hint ?? event.source ?? "visitor"}
-        </div>
-        <div className="mt-0.5 truncate font-mono text-[10px] text-text-variant">{actionSignature(event)}</div>
-      </div>
-    </button>
-  );
-}
-
-function TraceDetail({ event, onClose }: { event: WebTraceEvent; onClose: () => void }) {
-  const [imgError, setImgError] = useState(false);
-  const message = event.message.trim();
-  return (
-    <div className="rise-in rounded-md border border-outline bg-surface p-4">
-      <div className="mb-3 flex items-center justify-between gap-2">
-        <span className="hud text-[10px] text-primary">
-          Step {event.step} · {summarizeAction(event) ?? event.source ?? "visitor"}
-        </span>
-        <button
-          type="button"
-          onClick={onClose}
-          aria-label="Close step detail"
-          className={`grid h-7 w-7 place-items-center rounded-md border border-outline text-text-variant transition hover:border-primary hover:text-text-main active:scale-95 ${FOCUS_RING}`}
-        >
-          <Sym name="close" size={16} />
-        </button>
-      </div>
-      <div className="grid grid-cols-1 gap-3 lg:grid-cols-[minmax(0,1.2fr)_minmax(260px,0.8fr)]">
-        {event.screenshotUrl && !imgError ? (
-          <div className="overflow-hidden rounded-md border border-outline bg-surface-low">
-            <img
-              src={event.screenshotUrl}
-              alt={`Browser screenshot for step ${event.step}`}
-              className="aspect-video max-h-80 w-full bg-surface-lowest object-contain"
-              loading="lazy"
-              onError={() => setImgError(true)}
-            />
-            {event.screenshotFile && (
-              <div className="border-t border-outline px-2 py-1 font-mono text-[11px] text-text-variant">
-                {event.screenshotFile}
-              </div>
-            )}
-          </div>
-        ) : event.screenshotUrl && imgError ? (
-          <div className="grid aspect-video max-h-80 w-full place-items-center rounded-md border border-outline bg-surface-low text-text-dim">
-            <div className="text-center">
-              <Sym name="image" size={24} className="text-text-dim" />
-              <p className="mt-1 text-[12px] text-text-variant">Screenshot unavailable for this step.</p>
-            </div>
-          </div>
-        ) : null}
-        <div className="min-w-0 rounded-md border border-outline bg-surface-low p-2">
-          {message && (
-            <p className="whitespace-pre-wrap break-words text-[12px] leading-relaxed text-text-variant">{message}</p>
-          )}
-          {event.actions.length > 0 && (
-            <pre
-              className={`${message ? "mt-2" : ""} max-h-52 overflow-auto whitespace-pre-wrap break-words rounded bg-field p-2 font-mono text-[11px] text-text-variant`}
-            >
-              {JSON.stringify(event.actions, null, 2)}
-            </pre>
-          )}
-          {!message && event.actions.length === 0 && (
-            <p className="text-[12px] text-text-variant">No extra detail recorded for this step.</p>
-          )}
-        </div>
-      </div>
-    </div>
   );
 }
 

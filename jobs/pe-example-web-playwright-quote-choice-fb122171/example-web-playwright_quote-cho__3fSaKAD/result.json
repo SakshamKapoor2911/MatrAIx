@@ -1,0 +1,113 @@
+{
+    "id": "1ebd6d02-13a9-4f13-8179-7a32511f01e1",
+    "task_name": "personabench/application-web-playwright-quote-choice",
+    "trial_name": "example-web-playwright_quote-cho__3fSaKAD",
+    "trial_uri": "file:///Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/jobs/pe-example-web-playwright-quote-choice-fb122171/example-web-playwright_quote-cho__3fSaKAD",
+    "task_id": {
+        "path": "application/tasks/example-web-playwright_quote-choice"
+    },
+    "source": null,
+    "task_checksum": "81b54e7b647a574010fccabe3d19ab5188b8f680fb833de3d8043502f9fb3d05",
+    "config": {
+        "task": {
+            "path": "application/tasks/example-web-playwright_quote-choice",
+            "git_url": null,
+            "git_commit_id": null,
+            "name": null,
+            "ref": null,
+            "overwrite": false,
+            "download_dir": null,
+            "source": null
+        },
+        "trial_name": "example-web-playwright_quote-cho__3fSaKAD",
+        "trials_dir": "jobs/pe-example-web-playwright-quote-choice-fb122171",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "persona-openhands-sdk",
+            "import_path": null,
+            "model_name": "anthropic/claude-sonnet-4-6",
+            "skills": [],
+            "override_timeout_sec": null,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "extra_allowed_hosts": [],
+            "kwargs": {
+                "persona_path": "persona/datasets/bench-dev-sample/persona_0001.yaml"
+            },
+            "env": {},
+            "mcp_servers": []
+        },
+        "environment": {
+            "type": "docker",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "cpu_enforcement_policy": "auto",
+            "memory_enforcement_policy": "auto",
+            "override_cpus": null,
+            "override_memory_mb": null,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "override_tpu": null,
+            "mounts": null,
+            "extra_docker_compose": [],
+            "env": {},
+            "kwargs": {},
+            "extra_allowed_hosts": []
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "env": {},
+            "disable": false
+        },
+        "artifacts": [],
+        "extra_instruction_paths": [],
+        "job_id": "3cbc7433-0d3e-42a4-ba4b-dc168b422bdc"
+    },
+    "agent_info": {
+        "name": "persona-openhands-sdk",
+        "version": "1.31.0",
+        "model_info": {
+            "name": "claude-sonnet-4-6",
+            "provider": "anthropic"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 215446,
+        "n_cache_tokens": 194793,
+        "n_output_tokens": 6331,
+        "cost_usd": 0.23076615000000003,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-07-04T19:43:30.493139Z",
+    "finished_at": "2026-07-04T19:47:55.461868Z",
+    "environment_setup": {
+        "started_at": "2026-07-04T19:43:30.497310Z",
+        "finished_at": "2026-07-04T19:43:33.720138Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-07-04T19:43:33.720502Z",
+        "finished_at": "2026-07-04T19:45:26.534097Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-07-04T19:45:26.537512Z",
+        "finished_at": "2026-07-04T19:47:41.123166Z"
+    },
+    "verifier": {
+        "started_at": "2026-07-04T19:47:41.860080Z",
+        "finished_at": "2026-07-04T19:47:51.284851Z"
+    },
+    "step_results": null
+}

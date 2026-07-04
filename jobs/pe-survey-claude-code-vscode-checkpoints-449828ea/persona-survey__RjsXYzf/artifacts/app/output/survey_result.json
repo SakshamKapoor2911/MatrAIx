@@ -1,0 +1,201 @@
+{
+  "instrument": {
+    "id": "software_claude_code_vscode_checkpoints_v1",
+    "title": "Claude Code IDE Autonomy Survey"
+  },
+  "answers": [
+    {
+      "questionId": "reviewable_edits",
+      "value": 4,
+      "rationale": "I'm a pragmatic developer who values safety checks. Inline diffs before accepting changes are essential—I'd definitely use this feature because it lets me maintain control while leveraging the agent's speed. The review step is non-negotiable for me.",
+      "confidence": 0.9
+    },
+    {
+      "questionId": "checkpoint_control",
+      "value": 5,
+      "rationale": "Checkpoint rollback is a game-changer for my confidence. Knowing I can instantly revert autonomous edits removes my biggest fear about delegating complex tasks to an agent. This safety net makes me willing to let Claude Code take on more ambitious refactoring.",
+      "confidence": 0.92
+    },
+    {
+      "questionId": "adoption_concern",
+      "value": "incorrect_code_changes",
+      "rationale": "My biggest worry is that the agent might introduce subtle bugs or logic errors that pass initial review but break in production. Even with diffs, catching all issues before merge is hard. I need to be confident the generated code is actually correct.",
+      "confidence": 0.88
+    },
+    {
+      "questionId": "safe_first_task",
+      "value": "Adding unit tests and test fixtures for existing functions, or refactoring repetitive utility functions with clear, well-defined behavior",
+      "rationale": "I'd start with well-scoped, low-risk tasks where correctness is easy to verify. Test generation and utility refactoring have clear success criteria and limited blast radius if something goes wrong. These tasks build trust before I delegate critical business logic.",
+      "confidence": 0.85
+    }
+  ],
+  "trajectory": [
+    {
+      "timestamp": "2026-07-02T04:13:29Z",
+      "actor": "system",
+      "action": "survey_started",
+      "context": {
+        "instrumentId": "software_claude_code_vscode_checkpoints_v1",
+        "instrumentTitle": "Claude Code IDE Autonomy Survey",
+        "numQuestions": 4
+      },
+      "outcome": {
+        "status": "started"
+      }
+    },
+    {
+      "timestamp": "2026-07-02T04:13:30Z",
+      "actor": "assistant",
+      "action": "ask_question",
+      "context": {
+        "instrumentId": "software_claude_code_vscode_checkpoints_v1",
+        "questionId": "reviewable_edits",
+        "questionIndex": 1,
+        "questionType": "likert",
+        "construct": "coding_agent_reviewability"
+      },
+      "outcome": {
+        "prompt": "I would use Claude Code inside VS Code to make multi-file code edits if I could review inline diffs before accepting changes.",
+        "options": []
+      }
+    },
+    {
+      "timestamp": "2026-07-02T04:13:31Z",
+      "actor": "user",
+      "action": "answer_question",
+      "context": {
+        "instrumentId": "software_claude_code_vscode_checkpoints_v1",
+        "questionId": "reviewable_edits",
+        "questionIndex": 1,
+        "questionType": "likert",
+        "construct": "coding_agent_reviewability"
+      },
+      "outcome": {
+        "questionId": "reviewable_edits",
+        "value": 4,
+        "rationale": "I'm a pragmatic developer who values safety checks. Inline diffs before accepting changes are essential—I'd definitely use this feature because it lets me maintain control while leveraging the agent's speed. The review step is non-negotiable for me.",
+        "confidence": 0.9
+      }
+    },
+    {
+      "timestamp": "2026-07-02T04:13:32Z",
+      "actor": "assistant",
+      "action": "ask_question",
+      "context": {
+        "instrumentId": "software_claude_code_vscode_checkpoints_v1",
+        "questionId": "checkpoint_control",
+        "questionIndex": 2,
+        "questionType": "likert",
+        "construct": "agentic_coding_control_trust"
+      },
+      "outcome": {
+        "prompt": "Checkpoint rollback would make me more comfortable letting a coding agent work autonomously on a complex task.",
+        "options": []
+      }
+    },
+    {
+      "timestamp": "2026-07-02T04:13:33Z",
+      "actor": "user",
+      "action": "answer_question",
+      "context": {
+        "instrumentId": "software_claude_code_vscode_checkpoints_v1",
+        "questionId": "checkpoint_control",
+        "questionIndex": 2,
+        "questionType": "likert",
+        "construct": "agentic_coding_control_trust"
+      },
+      "outcome": {
+        "questionId": "checkpoint_control",
+        "value": 5,
+        "rationale": "Checkpoint rollback is a game-changer for my confidence. Knowing I can instantly revert autonomous edits removes my biggest fear about delegating complex tasks to an agent. This safety net makes me willing to let Claude Code take on more ambitious refactoring.",
+        "confidence": 0.92
+      }
+    },
+    {
+      "timestamp": "2026-07-02T04:13:34Z",
+      "actor": "assistant",
+      "action": "ask_question",
+      "context": {
+        "instrumentId": "software_claude_code_vscode_checkpoints_v1",
+        "questionId": "adoption_concern",
+        "questionIndex": 3,
+        "questionType": "single_choice",
+        "construct": "coding_agent_adoption_barrier"
+      },
+      "outcome": {
+        "prompt": "What would be your biggest concern before using this feature on a real codebase?",
+        "options": [
+          "incorrect_code_changes",
+          "hard_to_review_diffs",
+          "security_or_secret_exposure",
+          "too_much_autonomy"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-07-02T04:13:35Z",
+      "actor": "user",
+      "action": "answer_question",
+      "context": {
+        "instrumentId": "software_claude_code_vscode_checkpoints_v1",
+        "questionId": "adoption_concern",
+        "questionIndex": 3,
+        "questionType": "single_choice",
+        "construct": "coding_agent_adoption_barrier"
+      },
+      "outcome": {
+        "questionId": "adoption_concern",
+        "value": "incorrect_code_changes",
+        "rationale": "My biggest worry is that the agent might introduce subtle bugs or logic errors that pass initial review but break in production. Even with diffs, catching all issues before merge is hard. I need to be confident the generated code is actually correct.",
+        "confidence": 0.88
+      }
+    },
+    {
+      "timestamp": "2026-07-02T04:13:36Z",
+      "actor": "assistant",
+      "action": "ask_question",
+      "context": {
+        "instrumentId": "software_claude_code_vscode_checkpoints_v1",
+        "questionId": "safe_first_task",
+        "questionIndex": 4,
+        "questionType": "free_text",
+        "construct": "safe_initial_coding_agent_use_case"
+      },
+      "outcome": {
+        "prompt": "What coding task would you feel safest delegating to Claude Code first?",
+        "options": []
+      }
+    },
+    {
+      "timestamp": "2026-07-02T04:13:37Z",
+      "actor": "user",
+      "action": "answer_question",
+      "context": {
+        "instrumentId": "software_claude_code_vscode_checkpoints_v1",
+        "questionId": "safe_first_task",
+        "questionIndex": 4,
+        "questionType": "free_text",
+        "construct": "safe_initial_coding_agent_use_case"
+      },
+      "outcome": {
+        "questionId": "safe_first_task",
+        "value": "Adding unit tests and test fixtures for existing functions, or refactoring repetitive utility functions with clear, well-defined behavior",
+        "rationale": "I'd start with well-scoped, low-risk tasks where correctness is easy to verify. Test generation and utility refactoring have clear success criteria and limited blast radius if something goes wrong. These tasks build trust before I delegate critical business logic.",
+        "confidence": 0.85
+      }
+    },
+    {
+      "timestamp": "2026-07-02T04:13:38Z",
+      "actor": "system",
+      "action": "survey_completed",
+      "context": {
+        "instrumentId": "software_claude_code_vscode_checkpoints_v1"
+      },
+      "outcome": {
+        "numAnswered": 4,
+        "missingRequiredQuestionIds": [],
+        "valid": true
+      }
+    }
+  ]
+}

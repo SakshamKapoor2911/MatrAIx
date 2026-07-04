@@ -1,14 +1,16 @@
 schema_version = "1.1"
-artifacts = [ "/tmp/personabench-linux-notification-preferences",]
+artifacts = [ "/tmp/personabench-linux-note-to-csv",]
 
 [task]
-name = "personabench/application-computer-use-linux-notification-preferences"
+name = "personabench/application-computer-use-linux-note-to-csv"
 
 [metadata]
 difficulty = "easy"
-type = "desktop"
+type = "os-app"
+os = "linux"
 domain = "software"
-tags = [ "notification permissions", "do not disturb", "app notifications", "system settings",]
+tags = [ "file transform", "csv creation", "desktop editor", "structured output",]
+
 
 [verifier]
 timeout_sec = 300.0

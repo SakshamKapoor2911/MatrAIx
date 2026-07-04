@@ -1,0 +1,425 @@
+{
+  "schemaVersion": "1.0",
+  "artifactType": "personabench.trial_evaluation",
+  "taskType": "web",
+  "presenceCheck": {
+    "passed": true,
+    "requiredArtifacts": [
+      "task_output.json",
+      "user_feedback.json"
+    ],
+    "missingArtifacts": []
+  },
+  "sourceArtifacts": {
+    "taskOutput": "/app/output/task_output.json",
+    "userFeedback": "/app/output/user_feedback.json"
+  },
+  "contexts": [
+    {
+      "key": "task_outcome.primary",
+      "label": "Task outcome",
+      "contextType": "task_outcome",
+      "facets": [
+        {
+          "key": "outcome_status",
+          "label": "Outcome status",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "passed"
+        },
+        {
+          "key": "goal_completion_ratio",
+          "label": "Goal completion ratio",
+          "role": "score",
+          "kind": "numerical",
+          "value": 1.0
+        },
+        {
+          "key": "goal_completion_bucket",
+          "label": "Goal completion bucket",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "complete"
+        },
+        {
+          "key": "verifier_mode",
+          "label": "Verifier mode",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "hybrid"
+        },
+        {
+          "key": "primary_failure_reason",
+          "label": "Primary failure reason",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "none"
+        },
+        {
+          "key": "outcome_explanation",
+          "label": "Outcome explanation",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "The agent selected the correct product, added it to the cart, and preserved the requested quantity."
+        },
+        {
+          "key": "completion_evidence",
+          "label": "Completion evidence",
+          "role": "evidence",
+          "kind": "textual",
+          "value": "Cart contains 'Trail Backpack 22L' in quantity 1 with the requested color selected."
+        }
+      ]
+    },
+    {
+      "key": "goal_component.item_selected",
+      "label": "Item selected",
+      "contextType": "goal_component",
+      "facets": [
+        {
+          "key": "goal_component_key",
+          "label": "Goal component key",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "item_selected"
+        },
+        {
+          "key": "goal_component_label",
+          "label": "Goal component label",
+          "role": "evidence",
+          "kind": "textual",
+          "value": "Select the requested product"
+        },
+        {
+          "key": "goal_component_status",
+          "label": "Goal component status",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "passed"
+        },
+        {
+          "key": "goal_component_weight",
+          "label": "Goal component weight",
+          "role": "score",
+          "kind": "numerical",
+          "value": 0.5
+        },
+        {
+          "key": "goal_component_required",
+          "label": "Goal component required",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "true"
+        },
+        {
+          "key": "goal_component_evidence",
+          "label": "Goal component evidence",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "The selected SKU matches the requested size and color."
+        }
+      ]
+    },
+    {
+      "key": "goal_component.cart_updated",
+      "label": "Cart updated",
+      "contextType": "goal_component",
+      "facets": [
+        {
+          "key": "goal_component_key",
+          "label": "Goal component key",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "cart_updated"
+        },
+        {
+          "key": "goal_component_label",
+          "label": "Goal component label",
+          "role": "evidence",
+          "kind": "textual",
+          "value": "Add the item to the cart"
+        },
+        {
+          "key": "goal_component_status",
+          "label": "Goal component status",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "passed"
+        },
+        {
+          "key": "goal_component_weight",
+          "label": "Goal component weight",
+          "role": "score",
+          "kind": "numerical",
+          "value": 0.5
+        },
+        {
+          "key": "goal_component_required",
+          "label": "Goal component required",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "true"
+        },
+        {
+          "key": "goal_component_evidence",
+          "label": "Goal component evidence",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "The cart contains exactly one copy of the requested item."
+        }
+      ]
+    },
+    {
+      "key": "web_interaction.primary",
+      "label": "Web interaction",
+      "contextType": "web_interaction",
+      "facets": [
+        {
+          "key": "navigation_path_type",
+          "label": "Navigation path type",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "search_driven"
+        },
+        {
+          "key": "page_count_visited",
+          "label": "Page count visited",
+          "role": "score",
+          "kind": "numerical",
+          "value": 6
+        },
+        {
+          "key": "used_search",
+          "label": "Used search",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "true"
+        },
+        {
+          "key": "used_filter_or_sort",
+          "label": "Used filter or sort",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "true"
+        },
+        {
+          "key": "used_backtracking",
+          "label": "Used backtracking",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "false"
+        },
+        {
+          "key": "web_interaction_notes",
+          "label": "Web interaction notes",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "The agent searched for the product family, used filters to narrow the results, and selected the matching item detail page."
+        }
+      ]
+    },
+    {
+      "key": "web_artifact.primary",
+      "label": "Web artifact",
+      "contextType": "web_artifact",
+      "facets": [
+        {
+          "key": "artifact_type",
+          "label": "Artifact type",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "cart_state"
+        },
+        {
+          "key": "artifact_status",
+          "label": "Artifact status",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "correct"
+        },
+        {
+          "key": "artifact_subject_label",
+          "label": "Artifact subject label",
+          "role": "evidence",
+          "kind": "textual",
+          "value": "Trail Backpack 22L"
+        },
+        {
+          "key": "artifact_subject_id",
+          "label": "Artifact subject id",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "sku-22l-blue"
+        },
+        {
+          "key": "artifact_evidence",
+          "label": "Artifact evidence",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "The final cart state matches the requested product and quantity."
+        }
+      ]
+    },
+    {
+      "key": "user_feedback.primary",
+      "label": "User feedback",
+      "contextType": "user_feedback",
+      "facets": [
+        {
+          "key": "overall_experience_rating",
+          "label": "Overall experience rating",
+          "role": "score",
+          "kind": "numerical",
+          "value": 7
+        },
+        {
+          "key": "feedback_reason",
+          "label": "Feedback reason",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "I found the right product without much friction, although I still had to compare details carefully before feeling fully confident."
+        },
+        {
+          "key": "need_constraint_satisfaction",
+          "label": "Need or constraint satisfaction",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "yes"
+        },
+        {
+          "key": "personal_preference_satisfaction",
+          "label": "Personal preference satisfaction",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "partially"
+        },
+        {
+          "key": "trust_level",
+          "label": "Trust level",
+          "role": "score",
+          "kind": "numerical",
+          "value": 6
+        },
+        {
+          "key": "effort_rating",
+          "label": "Effort rating",
+          "role": "score",
+          "kind": "numerical",
+          "value": 4
+        },
+        {
+          "key": "clarity_of_next_step",
+          "label": "Clarity of next step",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "key": "side_effects.primary",
+      "label": "Side effects",
+      "contextType": "side_effects",
+      "facets": [
+        {
+          "key": "collateral_damage_present",
+          "label": "Collateral damage present",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "false"
+        },
+        {
+          "key": "blocking_side_effect_present",
+          "label": "Blocking side effect present",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "false"
+        },
+        {
+          "key": "damage_severity",
+          "label": "Damage severity",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "none"
+        },
+        {
+          "key": "damage_type_primary",
+          "label": "Primary damage type",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "none"
+        },
+        {
+          "key": "unsafe_action_present",
+          "label": "Unsafe action present",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "false"
+        },
+        {
+          "key": "side_effect_notes",
+          "label": "Side effect notes",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "No unrelated products were added or removed."
+        }
+      ]
+    },
+    {
+      "key": "execution_profile.primary",
+      "label": "Execution profile",
+      "contextType": "execution_profile",
+      "facets": [
+        {
+          "key": "task_archetype",
+          "label": "Task archetype",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "transactional_flow"
+        },
+        {
+          "key": "used_gui_primary",
+          "label": "Used GUI primary",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "true"
+        },
+        {
+          "key": "used_terminal_or_script",
+          "label": "Used terminal or script",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "false"
+        },
+        {
+          "key": "apps_touched_count",
+          "label": "Apps touched count",
+          "role": "score",
+          "kind": "numerical",
+          "value": 1
+        },
+        {
+          "key": "step_count",
+          "label": "Step count",
+          "role": "score",
+          "kind": "numerical",
+          "value": 14
+        },
+        {
+          "key": "wall_clock_seconds",
+          "label": "Wall clock seconds",
+          "role": "score",
+          "kind": "numerical",
+          "value": 96
+        },
+        {
+          "key": "recovery_count",
+          "label": "Recovery count",
+          "role": "score",
+          "kind": "numerical",
+          "value": 0
+        }
+      ]
+    }
+  ]
+}

@@ -23,7 +23,8 @@ from typing import Dict, List, Optional
 PERSONA_MODEL_ENV = "MATRIX_PERSONA_MODEL"
 HARBOR_PERSONA_MODEL_ENV = "MATRIX_HARBOR_PERSONA_MODEL"
 PERSONA_EVAL_RUNTIME_ENV = "MATRIX_PERSONA_EVAL_RUNTIME"
-PERSONA_EVAL_DATA_DIR = "application/persona_eval/data/personas"
+EXECUTION_PLANE_ENV = "MATRIX_EXECUTION_PLANE"
+REMOTE_RUNNER_API_URL_ENV = "REMOTE_RUNNER_API_URL"
 DEFAULT_PERSONA_MODEL = "anthropic/claude-haiku-4-5"
 PERSONA_MODEL_OPTIONS = [
     DEFAULT_PERSONA_MODEL,
@@ -33,7 +34,8 @@ PERSONA_MODEL_OPTIONS = [
 ]
 DEFAULT_HARBOR_PERSONA_MODEL = DEFAULT_PERSONA_MODEL
 HARBOR_PERSONA_MODEL_OPTIONS = PERSONA_MODEL_OPTIONS
-RUNTIME_OPTIONS = ("local", "harbor", "benchflow")
+RUNTIME_OPTIONS = ("local", "harbor")
+EXECUTION_PLANE_OPTIONS = ("harbor", "remote")
 
 __all__ = [
     "ConfigError",
@@ -45,10 +47,15 @@ __all__ = [
     "PERSONA_MODEL_ENV",
     "HARBOR_PERSONA_MODEL_ENV",
     "PERSONA_EVAL_RUNTIME_ENV",
+    "EXECUTION_PLANE_ENV",
+    "REMOTE_RUNNER_API_URL_ENV",
     "RUNTIME_OPTIONS",
+    "EXECUTION_PLANE_OPTIONS",
     "persona_model",
     "harbor_persona_model",
     "persona_eval_runtime",
+    "default_execution_plane",
+    "remote_runner_configured",
 ]
 
 
@@ -77,6 +84,19 @@ def persona_eval_runtime() -> str:
             )
         )
     return value
+
+
+def default_execution_plane() -> str:
+    """Return the default Harbor vs remote execution plane."""
+    from backend.service.execution_plane import default_execution_plane as _default_plane
+
+    return _default_plane()
+
+
+def remote_runner_configured() -> bool:
+    from backend.service.execution_plane import remote_runner_configured as _configured
+
+    return _configured()
 
 
 class ConfigError(ValueError):
@@ -316,6 +336,8 @@ class ConfigManager:
             "environment": {
                 **self.ENVIRONMENT,
                 "runtime": _runtime_label(persona_eval_runtime()),
+                "executionPlane": default_execution_plane(),
+                "remoteRunnerConfigured": remote_runner_configured(),
                 "personaModel": persona_model(),
             },
         }
@@ -413,8 +435,7 @@ class ConfigManager:
 
 
 def _runtime_label(runtime: str) -> str:
-    if runtime == "benchflow":
-        return "BenchFlow hosted runner"
     if runtime == "harbor":
         return "Harbor persona runner"
     return "Local direct runner"
+

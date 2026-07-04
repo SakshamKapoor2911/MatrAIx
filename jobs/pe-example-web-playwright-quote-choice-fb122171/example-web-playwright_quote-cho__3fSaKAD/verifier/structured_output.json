@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0",
+  "artifactType": "personabench.trial_evaluation",
+  "taskType": "web",
+  "presenceCheck": {
+    "passed": true,
+    "requiredArtifacts": [
+      "quote_choice.json"
+    ],
+    "missingArtifacts": []
+  },
+  "sourceArtifacts": {
+    "taskOutput": "/app/output/quote_choice.json"
+  },
+  "contexts": [
+    {
+      "key": "decision.primary",
+      "label": "Primary decision",
+      "contextType": "decision",
+      "facets": [
+        {
+          "key": "decision_outcome",
+          "label": "Decision outcome",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "selected"
+        },
+        {
+          "key": "basis_primary",
+          "label": "Primary basis",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "fit"
+        },
+        {
+          "key": "reason",
+          "label": "Reason",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "The quote's tightly structured if-then logic — precisely the kind of argument an analytical, autistic-profile mind finds compelling — directly names the trap a security-first, high-neuroticism, perfectionist thinker is most likely to fall into: paralysing caution that constitutes failure by a different name. Having just relocated (a demonstrably non-cautious act) and currently feeling frustrated, the paradox lands with force: excessive caution is not the safe path it appears to be. The quote offers no comfort, only a precise reframing, which is exactly what an expert-level, high-skepticism mindset requires."
+        },
+        {
+          "key": "decision_subject_id",
+          "label": "Decision subject ID",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "rowling-impossible-to-live-without-failing"
+        },
+        {
+          "key": "decision_subject_label",
+          "label": "Decision subject label",
+          "role": "evidence",
+          "kind": "textual",
+          "value": "“It is impossible to live without failing at something, unless you live so cautiously that you might as well not have lived at all - in which case, you fail by default.”"
+        },
+        {
+          "key": "task_author",
+          "label": "Quote author",
+          "role": "evidence",
+          "kind": "textual",
+          "value": "J.K. Rowling"
+        }
+      ]
+    },
+    {
+      "key": "decision.process",
+      "label": "Decision process",
+      "contextType": "decision_process",
+      "facets": [
+        {
+          "key": "exploration_style",
+          "label": "Exploration style",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "compared_multiple"
+        },
+        {
+          "key": "comparison_notes",
+          "label": "Comparison notes",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "The persona described a compared multiple browsing pattern before picking this quote."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "task": {
+    "path": "application/tasks/persona-survey"
+  },
+  "trial_name": "persona-survey__ed10a52",
+  "trials_dir": "/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/jobs/pe-survey-claude-code-vscode-checkpoints-56f880bb",
+  "timeout_multiplier": 1.0,
+  "agent_timeout_multiplier": null,
+  "verifier_timeout_multiplier": null,
+  "agent_setup_timeout_multiplier": null,
+  "environment_build_timeout_multiplier": null,
+  "agent": {
+    "name": "persona-json-survey",
+    "model_name": "anthropic/claude-haiku-4-5",
+    "kwargs": {
+      "persona_path": "persona/datasets/bench-dev-sample/persona_0164.yaml"
+    }
+  },
+  "environment": {
+    "type": "host",
+    "delete": true
+  },
+  "verifier": {},
+  "artifacts": [],
+  "extra_instruction_paths": [],
+  "job_id": "47a6a29d-4a86-4d81-b912-20d2d657d6c1"
+}

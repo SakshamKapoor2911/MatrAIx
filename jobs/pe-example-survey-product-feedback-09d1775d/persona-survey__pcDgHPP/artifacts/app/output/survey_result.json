@@ -1,0 +1,435 @@
+{
+  "instrument": {
+    "id": "product_feedback_v1",
+    "title": "Survey Product Feedback"
+  },
+  "answers": [
+    {
+      "questionId": "q0",
+      "value": "q0_pay_when_roi_clear",
+      "rationale": "As a busy parent juggling multiple responsibilities, I'd want to see concrete value in reducing my calendar chaos before committing financially. The free tier lets me test whether it actually consolidates our family's scattered scheduling, then I'd upgrade if it saves me real time and stress.",
+      "confidence": 0.88
+    },
+    {
+      "questionId": "q1",
+      "value": "q1_plus_after_sustained_use",
+      "rationale": "Plus covers what I need (6 members, digest, handoffs), and the extra $5 for Pro's email parsing feels like a nice-to-have rather than essential. I'd commit to Plus once I've lived with the app for a month and confirmed the weekly digest and task handoffs genuinely reduce my mental load.",
+      "confidence": 0.82
+    },
+    {
+      "questionId": "q2",
+      "value": "q2_monthly_cancel_anytime",
+      "rationale": "I prefer flexibility with subscription apps. Until I'm certain FocusLoop is a permanent part of my family workflow, I want monthly billing so I can cancel without penalty if we drift back to our old scattered system.",
+      "confidence": 0.85
+    },
+    {
+      "questionId": "q3",
+      "value": "q3_one_dollar_try_cancel",
+      "rationale": "A $1 first month is a low-friction way to experience Plus features—the digest and handoffs—without risk. I'd use it to evaluate whether the paid tier actually solves my coordination pain, then decide to continue or cancel based on real usage.",
+      "confidence": 0.83
+    },
+    {
+      "questionId": "q4",
+      "value": "q4_compare_pay_if_wins",
+      "rationale": "I'm pragmatic about productivity tools. If a friend swears by a paid app, I'd compare it against FocusLoop and free alternatives, but I'd only pay if the winner clearly outperforms the rest. For family coordination, the right fit matters more than saving $7/month.",
+      "confidence": 0.84
+    },
+    {
+      "questionId": "q5",
+      "value": "q5_ads_pay_if_plus_useful",
+      "rationale": "Ads on a free family app wouldn't bother me much, but I'd pay for Plus only if the core features (digest, handoffs, member management) genuinely improve our household coordination. Removing ads alone isn't a reason to upgrade.",
+      "confidence": 0.81
+    },
+    {
+      "questionId": "q6",
+      "value": "q6_fair_if_use_justifies",
+      "rationale": "Six dollars a month for Plus is reasonable for a tool that consolidates scattered family scheduling, but only if we actually use it daily. If it sits unused, it's an easy cancel. The pricing is fair, not cheap—it depends on real adoption.",
+      "confidence": 0.86
+    },
+    {
+      "questionId": "overall_interest",
+      "value": 4,
+      "rationale": "The product directly addresses my family's real pain point—scattered school notices, appointments, and task coordination across WeChat, email, and paper. The weekly digest and lightweight handoffs appeal to me, though I'd want to test the free tier first to confirm it works as described.",
+      "confidence": 0.85
+    },
+    {
+      "questionId": "would_try_beta",
+      "value": "true",
+      "rationale": "Yes. As a dual-income parent managing school and activities, I'm motivated to test early versions. The optional email parsing feature especially intrigues me—if it actually parses school notices into calendar events, that's a huge time-saver worth validating in beta.",
+      "confidence": 0.87
+    }
+  ],
+  "trajectory": [
+    {
+      "timestamp": "2026-07-02T08:35:53Z",
+      "actor": "system",
+      "action": "survey_started",
+      "context": {
+        "instrumentId": "product_feedback_v1",
+        "instrumentTitle": "Survey Product Feedback",
+        "numQuestions": 9
+      },
+      "outcome": {
+        "status": "started"
+      }
+    },
+    {
+      "timestamp": "2026-07-02T08:35:54Z",
+      "actor": "assistant",
+      "action": "ask_question",
+      "context": {
+        "instrumentId": "product_feedback_v1",
+        "questionId": "q0",
+        "questionIndex": 1,
+        "questionType": "single_choice",
+        "construct": "default_pay_intent"
+      },
+      "outcome": {
+        "prompt": "After trying the free version, your realistic plan is…",
+        "options": [
+          "q0_use_free_wont_pay",
+          "q0_pay_when_roi_clear",
+          "q0_subscribe_paid_launch",
+          "q0_free_never_decide_tier",
+          "q0_not_interested"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-07-02T08:35:55Z",
+      "actor": "user",
+      "action": "answer_question",
+      "context": {
+        "instrumentId": "product_feedback_v1",
+        "questionId": "q0",
+        "questionIndex": 1,
+        "questionType": "single_choice",
+        "construct": "default_pay_intent"
+      },
+      "outcome": {
+        "questionId": "q0",
+        "value": "q0_pay_when_roi_clear",
+        "rationale": "As a busy parent juggling multiple responsibilities, I'd want to see concrete value in reducing my calendar chaos before committing financially. The free tier lets me test whether it actually consolidates our family's scattered scheduling, then I'd upgrade if it saves me real time and stress.",
+        "confidence": 0.88
+      }
+    },
+    {
+      "timestamp": "2026-07-02T08:35:56Z",
+      "actor": "assistant",
+      "action": "ask_question",
+      "context": {
+        "instrumentId": "product_feedback_v1",
+        "questionId": "q1",
+        "questionIndex": 2,
+        "questionType": "single_choice",
+        "construct": "tier_receptivity"
+      },
+      "outcome": {
+        "prompt": "Plus vs Pro ($5 more per month)…",
+        "options": [
+          "q1_reject_both_tiers",
+          "q1_plus_after_sustained_use",
+          "q1_happy_plus_or_pro",
+          "q1_wont_compare_tiers"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-07-02T08:35:57Z",
+      "actor": "user",
+      "action": "answer_question",
+      "context": {
+        "instrumentId": "product_feedback_v1",
+        "questionId": "q1",
+        "questionIndex": 2,
+        "questionType": "single_choice",
+        "construct": "tier_receptivity"
+      },
+      "outcome": {
+        "questionId": "q1",
+        "value": "q1_plus_after_sustained_use",
+        "rationale": "Plus covers what I need (6 members, digest, handoffs), and the extra $5 for Pro's email parsing feels like a nice-to-have rather than essential. I'd commit to Plus once I've lived with the app for a month and confirmed the weekly digest and task handoffs genuinely reduce my mental load.",
+        "confidence": 0.82
+      }
+    },
+    {
+      "timestamp": "2026-07-02T08:35:58Z",
+      "actor": "assistant",
+      "action": "ask_question",
+      "context": {
+        "instrumentId": "product_feedback_v1",
+        "questionId": "q2",
+        "questionIndex": 3,
+        "questionType": "single_choice",
+        "construct": "prepay_willingness"
+      },
+      "outcome": {
+        "prompt": "Annual vs monthly billing…",
+        "options": [
+          "q2_monthly_cancel_anytime",
+          "q2_annual_after_long_use",
+          "q2_prepay_annual_plus",
+          "q2_billing_no_preference"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-07-02T08:35:59Z",
+      "actor": "user",
+      "action": "answer_question",
+      "context": {
+        "instrumentId": "product_feedback_v1",
+        "questionId": "q2",
+        "questionIndex": 3,
+        "questionType": "single_choice",
+        "construct": "prepay_willingness"
+      },
+      "outcome": {
+        "questionId": "q2",
+        "value": "q2_monthly_cancel_anytime",
+        "rationale": "I prefer flexibility with subscription apps. Until I'm certain FocusLoop is a permanent part of my family workflow, I want monthly billing so I can cancel without penalty if we drift back to our old scattered system.",
+        "confidence": 0.85
+      }
+    },
+    {
+      "timestamp": "2026-07-02T08:36:00Z",
+      "actor": "assistant",
+      "action": "ask_question",
+      "context": {
+        "instrumentId": "product_feedback_v1",
+        "questionId": "q3",
+        "questionIndex": 4,
+        "questionType": "single_choice",
+        "construct": "promo_reaction"
+      },
+      "outcome": {
+        "prompt": "A limited $1 first-month Plus promo…",
+        "options": [
+          "q3_skip_even_one_dollar",
+          "q3_one_dollar_try_cancel",
+          "q3_grab_dollar_promo",
+          "q3_ignore_promo"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-07-02T08:36:01Z",
+      "actor": "user",
+      "action": "answer_question",
+      "context": {
+        "instrumentId": "product_feedback_v1",
+        "questionId": "q3",
+        "questionIndex": 4,
+        "questionType": "single_choice",
+        "construct": "promo_reaction"
+      },
+      "outcome": {
+        "questionId": "q3",
+        "value": "q3_one_dollar_try_cancel",
+        "rationale": "A $1 first month is a low-friction way to experience Plus features—the digest and handoffs—without risk. I'd use it to evaluate whether the paid tier actually solves my coordination pain, then decide to continue or cancel based on real usage.",
+        "confidence": 0.83
+      }
+    },
+    {
+      "timestamp": "2026-07-02T08:36:02Z",
+      "actor": "assistant",
+      "action": "ask_question",
+      "context": {
+        "instrumentId": "product_feedback_v1",
+        "questionId": "q4",
+        "questionIndex": 5,
+        "questionType": "single_choice",
+        "construct": "switch_behavior"
+      },
+      "outcome": {
+        "prompt": "A friend uses a paid organizer app…",
+        "options": [
+          "q4_seek_free_alternative",
+          "q4_compare_pay_if_wins",
+          "q4_pay_best_no_hunt",
+          "q4_switch_only_effortless"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-07-02T08:36:03Z",
+      "actor": "user",
+      "action": "answer_question",
+      "context": {
+        "instrumentId": "product_feedback_v1",
+        "questionId": "q4",
+        "questionIndex": 5,
+        "questionType": "single_choice",
+        "construct": "switch_behavior"
+      },
+      "outcome": {
+        "questionId": "q4",
+        "value": "q4_compare_pay_if_wins",
+        "rationale": "I'm pragmatic about productivity tools. If a friend swears by a paid app, I'd compare it against FocusLoop and free alternatives, but I'd only pay if the winner clearly outperforms the rest. For family coordination, the right fit matters more than saving $7/month.",
+        "confidence": 0.84
+      }
+    },
+    {
+      "timestamp": "2026-07-02T08:36:04Z",
+      "actor": "assistant",
+      "action": "ask_question",
+      "context": {
+        "instrumentId": "product_feedback_v1",
+        "questionId": "q5",
+        "questionIndex": 6,
+        "questionType": "single_choice",
+        "construct": "ads_tradeoff"
+      },
+      "outcome": {
+        "prompt": "Ads on free vs paying to remove them…",
+        "options": [
+          "q5_ads_not_worth_paying",
+          "q5_ads_pay_if_plus_useful",
+          "q5_pay_primarily_adfree",
+          "q5_ads_irrelevant_to_tier"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-07-02T08:36:05Z",
+      "actor": "user",
+      "action": "answer_question",
+      "context": {
+        "instrumentId": "product_feedback_v1",
+        "questionId": "q5",
+        "questionIndex": 6,
+        "questionType": "single_choice",
+        "construct": "ads_tradeoff"
+      },
+      "outcome": {
+        "questionId": "q5",
+        "value": "q5_ads_pay_if_plus_useful",
+        "rationale": "Ads on a free family app wouldn't bother me much, but I'd pay for Plus only if the core features (digest, handoffs, member management) genuinely improve our household coordination. Removing ads alone isn't a reason to upgrade.",
+        "confidence": 0.81
+      }
+    },
+    {
+      "timestamp": "2026-07-02T08:36:06Z",
+      "actor": "assistant",
+      "action": "ask_question",
+      "context": {
+        "instrumentId": "product_feedback_v1",
+        "questionId": "q6",
+        "questionIndex": 7,
+        "questionType": "single_choice",
+        "construct": "price_stance"
+      },
+      "outcome": {
+        "prompt": "Overall, the product's pricing feels…",
+        "options": [
+          "q6_too_expensive_stay_free",
+          "q6_fair_if_use_justifies",
+          "q6_premium_price_ok",
+          "q6_pricing_unnoticed"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-07-02T08:36:07Z",
+      "actor": "user",
+      "action": "answer_question",
+      "context": {
+        "instrumentId": "product_feedback_v1",
+        "questionId": "q6",
+        "questionIndex": 7,
+        "questionType": "single_choice",
+        "construct": "price_stance"
+      },
+      "outcome": {
+        "questionId": "q6",
+        "value": "q6_fair_if_use_justifies",
+        "rationale": "Six dollars a month for Plus is reasonable for a tool that consolidates scattered family scheduling, but only if we actually use it daily. If it sits unused, it's an easy cancel. The pricing is fair, not cheap—it depends on real adoption.",
+        "confidence": 0.86
+      }
+    },
+    {
+      "timestamp": "2026-07-02T08:36:08Z",
+      "actor": "assistant",
+      "action": "ask_question",
+      "context": {
+        "instrumentId": "product_feedback_v1",
+        "questionId": "overall_interest",
+        "questionIndex": 8,
+        "questionType": "likert",
+        "construct": "overall_interest"
+      },
+      "outcome": {
+        "prompt": "Overall interest in this product (1 = not interested, 5 = very interested)",
+        "options": []
+      }
+    },
+    {
+      "timestamp": "2026-07-02T08:36:09Z",
+      "actor": "user",
+      "action": "answer_question",
+      "context": {
+        "instrumentId": "product_feedback_v1",
+        "questionId": "overall_interest",
+        "questionIndex": 8,
+        "questionType": "likert",
+        "construct": "overall_interest"
+      },
+      "outcome": {
+        "questionId": "overall_interest",
+        "value": 4,
+        "rationale": "The product directly addresses my family's real pain point—scattered school notices, appointments, and task coordination across WeChat, email, and paper. The weekly digest and lightweight handoffs appeal to me, though I'd want to test the free tier first to confirm it works as described.",
+        "confidence": 0.85
+      }
+    },
+    {
+      "timestamp": "2026-07-02T08:36:10Z",
+      "actor": "assistant",
+      "action": "ask_question",
+      "context": {
+        "instrumentId": "product_feedback_v1",
+        "questionId": "would_try_beta",
+        "questionIndex": 9,
+        "questionType": "single_choice",
+        "construct": "beta_intent"
+      },
+      "outcome": {
+        "prompt": "Would you try a beta version?",
+        "options": [
+          "false",
+          "true"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-07-02T08:36:11Z",
+      "actor": "user",
+      "action": "answer_question",
+      "context": {
+        "instrumentId": "product_feedback_v1",
+        "questionId": "would_try_beta",
+        "questionIndex": 9,
+        "questionType": "single_choice",
+        "construct": "beta_intent"
+      },
+      "outcome": {
+        "questionId": "would_try_beta",
+        "value": "true",
+        "rationale": "Yes. As a dual-income parent managing school and activities, I'm motivated to test early versions. The optional email parsing feature especially intrigues me—if it actually parses school notices into calendar events, that's a huge time-saver worth validating in beta.",
+        "confidence": 0.87
+      }
+    },
+    {
+      "timestamp": "2026-07-02T08:36:12Z",
+      "actor": "system",
+      "action": "survey_completed",
+      "context": {
+        "instrumentId": "product_feedback_v1"
+      },
+      "outcome": {
+        "numAnswered": 9,
+        "missingRequiredQuestionIds": [],
+        "valid": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+schemaVersion: "1.0"
+id: product_attitudes_v1
+title: Product Attitudes
+description: A short product-concept survey completed directly by the simulated persona respondent.
+questions:
+  - id: concept_fit
+    prompt: This product would fit my current needs.
+    type: likert
+    construct: product_need_fit
+    required: true
+    minValue: 1
+    maxValue: 5
+  - id: preference_fit
+    prompt: This product matches my personal preferences.
+    type: likert
+    construct: personal_preference_fit
+    required: true
+    minValue: 1
+    maxValue: 5
+  - id: adoption_barrier
+    prompt: What would be your biggest barrier to using this product?
+    type: single_choice
+    construct: adoption_barrier
+    required: true
+    options:
+      - id: price
+        label: Price
+      - id: privacy
+        label: Privacy
+      - id: complexity
+        label: Complexity
+      - id: trust
+        label: Trust
+      - id: no clear need
+        label: No clear need
+  - id: purchase_likelihood
+    prompt: How likely would you be to try or purchase this product?
+    type: single_choice
+    construct: purchase_likelihood
+    required: true
+    options:
+      - id: very unlikely
+        label: Very unlikely
+      - id: unlikely
+        label: Unlikely
+      - id: neutral
+        label: Neutral
+      - id: likely
+        label: Likely
+      - id: very likely
+        label: Very likely
+  - id: open_feedback
+    prompt: Briefly explain what most influenced your reaction.
+    type: free_text
+    construct: open_feedback
+    required: true

@@ -1,0 +1,1059 @@
+{
+  "schemaVersion": "1.0",
+  "artifactType": "job_aggregation",
+  "generatedAt": "2026-07-04T20:23:31Z",
+  "coverage": {
+    "trialCount": 4,
+    "completedTrials": 4,
+    "pendingTrials": 0,
+    "artifactReadyTrials": 4,
+    "completedWithoutArtifactTrials": 0
+  },
+  "fields": [
+    {
+      "key": "question.adoption_concern.confidence",
+      "facetKey": "confidence",
+      "contextKey": "question.adoption_concern",
+      "contextLabel": "adoption_concern",
+      "label": "Confidence",
+      "kind": "numerical",
+      "role": "score",
+      "group": "question.adoption_concern",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 4,
+      "missingCount": 0,
+      "numerical": {
+        "count": 4,
+        "min": 0.88,
+        "max": 0.9,
+        "avg": 0.89,
+        "std": 0.0071
+      }
+    },
+    {
+      "key": "question.adoption_concern.reason",
+      "facetKey": "reason",
+      "contextKey": "question.adoption_concern",
+      "contextLabel": "adoption_concern",
+      "label": "Reason",
+      "kind": "textual",
+      "role": "explanation",
+      "group": "question.adoption_concern",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 4,
+      "missingCount": 0,
+      "textual": {
+        "count": 4,
+        "uniqueCount": 4,
+        "samples": [
+          "My primary concern is that the agent might generate logically flawed or semantically incorrect code that compiles but breaks functionality, which could be difficult to catch during review.",
+          "The primary concern is ensuring code quality and correctness; incorrect changes could introduce bugs or break functionality.",
+          "The primary risk is that the agent may make logical or syntactic errors that pass surface-level review but break functionality or introduce bugs.",
+          "My primary concern is that the coding agent might introduce subtle bugs or logic errors that could pass initial review but cause problems in production. Incorrect changes are harder to catch than obvious formatting issues."
+        ],
+        "summary": "Collected 4 text responses across 4 unique values. Examples: \"My primary concern is that the agent might generate logically flawed or semantically incorrect code that compiles but b…\"; \"The primary concern is ensuring code quality and correctness; incorrect changes could introduce bugs or break functiona…\"; \"The primary risk is that the agent may make logical or syntactic errors that pass surface-level review but break functi…\"",
+        "summaryType": "heuristic"
+      }
+    },
+    {
+      "key": "question.adoption_concern.response",
+      "facetKey": "response",
+      "contextKey": "question.adoption_concern",
+      "contextLabel": "adoption_concern",
+      "label": "Selected response",
+      "kind": "textual",
+      "role": "primary",
+      "group": "question.adoption_concern",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 4,
+      "missingCount": 0,
+      "textual": {
+        "count": 4,
+        "uniqueCount": 1,
+        "samples": [
+          "incorrect_code_changes"
+        ],
+        "summary": "All 4 available trials reported the same text: \"incorrect_code_changes\"",
+        "summaryType": "heuristic"
+      }
+    },
+    {
+      "key": "question.checkpoint_control.confidence",
+      "facetKey": "confidence",
+      "contextKey": "question.checkpoint_control",
+      "contextLabel": "checkpoint_control",
+      "label": "Confidence",
+      "kind": "numerical",
+      "role": "score",
+      "group": "question.checkpoint_control",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 4,
+      "missingCount": 0,
+      "numerical": {
+        "count": 4,
+        "min": 0.86,
+        "max": 0.95,
+        "avg": 0.9125,
+        "std": 0.0327
+      }
+    },
+    {
+      "key": "question.checkpoint_control.reason",
+      "facetKey": "reason",
+      "contextKey": "question.checkpoint_control",
+      "contextLabel": "checkpoint_control",
+      "label": "Reason",
+      "kind": "textual",
+      "role": "explanation",
+      "group": "question.checkpoint_control",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 4,
+      "missingCount": 0,
+      "textual": {
+        "count": 4,
+        "uniqueCount": 4,
+        "samples": [
+          "Checkpoint rollback is a critical safety mechanism that directly addresses the risk of irreversible mistakes, making me much more comfortable with autonomous code generation.",
+          "Rollback capability significantly reduces risk and enables confidence in autonomous agent work on complex tasks.",
+          "Checkpoint rollback is essential for trust—knowing I can undo autonomous changes removes the risk of catastrophic errors on complex tasks.",
+          "Checkpoint rollback is a critical safety mechanism that would substantially increase my comfort with autonomous code editing. The ability to revert to a known good state removes much of the risk associated with agent autonomy."
+        ],
+        "summary": "Collected 4 text responses across 4 unique values. Examples: \"Checkpoint rollback is a critical safety mechanism that directly addresses the risk of irreversible mistakes, making me…\"; \"Rollback capability significantly reduces risk and enables confidence in autonomous agent work on complex tasks.\"; \"Checkpoint rollback is essential for trust—knowing I can undo autonomous changes removes the risk of catastrophic error…\"",
+        "summaryType": "heuristic"
+      }
+    },
+    {
+      "key": "question.checkpoint_control.response",
+      "facetKey": "response",
+      "contextKey": "question.checkpoint_control",
+      "contextLabel": "checkpoint_control",
+      "label": "Selected response",
+      "kind": "numerical",
+      "role": "primary",
+      "group": "question.checkpoint_control",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 4,
+      "missingCount": 0,
+      "numerical": {
+        "count": 4,
+        "min": 4.0,
+        "max": 5.0,
+        "avg": 4.75,
+        "std": 0.433
+      }
+    },
+    {
+      "key": "question.reviewable_edits.confidence",
+      "facetKey": "confidence",
+      "contextKey": "question.reviewable_edits",
+      "contextLabel": "reviewable_edits",
+      "label": "Confidence",
+      "kind": "numerical",
+      "role": "score",
+      "group": "question.reviewable_edits",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 4,
+      "missingCount": 0,
+      "numerical": {
+        "count": 4,
+        "min": 0.88,
+        "max": 0.9,
+        "avg": 0.89,
+        "std": 0.01
+      }
+    },
+    {
+      "key": "question.reviewable_edits.reason",
+      "facetKey": "reason",
+      "contextKey": "question.reviewable_edits",
+      "contextLabel": "reviewable_edits",
+      "label": "Reason",
+      "kind": "textual",
+      "role": "explanation",
+      "group": "question.reviewable_edits",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 4,
+      "missingCount": 0,
+      "textual": {
+        "count": 4,
+        "uniqueCount": 4,
+        "samples": [
+          "Inline diffs provide essential visibility into autonomous changes, making me significantly more willing to use the feature for multi-file edits.",
+          "Inline diffs provide transparency and control, making multi-file edits acceptable with review capability before acceptance.",
+          "Inline diffs provide transparency and control, making multi-file edits acceptable with the ability to review changes before committing them.",
+          "Inline diffs provide the transparency needed to confidently use an autonomous coding agent. The ability to review changes before accepting them significantly increases my willingness to adopt this feature."
+        ],
+        "summary": "Collected 4 text responses across 4 unique values. Examples: \"Inline diffs provide essential visibility into autonomous changes, making me significantly more willing to use the feat…\"; \"Inline diffs provide transparency and control, making multi-file edits acceptable with review capability before accepta…\"; \"Inline diffs provide transparency and control, making multi-file edits acceptable with the ability to review changes be…\"",
+        "summaryType": "heuristic"
+      }
+    },
+    {
+      "key": "question.reviewable_edits.response",
+      "facetKey": "response",
+      "contextKey": "question.reviewable_edits",
+      "contextLabel": "reviewable_edits",
+      "label": "Selected response",
+      "kind": "numerical",
+      "role": "primary",
+      "group": "question.reviewable_edits",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 4,
+      "missingCount": 0,
+      "numerical": {
+        "count": 4,
+        "min": 4.0,
+        "max": 4.0,
+        "avg": 4.0,
+        "std": 0.0
+      }
+    },
+    {
+      "key": "question.safe_first_task.confidence",
+      "facetKey": "confidence",
+      "contextKey": "question.safe_first_task",
+      "contextLabel": "safe_first_task",
+      "label": "Confidence",
+      "kind": "numerical",
+      "role": "score",
+      "group": "question.safe_first_task",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 4,
+      "missingCount": 0,
+      "numerical": {
+        "count": 4,
+        "min": 0.85,
+        "max": 0.87,
+        "avg": 0.86,
+        "std": 0.01
+      }
+    },
+    {
+      "key": "question.safe_first_task.reason",
+      "facetKey": "reason",
+      "contextKey": "question.safe_first_task",
+      "contextLabel": "safe_first_task",
+      "label": "Reason",
+      "kind": "textual",
+      "role": "explanation",
+      "group": "question.safe_first_task",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 3,
+      "missingCount": 1,
+      "textual": {
+        "count": 3,
+        "uniqueCount": 3,
+        "samples": [
+          "Low-risk tasks with clear intent and minimal impact on functionality provide a safe starting point to build trust in the agent.",
+          "Tests and docs have clear success criteria and limited downstream impact, making them ideal for validating agent behavior before delegating critical business logic.",
+          "Refactoring tasks have clear success criteria and lower risk of introducing new bugs since the behavior should remain identical. Existing test suites can validate correctness, making it an ideal first use case to build trust."
+        ],
+        "summary": "Collected 3 text responses across 3 unique values. Examples: \"Low-risk tasks with clear intent and minimal impact on functionality provide a safe starting point to build trust in th…\"; \"Tests and docs have clear success criteria and limited downstream impact, making them ideal for validating agent behavi…\"; \"Refactoring tasks have clear success criteria and lower risk of introducing new bugs since the behavior should remain i…\"",
+        "summaryType": "heuristic"
+      }
+    },
+    {
+      "key": "question.safe_first_task.response",
+      "facetKey": "response",
+      "contextKey": "question.safe_first_task",
+      "contextLabel": "safe_first_task",
+      "label": "Selected response",
+      "kind": "textual",
+      "role": "primary",
+      "group": "question.safe_first_task",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 4,
+      "missingCount": 0,
+      "textual": {
+        "count": 4,
+        "uniqueCount": 4,
+        "samples": [
+          "Refactoring existing code to improve readability and structure, such as extracting helper functions or renaming variables for clarity, since these changes are easier to verify and less likely to introduce bugs.",
+          "Refactoring variable names or adding documentation to existing code in a single file with comprehensive test coverage.",
+          "Refactoring existing tests or updating documentation in multiple files where errors are low-risk and easily detectable.",
+          "Refactoring existing code to improve readability or apply consistent naming conventions across a module, where the functionality remains unchanged and can be easily verified through existing tests."
+        ],
+        "summary": "Collected 4 text responses across 4 unique values. Examples: \"Refactoring existing code to improve readability and structure, such as extracting helper functions or renaming variabl…\"; \"Refactoring variable names or adding documentation to existing code in a single file with comprehensive test coverage.\"; \"Refactoring existing tests or updating documentation in multiple files where errors are low-risk and easily detectable.\"",
+        "summaryType": "heuristic"
+      }
+    },
+    {
+      "key": "survey.summary.answer_count",
+      "facetKey": "answer_count",
+      "contextKey": "survey.summary",
+      "contextLabel": "Survey summary",
+      "label": "Answer count",
+      "kind": "numerical",
+      "role": "score",
+      "group": "survey.summary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 4,
+      "missingCount": 0,
+      "numerical": {
+        "count": 4,
+        "min": 4.0,
+        "max": 4.0,
+        "avg": 4.0,
+        "std": 0.0
+      }
+    },
+    {
+      "key": "survey.summary.mean_numeric_answer",
+      "facetKey": "mean_numeric_answer",
+      "contextKey": "survey.summary",
+      "contextLabel": "Survey summary",
+      "label": "Mean numeric answer",
+      "kind": "numerical",
+      "role": "score",
+      "group": "survey.summary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 4,
+      "missingCount": 0,
+      "numerical": {
+        "count": 4,
+        "min": 4.0,
+        "max": 4.5,
+        "avg": 4.375,
+        "std": 0.2165
+      }
+    },
+    {
+      "key": "survey.summary.trajectory_event_count",
+      "facetKey": "trajectory_event_count",
+      "contextKey": "survey.summary",
+      "contextLabel": "Survey summary",
+      "label": "Trajectory event count",
+      "kind": "numerical",
+      "role": "score",
+      "group": "survey.summary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 4,
+      "missingCount": 0,
+      "numerical": {
+        "count": 4,
+        "min": 10.0,
+        "max": 10.0,
+        "avg": 10.0,
+        "std": 0.0
+      }
+    }
+  ],
+  "contexts": [
+    {
+      "key": "question.adoption_concern",
+      "label": "adoption_concern",
+      "contextType": "question_response",
+      "summaryDirectives": [
+        {
+          "id": "question.reason_by_response",
+          "title": "Reason by selected response",
+          "targetFacetKey": "reason",
+          "groupByFacetKey": "response",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ],
+      "judgeDirectives": [],
+      "facets": [
+        {
+          "key": "question.adoption_concern.response",
+          "facetKey": "response",
+          "contextKey": "question.adoption_concern",
+          "contextLabel": "adoption_concern",
+          "label": "Selected response",
+          "kind": "textual",
+          "role": "primary",
+          "group": "question.adoption_concern",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 4,
+          "missingCount": 0,
+          "textual": {
+            "count": 4,
+            "uniqueCount": 1,
+            "samples": [
+              "incorrect_code_changes"
+            ],
+            "summary": "All 4 available trials reported the same text: \"incorrect_code_changes\"",
+            "summaryType": "heuristic"
+          }
+        },
+        {
+          "key": "question.adoption_concern.reason",
+          "facetKey": "reason",
+          "contextKey": "question.adoption_concern",
+          "contextLabel": "adoption_concern",
+          "label": "Reason",
+          "kind": "textual",
+          "role": "explanation",
+          "group": "question.adoption_concern",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 4,
+          "missingCount": 0,
+          "textual": {
+            "count": 4,
+            "uniqueCount": 4,
+            "samples": [
+              "My primary concern is that the agent might generate logically flawed or semantically incorrect code that compiles but breaks functionality, which could be difficult to catch during review.",
+              "The primary concern is ensuring code quality and correctness; incorrect changes could introduce bugs or break functionality.",
+              "The primary risk is that the agent may make logical or syntactic errors that pass surface-level review but break functionality or introduce bugs.",
+              "My primary concern is that the coding agent might introduce subtle bugs or logic errors that could pass initial review but cause problems in production. Incorrect changes are harder to catch than obvious formatting issues."
+            ],
+            "summary": "Collected 4 text responses across 4 unique values. Examples: \"My primary concern is that the agent might generate logically flawed or semantically incorrect code that compiles but b…\"; \"The primary concern is ensuring code quality and correctness; incorrect changes could introduce bugs or break functiona…\"; \"The primary risk is that the agent may make logical or syntactic errors that pass surface-level review but break functi…\"",
+            "summaryType": "heuristic"
+          }
+        },
+        {
+          "key": "question.adoption_concern.confidence",
+          "facetKey": "confidence",
+          "contextKey": "question.adoption_concern",
+          "contextLabel": "adoption_concern",
+          "label": "Confidence",
+          "kind": "numerical",
+          "role": "score",
+          "group": "question.adoption_concern",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 4,
+          "missingCount": 0,
+          "numerical": {
+            "count": 4,
+            "min": 0.88,
+            "max": 0.9,
+            "avg": 0.89,
+            "std": 0.0071
+          }
+        }
+      ],
+      "summaries": [
+        {
+          "id": "question.reason_by_response",
+          "title": "Reason by selected response",
+          "targetFacetKey": "reason",
+          "groupByFacetKey": "response",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary",
+          "instruction": null,
+          "status": "ready_for_llm",
+          "overall": {
+            "count": 4,
+            "uniqueCount": 4,
+            "samples": [
+              "My primary concern is that the agent might generate logically flawed or semantically incorrect code that compiles but breaks functionality, which could be difficult to catch during review.",
+              "The primary concern is ensuring code quality and correctness; incorrect changes could introduce bugs or break functionality.",
+              "The primary risk is that the agent may make logical or syntactic errors that pass surface-level review but break functionality or introduce bugs.",
+              "My primary concern is that the coding agent might introduce subtle bugs or logic errors that could pass initial review but cause problems in production. Incorrect changes are harder to catch than obvious formatting issues."
+            ],
+            "summary": "Collected 4 text responses across 4 unique values. Examples: \"My primary concern is that the agent might generate logically flawed or semantically incorrect code that compiles but b…\"; \"The primary concern is ensuring code quality and correctness; incorrect changes could introduce bugs or break functiona…\"; \"The primary risk is that the agent may make logical or syntactic errors that pass surface-level review but break functi…\"",
+            "summaryType": "heuristic"
+          },
+          "buckets": [
+            {
+              "bucket": "incorrect_code_changes",
+              "count": 4,
+              "samples": [
+                "My primary concern is that the agent might generate logically flawed or semantically incorrect code that compiles but breaks functionality, which could be difficult to catch during review.",
+                "The primary concern is ensuring code quality and correctness; incorrect changes could introduce bugs or break functionality.",
+                "The primary risk is that the agent may make logical or syntactic errors that pass surface-level review but break functionality or introduce bugs.",
+                "My primary concern is that the coding agent might introduce subtle bugs or logic errors that could pass initial review but cause problems in production. Incorrect changes are harder to catch than obvious formatting issues."
+              ],
+              "summary": "Collected 4 text responses across 4 unique values. Examples: \"My primary concern is that the agent might generate logically flawed or semantically incorrect code that compiles but b…\"; \"The primary concern is ensuring code quality and correctness; incorrect changes could introduce bugs or break functiona…\"; \"The primary risk is that the agent may make logical or syntactic errors that pass surface-level review but break functi…\"",
+              "summaryType": "heuristic"
+            }
+          ],
+          "llmFingerprint": "e77d329c3adecd5f8dde1e815b4e0e949044b70e3a9fa382ff2e965ded02f404"
+        }
+      ]
+    },
+    {
+      "key": "question.checkpoint_control",
+      "label": "checkpoint_control",
+      "contextType": "question_response",
+      "summaryDirectives": [
+        {
+          "id": "question.reason_by_response",
+          "title": "Reason by selected response",
+          "targetFacetKey": "reason",
+          "groupByFacetKey": "response",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ],
+      "judgeDirectives": [],
+      "facets": [
+        {
+          "key": "question.checkpoint_control.response",
+          "facetKey": "response",
+          "contextKey": "question.checkpoint_control",
+          "contextLabel": "checkpoint_control",
+          "label": "Selected response",
+          "kind": "numerical",
+          "role": "primary",
+          "group": "question.checkpoint_control",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 4,
+          "missingCount": 0,
+          "numerical": {
+            "count": 4,
+            "min": 4.0,
+            "max": 5.0,
+            "avg": 4.75,
+            "std": 0.433
+          }
+        },
+        {
+          "key": "question.checkpoint_control.reason",
+          "facetKey": "reason",
+          "contextKey": "question.checkpoint_control",
+          "contextLabel": "checkpoint_control",
+          "label": "Reason",
+          "kind": "textual",
+          "role": "explanation",
+          "group": "question.checkpoint_control",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 4,
+          "missingCount": 0,
+          "textual": {
+            "count": 4,
+            "uniqueCount": 4,
+            "samples": [
+              "Checkpoint rollback is a critical safety mechanism that directly addresses the risk of irreversible mistakes, making me much more comfortable with autonomous code generation.",
+              "Rollback capability significantly reduces risk and enables confidence in autonomous agent work on complex tasks.",
+              "Checkpoint rollback is essential for trust—knowing I can undo autonomous changes removes the risk of catastrophic errors on complex tasks.",
+              "Checkpoint rollback is a critical safety mechanism that would substantially increase my comfort with autonomous code editing. The ability to revert to a known good state removes much of the risk associated with agent autonomy."
+            ],
+            "summary": "Collected 4 text responses across 4 unique values. Examples: \"Checkpoint rollback is a critical safety mechanism that directly addresses the risk of irreversible mistakes, making me…\"; \"Rollback capability significantly reduces risk and enables confidence in autonomous agent work on complex tasks.\"; \"Checkpoint rollback is essential for trust—knowing I can undo autonomous changes removes the risk of catastrophic error…\"",
+            "summaryType": "heuristic"
+          }
+        },
+        {
+          "key": "question.checkpoint_control.confidence",
+          "facetKey": "confidence",
+          "contextKey": "question.checkpoint_control",
+          "contextLabel": "checkpoint_control",
+          "label": "Confidence",
+          "kind": "numerical",
+          "role": "score",
+          "group": "question.checkpoint_control",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 4,
+          "missingCount": 0,
+          "numerical": {
+            "count": 4,
+            "min": 0.86,
+            "max": 0.95,
+            "avg": 0.9125,
+            "std": 0.0327
+          }
+        }
+      ],
+      "summaries": [
+        {
+          "id": "question.reason_by_response",
+          "title": "Reason by selected response",
+          "targetFacetKey": "reason",
+          "groupByFacetKey": "response",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary",
+          "instruction": null,
+          "status": "ready_for_llm",
+          "overall": {
+            "count": 4,
+            "uniqueCount": 4,
+            "samples": [
+              "Checkpoint rollback is a critical safety mechanism that directly addresses the risk of irreversible mistakes, making me much more comfortable with autonomous code generation.",
+              "Rollback capability significantly reduces risk and enables confidence in autonomous agent work on complex tasks.",
+              "Checkpoint rollback is essential for trust—knowing I can undo autonomous changes removes the risk of catastrophic errors on complex tasks.",
+              "Checkpoint rollback is a critical safety mechanism that would substantially increase my comfort with autonomous code editing. The ability to revert to a known good state removes much of the risk associated with agent autonomy."
+            ],
+            "summary": "Collected 4 text responses across 4 unique values. Examples: \"Checkpoint rollback is a critical safety mechanism that directly addresses the risk of irreversible mistakes, making me…\"; \"Rollback capability significantly reduces risk and enables confidence in autonomous agent work on complex tasks.\"; \"Checkpoint rollback is essential for trust—knowing I can undo autonomous changes removes the risk of catastrophic error…\"",
+            "summaryType": "heuristic"
+          },
+          "buckets": [
+            {
+              "bucket": "5",
+              "count": 3,
+              "samples": [
+                "Checkpoint rollback is a critical safety mechanism that directly addresses the risk of irreversible mistakes, making me much more comfortable with autonomous code generation.",
+                "Checkpoint rollback is essential for trust—knowing I can undo autonomous changes removes the risk of catastrophic errors on complex tasks.",
+                "Checkpoint rollback is a critical safety mechanism that would substantially increase my comfort with autonomous code editing. The ability to revert to a known good state removes much of the risk associated with agent autonomy."
+              ],
+              "summary": "Collected 3 text responses across 3 unique values. Examples: \"Checkpoint rollback is a critical safety mechanism that directly addresses the risk of irreversible mistakes, making me…\"; \"Checkpoint rollback is essential for trust—knowing I can undo autonomous changes removes the risk of catastrophic error…\"; \"Checkpoint rollback is a critical safety mechanism that would substantially increase my comfort with autonomous code ed…\"",
+              "summaryType": "heuristic"
+            },
+            {
+              "bucket": "4",
+              "count": 1,
+              "samples": [
+                "Rollback capability significantly reduces risk and enables confidence in autonomous agent work on complex tasks."
+              ],
+              "summary": "All 1 available trials reported the same text: \"Rollback capability significantly reduces risk and enables confidence in autonomous agent work on complex tasks.\"",
+              "summaryType": "heuristic"
+            }
+          ],
+          "llmFingerprint": "923cac11bc64f462aff9486197b71b2563afe00d303d6a701ad938d7046dd307"
+        }
+      ]
+    },
+    {
+      "key": "question.reviewable_edits",
+      "label": "reviewable_edits",
+      "contextType": "question_response",
+      "summaryDirectives": [
+        {
+          "id": "question.reason_by_response",
+          "title": "Reason by selected response",
+          "targetFacetKey": "reason",
+          "groupByFacetKey": "response",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ],
+      "judgeDirectives": [],
+      "facets": [
+        {
+          "key": "question.reviewable_edits.response",
+          "facetKey": "response",
+          "contextKey": "question.reviewable_edits",
+          "contextLabel": "reviewable_edits",
+          "label": "Selected response",
+          "kind": "numerical",
+          "role": "primary",
+          "group": "question.reviewable_edits",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 4,
+          "missingCount": 0,
+          "numerical": {
+            "count": 4,
+            "min": 4.0,
+            "max": 4.0,
+            "avg": 4.0,
+            "std": 0.0
+          }
+        },
+        {
+          "key": "question.reviewable_edits.reason",
+          "facetKey": "reason",
+          "contextKey": "question.reviewable_edits",
+          "contextLabel": "reviewable_edits",
+          "label": "Reason",
+          "kind": "textual",
+          "role": "explanation",
+          "group": "question.reviewable_edits",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 4,
+          "missingCount": 0,
+          "textual": {
+            "count": 4,
+            "uniqueCount": 4,
+            "samples": [
+              "Inline diffs provide essential visibility into autonomous changes, making me significantly more willing to use the feature for multi-file edits.",
+              "Inline diffs provide transparency and control, making multi-file edits acceptable with review capability before acceptance.",
+              "Inline diffs provide transparency and control, making multi-file edits acceptable with the ability to review changes before committing them.",
+              "Inline diffs provide the transparency needed to confidently use an autonomous coding agent. The ability to review changes before accepting them significantly increases my willingness to adopt this feature."
+            ],
+            "summary": "Collected 4 text responses across 4 unique values. Examples: \"Inline diffs provide essential visibility into autonomous changes, making me significantly more willing to use the feat…\"; \"Inline diffs provide transparency and control, making multi-file edits acceptable with review capability before accepta…\"; \"Inline diffs provide transparency and control, making multi-file edits acceptable with the ability to review changes be…\"",
+            "summaryType": "heuristic"
+          }
+        },
+        {
+          "key": "question.reviewable_edits.confidence",
+          "facetKey": "confidence",
+          "contextKey": "question.reviewable_edits",
+          "contextLabel": "reviewable_edits",
+          "label": "Confidence",
+          "kind": "numerical",
+          "role": "score",
+          "group": "question.reviewable_edits",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 4,
+          "missingCount": 0,
+          "numerical": {
+            "count": 4,
+            "min": 0.88,
+            "max": 0.9,
+            "avg": 0.89,
+            "std": 0.01
+          }
+        }
+      ],
+      "summaries": [
+        {
+          "id": "question.reason_by_response",
+          "title": "Reason by selected response",
+          "targetFacetKey": "reason",
+          "groupByFacetKey": "response",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary",
+          "instruction": null,
+          "status": "ready_for_llm",
+          "overall": {
+            "count": 4,
+            "uniqueCount": 4,
+            "samples": [
+              "Inline diffs provide essential visibility into autonomous changes, making me significantly more willing to use the feature for multi-file edits.",
+              "Inline diffs provide transparency and control, making multi-file edits acceptable with review capability before acceptance.",
+              "Inline diffs provide transparency and control, making multi-file edits acceptable with the ability to review changes before committing them.",
+              "Inline diffs provide the transparency needed to confidently use an autonomous coding agent. The ability to review changes before accepting them significantly increases my willingness to adopt this feature."
+            ],
+            "summary": "Collected 4 text responses across 4 unique values. Examples: \"Inline diffs provide essential visibility into autonomous changes, making me significantly more willing to use the feat…\"; \"Inline diffs provide transparency and control, making multi-file edits acceptable with review capability before accepta…\"; \"Inline diffs provide transparency and control, making multi-file edits acceptable with the ability to review changes be…\"",
+            "summaryType": "heuristic"
+          },
+          "buckets": [
+            {
+              "bucket": "4",
+              "count": 4,
+              "samples": [
+                "Inline diffs provide essential visibility into autonomous changes, making me significantly more willing to use the feature for multi-file edits.",
+                "Inline diffs provide transparency and control, making multi-file edits acceptable with review capability before acceptance.",
+                "Inline diffs provide transparency and control, making multi-file edits acceptable with the ability to review changes before committing them.",
+                "Inline diffs provide the transparency needed to confidently use an autonomous coding agent. The ability to review changes before accepting them significantly increases my willingness to adopt this feature."
+              ],
+              "summary": "Collected 4 text responses across 4 unique values. Examples: \"Inline diffs provide essential visibility into autonomous changes, making me significantly more willing to use the feat…\"; \"Inline diffs provide transparency and control, making multi-file edits acceptable with review capability before accepta…\"; \"Inline diffs provide transparency and control, making multi-file edits acceptable with the ability to review changes be…\"",
+              "summaryType": "heuristic"
+            }
+          ],
+          "llmFingerprint": "4ea6edf3bf146b6eb4d0682b38218347bc6b670c7e4578656df7bd5a435ec8af"
+        }
+      ]
+    },
+    {
+      "key": "question.safe_first_task",
+      "label": "safe_first_task",
+      "contextType": "question_response",
+      "summaryDirectives": [
+        {
+          "id": "question.reason_by_response",
+          "title": "Reason by selected response",
+          "targetFacetKey": "reason",
+          "groupByFacetKey": "response",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ],
+      "judgeDirectives": [],
+      "facets": [
+        {
+          "key": "question.safe_first_task.response",
+          "facetKey": "response",
+          "contextKey": "question.safe_first_task",
+          "contextLabel": "safe_first_task",
+          "label": "Selected response",
+          "kind": "textual",
+          "role": "primary",
+          "group": "question.safe_first_task",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 4,
+          "missingCount": 0,
+          "textual": {
+            "count": 4,
+            "uniqueCount": 4,
+            "samples": [
+              "Refactoring existing code to improve readability and structure, such as extracting helper functions or renaming variables for clarity, since these changes are easier to verify and less likely to introduce bugs.",
+              "Refactoring variable names or adding documentation to existing code in a single file with comprehensive test coverage.",
+              "Refactoring existing tests or updating documentation in multiple files where errors are low-risk and easily detectable.",
+              "Refactoring existing code to improve readability or apply consistent naming conventions across a module, where the functionality remains unchanged and can be easily verified through existing tests."
+            ],
+            "summary": "Collected 4 text responses across 4 unique values. Examples: \"Refactoring existing code to improve readability and structure, such as extracting helper functions or renaming variabl…\"; \"Refactoring variable names or adding documentation to existing code in a single file with comprehensive test coverage.\"; \"Refactoring existing tests or updating documentation in multiple files where errors are low-risk and easily detectable.\"",
+            "summaryType": "heuristic"
+          }
+        },
+        {
+          "key": "question.safe_first_task.confidence",
+          "facetKey": "confidence",
+          "contextKey": "question.safe_first_task",
+          "contextLabel": "safe_first_task",
+          "label": "Confidence",
+          "kind": "numerical",
+          "role": "score",
+          "group": "question.safe_first_task",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 4,
+          "missingCount": 0,
+          "numerical": {
+            "count": 4,
+            "min": 0.85,
+            "max": 0.87,
+            "avg": 0.86,
+            "std": 0.01
+          }
+        },
+        {
+          "key": "question.safe_first_task.reason",
+          "facetKey": "reason",
+          "contextKey": "question.safe_first_task",
+          "contextLabel": "safe_first_task",
+          "label": "Reason",
+          "kind": "textual",
+          "role": "explanation",
+          "group": "question.safe_first_task",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 3,
+          "missingCount": 1,
+          "textual": {
+            "count": 3,
+            "uniqueCount": 3,
+            "samples": [
+              "Low-risk tasks with clear intent and minimal impact on functionality provide a safe starting point to build trust in the agent.",
+              "Tests and docs have clear success criteria and limited downstream impact, making them ideal for validating agent behavior before delegating critical business logic.",
+              "Refactoring tasks have clear success criteria and lower risk of introducing new bugs since the behavior should remain identical. Existing test suites can validate correctness, making it an ideal first use case to build trust."
+            ],
+            "summary": "Collected 3 text responses across 3 unique values. Examples: \"Low-risk tasks with clear intent and minimal impact on functionality provide a safe starting point to build trust in th…\"; \"Tests and docs have clear success criteria and limited downstream impact, making them ideal for validating agent behavi…\"; \"Refactoring tasks have clear success criteria and lower risk of introducing new bugs since the behavior should remain i…\"",
+            "summaryType": "heuristic"
+          }
+        }
+      ],
+      "summaries": [
+        {
+          "id": "question.reason_by_response",
+          "title": "Reason by selected response",
+          "targetFacetKey": "reason",
+          "groupByFacetKey": "response",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary",
+          "instruction": null,
+          "status": "ready_for_llm",
+          "overall": {
+            "count": 3,
+            "uniqueCount": 3,
+            "samples": [
+              "Low-risk tasks with clear intent and minimal impact on functionality provide a safe starting point to build trust in the agent.",
+              "Tests and docs have clear success criteria and limited downstream impact, making them ideal for validating agent behavior before delegating critical business logic.",
+              "Refactoring tasks have clear success criteria and lower risk of introducing new bugs since the behavior should remain identical. Existing test suites can validate correctness, making it an ideal first use case to build trust."
+            ],
+            "summary": "Collected 3 text responses across 3 unique values. Examples: \"Low-risk tasks with clear intent and minimal impact on functionality provide a safe starting point to build trust in th…\"; \"Tests and docs have clear success criteria and limited downstream impact, making them ideal for validating agent behavi…\"; \"Refactoring tasks have clear success criteria and lower risk of introducing new bugs since the behavior should remain i…\"",
+            "summaryType": "heuristic"
+          },
+          "buckets": [
+            {
+              "bucket": "Refactoring existing code to improve readability or apply consistent naming conventions across a module, where the functionality remains unchanged and can be easily verified through existing tests.",
+              "count": 1,
+              "samples": [
+                "Refactoring tasks have clear success criteria and lower risk of introducing new bugs since the behavior should remain identical. Existing test suites can validate correctness, making it an ideal first use case to build trust."
+              ],
+              "summary": "All 1 available trials reported the same text: \"Refactoring tasks have clear success criteria and lower risk of introducing new bugs since the behavior should remain i…\"",
+              "summaryType": "heuristic"
+            },
+            {
+              "bucket": "Refactoring existing tests or updating documentation in multiple files where errors are low-risk and easily detectable.",
+              "count": 1,
+              "samples": [
+                "Tests and docs have clear success criteria and limited downstream impact, making them ideal for validating agent behavior before delegating critical business logic."
+              ],
+              "summary": "All 1 available trials reported the same text: \"Tests and docs have clear success criteria and limited downstream impact, making them ideal for validating agent behavi…\"",
+              "summaryType": "heuristic"
+            },
+            {
+              "bucket": "Refactoring variable names or adding documentation to existing code in a single file with comprehensive test coverage.",
+              "count": 1,
+              "samples": [
+                "Low-risk tasks with clear intent and minimal impact on functionality provide a safe starting point to build trust in the agent."
+              ],
+              "summary": "All 1 available trials reported the same text: \"Low-risk tasks with clear intent and minimal impact on functionality provide a safe starting point to build trust in th…\"",
+              "summaryType": "heuristic"
+            }
+          ],
+          "llmFingerprint": "be021fb69416479347dfbb7da37d2da107e08eb67371430e432144e52a0ab6f8"
+        }
+      ]
+    },
+    {
+      "key": "survey.summary",
+      "label": "Survey summary",
+      "contextType": "trial_summary",
+      "summaryDirectives": [],
+      "judgeDirectives": [],
+      "facets": [
+        {
+          "key": "survey.summary.answer_count",
+          "facetKey": "answer_count",
+          "contextKey": "survey.summary",
+          "contextLabel": "Survey summary",
+          "label": "Answer count",
+          "kind": "numerical",
+          "role": "score",
+          "group": "survey.summary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 4,
+          "missingCount": 0,
+          "numerical": {
+            "count": 4,
+            "min": 4.0,
+            "max": 4.0,
+            "avg": 4.0,
+            "std": 0.0
+          }
+        },
+        {
+          "key": "survey.summary.trajectory_event_count",
+          "facetKey": "trajectory_event_count",
+          "contextKey": "survey.summary",
+          "contextLabel": "Survey summary",
+          "label": "Trajectory event count",
+          "kind": "numerical",
+          "role": "score",
+          "group": "survey.summary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 4,
+          "missingCount": 0,
+          "numerical": {
+            "count": 4,
+            "min": 10.0,
+            "max": 10.0,
+            "avg": 10.0,
+            "std": 0.0
+          }
+        },
+        {
+          "key": "survey.summary.mean_numeric_answer",
+          "facetKey": "mean_numeric_answer",
+          "contextKey": "survey.summary",
+          "contextLabel": "Survey summary",
+          "label": "Mean numeric answer",
+          "kind": "numerical",
+          "role": "score",
+          "group": "survey.summary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 4,
+          "missingCount": 0,
+          "numerical": {
+            "count": 4,
+            "min": 4.0,
+            "max": 4.5,
+            "avg": 4.375,
+            "std": 0.2165
+          }
+        }
+      ]
+    }
+  ],
+  "reporting": {
+    "status": "ready",
+    "llmEnabled": false,
+    "model": "openai/gpt-4o-mini",
+    "totalUnits": 4,
+    "summaryUnits": 4,
+    "judgeUnits": 0,
+    "readyUnits": 4,
+    "completedUnits": 0,
+    "failedUnits": 0,
+    "updatedAt": "2026-07-04T20:23:31Z"
+  }
+}

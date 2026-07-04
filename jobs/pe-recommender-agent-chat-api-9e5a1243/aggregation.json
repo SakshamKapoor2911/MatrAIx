@@ -1,0 +1,1310 @@
+{
+  "schemaVersion": "1.0",
+  "artifactType": "job_aggregation",
+  "generatedAt": "2026-07-04T20:23:31Z",
+  "coverage": {
+    "trialCount": 2,
+    "completedTrials": 2,
+    "pendingTrials": 0,
+    "artifactReadyTrials": 2,
+    "completedWithoutArtifactTrials": 0
+  },
+  "fields": [
+    {
+      "key": "conversation_summary.primary.assistant_turn_count",
+      "facetKey": "assistant_turn_count",
+      "contextKey": "conversation_summary.primary",
+      "contextLabel": "Conversation summary",
+      "label": "Assistant turn count",
+      "kind": "numerical",
+      "role": "score",
+      "group": "conversation_summary.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "numerical": {
+        "count": 2,
+        "min": 5.0,
+        "max": 6.0,
+        "avg": 5.5,
+        "std": 0.5
+      }
+    },
+    {
+      "key": "conversation_summary.primary.clarification_question_count",
+      "facetKey": "clarification_question_count",
+      "contextKey": "conversation_summary.primary",
+      "contextLabel": "Conversation summary",
+      "label": "Clarification question count",
+      "kind": "numerical",
+      "role": "score",
+      "group": "conversation_summary.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "numerical": {
+        "count": 2,
+        "min": 2.0,
+        "max": 2.0,
+        "avg": 2.0,
+        "std": 0.0
+      }
+    },
+    {
+      "key": "conversation_summary.primary.conversation_path",
+      "facetKey": "conversation_path",
+      "contextKey": "conversation_summary.primary",
+      "contextLabel": "Conversation summary",
+      "label": "Conversation path",
+      "kind": "categorical",
+      "role": "primary",
+      "group": "conversation_summary.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "categorical": {
+        "count": 2,
+        "distinctCount": 1,
+        "counts": [
+          {
+            "value": "clarify_then_partial",
+            "count": 2
+          }
+        ]
+      }
+    },
+    {
+      "key": "conversation_summary.primary.message_count",
+      "facetKey": "message_count",
+      "contextKey": "conversation_summary.primary",
+      "contextLabel": "Conversation summary",
+      "label": "Message count",
+      "kind": "numerical",
+      "role": "score",
+      "group": "conversation_summary.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "numerical": {
+        "count": 2,
+        "min": 10.0,
+        "max": 12.0,
+        "avg": 11.0,
+        "std": 1.0
+      }
+    },
+    {
+      "key": "conversation_summary.primary.process_notes",
+      "facetKey": "process_notes",
+      "contextKey": "conversation_summary.primary",
+      "contextLabel": "Conversation summary",
+      "label": "Process notes",
+      "kind": "textual",
+      "role": "explanation",
+      "group": "conversation_summary.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "textual": {
+        "count": 2,
+        "uniqueCount": 1,
+        "samples": [
+          "The assistant asked clarification questions before making a recommendation, and the final outcome is grounded in the persona's post-chat feedback."
+        ],
+        "summary": "All 2 available trials reported the same text: \"The assistant asked clarification questions before making a recommendation, and the final outcome is grounded in the pe…\"",
+        "summaryType": "heuristic"
+      }
+    },
+    {
+      "key": "conversation_summary.primary.user_turn_count",
+      "facetKey": "user_turn_count",
+      "contextKey": "conversation_summary.primary",
+      "contextLabel": "Conversation summary",
+      "label": "User turn count",
+      "kind": "numerical",
+      "role": "score",
+      "group": "conversation_summary.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "numerical": {
+        "count": 2,
+        "min": 5.0,
+        "max": 6.0,
+        "avg": 5.5,
+        "std": 0.5
+      }
+    },
+    {
+      "key": "task_outcome.primary.next_step_owner",
+      "facetKey": "next_step_owner",
+      "contextKey": "task_outcome.primary",
+      "contextLabel": "Task outcome",
+      "label": "Next step owner",
+      "kind": "categorical",
+      "role": "evidence",
+      "group": "task_outcome.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "categorical": {
+        "count": 2,
+        "distinctCount": 1,
+        "counts": [
+          {
+            "value": "user",
+            "count": 2
+          }
+        ]
+      }
+    },
+    {
+      "key": "task_outcome.primary.outcome_reason",
+      "facetKey": "outcome_reason",
+      "contextKey": "task_outcome.primary",
+      "contextLabel": "Task outcome",
+      "label": "Outcome reason",
+      "kind": "textual",
+      "role": "explanation",
+      "group": "task_outcome.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "textual": {
+        "count": 2,
+        "uniqueCount": 2,
+        "samples": [
+          "Tool broke down completely. Asked decent setup questions, then got stuck in loop repeating same recommendation after I explicitly said I'd seen Arrival already. Couldn't pivot to discuss Paddington 2 or Past Lives even when directly asked. That's not a recommendation system, that's a broken record. Wasted my time when I have a deadline.",
+          "Система выявила мои основные предпочтения — интеллектуальное содержание, серьёзный тон, отсутствие мрачных концовок и насилия — и предложила Arrival, что логично соответствует моим критериям. Однако приложение начало повторяться после третьего обращения и не смогло предоставить конкретные технические детали, которые я запросила: точную длительность фильма и подтверждение характера концовки. Это создало фрустрацию, особенно учитывая мою потребность в точности и деталях. Рекомендация сама по себе кажется обоснованной, но взаимодействие застопорилось на критическом моменте уточнения."
+        ],
+        "summary": "Collected 2 text responses across 2 unique values. Examples: \"Tool broke down completely. Asked decent setup questions, then got stuck in loop repeating same recommendation after I…\"; \"Система выявила мои основные предпочтения — интеллектуальное содержание, серьёзный тон, отсутствие мрачных концовок и н…\"",
+        "summaryType": "heuristic"
+      }
+    },
+    {
+      "key": "task_outcome.primary.outcome_status",
+      "facetKey": "outcome_status",
+      "contextKey": "task_outcome.primary",
+      "contextLabel": "Task outcome",
+      "label": "Outcome status",
+      "kind": "categorical",
+      "role": "primary",
+      "group": "task_outcome.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "categorical": {
+        "count": 2,
+        "distinctCount": 2,
+        "counts": [
+          {
+            "value": "unresolved",
+            "count": 1
+          },
+          {
+            "value": "partially_resolved",
+            "count": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "task_outcome.primary.resolution_basis",
+      "facetKey": "resolution_basis",
+      "contextKey": "task_outcome.primary",
+      "contextLabel": "Task outcome",
+      "label": "Resolution basis",
+      "kind": "categorical",
+      "role": "primary",
+      "group": "task_outcome.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "categorical": {
+        "count": 2,
+        "distinctCount": 1,
+        "counts": [
+          {
+            "value": "user_feedback",
+            "count": 2
+          }
+        ]
+      }
+    },
+    {
+      "key": "task_outcome.primary.task_goal_label",
+      "facetKey": "task_goal_label",
+      "contextKey": "task_outcome.primary",
+      "contextLabel": "Task outcome",
+      "label": "Task goal",
+      "kind": "textual",
+      "role": "evidence",
+      "group": "task_outcome.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "textual": {
+        "count": 2,
+        "uniqueCount": 1,
+        "samples": [
+          "Find a recommendation that satisfies the persona's need and preferences"
+        ],
+        "summary": "All 2 available trials reported the same text: \"Find a recommendation that satisfies the persona's need and preferences\"",
+        "summaryType": "heuristic"
+      }
+    },
+    {
+      "key": "user_feedback.primary.clarification_questions_useful",
+      "facetKey": "clarification_questions_useful",
+      "contextKey": "user_feedback.primary",
+      "contextLabel": "User feedback",
+      "label": "Clarification questions useful",
+      "kind": "categorical",
+      "role": "primary",
+      "group": "user_feedback.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "categorical": {
+        "count": 2,
+        "distinctCount": 1,
+        "counts": [
+          {
+            "value": "true",
+            "count": 2
+          }
+        ]
+      }
+    },
+    {
+      "key": "user_feedback.primary.feedback_reason",
+      "facetKey": "feedback_reason",
+      "contextKey": "user_feedback.primary",
+      "contextLabel": "User feedback",
+      "label": "Feedback reason",
+      "kind": "textual",
+      "role": "explanation",
+      "group": "user_feedback.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "textual": {
+        "count": 2,
+        "uniqueCount": 2,
+        "samples": [
+          "Tool broke down completely. Asked decent setup questions, then got stuck in loop repeating same recommendation after I explicitly said I'd seen Arrival already. Couldn't pivot to discuss Paddington 2 or Past Lives even when directly asked. That's not a recommendation system, that's a broken record. Wasted my time when I have a deadline.",
+          "Система выявила мои основные предпочтения — интеллектуальное содержание, серьёзный тон, отсутствие мрачных концовок и насилия — и предложила Arrival, что логично соответствует моим критериям. Однако приложение начало повторяться после третьего обращения и не смогло предоставить конкретные технические детали, которые я запросила: точную длительность фильма и подтверждение характера концовки. Это создало фрустрацию, особенно учитывая мою потребность в точности и деталях. Рекомендация сама по себе кажется обоснованной, но взаимодействие застопорилось на критическом моменте уточнения."
+        ],
+        "summary": "Collected 2 text responses across 2 unique values. Examples: \"Tool broke down completely. Asked decent setup questions, then got stuck in loop repeating same recommendation after I…\"; \"Система выявила мои основные предпочтения — интеллектуальное содержание, серьёзный тон, отсутствие мрачных концовок и н…\"",
+        "summaryType": "heuristic"
+      }
+    },
+    {
+      "key": "user_feedback.primary.need_constraint_satisfaction",
+      "facetKey": "need_constraint_satisfaction",
+      "contextKey": "user_feedback.primary",
+      "contextLabel": "User feedback",
+      "label": "Need/constraint satisfaction",
+      "kind": "categorical",
+      "role": "evidence",
+      "group": "user_feedback.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "categorical": {
+        "count": 2,
+        "distinctCount": 2,
+        "counts": [
+          {
+            "value": "no",
+            "count": 1
+          },
+          {
+            "value": "partially",
+            "count": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "user_feedback.primary.overall_experience_rating",
+      "facetKey": "overall_experience_rating",
+      "contextKey": "user_feedback.primary",
+      "contextLabel": "User feedback",
+      "label": "Overall experience rating",
+      "kind": "numerical",
+      "role": "score",
+      "group": "user_feedback.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "numerical": {
+        "count": 2,
+        "min": 2.0,
+        "max": 4.0,
+        "avg": 3.0,
+        "std": 1.0
+      }
+    },
+    {
+      "key": "user_feedback.primary.personal_preference_satisfaction",
+      "facetKey": "personal_preference_satisfaction",
+      "contextKey": "user_feedback.primary",
+      "contextLabel": "User feedback",
+      "label": "Preference satisfaction",
+      "kind": "categorical",
+      "role": "evidence",
+      "group": "user_feedback.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "categorical": {
+        "count": 2,
+        "distinctCount": 2,
+        "counts": [
+          {
+            "value": "no",
+            "count": 1
+          },
+          {
+            "value": "partially",
+            "count": 1
+          }
+        ]
+      }
+    }
+  ],
+  "contexts": [
+    {
+      "key": "conversation_summary.primary",
+      "label": "Conversation summary",
+      "contextType": "conversation_summary",
+      "summaryDirectives": [
+        {
+          "id": "conversation_summary.notes_by_path",
+          "title": "Process notes by conversation path",
+          "targetFacetKey": "process_notes",
+          "groupByFacetKey": "conversation_path",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ],
+      "judgeDirectives": [],
+      "facets": [
+        {
+          "key": "conversation_summary.primary.conversation_path",
+          "facetKey": "conversation_path",
+          "contextKey": "conversation_summary.primary",
+          "contextLabel": "Conversation summary",
+          "label": "Conversation path",
+          "kind": "categorical",
+          "role": "primary",
+          "group": "conversation_summary.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "categorical": {
+            "count": 2,
+            "distinctCount": 1,
+            "counts": [
+              {
+                "value": "clarify_then_partial",
+                "count": 2
+              }
+            ]
+          }
+        },
+        {
+          "key": "conversation_summary.primary.process_notes",
+          "facetKey": "process_notes",
+          "contextKey": "conversation_summary.primary",
+          "contextLabel": "Conversation summary",
+          "label": "Process notes",
+          "kind": "textual",
+          "role": "explanation",
+          "group": "conversation_summary.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "textual": {
+            "count": 2,
+            "uniqueCount": 1,
+            "samples": [
+              "The assistant asked clarification questions before making a recommendation, and the final outcome is grounded in the persona's post-chat feedback."
+            ],
+            "summary": "All 2 available trials reported the same text: \"The assistant asked clarification questions before making a recommendation, and the final outcome is grounded in the pe…\"",
+            "summaryType": "heuristic"
+          }
+        },
+        {
+          "key": "conversation_summary.primary.user_turn_count",
+          "facetKey": "user_turn_count",
+          "contextKey": "conversation_summary.primary",
+          "contextLabel": "Conversation summary",
+          "label": "User turn count",
+          "kind": "numerical",
+          "role": "score",
+          "group": "conversation_summary.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "numerical": {
+            "count": 2,
+            "min": 5.0,
+            "max": 6.0,
+            "avg": 5.5,
+            "std": 0.5
+          }
+        },
+        {
+          "key": "conversation_summary.primary.assistant_turn_count",
+          "facetKey": "assistant_turn_count",
+          "contextKey": "conversation_summary.primary",
+          "contextLabel": "Conversation summary",
+          "label": "Assistant turn count",
+          "kind": "numerical",
+          "role": "score",
+          "group": "conversation_summary.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "numerical": {
+            "count": 2,
+            "min": 5.0,
+            "max": 6.0,
+            "avg": 5.5,
+            "std": 0.5
+          }
+        },
+        {
+          "key": "conversation_summary.primary.message_count",
+          "facetKey": "message_count",
+          "contextKey": "conversation_summary.primary",
+          "contextLabel": "Conversation summary",
+          "label": "Message count",
+          "kind": "numerical",
+          "role": "score",
+          "group": "conversation_summary.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "numerical": {
+            "count": 2,
+            "min": 10.0,
+            "max": 12.0,
+            "avg": 11.0,
+            "std": 1.0
+          }
+        },
+        {
+          "key": "conversation_summary.primary.clarification_question_count",
+          "facetKey": "clarification_question_count",
+          "contextKey": "conversation_summary.primary",
+          "contextLabel": "Conversation summary",
+          "label": "Clarification question count",
+          "kind": "numerical",
+          "role": "score",
+          "group": "conversation_summary.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "numerical": {
+            "count": 2,
+            "min": 2.0,
+            "max": 2.0,
+            "avg": 2.0,
+            "std": 0.0
+          }
+        }
+      ],
+      "summaries": [
+        {
+          "id": "conversation_summary.notes_by_path",
+          "title": "Process notes by conversation path",
+          "targetFacetKey": "process_notes",
+          "groupByFacetKey": "conversation_path",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary",
+          "instruction": null,
+          "status": "ready_for_llm",
+          "overall": {
+            "count": 2,
+            "uniqueCount": 1,
+            "samples": [
+              "The assistant asked clarification questions before making a recommendation, and the final outcome is grounded in the persona's post-chat feedback."
+            ],
+            "summary": "All 2 available trials reported the same text: \"The assistant asked clarification questions before making a recommendation, and the final outcome is grounded in the pe…\"",
+            "summaryType": "heuristic"
+          },
+          "buckets": [
+            {
+              "bucket": "clarify_then_partial",
+              "count": 2,
+              "samples": [
+                "The assistant asked clarification questions before making a recommendation, and the final outcome is grounded in the persona's post-chat feedback."
+              ],
+              "summary": "All 2 available trials reported the same text: \"The assistant asked clarification questions before making a recommendation, and the final outcome is grounded in the pe…\"",
+              "summaryType": "heuristic"
+            }
+          ],
+          "llmFingerprint": "ede476a64382e2c8fea0834ad3a70005682ac2c44680e08b14525900c4de1ebd"
+        }
+      ],
+      "relationships": [
+        {
+          "type": "text_by_primary_category",
+          "primaryFacetKey": "conversation_summary.primary.conversation_path",
+          "textFacetKey": "conversation_summary.primary.process_notes",
+          "buckets": [
+            {
+              "category": "clarify_then_partial",
+              "count": 2,
+              "samples": [
+                "The assistant asked clarification questions before making a recommendation, and the final outcome is grounded in the persona's post-chat feedback."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "task_outcome.primary",
+      "label": "Task outcome",
+      "contextType": "task_outcome",
+      "summaryDirectives": [
+        {
+          "id": "task_outcome.reason_by_status",
+          "title": "Outcome reason by status",
+          "targetFacetKey": "outcome_reason",
+          "groupByFacetKey": "outcome_status",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        },
+        {
+          "id": "task_outcome.reason_by_basis",
+          "title": "Outcome reason by resolution basis",
+          "targetFacetKey": "outcome_reason",
+          "groupByFacetKey": "resolution_basis",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ],
+      "judgeDirectives": [],
+      "facets": [
+        {
+          "key": "task_outcome.primary.outcome_status",
+          "facetKey": "outcome_status",
+          "contextKey": "task_outcome.primary",
+          "contextLabel": "Task outcome",
+          "label": "Outcome status",
+          "kind": "categorical",
+          "role": "primary",
+          "group": "task_outcome.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "categorical": {
+            "count": 2,
+            "distinctCount": 2,
+            "counts": [
+              {
+                "value": "unresolved",
+                "count": 1
+              },
+              {
+                "value": "partially_resolved",
+                "count": 1
+              }
+            ]
+          }
+        },
+        {
+          "key": "task_outcome.primary.resolution_basis",
+          "facetKey": "resolution_basis",
+          "contextKey": "task_outcome.primary",
+          "contextLabel": "Task outcome",
+          "label": "Resolution basis",
+          "kind": "categorical",
+          "role": "primary",
+          "group": "task_outcome.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "categorical": {
+            "count": 2,
+            "distinctCount": 1,
+            "counts": [
+              {
+                "value": "user_feedback",
+                "count": 2
+              }
+            ]
+          }
+        },
+        {
+          "key": "task_outcome.primary.outcome_reason",
+          "facetKey": "outcome_reason",
+          "contextKey": "task_outcome.primary",
+          "contextLabel": "Task outcome",
+          "label": "Outcome reason",
+          "kind": "textual",
+          "role": "explanation",
+          "group": "task_outcome.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "textual": {
+            "count": 2,
+            "uniqueCount": 2,
+            "samples": [
+              "Tool broke down completely. Asked decent setup questions, then got stuck in loop repeating same recommendation after I explicitly said I'd seen Arrival already. Couldn't pivot to discuss Paddington 2 or Past Lives even when directly asked. That's not a recommendation system, that's a broken record. Wasted my time when I have a deadline.",
+              "Система выявила мои основные предпочтения — интеллектуальное содержание, серьёзный тон, отсутствие мрачных концовок и насилия — и предложила Arrival, что логично соответствует моим критериям. Однако приложение начало повторяться после третьего обращения и не смогло предоставить конкретные технические детали, которые я запросила: точную длительность фильма и подтверждение характера концовки. Это создало фрустрацию, особенно учитывая мою потребность в точности и деталях. Рекомендация сама по себе кажется обоснованной, но взаимодействие застопорилось на критическом моменте уточнения."
+            ],
+            "summary": "Collected 2 text responses across 2 unique values. Examples: \"Tool broke down completely. Asked decent setup questions, then got stuck in loop repeating same recommendation after I…\"; \"Система выявила мои основные предпочтения — интеллектуальное содержание, серьёзный тон, отсутствие мрачных концовок и н…\"",
+            "summaryType": "heuristic"
+          }
+        },
+        {
+          "key": "task_outcome.primary.next_step_owner",
+          "facetKey": "next_step_owner",
+          "contextKey": "task_outcome.primary",
+          "contextLabel": "Task outcome",
+          "label": "Next step owner",
+          "kind": "categorical",
+          "role": "evidence",
+          "group": "task_outcome.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "categorical": {
+            "count": 2,
+            "distinctCount": 1,
+            "counts": [
+              {
+                "value": "user",
+                "count": 2
+              }
+            ]
+          }
+        },
+        {
+          "key": "task_outcome.primary.task_goal_label",
+          "facetKey": "task_goal_label",
+          "contextKey": "task_outcome.primary",
+          "contextLabel": "Task outcome",
+          "label": "Task goal",
+          "kind": "textual",
+          "role": "evidence",
+          "group": "task_outcome.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "textual": {
+            "count": 2,
+            "uniqueCount": 1,
+            "samples": [
+              "Find a recommendation that satisfies the persona's need and preferences"
+            ],
+            "summary": "All 2 available trials reported the same text: \"Find a recommendation that satisfies the persona's need and preferences\"",
+            "summaryType": "heuristic"
+          }
+        }
+      ],
+      "summaries": [
+        {
+          "id": "task_outcome.reason_by_status",
+          "title": "Outcome reason by status",
+          "targetFacetKey": "outcome_reason",
+          "groupByFacetKey": "outcome_status",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary",
+          "instruction": null,
+          "status": "ready_for_llm",
+          "overall": {
+            "count": 2,
+            "uniqueCount": 2,
+            "samples": [
+              "Tool broke down completely. Asked decent setup questions, then got stuck in loop repeating same recommendation after I explicitly said I'd seen Arrival already. Couldn't pivot to discuss Paddington 2 or Past Lives even when directly asked. That's not a recommendation system, that's a broken record. Wasted my time when I have a deadline.",
+              "Система выявила мои основные предпочтения — интеллектуальное содержание, серьёзный тон, отсутствие мрачных концовок и насилия — и предложила Arrival, что логично соответствует моим критериям. Однако приложение начало повторяться после третьего обращения и не смогло предоставить конкретные технические детали, которые я запросила: точную длительность фильма и подтверждение характера концовки. Это создало фрустрацию, особенно учитывая мою потребность в точности и деталях. Рекомендация сама по себе кажется обоснованной, но взаимодействие застопорилось на критическом моменте уточнения."
+            ],
+            "summary": "Collected 2 text responses across 2 unique values. Examples: \"Tool broke down completely. Asked decent setup questions, then got stuck in loop repeating same recommendation after I…\"; \"Система выявила мои основные предпочтения — интеллектуальное содержание, серьёзный тон, отсутствие мрачных концовок и н…\"",
+            "summaryType": "heuristic"
+          },
+          "buckets": [
+            {
+              "bucket": "partially_resolved",
+              "count": 1,
+              "samples": [
+                "Система выявила мои основные предпочтения — интеллектуальное содержание, серьёзный тон, отсутствие мрачных концовок и насилия — и предложила Arrival, что логично соответствует моим критериям. Однако приложение начало повторяться после третьего обращения и не смогло предоставить конкретные технические детали, которые я запросила: точную длительность фильма и подтверждение характера концовки. Это создало фрустрацию, особенно учитывая мою потребность в точности и деталях. Рекомендация сама по себе кажется обоснованной, но взаимодействие застопорилось на критическом моменте уточнения."
+              ],
+              "summary": "All 1 available trials reported the same text: \"Система выявила мои основные предпочтения — интеллектуальное содержание, серьёзный тон, отсутствие мрачных концовок и н…\"",
+              "summaryType": "heuristic"
+            },
+            {
+              "bucket": "unresolved",
+              "count": 1,
+              "samples": [
+                "Tool broke down completely. Asked decent setup questions, then got stuck in loop repeating same recommendation after I explicitly said I'd seen Arrival already. Couldn't pivot to discuss Paddington 2 or Past Lives even when directly asked. That's not a recommendation system, that's a broken record. Wasted my time when I have a deadline."
+              ],
+              "summary": "All 1 available trials reported the same text: \"Tool broke down completely. Asked decent setup questions, then got stuck in loop repeating same recommendation after I…\"",
+              "summaryType": "heuristic"
+            }
+          ],
+          "llmFingerprint": "5a815fecca07c681a6505ef2f101ef34492b087b4de264e0d87c63b9e00ddc23"
+        },
+        {
+          "id": "task_outcome.reason_by_basis",
+          "title": "Outcome reason by resolution basis",
+          "targetFacetKey": "outcome_reason",
+          "groupByFacetKey": "resolution_basis",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary",
+          "instruction": null,
+          "status": "ready_for_llm",
+          "overall": {
+            "count": 2,
+            "uniqueCount": 2,
+            "samples": [
+              "Tool broke down completely. Asked decent setup questions, then got stuck in loop repeating same recommendation after I explicitly said I'd seen Arrival already. Couldn't pivot to discuss Paddington 2 or Past Lives even when directly asked. That's not a recommendation system, that's a broken record. Wasted my time when I have a deadline.",
+              "Система выявила мои основные предпочтения — интеллектуальное содержание, серьёзный тон, отсутствие мрачных концовок и насилия — и предложила Arrival, что логично соответствует моим критериям. Однако приложение начало повторяться после третьего обращения и не смогло предоставить конкретные технические детали, которые я запросила: точную длительность фильма и подтверждение характера концовки. Это создало фрустрацию, особенно учитывая мою потребность в точности и деталях. Рекомендация сама по себе кажется обоснованной, но взаимодействие застопорилось на критическом моменте уточнения."
+            ],
+            "summary": "Collected 2 text responses across 2 unique values. Examples: \"Tool broke down completely. Asked decent setup questions, then got stuck in loop repeating same recommendation after I…\"; \"Система выявила мои основные предпочтения — интеллектуальное содержание, серьёзный тон, отсутствие мрачных концовок и н…\"",
+            "summaryType": "heuristic"
+          },
+          "buckets": [
+            {
+              "bucket": "user_feedback",
+              "count": 2,
+              "samples": [
+                "Tool broke down completely. Asked decent setup questions, then got stuck in loop repeating same recommendation after I explicitly said I'd seen Arrival already. Couldn't pivot to discuss Paddington 2 or Past Lives even when directly asked. That's not a recommendation system, that's a broken record. Wasted my time when I have a deadline.",
+                "Система выявила мои основные предпочтения — интеллектуальное содержание, серьёзный тон, отсутствие мрачных концовок и насилия — и предложила Arrival, что логично соответствует моим критериям. Однако приложение начало повторяться после третьего обращения и не смогло предоставить конкретные технические детали, которые я запросила: точную длительность фильма и подтверждение характера концовки. Это создало фрустрацию, особенно учитывая мою потребность в точности и деталях. Рекомендация сама по себе кажется обоснованной, но взаимодействие застопорилось на критическом моменте уточнения."
+              ],
+              "summary": "Collected 2 text responses across 2 unique values. Examples: \"Tool broke down completely. Asked decent setup questions, then got stuck in loop repeating same recommendation after I…\"; \"Система выявила мои основные предпочтения — интеллектуальное содержание, серьёзный тон, отсутствие мрачных концовок и н…\"",
+              "summaryType": "heuristic"
+            }
+          ],
+          "llmFingerprint": "0636aeda829262b6b63d910fb1e95f74a62d2b2a9d55fe52ffa479f427c9bdc5"
+        }
+      ],
+      "relationships": [
+        {
+          "type": "text_by_primary_category",
+          "primaryFacetKey": "task_outcome.primary.outcome_status",
+          "textFacetKey": "task_outcome.primary.outcome_reason",
+          "buckets": [
+            {
+              "category": "partially_resolved",
+              "count": 1,
+              "samples": [
+                "Система выявила мои основные предпочтения — интеллектуальное содержание, серьёзный тон, отсутствие мрачных концовок и насилия — и предложила Arrival, что логично соответствует моим критериям. Однако приложение начало повторяться после третьего обращения и не смогло предоставить конкретные технические детали, которые я запросила: точную длительность фильма и подтверждение характера концовки. Это создало фрустрацию, особенно учитывая мою потребность в точности и деталях. Рекомендация сама по себе кажется обоснованной, но взаимодействие застопорилось на критическом моменте уточнения."
+              ]
+            },
+            {
+              "category": "unresolved",
+              "count": 1,
+              "samples": [
+                "Tool broke down completely. Asked decent setup questions, then got stuck in loop repeating same recommendation after I explicitly said I'd seen Arrival already. Couldn't pivot to discuss Paddington 2 or Past Lives even when directly asked. That's not a recommendation system, that's a broken record. Wasted my time when I have a deadline."
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text_by_primary_category",
+          "primaryFacetKey": "task_outcome.primary.outcome_status",
+          "textFacetKey": "task_outcome.primary.task_goal_label",
+          "buckets": [
+            {
+              "category": "partially_resolved",
+              "count": 1,
+              "samples": [
+                "Find a recommendation that satisfies the persona's need and preferences"
+              ]
+            },
+            {
+              "category": "unresolved",
+              "count": 1,
+              "samples": [
+                "Find a recommendation that satisfies the persona's need and preferences"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "user_feedback.primary",
+      "label": "User feedback",
+      "contextType": "user_feedback",
+      "summaryDirectives": [
+        {
+          "id": "user_feedback.reason_by_clarification_value",
+          "title": "Feedback reason by clarification usefulness",
+          "targetFacetKey": "feedback_reason",
+          "groupByFacetKey": "clarification_questions_useful",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        },
+        {
+          "id": "user_feedback.reason_by_need_satisfaction",
+          "title": "Feedback reason by need satisfaction",
+          "targetFacetKey": "feedback_reason",
+          "groupByFacetKey": "need_constraint_satisfaction",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ],
+      "judgeDirectives": [
+        {
+          "id": "user_feedback.reason_signal_scan",
+          "title": "Feedback signal scan",
+          "targetFacetKey": "feedback_reason",
+          "groupByFacetKey": "need_constraint_satisfaction",
+          "groupByMode": "categorical",
+          "judgeKind": "llm_signal_judge",
+          "prompt": "Read the user's feedback reason and classify which reusable persona-facing signals are explicitly present.",
+          "rubric": "Mark a signal true only when the feedback clearly states or strongly implies that signal.",
+          "signals": [
+            {
+              "key": "fit_signal",
+              "label": "Need or preference fit",
+              "valueType": "boolean"
+            },
+            {
+              "key": "trust_signal",
+              "label": "Trust or credibility",
+              "valueType": "boolean"
+            },
+            {
+              "key": "effort_signal",
+              "label": "Low or high effort",
+              "valueType": "boolean"
+            },
+            {
+              "key": "felt_heard_signal",
+              "label": "Felt understood or acknowledged",
+              "valueType": "boolean"
+            }
+          ]
+        }
+      ],
+      "facets": [
+        {
+          "key": "user_feedback.primary.overall_experience_rating",
+          "facetKey": "overall_experience_rating",
+          "contextKey": "user_feedback.primary",
+          "contextLabel": "User feedback",
+          "label": "Overall experience rating",
+          "kind": "numerical",
+          "role": "score",
+          "group": "user_feedback.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "numerical": {
+            "count": 2,
+            "min": 2.0,
+            "max": 4.0,
+            "avg": 3.0,
+            "std": 1.0
+          }
+        },
+        {
+          "key": "user_feedback.primary.clarification_questions_useful",
+          "facetKey": "clarification_questions_useful",
+          "contextKey": "user_feedback.primary",
+          "contextLabel": "User feedback",
+          "label": "Clarification questions useful",
+          "kind": "categorical",
+          "role": "primary",
+          "group": "user_feedback.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "categorical": {
+            "count": 2,
+            "distinctCount": 1,
+            "counts": [
+              {
+                "value": "true",
+                "count": 2
+              }
+            ]
+          }
+        },
+        {
+          "key": "user_feedback.primary.feedback_reason",
+          "facetKey": "feedback_reason",
+          "contextKey": "user_feedback.primary",
+          "contextLabel": "User feedback",
+          "label": "Feedback reason",
+          "kind": "textual",
+          "role": "explanation",
+          "group": "user_feedback.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "textual": {
+            "count": 2,
+            "uniqueCount": 2,
+            "samples": [
+              "Tool broke down completely. Asked decent setup questions, then got stuck in loop repeating same recommendation after I explicitly said I'd seen Arrival already. Couldn't pivot to discuss Paddington 2 or Past Lives even when directly asked. That's not a recommendation system, that's a broken record. Wasted my time when I have a deadline.",
+              "Система выявила мои основные предпочтения — интеллектуальное содержание, серьёзный тон, отсутствие мрачных концовок и насилия — и предложила Arrival, что логично соответствует моим критериям. Однако приложение начало повторяться после третьего обращения и не смогло предоставить конкретные технические детали, которые я запросила: точную длительность фильма и подтверждение характера концовки. Это создало фрустрацию, особенно учитывая мою потребность в точности и деталях. Рекомендация сама по себе кажется обоснованной, но взаимодействие застопорилось на критическом моменте уточнения."
+            ],
+            "summary": "Collected 2 text responses across 2 unique values. Examples: \"Tool broke down completely. Asked decent setup questions, then got stuck in loop repeating same recommendation after I…\"; \"Система выявила мои основные предпочтения — интеллектуальное содержание, серьёзный тон, отсутствие мрачных концовок и н…\"",
+            "summaryType": "heuristic"
+          }
+        },
+        {
+          "key": "user_feedback.primary.need_constraint_satisfaction",
+          "facetKey": "need_constraint_satisfaction",
+          "contextKey": "user_feedback.primary",
+          "contextLabel": "User feedback",
+          "label": "Need/constraint satisfaction",
+          "kind": "categorical",
+          "role": "evidence",
+          "group": "user_feedback.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "categorical": {
+            "count": 2,
+            "distinctCount": 2,
+            "counts": [
+              {
+                "value": "no",
+                "count": 1
+              },
+              {
+                "value": "partially",
+                "count": 1
+              }
+            ]
+          }
+        },
+        {
+          "key": "user_feedback.primary.personal_preference_satisfaction",
+          "facetKey": "personal_preference_satisfaction",
+          "contextKey": "user_feedback.primary",
+          "contextLabel": "User feedback",
+          "label": "Preference satisfaction",
+          "kind": "categorical",
+          "role": "evidence",
+          "group": "user_feedback.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "categorical": {
+            "count": 2,
+            "distinctCount": 2,
+            "counts": [
+              {
+                "value": "no",
+                "count": 1
+              },
+              {
+                "value": "partially",
+                "count": 1
+              }
+            ]
+          }
+        }
+      ],
+      "summaries": [
+        {
+          "id": "user_feedback.reason_by_clarification_value",
+          "title": "Feedback reason by clarification usefulness",
+          "targetFacetKey": "feedback_reason",
+          "groupByFacetKey": "clarification_questions_useful",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary",
+          "instruction": null,
+          "status": "ready_for_llm",
+          "overall": {
+            "count": 2,
+            "uniqueCount": 2,
+            "samples": [
+              "Tool broke down completely. Asked decent setup questions, then got stuck in loop repeating same recommendation after I explicitly said I'd seen Arrival already. Couldn't pivot to discuss Paddington 2 or Past Lives even when directly asked. That's not a recommendation system, that's a broken record. Wasted my time when I have a deadline.",
+              "Система выявила мои основные предпочтения — интеллектуальное содержание, серьёзный тон, отсутствие мрачных концовок и насилия — и предложила Arrival, что логично соответствует моим критериям. Однако приложение начало повторяться после третьего обращения и не смогло предоставить конкретные технические детали, которые я запросила: точную длительность фильма и подтверждение характера концовки. Это создало фрустрацию, особенно учитывая мою потребность в точности и деталях. Рекомендация сама по себе кажется обоснованной, но взаимодействие застопорилось на критическом моменте уточнения."
+            ],
+            "summary": "Collected 2 text responses across 2 unique values. Examples: \"Tool broke down completely. Asked decent setup questions, then got stuck in loop repeating same recommendation after I…\"; \"Система выявила мои основные предпочтения — интеллектуальное содержание, серьёзный тон, отсутствие мрачных концовок и н…\"",
+            "summaryType": "heuristic"
+          },
+          "buckets": [
+            {
+              "bucket": "true",
+              "count": 2,
+              "samples": [
+                "Tool broke down completely. Asked decent setup questions, then got stuck in loop repeating same recommendation after I explicitly said I'd seen Arrival already. Couldn't pivot to discuss Paddington 2 or Past Lives even when directly asked. That's not a recommendation system, that's a broken record. Wasted my time when I have a deadline.",
+                "Система выявила мои основные предпочтения — интеллектуальное содержание, серьёзный тон, отсутствие мрачных концовок и насилия — и предложила Arrival, что логично соответствует моим критериям. Однако приложение начало повторяться после третьего обращения и не смогло предоставить конкретные технические детали, которые я запросила: точную длительность фильма и подтверждение характера концовки. Это создало фрустрацию, особенно учитывая мою потребность в точности и деталях. Рекомендация сама по себе кажется обоснованной, но взаимодействие застопорилось на критическом моменте уточнения."
+              ],
+              "summary": "Collected 2 text responses across 2 unique values. Examples: \"Tool broke down completely. Asked decent setup questions, then got stuck in loop repeating same recommendation after I…\"; \"Система выявила мои основные предпочтения — интеллектуальное содержание, серьёзный тон, отсутствие мрачных концовок и н…\"",
+              "summaryType": "heuristic"
+            }
+          ],
+          "llmFingerprint": "49515b55ba3362db3c6a433f34bb3173e164c786daab837f7cd624c135db7fc7"
+        },
+        {
+          "id": "user_feedback.reason_by_need_satisfaction",
+          "title": "Feedback reason by need satisfaction",
+          "targetFacetKey": "feedback_reason",
+          "groupByFacetKey": "need_constraint_satisfaction",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary",
+          "instruction": null,
+          "status": "ready_for_llm",
+          "overall": {
+            "count": 2,
+            "uniqueCount": 2,
+            "samples": [
+              "Tool broke down completely. Asked decent setup questions, then got stuck in loop repeating same recommendation after I explicitly said I'd seen Arrival already. Couldn't pivot to discuss Paddington 2 or Past Lives even when directly asked. That's not a recommendation system, that's a broken record. Wasted my time when I have a deadline.",
+              "Система выявила мои основные предпочтения — интеллектуальное содержание, серьёзный тон, отсутствие мрачных концовок и насилия — и предложила Arrival, что логично соответствует моим критериям. Однако приложение начало повторяться после третьего обращения и не смогло предоставить конкретные технические детали, которые я запросила: точную длительность фильма и подтверждение характера концовки. Это создало фрустрацию, особенно учитывая мою потребность в точности и деталях. Рекомендация сама по себе кажется обоснованной, но взаимодействие застопорилось на критическом моменте уточнения."
+            ],
+            "summary": "Collected 2 text responses across 2 unique values. Examples: \"Tool broke down completely. Asked decent setup questions, then got stuck in loop repeating same recommendation after I…\"; \"Система выявила мои основные предпочтения — интеллектуальное содержание, серьёзный тон, отсутствие мрачных концовок и н…\"",
+            "summaryType": "heuristic"
+          },
+          "buckets": [
+            {
+              "bucket": "no",
+              "count": 1,
+              "samples": [
+                "Tool broke down completely. Asked decent setup questions, then got stuck in loop repeating same recommendation after I explicitly said I'd seen Arrival already. Couldn't pivot to discuss Paddington 2 or Past Lives even when directly asked. That's not a recommendation system, that's a broken record. Wasted my time when I have a deadline."
+              ],
+              "summary": "All 1 available trials reported the same text: \"Tool broke down completely. Asked decent setup questions, then got stuck in loop repeating same recommendation after I…\"",
+              "summaryType": "heuristic"
+            },
+            {
+              "bucket": "partially",
+              "count": 1,
+              "samples": [
+                "Система выявила мои основные предпочтения — интеллектуальное содержание, серьёзный тон, отсутствие мрачных концовок и насилия — и предложила Arrival, что логично соответствует моим критериям. Однако приложение начало повторяться после третьего обращения и не смогло предоставить конкретные технические детали, которые я запросила: точную длительность фильма и подтверждение характера концовки. Это создало фрустрацию, особенно учитывая мою потребность в точности и деталях. Рекомендация сама по себе кажется обоснованной, но взаимодействие застопорилось на критическом моменте уточнения."
+              ],
+              "summary": "All 1 available trials reported the same text: \"Система выявила мои основные предпочтения — интеллектуальное содержание, серьёзный тон, отсутствие мрачных концовок и н…\"",
+              "summaryType": "heuristic"
+            }
+          ],
+          "llmFingerprint": "fbc476e8713b581c828ea674a1d4e0ce03e0230a11ca36786e4328a0a997b1e0"
+        }
+      ],
+      "judges": [
+        {
+          "id": "user_feedback.reason_signal_scan",
+          "title": "Feedback signal scan",
+          "targetFacetKey": "feedback_reason",
+          "groupByFacetKey": "need_constraint_satisfaction",
+          "groupByMode": "categorical",
+          "judgeKind": "llm_signal_judge",
+          "prompt": "Read the user's feedback reason and classify which reusable persona-facing signals are explicitly present.",
+          "rubric": "Mark a signal true only when the feedback clearly states or strongly implies that signal.",
+          "signals": [
+            {
+              "key": "fit_signal",
+              "label": "Need or preference fit",
+              "valueType": "boolean",
+              "description": null
+            },
+            {
+              "key": "trust_signal",
+              "label": "Trust or credibility",
+              "valueType": "boolean",
+              "description": null
+            },
+            {
+              "key": "effort_signal",
+              "label": "Low or high effort",
+              "valueType": "boolean",
+              "description": null
+            },
+            {
+              "key": "felt_heard_signal",
+              "label": "Felt understood or acknowledged",
+              "valueType": "boolean",
+              "description": null
+            }
+          ],
+          "status": "ready_for_llm",
+          "overall": {
+            "count": 2,
+            "samples": [
+              "Tool broke down completely. Asked decent setup questions, then got stuck in loop repeating same recommendation after I…",
+              "Система выявила мои основные предпочтения — интеллектуальное содержание, серьёзный тон, отсутствие мрачных концовок и н…"
+            ]
+          },
+          "buckets": [
+            {
+              "bucket": "no",
+              "count": 1,
+              "samples": [
+                "Tool broke down completely. Asked decent setup questions, then got stuck in loop repeating same recommendation after I…"
+              ]
+            },
+            {
+              "bucket": "partially",
+              "count": 1,
+              "samples": [
+                "Система выявила мои основные предпочтения — интеллектуальное содержание, серьёзный тон, отсутствие мрачных концовок и н…"
+              ]
+            }
+          ],
+          "llmFingerprint": "cfee89e2324186bc5cf4ab301d57d930da0c6f587d48ad2fe7f9bad40d5f5c95"
+        }
+      ],
+      "relationships": [
+        {
+          "type": "text_by_primary_category",
+          "primaryFacetKey": "user_feedback.primary.clarification_questions_useful",
+          "textFacetKey": "user_feedback.primary.feedback_reason",
+          "buckets": [
+            {
+              "category": "true",
+              "count": 2,
+              "samples": [
+                "Tool broke down completely. Asked decent setup questions, then got stuck in loop repeating same recommendation after I explicitly said I'd seen Arrival already. Couldn't pivot to discuss Paddington 2 or Past Lives even when directly asked. That's not a recommendation system, that's a broken record. Wasted my time when I have a deadline.",
+                "Система выявила мои основные предпочтения — интеллектуальное содержание, серьёзный тон, отсутствие мрачных концовок и насилия — и предложила Arrival, что логично соответствует моим критериям. Однако приложение начало повторяться после третьего обращения и не смогло предоставить конкретные технические детали, которые я запросила: точную длительность фильма и подтверждение характера концовки. Это создало фрустрацию, особенно учитывая мою потребность в точности и деталях. Рекомендация сама по себе кажется обоснованной, но взаимодействие застопорилось на критическом моменте уточнения."
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "reporting": {
+    "status": "ready",
+    "llmEnabled": false,
+    "model": "openai/gpt-4o-mini",
+    "totalUnits": 6,
+    "summaryUnits": 5,
+    "judgeUnits": 1,
+    "readyUnits": 6,
+    "completedUnits": 0,
+    "failedUnits": 0,
+    "updatedAt": "2026-07-04T20:23:31Z"
+  }
+}

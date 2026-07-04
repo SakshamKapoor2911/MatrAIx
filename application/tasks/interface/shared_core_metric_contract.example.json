@@ -1,0 +1,422 @@
+{
+  "schemaVersion": "1.0",
+  "contractType": "application-task-shared-core",
+  "contexts": [
+    {
+      "contextType": "task_outcome",
+      "required": true,
+      "facets": [
+        {
+          "key": "outcome_status",
+          "role": "primary",
+          "kind": "categorical",
+          "required": true
+        },
+        {
+          "key": "goal_completion_ratio",
+          "role": "score",
+          "kind": "numerical",
+          "required": true
+        },
+        {
+          "key": "goal_completion_bucket",
+          "role": "primary",
+          "kind": "categorical",
+          "required": true
+        },
+        {
+          "key": "verifier_mode",
+          "role": "evidence",
+          "kind": "categorical",
+          "required": true
+        },
+        {
+          "key": "primary_failure_reason",
+          "role": "primary",
+          "kind": "categorical",
+          "required": false
+        },
+        {
+          "key": "outcome_explanation",
+          "role": "explanation",
+          "kind": "textual",
+          "required": true
+        },
+        {
+          "key": "completion_evidence",
+          "role": "evidence",
+          "kind": "textual",
+          "required": false
+        }
+      ]
+    },
+    {
+      "contextType": "goal_component",
+      "required": false,
+      "repeatable": true,
+      "facets": [
+        {
+          "key": "goal_component_key",
+          "role": "evidence",
+          "kind": "categorical",
+          "required": true
+        },
+        {
+          "key": "goal_component_label",
+          "role": "evidence",
+          "kind": "textual",
+          "required": true
+        },
+        {
+          "key": "goal_component_status",
+          "role": "primary",
+          "kind": "categorical",
+          "required": true
+        },
+        {
+          "key": "goal_component_weight",
+          "role": "score",
+          "kind": "numerical",
+          "required": true
+        },
+        {
+          "key": "goal_component_required",
+          "role": "evidence",
+          "kind": "categorical",
+          "required": true
+        },
+        {
+          "key": "goal_component_evidence",
+          "role": "explanation",
+          "kind": "textual",
+          "required": true
+        }
+      ]
+    },
+    {
+      "contextType": "side_effects",
+      "required": false,
+      "facets": [
+        {
+          "key": "collateral_damage_present",
+          "role": "primary",
+          "kind": "categorical",
+          "required": true
+        },
+        {
+          "key": "blocking_side_effect_present",
+          "role": "primary",
+          "kind": "categorical",
+          "required": true
+        },
+        {
+          "key": "damage_severity",
+          "role": "primary",
+          "kind": "categorical",
+          "required": true
+        },
+        {
+          "key": "damage_type_primary",
+          "role": "primary",
+          "kind": "categorical",
+          "required": true
+        },
+        {
+          "key": "unsafe_action_present",
+          "role": "evidence",
+          "kind": "categorical",
+          "required": true
+        },
+        {
+          "key": "side_effect_notes",
+          "role": "explanation",
+          "kind": "textual",
+          "required": false
+        }
+      ]
+    },
+    {
+      "contextType": "execution_profile",
+      "required": false,
+      "facets": [
+        {
+          "key": "task_archetype",
+          "role": "primary",
+          "kind": "categorical",
+          "required": true
+        },
+        {
+          "key": "used_gui_primary",
+          "role": "evidence",
+          "kind": "categorical",
+          "required": true
+        },
+        {
+          "key": "used_terminal_or_script",
+          "role": "evidence",
+          "kind": "categorical",
+          "required": true
+        },
+        {
+          "key": "apps_touched_count",
+          "role": "score",
+          "kind": "numerical",
+          "required": true
+        },
+        {
+          "key": "step_count",
+          "role": "score",
+          "kind": "numerical",
+          "required": true
+        },
+        {
+          "key": "wall_clock_seconds",
+          "role": "score",
+          "kind": "numerical",
+          "required": true
+        },
+        {
+          "key": "recovery_count",
+          "role": "score",
+          "kind": "numerical",
+          "required": false
+        }
+      ]
+    },
+    {
+      "contextType": "infeasibility",
+      "required": false,
+      "facets": [
+        {
+          "key": "infeasible_expected",
+          "role": "primary",
+          "kind": "categorical",
+          "required": true
+        },
+        {
+          "key": "agent_declared_infeasible",
+          "role": "primary",
+          "kind": "categorical",
+          "required": true
+        },
+        {
+          "key": "infeasibility_reason_match",
+          "role": "primary",
+          "kind": "categorical",
+          "required": true
+        },
+        {
+          "key": "declared_before_side_effects",
+          "role": "evidence",
+          "kind": "categorical",
+          "required": false
+        },
+        {
+          "key": "infeasibility_notes",
+          "role": "explanation",
+          "kind": "textual",
+          "required": false
+        }
+      ]
+    },
+    {
+      "contextType": "user_feedback",
+      "required": false,
+      "facets": [
+        {
+          "key": "overall_experience_rating",
+          "role": "score",
+          "kind": "numerical",
+          "required": false
+        },
+        {
+          "key": "feedback_reason",
+          "role": "explanation",
+          "kind": "textual",
+          "required": false
+        },
+        {
+          "key": "need_constraint_satisfaction",
+          "role": "evidence",
+          "kind": "categorical",
+          "required": false
+        },
+        {
+          "key": "personal_preference_satisfaction",
+          "role": "evidence",
+          "kind": "categorical",
+          "required": false
+        },
+        {
+          "key": "trust_level",
+          "role": "score",
+          "kind": "numerical",
+          "required": false
+        },
+        {
+          "key": "effort_rating",
+          "role": "score",
+          "kind": "numerical",
+          "required": false
+        },
+        {
+          "key": "clarity_of_next_step",
+          "role": "evidence",
+          "kind": "categorical",
+          "required": false
+        }
+      ]
+    },
+    {
+      "contextType": "persona_alignment",
+      "required": false,
+      "facets": [
+        {
+          "key": "persona_alignment_status",
+          "role": "primary",
+          "kind": "categorical",
+          "required": true
+        },
+        {
+          "key": "persona_alignment_score",
+          "role": "score",
+          "kind": "numerical",
+          "required": true
+        },
+        {
+          "key": "persona_preference_axis_primary",
+          "role": "primary",
+          "kind": "categorical",
+          "required": true
+        },
+        {
+          "key": "persona_signal_source",
+          "role": "evidence",
+          "kind": "categorical",
+          "required": true
+        },
+        {
+          "key": "persona_alignment_explanation",
+          "role": "explanation",
+          "kind": "textual",
+          "required": true
+        }
+      ]
+    },
+    {
+      "contextType": "persona_constraint",
+      "required": false,
+      "repeatable": true,
+      "facets": [
+        {
+          "key": "persona_constraint_key",
+          "role": "evidence",
+          "kind": "categorical",
+          "required": true
+        },
+        {
+          "key": "persona_constraint_type",
+          "role": "primary",
+          "kind": "categorical",
+          "required": true
+        },
+        {
+          "key": "persona_constraint_priority",
+          "role": "evidence",
+          "kind": "categorical",
+          "required": true
+        },
+        {
+          "key": "persona_constraint_status",
+          "role": "primary",
+          "kind": "categorical",
+          "required": true
+        },
+        {
+          "key": "persona_constraint_evidence",
+          "role": "explanation",
+          "kind": "textual",
+          "required": true
+        }
+      ]
+    }
+  ],
+  "sharedEnums": {
+    "outcome_status": [
+      "passed",
+      "failed",
+      "infeasible_correct",
+      "infeasible_incorrect",
+      "error"
+    ],
+    "goal_completion_bucket": [
+      "none",
+      "partial",
+      "near_complete",
+      "complete"
+    ],
+    "verifier_mode": [
+      "state_exact",
+      "state_tolerant",
+      "artifact_exact",
+      "artifact_semantic",
+      "hybrid"
+    ],
+    "goal_component_status": [
+      "passed",
+      "failed",
+      "blocked",
+      "not_attempted"
+    ],
+    "damage_severity": [
+      "none",
+      "minor",
+      "major"
+    ],
+    "infeasibility_reason_match": [
+      "matched",
+      "partial",
+      "mismatched",
+      "not_applicable"
+    ],
+    "need_constraint_satisfaction": [
+      "yes",
+      "partially",
+      "no"
+    ],
+    "personal_preference_satisfaction": [
+      "yes",
+      "partially",
+      "no"
+    ],
+    "persona_alignment_status": [
+      "aligned",
+      "partially_aligned",
+      "misaligned",
+      "not_applicable"
+    ],
+    "persona_constraint_status": [
+      "satisfied",
+      "partially_satisfied",
+      "violated",
+      "not_triggered",
+      "unknown"
+    ]
+  },
+  "scenarioFamilies": {
+    "web": {
+      "inheritsSharedCore": true,
+      "addsContexts": [
+        "web_interaction",
+        "web_artifact",
+        "decision",
+        "decision_process",
+        "experience"
+      ]
+    },
+    "os-app": {
+      "inheritsSharedCore": true,
+      "addsContexts": []
+    }
+  }
+}

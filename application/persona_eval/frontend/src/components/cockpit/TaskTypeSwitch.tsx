@@ -11,9 +11,10 @@
  * unchanged (`value` / `onChange` / `disabled`); `showLabel` + `className` are
  * optional presentation knobs.
  */
+import { OS_APP_TAB_LABEL } from "@/lib/personaAgentCatalog";
 import { FOCUS_RING, Sym } from "./cockpitShared";
 
-export type PersonaEvalTaskType = "chatbot" | "survey" | "web" | "cua";
+export type PersonaEvalTaskType = "chatbot" | "survey" | "web" | "os-app";
 
 export interface TaskTypeSwitchProps {
   value: PersonaEvalTaskType;
@@ -25,10 +26,10 @@ export interface TaskTypeSwitchProps {
 }
 
 const OPTIONS: ReadonlyArray<{ value: PersonaEvalTaskType; label: string; icon: string; hint: string }> = [
-  { value: "chatbot", label: "Chatbot", icon: "forum", hint: "A back-and-forth conversation." },
   { value: "survey", label: "Survey", icon: "fact_check", hint: "A fixed questionnaire the user fills out." },
+  { value: "chatbot", label: "Chatbot", icon: "forum", hint: "A back-and-forth conversation." },
   { value: "web", label: "Web", icon: "language", hint: "A real browser task the user completes." },
-  { value: "cua", label: "CUA", icon: "smart_toy", hint: "Computer-use agent on desktop or browser tasks." },
+  { value: "os-app", label: OS_APP_TAB_LABEL, icon: "apps", hint: "Native apps on Linux, macOS, or iOS (computer-use simulation)." },
 ];
 
 export function TaskTypeSwitch({ value, onChange, disabled, showLabel = true, className = "" }: TaskTypeSwitchProps) {

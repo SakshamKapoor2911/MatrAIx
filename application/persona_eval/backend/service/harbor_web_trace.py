@@ -7,6 +7,8 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import quote
 
+from backend.service.import_paths import ensure_harbor_source_imports
+
 _ALLOWED_SUFFIXES = {".png", ".webp", ".jpg", ".jpeg", ".svg"}
 
 
@@ -117,6 +119,7 @@ def read_harbor_web_trace(
     trajectory_path = logs_dir / "trajectory.json"
     if not trajectory_path.is_file():
         return {"events": [], "raw": {}}
+    ensure_harbor_source_imports()
     from environment.integrations.persona_eval.harbor.web_eval import _trace_from_trajectory
 
     trajectory = json.loads(trajectory_path.read_text(encoding="utf-8"))

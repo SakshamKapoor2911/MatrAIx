@@ -19,10 +19,17 @@ uv run harbor run -p application/tasks/example-chat-api_support_chatbot -a oracl
 ## Layout
 
 ```
+application/tasks/example-chat-api_support_chatbot/
+├── input/
+│   ├── chatbot.yaml
+│   ├── instruction.md
+│   ├── context.md
+│   └── output_schema.md
+└── ...
+
 environment/
 ├── Dockerfile
 ├── docker-compose.yaml      # support-api sidecar
-├── order_context.md         # → /app/input/
 └── support-api/
     ├── Dockerfile
     └── server.py            # Flask REST endpoints

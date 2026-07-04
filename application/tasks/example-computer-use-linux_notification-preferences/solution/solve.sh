@@ -1,12 +1,20 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-mkdir -p /tmp/personabench-linux-notification-preferences
+mkdir -p /tmp/personabench-linux-note-to-csv
 
-cat > /tmp/personabench-linux-notification-preferences/decision.json <<'EOF'
+cat > /tmp/personabench-linux-note-to-csv/cleaned_list.csv <<'EOF'
+item,quantity,priority
+oat milk,2,urgent
+batteries,4,normal
+trash bags,1,low
+EOF
+
+cat > /tmp/personabench-linux-note-to-csv/submission.json <<'EOF'
 {
-  "keep_notifications_on": false,
-  "app_reviewed": "Notify OSD",
-  "reason": "I keep notifications off while focusing and only allow them for calendar and messaging apps."
+  "output_file": "/tmp/personabench-linux-note-to-csv/cleaned_list.csv",
+  "rows_written": 3,
+  "format": "csv",
+  "reason": "CSV keeps the shopping note compact and easy to sort later in a spreadsheet."
 }
 EOF

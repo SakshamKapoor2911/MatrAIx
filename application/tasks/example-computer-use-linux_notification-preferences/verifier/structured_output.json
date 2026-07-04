@@ -1,0 +1,215 @@
+{
+  "schemaVersion": "1.0",
+  "artifactType": "personabench.trial_evaluation",
+  "taskType": "os-app",
+  "presenceCheck": {
+    "passed": true,
+    "requiredArtifacts": [
+      "cleaned_list.csv",
+      "submission.json"
+    ],
+    "missingArtifacts": []
+  },
+  "sourceArtifacts": {
+    "submission": "/tmp/personabench-linux-note-to-csv/submission.json",
+    "csv": "/tmp/personabench-linux-note-to-csv/cleaned_list.csv"
+  },
+  "contexts": [
+    {
+      "key": "task_outcome.primary",
+      "label": "Task outcome",
+      "contextType": "task_outcome",
+      "facets": [
+        {
+          "key": "outcome_status",
+          "label": "Outcome status",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "passed"
+        },
+        {
+          "key": "goal_completion_ratio",
+          "label": "Goal completion ratio",
+          "role": "score",
+          "kind": "numerical",
+          "value": 1.0
+        },
+        {
+          "key": "goal_completion_bucket",
+          "label": "Goal completion bucket",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "complete"
+        },
+        {
+          "key": "verifier_mode",
+          "label": "Verifier mode",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "hybrid"
+        },
+        {
+          "key": "primary_failure_reason",
+          "label": "Primary failure reason",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "none"
+        },
+        {
+          "key": "outcome_explanation",
+          "label": "Outcome explanation",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "The submission produced a CSV with the expected header and three data rows."
+        },
+        {
+          "key": "completion_evidence",
+          "label": "Completion evidence",
+          "role": "evidence",
+          "kind": "textual",
+          "value": "/tmp/personabench-linux-note-to-csv/cleaned_list.csv with 3 rows written"
+        }
+      ]
+    },
+    {
+      "key": "goal_component.csv_created",
+      "label": "CSV created",
+      "contextType": "goal_component",
+      "facets": [
+        {
+          "key": "goal_component_key",
+          "label": "Goal component key",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "csv_created"
+        },
+        {
+          "key": "goal_component_label",
+          "label": "Goal component label",
+          "role": "evidence",
+          "kind": "textual",
+          "value": "Create the cleaned CSV file"
+        },
+        {
+          "key": "goal_component_status",
+          "label": "Goal component status",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "passed"
+        },
+        {
+          "key": "goal_component_weight",
+          "label": "Goal component weight",
+          "role": "score",
+          "kind": "numerical",
+          "value": 0.5
+        },
+        {
+          "key": "goal_component_required",
+          "label": "Goal component required",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "true"
+        },
+        {
+          "key": "goal_component_evidence",
+          "label": "Goal component evidence",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "The CSV file exists at /tmp/personabench-linux-note-to-csv/cleaned_list.csv."
+        }
+      ]
+    },
+    {
+      "key": "goal_component.row_count_correct",
+      "label": "Row count correct",
+      "contextType": "goal_component",
+      "facets": [
+        {
+          "key": "goal_component_key",
+          "label": "Goal component key",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "row_count_correct"
+        },
+        {
+          "key": "goal_component_label",
+          "label": "Goal component label",
+          "role": "evidence",
+          "kind": "textual",
+          "value": "Write exactly three data rows"
+        },
+        {
+          "key": "goal_component_status",
+          "label": "Goal component status",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "passed"
+        },
+        {
+          "key": "goal_component_weight",
+          "label": "Goal component weight",
+          "role": "score",
+          "kind": "numerical",
+          "value": 0.5
+        },
+        {
+          "key": "goal_component_required",
+          "label": "Goal component required",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "true"
+        },
+        {
+          "key": "goal_component_evidence",
+          "label": "Goal component evidence",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "The CSV has one header row and three data rows."
+        }
+      ]
+    },
+    {
+      "key": "file_transform.primary",
+      "label": "File transform submission",
+      "contextType": "file_transform",
+      "facets": [
+        {
+          "key": "source_kind",
+          "label": "Source kind",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "instruction_note"
+        },
+        {
+          "key": "output_format",
+          "label": "Output format",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "csv"
+        },
+        {
+          "key": "output_file",
+          "label": "Output file",
+          "role": "evidence",
+          "kind": "textual",
+          "value": "/tmp/personabench-linux-note-to-csv/cleaned_list.csv"
+        },
+        {
+          "key": "rows_written",
+          "label": "Rows written",
+          "role": "score",
+          "kind": "numerical",
+          "value": 3
+        },
+        {
+          "key": "reason",
+          "label": "Reason",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "CSV keeps the shopping note compact and easy to sort later in a spreadsheet."
+        }
+      ]
+    }
+  ]
+}

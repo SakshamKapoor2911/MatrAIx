@@ -21,6 +21,8 @@ from typing import Any, Callable, Dict, List, Optional, Sequence, Set
 import yaml
 
 from backend.service.config import harbor_persona_model
+from environment.integrations.persona_eval.persona_exposure import coerce_turn_view
+from persona_eval.feedback import questionnaire_from_feedback
 from persona_eval.types import Persona, PersonaEvalConfig
 
 SCORER_PACKAGE_TARGET = "/app/persona_eval"
@@ -63,6 +65,11 @@ def resolve_repo_root(file_path: Path) -> Path:
 
 def _repo_root() -> Path:
     return resolve_repo_root(Path(__file__))
+
+
+def _normalize_chat_task_path(task_path: str | None) -> str | None:
+    raw = str(task_path or "").strip()
+    return raw.replace("\\", "/") or None
 
 
 def _default_harbor_runs_root() -> Path:
@@ -181,7 +188,7 @@ def _prompt_bundle(persona: Persona, task_prompt: str) -> Dict[str, str]:
 def _scorer_mount(repo_root: Path) -> Dict[str, Any]:
     return {
         "type": "bind",
-        "source": str(repo_root / "application" / "persona_eval" / "persona_eval"),
+        "source": str(repo_root / "packages" / "persona-eval" / "src" / "persona_eval"),
         "target": SCORER_PACKAGE_TARGET,
         "read_only": True,
     }
@@ -259,63 +266,39 @@ def write_harbor_persona_yaml(base_dir: Path, persona: Persona) -> Path:
     return path
 
 
-def build_recommender_simulation_prompt(
-    *,
-    domain: str,
-    max_turns: int,
-    sut_description: str,
-    goal_context_description: str,
-) -> str:
-    """Build the application-owned task prompt appended to Harbor instruction."""
-    return """You are a user of a {domain} recommendation system.
-
-{sut_description}
-
-Context for this interaction: {goal_context_description}
-
-Based on your assigned persona, silently decide what kind of {domain} items you
-realistically want and which constraints or preferences matter to you. Start the
-conversation naturally. Do not reveal everything at once. Let the system ask
-follow-up questions, answer in character, and give feedback when
-recommendations do not fit. Continue until you can judge whether the
-recommendations satisfy your need.
-
-""".format(
-        domain=domain,
-        sut_description=sut_description,
-        goal_context_description=goal_context_description,
-    )
-
-
 def build_chatbot_simulation_prompt(
     *,
     application_id: str,
     application_context: str,
-    max_turns: int,
+    max_turns: int | None,
     sut_description: str,
-    goal_context_description: str,
 ) -> str:
     """Build the application-owned generic chatbot task prompt."""
     system_label = _chatbot_system_label(
         application_id=application_id,
         application_context=application_context,
     )
+    turn_limit = (
+        "\n\nFinish within {} user turns.".format(max_turns)
+        if max_turns is not None
+        else ""
+    )
     return """You are a user of a {system_label}.
 
 {sut_description}
-
-Context for this interaction: {goal_context_description}
 
 Based on your assigned persona, silently decide what you realistically want from
 this system and which constraints or preferences matter to you. Start the
 conversation naturally. Do not reveal everything at once. Let the system ask
 follow-up questions, answer in character, and give feedback when a response does
-not fit. Continue until you can judge whether the system satisfied your need.
+not fit. Keep messages short and conversational (1-3 sentences), and avoid
+analytical monologues or explaining your hidden reasoning. Continue until you
+can judge whether the system satisfied your need.{turn_limit}
 
 """.format(
         system_label=system_label,
         sut_description=sut_description,
-        goal_context_description=goal_context_description,
+        turn_limit=turn_limit,
     )
 
 
@@ -340,7 +323,7 @@ class HarborPersonaEvalRunner:
         runs_root: Optional[Path] = None,
         command_runner: Callable[[Sequence[str]], int] = _run_subprocess,
         harbor_command: Optional[Sequence[str]] = None,
-        goal_context_description_for: Optional[Callable[[str], str]] = None,
+        chat_task_path: Optional[str] = None,
     ) -> None:
         self.repo_root = Path(repo_root) if repo_root is not None else _repo_root()
         self.runs_root = (
@@ -348,9 +331,7 @@ class HarborPersonaEvalRunner:
         )
         self.command_runner = command_runner
         self.harbor_command = tuple(harbor_command or _default_harbor_command())
-        self.goal_context_description_for = goal_context_description_for or (
-            lambda goal_context_id: goal_context_id
-        )
+        self.chat_task_path = _normalize_chat_task_path(chat_task_path)
 
     def __call__(
         self,
@@ -367,6 +348,17 @@ class HarborPersonaEvalRunner:
             if on_event is not None:
                 on_event(event)
 
+        chat_task_path = self.chat_task_path or _normalize_chat_task_path(
+            os.environ.get("MATRIX_CHATBOT_TASK_PATH")
+        )
+        if not chat_task_path:
+            raise ValueError(
+                "chat task path is required; pass chat_task_path or set MATRIX_CHATBOT_TASK_PATH"
+            )
+        task_path_obj = Path(chat_task_path)
+        if not task_path_obj.is_absolute():
+            task_path_obj = self.repo_root / task_path_obj
+
         job_name = "persona-eval-{}".format(uuid.uuid4().hex[:12])
         run_dir = self.runs_root / job_name / "_inputs"
         run_dir.mkdir(parents=True, exist_ok=True)
@@ -378,9 +370,6 @@ class HarborPersonaEvalRunner:
             application_context=application_context,
             max_turns=config.max_turns,
             sut_description=sut_description,
-            goal_context_description=self.goal_context_description_for(
-                config.goal_context_id
-            ),
         )
         task_prompt_path.write_text(task_prompt, encoding="utf-8")
         prompts = _prompt_bundle(persona, task_prompt)
@@ -411,12 +400,7 @@ class HarborPersonaEvalRunner:
             ],
             "tasks": [
                 {
-                    "path": str(
-                        self.repo_root
-                        / "application"
-                        / "tasks"
-                        / "recommender-agent_chat_api"
-                    )
+                    "path": str(task_path_obj)
                 }
             ],
             "extra_instruction_paths": [str(task_prompt_path)],
@@ -431,9 +415,9 @@ class HarborPersonaEvalRunner:
         for key, value in _read_env_file(env_file).items():
             env.setdefault(key, value)
         env["INTERECAGENT_ENGINE"] = config.engine
-        env["RECBOT_READY_DOMAIN"] = config.domain
         env["MATRIX_CHATBOT_APPLICATION_ID"] = config.application_id
         env["MATRIX_CHATBOT_APPLICATION_CONTEXT"] = application_context
+        env["MATRIX_CHATBOT_TASK_PATH"] = chat_task_path
         if config.application_id == "finance_openbb":
             env["COMPOSE_PROFILES"] = "finance"
             env.setdefault("FINANCE_AGENT_MODEL", config.engine)
@@ -444,27 +428,28 @@ class HarborPersonaEvalRunner:
         project_env = Path("/tmp/matraix-harbor-project-venv")
         if project_env.exists():
             env.setdefault("UV_PROJECT_ENVIRONMENT", str(project_env))
+        agent_env = {
+            "MATRIX_CHATBOT_APPLICATION_ID": config.application_id,
+            "MATRIX_CHATBOT_APPLICATION_CONTEXT": application_context,
+            "MATRIX_CHATBOT_TASK_PATH": chat_task_path,
+            "MATRIX_CHATBOT_TASK_PROMPT_PATH": "/app/input/task_prompt.md",
+            "MATRIX_CHATBOT_PERSONA_PATH": "/app/input/persona.yaml",
+            "MATRIX_CHATBOT_OUTPUT_DIR": "/app/output",
+            "MATRIX_CHATBOT_API_URL": "http://chatbot-api:8000",
+            "MATRIX_CHATBOT_PERSONA_MODEL": config.persona_model
+            or harbor_persona_model(),
+        }
+        if config.max_turns is not None:
+            agent_env["MATRIX_CHATBOT_MAX_TURNS"] = str(config.max_turns)
+            agent_env["MATRIX_CHATBOT_MIN_TURNS"] = str(min(3, config.max_turns))
+
         command = [
             *self.harbor_command,
             "-c",
             str(job_config_path),
             "--agent-env",
             "CLAUDE_CODE_TMPDIR=/logs/agent/claude-tmp",
-            *_agent_env_args(
-                {
-                    "MATRIX_CHATBOT_APPLICATION_ID": config.application_id,
-                    "MATRIX_CHATBOT_APPLICATION_CONTEXT": application_context,
-                    "MATRIX_CHATBOT_DOMAIN": config.domain,
-                    "MATRIX_CHATBOT_MAX_TURNS": str(config.max_turns),
-                    "MATRIX_CHATBOT_MIN_TURNS": str(min(3, config.max_turns)),
-                    "MATRIX_CHATBOT_TASK_PROMPT_PATH": "/app/input/task_prompt.md",
-                    "MATRIX_CHATBOT_PERSONA_PATH": "/app/input/persona.yaml",
-                    "MATRIX_CHATBOT_OUTPUT_DIR": "/app/output",
-                    "MATRIX_CHATBOT_API_URL": "http://chatbot-api:8000",
-                    "MATRIX_CHATBOT_PERSONA_MODEL": config.persona_model
-                    or harbor_persona_model(),
-                }
-            ),
+            *_agent_env_args(agent_env),
             "-y",
         ]
         if env_file.is_file():
@@ -522,16 +507,26 @@ def _missing_required_output_artifacts(output_dir: Path) -> List[str]:
     missing: List[str] = []
     if not (output_dir / "transcript.json").is_file():
         missing.append("transcript.json")
-    if not _application_result_path(output_dir).is_file():
+    if not (output_dir / "application_result.json").is_file():
         missing.append("application_result.json")
     return missing
 
 
 def _application_result_path(output_dir: Path) -> Path:
-    generic = output_dir / "application_result.json"
-    if generic.is_file():
-        return generic
-    return output_dir / "recommendation_result.json"
+    return output_dir / "application_result.json"
+
+
+def _application_result_payload(output_dir: Path) -> Dict[str, Any]:
+    """Read the slim eval-run summary written by the PersonaEval harness."""
+    path = _application_result_path(output_dir)
+    if not path.is_file():
+        return {}
+    payload = _read_json(path)
+    summary: Dict[str, Any] = {}
+    for key in ("sessionId", "applicationId", "applicationContext", "turnCount"):
+        if key in payload:
+            summary[key] = payload[key]
+    return summary
 
 
 def _content_text(value: Any) -> str:
@@ -662,8 +657,6 @@ def _build_turns_from_messages(transcript: Dict[str, Any]) -> List[Dict[str, Any
                     "userMessage": pending_user,
                     "assistantMessage": content,
                     "plan": [],
-                    "recommendedItems": [],
-                    "groundedItems": [],
                     "nativeRaw": None,
                     "rawToolOutputs": None,
                 }
@@ -672,53 +665,59 @@ def _build_turns_from_messages(transcript: Dict[str, Any]) -> List[Dict[str, Any
     return turns
 
 
+def _normalize_harbor_turn(
+    turn: Dict[str, Any], *, transcript: Dict[str, Any], fallback_index: int
+) -> Dict[str, Any]:
+    normalized = dict(turn)
+
+    turn_id = normalized.get("turnId")
+    if turn_id is None:
+        legacy_turn_id = normalized.get("turn_id")
+        if legacy_turn_id is None:
+            legacy_turn_id = normalized.get("index", fallback_index)
+        normalized["turnId"] = str(legacy_turn_id)
+    elif not isinstance(turn_id, str):
+        normalized["turnId"] = str(turn_id)
+
+    conversation_id = normalized.get("conversationId")
+    if conversation_id is None:
+        session_id = transcript.get("sessionId")
+        if session_id is not None:
+            normalized["conversationId"] = str(session_id)
+    elif not isinstance(conversation_id, str):
+        normalized["conversationId"] = str(conversation_id)
+
+    assistant_message = normalized.get("assistantMessage")
+    if not isinstance(assistant_message, str) or not assistant_message.strip():
+        legacy_assistant = normalized.get("assistantReply")
+        if isinstance(legacy_assistant, str):
+            normalized["assistantMessage"] = legacy_assistant
+        elif assistant_message is None:
+            normalized["assistantMessage"] = ""
+
+    if "userMessage" not in normalized:
+        legacy_user = normalized.get("user_message")
+        if isinstance(legacy_user, str):
+            normalized["userMessage"] = legacy_user
+
+    if "durationSeconds" not in normalized and normalized.get("duration_seconds") is not None:
+        normalized["durationSeconds"] = normalized.get("duration_seconds")
+
+    return coerce_turn_view(normalized)
+
+
 def _turn_views(transcript: Dict[str, Any]) -> List[Dict[str, Any]]:
     turns = transcript.get("turns")
-    if isinstance(turns, list) and all(isinstance(t, dict) for t in turns):
-        return [dict(t) for t in turns]
+    if isinstance(turns, list) and turns and all(isinstance(t, dict) for t in turns):
+        return [
+            _normalize_harbor_turn(turn, transcript=transcript, fallback_index=index)
+            for index, turn in enumerate(turns)
+        ]
     return _build_turns_from_messages(transcript)
 
 
 def _questionnaire(feedback: Dict[str, Any]) -> Dict[str, Any]:
-    if "constraintSatisfaction" in feedback or "overallRating" in feedback:
-        return {
-            "constraintSatisfaction": _coerce_score(
-                feedback.get("constraintSatisfaction"), 3
-            ),
-            "constraintRationale": str(feedback.get("constraintRationale") or ""),
-            "preferenceSatisfaction": _coerce_score(
-                feedback.get("preferenceSatisfaction"), 3
-            ),
-            "preferenceRationale": str(feedback.get("preferenceRationale") or ""),
-            "overallRating": _coerce_overall(feedback.get("overallRating")),
-            "ratingReason": str(feedback.get("ratingReason") or ""),
-            "askedUsefulClarifyingQuestions": bool(
-                feedback.get("askedUsefulClarifyingQuestions", False)
-            ),
-            "clarifyingNotes": str(feedback.get("clarifyingNotes") or ""),
-        }
-
-    reason = str(feedback.get("reason") or "")
-    return {
-        "constraintSatisfaction": _coerce_score(
-            feedback.get(
-                "productNeedSatisfaction",
-                feedback.get("productNeedConstraintSatisfaction"),
-            ),
-            3,
-        ),
-        "constraintRationale": reason,
-        "preferenceSatisfaction": _coerce_score(
-            feedback.get("personalPreferenceSatisfaction"), 3
-        ),
-        "preferenceRationale": reason,
-        "overallRating": _coerce_overall(feedback.get("overallExperienceRating")),
-        "ratingReason": reason,
-        "askedUsefulClarifyingQuestions": bool(
-            feedback.get("askedUsefulClarificationQuestions", False)
-        ),
-        "clarifyingNotes": reason,
-    }
+    return questionnaire_from_feedback(feedback).to_dict()
 
 
 def _feedback_path(output_dir: Path) -> Optional[Path]:
@@ -732,100 +731,23 @@ def _feedback_path(output_dir: Path) -> Optional[Path]:
     return verifier_feedback if verifier_feedback.is_file() else None
 
 
-def _recommended_ids_per_turn(turn_views: List[Dict[str, Any]]) -> List[List[str]]:
-    per_turn: List[List[str]] = []
-    for turn in turn_views:
-        items = turn.get("groundedItems") or turn.get("recommendedItems") or []
-        if not isinstance(items, list):
-            per_turn.append([])
-            continue
-        per_turn.append(
-            [
-                _item_id(item)
-                for item in items
-                if isinstance(item, dict) and _item_id(item)
-            ]
-        )
-    return per_turn
-
-
-def _normalize_recommended_items(value: Any) -> List[Dict[str, Any]]:
-    if value is None:
-        return []
-    if not isinstance(value, list):
-        raise ValueError("application_result.groundedItems must be a list")
-    items: List[Dict[str, Any]] = []
-    for index, item in enumerate(value):
-        if not isinstance(item, dict):
-            raise ValueError(
-                "application_result.groundedItems[{}] must be an object".format(
-                    index
-                )
-            )
-        item_id = _item_id(item).strip()
-        if not item_id:
-            raise ValueError(
-                "application_result.groundedItems[{}].itemId is required".format(
-                    index
-                )
-            )
-        items.append({**item, "itemId": item_id})
-    return items
-
-
-def _grounded_item_ids(turn_views: List[Dict[str, Any]]) -> Set[str]:
-    ids: Set[str] = set()
-    for turn in turn_views:
-        items = turn.get("groundedItems") or turn.get("recommendedItems") or []
-        if not isinstance(items, list):
-            continue
-        for item in items:
-            if isinstance(item, dict):
-                item_id = _item_id(item).strip()
-                if item_id:
-                    ids.add(item_id)
-    return ids
-
-
-def _validate_recommendation_grounding(
-    *, turn_views: List[Dict[str, Any]], recommended_items: List[Dict[str, Any]]
-) -> None:
-    grounded_ids = _grounded_item_ids(turn_views)
-    missing = [
-        item["itemId"]
-        for item in recommended_items
-        if item["itemId"] not in grounded_ids
-    ]
-    if missing:
-        raise ValueError(
-            "application_result.groundedItems must be grounded in "
-            "transcript.turns groundedItems/recommendedItems; missing ids: {}".format(
-                ", ".join(missing[:5])
-            )
-        )
-
-
 @dataclass
 class HarborPersonaEvalResult:
     config: PersonaEvalConfig
     persona: Persona
     sut_description: str
     turn_views: List[Dict[str, Any]]
-    recommended_items: List[Dict[str, Any]]
     questionnaire: Dict[str, Any]
     metric_scores: Dict[str, Any]
     created_at: str
     prompts: Dict[str, str]
 
     def to_dict(self) -> Dict[str, Any]:
-        per_turn = _recommended_ids_per_turn(self.turn_views)
-        final = next((ids for ids in reversed(per_turn) if ids), [])
         return {
             "config": self.config.to_dict(),
             "persona": self.persona.to_dict(),
             "sutDescription": self.sut_description,
             "transcript": [dict(t) for t in self.turn_views],
-            "recommendedItemIds": {"perTurn": per_turn, "final": final},
             "questionnaire": dict(self.questionnaire),
             "metricScores": dict(self.metric_scores),
             "createdAt": self.created_at,
@@ -844,31 +766,19 @@ def build_result_from_harbor_artifacts(
 ) -> HarborPersonaEvalResult:
     """Map Harbor task artifacts into the existing PersonaEval UI result."""
     transcript = _read_json(output_dir / "transcript.json")
-    recommendation = _read_json(_application_result_path(output_dir))
+    turn_views = _turn_views(transcript)
+    _application_result_payload(output_dir)
     feedback_path = _feedback_path(output_dir)
     feedback = _read_json(feedback_path) if feedback_path is not None else {}
 
-    turn_views = _turn_views(transcript)
-    recommended_items = _normalize_recommended_items(
-        recommendation.get("groundedItems", recommendation.get("recommendedItems"))
-    )
-    _validate_recommendation_grounding(
-        turn_views=turn_views, recommended_items=recommended_items
-    )
-
     metric_scores = {
-        "turnsToRecommendation": recommendation.get(
-            "turnsToRecommendation", recommendation.get("turnsToResult")
-        ),
         "numTurns": len(turn_views),
-        "recommendedItemCount": len(recommended_items),
     }
     return HarborPersonaEvalResult(
         config=config,
         persona=persona,
         sut_description=sut_description,
         turn_views=turn_views,
-        recommended_items=recommended_items,
         questionnaire=_questionnaire(feedback),
         metric_scores=metric_scores,
         created_at=created_at,

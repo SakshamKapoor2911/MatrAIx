@@ -13,8 +13,9 @@
  */
 import { useId } from "react";
 
-import { FOCUS_RING, Sym } from "./cockpitShared";
-import type { PlanStep, RecommendedItem } from "@/lib/types";
+import type { ExposureItem } from "./PersonaExposurePanel";
+import { Sym, FOCUS_RING } from "./cockpitShared";
+import type { PlanStep } from "@/lib/types";
 
 /** A plan-step tool → a representative Material Symbol. */
 const TOOL_ICON: Record<string, string> = {
@@ -36,8 +37,8 @@ function iconForTool(tool: string): string {
 
 export interface ToolPlanFoldProps {
   plan: PlanStep[];
-  /** Ranked items (for the "Ranked items · scores" section). */
-  items: RecommendedItem[];
+  /** Structured item-list entries (for optional score display). */
+  items: ExposureItem[];
   /** Raw native action text (the model's own output), if any. */
   nativeRaw: string | null;
   open: boolean;

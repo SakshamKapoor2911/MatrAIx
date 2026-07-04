@@ -12,16 +12,13 @@ Included in this clean tree:
 - React/Vite frontend under `frontend/`.
 - FastAPI backend and service layer under `backend/`.
 - Persona simulator package under `persona_eval/`.
-- 336 YAML persona profiles under `data/personas/`.
+- Persona catalog sourced from `persona/datasets/bench-dev-sample/`.
 - Survey, chatbot, and web evaluation APIs.
-- A small ecommerce web task under
-  `application/tasks/web-ecommerce-platform_product-discovery/`.
 
 Preserved from the earlier clean PersonaBench main:
 
-- `application.persona_eval.backend.service.survey_instruments`
+- `application.persona_eval.backend.service.survey_questionnaire_catalog`
 - `application.persona_eval.backend.service.survey_types`
-- `application.persona_eval.backend.service.recommender_eval`
 
 Not included as a raw dump:
 
@@ -32,12 +29,44 @@ Not included as a raw dump:
 The current clean recommender task sidecar lives at:
 
 ```text
-environment/task-environments/application/recommender-agent_chat_api/recommender-api/
+environment/task-environments/application/shared-chat-api-recommender/recommender-api/
 ```
 
 It is suitable for smoke runs and API-contract compatibility. Full native RecAI
 recommendations should be restored later as a focused task/runtime PR with
 external resources documented separately.
+
+## RecAI Runtime Notes
+
+PersonaEval keeps the chatbot runtime task-backed and lightweight by default.
+
+- The recommender chatbot task lives at
+  `application/tasks/recommender-agent_chat_api/`.
+- The shared chatbot runtime bridge lives at
+  `environment/task-environments/application/shared-chat-api-recommender/recommender-api/`.
+- Large native RecAI resource bundles are intentionally not kept in the default
+  developer path inside this repo.
+
+If a fuller native RecAI runtime is restored later:
+
+- keep runtime code task-owned and runtime-focused under the shared recommender
+  path above
+- keep large resources out of git and document their external artifact
+  locations
+- add a setup script if resources must be materialized locally
+- add smoke tests for the API contract and at least one real recommendation turn
+
+The default PersonaEval local workflow uses the project `.venv`, but do not
+assume that must always be the only supported environment for a native RecAI
+stack. If a separate dependency set is required, document it explicitly and
+keep it distinct from the default dev workflow.
+
+For REAL-mode cache-heavy runs, you can redirect Hugging Face and
+sentence-transformer caches with:
+
+- `HF_HOME`
+- `TRANSFORMERS_CACHE`
+- `SENTENCE_TRANSFORMERS_HOME`
 
 ## Quickstart
 
@@ -49,7 +78,7 @@ npm ci
 npm run build
 cd ../../..
 
-PYTHONPATH=.:application/persona_eval:environment/runtime \
+PYTHONPATH=.:environment/runtime:packages/persona-eval/src:application/persona_eval \
   .venv/bin/python -m uvicorn backend.api.app:app \
   --host 127.0.0.1 --port 8765 --workers 1
 ```
@@ -76,77 +105,41 @@ cd application/persona_eval/frontend && npm run dev
 All app endpoints are mounted under `/api`.
 
 See [REST_API.md](REST_API.md) for the full endpoint-by-endpoint contract,
-including request bodies, polling responses, persisted run shapes, and the
-dev-only BenchFlow-compatible runner API.
+including Harbor job launch, trial debrief, and persona-pool APIs.
 
-See [UNIFIED_RUNTIME.md](UNIFIED_RUNTIME.md) for the local and BenchFlow-backed
-startup commands that run the chatbot, survey, web, and AppWorld surfaces
-through one backend.
+See [UNIFIED_RUNTIME.md](UNIFIED_RUNTIME.md) for Harbor-backed startup commands
+that run the chatbot, survey, web, and OS-app surfaces through one backend.
 
 | Method | Path | Purpose |
 |---|---|---|
 | `GET` | `/api/health` | Backend liveness check. |
 | `GET` | `/api/preflight` | Readiness checks for keys, catalogs, and runtime resources. |
 | `GET` | `/api/config/options` | Available domains, models, and runtime options. |
-| `POST` | `/api/sessions` | Create a manual chat session. |
-| `POST` | `/api/sessions/{id}/turns` | Send one manual chat turn. |
-| `GET` | `/api/catalog/search` | Search the configured recommendation catalog. |
 | `GET` | `/api/persona-eval/personas` | List persona profiles. |
-| `POST` | `/api/persona-eval` | Start a chatbot persona evaluation run. |
-| `POST` | `/api/survey-eval` | Start a survey persona evaluation run. |
-| `POST` | `/api/web-eval` | Start a web persona evaluation run. |
+| `POST` | `/api/harbor/jobs` | Launch a Harbor batch evaluation job. |
+| `GET` | `/api/harbor/jobs/{job}` | Poll job status and trial list. |
 
 Interactive OpenAPI docs are available at `/docs` when the backend is running.
 
 ## Execution Runtime
 
-PersonaEval defaults to the local direct runtime. To send survey, chatbot, and
-web runs to BenchFlow-hosted agents instead, start the backend with:
-
-```bash
-export MATRIX_PERSONA_EVAL_RUNTIME=benchflow
-export BENCHFLOW_API_URL=http://127.0.0.1:9000
-# Optional. Leave unset for local/no-auth BenchFlow services.
-export BENCHFLOW_API_KEY=...
-```
-
-The backend keeps the same API contract (`jobId` + polling endpoints). BenchFlow
-is used only behind the runner boundary, and the returned artifacts are
-normalized into the existing `surveyResult`, chatbot transcript, and `webResult`
-/ `trace` shapes.
-
-For web traces, BenchFlow can either return a local `screenshots_dir` artifact
-when the backend shares the runner filesystem, or include per-event
-`screenshotUrl` values in `trace.json` for remotely hosted screenshots.
-
-For local development without a deployed BenchFlow service, start the dev-only
-compatibility server in a second terminal:
-
-```bash
-PYTHONPATH=application/persona_eval \
-  python -m uvicorn backend.service.benchflow_compat_server:app \
-  --host 127.0.0.1 --port 9000
-```
-
-By default this serves deterministic mock web artifacts so the MatrAIx
-BenchFlow path can be tested end-to-end. To bridge to a real BenchFlow CLI run,
-set `BENCHFLOW_COMPAT_WEB_COMMAND`; the command receives
-`BENCHFLOW_PAYLOAD_JSON` and `BENCHFLOW_OUTPUT_DIR`, then must write
-`trace.json` plus `ecommerce_interaction.json` (or `web_result.json`) into that
-output directory.
+PersonaEval runs evaluations through **Harbor** batch jobs (`POST /api/harbor/jobs`).
+Set `MATRIX_PERSONA_EVAL_RUNTIME=harbor` when you want the config surface to
+label the active runtime as Harbor-backed (the cockpit always launches Harbor
+jobs regardless).
 
 ## Validation
 
 Useful local checks:
 
 ```bash
-PYTHONPATH=.:application/persona_eval:environment/runtime \
-  .venv/bin/python -m pytest application/persona_eval/persona_eval/tests -q
+PYTHONPATH=.:environment/runtime:packages/persona-eval/src:application/persona_eval \
+  .venv/bin/python -m pytest packages/persona-eval/src/persona_eval/tests -q
 
-PYTHONPATH=.:application/persona_eval:environment/runtime \
+PYTHONPATH=.:environment/runtime:packages/persona-eval/src:application/persona_eval \
   .venv/bin/python -m pytest application/persona_eval/backend/tests -q
 
-PYTHONPATH=.:application/persona_eval:environment/runtime \
+PYTHONPATH=.:environment/runtime:packages/persona-eval/src:application/persona_eval \
   .venv/bin/python -m pytest tests/application/persona_eval -q
 
 .venv/bin/ruff check application/persona_eval tests/application/persona_eval
@@ -165,9 +158,19 @@ npm run build
 ```text
 backend/        FastAPI app, service layer, backend tests
 frontend/       React/Vite SPA
-persona_eval/   Persona simulator, runner, scoring, model clients
-data/personas/  Shared PersonaEval persona catalog
 run_demo.sh     Single-origin launcher after frontend build
+```
+
+Shared core package:
+
+```text
+packages/persona-eval/src/persona_eval/
+```
+
+Canonical local persona source:
+
+```text
+persona/datasets/bench-dev-sample/
 ```
 
 Related application tasks live outside this app directory:
@@ -175,5 +178,5 @@ Related application tasks live outside this app directory:
 ```text
 application/tasks/persona-survey/
 application/tasks/recommender-agent_chat_api/
-application/tasks/web-ecommerce-platform_product-discovery/
+application/tasks/example-web-playwright_quote-choice/
 ```

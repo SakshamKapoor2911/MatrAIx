@@ -19,19 +19,18 @@ is running.
 
 ## Runtime Boundary
 
-The same REST contract is used for local and BenchFlow-backed execution.
-Runtime selection happens behind the service layer:
+PersonaEval launches evaluations through Harbor (`POST /api/harbor/jobs`).
+Execution can stay on the API host or dispatch to a Remote Runner worker:
 
 ```bash
-MATRIX_PERSONA_EVAL_RUNTIME=local      # default
-MATRIX_PERSONA_EVAL_RUNTIME=benchflow  # send supported eval runs to BenchFlow
-BENCHFLOW_API_URL=http://127.0.0.1:9000
-BENCHFLOW_API_KEY=...                  # optional
+MATRIX_EXECUTION_PLANE=harbor    # default — local harbor run
+MATRIX_EXECUTION_PLANE=remote    # HTTP dispatch to Remote Runner
+REMOTE_RUNNER_API_URL=http://127.0.0.1:9100
+REMOTE_RUNNER_API_KEY=...        # optional
 ```
 
-Survey, web, and AppWorld eval jobs keep the same public API shape regardless of
-runtime. BenchFlow artifacts are normalized into the job view fields documented
-below.
+Survey, chatbot, web, and os-app jobs share the same API and `jobs/` artifact
+layout regardless of plane.
 
 ## Endpoint Index
 
@@ -53,21 +52,17 @@ below.
 | `GET` | `/api/catalog/items/{item_id}` | Read one catalog item. |
 | `GET` | `/api/persona-eval/personas` | List persona profiles. |
 | `GET` | `/api/persona-eval/personas/{persona_id}` | Read one full persona profile. |
-| `GET` | `/api/persona-eval/goal-contexts` | List persona-eval goal contexts. |
 | `POST` | `/api/persona-eval` | Start a chatbot persona evaluation. |
 | `GET` | `/api/persona-eval/runs` | List persisted eval runs. |
 | `GET` | `/api/persona-eval/runs/{run_id}` | Read one persisted eval run. |
 | `GET` | `/api/persona-eval/jobs/{job_id}` | Poll one chatbot persona-eval job. |
-| `GET` | `/api/survey-eval/instruments` | List survey instruments. |
+| `GET` | `/api/survey-eval/instruments` | List task-backed survey questionnaires. |
 | `POST` | `/api/survey-eval` | Start a survey persona evaluation. |
 | `GET` | `/api/survey-eval/jobs/{job_id}` | Poll one survey eval job. |
 | `GET` | `/api/web-eval/tasks` | List web tasks. |
 | `POST` | `/api/web-eval` | Start a web persona evaluation. |
 | `GET` | `/api/web-eval/jobs/{job_id}` | Poll one web eval job. |
 | `GET` | `/api/web-eval/jobs/{job_id}/screenshots/{filename}` | Fetch one web trace screenshot. |
-| `GET` | `/api/appworld-eval/tasks` | List AppWorld tasks. |
-| `POST` | `/api/appworld-eval` | Start an AppWorld persona evaluation. |
-| `GET` | `/api/appworld-eval/jobs/{job_id}` | Poll one AppWorld eval job. |
 
 ## Health
 
@@ -487,24 +482,6 @@ Errors:
 
 - `404` when the persona does not exist.
 
-### `GET /api/persona-eval/goal-contexts`
-
-Lists available goal-context prompt presets for chatbot persona eval.
-
-Response:
-
-```json
-{
-  "goalContexts": [
-    {
-      "id": "scenario_default",
-      "label": "Default",
-      "description": "..."
-    }
-  ]
-}
-```
-
 ## Chatbot Persona Eval
 
 Chatbot persona eval starts a simulated persona conversation with a chatbot
@@ -523,7 +500,6 @@ Request body:
   "applicationContext": "movie",
   "personaId": "Nemotron_01B0D4D4",
   "maxTurns": 8,
-  "goalContextId": "scenario_default",
   "engine": "gpt-4o-mini",
   "personaModel": "anthropic/claude-haiku-4-5"
 }
@@ -536,7 +512,8 @@ Notes:
 - `recai` uses `domain`; supported domains are `movie`, `beauty_product`, and
   `game`.
 - Non-RecAI applications use `applicationContext`.
-- `maxTurns` must be between `1` and `20`.
+- `maxTurns` is optional. When omitted, the chatbot run is unbounded.
+- When provided, `maxTurns` must be `>= 1`.
 - `engine` and `personaModel` are optional and fall back to service defaults.
 
 Response:
@@ -566,7 +543,6 @@ Response while running:
   "personaId": "Nemotron_01B0D4D4",
   "personaName": "Persona name",
   "sutDescription": "...",
-  "goalContextId": "scenario_default",
   "status": "running",
   "phase": "turn_1",
   "turns": [],
@@ -586,7 +562,7 @@ Errors:
 
 ### `GET /api/persona-eval/runs`
 
-Lists persisted eval runs across chatbot, survey, web, and AppWorld surfaces.
+Lists persisted eval runs across chatbot, survey, web, and os-app surfaces.
 
 Response:
 
@@ -600,7 +576,6 @@ Response:
       "domain": "movie",
       "personaName": "Persona name",
       "source": "Nemotron",
-      "goalContextId": "scenario_default",
       "overallRating": 8,
       "numTurns": 4
     }
@@ -635,9 +610,8 @@ Response for chatbot runs:
 }
 ```
 
-Survey, web, and AppWorld persisted runs include their application-specific
-fields, such as `surveyResult`, `webResult`, `webTrace`, `appworldResult`, and
-`appworldTrace`.
+Survey, web, and os-app persisted runs include their application-specific
+fields.
 
 Errors:
 
@@ -645,11 +619,11 @@ Errors:
 
 ## Survey Eval
 
-Survey eval asks a simulated persona to complete a survey instrument.
+Survey eval asks a simulated persona to complete a task-backed survey questionnaire.
 
 ### `GET /api/survey-eval/instruments`
 
-Lists available survey instruments.
+Lists available task-backed survey questionnaires.
 
 Response:
 
@@ -744,7 +718,7 @@ Errors:
 ## Web Eval
 
 Web eval sends a simulated persona agent to a website task and records the
-interaction trace. In BenchFlow mode this maps to `taskType=web`.
+interaction trace.
 
 ### `GET /api/web-eval/tasks`
 
@@ -756,13 +730,13 @@ Response:
 {
   "tasks": [
     {
-      "id": "web-ecommerce-platform_product-discovery",
-      "title": "Ecommerce product discovery",
-      "siteName": "Northstar Home Goods",
-      "siteUrl": "http://ecommerce-web:8000/",
-      "description": "Browse the site and choose one product.",
-      "outputArtifact": "ecommerce_interaction.json",
-      "submissionProfile": "ecommerce_interaction"
+      "id": "web-playwright-quote-choice",
+      "title": "Quote choice",
+      "siteName": "quotes.toscrape.com",
+      "siteUrl": "https://quotes.toscrape.com/",
+      "description": "Browse the quotes site and choose one quote to keep.",
+      "outputArtifact": "quote_choice.json",
+      "submissionProfile": "quote_choice"
     }
   ]
 }
@@ -777,12 +751,12 @@ Request body:
 ```json
 {
   "personaId": "Nemotron_01B0D4D4",
-  "taskId": "web-ecommerce-platform_product-discovery",
+  "taskId": "web-playwright-quote-choice",
   "personaModel": "anthropic/claude-haiku-4-5"
 }
 ```
 
-`taskId` defaults to `web-ecommerce-platform_product-discovery`.
+`taskId` defaults to `web-playwright-quote-choice`.
 
 Response:
 
@@ -806,10 +780,10 @@ Response:
 {
   "jobId": "web_abc123",
   "applicationType": "web",
-  "taskId": "web-ecommerce-platform_product-discovery",
-  "taskTitle": "Ecommerce product discovery",
-  "siteName": "Northstar Home Goods",
-  "siteUrl": "http://ecommerce-web:8000/",
+  "taskId": "web-playwright-quote-choice",
+  "taskTitle": "Quote choice",
+  "siteName": "quotes.toscrape.com",
+  "siteUrl": "https://quotes.toscrape.com/",
   "personaId": "Nemotron_01B0D4D4",
   "personaName": "Persona name",
   "status": "done",
@@ -852,230 +826,60 @@ Errors:
 - `400` when the filename is invalid.
 - `404` when the job or screenshot does not exist.
 
-## AppWorld Eval
+## Remote Runner API
 
-AppWorld eval sends a simulated persona agent to an AppWorld API task and
-records the API trajectory. In BenchFlow mode this maps to `taskType=appworld`.
-
-### `GET /api/appworld-eval/tasks`
-
-Lists available AppWorld tasks.
-
-Response:
-
-```json
-{
-  "tasks": [
-    {
-      "id": "appworld-demo-personal-admin",
-      "title": "AppWorld personal admin task",
-      "appName": "AppWorld",
-      "description": "Complete a multi-app personal administration task through AppWorld-style APIs and report the final state.",
-      "outputArtifact": "appworld_result.json",
-      "submissionProfile": "appworld_result"
-    }
-  ]
-}
-```
-
-### `POST /api/appworld-eval`
-
-Starts an AppWorld persona evaluation.
-
-Request body:
-
-```json
-{
-  "personaId": "Nemotron_01B0D4D4",
-  "taskId": "appworld-demo-personal-admin",
-  "personaModel": "anthropic/claude-haiku-4-5"
-}
-```
-
-`taskId` defaults to `appworld-demo-personal-admin`.
-
-Response:
-
-```json
-{
-  "jobId": "appworld_abc123"
-}
-```
-
-Errors:
-
-- `422` when the persona, task, or model is invalid.
-
-### `GET /api/appworld-eval/jobs/{job_id}`
-
-Polls one AppWorld eval job.
-
-Response:
-
-```json
-{
-  "jobId": "appworld_abc123",
-  "applicationType": "appworld",
-  "taskId": "appworld-demo-personal-admin",
-  "taskTitle": "AppWorld personal admin task",
-  "appName": "AppWorld",
-  "personaId": "Nemotron_01B0D4D4",
-  "personaName": "Persona name",
-  "status": "done",
-  "phase": "complete",
-  "appworldResult": {
-    "taskId": "appworld-demo-personal-admin",
-    "success": true,
-    "score": 1.0,
-    "outcome": "Calendar invite and email draft completed.",
-    "reason": "The runner completed the AppWorld task.",
-    "createdAt": "2026-06-29T00:00:00Z"
-  },
-  "trace": {
-    "events": [
-      {
-        "step": 1,
-        "source": "agent",
-        "message": "Listed available AppWorld apps.",
-        "actions": [
-          {
-            "name": "appworld_api_call",
-            "arguments": {
-              "app": "system",
-              "method": "list_apps"
-            }
-          }
-        ]
-      }
-    ],
-    "raw": {}
-  },
-  "prompts": {},
-  "error": null
-}
-```
-
-Errors:
-
-- `404` when the job does not exist.
-
-## BenchFlow-Compatible Runner API
-
-`backend.service.benchflow_compat_server:app` is a dev/test service used by
-MatrAIx to exercise the BenchFlow runtime boundary without a deployed BenchFlow
-cluster. It is not mounted on the PersonaEval `/api` app.
+`environment.integrations.persona_eval.remote_runner.server:app` is the HTTP
+worker used when `MATRIX_EXECUTION_PLANE=remote`. It is not mounted on the
+PersonaEval `/api` app.
 
 Start it with:
 
 ```bash
-PYTHONPATH=application/persona_eval \
-  python -m uvicorn backend.service.benchflow_compat_server:app \
-  --host 127.0.0.1 --port 9000
+PYTHONPATH=.:environment/runtime:packages/persona-eval/src:application/persona_eval:src \
+  uvicorn environment.integrations.persona_eval.remote_runner.server:app \
+  --host 127.0.0.1 --port 9100
 ```
 
 ### `GET /health`
 
-Returns compat-server liveness.
-
-Response:
-
 ```json
-{
-  "status": "ok"
-}
+{"status": "ok", "service": "remote-runner"}
 ```
 
 ### `POST /v1/runs`
 
-Creates a BenchFlow-compatible run.
+Creates a remote run.
 
-Request body:
+Production dispatch uses `taskType=harbor_job`:
 
 ```json
 {
-  "taskType": "appworld",
+  "taskType": "harbor_job",
   "payload": {
-    "persona": {},
-    "task": {},
-    "config": {},
-    "prompts": {}
+    "jobName": "pe-example-survey-abc123",
+    "configYaml": "...",
+    "repoRoot": "/path/to/repo",
+    "jobsDir": "jobs",
+    "env": {}
   }
 }
 ```
 
-Supported `taskType` values:
-
-- `web`
-- `appworld`
-
 Response:
 
 ```json
 {
-  "id": "compat_abc123",
+  "id": "run_abc123",
   "status": "queued",
-  "taskType": "appworld"
+  "taskType": "harbor_job"
 }
 ```
-
-If `BENCHFLOW_COMPAT_WEB_COMMAND` or `BENCHFLOW_COMPAT_APPWORLD_COMMAND` is set,
-the compat server runs that command. The command receives:
-
-- `BENCHFLOW_RUN_ID`
-- `BENCHFLOW_TASK_TYPE`
-- `BENCHFLOW_PAYLOAD_JSON`
-- `BENCHFLOW_OUTPUT_DIR`
-
-The command must write `trace.json` plus the expected result artifact into
-`BENCHFLOW_OUTPUT_DIR`.
 
 ### `GET /v1/runs/{run_id}`
 
-Returns the current run status.
-
-Response:
-
-```json
-{
-  "id": "compat_abc123",
-  "status": "succeeded",
-  "taskType": "appworld"
-}
-```
-
-Terminal statuses are `succeeded` and `failed`.
-
-Errors:
-
-- `404` when the run does not exist.
+Returns run status (`queued`, `running`, `succeeded`, `failed`).
 
 ### `GET /v1/runs/{run_id}/artifacts/{name}`
 
-Returns one JSON artifact for a completed run.
-
-Common artifact names:
-
-- `trace.json`
-- `ecommerce_interaction.json`
-- `web_result.json`
-- `appworld_result.json`
-- `screenshots_dir`
-
-Errors:
-
-- `404` when the run or artifact does not exist.
-- `409` when the run is not finished.
-- `500` when the run failed.
-
-### `GET /mock/{run_id}/{filename}`
-
-Serves deterministic SVG screenshots for mock web runs.
-
-Supported mock filenames:
-
-- `step-1.svg`
-- `step-2.svg`
-
-Errors:
-
-- `404` when the run or mock screenshot does not exist.
+Returns a JSON artifact for a completed run. For `harbor_job`, see
+`harbor_job_result.json`.

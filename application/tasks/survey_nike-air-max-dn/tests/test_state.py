@@ -14,9 +14,40 @@ RESULT_PATH = OUTPUT_DIR / "survey_result.json"
 EVENT_KEYS = {"timestamp", "actor", "action", "context", "outcome"}
 
 
+def _verifier_dir() -> Path:
+    base = (
+        os.environ.get("HARBOR_VERIFIER_DIR")
+        or os.environ.get("PERSONABENCH_VERIFIER_DIR")
+        or "/logs/verifier"
+    )
+    path = Path(base)
+    try:
+        path.mkdir(parents=True, exist_ok=True)
+        return path
+    except OSError:
+        path = Path(__file__).resolve().parent.parent / "verifier"
+        path.mkdir(parents=True, exist_ok=True)
+        return path
+
+
+def _write_structured_output(payload: dict[str, object]) -> None:
+    path = _verifier_dir() / "structured_output.json"
+    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
 def fail(message: str) -> int:
     print(message, file=sys.stderr)
     return 1
+
+
+def _field_kind(value: object) -> str:
+    if isinstance(value, bool):
+        return "categorical"
+    if isinstance(value, (int, float)) and not isinstance(value, bool):
+        return "numerical"
+    if isinstance(value, list):
+        return "categorical"
+    return "textual"
 
 
 def main() -> int:
@@ -34,13 +65,92 @@ def main() -> int:
     trajectory = payload.get("trajectory")
     if not isinstance(trajectory, list) or not trajectory:
         return fail("survey_result.trajectory must be a non-empty list")
+    fields: list[dict[str, object]] = []
+    contexts: list[dict[str, object]] = []
+    numeric_values: list[float] = []
     for index, answer in enumerate(answers):
         if not isinstance(answer, dict):
             return fail("answers[{}] must be an object".format(index))
-        if not str(answer.get("questionId", "")).strip():
+        question_id = str(answer.get("questionId", "")).strip()
+        if not question_id:
             return fail("answers[{}].questionId is required".format(index))
         if "value" not in answer:
             return fail("answers[{}].value is required".format(index))
+        value = answer.get("value")
+        kind = _field_kind(value)
+        if isinstance(value, (int, float)) and not isinstance(value, bool):
+            numeric_values.append(float(value))
+        context_key = "question.{}".format(question_id)
+        context_label = str(answer.get("prompt") or question_id)
+        facets: list[dict[str, object]] = [
+            {
+                "key": "response",
+                "label": "Selected response",
+                "role": "primary",
+                "kind": kind,
+                "value": value,
+            }
+        ]
+        fields.append(
+            {
+                "key": "{}.response".format(context_key),
+                "label": "Selected response",
+                "group": context_key,
+                "role": "primary",
+                "kind": kind,
+                "value": value,
+            }
+        )
+        rationale = str(answer.get("rationale") or "").strip()
+        if rationale:
+            facets.append(
+                {
+                    "key": "reason",
+                    "label": "Reason",
+                    "role": "explanation",
+                    "kind": "textual",
+                    "value": rationale,
+                }
+            )
+            fields.append(
+                {
+                    "key": "{}.reason".format(context_key),
+                    "label": "Reason",
+                    "group": context_key,
+                    "role": "explanation",
+                    "kind": "textual",
+                    "value": rationale,
+                }
+            )
+        confidence = answer.get("confidence")
+        if isinstance(confidence, (int, float)) and not isinstance(confidence, bool):
+            facets.append(
+                {
+                    "key": "confidence",
+                    "label": "Confidence",
+                    "role": "score",
+                    "kind": "numerical",
+                    "value": float(confidence),
+                }
+            )
+            fields.append(
+                {
+                    "key": "{}.confidence".format(context_key),
+                    "label": "Confidence",
+                    "group": context_key,
+                    "role": "score",
+                    "kind": "numerical",
+                    "value": float(confidence),
+                }
+            )
+        contexts.append(
+            {
+                "key": context_key,
+                "label": context_label,
+                "contextType": "question_response",
+                "facets": facets,
+            }
+        )
     for index, event in enumerate(trajectory):
         if not isinstance(event, dict):
             return fail("trajectory[{}] must be an object".format(index))
@@ -53,6 +163,87 @@ def main() -> int:
             return fail("trajectory[{}].context must be an object".format(index))
         if not isinstance(event.get("outcome"), dict):
             return fail("trajectory[{}].outcome must be an object".format(index))
+    summary_facets: list[dict[str, object]] = [
+        {
+            "key": "answer_count",
+            "label": "Answer count",
+            "role": "score",
+            "kind": "numerical",
+            "value": len(answers),
+        },
+        {
+            "key": "trajectory_event_count",
+            "label": "Trajectory event count",
+            "role": "score",
+            "kind": "numerical",
+            "value": len(trajectory),
+        },
+    ]
+    fields.append(
+        {
+            "key": "survey.summary.answer_count",
+            "label": "Answer count",
+            "group": "survey.summary",
+            "role": "score",
+            "kind": "numerical",
+            "value": len(answers),
+        }
+    )
+    fields.append(
+        {
+            "key": "survey.summary.trajectory_event_count",
+            "label": "Trajectory event count",
+            "group": "survey.summary",
+            "role": "score",
+            "kind": "numerical",
+            "value": len(trajectory),
+        }
+    )
+    if numeric_values:
+        summary_facets.append(
+            {
+                "key": "mean_numeric_answer",
+                "label": "Mean numeric answer",
+                "role": "score",
+                "kind": "numerical",
+                "value": round(sum(numeric_values) / len(numeric_values), 4),
+            }
+        )
+        fields.append(
+            {
+                "key": "survey.summary.mean_numeric_answer",
+                "label": "Mean numeric answer",
+                "group": "survey.summary",
+                "role": "score",
+                "kind": "numerical",
+                "value": round(sum(numeric_values) / len(numeric_values), 4),
+            }
+        )
+    contexts.append(
+        {
+            "key": "survey.summary",
+            "label": "Survey summary",
+            "contextType": "trial_summary",
+            "facets": summary_facets,
+        }
+    )
+    _write_structured_output(
+        {
+            "schemaVersion": "1.0",
+            "artifactType": "personabench.trial_evaluation",
+            "taskType": "survey",
+            "presenceCheck": {
+                "passed": True,
+                "requiredArtifacts": ["survey_result.json"],
+                "missingArtifacts": [],
+            },
+            "sourceArtifacts": {
+                "surveyResult": str(RESULT_PATH),
+            },
+            "contexts": contexts,
+            "fields": fields,
+        }
+    )
     return 0
 
 

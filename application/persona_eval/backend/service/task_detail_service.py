@@ -6,6 +6,11 @@ import tomllib
 from pathlib import Path
 from typing import Any
 
+from backend.service.application_types import normalize_metadata_type
+from environment.integrations.persona_eval.task_content_bundle import (
+    load_task_content_bundle_for_task_path,
+)
+
 
 def _humanize_key(value: str) -> str:
     text = str(value).replace("_", " ").strip()
@@ -45,7 +50,7 @@ def get_task_detail(task_path: str, *, repo_root: Path) -> dict[str, Any]:
     instruction_title, instruction_blurb = _read_instruction_meta(instruction_path)
 
     extra_docs: list[dict[str, str]] = []
-    for name in ("user_scenario.yaml", "survey_questions.md", "README.md"):
+    for name in ("README.md",):
         doc_path = task_dir / name
         if doc_path.is_file():
             extra_docs.append(
@@ -61,12 +66,59 @@ def get_task_detail(task_path: str, *, repo_root: Path) -> dict[str, Any]:
     if toml_path.is_file():
         raw = tomllib.loads(toml_path.read_text(encoding="utf-8"))
         meta = raw.get("metadata") if isinstance(raw.get("metadata"), dict) else {}
-        meta_type = str(meta.get("type") or "")
+        meta_type = normalize_metadata_type(str(meta.get("type") or ""))
         task_block = raw.get("task") if isinstance(raw.get("task"), dict) else {}
         task_name = str(task_block.get("name") or task_name)
 
     title = instruction_title or _humanize_key(task_dir.name.replace("-", " "))
     description = instruction_blurb
+    bundle = load_task_content_bundle_for_task_path(normalized, repo_root=repo_root)
+    if bundle.instruction_markdown.strip():
+        instruction_md = bundle.instruction_markdown.strip()
+    context_markdown = ""
+    questionnaire_markdown = ""
+    output_schema_markdown = bundle.output_schema_markdown.strip()
+    questionnaire = None
+    if bundle.context_markdown.strip():
+        context_markdown = bundle.context_markdown.strip()
+    if meta_type == "survey":
+        questionnaire_id = None
+        try:
+            from backend.service.survey_questionnaire_catalog import get_survey_questionnaire
+            from backend.service.survey_task_registry import survey_questionnaire_id_for_task_path
+            from environment.integrations.persona_eval.survey_task_content import (
+                load_survey_task_content_for_task_path,
+            )
+
+            questionnaire_id = survey_questionnaire_id_for_task_path(normalized)
+            fallback_questionnaire = (
+                get_survey_questionnaire(questionnaire_id, repo_root=repo_root)
+                if questionnaire_id
+                else None
+            )
+            content = load_survey_task_content_for_task_path(
+                normalized,
+                repo_root=repo_root,
+                questionnaire_id=questionnaire_id,
+                fallback_questionnaire=fallback_questionnaire,
+            )
+            if content.title:
+                title = content.title
+            if not description:
+                description = (
+                    (content.context_markdown or instruction_blurb or "").strip().splitlines()[0]
+                    if (content.context_markdown or instruction_blurb)
+                    else ""
+                )
+            if content.instruction_markdown.strip():
+                instruction_md = content.instruction_markdown.strip()
+            context_markdown = content.context_markdown.strip()
+            questionnaire_markdown = content.questionnaire_markdown.strip()
+            output_schema_markdown = content.output_schema_markdown.strip()
+            questionnaire = content.instrument.to_dict() if content.instrument is not None else None
+        except Exception:  # noqa: BLE001
+            questionnaire_markdown = ""
+            questionnaire = None
 
     markdown_parts = [f"# {title}", ""]
     if description:
@@ -79,6 +131,12 @@ def get_task_detail(task_path: str, *, repo_root: Path) -> dict[str, Any]:
     markdown_parts.append("")
     if instruction_md:
         markdown_parts.extend(["---", "", instruction_md])
+    if context_markdown:
+        markdown_parts.extend(["", "---", "", "## Context", "", context_markdown])
+    if questionnaire_markdown:
+        markdown_parts.extend(["", "---", "", "## Questionnaire", "", questionnaire_markdown])
+    if output_schema_markdown:
+        markdown_parts.extend(["", "---", "", "## Output schema", "", output_schema_markdown])
     for doc in extra_docs:
         if doc["name"] == "instruction.md":
             continue
@@ -95,6 +153,10 @@ def get_task_detail(task_path: str, *, repo_root: Path) -> dict[str, Any]:
         "metaType": meta_type,
         "taskName": task_name,
         "instructionMarkdown": instruction_md,
+        "contextMarkdown": context_markdown,
+        "questionnaireMarkdown": questionnaire_markdown,
+        "outputSchemaMarkdown": output_schema_markdown,
+        "questionnaire": questionnaire,
         "profileMarkdown": "\n".join(markdown_parts).strip(),
         "extraDocs": extra_docs,
     }
@@ -116,4 +178,8 @@ def attach_task_profile_markdown(
     merged = dict(payload)
     merged["profileMarkdown"] = detail.get("profileMarkdown") or ""
     merged["instructionMarkdown"] = detail.get("instructionMarkdown") or ""
+    merged["contextMarkdown"] = detail.get("contextMarkdown") or ""
+    merged["questionnaireMarkdown"] = detail.get("questionnaireMarkdown") or ""
+    merged["outputSchemaMarkdown"] = detail.get("outputSchemaMarkdown") or ""
+    merged["questionnaire"] = detail.get("questionnaire")
     return merged

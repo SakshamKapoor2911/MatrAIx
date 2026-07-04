@@ -1,94 +1,128 @@
-"""Render Harbor ``instruction.md`` from a built-in survey instrument."""
+"""Render survey markdown assets from a normalized task-backed questionnaire."""
 
 from __future__ import annotations
 
-from backend.service.survey_types import SurveyInstrument, SurveyQuestion
+from backend.service.survey_types import SurveyInstrument, SurveyQuestion, SurveyTaskContent
 
 
 def _render_question(question: SurveyQuestion) -> list[str]:
-    lines = [f"### {question.id}", "", question.prompt, ""]
-    if question.construct:
-        lines.append(f"*Construct: {question.construct}*")
+    lines = ["## {}".format(question.id), ""]
+    if question.prompt:
+        lines.append("Prompt: {}".format(question.prompt))
         lines.append("")
+    if question.construct:
+        lines.append("- Construct: `{}`".format(question.construct))
+    lines.append("- Type: `{}`".format(question.type))
+    lines.append("- Required: `{}`".format("true" if question.required else "false"))
+    if question.type == "likert":
+        lines.append("- Scale: `{}`-`{}`".format(question.min_value, question.max_value))
+    lines.append("")
     if question.type == "likert":
         lines.append(
-            "**Type:** Likert scale — set `value` to an integer **{}**–**{}**.".format(
+            "Rate with an integer between **{}** and **{}**.".format(
                 question.min_value,
                 question.max_value,
             )
         )
+        lines.append("")
     elif question.type == "single_choice":
-        lines.append("**Type:** Single choice — set `value` to one **choice_id**:")
-        for option in question.options:
-            lines.append("- `{}`".format(option))
+        lines.append("| choice_id | label |")
+        lines.append("|-----------|-------|")
+        for option in question.option_details:
+            lines.append("| `{}` | {} |".format(option.id, option.label or option.id))
+        if not question.option_details:
+            for option in question.options:
+                lines.append("| `{}` | {} |".format(option, option))
     elif question.type == "multi_choice":
-        lines.append("**Type:** Multi choice — set `value` to a list of **choice_id** strings:")
-        for option in question.options:
-            lines.append("- `{}`".format(option))
+        lines.append("| choice_id | label |")
+        lines.append("|-----------|-------|")
+        for option in question.option_details:
+            lines.append("| `{}` | {} |".format(option.id, option.label or option.id))
+        if not question.option_details:
+            for option in question.options:
+                lines.append("| `{}` | {} |".format(option, option))
     elif question.type == "free_text":
-        lines.append("**Type:** Free text — set `value` to a short string in the persona's voice.")
-    else:
-        lines.append("**Type:** {}".format(question.type))
+        lines.append("Respond in a short free-text answer.")
     lines.append("")
     return lines
 
 
-def render_survey_instruction_markdown(instrument: SurveyInstrument) -> str:
-    """Human-readable survey brief for Harbor tasks (product context + questions)."""
+def render_survey_task_instruction_markdown(instrument: SurveyInstrument) -> str:
+    del instrument
+    return "\n".join(
+        [
+            "Complete the survey using the provided context and structured questionnaire.",
+            "",
+            "Return one JSON object that matches `input/output_schema.md`.",
+            "",
+            "Requirements:",
+            "",
+            "- Answer every required question in `input/questionnaire.yaml`.",
+            "- Use exact `questionId` values from the questionnaire.",
+            "- For choice questions, use the exact choice ids.",
+            "- For likert questions, use an integer within the declared range.",
+            "- Keep each `rationale` concise and specific to the selected answer.",
+            "- Return only the JSON object.",
+            "",
+            "Write the final JSON artifact to `/app/output/survey_result.json`.",
+        ]
+    ).strip() + "\n"
+
+
+def render_survey_context_markdown(instrument: SurveyInstrument) -> str:
+    return (
+        (instrument.description or "Complete each required question using the provided survey materials.").strip()
+        + "\n"
+    )
+
+
+def render_survey_questionnaire_markdown(instrument: SurveyInstrument) -> str:
     lines = [
         "# {}".format(instrument.title),
         "",
-        "You are the assigned persona. Read the context below and answer every question as that person would.",
-        "",
-        "Harbor runs this survey via **json_survey** (one-shot JSON completion). "
-        "Your answers are saved to `/app/output/survey_result.json`.",
-        "",
-        "---",
-        "",
-        "## Context",
-        "",
-        instrument.description.strip()
-        if instrument.description
-        else "Answer each question as the assigned persona.",
-        "",
-        "---",
-        "",
-        "## Survey questions",
-        "",
-        "Use exact `questionId` values and valid `value` strings from the instrument JSON schema.",
-        "Every answer needs a short **rationale** in the persona's voice and a **confidence** between 0 and 1.",
+        "Use exact `questionId` and valid choice ids.",
         "",
     ]
     for question in instrument.questions:
         lines.extend(_render_question(question))
-    lines.extend(
+    return "\n".join(lines).strip() + "\n"
+
+
+def render_survey_output_schema_markdown(instrument: SurveyInstrument) -> str:
+    example_question_id = instrument.questions[0].id if instrument.questions else "q1"
+    return "\n".join(
         [
-            "---",
-            "",
-            "## Output artifact",
-            "",
-            "Save to `/app/output/survey_result.json`:",
+            "Return strict JSON matching this shape.",
             "",
             "```json",
             "{",
-            '  "instrument": {',
-            '    "id": "{}",'.format(instrument.id),
-            '    "title": "{}"'.format(instrument.title.replace('"', '\\"')),
-            "  },",
+            '  "instrument": {"id": "%s", "title": "%s"},'
+            % (instrument.id, instrument.title.replace('"', '\\"')),
             '  "answers": [',
             "    {",
-            '      "questionId": "{}",'.format(instrument.questions[0].id if instrument.questions else "q1"),
-            '      "value": "<answer>",',
-            '      "rationale": "Brief persona-grounded reason.",',
+            '      "questionId": "%s",' % example_question_id,
+            '      "value": "<answer value>",',
+            '      "rationale": "Brief answer-specific reason.",',
             '      "confidence": 0.85',
             "    }",
-            "  ],",
-            '  "trajectory": []',
+            "  ]",
             "}",
             "```",
             "",
-            "- Include one entry in `answers` for each question you answer.",
-            "- The runtime fills `trajectory` automatically if you leave it empty.",
+            "Use exact `questionId` values from the questionnaire.",
+            "For choice questions, `value` must be the exact choice id (or list of ids for multi-select).",
         ]
+    ).strip() + "\n"
+
+
+def render_survey_instruction_markdown(instrument: SurveyInstrument) -> str:
+    """Backward-compatible combined markdown from a normalized questionnaire."""
+    content = SurveyTaskContent(
+        title=instrument.title,
+        instruction_markdown=render_survey_task_instruction_markdown(instrument),
+        context_markdown=render_survey_context_markdown(instrument),
+        questionnaire_markdown=render_survey_questionnaire_markdown(instrument),
+        output_schema_markdown=render_survey_output_schema_markdown(instrument),
+        instrument=instrument,
     )
-    return "\n".join(lines).strip() + "\n"
+    return content.combined_markdown().strip() + "\n"

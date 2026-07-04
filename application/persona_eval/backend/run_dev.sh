@@ -23,7 +23,7 @@
 #   PORT=8765 RELOAD=1 bash .../backend/run_dev.sh
 #
 # Requirements: deps from requirements.txt installed in the canonical project
-# .venv (the uv-managed Python 3.9 env — see RECAI_ENV_NOTES.md). This script
+# .venv (the uv-managed Python 3.9 env — see ../README.md). This script
 # execs uvicorn from that interpreter so the lazy `run_turn` import resolves.
 # For REAL recommendations you also need OPENAI_API_KEY and the catalog — see
 # README.md. The server boots and serves /api/health, /api/preflight and the
@@ -35,15 +35,16 @@ set -euo pipefail
 BACKEND_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 EVAL_DIR="$(cd "${BACKEND_DIR}/.." && pwd)"  # application/persona_eval
 REPO_ROOT="$(cd "${EVAL_DIR}/../.." && pwd)"
-CHATBOT_API_DIR="${REPO_ROOT}/environment/task-environments/application/recommender-agent_chat_api/recommender-api"
+PERSONA_EVAL_CORE_DIR="${REPO_ROOT}/packages/persona-eval/src"
+CHATBOT_API_DIR="${REPO_ROOT}/environment/task-environments/application/shared-chat-api-recommender/recommender-api"
 
 # --- interpreter: $VENV/bin/python if VENV is set, else `python` on PATH -------
-# (Python 3.9 + RecAI native — see RECAI_ENV_NOTES.md. Activate your venv, or
+# (Python 3.9 + RecAI native — see ../README.md. Activate your venv, or
 # pass VENV=/path/to/venv.)
 VENV_PY="${VENV:+${VENV}/bin/}python"
 if ! command -v "${VENV_PY}" >/dev/null 2>&1; then
   echo "[run_dev] ERROR: python interpreter '${VENV_PY}' not found." >&2
-  echo "[run_dev]        activate your venv, or set VENV=/path/to/venv (see RECAI_ENV_NOTES.md)." >&2
+  echo "[run_dev]        activate your venv, or set VENV=/path/to/venv (see application/persona_eval/README.md)." >&2
   exit 1
 fi
 
@@ -63,7 +64,7 @@ HOST="${HOST:-127.0.0.1}"
 APP="backend.api.app:app"
 
 # Make `backend`, `persona_eval`, and task-owned `recbot` importable.
-export PYTHONPATH="${REPO_ROOT}:${REPO_ROOT}/environment/runtime:${EVAL_DIR}:${CHATBOT_API_DIR}${PYTHONPATH:+:${PYTHONPATH}}"
+export PYTHONPATH="${REPO_ROOT}:${REPO_ROOT}/environment/runtime:${PERSONA_EVAL_CORE_DIR}:${EVAL_DIR}:${CHATBOT_API_DIR}${PYTHONPATH:+:${PYTHONPATH}}"
 
 # The catalog is served from the real per-domain bundle under
 # recai/InteRecAgent/resources/<domain>/ (see backend.service.bundle_catalog).
@@ -78,7 +79,7 @@ fi
 
 echo "[run_dev] python      : ${VENV_PY}"
 echo "[run_dev] backend dir : ${BACKEND_DIR}"
-echo "[run_dev] PYTHONPATH  : ${REPO_ROOT}:${REPO_ROOT}/environment/runtime:${EVAL_DIR}:${CHATBOT_API_DIR}"
+echo "[run_dev] PYTHONPATH  : ${REPO_ROOT}:${REPO_ROOT}/environment/runtime:${PERSONA_EVAL_CORE_DIR}:${EVAL_DIR}:${CHATBOT_API_DIR}"
 echo "[run_dev] catalog     : ${INTERECAGENT_CATALOG_PATH:-(bundle default)}"
 echo "[run_dev] serving     : http://${HOST}:${PORT}  (app ${APP})"
 echo "[run_dev] frontend    : in another terminal, run:"

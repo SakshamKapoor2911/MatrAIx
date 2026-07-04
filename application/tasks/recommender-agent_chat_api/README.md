@@ -25,11 +25,18 @@ the same HTTP contract for smoke runs.
 The persona agent writes:
 
 - `/app/output/transcript.json`
-- `/app/output/recommendation_result.json`
 - optionally `/app/output/user_feedback.json`
 
 The verifier checks artifact shape, multi-turn coverage, session consistency,
-and recommendation grounding.
+and conversation quality signals.
+
+Canonical contributor-facing docs:
+
+- `application/tasks/recommender-agent_chat_api/instruction.md`
+- `application/tasks/recommender-agent_chat_api/input/context.md`
+- `application/tasks/recommender-agent_chat_api/input/protocol.md`
+- `application/tasks/recommender-agent_chat_api/input/output_schema.md`
+- `application/tasks/recommender-agent_chat_api/input/chatbot.yaml`
 
 ## Smoke run
 
@@ -41,15 +48,29 @@ uv run python application/scripts/generate_application_job.py \
 
 export ANTHROPIC_API_KEY="sk-ant-..."
 export OPENAI_API_KEY="sk-..."
-export MATRIX_CHATBOT_DOMAIN=movie
-export MATRIX_CHATBOT_APPLICATION_ID=recai
-export MATRIX_CHATBOT_MAX_TURNS=8
+export MATRIX_CHATBOT_TASK_PATH="application/tasks/recommender-agent_chat_api"
 uv run harbor run -c configs/jobs/application-task-job-recipe/recommender-agent_chat_api-auto-n1.yaml
 ```
 
 See [Application Quickstart](../../QUICKSTART.md) for the UI path.
 
-The environment-side sidecar is intentionally lightweight. A production RecAI or
-catalog-backed recommender can replace
-`environment/task-environments/application/recommender-agent_chat_api/recommender-api/`
-later as a separate application tooling PR.
+## Native RecAI stack (full PersonaEval preflight)
+
+The lightweight `server.py` sidecar is enough for Harbor smoke runs. PersonaEval's
+**Catalog**, **Recommendation engine**, and **RecAI resources** checks need the
+real Microsoft InteRecAgent checkout plus the `all_resources` bundles.
+
+From the recommender API root:
+
+```bash
+cd environment/task-environments/application/shared-chat-api-recommender/recommender-api
+pip install gdown pandas pyarrow   # one-time
+./scripts/setup_recai_native.sh
+```
+
+This sparse-clones [microsoft/RecAI](https://github.com/microsoft/RecAI) into
+`recai/InteRecAgent/`, downloads `all_resources.zip` (~1–2 GB), and writes
+`data/catalogs/*.parquet`. Restart the PersonaEval backend afterward.
+
+Flags: `--engine-only`, `--skip-download`, `--skip-parquets` (see
+`scripts/setup_recai_resources.py --help`).

@@ -1,0 +1,180 @@
+{
+  "schemaVersion": "1.0",
+  "artifactType": "personabench.trial_evaluation",
+  "taskType": "web",
+  "presenceCheck": {
+    "passed": true,
+    "requiredArtifacts": [
+      "task_output.json",
+      "user_feedback.json"
+    ],
+    "missingArtifacts": []
+  },
+  "sourceArtifacts": {
+    "taskOutput": "/app/output/task_output.json",
+    "userFeedback": "/app/output/user_feedback.json"
+  },
+  "contexts": [
+    {
+      "key": "decision.primary",
+      "label": "Primary decision",
+      "contextType": "decision",
+      "facets": [
+        {
+          "key": "decision_outcome",
+          "label": "Decision outcome",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "selected"
+        },
+        {
+          "key": "basis_primary",
+          "label": "Primary basis",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "price"
+        },
+        {
+          "key": "reason",
+          "label": "Reason",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "The price felt reasonable for what I needed, so this option stood out the most."
+        },
+        {
+          "key": "decision_subject_id",
+          "label": "Selected option ID",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "option-123"
+        },
+        {
+          "key": "decision_subject_label",
+          "label": "Selected option label",
+          "role": "evidence",
+          "kind": "textual",
+          "value": "Starter plan"
+        },
+        {
+          "key": "basis_secondary",
+          "label": "Secondary basis",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "convenience"
+        },
+        {
+          "key": "decision_confidence",
+          "label": "Decision confidence",
+          "role": "score",
+          "kind": "numerical",
+          "value": 0.82
+        },
+        {
+          "key": "task_price_bucket",
+          "label": "Price bucket",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "mid"
+        }
+      ]
+    },
+    {
+      "key": "decision.process",
+      "label": "Decision process",
+      "contextType": "decision_process",
+      "facets": [
+        {
+          "key": "exploration_style",
+          "label": "Exploration style",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "compared_multiple"
+        },
+        {
+          "key": "options_considered_count",
+          "label": "Options considered",
+          "role": "score",
+          "kind": "numerical",
+          "value": 4
+        },
+        {
+          "key": "used_search",
+          "label": "Used search",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "true"
+        },
+        {
+          "key": "used_filter_or_sort",
+          "label": "Used filter or sort",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "false"
+        },
+        {
+          "key": "comparison_notes",
+          "label": "Comparison notes",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "I compared a few plans before deciding that the lowest tier already covered my basic needs."
+        }
+      ]
+    },
+    {
+      "key": "user_feedback.primary",
+      "label": "User feedback",
+      "contextType": "user_feedback",
+      "facets": [
+        {
+          "key": "overall_experience_rating",
+          "label": "Overall experience rating",
+          "role": "score",
+          "kind": "numerical",
+          "value": 7
+        },
+        {
+          "key": "feedback_reason",
+          "label": "Feedback reason",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "The plan fit my budget and felt easy enough to pick, but I still wanted slightly clearer comparisons before committing."
+        },
+        {
+          "key": "need_constraint_satisfaction",
+          "label": "Need or constraint satisfaction",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "yes"
+        },
+        {
+          "key": "personal_preference_satisfaction",
+          "label": "Personal preference satisfaction",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "partially"
+        },
+        {
+          "key": "trust_level",
+          "label": "Trust level",
+          "role": "score",
+          "kind": "numerical",
+          "value": 6
+        },
+        {
+          "key": "effort_rating",
+          "label": "Effort rating",
+          "role": "score",
+          "kind": "numerical",
+          "value": 4
+        },
+        {
+          "key": "clarity_of_next_step",
+          "label": "Clarity of next step",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "true"
+        }
+      ]
+    }
+  ]
+}

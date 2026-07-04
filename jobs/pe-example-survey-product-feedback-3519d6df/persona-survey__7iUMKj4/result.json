@@ -1,0 +1,113 @@
+{
+    "id": "2f187d5f-48f3-43ad-b219-5ac2f471b23a",
+    "task_name": "personabench/application-persona-survey",
+    "trial_name": "persona-survey__7iUMKj4",
+    "trial_uri": "file:///Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/jobs/pe-example-survey-product-feedback-3519d6df/persona-survey__7iUMKj4",
+    "task_id": {
+        "path": "application/tasks/persona-survey"
+    },
+    "source": null,
+    "task_checksum": "92407e68e3c6eaac0cff8e0537ee504e6d44e9f230dad8ecfaa2791d58208010",
+    "config": {
+        "task": {
+            "path": "application/tasks/persona-survey",
+            "git_url": null,
+            "git_commit_id": null,
+            "name": null,
+            "ref": null,
+            "overwrite": false,
+            "download_dir": null,
+            "source": null
+        },
+        "trial_name": "persona-survey__7iUMKj4",
+        "trials_dir": "jobs/pe-example-survey-product-feedback-3519d6df",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "persona-json-survey",
+            "import_path": null,
+            "model_name": "anthropic/claude-haiku-4-5",
+            "skills": [],
+            "override_timeout_sec": null,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "extra_allowed_hosts": [],
+            "kwargs": {
+                "persona_path": "persona/datasets/bench-dev-sample/persona_0001.yaml"
+            },
+            "env": {},
+            "mcp_servers": []
+        },
+        "environment": {
+            "type": "host",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "cpu_enforcement_policy": "auto",
+            "memory_enforcement_policy": "auto",
+            "override_cpus": null,
+            "override_memory_mb": null,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "override_tpu": null,
+            "mounts": null,
+            "extra_docker_compose": [],
+            "env": {},
+            "kwargs": {},
+            "extra_allowed_hosts": []
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "env": {},
+            "disable": false
+        },
+        "artifacts": [],
+        "extra_instruction_paths": [],
+        "job_id": "aba90a6a-ea42-4a3e-bca0-12bfe2fd7e1d"
+    },
+    "agent_info": {
+        "name": "persona-json-survey",
+        "version": "1.0.0",
+        "model_info": {
+            "name": "claude-haiku-4-5",
+            "provider": "anthropic"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": null,
+        "n_cache_tokens": null,
+        "n_output_tokens": null,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-07-02T08:28:03.303550Z",
+    "finished_at": "2026-07-02T08:28:14.093999Z",
+    "environment_setup": {
+        "started_at": "2026-07-02T08:28:03.307997Z",
+        "finished_at": "2026-07-02T08:28:03.308372Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-07-02T08:28:03.308389Z",
+        "finished_at": "2026-07-02T08:28:03.308405Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-07-02T08:28:03.308434Z",
+        "finished_at": "2026-07-02T08:28:13.618353Z"
+    },
+    "verifier": {
+        "started_at": "2026-07-02T08:28:13.631309Z",
+        "finished_at": "2026-07-02T08:28:14.093897Z"
+    },
+    "step_results": null
+}

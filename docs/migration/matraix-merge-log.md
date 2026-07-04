@@ -1164,7 +1164,6 @@ This log records the curated migration from MatrAIx into PersonaBench.
   - `application/persona_eval/frontend/`
   - `application/persona_eval/persona_eval/`
   - `application/persona_eval/data/personas/`
-  - `application/tasks/web-ecommerce-platform_product-discovery/`
 - Preserved/adapted:
   - Existing clean-main survey helper imports under
     `application.persona_eval.backend.service.*`.

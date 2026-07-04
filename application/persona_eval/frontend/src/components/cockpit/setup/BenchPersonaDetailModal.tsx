@@ -9,9 +9,15 @@ export interface BenchPersonaDetailModalProps {
   open: boolean;
   persona: PersonaPoolPersonaCard | null;
   onClose: () => void;
+  onUse?: (persona: PersonaPoolPersonaCard) => void;
 }
 
-export function BenchPersonaDetailModal({ open, persona, onClose }: BenchPersonaDetailModalProps) {
+export function BenchPersonaDetailModal({
+  open,
+  persona,
+  onClose,
+  onUse,
+}: BenchPersonaDetailModalProps) {
   const personaId = persona?.personaId ?? null;
   const detailQuery = useQuery({
     queryKey: ["persona-pool-detail", personaId],
@@ -42,6 +48,20 @@ export function BenchPersonaDetailModal({ open, persona, onClose }: BenchPersona
       )}
       {markdown && (
         <Markdown className="text-[12px] leading-relaxed text-text-variant">{markdown}</Markdown>
+      )}
+      {onUse && persona && (
+        <div className="mt-4 flex justify-end border-t border-outline/30 pt-4">
+          <button
+            type="button"
+            onClick={() => {
+              onUse(persona);
+              onClose();
+            }}
+            className="inline-flex h-9 items-center rounded-md bg-primary px-4 text-[12px] font-medium text-on-primary transition hover:bg-primary/90"
+          >
+            Use persona
+          </button>
+        </div>
       )}
     </RailInsetModal>
   );

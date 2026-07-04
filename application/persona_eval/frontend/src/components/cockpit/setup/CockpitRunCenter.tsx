@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 
 import { BatchTrialGrid, harborTrialsToGridCells, type BatchTrialCell } from "./BatchTrialGrid";
+import { BatchTrialStage } from "./BatchTrialStage";
 import { CockpitLiveStage } from "./CockpitLiveStage";
 import { RunLaunchBar, type RunLaunchPhase } from "./RunLaunchBar";
 
@@ -24,6 +25,8 @@ export interface CockpitRunCenterProps {
   error?: string | null;
   onNewRun?: () => void;
   onViewJob?: () => void;
+  onCancelRun?: () => void;
+  cancelRunBusy?: boolean;
   onDownload?: () => void;
   canDownload?: boolean;
 }
@@ -49,15 +52,21 @@ export function CockpitRunCenter({
   error,
   onNewRun,
   onViewJob,
+  onCancelRun,
+  cancelRunBusy,
   onDownload,
   canDownload,
 }: CockpitRunCenterProps) {
   return (
-    <div className="flex h-full min-h-0 w-full flex-col gap-2">
+    <div className="flex h-full min-h-0 w-full flex-col gap-2 overflow-hidden">
       {showLive ? (
-        <CockpitLiveStage className="min-h-0 flex-1">
-          {batchJobName ? <BatchTrialGrid trials={batchCells} jobLabel={batchJobName} /> : liveContent}
-        </CockpitLiveStage>
+        batchJobName ? (
+          <BatchTrialStage>
+            <BatchTrialGrid trials={batchCells} jobLabel={batchJobName} />
+          </BatchTrialStage>
+        ) : (
+          <CockpitLiveStage className="h-0 min-h-0 flex-1">{liveContent}</CockpitLiveStage>
+        )
       ) : (
         <div className="flex min-h-0 flex-1 flex-col">{pipeline}</div>
       )}
@@ -76,6 +85,8 @@ export function CockpitRunCenter({
         progressSublabel={progressSublabel}
         onNewRun={onNewRun}
         onViewJob={onViewJob}
+        onCancelRun={onCancelRun}
+        cancelRunBusy={cancelRunBusy}
         onDownload={onDownload}
         canDownload={canDownload}
       />

@@ -1,14 +1,17 @@
 import { useMemo, useState } from "react";
 
-import type { ChatbotSidecarStatus, ConfigOptionValue } from "@/lib/types";
+import type { ConfigOptionValue } from "@/lib/types";
 import { FOCUS_RING, Sym } from "../cockpitShared";
-import { USE_COMPUTER_URL } from "@/lib/personaAgentCatalog";
+import { USE_COMPUTER_URL, cuaRuntimeSelectOptions, webPersonaAgentSelectOptions } from "@/lib/personaAgentCatalog";
+import { CockpitSelect } from "./CockpitSelect";
 import type { PersonaEvalTaskType } from "../TaskTypeSwitch";
-import { AvailabilityPill } from "./AvailabilityPill";
 import { CockpitRailHeader } from "./CockpitRailHeader";
 import { CockpitToggle } from "./CockpitToggle";
 import { TaskDetailModal } from "./TaskDetailModal";
-import { ToneChip, transportChipTone } from "./ToneChip";
+import { ToneChip, transportChipTone, type ToneChipTone } from "./ToneChip";
+import { CHIP_TEXT_CLASS, formatChipLabel } from "./taskCardLabels";
+import type { TaskCardTag } from "./taskCardLabels";
+import { taskCardIcon } from "./taskCardIcons";
 
 export type ChatTransport = "api" | "sidecar" | "mcp";
 
@@ -19,30 +22,30 @@ export interface TaskCardModel {
   taskType: PersonaEvalTaskType;
   taskPath: string;
   transport?: ChatTransport;
-  available?: boolean;
+  available?: boolean | null;
+  canStart?: boolean;
   statusLabel?: string;
-  /** Survey-only: built-in questionnaire vs Harbor example-survey task. */
-  surveyKind?: "instrument" | "harbor";
-  /** Registry instrument id for json_survey (Harbor + built-in questionnaires). */
-  surveyInstrumentId?: string;
-  /** CUA task platform (linux / macos / ios / web). */
+  statusDetail?: string;
+  /** CUA runtime platform (linux / macos / ios / web). */
   platform?: string;
+  /** Harbor metadata.type from task.toml — display tag only. */
+  metaType?: string;
+  /** CUA metadata.os (linux / macos / ios). */
+  os?: string;
+  domain?: string;
+  difficulty?: string;
+  taskKind?: "example" | "task";
+  tags?: TaskCardTag[];
+  /** @deprecated prefer tags */
+  tagLabels?: string[];
   profileMarkdown?: string;
 }
 
-const APP_ICON: Record<string, string> = {
-  recai: "recommend",
-  finance_openbb: "show_chart",
-  medical_assistant: "stethoscope",
-};
+export { taskCardIcon, taskMetaTypeIcon } from "./taskCardIcons";
 
 export interface TaskSelectionRailProps {
   taskType: PersonaEvalTaskType;
-  chatOptions: ConfigOptionValue[];
-  selectedChatAppId: string;
-  onChatAppChange: (id: string) => void;
-  sidecarsByApp: Record<string, ChatbotSidecarStatus>;
-  sidecarsLoading: boolean;
+  chatTasks: TaskCardModel[];
   surveyTasks: TaskCardModel[];
   webTasks: TaskCardModel[];
   cuaTasks: TaskCardModel[];
@@ -54,17 +57,15 @@ export interface TaskSelectionRailProps {
   domain: string;
   onDomainChange: (domain: string) => void;
   domainOptions: ConfigOptionValue[];
-  maxTurns: number;
-  onMaxTurnsChange: (turns: number) => void;
-  onStartSidecar?: (applicationId: string) => void;
+  maxTurns: number | null;
+  onMaxTurnsChange: (turns: number | null) => void;
+  onStartSidecar?: (taskId: string) => void;
   sidecarStartingId?: string | null;
   sidecarActionError?: string | null;
-  webPersonaAgentOptions?: Array<{ value: string; label: string; description?: string }>;
   resolveWebPersonaAgent?: (taskId: string) => string;
   onWebPersonaAgentChange?: (taskId: string, agent: string) => void;
   resolveCuaRuntime?: (taskId: string, platform?: string) => string;
   onCuaRuntimeChange?: (taskId: string, runtime: string) => void;
-  cuaRuntimeOptionsForTask?: (platform?: string) => Array<{ value: string; label: string; description?: string }>;
   tasksLoading?: boolean;
   tasksError?: string | null;
   disabled?: boolean;
@@ -76,20 +77,9 @@ function transportLabel(transport?: ChatTransport): string {
   return "Sidecar";
 }
 
-const RAIL_TITLES: Record<PersonaEvalTaskType, { title: string; subtitle: string }> = {
-  chatbot: { title: "Chat applications", subtitle: "System under test · adapter transport" },
-  survey: { title: "Survey instruments", subtitle: "Fixed questionnaires to score" },
-  web: { title: "Web tasks", subtitle: "Browser scenarios and traces" },
-  cua: { title: "CUA tasks", subtitle: "Computer-use agent scenarios" },
-};
-
 export function TaskSelectionRail({
   taskType,
-  chatOptions,
-  selectedChatAppId,
-  onChatAppChange,
-  sidecarsByApp,
-  sidecarsLoading,
+  chatTasks,
   surveyTasks,
   webTasks,
   cuaTasks,
@@ -106,12 +96,10 @@ export function TaskSelectionRail({
   onStartSidecar,
   sidecarStartingId,
   sidecarActionError,
-  webPersonaAgentOptions = [],
   resolveWebPersonaAgent,
   onWebPersonaAgentChange,
   resolveCuaRuntime,
   onCuaRuntimeChange,
-  cuaRuntimeOptionsForTask,
   tasksLoading,
   tasksError,
   disabled,
@@ -120,31 +108,14 @@ export function TaskSelectionRail({
   const [detailCard, setDetailCard] = useState<TaskCardModel | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const chatCards: TaskCardModel[] = chatOptions.map((opt) => {
-    const sidecar = sidecarsByApp[opt.value];
-    const transport: ChatTransport =
-      opt.value === "finance_openbb" ? "mcp" : opt.value === "medical_assistant" ? "api" : "sidecar";
-    const available = sidecarsLoading ? undefined : sidecar?.ok ?? false;
-    return {
-      id: opt.value,
-      title: opt.label,
-      subtitle: opt.description,
-      taskType: "chatbot",
-      taskPath: "",
-      transport,
-      available,
-      statusLabel: sidecarsLoading ? "Checking…" : available ? "Available" : "Unavailable",
-    };
-  });
-
   const cards =
     taskType === "chatbot"
-      ? chatCards
+      ? chatTasks
       : taskType === "survey"
         ? surveyTasks
         : taskType === "web"
           ? webTasks
-          : taskType === "cua"
+          : taskType === "os-app"
             ? cuaTasks
             : [];
 
@@ -152,25 +123,25 @@ export function TaskSelectionRail({
     const query = searchQuery.trim().toLowerCase();
     if (!query) return cards;
     return cards.filter((card) => {
-      const haystack = [card.id, card.title, card.subtitle ?? "", card.statusLabel ?? ""]
+      const haystack = [
+        card.id,
+        card.title,
+        card.subtitle ?? "",
+        ...(card.tags?.map((tag) => tag.label) ?? []),
+        card.statusLabel ?? "",
+      ]
         .join(" ")
         .toLowerCase();
       return haystack.includes(query);
     });
   }, [cards, searchQuery]);
 
-  const railMeta = RAIL_TITLES[taskType];
-
   return (
     <aside className="glass-panel glass-panel-rail relative flex h-full min-h-0 flex-col rounded-xl p-4">
-      <CockpitRailHeader
-        eyebrow="Tasks"
-        title={railMeta.title}
-        subtitle={railMeta.subtitle}
-      />
+      <CockpitRailHeader label="Task" />
 
-      <label className="mb-3 flex flex-col gap-1.5">
-        <span className="cockpit-field-label">Search tasks</span>
+      <label className="mb-2.5 flex flex-col gap-1">
+        <span className="sr-only">Search tasks</span>
         <div className="relative">
           <Sym
             name="search"
@@ -202,8 +173,7 @@ export function TaskSelectionRail({
           </p>
         )}
         {filteredCards.map((card) => {
-          const selected =
-            taskType === "chatbot" ? card.id === selectedChatAppId : selectedTaskId === card.id;
+          const selected = selectedTaskId === card.id;
           const settingsId = settingsOpen === card.id;
           const unavailable = card.available === false;
           return (
@@ -221,10 +191,7 @@ export function TaskSelectionRail({
                 <button
                   type="button"
                   disabled={disabled}
-                  onClick={() => {
-                    if (taskType === "chatbot") onChatAppChange(card.id);
-                    onSelectTask(card);
-                  }}
+                  onClick={() => onSelectTask(card)}
                   className={`flex min-w-0 flex-1 items-start gap-3 text-left ${FOCUS_RING}`}
                 >
                   <div
@@ -235,7 +202,7 @@ export function TaskSelectionRail({
                     }`}
                   >
                     <Sym
-                      name={APP_ICON[card.id] ?? (taskType === "survey" ? "quiz" : "public")}
+                      name={taskCardIcon(taskType, card)}
                       size={20}
                       className={selected ? "text-primary" : "text-text-variant"}
                     />
@@ -251,16 +218,24 @@ export function TaskSelectionRail({
                     )}
                     <div className="mt-2.5 flex flex-wrap items-center gap-1.5">
                       {card.transport && (
-                        <ToneChip
-                          tone={transportChipTone(card.transport)}
-                          className="font-mono text-[9px] uppercase tracking-wide"
-                        >
+                        <ToneChip tone={transportChipTone(card.transport)} className={CHIP_TEXT_CLASS}>
                           {transportLabel(card.transport)}
                         </ToneChip>
                       )}
-                      {card.statusLabel && (
-                        <AvailabilityPill available={card.available} label={card.statusLabel} />
-                      )}
+                      {(card.tags ??
+                        (card.tagLabels?.map((label) => ({ label, tone: "secondary" as ToneChipTone })) ??
+                          (card.statusLabel
+                            ? [{ label: card.statusLabel, tone: "secondary" as ToneChipTone }]
+                            : []))).map((tag) => (
+                        <ToneChip
+                          key={tag.label}
+                          tone={tag.tone}
+                          showDot={tag.label === "Available" || tag.label === "Unavailable"}
+                          className={CHIP_TEXT_CLASS}
+                        >
+                          {formatChipLabel(tag.label)}
+                        </ToneChip>
+                      ))}
                     </div>
                   </div>
                 </button>
@@ -282,7 +257,7 @@ export function TaskSelectionRail({
                     <Sym name="settings" size={16} />
                   </button>
                 )}
-                {(taskType === "web" || taskType === "cua") && (
+                {(taskType === "web" || taskType === "os-app") && (
                   <button
                     type="button"
                     onClick={() => setSettingsOpen(settingsId ? null : card.id)}
@@ -294,84 +269,76 @@ export function TaskSelectionRail({
                 )}
               </div>
               {settingsId && taskType === "web" && resolveWebPersonaAgent && onWebPersonaAgentChange && (
-                <div className="space-y-3 border-t border-outline/30 px-3 py-3">
-                  <label className="cockpit-field-label flex flex-col gap-1.5">
-                    Persona agent
-                    <select
-                      value={resolveWebPersonaAgent(card.id)}
-                      disabled={disabled}
-                      onChange={(e) => onWebPersonaAgentChange(card.id, e.target.value)}
-                      className="h-8 rounded-md border border-outline/50 bg-surface/60 px-2 text-[12px] font-medium text-text-main"
-                    >
-                      {webPersonaAgentOptions.map((opt) => (
-                        <option key={opt.value} value={opt.value}>
-                          {opt.label}
-                        </option>
-                      ))}
-                    </select>
-                    <span className="text-[10px] leading-relaxed text-text-dim">
-                      {webPersonaAgentOptions.find((opt) => opt.value === resolveWebPersonaAgent(card.id))
-                        ?.description ?? "Harbor driver for this web task."}
-                    </span>
-                  </label>
+                <div className="border-t border-outline/30 px-3 py-3">
+                  <CockpitSelect
+                    label="Agent capability"
+                    value={resolveWebPersonaAgent(card.id)}
+                    options={webPersonaAgentSelectOptions()}
+                    disabled={disabled}
+                    onChange={(agentId) => onWebPersonaAgentChange(card.id, agentId)}
+                  />
                 </div>
               )}
-              {settingsId && taskType === "cua" && resolveCuaRuntime && onCuaRuntimeChange && (
-                <div className="space-y-3 border-t border-outline/30 px-3 py-3">
-                  <label className="cockpit-field-label flex flex-col gap-1.5">
-                    CUA runtime
-                    <select
-                      value={resolveCuaRuntime(card.id, card.platform)}
-                      disabled={disabled}
-                      onChange={(e) => onCuaRuntimeChange(card.id, e.target.value)}
-                      className="h-8 rounded-md border border-outline/50 bg-surface/60 px-2 text-[12px] font-medium text-text-main"
+              {settingsId && taskType === "os-app" && resolveCuaRuntime && onCuaRuntimeChange && (
+                <div className="space-y-2 border-t border-outline/30 px-3 py-3">
+                  <CockpitSelect
+                    label="OS runtime"
+                    value={resolveCuaRuntime(card.id, card.platform)}
+                    options={cuaRuntimeSelectOptions(card.platform ?? "linux")}
+                    disabled={disabled}
+                    onChange={(backend) => onCuaRuntimeChange(card.id, backend)}
+                  />
+                  {(card.platform === "macos" || card.platform === "ios") && (
+                    <a
+                      href={USE_COMPUTER_URL}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-[10px] font-medium text-primary hover:underline"
                     >
-                      {(cuaRuntimeOptionsForTask?.(card.platform) ?? []).map((opt) => (
-                        <option key={opt.value} value={opt.value}>
-                          {opt.label}
-                        </option>
-                      ))}
-                    </select>
-                    <span className="text-[10px] leading-relaxed text-text-dim">
-                      {(cuaRuntimeOptionsForTask?.(card.platform) ?? []).find(
-                        (opt) => opt.value === resolveCuaRuntime(card.id, card.platform),
-                      )?.description ?? "How persona-computer-1 runs this task."}
-                    </span>
-                    {(card.platform === "macos" || card.platform === "ios") && (
-                      <a
-                        href={USE_COMPUTER_URL}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-[10px] font-medium text-primary hover:underline"
-                      >
-                        use.computer setup →
-                      </a>
-                    )}
-                  </label>
+                      use.computer setup →
+                    </a>
+                  )}
                 </div>
               )}
               {settingsId && taskType === "chatbot" && (() => {
-                const sidecar = sidecarsByApp[card.id];
-                const serviceUp = sidecar?.ok ?? false;
+                const serviceUp = card.available ?? false;
+                const canStart = card.canStart ?? false;
                 const starting = sidecarStartingId === card.id;
+                const showServiceToggle = card.available !== null && card.available !== undefined;
                 return (
                 <div className="space-y-3 border-t border-outline/30 px-3 py-3">
-                  <CockpitToggle
-                    checked={serviceUp}
-                    onChange={(on) => {
-                      if (on && !serviceUp) onStartSidecar?.(card.id);
-                    }}
-                    disabled={disabled || starting || sidecarsLoading || serviceUp}
-                    label="Service up"
-                    description={
-                      starting
-                        ? "Starting sidecar via docker compose…"
-                        : sidecar?.detail ??
-                          (serviceUp
-                            ? "Chat API is reachable."
-                            : "Flip on to start the local chat API sidecar.")
-                    }
-                  />
+                  {showServiceToggle ? (
+                    <CockpitToggle
+                      checked={serviceUp}
+                      onChange={(on) => {
+                        if (on && !serviceUp && canStart) onStartSidecar?.(card.id);
+                      }}
+                      disabled={disabled || starting || serviceUp || !canStart}
+                      label="Service up"
+                      description={
+                        starting
+                          ? "Starting sidecar via docker compose…"
+                          : card.statusDetail ??
+                            (serviceUp
+                              ? "Chat API is reachable."
+                              : canStart
+                                ? "Flip on to start the local chat API sidecar."
+                                : "Configure the upstream endpoint for this task.")
+                      }
+                    />
+                  ) : (
+                    <div className="rounded-md border border-outline/35 bg-surface/30 px-3 py-2">
+                      <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-text-dim">
+                        Connection
+                      </p>
+                      <p className="mt-1 text-[11px] leading-relaxed text-text-variant">
+                        {card.statusDetail ??
+                          (card.transport === "mcp"
+                            ? "MCP-backed task; no local HTTP health toggle is available."
+                            : "No HTTP health check is configured for this task.")}
+                      </p>
+                    </div>
+                  )}
                   {sidecarActionError && settingsOpen === card.id && (
                     <p className="text-[10px] text-danger">{sidecarActionError}</p>
                   )}
@@ -407,18 +374,34 @@ export function TaskSelectionRail({
                       </select>
                     </label>
                   )}
-                  <label className="cockpit-field-label flex flex-col gap-1.5">
-                    Max turns · <span className="font-mono text-text-main">{maxTurns}</span>
-                    <input
-                      type="range"
-                      min={2}
-                      max={12}
-                      value={maxTurns}
-                      disabled={disabled}
-                      onChange={(e) => onMaxTurnsChange(Number(e.target.value))}
-                      className="accent-primary"
-                    />
-                  </label>
+                  <CockpitToggle
+                    checked={maxTurns !== null}
+                    onChange={(enabled) => onMaxTurnsChange(enabled ? maxTurns ?? 8 : null)}
+                    disabled={disabled}
+                    label="Turn limit"
+                    description={
+                      maxTurns === null
+                        ? "Unlimited by default. The run stops only when the user simulator decides to end."
+                        : "Stop after this many user turns."
+                    }
+                  />
+                  {maxTurns !== null && (
+                    <label className="cockpit-field-label flex flex-col gap-1.5">
+                      Max turns
+                      <input
+                        type="number"
+                        min={1}
+                        step={1}
+                        value={maxTurns}
+                        disabled={disabled}
+                        onChange={(e) => {
+                          const next = e.currentTarget.valueAsNumber;
+                          if (Number.isFinite(next) && next >= 1) onMaxTurnsChange(next);
+                        }}
+                        className="h-8 rounded-md border border-outline/50 bg-surface/60 px-2 text-[12px] font-medium text-text-main"
+                      />
+                    </label>
+                  )}
                 </div>
                 );
               })()}

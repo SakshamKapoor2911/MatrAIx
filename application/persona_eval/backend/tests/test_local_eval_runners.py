@@ -63,7 +63,9 @@ def test_local_survey_runner_returns_result_and_prompts(monkeypatch):
     assert result.metrics.num_answered == 1
     assert result.prompts["personaPrompt"]
     assert result.prompts["taskPrompt"]
-    assert "Survey: A survey about a concrete feature." in result.prompts["taskPrompt"]
+    assert "## Task instruction" in result.prompts["taskPrompt"]
+    assert "## Questionnaire" in result.prompts["taskPrompt"]
+    assert "This fits me." in result.prompts["taskPrompt"]
     assert [event.action for event in result.trajectory] == [
         "survey_started",
         "ask_question",
@@ -248,7 +250,7 @@ def test_direct_finance_session_uses_http_sidecar(monkeypatch):
                     "conversationId": "fin_ses_1",
                     "backend": "finance_openbb",
                     "assistantMessage": "I can compare ETFs and risk constraints.",
-                    "groundedItems": [
+                    "recommendedItems": [
                         {
                             "itemId": "finance:openbb:etf_search:0",
                             "title": "ETF data",
@@ -263,7 +265,6 @@ def test_direct_finance_session_uses_http_sidecar(monkeypatch):
 
     session = DirectApplicationSession(
         PersonaEvalConfig(
-            domain="financial_research",
             application_id="finance_openbb",
             application_context="financial_research",
         )
@@ -275,7 +276,7 @@ def test_direct_finance_session_uses_http_sidecar(monkeypatch):
     assert calls[0]["body"]["applicationContext"] == "financial_research"
     assert calls[0]["body"]["message"] == "Can you compare low-cost broad market ETFs?"
     assert turn["assistantMessage"] == "I can compare ETFs and risk constraints."
-    assert turn["groundedItems"][0]["itemId"] == "finance:openbb:etf_search:0"
+    assert turn["personaExposure"][0]["value"][0]["itemId"] == "finance:openbb:etf_search:0"
 
 
 def test_direct_medical_session_uses_http_sidecar(monkeypatch):
@@ -292,7 +293,7 @@ def test_direct_medical_session_uses_http_sidecar(monkeypatch):
                     "conversationId": "med_ses_1",
                     "backend": "medical_assistant",
                     "assistantMessage": "I can explain symptoms and suggest when to seek care.",
-                    "groundedItems": [],
+                    "recommendedItems": [],
                 },
             }
         )
@@ -302,7 +303,6 @@ def test_direct_medical_session_uses_http_sidecar(monkeypatch):
 
     session = DirectApplicationSession(
         PersonaEvalConfig(
-            domain="medical_consultation",
             application_id="medical_assistant",
             application_context="medical_consultation",
         )

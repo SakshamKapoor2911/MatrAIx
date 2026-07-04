@@ -151,7 +151,8 @@ class UseComputerEnvironment(BaseEnvironment):
 
         normalized_platform = self._normalize_platform(platform)
         self._platform = normalized_platform
-        self._api_key = api_key or os.environ.get("USE_COMPUTER_API_KEY")
+        raw_key = api_key or os.environ.get("USE_COMPUTER_API_KEY") or ""
+        self._api_key = str(raw_key).strip() or None
         self._base_url = (base_url or gateway_url or _DEFAULT_BASE_URL).rstrip("/")
         self._host = host or os.environ.get("USE_COMPUTER_HOST", "")
         self._mode = str(mode or "").strip().lower()
@@ -708,10 +709,26 @@ class UseComputerEnvironment(BaseEnvironment):
             return Path()
         return Path(*[part for part in re.split(r"[\\/]+", rel) if part])
 
+    def _use_computer_app_root(self) -> str:
+        if self._platform == "ios":
+            return f"{_MACOS_HARBOR_ROOT}/app"
+        return "/Users/lume"
+
+    def _use_computer_workspace_root(self) -> str:
+        if self._platform == "ios":
+            return f"{_MACOS_HARBOR_ROOT}/workspace"
+        return "/Users/lume"
+
     def _remap_macos_path(self, path: str) -> str:
         for root in ("/logs", "/tests", "/solution", "/harbor"):
             if path == root or path.startswith(root + "/"):
                 return _MACOS_HARBOR_ROOT + path
+        if path == "/app" or path.startswith("/app/"):
+            return self._use_computer_app_root() + path[len("/app") :]
+        if path == "/workspace" or path.startswith("/workspace/"):
+            return self._use_computer_workspace_root() + path[len("/workspace") :]
+        if path == "/installed-agent" or path.startswith("/installed-agent/"):
+            return f"{_MACOS_HARBOR_ROOT}/installed-agent" + path[len("/installed-agent") :]
         return path
 
     def _remap_macos_command(self, command: str) -> str:
@@ -721,8 +738,8 @@ class UseComputerEnvironment(BaseEnvironment):
             "/solution": f"{_MACOS_HARBOR_ROOT}/solution",
             "/harbor": f"{_MACOS_HARBOR_ROOT}/harbor",
             "/installed-agent": f"{_MACOS_HARBOR_ROOT}/installed-agent",
-            "/app": "/Users/lume",
-            "/workspace": "/Users/lume",
+            "/app": self._use_computer_app_root(),
+            "/workspace": self._use_computer_workspace_root(),
         }
         for root, target in replacements.items():
             command = re.sub(

@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-mkdir -p /tmp/personabench-ios-notification-preferences
+mkdir -p /tmp/personabench-ios-photo-access-review
 
-cat > /tmp/personabench-ios-notification-preferences/decision.json <<'EOF'
+cat > /tmp/personabench-ios-photo-access-review/decision.json <<'EOF'
 {
-  "keep_notifications_on": false,
-  "app_reviewed": "Messages",
-  "reason": "I mute group chats during work hours but still want direct messages to break through with banners."
+  "app_reviewed": "Photos",
+  "photo_access_level": "selected_photos",
+  "reason": "I only want this app to see the few images I choose on purpose instead of my full library."
 }
 EOF

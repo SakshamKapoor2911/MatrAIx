@@ -1,0 +1,206 @@
+{
+  "schemaVersion": "1.0",
+  "artifactType": "personabench.trial_evaluation",
+  "taskType": "os-app",
+  "presenceCheck": {
+    "passed": true,
+    "requiredArtifacts": [
+      "decision.json"
+    ],
+    "missingArtifacts": []
+  },
+  "sourceArtifacts": {
+    "decision": "/tmp/personabench-ios-photo-access-review/decision.json"
+  },
+  "contexts": [
+    {
+      "key": "task_outcome.primary",
+      "label": "Task outcome",
+      "contextType": "task_outcome",
+      "facets": [
+        {
+          "key": "outcome_status",
+          "label": "Outcome status",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "passed"
+        },
+        {
+          "key": "goal_completion_ratio",
+          "label": "Goal completion ratio",
+          "role": "score",
+          "kind": "numerical",
+          "value": 1.0
+        },
+        {
+          "key": "goal_completion_bucket",
+          "label": "Goal completion bucket",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "complete"
+        },
+        {
+          "key": "verifier_mode",
+          "label": "Verifier mode",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "artifact_exact"
+        },
+        {
+          "key": "primary_failure_reason",
+          "label": "Primary failure reason",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "none"
+        },
+        {
+          "key": "outcome_explanation",
+          "label": "Outcome explanation",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "The submission selected a valid photo access level for Photos."
+        },
+        {
+          "key": "completion_evidence",
+          "label": "Completion evidence",
+          "role": "evidence",
+          "kind": "textual",
+          "value": "Photos -> selected_photos"
+        }
+      ]
+    },
+    {
+      "key": "goal_component.reviewed_app",
+      "label": "Reviewed app",
+      "contextType": "goal_component",
+      "facets": [
+        {
+          "key": "goal_component_key",
+          "label": "Goal component key",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "reviewed_app"
+        },
+        {
+          "key": "goal_component_label",
+          "label": "Goal component label",
+          "role": "evidence",
+          "kind": "textual",
+          "value": "Review one app in the Photos privacy area"
+        },
+        {
+          "key": "goal_component_status",
+          "label": "Goal component status",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "passed"
+        },
+        {
+          "key": "goal_component_weight",
+          "label": "Goal component weight",
+          "role": "score",
+          "kind": "numerical",
+          "value": 0.5
+        },
+        {
+          "key": "goal_component_required",
+          "label": "Goal component required",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "true"
+        },
+        {
+          "key": "goal_component_evidence",
+          "label": "Goal component evidence",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "The submission reviewed Photos."
+        }
+      ]
+    },
+    {
+      "key": "goal_component.access_level_decided",
+      "label": "Access level decided",
+      "contextType": "goal_component",
+      "facets": [
+        {
+          "key": "goal_component_key",
+          "label": "Goal component key",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "access_level_decided"
+        },
+        {
+          "key": "goal_component_label",
+          "label": "Goal component label",
+          "role": "evidence",
+          "kind": "textual",
+          "value": "Choose a valid photo access level"
+        },
+        {
+          "key": "goal_component_status",
+          "label": "Goal component status",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "passed"
+        },
+        {
+          "key": "goal_component_weight",
+          "label": "Goal component weight",
+          "role": "score",
+          "kind": "numerical",
+          "value": 0.5
+        },
+        {
+          "key": "goal_component_required",
+          "label": "Goal component required",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "true"
+        },
+        {
+          "key": "goal_component_evidence",
+          "label": "Goal component evidence",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "The submission chose selected_photos."
+        }
+      ]
+    },
+    {
+      "key": "settings_change.primary",
+      "label": "Settings change decision",
+      "contextType": "settings_change",
+      "facets": [
+        {
+          "key": "settings_area",
+          "label": "Settings area",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "photos_privacy"
+        },
+        {
+          "key": "app_reviewed",
+          "label": "App reviewed",
+          "role": "evidence",
+          "kind": "textual",
+          "value": "Photos"
+        },
+        {
+          "key": "photo_access_level",
+          "label": "Photo access level",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "selected_photos"
+        },
+        {
+          "key": "reason",
+          "label": "Reason",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "I only want this app to see the few images I choose on purpose instead of my full library."
+        }
+      ]
+    }
+  ]
+}

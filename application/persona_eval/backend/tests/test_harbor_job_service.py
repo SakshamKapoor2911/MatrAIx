@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 from backend.service.harbor_job_service import HarborJobService
@@ -21,10 +22,10 @@ def test_launch_writes_job_config(tmp_path, monkeypatch):
         encoding="utf-8",
     )
 
-    calls: list[list[str]] = []
+    calls: list[dict[str, object]] = []
 
     def _fake_run(command, *, cwd, env):
-        calls.append(list(command))
+        calls.append({"command": list(command), "cwd": cwd, "env": dict(env)})
         return 0
 
     monkeypatch.setattr(
@@ -38,6 +39,7 @@ def test_launch_writes_job_config(tmp_path, monkeypatch):
         command_runner=_fake_run,
         harbor_command=("echo", "harbor"),
     )
+    service._executor = _FakeExecutor()
 
     job_name = service.launch(
         task_path="application/tasks/example-survey_product-feedback",
@@ -52,12 +54,20 @@ def test_launch_writes_job_config(tmp_path, monkeypatch):
     assert config_path.is_file()
     text = config_path.read_text(encoding="utf-8")
     assert "persona_0001.yaml" in text or "persona_0002.yaml" in text
+    assert service._executor.calls
+    fn, args, kwargs = service._executor.calls[0]
+    assert fn.__name__ == "_run_local_distributed"
+    fn(*args, **kwargs)
     assert calls
-    assert calls[0][-1].endswith("test-harbor-job.yaml")
+    assert calls[0]["command"][0:4] == ["echo", "harbor", "trials", "start"]
+    env = calls[0]["env"]
+    assert isinstance(env, dict)
+    assert env["MATRIX_SURVEY_TASK_PATH"] == "application/tasks/example-survey_product-feedback"
 
     detail = service.get_job("test-harbor-job")
     assert detail is not None
-    assert detail["launch"]["status"] in {"completed", "running", "queued"}
+    assert detail["launch"]["status"] == "completed"
+    assert len(detail["trials"]) == 2
 
     service.shutdown()
 
@@ -98,6 +108,7 @@ def test_launch_with_frozen_cohort(tmp_path, monkeypatch):
         command_runner=_fake_run,
         harbor_command=("echo", "harbor"),
     )
+    service._executor = _FakeExecutor()
 
     job_name = service.launch(
         task_path="application/tasks/example-survey_product-feedback",
@@ -110,7 +121,8 @@ def test_launch_with_frozen_cohort(tmp_path, monkeypatch):
     text = config_path.read_text(encoding="utf-8")
     assert "persona_0002.yaml" in text
     assert "# Cohort: frozen-oasis" in text
-    assert calls
+    assert service._executor.calls
+    assert service._executor.calls[0][0].__name__ == "_run_local_distributed"
     service.shutdown()
 
 
@@ -142,6 +154,7 @@ def test_launch_with_explicit_persona_ids(tmp_path, monkeypatch):
         command_runner=_fake_run,
         harbor_command=("echo", "harbor"),
     )
+    service._executor = _FakeExecutor()
 
     job_name = service.launch(
         task_path="application/tasks/example-survey_product-feedback",
@@ -158,6 +171,47 @@ def test_launch_with_explicit_persona_ids(tmp_path, monkeypatch):
     assert "# Trial profile: json_survey" in text
     assert "type: host" in text
     assert "application/tasks/persona-survey" in text
+    assert service._executor.calls
+    assert service._executor.calls[0][0].__name__ == "_run_local_distributed"
+    service.shutdown()
+
+
+def test_launch_rejects_generic_persona_survey_task_path(tmp_path, monkeypatch):
+    repo = tmp_path
+    jobs_dir = repo / "jobs"
+    jobs_dir.mkdir()
+    pool = repo / "persona" / "datasets" / "bench-dev-sample"
+    pool.mkdir(parents=True)
+    (pool / "persona_0042.yaml").write_text(
+        "persona_id: '0042'\nversion: '1.0'\nsource: Nemotron\ndimensions: {}\n",
+        encoding="utf-8",
+    )
+
+    def _fake_run(command, *, cwd, env):
+        return 0
+
+    monkeypatch.setattr(
+        "environment.integrations.persona_eval.harbor.persona_eval._repo_root",
+        lambda: repo,
+    )
+    service = HarborJobService(
+        repo_root=repo,
+        jobs_dir=jobs_dir,
+        generated_configs_dir=repo / "configs" / "jobs" / "application-task-job-recipe",
+        command_runner=_fake_run,
+        harbor_command=("echo", "harbor"),
+    )
+
+    import pytest
+
+    with pytest.raises(ValueError, match="concrete survey task path"):
+        service.launch(
+            task_path="application/tasks/persona-survey",
+            persona_ids=["0042"],
+            persona_model="anthropic/claude-haiku-4-5",
+            execution_mode="auto",
+            job_name="generic-persona-survey-job",
+        )
     service.shutdown()
 
 
@@ -259,6 +313,135 @@ def test_resolve_agent_name_for_chat_task(tmp_path):
         )
         == "persona-claude-code"
     )
+
+
+def test_launch_auto_chat_uses_local_distributed_executor(tmp_path, monkeypatch):
+    repo = tmp_path
+    jobs_dir = repo / "jobs"
+    jobs_dir.mkdir()
+    pool = repo / "persona" / "datasets" / "bench-dev-sample"
+    pool.mkdir(parents=True)
+    (pool / "persona_0042.yaml").write_text(
+        "persona_id: '0042'\nversion: '1.0'\nsource: Nemotron\ndimensions: {}\n",
+        encoding="utf-8",
+    )
+    task_dir = repo / "application" / "tasks" / "recommender-agent_chat_api"
+    task_dir.mkdir(parents=True)
+    (task_dir / "task.toml").write_text("metadata:\n  type: chat\n", encoding="utf-8")
+
+    calls: list[dict[str, object]] = []
+
+    def _fake_run(command, *, cwd, env):
+        calls.append({"command": list(command), "cwd": cwd, "env": dict(env)})
+        return 0
+
+    monkeypatch.setattr(
+        "environment.integrations.persona_eval.harbor.persona_eval._repo_root",
+        lambda: repo,
+    )
+    service = HarborJobService(
+        repo_root=repo,
+        jobs_dir=jobs_dir,
+        generated_configs_dir=repo / "configs" / "jobs" / "application-task-job-recipe",
+        command_runner=_fake_run,
+        harbor_command=("echo", "harbor"),
+    )
+    service._executor = _FakeExecutor()
+
+    service.launch(
+        task_path="application/tasks/recommender-agent_chat_api",
+        persona_ids=["0042"],
+        persona_model="anthropic/claude-haiku-4-5",
+        execution_mode="auto",
+        job_name="chat-distributed-job",
+    )
+
+    assert service._executor.calls
+    assert service._executor.calls[0][0].__name__ == "_run_local_distributed"
+    fn, args, kwargs = service._executor.calls[0]
+    assert args[3] == "application/tasks/recommender-agent_chat_api"
+    fn(*args, **kwargs)
+    assert calls
+    env = calls[0]["env"]
+    assert isinstance(env, dict)
+    assert env["MATRIX_CHATBOT_TASK_PATH"] == "application/tasks/recommender-agent_chat_api"
+    pythonpath = env["PYTHONPATH"].split(":")
+    assert str(repo) in pythonpath
+    assert str(repo / "environment" / "runtime") in pythonpath
+    assert str(repo / "packages" / "persona-eval" / "src") in pythonpath
+    assert str(repo / "application" / "persona_eval") in pythonpath
+    service.shutdown()
+
+
+class _FakeExecutor:
+    def __init__(self) -> None:
+        self.calls = []
+
+    def submit(self, fn, *args, **kwargs):
+        self.calls.append((fn, args, kwargs))
+        return None
+
+    def shutdown(self, wait=False, cancel_futures=True):
+        return None
+
+
+def test_get_job_surfaces_reporting_queue_status(tmp_path, monkeypatch):
+    repo = tmp_path
+    jobs_dir = repo / "jobs"
+    job_dir = jobs_dir / "demo-job"
+    trial_dir = job_dir / "trial-1"
+    (trial_dir / "verifier").mkdir(parents=True, exist_ok=True)
+    (trial_dir / "result.json").write_text("{}", encoding="utf-8")
+    (trial_dir / "config.json").write_text(
+        json.dumps({"task": {"path": "application/tasks/example-task"}}),
+        encoding="utf-8",
+    )
+    (trial_dir / "verifier" / "structured_output.json").write_text(
+        json.dumps(
+            {
+                "presenceCheck": {"passed": True},
+                "contexts": [
+                    {
+                        "key": "question.q1",
+                        "label": "Question 1",
+                        "contextType": "question_response",
+                        "summaryDirectives": [
+                            {
+                                "id": "question.reason_summary",
+                                "title": "Reason summary",
+                                "targetFacetKey": "reason",
+                                "groupByFacetKey": "response",
+                                "groupByMode": "categorical",
+                                "summaryKind": "llm_bucket_summary",
+                            }
+                        ],
+                        "facets": [
+                            {"key": "response", "label": "Response", "role": "primary", "kind": "categorical", "value": "yes"},
+                            {"key": "reason", "label": "Reason", "role": "explanation", "kind": "textual", "value": "Affordable."},
+                        ],
+                    }
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+    monkeypatch.setenv("PERSONAEVAL_REPORTING_ENABLE_LLM", "1")
+    service = HarborJobService(
+        repo_root=repo,
+        jobs_dir=jobs_dir,
+        generated_configs_dir=repo / "configs" / "jobs",
+    )
+    service._executor = _FakeExecutor()
+
+    detail = service.get_job("demo-job")
+
+    assert detail is not None
+    assert detail["aggregation"]["reporting"]["status"] == "queued"
+    assert len(service._executor.calls) == 1
+    status_path = jobs_dir / "demo-job" / "reporting_status.json"
+    assert status_path.is_file()
+
+    service.shutdown()
 
 
 def test_launch_ios_cua_uses_use_computer_environment(tmp_path, monkeypatch):
@@ -392,4 +575,35 @@ def test_list_jobs_reports_success_and_failed_status(tmp_path):
     assert rows["job-failed"]["status"] == "failed"
     assert rows["job-failed"]["failedTrials"] == 1
     assert rows["job-running"]["status"] == "running"
+    service.shutdown()
+
+
+def test_list_jobs_reports_application_type_from_generated_config(tmp_path):
+    jobs_dir = tmp_path / "jobs"
+    jobs_dir.mkdir()
+    configs_dir = tmp_path / "configs"
+    configs_dir.mkdir()
+
+    survey_job = jobs_dir / "pe-survey-job"
+    survey_job.mkdir()
+    (survey_job / "trial-a").mkdir()
+
+    task_dir = tmp_path / "application" / "tasks" / "example-survey"
+    task_dir.mkdir(parents=True)
+    (task_dir / "task.toml").write_text("metadata:\n  type: survey\n", encoding="utf-8")
+
+    (configs_dir / "pe-survey-job.yaml").write_text(
+        "# Generated by PersonaEval POST /api/harbor/jobs\n"
+        "# Task: application/tasks/example-survey\n"
+        "job_name: pe-survey-job\n",
+        encoding="utf-8",
+    )
+
+    service = HarborJobService(
+        repo_root=tmp_path,
+        jobs_dir=jobs_dir,
+        generated_configs_dir=configs_dir,
+    )
+    rows = {row["jobName"]: row for row in service.list_jobs()}
+    assert rows["pe-survey-job"]["applicationType"] == "survey"
     service.shutdown()

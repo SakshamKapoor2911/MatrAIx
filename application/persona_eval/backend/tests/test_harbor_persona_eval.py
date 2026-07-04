@@ -8,7 +8,6 @@ from environment.integrations.persona_eval.harbor.persona_eval import (
     HarborPersonaEvalRunner,
     _harbor_failure_summary,
     build_chatbot_simulation_prompt,
-    build_recommender_simulation_prompt,
     build_result_from_harbor_artifacts,
     resolve_repo_root,
     write_harbor_persona_yaml,
@@ -68,13 +67,13 @@ def test_build_result_from_harbor_artifacts_maps_transcript_feedback_and_metrics
         ),
         encoding="utf-8",
     )
-    (output_dir / "recommendation_result.json").write_text(
+    (output_dir / "application_result.json").write_text(
         json.dumps(
             {
                 "sessionId": "ses_123",
                 "domain": "movie",
                 "recommendedItems": [{"itemId": "42", "title": "Movie A"}],
-                "turnsToRecommendation": 2,
+                "turnsToResult": 2,
             }
         ),
         encoding="utf-8",
@@ -82,7 +81,7 @@ def test_build_result_from_harbor_artifacts_maps_transcript_feedback_and_metrics
     (output_dir / "user_feedback.json").write_text(
         json.dumps(
             {
-                "productNeedSatisfaction": 4,
+                "needConstraintSatisfaction": "partially",
                 "personalPreferenceSatisfaction": "yes",
                 "overallExperienceRating": 8,
                 "reason": "The final choice fit, but the first response was broad.",
@@ -104,20 +103,19 @@ def test_build_result_from_harbor_artifacts_maps_transcript_feedback_and_metrics
         },
     )
 
-    assert result.turn_views[1]["recommendedItems"] == [
+    assert result.turn_views[1]["personaExposure"][0]["value"] == [
         {"itemId": "42", "title": "Movie A", "rank": 1}
     ]
     payload = result.to_dict()
     assert payload["config"]["domain"] == "movie"
     assert payload["persona"]["name"] == "Persona One"
     assert payload["transcript"][1]["assistantMessage"] == "Try Movie A."
-    assert payload["recommendedItemIds"] == {"perTurn": [[], ["42"]], "final": ["42"]}
     assert payload["prompts"] == {
         "harborPrompt": "Persona system prompt.",
         "taskPrompt": "Task prompt.",
     }
     assert payload["questionnaire"] == {
-        "constraintSatisfaction": 4,
+        "constraintSatisfaction": 3,
         "constraintRationale": "The final choice fit, but the first response was broad.",
         "preferenceSatisfaction": 5,
         "preferenceRationale": "The final choice fit, but the first response was broad.",
@@ -126,11 +124,7 @@ def test_build_result_from_harbor_artifacts_maps_transcript_feedback_and_metrics
         "askedUsefulClarifyingQuestions": True,
         "clarifyingNotes": "The final choice fit, but the first response was broad.",
     }
-    assert payload["metricScores"] == {
-        "turnsToRecommendation": 2,
-        "numTurns": 2,
-        "recommendedItemCount": 1,
-    }
+    assert payload["metricScores"] == {"numTurns": 2}
 
 
 def test_build_result_from_harbor_artifacts_maps_persona_self_report_keys(tmp_path):
@@ -150,7 +144,7 @@ def test_build_result_from_harbor_artifacts_maps_persona_self_report_keys(tmp_pa
                         "turnId": "0",
                         "userMessage": "I want a movie.",
                         "assistantMessage": "Try Movie A.",
-                        "groundedItems": [{"itemId": "42", "title": "Movie A"}],
+                        "recommendedItems": [{"itemId": "42", "title": "Movie A"}],
                     }
                 ],
             }
@@ -162,7 +156,7 @@ def test_build_result_from_harbor_artifacts_maps_persona_self_report_keys(tmp_pa
             {
                 "sessionId": "ses_123",
                 "domain": "movie",
-                "groundedItems": [{"itemId": "42", "title": "Movie A"}],
+                "recommendedItems": [{"itemId": "42", "title": "Movie A"}],
                 "turnsToResult": 1,
             }
         ),
@@ -171,8 +165,8 @@ def test_build_result_from_harbor_artifacts_maps_persona_self_report_keys(tmp_pa
     (output_dir / "user_feedback.json").write_text(
         json.dumps(
             {
-                "productNeedSatisfaction": 4,
-                "personalPreferenceSatisfaction": 2,
+                "needConstraintSatisfaction": "partially",
+                "personalPreferenceSatisfaction": "no",
                 "overallExperienceRating": 6,
                 "reason": "Legacy persona self-report.",
                 "askedUsefulClarificationQuestions": True,
@@ -190,9 +184,91 @@ def test_build_result_from_harbor_artifacts_maps_persona_self_report_keys(tmp_pa
     )
 
     questionnaire = result.to_dict()["questionnaire"]
-    assert questionnaire["constraintSatisfaction"] == 4
-    assert questionnaire["preferenceSatisfaction"] == 2
+    assert questionnaire["constraintSatisfaction"] == 3
+    assert questionnaire["preferenceSatisfaction"] == 1
     assert questionnaire["overallRating"] == 6
+
+
+def test_build_result_from_harbor_artifacts_normalizes_legacy_turn_fields(tmp_path):
+    output_dir = tmp_path / "output"
+    output_dir.mkdir()
+    (output_dir / "transcript.json").write_text(
+        json.dumps(
+            {
+                "sessionId": "ses_legacy",
+                "domain": "movie",
+                "turns": [
+                    {
+                        "index": 1,
+                        "userMessage": "I want a thoughtful movie.",
+                        "assistantReply": "Try Movie A.",
+                        "recommendedItems": [{"itemId": "42", "title": "Movie A"}],
+                    }
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+    (output_dir / "application_result.json").write_text(
+        json.dumps(
+            {
+                "sessionId": "ses_legacy",
+                "domain": "movie",
+                "recommendedItems": [{"itemId": "42", "title": "Movie A"}],
+                "turnsToResult": 1,
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    result = build_result_from_harbor_artifacts(
+        output_dir=output_dir,
+        config=PersonaEvalConfig(domain="movie"),
+        persona=Persona(id="p1", name="Persona One", source="fixture"),
+        sut_description="Movie recommender.",
+        created_at="2026-06-23T00:00:00Z",
+    )
+
+    turn = result.to_dict()["transcript"][0]
+    assert turn["turnId"] == "1"
+    assert turn["conversationId"] == "ses_legacy"
+    assert turn["assistantMessage"] == "Try Movie A."
+
+
+def test_build_result_from_harbor_artifacts_fills_application_result_from_transcript(
+    tmp_path,
+):
+    output_dir = tmp_path / "output"
+    output_dir.mkdir()
+    (output_dir / "transcript.json").write_text(
+        json.dumps(
+            {
+                "sessionId": "ses_123",
+                "domain": "movie",
+                "turns": [
+                    {
+                        "turnId": "0",
+                        "userMessage": "I want a movie.",
+                        "assistantMessage": "Try Movie A.",
+                        "recommendedItems": [{"itemId": "42", "title": "Movie A"}],
+                    }
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+    (output_dir / "application_result.json").write_text("{}", encoding="utf-8")
+
+    result = build_result_from_harbor_artifacts(
+        output_dir=output_dir,
+        config=PersonaEvalConfig(domain="movie"),
+        persona=Persona(id="p1", name="Persona One", source="fixture"),
+        sut_description="Movie recommender.",
+        created_at="2026-06-23T00:00:00Z",
+    )
+
+    payload = result.to_dict()
+    assert payload["metricScores"]["numTurns"] == 1
 
 
 def test_build_result_from_harbor_artifacts_allows_general_chatbot_without_items(
@@ -221,7 +297,7 @@ def test_build_result_from_harbor_artifacts_allows_general_chatbot_without_items
                         "assistantMessage": (
                             "What time horizon and risk constraints matter?"
                         ),
-                        "groundedItems": [],
+                        "recommendedItems": [],
                     }
                 ],
             }
@@ -235,7 +311,7 @@ def test_build_result_from_harbor_artifacts_allows_general_chatbot_without_items
                 "applicationId": "finance_openbb",
                 "applicationContext": "financial_research",
                 "domain": "financial_research",
-                "groundedItems": [],
+                "recommendedItems": [],
                 "turnsToResult": 1,
             }
         ),
@@ -244,7 +320,7 @@ def test_build_result_from_harbor_artifacts_allows_general_chatbot_without_items
     (output_dir / "user_feedback.json").write_text(
         json.dumps(
             {
-                "productNeedSatisfaction": 2,
+                "needConstraintSatisfaction": 2,
                 "personalPreferenceSatisfaction": 2,
                 "overallExperienceRating": 3,
                 "reason": "The chatbot only asked a clarifying question.",
@@ -269,8 +345,7 @@ def test_build_result_from_harbor_artifacts_allows_general_chatbot_without_items
     )
 
     payload = result.to_dict()
-    assert payload["recommendedItemIds"] == {"perTurn": [[]], "final": []}
-    assert payload["metricScores"]["recommendedItemCount"] == 0
+    assert payload["metricScores"]["numTurns"] == 1
     assert payload["questionnaire"]["overallRating"] == 3
 
 
@@ -302,13 +377,13 @@ def test_build_result_from_harbor_artifacts_accepts_application_scorer_questionn
         ),
         encoding="utf-8",
     )
-    (output_dir / "recommendation_result.json").write_text(
+    (output_dir / "application_result.json").write_text(
         json.dumps(
             {
                 "sessionId": "ses_123",
                 "domain": "movie",
                 "recommendedItems": [{"itemId": "42", "title": "Movie A"}],
-                "turnsToRecommendation": 1,
+                "turnsToResult": 1,
             }
         ),
         encoding="utf-8",
@@ -316,13 +391,11 @@ def test_build_result_from_harbor_artifacts_accepts_application_scorer_questionn
     (output_dir / "user_feedback.json").write_text(
         json.dumps(
             {
-                "constraintSatisfaction": 4,
-                "constraintRationale": "The item fits the stated constraint.",
-                "preferenceSatisfaction": 5,
-                "preferenceRationale": "It matches the persona taste.",
-                "overallRating": 8,
-                "ratingReason": "Good grounded recommendation.",
-                "askedUsefulClarifyingQuestions": True,
+                "needConstraintSatisfaction": "partially",
+                "personalPreferenceSatisfaction": 5,
+                "overallExperienceRating": 8,
+                "reason": "Good grounded recommendation.",
+                "askedUsefulClarificationQuestions": True,
                 "clarifyingNotes": "The agent asked about tone.",
             }
         ),
@@ -338,10 +411,10 @@ def test_build_result_from_harbor_artifacts_accepts_application_scorer_questionn
     )
 
     assert result.to_dict()["questionnaire"] == {
-        "constraintSatisfaction": 4,
-        "constraintRationale": "The item fits the stated constraint.",
+        "constraintSatisfaction": 3,
+        "constraintRationale": "Good grounded recommendation.",
         "preferenceSatisfaction": 5,
-        "preferenceRationale": "It matches the persona taste.",
+        "preferenceRationale": "Good grounded recommendation.",
         "overallRating": 8,
         "ratingReason": "Good grounded recommendation.",
         "askedUsefulClarifyingQuestions": True,
@@ -368,7 +441,7 @@ def test_build_result_from_harbor_artifacts_maps_turns_to_result(tmp_path):
                         "turnId": "0",
                         "userMessage": "I want a movie.",
                         "assistantMessage": "Try Movie A.",
-                        "groundedItems": [{"itemId": "42", "title": "Movie A"}],
+                        "recommendedItems": [{"itemId": "42", "title": "Movie A"}],
                     }
                 ],
             }
@@ -382,7 +455,7 @@ def test_build_result_from_harbor_artifacts_maps_turns_to_result(tmp_path):
                 "applicationId": "recai",
                 "applicationContext": "movie",
                 "domain": "movie",
-                "groundedItems": [{"itemId": "42", "title": "Movie A"}],
+                "recommendedItems": [{"itemId": "42", "title": "Movie A"}],
                 "turnsToResult": 1,
             }
         ),
@@ -403,7 +476,7 @@ def test_build_result_from_harbor_artifacts_maps_turns_to_result(tmp_path):
         created_at="2026-06-23T00:00:00Z",
     )
 
-    assert result.to_dict()["metricScores"]["turnsToRecommendation"] == 1
+    assert result.to_dict()["metricScores"]["numTurns"] == 1
 
 
 def test_build_result_from_harbor_artifacts_reads_verifier_feedback(tmp_path):
@@ -433,13 +506,13 @@ def test_build_result_from_harbor_artifacts_reads_verifier_feedback(tmp_path):
         ),
         encoding="utf-8",
     )
-    (output_dir / "recommendation_result.json").write_text(
+    (output_dir / "application_result.json").write_text(
         json.dumps(
             {
                 "sessionId": "ses_123",
                 "domain": "movie",
                 "recommendedItems": [{"itemId": "42", "title": "Movie A"}],
-                "turnsToRecommendation": 1,
+                "turnsToResult": 1,
             }
         ),
         encoding="utf-8",
@@ -447,13 +520,11 @@ def test_build_result_from_harbor_artifacts_reads_verifier_feedback(tmp_path):
     (verifier_dir / "user_feedback.json").write_text(
         json.dumps(
             {
-                "constraintSatisfaction": 4,
-                "constraintRationale": "Verifier scorer judged the need met.",
-                "preferenceSatisfaction": 5,
-                "preferenceRationale": "Verifier scorer judged preferences met.",
-                "overallRating": 8,
-                "ratingReason": "Verifier scorer output.",
-                "askedUsefulClarifyingQuestions": True,
+                "needConstraintSatisfaction": "partially",
+                "personalPreferenceSatisfaction": 5,
+                "overallExperienceRating": 8,
+                "reason": "Verifier scorer output.",
+                "askedUsefulClarificationQuestions": True,
                 "clarifyingNotes": "The agent asked about tone.",
             }
         ),
@@ -471,12 +542,10 @@ def test_build_result_from_harbor_artifacts_reads_verifier_feedback(tmp_path):
     questionnaire = result.to_dict()["questionnaire"]
     assert questionnaire["overallRating"] == 8
     assert questionnaire["ratingReason"] == "Verifier scorer output."
-    assert (
-        questionnaire["constraintRationale"] == "Verifier scorer judged the need met."
-    )
+    assert questionnaire["constraintRationale"] == "Verifier scorer output."
 
 
-def test_build_result_from_harbor_artifacts_rejects_ungrounded_recommendations(
+def test_build_result_from_harbor_artifacts_ignores_legacy_application_result_fields(
     tmp_path,
 ):
     output_dir = tmp_path / "output"
@@ -499,7 +568,7 @@ def test_build_result_from_harbor_artifacts_rejects_ungrounded_recommendations(
         ),
         encoding="utf-8",
     )
-    (output_dir / "recommendation_result.json").write_text(
+    (output_dir / "application_result.json").write_text(
         json.dumps(
             {
                 "sessionId": "ses_123",
@@ -507,20 +576,21 @@ def test_build_result_from_harbor_artifacts_rejects_ungrounded_recommendations(
                 "recommendedItems": [
                     {"itemId": "movie_0001", "title": "Invented Movie"}
                 ],
-                "turnsToRecommendation": 3,
+                "turnsToResult": 3,
             }
         ),
         encoding="utf-8",
     )
 
-    with pytest.raises(ValueError, match="grounded"):
-        build_result_from_harbor_artifacts(
-            output_dir=output_dir,
-            config=PersonaEvalConfig(domain="movie", engine="gpt-4o-mini", max_turns=8),
-            persona=Persona(id="p1", name="Persona One", source="fixture"),
-            sut_description="Movie recommender.",
-            created_at="2026-06-23T00:00:00Z",
-        )
+    result = build_result_from_harbor_artifacts(
+        output_dir=output_dir,
+        config=PersonaEvalConfig(domain="movie", engine="gpt-4o-mini", max_turns=8),
+        persona=Persona(id="p1", name="Persona One", source="fixture"),
+        sut_description="Movie recommender.",
+        created_at="2026-06-23T00:00:00Z",
+    )
+
+    assert result.to_dict()["metricScores"]["numTurns"] == 3
 
 
 def test_write_harbor_persona_yaml_uses_persona_context_as_system_prompt(tmp_path):
@@ -543,37 +613,12 @@ def test_write_harbor_persona_yaml_uses_persona_context_as_system_prompt(tmp_pat
     }
 
 
-def test_build_recommender_simulation_prompt_is_task_specific_not_persona_identity():
-    prompt = build_recommender_simulation_prompt(
-        domain="game",
-        max_turns=7,
-        sut_description="A game recommender exposed through a chat API.",
-        goal_context_description="Persona reveals preferences gradually.",
-    )
-
-    assert prompt.startswith("You are a user of a game recommendation system")
-    assert "Harbor supplies your persona" not in prompt
-    assert "Controller input" not in prompt
-    assert "This section is consumed" not in prompt
-    assert "You are a user of a game recommendation system" in prompt
-    assert '"domain": "game"' not in prompt
-    assert "Do not reveal everything at once" in prompt
-    assert "Required behavior" not in prompt
-    assert "at least three user turns and three assistant turns" not in prompt
-    assert "Finish within" not in prompt
-    assert "application feedback scorer" not in prompt
-    assert "user_feedback.json" not in prompt
-    assert "overallExperienceRating" not in prompt
-    assert "7-8: the run is useful overall" not in prompt
-
-
 def test_build_chatbot_simulation_prompt_uses_generic_application_contract():
     prompt = build_chatbot_simulation_prompt(
         application_id="finance_openbb",
         application_context="financial_research",
         max_turns=7,
         sut_description="A financial research chatbot exposed through a chat API.",
-        goal_context_description="Persona reveals needs gradually.",
     )
 
     assert prompt.startswith("You are a user of a financial research system")
@@ -592,6 +637,7 @@ def test_build_chatbot_simulation_prompt_uses_generic_application_contract():
     assert "application_result.json" not in prompt
     assert "recommendation_result.json" not in prompt
     assert "recommender" not in prompt.lower()
+    assert "Finish within 7 user turns." in prompt
 
 
 def test_build_chatbot_simulation_prompt_labels_medical_assistant():
@@ -600,13 +646,25 @@ def test_build_chatbot_simulation_prompt_labels_medical_assistant():
         application_context="medical_consultation",
         max_turns=7,
         sut_description="A medical assistant chatbot exposed through a chat API.",
-        goal_context_description="Persona reveals health-information needs gradually.",
     )
 
     assert prompt.startswith("You are a user of a medical assistant")
     assert "medical_assistant" not in prompt
     assert "medical_consultation" not in prompt
     assert "Do not reveal everything at once" in prompt
+    assert "Keep messages short and conversational (1-3 sentences)" in prompt
+
+
+def test_build_chatbot_simulation_prompt_omits_turn_limit_when_unset():
+    prompt = build_chatbot_simulation_prompt(
+        application_id="recai",
+        application_context="movie",
+        max_turns=None,
+        sut_description="A movie recommender exposed through a chat API.",
+    )
+
+    assert "There is no fixed turn cap unless the controller applies one." not in prompt
+    assert "Finish within" not in prompt
 
 
 def test_harbor_failure_summary_reports_controller_tool_errors(tmp_path):
@@ -653,8 +711,12 @@ def test_resolve_repo_root_handles_local_and_container_layouts():
     ) == Path("/app")
 
 
-def test_harbor_runner_writes_run_inputs_invokes_harbor_and_maps_artifacts(tmp_path):
+def test_harbor_runner_writes_run_inputs_invokes_harbor_and_maps_artifacts(
+    tmp_path, monkeypatch
+):
     calls = []
+    monkeypatch.delenv("OPENAI_API_KEY", raising=False)
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
     (tmp_path / ".env.local").write_text(
         "OPENAI_API_KEY=sk-test-openai\nANTHROPIC_API_KEY=sk-test-anthropic\n",
         encoding="utf-8",
@@ -679,9 +741,9 @@ def test_harbor_runner_writes_run_inputs_invokes_harbor_and_maps_artifacts(tmp_p
             in open(prompt_path, encoding="utf-8").read()
         )
         assert env["INTERECAGENT_ENGINE"] == "gpt-4o"
-        assert env["RECBOT_READY_DOMAIN"] == "movie"
         assert env["MATRIX_CHATBOT_APPLICATION_ID"] == "recai"
         assert env["MATRIX_CHATBOT_APPLICATION_CONTEXT"] == "movie"
+        assert env["MATRIX_CHATBOT_TASK_PATH"] == "application/tasks/recommender-agent_chat_api"
         assert env["COMPOSE_PROFILES"] == "recai"
         assert env["OPENAI_API_KEY"] == "sk-test-openai"
         assert env["ANTHROPIC_API_KEY"] == "sk-test-anthropic"
@@ -690,8 +752,9 @@ def test_harbor_runner_writes_run_inputs_invokes_harbor_and_maps_artifacts(tmp_p
             "type": "bind",
             "source": str(
                 tmp_path
-                / "application"
-                / "persona_eval"
+                / "packages"
+                / "persona-eval"
+                / "src"
                 / "persona_eval"
             ),
             "target": "/app/persona_eval",
@@ -710,7 +773,7 @@ def test_harbor_runner_writes_run_inputs_invokes_harbor_and_maps_artifacts(tmp_p
         }
         assert agent_env["MATRIX_CHATBOT_APPLICATION_ID"] == "recai"
         assert agent_env["MATRIX_CHATBOT_APPLICATION_CONTEXT"] == "movie"
-        assert agent_env["MATRIX_CHATBOT_DOMAIN"] == "movie"
+        assert agent_env["MATRIX_CHATBOT_TASK_PATH"] == "application/tasks/recommender-agent_chat_api"
         assert agent_env["MATRIX_CHATBOT_MAX_TURNS"] == "5"
         assert agent_env["MATRIX_CHATBOT_MIN_TURNS"] == "3"
         assert agent_env["MATRIX_CHATBOT_TASK_PROMPT_PATH"] == "/app/input/task_prompt.md"
@@ -748,13 +811,13 @@ def test_harbor_runner_writes_run_inputs_invokes_harbor_and_maps_artifacts(tmp_p
             ),
             encoding="utf-8",
         )
-        (output_dir / "recommendation_result.json").write_text(
+        (output_dir / "application_result.json").write_text(
             json.dumps(
                 {
                     "sessionId": "ses_123",
                     "domain": "movie",
                     "recommendedItems": [{"itemId": "42", "title": "Movie A"}],
-                    "turnsToRecommendation": 1,
+                    "turnsToResult": 1,
                 }
             ),
             encoding="utf-8",
@@ -762,7 +825,7 @@ def test_harbor_runner_writes_run_inputs_invokes_harbor_and_maps_artifacts(tmp_p
         (output_dir / "user_feedback.json").write_text(
             json.dumps(
                 {
-                    "productNeedConstraintSatisfaction": "yes",
+                    "needConstraintSatisfaction": "yes",
                     "personalPreferenceSatisfaction": "yes",
                     "overallExperienceRating": 9,
                     "reason": "Good fit.",
@@ -781,6 +844,7 @@ def test_harbor_runner_writes_run_inputs_invokes_harbor_and_maps_artifacts(tmp_p
         runs_root=tmp_path / "runs",
         command_runner=fake_command,
         harbor_command=("uv", "run", "--frozen", "harbor", "run"),
+        chat_task_path="application/tasks/recommender-agent_chat_api",
     )
     session = Session()
     events = []
@@ -799,7 +863,7 @@ def test_harbor_runner_writes_run_inputs_invokes_harbor_and_maps_artifacts(tmp_p
     assert "--agent-env" in calls[0][0]
     assert "--verifier-env" not in calls[0][0]
     assert "--env-file" in calls[0][0]
-    assert session.turns[0]["recommendedItems"][0]["itemId"] == "42"
+    assert session.turns[0]["personaExposure"][0]["value"][0]["itemId"] == "42"
     payload = result.to_dict()
     assert payload["questionnaire"]["overallRating"] == 9
     assert payload["prompts"]["harborPrompt"] == "A careful viewer."
@@ -852,7 +916,7 @@ def test_harbor_runner_uses_finance_compose_profile(tmp_path):
                             "turnId": "fin_turn_1",
                             "userMessage": "Compare fintech securities.",
                             "assistantMessage": "I used OpenBB data.",
-                            "groundedItems": [
+                            "recommendedItems": [
                                 {
                                     "itemId": "finance:openbb:equity_screener:0",
                                     "title": "OpenBB equity_screener",
@@ -870,7 +934,7 @@ def test_harbor_runner_uses_finance_compose_profile(tmp_path):
                     "sessionId": "fin_ses_1",
                     "applicationId": "finance_openbb",
                     "applicationContext": "financial_research",
-                    "groundedItems": [
+                    "recommendedItems": [
                         {
                             "itemId": "finance:openbb:equity_screener:0",
                             "title": "OpenBB equity_screener",
@@ -884,11 +948,11 @@ def test_harbor_runner_uses_finance_compose_profile(tmp_path):
         (output_dir / "user_feedback.json").write_text(
             json.dumps(
                 {
-                    "overallRating": 8,
-                    "ratingReason": "Useful finance result.",
-                    "constraintSatisfaction": 4,
-                    "preferenceSatisfaction": 4,
-                    "askedUsefulClarifyingQuestions": True,
+                    "overallExperienceRating": 8,
+                    "reason": "Useful finance result.",
+                    "needConstraintSatisfaction": "partially",
+                    "personalPreferenceSatisfaction": 4,
+                    "askedUsefulClarificationQuestions": True,
                 }
             ),
             encoding="utf-8",
@@ -903,13 +967,13 @@ def test_harbor_runner_uses_finance_compose_profile(tmp_path):
         runs_root=tmp_path / "runs",
         command_runner=fake_command,
         harbor_command=("uv", "run", "--frozen", "harbor", "run"),
+        chat_task_path="application/tasks/finance-openbb_chatbot",
     )
     result = runner(
         Session(),
         Persona(id="p1", name="Persona One", context="A careful analyst."),
         "Finance chatbot.",
         PersonaEvalConfig(
-            domain="movie",
             application_id="finance_openbb",
             application_context="financial_research",
             engine="gpt-4o-mini",
@@ -923,8 +987,9 @@ def test_harbor_runner_uses_finance_compose_profile(tmp_path):
     assert env["COMPOSE_PROFILES"] == "finance"
     assert env["MATRIX_CHATBOT_APPLICATION_ID"] == "finance_openbb"
     assert env["MATRIX_CHATBOT_APPLICATION_CONTEXT"] == "financial_research"
+    assert env["MATRIX_CHATBOT_TASK_PATH"] == "application/tasks/finance-openbb_chatbot"
     assert env["FINANCE_AGENT_MODEL"] == "gpt-4o-mini"
-    assert result.to_dict()["metricScores"]["recommendedItemCount"] == 1
+    assert result.to_dict()["metricScores"]["numTurns"] == 1
 
 
 def test_harbor_runner_uses_medical_compose_profile(tmp_path):
@@ -971,7 +1036,7 @@ def test_harbor_runner_uses_medical_compose_profile(tmp_path):
                             "assistantMessage": (
                                 "I can share general guidance and red flags."
                             ),
-                            "groundedItems": [],
+                            "recommendedItems": [],
                         }
                     ],
                 }
@@ -984,7 +1049,7 @@ def test_harbor_runner_uses_medical_compose_profile(tmp_path):
                     "sessionId": "med_ses_1",
                     "applicationId": "medical_assistant",
                     "applicationContext": "medical_consultation",
-                    "groundedItems": [],
+                    "recommendedItems": [],
                     "turnsToResult": 1,
                 }
             ),
@@ -993,11 +1058,11 @@ def test_harbor_runner_uses_medical_compose_profile(tmp_path):
         (output_dir / "user_feedback.json").write_text(
             json.dumps(
                 {
-                    "overallRating": 8,
-                    "ratingReason": "Clear medical-information guidance.",
-                    "constraintSatisfaction": 4,
-                    "preferenceSatisfaction": 4,
-                    "askedUsefulClarifyingQuestions": True,
+                    "overallExperienceRating": 8,
+                    "reason": "Clear medical-information guidance.",
+                    "needConstraintSatisfaction": "partially",
+                    "personalPreferenceSatisfaction": 4,
+                    "askedUsefulClarificationQuestions": True,
                 }
             ),
             encoding="utf-8",
@@ -1012,13 +1077,13 @@ def test_harbor_runner_uses_medical_compose_profile(tmp_path):
         runs_root=tmp_path / "runs",
         command_runner=fake_command,
         harbor_command=("uv", "run", "--frozen", "harbor", "run"),
+        chat_task_path="application/tasks/medical-assistant_chatbot",
     )
     result = runner(
         Session(),
         Persona(id="p1", name="Persona One", context="A careful patient."),
         "Medical assistant chatbot.",
         PersonaEvalConfig(
-            domain="movie",
             application_id="medical_assistant",
             application_context="medical_consultation",
             engine="gpt-4o-mini",
@@ -1040,7 +1105,8 @@ def test_harbor_runner_uses_medical_compose_profile(tmp_path):
     assert "FINANCE_AGENT_MODEL" not in env
     assert agent_env["MATRIX_CHATBOT_APPLICATION_ID"] == "medical_assistant"
     assert agent_env["MATRIX_CHATBOT_APPLICATION_CONTEXT"] == "medical_consultation"
-    assert result.to_dict()["metricScores"]["recommendedItemCount"] == 0
+    assert agent_env["MATRIX_CHATBOT_TASK_PATH"] == "application/tasks/medical-assistant_chatbot"
+    assert result.to_dict()["metricScores"]["numTurns"] == 1
 
 
 def test_harbor_runner_reads_feedback_written_by_application_scorer_artifact(tmp_path):
@@ -1079,13 +1145,13 @@ def test_harbor_runner_reads_feedback_written_by_application_scorer_artifact(tmp
             ),
             encoding="utf-8",
         )
-        (output_dir / "recommendation_result.json").write_text(
+        (output_dir / "application_result.json").write_text(
             json.dumps(
                 {
                     "sessionId": "ses_123",
                     "domain": "movie",
                     "recommendedItems": [{"itemId": "42", "title": "Movie A"}],
-                    "turnsToRecommendation": 1,
+                    "turnsToResult": 1,
                 }
             ),
             encoding="utf-8",
@@ -1093,13 +1159,11 @@ def test_harbor_runner_reads_feedback_written_by_application_scorer_artifact(tmp
         (output_dir / "user_feedback.json").write_text(
             json.dumps(
                 {
-                    "constraintSatisfaction": 4,
-                    "constraintRationale": "Original scorer judged the need mostly met.",
-                    "preferenceSatisfaction": 4,
-                    "preferenceRationale": "Original scorer judged preferences mostly met.",
-                    "overallRating": 8,
-                    "ratingReason": "Original scoring prompt output.",
-                    "askedUsefulClarifyingQuestions": True,
+                    "needConstraintSatisfaction": "partially",
+                    "personalPreferenceSatisfaction": 4,
+                    "overallExperienceRating": 8,
+                    "reason": "Original scoring prompt output.",
+                    "askedUsefulClarificationQuestions": True,
                     "clarifyingNotes": "The recommender adapted after feedback.",
                 }
             ),
@@ -1114,6 +1178,7 @@ def test_harbor_runner_reads_feedback_written_by_application_scorer_artifact(tmp
         repo_root=tmp_path,
         runs_root=tmp_path / "runs",
         command_runner=fake_command,
+        chat_task_path="application/tasks/recommender-agent_chat_api",
     )
     result = runner(
         Session(),
@@ -1167,13 +1232,13 @@ def test_harbor_runner_persona_model_can_be_overridden(tmp_path, monkeypatch):
             ),
             encoding="utf-8",
         )
-        (output_dir / "recommendation_result.json").write_text(
+        (output_dir / "application_result.json").write_text(
             json.dumps(
                 {
                     "sessionId": "ses_123",
                     "domain": "movie",
                     "recommendedItems": [{"itemId": "42", "title": "Movie A"}],
-                    "turnsToRecommendation": 1,
+                    "turnsToResult": 1,
                 }
             ),
             encoding="utf-8",
@@ -1187,6 +1252,7 @@ def test_harbor_runner_persona_model_can_be_overridden(tmp_path, monkeypatch):
         repo_root=tmp_path,
         runs_root=tmp_path / "runs",
         command_runner=fake_command,
+        chat_task_path="application/tasks/recommender-agent_chat_api",
     )
     runner(
         Session(),
@@ -1243,13 +1309,13 @@ def test_harbor_runner_cache_flags_can_be_overridden(tmp_path, monkeypatch):
             ),
             encoding="utf-8",
         )
-        (output_dir / "recommendation_result.json").write_text(
+        (output_dir / "application_result.json").write_text(
             json.dumps(
                 {
                     "sessionId": "ses_123",
                     "domain": "movie",
                     "recommendedItems": [{"itemId": "42", "title": "Movie A"}],
-                    "turnsToRecommendation": 1,
+                    "turnsToResult": 1,
                 }
             ),
             encoding="utf-8",
@@ -1263,6 +1329,7 @@ def test_harbor_runner_cache_flags_can_be_overridden(tmp_path, monkeypatch):
         repo_root=tmp_path,
         runs_root=tmp_path / "runs",
         command_runner=fake_command,
+        chat_task_path="application/tasks/recommender-agent_chat_api",
     )
     runner(
         Session(),
@@ -1319,13 +1386,13 @@ def test_harbor_runner_default_command_uses_configured_harbor_command(
             ),
             encoding="utf-8",
         )
-        (output_dir / "recommendation_result.json").write_text(
+        (output_dir / "application_result.json").write_text(
             json.dumps(
                 {
                     "sessionId": "ses_123",
                     "domain": "movie",
                     "recommendedItems": [{"itemId": "42", "title": "Movie A"}],
-                    "turnsToRecommendation": 1,
+                    "turnsToResult": 1,
                 }
             ),
             encoding="utf-8",
@@ -1339,6 +1406,7 @@ def test_harbor_runner_default_command_uses_configured_harbor_command(
         repo_root=tmp_path,
         runs_root=tmp_path / "runs",
         command_runner=fake_command,
+        chat_task_path="application/tasks/recommender-agent_chat_api",
     )
     runner(
         Session(),
@@ -1398,6 +1466,7 @@ def test_harbor_runner_surfaces_trial_errors_when_artifacts_are_missing(tmp_path
         repo_root=tmp_path,
         runs_root=tmp_path / "runs",
         command_runner=fake_command,
+        chat_task_path="application/tasks/recommender-agent_chat_api",
     )
 
     with pytest.raises(RuntimeError, match="No space left on device"):
@@ -1480,6 +1549,7 @@ def test_harbor_runner_surfaces_agent_error_when_output_dir_is_empty(tmp_path):
         repo_root=tmp_path,
         runs_root=tmp_path / "runs",
         command_runner=fake_command,
+        chat_task_path="application/tasks/recommender-agent_chat_api",
     )
 
     with pytest.raises(RuntimeError, match="Credit balance is too low"):

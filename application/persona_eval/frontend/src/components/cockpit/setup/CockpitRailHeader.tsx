@@ -1,23 +1,17 @@
 export interface CockpitRailHeaderProps {
-  eyebrow: string;
-  title: string;
-  subtitle?: string;
+  label: string;
 }
 
-/** Shared section header for cockpit side rails — clear typographic hierarchy. */
-export function CockpitRailHeader({ eyebrow, title, subtitle }: CockpitRailHeaderProps) {
+/** Compact rail title — single label, minimal vertical footprint for card lists below. */
+export function CockpitRailHeader({ label }: CockpitRailHeaderProps) {
   return (
-    <div className="mb-4 shrink-0 border-b border-outline/25 pb-3">
-      <div className="mb-2 flex items-center gap-2">
-        <span className="h-3.5 w-0.5 rounded-full bg-primary" aria-hidden />
-        <p className="hud text-[9px] text-primary">{eyebrow}</p>
+    <div className="mb-2.5 shrink-0 border-b border-outline/20 pb-2">
+      <div className="flex items-center gap-2">
+        <span className="h-4 w-0.5 rounded-full bg-primary" aria-hidden />
+        <h2 className="font-display text-[15px] font-semibold leading-none tracking-tight text-text-main">
+          {label}
+        </h2>
       </div>
-      <h2 className="font-display text-[16px] font-semibold leading-snug tracking-tight text-text-main">
-        {title}
-      </h2>
-      {subtitle && (
-        <p className="mt-1 text-[11px] leading-relaxed text-text-dim">{subtitle}</p>
-      )}
     </div>
   );
 }

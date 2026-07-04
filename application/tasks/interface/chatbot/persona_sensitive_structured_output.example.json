@@ -1,0 +1,201 @@
+{
+  "schemaVersion": "1.0",
+  "artifactType": "personabench.trial_evaluation",
+  "taskType": "chatbot",
+  "presenceCheck": {
+    "passed": true,
+    "requiredArtifacts": [
+      "transcript.json",
+      "user_feedback.json"
+    ],
+    "missingArtifacts": []
+  },
+  "sourceArtifacts": {
+    "transcript": "/app/output/transcript.json",
+    "userFeedback": "/app/output/user_feedback.json"
+  },
+  "contexts": [
+    {
+      "key": "task_outcome.primary",
+      "label": "Task outcome",
+      "contextType": "task_outcome",
+      "facets": [
+        {
+          "key": "outcome_status",
+          "label": "Outcome status",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "resolved"
+        },
+        {
+          "key": "resolution_basis",
+          "label": "Resolution basis",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "user_feedback"
+        },
+        {
+          "key": "outcome_reason",
+          "label": "Outcome reason",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "The assistant clarified the user's constraints, suggested a fitting option, and the persona reported that the recommendation matched the need."
+        },
+        {
+          "key": "next_step_owner",
+          "label": "Next step owner",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "none"
+        },
+        {
+          "key": "task_goal_label",
+          "label": "Task goal",
+          "role": "evidence",
+          "kind": "textual",
+          "value": "Find a recommendation that satisfies needs and preferences"
+        }
+      ]
+    },
+    {
+      "key": "conversation_summary.primary",
+      "label": "Conversation summary",
+      "contextType": "conversation_summary",
+      "facets": [
+        {
+          "key": "conversation_path",
+          "label": "Conversation path",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "clarify_then_resolve"
+        },
+        {
+          "key": "user_turn_count",
+          "label": "User turn count",
+          "role": "score",
+          "kind": "numerical",
+          "value": 4
+        },
+        {
+          "key": "assistant_turn_count",
+          "label": "Assistant turn count",
+          "role": "score",
+          "kind": "numerical",
+          "value": 4
+        },
+        {
+          "key": "message_count",
+          "label": "Message count",
+          "role": "score",
+          "kind": "numerical",
+          "value": 8
+        },
+        {
+          "key": "process_notes",
+          "label": "Process notes",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "The assistant asked a small number of useful clarification questions before recommending an option and wrapping up cleanly."
+        },
+        {
+          "key": "clarification_question_count",
+          "label": "Clarification question count",
+          "role": "score",
+          "kind": "numerical",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "key": "user_feedback.primary",
+      "label": "User feedback",
+      "contextType": "user_feedback",
+      "facets": [
+        {
+          "key": "overall_experience_rating",
+          "label": "Overall experience rating",
+          "role": "score",
+          "kind": "numerical",
+          "value": 8
+        },
+        {
+          "key": "feedback_reason",
+          "label": "Feedback reason",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "The assistant understood what mattered to me and the questions it asked felt useful instead of repetitive."
+        },
+        {
+          "key": "need_constraint_satisfaction",
+          "label": "Need or constraint satisfaction",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "yes"
+        },
+        {
+          "key": "personal_preference_satisfaction",
+          "label": "Personal preference satisfaction",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "partially"
+        },
+        {
+          "key": "clarification_questions_useful",
+          "label": "Clarification questions useful",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "true"
+        },
+        {
+          "key": "trust_level",
+          "label": "Trust level",
+          "role": "score",
+          "kind": "numerical",
+          "value": 7
+        },
+        {
+          "key": "felt_understood",
+          "label": "Felt understood",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "key": "policy_and_trust.primary",
+      "label": "Policy and trust review",
+      "contextType": "policy_and_trust",
+      "facets": [
+        {
+          "key": "policy_compliance",
+          "label": "Policy compliance",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "pass"
+        },
+        {
+          "key": "groundedness_primary",
+          "label": "Groundedness",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "verified"
+        },
+        {
+          "key": "policy_notes",
+          "label": "Policy notes",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "The assistant stayed within the available knowledge and did not make unsupported commitments."
+        },
+        {
+          "key": "handoff_appropriateness",
+          "label": "Handoff appropriateness",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "not_applicable"
+        }
+      ]
+    }
+  ]
+}

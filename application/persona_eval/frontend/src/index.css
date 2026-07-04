@@ -7,9 +7,9 @@
    ---------------------------------------------------------------------------
    Dark-first "mission control". Tokens are "R G B" triplets, consumed via
    rgb(var(--x)/<alpha-value>) (see tailwind.config.ts) so every color supports
-   opacity utilities (bg-primary/10, border-secondary/25). Dark is the default
-   (:root); .light on <html> swaps the ramp (see src/hooks/useTheme.ts and the
-   pre-paint boot script in index.html).
+   opacity utilities (bg-primary/10, border-secondary/25). Light is the default
+   (boot script adds `.light` on <html>); remove it for dark (:root ramp). See
+   src/hooks/useTheme.ts and index.html.
    =========================================================================== */
 :root {
   color-scheme: dark;
@@ -29,6 +29,8 @@
   /* Brand — same blue ramp in dark and light */
   --primary: 0 118 194;
   --primary-dim: 0 92 152;
+  --primary-light: 56 176 224;
+  --primary-glow: 96 200 236;
   --on-primary: 255 255 255;
   --secondary: 78 222 163;      /* mint — success / available */
   --secondary-dim: 0 165 114;
@@ -76,6 +78,8 @@
 
   --primary: 0 118 194;
   --primary-dim: 0 92 152;
+  --primary-light: 56 176 224;
+  --primary-glow: 96 200 236;
   --on-primary: 255 255 255;
   --secondary: 0 150 103;
   --secondary-dim: 0 120 84;
@@ -602,6 +606,109 @@
   }
   .fade-in {
     animation: fade-in 0.15s ease-out;
+  }
+
+  /* -------------------------------------------------------------------------
+     Landing — centered home (shares cockpit-mesh-bg via StudioMeshShell)
+     ------------------------------------------------------------------------- */
+  .landing-home-hero {
+    animation-delay: 0.08s;
+  }
+
+  .landing-home-globe {
+    width: min(380px, 78vw);
+    height: min(380px, 78vw);
+    opacity: 0.92;
+  }
+
+  .landing-home-title {
+    font-family: var(--display);
+    font-size: clamp(1.5rem, 3.2vw, 2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: rgb(var(--text-main));
+  }
+
+  .landing-home-title-accent {
+    background: linear-gradient(
+      92deg,
+      rgb(var(--primary-light)) 0%,
+      rgb(var(--primary)) 55%,
+      rgb(var(--accent)) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .landing-stat-block {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .landing-stat-value {
+    font-family: var(--display);
+    font-size: clamp(3rem, 8vw, 4.75rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: rgb(var(--text-main));
+    text-shadow:
+      0 0 40px rgb(var(--primary) / 0.55),
+      0 0 80px rgb(var(--primary) / 0.25);
+  }
+
+  .landing-stat-value--home {
+    font-size: clamp(2.75rem, 7vw, 3.75rem);
+  }
+
+  .landing-stat-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgb(var(--primary) / 0.85);
+  }
+
+  .landing-cta-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 8px;
+    background: rgb(var(--primary));
+    padding: 10px 22px;
+    font-size: 13px;
+    font-weight: 600;
+    color: rgb(var(--on-primary));
+    box-shadow: 0 0 28px rgb(var(--primary) / 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  }
+
+  .landing-cta-primary:hover {
+    background: rgb(var(--primary-dim));
+    box-shadow: 0 0 40px rgb(var(--primary) / 0.5);
+  }
+
+  .landing-cta-primary:active {
+    transform: scale(0.98);
+  }
+
+  .landing-fade-up {
+    opacity: 0;
+    animation: landing-fade-up 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes landing-fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
 

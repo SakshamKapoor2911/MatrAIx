@@ -19,7 +19,7 @@ def test_application_interface_manifest_groups_core_protocols() -> None:
         "survey",
         "chatbot",
         "web",
-        "appworld",
+        "os-app",
     }
     assert manifest["applicationTypes"]["survey"]["canonicalTask"] == (
         "application/tasks/persona-survey"
@@ -28,15 +28,15 @@ def test_application_interface_manifest_groups_core_protocols() -> None:
         "application/tasks/recommender-agent_chat_api"
     )
     assert manifest["applicationTypes"]["web"]["canonicalTask"] == (
-        "application/tasks/example-web-playwright_books-interest"
+        "application/tasks/example-web-playwright_quote-choice"
     )
-    assert manifest["applicationTypes"]["appworld"]["canonicalTask"] == (
-        "external:appworld"
+    assert manifest["applicationTypes"]["os-app"]["canonicalTask"] == (
+        "application/tasks/example-computer-use-ios_notification-preferences"
     )
 
 
 def test_application_interface_docs_exist_for_each_protocol() -> None:
-    for dirname in ("survey", "chatbot", "web", "appworld"):
+    for dirname in ("survey", "chatbot", "web"):
         doc = INTERFACE_ROOT / dirname / "README.md"
         assert doc.is_file(), doc
         text = doc.read_text(encoding="utf-8")
@@ -58,46 +58,49 @@ def test_canonical_survey_task_shape() -> None:
     assert raw["metadata"]["type"] == "survey"
     assert raw["metadata"]["domain"] == "persona-research"
     assert "/app/output" in raw["artifacts"]
-    assert "python /tests/test_state.py" in (
+    assert "test_state.py" in (
         task / "tests" / "test.sh"
     ).read_text(encoding="utf-8")
 
 
+def test_survey_reference_tasks_use_shared_runtime_and_task_local_input() -> None:
+    for folder in ("example-survey_product-feedback", "survey_product-attitudes"):
+        task = TASKS_ROOT / folder
+        raw = tomllib.loads((task / "task.toml").read_text(encoding="utf-8"))
+
+        assert raw["metadata"]["type"] == "survey"
+        assert raw["environment"]["definition"] == "application/shared-survey-form"
+        assert (task / "instruction.md").is_file()
+        assert (task / "input" / "context.md").is_file()
+        assert (task / "input" / "questionnaire.yaml").is_file()
+        assert (task / "input" / "output_schema.md").is_file()
+
+
 def test_canonical_chatbot_task_shape() -> None:
     task = TASKS_ROOT / "recommender-agent_chat_api"
-    env = ENVIRONMENTS_ROOT / "recommender-agent_chat_api"
+    env = ENVIRONMENTS_ROOT / "shared-chat-api-recommender"
     raw = tomllib.loads((task / "task.toml").read_text(encoding="utf-8"))
 
     assert raw["task"]["name"] == "personabench/application-recommender-agent-chat-api"
-    assert raw["metadata"]["type"] == "chat"
+    assert raw["metadata"]["type"] == "chatbot"
     assert raw["metadata"]["domain"] == "commerce-retail"
-    assert raw["environment"]["definition"] == "application/recommender-agent_chat_api"
+    assert raw["environment"]["definition"] == "application/shared-chat-api-recommender"
     assert "/app/output" in raw["artifacts"]
     assert (env / "recommender-api" / "server.py").is_file()
 
 
 def test_canonical_web_task_shape() -> None:
-    task = TASKS_ROOT / "web-ecommerce-platform_product-discovery"
-    env = ENVIRONMENTS_ROOT / "web-ecommerce-platform_product-discovery"
+    task = TASKS_ROOT / "example-web-playwright_quote-choice"
+    env = ENVIRONMENTS_ROOT / "shared-web-playwright"
     raw = tomllib.loads((task / "task.toml").read_text(encoding="utf-8"))
 
     assert raw["task"]["name"] == (
-        "personabench/application-web-ecommerce-platform-product-discovery"
+        "personabench/application-web-playwright-quote-choice"
     )
     assert raw["metadata"]["type"] == "web"
-    assert raw["metadata"]["domain"] == "commerce-retail"
-    assert (
-        raw["environment"]["definition"]
-        == "application/web-ecommerce-platform_product-discovery"
-    )
+    assert raw["metadata"]["domain"] == "arts-culture"
+    assert raw["environment"]["definition"] == "application/shared-web-playwright"
     assert "/app/output" in raw["artifacts"]
     dockerfile = (env / "Dockerfile").read_text(encoding="utf-8")
-    assert "/app/input" in dockerfile
-    assert "/app/output" in dockerfile
-
-    site = env / "ecommerce-web" / "site"
-    catalog = json.loads((site / "catalog.json").read_text(encoding="utf-8"))
-    assert catalog["products"]
-    assert '<img class="product-media"' in (site / "index.html").read_text(
-        encoding="utf-8"
-    )
+    assert "playwright" in dockerfile.lower()
+    assert "python" in dockerfile.lower()

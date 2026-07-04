@@ -1,0 +1,201 @@
+{
+  "instrument": {
+    "id": "software_claude_code_vscode_checkpoints_v1",
+    "title": "Claude Code IDE Autonomy Survey"
+  },
+  "answers": [
+    {
+      "questionId": "reviewable_edits",
+      "value": 4,
+      "rationale": "Inline diffs are essential for me to trust autonomous edits. I'd definitely use this feature if I can see exactly what changed before accepting. The review step removes my biggest friction point with code automation.",
+      "confidence": 0.92
+    },
+    {
+      "questionId": "checkpoint_control",
+      "value": 5,
+      "rationale": "Checkpoint rollback is a game-changer. Knowing I can undo changes instantly if something goes wrong makes me way more willing to let an agent handle complex refactoring or multi-file updates. It's the safety net I need.",
+      "confidence": 0.95
+    },
+    {
+      "questionId": "adoption_concern",
+      "value": "incorrect_code_changes",
+      "rationale": "My biggest worry is that the agent makes subtle logic errors or breaks edge cases I don't catch in the diff review. Even well-intentioned changes can introduce bugs that don't show up immediately.",
+      "confidence": 0.88
+    },
+    {
+      "questionId": "safe_first_task",
+      "value": "Refactoring variable names and formatting in isolated utility functions with strong test coverage",
+      "rationale": "I'd start with low-risk refactoring tasks where the logic doesn't change and I have good tests. Variable renames and formatting are mechanical, easy to review, and the impact is contained. Perfect way to build trust before moving to riskier tasks.",
+      "confidence": 0.9
+    }
+  ],
+  "trajectory": [
+    {
+      "timestamp": "2026-07-02T04:13:34Z",
+      "actor": "system",
+      "action": "survey_started",
+      "context": {
+        "instrumentId": "software_claude_code_vscode_checkpoints_v1",
+        "instrumentTitle": "Claude Code IDE Autonomy Survey",
+        "numQuestions": 4
+      },
+      "outcome": {
+        "status": "started"
+      }
+    },
+    {
+      "timestamp": "2026-07-02T04:13:35Z",
+      "actor": "assistant",
+      "action": "ask_question",
+      "context": {
+        "instrumentId": "software_claude_code_vscode_checkpoints_v1",
+        "questionId": "reviewable_edits",
+        "questionIndex": 1,
+        "questionType": "likert",
+        "construct": "coding_agent_reviewability"
+      },
+      "outcome": {
+        "prompt": "I would use Claude Code inside VS Code to make multi-file code edits if I could review inline diffs before accepting changes.",
+        "options": []
+      }
+    },
+    {
+      "timestamp": "2026-07-02T04:13:36Z",
+      "actor": "user",
+      "action": "answer_question",
+      "context": {
+        "instrumentId": "software_claude_code_vscode_checkpoints_v1",
+        "questionId": "reviewable_edits",
+        "questionIndex": 1,
+        "questionType": "likert",
+        "construct": "coding_agent_reviewability"
+      },
+      "outcome": {
+        "questionId": "reviewable_edits",
+        "value": 4,
+        "rationale": "Inline diffs are essential for me to trust autonomous edits. I'd definitely use this feature if I can see exactly what changed before accepting. The review step removes my biggest friction point with code automation.",
+        "confidence": 0.92
+      }
+    },
+    {
+      "timestamp": "2026-07-02T04:13:37Z",
+      "actor": "assistant",
+      "action": "ask_question",
+      "context": {
+        "instrumentId": "software_claude_code_vscode_checkpoints_v1",
+        "questionId": "checkpoint_control",
+        "questionIndex": 2,
+        "questionType": "likert",
+        "construct": "agentic_coding_control_trust"
+      },
+      "outcome": {
+        "prompt": "Checkpoint rollback would make me more comfortable letting a coding agent work autonomously on a complex task.",
+        "options": []
+      }
+    },
+    {
+      "timestamp": "2026-07-02T04:13:38Z",
+      "actor": "user",
+      "action": "answer_question",
+      "context": {
+        "instrumentId": "software_claude_code_vscode_checkpoints_v1",
+        "questionId": "checkpoint_control",
+        "questionIndex": 2,
+        "questionType": "likert",
+        "construct": "agentic_coding_control_trust"
+      },
+      "outcome": {
+        "questionId": "checkpoint_control",
+        "value": 5,
+        "rationale": "Checkpoint rollback is a game-changer. Knowing I can undo changes instantly if something goes wrong makes me way more willing to let an agent handle complex refactoring or multi-file updates. It's the safety net I need.",
+        "confidence": 0.95
+      }
+    },
+    {
+      "timestamp": "2026-07-02T04:13:39Z",
+      "actor": "assistant",
+      "action": "ask_question",
+      "context": {
+        "instrumentId": "software_claude_code_vscode_checkpoints_v1",
+        "questionId": "adoption_concern",
+        "questionIndex": 3,
+        "questionType": "single_choice",
+        "construct": "coding_agent_adoption_barrier"
+      },
+      "outcome": {
+        "prompt": "What would be your biggest concern before using this feature on a real codebase?",
+        "options": [
+          "incorrect_code_changes",
+          "hard_to_review_diffs",
+          "security_or_secret_exposure",
+          "too_much_autonomy"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-07-02T04:13:40Z",
+      "actor": "user",
+      "action": "answer_question",
+      "context": {
+        "instrumentId": "software_claude_code_vscode_checkpoints_v1",
+        "questionId": "adoption_concern",
+        "questionIndex": 3,
+        "questionType": "single_choice",
+        "construct": "coding_agent_adoption_barrier"
+      },
+      "outcome": {
+        "questionId": "adoption_concern",
+        "value": "incorrect_code_changes",
+        "rationale": "My biggest worry is that the agent makes subtle logic errors or breaks edge cases I don't catch in the diff review. Even well-intentioned changes can introduce bugs that don't show up immediately.",
+        "confidence": 0.88
+      }
+    },
+    {
+      "timestamp": "2026-07-02T04:13:41Z",
+      "actor": "assistant",
+      "action": "ask_question",
+      "context": {
+        "instrumentId": "software_claude_code_vscode_checkpoints_v1",
+        "questionId": "safe_first_task",
+        "questionIndex": 4,
+        "questionType": "free_text",
+        "construct": "safe_initial_coding_agent_use_case"
+      },
+      "outcome": {
+        "prompt": "What coding task would you feel safest delegating to Claude Code first?",
+        "options": []
+      }
+    },
+    {
+      "timestamp": "2026-07-02T04:13:42Z",
+      "actor": "user",
+      "action": "answer_question",
+      "context": {
+        "instrumentId": "software_claude_code_vscode_checkpoints_v1",
+        "questionId": "safe_first_task",
+        "questionIndex": 4,
+        "questionType": "free_text",
+        "construct": "safe_initial_coding_agent_use_case"
+      },
+      "outcome": {
+        "questionId": "safe_first_task",
+        "value": "Refactoring variable names and formatting in isolated utility functions with strong test coverage",
+        "rationale": "I'd start with low-risk refactoring tasks where the logic doesn't change and I have good tests. Variable renames and formatting are mechanical, easy to review, and the impact is contained. Perfect way to build trust before moving to riskier tasks.",
+        "confidence": 0.9
+      }
+    },
+    {
+      "timestamp": "2026-07-02T04:13:43Z",
+      "actor": "system",
+      "action": "survey_completed",
+      "context": {
+        "instrumentId": "software_claude_code_vscode_checkpoints_v1"
+      },
+      "outcome": {
+        "numAnswered": 4,
+        "missingRequiredQuestionIds": [],
+        "valid": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+transport: sidecar_http
+runtimeDefaults:
+  applicationId: acme_support_api
+  applicationContext: customer_support
+  domain: customer_support
+connection:
+  baseUrl: http://support-api:8000
+  healthPath: /health
+protocol:
+  sendMessage:
+    method: POST
+    path: /v1/messages
+    sessionIdField: ""
+    messageField: message
+    titleField: ""
+    botTypeField: ""
+    staticBody: {}
+  response:
+    sessionIdField: ""
+    replyField: reply
+artifacts:
+  transcript: transcript.json
+  applicationResult: application_result.json
+  feedback: user_feedback.json

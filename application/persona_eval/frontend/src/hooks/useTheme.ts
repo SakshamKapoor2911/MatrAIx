@@ -1,7 +1,8 @@
 /**
  * Light/dark theme toggle for PersonaEval.
  *
- * Dark is the default; light is opt-in via the `light` class on <html>. The
+ * Light is the default; dark is opt-in via localStorage `personaeval-theme=dark`.
+ * The `light` class on <html> selects the light token ramp. The class is set
  * class is set BEFORE paint by the boot script in index.html (to avoid a flash),
  * so this hook reads the live DOM class as its source of truth and persists the
  * operator's choice to localStorage. UI-state only, touches nothing in the

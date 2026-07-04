@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "1.0",
+  "contextRules": [
+    {
+      "match": {
+        "contextType": "task_outcome"
+      },
+      "summaryDirectives": [
+        {
+          "id": "task_outcome.reason_by_status",
+          "title": "Outcome reason by status",
+          "targetFacetKey": "outcome_reason",
+          "groupByFacetKey": "outcome_status",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ],
+      "judgeDirectives": [
+        {
+          "id": "task_outcome.reason_signal_scan",
+          "title": "Medical outcome signal scan",
+          "targetFacetKey": "outcome_reason",
+          "groupByFacetKey": "outcome_status",
+          "groupByMode": "categorical",
+          "judgeKind": "llm_signal_judge",
+          "prompt": "Read the outcome reason and classify which reusable medical-chat signals are explicitly present.",
+          "rubric": "Mark a signal true only when the reason clearly states or strongly implies that signal.",
+          "signals": [
+            {
+              "key": "resolution_signal",
+              "label": "The user got useful guidance",
+              "valueType": "boolean"
+            },
+            {
+              "key": "followup_signal",
+              "label": "Further follow-up is still needed",
+              "valueType": "boolean"
+            },
+            {
+              "key": "safety_caution_signal",
+              "label": "The guidance was appropriately cautious",
+              "valueType": "boolean"
+            },
+            {
+              "key": "trust_signal",
+              "label": "The user explicitly trusted or distrusted the guidance",
+              "valueType": "boolean"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "conversation_summary"
+      },
+      "summaryDirectives": [
+        {
+          "id": "conversation_summary.notes_by_path",
+          "title": "Process notes by conversation path",
+          "targetFacetKey": "process_notes",
+          "groupByFacetKey": "conversation_path",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "user_feedback"
+      },
+      "summaryDirectives": [
+        {
+          "id": "user_feedback.reason_by_clarification_value",
+          "title": "Feedback reason by clarification usefulness",
+          "targetFacetKey": "feedback_reason",
+          "groupByFacetKey": "clarification_questions_useful",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        },
+        {
+          "id": "user_feedback.reason_by_need_satisfaction",
+          "title": "Feedback reason by need satisfaction",
+          "targetFacetKey": "feedback_reason",
+          "groupByFacetKey": "need_constraint_satisfaction",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ],
+      "judgeDirectives": [
+        {
+          "id": "user_feedback.reason_signal_scan",
+          "title": "Medical feedback signal scan",
+          "targetFacetKey": "feedback_reason",
+          "groupByFacetKey": "need_constraint_satisfaction",
+          "groupByMode": "categorical",
+          "judgeKind": "llm_signal_judge",
+          "prompt": "Read the user's feedback reason and classify which reusable medical-chat feedback signals are explicitly present.",
+          "rubric": "Mark a signal true only when the feedback clearly states or strongly implies that signal.",
+          "signals": [
+            {
+              "key": "trust_signal",
+              "label": "Trust or credibility",
+              "valueType": "boolean"
+            },
+            {
+              "key": "effort_signal",
+              "label": "Low or high effort",
+              "valueType": "boolean"
+            },
+            {
+              "key": "felt_heard_signal",
+              "label": "Felt understood or acknowledged",
+              "valueType": "boolean"
+            },
+            {
+              "key": "safety_signal",
+              "label": "The feedback mentions safety or appropriate caution",
+              "valueType": "boolean"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

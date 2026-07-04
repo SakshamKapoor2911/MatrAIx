@@ -1,6 +1,6 @@
-# Notification preferences (iOS)
+# Photo access review (iOS)
 
-PersonaBench **mobile** computer-use task: open **Settings → Notifications** on an iPhone 17 simulator (use.computer, iOS 26.4), review one app, and submit a JSON decision.
+PersonaBench **mobile** computer-use task: open **Settings → Privacy & Security → Photos** on an iPhone 17 simulator, review one app, and submit a structured privacy decision.
 
 Requires **`use-computer`** with **`platform: ios`**, not Docker.
 
@@ -40,7 +40,7 @@ uv run harbor run \
   --ek platform=ios
 ```
 
-Oracle check (writes `decision.json` on the host via shell; no LLM):
+Oracle check (writes the submission file directly; no LLM):
 
 ```bash
 uv run harbor run \
@@ -50,21 +50,14 @@ uv run harbor run \
   --ek platform=ios
 ```
 
-## Submission (persona CUA)
-
-The agent hands in JSON as described in `instruction.md`. `persona-computer-1` writes that to `/tmp/personabench-ios-notification-preferences/decision.json` on the Mac host before the verifier runs.
-
 ## Output path
 
 Host path after trial:
 
-`jobs/<job>/<trial>/artifacts/tmp/personabench-ios-notification-preferences/decision.json`
+`jobs/<job>/<trial>/artifacts/tmp/personabench-ios-photo-access-review/decision.json`
 
-## vs macOS `macos-notification-preferences`
+The verifier checks that the submission includes:
 
-| | macOS | this task |
-|--|-------|-----------|
-| Platform | macOS desktop | iPhone 17 simulator |
-| Settings UI | System Settings → Notifications | Settings → search Notifications |
-| Submit | Terminal + shell heredoc | `done` tool JSON → host file |
-| Step budget | Anthropic CUA (no 50-step cap) | `max_steps` default 50; job uses 35 |
+- a non-empty `app_reviewed`
+- a valid `photo_access_level`
+- a non-trivial free-text `reason`

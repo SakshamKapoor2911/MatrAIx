@@ -4,17 +4,27 @@ import json
 import os
 import urllib.error
 import urllib.request
+from pathlib import Path
 from typing import Any, Callable, Dict, Optional
 
-from fastapi import HTTPException
+try:
+    from fastapi import HTTPException
+except ModuleNotFoundError:  # pragma: no cover - test env fallback
+    class HTTPException(Exception):
+        def __init__(self, status_code: int, detail: str) -> None:
+            super().__init__(detail)
+            self.status_code = status_code
+            self.detail = detail
 
 from backend.service.catalog_index import CatalogIndex
 from backend.service.config import ConfigManager
-from persona_eval.model_client import build_json_client
+from backend.service.session import RecBotSession, _new_id
+from environment.integrations.persona_eval.chatbot_task_config import (
+    load_chatbot_task_config_for_task_path,
+)
+from environment.integrations.persona_eval.persona_exposure import build_persona_exposure
 from persona_eval.runner import run_persona_eval
-from persona_eval.session_factory import build_session
 from persona_eval.types import PersonaEvalConfig
-from persona_eval.user_simulator import UserSimulator
 
 
 class LocalChatbotEvalRunner:
@@ -26,7 +36,7 @@ class LocalChatbotEvalRunner:
         persona: Any,
         sut_description: str,
         config: PersonaEvalConfig,
-        simulator: Any,
+        simulator: Any | None,
         *,
         created_at: str,
         on_event: Optional[Callable[[Dict[str, Any]], None]] = None,
@@ -42,6 +52,12 @@ class LocalChatbotEvalRunner:
         )
 
 
+_SIDECAR_TASK_PATHS = {
+    "finance_openbb": "application/tasks/finance-openbb_chatbot",
+    "medical_assistant": "application/tasks/medical-assistant_chatbot",
+}
+
+
 class DirectApplicationSession:
     """Session wrapper for non-RecAI chatbot application adapters."""
 
@@ -50,6 +66,7 @@ class DirectApplicationSession:
         self.turns = []
         self._session_id: Optional[str] = None
         self._application = _application_for(config.application_id)
+        self._task_config = _load_sidecar_task_config(config.application_id)
 
     def run_turn_sync(self, message: str) -> Dict[str, Any]:
         response = self._application.send_message(
@@ -62,16 +79,60 @@ class DirectApplicationSession:
         )
         self._session_id = str(response["sessionId"])
         turn = dict(response.get("turn") or {})
-        if "recommendedItems" not in turn:
-            turn["recommendedItems"] = list(response.get("recommendedItems") or [])
-        if "groundedItems" not in turn:
-            turn["groundedItems"] = list(response.get("groundedItems") or [])
-        self.turns.append(turn)
-        return turn
+        assistant = str(
+            turn.get("assistantMessage")
+            or turn.get("assistantReply")
+            or response.get("reply")
+            or ""
+        )
+        merged = {**response, **turn, "userMessage": message}
+        exposure = build_persona_exposure(
+            merged,
+            self._task_config.persona_exposure if self._task_config else None,
+        )
+        view = {
+            "assistantMessage": assistant,
+            "userMessage": message,
+            "personaExposure": exposure,
+        }
+        self.turns.append(view)
+        return view
+
+
+def _load_sidecar_task_config(application_id: str):
+    task_path = _SIDECAR_TASK_PATHS.get(application_id)
+    if not task_path:
+        return None
+    repo_root = Path(__file__).resolve().parents[4]
+    return load_chatbot_task_config_for_task_path(task_path, repo_root=repo_root)
 
 
 def config_context(config: PersonaEvalConfig) -> str:
     return config.application_context or config.domain
+
+
+def _build_recai_session(
+    config: PersonaEvalConfig,
+    *,
+    catalog: CatalogIndex,
+    config_manager: ConfigManager,
+    title: str = "persona-eval",
+) -> RecBotSession:
+    recai_domain = config.domain or config.application_context
+    cfg = config_manager.normalize({
+        "engine": config.engine,
+        "rankerMode": config.ranker_mode,
+        "resourceMode": config.resource_mode,
+        "domain": recai_domain,
+        "botType": "chat",
+    })
+    return RecBotSession(
+        id=_new_id("ses"),
+        title=title,
+        config=cfg,
+        catalog=catalog,
+        config_manager=config_manager,
+    )
 
 
 def _application_for(application_id: str) -> Any:
@@ -194,34 +255,10 @@ def build_local_chat_session(
 ) -> Any:
     """Return the application-under-test session for one local eval run."""
     if config.application_id == "recai":
-        return build_session(
+        recai_domain = config.domain or config.application_context
+        return _build_recai_session(
             config,
-            catalog=catalog_provider(config.domain),
+            catalog=catalog_provider(recai_domain),
             config_manager=config_manager,
         )
     return DirectApplicationSession(config)
-
-
-def build_local_user_simulator(engine: str, goal_context_id: str, domain: str) -> UserSimulator:
-    from persona_eval.goal_contexts import get_goal_context
-
-    del engine
-    return UserSimulator(
-        build_json_client("openai/gpt-4o-mini"),
-        get_goal_context(goal_context_id),
-        domain,
-    )
-
-
-def build_local_user_simulator_for_model(
-    persona_model: str,
-    goal_context_id: str,
-    domain: str,
-) -> UserSimulator:
-    from persona_eval.goal_contexts import get_goal_context
-
-    return UserSimulator(
-        build_json_client(persona_model),
-        get_goal_context(goal_context_id),
-        domain,
-    )

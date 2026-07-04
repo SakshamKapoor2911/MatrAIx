@@ -1,4 +1,4 @@
-"""Host-native survey agent for the ``json_survey`` Harbor trial profile."""
+"""Host-native survey agent for Harbor's survey host path."""
 
 from __future__ import annotations
 
@@ -15,7 +15,8 @@ from harbor.models.agent.name import AgentName
 
 from environment.integrations.persona_eval.harbor.persona_eval import resolve_repo_root
 from environment.integrations.persona_eval.survey_task_content import (
-    instruction_markdown_for_instrument,
+    load_survey_task_content_for_questionnaire_id,
+    load_survey_task_content_for_task_path,
 )
 from environment.integrations.persona_eval.harbor.trial_events import TrialEventWriter
 from environment.integrations.persona_eval.local.survey_eval import LocalSurveyEvalRunner
@@ -38,8 +39,7 @@ def _eval_persona(persona: object) -> EvalPersona:
     )
 
 
-def _load_instrument(*, instrument_path: str | None, instrument_id: str | None):
-    from backend.service.survey_instruments import get_survey_instrument
+def _load_survey_content(*, task_path: str | None, instrument_path: str | None):
     from backend.service.survey_types import SurveyInstrument
 
     if instrument_path:
@@ -47,9 +47,22 @@ def _load_instrument(*, instrument_path: str | None, instrument_id: str | None):
         if path.is_file():
             payload = json.loads(path.read_text(encoding="utf-8"))
             if isinstance(payload, dict):
-                return SurveyInstrument.from_dict(payload)
-    instrument_key = instrument_id or os.environ.get("MATRIX_SURVEY_INSTRUMENT_ID", "product_attitudes_v1")
-    return get_survey_instrument(instrument_key)
+                instrument = SurveyInstrument.from_dict(payload)
+                return instrument, None
+    resolved_task_path = str(task_path or os.environ.get("MATRIX_SURVEY_TASK_PATH") or "").strip()
+    if resolved_task_path:
+        content = load_survey_task_content_for_task_path(
+            resolved_task_path,
+            repo_root=_repo_root(),
+        )
+        if content.instrument is None:
+            raise FileNotFoundError(
+                "survey task {} is missing input/questionnaire.yaml".format(resolved_task_path)
+            )
+        return content.instrument, content
+    raise ValueError(
+        "survey host runs require survey_task_path or MATRIX_SURVEY_TASK_PATH"
+    )
 
 
 def _survey_result_payload(result) -> dict[str, object]:
@@ -67,19 +80,25 @@ def _repo_root() -> Path:
     return resolve_repo_root(Path(__file__))
 
 
-def _instruction_markdown_for_instrument(instrument) -> str:
-    from environment.integrations.persona_eval.harbor.survey_eval import (
-        build_survey_instruction_markdown,
+def _instruction_markdown_for_questionnaire(questionnaire) -> str:
+    from backend.service.survey_instruction_builder import (
+        render_survey_instruction_markdown,
     )
 
-    full = instruction_markdown_for_instrument(instrument.id, repo_root=_repo_root())
-    if full:
-        return full
-    return build_survey_instruction_markdown(instrument=instrument)
+    content = load_survey_task_content_for_questionnaire_id(
+        questionnaire.id,
+        repo_root=_repo_root(),
+        fallback_questionnaire=questionnaire,
+    )
+    if content is not None:
+        full = content.combined_markdown().strip()
+        if full:
+            return full
+    return render_survey_instruction_markdown(questionnaire)
 
 
 class PersonaJsonSurvey(PersonaMixin, BaseAgent):
-    """Complete a survey via one-shot JSON completion (no Claude Code container)."""
+    """Complete a survey through the host-native structured output path."""
 
     SUPPORTS_WINDOWS = True
 
@@ -95,8 +114,8 @@ class PersonaJsonSurvey(PersonaMixin, BaseAgent):
         logs_dir: Path,
         persona_path: str | None = None,
         persona_template_path: str | None = None,
+        survey_task_path: str | None = None,
         survey_instrument_path: str | None = None,
-        survey_instrument_id: str | None = None,
         **kwargs,
     ) -> None:
         self._init_persona(
@@ -104,8 +123,8 @@ class PersonaJsonSurvey(PersonaMixin, BaseAgent):
             AgentName.PERSONA_JSON_SURVEY.value,
             persona_template_path=persona_template_path,
         )
+        self._survey_task_path = survey_task_path
         self._survey_instrument_path = survey_instrument_path
-        self._survey_instrument_id = survey_instrument_id
         super().__init__(logs_dir=logs_dir, **kwargs)
 
     async def setup(self, environment: BaseEnvironment) -> None:
@@ -119,16 +138,47 @@ class PersonaJsonSurvey(PersonaMixin, BaseAgent):
     ) -> None:
         del instruction, context
         await self._prepare_persona_trial(environment)
-        instrument = _load_instrument(
+        instrument, content = _load_survey_content(
+            task_path=self._survey_task_path,
             instrument_path=self._survey_instrument_path,
-            instrument_id=self._survey_instrument_id,
         )
         persona = _eval_persona(self._persona)
         created_at = _utc_now()
         trial_dir = self.logs_dir.parent
         event_writer = TrialEventWriter.for_trial_dir(trial_dir)
-        instruction_md = _instruction_markdown_for_instrument(instrument)
+        if content is None:
+            content = load_survey_task_content_for_questionnaire_id(
+                instrument.id,
+                repo_root=_repo_root(),
+                fallback_questionnaire=instrument,
+            )
+        instruction_md = (
+            content.combined_markdown().strip()
+            if content is not None and content.combined_markdown().strip()
+            else _instruction_markdown_for_questionnaire(instrument)
+        )
         (trial_dir / "instruction.md").write_text(instruction_md, encoding="utf-8")
+        if content is not None:
+            if content.instruction_markdown.strip():
+                (trial_dir / "task_instruction.md").write_text(
+                    content.instruction_markdown.strip(),
+                    encoding="utf-8",
+                )
+            if content.context_markdown.strip():
+                (trial_dir / "context.md").write_text(
+                    content.context_markdown.strip(),
+                    encoding="utf-8",
+                )
+            if content.questionnaire_markdown.strip():
+                (trial_dir / "questionnaire.md").write_text(
+                    content.questionnaire_markdown.strip(),
+                    encoding="utf-8",
+                )
+            if content.output_schema_markdown.strip():
+                (trial_dir / "output_schema.md").write_text(
+                    content.output_schema_markdown.strip(),
+                    encoding="utf-8",
+                )
         event_writer.append({"type": "instruction", "markdown": instruction_md})
 
         def on_event(event: dict) -> None:

@@ -73,7 +73,7 @@ def test_recommender_chat_task_metadata_is_clean() -> None:
     task = tomllib.loads(task_text)
 
     assert task["task"]["name"] == "personabench/application-recommender-agent-chat-api"
-    assert task["metadata"]["type"] == "chat"
+    assert task["metadata"]["type"] == "chatbot"
     assert task["metadata"]["domain"] == "commerce-retail"
     assert "matraix/" not in task_text.lower()
 
@@ -105,23 +105,10 @@ def test_recommender_chat_verifier_accepts_minimal_valid_result(tmp_path: Path) 
         ),
         encoding="utf-8",
     )
-    (output_dir / "recommendation_result.json").write_text(
-        json.dumps(
-            {
-                "sessionId": session_id,
-                "domain": "movie",
-                "recommendedItems": [
-                    {"itemId": "movie-past-lives", "title": "Past Lives"}
-                ],
-                "turnsToRecommendation": 3,
-            }
-        ),
-        encoding="utf-8",
-    )
     (output_dir / "user_feedback.json").write_text(
         json.dumps(
             {
-                "productNeedConstraintSatisfaction": "yes",
+                "needConstraintSatisfaction": "yes",
                 "personalPreferenceSatisfaction": "partially",
                 "overallExperienceRating": 8,
                 "reason": "The recommendation fit the quiet drama request.",
@@ -142,7 +129,6 @@ def test_recommender_chat_verifier_accepts_minimal_valid_result(tmp_path: Path) 
 
     module.OUTPUT_DIR = output_dir
     module.TRANSCRIPT_PATH = output_dir / "transcript.json"
-    module.RESULT_PATH = output_dir / "recommendation_result.json"
     module.FEEDBACK_PATH = output_dir / "user_feedback.json"
     assert module.main() == 0
 
@@ -197,7 +183,7 @@ def test_application_task_interface_manifest_uses_clean_task_paths() -> None:
         "application/tasks/recommender-agent_chat_api"
     )
     assert manifest["applicationTypes"]["web"]["canonicalTask"] == (
-        "application/tasks/example-web-playwright_books-interest"
+        "application/tasks/example-web-playwright_quote-choice"
     )
     assert manifest["applicationTypes"]["appworld"]["canonicalTask"] == (
         "external:appworld"

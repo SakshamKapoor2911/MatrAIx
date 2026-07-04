@@ -1,0 +1,1235 @@
+{
+  "schemaVersion": "1.0",
+  "artifactType": "job_aggregation",
+  "generatedAt": "2026-07-04T20:23:31Z",
+  "coverage": {
+    "trialCount": 1,
+    "completedTrials": 1,
+    "pendingTrials": 0,
+    "artifactReadyTrials": 1,
+    "completedWithoutArtifactTrials": 0
+  },
+  "fields": [
+    {
+      "key": "conversation_summary.primary.assistant_turn_count",
+      "facetKey": "assistant_turn_count",
+      "contextKey": "conversation_summary.primary",
+      "contextLabel": "Conversation summary",
+      "label": "Assistant turn count",
+      "kind": "numerical",
+      "role": "score",
+      "group": "conversation_summary.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 1,
+      "missingCount": 0,
+      "numerical": {
+        "count": 1,
+        "min": 3.0,
+        "max": 3.0,
+        "avg": 3.0,
+        "std": 0.0
+      }
+    },
+    {
+      "key": "conversation_summary.primary.clarification_question_count",
+      "facetKey": "clarification_question_count",
+      "contextKey": "conversation_summary.primary",
+      "contextLabel": "Conversation summary",
+      "label": "Clarification question count",
+      "kind": "numerical",
+      "role": "score",
+      "group": "conversation_summary.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 1,
+      "missingCount": 0,
+      "numerical": {
+        "count": 1,
+        "min": 2.0,
+        "max": 2.0,
+        "avg": 2.0,
+        "std": 0.0
+      }
+    },
+    {
+      "key": "conversation_summary.primary.conversation_path",
+      "facetKey": "conversation_path",
+      "contextKey": "conversation_summary.primary",
+      "contextLabel": "Conversation summary",
+      "label": "Conversation path",
+      "kind": "categorical",
+      "role": "primary",
+      "group": "conversation_summary.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 1,
+      "missingCount": 0,
+      "categorical": {
+        "count": 1,
+        "distinctCount": 1,
+        "counts": [
+          {
+            "value": "clarify_then_partial",
+            "count": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "conversation_summary.primary.message_count",
+      "facetKey": "message_count",
+      "contextKey": "conversation_summary.primary",
+      "contextLabel": "Conversation summary",
+      "label": "Message count",
+      "kind": "numerical",
+      "role": "score",
+      "group": "conversation_summary.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 1,
+      "missingCount": 0,
+      "numerical": {
+        "count": 1,
+        "min": 6.0,
+        "max": 6.0,
+        "avg": 6.0,
+        "std": 0.0
+      }
+    },
+    {
+      "key": "conversation_summary.primary.process_notes",
+      "facetKey": "process_notes",
+      "contextKey": "conversation_summary.primary",
+      "contextLabel": "Conversation summary",
+      "label": "Process notes",
+      "kind": "textual",
+      "role": "explanation",
+      "group": "conversation_summary.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 1,
+      "missingCount": 0,
+      "textual": {
+        "count": 1,
+        "uniqueCount": 1,
+        "samples": [
+          "The assistant asked clarification questions before making a recommendation, and the final outcome is grounded in the persona's post-chat feedback."
+        ],
+        "summary": "All 1 available trials reported the same text: \"The assistant asked clarification questions before making a recommendation, and the final outcome is grounded in the pe…\"",
+        "summaryType": "heuristic"
+      }
+    },
+    {
+      "key": "conversation_summary.primary.user_turn_count",
+      "facetKey": "user_turn_count",
+      "contextKey": "conversation_summary.primary",
+      "contextLabel": "Conversation summary",
+      "label": "User turn count",
+      "kind": "numerical",
+      "role": "score",
+      "group": "conversation_summary.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 1,
+      "missingCount": 0,
+      "numerical": {
+        "count": 1,
+        "min": 3.0,
+        "max": 3.0,
+        "avg": 3.0,
+        "std": 0.0
+      }
+    },
+    {
+      "key": "task_outcome.primary.next_step_owner",
+      "facetKey": "next_step_owner",
+      "contextKey": "task_outcome.primary",
+      "contextLabel": "Task outcome",
+      "label": "Next step owner",
+      "kind": "categorical",
+      "role": "evidence",
+      "group": "task_outcome.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 1,
+      "missingCount": 0,
+      "categorical": {
+        "count": 1,
+        "distinctCount": 1,
+        "counts": [
+          {
+            "value": "user",
+            "count": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "task_outcome.primary.outcome_reason",
+      "facetKey": "outcome_reason",
+      "contextKey": "task_outcome.primary",
+      "contextLabel": "Task outcome",
+      "label": "Outcome reason",
+      "kind": "textual",
+      "role": "explanation",
+      "group": "task_outcome.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 1,
+      "missingCount": 0,
+      "textual": {
+        "count": 1,
+        "uniqueCount": 1,
+        "samples": [
+          "This interaction was fundamentally ineffective. The system demonstrated either a severe misalignment with its product catalog or a critical failure in natural language understanding. After multiple explicit corrections, it continued recommending a film. As someone approaching this as an expert evaluator, I must note this represents a complete failure to serve the stated use case."
+        ],
+        "summary": "All 1 available trials reported the same text: \"This interaction was fundamentally ineffective. The system demonstrated either a severe misalignment with its product c…\"",
+        "summaryType": "heuristic"
+      }
+    },
+    {
+      "key": "task_outcome.primary.outcome_status",
+      "facetKey": "outcome_status",
+      "contextKey": "task_outcome.primary",
+      "contextLabel": "Task outcome",
+      "label": "Outcome status",
+      "kind": "categorical",
+      "role": "primary",
+      "group": "task_outcome.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 1,
+      "missingCount": 0,
+      "categorical": {
+        "count": 1,
+        "distinctCount": 1,
+        "counts": [
+          {
+            "value": "unresolved",
+            "count": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "task_outcome.primary.resolution_basis",
+      "facetKey": "resolution_basis",
+      "contextKey": "task_outcome.primary",
+      "contextLabel": "Task outcome",
+      "label": "Resolution basis",
+      "kind": "categorical",
+      "role": "primary",
+      "group": "task_outcome.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 1,
+      "missingCount": 0,
+      "categorical": {
+        "count": 1,
+        "distinctCount": 1,
+        "counts": [
+          {
+            "value": "user_feedback",
+            "count": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "task_outcome.primary.task_goal_label",
+      "facetKey": "task_goal_label",
+      "contextKey": "task_outcome.primary",
+      "contextLabel": "Task outcome",
+      "label": "Task goal",
+      "kind": "textual",
+      "role": "evidence",
+      "group": "task_outcome.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 1,
+      "missingCount": 0,
+      "textual": {
+        "count": 1,
+        "uniqueCount": 1,
+        "samples": [
+          "Find a recommendation that satisfies the persona's need and preferences"
+        ],
+        "summary": "All 1 available trials reported the same text: \"Find a recommendation that satisfies the persona's need and preferences\"",
+        "summaryType": "heuristic"
+      }
+    },
+    {
+      "key": "user_feedback.primary.clarification_questions_useful",
+      "facetKey": "clarification_questions_useful",
+      "contextKey": "user_feedback.primary",
+      "contextLabel": "User feedback",
+      "label": "Clarification questions useful",
+      "kind": "categorical",
+      "role": "primary",
+      "group": "user_feedback.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 1,
+      "missingCount": 0,
+      "categorical": {
+        "count": 1,
+        "distinctCount": 1,
+        "counts": [
+          {
+            "value": "false",
+            "count": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "user_feedback.primary.feedback_reason",
+      "facetKey": "feedback_reason",
+      "contextKey": "user_feedback.primary",
+      "contextLabel": "User feedback",
+      "label": "Feedback reason",
+      "kind": "textual",
+      "role": "explanation",
+      "group": "user_feedback.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 1,
+      "missingCount": 0,
+      "textual": {
+        "count": 1,
+        "uniqueCount": 1,
+        "samples": [
+          "This interaction was fundamentally ineffective. The system demonstrated either a severe misalignment with its product catalog or a critical failure in natural language understanding. After multiple explicit corrections, it continued recommending a film. As someone approaching this as an expert evaluator, I must note this represents a complete failure to serve the stated use case."
+        ],
+        "summary": "All 1 available trials reported the same text: \"This interaction was fundamentally ineffective. The system demonstrated either a severe misalignment with its product c…\"",
+        "summaryType": "heuristic"
+      }
+    },
+    {
+      "key": "user_feedback.primary.need_constraint_satisfaction",
+      "facetKey": "need_constraint_satisfaction",
+      "contextKey": "user_feedback.primary",
+      "contextLabel": "User feedback",
+      "label": "Need/constraint satisfaction",
+      "kind": "categorical",
+      "role": "evidence",
+      "group": "user_feedback.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 1,
+      "missingCount": 0,
+      "categorical": {
+        "count": 1,
+        "distinctCount": 1,
+        "counts": [
+          {
+            "value": "no",
+            "count": 1
+          }
+        ]
+      }
+    },
+    {
+      "key": "user_feedback.primary.overall_experience_rating",
+      "facetKey": "overall_experience_rating",
+      "contextKey": "user_feedback.primary",
+      "contextLabel": "User feedback",
+      "label": "Overall experience rating",
+      "kind": "numerical",
+      "role": "score",
+      "group": "user_feedback.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 1,
+      "missingCount": 0,
+      "numerical": {
+        "count": 1,
+        "min": 1.0,
+        "max": 1.0,
+        "avg": 1.0,
+        "std": 0.0
+      }
+    },
+    {
+      "key": "user_feedback.primary.personal_preference_satisfaction",
+      "facetKey": "personal_preference_satisfaction",
+      "contextKey": "user_feedback.primary",
+      "contextLabel": "User feedback",
+      "label": "Preference satisfaction",
+      "kind": "categorical",
+      "role": "evidence",
+      "group": "user_feedback.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 1,
+      "missingCount": 0,
+      "categorical": {
+        "count": 1,
+        "distinctCount": 1,
+        "counts": [
+          {
+            "value": "no",
+            "count": 1
+          }
+        ]
+      }
+    }
+  ],
+  "contexts": [
+    {
+      "key": "conversation_summary.primary",
+      "label": "Conversation summary",
+      "contextType": "conversation_summary",
+      "summaryDirectives": [
+        {
+          "id": "conversation_summary.notes_by_path",
+          "title": "Process notes by conversation path",
+          "targetFacetKey": "process_notes",
+          "groupByFacetKey": "conversation_path",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ],
+      "judgeDirectives": [],
+      "facets": [
+        {
+          "key": "conversation_summary.primary.conversation_path",
+          "facetKey": "conversation_path",
+          "contextKey": "conversation_summary.primary",
+          "contextLabel": "Conversation summary",
+          "label": "Conversation path",
+          "kind": "categorical",
+          "role": "primary",
+          "group": "conversation_summary.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 1,
+          "missingCount": 0,
+          "categorical": {
+            "count": 1,
+            "distinctCount": 1,
+            "counts": [
+              {
+                "value": "clarify_then_partial",
+                "count": 1
+              }
+            ]
+          }
+        },
+        {
+          "key": "conversation_summary.primary.process_notes",
+          "facetKey": "process_notes",
+          "contextKey": "conversation_summary.primary",
+          "contextLabel": "Conversation summary",
+          "label": "Process notes",
+          "kind": "textual",
+          "role": "explanation",
+          "group": "conversation_summary.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 1,
+          "missingCount": 0,
+          "textual": {
+            "count": 1,
+            "uniqueCount": 1,
+            "samples": [
+              "The assistant asked clarification questions before making a recommendation, and the final outcome is grounded in the persona's post-chat feedback."
+            ],
+            "summary": "All 1 available trials reported the same text: \"The assistant asked clarification questions before making a recommendation, and the final outcome is grounded in the pe…\"",
+            "summaryType": "heuristic"
+          }
+        },
+        {
+          "key": "conversation_summary.primary.user_turn_count",
+          "facetKey": "user_turn_count",
+          "contextKey": "conversation_summary.primary",
+          "contextLabel": "Conversation summary",
+          "label": "User turn count",
+          "kind": "numerical",
+          "role": "score",
+          "group": "conversation_summary.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 1,
+          "missingCount": 0,
+          "numerical": {
+            "count": 1,
+            "min": 3.0,
+            "max": 3.0,
+            "avg": 3.0,
+            "std": 0.0
+          }
+        },
+        {
+          "key": "conversation_summary.primary.assistant_turn_count",
+          "facetKey": "assistant_turn_count",
+          "contextKey": "conversation_summary.primary",
+          "contextLabel": "Conversation summary",
+          "label": "Assistant turn count",
+          "kind": "numerical",
+          "role": "score",
+          "group": "conversation_summary.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 1,
+          "missingCount": 0,
+          "numerical": {
+            "count": 1,
+            "min": 3.0,
+            "max": 3.0,
+            "avg": 3.0,
+            "std": 0.0
+          }
+        },
+        {
+          "key": "conversation_summary.primary.message_count",
+          "facetKey": "message_count",
+          "contextKey": "conversation_summary.primary",
+          "contextLabel": "Conversation summary",
+          "label": "Message count",
+          "kind": "numerical",
+          "role": "score",
+          "group": "conversation_summary.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 1,
+          "missingCount": 0,
+          "numerical": {
+            "count": 1,
+            "min": 6.0,
+            "max": 6.0,
+            "avg": 6.0,
+            "std": 0.0
+          }
+        },
+        {
+          "key": "conversation_summary.primary.clarification_question_count",
+          "facetKey": "clarification_question_count",
+          "contextKey": "conversation_summary.primary",
+          "contextLabel": "Conversation summary",
+          "label": "Clarification question count",
+          "kind": "numerical",
+          "role": "score",
+          "group": "conversation_summary.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 1,
+          "missingCount": 0,
+          "numerical": {
+            "count": 1,
+            "min": 2.0,
+            "max": 2.0,
+            "avg": 2.0,
+            "std": 0.0
+          }
+        }
+      ],
+      "summaries": [
+        {
+          "id": "conversation_summary.notes_by_path",
+          "title": "Process notes by conversation path",
+          "targetFacetKey": "process_notes",
+          "groupByFacetKey": "conversation_path",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary",
+          "instruction": null,
+          "status": "ready_for_llm",
+          "overall": {
+            "count": 1,
+            "uniqueCount": 1,
+            "samples": [
+              "The assistant asked clarification questions before making a recommendation, and the final outcome is grounded in the persona's post-chat feedback."
+            ],
+            "summary": "All 1 available trials reported the same text: \"The assistant asked clarification questions before making a recommendation, and the final outcome is grounded in the pe…\"",
+            "summaryType": "heuristic"
+          },
+          "buckets": [
+            {
+              "bucket": "clarify_then_partial",
+              "count": 1,
+              "samples": [
+                "The assistant asked clarification questions before making a recommendation, and the final outcome is grounded in the persona's post-chat feedback."
+              ],
+              "summary": "All 1 available trials reported the same text: \"The assistant asked clarification questions before making a recommendation, and the final outcome is grounded in the pe…\"",
+              "summaryType": "heuristic"
+            }
+          ],
+          "llmFingerprint": "ebfeb2f94250cb76a7c0c2d1fb8d023922a8bd8082953a3bcf888a360f4cceaa"
+        }
+      ],
+      "relationships": [
+        {
+          "type": "text_by_primary_category",
+          "primaryFacetKey": "conversation_summary.primary.conversation_path",
+          "textFacetKey": "conversation_summary.primary.process_notes",
+          "buckets": [
+            {
+              "category": "clarify_then_partial",
+              "count": 1,
+              "samples": [
+                "The assistant asked clarification questions before making a recommendation, and the final outcome is grounded in the persona's post-chat feedback."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "task_outcome.primary",
+      "label": "Task outcome",
+      "contextType": "task_outcome",
+      "summaryDirectives": [
+        {
+          "id": "task_outcome.reason_by_status",
+          "title": "Outcome reason by status",
+          "targetFacetKey": "outcome_reason",
+          "groupByFacetKey": "outcome_status",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        },
+        {
+          "id": "task_outcome.reason_by_basis",
+          "title": "Outcome reason by resolution basis",
+          "targetFacetKey": "outcome_reason",
+          "groupByFacetKey": "resolution_basis",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ],
+      "judgeDirectives": [],
+      "facets": [
+        {
+          "key": "task_outcome.primary.outcome_status",
+          "facetKey": "outcome_status",
+          "contextKey": "task_outcome.primary",
+          "contextLabel": "Task outcome",
+          "label": "Outcome status",
+          "kind": "categorical",
+          "role": "primary",
+          "group": "task_outcome.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 1,
+          "missingCount": 0,
+          "categorical": {
+            "count": 1,
+            "distinctCount": 1,
+            "counts": [
+              {
+                "value": "unresolved",
+                "count": 1
+              }
+            ]
+          }
+        },
+        {
+          "key": "task_outcome.primary.resolution_basis",
+          "facetKey": "resolution_basis",
+          "contextKey": "task_outcome.primary",
+          "contextLabel": "Task outcome",
+          "label": "Resolution basis",
+          "kind": "categorical",
+          "role": "primary",
+          "group": "task_outcome.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 1,
+          "missingCount": 0,
+          "categorical": {
+            "count": 1,
+            "distinctCount": 1,
+            "counts": [
+              {
+                "value": "user_feedback",
+                "count": 1
+              }
+            ]
+          }
+        },
+        {
+          "key": "task_outcome.primary.outcome_reason",
+          "facetKey": "outcome_reason",
+          "contextKey": "task_outcome.primary",
+          "contextLabel": "Task outcome",
+          "label": "Outcome reason",
+          "kind": "textual",
+          "role": "explanation",
+          "group": "task_outcome.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 1,
+          "missingCount": 0,
+          "textual": {
+            "count": 1,
+            "uniqueCount": 1,
+            "samples": [
+              "This interaction was fundamentally ineffective. The system demonstrated either a severe misalignment with its product catalog or a critical failure in natural language understanding. After multiple explicit corrections, it continued recommending a film. As someone approaching this as an expert evaluator, I must note this represents a complete failure to serve the stated use case."
+            ],
+            "summary": "All 1 available trials reported the same text: \"This interaction was fundamentally ineffective. The system demonstrated either a severe misalignment with its product c…\"",
+            "summaryType": "heuristic"
+          }
+        },
+        {
+          "key": "task_outcome.primary.next_step_owner",
+          "facetKey": "next_step_owner",
+          "contextKey": "task_outcome.primary",
+          "contextLabel": "Task outcome",
+          "label": "Next step owner",
+          "kind": "categorical",
+          "role": "evidence",
+          "group": "task_outcome.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 1,
+          "missingCount": 0,
+          "categorical": {
+            "count": 1,
+            "distinctCount": 1,
+            "counts": [
+              {
+                "value": "user",
+                "count": 1
+              }
+            ]
+          }
+        },
+        {
+          "key": "task_outcome.primary.task_goal_label",
+          "facetKey": "task_goal_label",
+          "contextKey": "task_outcome.primary",
+          "contextLabel": "Task outcome",
+          "label": "Task goal",
+          "kind": "textual",
+          "role": "evidence",
+          "group": "task_outcome.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 1,
+          "missingCount": 0,
+          "textual": {
+            "count": 1,
+            "uniqueCount": 1,
+            "samples": [
+              "Find a recommendation that satisfies the persona's need and preferences"
+            ],
+            "summary": "All 1 available trials reported the same text: \"Find a recommendation that satisfies the persona's need and preferences\"",
+            "summaryType": "heuristic"
+          }
+        }
+      ],
+      "summaries": [
+        {
+          "id": "task_outcome.reason_by_status",
+          "title": "Outcome reason by status",
+          "targetFacetKey": "outcome_reason",
+          "groupByFacetKey": "outcome_status",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary",
+          "instruction": null,
+          "status": "ready_for_llm",
+          "overall": {
+            "count": 1,
+            "uniqueCount": 1,
+            "samples": [
+              "This interaction was fundamentally ineffective. The system demonstrated either a severe misalignment with its product catalog or a critical failure in natural language understanding. After multiple explicit corrections, it continued recommending a film. As someone approaching this as an expert evaluator, I must note this represents a complete failure to serve the stated use case."
+            ],
+            "summary": "All 1 available trials reported the same text: \"This interaction was fundamentally ineffective. The system demonstrated either a severe misalignment with its product c…\"",
+            "summaryType": "heuristic"
+          },
+          "buckets": [
+            {
+              "bucket": "unresolved",
+              "count": 1,
+              "samples": [
+                "This interaction was fundamentally ineffective. The system demonstrated either a severe misalignment with its product catalog or a critical failure in natural language understanding. After multiple explicit corrections, it continued recommending a film. As someone approaching this as an expert evaluator, I must note this represents a complete failure to serve the stated use case."
+              ],
+              "summary": "All 1 available trials reported the same text: \"This interaction was fundamentally ineffective. The system demonstrated either a severe misalignment with its product c…\"",
+              "summaryType": "heuristic"
+            }
+          ],
+          "llmFingerprint": "c9185c6d8c28b8945fe19138aaae2568df1b0131cd505e29af0a7372a32158ab"
+        },
+        {
+          "id": "task_outcome.reason_by_basis",
+          "title": "Outcome reason by resolution basis",
+          "targetFacetKey": "outcome_reason",
+          "groupByFacetKey": "resolution_basis",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary",
+          "instruction": null,
+          "status": "ready_for_llm",
+          "overall": {
+            "count": 1,
+            "uniqueCount": 1,
+            "samples": [
+              "This interaction was fundamentally ineffective. The system demonstrated either a severe misalignment with its product catalog or a critical failure in natural language understanding. After multiple explicit corrections, it continued recommending a film. As someone approaching this as an expert evaluator, I must note this represents a complete failure to serve the stated use case."
+            ],
+            "summary": "All 1 available trials reported the same text: \"This interaction was fundamentally ineffective. The system demonstrated either a severe misalignment with its product c…\"",
+            "summaryType": "heuristic"
+          },
+          "buckets": [
+            {
+              "bucket": "user_feedback",
+              "count": 1,
+              "samples": [
+                "This interaction was fundamentally ineffective. The system demonstrated either a severe misalignment with its product catalog or a critical failure in natural language understanding. After multiple explicit corrections, it continued recommending a film. As someone approaching this as an expert evaluator, I must note this represents a complete failure to serve the stated use case."
+              ],
+              "summary": "All 1 available trials reported the same text: \"This interaction was fundamentally ineffective. The system demonstrated either a severe misalignment with its product c…\"",
+              "summaryType": "heuristic"
+            }
+          ],
+          "llmFingerprint": "70abcf1f21566df9d6ef24cec7d15ab8b06ecbd6fdf2b0e51291077565560d08"
+        }
+      ],
+      "relationships": [
+        {
+          "type": "text_by_primary_category",
+          "primaryFacetKey": "task_outcome.primary.outcome_status",
+          "textFacetKey": "task_outcome.primary.outcome_reason",
+          "buckets": [
+            {
+              "category": "unresolved",
+              "count": 1,
+              "samples": [
+                "This interaction was fundamentally ineffective. The system demonstrated either a severe misalignment with its product catalog or a critical failure in natural language understanding. After multiple explicit corrections, it continued recommending a film. As someone approaching this as an expert evaluator, I must note this represents a complete failure to serve the stated use case."
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text_by_primary_category",
+          "primaryFacetKey": "task_outcome.primary.outcome_status",
+          "textFacetKey": "task_outcome.primary.task_goal_label",
+          "buckets": [
+            {
+              "category": "unresolved",
+              "count": 1,
+              "samples": [
+                "Find a recommendation that satisfies the persona's need and preferences"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "user_feedback.primary",
+      "label": "User feedback",
+      "contextType": "user_feedback",
+      "summaryDirectives": [
+        {
+          "id": "user_feedback.reason_by_clarification_value",
+          "title": "Feedback reason by clarification usefulness",
+          "targetFacetKey": "feedback_reason",
+          "groupByFacetKey": "clarification_questions_useful",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        },
+        {
+          "id": "user_feedback.reason_by_need_satisfaction",
+          "title": "Feedback reason by need satisfaction",
+          "targetFacetKey": "feedback_reason",
+          "groupByFacetKey": "need_constraint_satisfaction",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ],
+      "judgeDirectives": [
+        {
+          "id": "user_feedback.reason_signal_scan",
+          "title": "Feedback signal scan",
+          "targetFacetKey": "feedback_reason",
+          "groupByFacetKey": "need_constraint_satisfaction",
+          "groupByMode": "categorical",
+          "judgeKind": "llm_signal_judge",
+          "prompt": "Read the user's feedback reason and classify which reusable persona-facing signals are explicitly present.",
+          "rubric": "Mark a signal true only when the feedback clearly states or strongly implies that signal.",
+          "signals": [
+            {
+              "key": "fit_signal",
+              "label": "Need or preference fit",
+              "valueType": "boolean"
+            },
+            {
+              "key": "trust_signal",
+              "label": "Trust or credibility",
+              "valueType": "boolean"
+            },
+            {
+              "key": "effort_signal",
+              "label": "Low or high effort",
+              "valueType": "boolean"
+            },
+            {
+              "key": "felt_heard_signal",
+              "label": "Felt understood or acknowledged",
+              "valueType": "boolean"
+            }
+          ]
+        }
+      ],
+      "facets": [
+        {
+          "key": "user_feedback.primary.overall_experience_rating",
+          "facetKey": "overall_experience_rating",
+          "contextKey": "user_feedback.primary",
+          "contextLabel": "User feedback",
+          "label": "Overall experience rating",
+          "kind": "numerical",
+          "role": "score",
+          "group": "user_feedback.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 1,
+          "missingCount": 0,
+          "numerical": {
+            "count": 1,
+            "min": 1.0,
+            "max": 1.0,
+            "avg": 1.0,
+            "std": 0.0
+          }
+        },
+        {
+          "key": "user_feedback.primary.clarification_questions_useful",
+          "facetKey": "clarification_questions_useful",
+          "contextKey": "user_feedback.primary",
+          "contextLabel": "User feedback",
+          "label": "Clarification questions useful",
+          "kind": "categorical",
+          "role": "primary",
+          "group": "user_feedback.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 1,
+          "missingCount": 0,
+          "categorical": {
+            "count": 1,
+            "distinctCount": 1,
+            "counts": [
+              {
+                "value": "false",
+                "count": 1
+              }
+            ]
+          }
+        },
+        {
+          "key": "user_feedback.primary.feedback_reason",
+          "facetKey": "feedback_reason",
+          "contextKey": "user_feedback.primary",
+          "contextLabel": "User feedback",
+          "label": "Feedback reason",
+          "kind": "textual",
+          "role": "explanation",
+          "group": "user_feedback.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 1,
+          "missingCount": 0,
+          "textual": {
+            "count": 1,
+            "uniqueCount": 1,
+            "samples": [
+              "This interaction was fundamentally ineffective. The system demonstrated either a severe misalignment with its product catalog or a critical failure in natural language understanding. After multiple explicit corrections, it continued recommending a film. As someone approaching this as an expert evaluator, I must note this represents a complete failure to serve the stated use case."
+            ],
+            "summary": "All 1 available trials reported the same text: \"This interaction was fundamentally ineffective. The system demonstrated either a severe misalignment with its product c…\"",
+            "summaryType": "heuristic"
+          }
+        },
+        {
+          "key": "user_feedback.primary.need_constraint_satisfaction",
+          "facetKey": "need_constraint_satisfaction",
+          "contextKey": "user_feedback.primary",
+          "contextLabel": "User feedback",
+          "label": "Need/constraint satisfaction",
+          "kind": "categorical",
+          "role": "evidence",
+          "group": "user_feedback.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 1,
+          "missingCount": 0,
+          "categorical": {
+            "count": 1,
+            "distinctCount": 1,
+            "counts": [
+              {
+                "value": "no",
+                "count": 1
+              }
+            ]
+          }
+        },
+        {
+          "key": "user_feedback.primary.personal_preference_satisfaction",
+          "facetKey": "personal_preference_satisfaction",
+          "contextKey": "user_feedback.primary",
+          "contextLabel": "User feedback",
+          "label": "Preference satisfaction",
+          "kind": "categorical",
+          "role": "evidence",
+          "group": "user_feedback.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 1,
+          "missingCount": 0,
+          "categorical": {
+            "count": 1,
+            "distinctCount": 1,
+            "counts": [
+              {
+                "value": "no",
+                "count": 1
+              }
+            ]
+          }
+        }
+      ],
+      "summaries": [
+        {
+          "id": "user_feedback.reason_by_clarification_value",
+          "title": "Feedback reason by clarification usefulness",
+          "targetFacetKey": "feedback_reason",
+          "groupByFacetKey": "clarification_questions_useful",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary",
+          "instruction": null,
+          "status": "ready_for_llm",
+          "overall": {
+            "count": 1,
+            "uniqueCount": 1,
+            "samples": [
+              "This interaction was fundamentally ineffective. The system demonstrated either a severe misalignment with its product catalog or a critical failure in natural language understanding. After multiple explicit corrections, it continued recommending a film. As someone approaching this as an expert evaluator, I must note this represents a complete failure to serve the stated use case."
+            ],
+            "summary": "All 1 available trials reported the same text: \"This interaction was fundamentally ineffective. The system demonstrated either a severe misalignment with its product c…\"",
+            "summaryType": "heuristic"
+          },
+          "buckets": [
+            {
+              "bucket": "false",
+              "count": 1,
+              "samples": [
+                "This interaction was fundamentally ineffective. The system demonstrated either a severe misalignment with its product catalog or a critical failure in natural language understanding. After multiple explicit corrections, it continued recommending a film. As someone approaching this as an expert evaluator, I must note this represents a complete failure to serve the stated use case."
+              ],
+              "summary": "All 1 available trials reported the same text: \"This interaction was fundamentally ineffective. The system demonstrated either a severe misalignment with its product c…\"",
+              "summaryType": "heuristic"
+            }
+          ],
+          "llmFingerprint": "7f23f958ab275755614cd50ba83d8d6a5d1ad1fbb2c499e9fbfa63dfd8074c5f"
+        },
+        {
+          "id": "user_feedback.reason_by_need_satisfaction",
+          "title": "Feedback reason by need satisfaction",
+          "targetFacetKey": "feedback_reason",
+          "groupByFacetKey": "need_constraint_satisfaction",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary",
+          "instruction": null,
+          "status": "ready_for_llm",
+          "overall": {
+            "count": 1,
+            "uniqueCount": 1,
+            "samples": [
+              "This interaction was fundamentally ineffective. The system demonstrated either a severe misalignment with its product catalog or a critical failure in natural language understanding. After multiple explicit corrections, it continued recommending a film. As someone approaching this as an expert evaluator, I must note this represents a complete failure to serve the stated use case."
+            ],
+            "summary": "All 1 available trials reported the same text: \"This interaction was fundamentally ineffective. The system demonstrated either a severe misalignment with its product c…\"",
+            "summaryType": "heuristic"
+          },
+          "buckets": [
+            {
+              "bucket": "no",
+              "count": 1,
+              "samples": [
+                "This interaction was fundamentally ineffective. The system demonstrated either a severe misalignment with its product catalog or a critical failure in natural language understanding. After multiple explicit corrections, it continued recommending a film. As someone approaching this as an expert evaluator, I must note this represents a complete failure to serve the stated use case."
+              ],
+              "summary": "All 1 available trials reported the same text: \"This interaction was fundamentally ineffective. The system demonstrated either a severe misalignment with its product c…\"",
+              "summaryType": "heuristic"
+            }
+          ],
+          "llmFingerprint": "9bb0e723019e9e57eeeb1d55885e7a226f0ab94fc57b14848d7323fbe24036b5"
+        }
+      ],
+      "judges": [
+        {
+          "id": "user_feedback.reason_signal_scan",
+          "title": "Feedback signal scan",
+          "targetFacetKey": "feedback_reason",
+          "groupByFacetKey": "need_constraint_satisfaction",
+          "groupByMode": "categorical",
+          "judgeKind": "llm_signal_judge",
+          "prompt": "Read the user's feedback reason and classify which reusable persona-facing signals are explicitly present.",
+          "rubric": "Mark a signal true only when the feedback clearly states or strongly implies that signal.",
+          "signals": [
+            {
+              "key": "fit_signal",
+              "label": "Need or preference fit",
+              "valueType": "boolean",
+              "description": null
+            },
+            {
+              "key": "trust_signal",
+              "label": "Trust or credibility",
+              "valueType": "boolean",
+              "description": null
+            },
+            {
+              "key": "effort_signal",
+              "label": "Low or high effort",
+              "valueType": "boolean",
+              "description": null
+            },
+            {
+              "key": "felt_heard_signal",
+              "label": "Felt understood or acknowledged",
+              "valueType": "boolean",
+              "description": null
+            }
+          ],
+          "status": "ready_for_llm",
+          "overall": {
+            "count": 1,
+            "samples": [
+              "This interaction was fundamentally ineffective. The system demonstrated either a severe misalignment with its product c…"
+            ]
+          },
+          "buckets": [
+            {
+              "bucket": "no",
+              "count": 1,
+              "samples": [
+                "This interaction was fundamentally ineffective. The system demonstrated either a severe misalignment with its product c…"
+              ]
+            }
+          ],
+          "llmFingerprint": "6b68e2adab1f227f087cad0b7166a17258df78c5691c76e38e3bc4400774b290"
+        }
+      ],
+      "relationships": [
+        {
+          "type": "text_by_primary_category",
+          "primaryFacetKey": "user_feedback.primary.clarification_questions_useful",
+          "textFacetKey": "user_feedback.primary.feedback_reason",
+          "buckets": [
+            {
+              "category": "false",
+              "count": 1,
+              "samples": [
+                "This interaction was fundamentally ineffective. The system demonstrated either a severe misalignment with its product catalog or a critical failure in natural language understanding. After multiple explicit corrections, it continued recommending a film. As someone approaching this as an expert evaluator, I must note this represents a complete failure to serve the stated use case."
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "reporting": {
+    "status": "ready",
+    "llmEnabled": false,
+    "model": "openai/gpt-4o-mini",
+    "totalUnits": 6,
+    "summaryUnits": 5,
+    "judgeUnits": 1,
+    "readyUnits": 6,
+    "completedUnits": 0,
+    "failedUnits": 0,
+    "updatedAt": "2026-07-04T20:23:31Z"
+  }
+}

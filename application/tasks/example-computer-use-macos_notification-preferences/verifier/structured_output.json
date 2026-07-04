@@ -1,0 +1,222 @@
+{
+  "schemaVersion": "1.0",
+  "artifactType": "personabench.trial_evaluation",
+  "taskType": "os-app",
+  "presenceCheck": {
+    "passed": true,
+    "requiredArtifacts": [
+      "handoff.txt",
+      "plan.json"
+    ],
+    "missingArtifacts": []
+  },
+  "sourceArtifacts": {
+    "handoff": "/tmp/personabench-macos-calendar-reminder-handoff/handoff.txt",
+    "plan": "/tmp/personabench-macos-calendar-reminder-handoff/plan.json"
+  },
+  "contexts": [
+    {
+      "key": "task_outcome.primary",
+      "label": "Task outcome",
+      "contextType": "task_outcome",
+      "facets": [
+        {
+          "key": "outcome_status",
+          "label": "Outcome status",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "passed"
+        },
+        {
+          "key": "goal_completion_ratio",
+          "label": "Goal completion ratio",
+          "role": "score",
+          "kind": "numerical",
+          "value": 1.0
+        },
+        {
+          "key": "goal_completion_bucket",
+          "label": "Goal completion bucket",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "complete"
+        },
+        {
+          "key": "verifier_mode",
+          "label": "Verifier mode",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "hybrid"
+        },
+        {
+          "key": "primary_failure_reason",
+          "label": "Primary failure reason",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "none"
+        },
+        {
+          "key": "outcome_explanation",
+          "label": "Outcome explanation",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "The submission produced both the cross-app handoff note and the matching plan JSON."
+        },
+        {
+          "key": "completion_evidence",
+          "label": "Completion evidence",
+          "role": "evidence",
+          "kind": "textual",
+          "value": "/tmp/personabench-macos-calendar-reminder-handoff/handoff.txt and /tmp/personabench-macos-calendar-reminder-handoff/plan.json"
+        }
+      ]
+    },
+    {
+      "key": "goal_component.handoff_note_created",
+      "label": "Handoff note created",
+      "contextType": "goal_component",
+      "facets": [
+        {
+          "key": "goal_component_key",
+          "label": "Goal component key",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "handoff_note_created"
+        },
+        {
+          "key": "goal_component_label",
+          "label": "Goal component label",
+          "role": "evidence",
+          "kind": "textual",
+          "value": "Create the calendar/reminder handoff note"
+        },
+        {
+          "key": "goal_component_status",
+          "label": "Goal component status",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "passed"
+        },
+        {
+          "key": "goal_component_weight",
+          "label": "Goal component weight",
+          "role": "score",
+          "kind": "numerical",
+          "value": 0.5
+        },
+        {
+          "key": "goal_component_required",
+          "label": "Goal component required",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "true"
+        },
+        {
+          "key": "goal_component_evidence",
+          "label": "Goal component evidence",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "handoff.txt matches the expected two-line handoff format."
+        }
+      ]
+    },
+    {
+      "key": "goal_component.plan_json_created",
+      "label": "Plan JSON created",
+      "contextType": "goal_component",
+      "facets": [
+        {
+          "key": "goal_component_key",
+          "label": "Goal component key",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "plan_json_created"
+        },
+        {
+          "key": "goal_component_label",
+          "label": "Goal component label",
+          "role": "evidence",
+          "kind": "textual",
+          "value": "Create the matching plan JSON"
+        },
+        {
+          "key": "goal_component_status",
+          "label": "Goal component status",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "passed"
+        },
+        {
+          "key": "goal_component_weight",
+          "label": "Goal component weight",
+          "role": "score",
+          "kind": "numerical",
+          "value": 0.5
+        },
+        {
+          "key": "goal_component_required",
+          "label": "Goal component required",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "true"
+        },
+        {
+          "key": "goal_component_evidence",
+          "label": "Goal component evidence",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "plan.json contains the expected event title, reminder title, and location."
+        }
+      ]
+    },
+    {
+      "key": "cross_app_workflow.primary",
+      "label": "Cross-app workflow plan",
+      "contextType": "cross_app_workflow",
+      "facets": [
+        {
+          "key": "workflow_type",
+          "label": "Workflow type",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "calendar_plus_reminder"
+        },
+        {
+          "key": "apps_involved_count",
+          "label": "Apps involved count",
+          "role": "score",
+          "kind": "numerical",
+          "value": 2
+        },
+        {
+          "key": "calendar_event_title",
+          "label": "Calendar event title",
+          "role": "evidence",
+          "kind": "textual",
+          "value": "Dentist follow-up"
+        },
+        {
+          "key": "reminder_title",
+          "label": "Reminder title",
+          "role": "evidence",
+          "kind": "textual",
+          "value": "Bring insurance card"
+        },
+        {
+          "key": "location",
+          "label": "Location",
+          "role": "evidence",
+          "kind": "textual",
+          "value": "North Clinic"
+        },
+        {
+          "key": "reason",
+          "label": "Reason",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "The appointment belongs on the calendar because it is time-based, while the item to bring works better as a reminder."
+        }
+      ]
+    }
+  ]
+}

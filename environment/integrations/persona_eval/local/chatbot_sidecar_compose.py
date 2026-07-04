@@ -36,8 +36,9 @@ def write_standalone_sidecar_compose(
                         "python",
                         "-c",
                         (
-                            "import urllib.request; "
-                            "urllib.request.urlopen('http://localhost:{}/health', timeout=2).read()"
+                            "import socket; "
+                            "s=socket.create_connection(('localhost', {}), timeout=2); "
+                            "s.close()"
                         ).format(container_port),
                     ],
                     "interval": "2s",

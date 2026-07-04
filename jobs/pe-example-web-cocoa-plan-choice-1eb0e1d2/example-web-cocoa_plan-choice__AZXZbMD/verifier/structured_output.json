@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0",
+  "artifactType": "personabench.trial_evaluation",
+  "taskType": "web",
+  "presenceCheck": {
+    "passed": true,
+    "requiredArtifacts": [
+      "plan_choice.json"
+    ],
+    "missingArtifacts": []
+  },
+  "sourceArtifacts": {
+    "taskOutput": "/app/output/plan_choice.json"
+  },
+  "contexts": [
+    {
+      "key": "decision.primary",
+      "label": "Primary decision",
+      "contextType": "decision",
+      "facets": [
+        {
+          "key": "decision_outcome",
+          "label": "Decision outcome",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "selected"
+        },
+        {
+          "key": "basis_primary",
+          "label": "Primary basis",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "fit"
+        },
+        {
+          "key": "reason",
+          "label": "Reason",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "After examining all three plans methodically, the Developer plan satisfies every requirement for small personal Python projects and lightweight web apps without introducing unnecessary complexity or financial ambiguity. The Beginner plan's severe constraints — 100 CPU-seconds per day, 512 MB storage, no SSH, and restricted outbound internet — introduce operational risk incompatible with even modest experimentation; this is particularly intolerable given a security-first disposition and low tolerance for unexpected failure. The Custom plan's variable pricing range ($10 to $500/month) provides no bounded guarantee, which conflicts with the need for predictable cost control. The Developer plan presents a fixed $10/month commitment, one web app, 5 GB disk, 5,000 CPU-seconds per day, full SSH access, unrestricted outbound internet, and a 30-day no-quibble money-back guarantee — a clearly scoped, verifiable, and sufficient set of capabilities for the stated purpose, cancellable at any time."
+        },
+        {
+          "key": "decision_subject_id",
+          "label": "Decision subject ID",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "developer"
+        },
+        {
+          "key": "decision_subject_label",
+          "label": "Decision subject label",
+          "role": "evidence",
+          "kind": "textual",
+          "value": "Developer"
+        },
+        {
+          "key": "task_price_text",
+          "label": "Displayed price",
+          "role": "evidence",
+          "kind": "textual",
+          "value": "$10/month"
+        }
+      ]
+    },
+    {
+      "key": "decision.process",
+      "label": "Decision process",
+      "contextType": "decision_process",
+      "facets": [
+        {
+          "key": "exploration_style",
+          "label": "Exploration style",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "compared_multiple"
+        },
+        {
+          "key": "comparison_notes",
+          "label": "Comparison notes",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "The persona described a compared multiple comparison pattern before picking this plan."
+        }
+      ]
+    }
+  ]
+}

@@ -1,5 +1,9 @@
 {
   "schemaVersion": "application-task-interface-v1",
+  "sharedCoreContract": {
+    "status": "active",
+    "reference": "application/tasks/interface/shared_core_metric_contract.example.json"
+  },
   "applicationTypes": {
     "survey": {
       "status": "active",
@@ -26,7 +30,7 @@
     "web": {
       "status": "active",
       "driver": "browser_or_computer_use",
-      "canonicalTask": "application/tasks/example-web-playwright_books-interest",
+      "canonicalTask": "application/tasks/example-web-playwright_quote-choice",
       "artifactContract": [
         "trajectory",
         "application_result",
@@ -34,15 +38,16 @@
         "persona_self_report"
       ]
     },
-    "appworld": {
+    "os-app": {
       "status": "active",
-      "driver": "benchflow_appworld_agent",
-      "canonicalTask": "external:appworld",
+      "driver": "computer_use_or_native_app",
+      "canonicalTask": "application/tasks/example-computer-use-ios_notification-preferences",
       "artifactContract": [
-        "appworld_result",
-        "trace",
-        "score",
-        "persona_self_report"
+        "trajectory",
+        "application_result",
+        "objective_result",
+        "persona_self_report",
+        "local_artifacts"
       ]
     }
   }

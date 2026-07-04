@@ -48,8 +48,8 @@ class WebEvalTask:
     site_url: str
     task_path: Path
     description: str
-    output_artifact: str = "ecommerce_interaction.json"
-    submission_profile: str = "persona_eval_final_json"
+    output_artifact: str = "web_result.json"
+    submission_profile: str = "web_result"
 
     def to_dict(self) -> Dict[str, Any]:
         return {

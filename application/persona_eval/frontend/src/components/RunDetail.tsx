@@ -6,44 +6,74 @@
  * breadcrumb, a headline score band + metric tiles, then the body.
  *
  * Option-aware, honestly scoped (spec §05): the debrief renders the stored
- * application artifact shape: chatbot, survey, web, or AppWorld.
+ * application artifact shape: chatbot, survey, web, or OS app.
  */
-import { useMemo, useState, type ReactNode } from "react";
+import { useMemo, type ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import {
-  GroundingChip,
-  RecChip,
   StatTile,
+  AppTypeTag,
   appName,
   asRunDetail,
-  bandBorderL,
   fmtDomain,
   fmtRunDate,
-  isAgentHiccup,
   runApplicationType,
   runWebTrace,
   type RunApplicationType,
   type RunDetailView,
-  type RunTranscriptTurn,
 } from "./runsShared";
-import { PromptPanel } from "./cockpit/PromptPanel";
+import { ChatTrialDebriefBody } from "./ChatTrialDebrief";
+import { TrialDebriefRails } from "./TrialDebriefRails";
+import { HarborTraceReplay } from "./cockpit/HarborTraceReplay";
+import { OsAppEvalScorecard } from "./cockpit/TaskEvalScorecard";
+import {
+  StudioGlassPanel,
+  StudioPageFrame,
+  StudioPageHeader,
+  StudioToolbarButton,
+} from "./studio/StudioShell";
 import { FOCUS_RING, SCORE_BAND_CLASS, Sym, humanizeToken, scoreBand } from "./cockpit/cockpitShared";
-import { Markdown } from "./Markdown";
 import { api, ApiError } from "@/lib/api";
 import type {
-  PersonaEvalQuestionnaire,
   PersonaEvalResult,
-  AppWorldTraceEvent,
+  OsAppResult,
   SurveyAnswer,
   SurveyQuestion,
   SurveyTrajectoryEvent,
-  WebTraceEvent,
+  UserFeedbackArtifact,
 } from "@/lib/types";
 
 export interface RunDetailProps {
   harborTrial: { jobName: string; trialName: string };
   onBack: () => void;
+}
+
+function runDebriefMetaLine(run: RunDetailView, appType: RunApplicationType): string {
+  const persona = run.persona?.name ? `persona “${run.persona.name}”` : "";
+  const personaPart = persona ? ` · ${persona}` : "";
+  const when = fmtRunDate(
+    run.surveyResult?.createdAt ??
+      run.webResult?.createdAt ??
+      run.createdAt,
+  );
+  if (appType === "survey" && run.surveyResult) {
+    const label =
+      run.surveyResult.instrument.title || run.instrumentTitle || run.surveyResult.instrument.id;
+    return `${label}${personaPart} · ${when}`;
+  }
+  if (appType === "web" && run.webResult) {
+    const task = run.taskTitle || run.siteName || "website task";
+    const site = run.siteName ? ` on ${run.siteName}` : "";
+    return `${task}${site}${personaPart} · ${when}`;
+  }
+  if (appType === "os-app") {
+    const task = run.taskTitle || "OS app task";
+    return `${task}${personaPart} · ${when}`;
+  }
+  const app = appName(run.config?.applicationId);
+  const domain = run.config?.domain ? ` · ${fmtDomain(run.config.domain)} catalog` : "";
+  return `${app}${domain}${personaPart} · ${when}`;
 }
 
 export function RunDetail({ harborTrial, onBack }: RunDetailProps) {
@@ -54,45 +84,57 @@ export function RunDetail({ harborTrial, onBack }: RunDetailProps) {
 
   const run = useMemo(() => (query.data ? asRunDetail(query.data) : null), [query.data]);
   const appType: RunApplicationType = run ? runApplicationType(run) : "chatbot";
+  const metaLine = run ? runDebriefMetaLine(run, appType) : null;
+  const subtitleText = metaLine ? `Job ${harborTrial.jobName} · ${metaLine}` : `Job ${harborTrial.jobName}`;
 
   return (
-    <div className="min-h-0 flex-1 overflow-auto bg-surface-dim custom-scrollbar">
-      <div className="mx-auto w-full max-w-[1240px] px-6 py-7">
-        {/* Header: back link + H1 (left) · run-type reflection (right) */}
-        <div className="mb-5 flex flex-wrap items-start justify-between gap-4">
-          <div>
-            <BackButton onBack={onBack} />
-            <h1 className="font-display text-[22px] font-bold tracking-tight text-text-main">
-              Trial debrief
-            </h1>
-          </div>
-          {run && <RunTypeReflection active={appType} />}
-        </div>
-
-        {query.isLoading ? (
-          <DetailLoading />
-        ) : query.isError ? (
-          <DetailError error={query.error} onRetry={() => query.refetch()} />
-        ) : !run ? (
-          <DetailNotFound />
-        ) : (
+    <StudioPageFrame>
+      <StudioPageHeader
+        compact
+        eyebrow="MatrAIx · Runs"
+        title={harborTrial.trialName}
+        subtitle={
+          <span className="font-mono text-[11px] text-text-variant" title={subtitleText}>
+            {subtitleText}
+          </span>
+        }
+        meta={run ? <AppTypeTag type={appType} /> : null}
+        actions={
           <>
-            <div className="mb-5">
-              <PersonaPanel persona={run.persona ?? {}} />
-            </div>
-            {appType === "survey" ? (
-              <SurveyDebrief run={run} />
-            ) : appType === "web" ? (
-              <WebDebrief run={run} />
-            ) : appType === "appworld" ? (
-              <AppWorldDebrief run={run} />
-            ) : (
-              <ChatbotDebrief run={run} />
-            )}
+            <StudioToolbarButton icon="arrow_back" onClick={onBack}>
+              Back to job
+            </StudioToolbarButton>
+            <StudioToolbarButton
+              icon="refresh"
+              onClick={() => query.refetch()}
+              disabled={query.isFetching}
+            >
+              Refresh
+            </StudioToolbarButton>
           </>
-        )}
-      </div>
-    </div>
+        }
+      />
+
+      {query.isLoading ? (
+        <DetailLoading />
+      ) : query.isError ? (
+        <DetailError error={query.error} onRetry={() => query.refetch()} />
+      ) : !run ? (
+        <DetailNotFound />
+      ) : (
+        <>
+          {appType === "survey" ? (
+            <SurveyDebrief run={run} />
+          ) : appType === "web" ? (
+            <WebDebrief run={run} />
+          ) : appType === "os-app" ? (
+            <OsAppDebrief run={run} />
+          ) : (
+            <ChatbotDebrief run={run} />
+          )}
+        </>
+      )}
+    </StudioPageFrame>
   );
 }
 
@@ -100,122 +142,74 @@ export function RunDetail({ harborTrial, onBack }: RunDetailProps) {
 // Shared chrome
 // ---------------------------------------------------------------------------
 
-function BackButton({ onBack }: { onBack: () => void }) {
-  return (
-    <button
-      type="button"
-      onClick={onBack}
-      className={`mb-2 flex items-center gap-1 hud text-[9px] text-primary transition-opacity hover:underline active:opacity-70 ${FOCUS_RING}`}
-    >
-      <Sym name="arrow_back" size={14} />
-      All runs
-    </button>
-  );
-}
-
-/**
- * The run-type segmented control from the mockup, rendered as a reflection of
- * the loaded run's kind (a run has one fixed type, so it is not a switcher).
- */
-function RunTypeReflection({ active }: { active: RunApplicationType }) {
-  const items: ReadonlyArray<{ key: RunApplicationType; label: string }> = [
-    { key: "chatbot", label: "Chatbot" },
-    { key: "survey", label: "Survey" },
-    { key: "web", label: "Web" },
-    { key: "appworld", label: "AppWorld" },
-  ];
-  return (
-    <div
-      className="inline-flex rounded-md border border-outline bg-surface-low p-1"
-      role="group"
-      aria-label={`This run is a ${active} run`}
-    >
-      {items.map((it) => {
-        const on = it.key === active;
-        return (
-          <span
-            key={it.key}
-            aria-current={on ? "true" : undefined}
-            title={on ? `This run is a ${it.label} run.` : `${it.label} runs show up here when you run one.`}
-            className={`rounded px-3 py-1.5 text-[12px] font-medium transition-colors ${
-              on ? "bg-primary text-on-primary" : "text-text-dim"
-            }`}
-          >
-            {it.label}
-          </span>
-        );
-      })}
-    </div>
-  );
-}
-
-/** The one-line telemetry breadcrumb that opens each debrief body. */
-function RunMetaLine({ icon, children }: { icon: string; children: ReactNode }) {
-  return (
-    <div className="flex items-start gap-2 hud text-[9px] leading-relaxed text-text-variant">
-      <Sym name={icon} size={16} className="mt-px shrink-0 text-primary" />
-      <span>{children}</span>
-    </div>
-  );
-}
-
-/** A short, friendly intro under the meta line (per option). */
-function DebriefIntro({ children }: { children: ReactNode }) {
-  return <p className="max-w-2xl text-[13px] leading-relaxed text-text-variant">{children}</p>;
-}
-
-/** Collapsible profile of the simulated persona behind a run (shared by every
- *  debrief). The full saved context is shown on demand so a reviewer can see
- *  exactly who the simulated user was. */
-function PersonaPanel({
-  persona,
+function DebriefPanel({
+  title,
+  icon,
+  children,
+  className = "",
+  bodyClassName = "",
 }: {
-  persona: { id?: string | null; name?: string | null; source?: string | null; context?: string | null };
+  title?: string;
+  icon?: string;
+  children: ReactNode;
+  className?: string;
+  bodyClassName?: string;
 }) {
-  const [open, setOpen] = useState(false);
-  const context = (persona.context ?? "").trim();
-  const name = persona.name || "Persona";
-  if (!persona.name && !context) return null;
   return (
-    <section className="overflow-hidden rounded-md border border-outline bg-surface-lowest">
-      <button
-        type="button"
-        onClick={() => setOpen((o) => !o)}
-        aria-expanded={open}
-        className={`flex w-full items-center justify-between gap-2 px-4 py-3 text-left transition-colors hover:bg-surface-low ${FOCUS_RING}`}
-      >
-        <span className="flex min-w-0 items-center gap-2">
-          <Sym name="person" fill={1} size={16} className="flex-none text-text-dim" />
-          <span className="hud text-[9px] text-text-dim">Persona</span>
-          <span className="truncate text-[13px] font-medium text-text-main">{name}</span>
-          {persona.source && (
-            <span className="hud flex-none rounded border border-outline px-1.5 py-0.5 text-[8px] text-text-dim">
-              {persona.source}
-            </span>
-          )}
-        </span>
-        <span className="flex flex-none items-center gap-2">
-          {context && <span className="hud text-[9px] text-text-dim">{open ? "Hide profile" : "View profile"}</span>}
-          <Sym name={open ? "expand_more" : "chevron_right"} size={18} className="text-text-dim" />
-        </span>
-      </button>
-      {open && context && (
-        <div className="border-t border-outline px-4 py-3">
-          <pre className="custom-scrollbar max-h-96 overflow-auto whitespace-pre-wrap break-words font-sans text-[12px] leading-relaxed text-text-variant">
-            {context}
-          </pre>
+    <StudioGlassPanel className={`overflow-hidden ${className}`}>
+      {title ? (
+        <div className="flex items-center gap-2 border-b border-outline/40 px-4 py-2.5 text-[10px] font-medium uppercase tracking-wide text-text-dim">
+          {icon ? <Sym name={icon} size={14} className="text-primary" /> : null}
+          {title}
         </div>
-      )}
-    </section>
+      ) : null}
+      <div className={bodyClassName}>{children}</div>
+    </StudioGlassPanel>
+  );
+}
+
+function TrialDebriefChrome({
+  prompts,
+  persona,
+  instructionMarkdown,
+  contextMarkdown,
+  questionnaireMarkdown,
+  outputSchemaMarkdown,
+  children,
+}: {
+  prompts?: RunDetailView["prompts"];
+  persona?: RunDetailView["persona"];
+  instructionMarkdown?: RunDetailView["instructionMarkdown"];
+  contextMarkdown?: RunDetailView["contextMarkdown"];
+  questionnaireMarkdown?: RunDetailView["questionnaireMarkdown"];
+  outputSchemaMarkdown?: RunDetailView["outputSchemaMarkdown"];
+  children: ReactNode;
+}) {
+  const rails = (
+    <TrialDebriefRails
+      prompts={prompts}
+      persona={persona ?? null}
+      instructionMarkdown={instructionMarkdown ?? null}
+      contextMarkdown={contextMarkdown ?? null}
+      questionnaireMarkdown={questionnaireMarkdown ?? null}
+      outputSchemaMarkdown={outputSchemaMarkdown ?? null}
+    />
+  );
+
+  return (
+    <div className="space-y-5">
+      {rails ? (
+        <StudioGlassPanel className="divide-y divide-outline/40 overflow-hidden">{rails}</StudioGlassPanel>
+      ) : null}
+      {children}
+    </div>
   );
 }
 
 /** A quiet dashed "nothing here" note, reused by empty bodies. */
 function DashedNote({ children }: { children: ReactNode }) {
   return (
-    <div className="rounded-md border border-dashed border-outline bg-surface-low px-4 py-8 text-center text-[13px] text-text-variant">
-      {children}
-    </div>
+    <div className="px-4 py-10 text-center text-[13px] text-text-variant">{children}</div>
   );
 }
 
@@ -242,9 +236,160 @@ function ValidityBadge({
   );
 }
 
-function clamp(value: number, max: number): number {
-  if (Number.isNaN(value)) return 0;
-  return Math.max(0, Math.min(max, value));
+function humanizeFeedbackKey(key: string): string {
+  const snake = key.replace(/([a-z0-9])([A-Z])/g, "$1_$2");
+  return humanizeToken(snake);
+}
+
+function feedbackDisplayValue(value: unknown): string {
+  if (typeof value === "boolean") return value ? "Yes" : "No";
+  if (typeof value === "number") return String(value);
+  if (typeof value === "string") return value;
+  return "-";
+}
+
+function feedbackNumericValue(
+  feedback: UserFeedbackArtifact | null | undefined,
+  key: string,
+): number | null {
+  const value = feedback?.[key];
+  return typeof value === "number" ? value : null;
+}
+
+function feedbackTextValue(
+  feedback: UserFeedbackArtifact | null | undefined,
+  key: string,
+): string {
+  const value = feedback?.[key];
+  return typeof value === "string" ? value : "";
+}
+
+function feedbackBooleanValue(
+  feedback: UserFeedbackArtifact | null | undefined,
+  key: string,
+): boolean | null {
+  const value = feedback?.[key];
+  return typeof value === "boolean" ? value : null;
+}
+
+function trialEvaluationFeedback(run: RunDetailView): UserFeedbackArtifact | null {
+  const context =
+    run.trialEvaluation?.contexts.find(
+      (item) => item.contextType === "user_feedback" || item.contextType === "feedback",
+    ) ?? null;
+  if (!context) return null;
+  const payload: UserFeedbackArtifact = {};
+  for (const facet of context.facets) {
+    const value = facet.value;
+    if (
+      typeof value === "string" ||
+      typeof value === "number" ||
+      typeof value === "boolean" ||
+      value === null
+    ) {
+      payload[facet.key] = value;
+    }
+  }
+  return Object.keys(payload).length > 0 ? payload : null;
+}
+
+function resolveUserFeedback(run: RunDetailView): UserFeedbackArtifact | null {
+  return run.userFeedback ?? trialEvaluationFeedback(run);
+}
+
+function UserFeedbackPanel({
+  feedback,
+}: {
+  feedback: UserFeedbackArtifact | null | undefined;
+}) {
+  const overall = feedbackNumericValue(feedback, "overallExperienceRating");
+  const trust = feedbackNumericValue(feedback, "trustLevel");
+  const effort = feedbackNumericValue(feedback, "effortRating");
+  const clarity = feedbackNumericValue(feedback, "clarityOfNextStep");
+  const feltUnderstood = feedbackBooleanValue(feedback, "feltUnderstood");
+  const reason = feedbackTextValue(feedback, "reason");
+  const extraEntries = Object.entries(feedback ?? {})
+    .filter(([, value]) => value !== null && value !== undefined && value !== "")
+    .filter(
+      ([key]) =>
+        ![
+          "overallExperienceRating",
+          "trustLevel",
+          "effortRating",
+          "clarityOfNextStep",
+          "feltUnderstood",
+          "reason",
+        ].includes(key),
+    );
+
+  return (
+    <DebriefPanel title="Persona self-report" icon="rate_review" bodyClassName="p-4">
+      {!feedback || Object.keys(feedback).length === 0 ? (
+        <DashedNote>
+          No post-run self-report was recorded. This section appears when the task writes{" "}
+          <span className="font-mono text-[11px]">user_feedback.json</span>.
+        </DashedNote>
+      ) : (
+        <div className="space-y-4">
+          <p className="text-[11px] leading-relaxed text-text-variant">
+            Subjective reflection captured after task completion from{" "}
+            <span className="font-mono">user_feedback.json</span>.
+          </p>
+
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {overall != null ? (
+              <StatTile
+                lead
+                caption="Overall experience"
+                value={overall}
+                unit="/10"
+                band={scoreBand(overall / 10)}
+              />
+            ) : null}
+            {trust != null ? <StatTile caption="Trust" value={trust} unit="/10" /> : null}
+            {effort != null ? <StatTile caption="Effort" value={effort} /> : null}
+            {clarity != null ? <StatTile caption="Next step clarity" value={clarity} /> : null}
+            {feltUnderstood != null ? (
+              <div className="flex flex-col justify-center rounded-lg border border-outline/40 bg-surface/40 p-4 backdrop-blur-sm">
+                <span className="hud text-[9px] text-text-dim">Felt understood</span>
+                <div className="mt-1.5">
+                  <ValidityBadge
+                    valid={feltUnderstood}
+                    validLabel="Yes"
+                    invalidLabel="Not really"
+                  />
+                </div>
+              </div>
+            ) : null}
+          </div>
+
+          {reason ? (
+            <div className="rounded-lg border border-outline/40 bg-surface/40 p-4 text-[12px] leading-relaxed text-text-variant">
+              <span className="font-medium text-text-main">Why:</span> {reason}
+            </div>
+          ) : null}
+
+          {extraEntries.length > 0 ? (
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              {extraEntries.map(([key, value]) => (
+                <div
+                  key={key}
+                  className="rounded-lg border border-outline/40 bg-surface/40 p-3 backdrop-blur-sm"
+                >
+                  <div className="text-[10px] uppercase tracking-wide text-text-dim">
+                    {humanizeFeedbackKey(key)}
+                  </div>
+                  <div className="mt-1.5 text-[13px] leading-relaxed text-text-main">
+                    {feedbackDisplayValue(value)}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : null}
+        </div>
+      )}
+    </DebriefPanel>
+  );
 }
 
 // ===========================================================================
@@ -254,259 +399,26 @@ function clamp(value: number, max: number): number {
 function ChatbotDebrief({ run }: { run: RunDetailView }) {
   const persona = run.persona ?? {};
   const config = run.config ?? {};
-  const transcript = run.transcript ?? [];
-  const q = run.questionnaire;
-  const metrics = run.metricScores;
-  const app = appName(config.applicationId);
-
-  const overall = q?.overallRating ?? null;
-  const band = scoreBand(overall == null ? null : overall / 10);
-  const color = SCORE_BAND_CLASS[band];
 
   return (
-    <div className="space-y-5">
-      <RunMetaLine icon="forum">
-        {`Chatbot run · ${app} on the ${fmtDomain(config.domain)} catalog · persona “${
-          persona.name ?? "Unknown persona"
-        }” · ${fmtRunDate(run.createdAt)}`}
-      </RunMetaLine>
-      <DebriefIntro>
-        A simulated user chatted with the app for a few turns, then rated how well it understood and
-        met their needs.
-      </DebriefIntro>
-
-      {/* Headline band: overall lead tile + three metric tiles */}
-      <div className="grid grid-cols-1 gap-5 lg:grid-cols-12">
-        <div
-          className={`rounded-md border border-outline bg-surface p-5 lg:col-span-4 border-l-4 ${
-            overall == null ? "border-l-outline" : bandBorderL(band)
-          }`}
-        >
-          <span className={`hud text-[9px] ${overall == null ? "text-text-dim" : color.text}`}>
-            Overall satisfaction
-          </span>
-          <div className="mt-1.5 flex items-baseline gap-1.5">
-            <span
-              className={`font-display text-[44px] font-bold leading-none tabular-nums ${
-                overall == null ? "text-text-dim" : color.text
-              }`}
-            >
-              {overall == null ? "-" : overall}
-            </span>
-            <span className="text-[13px] text-text-dim">/ 10</span>
-          </div>
-          <p className="mt-4 text-[12px] leading-relaxed text-text-variant">
-            {q?.ratingReason || "How the simulated user rated the experience, out of 10."}
-          </p>
-          {metrics && <GroundingChip metrics={metrics} className="mt-3" />}
-        </div>
-
-        <div className="grid grid-cols-3 gap-5 lg:col-span-8">
-          <StatTile
-            caption="Turns before first suggestion"
-            value={metrics?.turnsToRecommendation ?? "-"}
-          />
-          <StatTile caption="Total turns" value={metrics?.numTurns ?? "-"} />
-          <StatTile caption="Items suggested" value={metrics?.recommendedItemCount ?? "-"} />
-        </div>
-      </div>
-
-      {/* Two-column: transcript & trace | self-report scorecard */}
-      <div className="grid grid-cols-1 gap-5 lg:grid-cols-12">
-        <div className="space-y-3 lg:col-span-7">
-          <h2 className="hud text-[10px] text-primary">Transcript &amp; trace</h2>
-          {transcript.length === 0 ? (
-            <DashedNote>No conversation turns were recorded for this run.</DashedNote>
-          ) : (
-            <div className="space-y-6 rounded-md border border-outline bg-surface p-5">
-              {transcript.map((turn, i) => (
-                <TranscriptTurn key={turn.turnIndex ?? i} turn={turn} index={i} appLabel={app} />
-              ))}
-            </div>
-          )}
-        </div>
-
-        <div className="space-y-3 lg:col-span-5">
-          <h2 className="hud text-[10px] text-primary">Self-report scorecard</h2>
-          {q ? (
-            <DebriefScorecard q={q} />
-          ) : (
-            <DashedNote>
-              This run finished before a score was produced. There&apos;s no scorecard to show.
-            </DashedNote>
-          )}
-        </div>
-      </div>
-
-      {/* Prompts (preserved feature; not in the mockup, kept below the fold) */}
-      {run.prompts && (
-        <div className="space-y-3">
-          <h2 className="hud text-[10px] text-primary">Prompts</h2>
-          <div className="overflow-hidden rounded-md border border-outline bg-surface">
-            <PromptPanel prompts={run.prompts} />
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-/** One conversational turn: a persona bubble (left) + an app bubble (right). */
-function TranscriptTurn({
-  turn,
-  index,
-  appLabel,
-}: {
-  turn: RunTranscriptTurn;
-  index: number;
-  appLabel: string;
-}) {
-  const hiccup = isAgentHiccup(turn.assistantMessage);
-  const recs = turn.recommendedItems ?? [];
-  return (
-    <div
-      className="space-y-3 rise-in"
-      style={{ animationDelay: `${Math.min(index, 6) * 30}ms`, animationFillMode: "backwards" }}
+    <TrialDebriefChrome
+      prompts={run.prompts}
+      persona={persona}
+      instructionMarkdown={run.instructionMarkdown}
+      contextMarkdown={run.contextMarkdown}
+      questionnaireMarkdown={run.questionnaireMarkdown}
+      outputSchemaMarkdown={run.outputSchemaMarkdown}
     >
-      {/* Persona (left) */}
-      <div className="flex gap-3">
-        <div
-          className="grid h-8 w-8 shrink-0 place-items-center rounded border border-primary/25 bg-primary/10"
-          aria-hidden
-        >
-          <Sym name="face" fill={1} size={16} className="text-primary" />
-        </div>
-        <div className="min-w-0 flex-1">
-          <div className="rounded border border-outline bg-primary/5 p-3.5">
-            <div className="mb-1.5 flex items-center justify-between gap-2">
-              <span className="hud text-[9px] text-primary">Simulated user</span>
-              <span className="hud text-[9px] text-text-dim">turn {index + 1}</span>
-            </div>
-            <p className="whitespace-pre-wrap text-[13px] leading-relaxed text-text-main">
-              {turn.userMessage || <span className="italic text-text-variant">(no message)</span>}
-            </p>
-            {turn.decision && turn.decision !== "continue" && (
-              <div className="mt-2">
-                <DecisionTag decision={turn.decision} />
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-
-      {/* App (right) */}
-      <div className="flex flex-row-reverse gap-3">
-        <div
-          className="grid h-8 w-8 shrink-0 place-items-center rounded border border-outline bg-surface-high"
-          aria-hidden
-        >
-          <Sym name="smart_toy" fill={1} size={16} className="text-text-variant" />
-        </div>
-        <div className="min-w-0 flex-1">
-          <div className="rounded border border-outline bg-surface-low p-3.5">
-            <div className="mb-1.5 flex items-center justify-between gap-2">
-              <span className="hud text-[9px] text-text-dim">turn {index + 1}</span>
-              <span className="hud text-[9px] text-text-variant">{appLabel}</span>
-            </div>
-            {hiccup ? (
-              <p className="text-[13px] italic leading-relaxed text-danger">
-                The app didn&apos;t reply on this turn (it may have hit an error).
-              </p>
-            ) : (
-              <Markdown className="text-[13px] text-text-main">{turn.assistantMessage ?? ""}</Markdown>
-            )}
-            {recs.length > 0 && (
-              <div className="mt-2.5 flex flex-wrap gap-1.5">
-                {recs.map((item, ri) => (
-                  <RecChip key={`${item.id}-${ri}`} item={item} />
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/** A small tag for a non-`continue` persona decision (satisfied / gave up). */
-function DecisionTag({ decision }: { decision: string }) {
-  const satisfied = decision === "satisfied";
-  const cls = satisfied
-    ? "text-secondary border border-secondary/30 bg-secondary/10"
-    : "text-warn border border-warn/30 bg-warn/10";
-  const label = satisfied ? "Got what they needed" : decision === "give_up" ? "Gave up" : humanizeToken(decision);
-  return (
-    <span className={`inline-flex items-center rounded px-1.5 py-px hud text-[9px] ${cls}`}>{label}</span>
-  );
-}
-
-/** The right-column scorecard: the two criterion bars + the clarifying line. */
-function DebriefScorecard({ q }: { q: PersonaEvalQuestionnaire }) {
-  return (
-    <div className="space-y-5 rounded-md border border-outline bg-surface p-5">
-      <CriterionBar
-        label="Stayed within my requirements"
-        score={q.constraintSatisfaction}
-        max={5}
-        rationale={q.constraintRationale}
+      <ChatTrialDebriefBody
+        config={config}
+        transcript={run.transcript ?? []}
+        persona={run.persona}
+        questionnaire={run.questionnaire}
+        metricScores={run.metricScores}
+        verifier={run.verifier}
+        trialEvaluation={run.trialEvaluation}
       />
-      <CriterionBar
-        label="Matched my preferences"
-        score={q.preferenceSatisfaction}
-        max={5}
-        rationale={q.preferenceRationale}
-      />
-      <div className="border-t border-outline pt-3">
-        <div className="flex items-center justify-between gap-2">
-          <span className="text-[12px] font-medium text-text-main">Asked helpful follow-up questions</span>
-          <span
-            className={`inline-flex items-center rounded border px-2 py-1 hud text-[9px] ${
-              q.askedUsefulClarifyingQuestions
-                ? "border-secondary/30 bg-secondary/10 text-secondary"
-                : "border-outline bg-surface-high text-text-variant"
-            }`}
-          >
-            {q.askedUsefulClarifyingQuestions ? "Yes" : "Not this time"}
-          </span>
-        </div>
-        {q.clarifyingNotes && (
-          <p className="mt-1.5 text-[11px] leading-snug text-text-variant">{q.clarifyingNotes}</p>
-        )}
-      </div>
-    </div>
-  );
-}
-
-/** One criterion: label + score + threshold-coloured bar + rationale. */
-function CriterionBar({
-  label,
-  score,
-  max,
-  rationale,
-}: {
-  label: string;
-  score: number;
-  max: number;
-  rationale: string;
-}) {
-  const value = clamp(score, max);
-  const band = scoreBand(value / max);
-  const color = SCORE_BAND_CLASS[band];
-  const pct = (value / max) * 100;
-  return (
-    <div>
-      <div className="mb-1.5 flex items-center justify-between gap-2">
-        <span className="text-[12px] font-medium text-text-main">{label}</span>
-        <span className={`font-mono text-[12px] font-bold tabular-nums ${color.text}`}>
-          {value} / {max}
-        </span>
-      </div>
-      <div className="h-1.5 overflow-hidden rounded-full bg-field">
-        <div className={`h-full ${color.bar}`} style={{ width: `${pct}%` }} />
-      </div>
-      {rationale && <p className="mt-1.5 text-[11px] leading-snug text-text-variant">{rationale}</p>}
-    </div>
+    </TrialDebriefChrome>
   );
 }
 
@@ -519,10 +431,16 @@ function SurveyDebrief({ run }: { run: RunDetailView }) {
   const persona = run.persona ?? {};
   if (!survey) {
     return (
-      <div className="space-y-5">
-        <RunMetaLine icon="fact_check">Survey run</RunMetaLine>
+      <TrialDebriefChrome
+        prompts={run.prompts}
+        persona={persona}
+        instructionMarkdown={run.instructionMarkdown}
+        contextMarkdown={run.contextMarkdown}
+        questionnaireMarkdown={run.questionnaireMarkdown}
+        outputSchemaMarkdown={run.outputSchemaMarkdown}
+      >
         <DashedNote>No survey results were recorded for this run.</DashedNote>
-      </div>
+      </TrialDebriefChrome>
     );
   }
 
@@ -530,50 +448,53 @@ function SurveyDebrief({ run }: { run: RunDetailView }) {
   const questionsById = new Map<string, SurveyQuestion>(
     survey.instrument.questions.map((qq) => [qq.id, qq]),
   );
-  const freeTextCount = survey.answers.filter(
-    (a) => questionsById.get(a.questionId)?.type === "free_text",
-  ).length;
-  const instrumentLabel = survey.instrument.title || run.instrumentTitle || survey.instrument.id;
+  const freeTextCount = survey.answers.filter((a) => {
+    const q = questionsById.get(a.questionId);
+    return q?.type === "free_text";
+  }).length;
+  const likertQuestionCount = survey.instrument.questions.filter((q) => q.type === "likert").length;
   const meanBand = c.meanLikert == null ? undefined : scoreBand(c.meanLikert / 5);
 
   return (
-    <div className="space-y-5">
-      <RunMetaLine icon="fact_check">
-        {`Survey run · ${instrumentLabel}${persona.name ? ` · persona “${persona.name}”` : ""} · ${fmtRunDate(
-          survey.createdAt ?? run.createdAt,
-        )}`}
-      </RunMetaLine>
-      <DebriefIntro>
-        A simulated user filled out this questionnaire; here are their answers and how complete they
-        were.
-      </DebriefIntro>
-
-      {/* Stat tiles */}
-      <div className="grid grid-cols-2 gap-5 sm:grid-cols-4">
-        <StatTile lead caption="Questions answered" value={`${c.numAnswered}/${c.numQuestions}`} />
-        <div className="flex flex-col justify-center rounded-md border border-outline bg-surface p-4">
-          <span className="hud text-[9px] text-text-dim">Answers look valid</span>
-          <div className="mt-1.5">
-            <ValidityBadge valid={c.valid} validLabel="Valid" invalidLabel="Needs review" />
+    <TrialDebriefChrome
+      prompts={run.prompts}
+      persona={persona}
+      instructionMarkdown={run.instructionMarkdown}
+      contextMarkdown={run.contextMarkdown}
+      questionnaireMarkdown={run.questionnaireMarkdown}
+      outputSchemaMarkdown={run.outputSchemaMarkdown}
+    >
+      <DebriefPanel bodyClassName="p-4">
+        <div
+          className={`grid gap-4 ${
+            likertQuestionCount > 0 ? "grid-cols-2 sm:grid-cols-4" : "grid-cols-2 sm:grid-cols-3"
+          }`}
+        >
+          <StatTile lead caption="Questions answered" value={`${c.numAnswered}/${c.numQuestions}`} />
+          <div className="flex flex-col justify-center rounded-lg border border-outline/40 bg-surface/40 p-4 backdrop-blur-sm">
+            <span className="hud text-[9px] text-text-dim">Answers look valid</span>
+            <div className="mt-1.5">
+              <ValidityBadge valid={c.valid} validLabel="Valid" invalidLabel="Needs review" />
+            </div>
           </div>
+          {likertQuestionCount > 0 ? (
+            <StatTile
+              caption="Mean Likert score"
+              value={c.meanLikert == null ? "n/a" : c.meanLikert.toFixed(1)}
+              unit="/5"
+              band={meanBand}
+            />
+          ) : null}
+          <StatTile caption="Written answers" value={freeTextCount} />
         </div>
-        <StatTile
-          caption="Average agreement"
-          value={c.meanLikert == null ? "-" : c.meanLikert.toFixed(1)}
-          unit="/5"
-          band={meanBand}
-        />
-        <StatTile caption="Written answers" value={freeTextCount} />
-      </div>
+      </DebriefPanel>
 
-      {/* Two-column: answers | trajectory */}
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-12">
-        <div className="space-y-3 lg:col-span-7">
-          <h2 className="hud text-[10px] text-primary">Answers</h2>
+        <DebriefPanel title="Answers" icon="fact_check" className="lg:col-span-7">
           {survey.answers.length === 0 ? (
             <DashedNote>No answers were recorded for this survey run.</DashedNote>
           ) : (
-            <div className="divide-y divide-outline-dim rounded-md border border-outline bg-surface">
+            <ul className="divide-y divide-outline-dim">
               {survey.answers.map((a, i) => (
                 <SurveyAnswerRow
                   key={a.questionId}
@@ -582,24 +503,23 @@ function SurveyDebrief({ run }: { run: RunDetailView }) {
                   index={i}
                 />
               ))}
-            </div>
+            </ul>
           )}
-        </div>
+        </DebriefPanel>
 
-        <div className="space-y-3 lg:col-span-5">
-          <h2 className="hud text-[10px] text-primary">Trajectory</h2>
+        <DebriefPanel title="Trajectory" icon="route" className="lg:col-span-5">
           {survey.trajectory.length === 0 ? (
             <DashedNote>No trajectory was recorded for this run.</DashedNote>
           ) : (
-            <div className="space-y-2 rounded-md border border-outline bg-surface p-4 font-mono text-[11px] leading-relaxed">
+            <div className="custom-scrollbar max-h-[min(70vh,520px)] space-y-2 overflow-y-auto p-4 font-mono text-[11px] leading-relaxed">
               {survey.trajectory.map((e, i) => (
                 <SurveyTrajectoryRow key={`${e.timestamp}-${i}`} event={e} />
               ))}
             </div>
           )}
-        </div>
+        </DebriefPanel>
       </div>
-    </div>
+    </TrialDebriefChrome>
   );
 }
 
@@ -616,46 +536,50 @@ function SurveyAnswerRow({
   const type = question?.type;
   const prompt = question?.prompt ?? answer.questionId;
   const conf = answer.confidence;
-  const valueText = fmtAnswerValue(answer.value);
+  const valueText = fmtAnswerValue(answer.value, question);
   const freeText = type === "free_text";
   const likert = type === "likert";
+  const singleChoice = type === "single_choice";
   const max = question?.maxValue ?? 5;
   const numeric = Number(answer.value);
   const band = likert && Number.isFinite(numeric) ? scoreBand(numeric / (max || 5)) : "none";
   const color = SCORE_BAND_CLASS[band];
 
   return (
-    <div
-      className="p-4 rise-in"
+    <li
+      className="px-4 py-3.5 rise-in hover:bg-surface/30"
       style={{ animationDelay: `${Math.min(index, 6) * 30}ms`, animationFillMode: "backwards" }}
     >
-      <div className="mb-1 flex items-start justify-between gap-3">
-        <span className="text-[12px] font-medium text-text-main">
+      <div className="mb-1.5 flex items-start justify-between gap-3">
+        <span className="text-[12px] font-medium leading-snug text-text-main">
           Q{index + 1} · {prompt}
         </span>
         {freeText ? (
-          <span className="shrink-0 font-mono text-[11px] text-text-dim">free text</span>
+          <span className="shrink-0 hud text-[8px] text-text-dim">Free text</span>
         ) : likert ? (
           <span className={`shrink-0 font-mono text-[12px] font-bold tabular-nums ${color.text}`}>
             {valueText} / {max}
           </span>
         ) : (
-          <span className="shrink-0 font-mono text-[12px] text-text-variant">{valueText}</span>
+          <span className="shrink-0 max-w-[45%] truncate rounded border border-outline/40 bg-surface/60 px-2 py-0.5 text-right font-mono text-[10px] text-text-variant">
+            {valueText}
+          </span>
         )}
       </div>
       {freeText ? (
-        <p className="text-[11px] leading-snug text-text-variant">&ldquo;{valueText}&rdquo;</p>
+        <p className="text-[11px] leading-relaxed text-text-variant">&ldquo;{valueText}&rdquo;</p>
       ) : answer.rationale ? (
-        <p className="text-[11px] leading-snug text-text-variant">
-          Why: {answer.rationale}
+        <p className="rounded-lg border border-outline/30 bg-surface/35 px-3 py-2 text-[11px] leading-relaxed text-text-variant">
+          {singleChoice || likert ? "Why: " : ""}
+          {answer.rationale}
           {conf != null && (
-            <span className="text-text-variant"> · How sure: {(conf * 100).toFixed(0)}%</span>
+            <span className="text-text-dim"> · How sure: {(conf * 100).toFixed(0)}%</span>
           )}
         </p>
       ) : conf != null ? (
         <p className="text-[11px] text-text-variant">How sure: {(conf * 100).toFixed(0)}%</p>
       ) : null}
-    </div>
+    </li>
   );
 }
 
@@ -671,7 +595,14 @@ function SurveyTrajectoryRow({ event }: { event: SurveyTrajectoryEvent }) {
   );
 }
 
-function fmtAnswerValue(value: unknown): string {
+function fmtAnswerValue(value: unknown, question?: SurveyQuestion): string {
+  const optionLabel = (raw: unknown): string => {
+    const id = String(raw);
+    const detail = question?.optionDetails?.find((option) => option.id === id);
+    return detail?.label ? `${detail.label} (${id})` : id;
+  };
+  if (question?.type === "single_choice") return optionLabel(value);
+  if (question?.type === "multi_choice" && Array.isArray(value)) return value.map(optionLabel).join(", ");
   if (Array.isArray(value)) return value.map((item) => String(item)).join(", ");
   if (value === null || value === undefined) return "";
   if (typeof value === "object") return JSON.stringify(value);
@@ -695,291 +626,133 @@ function WebDebrief({ run }: { run: RunDetailView }) {
   const persona = run.persona ?? {};
   const trace = runWebTrace(run);
   const events = trace?.events ?? [];
+  const feedback = resolveUserFeedback(run);
 
   if (!result) {
     return (
-      <div className="space-y-5">
-        <RunMetaLine icon="language">Web run</RunMetaLine>
-        <DashedNote>No web result was recorded for this run.</DashedNote>
-      </div>
+      <TrialDebriefChrome
+        prompts={run.prompts}
+        persona={persona}
+        instructionMarkdown={run.instructionMarkdown}
+        contextMarkdown={run.contextMarkdown}
+        questionnaireMarkdown={run.questionnaireMarkdown}
+        outputSchemaMarkdown={run.outputSchemaMarkdown}
+      >
+        <DebriefPanel>
+          <DashedNote>No web result was recorded for this run.</DashedNote>
+        </DebriefPanel>
+      </TrialDebriefChrome>
     );
   }
 
-  const taskLabel = run.taskTitle || run.siteName || "website task";
-
   return (
-    <div className="space-y-5">
-      <RunMetaLine icon="language">
-        {`Web run · ${taskLabel}${run.siteName ? ` on ${run.siteName}` : ""}${
-          persona.name ? ` · persona “${persona.name}”` : ""
-        } · ${fmtRunDate(result.createdAt ?? run.createdAt)}`}
-      </RunMetaLine>
-      <DebriefIntro>
-        A simulated user browsed the site to finish a task; here are the UX ratings and a replay of
-        every step they took.
-      </DebriefIntro>
-
-      {/* UX score tiles | selected product */}
-      <div className="grid grid-cols-1 gap-5 lg:grid-cols-12">
-        <div className="grid grid-cols-3 gap-3 lg:col-span-5">
-          <StatTile
-            lead
-            caption="Met the persona's need"
-            value={result.needSatisfaction}
-            unit="/10"
-            band={scoreBand(result.needSatisfaction / 10)}
-          />
-          <StatTile
-            caption="Ease of use"
-            value={result.easeOfUse}
-            unit="/10"
-            band={scoreBand(result.easeOfUse / 10)}
-          />
-          <StatTile
-            caption="Overall experience"
-            value={result.overallExperienceRating}
-            unit="/10"
-            band={scoreBand(result.overallExperienceRating / 10)}
-          />
-        </div>
-
-        <div className="flex items-center gap-4 rounded-md border border-outline bg-surface p-5 lg:col-span-7">
-          <div
-            className="grid h-12 w-12 shrink-0 place-items-center rounded border border-outline bg-surface-high"
-            aria-hidden
-          >
-            <Sym name="inventory_2" size={22} className="text-primary" />
+    <TrialDebriefChrome
+      prompts={run.prompts}
+      persona={persona}
+      instructionMarkdown={run.instructionMarkdown}
+      contextMarkdown={run.contextMarkdown}
+      questionnaireMarkdown={run.questionnaireMarkdown}
+      outputSchemaMarkdown={run.outputSchemaMarkdown}
+    >
+      <DebriefPanel bodyClassName="p-4">
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 lg:col-span-5">
+            <StatTile
+              lead
+              caption="Met the persona's need"
+              value={result.needSatisfaction}
+              unit="/10"
+              band={scoreBand(result.needSatisfaction / 10)}
+            />
+            <StatTile
+              caption="Ease of use"
+              value={result.easeOfUse}
+              unit="/10"
+              band={scoreBand(result.easeOfUse / 10)}
+            />
+            <StatTile
+              caption="Overall experience"
+              value={result.overallExperienceRating}
+              unit="/10"
+              band={scoreBand(result.overallExperienceRating / 10)}
+            />
           </div>
-          <div className="min-w-0 flex-1">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="text-[14px] font-semibold text-text-main">
-                {result.selectedProductName || "(no product chosen)"}
-              </span>
-              <ValidityBadge valid={result.valid} validLabel="Valid pick" invalidLabel="Invalid pick" />
+
+          <div className="flex items-center gap-4 rounded-lg border border-outline/40 bg-surface/40 p-4 backdrop-blur-sm lg:col-span-7">
+            <div
+              className="grid h-12 w-12 shrink-0 place-items-center rounded-lg border border-outline/40 bg-surface-high/80"
+              aria-hidden
+            >
+              <Sym name="inventory_2" size={22} className="text-primary" />
             </div>
-            {result.selectedProductId && (
-              <div className="mt-0.5 font-mono text-[10px] text-text-dim">{result.selectedProductId}</div>
-            )}
-            {result.reason && (
-              <p className="mt-1 text-[11px] leading-snug text-text-variant">
-                Why this one: {result.reason}
-              </p>
-            )}
+            <div className="min-w-0 flex-1">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-[14px] font-semibold text-text-main">
+                  {result.selectedProductName || "(no product chosen)"}
+                </span>
+                <ValidityBadge valid={result.valid} validLabel="Valid pick" invalidLabel="Invalid pick" />
+              </div>
+              {result.selectedProductId && (
+                <div className="mt-0.5 font-mono text-[10px] text-text-dim">{result.selectedProductId}</div>
+              )}
+              {result.reason && (
+                <p className="mt-1 text-[11px] leading-snug text-text-variant">
+                  Why this one: {result.reason}
+                </p>
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      </DebriefPanel>
 
-      {/* Browser trace screenshot grid */}
-      <div className="space-y-3">
-        <h2 className="flex items-center gap-2 hud text-[10px] text-primary">
-          <Sym name="route" size={14} />
-          Browser trace · {events.length} step{events.length === 1 ? "" : "s"}
-        </h2>
-        {events.length === 0 ? (
+      <UserFeedbackPanel feedback={feedback} />
+
+      <DebriefPanel
+        title={`Browser trace · ${events.length} step${events.length === 1 ? "" : "s"}`}
+        icon="route"
+      >
+        {!trace || events.length === 0 ? (
           <DashedNote>No browser steps were captured for this run.</DashedNote>
         ) : (
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-            {events.map((event, i) => (
-              <WebStepCard key={event.step} event={event} index={i} />
-            ))}
+          <div className="p-4">
+            <HarborTraceReplay trace={trace} />
           </div>
         )}
-      </div>
-    </div>
+      </DebriefPanel>
+    </TrialDebriefChrome>
   );
-}
-
-/** One browser-trace step: a screenshot (or fallback) + a step caption. */
-function WebStepCard({ event, index }: { event: WebTraceEvent; index: number }) {
-  const [imgError, setImgError] = useState(false);
-  const showImg = Boolean(event.screenshotUrl) && !imgError;
-  return (
-    <div
-      className="overflow-hidden rounded-md border border-outline bg-surface rise-in"
-      style={{ animationDelay: `${Math.min(index, 6) * 30}ms`, animationFillMode: "backwards" }}
-    >
-      <div className="aspect-video border-b border-outline bg-surface-low">
-        {showImg ? (
-          <img
-            src={event.screenshotUrl ?? undefined}
-            alt={`Screenshot for step ${event.step}`}
-            loading="lazy"
-            onError={() => setImgError(true)}
-            className="h-full w-full bg-surface-lowest object-cover"
-          />
-        ) : (
-          <div
-            className="grid h-full place-items-center text-text-dim"
-            title="Screenshot not available for this step"
-          >
-            <Sym name="image" size={22} />
-          </div>
-        )}
-      </div>
-      <div className="p-2.5">
-        <div className="truncate hud text-[8px] text-text-dim">
-          Step {event.step} · {webActionLabel(event)}
-        </div>
-        <div className="mt-0.5 truncate font-mono text-[10px] text-text-variant">
-          {webActionDetail(event)}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/** The verb for a step's first action (e.g. "click", "navigate"). */
-function webActionLabel(event: WebTraceEvent): string {
-  const action = event.actions[0];
-  if (action?.name) return action.name.replace(/_/g, " ");
-  if (event.source) return event.source;
-  return "step";
-}
-
-/** A compact `name(arg)` signature for a step's first action. */
-function webActionDetail(event: WebTraceEvent): string {
-  const action = event.actions[0];
-  if (action?.name) {
-    let arg: string | null = null;
-    for (const value of Object.values(action.arguments ?? {})) {
-      if (typeof value === "string" && value.trim()) {
-        arg = value.trim();
-        break;
-      }
-      if (typeof value === "number") {
-        arg = String(value);
-        break;
-      }
-    }
-    const clip = (text: string) => (text.length > 22 ? text.slice(0, 21) + "…" : text);
-    return arg ? `${action.name}(${clip(arg)})` : `${action.name}()`;
-  }
-  const message = (event.message || "").trim();
-  return message ? clip40(message) : "-";
 }
 
 // ===========================================================================
-// AppWorld debrief: reads `AppWorldResult` + `AppWorldTrace` (types.ts)
+// OS app debrief
 // ===========================================================================
 
-function AppWorldDebrief({ run }: { run: RunDetailView }) {
-  const result = run.appworldResult;
-  const persona = run.persona ?? {};
-  const trace = run.appworldTrace;
-  const events = trace?.events ?? [];
+function OsAppDebrief({ run }: { run: RunDetailView }) {
+  const runRecord = run as Record<string, unknown>;
+  const osAppResult = (runRecord.osAppResult as OsAppResult | null | undefined) ?? null;
+  const trace = runRecord.osAppTrace as { events?: unknown[] } | null | undefined;
+  const feedback = resolveUserFeedback(run);
 
-  if (!result) {
-    return (
-      <div className="space-y-5">
-        <RunMetaLine icon="apps">AppWorld run</RunMetaLine>
-        <DashedNote>No AppWorld result was recorded for this run.</DashedNote>
-      </div>
-    );
-  }
-
-  const score = Math.round(clamp(result.score, 1) * 100);
   return (
-    <div className="space-y-5">
-      <RunMetaLine icon="apps">
-        {`AppWorld run · ${run.taskTitle || run.appName || result.taskId}${
-          persona.name ? ` · persona “${persona.name}”` : ""
-        } · ${fmtRunDate(result.createdAt ?? run.createdAt)}`}
-      </RunMetaLine>
-      <DebriefIntro>
-        A BenchFlow-hosted agent completed the AppWorld task through API calls; here are the final state and
-        recorded trajectory.
-      </DebriefIntro>
-
-      <div className="grid grid-cols-1 gap-5 lg:grid-cols-12">
-        <div className="grid grid-cols-3 gap-3 lg:col-span-5">
-          <StatTile
-            lead
-            caption="Task success"
-            value={result.success ? "Yes" : "No"}
-            band={result.success ? "high" : "low"}
-          />
-          <StatTile caption="Objective score" value={score} unit="%" band={scoreBand(result.score)} />
-          <StatTile caption="API steps" value={events.length} />
-        </div>
-
-        <div className="rounded-md border border-outline bg-surface p-5 lg:col-span-7">
-          <div className="flex flex-wrap items-center gap-2">
-            <ValidityBadge valid={result.success} validLabel="Succeeded" invalidLabel="Incomplete" />
-            <span className="font-mono text-[10px] text-text-dim">{result.taskId}</span>
-          </div>
-          <p className="mt-3 text-[13px] leading-relaxed text-text-main">{result.outcome}</p>
-          <p className="mt-2 text-[12px] leading-relaxed text-text-variant">{result.reason}</p>
-        </div>
-      </div>
-
-      <div className="space-y-3">
-        <h2 className="flex items-center gap-2 hud text-[10px] text-primary">
-          <Sym name="route" size={14} />
-          AppWorld trajectory · {events.length} step{events.length === 1 ? "" : "s"}
-        </h2>
-        {events.length === 0 ? (
-          <DashedNote>No AppWorld API steps were captured for this run.</DashedNote>
-        ) : (
-          <div className="grid gap-3 md:grid-cols-2">
-            {events.map((event, i) => (
-              <AppWorldStepCard key={`${event.step}-${i}`} event={event} index={i} />
-            ))}
-          </div>
-        )}
-      </div>
-
-      {run.prompts && (
-        <div className="space-y-3">
-          <h2 className="hud text-[10px] text-primary">Prompts</h2>
-          <div className="overflow-hidden rounded-md border border-outline bg-surface">
-            <PromptPanel prompts={run.prompts} />
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-function AppWorldStepCard({ event, index }: { event: AppWorldTraceEvent; index: number }) {
-  return (
-    <div
-      className="rounded-md border border-outline bg-surface p-4 rise-in"
-      style={{ animationDelay: `${Math.min(index, 6) * 30}ms`, animationFillMode: "backwards" }}
+    <TrialDebriefChrome
+      prompts={run.prompts}
+      persona={run.persona}
+      instructionMarkdown={run.instructionMarkdown}
+      contextMarkdown={run.contextMarkdown}
+      questionnaireMarkdown={run.questionnaireMarkdown}
+      outputSchemaMarkdown={run.outputSchemaMarkdown}
     >
-      <div className="mb-2 flex items-center justify-between gap-3">
-        <span className="hud text-[8px] text-text-dim">Step {event.step}</span>
-        <span className="rounded bg-surface-high px-2 py-0.5 font-mono text-[10px] text-primary">
-          {appWorldActionLabel(event)}
-        </span>
-      </div>
-      <p className="text-[13px] leading-relaxed text-text-main">{event.message ?? "AppWorld API step"}</p>
-      {event.actions.length > 0 && (
-        <div className="mt-3 flex flex-wrap gap-1.5">
-          {event.actions.map((action, actionIndex) => (
-            <span
-              key={`${action.name}-${actionIndex}`}
-              className="rounded border border-outline bg-field px-2 py-1 font-mono text-[10px] text-text-variant"
-            >
-              {action.name}
-            </span>
-          ))}
-        </div>
-      )}
-    </div>
+      <DebriefPanel title="Evaluation" icon="verified" bodyClassName="p-4">
+        <OsAppEvalScorecard
+          osAppResult={osAppResult}
+          verifier={run.verifier ?? null}
+          traceStepCount={trace?.events?.length ?? 0}
+          phase="done"
+        />
+      </DebriefPanel>
+      <UserFeedbackPanel feedback={feedback} />
+    </TrialDebriefChrome>
   );
-}
-
-function appWorldActionLabel(event: AppWorldTraceEvent): string {
-  const action = event.actions[0];
-  if (!action) return "step";
-  const args = action.arguments ?? {};
-  const app = typeof args.app === "string" ? args.app : null;
-  const method = typeof args.method === "string" ? args.method : null;
-  return app && method ? `${app}.${method}` : action.name.replace(/_/g, " ");
-}
-
-function clip40(text: string): string {
-  return text.length > 40 ? text.slice(0, 39) + "…" : text;
 }
 
 // ===========================================================================
@@ -989,18 +762,11 @@ function clip40(text: string): string {
 function DetailLoading() {
   return (
     <div className="space-y-5" aria-hidden>
-      <div className="h-4 w-72 animate-rb-pulse rounded bg-surface-high" />
+      <div className="glass-panel h-14 animate-rb-pulse rounded-xl" />
+      <div className="glass-panel h-28 animate-rb-pulse rounded-xl" />
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-12">
-        <div className="h-36 animate-rb-pulse rounded-md bg-surface-high lg:col-span-4" />
-        <div className="grid grid-cols-3 gap-5 lg:col-span-8">
-          <div className="h-36 animate-rb-pulse rounded-md bg-surface-high" />
-          <div className="h-36 animate-rb-pulse rounded-md bg-surface-high" />
-          <div className="h-36 animate-rb-pulse rounded-md bg-surface-high" />
-        </div>
-      </div>
-      <div className="grid grid-cols-1 gap-5 lg:grid-cols-12">
-        <div className="h-72 animate-rb-pulse rounded-md bg-surface-high lg:col-span-7" />
-        <div className="h-72 animate-rb-pulse rounded-md bg-surface-high lg:col-span-5" />
+        <div className="glass-panel h-80 animate-rb-pulse rounded-xl lg:col-span-7" />
+        <div className="glass-panel h-80 animate-rb-pulse rounded-xl lg:col-span-5" />
       </div>
     </div>
   );
@@ -1008,7 +774,7 @@ function DetailLoading() {
 
 function DetailNotFound() {
   return (
-    <div className="rounded-md border border-dashed border-outline bg-surface px-6 py-14 text-center rise-in">
+    <StudioGlassPanel className="px-6 py-14 text-center rise-in">
       <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-md border border-dashed border-outline bg-surface-high">
         <Sym name="search_off" size={26} className="text-text-dim" />
       </div>
@@ -1018,7 +784,7 @@ function DetailNotFound() {
       <p className="mx-auto mt-2 max-w-sm text-[13px] leading-relaxed text-text-variant">
         It may have been deleted. Go back to the list to pick another.
       </p>
-    </div>
+    </StudioGlassPanel>
   );
 }
 
@@ -1030,7 +796,7 @@ function DetailError({ error, onRetry }: { error: unknown; onRetry: () => void }
       ? error.message
       : "Something went wrong loading the details. Try again in a moment.";
   return (
-    <div className="rounded-md border border-outline border-l-4 border-l-danger bg-surface px-5 py-8 text-center rise-in">
+    <StudioGlassPanel className="border-l-4 border-l-danger px-5 py-8 text-center rise-in">
       <div className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-md border border-danger/30 bg-danger/10">
         <Sym name="error" fill={1} size={22} className="text-danger" />
       </div>
@@ -1048,7 +814,7 @@ function DetailError({ error, onRetry }: { error: unknown; onRetry: () => void }
         <Sym name="refresh" size={16} />
         Try again
       </button>
-    </div>
+    </StudioGlassPanel>
   );
 }
 

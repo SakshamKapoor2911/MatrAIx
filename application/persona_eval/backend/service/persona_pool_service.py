@@ -277,8 +277,10 @@ class PersonaPoolService:
         *,
         persona_pool: str = DEFAULT_PERSONA_POOL,
         limit: int = 10,
+        offset: int = 0,
         persona_ids: list[str] | None = None,
         seed: int = 42,
+        all_personas: bool = False,
     ) -> dict[str, Any]:
         import random
 
@@ -291,6 +293,14 @@ class PersonaPoolService:
                 for entry in entries
                 if str(entry.get("persona_id") or "") in wanted
             ]
+        elif all_personas:
+            sorted_entries = sorted(
+                entries,
+                key=lambda entry: str(entry.get("persona_id") or ""),
+            )
+            start = max(0, offset)
+            end = start + max(1, limit)
+            chosen = sorted_entries[start:end]
         else:
             summary = self.load_manifest_summary(persona_pool)
             smoke_id = str(summary.get("smokePersonaId") or "").strip()
@@ -306,9 +316,14 @@ class PersonaPoolService:
             rng = random.Random(seed)
             rng.shuffle(rest)
             chosen = ([smoke_entry] if smoke_entry else []) + rest[: max(0, limit - 1)]
+        cards = [self._persona_card(entry) for entry in chosen]
+        if not all_personas:
+            cards = cards[:limit]
         return {
             "pool": persona_pool,
-            "personas": [self._persona_card(entry) for entry in chosen[:limit]],
+            "personas": cards,
+            "offset": max(0, offset) if all_personas else 0,
+            "limit": limit,
         }
 
     def get_persona_detail(

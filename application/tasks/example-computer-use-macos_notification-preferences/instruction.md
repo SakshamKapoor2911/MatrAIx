@@ -1,19 +1,33 @@
-# Notification preferences (macOS)
+# Calendar + reminder handoff (macOS)
 
-You just set up a new Mac. Before you finish, take a minute to see how **notifications** work on this machine.
+You are setting up a new Mac and want a clean **cross-app handoff** between a
+calendar event and a reminder.
 
-1. Open **System Settings** → **Notifications**.
-2. Pick **one app** you actually use (Mail, Messages, Safari, whatever) and look at how its notifications are set up.
-3. Decide whether you'd **keep notifications on** for that app on a Mac you use every day.
+Use this brief:
 
-Save your decision to `/tmp/personabench-macos-notification-preferences/decision.json`:
+- Event title: `Dentist follow-up`
+- Date: `2026-08-14`
+- Time: `09:30`
+- Location: `North Clinic`
+- Reminder item: `Bring insurance card`
+
+Create `/tmp/personabench-macos-calendar-reminder-handoff/handoff.txt` with
+exactly these two lines:
+
+```text
+Calendar: Dentist follow-up | 2026-08-14 09:30 | North Clinic
+Reminder: Bring insurance card
+```
+
+Then save `/tmp/personabench-macos-calendar-reminder-handoff/plan.json`:
 
 ```json
 {
-  "keep_notifications_on": true,
-  "app_reviewed": "<app name you looked at>",
-  "reason": "<why, in your own words>"
+  "calendar_event_title": "Dentist follow-up",
+  "reminder_title": "Bring insurance card",
+  "location": "North Clinic",
+  "reason": "<why this belongs across Calendar and Reminders>"
 }
 ```
 
-`keep_notifications_on` must be `true` or `false`. Don't change unrelated system settings.
+Do not add extra lines to `handoff.txt`.

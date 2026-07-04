@@ -1,0 +1,133 @@
+{
+  "schemaVersion": "1.0",
+  "contextRules": [
+    {
+      "match": {
+        "contextType": "task_outcome"
+      },
+      "summaryDirectives": [
+        {
+          "id": "task_outcome.explanation_by_status",
+          "title": "Outcome explanation by status",
+          "targetFacetKey": "outcome_explanation",
+          "groupByFacetKey": "outcome_status",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ],
+      "judgeDirectives": [
+        {
+          "id": "task_outcome.web_failure_signal_scan",
+          "title": "Web failure signal scan",
+          "targetFacetKey": "outcome_explanation",
+          "groupByFacetKey": "primary_failure_reason",
+          "groupByMode": "categorical",
+          "judgeKind": "llm_signal_judge",
+          "prompt": "Read each outcome explanation and classify which reusable web-execution failure signals are explicitly present.",
+          "rubric": "Mark a signal true only when the explanation clearly states or strongly implies that signal.",
+          "signals": [
+            {
+              "key": "navigation_signal",
+              "label": "Navigation failure",
+              "valueType": "boolean"
+            },
+            {
+              "key": "search_signal",
+              "label": "Search or filter misuse",
+              "valueType": "boolean"
+            },
+            {
+              "key": "form_signal",
+              "label": "Form misunderstanding",
+              "valueType": "boolean"
+            },
+            {
+              "key": "live_site_signal",
+              "label": "Live-site brittleness",
+              "valueType": "boolean"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "web_interaction"
+      },
+      "summaryDirectives": [
+        {
+          "id": "web_interaction.notes_by_path_type",
+          "title": "Web interaction notes by path type",
+          "targetFacetKey": "web_interaction_notes",
+          "groupByFacetKey": "navigation_path_type",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "web_artifact"
+      },
+      "summaryDirectives": [
+        {
+          "id": "web_artifact.evidence_by_status",
+          "title": "Web artifact evidence by status",
+          "targetFacetKey": "artifact_evidence",
+          "groupByFacetKey": "artifact_status",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "user_feedback"
+      },
+      "summaryDirectives": [
+        {
+          "id": "user_feedback.reason_by_need_satisfaction",
+          "title": "Feedback reason by need satisfaction",
+          "targetFacetKey": "feedback_reason",
+          "groupByFacetKey": "need_constraint_satisfaction",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ],
+      "judgeDirectives": [
+        {
+          "id": "user_feedback.reason_signal_scan",
+          "title": "Feedback signal scan",
+          "targetFacetKey": "feedback_reason",
+          "groupByFacetKey": "personal_preference_satisfaction",
+          "groupByMode": "categorical",
+          "judgeKind": "llm_signal_judge",
+          "prompt": "Read each feedback reason and classify which reusable persona-facing web experience signals are explicitly present.",
+          "rubric": "Mark a signal true only when the feedback clearly states or strongly implies that signal.",
+          "signals": [
+            {
+              "key": "fit_signal",
+              "label": "Need or preference fit",
+              "valueType": "boolean"
+            },
+            {
+              "key": "trust_signal",
+              "label": "Trust or confidence",
+              "valueType": "boolean"
+            },
+            {
+              "key": "effort_signal",
+              "label": "Low or high effort",
+              "valueType": "boolean"
+            },
+            {
+              "key": "clarity_signal",
+              "label": "Clear next step",
+              "valueType": "boolean"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

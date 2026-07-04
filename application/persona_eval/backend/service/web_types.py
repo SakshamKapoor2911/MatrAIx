@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Union
 
 from persona_eval.types import DEFAULT_PERSONA_MODEL, Persona
 
@@ -13,10 +13,14 @@ class WebEvalTask:
     title: str
     site_name: str
     site_url: str
-    task_path: Path
+    task_path: Union[str, Path]
     description: str
-    output_artifact: str = "ecommerce_interaction.json"
-    submission_profile: str = "persona_eval_final_json"
+    meta_type: str = ""
+    domain: str = ""
+    difficulty: str = "easy"
+    task_kind: str = "task"
+    output_artifact: str = "web_result.json"
+    submission_profile: str = "web_result"
 
     def to_dict(self) -> Dict[str, Any]:
         task_path = self.task_path
@@ -32,6 +36,10 @@ class WebEvalTask:
             "title": self.title,
             "siteName": self.site_name,
             "siteUrl": self.site_url,
+            "metaType": self.meta_type,
+            "domain": self.domain,
+            "difficulty": self.difficulty,
+            "taskKind": self.task_kind,
             "description": self.description,
             "taskPath": str(task_path),
             "outputArtifact": self.output_artifact,

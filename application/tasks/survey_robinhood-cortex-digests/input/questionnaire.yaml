@@ -1,0 +1,38 @@
+schemaVersion: "1.0"
+id: finance_robinhood_cortex_digests_v1
+title: Robinhood Cortex Digests Survey
+description: Survey reactions to Robinhood Cortex Digests for stocks or crypto assets.
+questions:
+  - id: market_summary_utility
+    prompt: I would use Robinhood Cortex Digests to quickly understand why a stock or crypto asset may be moving before making my own decision.
+    type: likert
+    construct: ai_market_summary_utility
+    required: true
+    minValue: 1
+    maxValue: 5
+  - id: source_transparency
+    prompt: I would trust this feature more if it clearly showed the sources behind each market summary.
+    type: likert
+    construct: financial_source_transparency_trust
+    required: true
+    minValue: 1
+    maxValue: 5
+  - id: ai_investing_concern
+    prompt: What would be your biggest concern about using AI-generated investing summaries?
+    type: single_choice
+    construct: ai_investing_adoption_barrier
+    required: true
+    options:
+      - id: overreliance_on_ai
+        label: Overreliance on AI
+      - id: unclear_sources
+        label: Unclear sources
+      - id: missing_risk_context
+        label: Missing risk context
+      - id: too_complex
+        label: Too complex
+  - id: safety_requirement
+    prompt: What would Robinhood need to show you before this feature felt safe to use?
+    type: free_text
+    construct: financial_ai_safety_requirement
+    required: true

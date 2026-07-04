@@ -1,0 +1,151 @@
+{
+  "schemaVersion": "1.0",
+  "artifactType": "personabench.trial_evaluation",
+  "taskType": "chatbot",
+  "presenceCheck": {
+    "passed": true,
+    "requiredArtifacts": [
+      "transcript.json"
+    ],
+    "missingArtifacts": []
+  },
+  "sourceArtifacts": {
+    "transcript": "/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/jobs/pe-example-chat-mcp-support-chatbot-2c24fa6b/example-chat-mcp_support_chatbot__6df4f45/artifacts/app/output/transcript.json",
+    "userFeedback": "/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/jobs/pe-example-chat-mcp-support-chatbot-2c24fa6b/example-chat-mcp_support_chatbot__6df4f45/artifacts/app/output/user_feedback.json"
+  },
+  "contexts": [
+    {
+      "key": "task_outcome.primary",
+      "label": "Task outcome",
+      "contextType": "task_outcome",
+      "facets": [
+        {
+          "key": "outcome_status",
+          "label": "Outcome status",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "unresolved"
+        },
+        {
+          "key": "resolution_basis",
+          "label": "Resolution basis",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "user_feedback"
+        },
+        {
+          "key": "outcome_reason",
+          "label": "Outcome reason",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "The chatbot failed catastrophically to address my core support needs. I required concrete answers about delay causation, compensation pathways, and delivery guarantees—instead, the system entered a loop of repetitive, non-sequitur responses. Most critically, after I explicitly flagged that the bot was repeating itself and requested escalation to a supervisor, it continued the exact same broken pattern. This represents a fundamental failure in information retention, contextual awareness, and escalation protocol. The experience was frustrating and unproductive. 😞"
+        },
+        {
+          "key": "next_step_owner",
+          "label": "Next step owner",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "user"
+        },
+        {
+          "key": "task_goal_label",
+          "label": "Task goal",
+          "role": "evidence",
+          "kind": "textual",
+          "value": "Get a useful update on a missing delivery"
+        }
+      ]
+    },
+    {
+      "key": "conversation_summary.primary",
+      "label": "Conversation summary",
+      "contextType": "conversation_summary",
+      "facets": [
+        {
+          "key": "conversation_path",
+          "label": "Conversation path",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "clarify_then_partial"
+        },
+        {
+          "key": "process_notes",
+          "label": "Process notes",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "The conversation focused on clarifying the delivery status and reviewing tracking details before ending with a follow-up expectation."
+        },
+        {
+          "key": "user_turn_count",
+          "label": "User turn count",
+          "role": "score",
+          "kind": "numerical",
+          "value": 4
+        },
+        {
+          "key": "assistant_turn_count",
+          "label": "Assistant turn count",
+          "role": "score",
+          "kind": "numerical",
+          "value": 4
+        },
+        {
+          "key": "message_count",
+          "label": "Message count",
+          "role": "score",
+          "kind": "numerical",
+          "value": 8
+        },
+        {
+          "key": "clarification_question_count",
+          "label": "Clarification question count",
+          "role": "score",
+          "kind": "numerical",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "key": "user_feedback.primary",
+      "label": "User feedback",
+      "contextType": "user_feedback",
+      "facets": [
+        {
+          "key": "overall_experience_rating",
+          "label": "Overall experience rating",
+          "role": "score",
+          "kind": "numerical",
+          "value": 2
+        },
+        {
+          "key": "feedback_reason",
+          "label": "Feedback reason",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "The chatbot failed catastrophically to address my core support needs. I required concrete answers about delay causation, compensation pathways, and delivery guarantees—instead, the system entered a loop of repetitive, non-sequitur responses. Most critically, after I explicitly flagged that the bot was repeating itself and requested escalation to a supervisor, it continued the exact same broken pattern. This represents a fundamental failure in information retention, contextual awareness, and escalation protocol. The experience was frustrating and unproductive. 😞"
+        },
+        {
+          "key": "clarification_questions_useful",
+          "label": "Clarification questions useful",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "false"
+        },
+        {
+          "key": "need_constraint_satisfaction",
+          "label": "Need or constraint satisfaction",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "no"
+        },
+        {
+          "key": "personal_preference_satisfaction",
+          "label": "Preference satisfaction",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "partially"
+        }
+      ]
+    }
+  ]
+}

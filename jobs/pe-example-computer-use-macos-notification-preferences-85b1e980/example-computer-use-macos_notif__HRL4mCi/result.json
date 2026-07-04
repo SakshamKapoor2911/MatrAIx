@@ -1,0 +1,114 @@
+{
+    "id": "f88a3974-be5c-43d0-9919-b873e89e72a1",
+    "task_name": "personabench/application-computer-use-macos-notification-preferences",
+    "trial_name": "example-computer-use-macos_notif__HRL4mCi",
+    "trial_uri": "file:///Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/jobs/pe-example-computer-use-macos-notification-preferences-85b1e980/example-computer-use-macos_notif__HRL4mCi",
+    "task_id": {
+        "path": "application/tasks/example-computer-use-macos_notification-preferences"
+    },
+    "source": null,
+    "task_checksum": "c809c46033d92b5de9dfb54991cb69412b33a1721d8676c2c764bb10642e93e9",
+    "config": {
+        "task": {
+            "path": "application/tasks/example-computer-use-macos_notification-preferences",
+            "git_url": null,
+            "git_commit_id": null,
+            "name": null,
+            "ref": null,
+            "overwrite": false,
+            "download_dir": null,
+            "source": null
+        },
+        "trial_name": "example-computer-use-macos_notif__HRL4mCi",
+        "trials_dir": "jobs/pe-example-computer-use-macos-notification-preferences-85b1e980",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "persona-computer-1",
+            "import_path": null,
+            "model_name": "anthropic/claude-sonnet-4-6",
+            "skills": [],
+            "override_timeout_sec": null,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "extra_allowed_hosts": [],
+            "kwargs": {
+                "persona_path": "persona/datasets/bench-dev-sample/persona_0042.yaml",
+                "cua_backend": "macos"
+            },
+            "env": {},
+            "mcp_servers": []
+        },
+        "environment": {
+            "type": "use-computer",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "cpu_enforcement_policy": "auto",
+            "memory_enforcement_policy": "auto",
+            "override_cpus": null,
+            "override_memory_mb": null,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "override_tpu": null,
+            "mounts": null,
+            "extra_docker_compose": [],
+            "env": {},
+            "kwargs": {},
+            "extra_allowed_hosts": []
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "env": {},
+            "disable": false
+        },
+        "artifacts": [],
+        "extra_instruction_paths": [],
+        "job_id": "fb9a18a6-0d18-49df-b5f8-08a5d32f8ccb"
+    },
+    "agent_info": {
+        "name": "persona-computer-1",
+        "version": "1.0.0",
+        "model_info": {
+            "name": "claude-sonnet-4-6",
+            "provider": "anthropic"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 24,
+        "n_cache_tokens": 234062,
+        "n_output_tokens": 3524,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-07-02T03:18:30.524102Z",
+    "finished_at": "2026-07-02T03:29:38.845810Z",
+    "environment_setup": {
+        "started_at": "2026-07-02T03:18:30.528668Z",
+        "finished_at": "2026-07-02T03:18:32.198709Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-07-02T03:18:32.200281Z",
+        "finished_at": "2026-07-02T03:18:32.633038Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-07-02T03:18:32.633134Z",
+        "finished_at": "2026-07-02T03:25:19.440224Z"
+    },
+    "verifier": {
+        "started_at": "2026-07-02T03:29:33.848667Z",
+        "finished_at": "2026-07-02T03:29:38.214991Z"
+    },
+    "step_results": null
+}

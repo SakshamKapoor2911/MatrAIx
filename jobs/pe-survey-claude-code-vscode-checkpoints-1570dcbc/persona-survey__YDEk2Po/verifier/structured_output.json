@@ -1,0 +1,279 @@
+{
+  "schemaVersion": "1.0",
+  "artifactType": "personabench.trial_evaluation",
+  "taskType": "survey",
+  "presenceCheck": {
+    "passed": true,
+    "requiredArtifacts": [
+      "survey_result.json"
+    ],
+    "missingArtifacts": []
+  },
+  "sourceArtifacts": {
+    "surveyResult": "/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/jobs/pe-survey-claude-code-vscode-checkpoints-1570dcbc/persona-survey__YDEk2Po/artifacts/app/output/survey_result.json"
+  },
+  "contexts": [
+    {
+      "key": "question.reviewable_edits",
+      "label": "reviewable_edits",
+      "contextType": "question_response",
+      "facets": [
+        {
+          "key": "response",
+          "label": "Selected response",
+          "role": "primary",
+          "kind": "numerical",
+          "value": 4
+        },
+        {
+          "key": "reason",
+          "label": "Reason",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "Inline diffs provide transparency and control, making multi-file edits acceptable with review capability before acceptance."
+        },
+        {
+          "key": "confidence",
+          "label": "Confidence",
+          "role": "score",
+          "kind": "numerical",
+          "value": 0.88
+        }
+      ]
+    },
+    {
+      "key": "question.checkpoint_control",
+      "label": "checkpoint_control",
+      "contextType": "question_response",
+      "facets": [
+        {
+          "key": "response",
+          "label": "Selected response",
+          "role": "primary",
+          "kind": "numerical",
+          "value": 4
+        },
+        {
+          "key": "reason",
+          "label": "Reason",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "Rollback capability significantly reduces risk and enables confidence in autonomous agent work on complex tasks."
+        },
+        {
+          "key": "confidence",
+          "label": "Confidence",
+          "role": "score",
+          "kind": "numerical",
+          "value": 0.86
+        }
+      ]
+    },
+    {
+      "key": "question.adoption_concern",
+      "label": "adoption_concern",
+      "contextType": "question_response",
+      "facets": [
+        {
+          "key": "response",
+          "label": "Selected response",
+          "role": "primary",
+          "kind": "textual",
+          "value": "incorrect_code_changes"
+        },
+        {
+          "key": "reason",
+          "label": "Reason",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "The primary concern is ensuring code quality and correctness; incorrect changes could introduce bugs or break functionality."
+        },
+        {
+          "key": "confidence",
+          "label": "Confidence",
+          "role": "score",
+          "kind": "numerical",
+          "value": 0.89
+        }
+      ]
+    },
+    {
+      "key": "question.safe_first_task",
+      "label": "safe_first_task",
+      "contextType": "question_response",
+      "facets": [
+        {
+          "key": "response",
+          "label": "Selected response",
+          "role": "primary",
+          "kind": "textual",
+          "value": "Refactoring variable names or adding documentation to existing code in a single file with comprehensive test coverage."
+        },
+        {
+          "key": "reason",
+          "label": "Reason",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "Low-risk tasks with clear intent and minimal impact on functionality provide a safe starting point to build trust in the agent."
+        },
+        {
+          "key": "confidence",
+          "label": "Confidence",
+          "role": "score",
+          "kind": "numerical",
+          "value": 0.87
+        }
+      ]
+    },
+    {
+      "key": "survey.summary",
+      "label": "Survey summary",
+      "contextType": "trial_summary",
+      "facets": [
+        {
+          "key": "answer_count",
+          "label": "Answer count",
+          "role": "score",
+          "kind": "numerical",
+          "value": 4
+        },
+        {
+          "key": "trajectory_event_count",
+          "label": "Trajectory event count",
+          "role": "score",
+          "kind": "numerical",
+          "value": 10
+        },
+        {
+          "key": "mean_numeric_answer",
+          "label": "Mean numeric answer",
+          "role": "score",
+          "kind": "numerical",
+          "value": 4.0
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "key": "question.reviewable_edits.response",
+      "label": "Selected response",
+      "group": "question.reviewable_edits",
+      "role": "primary",
+      "kind": "numerical",
+      "value": 4
+    },
+    {
+      "key": "question.reviewable_edits.reason",
+      "label": "Reason",
+      "group": "question.reviewable_edits",
+      "role": "explanation",
+      "kind": "textual",
+      "value": "Inline diffs provide transparency and control, making multi-file edits acceptable with review capability before acceptance."
+    },
+    {
+      "key": "question.reviewable_edits.confidence",
+      "label": "Confidence",
+      "group": "question.reviewable_edits",
+      "role": "score",
+      "kind": "numerical",
+      "value": 0.88
+    },
+    {
+      "key": "question.checkpoint_control.response",
+      "label": "Selected response",
+      "group": "question.checkpoint_control",
+      "role": "primary",
+      "kind": "numerical",
+      "value": 4
+    },
+    {
+      "key": "question.checkpoint_control.reason",
+      "label": "Reason",
+      "group": "question.checkpoint_control",
+      "role": "explanation",
+      "kind": "textual",
+      "value": "Rollback capability significantly reduces risk and enables confidence in autonomous agent work on complex tasks."
+    },
+    {
+      "key": "question.checkpoint_control.confidence",
+      "label": "Confidence",
+      "group": "question.checkpoint_control",
+      "role": "score",
+      "kind": "numerical",
+      "value": 0.86
+    },
+    {
+      "key": "question.adoption_concern.response",
+      "label": "Selected response",
+      "group": "question.adoption_concern",
+      "role": "primary",
+      "kind": "textual",
+      "value": "incorrect_code_changes"
+    },
+    {
+      "key": "question.adoption_concern.reason",
+      "label": "Reason",
+      "group": "question.adoption_concern",
+      "role": "explanation",
+      "kind": "textual",
+      "value": "The primary concern is ensuring code quality and correctness; incorrect changes could introduce bugs or break functionality."
+    },
+    {
+      "key": "question.adoption_concern.confidence",
+      "label": "Confidence",
+      "group": "question.adoption_concern",
+      "role": "score",
+      "kind": "numerical",
+      "value": 0.89
+    },
+    {
+      "key": "question.safe_first_task.response",
+      "label": "Selected response",
+      "group": "question.safe_first_task",
+      "role": "primary",
+      "kind": "textual",
+      "value": "Refactoring variable names or adding documentation to existing code in a single file with comprehensive test coverage."
+    },
+    {
+      "key": "question.safe_first_task.reason",
+      "label": "Reason",
+      "group": "question.safe_first_task",
+      "role": "explanation",
+      "kind": "textual",
+      "value": "Low-risk tasks with clear intent and minimal impact on functionality provide a safe starting point to build trust in the agent."
+    },
+    {
+      "key": "question.safe_first_task.confidence",
+      "label": "Confidence",
+      "group": "question.safe_first_task",
+      "role": "score",
+      "kind": "numerical",
+      "value": 0.87
+    },
+    {
+      "key": "survey.summary.answer_count",
+      "label": "Answer count",
+      "group": "survey.summary",
+      "role": "score",
+      "kind": "numerical",
+      "value": 4
+    },
+    {
+      "key": "survey.summary.trajectory_event_count",
+      "label": "Trajectory event count",
+      "group": "survey.summary",
+      "role": "score",
+      "kind": "numerical",
+      "value": 10
+    },
+    {
+      "key": "survey.summary.mean_numeric_answer",
+      "label": "Mean numeric answer",
+      "group": "survey.summary",
+      "role": "score",
+      "kind": "numerical",
+      "value": 4.0
+    }
+  ]
+}

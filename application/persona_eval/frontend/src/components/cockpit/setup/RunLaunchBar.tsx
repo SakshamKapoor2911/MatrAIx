@@ -1,4 +1,5 @@
 import { FOCUS_RING, Sym } from "../cockpitShared";
+import { CockpitInlineCount } from "./CockpitCountField";
 
 export type RunLaunchPhase = "idle" | "launching" | "running" | "done" | "error";
 
@@ -18,8 +19,12 @@ export interface RunLaunchBarProps {
   progressSublabel?: string;
   onNewRun?: () => void;
   onViewJob?: () => void;
+  onCancelRun?: () => void;
+  cancelRunBusy?: boolean;
   onDownload?: () => void;
   canDownload?: boolean;
+  /** When the live panel already shows a failure card, keep the bar to actions only. */
+  compactOnFailure?: boolean;
 }
 
 export function RunLaunchBar({
@@ -37,6 +42,8 @@ export function RunLaunchBar({
   progressSublabel,
   onNewRun,
   onViewJob,
+  onCancelRun,
+  cancelRunBusy = false,
   onDownload,
   canDownload = false,
 }: RunLaunchBarProps) {
@@ -44,6 +51,7 @@ export function RunLaunchBar({
   const failed = runPhase === "error";
   const done = runPhase === "done";
   const pct = Math.max(0, Math.min(100, progressPct));
+  const parallelMax = Math.max(1, personaCount);
 
   return (
     <div className="glass-panel-strong w-full shrink-0 rounded-xl border border-primary/20 px-4 py-3 sm:px-5">
@@ -54,49 +62,78 @@ export function RunLaunchBar({
       )}
 
       {active ? (
-        <div className="space-y-2">
-          <div className="flex flex-wrap items-center gap-2">
-            {failed ? (
-              <Sym name="error" fill={1} size={18} className="shrink-0 text-danger" />
-            ) : done ? (
-              <Sym name="check_circle" fill={1} size={18} className="shrink-0 text-secondary" />
-            ) : (
-              <Sym name="autorenew" size={18} className="shrink-0 animate-rb-spin text-primary" />
-            )}
-            <span className="min-w-0 flex-1 text-[12px] text-text-variant">
-              {progressLabel ?? (isBatch ? "Harbor batch job" : "Running simulation")}
-            </span>
-            {onDownload && (done || failed) && (
-              <button
-                type="button"
-                onClick={onDownload}
-                disabled={!canDownload}
-                className={`shrink-0 rounded-md border border-outline bg-surface-low px-3 py-1.5 text-[11px] font-medium text-text-variant transition hover:border-primary disabled:opacity-50 ${FOCUS_RING}`}
-              >
-                Download
-              </button>
-            )}
-            {onViewJob && done && (
-              <button
-                type="button"
-                onClick={onViewJob}
-                className={`shrink-0 rounded-md border border-primary/40 bg-primary/10 px-3 py-1.5 text-[11px] font-medium text-primary transition hover:bg-primary/20 ${FOCUS_RING}`}
-              >
-                View job
-              </button>
-            )}
-            {onNewRun && (done || failed) && (
-              <button
-                type="button"
-                onClick={onNewRun}
-                className={`shrink-0 rounded-md border border-outline bg-surface-low px-3 py-1.5 text-[11px] font-medium text-text-variant transition hover:border-primary hover:text-text-main ${FOCUS_RING}`}
-              >
-                Reset
-              </button>
-            )}
+        <div className="space-y-3">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2.5">
+            <div className="flex min-w-0 flex-1 items-center gap-2.5">
+              {failed ? (
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-danger/12">
+                  <Sym name="error" fill={1} size={18} className="text-danger" />
+                </span>
+              ) : done ? (
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-secondary/12">
+                  <Sym name="check_circle" fill={1} size={18} className="text-secondary" />
+                </span>
+              ) : (
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10">
+                  <Sym name="autorenew" size={18} className="animate-rb-spin text-primary" />
+                </span>
+              )}
+              <div className="min-w-0">
+                <p className="truncate font-display text-[13px] font-semibold leading-tight text-text-main">
+                  {progressLabel ?? (isBatch ? "Batch run" : "Running simulation")}
+                </p>
+                {progressSublabel && (
+                  <p className="mt-0.5 truncate text-[10px] text-text-dim">{progressSublabel}</p>
+                )}
+              </div>
+            </div>
+
+            <div className="flex shrink-0 flex-wrap items-center justify-end gap-2">
+              {onCancelRun && !done && !failed && (
+                <button
+                  type="button"
+                  onClick={onCancelRun}
+                  disabled={cancelRunBusy}
+                  className={`inline-flex items-center gap-1.5 rounded-lg border border-danger/35 bg-danger/8 px-3.5 py-2 text-[12px] font-medium text-danger transition hover:border-danger/50 hover:bg-danger/14 active:scale-[0.98] disabled:opacity-50 ${FOCUS_RING}`}
+                >
+                  <Sym name="stop_circle" size={16} />
+                  {cancelRunBusy ? "Stopping…" : isBatch ? "Stop batch" : "Stop run"}
+                </button>
+              )}
+              {onDownload && (done || failed) && !onViewJob && (
+                <button
+                  type="button"
+                  onClick={onDownload}
+                  disabled={!canDownload}
+                  className={`inline-flex items-center gap-1.5 rounded-lg border border-outline/60 bg-surface/40 px-3.5 py-2 text-[12px] font-medium text-text-variant backdrop-blur-sm transition hover:border-outline hover:bg-surface-high hover:text-text-main active:scale-[0.98] disabled:opacity-50 ${FOCUS_RING}`}
+                >
+                  <Sym name="download" size={16} />
+                  Download
+                </button>
+              )}
+              {onViewJob && done && (
+                <button
+                  type="button"
+                  onClick={onViewJob}
+                  className={`inline-flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2 font-display text-[12px] font-semibold text-on-primary shadow-[0_4px_16px_-6px_rgb(var(--primary)/0.55)] transition hover:bg-primary-dim active:scale-[0.98] ${FOCUS_RING}`}
+                >
+                  <Sym name="open_in_new" size={16} />
+                  {isBatch ? "View job" : "View trial"}
+                </button>
+              )}
+              {onNewRun && (done || failed) && (
+                <button
+                  type="button"
+                  onClick={onNewRun}
+                  className={`inline-flex items-center gap-1.5 rounded-lg border border-outline/55 bg-transparent px-3.5 py-2 text-[12px] font-medium text-text-dim transition hover:border-outline hover:bg-surface-low hover:text-text-variant active:scale-[0.98] ${FOCUS_RING}`}
+                >
+                  <Sym name="restart_alt" size={16} />
+                  Reset
+                </button>
+              )}
+            </div>
           </div>
-          {progressSublabel && <p className="text-[10px] text-text-dim">{progressSublabel}</p>}
-          <div className="h-1.5 w-full overflow-hidden rounded-full bg-field">
+          <div className="h-1 w-full overflow-hidden rounded-full bg-field/80">
             <div
               className={`h-full rounded-full transition-[width] duration-500 ${
                 failed ? "bg-danger" : done ? "bg-secondary" : "bg-primary"
@@ -107,31 +144,26 @@ export function RunLaunchBar({
         </div>
       ) : (
         <>
-          <div className="flex w-full flex-wrap items-center justify-center gap-3">
+          <div className="flex w-full flex-col items-center gap-3 sm:flex-row sm:justify-center">
             <button
               type="button"
               disabled={!canRun || isRunning}
               onClick={onRun}
-              className={`glow inline-flex min-w-[200px] items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3.5 font-display text-[16px] font-bold text-on-primary transition hover:bg-primary-dim disabled:cursor-not-allowed disabled:opacity-50 ${FOCUS_RING}`}
+              className={`glow inline-flex w-full min-w-[200px] items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3.5 font-display text-[16px] font-bold text-on-primary transition hover:bg-primary-dim disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto ${FOCUS_RING}`}
             >
               <Sym name={isBatch ? "rocket_launch" : "play_arrow"} fill={1} size={22} />
               {isRunning ? "Launching…" : isBatch ? `Run batch (${personaCount})` : "Run simulation"}
             </button>
-            {isBatch && (
-              <label className="flex min-w-[180px] flex-col gap-1.5 text-[10px] text-text-variant">
-                <div className="flex items-center justify-between">
-                  <span>Parallel trials</span>
-                  <span className="font-mono text-[11px] text-text-main">{parallelTrials}</span>
-                </div>
-                <input
-                  type="range"
-                  min={1}
-                  max={Math.min(8, personaCount)}
-                  value={parallelTrials}
-                  onChange={(e) => onParallelTrialsChange(Number(e.target.value))}
-                  className="accent-primary"
-                />
-              </label>
+            {isBatch && personaCount > 1 && (
+              <CockpitInlineCount
+                label="Parallel"
+                value={Math.min(parallelTrials, parallelMax)}
+                onChange={onParallelTrialsChange}
+                min={1}
+                max={parallelMax}
+                disabled={isRunning}
+                hint={`≤ ${parallelMax}`}
+              />
             )}
           </div>
           <p className="mt-2 text-center text-[10px] text-text-dim">

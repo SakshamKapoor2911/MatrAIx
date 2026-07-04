@@ -1,0 +1,66 @@
+{
+    "schema_version": 1,
+    "created_at": "2026-07-02T08:32:25.219680Z",
+    "harbor": {
+        "version": "0.16.1",
+        "is_editable": false
+    },
+    "invocation": [
+        "/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/.venv/bin/harbor",
+        "run",
+        "-c",
+        "configs/jobs/application-task-job-recipe/pe-example-survey-product-feedback-1fe76dcc.yaml"
+    ],
+    "n_concurrent_trials": 1,
+    "retry": {
+        "max_retries": 0,
+        "exclude_exceptions": [
+            "VerifierOutputParseError",
+            "RewardFileNotFoundError",
+            "RewardFileEmptyError",
+            "VerifierTimeoutError",
+            "AgentTimeoutError"
+        ],
+        "wait_multiplier": 1.0,
+        "min_wait_sec": 1.0,
+        "max_wait_sec": 60.0
+    },
+    "trials": [
+        {
+            "task": {
+                "name": "persona-survey",
+                "type": "local",
+                "digest": "sha256:92407e68e3c6eaac0cff8e0537ee504e6d44e9f230dad8ecfaa2791d58208010",
+                "path": "application/tasks/persona-survey"
+            },
+            "timeout_multiplier": 1.0,
+            "agent": {
+                "name": "persona-json-survey",
+                "model_name": "anthropic/claude-haiku-4-5",
+                "skills": [],
+                "extra_allowed_hosts": [],
+                "kwargs": {
+                    "persona_path": "persona/datasets/bench-dev-sample/persona_0001.yaml"
+                },
+                "env": {},
+                "mcp_servers": []
+            },
+            "skills": [],
+            "environment": {
+                "type": "host",
+                "force_build": false,
+                "delete": true,
+                "cpu_enforcement_policy": "auto",
+                "memory_enforcement_policy": "auto",
+                "extra_docker_compose": [],
+                "env": {},
+                "kwargs": {},
+                "extra_allowed_hosts": []
+            },
+            "verifier": {
+                "env": {},
+                "disable": false
+            }
+        }
+    ]
+}

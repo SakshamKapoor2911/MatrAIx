@@ -1,0 +1,40 @@
+schemaVersion: "1.0"
+id: commerce_nike_air_max_dn_dynamic_air_v1
+title: Nike Air Max Dn Dynamic Air Purchase Survey
+description: Survey reactions to the Nike Air Max Dn Dynamic Air cushioning feature.
+questions:
+  - id: dynamic_air_appeal
+    prompt: The Dynamic Air cushioning feature would make me more interested in trying the Nike Air Max Dn.
+    type: likert
+    construct: retail_product_feature_appeal
+    required: true
+    minValue: 1
+    maxValue: 5
+  - id: comfort_price_tolerance
+    prompt: I would pay more for sneakers if the cushioning technology felt noticeably more comfortable during everyday walking.
+    type: likert
+    construct: comfort_feature_price_tolerance
+    required: true
+    minValue: 1
+    maxValue: 5
+  - id: purchase_driver
+    prompt: What would most affect your decision to buy the Air Max Dn?
+    type: single_choice
+    construct: sneaker_purchase_driver
+    required: true
+    options:
+      - id: comfort
+        label: Comfort
+      - id: style
+        label: Style
+      - id: price
+        label: Price
+      - id: brand_loyalty
+        label: Brand loyalty
+      - id: durability
+        label: Durability
+  - id: proof_requirement
+    prompt: What would Nike need to show or prove for you to believe the Dynamic Air feature is worth it?
+    type: free_text
+    construct: retail_product_proof_requirement
+    required: true

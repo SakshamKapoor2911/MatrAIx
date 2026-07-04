@@ -1,0 +1,279 @@
+{
+  "schemaVersion": "1.0",
+  "artifactType": "personabench.trial_evaluation",
+  "taskType": "survey",
+  "presenceCheck": {
+    "passed": true,
+    "requiredArtifacts": [
+      "survey_result.json"
+    ],
+    "missingArtifacts": []
+  },
+  "sourceArtifacts": {
+    "surveyResult": "/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/jobs/pe-survey-claude-code-vscode-checkpoints-1570dcbc/persona-survey__vBot5SM/artifacts/app/output/survey_result.json"
+  },
+  "contexts": [
+    {
+      "key": "question.reviewable_edits",
+      "label": "reviewable_edits",
+      "contextType": "question_response",
+      "facets": [
+        {
+          "key": "response",
+          "label": "Selected response",
+          "role": "primary",
+          "kind": "numerical",
+          "value": 4
+        },
+        {
+          "key": "reason",
+          "label": "Reason",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "Inline diffs provide the transparency needed to confidently use an autonomous coding agent. The ability to review changes before accepting them significantly increases my willingness to adopt this feature."
+        },
+        {
+          "key": "confidence",
+          "label": "Confidence",
+          "role": "score",
+          "kind": "numerical",
+          "value": 0.9
+        }
+      ]
+    },
+    {
+      "key": "question.checkpoint_control",
+      "label": "checkpoint_control",
+      "contextType": "question_response",
+      "facets": [
+        {
+          "key": "response",
+          "label": "Selected response",
+          "role": "primary",
+          "kind": "numerical",
+          "value": 5
+        },
+        {
+          "key": "reason",
+          "label": "Reason",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "Checkpoint rollback is a critical safety mechanism that would substantially increase my comfort with autonomous code editing. The ability to revert to a known good state removes much of the risk associated with agent autonomy."
+        },
+        {
+          "key": "confidence",
+          "label": "Confidence",
+          "role": "score",
+          "kind": "numerical",
+          "value": 0.92
+        }
+      ]
+    },
+    {
+      "key": "question.adoption_concern",
+      "label": "adoption_concern",
+      "contextType": "question_response",
+      "facets": [
+        {
+          "key": "response",
+          "label": "Selected response",
+          "role": "primary",
+          "kind": "textual",
+          "value": "incorrect_code_changes"
+        },
+        {
+          "key": "reason",
+          "label": "Reason",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "My primary concern is that the coding agent might introduce subtle bugs or logic errors that could pass initial review but cause problems in production. Incorrect changes are harder to catch than obvious formatting issues."
+        },
+        {
+          "key": "confidence",
+          "label": "Confidence",
+          "role": "score",
+          "kind": "numerical",
+          "value": 0.88
+        }
+      ]
+    },
+    {
+      "key": "question.safe_first_task",
+      "label": "safe_first_task",
+      "contextType": "question_response",
+      "facets": [
+        {
+          "key": "response",
+          "label": "Selected response",
+          "role": "primary",
+          "kind": "textual",
+          "value": "Refactoring existing code to improve readability or apply consistent naming conventions across a module, where the functionality remains unchanged and can be easily verified through existing tests."
+        },
+        {
+          "key": "reason",
+          "label": "Reason",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "Refactoring tasks have clear success criteria and lower risk of introducing new bugs since the behavior should remain identical. Existing test suites can validate correctness, making it an ideal first use case to build trust."
+        },
+        {
+          "key": "confidence",
+          "label": "Confidence",
+          "role": "score",
+          "kind": "numerical",
+          "value": 0.87
+        }
+      ]
+    },
+    {
+      "key": "survey.summary",
+      "label": "Survey summary",
+      "contextType": "trial_summary",
+      "facets": [
+        {
+          "key": "answer_count",
+          "label": "Answer count",
+          "role": "score",
+          "kind": "numerical",
+          "value": 4
+        },
+        {
+          "key": "trajectory_event_count",
+          "label": "Trajectory event count",
+          "role": "score",
+          "kind": "numerical",
+          "value": 10
+        },
+        {
+          "key": "mean_numeric_answer",
+          "label": "Mean numeric answer",
+          "role": "score",
+          "kind": "numerical",
+          "value": 4.5
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "key": "question.reviewable_edits.response",
+      "label": "Selected response",
+      "group": "question.reviewable_edits",
+      "role": "primary",
+      "kind": "numerical",
+      "value": 4
+    },
+    {
+      "key": "question.reviewable_edits.reason",
+      "label": "Reason",
+      "group": "question.reviewable_edits",
+      "role": "explanation",
+      "kind": "textual",
+      "value": "Inline diffs provide the transparency needed to confidently use an autonomous coding agent. The ability to review changes before accepting them significantly increases my willingness to adopt this feature."
+    },
+    {
+      "key": "question.reviewable_edits.confidence",
+      "label": "Confidence",
+      "group": "question.reviewable_edits",
+      "role": "score",
+      "kind": "numerical",
+      "value": 0.9
+    },
+    {
+      "key": "question.checkpoint_control.response",
+      "label": "Selected response",
+      "group": "question.checkpoint_control",
+      "role": "primary",
+      "kind": "numerical",
+      "value": 5
+    },
+    {
+      "key": "question.checkpoint_control.reason",
+      "label": "Reason",
+      "group": "question.checkpoint_control",
+      "role": "explanation",
+      "kind": "textual",
+      "value": "Checkpoint rollback is a critical safety mechanism that would substantially increase my comfort with autonomous code editing. The ability to revert to a known good state removes much of the risk associated with agent autonomy."
+    },
+    {
+      "key": "question.checkpoint_control.confidence",
+      "label": "Confidence",
+      "group": "question.checkpoint_control",
+      "role": "score",
+      "kind": "numerical",
+      "value": 0.92
+    },
+    {
+      "key": "question.adoption_concern.response",
+      "label": "Selected response",
+      "group": "question.adoption_concern",
+      "role": "primary",
+      "kind": "textual",
+      "value": "incorrect_code_changes"
+    },
+    {
+      "key": "question.adoption_concern.reason",
+      "label": "Reason",
+      "group": "question.adoption_concern",
+      "role": "explanation",
+      "kind": "textual",
+      "value": "My primary concern is that the coding agent might introduce subtle bugs or logic errors that could pass initial review but cause problems in production. Incorrect changes are harder to catch than obvious formatting issues."
+    },
+    {
+      "key": "question.adoption_concern.confidence",
+      "label": "Confidence",
+      "group": "question.adoption_concern",
+      "role": "score",
+      "kind": "numerical",
+      "value": 0.88
+    },
+    {
+      "key": "question.safe_first_task.response",
+      "label": "Selected response",
+      "group": "question.safe_first_task",
+      "role": "primary",
+      "kind": "textual",
+      "value": "Refactoring existing code to improve readability or apply consistent naming conventions across a module, where the functionality remains unchanged and can be easily verified through existing tests."
+    },
+    {
+      "key": "question.safe_first_task.reason",
+      "label": "Reason",
+      "group": "question.safe_first_task",
+      "role": "explanation",
+      "kind": "textual",
+      "value": "Refactoring tasks have clear success criteria and lower risk of introducing new bugs since the behavior should remain identical. Existing test suites can validate correctness, making it an ideal first use case to build trust."
+    },
+    {
+      "key": "question.safe_first_task.confidence",
+      "label": "Confidence",
+      "group": "question.safe_first_task",
+      "role": "score",
+      "kind": "numerical",
+      "value": 0.87
+    },
+    {
+      "key": "survey.summary.answer_count",
+      "label": "Answer count",
+      "group": "survey.summary",
+      "role": "score",
+      "kind": "numerical",
+      "value": 4
+    },
+    {
+      "key": "survey.summary.trajectory_event_count",
+      "label": "Trajectory event count",
+      "group": "survey.summary",
+      "role": "score",
+      "kind": "numerical",
+      "value": 10
+    },
+    {
+      "key": "survey.summary.mean_numeric_answer",
+      "label": "Mean numeric answer",
+      "group": "survey.summary",
+      "role": "score",
+      "kind": "numerical",
+      "value": 4.5
+    }
+  ]
+}

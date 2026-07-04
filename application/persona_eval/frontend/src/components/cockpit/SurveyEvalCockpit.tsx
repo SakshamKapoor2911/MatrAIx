@@ -21,9 +21,9 @@ import { useQuery } from "@tanstack/react-query";
 
 import { listSurveyHarborTasks, listSurveyInstruments, api, ApiError } from "@/lib/api";
 import { FALLBACK_SURVEY_HARBOR_TASKS } from "@/lib/fallbackTasks";
+import { personaModelPipelineLabel } from "@/lib/personaAgentCatalog";
 import type {
   ConfigOptionsResponse,
-  PersonaEvalPersona,
   SurveyAnswer,
   SurveyHarborTask,
   SurveyHarborTasksResponse,
@@ -38,6 +38,7 @@ import { useHarborCockpitRun, type HarborCockpitPhase } from "@/lib/useHarborCoc
 import { useCockpitInstruction } from "@/lib/useCockpitInstruction";
 import { mapSurveyDebriefToJobView, mapSurveyLiveToJobView, isRewardOnlyTrialFailure } from "@/lib/harborCockpitMappers";
 import { buildSurveyInstructionMarkdown } from "@/lib/surveyInstruction";
+import { normalizeTaskInstructionMarkdown } from "@/lib/taskContent";
 import { Markdown } from "@/components/Markdown";
 import { RunHeader } from "./RunHeader";
 import { PersonaDrawer } from "./PersonaDrawer";
@@ -52,17 +53,18 @@ import { CockpitRunCenter } from "./setup/CockpitRunCenter";
 import { useSetupPersonaSampling } from "./setup/useSetupPersonaSampling";
 import {
   batchProgressPct as computeBatchProgressPct,
+  BATCH_RUN_COMPLETE_HINT,
+  formatBatchProgressLabel,
   resolveRunLaunchPhase,
   useCockpitBatchJob,
 } from "./setup/useCockpitBatchJob";
+import { useCockpitRunCancel } from "./setup/useCockpitRunCancel";
 import { surveyHarborTaskCards } from "./setup/cockpitTaskCards";
 import type { TaskCardModel } from "./setup/TaskSelectionRail";
 import {
   FOCUS_RING,
   Sym,
   humanizeToken,
-  personaCodename,
-  personaDescriptiveTitle,
 } from "./cockpitShared";
 import type { PersonaEvalTaskType } from "./TaskTypeSwitch";
 import { HARBOR_TASK_PATHS } from "@/lib/types";
@@ -87,10 +89,10 @@ function surveyStatusLine(
   jobPhase: string | null | undefined,
   harborPhase?: string | null,
 ): string | null {
-  if (phase === "launching") return "Launching Harbor job…";
+  if (phase === "launching") return "Launching batch…";
   if (phase !== "running") return null;
   const raw = (harborPhase ?? jobPhase ?? "").toLowerCase();
-  if (raw.includes("harbor") || raw.includes("trial")) return "Harbor is running the survey trial…";
+  if (raw.includes("harbor") || raw.includes("trial")) return "Running survey trial…";
   if (raw.includes("collect")) return "Saving the answers…";
   if (raw.includes("survey")) return "The simulated user is filling out the questionnaire…";
   return "Running the questionnaire…";
@@ -128,16 +130,29 @@ function formatSurveyValue(value: unknown): string {
   return String(value);
 }
 
+function inferSurveyTaskIdFromJob(jobName: string, taskCards: TaskCardModel[]): string | null {
+  const normalized = jobName.toLowerCase();
+  for (const card of taskCards) {
+    const folder = card.taskPath.split("/").pop() ?? "";
+    const slug = folder.replace(/^example-survey_/, "").replace(/^survey_/, "").replace(/_/g, "-");
+    if (slug && normalized.includes(slug)) {
+      return card.id;
+    }
+  }
+  return null;
+}
+
 export function SurveyEvalCockpit({
   options,
   taskType,
   onTaskTypeChange,
   onFooterContextChange,
   onOpenHarborJob,
+  onOpenHarborTrial,
   isActive = true,
 }: SurveyEvalCockpitProps) {
-  const { run, job, phase, isRunning, error, timedOut, retry, reset, harborPhase, harborJobName, harborTrialName } =
-    useHarborCockpitRun<SurveyEvalJobView>();
+  const { run, job, phase, isRunning, error, timedOut, retry, reset, harborPhase, harborJobName, harborTrialName, cancelRun, cancelBusy: harborCancelBusy } =
+    useHarborCockpitRun<SurveyEvalJobView>({ taskKind: "survey" });
   const {
     persona,
     personaModel,
@@ -157,21 +172,25 @@ export function SurveyEvalCockpit({
     parallelTrials,
     setParallelTrials,
     isBatchRun,
-  } = useSetupPersonaSampling(options);
+  } = useSetupPersonaSampling(options, "survey");
   const [selectedTaskId, setSelectedTaskId] = useState("");
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [tab, setTab] = useState<InspectorTab>("evaluation");
   const [launchError, setLaunchError] = useState<string | null>(null);
   const {
     batchJobName,
+    batchTaskId,
+    batchPersonaIds,
     setBatchJobName,
     batchLive,
     clearBatch,
+    cancelBatch,
+    cancelBusy,
     isBatchActive,
     batchComplete,
     batchGridCells,
     expectedTrialCount,
-  } = useCockpitBatchJob(selectedPersonaIds, parallelTrials);
+  } = useCockpitBatchJob(selectedPersonaIds, parallelTrials, "survey");
   const [exportSnapshot, setExportSnapshot] = useState<{
     persona: { id: string; name: string; source: string } | null;
     taskId: string;
@@ -199,27 +218,48 @@ export function SurveyEvalCockpit({
   }, [harborTasksQuery.data?.tasks, harborTasksQuery.isError]);
 
   const taskCards = useMemo(() => surveyHarborTaskCards(harborTasks), [harborTasks]);
+  const setupLocked = phase !== "idle" || Boolean(batchJobName);
+  const visiblePersonaIds = setupLocked && batchPersonaIds.length > 0 ? batchPersonaIds : selectedPersonaIds;
+  const activeTaskId = batchJobName && batchTaskId ? batchTaskId : selectedTaskId;
   const selectedCard =
-    taskCards.find((item) => item.id === selectedTaskId) ?? taskCards[0] ?? null;
+    taskCards.find((item) => item.id === activeTaskId) ?? taskCards[0] ?? null;
   const harborTask: SurveyHarborTask | null =
     harborTasks.find((item) => item.id === selectedCard?.id) ?? null;
-  const surveyInstrumentId = selectedCard?.surveyInstrumentId ?? harborTask?.instrumentId ?? null;
-  const surveyInstrument: SurveyInstrument | null = useMemo(() => {
-    if (!surveyInstrumentId) return null;
-    return instruments.find((item) => item.id === surveyInstrumentId) ?? null;
-  }, [surveyInstrumentId, instruments]);
+  const activeInstrumentId = harborTask?.instrumentId ?? null;
+  const activeQuestionnaire: SurveyInstrument | null = useMemo(() => {
+    if (!activeInstrumentId) return null;
+    return instruments.find((item) => item.id === activeInstrumentId) ?? null;
+  }, [activeInstrumentId, instruments]);
+
+  const pipelinePersonaModelLabel = useMemo(
+    () => personaModelPipelineLabel(personaModel, personaModelOptions),
+    [personaModel, personaModelOptions],
+  );
 
   useEffect(() => {
-    if (!selectedCard && taskCards.length > 0) setSelectedTaskId(taskCards[0].id);
-  }, [selectedCard, taskCards]);
+    if (batchTaskId) {
+      setSelectedTaskId(batchTaskId);
+      return;
+    }
+    if (batchJobName && taskCards.length > 0) {
+      const inferred = inferSurveyTaskIdFromJob(batchJobName, taskCards);
+      if (inferred) {
+        setSelectedTaskId(inferred);
+        return;
+      }
+    }
+    if (!selectedTaskId && taskCards.length > 0) {
+      setSelectedTaskId(taskCards[0].id);
+    }
+  }, [batchTaskId, batchJobName, selectedTaskId, taskCards]);
 
   // Report the honest footer context up (the active questionnaire).
   useEffect(() => {
     if (!isActive) return;
     onFooterContextChange?.(
-      `survey · ${harborTask?.title ?? surveyInstrument?.title ?? "Questionnaire"}`,
+      `survey · ${harborTask?.title ?? activeQuestionnaire?.title ?? "Questionnaire"}`,
     );
-  }, [isActive, harborTask, surveyInstrument, onFooterContextChange]);
+  }, [isActive, harborTask, activeQuestionnaire, onFooterContextChange]);
 
   const surveyResult = job?.surveyResult ?? null;
   const verifier = job?.verifier ?? null;
@@ -232,18 +272,18 @@ export function SurveyEvalCockpit({
   const status = surveyStatusLine(phase, job?.phase, harborPhase);
   const setupInstructionMarkdown = useMemo(() => {
     if (harborTask?.profileMarkdown?.trim()) return harborTask.profileMarkdown.trim();
-    if (surveyInstrument) return buildSurveyInstructionMarkdown(surveyInstrument);
+    if (activeQuestionnaire) return buildSurveyInstructionMarkdown(activeQuestionnaire);
     if (harborTask) return `# ${harborTask.title}\n\n${harborTask.description}`;
     return "";
-  }, [harborTask, surveyInstrument]);
-  const liveInstructionMarkdown = job?.instructionMarkdown ?? null;
-  const centerInstructionMarkdown = liveInstructionMarkdown?.trim() || setupInstructionMarkdown;
+  }, [harborTask, activeQuestionnaire]);
+  const liveInstructionMarkdown = normalizeTaskInstructionMarkdown(job?.instructionMarkdown ?? null);
+  const centerInstructionMarkdown = liveInstructionMarkdown || setupInstructionMarkdown;
 
   const activeTaskPath = selectedCard?.taskPath || HARBOR_TASK_PATHS.survey;
   const instructionView = useCockpitInstruction({
     taskPath: activeTaskPath,
     fallbackMarkdown: setupInstructionMarkdown,
-    fallbackTitle: harborTask?.title ?? surveyInstrument?.title ?? selectedCard?.title ?? null,
+    fallbackTitle: harborTask?.title ?? activeQuestionnaire?.title ?? selectedCard?.title ?? null,
     harborJobName,
     harborTrialName,
     enabled: phase !== "idle",
@@ -266,17 +306,14 @@ export function SurveyEvalCockpit({
     (card: TaskCardModel) => {
       if (!persona || isRunning) return;
       setExportSnapshot(null);
-      const instrumentId = card.surveyInstrumentId ?? "";
+      const task = harborTasks.find((item) => item.id === card.id) ?? null;
+      const instrumentId = task?.instrumentId ?? "";
       const taskPath = card.taskPath || HARBOR_TASK_PATHS.survey;
-      const instrumentTitle =
-        harborTasks.find((item) => item.id === card.id)?.title ??
-        instruments.find((item) => item.id === instrumentId)?.title ??
-        card.title;
+      const instrumentTitle = task?.title ?? instruments.find((item) => item.id === instrumentId)?.title ?? card.title;
       void run({
         taskPath,
         personaId: persona.id,
         personaModel,
-        surveyInstrumentId: instrumentId,
         mode: "auto",
         mapDebrief: (debrief, ctx) =>
           mapSurveyDebriefToJobView(debrief, ctx, {
@@ -309,21 +346,16 @@ export function SurveyEvalCockpit({
       try {
         const launched = await api.launchHarborJob(
           {
-            taskPath:
-              selectedCard.surveyKind === "harbor" && selectedCard.taskPath
-                ? selectedCard.taskPath
-                : HARBOR_TASK_PATHS.survey,
+            taskPath: selectedCard.taskPath || HARBOR_TASK_PATHS.survey,
             sampleSize: selectedPersonaIds.length,
             seed,
             personaModel,
             personaIds: selectedPersonaIds,
             nConcurrentTrials: Math.min(parallelTrials, selectedPersonaIds.length),
             mode: "auto",
-            surveyInstrumentId:
-              selectedCard.surveyInstrumentId ?? selectedCard.id,
           },
         );
-        setBatchJobName(launched.jobName);
+        setBatchJobName(launched.jobName, { taskId: selectedCard.id });
       } catch (exc) {
         const message = exc instanceof ApiError ? exc.message : exc instanceof Error ? exc.message : String(exc);
         setLaunchError(message);
@@ -347,6 +379,18 @@ export function SurveyEvalCockpit({
     clearBatch();
     setLaunchError(null);
   }, [reset, clearBatch]);
+
+  const { onCancelRun, cancelRunBusy } = useCockpitRunCancel({
+    batchJobName,
+    batchComplete,
+    cancelBatch,
+    batchCancelBusy: cancelBusy,
+    harborJobName,
+    isRunning,
+    cancelRun,
+    harborCancelBusy,
+    setError: setLaunchError,
+  });
 
   const handleRetry = useCallback(() => {
     if (timedOut || phase === "error") retry();
@@ -385,12 +429,21 @@ export function SurveyEvalCockpit({
       } else if (e.key === "2") {
         e.preventDefault();
         setTab("instruction");
+      } else if (e.key === "3") {
+        e.preventDefault();
+        setTab("context");
+      } else if (e.key === "4") {
+        e.preventDefault();
+        setTab("questionnaire");
+      } else if (e.key === "5") {
+        e.preventDefault();
+        setTab("output-schema");
       }
     }
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
   }, [showInspector]);
-  const activeInstrument = surveyResult?.instrument ?? surveyInstrument;
+  const activeInstrument = surveyResult?.instrument ?? activeQuestionnaire;
   const questionTotal =
     surveyResult?.completion?.numQuestions ?? activeInstrument?.questions.length ?? 0;
   const questionAnswered =
@@ -413,7 +466,10 @@ export function SurveyEvalCockpit({
             ? 20
             : 0;
   const runProgressLabel = batchJobName
-    ? `Harbor job · ${batchLive.live?.completedTrials ?? 0}/${expectedTrialCount} trials`
+    ? formatBatchProgressLabel(
+        batchLive.live?.completedTrials ?? 0,
+        expectedTrialCount,
+      )
     : phase === "launching"
       ? "Launching survey trial…"
       : phase === "running"
@@ -427,36 +483,24 @@ export function SurveyEvalCockpit({
             : undefined;
   const canExport = exportSnapshot !== null && surveyResult !== null;
 
-  const surveyLiveContent = (
-    <>
-      {surveyResult ? (
-              <SurveyLive
-                instrument={surveyInstrument}
-                result={surveyResult}
-          phase={failed ? "error" : phase}
-                status={status}
-          error={error ?? job?.error ?? null}
-                persona={persona}
-                instructionMarkdown={centerInstructionMarkdown}
-                onRetry={handleRetry}
-              />
-      ) : runBusy ? (
-        <div className="rounded-md border border-outline bg-surface-lowest p-5">
-          <p className="mb-3 text-[12px] font-semibold text-text-main">
-            {status ?? "Persona is answering the questionnaire…"}
-          </p>
-          {verifierOnlyFailure && (
-            <p className="mb-3 rounded-md border border-warn/30 bg-warn/10 px-3 py-2 text-[12px] text-text-variant">
-              Answers were collected, but Harbor verifier did not write a reward file. Restart the backend and re-run after the host verifier fix.
-            </p>
-          )}
-          <div className="custom-scrollbar max-h-[480px] overflow-y-auto text-[13px] text-text-main">
-            <Markdown>{centerInstructionMarkdown}</Markdown>
-          </div>
-        </div>
-      ) : null}
-    </>
-  );
+  const surveyLiveContent =
+    phase === "done" && !surveyResult && !runBusy ? (
+      <div className="rounded-md border border-outline bg-surface-lowest p-5 text-[13px] text-text-variant">
+        <p className="font-medium text-text-main">Survey finished, but no answers were loaded.</p>
+        <p className="mt-2">
+          {error ?? job?.error ?? "Try Reset and run again, or open this trial in Runs for the saved debrief."}
+        </p>
+      </div>
+    ) : phase !== "idle" || surveyResult ? (
+      <SurveyLive
+        instrument={activeQuestionnaire}
+        result={surveyResult}
+        phase={failed ? "error" : phase}
+        error={error ?? job?.error ?? null}
+        instructionMarkdown={centerInstructionMarkdown}
+        onRetry={handleRetry}
+      />
+    ) : null;
 
   const cockpitView = (
     <CockpitSetupShell
@@ -469,7 +513,7 @@ export function SurveyEvalCockpit({
           personaModelOptions={personaModelOptions}
           mode={samplingMode}
           onModeChange={setSamplingMode}
-          selectedPersonaIds={selectedPersonaIds}
+          selectedPersonaIds={visiblePersonaIds}
           onSelectedPersonaIdsChange={setSelectedPersonaIds}
           sampleSize={sampleSize}
           onSampleSizeChange={setSampleSize}
@@ -478,7 +522,7 @@ export function SurveyEvalCockpit({
           onFiltersChange={setGroupFilters}
           stratifyFields={stratifyFields}
           onStratifyFieldsChange={setStratifyFields}
-          disabled={runBusy}
+          disabled={setupLocked}
         />
       }
       center={
@@ -488,7 +532,8 @@ export function SurveyEvalCockpit({
             <CockpitPipelineDiagram
               className="h-full"
               taskType="survey"
-              hasPersona={selectedPersonaIds.length > 0}
+              personaModelLabel={pipelinePersonaModelLabel}
+              hasPersona={visiblePersonaIds.length > 0}
               hasTask={Boolean(selectedCard)}
             />
           }
@@ -499,20 +544,24 @@ export function SurveyEvalCockpit({
           progressPct={runProgressPct}
           progressLabel={runProgressLabel}
           progressSublabel={
-            batchJobName && batchComplete ? "All trials finished — open Runs for debrief." : undefined
+            batchJobName && batchComplete ? BATCH_RUN_COMPLETE_HINT : undefined
           }
           canRun={selectedPersonaIds.length > 0 && Boolean(selectedCard) && !runBusy}
           isBatch={isBatchRun}
-          personaCount={selectedPersonaIds.length}
+          personaCount={visiblePersonaIds.length}
           parallelTrials={parallelTrials}
           onParallelTrialsChange={setParallelTrials}
           runBusy={runBusy}
           onRun={() => void handleLaunch()}
           error={launchError ?? error ?? batchLive.error}
           onNewRun={showLiveCenter ? handleNewRun : undefined}
+          onCancelRun={onCancelRun}
+          cancelRunBusy={cancelRunBusy}
           onViewJob={
             batchJobName && batchComplete && onOpenHarborJob
               ? () => onOpenHarborJob(batchJobName)
+              : !batchJobName && harborJobName && harborTrialName && onOpenHarborTrial
+                ? () => onOpenHarborTrial(harborJobName, harborTrialName)
               : undefined
           }
           onDownload={!batchJobName ? handleExport : undefined}
@@ -529,25 +578,55 @@ export function SurveyEvalCockpit({
             }
             instruction={
               <InstructionPanel
+                label="Task instruction"
                 title={instructionView.title}
-                markdown={instructionView.markdown}
+                markdown={instructionView.instructionMarkdown ?? instructionView.markdown}
                 loading={instructionView.loading}
                 error={instructionView.error}
+              />
+            }
+            context={
+              <InstructionPanel
+                label="Task context"
+                title={instructionView.title}
+                markdown={instructionView.contextMarkdown}
+                loading={instructionView.loading}
+                error={instructionView.error}
+                emptyMessage="No separate context document is available for this run."
+                icon="menu_book"
+              />
+            }
+            questionnaire={
+              <InstructionPanel
+                label="Questionnaire"
+                title={instructionView.title}
+                markdown={instructionView.questionnaireMarkdown}
+                loading={instructionView.loading}
+                error={instructionView.error}
+                emptyMessage="No separate questionnaire document is available for this run."
+                icon="list_alt"
+              />
+            }
+            outputSchema={
+              <InstructionPanel
+                label="Output schema"
+                title={instructionView.title}
+                markdown={instructionView.outputSchemaMarkdown}
+                loading={instructionView.loading}
+                error={instructionView.error}
+                emptyMessage="No separate output schema document is available for this run."
+                icon="schema"
               />
             }
           />
         ) : (
         <TaskSelectionRail
           taskType="survey"
-          chatOptions={[]}
-          selectedChatAppId=""
-          onChatAppChange={() => undefined}
-          sidecarsByApp={{}}
-          sidecarsLoading={false}
+          chatTasks={[]}
           surveyTasks={taskCards}
           webTasks={[]}
           cuaTasks={[]}
-          selectedTaskId={selectedTaskId}
+          selectedTaskId={activeTaskId}
           onSelectTask={(card) => setSelectedTaskId(card.id)}
           engine=""
           onEngineChange={() => undefined}
@@ -562,10 +641,10 @@ export function SurveyEvalCockpit({
             harborTasksQuery.isError && taskCards.length === 0
               ? "Could not load survey tasks — restart the PersonaEval backend."
               : harborTasksQuery.isError
-                ? "Harbor survey tasks loaded from built-in catalog."
+                ? "Built-in survey tasks loaded from catalog."
                 : null
           }
-          disabled={runBusy}
+          disabled={setupLocked}
         />
         )
       }
@@ -586,18 +665,14 @@ function SurveyLive({
   instrument,
   result,
   phase,
-  status,
   error,
-  persona,
   instructionMarkdown,
   onRetry,
 }: {
   instrument: SurveyInstrument | null;
   result: SurveyResult | null;
   phase: HarborCockpitPhase;
-  status: string | null;
   error: string | null;
-  persona: PersonaEvalPersona | null;
   instructionMarkdown?: string;
   onRetry: () => void;
 }) {
@@ -607,64 +682,18 @@ function SurveyLive({
   const completion = result?.completion ?? null;
   const total = completion?.numQuestions ?? activeInstrument?.questions.length ?? 0;
   const answered = completion?.numAnswered ?? result?.answers.length ?? 0;
-  const pct = total > 0 ? Math.round((answered / total) * 100) : 0;
-
-  const personaTitle = persona
-    ? personaDescriptiveTitle(null, persona.blurb, persona.source)
-    : "Persona";
-  const personaCode = persona ? personaCodename(persona.name, persona.id) : null;
 
   return (
     <section className="space-y-4">
       {/* Header */}
-      <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-start">
-        <div className="min-w-0">
-          <div className="hud mb-2 break-words text-[10px] text-primary">
-            Survey · {humanizeToken(activeInstrument?.id ?? activeInstrument?.title ?? "questionnaire")}
-          </div>
-          <h2 className="font-display text-[22px] font-bold tracking-tight text-text-main">
-            {running ? "Persona is answering" : failed ? "The questionnaire didn’t finish" : "Completed questionnaire"}
-          </h2>
-          {running && (
-            <div className="mt-2 flex items-center gap-2 text-[12px] text-text-variant">
-              <Sym name="autorenew" size={14} className="animate-rb-spin text-primary" />
-              <span>{result ? `Answering Q${Math.min(answered + 1, total)} of ${total}` : status ?? "Simulated user is answering…"}</span>
-            </div>
-          )}
+      <div className="min-w-0">
+        <div className="hud mb-2 break-words text-[10px] text-primary">
+          Survey · {humanizeToken(activeInstrument?.id ?? activeInstrument?.title ?? "questionnaire")}
         </div>
-        {persona && (
-          <div className="flex shrink-0 items-center gap-2.5 rounded-md border border-outline bg-surface-lowest px-3 py-2">
-            <div className="grid h-9 w-9 place-items-center rounded border border-outline bg-surface-high">
-              <Sym name="person" fill={1} size={16} className="text-primary" />
-            </div>
-            <div className="min-w-0">
-              <div className="truncate text-[12px] font-semibold leading-tight text-text-main" title={personaTitle}>{personaTitle}</div>
-              <div className="hud mt-1 whitespace-nowrap text-[8px] text-text-dim">
-                {[persona.source, personaCode].filter(Boolean).join(" · ")}
-              </div>
-            </div>
-          </div>
-        )}
+        <h2 className="font-display text-[22px] font-bold tracking-tight text-text-main">
+          {running ? "Persona is answering" : failed ? "The questionnaire didn’t finish" : "Completed questionnaire"}
+        </h2>
       </div>
-
-      {/* Completion progress (running) */}
-      {running && (
-        <div>
-          <div className="mb-1.5 flex items-center justify-between">
-            <span className="hud text-[9px] text-text-dim">
-              {result ? `${answered} / ${total} answered` : "Working…"}
-            </span>
-            <span className="hud text-[9px] text-primary">{result ? `${pct}%` : ""}</span>
-          </div>
-          <div className="h-1.5 overflow-hidden rounded-full bg-field">
-            {result ? (
-              <div className="h-full rounded-full bg-primary transition-[width] duration-500 ease-out" style={{ width: `${pct}%` }} />
-            ) : (
-              <div className="h-full w-1/3 animate-pulse rounded-full bg-primary/60" />
-            )}
-          </div>
-        </div>
-      )}
 
       {/* Answer cards */}
       {failed && (
@@ -805,16 +834,20 @@ function AnswerValue({ answer, question }: { answer: SurveyAnswer; question: Sur
     const selected = Array.isArray(answer.value)
       ? answer.value.map((v) => String(v))
       : [String(answer.value)];
+    const optionDetails =
+      question.optionDetails && question.optionDetails.length > 0
+        ? question.optionDetails
+        : question.options.map((option) => ({ id: option, label: option, description: "" }));
     return (
       <div className="space-y-2">
         {multi && (
           <p className="hud text-[8px] text-text-dim">Select all that apply · {selected.length} selected</p>
         )}
-        {question.options.map((option) => {
-          const isSelected = selected.includes(option);
+        {optionDetails.map((option) => {
+          const isSelected = selected.includes(option.id);
           return (
             <div
-              key={option}
+              key={option.id}
               className={`flex items-center gap-3 rounded border px-3.5 py-2.5 ${
                 isSelected ? "border-primary bg-primary/10" : "border-outline bg-surface-low"
               }`}
@@ -836,9 +869,19 @@ function AnswerValue({ answer, question }: { answer: SurveyAnswer; question: Sur
                   {isSelected && <span className="h-1.5 w-1.5 rounded-full bg-primary" />}
                 </span>
               )}
-              <span className={`text-[12px] ${isSelected ? "font-medium text-text-main" : "text-text-variant"}`}>
-                {option}
-              </span>
+              <div className="min-w-0">
+                <span className={`block text-[12px] ${isSelected ? "font-medium text-text-main" : "text-text-variant"}`}>
+                  {option.label || option.id}
+                </span>
+                {option.label && option.label !== option.id ? (
+                  <span className="mt-0.5 block font-mono text-[10px] text-text-dim">{option.id}</span>
+                ) : null}
+                {option.description ? (
+                  <span className="mt-0.5 block text-[10px] leading-relaxed text-text-dim">
+                    {option.description}
+                  </span>
+                ) : null}
+              </div>
             </div>
           );
         })}

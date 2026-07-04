@@ -1,0 +1,279 @@
+{
+  "schemaVersion": "1.0",
+  "artifactType": "personabench.trial_evaluation",
+  "taskType": "survey",
+  "presenceCheck": {
+    "passed": true,
+    "requiredArtifacts": [
+      "survey_result.json"
+    ],
+    "missingArtifacts": []
+  },
+  "sourceArtifacts": {
+    "surveyResult": "/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/jobs/pe-survey-claude-code-vscode-checkpoints-1570dcbc/persona-survey__hgQvsmt/artifacts/app/output/survey_result.json"
+  },
+  "contexts": [
+    {
+      "key": "question.reviewable_edits",
+      "label": "reviewable_edits",
+      "contextType": "question_response",
+      "facets": [
+        {
+          "key": "response",
+          "label": "Selected response",
+          "role": "primary",
+          "kind": "numerical",
+          "value": 4
+        },
+        {
+          "key": "reason",
+          "label": "Reason",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "Inline diffs provide transparency and control, making multi-file edits acceptable with the ability to review changes before committing them."
+        },
+        {
+          "key": "confidence",
+          "label": "Confidence",
+          "role": "score",
+          "kind": "numerical",
+          "value": 0.88
+        }
+      ]
+    },
+    {
+      "key": "question.checkpoint_control",
+      "label": "checkpoint_control",
+      "contextType": "question_response",
+      "facets": [
+        {
+          "key": "response",
+          "label": "Selected response",
+          "role": "primary",
+          "kind": "numerical",
+          "value": 5
+        },
+        {
+          "key": "reason",
+          "label": "Reason",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "Checkpoint rollback is essential for trust—knowing I can undo autonomous changes removes the risk of catastrophic errors on complex tasks."
+        },
+        {
+          "key": "confidence",
+          "label": "Confidence",
+          "role": "score",
+          "kind": "numerical",
+          "value": 0.92
+        }
+      ]
+    },
+    {
+      "key": "question.adoption_concern",
+      "label": "adoption_concern",
+      "contextType": "question_response",
+      "facets": [
+        {
+          "key": "response",
+          "label": "Selected response",
+          "role": "primary",
+          "kind": "textual",
+          "value": "incorrect_code_changes"
+        },
+        {
+          "key": "reason",
+          "label": "Reason",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "The primary risk is that the agent may make logical or syntactic errors that pass surface-level review but break functionality or introduce bugs."
+        },
+        {
+          "key": "confidence",
+          "label": "Confidence",
+          "role": "score",
+          "kind": "numerical",
+          "value": 0.89
+        }
+      ]
+    },
+    {
+      "key": "question.safe_first_task",
+      "label": "safe_first_task",
+      "contextType": "question_response",
+      "facets": [
+        {
+          "key": "response",
+          "label": "Selected response",
+          "role": "primary",
+          "kind": "textual",
+          "value": "Refactoring existing tests or updating documentation in multiple files where errors are low-risk and easily detectable."
+        },
+        {
+          "key": "reason",
+          "label": "Reason",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "Tests and docs have clear success criteria and limited downstream impact, making them ideal for validating agent behavior before delegating critical business logic."
+        },
+        {
+          "key": "confidence",
+          "label": "Confidence",
+          "role": "score",
+          "kind": "numerical",
+          "value": 0.85
+        }
+      ]
+    },
+    {
+      "key": "survey.summary",
+      "label": "Survey summary",
+      "contextType": "trial_summary",
+      "facets": [
+        {
+          "key": "answer_count",
+          "label": "Answer count",
+          "role": "score",
+          "kind": "numerical",
+          "value": 4
+        },
+        {
+          "key": "trajectory_event_count",
+          "label": "Trajectory event count",
+          "role": "score",
+          "kind": "numerical",
+          "value": 10
+        },
+        {
+          "key": "mean_numeric_answer",
+          "label": "Mean numeric answer",
+          "role": "score",
+          "kind": "numerical",
+          "value": 4.5
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "key": "question.reviewable_edits.response",
+      "label": "Selected response",
+      "group": "question.reviewable_edits",
+      "role": "primary",
+      "kind": "numerical",
+      "value": 4
+    },
+    {
+      "key": "question.reviewable_edits.reason",
+      "label": "Reason",
+      "group": "question.reviewable_edits",
+      "role": "explanation",
+      "kind": "textual",
+      "value": "Inline diffs provide transparency and control, making multi-file edits acceptable with the ability to review changes before committing them."
+    },
+    {
+      "key": "question.reviewable_edits.confidence",
+      "label": "Confidence",
+      "group": "question.reviewable_edits",
+      "role": "score",
+      "kind": "numerical",
+      "value": 0.88
+    },
+    {
+      "key": "question.checkpoint_control.response",
+      "label": "Selected response",
+      "group": "question.checkpoint_control",
+      "role": "primary",
+      "kind": "numerical",
+      "value": 5
+    },
+    {
+      "key": "question.checkpoint_control.reason",
+      "label": "Reason",
+      "group": "question.checkpoint_control",
+      "role": "explanation",
+      "kind": "textual",
+      "value": "Checkpoint rollback is essential for trust—knowing I can undo autonomous changes removes the risk of catastrophic errors on complex tasks."
+    },
+    {
+      "key": "question.checkpoint_control.confidence",
+      "label": "Confidence",
+      "group": "question.checkpoint_control",
+      "role": "score",
+      "kind": "numerical",
+      "value": 0.92
+    },
+    {
+      "key": "question.adoption_concern.response",
+      "label": "Selected response",
+      "group": "question.adoption_concern",
+      "role": "primary",
+      "kind": "textual",
+      "value": "incorrect_code_changes"
+    },
+    {
+      "key": "question.adoption_concern.reason",
+      "label": "Reason",
+      "group": "question.adoption_concern",
+      "role": "explanation",
+      "kind": "textual",
+      "value": "The primary risk is that the agent may make logical or syntactic errors that pass surface-level review but break functionality or introduce bugs."
+    },
+    {
+      "key": "question.adoption_concern.confidence",
+      "label": "Confidence",
+      "group": "question.adoption_concern",
+      "role": "score",
+      "kind": "numerical",
+      "value": 0.89
+    },
+    {
+      "key": "question.safe_first_task.response",
+      "label": "Selected response",
+      "group": "question.safe_first_task",
+      "role": "primary",
+      "kind": "textual",
+      "value": "Refactoring existing tests or updating documentation in multiple files where errors are low-risk and easily detectable."
+    },
+    {
+      "key": "question.safe_first_task.reason",
+      "label": "Reason",
+      "group": "question.safe_first_task",
+      "role": "explanation",
+      "kind": "textual",
+      "value": "Tests and docs have clear success criteria and limited downstream impact, making them ideal for validating agent behavior before delegating critical business logic."
+    },
+    {
+      "key": "question.safe_first_task.confidence",
+      "label": "Confidence",
+      "group": "question.safe_first_task",
+      "role": "score",
+      "kind": "numerical",
+      "value": 0.85
+    },
+    {
+      "key": "survey.summary.answer_count",
+      "label": "Answer count",
+      "group": "survey.summary",
+      "role": "score",
+      "kind": "numerical",
+      "value": 4
+    },
+    {
+      "key": "survey.summary.trajectory_event_count",
+      "label": "Trajectory event count",
+      "group": "survey.summary",
+      "role": "score",
+      "kind": "numerical",
+      "value": 10
+    },
+    {
+      "key": "survey.summary.mean_numeric_answer",
+      "label": "Mean numeric answer",
+      "group": "survey.summary",
+      "role": "score",
+      "kind": "numerical",
+      "value": 4.5
+    }
+  ]
+}

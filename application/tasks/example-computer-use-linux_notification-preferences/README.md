@@ -1,6 +1,7 @@
-# Notification preferences (Linux)
+# Note to CSV cleanup (Linux)
 
-PersonaBench **Linux desktop** computer-use task: the persona opens **XFCE Settings → Notifications** (Notify OSD) in a Docker Xvfb desktop and writes a JSON preference to disk.
+PersonaBench **Linux desktop** computer-use task: turn a rough note into a
+small CSV artifact and submit matching metadata in JSON.
 
 Requires **`persona-computer-1`** with default **Docker** environment (Harbor `Computer1`). No `USE_COMPUTER_API_KEY`.
 
@@ -22,13 +23,11 @@ uv run harbor run -p application/tasks/example-computer-use-linux_notification-p
 
 ## Output
 
-`/tmp/personabench-linux-notification-preferences/decision.json`
+- `/tmp/personabench-linux-note-to-csv/cleaned_list.csv`
+- `/tmp/personabench-linux-note-to-csv/submission.json`
 
-## vs macOS / iOS
+The verifier checks:
 
-| | Linux (this) | macOS | iOS |
-|--|--------------|-------|-----|
-| Environment | Docker Xvfb | use.computer | use.computer + `platform: ios` |
-| Settings UI | XFCE Settings → Notify OSD | System Settings → Notifications | Settings → Notifications |
-
-Web browsing CUA (books.toscrape.com) lives under `application/tasks/example-web-cua_*`, not here.
+- the CSV header is `item,quantity,priority`
+- the CSV has exactly three data rows
+- the JSON metadata points to the CSV and records `rows_written = 3`

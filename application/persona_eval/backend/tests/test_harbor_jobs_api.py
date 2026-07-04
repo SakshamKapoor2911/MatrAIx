@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from pathlib import Path
 from typing import Any
 
 import pytest
@@ -11,6 +12,7 @@ pytest.importorskip("fastapi")
 
 class _FakeHarborJobService:
     def __init__(self) -> None:
+        self.repo_root = Path.cwd()
         self.launches: list[dict[str, Any]] = []
         self.debrief_calls: list[tuple[str, str]] = []
         self.deleted: list[str] = []
@@ -45,6 +47,33 @@ class _FakeHarborJobService:
 
     def get_job(self, job_name: str) -> dict[str, Any] | None:
         return self._jobs.get(job_name)
+
+    def get_job_aggregation(self, job_name: str) -> dict[str, Any]:
+        if job_name not in self._jobs:
+            raise ValueError("Job not found")
+        return {
+            "schemaVersion": "1.0",
+            "artifactType": "job_aggregation",
+            "generatedAt": "2026-07-01T12:06:00Z",
+            "reporting": {
+                "status": "completed",
+                "totalUnits": 2,
+                "summaryUnits": 1,
+                "judgeUnits": 1,
+                "readyUnits": 0,
+                "completedUnits": 2,
+                "failedUnits": 0,
+            },
+            "coverage": {
+                "trialCount": 1,
+                "completedTrials": 1,
+                "pendingTrials": 0,
+                "artifactReadyTrials": 1,
+                "completedWithoutArtifactTrials": 0,
+            },
+            "fields": [],
+            "contexts": [],
+        }
 
     def launch(self, **kwargs: Any) -> str:
         self.launches.append(kwargs)
@@ -118,6 +147,13 @@ def test_get_harbor_job(client, fake_harbor_jobs):
     assert resp.json()["jobName"] == "demo-job"
 
 
+def test_get_harbor_job_aggregation(client, fake_harbor_jobs):
+    resp = client.get("/api/harbor/jobs/demo-job/aggregation")
+    assert resp.status_code == 200
+    assert resp.json()["artifactType"] == "job_aggregation"
+    assert resp.json()["reporting"]["status"] == "completed"
+
+
 def test_get_harbor_job_missing(client, fake_harbor_jobs):
     resp = client.get("/api/harbor/jobs/missing-job")
     assert resp.status_code == 404
@@ -163,6 +199,20 @@ def test_launch_harbor_job_with_persona_ids(client, fake_harbor_jobs):
     assert resp.status_code == 200
     assert fake_harbor_jobs.launches[-1]["persona_ids"] == ["0042"]
     assert fake_harbor_jobs.launches[-1]["execution_mode"] == "auto"
+
+
+def test_launch_harbor_job_prefers_chat_application_context_for_recai(client, fake_harbor_jobs):
+    resp = client.post(
+        "/api/harbor/jobs",
+        json={
+            "taskPath": "application/tasks/recommender-agent_chat_api",
+            "chatApplicationId": "recai",
+            "chatApplicationContext": "beauty_product",
+        },
+    )
+    assert resp.status_code == 200
+    assert fake_harbor_jobs.launches[-1]["chat_application_context"] == "beauty_product"
+    assert fake_harbor_jobs.launches[-1]["chat_domain"] == "beauty_product"
 
 
 def test_get_harbor_trial_debrief(client, fake_harbor_jobs):

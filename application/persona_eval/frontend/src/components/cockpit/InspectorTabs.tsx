@@ -1,33 +1,51 @@
 /**
  * InspectorTabs: the live-run right inspector, as a real ARIA tablist.
  *
- * Two panels: Evaluation (scorecard) · Instruction (task document).
+ * InspectorTabs: evaluation plus optional task-doc panels.
  */
 import { useRef } from "react";
 
 import { FOCUS_RING, Sym } from "./cockpitShared";
 
-export type InspectorTab = "evaluation" | "instruction";
-
-const TABS: ReadonlyArray<{ id: InspectorTab; label: string; icon: string }> = [
-  { id: "evaluation", label: "Evaluation", icon: "verified" },
-  { id: "instruction", label: "Instruction", icon: "description" },
-];
+export type InspectorTab =
+  | "evaluation"
+  | "instruction"
+  | "context"
+  | "questionnaire"
+  | "output-schema";
 
 export interface InspectorTabsProps {
   active: InspectorTab;
   onChange: (tab: InspectorTab) => void;
   evaluation: React.ReactNode;
   instruction: React.ReactNode;
+  context?: React.ReactNode;
+  questionnaire?: React.ReactNode;
+  outputSchema?: React.ReactNode;
 }
 
-export function InspectorTabs({ active, onChange, evaluation, instruction }: InspectorTabsProps) {
+export function InspectorTabs({
+  active,
+  onChange,
+  evaluation,
+  instruction,
+  context,
+  questionnaire,
+  outputSchema,
+}: InspectorTabsProps) {
+  const tabs: Array<{ id: InspectorTab; label: string; icon: string }> = [
+    { id: "evaluation", label: "Evaluation", icon: "verified" },
+    { id: "instruction", label: "Instruction", icon: "description" },
+  ];
+  if (context) tabs.push({ id: "context", label: "Context", icon: "menu_book" });
+  if (questionnaire) tabs.push({ id: "questionnaire", label: "Questionnaire", icon: "list_alt" });
+  if (outputSchema) tabs.push({ id: "output-schema", label: "Output schema", icon: "schema" });
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
-  const activeLabel = TABS.find((t) => t.id === active)?.label ?? "";
+  const activeLabel = tabs.find((t) => t.id === active)?.label ?? "";
 
   function focusTab(index: number) {
-    const clamped = (index + TABS.length) % TABS.length;
-    const tab = TABS[clamped];
+    const clamped = (index + tabs.length) % tabs.length;
+    const tab = tabs[clamped];
     onChange(tab.id);
     tabRefs.current[clamped]?.focus();
   }
@@ -44,7 +62,7 @@ export function InspectorTabs({ active, onChange, evaluation, instruction }: Ins
       focusTab(0);
     } else if (e.key === "End") {
       e.preventDefault();
-      focusTab(TABS.length - 1);
+      focusTab(tabs.length - 1);
     }
   }
 
@@ -59,9 +77,9 @@ export function InspectorTabs({ active, onChange, evaluation, instruction }: Ins
         role="tablist"
         aria-label="Inspector"
         aria-orientation="horizontal"
-        className="flex shrink-0 items-center gap-5 border-b border-outline px-4"
+        className="flex shrink-0 flex-wrap items-center gap-x-3 gap-y-0 border-b border-outline px-3"
       >
-        {TABS.map((tab, i) => {
+        {tabs.map((tab, i) => {
           const selected = tab.id === active;
           return (
             <button
@@ -72,14 +90,16 @@ export function InspectorTabs({ active, onChange, evaluation, instruction }: Ins
               aria-selected={selected}
               aria-controls={`inspector-panel-${tab.id}`}
               tabIndex={selected ? 0 : -1}
-              onClick={() => onChange(tab.id)}
+              onClick={() => {
+                onChange(tab.id);
+              }}
               onKeyDown={(e) => onKeyDown(e, i)}
-              className={`-mb-px flex select-none items-center gap-1.5 border-b-2 py-2.5 text-[12px] font-medium transition ease-out active:opacity-70 ${FOCUS_RING} ${
+              className={`-mb-px flex min-w-0 select-none items-center gap-1.5 border-b-2 py-2.5 text-[11px] font-medium transition ease-out active:opacity-70 lg:text-[12px] ${FOCUS_RING} ${
                 selected ? "border-primary text-primary" : "border-transparent text-text-variant hover:text-text-main"
               }`}
             >
               <Sym name={tab.icon} fill={selected ? 1 : 0} size={16} />
-              {tab.label}
+              <span className="whitespace-nowrap">{tab.label}</span>
             </button>
           );
         })}
@@ -91,6 +111,25 @@ export function InspectorTabs({ active, onChange, evaluation, instruction }: Ins
         </div>
         <div role="tabpanel" id="inspector-panel-instruction" aria-labelledby="inspector-tab-instruction" hidden={active !== "instruction"}>
           {active === "instruction" && instruction}
+        </div>
+        <div role="tabpanel" id="inspector-panel-context" aria-labelledby="inspector-tab-context" hidden={active !== "context"}>
+          {active === "context" && context}
+        </div>
+        <div
+          role="tabpanel"
+          id="inspector-panel-questionnaire"
+          aria-labelledby="inspector-tab-questionnaire"
+          hidden={active !== "questionnaire"}
+        >
+          {active === "questionnaire" && questionnaire}
+        </div>
+        <div
+          role="tabpanel"
+          id="inspector-panel-output-schema"
+          aria-labelledby="inspector-tab-output-schema"
+          hidden={active !== "output-schema"}
+        >
+          {active === "output-schema" && outputSchema}
         </div>
       </div>
     </aside>

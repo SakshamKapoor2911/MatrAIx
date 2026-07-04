@@ -11,9 +11,11 @@ from backend.service import chatbot_sidecar_service as svc
 
 def test_resolve_health_url_defaults(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.delenv("CHATBOT_API_URL", raising=False)
+    monkeypatch.delenv("CHATBOT_MCP_URL", raising=False)
     assert svc.resolve_health_url("recai") == "http://127.0.0.1:8000"
     assert svc.resolve_health_url("finance_openbb") == "http://127.0.0.1:8901"
     assert svc.resolve_health_url("medical_assistant") == "http://127.0.0.1:8902"
+    assert svc.resolve_health_url("acme_support_mcp") == "http://127.0.0.1:8903"
 
 
 def test_sidecar_status_unknown_application() -> None:
@@ -22,14 +24,20 @@ def test_sidecar_status_unknown_application() -> None:
 
 
 def test_list_sidecar_statuses(monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setattr(svc, "sidecar_reachable", lambda _url, timeout=1.5: True)
+    monkeypatch.setattr(svc, "_sidecar_probe_ok", lambda _spec, _url, timeout=1.5: True)
     statuses = svc.list_sidecar_statuses()
     assert {item["applicationId"] for item in statuses} == {
         "recai",
         "finance_openbb",
         "medical_assistant",
+        "acme_support_mcp",
     }
     assert all(item["ok"] for item in statuses)
+    by_id = {item["applicationId"]: item for item in statuses}
+    assert by_id["recai"]["canStart"] is True
+    assert by_id["finance_openbb"]["canStart"] is False
+    assert by_id["medical_assistant"]["canStart"] is False
+    assert by_id["acme_support_mcp"]["canStart"] is True
 
 
 def test_start_sidecar_runs_compose_for_sidecar_only(
@@ -74,3 +82,15 @@ def test_start_sidecar_runs_compose_for_sidecar_only(
     assert result["ok"] is True
     assert captured["command"][-1] == "rec-agent-api"
     assert "main" not in captured["command"]
+
+
+def test_start_sidecar_rejects_external_only_task() -> None:
+    with pytest.raises(RuntimeError, match="does not provide a local startable sidecar"):
+        svc.start_sidecar("finance_openbb")
+
+
+def test_sidecar_status_uses_tcp_probe_for_mcp(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(svc, "sidecar_port_reachable", lambda _host, _port, timeout=1.5: True)
+    status = svc.sidecar_status("acme_support_mcp")
+    assert status["ok"] is True
+    assert "MCP server reachable" in status["detail"]

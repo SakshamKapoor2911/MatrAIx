@@ -2,11 +2,10 @@
  * Shared helpers + precise types for the Runs monitoring surface.
  *
  * `src/lib/types.ts` declares the persisted-run shapes loosely (`transcript:
- * TurnView[]`, `recommendedItemIds: Record<string, unknown>`) to stay tolerant
- * of legacy artifacts. The live backend returns a richer, more specific shape
- * (verified against the running API), so the Runs views narrow it here, at the
- * read boundary, into the fields they actually render, rather than threading
- * `unknown` through the components.
+ * TurnView[]`) to stay tolerant of legacy artifacts. The live backend returns a
+ * richer, more specific shape (verified against the running API), so the Runs
+ * views narrow it here, at the read boundary, into the fields they actually
+ * render, rather than threading `unknown` through the components.
  */
 import type { ReactNode } from "react";
 
@@ -15,9 +14,9 @@ import type {
   Domain,
   PersonaEvalMetricScores,
   PersonaEvalResult,
-  AppWorldResult,
-  AppWorldTrace,
   SurveyResult,
+  TrialEvaluationArtifact,
+  UserFeedbackArtifact,
   WebResult,
   WebTrace,
 } from "@/lib/types";
@@ -40,19 +39,18 @@ export interface RunTranscriptTurn {
   turnIndex: number;
   userMessage: string;
   assistantMessage: string;
-  recommendedItems: RunRecItem[];
+  personaExposure?: { key?: string | null; label?: string | null; format?: string | null; value?: unknown }[];
   decision: RunDecision | string;
   durationSeconds: number | null;
 }
 
-/** The run config block we surface (domain / engine / goal context, etc.). */
+/** The run config block we surface (domain / engine / app selection, etc.). */
 export interface RunConfig {
   domain?: Domain | string | null;
   engine?: string | null;
   rankerMode?: string | null;
   resourceMode?: string | null;
   maxTurns?: number | null;
-  goalContextId?: string | null;
   /** Which chatbot adapter was under test (`recai` / `finance_openbb` / …). */
   applicationId?: string | null;
 }
@@ -63,7 +61,7 @@ export interface RunConfig {
  * `runApplicationType` resolves from the stored discriminator and the survey/web/AppWorld branches activate
  * only if the loaded artifact carries the matching result object (see below).
  */
-export type RunApplicationType = "chatbot" | "survey" | "web" | "appworld";
+export type RunApplicationType = "chatbot" | "survey" | "web" | "os-app";
 
 /** The persona block we surface in headers. */
 export interface RunPersona {
@@ -71,6 +69,7 @@ export interface RunPersona {
   name?: string | null;
   source?: string | null;
   context?: string | null;
+  dimensions?: Record<string, string> | null;
 }
 
 /**
@@ -80,13 +79,12 @@ export interface RunPersona {
  */
 export type RunDetailView = Omit<
   PersonaEvalResult,
-  "config" | "persona" | "transcript" | "recommendedItemIds" | "questionnaire" | "metricScores" | "prompts"
+  "config" | "persona" | "transcript" | "questionnaire" | "metricScores" | "prompts"
 > & {
   createdAt?: string | null;
   config: RunConfig;
   persona: RunPersona;
   transcript: RunTranscriptTurn[];
-  recommendedItemIds: { perTurn?: unknown; final?: string[] | null } & Record<string, unknown>;
   questionnaire?: PersonaEvalResult["questionnaire"];
   metricScores?: PersonaEvalResult["metricScores"];
   prompts?: PersonaEvalResult["prompts"];
@@ -105,14 +103,26 @@ export type RunDetailView = Omit<
   webResult?: WebResult | null;
   webTrace?: WebTrace | null;
   trace?: WebTrace | null;
-  /** AppWorld result + API trace, present only on an AppWorld run. */
-  appworldResult?: AppWorldResult | null;
-  appworldTrace?: AppWorldTrace | null;
   /** Human labels a survey/web artifact may carry for the run-meta line. */
   instrumentTitle?: string | null;
   taskTitle?: string | null;
   siteName?: string | null;
   appName?: string | null;
+  /** Harbor ``test_state`` / verifier outcome when the trial wrote ``reward.txt``. */
+  verifier?: {
+    passed: boolean;
+    reward: number;
+    detail?: string | null;
+  } | null;
+  /** Raw post-run self-reflection artifact from ``user_feedback.json`` when present. */
+  userFeedback?: UserFeedbackArtifact | null;
+  /** Raw trial-level structured evaluation from ``verifier/structured_output.json`` when present. */
+  trialEvaluation?: TrialEvaluationArtifact | null;
+  /** Harbor task ``instruction.md`` when the debrief API enriches it. */
+  instructionMarkdown?: string | null;
+  contextMarkdown?: string | null;
+  questionnaireMarkdown?: string | null;
+  outputSchemaMarkdown?: string | null;
 };
 
 /** Narrow a raw `PersonaEvalResult` into the richer `RunDetailView` shape. */
@@ -130,12 +140,13 @@ export function runApplicationType(run: RunDetailView): RunApplicationType {
   if (
     explicit === "survey"
     || explicit === "web"
-    || explicit === "appworld"
+    || explicit === "os-app"
     || explicit === "chatbot"
   ) {
-    return explicit;
+    return explicit as RunApplicationType;
   }
-  if (run.appworldResult || run.appworldTrace) return "appworld";
+  const runRecord = run as Record<string, unknown>;
+  if (runRecord.osAppResult) return "os-app";
   if (run.webResult || run.webTrace || run.trace) return "web";
   if (run.surveyResult) return "survey";
   return "chatbot";
@@ -207,24 +218,6 @@ export function fmtSource(source: string | null | undefined): string {
   return source;
 }
 
-/**
- * Friendly label for a goal-context id (the conversation style). `scenario_default`
- * ("Realistic scenario") is the only current option; `gradual_reveal` is retained
- * only so older runs that used it still render a name. Unknown ids are humanized; a
- * missing id reads as a dash.
- */
-const GOAL_CONTEXT_LABELS: Record<string, string> = {
-  scenario_default: "Realistic scenario",
-  gradual_reveal: "Gradual reveal",
-};
-
-export function fmtGoalContext(id: string | null | undefined): string {
-  if (!id) return "-";
-  if (GOAL_CONTEXT_LABELS[id]) return GOAL_CONTEXT_LABELS[id];
-  const spaced = id.replace(/_/g, " ").trim();
-  return spaced.charAt(0).toUpperCase() + spaced.slice(1);
-}
-
 // ---------------------------------------------------------------------------
 // Small shared presentational atoms
 // ---------------------------------------------------------------------------
@@ -247,42 +240,7 @@ export function SourceTag({ source }: { source: string | null | undefined }) {
   );
 }
 
-/**
- * Grounding indicator: did the recommender actually return real catalog items,
- * or did the agent answer from base knowledge? A run can read smoothly (and even
- * self-score highly) while recommending nothing real, so we surface this plainly:
- * `N from the real catalog` (mint) when the corpus was used, `Nothing from the
- * catalog` (amber) when zero catalog items were recommended.
- */
-export function GroundingChip({
-  metrics,
-  className = "",
-}: {
-  metrics: PersonaEvalMetricScores | null | undefined;
-  className?: string;
-}) {
-  const count = metrics?.recommendedItemCount ?? 0;
-  const grounded = count > 0;
-  return (
-    <span
-      className={`inline-flex items-center gap-1 rounded border px-2 py-0.5 text-[11px] font-medium ${
-        grounded
-          ? "border-secondary/30 bg-secondary/10 text-secondary"
-          : "border-warn/30 bg-warn/10 text-warn"
-      } ${className}`}
-      title={
-        grounded
-          ? `${count} suggestion${count === 1 ? "" : "s"} came from the real product catalog.`
-          : "The app suggested items but none came from the real product catalog. They're from the model's own knowledge, so treat them with care."
-      }
-    >
-      <Sym name={grounded ? "inventory_2" : "warning"} size={13} />
-      {grounded ? `${count} from the real catalog` : "Nothing from the catalog"}
-    </span>
-  );
-}
-
-/** A compact recommended-item chip (mono id + title) for trajectories. */
+/** A compact structured-data chip (mono id + title) for trajectories. */
 export function RecChip({ item }: { item: RunRecItem }) {
   return (
     <span
@@ -313,11 +271,12 @@ export function appName(applicationId: string | null | undefined): string {
 }
 
 /** Per-kind glyph + label for the list "Kind" tag (Material Symbols, like the cockpit switch). */
-const APP_TYPE_META: Record<RunApplicationType, { icon: string; label: string }> = {
+const APP_TYPE_META: Record<string, { icon: string; label: string }> = {
   chatbot: { icon: "forum", label: "Chatbot" },
   survey: { icon: "fact_check", label: "Survey" },
   web: { icon: "language", label: "Web" },
-  appworld: { icon: "apps", label: "AppWorld" },
+  "os-app": { icon: "apps", label: "OS app" },
+  unknown: { icon: "help_outline", label: "Unknown" },
 };
 
 /**
@@ -325,13 +284,12 @@ const APP_TYPE_META: Record<RunApplicationType, { icon: string; label: string }>
  * glance. Renders from whatever type the summary carries; absent → chatbot.
  */
 export function AppTypeTag({ type }: { type?: string | null }) {
-  const key: RunApplicationType =
-    type === "survey" || type === "web" || type === "appworld" ? type : "chatbot";
-  const meta = APP_TYPE_META[key];
+  const key = (type ?? "chatbot").toString().toLowerCase();
+  const meta = APP_TYPE_META[key] ?? APP_TYPE_META.chatbot;
   return (
     <span
       className="inline-flex items-center gap-1 rounded border border-outline bg-surface-high px-1.5 py-0.5 text-[11px] text-text-variant"
-      title="Which kind of app was tested: a chatbot, a survey, a website, or AppWorld."
+      title="Application type for this run."
     >
       <Sym name={meta.icon} size={13} />
       {meta.label}
@@ -342,7 +300,8 @@ export function AppTypeTag({ type }: { type?: string | null }) {
 /** Read a run summary's app type defensively (the summary may not carry one). */
 export function runSummaryAppType(summary: unknown): RunApplicationType {
   const t = ((summary as { applicationType?: string | null } | null)?.applicationType ?? "").toString().toLowerCase();
-  if (t === "survey" || t === "web" || t === "appworld") return t;
+  if (t === "cua" || t === "appworld") return "os-app";
+  if (t === "survey" || t === "web" || t === "os-app") return t as RunApplicationType;
   return "chatbot";
 }
 
@@ -383,7 +342,7 @@ export function StatTile({
   const leadBorder = lead ? `border-l-4 ${band ? bandBorderL(band) : "border-l-secondary"}` : "";
   const captionTone = lead ? (color ? color.text : "text-secondary") : "text-text-dim";
   return (
-    <div className={`flex flex-col justify-center rounded-md border border-outline bg-surface p-4 ${leadBorder}`}>
+    <div className={`flex flex-col justify-center rounded-lg border border-outline/40 bg-surface/50 p-4 backdrop-blur-sm ${leadBorder}`}>
       <span className={`hud text-[9px] ${captionTone}`}>{caption}</span>
       <div className="mt-1.5 flex items-baseline gap-1">
         <span

@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import json
-import tempfile
 from pathlib import Path
 
 from harbor.agents.base import BaseAgent
@@ -11,9 +9,6 @@ from harbor.environments.base import BaseEnvironment
 from harbor.models.agent.context import AgentContext
 from harbor.models.agent.name import AgentName
 
-from environment.integrations.persona_eval.harbor.chat_artifacts import (
-    harbor_artifacts_from_result,
-)
 from environment.integrations.persona_eval.harbor.chat_eval import (
     run_harbor_chat_eval_for_persona,
 )
@@ -68,18 +63,4 @@ class PersonaUserSim(PersonaMixin, BaseAgent):
             self._persona,
             on_event=on_event,
         )
-        artifacts = harbor_artifacts_from_result(
-            result,
-            session_id=session_id or "harbor-chat",
-            domain=result.config.domain,
-        )
-        for filename, payload in artifacts.items():
-            with tempfile.NamedTemporaryFile(
-                "w", encoding="utf-8", suffix=".json", delete=False
-            ) as handle:
-                json.dump(payload, handle, ensure_ascii=False, indent=2)
-                temp_path = Path(handle.name)
-            try:
-                await environment.upload_file(temp_path, "/app/output/{}".format(filename))
-            finally:
-                temp_path.unlink(missing_ok=True)
+        del result, session_id

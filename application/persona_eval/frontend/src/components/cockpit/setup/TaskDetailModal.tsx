@@ -3,23 +3,16 @@ import { useQuery } from "@tanstack/react-query";
 
 import { Markdown } from "@/components/Markdown";
 import { api, ApiError } from "@/lib/api";
-import { HARBOR_CHAT_TASKS } from "@/lib/types";
-import { AvailabilityPill } from "./AvailabilityPill";
 import { RailInsetModal } from "./RailInsetModal";
 import type { TaskCardModel } from "./TaskSelectionRail";
 import { ToneChip, transportChipTone } from "./ToneChip";
+import { CHIP_TEXT_CLASS, formatChipLabel } from "./taskCardLabels";
 
 function transportLabel(transport?: TaskCardModel["transport"]): string {
   if (transport === "mcp") return "MCP";
   if (transport === "api") return "API";
   if (transport === "sidecar") return "Sidecar";
   return "—";
-}
-
-function resolveTaskPath(card: TaskCardModel): string {
-  if (card.taskPath?.trim()) return card.taskPath.trim();
-  if (card.taskType === "chatbot") return HARBOR_CHAT_TASKS[card.id] ?? "";
-  return "";
 }
 
 export interface TaskDetailModalProps {
@@ -29,7 +22,7 @@ export interface TaskDetailModalProps {
 }
 
 export function TaskDetailModal({ open, card, onClose }: TaskDetailModalProps) {
-  const taskPath = card ? resolveTaskPath(card) : "";
+  const taskPath = card?.taskPath?.trim() ?? "";
   const embeddedMarkdown = card?.profileMarkdown?.trim() ?? "";
 
   const detailQuery = useQuery({
@@ -59,15 +52,26 @@ export function TaskDetailModal({ open, card, onClose }: TaskDetailModalProps) {
         <div className="space-y-4">
           <div className="flex flex-wrap gap-1.5">
             {card.transport && (
-              <ToneChip tone={transportChipTone(card.transport)} className="font-mono text-[9px] uppercase">
+              <ToneChip tone={transportChipTone(card.transport)} className={CHIP_TEXT_CLASS}>
                 {transportLabel(card.transport)}
               </ToneChip>
             )}
-            {card.statusLabel && <AvailabilityPill available={card.available} label={card.statusLabel} />}
+            {(card.tags ??
+              (card.tagLabels?.map((label) => ({ label, tone: "secondary" as const })) ??
+                [])).map((tag) => (
+              <ToneChip
+                key={tag.label}
+                tone={tag.tone}
+                showDot={tag.label === "Available" || tag.label === "Unavailable"}
+                className={CHIP_TEXT_CLASS}
+              >
+                {formatChipLabel(tag.label)}
+              </ToneChip>
+            ))}
           </div>
 
           {!taskPath && (
-            <p className="text-[12px] text-danger">This task has no Harbor path — no instruction document to show.</p>
+            <p className="text-[12px] text-danger">This task has no task path — no instruction document to show.</p>
           )}
           {loading && <p className="text-[12px] text-text-dim">Loading task instructions…</p>}
           {failed && (

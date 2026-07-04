@@ -20,14 +20,14 @@ from persona_eval.types import Persona
 
 def _task() -> WebEvalTask:
     return WebEvalTask(
-        id="web-ecommerce-platform_product-discovery",
-        title="Ecommerce product discovery",
-        site_name="Northstar Home Goods",
-        site_url="http://ecommerce-web:8000/",
-        task_path=Path("application/tasks/web-ecommerce-platform_product-discovery"),
-        description="Browse a task-hosted ecommerce site and report the shopping experience.",
-        output_artifact="ecommerce_interaction.json",
-        submission_profile="persona_eval_final_json",
+        id="web-playwright-quote-choice",
+        title="Quote choice",
+        site_name="quotes.toscrape.com",
+        site_url="https://quotes.toscrape.com/",
+        task_path=Path("application/tasks/example-web-playwright_quote-choice"),
+        description="Browse the quotes site and choose one quote to keep.",
+        output_artifact="quote_choice.json",
+        submission_profile="quote_choice",
     )
 
 
@@ -53,7 +53,7 @@ def _trajectory() -> dict:
                         "function_name": "computer_action",
                         "arguments": {
                             "type": "navigate",
-                            "url": "http://ecommerce-web:8000/",
+                            "url": "https://quotes.toscrape.com/",
                         },
                     }
                 ],
@@ -95,14 +95,14 @@ def test_build_web_task_prompt_requires_stated_operation_and_user_experience_fee
     assert "closed loop" in prompt
     assert "user experience" in prompt
     assert "collect" in prompt
-    assert "ecommerce_interaction.json" in prompt
+    assert "quote_choice.json" in prompt
     assert "selected_product_id" in prompt
 
 
 def test_build_result_from_harbor_web_artifacts_maps_result_and_trace(tmp_path):
     output_dir = tmp_path / "artifacts" / "app" / "output"
     output_dir.mkdir(parents=True)
-    (output_dir / "ecommerce_interaction.json").write_text(
+    (output_dir / "quote_choice.json").write_text(
         json.dumps(_web_payload()),
         encoding="utf-8",
     )
@@ -125,7 +125,7 @@ def test_build_result_from_harbor_web_artifacts_maps_result_and_trace(tmp_path):
 
     payload = result.to_dict()
     assert payload["config"]["personaModel"] == "anthropic/claude-sonnet-4-6"
-    assert payload["task"]["id"] == "web-ecommerce-platform_product-discovery"
+    assert payload["task"]["id"] == "web-playwright-quote-choice"
     assert payload["webResult"] == {
         "selectedProductId": "desk-002",
         "selectedProductName": "FocusDesk Pro",
@@ -150,7 +150,7 @@ def test_build_result_from_harbor_web_artifacts_rejects_bad_scores(tmp_path):
     output_dir.mkdir(parents=True)
     payload = _web_payload()
     payload["need_satisfaction"] = True
-    (output_dir / "ecommerce_interaction.json").write_text(
+    (output_dir / "quote_choice.json").write_text(
         json.dumps(payload),
         encoding="utf-8",
     )
@@ -174,8 +174,10 @@ def test_build_result_from_harbor_web_artifacts_rejects_bad_scores(tmp_path):
 
 def test_harbor_web_runner_uses_ecommerce_task_without_harbor_submission_profile(
     tmp_path,
+    monkeypatch,
 ):
     calls = []
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
     (tmp_path / ".env.local").write_text(
         "ANTHROPIC_API_KEY=sk-test-anthropic\n",
         encoding="utf-8",
@@ -188,7 +190,7 @@ def test_harbor_web_runner_uses_ecommerce_task_without_harbor_submission_profile
         assert config["agents"][0]["name"] == "persona-computer-1"
         assert "cua_submission_profile" not in config["agents"][0]["kwargs"]
         assert config["tasks"][0]["path"].endswith(
-            "application/tasks/web-ecommerce-platform_product-discovery"
+            "application/tasks/example-web-playwright_quote-choice"
         )
         assert config["environment"]["force_build"] is False
         job_name = config["job_name"]
@@ -201,7 +203,7 @@ def test_harbor_web_runner_uses_ecommerce_task_without_harbor_submission_profile
             / "output"
         )
         output_dir.mkdir(parents=True)
-        (output_dir / "ecommerce_interaction.json").write_text(
+        (output_dir / "quote_choice.json").write_text(
             json.dumps(_web_payload()),
             encoding="utf-8",
         )
@@ -296,5 +298,5 @@ def test_harbor_web_runner_recovers_submission_from_final_answer_when_artifact_m
     )
 
     assert result.web_result.selected_product_id == "desk-002"
-    artifact = next((tmp_path / "runs").rglob("ecommerce_interaction.json"))
+    artifact = next((tmp_path / "runs").rglob("quote_choice.json"))
     assert json.loads(artifact.read_text(encoding="utf-8")) == _web_payload()

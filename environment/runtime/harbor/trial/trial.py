@@ -61,6 +61,33 @@ TrialHookCallback = Callable[[TrialHookEvent], Awaitable[None]]
 _MAX_VERIFIER_ENV_SESSION_ID_LEN = 63
 
 
+def build_task_input_mounts(task_dir: Path) -> list[ServiceVolumeConfig]:
+    """Bind-mount task-owned input files into ``/app/input``.
+
+    Shared environments should provide runtime capabilities only; contributor-
+    owned task materials live under ``task_dir/input`` and are mounted read-only
+    at runtime so agents can read them from a stable in-container location.
+    """
+
+    input_dir = task_dir / "input"
+    if not input_dir.is_dir():
+        return []
+
+    mounts: list[ServiceVolumeConfig] = []
+    for source in sorted(path for path in input_dir.rglob("*") if path.is_file()):
+        rel = source.relative_to(input_dir)
+        target = PurePosixPath("/app/input") / PurePosixPath(rel.as_posix())
+        mounts.append(
+            ServiceVolumeConfig(
+                type="bind",
+                source=source.resolve().absolute().as_posix(),
+                target=target.as_posix(),
+                read_only=True,
+            )
+        )
+    return mounts
+
+
 class Trial(ABC):
     """Base trial lifecycle.
 
@@ -1063,7 +1090,8 @@ class Trial(ABC):
                 target=str(self.agent_env_paths.artifacts_dir),
             ),
         ]
-        return base + list(self.config.environment.mounts or [])
+        task_inputs = build_task_input_mounts(self.task.paths.task_dir)
+        return base + task_inputs + list(self.config.environment.mounts or [])
 
     def __repr__(self) -> str:
         return f"{type(self).__name__}(trial_name={self.config.trial_name!r})"

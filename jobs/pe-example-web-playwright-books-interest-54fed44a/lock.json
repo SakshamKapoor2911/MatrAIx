@@ -1,0 +1,174 @@
+{
+    "schema_version": 1,
+    "created_at": "2026-07-02T05:25:09.507989Z",
+    "harbor": {
+        "version": "0.16.1",
+        "is_editable": false
+    },
+    "invocation": [
+        "/Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/.venv/bin/harbor",
+        "run",
+        "-c",
+        "configs/jobs/application-task-job-recipe/pe-example-web-playwright-books-interest-54fed44a.yaml"
+    ],
+    "n_concurrent_trials": 2,
+    "retry": {
+        "max_retries": 0,
+        "exclude_exceptions": [
+            "VerifierTimeoutError",
+            "AgentTimeoutError",
+            "RewardFileEmptyError",
+            "VerifierOutputParseError",
+            "RewardFileNotFoundError"
+        ],
+        "wait_multiplier": 1.0,
+        "min_wait_sec": 1.0,
+        "max_wait_sec": 60.0
+    },
+    "trials": [
+        {
+            "task": {
+                "name": "example-web-playwright_books-interest",
+                "type": "local",
+                "digest": "sha256:38c40a5f41f247178f9ff8a15c0fab7c6a9ef41ee66d637e521e352773570125",
+                "path": "application/tasks/example-web-playwright_books-interest"
+            },
+            "timeout_multiplier": 1.0,
+            "agent": {
+                "name": "persona-openhands-sdk",
+                "model_name": "anthropic/claude-sonnet-4-6",
+                "skills": [],
+                "extra_allowed_hosts": [],
+                "kwargs": {
+                    "persona_path": "persona/datasets/bench-dev-sample/persona_0164.yaml"
+                },
+                "env": {},
+                "mcp_servers": []
+            },
+            "skills": [],
+            "environment": {
+                "type": "docker",
+                "force_build": false,
+                "delete": true,
+                "cpu_enforcement_policy": "auto",
+                "memory_enforcement_policy": "auto",
+                "extra_docker_compose": [],
+                "env": {},
+                "kwargs": {},
+                "extra_allowed_hosts": []
+            },
+            "verifier": {
+                "env": {},
+                "disable": false
+            }
+        },
+        {
+            "task": {
+                "name": "example-web-playwright_books-interest",
+                "type": "local",
+                "digest": "sha256:38c40a5f41f247178f9ff8a15c0fab7c6a9ef41ee66d637e521e352773570125",
+                "path": "application/tasks/example-web-playwright_books-interest"
+            },
+            "timeout_multiplier": 1.0,
+            "agent": {
+                "name": "persona-openhands-sdk",
+                "model_name": "anthropic/claude-sonnet-4-6",
+                "skills": [],
+                "extra_allowed_hosts": [],
+                "kwargs": {
+                    "persona_path": "persona/datasets/bench-dev-sample/persona_0029.yaml"
+                },
+                "env": {},
+                "mcp_servers": []
+            },
+            "skills": [],
+            "environment": {
+                "type": "docker",
+                "force_build": false,
+                "delete": true,
+                "cpu_enforcement_policy": "auto",
+                "memory_enforcement_policy": "auto",
+                "extra_docker_compose": [],
+                "env": {},
+                "kwargs": {},
+                "extra_allowed_hosts": []
+            },
+            "verifier": {
+                "env": {},
+                "disable": false
+            }
+        },
+        {
+            "task": {
+                "name": "example-web-playwright_books-interest",
+                "type": "local",
+                "digest": "sha256:38c40a5f41f247178f9ff8a15c0fab7c6a9ef41ee66d637e521e352773570125",
+                "path": "application/tasks/example-web-playwright_books-interest"
+            },
+            "timeout_multiplier": 1.0,
+            "agent": {
+                "name": "persona-openhands-sdk",
+                "model_name": "anthropic/claude-sonnet-4-6",
+                "skills": [],
+                "extra_allowed_hosts": [],
+                "kwargs": {
+                    "persona_path": "persona/datasets/bench-dev-sample/persona_0007.yaml"
+                },
+                "env": {},
+                "mcp_servers": []
+            },
+            "skills": [],
+            "environment": {
+                "type": "docker",
+                "force_build": false,
+                "delete": true,
+                "cpu_enforcement_policy": "auto",
+                "memory_enforcement_policy": "auto",
+                "extra_docker_compose": [],
+                "env": {},
+                "kwargs": {},
+                "extra_allowed_hosts": []
+            },
+            "verifier": {
+                "env": {},
+                "disable": false
+            }
+        },
+        {
+            "task": {
+                "name": "example-web-playwright_books-interest",
+                "type": "local",
+                "digest": "sha256:38c40a5f41f247178f9ff8a15c0fab7c6a9ef41ee66d637e521e352773570125",
+                "path": "application/tasks/example-web-playwright_books-interest"
+            },
+            "timeout_multiplier": 1.0,
+            "agent": {
+                "name": "persona-openhands-sdk",
+                "model_name": "anthropic/claude-sonnet-4-6",
+                "skills": [],
+                "extra_allowed_hosts": [],
+                "kwargs": {
+                    "persona_path": "persona/datasets/bench-dev-sample/persona_0190.yaml"
+                },
+                "env": {},
+                "mcp_servers": []
+            },
+            "skills": [],
+            "environment": {
+                "type": "docker",
+                "force_build": false,
+                "delete": true,
+                "cpu_enforcement_policy": "auto",
+                "memory_enforcement_policy": "auto",
+                "extra_docker_compose": [],
+                "env": {},
+                "kwargs": {},
+                "extra_allowed_hosts": []
+            },
+            "verifier": {
+                "env": {},
+                "disable": false
+            }
+        }
+    ]
+}

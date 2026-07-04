@@ -1,19 +1,34 @@
-# Notification preferences (Linux)
+# Note to CSV cleanup (Linux)
 
-You just set up a new Linux desktop. Before you finish, take a minute to see how **notifications** work on this machine.
+You are setting up a new Linux desktop and want a quick structured copy of a
+rough shopping note.
 
-1. Open **Settings** → **Notifications** (on XFCE this may appear as **Notify OSD** or similar).
-2. Look at how alerts show up — position, duration, or whether they appear at all.
-3. Decide whether you'd **keep notifications on** the way this system is set up for everyday use.
+Turn this rough note into a CSV table:
 
-Save your decision to `/tmp/personabench-linux-notification-preferences/decision.json`:
+- oat milk | 2 | urgent
+- batteries | 4 | normal
+- trash bags | 1 | low
+
+Create `/tmp/personabench-linux-note-to-csv/cleaned_list.csv` with this exact
+header:
+
+```text
+item,quantity,priority
+```
+
+Then save `/tmp/personabench-linux-note-to-csv/submission.json`:
 
 ```json
 {
-  "keep_notifications_on": true,
-  "app_reviewed": "<what you looked at, e.g. Notify OSD>",
-  "reason": "<why, in your own words>"
+  "output_file": "/tmp/personabench-linux-note-to-csv/cleaned_list.csv",
+  "rows_written": 3,
+  "format": "csv",
+  "reason": "<why you chose this structure>"
 }
 ```
 
-`keep_notifications_on` must be `true` or `false`. Don't change unrelated system settings.
+Rules:
+
+- `format` must be exactly `csv`
+- `rows_written` must be `3`
+- do not add extra columns or extra data rows
