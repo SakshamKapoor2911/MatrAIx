@@ -56,8 +56,6 @@ __all__ = [
     "PersonaSummary",
     "PersonaEvalPersonasResponse",
     "PersonaEvalPersonaDetail",
-    "GoalContext",
-    "GoalContextsResponse",
     "PersonaEvalJobView",
     "SurveyQuestion",
     "SurveyInstrument",

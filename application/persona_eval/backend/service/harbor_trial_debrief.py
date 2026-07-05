@@ -6,7 +6,7 @@ import json
 import os
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import yaml
 
@@ -17,6 +17,10 @@ from backend.service.survey_types import build_survey_eval_result_from_artifacts
 from backend.service.survey_types import survey_result_view
 from backend.service.survey_types import SurveyEvalConfig, SurveyInstrument, SurveyQuestion
 from persona_eval.types import Persona, PersonaEvalConfig
+
+if TYPE_CHECKING:
+    from backend.service.survey_types import SurveyMetrics
+    from backend.service.web_types import WebEvalTask
 
 
 def _utc_now() -> str:

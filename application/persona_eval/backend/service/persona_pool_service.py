@@ -11,7 +11,6 @@ from typing import Any, Literal
 
 from personabench.persona_dimension_catalog import values_for_dimension
 from personabench.persona_job import (
-    filter_personas_by_confounders,
     load_manifest,
     sample_personas,
     sample_personas_stratified,

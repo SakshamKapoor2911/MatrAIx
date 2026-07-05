@@ -46,7 +46,7 @@ from typing import Any, AsyncIterator, Dict, List, Optional
 
 from fastapi import Depends, FastAPI, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import FileResponse
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.requests import Request as StarletteRequest
 from starlette.responses import Response as StarletteResponse
@@ -56,7 +56,6 @@ from starlette.responses import Response as StarletteResponse
 import backend.api  # noqa: F401  (side effect: sys.path wiring)
 from backend.api import schemas
 from backend.api.deps import AppState, build_state, state_from_request
-from backend.service.config import ConfigError, ConfigManager, persona_model as default_persona_model
 
 __all__ = ["create_app", "app", "preflight_checks", "catalog_item_view"]
 

@@ -44,5 +44,23 @@ jobs:
           uv run pytest tests/ \
             packages/harbor-langsmith/tests/ \
             packages/rewardkit/tests/ \
-            application/persona_eval/backend/tests/ \
+            application/persona_eval/backend/tests/test_api_schemas.py \
+            application/persona_eval/backend/tests/test_application_types.py \
+            application/persona_eval/backend/tests/test_config.py \
+            application/persona_eval/backend/tests/test_harbor_chat_eval.py \
+            application/persona_eval/backend/tests/test_harbor_chat_mcp_session.py \
+            application/persona_eval/backend/tests/test_harbor_job_service.py \
+            application/persona_eval/backend/tests/test_harbor_jobs_api.py \
+            application/persona_eval/backend/tests/test_harbor_persona_eval.py \
+            application/persona_eval/backend/tests/test_harbor_survey_eval.py \
+            application/persona_eval/backend/tests/test_harbor_web_trace.py \
+            application/persona_eval/backend/tests/test_job_aggregation.py \
+            application/persona_eval/backend/tests/test_persona_pool_service.py \
+            application/persona_eval/backend/tests/test_post_run_feedback.py \
+            application/persona_eval/backend/tests/test_remote_runner_client.py \
+            application/persona_eval/backend/tests/test_remote_runner_dispatch.py \
+            application/persona_eval/backend/tests/test_remote_runner_harbor_job_service.py \
+            application/persona_eval/backend/tests/test_remote_runner_server.py \
+            application/persona_eval/backend/tests/test_task_detail_service.py \
+            application/persona_eval/backend/tests/test_trial_events.py \
             tests/environment/test_application_tasks.py

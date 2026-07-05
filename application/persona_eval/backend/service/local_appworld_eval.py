@@ -11,7 +11,7 @@ from backend.service.appworld_types import (
     AppWorldResultArtifact,
     AppWorldTrace,
 )
-from backend.service.local_survey_eval import persona_system_prompt
+from persona_eval.inprocess.survey_eval import persona_system_prompt
 from persona_eval.types import Persona
 
 

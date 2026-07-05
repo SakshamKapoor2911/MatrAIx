@@ -9,18 +9,16 @@ stringification; and tolerance of empty / malformed input.
 from __future__ import annotations
 
 from backend.service.trace_view import TraceView, item_list_from_exposure
-
-
-def _items(view):
-    return item_list_from_exposure(view.get("personaExposure"))
-
-# Reuse the fake result types so we can build a real RecBotTurnResult object.
 from backend.tests.conftest import (
     ChatMessage,
     NativeAction,
     RecBotTrace,
     RecBotTurnResult,
 )
+
+
+def _items(view):
+    return item_list_from_exposure(view.get("personaExposure"))
 
 
 def _make_result() -> RecBotTurnResult:

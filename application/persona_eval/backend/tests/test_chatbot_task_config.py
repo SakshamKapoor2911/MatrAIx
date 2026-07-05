@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from pathlib import Path
-
 from persona_eval.chatbot_task_config import (
     load_chatbot_task_config_for_task_path,
 )
