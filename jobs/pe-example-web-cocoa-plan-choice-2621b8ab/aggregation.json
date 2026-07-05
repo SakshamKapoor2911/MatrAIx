@@ -1,0 +1,1829 @@
+{
+  "schemaVersion": "1.0",
+  "artifactType": "job_aggregation",
+  "generatedAt": "2026-07-05T01:05:48Z",
+  "coverage": {
+    "trialCount": 4,
+    "completedTrials": 4,
+    "pendingTrials": 0,
+    "artifactReadyTrials": 2,
+    "completedWithoutArtifactTrials": 2
+  },
+  "fields": [
+    {
+      "key": "decision.primary.basis_primary",
+      "facetKey": "basis_primary",
+      "contextKey": "decision.primary",
+      "contextLabel": "Primary decision",
+      "label": "Primary basis",
+      "kind": "categorical",
+      "role": "primary",
+      "group": "decision.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "categorical": {
+        "count": 2,
+        "distinctCount": 1,
+        "counts": [
+          {
+            "value": "fit",
+            "count": 2
+          }
+        ]
+      }
+    },
+    {
+      "key": "decision.primary.decision_outcome",
+      "facetKey": "decision_outcome",
+      "contextKey": "decision.primary",
+      "contextLabel": "Primary decision",
+      "label": "Decision outcome",
+      "kind": "categorical",
+      "role": "primary",
+      "group": "decision.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "categorical": {
+        "count": 2,
+        "distinctCount": 1,
+        "counts": [
+          {
+            "value": "selected",
+            "count": 2
+          }
+        ]
+      }
+    },
+    {
+      "key": "decision.primary.decision_subject_id",
+      "facetKey": "decision_subject_id",
+      "contextKey": "decision.primary",
+      "contextLabel": "Primary decision",
+      "label": "Decision subject ID",
+      "kind": "categorical",
+      "role": "evidence",
+      "group": "decision.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "categorical": {
+        "count": 2,
+        "distinctCount": 1,
+        "counts": [
+          {
+            "value": "developer",
+            "count": 2
+          }
+        ]
+      }
+    },
+    {
+      "key": "decision.primary.decision_subject_label",
+      "facetKey": "decision_subject_label",
+      "contextKey": "decision.primary",
+      "contextLabel": "Primary decision",
+      "label": "Decision subject label",
+      "kind": "textual",
+      "role": "evidence",
+      "group": "decision.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "textual": {
+        "count": 2,
+        "uniqueCount": 1,
+        "samples": [
+          "Developer"
+        ],
+        "summary": "All 2 available trials reported the same text: \"Developer\"",
+        "summaryType": "heuristic"
+      }
+    },
+    {
+      "key": "decision.primary.reason",
+      "facetKey": "reason",
+      "contextKey": "decision.primary",
+      "contextLabel": "Primary decision",
+      "label": "Reason",
+      "kind": "textual",
+      "role": "explanation",
+      "group": "decision.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "textual": {
+        "count": 2,
+        "uniqueCount": 2,
+        "samples": [
+          "As a retired researcher running small behavioral-economics experiments and lightweight web apps, the Developer plan hits the only viable sweet spot. Beginner's restricted outbound Internet access kills any API or live-data work immediately — unacceptable. Custom is absurd overkill for a single person tinkering in retirement. Developer gives one real web app, 5,000 CPU-seconds/day, 5 GB disk, unrestricted Internet, and a 30-day money-back guarantee that fully satisfies my risk-averse temperament. $10/month is a negligible cost for a middle-income retiree who values novelty and wants a clean, hosted environment without the friction of self-managed infrastructure.",
+          "As a premium-seeking student running small personal Python projects and a lightweight web app, the Developer plan delivers exactly the right configuration: one web app with a custom domain, SSH access, full unrestricted outbound internet, 5,000 CPU-seconds per day, IPython/Jupyter notebook support, and 5GB of disk space — all at a fixed $10/month. The Beginner plan is disqualifying: restricted outbound internet breaks real experiments, only 100 CPU-seconds per day is insufficient, no SSH, and no scheduled tasks. The Custom plan is architectural overkill for a solo student with one project at a time. Developer hits the premium-but-practical sweet spot this persona demands."
+        ],
+        "summary": "Collected 2 text responses across 2 unique values. Examples: \"As a retired researcher running small behavioral-economics experiments and lightweight web apps, the Developer plan hit…\"; \"As a premium-seeking student running small personal Python projects and a lightweight web app, the Developer plan deliv…\"",
+        "summaryType": "heuristic"
+      }
+    },
+    {
+      "key": "decision.primary.task_price_text",
+      "facetKey": "task_price_text",
+      "contextKey": "decision.primary",
+      "contextLabel": "Primary decision",
+      "label": "Displayed price",
+      "kind": "textual",
+      "role": "evidence",
+      "group": "decision.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "textual": {
+        "count": 2,
+        "uniqueCount": 1,
+        "samples": [
+          "$10/month"
+        ],
+        "summary": "All 2 available trials reported the same text: \"$10/month\"",
+        "summaryType": "heuristic"
+      }
+    },
+    {
+      "key": "decision.process.comparison_notes",
+      "facetKey": "comparison_notes",
+      "contextKey": "decision.process",
+      "contextLabel": "Decision process",
+      "label": "Comparison notes",
+      "kind": "textual",
+      "role": "explanation",
+      "group": "decision.process",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "textual": {
+        "count": 2,
+        "uniqueCount": 1,
+        "samples": [
+          "The persona described a compared multiple comparison pattern before picking this plan."
+        ],
+        "summary": "All 2 available trials reported the same text: \"The persona described a compared multiple comparison pattern before picking this plan.\"",
+        "summaryType": "heuristic"
+      }
+    },
+    {
+      "key": "decision.process.exploration_style",
+      "facetKey": "exploration_style",
+      "contextKey": "decision.process",
+      "contextLabel": "Decision process",
+      "label": "Exploration style",
+      "kind": "categorical",
+      "role": "primary",
+      "group": "decision.process",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "categorical": {
+        "count": 2,
+        "distinctCount": 1,
+        "counts": [
+          {
+            "value": "compared_multiple",
+            "count": 2
+          }
+        ]
+      }
+    },
+    {
+      "key": "task_outcome.primary.completion_evidence",
+      "facetKey": "completion_evidence",
+      "contextKey": "task_outcome.primary",
+      "contextLabel": "Task outcome",
+      "label": "Completion evidence",
+      "kind": "textual",
+      "role": "evidence",
+      "group": "task_outcome.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "textual": {
+        "count": 2,
+        "uniqueCount": 1,
+        "samples": [
+          "Saved plan_choice.json with decision subject Developer."
+        ],
+        "summary": "All 2 available trials reported the same text: \"Saved plan_choice.json with decision subject Developer.\"",
+        "summaryType": "heuristic"
+      }
+    },
+    {
+      "key": "task_outcome.primary.goal_completion_bucket",
+      "facetKey": "goal_completion_bucket",
+      "contextKey": "task_outcome.primary",
+      "contextLabel": "Task outcome",
+      "label": "Goal completion bucket",
+      "kind": "categorical",
+      "role": "primary",
+      "group": "task_outcome.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "categorical": {
+        "count": 2,
+        "distinctCount": 1,
+        "counts": [
+          {
+            "value": "complete",
+            "count": 2
+          }
+        ]
+      }
+    },
+    {
+      "key": "task_outcome.primary.goal_completion_ratio",
+      "facetKey": "goal_completion_ratio",
+      "contextKey": "task_outcome.primary",
+      "contextLabel": "Task outcome",
+      "label": "Goal completion ratio",
+      "kind": "numerical",
+      "role": "score",
+      "group": "task_outcome.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "numerical": {
+        "count": 2,
+        "min": 1.0,
+        "max": 1.0,
+        "avg": 1.0,
+        "std": 0.0
+      }
+    },
+    {
+      "key": "task_outcome.primary.outcome_explanation",
+      "facetKey": "outcome_explanation",
+      "contextKey": "task_outcome.primary",
+      "contextLabel": "Task outcome",
+      "label": "Outcome explanation",
+      "kind": "textual",
+      "role": "explanation",
+      "group": "task_outcome.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "textual": {
+        "count": 2,
+        "uniqueCount": 1,
+        "samples": [
+          "The persona completed the web task and saved a valid plan_choice.json artifact."
+        ],
+        "summary": "All 2 available trials reported the same text: \"The persona completed the web task and saved a valid plan_choice.json artifact.\"",
+        "summaryType": "heuristic"
+      }
+    },
+    {
+      "key": "task_outcome.primary.outcome_status",
+      "facetKey": "outcome_status",
+      "contextKey": "task_outcome.primary",
+      "contextLabel": "Task outcome",
+      "label": "Outcome status",
+      "kind": "categorical",
+      "role": "primary",
+      "group": "task_outcome.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "categorical": {
+        "count": 2,
+        "distinctCount": 1,
+        "counts": [
+          {
+            "value": "passed",
+            "count": 2
+          }
+        ]
+      }
+    },
+    {
+      "key": "task_outcome.primary.primary_failure_reason",
+      "facetKey": "primary_failure_reason",
+      "contextKey": "task_outcome.primary",
+      "contextLabel": "Task outcome",
+      "label": "Primary failure reason",
+      "kind": "categorical",
+      "role": "primary",
+      "group": "task_outcome.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "categorical": {
+        "count": 2,
+        "distinctCount": 1,
+        "counts": [
+          {
+            "value": "none",
+            "count": 2
+          }
+        ]
+      }
+    },
+    {
+      "key": "task_outcome.primary.verifier_mode",
+      "facetKey": "verifier_mode",
+      "contextKey": "task_outcome.primary",
+      "contextLabel": "Task outcome",
+      "label": "Verifier mode",
+      "kind": "categorical",
+      "role": "evidence",
+      "group": "task_outcome.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "categorical": {
+        "count": 2,
+        "distinctCount": 1,
+        "counts": [
+          {
+            "value": "artifact_exact",
+            "count": 2
+          }
+        ]
+      }
+    },
+    {
+      "key": "web_artifact.primary.artifact_evidence",
+      "facetKey": "artifact_evidence",
+      "contextKey": "web_artifact.primary",
+      "contextLabel": "Web artifact",
+      "label": "Artifact evidence",
+      "kind": "textual",
+      "role": "explanation",
+      "group": "web_artifact.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "textual": {
+        "count": 2,
+        "uniqueCount": 1,
+        "samples": [
+          "The submission artifact plan_choice.json matches the persona decision."
+        ],
+        "summary": "All 2 available trials reported the same text: \"The submission artifact plan_choice.json matches the persona decision.\"",
+        "summaryType": "heuristic"
+      }
+    },
+    {
+      "key": "web_artifact.primary.artifact_status",
+      "facetKey": "artifact_status",
+      "contextKey": "web_artifact.primary",
+      "contextLabel": "Web artifact",
+      "label": "Artifact status",
+      "kind": "categorical",
+      "role": "primary",
+      "group": "web_artifact.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "categorical": {
+        "count": 2,
+        "distinctCount": 1,
+        "counts": [
+          {
+            "value": "correct",
+            "count": 2
+          }
+        ]
+      }
+    },
+    {
+      "key": "web_artifact.primary.artifact_subject_id",
+      "facetKey": "artifact_subject_id",
+      "contextKey": "web_artifact.primary",
+      "contextLabel": "Web artifact",
+      "label": "Artifact subject id",
+      "kind": "categorical",
+      "role": "evidence",
+      "group": "web_artifact.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "categorical": {
+        "count": 2,
+        "distinctCount": 1,
+        "counts": [
+          {
+            "value": "developer",
+            "count": 2
+          }
+        ]
+      }
+    },
+    {
+      "key": "web_artifact.primary.artifact_subject_label",
+      "facetKey": "artifact_subject_label",
+      "contextKey": "web_artifact.primary",
+      "contextLabel": "Web artifact",
+      "label": "Artifact subject label",
+      "kind": "textual",
+      "role": "evidence",
+      "group": "web_artifact.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "textual": {
+        "count": 2,
+        "uniqueCount": 1,
+        "samples": [
+          "Developer"
+        ],
+        "summary": "All 2 available trials reported the same text: \"Developer\"",
+        "summaryType": "heuristic"
+      }
+    },
+    {
+      "key": "web_artifact.primary.artifact_type",
+      "facetKey": "artifact_type",
+      "contextKey": "web_artifact.primary",
+      "contextLabel": "Web artifact",
+      "label": "Artifact type",
+      "kind": "categorical",
+      "role": "primary",
+      "group": "web_artifact.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "categorical": {
+        "count": 2,
+        "distinctCount": 1,
+        "counts": [
+          {
+            "value": "task_submission",
+            "count": 2
+          }
+        ]
+      }
+    },
+    {
+      "key": "web_interaction.primary.navigation_path_type",
+      "facetKey": "navigation_path_type",
+      "contextKey": "web_interaction.primary",
+      "contextLabel": "Web interaction",
+      "label": "Navigation path type",
+      "kind": "categorical",
+      "role": "primary",
+      "group": "web_interaction.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "categorical": {
+        "count": 2,
+        "distinctCount": 1,
+        "counts": [
+          {
+            "value": "browse_compare",
+            "count": 2
+          }
+        ]
+      }
+    },
+    {
+      "key": "web_interaction.primary.web_interaction_notes",
+      "facetKey": "web_interaction_notes",
+      "contextKey": "web_interaction.primary",
+      "contextLabel": "Web interaction",
+      "label": "Web interaction notes",
+      "kind": "textual",
+      "role": "explanation",
+      "group": "web_interaction.primary",
+      "description": null,
+      "unit": null,
+      "higherIsBetter": null,
+      "categories": null,
+      "order": null,
+      "presentCount": 2,
+      "missingCount": 0,
+      "textual": {
+        "count": 2,
+        "uniqueCount": 1,
+        "samples": [
+          "The persona used a compared multiple browsing pattern before submitting."
+        ],
+        "summary": "All 2 available trials reported the same text: \"The persona used a compared multiple browsing pattern before submitting.\"",
+        "summaryType": "heuristic"
+      }
+    }
+  ],
+  "contexts": [
+    {
+      "key": "decision.primary",
+      "label": "Primary decision",
+      "contextType": "decision",
+      "summaryDirectives": [
+        {
+          "id": "decision.reason_by_outcome",
+          "title": "Reason by decision outcome",
+          "targetFacetKey": "reason",
+          "groupByFacetKey": "decision_outcome",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        },
+        {
+          "id": "decision.reason_by_basis_primary",
+          "title": "Reason by primary basis",
+          "targetFacetKey": "reason",
+          "groupByFacetKey": "basis_primary",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ],
+      "judgeDirectives": [
+        {
+          "id": "decision.reason_signal_scan",
+          "title": "Reason signal scan",
+          "targetFacetKey": "reason",
+          "groupByFacetKey": "basis_primary",
+          "groupByMode": "categorical",
+          "judgeKind": "llm_signal_judge",
+          "prompt": "Read the persona's reason and classify which reusable decision signals are explicitly present.",
+          "rubric": "Mark a signal true only when the reason clearly states or strongly implies that signal.",
+          "signals": [
+            {
+              "key": "price_signal",
+              "label": "Price sensitivity",
+              "valueType": "boolean"
+            },
+            {
+              "key": "quality_signal",
+              "label": "Quality emphasis",
+              "valueType": "boolean"
+            },
+            {
+              "key": "convenience_signal",
+              "label": "Convenience emphasis",
+              "valueType": "boolean"
+            },
+            {
+              "key": "trust_signal",
+              "label": "Trust emphasis",
+              "valueType": "boolean"
+            },
+            {
+              "key": "novelty_signal",
+              "label": "Novelty seeking",
+              "valueType": "boolean"
+            },
+            {
+              "key": "fit_signal",
+              "label": "Needs fit emphasis",
+              "valueType": "boolean"
+            }
+          ]
+        }
+      ],
+      "facets": [
+        {
+          "key": "decision.primary.decision_outcome",
+          "facetKey": "decision_outcome",
+          "contextKey": "decision.primary",
+          "contextLabel": "Primary decision",
+          "label": "Decision outcome",
+          "kind": "categorical",
+          "role": "primary",
+          "group": "decision.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "categorical": {
+            "count": 2,
+            "distinctCount": 1,
+            "counts": [
+              {
+                "value": "selected",
+                "count": 2
+              }
+            ]
+          }
+        },
+        {
+          "key": "decision.primary.basis_primary",
+          "facetKey": "basis_primary",
+          "contextKey": "decision.primary",
+          "contextLabel": "Primary decision",
+          "label": "Primary basis",
+          "kind": "categorical",
+          "role": "primary",
+          "group": "decision.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "categorical": {
+            "count": 2,
+            "distinctCount": 1,
+            "counts": [
+              {
+                "value": "fit",
+                "count": 2
+              }
+            ]
+          }
+        },
+        {
+          "key": "decision.primary.reason",
+          "facetKey": "reason",
+          "contextKey": "decision.primary",
+          "contextLabel": "Primary decision",
+          "label": "Reason",
+          "kind": "textual",
+          "role": "explanation",
+          "group": "decision.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "textual": {
+            "count": 2,
+            "uniqueCount": 2,
+            "samples": [
+              "As a retired researcher running small behavioral-economics experiments and lightweight web apps, the Developer plan hits the only viable sweet spot. Beginner's restricted outbound Internet access kills any API or live-data work immediately — unacceptable. Custom is absurd overkill for a single person tinkering in retirement. Developer gives one real web app, 5,000 CPU-seconds/day, 5 GB disk, unrestricted Internet, and a 30-day money-back guarantee that fully satisfies my risk-averse temperament. $10/month is a negligible cost for a middle-income retiree who values novelty and wants a clean, hosted environment without the friction of self-managed infrastructure.",
+              "As a premium-seeking student running small personal Python projects and a lightweight web app, the Developer plan delivers exactly the right configuration: one web app with a custom domain, SSH access, full unrestricted outbound internet, 5,000 CPU-seconds per day, IPython/Jupyter notebook support, and 5GB of disk space — all at a fixed $10/month. The Beginner plan is disqualifying: restricted outbound internet breaks real experiments, only 100 CPU-seconds per day is insufficient, no SSH, and no scheduled tasks. The Custom plan is architectural overkill for a solo student with one project at a time. Developer hits the premium-but-practical sweet spot this persona demands."
+            ],
+            "summary": "Collected 2 text responses across 2 unique values. Examples: \"As a retired researcher running small behavioral-economics experiments and lightweight web apps, the Developer plan hit…\"; \"As a premium-seeking student running small personal Python projects and a lightweight web app, the Developer plan deliv…\"",
+            "summaryType": "heuristic"
+          }
+        },
+        {
+          "key": "decision.primary.decision_subject_id",
+          "facetKey": "decision_subject_id",
+          "contextKey": "decision.primary",
+          "contextLabel": "Primary decision",
+          "label": "Decision subject ID",
+          "kind": "categorical",
+          "role": "evidence",
+          "group": "decision.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "categorical": {
+            "count": 2,
+            "distinctCount": 1,
+            "counts": [
+              {
+                "value": "developer",
+                "count": 2
+              }
+            ]
+          }
+        },
+        {
+          "key": "decision.primary.decision_subject_label",
+          "facetKey": "decision_subject_label",
+          "contextKey": "decision.primary",
+          "contextLabel": "Primary decision",
+          "label": "Decision subject label",
+          "kind": "textual",
+          "role": "evidence",
+          "group": "decision.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "textual": {
+            "count": 2,
+            "uniqueCount": 1,
+            "samples": [
+              "Developer"
+            ],
+            "summary": "All 2 available trials reported the same text: \"Developer\"",
+            "summaryType": "heuristic"
+          }
+        },
+        {
+          "key": "decision.primary.task_price_text",
+          "facetKey": "task_price_text",
+          "contextKey": "decision.primary",
+          "contextLabel": "Primary decision",
+          "label": "Displayed price",
+          "kind": "textual",
+          "role": "evidence",
+          "group": "decision.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "textual": {
+            "count": 2,
+            "uniqueCount": 1,
+            "samples": [
+              "$10/month"
+            ],
+            "summary": "All 2 available trials reported the same text: \"$10/month\"",
+            "summaryType": "heuristic"
+          }
+        }
+      ],
+      "summaries": [
+        {
+          "id": "decision.reason_by_outcome",
+          "title": "Reason by decision outcome",
+          "targetFacetKey": "reason",
+          "groupByFacetKey": "decision_outcome",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary",
+          "instruction": null,
+          "status": "ready_for_llm",
+          "overall": {
+            "count": 2,
+            "uniqueCount": 2,
+            "samples": [
+              "As a retired researcher running small behavioral-economics experiments and lightweight web apps, the Developer plan hits the only viable sweet spot. Beginner's restricted outbound Internet access kills any API or live-data work immediately — unacceptable. Custom is absurd overkill for a single person tinkering in retirement. Developer gives one real web app, 5,000 CPU-seconds/day, 5 GB disk, unrestricted Internet, and a 30-day money-back guarantee that fully satisfies my risk-averse temperament. $10/month is a negligible cost for a middle-income retiree who values novelty and wants a clean, hosted environment without the friction of self-managed infrastructure.",
+              "As a premium-seeking student running small personal Python projects and a lightweight web app, the Developer plan delivers exactly the right configuration: one web app with a custom domain, SSH access, full unrestricted outbound internet, 5,000 CPU-seconds per day, IPython/Jupyter notebook support, and 5GB of disk space — all at a fixed $10/month. The Beginner plan is disqualifying: restricted outbound internet breaks real experiments, only 100 CPU-seconds per day is insufficient, no SSH, and no scheduled tasks. The Custom plan is architectural overkill for a solo student with one project at a time. Developer hits the premium-but-practical sweet spot this persona demands."
+            ],
+            "summary": "Collected 2 text responses across 2 unique values. Examples: \"As a retired researcher running small behavioral-economics experiments and lightweight web apps, the Developer plan hit…\"; \"As a premium-seeking student running small personal Python projects and a lightweight web app, the Developer plan deliv…\"",
+            "summaryType": "heuristic"
+          },
+          "buckets": [
+            {
+              "bucket": "selected",
+              "count": 2,
+              "samples": [
+                "As a retired researcher running small behavioral-economics experiments and lightweight web apps, the Developer plan hits the only viable sweet spot. Beginner's restricted outbound Internet access kills any API or live-data work immediately — unacceptable. Custom is absurd overkill for a single person tinkering in retirement. Developer gives one real web app, 5,000 CPU-seconds/day, 5 GB disk, unrestricted Internet, and a 30-day money-back guarantee that fully satisfies my risk-averse temperament. $10/month is a negligible cost for a middle-income retiree who values novelty and wants a clean, hosted environment without the friction of self-managed infrastructure.",
+                "As a premium-seeking student running small personal Python projects and a lightweight web app, the Developer plan delivers exactly the right configuration: one web app with a custom domain, SSH access, full unrestricted outbound internet, 5,000 CPU-seconds per day, IPython/Jupyter notebook support, and 5GB of disk space — all at a fixed $10/month. The Beginner plan is disqualifying: restricted outbound internet breaks real experiments, only 100 CPU-seconds per day is insufficient, no SSH, and no scheduled tasks. The Custom plan is architectural overkill for a solo student with one project at a time. Developer hits the premium-but-practical sweet spot this persona demands."
+              ],
+              "summary": "Collected 2 text responses across 2 unique values. Examples: \"As a retired researcher running small behavioral-economics experiments and lightweight web apps, the Developer plan hit…\"; \"As a premium-seeking student running small personal Python projects and a lightweight web app, the Developer plan deliv…\"",
+              "summaryType": "heuristic"
+            }
+          ],
+          "llmFingerprint": "7580896a0b58e875c47f2b821e225773926ad379d176516fc2d92c25f9e59a4c"
+        },
+        {
+          "id": "decision.reason_by_basis_primary",
+          "title": "Reason by primary basis",
+          "targetFacetKey": "reason",
+          "groupByFacetKey": "basis_primary",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary",
+          "instruction": null,
+          "status": "ready_for_llm",
+          "overall": {
+            "count": 2,
+            "uniqueCount": 2,
+            "samples": [
+              "As a retired researcher running small behavioral-economics experiments and lightweight web apps, the Developer plan hits the only viable sweet spot. Beginner's restricted outbound Internet access kills any API or live-data work immediately — unacceptable. Custom is absurd overkill for a single person tinkering in retirement. Developer gives one real web app, 5,000 CPU-seconds/day, 5 GB disk, unrestricted Internet, and a 30-day money-back guarantee that fully satisfies my risk-averse temperament. $10/month is a negligible cost for a middle-income retiree who values novelty and wants a clean, hosted environment without the friction of self-managed infrastructure.",
+              "As a premium-seeking student running small personal Python projects and a lightweight web app, the Developer plan delivers exactly the right configuration: one web app with a custom domain, SSH access, full unrestricted outbound internet, 5,000 CPU-seconds per day, IPython/Jupyter notebook support, and 5GB of disk space — all at a fixed $10/month. The Beginner plan is disqualifying: restricted outbound internet breaks real experiments, only 100 CPU-seconds per day is insufficient, no SSH, and no scheduled tasks. The Custom plan is architectural overkill for a solo student with one project at a time. Developer hits the premium-but-practical sweet spot this persona demands."
+            ],
+            "summary": "Collected 2 text responses across 2 unique values. Examples: \"As a retired researcher running small behavioral-economics experiments and lightweight web apps, the Developer plan hit…\"; \"As a premium-seeking student running small personal Python projects and a lightweight web app, the Developer plan deliv…\"",
+            "summaryType": "heuristic"
+          },
+          "buckets": [
+            {
+              "bucket": "fit",
+              "count": 2,
+              "samples": [
+                "As a retired researcher running small behavioral-economics experiments and lightweight web apps, the Developer plan hits the only viable sweet spot. Beginner's restricted outbound Internet access kills any API or live-data work immediately — unacceptable. Custom is absurd overkill for a single person tinkering in retirement. Developer gives one real web app, 5,000 CPU-seconds/day, 5 GB disk, unrestricted Internet, and a 30-day money-back guarantee that fully satisfies my risk-averse temperament. $10/month is a negligible cost for a middle-income retiree who values novelty and wants a clean, hosted environment without the friction of self-managed infrastructure.",
+                "As a premium-seeking student running small personal Python projects and a lightweight web app, the Developer plan delivers exactly the right configuration: one web app with a custom domain, SSH access, full unrestricted outbound internet, 5,000 CPU-seconds per day, IPython/Jupyter notebook support, and 5GB of disk space — all at a fixed $10/month. The Beginner plan is disqualifying: restricted outbound internet breaks real experiments, only 100 CPU-seconds per day is insufficient, no SSH, and no scheduled tasks. The Custom plan is architectural overkill for a solo student with one project at a time. Developer hits the premium-but-practical sweet spot this persona demands."
+              ],
+              "summary": "Collected 2 text responses across 2 unique values. Examples: \"As a retired researcher running small behavioral-economics experiments and lightweight web apps, the Developer plan hit…\"; \"As a premium-seeking student running small personal Python projects and a lightweight web app, the Developer plan deliv…\"",
+              "summaryType": "heuristic"
+            }
+          ],
+          "llmFingerprint": "405e62b8befef52bc2812b885f1732702df7dcf433339ad3a055e1f380d096bb"
+        }
+      ],
+      "judges": [
+        {
+          "id": "decision.reason_signal_scan",
+          "title": "Reason signal scan",
+          "targetFacetKey": "reason",
+          "groupByFacetKey": "basis_primary",
+          "groupByMode": "categorical",
+          "judgeKind": "llm_signal_judge",
+          "prompt": "Read the persona's reason and classify which reusable decision signals are explicitly present.",
+          "rubric": "Mark a signal true only when the reason clearly states or strongly implies that signal.",
+          "signals": [
+            {
+              "key": "price_signal",
+              "label": "Price sensitivity",
+              "valueType": "boolean",
+              "description": null
+            },
+            {
+              "key": "quality_signal",
+              "label": "Quality emphasis",
+              "valueType": "boolean",
+              "description": null
+            },
+            {
+              "key": "convenience_signal",
+              "label": "Convenience emphasis",
+              "valueType": "boolean",
+              "description": null
+            },
+            {
+              "key": "trust_signal",
+              "label": "Trust emphasis",
+              "valueType": "boolean",
+              "description": null
+            },
+            {
+              "key": "novelty_signal",
+              "label": "Novelty seeking",
+              "valueType": "boolean",
+              "description": null
+            },
+            {
+              "key": "fit_signal",
+              "label": "Needs fit emphasis",
+              "valueType": "boolean",
+              "description": null
+            }
+          ],
+          "status": "ready_for_llm",
+          "overall": {
+            "count": 2,
+            "samples": [
+              "As a retired researcher running small behavioral-economics experiments and lightweight web apps, the Developer plan hit…",
+              "As a premium-seeking student running small personal Python projects and a lightweight web app, the Developer plan deliv…"
+            ]
+          },
+          "buckets": [
+            {
+              "bucket": "fit",
+              "count": 2,
+              "samples": [
+                "As a retired researcher running small behavioral-economics experiments and lightweight web apps, the Developer plan hit…",
+                "As a premium-seeking student running small personal Python projects and a lightweight web app, the Developer plan deliv…"
+              ]
+            }
+          ],
+          "llmFingerprint": "167c99687c7e2d0239752c0c8ba1293ae2aee3a05f2f1a0a17dd70c7ef5812af"
+        }
+      ],
+      "relationships": [
+        {
+          "type": "text_by_primary_category",
+          "primaryFacetKey": "decision.primary.decision_outcome",
+          "textFacetKey": "decision.primary.reason",
+          "buckets": [
+            {
+              "category": "selected",
+              "count": 2,
+              "samples": [
+                "As a retired researcher running small behavioral-economics experiments and lightweight web apps, the Developer plan hits the only viable sweet spot. Beginner's restricted outbound Internet access kills any API or live-data work immediately — unacceptable. Custom is absurd overkill for a single person tinkering in retirement. Developer gives one real web app, 5,000 CPU-seconds/day, 5 GB disk, unrestricted Internet, and a 30-day money-back guarantee that fully satisfies my risk-averse temperament. $10/month is a negligible cost for a middle-income retiree who values novelty and wants a clean, hosted environment without the friction of self-managed infrastructure.",
+                "As a premium-seeking student running small personal Python projects and a lightweight web app, the Developer plan delivers exactly the right configuration: one web app with a custom domain, SSH access, full unrestricted outbound internet, 5,000 CPU-seconds per day, IPython/Jupyter notebook support, and 5GB of disk space — all at a fixed $10/month. The Beginner plan is disqualifying: restricted outbound internet breaks real experiments, only 100 CPU-seconds per day is insufficient, no SSH, and no scheduled tasks. The Custom plan is architectural overkill for a solo student with one project at a time. Developer hits the premium-but-practical sweet spot this persona demands."
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text_by_primary_category",
+          "primaryFacetKey": "decision.primary.decision_outcome",
+          "textFacetKey": "decision.primary.decision_subject_label",
+          "buckets": [
+            {
+              "category": "selected",
+              "count": 2,
+              "samples": [
+                "Developer"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text_by_primary_category",
+          "primaryFacetKey": "decision.primary.decision_outcome",
+          "textFacetKey": "decision.primary.task_price_text",
+          "buckets": [
+            {
+              "category": "selected",
+              "count": 2,
+              "samples": [
+                "$10/month"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "decision.process",
+      "label": "Decision process",
+      "contextType": "decision_process",
+      "summaryDirectives": [
+        {
+          "id": "decision_process.notes_by_style",
+          "title": "Comparison notes by exploration style",
+          "targetFacetKey": "comparison_notes",
+          "groupByFacetKey": "exploration_style",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ],
+      "judgeDirectives": [],
+      "facets": [
+        {
+          "key": "decision.process.exploration_style",
+          "facetKey": "exploration_style",
+          "contextKey": "decision.process",
+          "contextLabel": "Decision process",
+          "label": "Exploration style",
+          "kind": "categorical",
+          "role": "primary",
+          "group": "decision.process",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "categorical": {
+            "count": 2,
+            "distinctCount": 1,
+            "counts": [
+              {
+                "value": "compared_multiple",
+                "count": 2
+              }
+            ]
+          }
+        },
+        {
+          "key": "decision.process.comparison_notes",
+          "facetKey": "comparison_notes",
+          "contextKey": "decision.process",
+          "contextLabel": "Decision process",
+          "label": "Comparison notes",
+          "kind": "textual",
+          "role": "explanation",
+          "group": "decision.process",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "textual": {
+            "count": 2,
+            "uniqueCount": 1,
+            "samples": [
+              "The persona described a compared multiple comparison pattern before picking this plan."
+            ],
+            "summary": "All 2 available trials reported the same text: \"The persona described a compared multiple comparison pattern before picking this plan.\"",
+            "summaryType": "heuristic"
+          }
+        }
+      ],
+      "summaries": [
+        {
+          "id": "decision_process.notes_by_style",
+          "title": "Comparison notes by exploration style",
+          "targetFacetKey": "comparison_notes",
+          "groupByFacetKey": "exploration_style",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary",
+          "instruction": null,
+          "status": "ready_for_llm",
+          "overall": {
+            "count": 2,
+            "uniqueCount": 1,
+            "samples": [
+              "The persona described a compared multiple comparison pattern before picking this plan."
+            ],
+            "summary": "All 2 available trials reported the same text: \"The persona described a compared multiple comparison pattern before picking this plan.\"",
+            "summaryType": "heuristic"
+          },
+          "buckets": [
+            {
+              "bucket": "compared_multiple",
+              "count": 2,
+              "samples": [
+                "The persona described a compared multiple comparison pattern before picking this plan."
+              ],
+              "summary": "All 2 available trials reported the same text: \"The persona described a compared multiple comparison pattern before picking this plan.\"",
+              "summaryType": "heuristic"
+            }
+          ],
+          "llmFingerprint": "446e624e39adfd9b59d91309ecaaa8c3b51f1ad5116f92d9b753baee0e35dfec"
+        }
+      ],
+      "relationships": [
+        {
+          "type": "text_by_primary_category",
+          "primaryFacetKey": "decision.process.exploration_style",
+          "textFacetKey": "decision.process.comparison_notes",
+          "buckets": [
+            {
+              "category": "compared_multiple",
+              "count": 2,
+              "samples": [
+                "The persona described a compared multiple comparison pattern before picking this plan."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "task_outcome.primary",
+      "label": "Task outcome",
+      "contextType": "task_outcome",
+      "summaryDirectives": [
+        {
+          "id": "task_outcome.explanation_by_status",
+          "title": "Outcome explanation by status",
+          "targetFacetKey": "outcome_explanation",
+          "groupByFacetKey": "outcome_status",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ],
+      "judgeDirectives": [
+        {
+          "id": "task_outcome.web_failure_signal_scan",
+          "title": "Web failure signal scan",
+          "targetFacetKey": "outcome_explanation",
+          "groupByFacetKey": "primary_failure_reason",
+          "groupByMode": "categorical",
+          "judgeKind": "llm_signal_judge",
+          "prompt": "Read each outcome explanation and classify which reusable web-execution failure signals are explicitly present.",
+          "rubric": "Mark a signal true only when the explanation clearly states or strongly implies that signal.",
+          "signals": [
+            {
+              "key": "navigation_signal",
+              "label": "Navigation failure",
+              "valueType": "boolean"
+            },
+            {
+              "key": "search_signal",
+              "label": "Search or filter misuse",
+              "valueType": "boolean"
+            },
+            {
+              "key": "form_signal",
+              "label": "Form misunderstanding",
+              "valueType": "boolean"
+            },
+            {
+              "key": "live_site_signal",
+              "label": "Live-site brittleness",
+              "valueType": "boolean"
+            }
+          ]
+        }
+      ],
+      "facets": [
+        {
+          "key": "task_outcome.primary.outcome_status",
+          "facetKey": "outcome_status",
+          "contextKey": "task_outcome.primary",
+          "contextLabel": "Task outcome",
+          "label": "Outcome status",
+          "kind": "categorical",
+          "role": "primary",
+          "group": "task_outcome.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "categorical": {
+            "count": 2,
+            "distinctCount": 1,
+            "counts": [
+              {
+                "value": "passed",
+                "count": 2
+              }
+            ]
+          }
+        },
+        {
+          "key": "task_outcome.primary.goal_completion_ratio",
+          "facetKey": "goal_completion_ratio",
+          "contextKey": "task_outcome.primary",
+          "contextLabel": "Task outcome",
+          "label": "Goal completion ratio",
+          "kind": "numerical",
+          "role": "score",
+          "group": "task_outcome.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "numerical": {
+            "count": 2,
+            "min": 1.0,
+            "max": 1.0,
+            "avg": 1.0,
+            "std": 0.0
+          }
+        },
+        {
+          "key": "task_outcome.primary.goal_completion_bucket",
+          "facetKey": "goal_completion_bucket",
+          "contextKey": "task_outcome.primary",
+          "contextLabel": "Task outcome",
+          "label": "Goal completion bucket",
+          "kind": "categorical",
+          "role": "primary",
+          "group": "task_outcome.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "categorical": {
+            "count": 2,
+            "distinctCount": 1,
+            "counts": [
+              {
+                "value": "complete",
+                "count": 2
+              }
+            ]
+          }
+        },
+        {
+          "key": "task_outcome.primary.verifier_mode",
+          "facetKey": "verifier_mode",
+          "contextKey": "task_outcome.primary",
+          "contextLabel": "Task outcome",
+          "label": "Verifier mode",
+          "kind": "categorical",
+          "role": "evidence",
+          "group": "task_outcome.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "categorical": {
+            "count": 2,
+            "distinctCount": 1,
+            "counts": [
+              {
+                "value": "artifact_exact",
+                "count": 2
+              }
+            ]
+          }
+        },
+        {
+          "key": "task_outcome.primary.primary_failure_reason",
+          "facetKey": "primary_failure_reason",
+          "contextKey": "task_outcome.primary",
+          "contextLabel": "Task outcome",
+          "label": "Primary failure reason",
+          "kind": "categorical",
+          "role": "primary",
+          "group": "task_outcome.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "categorical": {
+            "count": 2,
+            "distinctCount": 1,
+            "counts": [
+              {
+                "value": "none",
+                "count": 2
+              }
+            ]
+          }
+        },
+        {
+          "key": "task_outcome.primary.outcome_explanation",
+          "facetKey": "outcome_explanation",
+          "contextKey": "task_outcome.primary",
+          "contextLabel": "Task outcome",
+          "label": "Outcome explanation",
+          "kind": "textual",
+          "role": "explanation",
+          "group": "task_outcome.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "textual": {
+            "count": 2,
+            "uniqueCount": 1,
+            "samples": [
+              "The persona completed the web task and saved a valid plan_choice.json artifact."
+            ],
+            "summary": "All 2 available trials reported the same text: \"The persona completed the web task and saved a valid plan_choice.json artifact.\"",
+            "summaryType": "heuristic"
+          }
+        },
+        {
+          "key": "task_outcome.primary.completion_evidence",
+          "facetKey": "completion_evidence",
+          "contextKey": "task_outcome.primary",
+          "contextLabel": "Task outcome",
+          "label": "Completion evidence",
+          "kind": "textual",
+          "role": "evidence",
+          "group": "task_outcome.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "textual": {
+            "count": 2,
+            "uniqueCount": 1,
+            "samples": [
+              "Saved plan_choice.json with decision subject Developer."
+            ],
+            "summary": "All 2 available trials reported the same text: \"Saved plan_choice.json with decision subject Developer.\"",
+            "summaryType": "heuristic"
+          }
+        }
+      ],
+      "summaries": [
+        {
+          "id": "task_outcome.explanation_by_status",
+          "title": "Outcome explanation by status",
+          "targetFacetKey": "outcome_explanation",
+          "groupByFacetKey": "outcome_status",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary",
+          "instruction": null,
+          "status": "ready_for_llm",
+          "overall": {
+            "count": 2,
+            "uniqueCount": 1,
+            "samples": [
+              "The persona completed the web task and saved a valid plan_choice.json artifact."
+            ],
+            "summary": "All 2 available trials reported the same text: \"The persona completed the web task and saved a valid plan_choice.json artifact.\"",
+            "summaryType": "heuristic"
+          },
+          "buckets": [
+            {
+              "bucket": "passed",
+              "count": 2,
+              "samples": [
+                "The persona completed the web task and saved a valid plan_choice.json artifact."
+              ],
+              "summary": "All 2 available trials reported the same text: \"The persona completed the web task and saved a valid plan_choice.json artifact.\"",
+              "summaryType": "heuristic"
+            }
+          ],
+          "llmFingerprint": "7bdb0f2553b193ecbe532ceef1412aeb53f592bdc7db991d2557763cd5c6c9c8"
+        }
+      ],
+      "judges": [
+        {
+          "id": "task_outcome.web_failure_signal_scan",
+          "title": "Web failure signal scan",
+          "targetFacetKey": "outcome_explanation",
+          "groupByFacetKey": "primary_failure_reason",
+          "groupByMode": "categorical",
+          "judgeKind": "llm_signal_judge",
+          "prompt": "Read each outcome explanation and classify which reusable web-execution failure signals are explicitly present.",
+          "rubric": "Mark a signal true only when the explanation clearly states or strongly implies that signal.",
+          "signals": [
+            {
+              "key": "navigation_signal",
+              "label": "Navigation failure",
+              "valueType": "boolean",
+              "description": null
+            },
+            {
+              "key": "search_signal",
+              "label": "Search or filter misuse",
+              "valueType": "boolean",
+              "description": null
+            },
+            {
+              "key": "form_signal",
+              "label": "Form misunderstanding",
+              "valueType": "boolean",
+              "description": null
+            },
+            {
+              "key": "live_site_signal",
+              "label": "Live-site brittleness",
+              "valueType": "boolean",
+              "description": null
+            }
+          ],
+          "status": "ready_for_llm",
+          "overall": {
+            "count": 2,
+            "samples": [
+              "The persona completed the web task and saved a valid plan_choice.json artifact."
+            ]
+          },
+          "buckets": [
+            {
+              "bucket": "none",
+              "count": 2,
+              "samples": [
+                "The persona completed the web task and saved a valid plan_choice.json artifact."
+              ]
+            }
+          ],
+          "llmFingerprint": "1c7405ec38867c9f7fae2dda8931a8a55c38fabe9a5f7f287912ef82df385a76"
+        }
+      ],
+      "relationships": [
+        {
+          "type": "text_by_primary_category",
+          "primaryFacetKey": "task_outcome.primary.outcome_status",
+          "textFacetKey": "task_outcome.primary.outcome_explanation",
+          "buckets": [
+            {
+              "category": "passed",
+              "count": 2,
+              "samples": [
+                "The persona completed the web task and saved a valid plan_choice.json artifact."
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text_by_primary_category",
+          "primaryFacetKey": "task_outcome.primary.outcome_status",
+          "textFacetKey": "task_outcome.primary.completion_evidence",
+          "buckets": [
+            {
+              "category": "passed",
+              "count": 2,
+              "samples": [
+                "Saved plan_choice.json with decision subject Developer."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "web_artifact.primary",
+      "label": "Web artifact",
+      "contextType": "web_artifact",
+      "summaryDirectives": [
+        {
+          "id": "web_artifact.evidence_by_status",
+          "title": "Web artifact evidence by status",
+          "targetFacetKey": "artifact_evidence",
+          "groupByFacetKey": "artifact_status",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ],
+      "judgeDirectives": [],
+      "facets": [
+        {
+          "key": "web_artifact.primary.artifact_type",
+          "facetKey": "artifact_type",
+          "contextKey": "web_artifact.primary",
+          "contextLabel": "Web artifact",
+          "label": "Artifact type",
+          "kind": "categorical",
+          "role": "primary",
+          "group": "web_artifact.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "categorical": {
+            "count": 2,
+            "distinctCount": 1,
+            "counts": [
+              {
+                "value": "task_submission",
+                "count": 2
+              }
+            ]
+          }
+        },
+        {
+          "key": "web_artifact.primary.artifact_status",
+          "facetKey": "artifact_status",
+          "contextKey": "web_artifact.primary",
+          "contextLabel": "Web artifact",
+          "label": "Artifact status",
+          "kind": "categorical",
+          "role": "primary",
+          "group": "web_artifact.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "categorical": {
+            "count": 2,
+            "distinctCount": 1,
+            "counts": [
+              {
+                "value": "correct",
+                "count": 2
+              }
+            ]
+          }
+        },
+        {
+          "key": "web_artifact.primary.artifact_subject_label",
+          "facetKey": "artifact_subject_label",
+          "contextKey": "web_artifact.primary",
+          "contextLabel": "Web artifact",
+          "label": "Artifact subject label",
+          "kind": "textual",
+          "role": "evidence",
+          "group": "web_artifact.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "textual": {
+            "count": 2,
+            "uniqueCount": 1,
+            "samples": [
+              "Developer"
+            ],
+            "summary": "All 2 available trials reported the same text: \"Developer\"",
+            "summaryType": "heuristic"
+          }
+        },
+        {
+          "key": "web_artifact.primary.artifact_subject_id",
+          "facetKey": "artifact_subject_id",
+          "contextKey": "web_artifact.primary",
+          "contextLabel": "Web artifact",
+          "label": "Artifact subject id",
+          "kind": "categorical",
+          "role": "evidence",
+          "group": "web_artifact.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "categorical": {
+            "count": 2,
+            "distinctCount": 1,
+            "counts": [
+              {
+                "value": "developer",
+                "count": 2
+              }
+            ]
+          }
+        },
+        {
+          "key": "web_artifact.primary.artifact_evidence",
+          "facetKey": "artifact_evidence",
+          "contextKey": "web_artifact.primary",
+          "contextLabel": "Web artifact",
+          "label": "Artifact evidence",
+          "kind": "textual",
+          "role": "explanation",
+          "group": "web_artifact.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "textual": {
+            "count": 2,
+            "uniqueCount": 1,
+            "samples": [
+              "The submission artifact plan_choice.json matches the persona decision."
+            ],
+            "summary": "All 2 available trials reported the same text: \"The submission artifact plan_choice.json matches the persona decision.\"",
+            "summaryType": "heuristic"
+          }
+        }
+      ],
+      "summaries": [
+        {
+          "id": "web_artifact.evidence_by_status",
+          "title": "Web artifact evidence by status",
+          "targetFacetKey": "artifact_evidence",
+          "groupByFacetKey": "artifact_status",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary",
+          "instruction": null,
+          "status": "ready_for_llm",
+          "overall": {
+            "count": 2,
+            "uniqueCount": 1,
+            "samples": [
+              "The submission artifact plan_choice.json matches the persona decision."
+            ],
+            "summary": "All 2 available trials reported the same text: \"The submission artifact plan_choice.json matches the persona decision.\"",
+            "summaryType": "heuristic"
+          },
+          "buckets": [
+            {
+              "bucket": "correct",
+              "count": 2,
+              "samples": [
+                "The submission artifact plan_choice.json matches the persona decision."
+              ],
+              "summary": "All 2 available trials reported the same text: \"The submission artifact plan_choice.json matches the persona decision.\"",
+              "summaryType": "heuristic"
+            }
+          ],
+          "llmFingerprint": "81b428a5574d72153813d3cd8ad74e29662931c709ba857ed64446f384e4a0d1"
+        }
+      ],
+      "relationships": [
+        {
+          "type": "text_by_primary_category",
+          "primaryFacetKey": "web_artifact.primary.artifact_type",
+          "textFacetKey": "web_artifact.primary.artifact_subject_label",
+          "buckets": [
+            {
+              "category": "task_submission",
+              "count": 2,
+              "samples": [
+                "Developer"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text_by_primary_category",
+          "primaryFacetKey": "web_artifact.primary.artifact_type",
+          "textFacetKey": "web_artifact.primary.artifact_evidence",
+          "buckets": [
+            {
+              "category": "task_submission",
+              "count": 2,
+              "samples": [
+                "The submission artifact plan_choice.json matches the persona decision."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "web_interaction.primary",
+      "label": "Web interaction",
+      "contextType": "web_interaction",
+      "summaryDirectives": [
+        {
+          "id": "web_interaction.notes_by_path_type",
+          "title": "Web interaction notes by path type",
+          "targetFacetKey": "web_interaction_notes",
+          "groupByFacetKey": "navigation_path_type",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ],
+      "judgeDirectives": [],
+      "facets": [
+        {
+          "key": "web_interaction.primary.navigation_path_type",
+          "facetKey": "navigation_path_type",
+          "contextKey": "web_interaction.primary",
+          "contextLabel": "Web interaction",
+          "label": "Navigation path type",
+          "kind": "categorical",
+          "role": "primary",
+          "group": "web_interaction.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "categorical": {
+            "count": 2,
+            "distinctCount": 1,
+            "counts": [
+              {
+                "value": "browse_compare",
+                "count": 2
+              }
+            ]
+          }
+        },
+        {
+          "key": "web_interaction.primary.web_interaction_notes",
+          "facetKey": "web_interaction_notes",
+          "contextKey": "web_interaction.primary",
+          "contextLabel": "Web interaction",
+          "label": "Web interaction notes",
+          "kind": "textual",
+          "role": "explanation",
+          "group": "web_interaction.primary",
+          "description": null,
+          "unit": null,
+          "higherIsBetter": null,
+          "categories": null,
+          "order": null,
+          "presentCount": 2,
+          "missingCount": 0,
+          "textual": {
+            "count": 2,
+            "uniqueCount": 1,
+            "samples": [
+              "The persona used a compared multiple browsing pattern before submitting."
+            ],
+            "summary": "All 2 available trials reported the same text: \"The persona used a compared multiple browsing pattern before submitting.\"",
+            "summaryType": "heuristic"
+          }
+        }
+      ],
+      "summaries": [
+        {
+          "id": "web_interaction.notes_by_path_type",
+          "title": "Web interaction notes by path type",
+          "targetFacetKey": "web_interaction_notes",
+          "groupByFacetKey": "navigation_path_type",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary",
+          "instruction": null,
+          "status": "ready_for_llm",
+          "overall": {
+            "count": 2,
+            "uniqueCount": 1,
+            "samples": [
+              "The persona used a compared multiple browsing pattern before submitting."
+            ],
+            "summary": "All 2 available trials reported the same text: \"The persona used a compared multiple browsing pattern before submitting.\"",
+            "summaryType": "heuristic"
+          },
+          "buckets": [
+            {
+              "bucket": "browse_compare",
+              "count": 2,
+              "samples": [
+                "The persona used a compared multiple browsing pattern before submitting."
+              ],
+              "summary": "All 2 available trials reported the same text: \"The persona used a compared multiple browsing pattern before submitting.\"",
+              "summaryType": "heuristic"
+            }
+          ],
+          "llmFingerprint": "39eb949517587a8f2e949bb507ee03560735a7a30381ee6b3ea47717a015a677"
+        }
+      ],
+      "relationships": [
+        {
+          "type": "text_by_primary_category",
+          "primaryFacetKey": "web_interaction.primary.navigation_path_type",
+          "textFacetKey": "web_interaction.primary.web_interaction_notes",
+          "buckets": [
+            {
+              "category": "browse_compare",
+              "count": 2,
+              "samples": [
+                "The persona used a compared multiple browsing pattern before submitting."
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "reporting": {
+    "status": "ready",
+    "llmEnabled": false,
+    "model": "openai/gpt-4o-mini",
+    "totalUnits": 8,
+    "summaryUnits": 6,
+    "judgeUnits": 2,
+    "readyUnits": 8,
+    "completedUnits": 0,
+    "failedUnits": 0,
+    "updatedAt": "2026-07-05T01:05:48Z"
+  }
+}

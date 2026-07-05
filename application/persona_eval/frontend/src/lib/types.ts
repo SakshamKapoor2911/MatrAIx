@@ -880,7 +880,7 @@ export const HARBOR_TASK_PATHS = {
   chatbot: "application/tasks/recommender-agent_chat_api",
   survey: "application/tasks/persona-survey",
   web: "application/tasks/example-web-playwright_books-interest",
-  cuaLinux: "application/tasks/example-computer-use-linux_notification-preferences",
+  cuaLinux: "application/tasks/example-computer-use-linux_note-to-csv",
   cuaWeb: "application/tasks/example-web-cua_books-interest",
 } as const;
 

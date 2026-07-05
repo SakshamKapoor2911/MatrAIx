@@ -129,7 +129,7 @@ def test_build_application_job_config_macos_cua_uses_use_computer(tmp_path: Path
     job = build_application_job_config(
         {
             "name": "macos-cua",
-            "task": "application/tasks/example-computer-use-macos_notification-preferences",
+            "task": "application/tasks/example-computer-use-macos_calendar-reminder-handoff",
             "persona_pool": "persona/datasets/bench-dev-sample",
             "persona_ids": ["0001"],
             "execution_mode": "auto",

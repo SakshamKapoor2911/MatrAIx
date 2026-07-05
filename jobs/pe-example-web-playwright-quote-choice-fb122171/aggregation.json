@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "artifactType": "job_aggregation",
-  "generatedAt": "2026-07-04T20:23:31Z",
+  "generatedAt": "2026-07-05T01:05:48Z",
   "coverage": {
     "trialCount": 1,
     "completedTrials": 1,
@@ -254,7 +254,7 @@
           "groupByFacetKey": "basis_primary",
           "groupByMode": "categorical",
           "judgeKind": "llm_signal_judge",
-          "prompt": "Read the persona's reason and mark which reusable decision signals are explicitly present.",
+          "prompt": "Read the persona's reason and classify which reusable decision signals are explicitly present.",
           "rubric": "Mark a signal true only when the reason clearly states or strongly implies that signal.",
           "signals": [
             {
@@ -523,7 +523,7 @@
           "groupByFacetKey": "basis_primary",
           "groupByMode": "categorical",
           "judgeKind": "llm_signal_judge",
-          "prompt": "Read the persona's reason and mark which reusable decision signals are explicitly present.",
+          "prompt": "Read the persona's reason and classify which reusable decision signals are explicitly present.",
           "rubric": "Mark a signal true only when the reason clearly states or strongly implies that signal.",
           "signals": [
             {
@@ -579,7 +579,7 @@
               ]
             }
           ],
-          "llmFingerprint": "285769f7c71f83c42ba5e6bdcca38a210f3c687bcc375ef72f1146f47808d8c6"
+          "llmFingerprint": "fc128e8983b710f49f5bc79c33bd1c8190495aa340f540c44fe2daae40355017"
         }
       ],
       "relationships": [
@@ -631,7 +631,16 @@
       "key": "decision.process",
       "label": "Decision process",
       "contextType": "decision_process",
-      "summaryDirectives": [],
+      "summaryDirectives": [
+        {
+          "id": "decision_process.notes_by_style",
+          "title": "Comparison notes by exploration style",
+          "targetFacetKey": "comparison_notes",
+          "groupByFacetKey": "exploration_style",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ],
       "judgeDirectives": [],
       "facets": [
         {
@@ -688,6 +697,39 @@
           }
         }
       ],
+      "summaries": [
+        {
+          "id": "decision_process.notes_by_style",
+          "title": "Comparison notes by exploration style",
+          "targetFacetKey": "comparison_notes",
+          "groupByFacetKey": "exploration_style",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary",
+          "instruction": null,
+          "status": "ready_for_llm",
+          "overall": {
+            "count": 1,
+            "uniqueCount": 1,
+            "samples": [
+              "The persona described a compared multiple browsing pattern before picking this quote."
+            ],
+            "summary": "All 1 available trials reported the same text: \"The persona described a compared multiple browsing pattern before picking this quote.\"",
+            "summaryType": "heuristic"
+          },
+          "buckets": [
+            {
+              "bucket": "compared_multiple",
+              "count": 1,
+              "samples": [
+                "The persona described a compared multiple browsing pattern before picking this quote."
+              ],
+              "summary": "All 1 available trials reported the same text: \"The persona described a compared multiple browsing pattern before picking this quote.\"",
+              "summaryType": "heuristic"
+            }
+          ],
+          "llmFingerprint": "5f2317779aed6cbf803c4df141df42d9995782c6646ab531e4cbd112f6025af6"
+        }
+      ],
       "relationships": [
         {
           "type": "text_by_primary_category",
@@ -710,12 +752,12 @@
     "status": "ready",
     "llmEnabled": false,
     "model": "openai/gpt-4o-mini",
-    "totalUnits": 3,
-    "summaryUnits": 2,
+    "totalUnits": 4,
+    "summaryUnits": 3,
     "judgeUnits": 1,
-    "readyUnits": 3,
+    "readyUnits": 4,
     "completedUnits": 0,
     "failedUnits": 0,
-    "updatedAt": "2026-07-04T20:23:31Z"
+    "updatedAt": "2026-07-05T01:05:48Z"
   }
 }

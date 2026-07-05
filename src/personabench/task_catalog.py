@@ -138,7 +138,7 @@ APPLICATION_TASK_METADATA: dict[str, dict[str, object]] = {
             "desktop browser choice",
         ],
     },
-    "example-computer-use-macos_notification-preferences": {
+    "example-computer-use-macos_calendar-reminder-handoff": {
         "type": "os-app",
         "domain": DOMAIN_SOFTWARE,
         "tags": [
@@ -148,7 +148,7 @@ APPLICATION_TASK_METADATA: dict[str, dict[str, object]] = {
             "desktop productivity",
         ],
     },
-    "example-computer-use-ios_notification-preferences": {
+    "example-computer-use-ios_photo-access-review": {
         "type": "os-app",
         "domain": DOMAIN_SOFTWARE,
         "tags": [
@@ -158,7 +158,7 @@ APPLICATION_TASK_METADATA: dict[str, dict[str, object]] = {
             "system settings",
         ],
     },
-    "example-computer-use-linux_notification-preferences": {
+    "example-computer-use-linux_note-to-csv": {
         "type": "os-app",
         "domain": DOMAIN_SOFTWARE,
         "tags": [

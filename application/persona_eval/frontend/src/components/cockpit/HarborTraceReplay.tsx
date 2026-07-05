@@ -77,19 +77,19 @@ export function HarborTraceReplay({
 
   useEffect(() => {
     if (!isPlaying) return;
-    if (scrubIndex >= events.length - 1) {
-      setIsPlaying(false);
-      return;
-    }
     const id = window.setInterval(() => {
       setScrubIndex((prev) => {
-        const next = Math.min(prev + 1, events.length - 1);
+        if (prev >= events.length - 1) {
+          setIsPlaying(false);
+          return prev;
+        }
+        const next = prev + 1;
         if (next >= events.length - 1) setIsPlaying(false);
         return next;
       });
     }, 1200);
     return () => window.clearInterval(id);
-  }, [isPlaying, scrubIndex, events]);
+  }, [isPlaying, events.length]);
 
   useEffect(() => {
     setScrubIndex((prev) => Math.min(prev, Math.max(0, events.length - 1)));
@@ -182,6 +182,10 @@ function TraceHeroScreenshot({
   const [imgError, setImgError] = useState(false);
   const showImage = Boolean(event.screenshotUrl) && !imgError;
 
+  useEffect(() => {
+    setImgError(false);
+  }, [event.step, event.screenshotUrl]);
+
   return (
     <div className="overflow-hidden rounded-md border border-outline bg-surface-low">
       {showImage ? (
@@ -258,6 +262,10 @@ function TraceTile({
   const [imgError, setImgError] = useState(false);
   const hint = summarizeAction(event);
   const showImage = Boolean(event.screenshotUrl) && !imgError;
+
+  useEffect(() => {
+    setImgError(false);
+  }, [event.step, event.screenshotUrl]);
 
   return (
     <button

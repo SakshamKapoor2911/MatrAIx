@@ -1,0 +1,151 @@
+{
+  "schemaVersion": "1.0",
+  "artifactType": "personabench.trial_evaluation",
+  "taskType": "chatbot",
+  "presenceCheck": {
+    "passed": true,
+    "requiredArtifacts": [
+      "transcript.json"
+    ],
+    "missingArtifacts": []
+  },
+  "sourceArtifacts": {
+    "transcript": "/private/var/folders/9d/g1kf84k52dz538sqv8w4pnj40000gn/T/pytest-of-jianhenghou/pytest-246/test_recommender_chat_verifier0/output/transcript.json",
+    "userFeedback": "/private/var/folders/9d/g1kf84k52dz538sqv8w4pnj40000gn/T/pytest-of-jianhenghou/pytest-246/test_recommender_chat_verifier0/output/user_feedback.json"
+  },
+  "contexts": [
+    {
+      "key": "task_outcome.primary",
+      "label": "Task outcome",
+      "contextType": "task_outcome",
+      "facets": [
+        {
+          "key": "outcome_status",
+          "label": "Outcome status",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "partially_resolved"
+        },
+        {
+          "key": "resolution_basis",
+          "label": "Resolution basis",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "user_feedback"
+        },
+        {
+          "key": "outcome_reason",
+          "label": "Outcome reason",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "The recommendation fit the quiet drama request."
+        },
+        {
+          "key": "next_step_owner",
+          "label": "Next step owner",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "user"
+        },
+        {
+          "key": "task_goal_label",
+          "label": "Task goal",
+          "role": "evidence",
+          "kind": "textual",
+          "value": "Find a recommendation that satisfies the persona's need and preferences"
+        }
+      ]
+    },
+    {
+      "key": "conversation_summary.primary",
+      "label": "Conversation summary",
+      "contextType": "conversation_summary",
+      "facets": [
+        {
+          "key": "conversation_path",
+          "label": "Conversation path",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "clarify_then_partial"
+        },
+        {
+          "key": "process_notes",
+          "label": "Process notes",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "The assistant asked clarification questions before making a recommendation, and the final outcome is grounded in the persona's post-chat feedback."
+        },
+        {
+          "key": "user_turn_count",
+          "label": "User turn count",
+          "role": "score",
+          "kind": "numerical",
+          "value": 3
+        },
+        {
+          "key": "assistant_turn_count",
+          "label": "Assistant turn count",
+          "role": "score",
+          "kind": "numerical",
+          "value": 3
+        },
+        {
+          "key": "message_count",
+          "label": "Message count",
+          "role": "score",
+          "kind": "numerical",
+          "value": 6
+        },
+        {
+          "key": "clarification_question_count",
+          "label": "Clarification question count",
+          "role": "score",
+          "kind": "numerical",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "key": "user_feedback.primary",
+      "label": "User feedback",
+      "contextType": "user_feedback",
+      "facets": [
+        {
+          "key": "overall_experience_rating",
+          "label": "Overall experience rating",
+          "role": "score",
+          "kind": "numerical",
+          "value": 8
+        },
+        {
+          "key": "clarification_questions_useful",
+          "label": "Clarification questions useful",
+          "role": "primary",
+          "kind": "categorical",
+          "value": "true"
+        },
+        {
+          "key": "feedback_reason",
+          "label": "Feedback reason",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "The recommendation fit the quiet drama request."
+        },
+        {
+          "key": "need_constraint_satisfaction",
+          "label": "Need/constraint satisfaction",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "yes"
+        },
+        {
+          "key": "personal_preference_satisfaction",
+          "label": "Preference satisfaction",
+          "role": "evidence",
+          "kind": "categorical",
+          "value": "partially"
+        }
+      ]
+    }
+  ]
+}

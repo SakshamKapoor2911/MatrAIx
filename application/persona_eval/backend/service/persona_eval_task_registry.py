@@ -37,19 +37,19 @@ def resolve_task_kind(folder_name: str, entry: PersonaEvalTaskEntry) -> str:
 # folder name → PersonaEval routing. Keys are repo paths under application/tasks/.
 PERSONA_EVAL_TASK_INDEX: Dict[str, PersonaEvalTaskEntry] = {
     # OS app (computer-use)
-    "example-computer-use-linux_notification-preferences": PersonaEvalTaskEntry(
+    "example-computer-use-linux_note-to-csv": PersonaEvalTaskEntry(
         application_type="os-app",
         os_app_backend="docker",
         os_app_platform="linux",
         environment_label="Docker Xvfb · persona-computer-1",
     ),
-    "example-computer-use-macos_notification-preferences": PersonaEvalTaskEntry(
+    "example-computer-use-macos_calendar-reminder-handoff": PersonaEvalTaskEntry(
         application_type="os-app",
         os_app_backend="macos",
         os_app_platform="macos",
         environment_label="use.computer · persona-computer-1",
     ),
-    "example-computer-use-ios_notification-preferences": PersonaEvalTaskEntry(
+    "example-computer-use-ios_photo-access-review": PersonaEvalTaskEntry(
         application_type="os-app",
         os_app_backend="ios",
         os_app_platform="ios",

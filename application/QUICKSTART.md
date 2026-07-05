@@ -103,8 +103,7 @@ export ANTHROPIC_API_KEY="sk-ant-..."   # replace with your key
 To keep it across terminal sessions, add the same line to `~/.zshrc` or
 `~/.bashrc`, then open a new terminal.
 
-Other agents and keys: [choosing-an-agent.md](choosing-an-agent.md) and
-[`.env.example`](../.env.example).
+Other agents and keys: [choosing-an-agent.md](choosing-an-agent.md).
 
 ---
 
@@ -414,7 +413,7 @@ cp -R application/tasks/example-chat-mcp_support_chatbot application/tasks/<your
 cp -R application/tasks/example-web-playwright_quote-choice application/tasks/<your-task-name>
 
 # computer-use (macOS / iOS / Linux — copy the matching example)
-cp -R application/tasks/example-computer-use-macos_notification-preferences application/tasks/<your-task-name>
+cp -R application/tasks/example-computer-use-macos_calendar-reminder-handoff application/tasks/<your-task-name>
 ```
 
 ### 4. Edit the task

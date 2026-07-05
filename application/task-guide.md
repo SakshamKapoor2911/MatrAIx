@@ -131,7 +131,7 @@ See [tasks/README.md](tasks/README.md) and the task specs under
 | web (browser-use) | `application/tasks/example-web-browser-use_laptop-choice/` |
 | web (Cocoa) | `application/tasks/example-web-cocoa_plan-choice/` |
 | web (CUA) | `application/tasks/example-web-cua_bookshop-choice/` |
-| computer-use | `application/tasks/example-computer-use-macos_notification-preferences/` (macOS / iOS / Linux) |
+| computer-use | `application/tasks/example-computer-use-macos_calendar-reminder-handoff/` (macOS / iOS / Linux) |
 
 Agent choice depends on the form — [choosing-an-agent.md](choosing-an-agent.md).
 Web stack details — [web-interaction.md](web-interaction.md).
@@ -148,9 +148,9 @@ Web stack details — [web-interaction.md](web-interaction.md).
 | web (browser-use) | `application/tasks/example-web-browser-use_laptop-choice/` | `persona-browser-use` |
 | web (Cocoa) | `application/tasks/example-web-cocoa_plan-choice/` | `persona-cocoa` |
 | web (CUA) | `application/tasks/example-web-cua_bookshop-choice/` | `persona-computer-1` (Docker Linux) |
-| computer-use (macOS) | `application/tasks/example-computer-use-macos_notification-preferences/` | `persona-computer-1` |
-| computer-use (iOS) | `application/tasks/example-computer-use-ios_notification-preferences/` | `persona-computer-1` |
-| computer-use (Linux) | `application/tasks/example-computer-use-linux_notification-preferences/` | `persona-computer-1` |
+| computer-use (macOS) | `application/tasks/example-computer-use-macos_calendar-reminder-handoff/` | `persona-computer-1` |
+| computer-use (iOS) | `application/tasks/example-computer-use-ios_photo-access-review/` | `persona-computer-1` |
+| computer-use (Linux) | `application/tasks/example-computer-use-linux_note-to-csv/` | `persona-computer-1` |
 
 Real application survey tasks (`survey_*`) follow the same layout as the reference
 example; only **`example-survey_product-feedback`** is the copy-from reference.

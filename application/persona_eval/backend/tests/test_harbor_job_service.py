@@ -415,7 +415,7 @@ def test_launch_ios_cua_uses_use_computer_environment(tmp_path, monkeypatch):
         "persona_id: '0020'\nversion: '1.0'\nsource: OASIS\ndimensions: {}\n",
         encoding="utf-8",
     )
-    task_dir = repo / "application" / "tasks" / "example-computer-use-ios_notification-preferences"
+    task_dir = repo / "application" / "tasks" / "example-computer-use-ios_photo-access-review"
     task_dir.mkdir(parents=True)
     (task_dir / "task.toml").write_text("metadata:\n  type: mobile\n", encoding="utf-8")
 
@@ -435,7 +435,7 @@ def test_launch_ios_cua_uses_use_computer_environment(tmp_path, monkeypatch):
     )
 
     job_name = service.launch(
-        task_path="application/tasks/example-computer-use-ios_notification-preferences",
+        task_path="application/tasks/example-computer-use-ios_photo-access-review",
         persona_ids=["0020"],
         persona_model="anthropic/claude-sonnet-4-6",
         cua_backend="ios",

@@ -236,7 +236,7 @@ API tables in `input/protocol.md` (chatbot) rather than in `instruction.md`.
 | Survey | `survey/` | `application/tasks/example-survey_product-feedback` |
 | Chatbot | `chatbot/` | `application/tasks/recommender-agent_chat_api` |
 | Browser / computer-use | `web/` | `application/tasks/example-web-playwright_quote-choice` |
-| OS / app | `os-app/` | `application/tasks/example-computer-use-ios_notification-preferences` |
+| OS / app | `os-app/` | `application/tasks/example-computer-use-ios_photo-access-review` |
 
 For browser, computer-use, and native app tasks, use the folders this way:
 

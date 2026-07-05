@@ -25,7 +25,7 @@ Default smoke persona: **`persona_0042`** in `persona/datasets/bench-dev-sample/
 | `persona-openhands-sdk` | web | Python Playwright in the terminal (DOM selectors); fast, CI-friendly | [quote-choice-playwright](tasks/example-web-playwright_quote-choice) |
 | `persona-browser-use` | web | browser-use agent loop over Chromium | [laptop-choice-browser-use](tasks/example-web-browser-use_laptop-choice) |
 | `persona-cocoa` | web | browser + shell + files in one container | [plan-choice-cocoa](tasks/example-web-cocoa_plan-choice) |
-| `persona-computer-1` | web<br>computer-use | Screenshot CUA; auto-routes to use.computer (macOS/iOS) or Docker Linux | **computer-use:** [macos-notification-preferences](tasks/example-computer-use-macos_notification-preferences)<br>[ios-notification-preferences](tasks/example-computer-use-ios_notification-preferences)<br>[linux-notification-preferences](tasks/example-computer-use-linux_notification-preferences)<br>**web:** [bookshop-choice-cua](tasks/example-web-cua_bookshop-choice) |
+| `persona-computer-1` | web<br>computer-use | Screenshot CUA; auto-routes to use.computer (macOS/iOS) or Docker Linux | **computer-use:** [macos-calendar-reminder-handoff](tasks/example-computer-use-macos_calendar-reminder-handoff)<br>[ios-photo-access-review](tasks/example-computer-use-ios_photo-access-review)<br>[linux-note-to-csv](tasks/example-computer-use-linux_note-to-csv)<br>**web:** [bookshop-choice-cua](tasks/example-web-cua_bookshop-choice) |
 
 Live-web details: [web-interaction.md](web-interaction.md).
 
@@ -78,7 +78,7 @@ export LLM_API_KEY="$ANTHROPIC_API_KEY"
 export USE_COMPUTER_API_KEY=...  # persona-computer-1 on use.computer (macOS/iOS)
 ```
 
-Variable names per agent: see [`.env.example`](../.env.example).
+Variable names per agent: see the export blocks in [choosing-an-agent.md](choosing-an-agent.md).
 
 ## Examples
 

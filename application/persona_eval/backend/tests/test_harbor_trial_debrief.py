@@ -523,14 +523,14 @@ def test_map_trial_debrief_chatbot_from_events_when_artifacts_missing(tmp_path: 
 
 def test_map_trial_debrief_ios_cua_tmp_artifacts(tmp_path: Path) -> None:
     repo = tmp_path
-    task_dir = repo / "application" / "tasks" / "example-computer-use-ios_notification-preferences"
+    task_dir = repo / "application" / "tasks" / "example-computer-use-ios_photo-access-review"
     task_dir.mkdir(parents=True)
     (task_dir / "task.toml").write_text(
         '[metadata]\ntype = "os-app"\n',
         encoding="utf-8",
     )
     trial_dir = repo / "jobs" / "job-ios" / "trial-0"
-    output = trial_dir / "artifacts" / "tmp" / "personabench-ios-notification-preferences"
+    output = trial_dir / "artifacts" / "tmp" / "personabench-ios-photo-access-review"
     output.mkdir(parents=True)
     (output / "decision.json").write_text(
         json.dumps({"keep_notifications_on": True, "app_reviewed": "Calendar"}),
@@ -544,7 +544,7 @@ def test_map_trial_debrief_ios_cua_tmp_artifacts(tmp_path: Path) -> None:
     verifier_dir.mkdir(parents=True)
     (verifier_dir / "reward.txt").write_text("1\n", encoding="utf-8")
     (trial_dir / "config.json").write_text(
-        json.dumps({"task": {"path": "application/tasks/example-computer-use-ios_notification-preferences"}}),
+        json.dumps({"task": {"path": "application/tasks/example-computer-use-ios_photo-access-review"}}),
         encoding="utf-8",
     )
     (trial_dir / "result.json").write_text(

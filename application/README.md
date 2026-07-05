@@ -9,10 +9,9 @@
 with a persona, scale to a batch, play tasks in the **PersonaEval Cockpit**, create
 a new task. Written for contributors who are not full-time engineers.
 
-This directory is the upgraded home of the MatrAIx
-[`docs/applications`](https://github.com/JianhengHou/MatrAIx/tree/dev/harbor-based-work/docs/applications)
-guides, adapted to the PersonaBench layout (shared runtimes, **Mode → auto**,
-`bench-dev-sample` personas, PersonaEval Cockpit).
+This directory is the PersonaBench home for **persona-affiliated product simulation
+scenarios**, adapted from the MatrAIx application guides (shared runtimes,
+**Mode → auto**, `bench-dev-sample` personas, PersonaEval Cockpit).
 
 ## Guides
 

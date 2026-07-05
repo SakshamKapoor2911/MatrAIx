@@ -11,18 +11,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
-_PERSONA_EVAL_CORE = REPO_ROOT / "packages" / "persona-eval" / "src"
-_PERSONA_EVAL_BACKEND = REPO_ROOT / "application" / "persona_eval"
+from _repo_imports import REPO_ROOT, ensure_application_script_imports
 
-
-def _ensure_repo_import_paths() -> None:
-    for path in (str(REPO_ROOT), str(_PERSONA_EVAL_CORE), str(_PERSONA_EVAL_BACKEND)):
-        if path not in sys.path:
-            sys.path.insert(0, path)
-
-
-_ensure_repo_import_paths()
+ensure_application_script_imports()
 
 from backend.service.job_aggregation import (  # noqa: E402
     DEFAULT_REPORTING_LLM_MODEL,

@@ -117,7 +117,7 @@ def test_maybe_write_trial_user_feedback_for_os_app(monkeypatch, tmp_path):
     repo = tmp_path
     _write_task(
         repo,
-        "application/tasks/example-computer-use-ios_notification-preferences",
+        "application/tasks/example-computer-use-ios_photo-access-review",
         metadata_type="mobile",
         schema_text="""
 artifactName: user_feedback.json
@@ -132,7 +132,7 @@ fields:
     )
     trial_dir, output_dir = _write_trial(
         repo,
-        task_path="application/tasks/example-computer-use-ios_notification-preferences",
+        task_path="application/tasks/example-computer-use-ios_photo-access-review",
     )
     (output_dir / "decision.json").write_text(
         json.dumps({"allowPhotos": False, "reason": "Too much access requested."}),

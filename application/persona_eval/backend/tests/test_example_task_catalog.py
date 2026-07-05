@@ -22,7 +22,7 @@ def test_categorize_task():
     assert categorize_task("survey_nike-air-max-dn", "survey") == "survey"
     assert categorize_task("example-web-playwright_quote-choice", "web") == "web"
     assert categorize_task("example-web-cua_bookshop-choice", "web") == "web"
-    assert categorize_task("example-computer-use-linux_notification-preferences", "os-app") == "os-app"
+    assert categorize_task("example-computer-use-linux_note-to-csv", "os-app") == "os-app"
 
 
 def test_list_survey_harbor_tasks_includes_product_feedback():
@@ -52,5 +52,5 @@ def test_list_web_eval_tasks_includes_example_web_tasks():
 def test_list_os_app_eval_tasks_includes_computer_use_only():
     tasks = list_os_app_eval_tasks()
     ids = {task.id for task in tasks}
-    assert "computer-use-linux-notification-preferences" in ids
+    assert "computer-use-linux-note-to-csv" in ids
     assert "web-cua-bookshop-choice" not in ids

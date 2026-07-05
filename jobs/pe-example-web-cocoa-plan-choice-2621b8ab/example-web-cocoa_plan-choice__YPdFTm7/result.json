@@ -1,0 +1,135 @@
+{
+    "id": "c7e58ecd-40d3-4a63-bd66-e96794fdd55c",
+    "task_name": "personabench/application-web-cocoa-plan-choice",
+    "trial_name": "example-web-cocoa_plan-choice__YPdFTm7",
+    "trial_uri": "file:///Users/jianhenghou/HJH/GitHub_Repo/MatrAIx-work-latest/jobs/pe-example-web-cocoa-plan-choice-2621b8ab/example-web-cocoa_plan-choice__YPdFTm7",
+    "task_id": {
+        "path": "application/tasks/example-web-cocoa_plan-choice"
+    },
+    "source": null,
+    "task_checksum": "489752994bfedad87e16f0c8d891c3e36e04500a38e5197b96c66343f93f3967",
+    "config": {
+        "task": {
+            "path": "application/tasks/example-web-cocoa_plan-choice",
+            "git_url": null,
+            "git_commit_id": null,
+            "name": null,
+            "ref": null,
+            "overwrite": false,
+            "download_dir": null,
+            "source": null
+        },
+        "trial_name": "example-web-cocoa_plan-choice__YPdFTm7",
+        "trials_dir": "jobs/pe-example-web-cocoa-plan-choice-2621b8ab",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": "persona-cocoa",
+            "import_path": null,
+            "model_name": "anthropic/claude-sonnet-4-6",
+            "skills": [],
+            "override_timeout_sec": null,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "extra_allowed_hosts": [],
+            "kwargs": {
+                "persona_path": "persona/datasets/bench-dev-sample/persona_0190.yaml"
+            },
+            "env": {},
+            "mcp_servers": []
+        },
+        "environment": {
+            "type": "docker",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "cpu_enforcement_policy": "auto",
+            "memory_enforcement_policy": "auto",
+            "override_cpus": null,
+            "override_memory_mb": null,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "override_tpu": null,
+            "mounts": null,
+            "extra_docker_compose": [],
+            "env": {},
+            "kwargs": {},
+            "extra_allowed_hosts": []
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "env": {},
+            "disable": false
+        },
+        "artifacts": [],
+        "extra_instruction_paths": [],
+        "job_id": "987f9db4-c797-4213-9454-18ada1f7a5a2"
+    },
+    "agent_info": {
+        "name": "persona-cocoa",
+        "version": "unknown",
+        "model_info": {
+            "name": "claude-sonnet-4-6",
+            "provider": "anthropic"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 114220,
+        "n_cache_tokens": 114196,
+        "n_output_tokens": 3395,
+        "cost_usd": 0.144413,
+        "rollout_details": null,
+        "metadata": {
+            "cocoa": {
+                "final_result": "Task completed",
+                "is_done": true,
+                "is_successful": true,
+                "urls": [
+                    "https://www.pythonanywhere.com/pricing/"
+                ],
+                "action_names": [
+                    "browser_navigate",
+                    "dom_scroll",
+                    "shell_execute",
+                    "file_write",
+                    "shell_execute",
+                    "shell_execute",
+                    "shell_execute",
+                    "task_complete"
+                ],
+                "promoted_outputs": [],
+                "status": "success",
+                "iterations": 8
+            }
+        }
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-07-04T23:16:05.740573Z",
+    "finished_at": "2026-07-04T23:18:54.801340Z",
+    "environment_setup": {
+        "started_at": "2026-07-04T23:16:05.745441Z",
+        "finished_at": "2026-07-04T23:16:37.064593Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-07-04T23:16:37.650597Z",
+        "finished_at": "2026-07-04T23:16:55.916425Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-07-04T23:16:55.916646Z",
+        "finished_at": "2026-07-04T23:18:43.654814Z"
+    },
+    "verifier": {
+        "started_at": "2026-07-04T23:18:44.761650Z",
+        "finished_at": "2026-07-04T23:18:49.945371Z"
+    },
+    "step_results": null
+}

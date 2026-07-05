@@ -186,7 +186,7 @@ def test_application_task_spec_manifest_uses_clean_task_paths() -> None:
         "application/tasks/example-web-playwright_quote-choice"
     )
     assert manifest["applicationTypes"]["os-app"]["canonicalTask"] == (
-        "application/tasks/example-computer-use-ios_notification-preferences"
+        "application/tasks/example-computer-use-ios_photo-access-review"
     )
 
 

@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "1.0",
+  "artifactType": "personabench.trial_evaluation",
+  "taskType": "survey",
+  "presenceCheck": {
+    "passed": true,
+    "requiredArtifacts": [
+      "survey_result.json"
+    ],
+    "missingArtifacts": []
+  },
+  "sourceArtifacts": {
+    "surveyResult": "/private/var/folders/9d/g1kf84k52dz538sqv8w4pnj40000gn/T/pytest-of-jianhenghou/pytest-246/test_example_survey_verifier_a0/output/survey_result.json"
+  },
+  "contexts": [
+    {
+      "key": "question.q1",
+      "label": "q1",
+      "contextType": "question_response",
+      "facets": [
+        {
+          "key": "response",
+          "label": "Selected response",
+          "role": "primary",
+          "kind": "numerical",
+          "value": 4
+        },
+        {
+          "key": "reason",
+          "label": "Reason",
+          "role": "explanation",
+          "kind": "textual",
+          "value": "Fits the assigned persona."
+        },
+        {
+          "key": "confidence",
+          "label": "Confidence",
+          "role": "score",
+          "kind": "numerical",
+          "value": 0.8
+        }
+      ]
+    },
+    {
+      "key": "survey.summary",
+      "label": "Survey summary",
+      "contextType": "trial_summary",
+      "facets": [
+        {
+          "key": "answer_count",
+          "label": "Answer count",
+          "role": "score",
+          "kind": "numerical",
+          "value": 1
+        },
+        {
+          "key": "trajectory_event_count",
+          "label": "Trajectory event count",
+          "role": "score",
+          "kind": "numerical",
+          "value": 1
+        },
+        {
+          "key": "mean_numeric_answer",
+          "label": "Mean numeric answer",
+          "role": "score",
+          "kind": "numerical",
+          "value": 4.0
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "key": "question.q1.response",
+      "label": "Selected response",
+      "group": "question.q1",
+      "role": "primary",
+      "kind": "numerical",
+      "value": 4
+    },
+    {
+      "key": "question.q1.reason",
+      "label": "Reason",
+      "group": "question.q1",
+      "role": "explanation",
+      "kind": "textual",
+      "value": "Fits the assigned persona."
+    },
+    {
+      "key": "question.q1.confidence",
+      "label": "Confidence",
+      "group": "question.q1",
+      "role": "score",
+      "kind": "numerical",
+      "value": 0.8
+    },
+    {
+      "key": "survey.summary.answer_count",
+      "label": "Answer count",
+      "group": "survey.summary",
+      "role": "score",
+      "kind": "numerical",
+      "value": 1
+    },
+    {
+      "key": "survey.summary.trajectory_event_count",
+      "label": "Trajectory event count",
+      "group": "survey.summary",
+      "role": "score",
+      "kind": "numerical",
+      "value": 1
+    },
+    {
+      "key": "survey.summary.mean_numeric_answer",
+      "label": "Mean numeric answer",
+      "group": "survey.summary",
+      "role": "score",
+      "kind": "numerical",
+      "value": 4.0
+    }
+  ]
+}

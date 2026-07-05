@@ -17,21 +17,10 @@ from personabench.application_job import (
 )
 from personabench.persona_job import DEFAULT_DATASET, parse_stratify_field_args
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+from _repo_imports import REPO_ROOT, ensure_application_script_imports
+
 DEFAULT_JOBS_DIR = REPO_ROOT / "configs" / "jobs" / "application-task-job-recipe"
-_PERSONA_EVAL_CORE = REPO_ROOT / "packages" / "persona-eval" / "src"
-_PERSONA_EVAL_BACKEND = REPO_ROOT / "application" / "persona_eval"
 _EXECUTION_MODES = frozenset({"auto", "force_docker", "smoke"})
-
-
-def _ensure_repo_import_paths() -> None:
-    for path in (str(REPO_ROOT), str(_PERSONA_EVAL_CORE), str(_PERSONA_EVAL_BACKEND)):
-        if path not in sys.path:
-            sys.path.insert(0, path)
-
-
-def _ensure_persona_eval_backend_on_path() -> None:
-    _ensure_repo_import_paths()
 
 
 def _display_path(path: Path) -> str:
@@ -66,7 +55,7 @@ def _format_run_env_comment(exports: list[tuple[str, str]]) -> str:
         return ""
     lines = ["# Run (after exporting API keys):"]
     lines.append("#   export ANTHROPIC_API_KEY=...")
-    if any(name == "MATRIX_CHATBOT_DOMAIN" for name, _ in exports):
+    if any(name == "MATRIX_CHATBOT_TASK_PATH" for name, _ in exports):
         lines.append("#   export OPENAI_API_KEY=...   # user-sim engine default")
     for name, value in exports:
         lines.append(f"#   export {name}={value}")
@@ -82,7 +71,7 @@ def _resolve_auto_launch(
     agent_name: str | None,
     repo_root: Path,
 ) -> tuple[str, str]:
-    _ensure_persona_eval_backend_on_path()
+    ensure_application_script_imports()
     from backend.service.harbor_job_service import resolve_agent_name, resolve_trial_profile
 
     trial_profile = resolve_trial_profile(
@@ -294,7 +283,7 @@ def main() -> None:
     print(f"Meta: {sidecar}")
     print("Run:")
     print("  export ANTHROPIC_API_KEY=...")
-    if any(name == "MATRIX_CHATBOT_DOMAIN" for name, _ in run_env_exports):
+    if any(name == "MATRIX_CHATBOT_TASK_PATH" for name, _ in run_env_exports):
         print("  export OPENAI_API_KEY=...   # user-sim engine default")
     for name, value in run_env_exports:
         print(f"  export {name}={value}")
