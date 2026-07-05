@@ -106,6 +106,17 @@ export function PersonaSamplingRail({
     staleTime: 60_000,
   });
 
+  const lockedCohortQuery = useQuery({
+    queryKey: ["persona-pool-locked-cohort", selectedPersonaIds.join(",")],
+    queryFn: () =>
+      api.getPersonaPoolCards({
+        personaIds: selectedPersonaIds,
+        limit: selectedPersonaIds.length,
+      }),
+    enabled: Boolean(disabled) && mode !== "single" && selectedPersonaIds.length > 0,
+    staleTime: 300_000,
+  });
+
   const quickPickCards = useMemo(() => {
     const fromApi = defaultCardsQuery.data?.personas ?? [];
     if (fromApi.length > 0) return fromApi;
@@ -115,8 +126,25 @@ export function PersonaSamplingRail({
 
   const displayCards = useMemo(() => {
     if (mode === "single") return quickPickCards;
+    if (disabled && selectedPersonaIds.length > 0) {
+      const locked = lockedCohortQuery.data?.personas ?? [];
+      if (locked.length > 0) return locked;
+      return selectedPersonaIds.map((personaId) => ({
+        personaId,
+        name: `persona-${personaId}`,
+        source: "bench-dev-sample",
+        dimensions: {},
+      }));
+    }
     return generatedCards;
-  }, [quickPickCards, generatedCards, mode]);
+  }, [
+    quickPickCards,
+    generatedCards,
+    mode,
+    disabled,
+    selectedPersonaIds,
+    lockedCohortQuery.data?.personas,
+  ]);
 
   useEffect(() => {
     if (mode === "single") setGeneratedCards([]);
@@ -217,6 +245,12 @@ export function PersonaSamplingRail({
         ))}
       </div>
 
+      {disabled && selectedPersonaIds.length > 0 ? (
+        <p className="mb-2 rounded-lg border border-primary/25 bg-primary/10 px-2.5 py-2 text-[10px] leading-relaxed text-text-variant">
+          Cohort locked for this run — use Reset to change personas or sample settings.
+        </p>
+      ) : null}
+
       {mode !== "single" && (
         <div className="mb-2 space-y-2">
           <button
@@ -293,10 +327,13 @@ export function PersonaSamplingRail({
             No personas loaded. Check that the backend is running.
           </p>
         )}
-        {mode !== "single" && displayCards.length === 0 && (
+        {mode !== "single" && displayCards.length === 0 && !disabled && (
           <p className="rounded-lg border border-dashed border-outline/40 p-4 text-center text-[11px] text-text-dim">
             Set filters and generate a preview cohort.
           </p>
+        )}
+        {mode !== "single" && displayCards.length === 0 && disabled && lockedCohortQuery.isLoading && (
+          <p className="text-[11px] text-text-variant">Loading cohort personas…</p>
         )}
       </div>
 

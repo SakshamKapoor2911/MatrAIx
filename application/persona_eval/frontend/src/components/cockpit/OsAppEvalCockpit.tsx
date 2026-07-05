@@ -45,6 +45,7 @@ import {
   useCockpitBatchJob,
 } from "./setup/useCockpitBatchJob";
 import { useCockpitRunCancel } from "./setup/useCockpitRunCancel";
+import { useCockpitSetupLock } from "./setup/useCockpitSetupLock";
 import { osAppTaskCards } from "./setup/cockpitTaskCards";
 import { FOCUS_RING, Sym } from "./cockpitShared";
 import type { PersonaEvalTaskType } from "./TaskTypeSwitch";
@@ -119,6 +120,7 @@ export function OsAppEvalCockpit({
   const {
     batchJobName,
     batchTaskId,
+    batchPersonaIds,
     setBatchJobName,
     batchLive,
     clearBatch,
@@ -151,7 +153,14 @@ export function OsAppEvalCockpit({
     () => mergeOsAppTasks(tasksQuery.data?.tasks),
     [tasksQuery.data?.tasks],
   );
-  const task = tasks.find((item) => item.id === taskId) ?? tasks[0] ?? null;
+  const { setupLocked, visiblePersonaIds } = useCockpitSetupLock(
+    phase,
+    batchJobName,
+    batchPersonaIds,
+    selectedPersonaIds,
+  );
+  const activeTaskId = batchJobName && batchTaskId ? batchTaskId : taskId;
+  const task = tasks.find((item) => item.id === activeTaskId) ?? tasks[0] ?? null;
 
   const cuaPersonaModelOptions = useMemo(
     () => cuaPersonaModelSelectOptions(task?.platform, personaModelOptions),
@@ -402,7 +411,7 @@ export function OsAppEvalCockpit({
           personaModelOptions={cuaPersonaModelOptions}
           mode={samplingMode}
           onModeChange={setSamplingMode}
-          selectedPersonaIds={selectedPersonaIds}
+          selectedPersonaIds={visiblePersonaIds}
           onSelectedPersonaIdsChange={setSelectedPersonaIds}
           sampleSize={sampleSize}
           onSampleSizeChange={setSampleSize}
@@ -411,7 +420,7 @@ export function OsAppEvalCockpit({
           onFiltersChange={setGroupFilters}
           stratifyFields={stratifyFields}
           onStratifyFieldsChange={setStratifyFields}
-          disabled={runBusy}
+          disabled={setupLocked}
         />
       }
       center={
@@ -423,7 +432,7 @@ export function OsAppEvalCockpit({
               taskType="os-app"
               cuaPlatform={task?.platform}
               personaModelLabel={pipelinePersonaModelLabel}
-              hasPersona={selectedPersonaIds.length > 0}
+              hasPersona={visiblePersonaIds.length > 0}
               hasTask={Boolean(task)}
             />
           }
@@ -436,9 +445,9 @@ export function OsAppEvalCockpit({
           progressSublabel={
             batchJobName && batchComplete ? BATCH_RUN_COMPLETE_HINT : undefined
           }
-          canRun={selectedPersonaIds.length > 0 && Boolean(task) && !runBusy}
+          canRun={visiblePersonaIds.length > 0 && Boolean(task) && !runBusy}
           isBatch={isBatchRun}
-          personaCount={selectedPersonaIds.length}
+          personaCount={visiblePersonaIds.length}
           parallelTrials={parallelTrials}
           onParallelTrialsChange={setParallelTrials}
           runBusy={runBusy}
@@ -478,9 +487,31 @@ export function OsAppEvalCockpit({
             instruction={
               <InstructionPanel
                 title={instructionView.title}
-                markdown={instructionView.markdown}
+                markdown={instructionView.instructionMarkdown ?? instructionView.markdown}
                 loading={instructionView.loading}
                 error={instructionView.error}
+              />
+            }
+            context={
+              <InstructionPanel
+                label="Task context"
+                title={instructionView.title}
+                markdown={instructionView.contextMarkdown}
+                loading={instructionView.loading}
+                error={instructionView.error}
+                emptyMessage="No separate context document is available for this task."
+                icon="menu_book"
+              />
+            }
+            outputSchema={
+              <InstructionPanel
+                label="Output schema"
+                title={instructionView.title}
+                markdown={instructionView.outputSchemaMarkdown}
+                loading={instructionView.loading}
+                error={instructionView.error}
+                emptyMessage="No separate output schema document is available for this task."
+                icon="schema"
               />
             }
           />
@@ -491,7 +522,7 @@ export function OsAppEvalCockpit({
           surveyTasks={[]}
           webTasks={[]}
           cuaTasks={taskCards}
-          selectedTaskId={taskId}
+          selectedTaskId={activeTaskId}
           onSelectTask={(card) => setTaskId(card.id)}
           engine=""
           onEngineChange={() => undefined}
@@ -513,7 +544,7 @@ export function OsAppEvalCockpit({
                 : "No OS app tasks available."
               : null
           }
-          disabled={runBusy}
+          disabled={setupLocked}
         />
         )
       }

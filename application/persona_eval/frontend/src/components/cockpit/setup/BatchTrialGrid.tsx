@@ -94,7 +94,8 @@ function BatchTrialCellView({
   const roster = personaRosterLines(dimensions);
   const personaId = personaDisplayId(trial);
   const statusLabel = statusBadgeLabel(trial);
-  const identityHint = roster
+  const displayName = trial.persona?.name?.trim() || trial.label || personaId;
+  const detailHint = roster
     ? roster.secondary
       ? `${roster.primary} · ${roster.secondary}`
       : roster.primary
@@ -125,8 +126,8 @@ function BatchTrialCellView({
           : "items-center gap-3 px-3 py-2.5"
       }`}
       title={
-        identityHint
-          ? `${personaId} · ${statusLabel} · ${identityHint}`
+        detailHint
+          ? `${personaId} · ${statusLabel} · ${detailHint}`
           : `${personaId} · ${statusLabel}`
       }
     >
@@ -144,8 +145,15 @@ function BatchTrialCellView({
           {personaId}
         </p>
         <p
-          className={`truncate font-display font-semibold leading-snug ${statusLineClass(trial.status)} ${
+          className={`truncate font-display font-semibold leading-snug text-text-main ${
             portrait ? "text-[12px] px-1" : "text-[11px]"
+          }`}
+        >
+          {displayName}
+        </p>
+        <p
+          className={`truncate font-medium ${statusLineClass(trial.status)} ${
+            portrait ? "text-[11px] px-1" : "text-[10px]"
           }`}
         >
           {statusLabel}

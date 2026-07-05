@@ -39,6 +39,7 @@ export interface TaskCardModel {
   /** @deprecated prefer tags */
   tagLabels?: string[];
   profileMarkdown?: string;
+  instructionMarkdown?: string;
 }
 
 export { taskCardIcon, taskMetaTypeIcon } from "./taskCardIcons";

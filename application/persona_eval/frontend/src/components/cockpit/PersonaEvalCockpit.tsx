@@ -50,6 +50,7 @@ import {
 import { readCockpitBatch } from "./setup/cockpitBatchStorage";
 import { useSetupPersonaSampling } from "./setup/useSetupPersonaSampling";
 import { useCockpitRunCancel } from "./setup/useCockpitRunCancel";
+import { useCockpitSetupLock } from "./setup/useCockpitSetupLock";
 import { api, ApiError } from "@/lib/api";
 import { useHarborCockpitRun, type HarborCockpitPhase } from "@/lib/useHarborCockpitRun";
 import { useUrlState } from "@/lib/useUrlState";
@@ -311,6 +312,7 @@ function ChatbotEvalCockpit({
   const {
     batchJobName,
     batchTaskId,
+    batchPersonaIds,
     setBatchJobName,
     batchLive,
     clearBatch,
@@ -709,6 +711,7 @@ function ChatbotEvalCockpit({
           difficulty: task.difficulty,
           taskKind: task.taskKind,
           profileMarkdown: task.profileMarkdown,
+          instructionMarkdown: task.instructionMarkdown,
           tags: [...taskCardTags({ taskPath: task.taskPath }), ...statusTags],
         };
       }),
@@ -730,6 +733,12 @@ function ChatbotEvalCockpit({
   const showLiveCenter = phase !== "idle" || Boolean(batchJobName);
   const showInspector = phase !== "idle" && !batchJobName;
   const runBusy = isRunning || isBatchActive;
+  const { setupLocked, visiblePersonaIds } = useCockpitSetupLock(
+    phase,
+    batchJobName,
+    batchPersonaIds,
+    selectedPersonaIds,
+  );
   const instructionView = useCockpitInstruction({
     taskPath: chatTaskPath,
     fallbackTitle: chatTaskLabel,
@@ -789,7 +798,7 @@ function ChatbotEvalCockpit({
           personaModelOptions={personaModelOptions}
           mode={samplingMode}
           onModeChange={setSamplingMode}
-          selectedPersonaIds={selectedPersonaIds}
+          selectedPersonaIds={visiblePersonaIds}
           onSelectedPersonaIdsChange={setSelectedPersonaIds}
           sampleSize={sampleSize}
           onSampleSizeChange={setSampleSize}
@@ -798,7 +807,7 @@ function ChatbotEvalCockpit({
           onFiltersChange={setGroupFilters}
           stratifyFields={stratifyFields}
           onStratifyFieldsChange={setStratifyFields}
-          disabled={runBusy}
+          disabled={setupLocked}
         />
       }
       center={
@@ -837,15 +846,15 @@ function ChatbotEvalCockpit({
                 chatTransport={chatTransport}
                 chatbotLabel={chatTaskLabel}
                 personaModelLabel={pipelinePersonaModelLabel}
-                hasPersona={selectedPersonaIds.length > 0}
+                hasPersona={visiblePersonaIds.length > 0}
                 hasTask={Boolean(chatTaskPath)}
               />
             </div>
           )}
           <RunLaunchBar
-            canRun={selectedPersonaIds.length > 0 && Boolean(chatTaskPath) && !runBusy}
+            canRun={visiblePersonaIds.length > 0 && Boolean(chatTaskPath) && !runBusy}
             isBatch={isBatchRun}
-            personaCount={selectedPersonaIds.length}
+            personaCount={visiblePersonaIds.length}
             parallelTrials={parallelTrials}
             onParallelTrialsChange={setParallelTrials}
             isRunning={runBusy}
@@ -881,7 +890,7 @@ function ChatbotEvalCockpit({
           instruction={
             <InstructionPanel
               title={instructionView.title}
-              markdown={instructionView.markdown}
+              markdown={instructionView.instructionMarkdown ?? instructionView.markdown}
               loading={instructionView.loading}
               error={instructionView.error}
             />
@@ -934,7 +943,7 @@ function ChatbotEvalCockpit({
             sidecarActionError={sidecarActionError}
             tasksLoading={tasksQuery.isLoading}
             tasksError={tasksQuery.error instanceof Error ? tasksQuery.error.message : null}
-            disabled={runBusy}
+            disabled={setupLocked}
           />
         )
       }

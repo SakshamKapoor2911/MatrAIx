@@ -1,14 +1,13 @@
-# Laptop shortlist (browser-use + live web)
+# Laptop shortlist
 
 Browse the public laptop catalog at:
 
 https://webscraper.io/test-sites/e-commerce/static/computers/laptops
 
-Use the **browser-use** agent loop (Chromium + DOM/vision tools) to compare a
-few options as yourself and pick the **one laptop** you would most realistically
-consider.
+Compare a few options as yourself and pick the **one laptop** you would most
+realistically consider.
 
-Write `/app/output/laptop_choice.json`:
+Save your choice to `/app/output/laptop_choice.json`:
 
 ```json
 {

@@ -237,3 +237,26 @@ def test_get_task_detail_ignores_shared_environment_content_without_task_input(t
     assert detail["contextMarkdown"] == ""
     assert "user_feedback.json" in detail["outputSchemaMarkdown"]
     assert "Persona self-report" in detail["profileMarkdown"]
+
+
+def test_get_task_detail_excludes_readme_from_profile_markdown(tmp_path):
+    task_dir = tmp_path / "application" / "tasks" / "example-web-readme"
+    task_dir.mkdir(parents=True)
+    (task_dir / "task.toml").write_text(
+        '[metadata]\ntype = "web"\n[task]\nname = "example/web-readme"\n',
+        encoding="utf-8",
+    )
+    (task_dir / "instruction.md").write_text(
+        "# Web Task\n\nBrowse the site and choose one option.\n",
+        encoding="utf-8",
+    )
+    (task_dir / "README.md").write_text(
+        "# Dev README\n\nHarbor agent setup notes for maintainers.\n",
+        encoding="utf-8",
+    )
+
+    detail = get_task_detail("application/tasks/example-web-readme", repo_root=tmp_path)
+
+    assert "Harbor agent setup notes" not in detail["profileMarkdown"]
+    assert detail["instructionMarkdown"].startswith("# Web Task")
+    assert detail["extraDocs"][0]["name"] == "README.md"

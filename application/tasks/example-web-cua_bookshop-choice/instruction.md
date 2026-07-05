@@ -4,14 +4,10 @@ Browse the public book catalog at:
 
 https://books.toscrape.com/
 
-Use the desktop browser and pick the **one book** you would most realistically
-consider for yourself after browsing the catalog.
+Pick the **one book** you would most realistically consider for yourself after
+browsing the catalog.
 
-When you're done, submit your choice as JSON with a **done** action. Harbor
-will materialize the file for you, so do not use Save dialogs or manual file
-editing.
-
-Write `/app/output/book_interest.json` with:
+Save your choice to `/app/output/book_interest.json`:
 
 ```json
 {
@@ -33,6 +29,3 @@ Requirements:
 - `decision_outcome` should reflect your realistic stance after browsing. For
   this task, `selected` or `considered` will usually make the most sense.
 - Keep `reason` specific to the selected book and your persona's preferences.
-
-`Ctrl+Alt+T` opens a terminal if you need it for browsing, but finish with a
-**done** action.

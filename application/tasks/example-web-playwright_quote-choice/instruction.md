@@ -1,14 +1,13 @@
-# Quote to save (Playwright + live web)
+# Quote to save
 
 Browse the public quotes catalog at:
 
 https://quotes.toscrape.com/
 
-Use **Playwright** (Python API) to open the site in Chromium, explore at least
-a few quotes as yourself, and pick the **one quote** you would most want to
-save, share, or come back to later.
+Explore at least a few quotes as yourself and pick the **one quote** you would
+most want to save, share, or come back to later.
 
-Write `/app/output/quote_choice.json`:
+Save your choice to `/app/output/quote_choice.json`:
 
 ```json
 {

@@ -59,6 +59,7 @@ import {
   useCockpitBatchJob,
 } from "./setup/useCockpitBatchJob";
 import { useCockpitRunCancel } from "./setup/useCockpitRunCancel";
+import { useCockpitSetupLock } from "./setup/useCockpitSetupLock";
 import { webEvalTaskCards } from "./setup/cockpitTaskCards";
 import { HarborTraceReplay } from "./HarborTraceReplay";
 import {
@@ -158,6 +159,7 @@ export function WebEvalCockpit({
   const {
     batchJobName,
     batchTaskId,
+    batchPersonaIds,
     setBatchJobName,
     batchLive,
     clearBatch,
@@ -191,7 +193,14 @@ export function WebEvalCockpit({
     () => mergeWebTasks(tasksQuery.data?.tasks),
     [tasksQuery.data?.tasks],
   );
-  const task = tasks.find((item) => item.id === taskId) ?? tasks[0] ?? null;
+  const { setupLocked, visiblePersonaIds } = useCockpitSetupLock(
+    phase,
+    batchJobName,
+    batchPersonaIds,
+    selectedPersonaIds,
+  );
+  const activeTaskId = batchJobName && batchTaskId ? batchTaskId : taskId;
+  const task = tasks.find((item) => item.id === activeTaskId) ?? tasks[0] ?? null;
 
   const pipelinePersonaModelLabel = useMemo(
     () => personaModelPipelineLabel(personaModel, personaModelOptions),
@@ -454,7 +463,7 @@ export function WebEvalCockpit({
           personaModelOptions={personaModelOptions}
           mode={samplingMode}
           onModeChange={setSamplingMode}
-          selectedPersonaIds={selectedPersonaIds}
+          selectedPersonaIds={visiblePersonaIds}
           onSelectedPersonaIdsChange={setSelectedPersonaIds}
           sampleSize={sampleSize}
           onSampleSizeChange={setSampleSize}
@@ -463,7 +472,7 @@ export function WebEvalCockpit({
           onFiltersChange={setGroupFilters}
           stratifyFields={stratifyFields}
           onStratifyFieldsChange={setStratifyFields}
-          disabled={runBusy}
+          disabled={setupLocked}
         />
       }
       center={
@@ -477,7 +486,7 @@ export function WebEvalCockpit({
               webCapabilityTierId={
                 task ? findWebPersonaAgent(resolveWebAgent(task.id))?.tier : undefined
               }
-              hasPersona={selectedPersonaIds.length > 0}
+              hasPersona={visiblePersonaIds.length > 0}
               hasTask={Boolean(task?.taskPath)}
             />
           }
@@ -490,9 +499,9 @@ export function WebEvalCockpit({
           progressSublabel={
             batchJobName && batchComplete ? BATCH_RUN_COMPLETE_HINT : undefined
           }
-          canRun={selectedPersonaIds.length > 0 && Boolean(task?.taskPath) && !runBusy}
+          canRun={visiblePersonaIds.length > 0 && Boolean(task?.taskPath) && !runBusy}
           isBatch={isBatchRun}
-          personaCount={selectedPersonaIds.length}
+          personaCount={visiblePersonaIds.length}
           parallelTrials={parallelTrials}
           onParallelTrialsChange={setParallelTrials}
           runBusy={runBusy}
@@ -523,9 +532,31 @@ export function WebEvalCockpit({
             instruction={
               <InstructionPanel
                 title={instructionView.title}
-                markdown={instructionView.markdown}
+                markdown={instructionView.instructionMarkdown ?? instructionView.markdown}
                 loading={instructionView.loading}
                 error={instructionView.error}
+              />
+            }
+            context={
+              <InstructionPanel
+                label="Task context"
+                title={instructionView.title}
+                markdown={instructionView.contextMarkdown}
+                loading={instructionView.loading}
+                error={instructionView.error}
+                emptyMessage="No separate context document is available for this task."
+                icon="menu_book"
+              />
+            }
+            outputSchema={
+              <InstructionPanel
+                label="Output schema"
+                title={instructionView.title}
+                markdown={instructionView.outputSchemaMarkdown}
+                loading={instructionView.loading}
+                error={instructionView.error}
+                emptyMessage="No separate output schema document is available for this task."
+                icon="schema"
               />
             }
           />
@@ -536,7 +567,7 @@ export function WebEvalCockpit({
           surveyTasks={[]}
           webTasks={taskCards}
           cuaTasks={[]}
-          selectedTaskId={taskId}
+          selectedTaskId={activeTaskId}
           onSelectTask={(card) => setTaskId(card.id)}
           engine=""
           onEngineChange={() => undefined}
@@ -558,7 +589,7 @@ export function WebEvalCockpit({
                 : "No web tasks available."
               : null
           }
-          disabled={runBusy}
+          disabled={setupLocked}
         />
         )
       }

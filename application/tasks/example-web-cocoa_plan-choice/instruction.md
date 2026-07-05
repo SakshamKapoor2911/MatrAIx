@@ -1,15 +1,14 @@
-# Plan preference (CocoaAgent + live web)
+# Plan preference
 
 Browse the public pricing page at:
 
 https://www.pythonanywhere.com/pricing/
 
 Imagine you were considering a hosted place for small personal Python projects,
-experiments, or a lightweight web app. Use the **CocoaAgent** tools (browser,
-shell, files inside the AIO Sandbox) to compare the plans as yourself and pick
+experiments, or a lightweight web app. Compare the plans as yourself and pick
 the **one plan** you would most realistically consider.
 
-Write `/app/output/plan_choice.json`:
+Save your choice to `/app/output/plan_choice.json`:
 
 ```json
 {
