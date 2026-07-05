@@ -548,17 +548,6 @@ export function WebEvalCockpit({
                 icon="menu_book"
               />
             }
-            outputSchema={
-              <InstructionPanel
-                label="Output schema"
-                title={instructionView.title}
-                markdown={instructionView.outputSchemaMarkdown}
-                loading={instructionView.loading}
-                error={instructionView.error}
-                emptyMessage="No separate output schema document is available for this task."
-                icon="schema"
-              />
-            }
           />
         ) : (
         <TaskSelectionRail

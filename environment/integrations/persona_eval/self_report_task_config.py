@@ -124,3 +124,13 @@ def render_self_report_schema_markdown(schema: SelfReportSchema) -> str:
         parts.extend(["", schema.instructions.strip()])
     parts.extend(["", schema_prompt_block(schema)])
     return "\n".join(parts).strip()
+
+
+def render_task_self_report_preview_markdown(schema: SelfReportSchema) -> str:
+    """Render task-owned ``self_report_schema.yaml`` for contributor preview."""
+    parts: list[str] = []
+    if schema.instructions.strip():
+        parts.append(schema.instructions.strip())
+    artifact = schema.artifact_name.strip() or "user_feedback.json"
+    parts.extend(["", "Artifact: `{}`".format(artifact), "", schema_prompt_block(schema)])
+    return "\n".join(parts).strip()

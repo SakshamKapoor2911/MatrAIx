@@ -1352,6 +1352,7 @@ class HarborJobService:
         context_markdown = ""
         questionnaire_markdown = ""
         output_schema_markdown = ""
+        self_report_markdown = ""
         instruction_path = trial_dir / "instruction.md"
         task_instruction_path = trial_dir / "task_instruction.md"
         context_path = trial_dir / "context.md"
@@ -1380,6 +1381,7 @@ class HarborJobService:
             or not context_markdown
             or not questionnaire_markdown
             or not output_schema_markdown
+            or not self_report_markdown
         ):
             from backend.service.task_detail_service import get_task_detail
 
@@ -1393,6 +1395,9 @@ class HarborJobService:
             ).strip()
             output_schema_markdown = output_schema_markdown or str(
                 detail.get("outputSchemaMarkdown") or ""
+            ).strip()
+            self_report_markdown = self_report_markdown or str(
+                detail.get("selfReportMarkdown") or ""
             ).strip()
         if instruction_path.is_file():
             markdown = instruction_path.read_text(encoding="utf-8").strip()
@@ -1409,6 +1414,7 @@ class HarborJobService:
                 "contextMarkdown": context_markdown or None,
                 "questionnaireMarkdown": questionnaire_markdown or None,
                 "outputSchemaMarkdown": output_schema_markdown or None,
+                "selfReportMarkdown": self_report_markdown or None,
             }
         if task_path:
             from backend.service.task_detail_service import get_task_detail
@@ -1423,6 +1429,7 @@ class HarborJobService:
                     "contextMarkdown": detail.get("contextMarkdown") or None,
                     "questionnaireMarkdown": detail.get("questionnaireMarkdown") or None,
                     "outputSchemaMarkdown": detail.get("outputSchemaMarkdown") or None,
+                    "selfReportMarkdown": detail.get("selfReportMarkdown") or None,
                 }
         raise FileNotFoundError("instruction not found for trial {}/{}".format(job_name, trial_name))
 

@@ -651,10 +651,6 @@ function ChatbotEvalCockpit({
           e.preventDefault();
           setTab("context");
           break;
-        case "4":
-          e.preventDefault();
-          setTab("output-schema");
-          break;
         case "e":
         case "E":
           e.preventDefault();
@@ -895,29 +891,18 @@ function ChatbotEvalCockpit({
               error={instructionView.error}
             />
           }
-          context={
-            <InstructionPanel
-              label="Task context"
-              title={instructionView.title}
-              markdown={instructionView.contextMarkdown}
-              loading={instructionView.loading}
-              error={instructionView.error}
-              emptyMessage="No separate context document is available for this task."
-              icon="menu_book"
-            />
-          }
-          outputSchema={
-            <InstructionPanel
-              label="Output schema"
-              title={instructionView.title}
-              markdown={instructionView.outputSchemaMarkdown}
-              loading={instructionView.loading}
-              error={instructionView.error}
-              emptyMessage="No separate output schema document is available for this task."
-              icon="schema"
-            />
-          }
-        />
+            context={
+              <InstructionPanel
+                label="Task context"
+                title={instructionView.title}
+                markdown={instructionView.contextMarkdown}
+                loading={instructionView.loading}
+                error={instructionView.error}
+                emptyMessage="No separate context document is available for this task."
+                icon="menu_book"
+              />
+            }
+          />
         ) : (
           <TaskSelectionRail
             taskType={taskType}

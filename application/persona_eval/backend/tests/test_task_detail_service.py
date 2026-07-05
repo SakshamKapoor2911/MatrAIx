@@ -126,8 +126,10 @@ def test_get_task_detail_reads_chat_self_report_schema(tmp_path):
     assert detail["metaType"] == "chatbot"
     assert detail["instructionMarkdown"] == "# Demo Chat Task\n\nHave a natural support conversation."
     assert detail["contextMarkdown"] == "Order #4521 is late."
-    assert "user_feedback.json" in detail["outputSchemaMarkdown"]
-    assert "satisfaction" in detail["outputSchemaMarkdown"]
+    assert detail["outputSchemaMarkdown"] == ""
+    assert "user_feedback.json" in detail["selfReportMarkdown"]
+    assert "satisfaction" in detail["selfReportMarkdown"]
+    assert "eval_artifacts.md" not in detail["selfReportMarkdown"]
     assert "Persona self-report" in detail["profileMarkdown"]
     assert detail["questionnaire"] is None
 
@@ -235,8 +237,8 @@ def test_get_task_detail_ignores_shared_environment_content_without_task_input(t
 
     assert detail["instructionMarkdown"] == "# Shared Chat Task\n\nTask-root instruction only."
     assert detail["contextMarkdown"] == ""
-    assert "user_feedback.json" in detail["outputSchemaMarkdown"]
-    assert "Persona self-report" in detail["profileMarkdown"]
+    assert detail["outputSchemaMarkdown"] == ""
+    assert detail["selfReportMarkdown"] == ""
 
 
 def test_get_task_detail_excludes_readme_from_profile_markdown(tmp_path):

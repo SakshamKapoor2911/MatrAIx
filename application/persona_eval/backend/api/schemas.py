@@ -1068,6 +1068,7 @@ class TaskDetailResponse(BaseModel):
     contextMarkdown: str = ""
     questionnaireMarkdown: str = ""
     outputSchemaMarkdown: str = ""
+    selfReportMarkdown: str = ""
     questionnaire: Optional[SurveyInstrument] = None
     profileMarkdown: str = ""
 

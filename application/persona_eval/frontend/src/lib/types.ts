@@ -886,6 +886,7 @@ export interface TaskDetail {
   contextMarkdown?: string;
   questionnaireMarkdown?: string;
   outputSchemaMarkdown?: string;
+  selfReportMarkdown?: string;
   questionnaire?: SurveyInstrument | null;
   profileMarkdown?: string;
 }

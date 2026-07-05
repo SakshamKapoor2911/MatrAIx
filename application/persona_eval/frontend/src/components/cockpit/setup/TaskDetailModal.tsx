@@ -82,6 +82,7 @@ export function TaskDetailModal({ open, card, onClose }: TaskDetailModalProps) {
         contextMarkdown: detailQuery.data?.contextMarkdown,
         questionnaireMarkdown: detailQuery.data?.questionnaireMarkdown,
         outputSchemaMarkdown: detailQuery.data?.outputSchemaMarkdown,
+        selfReportMarkdown: detailQuery.data?.selfReportMarkdown,
       }),
     [card?.instructionMarkdown, detailQuery.data],
   );

@@ -2,10 +2,16 @@ import {
   hasMeaningfulTaskContext,
   normalizeOutputSchemaMarkdown,
   normalizeQuestionnaireMarkdown,
+  normalizeSelfReportMarkdown,
   normalizeTaskInstructionMarkdown,
 } from "@/lib/taskContent";
 
-export type TaskDocTabId = "instruction" | "context" | "questionnaire" | "output-schema";
+export type TaskDocTabId =
+  | "instruction"
+  | "context"
+  | "questionnaire"
+  | "output-schema"
+  | "self-report";
 
 export type TaskDocSection = {
   id: TaskDocTabId;
@@ -19,9 +25,11 @@ export type TaskDocSource = {
   contextMarkdown?: string | null;
   questionnaireMarkdown?: string | null;
   outputSchemaMarkdown?: string | null;
+  /** Task-owned ``input/self_report_schema.yaml`` only (no platform default). */
+  selfReportMarkdown?: string | null;
 };
 
-/** Split task-owned docs into contract-aligned sections (instruction / context / questionnaire / output). */
+/** Contributor-facing task docs for preview. */
 export function buildTaskDocSections(source: TaskDocSource): TaskDocSection[] {
   const sections: TaskDocSection[] = [];
 
@@ -62,6 +70,16 @@ export function buildTaskDocSections(source: TaskDocSource): TaskDocSection[] {
       label: "Output schema",
       icon: "schema",
       markdown: outputSchema,
+    });
+  }
+
+  const selfReport = normalizeSelfReportMarkdown(source.selfReportMarkdown);
+  if (selfReport) {
+    sections.push({
+      id: "self-report",
+      label: "Self-report",
+      icon: "rate_review",
+      markdown: selfReport,
     });
   }
 

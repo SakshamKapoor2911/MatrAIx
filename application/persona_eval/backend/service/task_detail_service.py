@@ -78,28 +78,27 @@ def get_task_detail(task_path: str, *, repo_root: Path) -> dict[str, Any]:
     context_markdown = ""
     questionnaire_markdown = ""
     output_schema_markdown = bundle.output_schema_markdown.strip()
-    output_schema_heading = "Output schema"
+    self_report_markdown = ""
     questionnaire = None
     if bundle.context_markdown.strip():
         context_markdown = bundle.context_markdown.strip()
     if meta_type in {"chatbot", "web", "os-app"}:
+        output_schema_markdown = ""
         try:
             from environment.integrations.persona_eval.self_report_task_config import (
                 load_self_report_schema_for_task_path,
-                render_self_report_schema_markdown,
+                render_task_self_report_preview_markdown,
             )
 
             schema = load_self_report_schema_for_task_path(
                 normalized,
                 repo_root=repo_root,
-                fallback_to_default=meta_type == "chatbot",
+                fallback_to_default=False,
             )
             if schema is not None:
-                output_schema_markdown = render_self_report_schema_markdown(schema)
-                output_schema_heading = "Persona self-report"
+                self_report_markdown = render_task_self_report_preview_markdown(schema)
         except Exception:  # noqa: BLE001
-            if meta_type == "chatbot":
-                output_schema_markdown = ""
+            self_report_markdown = ""
     elif meta_type == "survey":
         questionnaire_id = None
         try:
@@ -155,9 +154,9 @@ def get_task_detail(task_path: str, *, repo_root: Path) -> dict[str, Any]:
     if questionnaire_markdown:
         markdown_parts.extend(["", "---", "", "## Questionnaire", "", questionnaire_markdown])
     if output_schema_markdown:
-        markdown_parts.extend(
-            ["", "---", "", "## {}".format(output_schema_heading), "", output_schema_markdown]
-        )
+        markdown_parts.extend(["", "---", "", "## Output schema", "", output_schema_markdown])
+    if self_report_markdown:
+        markdown_parts.extend(["", "---", "", "## Persona self-report", "", self_report_markdown])
     for doc in extra_docs:
         if doc["name"] in {"instruction.md", "README.md"}:
             continue
@@ -177,6 +176,7 @@ def get_task_detail(task_path: str, *, repo_root: Path) -> dict[str, Any]:
         "contextMarkdown": context_markdown,
         "questionnaireMarkdown": questionnaire_markdown,
         "outputSchemaMarkdown": output_schema_markdown,
+        "selfReportMarkdown": self_report_markdown,
         "questionnaire": questionnaire,
         "profileMarkdown": "\n".join(markdown_parts).strip(),
         "extraDocs": extra_docs,
@@ -202,5 +202,6 @@ def attach_task_profile_markdown(
     merged["contextMarkdown"] = detail.get("contextMarkdown") or ""
     merged["questionnaireMarkdown"] = detail.get("questionnaireMarkdown") or ""
     merged["outputSchemaMarkdown"] = detail.get("outputSchemaMarkdown") or ""
+    merged["selfReportMarkdown"] = detail.get("selfReportMarkdown") or ""
     merged["questionnaire"] = detail.get("questionnaire")
     return merged

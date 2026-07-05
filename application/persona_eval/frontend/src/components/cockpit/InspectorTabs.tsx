@@ -12,7 +12,8 @@ export type InspectorTab =
   | "instruction"
   | "context"
   | "questionnaire"
-  | "output-schema";
+  | "output-schema"
+  | "self-report";
 
 export interface InspectorTabsProps {
   active: InspectorTab;
@@ -22,6 +23,7 @@ export interface InspectorTabsProps {
   context?: React.ReactNode;
   questionnaire?: React.ReactNode;
   outputSchema?: React.ReactNode;
+  selfReport?: React.ReactNode;
 }
 
 export function InspectorTabs({
@@ -32,6 +34,7 @@ export function InspectorTabs({
   context,
   questionnaire,
   outputSchema,
+  selfReport,
 }: InspectorTabsProps) {
   const tabs: Array<{ id: InspectorTab; label: string; icon: string }> = [
     { id: "evaluation", label: "Evaluation", icon: "verified" },
@@ -40,6 +43,7 @@ export function InspectorTabs({
   if (context) tabs.push({ id: "context", label: "Context", icon: "menu_book" });
   if (questionnaire) tabs.push({ id: "questionnaire", label: "Questionnaire", icon: "list_alt" });
   if (outputSchema) tabs.push({ id: "output-schema", label: "Output schema", icon: "schema" });
+  if (selfReport) tabs.push({ id: "self-report", label: "Self-report", icon: "rate_review" });
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const activeLabel = tabs.find((t) => t.id === active)?.label ?? "";
 
@@ -130,6 +134,14 @@ export function InspectorTabs({
           hidden={active !== "output-schema"}
         >
           {active === "output-schema" && outputSchema}
+        </div>
+        <div
+          role="tabpanel"
+          id="inspector-panel-self-report"
+          aria-labelledby="inspector-tab-self-report"
+          hidden={active !== "self-report"}
+        >
+          {active === "self-report" && selfReport}
         </div>
       </div>
     </aside>

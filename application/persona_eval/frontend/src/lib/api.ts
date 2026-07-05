@@ -112,6 +112,7 @@ export const api = {
       contextMarkdown?: string | null;
       questionnaireMarkdown?: string | null;
       outputSchemaMarkdown?: string | null;
+      selfReportMarkdown?: string | null;
     }>(
       `/api/harbor/jobs/${encodeURIComponent(jobName)}/trials/${encodeURIComponent(trialName)}/instruction`,
     ),
