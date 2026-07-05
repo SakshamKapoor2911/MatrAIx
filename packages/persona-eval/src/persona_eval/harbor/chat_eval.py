@@ -31,6 +31,7 @@ from persona_eval.persona_exposure import (
 from persona_eval.task_content_bundle import (
     load_task_content_bundle_for_task_path,
 )
+from persona_eval.persona_model import resolve_persona_model
 from persona_eval.types import (
     Persona,
     PersonaEvalConfig,
@@ -65,7 +66,9 @@ def harbor_chat_task_config_from_env(
 
 
 def harbor_chat_config_from_env(
-    *, repo_root: Path | None = None
+    *,
+    repo_root: Path | None = None,
+    model_name: str | None = None,
 ) -> PersonaEvalConfig:
     task_config = harbor_chat_task_config_from_env(repo_root=repo_root)
     runtime = task_config.runtime_defaults if task_config is not None else None
@@ -100,10 +103,9 @@ def harbor_chat_config_from_env(
         max_turns = max(1, int(max_turns_raw)) if max_turns_raw else None
     except ValueError:
         max_turns = None
-    persona_model = (
-        os.environ.get("MATRIX_CHATBOT_PERSONA_MODEL", "").strip()
-        or os.environ.get("MATRIX_PERSONA_MODEL", "").strip()
-        or "anthropic/claude-haiku-4-5"
+    persona_model = resolve_persona_model(
+        model_name=model_name,
+        include_chat_env=True,
     )
     engine = (
         os.environ.get("MATRIX_CHATBOT_ENGINE", "gpt-4o-mini").strip()
@@ -474,6 +476,7 @@ async def run_harbor_chat_eval_for_persona(
     environment: "BaseEnvironment",
     persona: object,
     *,
+    model_name: str | None = None,
     on_event: Optional[Callable[[Dict[str, Any]], None]] = None,
 ) -> tuple[PersonaEvalResult, str]:
     """End-to-end Harbor chat eval for one loaded Harbor persona object."""
@@ -487,7 +490,10 @@ async def run_harbor_chat_eval_for_persona(
         if task_path
         else None
     )
-    config = harbor_chat_config_from_env(repo_root=repo_root)
+    config = harbor_chat_config_from_env(
+        repo_root=repo_root,
+        model_name=model_name,
+    )
     eval_persona = _eval_persona(persona)
     sut_description = (
         (bundle.context_markdown if bundle is not None else "")

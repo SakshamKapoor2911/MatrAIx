@@ -62,6 +62,9 @@ Expected contents:
 Persona agents live here because they are execution mechanisms. The persona
 schema and datasets they consume live in `persona/`.
 
+For execution planes, environment variables, contributor guidance, and the
+Environment roadmap, see [environment/README.md](../environment/README.md).
+
 ## Shared Packages
 
 `packages/` is for reusable libraries that serve multiple modules. If code is

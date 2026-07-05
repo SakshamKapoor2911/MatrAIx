@@ -9,23 +9,51 @@ fields in the job YAML).
 | Flag | Meaning | Example |
 |------|---------|---------|
 | `-a` | Persona agent | `persona-claude-code` |
-| `-m` | LLM | `anthropic/claude-sonnet-4-6` |
+| `-m` | Persona LLM (simulated user) | `anthropic/claude-sonnet-4-6` |
 | `-p` | Task scenario | `application/tasks/example-survey_product-feedback` |
 | `--ak persona_path` | Persona YAML (**which profile**) | `persona/datasets/bench-dev-sample/persona_0042.yaml` |
+| `--model-name` | Same as `-m`, on `generate_application_job.py` | `openai/gpt-4o-mini` |
 
 Default smoke persona: **`persona_0042`** in `persona/datasets/bench-dev-sample/`.
+
+## Persona model (`-m` / `--model-name`)
+
+The **persona LLM** is the model that plays the simulated user. It is separate
+from chat **SUT** backends (`MATRIX_CHATBOT_ENGINE`, sidecar APIs, etc.).
+
+All persona agents — including auto host-native survey/chat — resolve the model
+the same way:
+
+1. Harbor job `agents[].model_name` or CLI `-m` / `--model-name` (**wins**)
+2. `MATRIX_CHATBOT_PERSONA_MODEL` (chat auto only, when no YAML model)
+3. `MATRIX_PERSONA_MODEL` or `MATRIX_HARBOR_PERSONA_MODEL`
+4. Default: `anthropic/claude-haiku-4-5`
+
+Web/CUA agents (`persona-browser-use`, `persona-computer-1`, …) and auto agents
+(`persona-json-survey`, `persona-user-sim`) all honor the YAML `model_name`.
+CLI wrapper agents (`persona-claude-code`, …) pass `-m` through to the same field.
+
+Supported persona models in Cockpit: `anthropic/claude-haiku-4-5`,
+`anthropic/claude-sonnet-4-6`, `openai/gpt-4o-mini`, `openai/gpt-4o`. Other
+LiteLLM-compatible ids may work if the matching API key is set.
 
 ## Persona agents
 
 | CLI name | Application | Typical use | Example task |
 |----------|-------------|-------------|----------------|
-| `persona-claude-code` | survey<br>chat | Forms, surveys, multi-turn chat, API/MCP sidecars | [product-feedback](tasks/example-survey_product-feedback)<br>[acme-support-api](tasks/example-chat-api_support_chatbot)<br>[acme-support-mcp](tasks/example-chat-mcp_support_chatbot)<br>[recommender-agent_chat_api](tasks/recommender-agent_chat_api) |
+| `persona-json-survey` | survey | **Auto mode (recommended):** one-shot JSON survey on the host; no Docker | [product-feedback](tasks/example-survey_product-feedback) |
+| `persona-user-sim` | chat | **Auto mode (recommended):** multi-turn user simulator + task sidecar on the host | [recommender-agent_chat_api](tasks/recommender-agent_chat_api)<br>[acme-support-api](tasks/example-chat-api_support_chatbot) |
+| `persona-claude-code` | survey<br>chat | CLI agent in Docker; forms, surveys, multi-turn chat, API/MCP sidecars | [product-feedback](tasks/example-survey_product-feedback)<br>[acme-support-api](tasks/example-chat-api_support_chatbot)<br>[acme-support-mcp](tasks/example-chat-mcp_support_chatbot)<br>[recommender-agent_chat_api](tasks/recommender-agent_chat_api) |
 | `persona-gemini-cli` | survey<br>chat | Same as `persona-claude-code`; Google Gemini CLI backend | [product-feedback](tasks/example-survey_product-feedback)<br>[acme-support-api](tasks/example-chat-api_support_chatbot) |
 | `persona-codex` | survey<br>chat | Same as `persona-claude-code`; OpenAI Codex CLI backend | [product-feedback](tasks/example-survey_product-feedback)<br>[acme-support-api](tasks/example-chat-api_support_chatbot) |
 | `persona-openhands-sdk` | web | Python Playwright in the terminal (DOM selectors); fast, CI-friendly | [quote-choice-playwright](tasks/example-web-playwright_quote-choice) |
 | `persona-browser-use` | web | browser-use agent loop over Chromium | [laptop-choice-browser-use](tasks/example-web-browser-use_laptop-choice) |
 | `persona-cocoa` | web | browser + shell + files in one container | [plan-choice-cocoa](tasks/example-web-cocoa_plan-choice) |
 | `persona-computer-1` | web<br>computer-use | Screenshot CUA; auto-routes to use.computer (macOS/iOS) or Docker Linux | **computer-use:** [macos-calendar-reminder-handoff](tasks/example-computer-use-macos_calendar-reminder-handoff)<br>[ios-photo-access-review](tasks/example-computer-use-ios_photo-access-review)<br>[linux-note-to-csv](tasks/example-computer-use-linux_note-to-csv)<br>**web:** [bookshop-choice-cua](tasks/example-web-cua_bookshop-choice) |
+
+`generate_application_job.py --execution-mode auto` picks `persona-json-survey` or
+`persona-user-sim` from the task type. Use `--agent-name` to override, or
+`--execution-mode force_docker` for the CLI agents above.
 
 Live-web details: [web-interaction.md](web-interaction.md).
 
@@ -48,6 +76,8 @@ differ by agent:
 
 | Agent | Required on host | Notes |
 |-------|------------------|-------|
+| `persona-json-survey` | `ANTHROPIC_API_KEY` or `OPENAI_API_KEY` | Match `-m` / YAML `model_name`. Auto host-native survey. |
+| `persona-user-sim` | `ANTHROPIC_API_KEY`; often `OPENAI_API_KEY` for SUT | Persona model via `-m`; chat sidecar engine via `MATRIX_CHATBOT_ENGINE` (default `gpt-4o-mini`). |
 | `persona-claude-code` | `ANTHROPIC_API_KEY` | Anthropic models |
 | `persona-gemini-cli` | `GEMINI_API_KEY` | Google models, e.g. `google/gemini-2.5-pro` |
 | `persona-codex` | `OPENAI_API_KEY` | OpenAI models, e.g. `openai/gpt-4o` |
@@ -57,7 +87,9 @@ differ by agent:
 | `persona-computer-1` | `ANTHROPIC_API_KEY` | Docker Linux web CUA and linux computer-use. **use.computer** (macOS/iOS) also needs `USE_COMPUTER_API_KEY`. Install extras: `uv sync --extra use-computer --extra computer-1`. |
 
 Chat tasks may also need `OPENAI_API_KEY` and `MATRIX_CHATBOT_*` exports — the
-job generator prints them.
+job generator prints them. Optional global persona default:
+`export MATRIX_PERSONA_MODEL=anthropic/claude-sonnet-4-6` (overridden when the job
+YAML sets `model_name`).
 
 Job YAML can pass keys per agent, e.g. `agents[].env.LLM_API_KEY: ${ANTHROPIC_API_KEY}`.
 
@@ -98,15 +130,19 @@ uv run harbor run \
   -p application/tasks/example-web-browser-use_laptop-choice
 ```
 
-Auto mode (matches PersonaEval Cockpit):
+Auto mode (matches PersonaEval Cockpit; `persona-json-survey` / `persona-user-sim`):
 
 ```bash
 uv run python application/scripts/generate_application_job.py \
   --task application/tasks/example-survey_product-feedback \
   --execution-mode auto \
+  --model-name anthropic/claude-sonnet-4-6 \
   --persona-ids 0042
 # Run the printed harbor command + exports
 ```
+
+The generated YAML includes `agents[].model_name`; edit it or pass `--model-name`
+on regenerate to swap the persona LLM.
 
 Batch runs: [QUICKSTART.md §7](QUICKSTART.md#7-batch--sample-many-personas-job),
 [../configs/jobs/README.md](../configs/jobs/README.md).

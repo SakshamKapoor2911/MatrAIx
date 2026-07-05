@@ -3,6 +3,8 @@
 This module owns persona data, schema, curation, and persona adherence
 evaluation.
 
+**Persona team guides:** [docs/personas/README.md](../docs/personas/README.md) (data → schema → grounding)
+
 Current layout:
 
 ```text

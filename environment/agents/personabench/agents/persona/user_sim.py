@@ -61,6 +61,7 @@ class PersonaUserSim(PersonaMixin, BaseAgent):
         result, session_id = await run_harbor_chat_eval_for_persona(
             environment,
             self._persona,
+            model_name=self.model_name,
             on_event=on_event,
         )
         del result, session_id

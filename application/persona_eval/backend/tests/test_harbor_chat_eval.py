@@ -178,6 +178,14 @@ def test_harbor_chat_config_from_env_defaults_to_unlimited_turns(tmp_path, monke
     assert config.max_turns is None
 
 
+def test_harbor_chat_config_from_env_prefers_harbor_model_name(monkeypatch) -> None:
+    monkeypatch.setenv("MATRIX_PERSONA_MODEL", "openai/gpt-4o-mini")
+    monkeypatch.setenv("MATRIX_CHATBOT_PERSONA_MODEL", "anthropic/claude-haiku-4-5")
+
+    config = harbor_chat_config_from_env(model_name="anthropic/claude-sonnet-4-6")
+    assert config.persona_model == "anthropic/claude-sonnet-4-6"
+
+
 @pytest.mark.anyio
 async def test_run_harbor_chat_eval_for_persona_writes_output_artifacts(
     tmp_path, monkeypatch

@@ -1,28 +1,85 @@
-# PersonaBench CODEOWNERS
+# PersonaBench CODEOWNERS — default reviewers on PRs
 #
-# Keep ownership aligned with the clean MatrAIx module layout. This file avoids
-# MatrAIx organization team references because PersonaBench currently lives
-# under a user-owned repository.
+# Uses GitHub org teams (Settings → Teams). Labels (team: persona, …) are applied
+# by workflows/pr-labeler.yml from labeler.yml; only entries here trigger review
+# requests.
+#
+# When several patterns match the same file, the last matching line wins.
+# Order: broad paths first, specific / cross-team paths later.
+#
+# Persona      @MatrAIx-ai/persona-team-maintainers
+# Environment  @MatrAIx-ai/env-eng-team-maintainers
+# Application  @MatrAIx-ai/application-team-maintainers
 
-# Default fallback
-* @ElegantLin
+# --- Persona team (data → schema → grounding) ---
+/persona/curation/           @MatrAIx-ai/persona-team-maintainers
+/persona/datasets/           @MatrAIx-ai/persona-team-maintainers
+/persona/schema/             @MatrAIx-ai/persona-team-maintainers
+/persona/reporting/          @MatrAIx-ai/persona-team-maintainers
+/persona/scripts/            @MatrAIx-ai/persona-team-maintainers
+/persona/validators/         @MatrAIx-ai/persona-team-maintainers
+/persona/tasks/              @MatrAIx-ai/persona-team-maintainers @MatrAIx-ai/application-team-maintainers
+/persona/                    @MatrAIx-ai/persona-team-maintainers
 
-# Core modules
-/persona/                 @ElegantLin
-/application/             @ElegantLin
-/environment/             @ElegantLin
+# --- Application team (scenarios, tasks, Cockpit) ---
+/application/persona_eval/   @MatrAIx-ai/application-team-maintainers @MatrAIx-ai/env-eng-team-maintainers
+/application/tasks/          @MatrAIx-ai/application-team-maintainers
+/application/task-spec/      @MatrAIx-ai/application-team-maintainers @MatrAIx-ai/env-eng-team-maintainers
+/application/scripts/        @MatrAIx-ai/application-team-maintainers @MatrAIx-ai/env-eng-team-maintainers
+/application/                @MatrAIx-ai/application-team-maintainers
 
-# Shared utilities and tooling
-/src/                     @ElegantLin
-/configs/                 @ElegantLin
-/apps/                    @ElegantLin
-/packages/                @ElegantLin
-/tests/                   @ElegantLin
+# --- Shared libraries (cross-module) ---
+/packages/persona-eval/      @MatrAIx-ai/env-eng-team-maintainers @MatrAIx-ai/application-team-maintainers
+/packages/rewardkit/         @MatrAIx-ai/env-eng-team-maintainers
+/packages/harbor-langsmith/  @MatrAIx-ai/env-eng-team-maintainers
+/packages/                   @MatrAIx-ai/env-eng-team-maintainers
 
-# Documentation, migration records, and repository metadata
-/docs/                    @ElegantLin
-/migration/               @ElegantLin
-/.github/                 @ElegantLin
-/CONTRIBUTING.md          @ElegantLin
-/README.md                @ElegantLin
-/pyproject.toml           @ElegantLin
+# --- Environment team (Harbor runtime, agents, execution backends) ---
+/environment/                @MatrAIx-ai/env-eng-team-maintainers
+/environment/task-environments/application/ @MatrAIx-ai/env-eng-team-maintainers @MatrAIx-ai/application-team-maintainers
+
+# --- Job recipes & shared config ---
+/configs/jobs/persona-task-grounding-job-recipe/ @MatrAIx-ai/persona-team-maintainers @MatrAIx-ai/env-eng-team-maintainers
+/configs/jobs/application-task-job-recipe/ @MatrAIx-ai/application-team-maintainers @MatrAIx-ai/env-eng-team-maintainers
+/configs/jobs/example-job-recipe/ @MatrAIx-ai/env-eng-team-maintainers @MatrAIx-ai/application-team-maintainers @MatrAIx-ai/persona-team-maintainers
+/configs/jobs/               @MatrAIx-ai/env-eng-team-maintainers
+/configs/                    @MatrAIx-ai/env-eng-team-maintainers
+
+# --- Apps, examples, viewer ---
+/apps/viewer/                @MatrAIx-ai/env-eng-team-maintainers
+/apps/                       @MatrAIx-ai/env-eng-team-maintainers
+/examples/                   @MatrAIx-ai/env-eng-team-maintainers
+
+# --- Source helpers (job builders shared by Application + Environment) ---
+/src/personabench/           @MatrAIx-ai/env-eng-team-maintainers @MatrAIx-ai/application-team-maintainers
+/src/                        @MatrAIx-ai/env-eng-team-maintainers
+
+# --- Tests (mirror module ownership) ---
+/tests/persona/              @MatrAIx-ai/persona-team-maintainers
+/tests/application/          @MatrAIx-ai/application-team-maintainers
+/tests/environment/          @MatrAIx-ai/env-eng-team-maintainers
+/tests/unit/application/     @MatrAIx-ai/application-team-maintainers @MatrAIx-ai/env-eng-team-maintainers
+/tests/unit/personabench/    @MatrAIx-ai/env-eng-team-maintainers @MatrAIx-ai/application-team-maintainers
+/tests/unit/agents/          @MatrAIx-ai/env-eng-team-maintainers
+/tests/unit/harbor/          @MatrAIx-ai/env-eng-team-maintainers
+/tests/unit/                 @MatrAIx-ai/env-eng-team-maintainers
+/tests/                      @MatrAIx-ai/env-eng-team-maintainers
+
+# --- Documentation (topic-specific; then repo-wide docs) ---
+/docs/personas/              @MatrAIx-ai/persona-team-maintainers @MatrAIx-ai/env-eng-team-maintainers @MatrAIx-ai/application-team-maintainers
+/docs/research/              @MatrAIx-ai/persona-team-maintainers @MatrAIx-ai/env-eng-team-maintainers @MatrAIx-ai/application-team-maintainers
+/docs/migration/             @MatrAIx-ai/persona-team-maintainers @MatrAIx-ai/env-eng-team-maintainers @MatrAIx-ai/application-team-maintainers
+/migration/                  @MatrAIx-ai/persona-team-maintainers @MatrAIx-ai/env-eng-team-maintainers @MatrAIx-ai/application-team-maintainers
+/docs/                       @MatrAIx-ai/persona-team-maintainers @MatrAIx-ai/env-eng-team-maintainers @MatrAIx-ai/application-team-maintainers
+/CONTRIBUTING.md             @MatrAIx-ai/persona-team-maintainers @MatrAIx-ai/env-eng-team-maintainers @MatrAIx-ai/application-team-maintainers
+/README.md                   @MatrAIx-ai/persona-team-maintainers @MatrAIx-ai/env-eng-team-maintainers @MatrAIx-ai/application-team-maintainers
+
+# --- CI & repository metadata ---
+/.github/workflows/          @MatrAIx-ai/env-eng-team-maintainers
+/.github/                    @MatrAIx-ai/env-eng-team-maintainers @MatrAIx-ai/persona-team-maintainers
+/.gitignore                  @MatrAIx-ai/env-eng-team-maintainers
+/pyproject.toml              @MatrAIx-ai/env-eng-team-maintainers
+/uv.lock                     @MatrAIx-ai/env-eng-team-maintainers
+
+# Admin fallback (unmatched paths)
+*                            @YuexingHao

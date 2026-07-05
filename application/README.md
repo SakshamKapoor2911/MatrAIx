@@ -1,131 +1,142 @@
-# Application team documentation
+# Application module
 
-> Part of [PersonaBench](../README.md). The Application module owns **persona-affiliated
-> product simulation scenarios**.
+> Part of [PersonaBench](../README.md). We own **persona-affiliated product
+> simulation scenarios** — surveys, chatbots, live web, and computer-use tasks.
 
-## New here?
+Welcome. If you are joining to design scenarios, run demos, or ship a new task,
+you are in the right place.
 
-**[QUICKSTART.md](QUICKSTART.md)** — install Docker, set an API key, run one survey
-with a persona, scale to a batch, play tasks in the **PersonaEval Cockpit**, create
-a new task. Written for contributors who are not full-time engineers.
+---
 
-This directory is the PersonaBench home for **persona-affiliated product simulation
-scenarios**, adapted from the MatrAIx application guides (shared runtimes,
-**Mode → auto**, `bench-dev-sample` personas, PersonaEval Cockpit).
+## Start here
 
-## Guides
+| You want to… | Go to |
+|--------------|-------|
+| Run your first persona survey (terminal) | **[QUICKSTART.md](QUICKSTART.md)** |
+| Play tasks in the UI | QUICKSTART **[§10 — PersonaEval Cockpit](QUICKSTART.md#10-personaeval-cockpit--play-tasks-visually)** |
+| Add a new task | [tasks/README.md](tasks/README.md) + [task-guide.md](task-guide.md) |
+| Pick agent + API keys | [choosing-an-agent.md](choosing-an-agent.md) |
+| Understand how runs execute | [environment/README.md](../environment/README.md) |
+| Use the HTTP API | [persona_eval/REST_API.md](persona_eval/REST_API.md) |
+
+**Time budget:** ~30–60 minutes for a first end-to-end pass (Docker image builds
+ dominate on web/CUA tasks).
+
+---
+
+## What Application delivers
+
+Each runnable scenario under `application/tasks/` defines:
+
+- a **persona-facing** scenario (`instruction.md` — no agent names)
+- task metadata (`task.toml` — type, domain, environment definition)
+- a **verifier** (`tests/` — shape, coverage, quality signals)
+- optional **batch reporting** (`reporting.json` — summaries and LLM judges)
+
+Persona profiles live in `persona/datasets/`. Tasks reference them via
+`persona_path=` at job launch — never copy persona YAML into application folders.
+
+```text
+application/
+  tasks/              Executable scenarios (survey, chat, web, os-app)
+  task-spec/          Shared contracts per interaction type
+  persona_eval/       Cockpit UI, FastAPI backend, remote runner client
+  scripts/            generate_application_job.py, report_job.py
+  QUICKSTART.md       Contributor walkthrough (terminal → batch → UI)
+  task-guide.md       Folder layout and reference tasks
+  choosing-an-agent.md
+  web-interaction.md
+```
+
+Shared Docker / sidecar stacks: `environment/task-environments/application/`.
+
+---
+
+## Task types at a glance
+
+| Type | Reference task | Agent (typical) | Docs |
+|------|------------------|-----------------|------|
+| Survey | `example-survey_product-feedback` | `persona-claude-code` | [task-spec/survey/](task-spec/survey/) |
+| Chatbot | `recommender-agent_chat_api` | `persona-claude-code` | [task-spec/chatbot/](task-spec/chatbot/) |
+| Web | `example-web-playwright_quote-choice` | `persona-openhands-sdk` | [web-interaction.md](web-interaction.md) |
+| OS / computer-use | `example-computer-use-ios_photo-access-review` | `persona-computer-1` | [task-spec/os-app/](task-spec/os-app/) |
+
+Copy the closest **`example-*`** sibling when adding a task. See
+[tasks/README.md](tasks/README.md) for the full checklist.
+
+---
+
+## Conventions (please follow)
+
+1. **`instruction.md` is persona-facing only** — scenario + output format. Put
+   agent names and smoke commands in the task **README** under *Suggested setup
+   (non-binding)*.
+2. **Harbor task names** use one slash: `personabench/application-{slug}`.
+3. **Generated job YAML** uses hyphenated slugs from folder names
+   (`example-survey-product-feedback-auto-n1.yaml`, not underscores).
+4. **Do not commit** bulk `jobs/` output — curated demo jobs in `jobs/` are
+   maintained intentionally; your local runs stay local unless asked otherwise.
+
+---
+
+## Scenario proposal template
+
+Use this when opening an Issue or design doc before coding:
+
+```text
+Scenario name:
+Task type:                # survey / chatbot / web / os-app
+Domain / vertical:
+Product or system under test:
+Task specification:       # episode + required artifacts
+Environment needs:        # sidecar, browser, credentials
+Persona inputs:           # cohort or dimensions (by reference)
+User goal and context:
+Metrics:                  # success, fidelity, friction, …
+Outputs:                  # trajectory, telemetry, reports
+Known limitations:
+```
+
+Domain inspiration:
+[application-domain-benchmark-catalog.md](../docs/research/application-domain-benchmark-catalog.md).
+
+---
+
+## Batch reporting
+
+Reporting is task-owned, not a separate app folder:
+
+| Piece | Location |
+|-------|----------|
+| Policy | `application/tasks/<name>/reporting.json` |
+| Rollup script | `application/scripts/report_job.py` → `jobs/<job>/aggregation.json` |
+| Cockpit / API | optional LLM judges when `PERSONAEVAL_REPORTING_ENABLE_LLM=1` |
+
+---
+
+## Guides index
 
 | Doc | Purpose |
 |-----|---------|
 | [QUICKSTART.md](QUICKSTART.md) | Zero → first run → batch → Cockpit → new task |
-| [task-guide.md](task-guide.md) | Application task folder structure and reference scenarios |
-| [task-spec/](task-spec/) | Shared specs for survey, chatbot, web, and OS-app tasks |
-| [web-interaction.md](web-interaction.md) | Playwright vs browser-use vs Cocoa vs CUA for live-web tasks |
-| [choosing-an-agent.md](choosing-an-agent.md) | Agent ↔ form mapping, models, and API keys |
-| [tasks/README.md](tasks/README.md) | Contributor checklist, reporting, interface contracts |
-| [scripts/README.md](scripts/README.md) | `generate_application_job.py`, `report_job.py` |
-| [persona_eval/README.md](persona_eval/README.md) | PersonaEval API, preflight, remote runner |
-
-## Paths in this repository
-
-| Kind | Path |
-|------|------|
-| Executable tasks | `application/tasks/` |
-| Team docs | `application/` (this directory) |
-| Shared runtimes | `environment/task-environments/application/` |
-| Job recipes | `configs/jobs/example-job-recipe/`, `configs/jobs/application-task-job-recipe/` |
-| PersonaEval app | `application/persona_eval/` |
-| Verifiers | `packages/rewardkit/` + per-task `tests/` |
-
-**Convention:** Harbor task format; `instruction.md` = scenario for the simulated
-user; persona lives in the agent layer (`-a persona-*` + `persona_path`). Agent
-choice belongs in README / Cockpit / job YAML — not in `instruction.md`.
+| [task-guide.md](task-guide.md) | Task folder structure |
+| [task-spec/](task-spec/) | Survey / chat / web / os-app contracts |
+| [web-interaction.md](web-interaction.md) | Playwright vs browser-use vs Cocoa vs CUA |
+| [choosing-an-agent.md](choosing-an-agent.md) | Agent ↔ form ↔ API keys |
+| [tasks/README.md](tasks/README.md) | Contributor checklist |
+| [scripts/README.md](scripts/README.md) | Job generation scripts |
+| [persona_eval/README.md](persona_eval/README.md) | PersonaEval app |
+| [persona_eval/UNIFIED_RUNTIME.md](persona_eval/UNIFIED_RUNTIME.md) | Local vs remote execution |
 
 ---
 
-## Goal
-
-Collect realistic scenarios where persona-affiliated agents evaluate products,
-workflows, assistants, and research questions — and make sure each scenario runs
-end-to-end inside Harbor and PersonaEval.
-
-Each application should define:
-
-- target domain
-- task setting
-- relevant persona types
-- required environment
-- interaction protocol
-- evaluation metrics
-- expected output format
-- example runs
-- known limitations
-
-## Scenario handoff template
-
-Use this format when proposing a new runnable application scenario:
-
-```text
-Scenario name:
-Task type:                # survey / chatbot / web / app
-Domain / vertical:
-Product or system under test:
-Task specification:       # what happens in the episode and what must be done
-Environment needs:        # surface, tools, initial state, data, credentials
-Persona inputs:           # referenced cohort or dimensions, not copied data
-User goal and context:    # motivation, prior knowledge, constraints
-Metrics:                  # task success, fidelity, friction, safety, etc.
-Outputs:                  # trajectory, telemetry, reports, artifacts
-```
-
-Example:
-
-```text
-Scenario name: Retail order-support refund handling
-Task type: chatbot
-Domain / vertical: Commerce & Retail / order support
-Product or system under test: retail order-support chatbot
-Task specification: simulated shoppers request a return or refund over
-  multi-turn chat; the bot must handle each request under the return policy.
-Environment needs: chat API connector, orders fixture, return policy document,
-  and deterministic task start state.
-Persona inputs: price sensitivity, age, shopping habits, tech savviness.
-User goal and context: ordered earbuds arrived late and the user wants a refund.
-Metrics: persona adherence, turns to resolution, frustration, policy compliance.
-Outputs: conversation trajectory and per-metric score report.
-```
-
-For broader domain inspiration, see
-[`docs/research/application-domain-benchmark-catalog.md`](../docs/research/application-domain-benchmark-catalog.md).
-
-## Current layout
-
-```text
-application/
-  task-spec/    Shared specs for survey, chatbot, web, and OS-app tasks.
-  persona_eval/ PersonaEval app, API, simulator, and frontend workbench.
-  scripts/      Job generation (`generate_application_job.py`) and batch rollups (`report_job.py`).
-  tasks/        Runnable survey, chat, web, and product tasks (each with `reporting.json`).
-  QUICKSTART.md, task-guide.md, web-interaction.md, choosing-an-agent.md
-```
-
-**Batch reporting** is not a separate folder. It lives in:
-
-- per-task **`reporting.json`** — context rules, summaries, judge directives
-- **`scripts/report_job.py`** — refreshes `jobs/<job_name>/aggregation.json`
-- **PersonaEval** — optional LLM reporting when `PERSONAEVAL_REPORTING_ENABLE_LLM=1`
-
-Applications should depend on persona inputs by reference. They should not copy
-large persona datasets into application folders.
-
-Keep new application contributions scoped to application-owned task, script,
-or PersonaEval folders. Do not commit generated job outputs under `jobs/`.
-
 ## Contributing
 
-- new task scenarios under `application/tasks/`
-- domain-specific benchmarks
-- evaluation metrics (`packages/rewardkit/`, per-task `reporting.json`)
-- batch rollups via `application/scripts/report_job.py`
+- New scenarios → `application/tasks/`
+- Metrics / judges → `reporting.json` + `packages/rewardkit/`
+- UI / API → `application/persona_eval/`
 
-See [../CONTRIBUTING.md](../CONTRIBUTING.md) if present in your checkout.
+Workflow and PR rules: [CONTRIBUTING.md](../CONTRIBUTING.md).
+
+Open Environment roadmap items (task review agent, multi-agent env, benchmark
+import) live in [environment/README.md](../environment/README.md#roadmap--open-work).
