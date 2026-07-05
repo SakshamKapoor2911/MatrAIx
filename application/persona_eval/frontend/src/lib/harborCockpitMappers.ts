@@ -5,7 +5,6 @@ import type {
   PersonaEvalPrompts,
   PersonaEvalQuestionnaire,
   PersonaEvalResult,
-  RecommendedItem,
   SurveyEvalJobView,
   SurveyResult,
   TurnView,
@@ -40,33 +39,16 @@ function asTurns(transcript: unknown): TurnView[] {
   return transcript.map((turn) => normalizeTurnDict(turn as Record<string, unknown>));
 }
 
-function normalizeRecommendedItems(items: unknown): RecommendedItem[] {
-  if (!Array.isArray(items)) return [];
-  return items.map((item) => {
-    const raw = item as Record<string, unknown>;
-    const itemId = String(raw.itemId ?? raw.id ?? "");
-    return {
-      itemId,
-      title: (raw.title as string | undefined) ?? null,
-      rank: (raw.rank as number | undefined) ?? null,
-      meta: (raw.meta as string | undefined) ?? null,
-      score: (raw.score as number | undefined) ?? null,
-    };
-  });
-}
-
 export function normalizeTurnDict(turn: Record<string, unknown>): TurnView {
   const assistant = turn.assistantMessage;
   const legacyAssistant = turn.assistantReply;
   const userMessage = turn.userMessage ?? turn.user_message;
-  const recommendedItems = turn.recommendedItems ?? turn.recommended_items;
   const durationSeconds = turn.durationSeconds ?? turn.duration_seconds;
   const rawTurnId = turn.turnId ?? turn.turnIndex ?? turn.index;
   return {
     turnId: rawTurnId != null ? String(rawTurnId) : "",
     userMessage: String(userMessage ?? ""),
     assistantMessage: String(assistant ?? legacyAssistant ?? ""),
-    recommendedItems: normalizeRecommendedItems(recommendedItems),
     durationSeconds: (durationSeconds as number | null | undefined) ?? null,
     plan: Array.isArray(turn.plan) ? (turn.plan as TurnView["plan"]) : [],
     nativeRaw: typeof turn.nativeRaw === "string" ? turn.nativeRaw : null,
@@ -79,7 +61,6 @@ export function draftTurnToView(draft: HarborDraftTurn): TurnView {
     turnId: draft.turnIndex != null ? String(draft.turnIndex) : "draft",
     userMessage: draft.userMessage ?? "",
     assistantMessage: draft.assistantMessage ?? "",
-    recommendedItems: draft.recommendedItems ?? [],
     durationSeconds: draft.durationSeconds ?? null,
     plan: [],
   };
@@ -181,7 +162,6 @@ export function applyHarborTrialEvents(
     message?: string;
     userMessage?: string;
     assistantMessage?: string;
-    recommendedItems?: unknown;
     durationSeconds?: number | null;
   }>,
   prev: HarborCockpitLiveState,
@@ -202,7 +182,6 @@ export function applyHarborTrialEvents(
         turnIndex: event.turnIndex,
         userMessage: event.message,
         assistantMessage: "",
-        recommendedItems: [],
       };
       phase = "recommender_thinking";
     } else if (event.type === "assistant_message") {
@@ -210,7 +189,6 @@ export function applyHarborTrialEvents(
         turnIndex: event.turnIndex ?? draftTurn?.turnIndex,
         userMessage: event.userMessage ?? draftTurn?.userMessage ?? "",
         assistantMessage: event.assistantMessage ?? "",
-        recommendedItems: normalizeRecommendedItems(event.recommendedItems),
         durationSeconds: event.durationSeconds ?? null,
       };
       phase = "persona_thinking";
@@ -221,7 +199,6 @@ export function applyHarborTrialEvents(
           turnIndex: draftTurn?.turnIndex,
           userMessage: event.userMessage,
           assistantMessage: draftTurn?.assistantMessage ?? "",
-          recommendedItems: draftTurn?.recommendedItems ?? [],
         };
       }
     } else if (event.type === "turn" && event.turn) {

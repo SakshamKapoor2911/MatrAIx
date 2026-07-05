@@ -388,6 +388,7 @@ export interface WebEvalTask {
   outputArtifact: string;
   submissionProfile: string;
   profileMarkdown?: string;
+  instructionMarkdown?: string;
 }
 
 export interface WebEvalTasksResponse {
@@ -503,6 +504,7 @@ export interface OsAppEvalTask {
   /** Harbor persona-computer-1 backend: docker | macos | ios (use.computer). */
   osAppBackend?: string;
   profileMarkdown?: string;
+  instructionMarkdown?: string;
 }
 
 export interface OsAppEvalTasksResponse {

@@ -195,6 +195,7 @@ function TraceHeroScreenshot({
             src={event.screenshotUrl as string}
             alt={`Step ${event.step}`}
             className="max-h-[360px] w-full bg-surface-lowest object-contain"
+            onError={() => setImgError(true)}
           />
         </button>
       ) : (

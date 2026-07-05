@@ -879,7 +879,8 @@ type CountBarItem = {
 }
 
 function formatNumericalSummary(field: AggregationField | null, suffix = ""): string {
-  const avg = field?.numerical?.avg
+  if (!field) return "—"
+  const avg = field.numerical?.avg
   if (avg == null) return "—"
   const min = field.numerical?.min
   const max = field.numerical?.max

@@ -12,7 +12,6 @@ import type { ReactNode } from "react";
 import { SCORE_BAND_CLASS, Sym, type ScoreBand } from "./cockpit/cockpitShared";
 import type {
   Domain,
-  PersonaEvalMetricScores,
   PersonaEvalResult,
   SurveyResult,
   TrialEvaluationArtifact,
