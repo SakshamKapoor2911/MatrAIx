@@ -2,16 +2,18 @@
 # Validates the full OASIS-compatible state layer: 16-table schema, action processing,
 # trace recording, recommendation algorithms, and the HTTP API contract.
 
-import pytest
+import sys
 from pathlib import Path
 
-import sys
+import pytest
+from fastapi.testclient import TestClient
+
 sys.path.insert(0, str(Path(__file__).resolve().parents[4]))
 
 from environments.oasis.platform.database import Database
-from environments.oasis.platform.actions import ActionProcessor, ActionType, ActionResult
+from environments.oasis.platform.actions import ActionProcessor
 from environments.oasis.platform.recsys import RecSys, RecSysType
-from environments.oasis.platform.server import PlatformState
+from environments.oasis.platform.server import PlatformState, create_app
 
 
 @pytest.fixture
@@ -101,6 +103,7 @@ class TestDatabase:
         db.signup_user(0, "u", "U")
         pid = db.create_post(1, "Post")
         cid = db.create_comment(pid, 1, "Nice post!")
+        assert cid == 1
         comments = db.get_comments_for_post(pid)
         assert len(comments) == 1
         assert comments[0]["content"] == "Nice post!"
@@ -129,6 +132,7 @@ class TestDatabase:
     def test_record_trace(self, db):
         db.signup_user(0, "u", "U")
         tid = db.record_trace(1, "create_post", {"content": "hello"})
+        assert tid == 1
         traces = db.get_traces(user_id=1)
         assert len(traces) == 1
         assert traces[0]["action"] == "create_post"
@@ -307,6 +311,44 @@ class TestPlatformState:
         result = state.process_action(1, "create_post", {"content": "Hello"})
         assert result.success is True
         state.close()
+
+
+class TestPlatformApi:
+    def test_posts_and_threads_include_authors_and_comments(self):
+        with TestClient(create_app()) as client:
+            signup = client.post(
+                "/signup/bulk",
+                json={
+                    "users": [
+                        {"agent_id": 0, "user_name": "alice", "name": "Alice"},
+                        {"agent_id": 1, "user_name": "bob", "name": "Bob"},
+                    ]
+                },
+            )
+            assert signup.status_code == 200
+
+            post = client.post("/seed_post", json={"user_id": 1, "content": "hello from alice"})
+            assert post.status_code == 200
+
+            comment = client.post(
+                "/action",
+                json={
+                    "user_id": 2,
+                    "action_type": "create_comment",
+                    "params": {"post_id": 1, "content": "reply from bob"},
+                },
+            )
+            assert comment.status_code == 200
+            assert comment.json()["success"] is True
+
+            posts = client.get("/posts").json()
+            assert posts[0]["author"] == "Alice"
+            assert posts[0]["num_comments"] == 1
+
+            threads = client.get("/threads").json()["threads"]
+            assert threads[0]["author"] == "Alice"
+            assert threads[0]["comments"][0]["author"] == "Bob"
+            assert threads[0]["comments"][0]["content"] == "reply from bob"
 
     def test_advance_step(self):
         state = PlatformState(db_path=":memory:", recsys_type="random")

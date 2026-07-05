@@ -109,9 +109,10 @@ def _posts_from_http() -> list[dict[str, Any]]:
     """Preferred path: the platform's /posts endpoint (if it has it)."""
     try:
         r = requests.get(f"{PLATFORM_URL}/posts?limit=40", timeout=5)
-        if r.ok and isinstance(r.json(), list):
-            return r.json()
-    except requests.RequestException:
+        data = r.json()
+        if r.ok and isinstance(data, list):
+            return data
+    except (requests.RequestException, ValueError):
         pass
     return []
 
@@ -274,9 +275,10 @@ def threads_state(limit: int = 40) -> dict[str, Any]:
     """
     try:
         r = requests.get(f"{PLATFORM_URL}/threads?limit={limit}", timeout=5)
-        if r.ok and isinstance(r.json(), dict) and "threads" in r.json():
-            return r.json()
-    except requests.RequestException:
+        data = r.json()
+        if r.ok and isinstance(data, dict) and "threads" in data:
+            return data
+    except (requests.RequestException, ValueError):
         pass
     if not DB_PATH or not os.path.exists(DB_PATH):
         return {"threads": []}
@@ -474,7 +476,7 @@ FEED_PAGE = """<!doctype html><html><head><meta charset=utf-8>
  <span class=pill id=stat>&mdash;</span>
  <a class=pill href="/">&#9673; 3D network &rarr;</a>
 </div>
-<div id=wrap id=feed></div>
+<div id=wrap></div>
 <script>
 function hue(id){return `hsl(${(id*47)%360} 72% 62%)`;}
 const esc=t=>(t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
