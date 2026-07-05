@@ -15,7 +15,12 @@ snapshots, generated jobs, and full persona datasets are intentionally excluded.
 
 ## Install
 
-From the repository root:
+Use the **wide install** in [README.md — Step 1](../README.md#step-1--clone-and-install)
+from the repository root (root package, `persona-eval`, `harbor-langsmith`,
+`rewardkit`, `simpleqa`, and test deps). That is the default for new
+contributors.
+
+Minimal install (core Harbor only, no optional packages):
 
 ```bash
 uv venv --python 3.12
@@ -23,20 +28,17 @@ uv pip install -e .
 uv pip install pytest pytest-asyncio
 ```
 
-Install optional packages only when you need them:
-
-```bash
-uv pip install -e packages/harbor-langsmith
-uv pip install -e packages/rewardkit
-uv pip install -e environment/adapters/simpleqa
-```
-
 ## Verify The Checkout
 
 Run the curated Python test suite after installing the optional packages above:
 
 ```bash
-uv run pytest tests/ packages/harbor-langsmith/tests/ packages/rewardkit/tests/
+PYTHONPATH=.:environment/runtime:packages/persona-eval/src:application/persona_eval \
+  uv run pytest tests/ \
+    packages/harbor-langsmith/tests/ \
+    packages/rewardkit/tests/ \
+    application/persona_eval/backend/tests/ \
+    tests/environment/test_application_tasks.py
 ```
 
 If you only installed the root package, run the core tests:

@@ -34,9 +34,10 @@ than confounders:
 
 Expected contents:
 
-- `application/tasks/` for runnable survey, chat, web, and product tasks.
-- `application/reporting/` for application result summaries.
-- `application/scripts/` for application job generation helpers.
+- `application/tasks/` for runnable survey, chat, web, and product tasks (each
+  task carries its own `reporting.json` policy).
+- `application/scripts/` for application job generation and batch reporting
+  rollups (`report_job.py` → `jobs/<job_name>/aggregation.json`).
 - `application/persona_eval/` for the PersonaEval app/API/frontend plus survey,
   chatbot, and web evaluation helpers.
 
@@ -60,6 +61,9 @@ Expected contents:
 
 Persona agents live here because they are execution mechanisms. The persona
 schema and datasets they consume live in `persona/`.
+
+For execution planes, environment variables, contributor guidance, and the
+Environment roadmap, see [environment/README.md](../environment/README.md).
 
 ## Shared Packages
 

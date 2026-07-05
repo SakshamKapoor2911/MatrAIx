@@ -1,121 +1,148 @@
 # PersonaBench
 
-PersonaBench is the focused home for persona data, persona schemas, persona
-evaluation tasks, and persona-conditioned simulation examples curated from
-MatrAIx.
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/)
+[![Discord](https://img.shields.io/badge/Discord-join-5865F2?logo=discord&logoColor=white)](https://discord.gg/vruP88PTZ)
 
-The repository is organized around three contribution modules:
+> **Simulate before reality.**
 
-```text
-persona/       Persona schemas, datasets, curation pipelines, and persona bench tasks.
-application/   Product and research scenarios that consume personas.
-environment/   Runtime, agents, job recipes, viewer, and execution infrastructure.
-apps/          Repo-local tool frontends paired with runtime APIs.
-```
+Large-scale, persona-driven agent simulation — test products, conversations, and
+workflows before they hit real users.
 
-The rule of thumb is simple:
+PersonaBench pairs synthetic personas with LLM agents in reproducible Harbor
+tasks: survey, chat, live web, and desktop computer-use. **Application tasks**
+are designed to be configured and inspected in the **PersonaEval Cockpit**;
+`harbor view` remains available for raw trajectory and log debugging.
 
-- `persona/` defines who the simulated user is and how persona adherence is
-  evaluated.
-- `application/` defines what scenario, product, or workflow the simulated user
-  interacts with.
-- `environment/` defines how the simulation runs, logs, and verifies work.
-- `apps/` contains developer-facing tool frontends, currently the viewer UI for
-  `harbor view`.
+**North star:** toward 8.3B persona-scale simulation. Today the repo ships a
+working minimal stack you can run locally with Docker.
 
-Shared libraries may live under `packages/` when they are genuinely reusable.
-Large generated outputs, raw dumps, and migration snapshots should not be
-merged into `main`.
+---
 
-## Current Clean-Main State
+## Requirements
 
-This branch is intentionally not a byte-for-byte copy of the old MatrAIx
-`main`. It keeps the runnable and reviewable parts of MatrAIx under stable
-module boundaries:
+- [Docker](https://docs.docker.com/get-docker/)
+- [uv](https://docs.astral.sh/uv/) and Python 3.12
+- Node.js 20+ (Cockpit / viewer frontends only)
+- Model API keys for persona-agent examples — [choosing-an-agent.md](application/choosing-an-agent.md)
 
-- `persona/`: persona schema, curation utilities, sample datasets, persona
-  grounding tasks, bench tasks, reporting, and validators.
-- `application/`: application task definitions, reporting code, and curated
-  recipe generation helpers.
-- `environment/`: Harbor runtime, persona agents, adapter foundation, SimpleQA
-  adapter, curated job recipes, and environment docs.
-- `apps/viewer/`: the repo-local viewer frontend for inspecting Harbor jobs.
-- `packages/`: optional reusable packages such as `harbor-langsmith` and
-  `rewardkit`.
+---
 
-Historical run outputs, generated datasets, large fixtures, screenshots,
-recordings, and raw migration snapshots are tracked as external artifacts
-instead of being committed to `main`; see
-[the artifact handoff checklist](migration/matraix/README.md).
-
-## Quick Start
+## Installation
 
 ```bash
+git clone <your-fork-url> && cd PersonaBench
 uv venv --python 3.12
 uv pip install -e .
-uv pip install pytest pytest-asyncio
+uv pip install pytest pytest-asyncio httpx
+uv pip install -e packages/persona-eval
 uv pip install -e packages/harbor-langsmith
 uv pip install -e packages/rewardkit
 uv pip install -e environment/adapters/simpleqa
-uv run pytest tests/ packages/harbor-langsmith/tests/ packages/rewardkit/tests/
-uv run ruff check .
 ```
 
-Run a local smoke job that does not need model credentials:
+All Harbor commands: **`uv run harbor …`**
+
+---
+
+## Quick start
+
+**Smoke** (terminal — all teams, no API key):
 
 ```bash
 uv run harbor run -c configs/jobs/example-job-recipe/harbor-smoke-local.yaml
 ```
 
-Run the curated persona application example after setting the required model
-API key:
+**Application tasks** — follow [QUICKSTART.md](application/QUICKSTART.md) (terminal → batch → UI).
+For interactive play, jump to [Cockpit §10](application/QUICKSTART.md#10-personaeval-cockpit--play-tasks-visually)
+(Node.js 20+).
+
+Terminal batch runs (CI, scripts) use the same Harbor jobs, e.g.:
 
 ```bash
 export ANTHROPIC_API_KEY="sk-ant-..."
 uv run harbor run -c configs/jobs/example-job-recipe/appSim-example-survey-local.yaml
 ```
 
-More setup, optional package, adapter, viewer, and artifact details are in
-[Running PersonaBench](docs/running.md).
+**Inspect** — Cockpit **Runs** for cohort debrief; `uv run harbor view jobs/<job_name> --build`
+when you need raw ATIF trajectories, agent logs, or file-level artifacts.
 
-## Persona Data
+More: [docs/running.md](docs/running.md) · [Architecture](docs/architecture.md)
 
-Persona schema, datasets, curation pipelines, collaborator packages, and
-artifact handoff guidance live under [persona/](persona/README.md).
+---
 
-Useful entry points:
+## Teams
 
-- [Existing-data curation](persona/curation/existing_data/README.md) documents
-  the Wikipedia and Amazon package-generation flow.
-- `persona/curation/existing_data/scripts/make_package.py` is the preferred
-  owner-facing package generator for both `--source wiki` and
-  `--source amazon`.
-- [Artifact handoff](migration/matraix/README.md) lists large generated data
-  that stays outside `main` until uploaded externally.
+Three teams own the repo. Pick **one row** to onboard; details live in each
+team's docs — not duplicated here.
 
-## Research Notes
+![PersonaBench architecture](docs/assets/matraix-architecture.png)
 
-The old MatrAIx literature review lived inside team planning files. Clean main
-keeps the useful references as module-specific research notes:
+| Team | Path | Scope | Start here |
+|------|------|-------|------------|
+| **Persona** | [`persona/`](persona/) | **Who** — data curation → dimension schema → grounding benchmarks | [docs/personas/README.md](docs/personas/README.md) |
+| **Application** | [`application/`](application/) | **What** — scenarios, tasks, metrics; play & debrief in Cockpit | [QUICKSTART.md](application/QUICKSTART.md) · [Cockpit §10](application/QUICKSTART.md#10-personaeval-cockpit--play-tasks-visually) |
+| **Environment** | [`environment/`](environment/) | **How** — Harbor runtime, agents, task environments; harbor view for debug | [environment/README.md](environment/README.md) |
 
-- [Persona related work](docs/research/persona-related-work.md)
-- [Behavior-grounded personas](docs/research/behavior-grounded-personas.md)
-- [AutoPersona causal schema-learning proposal](docs/research/autopersona.md)
-- [Application related work](docs/research/application-related-work.md)
-- [Application areas taxonomy](docs/research/application-areas-taxonomy.md)
-- [Application domain benchmark catalog](docs/research/application-domain-benchmark-catalog.md)
-- [Environment related work](docs/research/environment-related-work.md)
+---
 
-The source environment review was much thinner than the application and
-persona reviews. The environment note records the original environment entries
-and cross-links environment-relevant benchmark references that were originally
-written in the application review.
+## Repository layout
 
-Start here:
+```text
+PersonaBench/
+├── persona/           curation · schema · datasets · bench tasks · reporting
+├── application/       tasks · task-spec · persona_eval (Cockpit) · QUICKSTART
+├── environment/       runtime/harbor · agents · task-environments · harbor view · adapters
+├── docs/personas/     Persona team guides (data → schema → grounding)
+├── configs/jobs/      curated Harbor recipes
+├── packages/          persona-eval · rewardkit · harbor-langsmith
+├── jobs/              run outputs (local; small demos may be checked in)
+└── docs/              architecture · running · research
+```
 
-- [Architecture](docs/architecture.md)
-- [Running PersonaBench](docs/running.md)
-- [Research notes](docs/research/README.md)
-- [Contributing](CONTRIBUTING.md)
-- [MatrAIx migration plan](docs/migration/matraix-import-plan.md)
-- [MatrAIx merge log](docs/migration/matraix-merge-log.md)
+Large generated datasets stay outside git — [artifact handoff](migration/matraix/README.md).
+
+---
+
+## Join the project
+
+Community onboarding only — **which team and which doc** are in the [Teams](#teams)
+table above.
+
+[![Discord](https://img.shields.io/badge/Discord-join%20PersonaBench-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/vruP88PTZ)
+[![Google Form](https://img.shields.io/badge/Google%20Form-join%20PersonaBench-4285F4?style=for-the-badge&logo=googleforms&logoColor=white)](https://forms.gle/hwEHng5HGWRqcJue9)
+
+1. Join Discord — nickname **`Full Name - Affiliation`**. Fill the Google Form
+   (background, team placement, paper authorship / acknowledgements).
+2. Open **Start here** for your team (Teams table).
+3. Complete one hands-on pass in that doc. Application team: configure and run in
+   **Cockpit**; use `harbor view` when you need low-level traces.
+4. Read **[CONTRIBUTING.md](CONTRIBUTING.md)** before opening a PR.
+
+---
+
+## Vision
+
+**Roadmap**
+
+- **Stage 1 — Minimal stack.** Persona schema & dev pool; survey/chat/web/os-app tasks; adherence metrics; telemetry.
+- **Stage 2 — Core dataset & benchmark.** Scaled cohorts, domain subsets, automatic evaluation.
+- **Stage 3 — Environment expansion.** Long-horizon tasks, memory-enabled agents, multi-agent interaction, friction simulation.
+- **Stage 4 — Simulated society.** Social graphs, group dynamics, information diffusion.
+
+**Research questions** (cross-team)
+
+- How should synthetic personas be represented, and how do we measure adherence?
+- How consistent are LLM agents across long interactions?
+- Can simulated users predict real user preferences?
+- How do multi-agent simulations differ from single-agent feedback?
+- Can lightweight self-evolving memory make agents better human stand-ins?
+- What are the failure modes of persona-based simulation?
+
+Literature: [docs/research/](docs/research/README.md)
+
+---
+
+## License
+
+Apache 2.0 — see [LICENSE](LICENSE).

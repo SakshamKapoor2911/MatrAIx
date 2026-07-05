@@ -14,7 +14,7 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+/lib/
 !apps/viewer/app/lib/
 !apps/viewer/app/lib/**
 lib64/
@@ -254,3 +254,18 @@ configs/jobs/persona-task-grounding-job-recipe/*.yaml
 configs/jobs/persona-task-grounding-job-recipe/*.meta.json
 !configs/jobs/persona-task-grounding-job-recipe/personaBench-example-survey-product-feedback-economic-motivation-pg2.yaml
 !configs/jobs/persona-task-grounding-job-recipe/personaBench-example-survey-product-feedback-economic-motivation-pg2.meta.json
+
+# Local Harbor job outputs (recipes live under configs/jobs/)
+/jobs/*
+
+# PersonaEval local runtime cache (Cockpit / harness sessions)
+/data/cache/
+
+configs/jobs/_generated/
+
+# Local planning notes (not for git)
+plan.md
+user-simulator-chat-design.md
+
+# Generated at runtime by PersonaEval sidecar compose helpers
+**/.persona_eval_sidecar/
