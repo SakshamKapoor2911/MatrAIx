@@ -49,7 +49,7 @@ uv run python application/scripts/generate_application_job.py \
 export ANTHROPIC_API_KEY="sk-ant-..."
 export OPENAI_API_KEY="sk-..."
 export MATRIX_CHATBOT_TASK_PATH="application/tasks/recommender-agent_chat_api"
-uv run harbor run -c configs/jobs/application-task-job-recipe/recommender-agent_chat_api-auto-n1.yaml
+uv run harbor run -c configs/jobs/application-task-job-recipe/recommender-agent-chat-api-auto-n1.yaml
 ```
 
 See [Application Quickstart](../../QUICKSTART.md) for the UI path.

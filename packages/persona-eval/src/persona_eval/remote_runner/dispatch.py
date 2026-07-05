@@ -8,6 +8,22 @@ import subprocess
 from pathlib import Path
 from typing import Any, Callable, Sequence
 
+_ALLOWED_REMOTE_HARBOR_ENV_KEYS = frozenset({"PYTHONPATH"})
+
+
+def is_allowed_remote_harbor_env_key(key: str) -> bool:
+    """Return True when ``key`` may cross the Remote Runner HTTP boundary."""
+    return key in _ALLOWED_REMOTE_HARBOR_ENV_KEYS or key.startswith("MATRIX_")
+
+
+def filter_remote_harbor_payload_env(env: dict[str, Any]) -> dict[str, str]:
+    """Drop secrets and unrelated process env from a remote ``harbor_job`` payload."""
+    return {
+        str(key): str(value)
+        for key, value in env.items()
+        if is_allowed_remote_harbor_env_key(str(key))
+    }
+
 
 def resolve_repo_root(payload: dict[str, Any]) -> Path:
     raw = str(payload.get("repoRoot") or "").strip()
@@ -20,8 +36,8 @@ def build_harbor_env(*, repo_root: Path, payload: dict[str, Any]) -> dict[str, s
     env = dict(os.environ)
     extra = payload.get("env")
     if isinstance(extra, dict):
-        for key, value in extra.items():
-            env[str(key)] = str(value)
+        for key, value in filter_remote_harbor_payload_env(extra).items():
+            env[key] = value
     existing = env.get("PYTHONPATH", "")
     path_entries = [entry for entry in existing.split(":") if entry]
     required_paths = [
@@ -49,7 +65,7 @@ def default_harbor_command() -> list[str]:
     override = os.environ.get("REMOTE_RUNNER_HARBOR_COMMAND", "").strip()
     if override:
         return shlex.split(override)
-    from environment.integrations.persona_eval.harbor.persona_eval import (
+    from persona_eval.harbor.persona_eval import (
         _default_harbor_command,
     )
 

@@ -116,8 +116,10 @@ def test_options_environment_block(config_manager):
         "resources",
         "agent",
         "promptOwnership",
+        "executionPlane",
+        "remoteRunnerConfigured",
     }
-    assert env["runtime"] == "Local direct runner"
+    assert env["runtime"] == "In-process Harbor runner"
     assert env["personaAgent"] == "PersonaEval simulated user"
     assert env["personaModel"] == "anthropic/claude-haiku-4-5"
     assert env["applicationApi"] == "direct application adapter"

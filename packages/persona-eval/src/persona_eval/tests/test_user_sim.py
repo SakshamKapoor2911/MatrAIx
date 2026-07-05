@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from environment.integrations.persona_eval.task_content_bundle import TaskContentBundle
+from persona_eval.task_content_bundle import TaskContentBundle
 from persona_eval.types import Persona, PersonaEvalConfig, Questionnaire
 from persona_eval.user_sim.runner import run_persona_eval
 from persona_eval.user_sim.session import UserSimSession

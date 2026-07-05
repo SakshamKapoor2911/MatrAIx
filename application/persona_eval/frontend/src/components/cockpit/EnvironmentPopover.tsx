@@ -90,7 +90,7 @@ export function EnvironmentPanel({ environment, applicationId }: EnvironmentPane
         </span>
       </div>
       <div className="space-y-3 text-[12px]">
-        <EnvRow label="Runtime" value={environment?.runtime ?? "Local direct runner"} />
+        <EnvRow label="Runtime" value={environment?.runtime ?? "In-process Harbor runner"} />
         <EnvRow label="Application API" value={environment?.applicationApi ?? "direct application adapter"} />
         <EnvRow label="Selection" value={app?.selection ?? environment?.ranker ?? "application ranking"} />
         <EnvRow label="Agent" value={app?.agent ?? environment?.agent ?? "chatbot application adapter"} />
@@ -137,7 +137,7 @@ export function EnvironmentPopover({ environment }: EnvironmentPopoverProps) {
     };
   }, [open]);
 
-  const runtime = environment?.runtime ?? "Local direct runner";
+  const runtime = environment?.runtime ?? "In-process Harbor runner";
   const runtimeRows: Array<{ label: string; value: string }> = [
     { label: "Runtime", value: runtime },
     { label: "Persona", value: environment?.personaAgent ?? "PersonaEval simulated user" },

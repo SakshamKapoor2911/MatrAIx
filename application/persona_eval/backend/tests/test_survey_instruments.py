@@ -10,7 +10,7 @@ from backend.service.survey_questionnaire_catalog import (
     get_survey_questionnaire,
     list_survey_questionnaires,
 )
-from environment.integrations.persona_eval.survey_task_content import (
+from persona_eval.survey_task_content import (
     load_survey_task_content_for_questionnaire_id,
 )
 

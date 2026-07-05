@@ -13,13 +13,13 @@ from harbor.environments.base import BaseEnvironment
 from harbor.models.agent.context import AgentContext
 from harbor.models.agent.name import AgentName
 
-from environment.integrations.persona_eval.harbor.persona_eval import resolve_repo_root
-from environment.integrations.persona_eval.survey_task_content import (
+from persona_eval.harbor.persona_eval import resolve_repo_root
+from persona_eval.survey_task_content import (
     load_survey_task_content_for_questionnaire_id,
     load_survey_task_content_for_task_path,
 )
-from environment.integrations.persona_eval.harbor.trial_events import TrialEventWriter
-from environment.integrations.persona_eval.local.survey_eval import LocalSurveyEvalRunner
+from persona_eval.harbor.trial_events import TrialEventWriter
+from persona_eval.inprocess.survey_eval import InprocessSurveyEvalRunner
 from personabench.agents.persona.mixin import PersonaMixin
 from persona_eval.types import Persona as EvalPersona
 
@@ -184,7 +184,7 @@ class PersonaJsonSurvey(PersonaMixin, BaseAgent):
         def on_event(event: dict) -> None:
             event_writer.append(event)
 
-        result = LocalSurveyEvalRunner()(
+        result = InprocessSurveyEvalRunner()(
             persona,
             instrument,
             config=None,

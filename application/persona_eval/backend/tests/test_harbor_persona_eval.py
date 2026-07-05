@@ -4,7 +4,7 @@ from pathlib import Path
 import pytest
 import yaml
 
-from environment.integrations.persona_eval.harbor.persona_eval import (
+from persona_eval.harbor.persona_eval import (
     HarborPersonaEvalRunner,
     _harbor_failure_summary,
     build_chatbot_simulation_prompt,
@@ -703,11 +703,11 @@ def test_harbor_failure_summary_reports_controller_tool_errors(tmp_path):
 def test_resolve_repo_root_handles_local_and_container_layouts():
     assert resolve_repo_root(
         Path(
-            "/workspace/environment/integrations/persona_eval/harbor/persona_eval.py"
+            "/workspace/packages/persona-eval/src/persona_eval/harbor/persona_eval.py"
         )
     ) == Path("/workspace")
     assert resolve_repo_root(
-        Path("/app/environment/integrations/persona_eval/harbor/persona_eval.py")
+        Path("/app/packages/persona-eval/src/persona_eval/harbor/persona_eval.py")
     ) == Path("/app")
 
 

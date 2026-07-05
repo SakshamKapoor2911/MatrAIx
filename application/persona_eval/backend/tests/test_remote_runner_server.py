@@ -7,8 +7,8 @@ import pytest
 pytest.importorskip("fastapi")
 from fastapi.testclient import TestClient
 
-from environment.integrations.persona_eval.remote_runner.dispatch import run_harbor_job
-from environment.integrations.persona_eval.remote_runner.server import create_app
+from persona_eval.remote_runner.dispatch import run_harbor_job
+from persona_eval.remote_runner.server import create_app
 
 
 def test_remote_runner_server_harbor_job(tmp_path, monkeypatch) -> None:
@@ -23,7 +23,7 @@ def test_remote_runner_server_harbor_job(tmp_path, monkeypatch) -> None:
 
         return run_harbor_job(payload, command_runner=_runner)
 
-    from environment.integrations.persona_eval import remote_runner
+    from persona_eval import remote_runner
 
     monkeypatch.setattr(remote_runner.server, "run_harbor_job", _fake_harbor)
     monkeypatch.setenv("REMOTE_RUNNER_INLINE", "1")

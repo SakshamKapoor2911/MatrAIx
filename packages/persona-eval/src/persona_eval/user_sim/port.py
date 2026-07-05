@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any, Dict, Protocol, Sequence
 
-from environment.integrations.persona_eval.persona_exposure import build_persona_exposure
+from persona_eval.persona_exposure import build_persona_exposure
 
 
 class ChatSessionPort(Protocol):

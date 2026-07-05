@@ -8,10 +8,10 @@ from types import SimpleNamespace
 
 import pytest
 
-import environment.integrations.persona_eval.harbor.chat_eval as chat_eval_module
-from environment.integrations.persona_eval.chatbot_task_config import ChatbotTaskConfig
-from environment.integrations.persona_eval.harbor.chat_eval import create_harbor_chat_session
-from environment.integrations.persona_eval.harbor.chat_mcp_session import (
+import persona_eval.harbor.chat_eval as chat_eval_module
+from persona_eval.chatbot_task_config import ChatbotTaskConfig
+from persona_eval.harbor.chat_eval import create_harbor_chat_session
+from persona_eval.harbor.chat_mcp_session import (
     HarborMcpChatSession,
     harbor_chat_mcp_url_from_task_path,
 )
@@ -228,7 +228,7 @@ async def test_run_harbor_chat_eval_for_persona_uses_mcp_session(
         }
 
     monkeypatch.setattr(
-        "environment.integrations.persona_eval.harbor.persona_eval._repo_root",
+        "persona_eval.harbor.persona_eval._repo_root",
         lambda: tmp_path,
     )
     monkeypatch.setattr(

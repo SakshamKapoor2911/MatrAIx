@@ -12,8 +12,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Literal
 
-from environment.integrations.persona_eval.harbor.persona_eval import _repo_root
-from environment.integrations.persona_eval.local.chatbot_eval import _sidecar_base_url
+from persona_eval.harbor.persona_eval import _repo_root
+from persona_eval.inprocess.chatbot_eval import _sidecar_base_url
 
 
 @dataclass(frozen=True)
@@ -137,7 +137,7 @@ def _compose_project(application_id: str) -> str:
 
 
 def _standalone_compose_path(spec: SidecarSpec, compose_dir: Path) -> Path:
-    from environment.integrations.persona_eval.local.chatbot_sidecar_compose import (
+    from persona_eval.inprocess.chatbot_sidecar_compose import (
         write_standalone_sidecar_compose,
     )
 

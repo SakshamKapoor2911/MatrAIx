@@ -26,7 +26,7 @@ uv run python application/scripts/generate_application_job.py \
 
 export ANTHROPIC_API_KEY="sk-ant-..."
 export MATRIX_SURVEY_TASK_PATH=application/tasks/example-survey_product-feedback
-uv run harbor run -c configs/jobs/application-task-job-recipe/example-survey_product-feedback-auto-n1.yaml
+uv run harbor run -c configs/jobs/application-task-job-recipe/example-survey-product-feedback-auto-n1.yaml
 ```
 
 See [Application Quickstart](../../QUICKSTART.md) for the UI path and full env vars.

@@ -44,7 +44,7 @@ def _cohort_slug(value: str) -> str:
 
 
 def _repo_root() -> Path:
-    from environment.integrations.persona_eval.harbor.persona_eval import _repo_root as harbor_root
+    from persona_eval.harbor.persona_eval import _repo_root as harbor_root
 
     return harbor_root()
 

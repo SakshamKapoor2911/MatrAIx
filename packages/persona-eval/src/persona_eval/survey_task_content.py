@@ -13,7 +13,7 @@ from backend.service.survey_instruction_builder import (
     render_survey_task_instruction_markdown,
 )
 from backend.service.survey_types import SurveyInstrument, SurveyTaskContent
-from environment.integrations.persona_eval.task_content_bundle import (
+from persona_eval.task_content_bundle import (
     content_dir_for_task_path,
     input_dir_for_task_path,
     load_task_content_bundle_for_task_path,

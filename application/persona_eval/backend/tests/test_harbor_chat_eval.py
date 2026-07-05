@@ -8,14 +8,14 @@ from types import SimpleNamespace
 
 import pytest
 
-import environment.integrations.persona_eval.harbor.chat_eval as chat_eval_module
-from environment.integrations.persona_eval.harbor.chat_eval import (
+import persona_eval.harbor.chat_eval as chat_eval_module
+from persona_eval.harbor.chat_eval import (
     ChatbotTaskConfig,
     harbor_chat_config_from_env,
     harbor_output_artifacts_from_result,
     run_harbor_chat_eval_for_persona,
 )
-from environment.integrations.persona_eval.harbor.chat_sidecar_io import parse_json_stdout
+from persona_eval.harbor.chat_sidecar_io import parse_json_stdout
 from persona_eval.types import (
     MetricScores,
     Persona,
@@ -285,7 +285,7 @@ async def test_run_harbor_chat_eval_for_persona_writes_output_artifacts(
         }
 
     monkeypatch.setattr(
-        "environment.integrations.persona_eval.harbor.persona_eval._repo_root",
+        "persona_eval.harbor.persona_eval._repo_root",
         lambda: tmp_path,
     )
     monkeypatch.setattr(

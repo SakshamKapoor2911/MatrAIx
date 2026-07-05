@@ -170,7 +170,7 @@ add an entry to:
 `submission_profile` (copy fields from the nearest `example-web-*` entry).
 
 **Survey tasks** also need a questionnaire id mapping in
-`environment/integrations/persona_eval/survey_task_content.py`:
+`packages/persona-eval/src/persona_eval/survey_task_content.py`:
 
 ```python
 SURVEY_TASK_FOLDER_BY_QUESTIONNAIRE_ID = {

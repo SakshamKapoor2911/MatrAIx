@@ -255,7 +255,7 @@ class ConfigManager:
     #: Read-only facts about the fixed parts of the stack, surfaced alongside the
     #: editable knobs so the UI can show what is *not* configurable and why.
     ENVIRONMENT: Dict[str, object] = {
-        "runtime": "Local direct runner",
+        "runtime": "In-process Harbor runner",
         "personaAgent": "PersonaEval simulated user",
         "applicationApi": "direct application adapter",
         "scorer": "PersonaEval self-report scorer",
@@ -437,5 +437,5 @@ class ConfigManager:
 def _runtime_label(runtime: str) -> str:
     if runtime == "harbor":
         return "Harbor persona runner"
-    return "Local direct runner"
+    return "In-process Harbor runner"
 

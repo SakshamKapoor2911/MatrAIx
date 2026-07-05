@@ -282,7 +282,7 @@ def _map_failed_trial_debrief(
             trajectory_path = logs_dir / "trajectory.json"
             if trajectory_path.is_file():
                 try:
-                    from environment.integrations.persona_eval.harbor.web_eval import _trace_from_trajectory
+                    from persona_eval.harbor.web_eval import _trace_from_trajectory
 
                     mapped = _trace_from_trajectory(_read_json(trajectory_path))
                     trace = mapped.to_dict()
@@ -719,7 +719,7 @@ def _map_chatbot_debrief(
     created_at: str,
 ) -> dict[str, Any]:
     ensure_harbor_source_imports()
-    from environment.integrations.persona_eval.harbor.persona_eval import (
+    from persona_eval.harbor.persona_eval import (
         build_result_from_harbor_artifacts,
     )
 
@@ -1066,7 +1066,7 @@ def _map_web_debrief(
     repo_root: Path,
 ) -> dict[str, Any]:
     ensure_harbor_source_imports()
-    from environment.integrations.persona_eval.harbor.web_eval import (
+    from persona_eval.harbor.web_eval import (
         HarborWebEvalConfig,
         WebEvalResultArtifact,
         _extract_web_submission_from_logs,
@@ -1274,7 +1274,7 @@ def _map_cua_debrief(
         if trajectory_path.is_file():
             try:
                 ensure_harbor_source_imports()
-                from environment.integrations.persona_eval.harbor.web_eval import _trace_from_trajectory
+                from persona_eval.harbor.web_eval import _trace_from_trajectory
 
                 mapped = _trace_from_trajectory(_read_json(trajectory_path))
                 trace = mapped.to_dict()

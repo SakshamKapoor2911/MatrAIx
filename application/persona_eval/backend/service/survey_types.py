@@ -177,10 +177,10 @@ class SurveyTaskContent:
 
 @dataclass
 class SurveyEvalConfig:
-    """Runtime config for local survey evaluation."""
+    """Runtime config for in-process survey evaluation."""
 
     persona_model: str = DEFAULT_PERSONA_MODEL
-    mode: str = "local_persona_survey"
+    mode: str = "inprocess_persona_survey"
     require_rationale: bool = True
 
     def to_dict(self) -> dict[str, Any]:
@@ -295,7 +295,7 @@ class SurveyMetrics:
 
 @dataclass
 class SurveyEvalResult:
-    """Full local survey evaluation result."""
+    """Full in-process survey evaluation result."""
 
     config: SurveyEvalConfig
     persona: Persona

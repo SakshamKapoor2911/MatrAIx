@@ -49,6 +49,21 @@ def test_persona_agent_templates_are_packaged() -> None:
     ]
 
 
+def test_installed_runtime_packages_do_not_import_environment_namespace() -> None:
+    """Installed ``harbor.*`` / ``personabench.agents.*`` must not rely on repo-root ``environment.*`` imports."""
+    roots = [
+        ROOT / "environment/agents/personabench/agents",
+        ROOT / "environment/runtime/harbor",
+    ]
+    for root in roots:
+        for path in root.rglob("*.py"):
+            text = path.read_text(encoding="utf-8")
+            assert "environment.integrations" not in text, path
+            assert "persona_eval.local" not in text, path
+            assert "from environment." not in text, path
+            assert "import environment." not in text, path
+
+
 def test_persona_loader_reads_sample_dataset() -> None:
     from personabench.agents.persona.loader import load_persona
 

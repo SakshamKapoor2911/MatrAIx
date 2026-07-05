@@ -43,7 +43,7 @@ import json
 import re
 from typing import Any, Dict, List, Optional
 
-from environment.integrations.persona_eval.persona_exposure import (
+from persona_eval.persona_exposure import (
     coerce_turn_view,
     item_list_from_exposure,
 )

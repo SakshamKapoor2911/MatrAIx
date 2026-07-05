@@ -7,10 +7,10 @@ import urllib.request
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional
 
-from environment.integrations.persona_eval.self_report_task_config import (
+from persona_eval.self_report_task_config import (
     load_self_report_schema_for_task_path,
 )
-from environment.integrations.persona_eval.task_content_bundle import (
+from persona_eval.task_content_bundle import (
     load_task_content_bundle_for_task_path,
 )
 from persona_eval.self_report_runtime import write_self_report_artifact

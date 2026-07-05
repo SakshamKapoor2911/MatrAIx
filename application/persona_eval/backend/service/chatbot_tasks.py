@@ -12,7 +12,7 @@ from backend.service.example_task_catalog import (
     repo_root,
     task_id_from_folder,
 )
-from environment.integrations.persona_eval.chatbot_task_config import (
+from persona_eval.chatbot_task_config import (
     ChatbotTaskConfig,
     load_chatbot_task_config_for_task_path,
 )

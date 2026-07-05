@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from backend.service.application_types import normalize_metadata_type
-from environment.integrations.persona_eval.task_content_bundle import (
+from persona_eval.task_content_bundle import (
     load_task_content_bundle_for_task_path,
 )
 
@@ -85,7 +85,7 @@ def get_task_detail(task_path: str, *, repo_root: Path) -> dict[str, Any]:
     if meta_type in {"chatbot", "web", "os-app"}:
         output_schema_markdown = ""
         try:
-            from environment.integrations.persona_eval.self_report_task_config import (
+            from persona_eval.self_report_task_config import (
                 load_self_report_schema_for_task_path,
                 render_task_self_report_preview_markdown,
             )
@@ -104,7 +104,7 @@ def get_task_detail(task_path: str, *, repo_root: Path) -> dict[str, Any]:
         try:
             from backend.service.survey_questionnaire_catalog import get_survey_questionnaire
             from backend.service.survey_task_registry import survey_questionnaire_id_for_task_path
-            from environment.integrations.persona_eval.survey_task_content import (
+            from persona_eval.survey_task_content import (
                 load_survey_task_content_for_task_path,
             )
 

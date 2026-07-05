@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from environment.integrations.persona_eval.harbor.trial_events import (
+from persona_eval.harbor.trial_events import (
     TrialEventWriter,
     read_events_after,
 )

@@ -8,7 +8,7 @@ from threading import Thread
 
 import pytest
 
-from environment.integrations.persona_eval.remote_runner.client import (
+from persona_eval.remote_runner.client import (
     RemoteRunError,
     RemoteRunnerClient,
 )

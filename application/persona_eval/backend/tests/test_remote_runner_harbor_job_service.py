@@ -38,10 +38,12 @@ def test_launch_remote_plane_dispatches_harbor_job(tmp_path, monkeypatch) -> Non
     )
 
     monkeypatch.setattr(
-        "environment.integrations.persona_eval.harbor.persona_eval._repo_root",
+        "persona_eval.harbor.persona_eval._repo_root",
         lambda: repo,
     )
     monkeypatch.setenv("REMOTE_RUNNER_API_URL", "http://127.0.0.1:9999")
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-ant-leak-test")
+    monkeypatch.setenv("OPENAI_API_KEY", "sk-openai-leak-test")
 
     fake_client = _FakeRemoteClient()
     service = HarborJobService(
@@ -67,6 +69,12 @@ def test_launch_remote_plane_dispatches_harbor_job(tmp_path, monkeypatch) -> Non
     assert fake_client.calls
     assert fake_client.calls[0]["task_type"] == "harbor_job"
     assert "configYaml" in fake_client.calls[0]["payload"]
+    remote_env = fake_client.calls[0]["payload"]["env"]
+    assert remote_env["MATRIX_SURVEY_TASK_PATH"] == "application/tasks/example-survey_product-feedback"
+    assert "PYTHONPATH" in remote_env
+    assert "ANTHROPIC_API_KEY" not in remote_env
+    assert "OPENAI_API_KEY" not in remote_env
+    assert "REMOTE_RUNNER_API_URL" not in remote_env
     launch = service._launches[job_name]
     assert launch.execution_plane == "remote"
     assert launch.remote_run_id == "run_fake"

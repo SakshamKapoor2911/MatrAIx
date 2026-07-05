@@ -8,7 +8,7 @@ from backend.service.example_task_catalog import repo_root
 from backend.service.survey_instruction_builder import render_survey_task_instruction_markdown
 from backend.service.survey_questionnaire_catalog import get_survey_questionnaire
 
-from environment.integrations.persona_eval.survey_task_content import (
+from persona_eval.survey_task_content import (
     SURVEY_TASK_FOLDER_BY_QUESTIONNAIRE_ID,
 )
 

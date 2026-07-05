@@ -29,11 +29,12 @@ from backend.service.job_aggregation import (
     reporting_status_artifact_path,
     write_reporting_status_artifact,
 )
-from environment.integrations.persona_eval.harbor.persona_eval import (
+from persona_eval.harbor.persona_eval import (
     _default_harbor_command,
     _repo_root,
     _run_subprocess,
 )
+from persona_eval.remote_runner.dispatch import filter_remote_harbor_payload_env
 from personabench.application_job import (
     DEFAULT_APPLICATION_JOBS_DIR,
     build_application_job_config,
@@ -215,7 +216,7 @@ def _trial_result_error(result: dict[str, Any] | None) -> str | None:
 
 
 def _trial_live_phase(trial_dir: Path) -> str | None:
-    from environment.integrations.persona_eval.harbor.trial_events import (
+    from persona_eval.harbor.trial_events import (
         EVENTS_FILENAME,
         read_events_after,
     )
@@ -1003,8 +1004,9 @@ class HarborJobService:
         chat_application_id: str | None,
         chat_application_context: str | None,
         chat_max_turns: int | None,
+        for_remote: bool = False,
     ) -> dict[str, str]:
-        env = dict(os.environ)
+        env = {} if for_remote else dict(os.environ)
         existing = env.get("PYTHONPATH", "")
         path_entries = [entry for entry in existing.split(":") if entry]
         required_paths = [
@@ -1043,7 +1045,7 @@ class HarborJobService:
     def _remote_client(self):
         if self.remote_runner_client is not None:
             return self.remote_runner_client
-        from environment.integrations.persona_eval.remote_runner.client import (
+        from persona_eval.remote_runner.client import (
             RemoteRunnerClient,
         )
 
@@ -1183,13 +1185,14 @@ class HarborJobService:
             chat_application_id=chat_application_id,
             chat_application_context=chat_application_context,
             chat_max_turns=chat_max_turns,
+            for_remote=True,
         )
         payload = {
             "jobName": job_name,
             "configYaml": config_path.read_text(encoding="utf-8"),
             "repoRoot": str(self.repo_root.resolve()),
             "jobsDir": _rel_path(self.jobs_dir, self.repo_root),
-            "env": env,
+            "env": filter_remote_harbor_payload_env(env),
         }
         try:
             client = self._remote_client()
@@ -1216,7 +1219,7 @@ class HarborJobService:
         self._maybe_schedule_reporting(job_name, self.jobs_dir / job_name)
 
     def _maybe_generate_post_run_feedback(self, job_name: str) -> None:
-        from environment.integrations.persona_eval.post_run_feedback import (
+        from persona_eval.post_run_feedback import (
             maybe_write_trial_user_feedback,
         )
 
@@ -1243,7 +1246,7 @@ class HarborJobService:
         trial_dir = self.jobs_dir / job_name / trial_name
         if not trial_dir.is_dir():
             raise ValueError("Trial not found: {}/{}".format(job_name, trial_name))
-        from environment.integrations.persona_eval.harbor.trial_events import (
+        from persona_eval.harbor.trial_events import (
             EVENTS_FILENAME,
             read_events_after,
         )

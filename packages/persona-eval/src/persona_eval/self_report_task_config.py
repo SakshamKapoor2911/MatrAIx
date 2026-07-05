@@ -7,7 +7,7 @@ from typing import Any
 
 import yaml
 
-from environment.integrations.persona_eval.task_content_bundle import (
+from persona_eval.task_content_bundle import (
     content_dir_for_task_path,
     input_dir_for_task_path,
     task_dir_from_path,

@@ -1,7 +1,7 @@
 import json
 
 from backend.service.harbor_job_service import HarborJobService
-from environment.integrations.persona_eval.post_run_feedback import (
+from persona_eval.post_run_feedback import (
     maybe_write_trial_user_feedback,
 )
 
@@ -101,7 +101,7 @@ fields:
     )
     client = _FakeJSONClient({"satisfaction": 4})
     monkeypatch.setattr(
-        "environment.integrations.persona_eval.post_run_feedback.build_json_client",
+        "persona_eval.post_run_feedback.build_json_client",
         lambda model, temperature=0.1: client,
     )
 
@@ -140,7 +140,7 @@ fields:
     )
     client = _FakeJSONClient({"confidence": 5})
     monkeypatch.setattr(
-        "environment.integrations.persona_eval.post_run_feedback.build_json_client",
+        "persona_eval.post_run_feedback.build_json_client",
         lambda model, temperature=0.1: client,
     )
 
@@ -160,7 +160,7 @@ def test_harbor_job_service_calls_post_run_feedback(tmp_path, monkeypatch):
     (trial_dir / "config.json").write_text("{}", encoding="utf-8")
     calls = []
     monkeypatch.setattr(
-        "environment.integrations.persona_eval.post_run_feedback.maybe_write_trial_user_feedback",
+        "persona_eval.post_run_feedback.maybe_write_trial_user_feedback",
         lambda *, repo_root, trial_dir: calls.append((repo_root, trial_dir)),
     )
     service = HarborJobService(

@@ -164,7 +164,7 @@ uv run python application/scripts/generate_application_job.py \
 
 export ANTHROPIC_API_KEY="sk-ant-..."
 export MATRIX_SURVEY_TASK_PATH=application/tasks/example-survey_product-feedback
-uv run harbor run -c configs/jobs/application-task-job-recipe/example-survey_product-feedback-auto-n1.yaml
+uv run harbor run -c configs/jobs/application-task-job-recipe/example-survey-product-feedback-auto-n1.yaml
 ```
 
 ```bash
@@ -179,7 +179,7 @@ export OPENAI_API_KEY="sk-..."
 export MATRIX_CHATBOT_DOMAIN=movie
 export MATRIX_CHATBOT_APPLICATION_ID=recai
 export MATRIX_CHATBOT_MAX_TURNS=8
-uv run harbor run -c configs/jobs/application-task-job-recipe/recommender-agent_chat_api-auto-n1.yaml
+uv run harbor run -c configs/jobs/application-task-job-recipe/recommender-agent-chat-api-auto-n1.yaml
 ```
 
 The generator prints exact `export` lines. Script reference: [scripts/README.md](scripts/README.md).
@@ -249,7 +249,7 @@ uv run python application/scripts/generate_application_job.py \
 | `--persona-ids` | (none) | Explicit IDs instead of random sampling |
 | `--seed` | `42` | Random seed — same seed + pool → same persona IDs |
 | `--dataset` | `bench-dev-sample` | Persona pool to sample from |
-| `--execution-mode` | (docker) | Use **`auto`** — matches PersonaEval Cockpit |
+| `--execution-mode` | `auto` | Same as PersonaEval Cockpit; use `force_docker` to always run in Docker |
 | `--stratify` | (none) | Balance across a field, e.g. `dimensions.age_bracket` |
 | `--name` | (derived) | Job basename |
 
@@ -258,7 +258,7 @@ Run the generated job (paths are also in the YAML header):
 ```bash
 export ANTHROPIC_API_KEY="sk-ant-..."
 export MATRIX_SURVEY_TASK_PATH=application/tasks/example-survey_product-feedback
-uv run harbor run -c configs/jobs/application-task-job-recipe/example-survey_product-feedback-auto-n10.yaml
+uv run harbor run -c configs/jobs/application-task-job-recipe/example-survey-product-feedback-auto-n10.yaml
 ```
 
 **What a job means here:** one **task**, **N trials** — each trial uses a

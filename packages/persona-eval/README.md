@@ -4,7 +4,7 @@ This package contains the shared PersonaEval core library:
 
 - persona loading
 - user simulation
-- local chat runner orchestration
+- in-process Harbor host-native runners (`persona_eval.inprocess`)
 - scoring helpers
 
 This package is the shared PersonaEval core library used by the app backend and

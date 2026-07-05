@@ -29,7 +29,7 @@ def test_launch_writes_job_config(tmp_path, monkeypatch):
         return 0
 
     monkeypatch.setattr(
-        "environment.integrations.persona_eval.harbor.persona_eval._repo_root",
+        "persona_eval.harbor.persona_eval._repo_root",
         lambda: repo,
     )
     service = HarborJobService(
@@ -98,7 +98,7 @@ def test_launch_with_frozen_cohort(tmp_path, monkeypatch):
         return 0
 
     monkeypatch.setattr(
-        "environment.integrations.persona_eval.harbor.persona_eval._repo_root",
+        "persona_eval.harbor.persona_eval._repo_root",
         lambda: repo,
     )
     service = HarborJobService(
@@ -144,7 +144,7 @@ def test_launch_with_explicit_persona_ids(tmp_path, monkeypatch):
         return 0
 
     monkeypatch.setattr(
-        "environment.integrations.persona_eval.harbor.persona_eval._repo_root",
+        "persona_eval.harbor.persona_eval._repo_root",
         lambda: repo,
     )
     service = HarborJobService(
@@ -297,7 +297,7 @@ def test_launch_auto_chat_uses_local_distributed_executor(tmp_path, monkeypatch)
         return 0
 
     monkeypatch.setattr(
-        "environment.integrations.persona_eval.harbor.persona_eval._repo_root",
+        "persona_eval.harbor.persona_eval._repo_root",
         lambda: repo,
     )
     service = HarborJobService(
@@ -423,7 +423,7 @@ def test_launch_ios_cua_uses_use_computer_environment(tmp_path, monkeypatch):
         return 0
 
     monkeypatch.setattr(
-        "environment.integrations.persona_eval.harbor.persona_eval._repo_root",
+        "persona_eval.harbor.persona_eval._repo_root",
         lambda: repo,
     )
     service = HarborJobService(

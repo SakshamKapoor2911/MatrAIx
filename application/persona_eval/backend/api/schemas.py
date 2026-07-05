@@ -53,32 +53,27 @@ __all__ = [
     "JobView",
     "CatalogItem",
     "CatalogSearchResponse",
-    "StartPersonaEvalRequest",
-    "SubmitPersonaEvalResponse",
     "PersonaSummary",
     "PersonaEvalPersonasResponse",
+    "PersonaEvalPersonaDetail",
     "GoalContext",
     "GoalContextsResponse",
     "PersonaEvalJobView",
     "SurveyQuestion",
     "SurveyInstrument",
     "SurveyInstrumentsResponse",
+    "SurveyHarborTask",
+    "SurveyHarborTasksResponse",
+    "SurveyEvalJobView",
     "ChatbotEvalTask",
     "ChatbotEvalTasksResponse",
-    "StartSurveyEvalRequest",
-    "SurveyEvalJobView",
     "WebEvalTask",
     "WebEvalTasksResponse",
-    "StartWebEvalRequest",
     "WebEvalJobView",
     "OsAppEvalTask",
     "OsAppEvalTasksResponse",
     "CuaEvalTask",
     "CuaEvalTasksResponse",
-    "AppWorldEvalTask",
-    "AppWorldEvalTasksResponse",
-    "StartAppWorldEvalRequest",
-    "AppWorldEvalJobView",
 ]
 
 #: Domains the persona-eval (and the rest of the Studio) supports. Mirrors the
@@ -201,9 +196,9 @@ class ConfigEnvironment(BaseModel):
     """Read-only facts about the fixed parts of the stack.
 
     ``runtime`` / ``personaAgent`` / ``personaModel`` / ``applicationApi`` /
-    ``scorer`` report the local PersonaEval execution boundary. The ranker,
+    ``scorer`` report the in-process PersonaEval execution boundary. The ranker,
     resources, and agent are adapter-specific and not user-configurable.
-    ``promptOwnership`` reports the prompt boundary for local runs.
+    ``promptOwnership`` reports the prompt boundary for in-process Harbor runs.
     """
 
     model_config = ConfigDict(extra="allow")
@@ -431,83 +426,8 @@ class CatalogSearchResponse(BaseModel):
 
 
 # --------------------------------------------------------------------------- #
-# Persona eval (persona-driven evaluation)
+# Persona eval (persona catalog + Harbor debrief views)
 # --------------------------------------------------------------------------- #
-class StartPersonaEvalRequest(BaseModel):
-    """Body for ``POST /api/persona-eval``.
-
-    ``applicationId`` selects the chatbot application adapter.
-    ``applicationContext`` is the primary chatbot context knob; ``domain`` is a
-    legacy RecAI compatibility alias and is mirrored from the resolved context.
-    ``maxTurns`` is optional. When omitted, the chatbot run is unbounded and
-    stops only when the user simulator ends the conversation.
-    """
-
-    domain: Optional[str] = None
-    applicationId: str = "recai"
-    applicationContext: Optional[str] = None
-    personaId: str
-    maxTurns: Optional[int] = Field(default=None, ge=1)
-    #: The OpenAI chat model that drives the recommender (per-run
-    #: ``INTERECAGENT_ENGINE``). ``None`` falls back to the service default
-    #: (``ConfigManager.DEFAULTS['engine']``).
-    engine: Optional[str] = None
-    #: Persona-agent base model. ``None`` falls back to the local persona model
-    #: default / env override.
-    personaModel: Optional[str] = None
-
-    @field_validator("applicationId")
-    @classmethod
-    def _validate_application_id(cls, value: str) -> str:
-        if value not in SUPPORTED_APPLICATION_IDS:
-            raise ValueError(
-                "applicationId must be one of {}".format(
-                    list(SUPPORTED_APPLICATION_IDS)
-                )
-            )
-        return value
-
-    @model_validator(mode="after")
-    def _normalize_application_context(self) -> "StartPersonaEvalRequest":
-        if self.applicationId == "recai":
-            resolved_context = _resolved_recai_context(
-                domain=self.domain,
-                application_context=self.applicationContext,
-            )
-            if resolved_context not in SUPPORTED_DOMAINS:
-                raise ValueError(
-                    "applicationContext/domain must be one of {}".format(
-                        list(SUPPORTED_DOMAINS)
-                    )
-                )
-            self.applicationContext = resolved_context
-            self.domain = resolved_context
-            return self
-
-        default_context = DEFAULT_APPLICATION_CONTEXTS.get(self.applicationId)
-        self.applicationContext = self.applicationContext or default_context
-        if not self.applicationContext:
-            raise ValueError("applicationContext is required")
-        self.domain = self.applicationContext
-        return self
-
-    @field_validator("personaModel")
-    @classmethod
-    def _validate_persona_model(cls, value: Optional[str]) -> Optional[str]:
-        if value is None:
-            return value
-        if value not in SUPPORTED_PERSONA_MODELS:
-            raise ValueError(
-                "personaModel must be one of {}".format(list(SUPPORTED_PERSONA_MODELS))
-            )
-        return value
-
-class SubmitPersonaEvalResponse(BaseModel):
-    """Response of ``POST /api/persona-eval``."""
-
-    jobId: str
-
-
 class PersonaSummary(BaseModel):
     """A persona as surfaced by ``GET /api/persona-eval/personas``.
 
@@ -533,6 +453,8 @@ class PersonaEvalPersonasResponse(BaseModel):
     model_config = ConfigDict(extra="allow")
 
     personas: List[PersonaSummary]
+
+
 class PersonaEvalPersonaDetail(BaseModel):
     """``GET /api/persona-eval/personas/{id}`` payload — one full persona.
 
@@ -548,15 +470,7 @@ class PersonaEvalPersonaDetail(BaseModel):
 
 
 class PersonaEvalJobView(BaseModel):
-    """``GET /api/persona-eval/jobs/{jobId}`` payload.
-
-    Mirrors :meth:`backend.service.persona_eval_service.PersonaEvalProgress.to_view`.
-    ``status`` is one of ``building | running | done | error``. ``questionnaire``
-    / ``metricScores`` populate only on ``done``; ``error`` only on ``error``.
-    ``turns`` are full ``TurnView`` dicts (identical to manual chat) so the SPA
-    can render them with the same component. Permissive so the service can
-    enrich the view without breaking the schema.
-    """
+    """Harbor chatbot debrief/live view shape used by the Cockpit."""
 
     model_config = ConfigDict(extra="allow")
 
@@ -641,31 +555,8 @@ class SurveyHarborTasksResponse(BaseModel):
     tasks: List[SurveyHarborTask]
 
 
-class StartSurveyEvalRequest(BaseModel):
-    """Body for ``POST /api/survey-eval``."""
-
-    personaId: str
-    instrumentId: str = "chatgpt_images_market_research_v1"
-    personaModel: Optional[str] = None
-
-    @field_validator("personaModel")
-    @classmethod
-    def _validate_persona_model(cls, value: Optional[str]) -> Optional[str]:
-        if value is None:
-            return value
-        if value not in SUPPORTED_PERSONA_MODELS:
-            raise ValueError(
-                "personaModel must be one of {}".format(list(SUPPORTED_PERSONA_MODELS))
-            )
-        return value
-
-
 class SurveyEvalJobView(BaseModel):
-    """Live view of a local survey run.
-
-    ``surveyResult`` is the evaluation artifact. There is no additional
-    chatbot-style scorecard layer for survey tasks.
-    """
+    """Harbor survey debrief/live view shape used by the Cockpit."""
 
     model_config = ConfigDict(extra="allow")
 
@@ -743,27 +634,8 @@ class WebEvalTasksResponse(BaseModel):
     tasks: List[WebEvalTask]
 
 
-class StartWebEvalRequest(BaseModel):
-    """Body for ``POST /api/web-eval``."""
-
-    personaId: str
-    taskId: str = "web-playwright-quote-choice"
-    personaModel: Optional[str] = None
-
-    @field_validator("personaModel")
-    @classmethod
-    def _validate_persona_model(cls, value: Optional[str]) -> Optional[str]:
-        if value is None:
-            return value
-        if value not in SUPPORTED_PERSONA_MODELS:
-            raise ValueError(
-                "personaModel must be one of {}".format(list(SUPPORTED_PERSONA_MODELS))
-            )
-        return value
-
-
 class WebEvalJobView(BaseModel):
-    """Live view of a local website run."""
+    """Harbor web debrief/live view shape used by the Cockpit."""
 
     model_config = ConfigDict(extra="allow")
 
@@ -816,67 +688,6 @@ class OsAppEvalTasksResponse(BaseModel):
 # Deprecated aliases (older clients).
 CuaEvalTask = OsAppEvalTask
 CuaEvalTasksResponse = OsAppEvalTasksResponse
-
-
-# --------------------------------------------------------------------------- #
-# AppWorld eval
-# --------------------------------------------------------------------------- #
-class AppWorldEvalTask(BaseModel):
-    """An AppWorld API task available for persona-agent testing."""
-
-    model_config = ConfigDict(extra="allow")
-
-    id: str
-    title: str
-    appName: str
-    description: str = ""
-    outputArtifact: str = "appworld_result.json"
-    submissionProfile: str = "appworld_result"
-
-
-class AppWorldEvalTasksResponse(BaseModel):
-    """``GET /api/appworld-eval/tasks`` payload."""
-
-    tasks: List[AppWorldEvalTask]
-
-
-class StartAppWorldEvalRequest(BaseModel):
-    """Body for ``POST /api/appworld-eval``."""
-
-    personaId: str
-    taskId: str = "appworld-demo-personal-admin"
-    personaModel: Optional[str] = None
-
-    @field_validator("personaModel")
-    @classmethod
-    def _validate_persona_model(cls, value: Optional[str]) -> Optional[str]:
-        if value is None:
-            return value
-        if value not in SUPPORTED_PERSONA_MODELS:
-            raise ValueError(
-                "personaModel must be one of {}".format(list(SUPPORTED_PERSONA_MODELS))
-            )
-        return value
-
-
-class AppWorldEvalJobView(BaseModel):
-    """Live view of an AppWorld run."""
-
-    model_config = ConfigDict(extra="allow")
-
-    jobId: str
-    applicationType: str = "appworld"
-    taskId: str
-    taskTitle: str
-    appName: str
-    personaId: str
-    personaName: str
-    status: str
-    phase: Optional[str] = None
-    appworldResult: Optional[Dict[str, Any]] = None
-    trace: Optional[Dict[str, Any]] = None
-    prompts: Optional[Dict[str, str]] = None
-    error: Optional[str] = None
 
 
 # --------------------------------------------------------------------------- #

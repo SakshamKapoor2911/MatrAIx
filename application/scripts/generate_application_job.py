@@ -54,7 +54,7 @@ def _default_job_name(
     execution_mode: str,
 ) -> str:
     task_slug = _slug(Path(task).name)
-    mode_suffix = "" if execution_mode == "force_docker" else f"-{execution_mode}"
+    mode_suffix = "" if execution_mode == "auto" else f"-{execution_mode}"
     if stratify_fields:
         dim_slug = "-".join(_slug(field.split(".")[-1]) for field in stratify_fields)
         return f"{task_slug}{mode_suffix}-{dim_slug}-n{sample_size}"
@@ -145,10 +145,10 @@ def main() -> None:
     parser.add_argument(
         "--execution-mode",
         choices=sorted(_EXECUTION_MODES),
-        default="force_docker",
+        default="auto",
         help=(
-            "Harbor execution mode. Use 'auto' for native host survey/chat profiles "
-            "(default: force_docker)."
+            "Harbor execution mode. 'auto' picks native host survey/chat profiles when "
+            "applicable (default: auto)."
         ),
     )
     parser.add_argument(

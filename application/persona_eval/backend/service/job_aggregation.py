@@ -458,7 +458,7 @@ def _synthesized_user_feedback_context(
     schema = None
     if task_path and repo_root is not None:
         try:
-            from environment.integrations.persona_eval.self_report_task_config import (
+            from persona_eval.self_report_task_config import (
                 load_self_report_schema_for_task_path,
             )
 

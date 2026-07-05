@@ -10,67 +10,78 @@ is running.
 
 - JSON uses camelCase field names.
 - The API does not require authentication in local development.
-- `POST` endpoints that start long-running work return `{ "jobId": "..." }`.
-  Clients poll the matching job endpoint until `status` is `done` or `error`.
-- Common job statuses are `building`, `running`, `done`, and `error`.
+- Long-running work is launched through `POST /api/harbor/jobs`. Clients poll
+  `GET /api/harbor/jobs/{job_name}` until `launch.status` is `completed` or
+  `failed`.
+- Common Harbor launch statuses are `queued`, `running`, `completed`, and
+  `failed`.
 - FastAPI may return `422` for malformed requests or failed validation.
-- Application handlers return `404` for unknown sessions, jobs, runs, personas,
-  catalog items, screenshots, or tasks where applicable.
+- Application handlers return `404` for unknown jobs, trials, personas, cohorts,
+  screenshots, recordings, or tasks where applicable.
 
-## Runtime Boundary
+## Runtime boundary
 
-PersonaEval launches evaluations through Harbor (`POST /api/harbor/jobs`).
+PersonaEval launches evaluations through Harbor batch jobs. The Cockpit and
+`POST /api/harbor/jobs` share the same artifact layout under `jobs/`.
+
 Execution can stay on the API host or dispatch to a Remote Runner worker:
 
 ```bash
 MATRIX_EXECUTION_PLANE=harbor    # default — local harbor run
 MATRIX_EXECUTION_PLANE=remote    # HTTP dispatch to Remote Runner
 REMOTE_RUNNER_API_URL=http://127.0.0.1:9100
-REMOTE_RUNNER_API_KEY=...        # optional
+REMOTE_RUNNER_API_KEY=...        # optional bearer token for the worker API
 ```
 
-Survey, chatbot, web, and os-app jobs share the same API and `jobs/` artifact
-layout regardless of plane.
+Survey, chatbot, web, and os-app jobs share the same API regardless of plane.
+See [UNIFIED_RUNTIME.md](UNIFIED_RUNTIME.md) for worker setup and remote payload
+fields.
 
-## Endpoint Index
+Optional per-request override: `"plane": "harbor"` or `"plane": "remote"` on
+`POST /api/harbor/jobs`.
+
+## Endpoint index
 
 | Method | Path | Purpose |
 |---|---|---|
 | `GET` | `/api/health` | Backend liveness. |
 | `GET` | `/api/preflight` | Environment and resource readiness checks. |
+| `GET` | `/api/chatbot-sidecars` | List chat sidecar statuses. |
+| `POST` | `/api/chatbot-sidecars/{application_id}/start` | Start one chat sidecar. |
 | `GET` | `/api/config/options` | Editable config knobs, defaults, and runtime facts. |
-| `GET` | `/api/sessions` | List manual chat sessions. |
-| `POST` | `/api/sessions` | Create a manual chat session. |
-| `DELETE` | `/api/sessions` | Delete every manual chat session. |
-| `GET` | `/api/sessions/{session_id}` | Read one manual chat session. |
-| `DELETE` | `/api/sessions/{session_id}` | Delete one manual chat session. |
-| `PATCH` | `/api/sessions/{session_id}/config` | Patch one session config. |
-| `GET` | `/api/sessions/{session_id}/export` | Download one session JSON artifact. |
-| `POST` | `/api/sessions/{session_id}/turns` | Submit one manual chat turn. |
-| `GET` | `/api/jobs/{job_id}` | Poll one manual chat turn job. |
-| `GET` | `/api/catalog/search` | Search catalog items. |
-| `GET` | `/api/catalog/items/{item_id}` | Read one catalog item. |
-| `GET` | `/api/persona-eval/personas` | List persona profiles. |
+| `GET` | `/api/persona-eval/personas` | List persona profiles (searchable). |
 | `GET` | `/api/persona-eval/personas/{persona_id}` | Read one full persona profile. |
-| `POST` | `/api/persona-eval` | Start a chatbot persona evaluation. |
-| `GET` | `/api/persona-eval/runs` | List persisted eval runs. |
-| `GET` | `/api/persona-eval/runs/{run_id}` | Read one persisted eval run. |
-| `GET` | `/api/persona-eval/jobs/{job_id}` | Poll one chatbot persona-eval job. |
+| `GET` | `/api/harbor/jobs` | List Harbor batch jobs. |
+| `POST` | `/api/harbor/jobs` | Launch a Harbor batch job. |
+| `GET` | `/api/harbor/jobs/{job_name}` | Read one job detail view. |
+| `DELETE` | `/api/harbor/jobs/{job_name}` | Delete one job and its artifacts. |
+| `GET` | `/api/harbor/jobs/{job_name}/aggregation` | Read refreshed job aggregation JSON. |
+| `GET` | `/api/harbor/jobs/{job_name}/live` | Live job/trial progress for the Cockpit. |
+| `GET` | `/api/harbor/jobs/{job_name}/trials/{trial_name}/events` | Incremental trial event stream. |
+| `GET` | `/api/harbor/jobs/{job_name}/trials/{trial_name}/debrief` | Post-run debrief for one trial. |
+| `GET` | `/api/harbor/jobs/{job_name}/trials/{trial_name}/instruction` | Persona-facing instruction for one trial. |
+| `GET` | `/api/harbor/jobs/{job_name}/trials/{trial_name}/trace` | Web trace payload for one trial. |
+| `GET` | `/api/harbor/jobs/{job_name}/trials/{trial_name}/screenshots/{filename}` | Fetch one web trace screenshot. |
+| `GET` | `/api/harbor/jobs/{job_name}/trials/{trial_name}/recording` | Fetch one os-app screen recording. |
+| `GET` | `/api/persona-pool/catalog` | Persona pool dimension catalog. |
+| `POST` | `/api/persona-pool/sample` | Sample personas from a pool. |
+| `GET` | `/api/persona-pool/personas` | List persona cards from a pool. |
+| `GET` | `/api/persona-pool/personas/{persona_id}` | Read one persona card/detail from a pool. |
+| `GET` | `/api/persona-pool/cohorts` | List saved persona cohorts. |
+| `POST` | `/api/persona-pool/cohorts` | Save a persona cohort. |
+| `GET` | `/api/persona-pool/cohorts/{cohort_id}` | Read one saved cohort. |
+| `GET` | `/api/tasks/detail` | Task detail for Cockpit setup (`taskPath` query). |
 | `GET` | `/api/survey-eval/instruments` | List task-backed survey questionnaires. |
-| `POST` | `/api/survey-eval` | Start a survey persona evaluation. |
-| `GET` | `/api/survey-eval/jobs/{job_id}` | Poll one survey eval job. |
-| `GET` | `/api/web-eval/tasks` | List web tasks. |
-| `POST` | `/api/web-eval` | Start a web persona evaluation. |
-| `GET` | `/api/web-eval/jobs/{job_id}` | Poll one web eval job. |
-| `GET` | `/api/web-eval/jobs/{job_id}/screenshots/{filename}` | Fetch one web trace screenshot. |
+| `GET` | `/api/survey-eval/harbor-tasks` | List survey Harbor tasks for the Cockpit. |
+| `GET` | `/api/chatbot-eval/tasks` | List chatbot Harbor tasks for the Cockpit. |
+| `GET` | `/api/web-eval/tasks` | List web Harbor tasks for the Cockpit. |
+| `GET` | `/api/os-app-eval/tasks` | List os-app Harbor tasks for the Cockpit. |
 
 ## Health
 
 ### `GET /api/health`
 
 Returns a process liveness response.
-
-Response:
 
 ```json
 {
@@ -80,10 +91,8 @@ Response:
 
 ### `GET /api/preflight`
 
-Returns user-facing readiness checks for credentials, catalogs, RecAI resources,
-optional sidecars, and eval surfaces.
-
-Response:
+Returns user-facing readiness checks for credentials, catalogs, optional
+sidecars, and eval surfaces.
 
 ```json
 {
@@ -102,784 +111,175 @@ Response:
 
 `ready` ignores checks marked `optional`.
 
+### `GET /api/chatbot-sidecars`
+
+Returns sidecar container status for supported chat applications.
+
+### `POST /api/chatbot-sidecars/{application_id}/start`
+
+Starts the sidecar for one supported `application_id` when it is not already
+running. Returns `404` for unknown application ids.
+
 ## Config
 
 ### `GET /api/config/options`
 
 Returns the available config knobs, canonical defaults, and fixed runtime
-environment metadata.
+environment metadata used by the Cockpit.
 
-Response shape:
-
-```json
-{
-  "knobs": [
-    {
-      "key": "domain",
-      "label": "Domain",
-      "description": "...",
-      "options": [
-        {
-          "value": "movie",
-          "label": "Movies",
-          "description": "..."
-        }
-      ],
-      "rebuildsAgent": true
-    }
-  ],
-  "defaults": {
-    "domain": "movie",
-    "engine": "gpt-4o-mini"
-  },
-  "environment": {
-    "runtime": "local",
-    "personaAgent": "...",
-    "personaModel": "anthropic/claude-haiku-4-5",
-    "applicationApi": "...",
-    "scorer": "...",
-    "cache": "...",
-    "ranker": "...",
-    "resources": "...",
-    "agent": "...",
-    "promptOwnership": {}
-  }
-}
-```
-
-## Manual Chat Sessions
-
-Manual chat sessions drive the chatbot surface turn by turn. Turn execution is
-asynchronous.
-
-### `GET /api/sessions`
-
-Lists saved chat sessions newest-first.
-
-Response:
-
-```json
-[
-  {
-    "id": "session_abc123",
-    "title": "Movie recommendations",
-    "config": {},
-    "turnCount": 2,
-    "messageCount": 4,
-    "createdAt": "2026-06-29T00:00:00Z"
-  }
-]
-```
-
-### `POST /api/sessions`
-
-Creates a manual chat session.
-
-Request body:
-
-```json
-{
-  "title": "Movie recommendations",
-  "config": {
-    "domain": "movie",
-    "engine": "gpt-4o-mini"
-  }
-}
-```
-
-Both fields are optional. `config` accepts partial config; invalid values return
-`422`.
-
-Response:
-
-```json
-{
-  "id": "session_abc123",
-  "title": "Movie recommendations",
-  "config": {},
-  "messages": [],
-  "turns": [],
-  "createdAt": "2026-06-29T00:00:00Z"
-}
-```
-
-### `DELETE /api/sessions`
-
-Deletes every saved chat session from memory and disk.
-
-Response:
-
-```json
-{
-  "deleted": 3
-}
-```
-
-### `GET /api/sessions/{session_id}`
-
-Returns one full chat session.
-
-Path parameters:
-
-- `session_id`: session id returned by `POST /api/sessions`.
-
-Response is the same full `Session` shape returned by `POST /api/sessions`.
-
-Errors:
-
-- `404` when the session does not exist.
-
-### `DELETE /api/sessions/{session_id}`
-
-Deletes one chat session from memory and disk.
-
-Response:
-
-```json
-{
-  "deleted": "session_abc123"
-}
-```
-
-Errors:
-
-- `404` when the session does not exist.
-
-### `PATCH /api/sessions/{session_id}/config`
-
-Patches a session config. Some config changes invalidate the cached application
-agent for the next turn.
-
-Request body:
-
-```json
-{
-  "config": {
-    "domain": "beauty_product",
-    "engine": "gpt-4o-mini"
-  }
-}
-```
-
-Response:
-
-```json
-{
-  "session": {
-    "id": "session_abc123",
-    "title": "Beauty recommendations",
-    "config": {},
-    "messages": [],
-    "turns": [],
-    "createdAt": "2026-06-29T00:00:00Z"
-  },
-  "cacheInvalidated": true
-}
-```
-
-Errors:
-
-- `404` when the session does not exist.
-- `422` when config validation fails.
-
-### `GET /api/sessions/{session_id}/export`
-
-Downloads one full session as JSON. The response includes a
-`Content-Disposition` attachment header.
-
-Errors:
-
-- `404` when the session does not exist.
-
-### `POST /api/sessions/{session_id}/turns`
-
-Submits one user turn to a manual chat session. The endpoint returns
-immediately with a job id; poll `GET /api/jobs/{job_id}` for completion.
-
-Request body:
-
-```json
-{
-  "message": "I want a thoughtful sci-fi movie recommendation."
-}
-```
-
-Response:
-
-```json
-{
-  "jobId": "job_abc123"
-}
-```
-
-Errors:
-
-- `404` when the session does not exist.
-- `422` when the message is empty or invalid.
-
-### `GET /api/jobs/{job_id}`
-
-Polls one manual chat turn job.
-
-Response while running:
-
-```json
-{
-  "jobId": "job_abc123",
-  "status": "running",
-  "turn": null,
-  "error": null
-}
-```
-
-Response when done:
-
-```json
-{
-  "jobId": "job_abc123",
-  "status": "done",
-  "turn": {
-    "turnId": "0",
-    "conversationId": "session_abc123",
-    "backend": "recai",
-    "userMessage": "I want a thoughtful sci-fi movie recommendation.",
-    "assistantMessage": "...",
-    "plan": [],
-    "recommendedItems": [
-      {
-        "itemId": "123",
-        "rank": 1,
-        "title": "Example Item",
-        "meta": "Sci-fi",
-        "score": 0.92
-      }
-    ],
-    "nativeRaw": null,
-    "rawToolOutputs": null
-  },
-  "error": null
-}
-```
-
-Errors:
-
-- `404` when the job does not exist.
-
-## Catalog
-
-### `GET /api/catalog/search`
-
-Searches the configured recommendation catalog.
-
-Query parameters:
-
-- `q` optional search text, default `""`.
-- `genre` optional category filter.
-- `limit` optional integer from `0` to `500`, default `50`.
-- `domain` optional catalog domain, for example `movie`, `beauty_product`, or
-  `game`.
-
-Response:
-
-```json
-{
-  "items": [
-    {
-      "itemId": "123",
-      "title": "Example Item",
-      "description": "...",
-      "displayText": "...",
-      "categories": ["sci-fi"],
-      "metadata": {}
-    }
-  ],
-  "total": 1
-}
-```
-
-### `GET /api/catalog/items/{item_id}`
-
-Returns one catalog item.
-
-Path parameters:
-
-- `item_id`: catalog item id.
-
-Query parameters:
-
-- `domain` optional catalog domain.
-
-Response:
-
-```json
-{
-  "itemId": "123",
-  "title": "Example Item",
-  "description": "...",
-  "displayText": "...",
-  "categories": ["sci-fi"],
-  "metadata": {}
-}
-```
-
-Errors:
-
-- `404` when the item does not exist.
-
-## Persona Catalog
+## Personas
 
 ### `GET /api/persona-eval/personas`
 
-Lists persona profiles for eval task pickers.
-
 Query parameters:
 
-- `q` optional substring search, default `""`.
-- `limit` optional positive integer.
-- `domain` optional SUT-description domain. When provided, the response may
-  include `sutDescription`.
-
-Response:
-
-```json
-{
-  "personas": [
-    {
-      "id": "Nemotron_01B0D4D4",
-      "name": "Persona name",
-      "source": "Nemotron",
-      "blurb": "Short persona preview..."
-    }
-  ],
-  "sutDescription": "..."
-}
-```
-
-Errors:
-
-- `422` when `domain` is unknown.
+- `q` — optional substring search
+- `limit` — optional result cap
+- `domain` — accepted for backwards compatibility; no domain-specific blurb is
+  returned
 
 ### `GET /api/persona-eval/personas/{persona_id}`
 
-Returns one full persona profile.
+Returns the full persona record (`id`, `name`, `source`, `context`).
 
-Path parameters:
+## Harbor batch jobs
 
-- `persona_id`: persona id returned by the persona list endpoint.
+Harbor jobs are the canonical launch path. Artifacts are written under
+`jobs/{job_name}/`.
 
-Response:
+### `GET /api/harbor/jobs`
 
-```json
-{
-  "id": "Nemotron_01B0D4D4",
-  "name": "Persona name",
-  "source": "Nemotron",
-  "context": "Full persona context..."
-}
-```
+Returns a list of job summaries (`jobName`, trial counts, status, timestamps).
 
-Errors:
+### `POST /api/harbor/jobs`
 
-- `404` when the persona does not exist.
-
-## Chatbot Persona Eval
-
-Chatbot persona eval starts a simulated persona conversation with a chatbot
-application and scores the resulting interaction.
-
-### `POST /api/persona-eval`
-
-Starts a chatbot persona evaluation.
+Launch a multi-trial Harbor job from one application task.
 
 Request body:
 
 ```json
 {
-  "applicationId": "recai",
-  "domain": "movie",
-  "applicationContext": "movie",
-  "personaId": "Nemotron_01B0D4D4",
-  "maxTurns": 8,
-  "engine": "gpt-4o-mini",
-  "personaModel": "anthropic/claude-haiku-4-5"
+  "taskPath": "application/tasks/example-survey_product-feedback",
+  "sampleSize": 3,
+  "seed": 42,
+  "personaPool": "persona/datasets/bench-dev-sample",
+  "personaIds": ["0042"],
+  "mode": "auto",
+  "plane": "harbor",
+  "personaModel": "anthropic/claude-haiku-4-5",
+  "nConcurrentTrials": 2
 }
 ```
 
-Notes:
+Common optional fields:
 
-- `applicationId` is one of `recai`, `finance_openbb`, or
-  `medical_assistant`.
-- `recai` uses `domain`; supported domains are `movie`, `beauty_product`, and
-  `game`.
-- Non-RecAI applications use `applicationContext`.
-- `maxTurns` is optional. When omitted, the chatbot run is unbounded.
-- When provided, `maxTurns` must be `>= 1`.
-- `engine` and `personaModel` are optional and fall back to service defaults.
+| Field | Purpose |
+|---|---|
+| `agentName` | Override resolved Harbor agent |
+| `jobName` | Explicit job basename |
+| `cohortId` | Launch from a saved persona cohort |
+| `personaSources` / `personaFilters` | Pool sampling filters |
+| `chatDomain`, `chatApplicationId`, `chatApplicationContext`, `chatMaxTurns` | Chatbot / user-sim tasks |
+| `osAppSubmissionProfile`, `osAppBackend` | os-app / CUA tasks |
+
+`mode` must be one of `auto`, `force_docker`, or `smoke`.
+`plane` must be `harbor` or `remote`.
 
 Response:
 
 ```json
 {
-  "jobId": "persona_eval_abc123"
+  "jobName": "pe-example-survey-product-feedback-abc123",
+  "configPath": "configs/jobs/application-task-job-recipe/pe-example-survey-product-feedback-abc123.yaml",
+  "jobsDir": "jobs",
+  "agentName": "persona-json-survey",
+  "taskType": "survey",
+  "trialProfile": "json_survey",
+  "mode": "auto",
+  "plane": "harbor"
 }
 ```
 
-Errors:
+Poll `GET /api/harbor/jobs/{job_name}` until `launch.status` is terminal.
 
-- `422` when the persona, domain, application id, or model is invalid.
+### `GET /api/harbor/jobs/{job_name}`
 
-### `GET /api/persona-eval/jobs/{job_id}`
+Returns the job detail view: launch metadata, generated config path, trial list,
+and per-trial result summaries when available.
 
-Polls one chatbot persona-eval job.
+### `DELETE /api/harbor/jobs/{job_name}`
 
-Response while running:
+Deletes the job directory and generated config when present.
 
-```json
-{
-  "jobId": "persona_eval_abc123",
-  "domain": "movie",
-  "applicationId": "recai",
-  "applicationContext": "movie",
-  "personaId": "Nemotron_01B0D4D4",
-  "personaName": "Persona name",
-  "sutDescription": "...",
-  "status": "running",
-  "phase": "turn_1",
-  "turns": [],
-  "questionnaire": null,
-  "metricScores": null,
-  "prompts": null,
-  "error": null
-}
-```
-
-Response when done populates `turns`, `questionnaire`, `metricScores`, and
-`prompts`.
-
-Errors:
-
-- `404` when the job does not exist.
-
-### `GET /api/persona-eval/runs`
-
-Lists persisted eval runs across chatbot, survey, web, and os-app surfaces.
-
-Response:
-
-```json
-{
-  "runs": [
-    {
-      "id": "persona_eval_abc123",
-      "createdAt": "2026-06-29T00:00:00Z",
-      "applicationType": "chatbot",
-      "domain": "movie",
-      "personaName": "Persona name",
-      "source": "Nemotron",
-      "overallRating": 8,
-      "numTurns": 4
-    }
-  ]
-}
-```
-
-The summary is permissive and may include application-specific fields.
+### `GET /api/harbor/jobs/{job_name}/aggregation`
 
-### `GET /api/persona-eval/runs/{run_id}`
+Returns `jobs/{job_name}/aggregation.json`, refreshing it when needed.
 
-Returns one persisted eval run.
+### `GET /api/harbor/jobs/{job_name}/live`
 
-Path parameters:
-
-- `run_id`: run id from `GET /api/persona-eval/runs`.
-
-Response for chatbot runs:
-
-```json
-{
-  "id": "persona_eval_abc123",
-  "createdAt": "2026-06-29T00:00:00Z",
-  "config": {},
-  "persona": {},
-  "sutDescription": "...",
-  "transcript": [],
-  "recommendedItemIds": {},
-  "questionnaire": {},
-  "metricScores": {},
-  "prompts": {}
-}
-```
-
-Survey, web, and os-app persisted runs include their application-specific
-fields.
-
-Errors:
-
-- `404` when the run does not exist.
-
-## Survey Eval
-
-Survey eval asks a simulated persona to complete a task-backed survey questionnaire.
-
-### `GET /api/survey-eval/instruments`
-
-Lists available task-backed survey questionnaires.
-
-Response:
-
-```json
-{
-  "instruments": [
-    {
-      "id": "chatgpt_images_market_research_v1",
-      "title": "Market research survey",
-      "description": "...",
-      "questions": [
-        {
-          "id": "q1",
-          "prompt": "How useful was this?",
-          "type": "likert",
-          "options": [],
-          "minValue": 1,
-          "maxValue": 5,
-          "construct": "usefulness",
-          "required": true
-        }
-      ]
-    }
-  ]
-}
-```
-
-### `POST /api/survey-eval`
-
-Starts a survey persona evaluation.
-
-Request body:
-
-```json
-{
-  "personaId": "Nemotron_01B0D4D4",
-  "instrumentId": "chatgpt_images_market_research_v1",
-  "personaModel": "anthropic/claude-haiku-4-5"
-}
-```
-
-`instrumentId` defaults to `chatgpt_images_market_research_v1`.
-
-Response:
-
-```json
-{
-  "jobId": "survey_abc123"
-}
-```
-
-Errors:
-
-- `422` when the persona, instrument, or model is invalid.
-
-### `GET /api/survey-eval/jobs/{job_id}`
-
-Polls one survey eval job.
-
-Response:
-
-```json
-{
-  "jobId": "survey_abc123",
-  "applicationType": "survey",
-  "taskId": "survey_form",
-  "instrumentId": "chatgpt_images_market_research_v1",
-  "instrumentTitle": "Market research survey",
-  "personaId": "Nemotron_01B0D4D4",
-  "personaName": "Persona name",
-  "status": "done",
-  "phase": "complete",
-  "surveyResult": {
-    "instrument": {},
-    "answers": [],
-    "trajectory": [],
-    "completion": {
-      "numQuestions": 5,
-      "numAnswered": 5,
-      "meanLikert": 4.2
-    }
-  },
-  "prompts": {},
-  "error": null
-}
-```
-
-Errors:
-
-- `404` when the job does not exist.
-
-## Web Eval
-
-Web eval sends a simulated persona agent to a website task and records the
-interaction trace.
-
-### `GET /api/web-eval/tasks`
-
-Lists available web tasks.
-
-Response:
-
-```json
-{
-  "tasks": [
-    {
-      "id": "web-playwright-quote-choice",
-      "title": "Quote choice",
-      "siteName": "quotes.toscrape.com",
-      "siteUrl": "https://quotes.toscrape.com/",
-      "description": "Browse the quotes site and choose one quote to keep.",
-      "outputArtifact": "quote_choice.json",
-      "submissionProfile": "quote_choice"
-    }
-  ]
-}
-```
-
-### `POST /api/web-eval`
-
-Starts a web persona evaluation.
-
-Request body:
-
-```json
-{
-  "personaId": "Nemotron_01B0D4D4",
-  "taskId": "web-playwright-quote-choice",
-  "personaModel": "anthropic/claude-haiku-4-5"
-}
-```
-
-`taskId` defaults to `web-playwright-quote-choice`.
-
-Response:
-
-```json
-{
-  "jobId": "web_abc123"
-}
-```
-
-Errors:
-
-- `422` when the persona, task, or model is invalid.
-
-### `GET /api/web-eval/jobs/{job_id}`
-
-Polls one web eval job.
-
-Response:
-
-```json
-{
-  "jobId": "web_abc123",
-  "applicationType": "web",
-  "taskId": "web-playwright-quote-choice",
-  "taskTitle": "Quote choice",
-  "siteName": "quotes.toscrape.com",
-  "siteUrl": "https://quotes.toscrape.com/",
-  "personaId": "Nemotron_01B0D4D4",
-  "personaName": "Persona name",
-  "status": "done",
-  "phase": "complete",
-  "webResult": {
-    "selectedProductId": "item-123",
-    "overallExperienceRating": 8
-  },
-  "trace": {
-    "events": [],
-    "raw": {}
-  },
-  "prompts": {},
-  "error": null
-}
-```
-
-Errors:
-
-- `404` when the job does not exist.
-
-### `GET /api/web-eval/jobs/{job_id}/screenshots/{filename}`
-
-Fetches a screenshot referenced by a web eval trace.
-
-Path parameters:
-
-- `job_id`: web eval job id.
-- `filename`: screenshot filename. Nested paths are accepted by the route but
-  are validated by the service.
-
-Response:
-
-- Binary file response.
-- `Content-Type` is `image/svg+xml` for `.svg` screenshots and `image/webp` for
-  all other screenshot files.
-
-Errors:
-
-- `400` when the filename is invalid.
-- `404` when the job or screenshot does not exist.
-
-## Remote Runner API
-
-`environment.integrations.persona_eval.remote_runner.server:app` is the HTTP
-worker used when `MATRIX_EXECUTION_PLANE=remote`. It is not mounted on the
-PersonaEval `/api` app.
-
-Start it with:
-
-```bash
-PYTHONPATH=.:environment/runtime:packages/persona-eval/src:application/persona_eval:src \
-  uvicorn environment.integrations.persona_eval.remote_runner.server:app \
-  --host 127.0.0.1 --port 9100
-```
-
-### `GET /health`
-
-```json
-{"status": "ok", "service": "remote-runner"}
-```
-
-### `POST /v1/runs`
-
-Creates a remote run.
-
-Production dispatch uses `taskType=harbor_job`:
-
-```json
-{
-  "taskType": "harbor_job",
-  "payload": {
-    "jobName": "pe-example-survey-abc123",
-    "configYaml": "...",
-    "repoRoot": "/path/to/repo",
-    "jobsDir": "jobs",
-    "env": {}
-  }
-}
-```
-
-Response:
-
-```json
-{
-  "id": "run_abc123",
-  "status": "queued",
-  "taskType": "harbor_job"
-}
-```
-
-### `GET /v1/runs/{run_id}`
-
-Returns run status (`queued`, `running`, `succeeded`, `failed`).
-
-### `GET /v1/runs/{run_id}/artifacts/{name}`
-
-Returns a JSON artifact for a completed run. For `harbor_job`, see
-`harbor_job_result.json`.
+Returns live progress for the Cockpit: launch status, trial phases, and basic
+persona labels.
+
+### Trial inspection routes
+
+| Route | Purpose |
+|---|---|
+| `GET .../trials/{trial_name}/events?after=0` | Incremental event stream |
+| `GET .../trials/{trial_name}/debrief` | Structured post-run debrief |
+| `GET .../trials/{trial_name}/instruction` | Persona-facing instruction text |
+| `GET .../trials/{trial_name}/trace` | Web trajectory / trace JSON |
+| `GET .../trials/{trial_name}/screenshots/{filename}` | Binary screenshot |
+| `GET .../trials/{trial_name}/recording` | Binary screen recording (mp4) |
+
+## Persona pool
+
+Used by the Cockpit setup rails for sampling and cohort management.
+
+### `GET /api/persona-pool/catalog?pool=...`
+
+Returns dimension metadata for one persona pool.
+
+### `POST /api/persona-pool/sample`
+
+Samples personas from a pool with optional filters and stratification.
+
+### `GET /api/persona-pool/personas`
+
+Lists persona cards. Supports `limit`, `offset`, `seed`, `personaIds`, `detail`,
+and `all`.
+
+### `GET /api/persona-pool/personas/{persona_id}?pool=...`
+
+Returns one persona card or detail record from the requested pool.
+
+### `GET /api/persona-pool/cohorts`
+
+Lists saved cohorts.
+
+### `POST /api/persona-pool/cohorts`
+
+Saves a cohort from explicit persona ids or a sampled/filtered selection.
+
+### `GET /api/persona-pool/cohorts/{cohort_id}`
+
+Returns one saved cohort definition.
+
+## Task catalogs
+
+Read-only catalogs for Cockpit task pickers. Each route returns a `tasks` array
+with task metadata plus optional profile markdown when available.
+
+| Route | Surface |
+|---|---|
+| `GET /api/tasks/detail?taskPath=...` | One task detail record |
+| `GET /api/survey-eval/instruments` | Survey questionnaires |
+| `GET /api/survey-eval/harbor-tasks` | Survey Harbor tasks |
+| `GET /api/chatbot-eval/tasks` | Chatbot Harbor tasks |
+| `GET /api/web-eval/tasks` | Web Harbor tasks |
+| `GET /api/os-app-eval/tasks` | os-app Harbor tasks |
+
+## Related docs
+
+- [UNIFIED_RUNTIME.md](UNIFIED_RUNTIME.md) — Harbor vs remote execution planes
+- [QUICKSTART.md](../QUICKSTART.md) — terminal smoke and Cockpit setup
+- OpenAPI `/docs` — generated from FastAPI models in `backend/api/schemas.py`

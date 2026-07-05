@@ -78,7 +78,8 @@ def test_recommender_chat_task_metadata_is_clean() -> None:
 
     readme = (RECOMMENDER_CHAT / "README.md").read_text(encoding="utf-8")
     assert "applications/recommendation_chatbot_eval" not in readme
-    assert "persona/datasets/bench-dev-sample/persona_0042.yaml" in readme
+    assert "--persona-ids 0042" in readme
+    assert "recommender-agent-chat-api-auto-n1.yaml" in readme
 
 
 def test_recommender_chat_verifier_accepts_minimal_valid_result(tmp_path: Path) -> None:

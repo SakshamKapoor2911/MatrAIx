@@ -287,7 +287,7 @@ def preflight_checks() -> List[Dict[str, Any]]:
     # /health so readiness reflects whether it is actually running. They are
     # marked optional: a down sidecar shows here but does not gate overall
     # readiness (RecAI / Survey / Web still run without them).
-    from environment.integrations.persona_eval.local.chatbot_eval import _sidecar_base_url
+    from persona_eval.inprocess.chatbot_eval import _sidecar_base_url
 
     finance_url = _sidecar_base_url(
         "CHATBOT_UPSTREAM_FINANCE", "FINANCE_CHATBOT_URL", "http://127.0.0.1:8901"
@@ -439,7 +439,8 @@ def _interecagent_root() -> str:
     """Absolute path to the RecAI engine root used for resource validation.
 
     Honors an ``INTERECAGENT_ROOT`` override (the bridge reads the same var) and
-    otherwise falls back to the task-owned ``recai/InteRecAgent`` checkout. The
+    otherwise falls back to the task-environment ``recai/InteRecAgent`` checkout
+    (sparse-cloned on demand via ``scripts/setup_recai_resources.py``). The
     fallback is computed straight from this module's location so it is unaffected
     by a faked ``recbot`` package in tests.
     """

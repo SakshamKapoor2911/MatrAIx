@@ -14,10 +14,10 @@ from backend.service.harbor_trial_debrief import (
     find_trial_logs_dir,
     find_trial_output_dir,
 )
-from environment.integrations.persona_eval.self_report_task_config import (
+from persona_eval.self_report_task_config import (
     load_self_report_schema_for_task_path,
 )
-from environment.integrations.persona_eval.task_content_bundle import (
+from persona_eval.task_content_bundle import (
     load_task_content_bundle_for_task_path,
 )
 from persona_eval.model_client import build_json_client

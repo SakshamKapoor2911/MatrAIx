@@ -21,7 +21,7 @@ from typing import Any, Callable, Dict, List, Optional, Sequence, Set
 import yaml
 
 from backend.service.config import harbor_persona_model
-from environment.integrations.persona_eval.persona_exposure import coerce_turn_view
+from persona_eval.persona_exposure import coerce_turn_view
 from persona_eval.feedback import questionnaire_from_feedback
 from persona_eval.types import Persona, PersonaEvalConfig
 
@@ -42,6 +42,13 @@ def resolve_repo_root(file_path: Path) -> Path:
         if parts[index] == "application" and parts[index + 1] == "persona_eval":
             return _path_prefix(parts, index)
         if parts[index] == "applications" and parts[index + 1] == "persona_eval":
+            return _path_prefix(parts, index)
+    for index in range(len(parts) - 2):
+        if (
+            parts[index] == "packages"
+            and parts[index + 1] == "persona-eval"
+            and parts[index + 2] == "src"
+        ):
             return _path_prefix(parts, index)
     for index in range(len(parts) - 2):
         if (

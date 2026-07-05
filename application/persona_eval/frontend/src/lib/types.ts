@@ -446,47 +446,6 @@ export interface WebEvalJobView {
   error?: string | null;
 }
 
-export interface AppWorldEvalTask {
-  id: string;
-  title: string;
-  appName: string;
-  description?: string;
-  outputArtifact?: string;
-  submissionProfile?: string;
-}
-
-export interface AppWorldEvalTasksResponse {
-  tasks: AppWorldEvalTask[];
-}
-
-export interface AppWorldResult {
-  taskId: string;
-  success: boolean;
-  score: number;
-  outcome: string;
-  reason: string;
-  createdAt?: string | null;
-}
-
-export type AppWorldTraceEvent = WebTraceEvent;
-export type AppWorldTrace = WebTrace;
-
-export interface AppWorldEvalJobView {
-  jobId: string;
-  applicationType: "appworld";
-  taskId: string;
-  taskTitle: string;
-  appName: string;
-  personaId: string;
-  personaName: string;
-  status: string;
-  phase?: string | null;
-  appworldResult?: AppWorldResult | null;
-  trace?: AppWorldTrace | null;
-  prompts?: PersonaEvalPrompts | null;
-  error?: string | null;
-}
-
 export interface OsAppEvalTask {
   id: string;
   title: string;

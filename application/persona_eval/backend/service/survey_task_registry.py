@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from environment.integrations.persona_eval.survey_task_content import (
+from persona_eval.survey_task_content import (
     instruction_markdown_for_questionnaire_id as _instruction_md,
     load_survey_task_content_for_questionnaire_id,
     survey_questionnaire_id_for_task_folder,

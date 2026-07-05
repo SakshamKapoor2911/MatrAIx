@@ -105,8 +105,10 @@ def test_read_harbor_web_trace_from_cocoa_trial(tmp_path: Path) -> None:
         job_name="pe-job",
         trial_name="trial-a",
     )
-    assert len(trace["events"]) == 1
-    assert trace["events"][0]["screenshotFile"] == "images/step_001.png"
-    assert trace["events"][0]["screenshotUrl"].endswith("images/step_001.png")
+    assert len(trace["events"]) == 2
+    agent_event = trace["events"][1]
+    assert agent_event["source"] == "agent"
+    assert agent_event["screenshotFile"] == "images/step_001.png"
+    assert agent_event["screenshotUrl"].endswith("images/step_001.png")
     path = resolve_trial_screenshot_path(logs_dir, "images/step_001.png")
     assert path.is_file()

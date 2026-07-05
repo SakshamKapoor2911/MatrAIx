@@ -2,10 +2,10 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from environment.integrations.persona_eval.chatbot_task_config import (
+from persona_eval.chatbot_task_config import (
     load_chatbot_task_config_for_task_path,
 )
-from environment.integrations.persona_eval.harbor.chat_eval import (
+from persona_eval.harbor.chat_eval import (
     chat_api_url_from_env,
     harbor_chat_task_config_from_env,
 )

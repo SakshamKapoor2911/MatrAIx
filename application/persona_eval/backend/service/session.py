@@ -371,7 +371,7 @@ class RecBotSession:
         silently falling back to RecAI. The sidecar response is adapted into the
         same ``TurnView`` shape the chat UI and persistence expect.
         """
-        from environment.integrations.persona_eval.local.chatbot_eval import DirectApplicationSession
+        from persona_eval.inprocess.chatbot_eval import DirectApplicationSession
         from persona_eval.types import PersonaEvalConfig
 
         if self._direct_session is None:

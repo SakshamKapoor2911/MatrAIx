@@ -5,7 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Optional
 
-from environment.integrations.persona_eval.task_content_bundle import TaskContentBundle
+from persona_eval.task_content_bundle import TaskContentBundle
 from persona_eval.types import Persona
 
 _GUIDELINES_PATH = Path(__file__).resolve().parent / "sim_guidelines.md"

@@ -43,7 +43,7 @@ Use this when the API should not execute `harbor run` locally.
 
 ```bash
 PYTHONPATH=.:environment/runtime:packages/persona-eval/src:application/persona_eval:src \
-  uvicorn environment.integrations.persona_eval.remote_runner.server:app \
+  uvicorn persona_eval.remote_runner.server:app \
   --host 127.0.0.1 --port 9100
 ```
 
@@ -72,7 +72,10 @@ Primary payload fields for `harbor_job`:
 - `configYaml` — generated Harbor job recipe
 - `repoRoot`
 - `jobsDir`
-- `env` — survey/chat env exports (optional)
+- `env` — optional `PYTHONPATH` plus `MATRIX_*` task exports only (no API keys)
+
+API keys and other secrets must be configured on the **worker** process, not
+sent from the PersonaEval API host.
 
 Optional dev-only `taskType=web` returns a deterministic mock when
 `REMOTE_RUNNER_WEB_COMMAND` is not set.

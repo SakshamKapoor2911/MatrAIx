@@ -17,7 +17,7 @@ def test_public_product_name_is_persona_eval(client):
 def test_frontend_header_uses_persona_eval_brand():
     top_bar = (APP_ROOT / "frontend/src/components/TopBar.tsx").read_text()
 
-    assert "PersonaEval" in top_bar
+    assert "Persona Eval" in top_bar
     assert FORMER_BRAND not in top_bar
 
 

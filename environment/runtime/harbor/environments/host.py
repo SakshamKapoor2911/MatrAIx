@@ -188,7 +188,7 @@ class HostEnvironment(BaseEnvironment):
             return
         self._sidecar_services = services
         service_name = services[0]
-        from environment.integrations.persona_eval.local.chatbot_sidecar_compose import (
+        from persona_eval.inprocess.chatbot_sidecar_compose import (
             write_standalone_sidecar_compose,
         )
 

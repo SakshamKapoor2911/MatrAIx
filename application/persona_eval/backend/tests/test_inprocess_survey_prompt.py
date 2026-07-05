@@ -1,7 +1,7 @@
 from backend.service.example_task_catalog import repo_root
 from backend.service.survey_questionnaire_catalog import get_survey_questionnaire
 from backend.service.survey_types import SurveyInstrument, SurveyQuestion
-from environment.integrations.persona_eval.local.survey_eval import build_survey_task_prompt
+from persona_eval.inprocess.survey_eval import build_survey_task_prompt
 
 
 def test_repo_backed_local_survey_prompt_is_only_document_bundle():

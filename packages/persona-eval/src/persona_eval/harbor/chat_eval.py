@@ -13,22 +13,22 @@ from pathlib import Path
 from typing import TYPE_CHECKING, Any, Callable, Dict, List, Optional
 from urllib.parse import urlencode
 
-from environment.integrations.persona_eval.chatbot_task_config import (
+from persona_eval.chatbot_task_config import (
     ChatbotTaskConfig,
     load_chatbot_task_config_for_task_path,
 )
-from environment.integrations.persona_eval.harbor.chat_mcp_session import (
+from persona_eval.harbor.chat_mcp_session import (
     HarborMcpChatSession,
     harbor_chat_mcp_url_from_task_path,
 )
-from environment.integrations.persona_eval.harbor.chat_sidecar_io import parse_json_stdout
-from environment.integrations.persona_eval.local.chatbot_eval import config_context
-from environment.integrations.persona_eval.persona_exposure import (
+from persona_eval.harbor.chat_sidecar_io import parse_json_stdout
+from persona_eval.inprocess.chatbot_eval import config_context
+from persona_eval.persona_exposure import (
     build_persona_exposure,
     coerce_turn_view,
     normalize_transcript_payload,
 )
-from environment.integrations.persona_eval.task_content_bundle import (
+from persona_eval.task_content_bundle import (
     load_task_content_bundle_for_task_path,
 )
 from persona_eval.types import (
@@ -477,7 +477,7 @@ async def run_harbor_chat_eval_for_persona(
     on_event: Optional[Callable[[Dict[str, Any]], None]] = None,
 ) -> tuple[PersonaEvalResult, str]:
     """End-to-end Harbor chat eval for one loaded Harbor persona object."""
-    from environment.integrations.persona_eval.harbor.persona_eval import _repo_root
+    from persona_eval.harbor.persona_eval import _repo_root
 
     repo_root = _repo_root()
     task_path = harbor_chat_task_path_from_env()

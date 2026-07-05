@@ -17,7 +17,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.responses import JSONResponse, Response
 from pydantic import BaseModel, Field
 
-from environment.integrations.persona_eval.remote_runner.dispatch import run_harbor_job
+from persona_eval.remote_runner.dispatch import run_harbor_job
 
 __all__ = ["create_app"]
 

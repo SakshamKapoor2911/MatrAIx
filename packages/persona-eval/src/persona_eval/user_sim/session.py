@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any, Dict, List, Optional
 
-from environment.integrations.persona_eval.task_content_bundle import TaskContentBundle
+from persona_eval.task_content_bundle import TaskContentBundle
 from persona_eval.types import Persona
 from persona_eval.user_sim.prompt import assemble_system_prompt
 from persona_eval.user_sim.tool_client import ToolStepClient

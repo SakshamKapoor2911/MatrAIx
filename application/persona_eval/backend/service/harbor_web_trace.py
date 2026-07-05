@@ -120,7 +120,7 @@ def read_harbor_web_trace(
     if not trajectory_path.is_file():
         return {"events": [], "raw": {}}
     ensure_harbor_source_imports()
-    from environment.integrations.persona_eval.harbor.web_eval import _trace_from_trajectory
+    from persona_eval.harbor.web_eval import _trace_from_trajectory
 
     trajectory = json.loads(trajectory_path.read_text(encoding="utf-8"))
     if not isinstance(trajectory, dict):

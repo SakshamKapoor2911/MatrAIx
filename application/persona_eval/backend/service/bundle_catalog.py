@@ -36,7 +36,8 @@ def _resources_root() -> str:
     """Absolute path to ``<root>/resources`` (the parent of the domain dirs).
 
     Honors ``INTERECAGENT_ROOT`` (the bridge reads the same override); otherwise
-    the in-repo ``recai/InteRecAgent`` checkout, resolved from this file's
+    the task-environment ``recai/InteRecAgent`` checkout (installed on demand via
+    ``scripts/setup_recai_resources.py``), resolved from this file's
     location rather than via ``recbot.paths`` so a faked ``recbot`` in tests does
     not perturb it.
     """

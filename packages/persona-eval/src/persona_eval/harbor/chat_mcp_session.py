@@ -12,8 +12,8 @@ from typing import TYPE_CHECKING, Any, Dict, List, Optional
 
 import tomllib
 
-from environment.integrations.persona_eval.chatbot_task_config import ChatbotTaskConfig
-from environment.integrations.persona_eval.harbor.chat_sidecar_io import parse_json_stdout
+from persona_eval.chatbot_task_config import ChatbotTaskConfig
+from persona_eval.harbor.chat_sidecar_io import parse_json_stdout
 from persona_eval.types import PersonaEvalConfig
 
 if TYPE_CHECKING:

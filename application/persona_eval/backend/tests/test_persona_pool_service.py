@@ -88,7 +88,7 @@ def test_save_list_and_resolve_cohort(tmp_path, monkeypatch):
     repo = tmp_path
     _write_pool(repo)
     monkeypatch.setattr(
-        "environment.integrations.persona_eval.harbor.persona_eval._repo_root",
+        "persona_eval.harbor.persona_eval._repo_root",
         lambda: repo,
     )
     service = PersonaPoolService(repo_root=repo)
@@ -126,7 +126,7 @@ def test_get_persona_detail(tmp_path, monkeypatch):
     repo = tmp_path
     _write_pool(repo)
     monkeypatch.setattr(
-        "environment.integrations.persona_eval.harbor.persona_eval._repo_root",
+        "persona_eval.harbor.persona_eval._repo_root",
         lambda: repo,
     )
     service = PersonaPoolService(repo_root=repo)
@@ -143,7 +143,7 @@ def test_get_catalog_and_sample_with_filters(tmp_path, monkeypatch):
     repo = tmp_path
     _write_pool(repo)
     monkeypatch.setattr(
-        "environment.integrations.persona_eval.harbor.persona_eval._repo_root",
+        "persona_eval.harbor.persona_eval._repo_root",
         lambda: repo,
     )
     service = PersonaPoolService(repo_root=repo)
@@ -169,7 +169,7 @@ def test_list_persona_cards_all_personas(tmp_path, monkeypatch):
     repo = tmp_path
     _write_pool(repo)
     monkeypatch.setattr(
-        "environment.integrations.persona_eval.harbor.persona_eval._repo_root",
+        "persona_eval.harbor.persona_eval._repo_root",
         lambda: repo,
     )
     service = PersonaPoolService(repo_root=repo)

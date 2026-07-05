@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 def ensure_harbor_source_imports() -> None:
-    """Make ``environment/...`` and source-package imports available."""
+    """Make source-tree imports (``backend.*``, ``harbor.*``, ``persona_eval.*``) available."""
     repo_root = Path(__file__).resolve().parents[4]
     required_paths = [
         repo_root,

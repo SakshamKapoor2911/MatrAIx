@@ -46,8 +46,8 @@ def persona_system_prompt(persona: Persona) -> str:
 def build_survey_task_prompt(
     *, instrument: SurveyInstrument, require_rationale: bool = True
 ) -> str:
-    from environment.integrations.persona_eval.harbor.persona_eval import _repo_root
-    from environment.integrations.persona_eval.survey_task_content import (
+    from persona_eval.harbor.persona_eval import _repo_root
+    from persona_eval.survey_task_content import (
         load_survey_task_content_for_questionnaire_id,
     )
 
@@ -77,7 +77,7 @@ def build_survey_task_prompt(
     return "\n".join(lines).strip()
 
 
-class LocalSurveyEvalRunner:
+class InprocessSurveyEvalRunner:
     """Run survey completion through the configured persona model."""
 
     def __call__(

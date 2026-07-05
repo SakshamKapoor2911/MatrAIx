@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 import yaml
 
-from environment.integrations.persona_eval.harbor.persona_eval import (
+from persona_eval.harbor.persona_eval import (
     build_chatbot_simulation_prompt,
     build_result_from_harbor_artifacts,
     write_harbor_persona_yaml,

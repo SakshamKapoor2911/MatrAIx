@@ -11,7 +11,7 @@ Included in this clean tree:
 
 - React/Vite frontend under `frontend/`.
 - FastAPI backend and service layer under `backend/`.
-- Persona simulator package under `persona_eval/`.
+- Persona simulator package under `packages/persona-eval/src/persona_eval/`.
 - Persona catalog sourced from `persona/datasets/bench-dev-sample/`.
 - Survey, chatbot, and web evaluation APIs.
 
