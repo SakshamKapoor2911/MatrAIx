@@ -69,16 +69,6 @@ source-level evidence.
 | World Bank Remittances / KNOMAD | Remittance context; remittance flows; remittance-related data indicators | The World Bank Remittances / KNOMAD page describes remittance flows and links to remittance-related data indicators such as personal remittances received and paid. | Verified |
 | IPUMS International | Household and family variables; birthplace, migration, citizenship-adjacent census variables | IPUMS International supports cross-national household composition, relationship, marital status, birthplace, migration, and demographic variables in census microdata. | Verified, account/license may be required |
 
-## Language, Culture, And Locale Metadata
-
-| Source | Evidence to look for | Observed evidence | Status |
-| --- | --- | --- | --- |
-| U.S. Census ACS PUMS | Home language and English proficiency variables; U.S. person/household microdata | ACS PUMS includes U.S. public-use person and household microdata with language-related variables such as language spoken at home and English proficiency, supporting U.S.-specific language distribution grounding. | Verified, U.S.-focused |
-| IPUMS International | Census language variables where available; cross-national census microdata | IPUMS International harmonizes census microdata across countries and can support cross-national language-use grounding where language variables are available in source censuses. | Verified, account/license may be required |
-| IPUMS USA | U.S. language, home language, and English proficiency variables | IPUMS USA harmonizes U.S. census and ACS microdata, including language-related variables useful for U.S. home-language and English-proficiency grounding. | Verified, U.S.-focused |
-| Glottolog | Language taxonomy; language reference; language family and classification data | Glottolog provides language taxonomy and reference metadata for language classification. It supports language normalization and taxonomy rather than speaker-distribution calibration. | Verified, metadata source |
-| Ethnologue | Language reference; speaker communities; language status | Ethnologue is a language reference source covering languages, speaker communities, and language status. It can inform language metadata and speaker-community context, but access may be limited. | Verified, access may be limited |
-
 ## Religion, Values, Politics, And Social Attitudes
 
 | Source | Evidence to look for | Observed evidence | Status |

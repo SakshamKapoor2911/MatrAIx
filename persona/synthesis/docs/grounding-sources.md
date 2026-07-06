@@ -16,7 +16,6 @@ documentation, and follow-up validation.
 | Employment / occupation / work | Employment status, occupation, wages, skills, work context | ILOSTAT; BLS OEWS; O*NET; OECD employment data; ACS PUMS; IPUMS USA; IPUMS CPS |
 | Income / socioeconomic status | Income, poverty, inequality, and socioeconomic priors | World Bank Poverty and Inequality Platform; World Bank WDI; World Inequality Database; Luxembourg Income Study; OECD Income Distribution Database; ACS PUMS; IPUMS USA; IPUMS CPS |
 | Household / family / marital status | Household size, family structure, marital and parental status | ACS PUMS; IPUMS International; IPUMS USA; UN Population Division; OECD Family Database; DHS Program; UNICEF MICS |
-| Language / locale / culture | Language use, home language, language taxonomy, and speaker/community context | ACS PUMS; IPUMS International; IPUMS USA; Glottolog; Ethnologue |
 | Religion / religiosity | Religious affiliation, denomination, belief, and religiosity | Pew Research Center Religion; World Values Survey; General Social Survey; ARDA |
 | Values / politics / trust / social attitudes | Political lean, trust, social values, public opinion | World Values Survey; General Social Survey; Pew Research Center; European Social Survey; International Social Survey Programme; Gallup World Poll; Afrobarometer; Arab Barometer; Asian Barometer; Latinobarometro; Eurobarometer |
 | Personality / psychometrics | Personality traits, psychological scales, and self-report constructs | IPIP; SAPA Project; MIDUS |
@@ -72,14 +71,6 @@ documentation, and follow-up validation.
 - World Bank Migration & Labor Mobility: https://www.worldbank.org/ext/en/topic/social-protection/migration
 - World Bank Remittances / KNOMAD: https://www.worldbank.org/en/topic/migration/brief/remittances-knomad
 - IPUMS International: https://international.ipums.org/international/
-
-### Language, Culture, And Locale Metadata
-
-- U.S. Census ACS PUMS: https://www.census.gov/programs-surveys/acs/microdata.html
-- IPUMS International: https://international.ipums.org/international/
-- IPUMS USA: https://usa.ipums.org/usa/
-- Glottolog: https://glottolog.org/
-- Ethnologue: https://www.ethnologue.com/
 
 ### Religion, Values, Politics, And Social Attitudes
 
@@ -147,13 +138,11 @@ These shorthand keys identify the grounding sources referenced above.
 - `consumer_expenditure_surveys`: Consumer Expenditure Surveys
 - `datareportal`: DataReportal global digital reports
 - `dhs_program`: DHS Program
-- `ethnologue`: Ethnologue
 - `eurobarometer`: Eurobarometer
 - `european_social_survey`: European Social Survey
 - `eurostat`: Eurostat
 - `gallup_world_poll`: Gallup World Poll
 - `github_octoverse`: GitHub Octoverse
-- `glottolog`: Glottolog
 - `gss_1972_2024`: General Social Survey
 - `ihme_gbd`: IHME Global Burden of Disease
 - `ilostat`: ILOSTAT
