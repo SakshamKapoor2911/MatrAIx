@@ -69,16 +69,16 @@ source-level evidence.
 | World Bank Remittances / KNOMAD | Remittance context; remittance flows; remittance-related data indicators | The World Bank Remittances / KNOMAD page describes remittance flows and links to remittance-related data indicators such as personal remittances received and paid. | Verified |
 | IPUMS International | Household and family variables; birthplace, migration, citizenship-adjacent census variables | IPUMS International supports cross-national household composition, relationship, marital status, birthplace, migration, and demographic variables in census microdata. | Verified, account/license may be required |
 
-## Language, Culture, And Locale
+## Language, Culture, And Locale Metadata
 
 | Source | Evidence to look for | Observed evidence | Status |
 | --- | --- | --- | --- |
-| Unicode CLDR | Locale, territory, script, language metadata; internationalization data | Unicode CLDR provides locale, language, script, territory, and formatting metadata used for language and locale grounding. | Verified |
-| CLDR project repository | Source repository for CLDR data and project artifacts | The CLDR project repository provides source data and project artifacts for Unicode CLDR. | Verified |
-| Glottolog | Language taxonomy; language reference; language family and classification data | Glottolog provides language taxonomy and reference metadata for language classification. | Verified |
-| Glottolog downloads | Downloadable language taxonomy and metadata files | The local raw manifest points to Glottolog downloads for language taxonomy and geolocation files, matching this source's data-download role. | Verified |
-| World Atlas of Language Structures | Cross-linguistic language features; language metadata | WALS provides structured cross-linguistic features and language metadata, supporting language and culture-adjacent grounding. | Verified |
-| Ethnologue | Language reference; speaker communities; language status | Ethnologue is a language reference source covering languages, speaker communities, and language status. | Verified, access may be limited |
+| Unicode CLDR | Locale, territory, script, language metadata; internationalization data | Unicode CLDR provides locale, language, script, territory, and formatting metadata for normalization and language/locale mapping. It is a metadata source rather than a population-distribution source. | Verified, metadata source |
+| CLDR project repository | Source repository for CLDR data and project artifacts | The CLDR project repository provides source data and project artifacts for Unicode CLDR, supporting direct access to locale, language, script, and territory metadata files. | Verified, metadata source |
+| Glottolog | Language taxonomy; language reference; language family and classification data | Glottolog provides language taxonomy and reference metadata for language classification. It supports language normalization and taxonomy rather than speaker-distribution calibration. | Verified, metadata source |
+| Glottolog downloads | Downloadable language taxonomy and metadata files | The local raw manifest points to Glottolog downloads for language taxonomy and geolocation files, matching this source's data-download role for metadata. | Verified, metadata source |
+| World Atlas of Language Structures | Cross-linguistic language features; language metadata | WALS provides structured cross-linguistic features and language metadata, supporting language and culture-adjacent metadata rather than population distributions. | Verified, metadata source |
+| Ethnologue | Language reference; speaker communities; language status | Ethnologue is a language reference source covering languages, speaker communities, and language status. It can inform language metadata and speaker-community context, but access may be limited. | Verified, access may be limited |
 
 ## Religion, Values, Politics, And Social Attitudes
 

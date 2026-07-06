@@ -16,7 +16,7 @@ documentation, and follow-up validation.
 | Employment / occupation / work | Employment status, occupation, wages, skills, work context | ILOSTAT; BLS OEWS; O*NET; OECD employment data; ACS PUMS; IPUMS USA; IPUMS CPS |
 | Income / socioeconomic status | Income, poverty, inequality, and socioeconomic priors | World Bank Poverty and Inequality Platform; World Bank WDI; World Inequality Database; Luxembourg Income Study; OECD Income Distribution Database; ACS PUMS; IPUMS USA; IPUMS CPS |
 | Household / family / marital status | Household size, family structure, marital and parental status | ACS PUMS; IPUMS International; IPUMS USA; UN Population Division; OECD Family Database; DHS Program; UNICEF MICS |
-| Language / locale / culture | Language, locale, territory, script, and language geography | Unicode CLDR; Glottolog; World Atlas of Language Structures; Ethnologue |
+| Language / locale / culture | Language, locale, territory, script, and language/culture metadata | Unicode CLDR; Glottolog; World Atlas of Language Structures; Ethnologue |
 | Religion / religiosity | Religious affiliation, denomination, belief, and religiosity | Pew Research Center Religion; World Values Survey; General Social Survey; ARDA |
 | Values / politics / trust / social attitudes | Political lean, trust, social values, public opinion | World Values Survey; General Social Survey; Pew Research Center; European Social Survey; International Social Survey Programme; Gallup World Poll; Afrobarometer; Arab Barometer; Asian Barometer; Latinobarometro; Eurobarometer |
 | Personality / psychometrics | Personality traits, psychological scales, and self-report constructs | IPIP; SAPA Project; MIDUS |
@@ -73,7 +73,7 @@ documentation, and follow-up validation.
 - World Bank Remittances / KNOMAD: https://www.worldbank.org/en/topic/migration/brief/remittances-knomad
 - IPUMS International: https://international.ipums.org/international/
 
-### Language, Culture, And Locale
+### Language, Culture, And Locale Metadata
 
 - Unicode CLDR: https://cldr.unicode.org/
 - CLDR project repository: https://github.com/unicode-org/cldr
