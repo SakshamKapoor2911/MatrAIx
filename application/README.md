@@ -1,79 +1,142 @@
-# Application Module
+# Application module
 
-This module owns scenarios where personas are used to evaluate products,
-workflows, assistants, and research questions.
+> Part of [PersonaBench](../README.md). We own **persona-affiliated product
+> simulation scenarios** — surveys, chatbots, live web, and computer-use tasks.
 
-Current layout:
+Welcome. If you are joining to design scenarios, run demos, or ship a new task,
+you are in the right place.
+
+---
+
+## Start here
+
+| You want to… | Go to |
+|--------------|-------|
+| Run your first persona survey (terminal) | **[QUICKSTART.md](QUICKSTART.md)** |
+| Play tasks in the UI | QUICKSTART **[§10 — PersonaEval Cockpit](QUICKSTART.md#10-personaeval-cockpit--play-tasks-visually)** |
+| Add a new task | [tasks/README.md](tasks/README.md) + [task-guide.md](task-guide.md) |
+| Pick agent + API keys | [choosing-an-agent.md](choosing-an-agent.md) |
+| Understand how runs execute | [environment/README.md](../environment/README.md) |
+| Use the HTTP API | [persona_eval/REST_API.md](persona_eval/REST_API.md) |
+
+**Time budget:** ~30–60 minutes for a first end-to-end pass (Docker image builds
+ dominate on web/CUA tasks).
+
+---
+
+## What Application delivers
+
+Each runnable scenario under `application/tasks/` defines:
+
+- a **persona-facing** scenario (`instruction.md` — no agent names)
+- task metadata (`task.toml` — type, domain, environment definition)
+- a **verifier** (`tests/` — shape, coverage, quality signals)
+- optional **batch reporting** (`reporting.json` — summaries and LLM judges)
+
+Persona profiles live in `persona/datasets/`. Tasks reference them via
+`persona_path=` at job launch — never copy persona YAML into application folders.
 
 ```text
 application/
-  persona_eval/ PersonaEval app, API, simulator, and frontend workbench.
-  reporting/   Application result summaries.
-  scripts/     Application job generation helpers.
-  tasks/       Runnable survey, chat, web, and product tasks.
+  tasks/              Executable scenarios (survey, chat, web, os-app)
+  task-spec/          Shared contracts per interaction type
+  persona_eval/       Cockpit UI, FastAPI backend, remote runner client
+  scripts/            generate_application_job.py, report_job.py
+  QUICKSTART.md       Contributor walkthrough (terminal → batch → UI)
+  task-guide.md       Folder layout and reference tasks
+  choosing-an-agent.md
+  web-interaction.md
 ```
 
-Applications should depend on persona inputs by reference. They should not copy
-large persona datasets into application folders.
+Shared Docker / sidecar stacks: `environment/task-environments/application/`.
 
-Related runtime and recipe surfaces live outside this module:
+---
 
-- `configs/jobs/application-task-job-recipe/` contains curated multi-persona
-  application job fixtures.
-- `configs/jobs/example-job-recipe/` contains local smoke recipes for the
-  example application tasks.
-- `environment/runtime/harbor/` and `environment/agents/personabench/agents/`
-  own execution and agent wiring.
+## Task types at a glance
 
-## Scenario Handoff Template
+| Type | Reference task | Agent (typical) | Docs |
+|------|------------------|-----------------|------|
+| Survey | `example-survey_product-feedback` | `persona-claude-code` | [task-spec/survey/](task-spec/survey/) |
+| Chatbot | `recommender-agent_chat_api` | `persona-claude-code` | [task-spec/chatbot/](task-spec/chatbot/) |
+| Web | `example-web-playwright_quote-choice` | `persona-openhands-sdk` | [web-interaction.md](web-interaction.md) |
+| OS / computer-use | `example-computer-use-ios_photo-access-review` | `persona-computer-1` | [task-spec/os-app/](task-spec/os-app/) |
 
-Use this format when proposing a new runnable application scenario. The goal is
-to make the task concrete enough that the environment/runtime side can execute
-it without guessing at product state, tools, or metrics.
+Copy the closest **`example-*`** sibling when adding a task. See
+[tasks/README.md](tasks/README.md) for the full checklist.
+
+---
+
+## Conventions (please follow)
+
+1. **`instruction.md` is persona-facing only** — scenario + output format. Put
+   agent names and smoke commands in the task **README** under *Suggested setup
+   (non-binding)*.
+2. **Harbor task names** use one slash: `personabench/application-{slug}`.
+3. **Generated job YAML** uses hyphenated slugs from folder names
+   (`example-survey-product-feedback-auto-n1.yaml`, not underscores).
+4. **Do not commit** bulk `jobs/` output — curated demo jobs in `jobs/` are
+   maintained intentionally; your local runs stay local unless asked otherwise.
+
+---
+
+## Scenario proposal template
+
+Use this when opening an Issue or design doc before coding:
 
 ```text
 Scenario name:
-Task type:                # survey / chatbot / web / app / social-sim
+Task type:                # survey / chatbot / web / os-app
 Domain / vertical:
 Product or system under test:
-Task specification:       # what happens in the episode and what must be done
-Environment needs:        # surface, tools, initial state, data, credentials
-Persona inputs:           # referenced cohort or dimensions, not copied data
-User goal and context:    # motivation, prior knowledge, constraints
-Metrics:                  # task success, fidelity, friction, safety, etc.
-Outputs:                  # trajectory, telemetry, reports, artifacts
+Task specification:       # episode + required artifacts
+Environment needs:        # sidecar, browser, credentials
+Persona inputs:           # cohort or dimensions (by reference)
+User goal and context:
+Metrics:                  # success, fidelity, friction, …
+Outputs:                  # trajectory, telemetry, reports
+Known limitations:
 ```
 
-Example:
+Domain inspiration:
+[application-domain-benchmark-catalog.md](../docs/research/application-domain-benchmark-catalog.md).
 
-```text
-Scenario name: Retail order-support refund handling
-Task type: chatbot
-Domain / vertical: Commerce & Retail / order support
-Product or system under test: retail order-support chatbot
-Task specification: simulated shoppers request a return or refund over
-  multi-turn chat; the bot must handle each request under the return policy.
-Environment needs: chat API connector, orders fixture, return policy document,
-  and deterministic task start state.
-Persona inputs: price sensitivity, age, shopping habits, tech savviness.
-User goal and context: ordered earbuds arrived late and the user wants a refund.
-Metrics: persona adherence, turns to resolution, frustration, policy compliance.
-Outputs: conversation trajectory and per-metric score report.
-```
+---
 
-For broader domain inspiration, see
-[`docs/research/application-domain-benchmark-catalog.md`](../docs/research/application-domain-benchmark-catalog.md).
+## Batch reporting
 
-## Current Imported Scope
+Reporting is task-owned, not a separate app folder:
 
-The clean import currently includes:
+| Piece | Location |
+|-------|----------|
+| Policy | `application/tasks/<name>/reporting.json` |
+| Rollup script | `application/scripts/report_job.py` → `jobs/<job>/aggregation.json` |
+| Cockpit / API | optional LLM judges when `PERSONAEVAL_REPORTING_ENABLE_LLM=1` |
 
-- `tasks/`: survey, chat, web, and computer-use example tasks
-- `scripts/`: application job generation helpers
-- `reporting/`: placeholder aggregation surface for application batch reports
-- `persona_eval/`: PersonaEval app/API/frontend plus survey, chatbot, and web
-  evaluation helpers
+---
 
-Keep new application contributions scoped to application-owned task, script,
-reporting, or PersonaEval folders. Do not add repo-root scripts, copy persona
-datasets into application folders, or commit generated job outputs.
+## Guides index
+
+| Doc | Purpose |
+|-----|---------|
+| [QUICKSTART.md](QUICKSTART.md) | Zero → first run → batch → Cockpit → new task |
+| [task-guide.md](task-guide.md) | Task folder structure |
+| [task-spec/](task-spec/) | Survey / chat / web / os-app contracts |
+| [web-interaction.md](web-interaction.md) | Playwright vs browser-use vs Cocoa vs CUA |
+| [choosing-an-agent.md](choosing-an-agent.md) | Agent ↔ form ↔ API keys |
+| [tasks/README.md](tasks/README.md) | Contributor checklist |
+| [scripts/README.md](scripts/README.md) | Job generation scripts |
+| [persona_eval/README.md](persona_eval/README.md) | PersonaEval app |
+| [persona_eval/UNIFIED_RUNTIME.md](persona_eval/UNIFIED_RUNTIME.md) | Local vs remote execution |
+
+---
+
+## Contributing
+
+- New scenarios → `application/tasks/`
+- Metrics / judges → `reporting.json` + `packages/rewardkit/`
+- UI / API → `application/persona_eval/`
+
+Workflow and PR rules: [CONTRIBUTING.md](../CONTRIBUTING.md).
+
+Open Environment roadmap items (task review agent, multi-agent env, benchmark
+import) live in [environment/README.md](../environment/README.md#roadmap--open-work).
