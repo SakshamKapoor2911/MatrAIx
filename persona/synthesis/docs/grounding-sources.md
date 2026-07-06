@@ -23,7 +23,7 @@ documentation, and follow-up validation.
 | Health / disability / accessibility | Disability, health status, accessibility needs, assistive technology | WHO Global Health Observatory; IHME Global Burden of Disease; ACS PUMS; CDC NHIS; CDC BRFSS; DHS Program; UNICEF MICS |
 | Lifestyle / time use / consumption | Time use, household spending, daily activity, and lifestyle priors | American Time Use Survey; Consumer Expenditure Surveys; OECD Time Use Database |
 | Technology / internet access / digital behavior | Internet access, digital adoption, technical familiarity | ITU statistics; World Bank WDI; DataReportal; Pew Internet & Technology; Stack Overflow Survey |
-| Developer / coding / technical tools | Developer skills, programming languages, tools, AI-tool usage | Stack Overflow Survey; GitHub Octoverse; JetBrains State of Developer Ecosystem Report; CNCF Annual Survey |
+| Developer / coding / technical tools | Developer skills, programming languages, tools, AI-tool usage | Stack Overflow Survey; GitHub Octoverse; JetBrains State of Developer Ecosystem Report |
 | Migration / citizenship / country of birth | Citizenship, migration, country of birth, remittance context | UN International Migrant Stock; OECD migration data; ACS PUMS; IPUMS International; IPUMS USA; World Bank Migration & Labor Mobility; World Bank Remittances / KNOMAD |
 
 ## Source Catalog
@@ -130,7 +130,6 @@ documentation, and follow-up validation.
 - GitHub Octoverse: https://octoverse.github.com/
 - JetBrains State of Developer Ecosystem Report 2025: https://devecosystem-2025.jetbrains.com/
 - JetBrains State of Developer Ecosystem Report 2024: https://www.jetbrains.com/lp/devecosystem-2024/
-- CNCF Annual Survey: https://www.cncf.io/reports/
 
 ## Source Reference Keys
 
@@ -145,7 +144,6 @@ These shorthand keys identify the grounding sources referenced above.
 - `bls_oews_may2025`: BLS Occupational Employment and Wage Statistics
 - `cdc_brfss`: CDC Behavioral Risk Factor Surveillance System
 - `cdc_nhis`: CDC National Health Interview Survey
-- `cncf_annual_survey`: CNCF Annual Survey
 - `consumer_expenditure_surveys`: Consumer Expenditure Surveys
 - `datareportal`: DataReportal global digital reports
 - `dhs_program`: DHS Program

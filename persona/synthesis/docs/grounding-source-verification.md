@@ -138,7 +138,6 @@ source-level evidence.
 | GitHub Octoverse | Developer ecosystem and platform trends; repository/language/AI trends | GitHub Octoverse reports on developer activity, repositories, languages, AI, and platform ecosystem trends. | Verified, platform/report-focused |
 | JetBrains State of Developer Ecosystem Report 2025 | Developer tools, languages, AI, productivity, work, salary, demographics | JetBrains State of Developer Ecosystem Report provides survey-based developer ecosystem metrics, including languages, tools, AI, productivity, work, salary, and demographics. | Verified, developer-focused |
 | JetBrains State of Developer Ecosystem Report 2024 | Developer ecosystem report and raw data page; tools, languages, AI, work, salary, demographics | The 2024 JetBrains report provides developer ecosystem data, methodology, and raw-data access, supporting developer tools and behavior grounding. | Verified, developer-focused |
-| CNCF Annual Survey | Cloud-native tools, containers, Kubernetes, platform practices | CNCF survey reports support cloud-native tooling, containers, Kubernetes, platform, and developer infrastructure dimensions. | Verified, developer/cloud-focused |
 
 ## Verification Templates
 
