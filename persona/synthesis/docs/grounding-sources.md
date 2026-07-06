@@ -48,7 +48,7 @@ documentation, and follow-up validation.
 - UNESCO Institute for Statistics: https://uis.unesco.org/
 - World Bank Education Statistics: https://databank.worldbank.org/source/education-statistics
 - ILOSTAT data: https://ilostat.ilo.org/data/
-- ILOSTAT explorer: https://rshiny.ilo.org/dataexplorer/
+- ILOSTAT explorer: https://rplumber.ilo.org/dataexplorer/?lang=en
 - BLS Occupational Employment and Wage Statistics: https://www.bls.gov/oes/
 - OEWS data overview: https://www.bls.gov/oes/tables.htm
 - O*NET Resource Center: https://www.onetcenter.org/
