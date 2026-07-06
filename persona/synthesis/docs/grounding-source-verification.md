@@ -53,7 +53,7 @@ source-level evidence.
 | OECD Income Distribution Database | Income distribution; inequality indicators; OECD and partner coverage | OECD Income Distribution Database provides income distribution and inequality indicators for OECD and partner countries. | Verified, OECD-focused |
 | World Bank Poverty and Inequality Platform | Poverty, inequality, welfare distribution; country-level socioeconomic indicators | The World Bank Poverty and Inequality Platform supports country-level poverty and inequality grounding. | Verified |
 | World Inequality Database | Income inequality; wealth inequality; distributional indicators | The World Inequality Database provides inequality and distributional indicators for income and wealth grounding. | Verified |
-| Luxembourg Income Study | Harmonized income microdata; income distribution; inequality research | LIS provides harmonized income microdata and distributional resources, supporting socioeconomic and income grounding. | Verified, access may require registration |
+| Luxembourg Income Study | Harmonized income microdata; income distribution; inequality research | LIS provides harmonized income microdata and distributional resources, supporting socioeconomic and income grounding. | Verified, requires registration |
 | IPUMS CPS | U.S. labor-force survey microdata; employment, occupation, income variables | IPUMS CPS harmonizes Current Population Survey microdata, supporting U.S. employment, labor force, occupation, and income grounding. | Verified, U.S.-focused |
 
 ## Household, Family, And Migration
