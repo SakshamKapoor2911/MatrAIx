@@ -93,7 +93,10 @@ def parse_fields(text: str) -> list[dict]:
         obj = json.loads(text[start : end + 1])
     except json.JSONDecodeError:
         return []
-    return obj.get("fields", []) if isinstance(obj, dict) else []
+    if not isinstance(obj, dict):
+        return []
+    fields = obj.get("fields")
+    return fields if isinstance(fields, list) else []
 
 
 def cat_chunks(by_category: dict, per_chunk: int):

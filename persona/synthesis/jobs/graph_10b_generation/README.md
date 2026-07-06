@@ -8,6 +8,10 @@ This folder contains CPU-only SLURM templates for generating large Full DAG pers
 generate_graph_shard.job   One SLURM array task = one compressed codes shard.
 submit_graph_10b.sh        Wrapper that submits an array of shard jobs.
 monitor_generation.sh      One-command progress view for a run and optional job id.
+RUN_FULL_DAG_10B_20260703.md
+                            Completed 10B production run record.
+HF_UPLOAD_PERSONA8B_1B_20260704.md
+                            Hugging Face upload record for the 1B subset.
 ```
 
 The generated personas are stored as compressed graph `codes.gz` files, not rendered text.

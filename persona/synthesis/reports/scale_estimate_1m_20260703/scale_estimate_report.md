@@ -497,3 +497,33 @@ I/O remains healthy. Based on the 100M benchmark and the first wave, the active
 ETA is approximately 45-60 minutes from submission, with storage expected around
 4.04TB final and higher transient space while temporary shard directories and
 final gzip files coexist.
+
+Final production run status:
+
+```text
+status: COMPLETED
+job_id: 27698932
+code shard files: 100
+schema sidecars: 100
+manifest files: 100
+missing shard ids: none
+total rows from manifests: 10,000,000,000
+total compressed codes bytes: 4,039,709,140,901
+average compressed bytes/persona: 403.971
+sum of per-shard sampler seconds: 46,872
+aggregate rows per sampler-second: ~213,347
+directory size from du -sh: 3.7T
+```
+
+The final output is under:
+
+```text
+persona/synthesis/generated/full_dag_10b_20260703/
+  shards/      100 x .codes.gz plus 100 x .schema.json
+  manifests/   100 x .manifest.json
+```
+
+Each shard contains 100M personas in compressed Full DAG codes format. The run
+completed without missing shard ids, and all array tasks reported `COMPLETED` in
+SLURM accounting. The final decimal storage footprint is approximately 4.04TB;
+`du -sh` reports 3.7T in binary/display units.
