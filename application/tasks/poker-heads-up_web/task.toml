@@ -1,0 +1,32 @@
+version = "1.0"
+artifacts = ["/app/output"]
+
+[task]
+name = "personabench/application-poker-heads-up-web"
+
+[metadata]
+difficulty = "easy"
+type = "web"
+domain = "gaming-interactive"
+tags = [
+  "heads up poker",
+  "kuhn poker",
+  "deterministic opponent",
+  "persona-sensitive strategy",
+  "task-specific host",
+]
+
+[verifier]
+timeout_sec = 300.0
+
+[agent]
+timeout_sec = 900.0
+
+[environment]
+definition = "application/poker-heads-up_web"
+build_timeout_sec = 900.0
+cpus = 1
+memory_mb = 2048
+storage_mb = 8192
+gpus = 0
+

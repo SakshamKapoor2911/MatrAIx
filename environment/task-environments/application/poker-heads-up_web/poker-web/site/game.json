@@ -1,0 +1,43 @@
+{
+  "gameId": "kuhn-heads-up-fixed-v1",
+  "ruleset": "Simplified one-hand Kuhn poker",
+  "deck": ["J", "Q", "K"],
+  "playerCard": "Q",
+  "opponentModel": "deterministic-kuhn-bot-v1",
+  "opponentProfile": "Bluffs with J after a check, folds J to a bet, calls or value-bets stronger cards.",
+  "ante": 1,
+  "betSize": 1,
+  "validPlayerLines": [
+    {
+      "id": "line-bet",
+      "actions": ["bet"],
+      "opponentActions": ["fold"],
+      "terminalState": "bot_folded",
+      "winner": "player",
+      "chipDelta": 1,
+      "potSize": 3,
+      "label": "Bet first and make the bot fold"
+    },
+    {
+      "id": "line-check-call",
+      "actions": ["check", "call"],
+      "opponentActions": ["bet"],
+      "terminalState": "showdown",
+      "winner": "player",
+      "chipDelta": 2,
+      "potSize": 4,
+      "label": "Check, face a bluff bet, then call"
+    },
+    {
+      "id": "line-check-fold",
+      "actions": ["check", "fold"],
+      "opponentActions": ["bet"],
+      "terminalState": "player_folded",
+      "winner": "opponent",
+      "chipDelta": -1,
+      "potSize": 3,
+      "label": "Check, face a bluff bet, then fold"
+    }
+  ]
+}
+

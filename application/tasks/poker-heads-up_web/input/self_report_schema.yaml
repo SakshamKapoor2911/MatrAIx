@@ -1,0 +1,38 @@
+artifactName: user_feedback.json
+instructions: |
+  Reflect honestly as the persona after finishing the poker hand.
+  Base your answers on the action line you chose, the hidden-information
+  pressure, and how satisfying the game felt.
+fields:
+  - key: needConstraintSatisfaction
+    prompt: How well did the final action line satisfy your goal for the hand?
+    kind: enum
+    choices: [yes, partially, no]
+  - key: personalPreferenceSatisfaction
+    prompt: How well did the action line match your personal risk style?
+    kind: enum
+    choices: [yes, partially, no]
+  - key: overallExperienceRating
+    prompt: Overall, how would you rate the poker experience from 1 to 10?
+    kind: integer
+    minimum: 1
+    maximum: 10
+  - key: reason
+    prompt: Briefly explain the rating in your own voice.
+  - key: trustLevel
+    prompt: "Optional: how much did you trust the visible game state from 1 to 10?"
+    kind: integer
+    minimum: 1
+    maximum: 10
+    required: false
+  - key: effortRating
+    prompt: "Optional: how effortful did the decision feel from 1 to 10, where higher means more effort?"
+    kind: integer
+    minimum: 1
+    maximum: 10
+    required: false
+  - key: clarityOfNextStep
+    prompt: "Optional: did the next action feel clear while playing?"
+    kind: boolean
+    required: false
+

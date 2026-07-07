@@ -16,3 +16,17 @@ def test_all_registered_web_tasks_have_absolute_paths():
     for task in list_web_eval_tasks():
         task_path = REPO_ROOT / Path(str(task.task_path))
         assert task_path.is_dir(), "{} has missing task path".format(task.id)
+
+
+def test_poker_web_task_resolves_static_game_host():
+    task = get_web_eval_task("poker-heads-up-web")
+    assert task.output_artifact == "poker_result.json"
+
+    task_path = REPO_ROOT / Path(str(task.task_path))
+    site = (
+        TaskPaths.from_task_dir(task_path).environment_dir
+        / "poker-web"
+        / "site"
+    )
+    assert (site / "index.html").is_file()
+    assert (site / "game.json").is_file()
