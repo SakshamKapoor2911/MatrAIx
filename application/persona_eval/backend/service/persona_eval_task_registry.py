@@ -89,7 +89,7 @@ PERSONA_EVAL_TASK_INDEX: Dict[str, PersonaEvalTaskEntry] = {
         site_name="Heads-up Poker Table",
         site_url="http://poker-web:8000/",
         output_artifact="poker_result.json",
-        submission_profile="persona_eval_final_json",
+        submission_profile="",
     ),
     # Chatbot
     "recommender-agent_chat_api": PersonaEvalTaskEntry(application_type="chatbot"),
