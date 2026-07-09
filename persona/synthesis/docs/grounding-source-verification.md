@@ -124,6 +124,13 @@ source-level evidence.
 | GitHub Octoverse | Developer ecosystem and platform trends; repository/language/AI trends | GitHub Octoverse reports on developer activity, repositories, languages, AI, and platform ecosystem trends. | Verified, platform/report-focused |
 | JetBrains State of Developer Ecosystem | Developer tools, languages, AI, productivity, work, salary, demographics | JetBrains State of Developer Ecosystem provides survey-based developer ecosystem metrics, including languages, tools, AI, productivity, work, salary, and demographics. | Verified, developer-focused |
 
+## Linguistic And Locale Data
+
+| Source | Evidence to look for | Observed evidence | Status |
+| --- | --- | --- | --- |
+| Unicode CLDR | Locales, language codes, country-to-language mappings, script usage, plural rules, keyboard layouts | Unicode CLDR provides key building blocks for software to support locales and languages, including locale-specific patterns and data. | Verified |
+| Glottolog | Language classification, geographic coordinates of dialects, genealogical relationships, references for world languages | Glottolog provides comprehensive reference data and genealogical classification for the world's languages and dialects. | Verified |
+
 ## Verification Templates
 
 ### Source-Level Verification Template

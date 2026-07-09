@@ -117,6 +117,11 @@ documentation, and follow-up validation.
 - GitHub Octoverse: https://octoverse.github.com/
 - JetBrains State of Developer Ecosystem: https://devecosystem-2025.jetbrains.com/
 
+### Linguistic and Locale Data
+
+- Unicode CLDR: https://cldr.unicode.org/
+- Glottolog: https://glottolog.org/
+
 ## Source Reference Keys
 
 These shorthand keys identify the grounding sources referenced above.
@@ -130,6 +135,7 @@ These shorthand keys identify the grounding sources referenced above.
 - `bls_oews_may2025`: BLS Occupational Employment and Wage Statistics
 - `cdc_brfss`: CDC Behavioral Risk Factor Surveillance System
 - `cdc_nhis`: CDC National Health Interview Survey
+- `cldr`: Unicode CLDR
 - `consumer_expenditure_surveys`: Consumer Expenditure Surveys
 - `datareportal`: DataReportal global digital reports
 - `dhs_program`: DHS Program
@@ -139,6 +145,7 @@ These shorthand keys identify the grounding sources referenced above.
 - `eurostat`: Eurostat
 - `gallup_world_poll`: Gallup World Poll
 - `github_octoverse`: GitHub Octoverse
+- `glottolog`: Glottolog
 - `gss_1972_2024`: General Social Survey
 - `ihme_gbd`: IHME Global Burden of Disease
 - `ilostat`: ILOSTAT
