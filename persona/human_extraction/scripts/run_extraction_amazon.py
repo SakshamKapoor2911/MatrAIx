@@ -403,7 +403,7 @@ def main() -> None:
     out_path = out_dir / f"shard_{bucket}.jsonl"
 
     # --- schema / chunks ---
-    schema_doc = json.load(open(DIMENSIONS_JSON))
+    schema_doc = json.load(open(DIMENSIONS_JSON, encoding="utf-8"))
     by_category: dict[str, list] = {}
     for d in schema_doc["dimensions"]:
         by_category.setdefault(d.get("category", "Uncategorized"), []).append(d)
@@ -428,7 +428,7 @@ def main() -> None:
                 f"appended_newline={appended_newline}",
                 flush=True,
             )
-        with open(out_path) as fh:
+        with open(out_path, encoding="utf-8") as fh:
             for line in fh:
                 try:
                     done.add(json.loads(line)["user_id"])
@@ -483,7 +483,7 @@ def main() -> None:
     # --- stream in batches; checkpoint after each ---
     n_done = 0
     t_gen = time.time()
-    with open(out_path, "a") as out_fh:
+    with open(out_path, "a", encoding="utf-8") as out_fh:
         for bstart in range(0, len(todo), args.batch_profiles):
             batch = todo[bstart : bstart + args.batch_profiles]
             convs, idx, dim_chunks = [], [], []
