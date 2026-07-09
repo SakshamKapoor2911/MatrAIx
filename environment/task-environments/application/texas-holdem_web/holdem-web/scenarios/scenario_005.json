@@ -1,0 +1,46 @@
+{
+  "seed": 5,
+  "hole_cards": ["9c", "9d"],
+  "bot_cards": ["Td", "Ts"],
+  "community_order": ["9h", "3s", "2c", "7d", "Kc"],
+  "bot_policy": "deterministic-treys-v1",
+  "optimal_action_tree": {
+    "preflop": {
+      "optimal_action": "call",
+      "rationale": "99 is playable but behind TT. Call to see flop. Bot will raise with TT.",
+      "bot_response_to_raise": "raise",
+      "bot_response_to_call": "raise_bot",
+      "bot_response_to_check": "raise_bot"
+    },
+    "flop": {
+      "optimal_action": "raise",
+      "rationale": "Player hits top set on 9h-3s-2c flop. Bot has overpair TT. Raise for value - bot will call with overpair.",
+      "bot_response_to_raise": "call",
+      "bot_response_to_call": "raise_bot",
+      "bot_response_to_check": "bet"
+    },
+    "turn": {
+      "optimal_action": "raise",
+      "rationale": "Blank turn (7d). Set still best. Bot checks. Raise for value.",
+      "bot_response_to_raise": "call",
+      "bot_response_to_check": "check"
+    },
+    "river": {
+      "optimal_action": "raise",
+      "rationale": "Blank river (Kc). Set still best. Bot may bet. Raise for max value.",
+      "bot_response_to_raise": "call"
+    }
+  },
+  "chip_delta_by_action_sequence": {
+    "preflop:call,flop:raise,turn:raise,river:raise": 200,
+    "preflop:call,flop:call,turn:check,river:call": 130,
+    "preflop:raise": -30,
+    "preflop:fold": -10
+  },
+  "outcome_by_sequence": {
+    "preflop:call,flop:raise,turn:raise,river:raise": "Bot calls all streets with overpair. Player wins with set.",
+    "preflop:call,flop:call,turn:check,river:call": "Showdown: player wins with set. Smaller pot from passive play.",
+    "preflop:raise": "Bot re-raises. Player calls. Set on flop but pot committed.",
+    "preflop:fold": "Player folds preflop, loses small blind."
+  }
+}

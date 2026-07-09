@@ -1,0 +1,37 @@
+artifactName: holdem_result.json
+instructions: |
+  Reflect honestly as the persona after finishing the Texas Hold'em hand.
+  Base your answers on the cards you were dealt, the decisions you made
+  each street, and how satisfying the game felt.
+fields:
+  - key: needConstraintSatisfaction
+    prompt: How well did your poker decisions this hand satisfy your goal?
+    kind: enum
+    choices: [yes, partially, no]
+  - key: personalPreferenceSatisfaction
+    prompt: How well did your betting choices match your personal risk style?
+    kind: enum
+    choices: [yes, partially, no]
+  - key: overallExperienceRating
+    prompt: Overall, how would you rate the Texas Hold'em experience from 1 to 10?
+    kind: integer
+    minimum: 1
+    maximum: 10
+  - key: reason
+    prompt: Briefly explain your rating and key decisions in your own voice.
+  - key: trustLevel
+    prompt: "Optional: how much did you trust the visible game state from 1 to 10?"
+    kind: integer
+    minimum: 1
+    maximum: 10
+    required: false
+  - key: effortRating
+    prompt: "Optional: how effortful did the decisions feel from 1 to 10, where higher means more effort?"
+    kind: integer
+    minimum: 1
+    maximum: 10
+    required: false
+  - key: clarityOfNextStep
+    prompt: "Optional: did the best next action feel clear on each street?"
+    kind: boolean
+    required: false

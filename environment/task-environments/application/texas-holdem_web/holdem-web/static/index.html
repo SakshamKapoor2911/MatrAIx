@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Texas Hold'em</title>
+  <style>
+    :root {
+      --felt: #176047; --felt-dark: #0f3f30; --ink: #18211f; --muted: #5b6863;
+      --panel: #f7faf8; --line: #c8d6d0; --accent: #c43c31; --gold: #d8a335;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, sans-serif; color: var(--ink); background: #eef4f1; }
+    html, body { height: 100%; }
+    main { height: 100vh; display: grid; grid-template-columns: 1fr 420px; gap: 20px; padding: 24px; }
+    .table {
+      min-height: 600px; height: 100%; border-radius: 8px;
+      background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.10), transparent 36%),
+                  linear-gradient(135deg, var(--felt), var(--felt-dark));
+      border: 10px solid #5a3424; box-shadow: 0 24px 70px rgba(20,40,33,0.22);
+      color: #f5fff9; overflow: hidden;
+      display: grid; grid-template-rows: 1fr 1fr 1fr;
+    }
+    .zone {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 16px 28px; gap: 10px;
+    }
+    .zone-opponent { border-bottom: 1px solid rgba(255,255,255,0.10); }
+    .zone-community {
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.08);
+    }
+    .zone-persona { gap: 12px; }
+    .seat { display: flex; align-items: center; justify-content: space-between; gap: 16px; max-width: 700px; width: 100%; }
+    .identity { display: grid; gap: 4px; }
+    .label { font-size: 12px; text-transform: uppercase; color: rgba(255,255,255,0.7); }
+    .name { font-size: 18px; font-weight: 700; }
+    .stack { font-size: 14px; color: var(--gold); }
+    .card-row { display: flex; gap: 8px; }
+    .card {
+      width: 72px; aspect-ratio: 5/7; display: grid; place-items: center;
+      border-radius: 8px; background: #fffaf2; color: #141716;
+      font-size: 26px; font-weight: 800; border: 2px solid #fff;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.18); line-height: 1;
+      flex-direction: column;
+    }
+    .card .suit { font-size: 16px; }
+    .card.red { color: #c43c31; }
+    .card.back {
+      background: linear-gradient(45deg, rgba(255,255,255,0.16) 25%, transparent 25% 50%,
+                  rgba(255,255,255,0.16) 50% 75%, transparent 75%), #26314f;
+      background-size: 14px 14px;
+    }
+    .card.empty { background: rgba(255,255,255,0.08); border: 2px dashed rgba(255,255,255,0.3); }
+    .community-row {
+      display: flex; gap: 10px; justify-content: center; align-items: center;
+    }
+    .pot-area { text-align: center; }
+    .pot-label { font-size: 12px; text-transform: uppercase; color: rgba(255,255,255,0.7); }
+    .pot-value { font-size: 32px; font-weight: 800; color: var(--gold); }
+    .controls { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 8px; }
+    .raise-row { display: flex; gap: 8px; align-items: center; }
+    .raise-row input {
+      width: 80px; padding: 0 10px; height: 42px; border: 1px solid var(--line);
+      border-radius: 8px; font: inherit; font-size: 14px; text-align: center;
+    }
+    button {
+      min-height: 42px; border: 1px solid transparent; border-radius: 8px;
+      padding: 0 18px; font: inherit; font-weight: 700; font-size: 14px;
+      cursor: pointer; background: #fff; color: var(--ink); transition: opacity 0.15s;
+    }
+    button.primary { background: var(--gold); color: #271d08; }
+    button.danger { background: var(--accent); color: #fff; }
+    button.new-game { background: #2d6a4f; color: #fff; }
+    button:disabled { opacity: 0.4; cursor: not-allowed; }
+    .winner-banner {
+      display: none; text-align: center; padding: 14px; border-radius: 8px;
+      font-size: 20px; font-weight: 800; margin: 8px auto; max-width: 400px;
+    }
+    .winner-banner.player { background: #d8a335; color: #271d08; }
+    .winner-banner.opponent { background: #c43c31; color: #fff; }
+    .winner-banner.tie { background: #fff; color: #18211f; }
+    /* panel */
+    .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 18px; display: grid; gap: 16px; align-self: start; }
+    h1 { margin: 0; font-size: 22px; }
+    h2 { margin: 0; font-size: 14px; text-transform: uppercase; color: var(--muted); letter-spacing: 0.04em; }
+    .stat-list { display: grid; gap: 8px; }
+    .stat-row { display: grid; gap: 8px; }
+    .stat-row.two-col { grid-template-columns: 1fr 1fr; }
+    .stat-cell { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; background: #fff; display: grid; gap: 2px; }
+    .stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); font-weight: 600; }
+    .stat-value { font-size: 17px; font-weight: 800; color: var(--ink); }
+    .stat-desc { font-size: 11px; color: var(--muted); line-height: 1.4; margin-top: 2px; }
+    .log { display: grid; gap: 6px; max-height: 160px; overflow-y: auto; }
+    .log-item { border-left: 3px solid var(--gold); padding: 6px 10px; background: #fff; border-radius: 0 6px 6px 0; font-size: 13px; color: #2a3430; }
+    pre { white-space: pre-wrap; word-break: break-word; background: #111816; color: #e9fff5; padding: 12px; border-radius: 8px; max-height: 260px; overflow: auto; margin: 0; font-size: 11px; }
+    @media (max-width: 860px) { main { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<main>
+  <section class="table">
+    <!-- Zone 1: Opponent -->
+    <div class="zone zone-opponent">
+      <div class="seat">
+        <div class="identity">
+          <div class="label">Opponent</div>
+          <div class="name">Rule-based Bot</div>
+          <div class="stack" id="bot-stack">Stack: 1000</div>
+        </div>
+        <div class="card-row" id="bot-cards">
+          <div class="card back"></div>
+          <div class="card back"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Zone 2: Community info -->
+    <div class="zone zone-community">
+      <div class="pot-area">
+        <div class="pot-label">Pot</div>
+        <div class="pot-value" id="pot">0</div>
+      </div>
+      <div class="community-row" id="community-cards">
+        <div class="card empty"></div>
+        <div class="card empty"></div>
+        <div class="card empty"></div>
+        <div class="card empty"></div>
+        <div class="card empty"></div>
+      </div>
+      <div class="winner-banner" id="winner-banner"></div>
+    </div>
+
+    <!-- Zone 3: Persona -->
+    <div class="zone zone-persona">
+      <div class="seat">
+        <div class="identity">
+          <div class="label">You (Persona)</div>
+          <div class="name">Player</div>
+          <div class="stack" id="player-stack">Stack: 1000</div>
+        </div>
+        <div class="card-row" id="player-cards">
+          <div class="card empty"></div>
+          <div class="card empty"></div>
+        </div>
+      </div>
+      <div class="controls" id="controls">
+        <button class="new-game" onclick="startGame()">New Game</button>
+      </div>
+    </div>
+  </section>
+
+  <aside class="panel">
+    <div>
+      <h1>Texas Hold'em</h1>
+      <p style="margin:4px 0 0; color:var(--muted); font-size:14px;">Heads-up · 1000 chips each · Blinds 10/20</p>
+    </div>
+
+    <div>
+      <h2>Game State</h2>
+      <div class="stat-list">
+        <div class="stat-row">
+          <div class="stat-cell">
+            <div class="stat-label">Street</div>
+            <div class="stat-value" id="stat-street">—</div>
+            <div class="stat-desc">Current betting round: Preflop → Flop → Turn → River → Showdown</div>
+          </div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-cell">
+            <div class="stat-label">Your Best Hand</div>
+            <div class="stat-value" id="stat-rank">—</div>
+            <div class="stat-desc">Your strongest 5-card hand using hole cards + community cards (revealed at showdown)</div>
+          </div>
+        </div>
+        <div class="stat-row two-col">
+          <div class="stat-cell">
+            <div class="stat-label">Your Bet</div>
+            <div class="stat-value" id="stat-pbet">0</div>
+            <div class="stat-desc">Chips you've committed this street</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-label">Bot Bet</div>
+            <div class="stat-value" id="stat-bbet">0</div>
+            <div class="stat-desc">Chips bot has committed this street</div>
+          </div>
+        </div>
+        <div class="stat-row two-col">
+          <div class="stat-cell">
+            <div class="stat-label">Your Stack</div>
+            <div class="stat-value" id="stat-pstack">1000</div>
+            <div class="stat-desc">Your remaining chips</div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-label">Bot Stack</div>
+            <div class="stat-value" id="stat-bstack">1000</div>
+            <div class="stat-desc">Bot's remaining chips</div>
+          </div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-cell">
+            <div class="stat-label">To Call</div>
+            <div class="stat-value" id="stat-call">0</div>
+            <div class="stat-desc">Chips needed to match the bot's current bet (0 = free to check)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h2>Action Log</h2>
+      <div class="log" id="log"></div>
+    </div>
+
+    <div>
+      <h2>Result JSON (copy after game ends)</h2>
+      <pre id="json-preview">Start a game to see the result JSON here.</pre>
+    </div>
+  </aside>
+</main>
+
+<script>
+let state = null;
+
+function cardHtml(raw) {
+  if (!raw || raw === '??' || raw === '') return '<div class="card back"></div>';
+  const rank = raw[0];
+  const suit = raw[raw.length - 1];
+  const redSuits = ['♥', '♦'];
+  const cls = redSuits.includes(suit) ? 'card red' : 'card';
+  return `<div class="${cls}"><div>${rank}</div><div class="suit">${suit}</div></div>`;
+}
+
+function emptyCard() {
+  return '<div class="card empty"></div>';
+}
+
+function render(s) {
+  state = s;
+  // cards
+  document.getElementById('player-cards').innerHTML = s.hole_cards.map(cardHtml).join('');
+  const community = s.community_cards;
+  let communityHtml = community.map(cardHtml).join('');
+  for (let i = community.length; i < 5; i++) communityHtml += emptyCard();
+  document.getElementById('community-cards').innerHTML = communityHtml;
+
+  // bot cards
+  if (s.status === 'finished') {
+    document.getElementById('bot-cards').innerHTML = s.bot_cards.map(cardHtml).join('');
+  } else {
+    document.getElementById('bot-cards').innerHTML = '<div class="card back"></div><div class="card back"></div>';
+  }
+
+  // stats
+  document.getElementById('pot').textContent = s.pot;
+  document.getElementById('player-stack').textContent = `Stack: ${s.player_stack}`;
+  document.getElementById('bot-stack').textContent = `Stack: ${s.bot_stack}`;
+  document.getElementById('stat-street').textContent = s.street.charAt(0).toUpperCase() + s.street.slice(1);
+  document.getElementById('stat-rank').textContent = s.final_hand_rank ? s.final_hand_rank.replace(/_/g, ' ') : '—';
+  document.getElementById('stat-pbet').textContent = s.player_bet;
+  document.getElementById('stat-bbet').textContent = s.bot_bet;
+  document.getElementById('stat-pstack').textContent = s.player_stack;
+  document.getElementById('stat-bstack').textContent = s.bot_stack;
+  document.getElementById('stat-call').textContent = s.call_amount > 0 ? s.call_amount : '0 (free to check)';
+
+  // log
+  const log = document.getElementById('log');
+  log.innerHTML = [...s.action_log].reverse().map(l => `<div class="log-item">${l}</div>`).join('');
+
+  // winner
+  const banner = document.getElementById('winner-banner');
+  if (s.winner) {
+    banner.style.display = 'block';
+    banner.className = `winner-banner ${s.winner}`;
+    if (s.winner === 'player') banner.textContent = `🎉 You win! +${s.chip_delta} chips`;
+    else if (s.winner === 'opponent') banner.textContent = `Bot wins. ${s.chip_delta} chips`;
+    else banner.textContent = 'Tie — pot split';
+  } else {
+    banner.style.display = 'none';
+  }
+
+  // controls
+  const ctrl = document.getElementById('controls');
+  if (s.status === 'finished') {
+    ctrl.innerHTML = `<button class="new-game" onclick="startGame()">New Game</button>`;
+    renderJson(s);
+  } else {
+    const callAmt = s.call_amount;
+    const checkDisabled = callAmt > 0 ? 'disabled title="Must call or raise — you have not matched the big blind"' : '';
+    const callLabel = callAmt > 0 ? `Call ${callAmt}` : 'Call (nothing to call)';
+    ctrl.innerHTML = `
+      <button class="danger" onclick="act('fold')">Fold</button>
+      <button ${checkDisabled} onclick="act('check')">Check</button>
+      <button class="primary" onclick="act('call')">${callLabel}</button>
+      <div class="raise-row">
+        <input type="number" id="raise-amount" value="60" min="20" step="20">
+        <button onclick="actRaise()">Raise</button>
+      </div>
+    `;
+  }
+}
+
+function renderJson(s) {
+  const player_actions = {};
+  for (const [street, acts] of Object.entries(s.street_actions)) {
+    player_actions[street] = acts.filter(a => !a.startsWith('bot_'));
+  }
+  const result = {
+    game_id: s.game_id,
+    hole_cards: s.hole_cards_raw,
+    community_cards: s.community_cards_raw,
+    final_hand_rank: s.final_hand_rank || 'high_card',
+    street_actions: player_actions,
+    winner: s.winner,
+    chip_delta: s.chip_delta,
+    pot_size: s.pot,
+    risk_posture: 'balanced',
+    exploration_style: 'compared_multiple',
+    basis_primary: 'other',
+    task_strategy_basis: 'hand_strength',
+    decision_outcome: 'selected',
+    need_satisfaction: 7,
+    ease_of_use: 7,
+    overall_experience_rating: 7,
+    reason: 'Fill in your reason here based on your persona.'
+  };
+  document.getElementById('json-preview').textContent = JSON.stringify(result, null, 2);
+}
+
+async function startGame() {
+  const r = await fetch('/new-game', {method: 'POST'});
+  render(await r.json());
+}
+
+async function act(action) {
+  const r = await fetch('/action', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({action})
+  });
+  render(await r.json());
+}
+
+async function actRaise() {
+  const amount = parseInt(document.getElementById('raise-amount').value) || 60;
+  const r = await fetch('/action', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({action: 'raise', amount})
+  });
+  render(await r.json());
+}
+
+// auto-start on load
+startGame();
+</script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "1.0",
+  "contextRules": [
+    {
+      "match": {
+        "contextType": "task_outcome"
+      },
+      "summaryDirectives": [
+        {
+          "id": "task_outcome.explanation_by_status",
+          "title": "Outcome explanation by status",
+          "targetFacetKey": "outcome_explanation",
+          "groupByFacetKey": "outcome_status",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "decision"
+      },
+      "summaryDirectives": [
+        {
+          "id": "decision.reason_by_strategy",
+          "title": "Reason by poker strategy",
+          "targetFacetKey": "reason",
+          "groupByFacetKey": "task_strategy_basis",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        },
+        {
+          "id": "decision.reason_by_risk_posture",
+          "title": "Reason by risk posture",
+          "targetFacetKey": "reason",
+          "groupByFacetKey": "risk_posture",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ],
+      "judgeDirectives": [
+        {
+          "id": "decision.holdem_signal_scan",
+          "title": "Texas Hold'em decision signal scan",
+          "targetFacetKey": "reason",
+          "groupByFacetKey": "risk_posture",
+          "groupByMode": "categorical",
+          "judgeKind": "llm_signal_judge",
+          "prompt": "Read the persona's Texas Hold'em decision reason and classify which strategic signals are explicitly present.",
+          "rubric": "Mark a signal true only when the reason clearly states or strongly implies that signal.",
+          "signals": [
+            {
+              "key": "hand_strength_signal",
+              "label": "Hand strength reasoning",
+              "valueType": "boolean"
+            },
+            {
+              "key": "pot_odds_signal",
+              "label": "Pot odds or value calculation",
+              "valueType": "boolean"
+            },
+            {
+              "key": "bluff_signal",
+              "label": "Bluffing or bluff-catching",
+              "valueType": "boolean"
+            },
+            {
+              "key": "risk_control_signal",
+              "label": "Risk control or chip preservation",
+              "valueType": "boolean"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "user_feedback"
+      },
+      "summaryDirectives": [
+        {
+          "id": "user_feedback.reason_by_need_satisfaction",
+          "title": "Feedback reason by goal satisfaction",
+          "targetFacetKey": "feedback_reason",
+          "groupByFacetKey": "need_constraint_satisfaction",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ]
+    }
+  ]
+}
