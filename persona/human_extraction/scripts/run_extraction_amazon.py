@@ -20,6 +20,7 @@ Example (single card):
   python run_extraction_amazon.py --shard-id 0 --quantization fp8 \
       --out-dir data/amazon/extraction_v1
 """
+
 from __future__ import annotations
 
 import argparse
@@ -42,23 +43,39 @@ os.environ.setdefault("VLLM_WORKER_MULTIPROC_METHOD", "spawn")
 import pandas as pd  # noqa: E402
 from vllm import LLM, SamplingParams  # noqa: E402
 
-DATA_DIR = Path(os.environ.get(
-    "DATA_DIR", REPO_ROOT / "persona/human_extraction/data"
-)).expanduser().resolve()
-SELECTION = Path(os.environ.get(
-    "SELECTION_PATH", DATA_DIR / "amazon/selected_users_100k.parquet"
-)).expanduser().resolve()
-DIMENSIONS_JSON = Path(os.environ.get(
-    "DIMENSIONS_JSON", REPO_ROOT / "persona/schema/dimensions.json"
-)).expanduser().resolve()
+DATA_DIR = (
+    Path(os.environ.get("DATA_DIR", REPO_ROOT / "persona/human_extraction/data"))
+    .expanduser()
+    .resolve()
+)
+SELECTION = (
+    Path(
+        os.environ.get(
+            "SELECTION_PATH", DATA_DIR / "amazon/selected_users_100k.parquet"
+        )
+    )
+    .expanduser()
+    .resolve()
+)
+DIMENSIONS_JSON = (
+    Path(
+        os.environ.get("DIMENSIONS_JSON", REPO_ROOT / "persona/schema/dimensions.json")
+    )
+    .expanduser()
+    .resolve()
+)
 MODEL_ID = "Qwen/Qwen3.6-35B-A3B"
 
 DATASET_REPO = "MatrAIx2026/MatrAIx2026"
-UBUK = ("amazon/modal_artifacts/"
-        "amazon_reviews_2018_2023_user_buckets_min30_verified70_text2000")
+UBUK = (
+    "amazon/modal_artifacts/"
+    "amazon_reviews_2018_2023_user_buckets_min30_verified70_text2000"
+)
 
-REVIEW_TMPL = ("[{date}] {category} | {parent_asin} | rating={rating:.0f}/5 | "
-               "verified={verified}\nTitle: {title}\n{text}")
+REVIEW_TMPL = (
+    "[{date}] {category} | {parent_asin} | rating={rating:.0f}/5 | "
+    "verified={verified}\nTitle: {title}\n{text}"
+)
 
 ASSIGNMENT_TYPES = {"direct", "structured_claim", "summary_inference", "unsupported"}
 NULLISH_TEXT = {"", "null", "none", "n/a", "na", "not applicable", "unsupported"}
@@ -98,13 +115,22 @@ def hf_token() -> str | None:
 def assemble_profile(g: pd.DataFrame, max_chars: int) -> str:
     """Concatenate one user's reviews (chronological) into a profile_text."""
     g = g.sort_values("timestamp")
-    parts = [REVIEW_TMPL.format(
-                date=r.date, category=r.category, parent_asin=r.parent_asin,
-                rating=float(r.rating), verified=bool(r.verified_purchase),
-                title=(r.title or ""), text=(r.text or ""))
-             for r in g.itertuples()]
-    header = (f"Amazon reviewer profile — {len(g)} reviews across "
-              f"{g.category.nunique()} categories.\n\n")
+    parts = [
+        REVIEW_TMPL.format(
+            date=r.date,
+            category=r.category,
+            parent_asin=r.parent_asin,
+            rating=float(r.rating),
+            verified=bool(r.verified_purchase),
+            title=(r.title or ""),
+            text=(r.text or ""),
+        )
+        for r in g.itertuples()
+    ]
+    header = (
+        f"Amazon reviewer profile — {len(g)} reviews across "
+        f"{g.category.nunique()} categories.\n\n"
+    )
     return (header + "\n\n".join(parts))[:max_chars]
 
 
@@ -122,8 +148,8 @@ def build_amazon_prompt(profile_text: str, dimensions: list[dict]) -> str:
         "hobbies, life stage, household, budget, and needs.",
         "- HOW they write: tone, length, detail, sentiment, and vocabulary reveal "
         "personality, values, and writing style.",
-        "- WHAT they say: facts a reviewer states about themselves (\"as a "
-        "nurse\", \"for my kids\", \"at 65 I...\") are the strongest signal.",
+        '- WHAT they say: facts a reviewer states about themselves ("as a '
+        'nurse", "for my kids", "at 65 I...") are the strongest signal.',
         "",
         "Return ONLY JSON with this shape (no markdown, no commentary):",
         '{"fields": [{"field_id": "<one id from DIMENSIONS below>", '
@@ -150,8 +176,8 @@ def build_amazon_prompt(profile_text: str, dimensions: list[dict]) -> str:
         "- Every object, including unsupported ones, MUST include assignment_type "
         'as exactly one of: "direct", "structured_claim", "summary_inference", '
         'or "unsupported". Never omit assignment_type.',
-        "- Never use string placeholders such as \"Not applicable\", "
-        "\"Unsupported\", \"None\", or \"null\" as values. Unsupported fields "
+        '- Never use string placeholders such as "Not applicable", '
+        '"Unsupported", "None", or "null" as values. Unsupported fields '
         "must use JSON null.",
         "- Judge the history as a whole; prefer attributes backed by MULTIPLE "
         "reviews over a single purchase (one-off items may be gifts for others).",
@@ -296,8 +322,9 @@ def field_rank(field: dict) -> tuple[int, float]:
     return (0 if field.get("value") is None else 1, float(field.get("confidence", 0.0)))
 
 
-def validate_chunk_fields(raw_fields: list[dict], dimensions: list[dict],
-                          profile_text: str) -> list[dict]:
+def validate_chunk_fields(
+    raw_fields: list[dict], dimensions: list[dict], profile_text: str
+) -> list[dict]:
     """Emit exactly one valid field per requested dimension, in schema order."""
     dims_by_id = {d["id"]: d for d in dimensions}
     best: dict[str, dict] = {}
@@ -368,31 +395,51 @@ def cat_chunks(by_category: dict, per_chunk: int):
 def load_bucket_reviews(bucket: str, token: str | None) -> pd.DataFrame:
     """All reviews in one user_bucket (across every category file)."""
     from huggingface_hub import HfApi, hf_hub_download
+
     api = HfApi(token=token)
-    files = [f for f in api.list_repo_files(DATASET_REPO, repo_type="dataset")
-             if f.startswith(f"{UBUK}/bucket={bucket}/") and f.endswith(".parquet")]
-    dfs = [pd.read_parquet(hf_hub_download(DATASET_REPO, f, repo_type="dataset",
-                                           token=token)) for f in files]
+    files = [
+        f
+        for f in api.list_repo_files(DATASET_REPO, repo_type="dataset")
+        if f.startswith(f"{UBUK}/bucket={bucket}/") and f.endswith(".parquet")
+    ]
+    dfs = [
+        pd.read_parquet(
+            hf_hub_download(DATASET_REPO, f, repo_type="dataset", token=token)
+        )
+        for f in files
+    ]
     return pd.concat(dfs, ignore_index=True) if dfs else pd.DataFrame()
 
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--shard-id", type=int, required=True,
-                    help="0..255 -> user_bucket hex 00..ff")
+    ap.add_argument(
+        "--shard-id", type=int, required=True, help="0..255 -> user_bucket hex 00..ff"
+    )
     ap.add_argument("--out-dir", default=str(DATA_DIR / "amazon/extraction_v1"))
-    ap.add_argument("--batch-profiles", type=int, default=32,
-                    help="profiles per vLLM submit / checkpoint granularity")
+    ap.add_argument(
+        "--batch-profiles",
+        type=int,
+        default=32,
+        help="profiles per vLLM submit / checkpoint granularity",
+    )
     ap.add_argument("--max-dims-per-chunk", type=int, default=50)
     ap.add_argument("--max-tokens", type=int, default=8192)
     ap.add_argument("--max-model-len", type=int, default=32768)
     ap.add_argument("--max-profile-chars", type=int, default=48000)
     ap.add_argument("--gpu-mem", type=float, default=0.90)
     ap.add_argument("--max-num-seqs", type=int, default=64)
-    ap.add_argument("--tensor-parallel", type=int, default=1,
-                    help="GPUs per task (2 => bf16 fits across 2x A100 80GB, no quant)")
-    ap.add_argument("--quantization", default="fp8",
-                    help="fp8 (fits single A100 80GB) | none (bf16, needs 2x A100)")
+    ap.add_argument(
+        "--tensor-parallel",
+        type=int,
+        default=1,
+        help="GPUs per task (2 => bf16 fits across 2x A100 80GB, no quant)",
+    )
+    ap.add_argument(
+        "--quantization",
+        default="fp8",
+        help="fp8 (fits single A100 80GB) | none (bf16, needs 2x A100)",
+    )
     ap.add_argument("--limit", type=int, default=0, help="debug: cap users this shard")
     args = ap.parse_args()
 
@@ -436,9 +483,12 @@ def main() -> None:
                     pass
     todo_ids = [u for u in want_ids if u not in done]
 
-    print(f"[shard {args.shard_id} bucket={bucket}] selected={len(sel_b):,} "
-          f"want={len(want):,} done={len(done):,} todo={len(todo_ids):,} "
-          f"chunks/user={len(chunk_list)}", flush=True)
+    print(
+        f"[shard {args.shard_id} bucket={bucket}] selected={len(sel_b):,} "
+        f"want={len(want):,} done={len(done):,} todo={len(todo_ids):,} "
+        f"chunks/user={len(chunk_list)}",
+        flush=True,
+    )
     if not todo_ids:
         print("[shard] nothing to do — complete.", flush=True)
         return
@@ -447,11 +497,16 @@ def main() -> None:
     t0 = time.time()
     rev = load_bucket_reviews(bucket, token)
     rev = rev[rev.user_id.isin(set(todo_ids))]
-    profiles = {uid: assemble_profile(g, args.max_profile_chars)
-                for uid, g in rev.groupby("user_id", sort=False)}
+    profiles = {
+        uid: assemble_profile(g, args.max_profile_chars)
+        for uid, g in rev.groupby("user_id", sort=False)
+    }
     todo = [u for u in todo_ids if u in profiles]
-    print(f"[shard] loaded {len(rev):,} reviews, assembled {len(profiles):,} "
-          f"profiles in {time.time()-t0:.0f}s", flush=True)
+    print(
+        f"[shard] loaded {len(rev):,} reviews, assembled {len(profiles):,} "
+        f"profiles in {time.time() - t0:.0f}s",
+        flush=True,
+    )
 
     # --- load model once ---
     t0 = time.time()
@@ -470,13 +525,20 @@ def main() -> None:
         llm_kwargs["quantization"] = args.quantization
     llm = LLM(**llm_kwargs)
     sampling = SamplingParams(temperature=0.0, top_p=1.0, max_tokens=args.max_tokens)
-    print(f"[shard] model loaded in {time.time()-t0:.0f}s "
-          f"(tp={args.tensor_parallel}, quant={args.quantization})", flush=True)
+    print(
+        f"[shard] model loaded in {time.time() - t0:.0f}s "
+        f"(tp={args.tensor_parallel}, quant={args.quantization})",
+        flush=True,
+    )
 
     def chat(convs):
         try:
-            return llm.chat(convs, sampling,
-                            chat_template_kwargs={"enable_thinking": False}, use_tqdm=False)
+            return llm.chat(
+                convs,
+                sampling,
+                chat_template_kwargs={"enable_thinking": False},
+                use_tqdm=False,
+            )
         except TypeError:
             return llm.chat(convs, sampling, use_tqdm=False)
 
@@ -490,30 +552,48 @@ def main() -> None:
             for uid in batch:
                 prof = profiles[uid]
                 for chunk in chunk_list:
-                    convs.append([{"role": "user", "content": build_amazon_prompt(prof, chunk)}])
+                    convs.append(
+                        [{"role": "user", "content": build_amazon_prompt(prof, chunk)}]
+                    )
                     idx.append(uid)
                     dim_chunks.append(chunk)
             outs = chat(convs)
             merged: dict[str, list] = {uid: [] for uid in batch}
             for uid, chunk, o in zip(idx, dim_chunks, outs):
                 raw_fields = parse_fields(o.outputs[0].text)
-                merged[uid].extend(validate_chunk_fields(raw_fields, chunk, profiles[uid]))
+                merged[uid].extend(
+                    validate_chunk_fields(raw_fields, chunk, profiles[uid])
+                )
             for uid in batch:
-                out_fh.write(json.dumps(
-                    {"user_id": uid, "user_bucket": bucket,
-                     "review_count": int(review_count.get(uid, 0)),
-                     "fields": merged[uid]}, ensure_ascii=False) + "\n")
+                out_fh.write(
+                    json.dumps(
+                        {
+                            "user_id": uid,
+                            "user_bucket": bucket,
+                            "review_count": int(review_count.get(uid, 0)),
+                            "fields": merged[uid],
+                        },
+                        ensure_ascii=False,
+                    )
+                    + "\n"
+                )
             out_fh.flush()
             os.fsync(out_fh.fileno())
             n_done += len(batch)
             rate = n_done / max(1e-9, time.time() - t_gen)
             eta = (len(todo) - n_done) / max(1e-9, rate)
-            print(f"[shard {args.shard_id}] {n_done}/{len(todo)} "
-                  f"({100*n_done/len(todo):.1f}%)  {rate:.2f} user/s  "
-                  f"ETA {eta/3600:.1f}h", flush=True)
+            print(
+                f"[shard {args.shard_id}] {n_done}/{len(todo)} "
+                f"({100 * n_done / len(todo):.1f}%)  {rate:.2f} user/s  "
+                f"ETA {eta / 3600:.1f}h",
+                flush=True,
+            )
 
-    print(f"[shard {args.shard_id}] DONE {n_done} users in "
-          f"{(time.time()-t_gen)/3600:.2f}h -> {out_path}", flush=True)
+    print(
+        f"[shard {args.shard_id}] DONE {n_done} users in "
+        f"{(time.time() - t_gen) / 3600:.2f}h -> {out_path}",
+        flush=True,
+    )
 
 
 if __name__ == "__main__":
