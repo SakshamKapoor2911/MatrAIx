@@ -5,6 +5,8 @@ from treys import Card, Evaluator
 
 HIGH_RANKS = set("AKQJ")
 PREMIUM_PAIRS = {"AA", "KK", "QQ", "JJ", "TT"}
+RAISE_SIZE = 60
+STARTING_STACK = 1000
 
 
 def _hand_strength(state) -> int:
@@ -54,3 +56,42 @@ def decide_bot_action(state) -> str:
     if player_raised:
         return "fold"
     return "check"
+
+
+def apply_bot_action(state) -> None:
+    """Mutate GameState with bot's action."""
+    bot_act = decide_bot_action(state)
+    actions = state.street_actions.setdefault(state.street, [])
+
+    if bot_act == "fold":
+        actions.append("bot_fold")
+        state.action_log.append("Bot folds.")
+        state.status = "finished"
+        state.winner = "player"
+        state.chip_delta = state.pot - (STARTING_STACK - state.player_stack)
+        return
+
+    if bot_act == "check":
+        actions.append("bot_check")
+        state.action_log.append("Bot checks.")
+
+    elif bot_act == "call":
+        to_call = state.player_bet - state.bot_bet
+        if to_call <= 0:
+            actions.append("bot_check")
+            state.action_log.append("Bot checks.")
+        else:
+            to_call = min(to_call, state.bot_stack)
+            state.bot_stack -= to_call
+            state.bot_bet += to_call
+            state.pot += to_call
+            actions.append("bot_call")
+            state.action_log.append(f"Bot calls {to_call}.")
+
+    elif bot_act == "raise":
+        amount = min(RAISE_SIZE, state.bot_stack)
+        state.bot_stack -= amount
+        state.bot_bet += amount
+        state.pot += amount
+        actions.append("bot_raise")
+        state.action_log.append(f"Bot raises {amount}.")

@@ -9,6 +9,12 @@ if ! command -v uvx >/dev/null 2>&1; then
   source "$HOME/.local/bin/env"
 fi
 
+# Copy scenario definitions into tests dir so verifier can load them
+SCENARIOS_SRC="${SCRIPT_DIR}/../../environment/task-environments/application/texas-holdem_web/holdem-web/scenarios"
+if [ -d "${SCENARIOS_SRC}" ]; then
+  cp -r "${SCENARIOS_SRC}" "${TESTS_DIR}/scenarios"
+fi
+
 if uvx \
   --with pytest==8.4.1 \
   --with pytest-json-ctrf==0.3.5 \

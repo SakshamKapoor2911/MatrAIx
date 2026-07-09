@@ -307,22 +307,23 @@ function renderJson(s) {
   }
   const result = {
     game_id: s.game_id,
+    seed: s.seed,
     hole_cards: s.hole_cards_raw,
     community_cards: s.community_cards_raw,
-    final_hand_rank: s.final_hand_rank || 'high_card',
+    final_hand_rank: s.final_hand_rank || null,
     street_actions: player_actions,
     winner: s.winner,
     chip_delta: s.chip_delta,
     pot_size: s.pot,
-    risk_posture: 'balanced',
-    exploration_style: 'compared_multiple',
-    basis_primary: 'other',
-    task_strategy_basis: 'hand_strength',
-    decision_outcome: 'selected',
-    need_satisfaction: 7,
-    ease_of_use: 7,
-    overall_experience_rating: 7,
-    reason: 'Fill in your reason here based on your persona.'
+    risk_posture: '',
+    exploration_style: '',
+    basis_primary: '',
+    task_strategy_basis: '',
+    decision_outcome: '',
+    need_satisfaction: 0,
+    ease_of_use: 0,
+    overall_experience_rating: 0,
+    reason: ''
   };
   document.getElementById('json-preview').textContent = JSON.stringify(result, null, 2);
 }
