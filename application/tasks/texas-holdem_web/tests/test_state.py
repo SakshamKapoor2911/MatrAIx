@@ -36,6 +36,82 @@ RISK_POSTURES = {"risk_averse", "balanced", "risk_seeking", "opportunistic"}
 EXPLORATION_STYLES = {"quick_pick", "compared_multiple", "deep_research", "hesitant"}
 
 
+SCENARIOS_DIR = Path(os.environ.get("SCENARIOS_DIR", ""))
+if not SCENARIOS_DIR.is_dir():
+    SCENARIOS_DIR = Path(__file__).resolve().parent / "scenarios"
+
+SCENARIO_CACHE: dict[int, dict] = {}
+
+
+def _load_scenario(seed: int) -> dict:
+    if seed in SCENARIO_CACHE:
+        return SCENARIO_CACHE[seed]
+    path = SCENARIOS_DIR / f"scenario_{seed:03d}.json"
+    assert path.is_file(), f"Scenario file not found: {path}"
+    data = json.loads(path.read_text(encoding="utf-8"))
+    assert data.get("seed") == seed, f"Scenario seed mismatch: {data.get('seed')} != {seed}"
+    SCENARIO_CACHE[seed] = data
+    return data
+
+
+def _action_sequence_key(data: dict) -> str:
+    parts = []
+    for street in ["preflop", "flop", "turn", "river"]:
+        actions = data.get("street_actions", {}).get(street, [])
+        if actions:
+            parts.append(f"{street}:{actions[0]}")
+    return ",".join(parts)
+
+
+def _best_ev_for_scenario(data: dict) -> int:
+    scenario = _load_scenario(data.get("seed", 0))
+    ev_table = scenario.get("chip_delta_by_action_sequence", {})
+    if not ev_table:
+        simple = scenario.get("chip_delta_by_action", {})
+        non_fold = {k: v for k, v in simple.items() if k != "fold"}
+        return max(non_fold.values()) if non_fold else 0
+    max_ev = max(ev_table.values()) if ev_table else 0
+    return max_ev
+
+
+def _compute_ev_score(data: dict) -> float:
+    """Return 1.0 for optimal play, 0.5 for minor deviation, 0.0 for major."""
+    seed = data.get("seed")
+    if seed is None:
+        return 1.0
+    scenario = _load_scenario(seed)
+    seq = _action_sequence_key(data)
+    ev_table = scenario.get("chip_delta_by_action_sequence", {})
+    if ev_table:
+        actual_ev = ev_table.get(seq)
+        if actual_ev is None:
+            simple = scenario.get("chip_delta_by_action", {})
+            preflop_actions = data.get("street_actions", {}).get("preflop", [])
+            first_action = preflop_actions[0] if preflop_actions else None
+            if first_action and first_action in simple:
+                actual_ev = simple[first_action]
+        if actual_ev is None:
+            return 0.5
+        max_ev = max(ev_table.values())
+        if actual_ev == max_ev:
+            return 1.0
+        if actual_ev >= max_ev * 0.7:
+            return 0.5
+        return 0.0
+    simple = scenario.get("chip_delta_by_action", {})
+    preflop_actions = data.get("street_actions", {}).get("preflop", [])
+    first_action = preflop_actions[0] if preflop_actions else "fold"
+    if first_action in simple:
+        actual = simple[first_action]
+        expected = max(v for k, v in simple.items() if k != "fold")
+        if actual == expected:
+            return 1.0
+        if actual >= expected * 0.8:
+            return 0.5
+        return 0.0
+    return 0.5
+
+
 def _verifier_dir() -> Path:
     base = (
         os.environ.get("HARBOR_VERIFIER_DIR")
@@ -122,6 +198,9 @@ def _contexts(*, data: dict) -> list[dict]:
         for s, acts in data.get("street_actions", {}).items()
         if acts
     )
+    ev_score = _compute_ev_score(data)
+    optimal_chip_delta = _best_ev_for_scenario(data)
+    seed = data.get("seed")
 
     return [
         {
@@ -180,6 +259,34 @@ def _contexts(*, data: dict) -> list[dict]:
                     "role": "evidence",
                     "kind": "textual",
                     "value": "Saved holdem_result.json with valid schema.",
+                },
+                {
+                    "key": "ev_optimality_score",
+                    "label": "EV optimality score",
+                    "role": "score",
+                    "kind": "numerical",
+                    "value": ev_score,
+                },
+                {
+                    "key": "ev_optimality_chip_delta",
+                    "label": "Actual chip delta",
+                    "role": "evidence",
+                    "kind": "numerical",
+                    "value": chip_delta,
+                },
+                {
+                    "key": "ev_optimality_best_chip_delta",
+                    "label": "Best possible chip delta",
+                    "role": "evidence",
+                    "kind": "numerical",
+                    "value": optimal_chip_delta,
+                },
+                {
+                    "key": "ev_optimality_seed",
+                    "label": "Scenario seed",
+                    "role": "evidence",
+                    "kind": "numerical",
+                    "value": seed,
                 },
             ],
         },
@@ -338,6 +445,18 @@ def _contexts(*, data: dict) -> list[dict]:
             ],
         },
     ]
+
+
+def test_ev_optimality() -> None:
+    data = _load()
+    seed = data.get("seed")
+    if seed is None:
+        return
+    scenario = _load_scenario(seed)
+    ev_table = scenario.get("chip_delta_by_action_sequence", {}) or scenario.get("chip_delta_by_action", {})
+    assert len(ev_table) > 0, (
+        f"Scenario {seed} has no EV data"
+    )
 
 
 def test_output_exists() -> None:

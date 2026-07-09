@@ -23,9 +23,9 @@ def root():
 
 
 @app.post("/new-game")
-def new_game():
+def new_game(seed: Optional[int] = None):
     global _state
-    _state = g.new_game()
+    _state = g.new_game(seed=seed)
     return g.state_to_dict(_state)
 
 

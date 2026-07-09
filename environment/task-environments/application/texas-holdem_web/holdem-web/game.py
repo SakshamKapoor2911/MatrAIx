@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 import random
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import List, Optional
 
 from treys import Card, Evaluator
@@ -67,11 +67,13 @@ class GameState:
     final_hand_rank: Optional[str]
     action_log: List[str]
     player_to_act: bool        # True = player acts next
+    seed: Optional[int]        # RNG seed for reproducibility
 
 
-def new_game() -> GameState:
+def new_game(seed: Optional[int] = None) -> GameState:
     deck = _make_deck()
-    random.shuffle(deck)
+    rng = random.Random(seed) if seed is not None else random
+    rng.shuffle(deck)
     hole = [deck.pop(), deck.pop()]
     bot = [deck.pop(), deck.pop()]
     # post blinds: player = small blind, bot = big blind (heads-up convention)
@@ -93,6 +95,7 @@ def new_game() -> GameState:
         final_hand_rank=None,
         action_log=[f"Blinds posted: player {SMALL_BLIND}, bot {BIG_BLIND}"],
         player_to_act=True,  # small blind acts first preflop
+        seed=seed,
     )
     return state
 
@@ -111,7 +114,7 @@ def apply_action(state: GameState, action: str, raise_amount: int = RAISE_SIZE) 
         state.action_log.append("Player folds.")
         state.status = "finished"
         state.winner = "opponent"
-        state.chip_delta = -(state.player_bet)
+        state.chip_delta = state.player_stack - STARTING_STACK
         return state
 
     elif action == "check":
@@ -147,52 +150,13 @@ def apply_action(state: GameState, action: str, raise_amount: int = RAISE_SIZE) 
         bot_needs_to_act = True  # bot must respond to any raise
 
     if bot_needs_to_act and state.status == "playing":
-        _bot_action(state)
+        from bot import apply_bot_action
+        apply_bot_action(state)
 
     if state.status == "playing":
         _maybe_advance_street(state)
 
     return state
-
-
-def _bot_action(state: GameState) -> None:
-    from bot import decide_bot_action
-    bot_act = decide_bot_action(state)
-    actions = state.street_actions.setdefault(state.street, [])
-
-    if bot_act == "fold":
-        actions.append("bot_fold")
-        state.action_log.append("Bot folds.")
-        state.status = "finished"
-        state.winner = "player"
-        state.chip_delta = state.pot - (STARTING_STACK - state.player_stack)
-        return
-
-    if bot_act == "check":
-        actions.append("bot_check")
-        state.action_log.append("Bot checks.")
-
-    elif bot_act == "call":
-        to_call = state.player_bet - state.bot_bet
-        if to_call <= 0:
-            # nothing to call — treat as check
-            actions.append("bot_check")
-            state.action_log.append("Bot checks.")
-        else:
-            to_call = min(to_call, state.bot_stack)
-            state.bot_stack -= to_call
-            state.bot_bet += to_call
-            state.pot += to_call
-            actions.append("bot_call")
-            state.action_log.append(f"Bot calls {to_call}.")
-
-    elif bot_act == "raise":
-        amount = min(RAISE_SIZE, state.bot_stack)
-        state.bot_stack -= amount
-        state.bot_bet += amount
-        state.pot += amount
-        actions.append("bot_raise")
-        state.action_log.append(f"Bot raises {amount}.")
 
 
 def _maybe_advance_street(state: GameState) -> None:
@@ -287,4 +251,5 @@ def state_to_dict(state: GameState) -> dict:
         "final_hand_rank": state.final_hand_rank,
         "action_log": state.action_log,
         "call_amount": max(0, state.bot_bet - state.player_bet),
+        "seed": state.seed,
     }
