@@ -1,7 +1,7 @@
 /**
  * TopBar: MatrAIx application header.
  *
- * Nav: Home · Persona Eval · Runs · Persona Store.
+ * Nav: Home · Playground · Runs · Persona World.
  */
 import { PreflightChip } from "./PreflightChip";
 import { FOCUS_RING, Sym } from "./cockpit/cockpitShared";
@@ -36,12 +36,12 @@ export function TopBar({
     { key: "home", label: "Home", active: mode === "home" && !runsActive && !storeActive, onClick: onOpenHome },
     {
       key: "peval",
-      label: "Persona Eval",
+      label: "Playground",
       active: mode === "persona-eval" && !runsActive && !storeActive,
       onClick: () => onModeChange("persona-eval"),
     },
     { key: "runs", label: "Runs", active: runsActive, onClick: onOpenRuns },
-    { key: "store", label: "Persona Store", active: storeActive, onClick: onOpenPersonaStore },
+    { key: "store", label: "Persona World", active: storeActive, onClick: onOpenPersonaStore },
   ];
 
   return (

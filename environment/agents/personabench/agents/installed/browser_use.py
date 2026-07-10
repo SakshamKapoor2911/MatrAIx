@@ -145,10 +145,15 @@ class BrowserUseHarborAgent(BaseInstalledAgent):
 
         if not any(
             self._get_env(name)
-            for name in ("ANTHROPIC_API_KEY", "OPENAI_API_KEY", "LLM_API_KEY")
+            for name in (
+                "ANTHROPIC_API_KEY",
+                "OPENAI_API_KEY",
+                "LLM_API_KEY",
+                "DASHSCOPE_API_KEY",
+            )
         ):
             raise ValueError(
-                "Set ANTHROPIC_API_KEY, OPENAI_API_KEY, or LLM_API_KEY for browser-use"
+                "Set ANTHROPIC_API_KEY, OPENAI_API_KEY, DASHSCOPE_API_KEY, or LLM_API_KEY for browser-use"
             )
 
         llm_api_key = self._get_env("LLM_API_KEY")
@@ -156,9 +161,12 @@ class BrowserUseHarborAgent(BaseInstalledAgent):
             llm_api_key
             and "ANTHROPIC_API_KEY" not in env
             and "OPENAI_API_KEY" not in env
+            and "DASHSCOPE_API_KEY" not in env
         ):
             if self.model_name.startswith("anthropic/"):
                 env["ANTHROPIC_API_KEY"] = llm_api_key
+            elif self.model_name.startswith("dashscope/"):
+                env["DASHSCOPE_API_KEY"] = llm_api_key
             else:
                 env["OPENAI_API_KEY"] = llm_api_key
 

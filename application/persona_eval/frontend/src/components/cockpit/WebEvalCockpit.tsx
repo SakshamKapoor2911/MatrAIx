@@ -12,7 +12,7 @@
  * overall-UX score tiles, the selected product, and a browser trace rendered as
  * screenshot tiles with per-step actions.
  *
- * The data layer is untouched: `useWebEval`, the `listWebEvalTasks` query, the
+ * Harbor-backed: `useHarborCockpitRun`, the `listWebEvalTasks` query, the
  * export logic, and every result/trace shape are wired exactly as before. Only
  * the structure and presentation are rebuilt.
  */
@@ -574,7 +574,7 @@ export function WebEvalCockpit({
           tasksError={
             tasks.length === 0
               ? tasksQuery.isError
-                ? "Web task API unavailable — restart PersonaEval backend on :8765."
+                ? "Web task API unavailable — restart the Playground backend on :8765."
                 : "No web tasks available."
               : null
           }

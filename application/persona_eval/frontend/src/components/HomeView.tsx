@@ -37,7 +37,7 @@ export function HomeView({ onOpenPersonaEval }: HomeViewProps) {
             onClick={onOpenPersonaEval}
             className={`landing-cta-primary mt-8 ${FOCUS_RING}`}
           >
-            PersonaEval cockpit
+            Playground
             <Sym name="arrow_forward" size={18} />
           </button>
         </div>

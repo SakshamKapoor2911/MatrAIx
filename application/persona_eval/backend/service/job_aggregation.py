@@ -722,9 +722,12 @@ def _aggregate_context(
     judges = _aggregate_context_judges(meta=meta, facets=facets, field_values=field_values)
     if judges:
         payload["judges"] = judges
-    relationships = _aggregate_context_relationships(facets=facets, field_values=field_values)
-    if relationships:
-        payload["relationships"] = relationships
+    cross_facet_views = _aggregate_context_cross_facet_views(
+        facets=facets,
+        field_values=field_values,
+    )
+    if cross_facet_views:
+        payload["crossFacetViews"] = cross_facet_views
     return payload
 
 
@@ -1329,7 +1332,7 @@ def _aggregate_judge_directive(
     }
 
 
-def _aggregate_context_relationships(
+def _aggregate_context_cross_facet_views(
     *,
     facets: list[dict[str, Any]],
     field_values: dict[str, list[dict[str, Any]]],
@@ -1349,7 +1352,7 @@ def _aggregate_context_relationships(
         for entry in field_values.get(str(primary.get("key")), [])
         if entry.get("trialName") is not None and _has_value(entry.get("value"))
     }
-    relationships: list[dict[str, Any]] = []
+    cross_facet_views: list[dict[str, Any]] = []
     for facet in facets:
         if facet.get("kind") != "textual":
             continue
@@ -1366,7 +1369,7 @@ def _aggregate_context_relationships(
             buckets.setdefault(bucket, []).append(value)
         if not buckets:
             continue
-        relationships.append(
+        cross_facet_views.append(
             {
                 "type": "text_by_primary_category",
                 "primaryFacetKey": primary.get("key"),
@@ -1384,7 +1387,7 @@ def _aggregate_context_relationships(
                 ],
             }
         )
-    return relationships
+    return cross_facet_views
 
 
 def _normalize_numeric_bands(raw: Any) -> list[dict[str, Any]]:

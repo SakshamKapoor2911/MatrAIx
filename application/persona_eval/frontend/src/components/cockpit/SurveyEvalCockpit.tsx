@@ -12,7 +12,7 @@
  * mean-Likert summary + per-question answer cards with likert / single / multi /
  * free-text rendering).
  *
- * The data layer is untouched: `useSurveyEval`, the `listSurveyInstruments`
+ * Harbor-backed: `useHarborCockpitRun`, the `listSurveyInstruments`
  * query, the export logic, and every result/trajectory shape are wired exactly
  * as before. Only the structure and presentation are rebuilt.
  */
@@ -639,7 +639,7 @@ export function SurveyEvalCockpit({
           tasksLoading={harborTasksQuery.isLoading}
           tasksError={
             harborTasksQuery.isError && taskCards.length === 0
-              ? "Could not load survey tasks — restart the PersonaEval backend."
+              ? "Could not load survey tasks — restart the Playground backend."
               : harborTasksQuery.isError
                 ? "Built-in survey tasks loaded from catalog."
                 : null

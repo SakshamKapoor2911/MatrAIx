@@ -26,12 +26,90 @@ PERSONA_EVAL_RUNTIME_ENV = "MATRIX_PERSONA_EVAL_RUNTIME"
 EXECUTION_PLANE_ENV = "MATRIX_EXECUTION_PLANE"
 REMOTE_RUNNER_API_URL_ENV = "REMOTE_RUNNER_API_URL"
 DEFAULT_PERSONA_MODEL = "anthropic/claude-haiku-4-5"
-PERSONA_MODEL_OPTIONS = [
-    DEFAULT_PERSONA_MODEL,
-    "anthropic/claude-sonnet-4-6",
-    "openai/gpt-4o-mini",
-    "openai/gpt-4o",
-]
+
+# Persona-model IDs use LiteLLM provider prefixes (``anthropic/``, ``openai/``,
+# ``dashscope/``). DashScope models route through Alibaba's OpenAI-compatible
+# endpoint when ``DASHSCOPE_API_KEY`` is set.
+PERSONA_MODEL_KNOB_META: Dict[str, Dict[str, str]] = {
+    "anthropic/claude-haiku-4-5": {
+        "label": "Claude Haiku 4.5",
+        "description": "Lower-cost persona simulation; the default.",
+    },
+    "anthropic/claude-sonnet-4-6": {
+        "label": "Claude Sonnet 4.6",
+        "description": "Stronger persona simulation at higher cost.",
+    },
+    "openai/gpt-4o-mini": {
+        "label": "GPT-4o mini",
+        "description": "OpenAI persona simulation with lower cost.",
+    },
+    "openai/gpt-4o": {
+        "label": "GPT-4o",
+        "description": "OpenAI persona simulation with stronger reasoning.",
+    },
+    "dashscope/qwen3.6-plus-2026-04-02": {
+        "label": "Qwen 3.6 Plus · Apr 2026",
+        "description": "Pinned DashScope release — use for reproducible runs.",
+    },
+    "dashscope/qwen3.6-plus": {
+        "label": "Qwen 3.6 Plus · latest",
+        "description": "Rolling alias — tracks DashScope updates.",
+    },
+    "dashscope/qwen3.5-plus-2026-04-20": {
+        "label": "Qwen 3.5 Plus · Apr 2026",
+        "description": "Pinned prior-gen release — stable for reproducible runs.",
+    },
+    "dashscope/qwen3.7-max": {
+        "label": "Qwen 3.7 Max",
+        "description": "DashScope latest Qwen flagship.",
+    },
+    "dashscope/qwen3-max": {
+        "label": "Qwen 3 Max",
+        "description": "DashScope prior flagship generation.",
+    },
+    "dashscope/qwen-max": {
+        "label": "Qwen Max",
+        "description": "DashScope Max stable alias.",
+    },
+    "dashscope/qwen-plus": {
+        "label": "Qwen Plus",
+        "description": "DashScope balanced cost/quality.",
+    },
+    "dashscope/qwen-flash": {
+        "label": "Qwen Flash",
+        "description": "DashScope fast, lower-cost text.",
+    },
+    "dashscope/qwen-turbo": {
+        "label": "Qwen Turbo",
+        "description": "DashScope lightweight, cheapest text tier.",
+    },
+    "dashscope/qwen3-coder-plus": {
+        "label": "Qwen 3 Coder Plus",
+        "description": "DashScope code-focused flagship.",
+    },
+    "dashscope/qwen3-coder-flash": {
+        "label": "Qwen 3 Coder Flash",
+        "description": "DashScope fast code model.",
+    },
+    "dashscope/qwen3-vl-plus": {
+        "label": "Qwen 3 VL Plus",
+        "description": "DashScope vision understanding.",
+    },
+    "dashscope/qwen3-vl-flash": {
+        "label": "Qwen 3 VL Flash",
+        "description": "DashScope fast vision model.",
+    },
+    "dashscope/deepseek-v4-pro": {
+        "label": "DeepSeek V4 Pro",
+        "description": "DeepSeek via DashScope OpenAI-compatible API.",
+    },
+    "dashscope/deepseek-v3.2": {
+        "label": "DeepSeek V3.2",
+        "description": "DeepSeek V3.2 via DashScope compatible API.",
+    },
+}
+
+PERSONA_MODEL_OPTIONS = list(PERSONA_MODEL_KNOB_META.keys())
 DEFAULT_HARBOR_PERSONA_MODEL = DEFAULT_PERSONA_MODEL
 HARBOR_PERSONA_MODEL_OPTIONS = PERSONA_MODEL_OPTIONS
 RUNTIME_OPTIONS = ("local", "harbor")
@@ -42,6 +120,7 @@ __all__ = [
     "ConfigManager",
     "DEFAULT_PERSONA_MODEL",
     "DEFAULT_HARBOR_PERSONA_MODEL",
+    "PERSONA_MODEL_KNOB_META",
     "PERSONA_MODEL_OPTIONS",
     "HARBOR_PERSONA_MODEL_OPTIONS",
     "PERSONA_MODEL_ENV",
@@ -197,24 +276,7 @@ class ConfigManager:
         "personaModel": {
             "label": "Persona model",
             "description": "The base model used to simulate the user side of PersonaEval runs.",
-            "values": {
-                "anthropic/claude-haiku-4-5": {
-                    "label": "Claude Haiku 4.5",
-                    "description": "Lower-cost persona simulation; the default.",
-                },
-                "anthropic/claude-sonnet-4-6": {
-                    "label": "Claude Sonnet 4.6",
-                    "description": "Stronger persona simulation at higher cost.",
-                },
-                "openai/gpt-4o-mini": {
-                    "label": "GPT-4o mini",
-                    "description": "OpenAI persona simulation with lower cost.",
-                },
-                "openai/gpt-4o": {
-                    "label": "GPT-4o",
-                    "description": "OpenAI persona simulation with stronger reasoning.",
-                },
-            },
+            "values": PERSONA_MODEL_KNOB_META,
         },
         "domain": {
             "label": "Domain",

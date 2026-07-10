@@ -91,7 +91,7 @@ export function PreflightChip() {
   } else if (preflight.isError || !data) {
     tone = "offline";
     label = "Backend offline";
-    sub = "Start the PersonaEval backend to send messages";
+    sub = "Start the Playground backend to send messages";
   } else if (!data.ready) {
     tone = "setup";
     label = requiredFailing.length === 1 ? "1 issue" : `${requiredFailing.length} issues`;

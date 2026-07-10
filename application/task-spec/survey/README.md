@@ -5,6 +5,51 @@ The active survey protocol uses a generic survey-form task. The application
 runner supplies the survey instrument as task context, then maps the resulting
 artifact into answers, metrics, and a telemetry-style trajectory.
 
+**Canonical copy-from:** `application/tasks/example-survey_product-feedback`
+
+### What you author (required vs optional)
+
+```mermaid
+flowchart TB
+  subgraph folder ["YOUR task folder"]
+    direction TB
+    subgraph S_REQ ["REQUIRED"]
+      direction LR
+      s_inst["instruction.md"]
+      s_toml["task.toml"]
+      s_q["input/questionnaire.yaml"]
+      s_out["input/output_schema.md"]
+      s_test["tests/"]
+      s_rep["reporting.json"]
+    end
+    subgraph S_OPT ["OPTIONAL"]
+      direction LR
+      s_ctx["input/context.md"]
+      s_rep2["reporting.json contextRules"]
+    end
+  end
+  subgraph S_PLAT ["PLATFORM"]
+    direction LR
+    s_rt["shared-survey-form runtime"]
+    s_traj["survey trajectory"]
+    s_agg["aggregation Layer 1"]
+  end
+  subgraph S_REF ["REFERENCE"]
+    direction LR
+    s_ex["survey/*.example.json"]
+    s_cheat["structured-output-quick-reference"]
+  end
+  S_REQ --> S_PLAT
+  s_test -->|"structured_output.json"| s_agg
+  S_REF -.-> folder
+```
+
+| Verifier emits | Priority |
+|---|---|
+| `question_response` per question | **Required** |
+| `trial_summary` | **Required** |
+| Layer 2 summarize `reason` by `response` | Optional in `reporting.json` |
+
 ## Contract
 
 - Task instruction: define the task steps, constraints, and submission requirements.
@@ -92,6 +137,93 @@ Notes:
 - Keep `id`, question ids, and option ids stable once data has been collected.
 - Put long scenario prose in `context.md`, not inside `questionnaire.yaml`.
 - Keep the artifact contract in `output_schema.md`, not inside `instruction.md`.
+
+## Reporting contract
+
+Survey tasks use the same generic `structured_output.json` / `reporting.json`
+mechanism as other application tasks. The verifier reads `survey_result.json`
+and emits normalized contexts for batch aggregation.
+
+This contract should answer:
+
+- what the persona answered for each question
+- why they answered that way when a rationale is available
+- how many answers and trajectory events the trial produced
+
+Keep using the platform's existing artifact shape:
+
+- verifier writes `verifier/structured_output.json`
+- task root defines `reporting.json`
+- both continue to use `contexts[]`, `facets[]`, `summaryDirectives[]`, and
+  optional `judgeDirectives[]`
+
+See the example templates in this folder:
+
+- `survey_structured_output.example.json`
+- `survey_reporting.example.json`
+
+### Minimum Contexts
+
+Survey verifiers should emit these contexts:
+
+1. `question_response`
+   Required. One context per answered question. Use a stable key such as
+   `question.<questionId>`.
+2. `trial_summary`
+   Required. One context per trial, usually keyed as `survey.summary`.
+
+If a survey task cannot produce stable per-question contexts, it is probably not
+ready for shared batch reporting.
+
+### Required Facets For `question_response`
+
+Emit one `question_response` context for each entry in `survey_result.json`
+`answers[]`. The question id in `answers[].questionId` must match
+`questionnaire.yaml`.
+
+| Facet key | Role | Kind | Required | Notes |
+|---|---|---|---|---|
+| `response` | `primary` | `numerical`, `categorical`, or `textual` | Yes | Use `numerical` for likert values, `categorical` for choice ids, `textual` for free-text answers |
+| `reason` | `explanation` | `textual` | Prefer | Map from `answers[].rationale` when present |
+| `confidence` | `score` | `numerical` | Optional | Map from `answers[].confidence` when present |
+
+The context `label` should normally be the question prompt or a stable question
+id. The context `key` should stay stable across trials, for example
+`question.q1`.
+
+### Required Facets For `trial_summary`
+
+The `trial_summary` context summarizes the whole survey trial:
+
+| Facet key | Role | Kind | Required | Notes |
+|---|---|---|---|---|
+| `answer_count` | `score` | `numerical` | Yes | Number of answers emitted |
+| `trajectory_event_count` | `score` | `numerical` | Yes | Number of standardized trajectory events |
+| `mean_numeric_answer` | `score` | `numerical` | Optional | Include when the survey has numeric answers |
+
+### Default Reporting Pattern
+
+For survey tasks, the default `reporting.json` should usually:
+
+- summarize `reason` by `response` for every `question_response` context
+- optionally judge `reason` for reusable signals such as price sensitivity,
+  preference fit, or hesitation
+
+Copy from:
+
+- `survey_reporting.example.json`
+- `application/tasks/example-survey_product-feedback/reporting.json`
+
+### Contributor Extension Rules
+
+- Keep the standard facet keys exactly as written above.
+- Do not invent a different per-question context type; use `question_response`
+  for every question.
+- Put survey-specific additions behind a `task_` prefix or in a new
+  scenario-specific context only when the shared contract is genuinely too
+  narrow.
+- Do not bake reporting policy into the verifier; use `reporting.json` for
+  summaries and judges.
 
 ## Canonical Task
 

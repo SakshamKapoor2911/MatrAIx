@@ -3,6 +3,56 @@
 Chatbot tasks let the simulated user interact with an application exposed
 through a chat API.
 
+**Canonical copy-from:** `application/tasks/recommender-agent_chat_api`
+
+### What you author (required vs optional)
+
+```mermaid
+flowchart TB
+  subgraph folder ["YOUR task folder"]
+    direction TB
+    subgraph C_REQ ["REQUIRED"]
+      direction LR
+      c_inst["instruction.md"]
+      c_toml["task.toml"]
+      c_yaml["input/chatbot.yaml"]
+      c_test["tests/"]
+      c_rep["reporting.json"]
+    end
+    subgraph C_OPT ["OPTIONAL"]
+      direction LR
+      c_ctx["input/context.md"]
+      c_proto["input/protocol.md"]
+      c_self["input/self_report_schema.yaml"]
+      c_rep2["reporting.json rules"]
+    end
+  end
+  subgraph C_PLAT ["PLATFORM"]
+    direction LR
+    c_tx["transcript.json"]
+    c_app["application_result.json"]
+    c_side["chat sidecar runtime"]
+  end
+  subgraph C_REF ["REFERENCE"]
+    direction LR
+    c_ex["chatbot/*.example.json"]
+    c_art["eval_artifacts.md"]
+  end
+  C_REQ --> C_PLAT
+  c_self -.->|"user_feedback.json"| c_test
+  C_REF -.-> folder
+```
+
+| Verifier context | Priority |
+|---|---|
+| `task_outcome` | **Required** |
+| `conversation_summary` | Strongly recommended |
+| `user_feedback` | When `self_report_schema.yaml` exists |
+| `policy_and_trust`, `coordination` | Optional depth |
+
+**Do not** add per-task `output_schema.md` — platform owns harness artifacts in
+[`eval_artifacts.md`](eval_artifacts.md).
+
 ## Contract
 
 - Task instruction: describe the chatbot application and the user's goal context.

@@ -235,14 +235,7 @@ export function cuaPersonaModelSelectOptions(
 ): CockpitSelectOption[] {
   const normalized = (platform ?? "linux").toLowerCase();
   if (normalized === "macos" || normalized === "ios") {
-    return options
-      .filter((opt) => opt.value.startsWith("anthropic/"))
-      .map((opt) => ({
-        ...opt,
-        summary:
-          opt.summary ??
-          "Anthropic computer-use — required for use.computer on macOS and iOS.",
-      }));
+    return options.filter((opt) => opt.value.startsWith("anthropic/"));
   }
   return options;
 }

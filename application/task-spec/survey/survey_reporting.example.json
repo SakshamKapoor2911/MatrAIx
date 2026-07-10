@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "1.0",
+  "contextRules": [
+    {
+      "match": {
+        "contextType": "question_response"
+      },
+      "summaryDirectives": [
+        {
+          "id": "question.reason_by_response",
+          "title": "Reason by selected response",
+          "targetFacetKey": "reason",
+          "groupByFacetKey": "response",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ],
+      "judgeDirectives": [
+        {
+          "id": "question.reason_signal_scan",
+          "title": "Reason signal scan",
+          "targetFacetKey": "reason",
+          "groupByFacetKey": "response",
+          "groupByMode": "categorical",
+          "judgeKind": "llm_signal_judge",
+          "prompt": "Read each free-text reason and identify whether it expresses price sensitivity, preference fit, or hesitation. Return structured JSON for the configured signals.",
+          "rubric": "Mark a signal true only when the reason clearly indicates that factor. Use false when the factor is absent or too ambiguous to support.",
+          "signals": [
+            {
+              "key": "price_sensitivity",
+              "label": "Price sensitivity",
+              "valueType": "boolean",
+              "description": "Whether the reason explicitly mentions cost, affordability, or price as a meaningful factor."
+            },
+            {
+              "key": "preference_fit",
+              "label": "Preference fit",
+              "valueType": "boolean",
+              "description": "Whether the reason indicates the product matched or failed to match the user's tastes or personal needs."
+            },
+            {
+              "key": "hesitation",
+              "label": "Hesitation",
+              "valueType": "boolean",
+              "description": "Whether the reason shows uncertainty, doubt, or reluctance rather than a confident stance."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

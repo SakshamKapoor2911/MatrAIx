@@ -108,7 +108,7 @@ export function ComponentPipeline({
       key: "persona",
       label: "Persona",
       icon: "face",
-      owner: environment?.personaAgent ?? "PersonaEval simulated user",
+      owner: environment?.personaAgent ?? "Playground simulated user",
       ...personaStatus(phase, raw, hasPersona),
     },
     {

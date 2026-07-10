@@ -637,17 +637,17 @@ export interface JobAggregationField {
   textual?: JobAggregationTextual | null;
 }
 
-export interface JobAggregationRelationshipBucket {
+export interface JobAggregationCrossFacetViewBucket {
   category: string;
   count: number;
   samples: string[];
 }
 
-export interface JobAggregationRelationship {
+export interface JobAggregationCrossFacetView {
   type: string;
   primaryFacetKey?: string | null;
   textFacetKey?: string | null;
-  buckets?: JobAggregationRelationshipBucket[];
+  buckets?: JobAggregationCrossFacetViewBucket[];
 }
 
 export interface JobAggregationSummaryBucket {
@@ -738,7 +738,9 @@ export interface HarborJobAggregationContext {
   facets: JobAggregationField[];
   summaries?: JobAggregationSummary[];
   judges?: JobAggregationJudge[];
-  relationships?: JobAggregationRelationship[];
+  crossFacetViews?: JobAggregationCrossFacetView[];
+  /** @deprecated Renamed to `crossFacetViews`. Kept for older aggregation artifacts. */
+  relationships?: JobAggregationCrossFacetView[];
 }
 
 export interface HarborJobAggregation {
@@ -879,9 +881,9 @@ export interface PersonaCohortDetail extends PersonaCohortSummary {
 export const HARBOR_TASK_PATHS = {
   chatbot: "application/tasks/recommender-agent_chat_api",
   survey: "application/tasks/persona-survey",
-  web: "application/tasks/example-web-playwright_books-interest",
+  web: "application/tasks/example-web-playwright_quote-choice",
   cuaLinux: "application/tasks/example-computer-use-linux_note-to-csv",
-  cuaWeb: "application/tasks/example-web-cua_books-interest",
+  cuaWeb: "application/tasks/example-web-cua_bookshop-choice",
 } as const;
 
 export const HARBOR_CHAT_TASKS: Record<string, string> = {

@@ -136,16 +136,31 @@ class CocoaHarborAgent(BaseInstalledAgent):
         for key in (
             "ANTHROPIC_API_KEY",
             "OPENAI_API_KEY",
+            "DASHSCOPE_API_KEY",
             "LLM_API_KEY",
             "LLM_BASE_URL",
+            "DASHSCOPE_API_BASE",
         ):
             value = self._get_env(key)
             if value is not None:
                 env[key] = value
 
+        if self.model_name.startswith("dashscope/"):
+            if "LLM_BASE_URL" not in env:
+                env["LLM_BASE_URL"] = (
+                    self._get_env("DASHSCOPE_API_BASE")
+                    or "https://dashscope.aliyuncs.com/compatible-mode/v1"
+                )
+            if (
+                "LLM_API_KEY" not in env
+                and "OPENAI_API_KEY" not in env
+                and self._get_env("DASHSCOPE_API_KEY")
+            ):
+                env["LLM_API_KEY"] = self._get_env("DASHSCOPE_API_KEY")  # type: ignore[assignment]
+
         if not any(
             self._get_env(k)
-            for k in ("ANTHROPIC_API_KEY", "OPENAI_API_KEY", "LLM_API_KEY")
+            for k in ("ANTHROPIC_API_KEY", "OPENAI_API_KEY", "LLM_API_KEY", "DASHSCOPE_API_KEY")
         ):
             raise ValueError(
                 "Set ANTHROPIC_API_KEY, OPENAI_API_KEY, or LLM_API_KEY for cocoa"

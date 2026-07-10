@@ -120,7 +120,7 @@ Reporting is task-owned, not a separate app folder:
 |-----|---------|
 | [QUICKSTART.md](QUICKSTART.md) | Zero → first run → batch → Cockpit → new task |
 | [task-guide.md](task-guide.md) | Task folder structure |
-| [task-spec/](task-spec/) | Survey / chat / web / os-app contracts |
+| [task-spec/README.md](task-spec/README.md) | Hub — links to per-type specs and shared reporting docs |
 | [web-interaction.md](web-interaction.md) | Playwright vs browser-use vs Cocoa vs CUA |
 | [choosing-an-agent.md](choosing-an-agent.md) | Agent ↔ form ↔ API keys |
 | [tasks/README.md](tasks/README.md) | Contributor checklist |
