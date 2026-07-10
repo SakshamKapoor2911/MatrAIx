@@ -9,6 +9,7 @@ import json
 import os
 import re
 import sys
+import time
 import urllib.error
 import urllib.request
 from collections import Counter, OrderedDict
@@ -449,6 +450,7 @@ def missing_api_environment_variables() -> list[str]:
 
 
 def main() -> int:
+    started_at = time.monotonic()
     args = parse_args()
     if not 0 <= args.min_confidence <= 1:
         print("--min-confidence must be between 0 and 1", file=sys.stderr)
@@ -589,6 +591,7 @@ def main() -> int:
 
     print(f"Wrote {len(rows)} records to {output_path}")
     print(f"Chunk failures: {failures}")
+    print(f"Elapsed seconds: {time.monotonic() - started_at:.3f}")
     return 0 if failures == 0 else 1
 
 
