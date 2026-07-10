@@ -879,9 +879,9 @@ export interface PersonaCohortDetail extends PersonaCohortSummary {
 export const HARBOR_TASK_PATHS = {
   chatbot: "application/tasks/recommender-agent_chat_api",
   survey: "application/tasks/persona-survey",
-  web: "application/tasks/example-web-playwright_books-interest",
+  web: "application/tasks/example-web-playwright_quote-choice",
   cuaLinux: "application/tasks/example-computer-use-linux_note-to-csv",
-  cuaWeb: "application/tasks/example-web-cua_books-interest",
+  cuaWeb: "application/tasks/example-web-cua_bookshop-choice",
 } as const;
 
 export const HARBOR_CHAT_TASKS: Record<string, string> = {
