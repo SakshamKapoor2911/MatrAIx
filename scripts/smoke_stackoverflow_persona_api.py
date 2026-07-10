@@ -60,6 +60,15 @@ def parse_args() -> argparse.Namespace:
         help="Run every persona schema category, chunked by --dims-per-chunk",
     )
     parser.add_argument("--dims-per-chunk", type=int, default=50)
+    parser.add_argument(
+        "--prompt-layout",
+        choices=("profile-first", "dimensions-first"),
+        default="profile-first",
+        help=(
+            "Prompt ordering for A/B tests. profile-first optimizes repeated "
+            "chunks for one respondent; dimensions-first is the original layout."
+        ),
+    )
     parser.add_argument("--survey-root", type=Path, default=DEFAULT_SURVEY_ROOT)
     parser.add_argument("--out", type=Path, default=None)
     parser.add_argument("--max-tokens", type=int, default=4096)
@@ -194,7 +203,12 @@ def load_dimension_chunks(
     raise ValueError(f"Unknown category {category!r}. Available categories include: {categories[:10]}")
 
 
-def build_stackoverflow_prompt(profile_text: str, dimensions: list[dict[str, Any]]) -> str:
+def build_stackoverflow_prompt(
+    profile_text: str,
+    dimensions: list[dict[str, Any]],
+    *,
+    prompt_layout: str = "profile-first",
+) -> str:
     lines = [
         "You are building a persona for a single Stack Overflow Developer Survey respondent from their survey answers.",
         "",
@@ -248,21 +262,29 @@ def build_stackoverflow_prompt(profile_text: str, dimensions: list[dict[str, Any
         "- When unsure, omit the dimension.",
         "- Return valid JSON only, with no markdown.",
     ]
-    # Keep the respondent profile before the varying dimension chunk. With the
-    # existing respondent-outer/chunk-inner loop, all chunk requests for one
-    # respondent then share the long instructions + profile token prefix. This
-    # layout is intentionally optimized for vLLM automatic prefix caching.
-    lines += [
-        "",
-        "RESPONDENT PROFILE:",
-        profile_text,
+    dimension_lines = [
         "",
         "DIMENSIONS (field_id — label — description — allowed values):",
     ]
     for dim in dimensions:
         allowed = " | ".join(str(value) for value in dim.get("values", [])) or "(free value)"
         desc = str(dim.get("description", "")).strip()
-        lines.append(f"- {dim['id']} — {dim.get('label', dim['id'])} — {desc} — [{allowed}]")
+        dimension_lines.append(
+            f"- {dim['id']} — {dim.get('label', dim['id'])} — {desc} — [{allowed}]"
+        )
+
+    profile_lines = ["", "RESPONDENT PROFILE:", profile_text]
+    if prompt_layout == "profile-first":
+        # With the respondent-outer/chunk-inner loop, all chunk requests for one
+        # respondent share the long instructions + profile token prefix.
+        lines.extend(profile_lines)
+        lines.extend(dimension_lines)
+    elif prompt_layout == "dimensions-first":
+        # Original layout retained for controlled A/B performance comparisons.
+        lines.extend(dimension_lines)
+        lines.extend(profile_lines)
+    else:
+        raise ValueError(f"Unsupported prompt layout: {prompt_layout}")
     return "\n".join(lines)
 
 
@@ -473,7 +495,8 @@ def main() -> int:
         dims_per_chunk=args.dims_per_chunk,
     )
     mode_slug = "all_categories" if args.all_categories else args.category.replace(":", "").replace(" ", "_").lower()
-    output_path = args.out or DEFAULT_OUT_DIR / f"stackoverflow_{args.year}_smoke_{args.limit}_{mode_slug}.jsonl"
+    layout_slug = args.prompt_layout.replace("-", "_")
+    output_path = args.out or DEFAULT_OUT_DIR / f"stackoverflow_{args.year}_smoke_{args.limit}_{mode_slug}_{layout_slug}.jsonl"
 
     profiles = [
         assemble_stackoverflow_profile(row, year=args.year, mapping=mapping)
@@ -485,14 +508,22 @@ def main() -> int:
             f"total_prompts={len(rows) * len(chunks)}"
         )
         print(f"first_chunk={chunks[0][0]} dims={len(chunks[0][1])}")
-        preview_prompt = build_stackoverflow_prompt(profiles[0], chunks[0][1])
-        dimensions_index = preview_prompt.index(
-            "DIMENSIONS (field_id — label — description — allowed values):"
+        preview_prompt = build_stackoverflow_prompt(
+            profiles[0], chunks[0][1], prompt_layout=args.prompt_layout
         )
-        print("prompt_layout=instructions_profile_dimensions")
+        if args.prompt_layout == "profile-first":
+            shared_prefix_end = preview_prompt.index(
+                "DIMENSIONS (field_id — label — description — allowed values):"
+            )
+            layout_name = "instructions_profile_dimensions"
+        else:
+            first_dimension = f"- {chunks[0][1][0]['id']} —"
+            shared_prefix_end = preview_prompt.index(first_dimension)
+            layout_name = "instructions_dimensions_profile"
+        print(f"prompt_layout={layout_name}")
         print(
-            f"shared_prefix_chars={dimensions_index} "
-            f"rough_shared_prefix_tokens={round(dimensions_index / 4)}"
+            f"shared_prefix_chars={shared_prefix_end} "
+            f"rough_shared_prefix_tokens={round(shared_prefix_end / 4)}"
         )
         print(preview_prompt[:4000])
         return 0
@@ -521,7 +552,11 @@ def main() -> int:
             merged_fields: list[dict[str, Any]] = []
             chunk_records: list[dict[str, Any]] = []
             for chunk_index, (chunk_label, dimensions) in enumerate(chunks, start=1):
-                prompt = build_stackoverflow_prompt(profile_text, dimensions)
+                prompt = build_stackoverflow_prompt(
+                    profile_text,
+                    dimensions,
+                    prompt_layout=args.prompt_layout,
+                )
                 try:
                     content = chat_completion(prompt, max_tokens=args.max_tokens, timeout=args.timeout)
                     raw_fields = parse_fields(content)
@@ -575,7 +610,11 @@ def main() -> int:
                     "min_confidence": args.min_confidence,
                     "keep_summary_inference": args.keep_summary_inference,
                     "output_policy": "sparse_supported_fields_only",
-                    "prompt_layout": "instructions_profile_dimensions",
+                    "prompt_layout": (
+                        "instructions_profile_dimensions"
+                        if args.prompt_layout == "profile-first"
+                        else "instructions_dimensions_profile"
+                    ),
                 },
                 "deduped_field_count": deduped_count,
                 "chunks": chunk_records,
