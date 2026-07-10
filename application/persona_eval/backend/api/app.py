@@ -236,6 +236,22 @@ def preflight_checks() -> List[Dict[str, Any]]:
         }
     )
 
+    dashscope_key = os.environ.get("DASHSCOPE_API_KEY")
+    checks.append(
+        {
+            "group": "Core",
+            "name": "DashScope (Qwen / DeepSeek)",
+            "ok": bool(dashscope_key),
+            "optional": True,
+            "detail": (
+                "Configured."
+                if dashscope_key
+                else "Not configured. Required for DashScope persona models "
+                "(Qwen, DeepSeek via OpenAI-compatible API)."
+            ),
+        }
+    )
+
     # ---- Chatbot — RecAI is deeply probed; other adapters are offered --- #
     root = _interecagent_root()
     llm4crs = os.path.join(root, "llm4crs")

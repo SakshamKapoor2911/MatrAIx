@@ -49,18 +49,18 @@ def test_options_returns_enriched_knobs(config_manager):
             assert option["label"]
 
 
+from backend.service.config import PERSONA_MODEL_OPTIONS
+
+
 def test_options_knob_values_match_allowed(config_manager):
     opts = config_manager.options()
     knobs = {k["key"]: k for k in opts["knobs"]}
     for key in ("applicationId", "engine", "domain", "botType"):
         values = [o["value"] for o in knobs[key]["options"]]
         assert values == config_manager.ALLOWED[key]
-    assert [o["value"] for o in knobs["personaModel"]["options"]] == [
-        "anthropic/claude-haiku-4-5",
-        "anthropic/claude-sonnet-4-6",
-        "openai/gpt-4o-mini",
-        "openai/gpt-4o",
-    ]
+    assert [o["value"] for o in knobs["personaModel"]["options"]] == PERSONA_MODEL_OPTIONS
+    assert "dashscope/qwen3.7-max" in PERSONA_MODEL_OPTIONS
+    assert "dashscope/deepseek-v4-pro" in PERSONA_MODEL_OPTIONS
 
 
 def test_options_rebuilds_agent_flag(config_manager):

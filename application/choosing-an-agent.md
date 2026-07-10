@@ -33,9 +33,15 @@ Web/CUA agents (`persona-browser-use`, `persona-computer-1`, …) and auto agent
 (`persona-json-survey`, `persona-user-sim`) all honor the YAML `model_name`.
 CLI wrapper agents (`persona-claude-code`, …) pass `-m` through to the same field.
 
-Supported persona models in Cockpit: `anthropic/claude-haiku-4-5`,
-`anthropic/claude-sonnet-4-6`, `openai/gpt-4o-mini`, `openai/gpt-4o`. Other
-LiteLLM-compatible ids may work if the matching API key is set.
+Supported persona models in Cockpit include Anthropic (`anthropic/claude-*`),
+OpenAI (`openai/gpt-4o*`), and DashScope OpenAI-compatible models
+(`dashscope/qwen3.6-plus-2026-04-02`, `dashscope/qwen3.7-max`,
+`dashscope/deepseek-v4-pro`, …). Set `DASHSCOPE_API_KEY` (and optional
+`DASHSCOPE_API_BASE`) when using `dashscope/*` — the same `-m` value applies to
+auto survey/chat and Docker web/CUA agents. CLI harness agents
+(`persona-claude-code`, `persona-gemini-cli`, `persona-codex`) stay
+vendor-locked. Other LiteLLM-compatible ids may work if the matching API key is
+set.
 
 ## Persona agents
 
@@ -76,15 +82,15 @@ differ by agent:
 
 | Agent | Required on host | Notes |
 |-------|------------------|-------|
-| `persona-json-survey` | `ANTHROPIC_API_KEY` or `OPENAI_API_KEY` | Match `-m` / YAML `model_name`. Auto host-native survey. |
-| `persona-user-sim` | `ANTHROPIC_API_KEY`; often `OPENAI_API_KEY` for SUT | Persona model via `-m`; chat sidecar engine via `MATRIX_CHATBOT_ENGINE` (default `gpt-4o-mini`). |
+| `persona-json-survey` | `ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, or `DASHSCOPE_API_KEY` | Match `-m` / YAML `model_name`. Auto host-native survey. |
+| `persona-user-sim` | Persona: `ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, or `DASHSCOPE_API_KEY`; often `OPENAI_API_KEY` for SUT | Persona model via `-m`; chat sidecar engine via `MATRIX_CHATBOT_ENGINE` (default `gpt-4o-mini`). |
 | `persona-claude-code` | `ANTHROPIC_API_KEY` | Anthropic models |
 | `persona-gemini-cli` | `GEMINI_API_KEY` | Google models, e.g. `google/gemini-2.5-pro` |
 | `persona-codex` | `OPENAI_API_KEY` | OpenAI models, e.g. `openai/gpt-4o` |
-| `persona-openhands-sdk` | **`LLM_API_KEY`** | Not the provider-native name. Map before run, e.g. `export LLM_API_KEY="$ANTHROPIC_API_KEY"` (match `-m`). |
-| `persona-browser-use` | `ANTHROPIC_API_KEY` or `LLM_API_KEY` | OpenAI models: `OPENAI_API_KEY`. |
-| `persona-cocoa` | `ANTHROPIC_API_KEY` or `LLM_API_KEY` | Task image must be AIO Sandbox-based. |
-| `persona-computer-1` | `ANTHROPIC_API_KEY` | Docker Linux web CUA and linux computer-use. **use.computer** (macOS/iOS) also needs `USE_COMPUTER_API_KEY`. Install extras: `uv sync --extra use-computer --extra computer-1`. |
+| `persona-openhands-sdk` | **`LLM_API_KEY`** (or `DASHSCOPE_API_KEY` when `-m` is `dashscope/*`) | Not the provider-native name for Anthropic/OpenAI. Map before run, e.g. `export LLM_API_KEY="$ANTHROPIC_API_KEY"` (match `-m`). DashScope models auto-map `DASHSCOPE_API_KEY` → `LLM_API_KEY`. |
+| `persona-browser-use` | `ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, `DASHSCOPE_API_KEY`, or `LLM_API_KEY` | DashScope: set `DASHSCOPE_API_KEY` (+ optional `DASHSCOPE_API_BASE`). |
+| `persona-cocoa` | `ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, `DASHSCOPE_API_KEY`, or `LLM_API_KEY` | Task image must be AIO Sandbox-based. |
+| `persona-computer-1` | `ANTHROPIC_API_KEY` or `DASHSCOPE_API_KEY` | Docker Linux web CUA and linux computer-use. **use.computer** (macOS/iOS) also needs `USE_COMPUTER_API_KEY`. Install extras: `uv sync --extra use-computer --extra computer-1`. |
 
 Chat tasks may also need `OPENAI_API_KEY` and `MATRIX_CHATBOT_*` exports — the
 job generator prints them. Optional global persona default:

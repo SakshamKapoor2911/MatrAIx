@@ -8,6 +8,35 @@ from typing import Any, Dict, Optional
 
 from persona_eval.openai_client import OpenAIChatClient, coerce_json
 
+DASHSCOPE_DEFAULT_BASE_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1"
+
+
+def dashscope_model_id(model: str) -> str:
+    """Return the bare DashScope model id from a Harbor persona model string."""
+    value = (model or "").strip()
+    if value.startswith("dashscope/"):
+        return value.split("/", 1)[1]
+    return value
+
+
+def dashscope_openai_client_kwargs(model: str) -> Dict[str, str]:
+    """OpenAI SDK kwargs for Alibaba DashScope compatible-mode chat."""
+    api_key = (os.environ.get("DASHSCOPE_API_KEY") or "").strip()
+    if not api_key:
+        raise RuntimeError(
+            "DASHSCOPE_API_KEY is required for persona model {!r}".format(model)
+        )
+    base_url = (
+        os.environ.get("DASHSCOPE_API_BASE")
+        or os.environ.get("LLM_BASE_URL")
+        or DASHSCOPE_DEFAULT_BASE_URL
+    ).strip()
+    return {
+        "model": dashscope_model_id(model),
+        "api_key": api_key,
+        "base_url": base_url,
+    }
+
 
 class AnthropicJSONClient:
     """Minimal Anthropic Messages client that returns a JSON object."""
@@ -90,6 +119,14 @@ def build_json_client(model: str, *, temperature: float = 0.7) -> Any:
     value = (model or "openai/gpt-4o-mini").strip()
     if value.startswith("anthropic/"):
         return AnthropicJSONClient(value.split("/", 1)[1], temperature=temperature)
+    if value.startswith("dashscope/"):
+        kwargs = dashscope_openai_client_kwargs(value)
+        return OpenAIChatClient(
+            model=kwargs["model"],
+            api_key=kwargs["api_key"],
+            base_url=kwargs["base_url"],
+            temperature=temperature,
+        )
     if value.startswith("openai/"):
         return OpenAIChatClient(
             model=value.split("/", 1)[1],

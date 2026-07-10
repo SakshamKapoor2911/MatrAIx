@@ -37,6 +37,20 @@ def _create_llm(model: str):
 
     from browser_use import ChatOpenAI
 
+    if provider == "dashscope":
+        api_key = (
+            os.environ.get("DASHSCOPE_API_KEY")
+            or os.environ.get("OPENAI_API_KEY")
+            or os.environ.get("LLM_API_KEY")
+            or ""
+        ).strip()
+        base_url = (
+            os.environ.get("DASHSCOPE_API_BASE")
+            or os.environ.get("LLM_BASE_URL")
+            or "https://dashscope.aliyuncs.com/compatible-mode/v1"
+        ).strip()
+        return ChatOpenAI(model=bare, api_key=api_key, base_url=base_url)
+
     return ChatOpenAI(model=bare)
 
 
