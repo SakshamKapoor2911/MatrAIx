@@ -11,6 +11,8 @@ import pytest
 pytest.importorskip("fastapi")
 pytest.importorskip("pydantic")
 
+from backend.service.config import PERSONA_MODEL_OPTIONS
+
 
 def test_health(client):
     resp = client.get("/api/health")
@@ -27,6 +29,7 @@ def test_preflight_shape(client):
     names = {c["name"] for c in body["checks"]}
     assert "OpenAI credentials" in names
     assert "Anthropic credentials" in names
+    assert "DashScope (Qwen / DeepSeek)" in names
     assert {"OpenBB (finance)", "Medical assistant", "Survey forms", "Web tasks", "Docker", "use.computer API"} <= names
     for check in body["checks"]:
         assert set(check.keys()) >= {"name", "ok", "detail", "group"}
@@ -38,6 +41,7 @@ def test_preflight_does_not_leak_env_var_names(client):
         "OPENAI_API_KEY",
         "ANTHROPIC_API_KEY",
         "CLAUDE_API_KEY",
+        "DASHSCOPE_API_KEY",
         "USE_COMPUTER_API_KEY",
         "INTERECAGENT_ROOT",
         "INTERECAGENT_CATALOG_PATH",
@@ -58,6 +62,19 @@ def test_interecagent_root_falls_back_to_task_app_path(monkeypatch):
     )
     assert expected_suffix in root
     assert "/applications/tasks/" not in root
+
+
+def test_preflight_dashscope_check_optional(client, monkeypatch):
+    monkeypatch.delenv("DASHSCOPE_API_KEY", raising=False)
+    body = client.get("/api/preflight").json()
+    dashscope = next(c for c in body["checks"] if c["name"] == "DashScope (Qwen / DeepSeek)")
+    assert dashscope["ok"] is False
+    assert dashscope.get("optional") is True
+
+    monkeypatch.setenv("DASHSCOPE_API_KEY", "sk-test")
+    body = client.get("/api/preflight").json()
+    dashscope = next(c for c in body["checks"] if c["name"] == "DashScope (Qwen / DeepSeek)")
+    assert dashscope["ok"] is True
 
 
 def test_preflight_anthropic_check(client, monkeypatch):
@@ -171,12 +188,9 @@ def test_config_options(client):
     assert engine_values == {"gpt-4o-mini", "gpt-4o"}
     persona_model = knobs["personaModel"]
     persona_model_values = {o["value"] for o in persona_model["options"]}
-    assert persona_model_values == {
-        "anthropic/claude-haiku-4-5",
-        "anthropic/claude-sonnet-4-6",
-        "openai/gpt-4o-mini",
-        "openai/gpt-4o",
-    }
+    assert persona_model_values == set(PERSONA_MODEL_OPTIONS)
+    assert "dashscope/qwen3.6-plus-2026-04-02" in persona_model_values
+    assert "dashscope/deepseek-v4-pro" in persona_model_values
 
     assert body["defaults"]["engine"] == "gpt-4o-mini"
     assert body["defaults"]["rankerMode"] == "native"

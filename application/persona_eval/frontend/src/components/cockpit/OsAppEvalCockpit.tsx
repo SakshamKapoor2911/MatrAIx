@@ -529,7 +529,7 @@ export function OsAppEvalCockpit({
           tasksError={
             tasks.length === 0
               ? tasksQuery.isError
-                ? "OS app task API unavailable — restart PersonaEval backend (uvicorn backend.api.app:app on :8765)."
+                ? "OS app task API unavailable — restart the Playground backend (uvicorn backend.api.app:app on :8765)."
                 : "No OS app tasks available."
               : null
           }

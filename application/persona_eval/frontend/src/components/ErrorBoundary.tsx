@@ -56,7 +56,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
             <h1 className="font-display text-lg font-bold tracking-tight text-text-main">Something went wrong</h1>
           </div>
           <p className="mt-2 text-[13px] leading-relaxed text-text-variant">
-            PersonaEval hit an unexpected error and stopped rendering. Your data is safe. You can
+            Playground hit an unexpected error and stopped rendering. Your data is safe. You can
             recover the view or reload the app.
           </p>
           {error.message && (

@@ -5,7 +5,7 @@ import { type ReactNode, useId, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import { api, ApiError } from "@/lib/api";
-import type { HarborJobAggregation, HarborJobDetail } from "@/lib/types";
+import type { HarborJobAggregation, HarborJobDetail, JobAggregationCrossFacetView } from "@/lib/types";
 import { FOCUS_RING, Sym } from "./cockpit/cockpitShared";
 import {
   StudioGlassPanel,
@@ -25,7 +25,7 @@ type AggregationField = HarborJobAggregation["fields"][number];
 type AggregationContext = NonNullable<HarborJobAggregation["contexts"]>[number];
 type AggregationSummary = NonNullable<AggregationContext["summaries"]>[number];
 type AggregationJudge = NonNullable<AggregationContext["judges"]>[number];
-type AggregationRelationship = NonNullable<AggregationContext["relationships"]>[number];
+type AggregationCrossFacetView = JobAggregationCrossFacetView;
 type AggregationContextType =
   | "question_response"
   | "decision"
@@ -766,6 +766,10 @@ function orderedContextsForBreakdown(
   })
 }
 
+function crossFacetViewsForContext(context: AggregationContext): AggregationCrossFacetView[] {
+  return context.crossFacetViews ?? context.relationships ?? []
+}
+
 function summaryBucketsForContext(context: AggregationContext): CountBarItem[] {
   const summary = context.summaries?.find((item) => item.buckets.length > 0)
   if (summary) {
@@ -782,8 +786,10 @@ function summaryBucketsForContext(context: AggregationContext): CountBarItem[] {
       count: entry.count,
     }))
   }
-  const relationship = context.relationships?.find((item) => (item.buckets?.length ?? 0) > 0)
-  return (relationship?.buckets ?? []).map((bucket) => ({
+  const crossFacetView = crossFacetViewsForContext(context).find(
+    (item) => (item.buckets?.length ?? 0) > 0,
+  )
+  return (crossFacetView?.buckets ?? []).map((bucket) => ({
     label: bucket.category,
     count: bucket.count,
   }))
@@ -1310,12 +1316,12 @@ function ContextCard({ context }: { context: AggregationContext }) {
   const typeDescription = contextTypeDescription(context)
   const summaryCount = context.summaries?.length ?? 0
   const judgeCount = context.judges?.length ?? 0
-  const relationshipCount = context.relationships?.length ?? 0
+  const crossFacetViewCount = crossFacetViewsForContext(context).length
   const unanimousPrimary =
     primaryFacet?.kind === "categorical" && primaryFacet != null && isUnanimousField(primaryFacet)
   const showDistribution =
     !unanimousPrimary && primaryFacet?.kind !== "categorical" && distributionItems.length > 0
-  const analysisCount = summaryCount + judgeCount + relationshipCount
+  const analysisCount = summaryCount + judgeCount + crossFacetViewCount
   const showPrimaryPreview = primaryFacet?.kind === "numerical" || (!showDistribution && !unanimousPrimary)
   const primaryValue = primaryFacet?.categorical?.counts?.[0]?.value ?? null
 
@@ -1432,16 +1438,16 @@ function ContextCard({ context }: { context: AggregationContext }) {
             </div>
           ) : null}
 
-          {(context.relationships?.length ?? 0) > 0 ? (
+          {crossFacetViewsForContext(context).length > 0 ? (
             <div className="space-y-3">
               <SubsectionTitle
-                title="Relationships"
-                subtitle="How explanations vary across response groups."
+                title="Cross-facet views"
+                subtitle="How one facet varies across another facet's groups."
               />
-              {context.relationships?.map((relationship, index) => (
-                <RelationshipDisclosure
-                  key={`${context.key}-${relationship.type}-${index}`}
-                  relationship={relationship}
+              {crossFacetViewsForContext(context).map((crossFacetView, index) => (
+                <CrossFacetViewDisclosure
+                  key={`${context.key}-${crossFacetView.type}-${index}`}
+                  crossFacetView={crossFacetView}
                 />
               ))}
             </div>
@@ -1616,20 +1622,24 @@ function JudgeDisclosure({ judge }: { judge: AggregationJudge }) {
   )
 }
 
-function RelationshipDisclosure({ relationship }: { relationship: AggregationRelationship }) {
-  const buckets = relationship.buckets ?? []
+function CrossFacetViewDisclosure({
+  crossFacetView,
+}: {
+  crossFacetView: AggregationCrossFacetView
+}) {
+  const buckets = crossFacetView.buckets ?? []
   const total = buckets.reduce((sum, bucket) => sum + bucket.count, 0)
   const title =
-    relationship.type === "text_by_primary_category"
+    crossFacetView.type === "text_by_primary_category"
       ? "Reasons by response group"
-      : relationship.type.replace(/_/g, " ")
+      : crossFacetView.type.replace(/_/g, " ")
 
   return (
     <DisclosurePanel
       title={title}
       subtitle={
-        relationship.primaryFacetKey && relationship.textFacetKey
-          ? `${relationship.primaryFacetKey} × ${relationship.textFacetKey}`
+        crossFacetView.primaryFacetKey && crossFacetView.textFacetKey
+          ? `${crossFacetView.primaryFacetKey} × ${crossFacetView.textFacetKey}`
           : undefined
       }
       badge={`${buckets.length} buckets`}
@@ -1643,7 +1653,7 @@ function RelationshipDisclosure({ relationship }: { relationship: AggregationRel
       />
       <div className="mt-3 space-y-2">
         {buckets.map((bucket) => (
-          <div key={`${relationship.type}-${bucket.category}`} className="rounded-lg border border-outline/40 bg-surface/70 p-3">
+          <div key={`${crossFacetView.type}-${bucket.category}`} className="rounded-lg border border-outline/40 bg-surface/70 p-3">
             <div className="flex items-center justify-between gap-3 text-[12px]">
               <span className="font-medium text-text-main">{bucket.category}</span>
               <span className="font-mono text-text-variant">{bucket.count}</span>

@@ -6,7 +6,7 @@ import type { HarborJobDetail, HarborJobLiveResponse } from "./types";
 
 const POLL_MS = 1_000;
 const STALE_BACKEND_HINT =
-  "Live events API is unavailable. Restart the PersonaEval backend (uvicorn) to enable bubble-by-bubble updates.";
+  "Live events API is unavailable. Restart the Playground backend (uvicorn) to enable bubble-by-bubble updates.";
 
 function jobDetailToLive(job: HarborJobDetail): HarborJobLiveResponse {
   const trials = job.trials.map((trial) => ({

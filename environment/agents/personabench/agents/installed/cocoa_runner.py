@@ -105,13 +105,18 @@ def _controller_type(model: str) -> str:
     return "llm"
 
 
-def _api_key() -> str:
-    for name in ("ANTHROPIC_API_KEY", "OPENAI_API_KEY", "LLM_API_KEY"):
+def _api_key(model: str) -> str:
+    if model.startswith("dashscope/"):
+        value = os.environ.get("DASHSCOPE_API_KEY", "").strip()
+        if value:
+            return value
+    for name in ("ANTHROPIC_API_KEY", "OPENAI_API_KEY", "LLM_API_KEY", "DASHSCOPE_API_KEY"):
         value = os.environ.get(name, "").strip()
         if value:
             return value
     raise RuntimeError(
-        "Set ANTHROPIC_API_KEY, OPENAI_API_KEY, or LLM_API_KEY for persona-cocoa"
+        "Set DASHSCOPE_API_KEY (for dashscope/*), or ANTHROPIC_API_KEY, OPENAI_API_KEY, "
+        "or LLM_API_KEY for persona-cocoa"
     )
 
 
@@ -459,8 +464,14 @@ def main() -> int:
             "type": _controller_type(args.model),
             "args": {
                 "model": bare_model,
-                "api_key": _api_key(),
-                "base_url": os.environ.get("LLM_BASE_URL", ""),
+                "api_key": _api_key(args.model),
+                "base_url": os.environ.get("LLM_BASE_URL")
+                or os.environ.get("DASHSCOPE_API_BASE")
+                or (
+                    "https://dashscope.aliyuncs.com/compatible-mode/v1"
+                    if args.model.startswith("dashscope/")
+                    else ""
+                ),
             },
         },
         "sandbox": {

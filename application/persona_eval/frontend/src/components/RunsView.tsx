@@ -274,7 +274,7 @@ function HarborJobsList({ openHarborJob, onClose, backLabel }: HarborJobsListPro
           title="Runs"
           subtitle={
             <>
-              Harbor jobs in <span className="font-mono">jobs/</span> — launch from PersonaEval, debrief
+              Harbor jobs in <span className="font-mono">jobs/</span> — launch from Playground, debrief
               trials here.
             </>
           }
@@ -599,7 +599,7 @@ function ListEmpty({ onClose }: { onClose: () => void }) {
       </div>
       <h2 className="font-display text-[15px] font-semibold text-text-main">No runs yet</h2>
       <p className="mx-auto mt-2 max-w-md text-[13px] leading-relaxed text-text-variant">
-        Launch a batch from PersonaEval to run personas at scale. Results appear here under{" "}
+        Launch a batch from Playground to run personas at scale. Results appear here under{" "}
         <span className="font-mono">jobs/</span>.
       </p>
       <button

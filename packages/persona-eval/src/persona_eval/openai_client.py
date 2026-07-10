@@ -29,13 +29,26 @@ class ChatClient(Protocol):
 class OpenAIChatClient:
     """OpenAI v1 client (`from openai import OpenAI`) using JSON response mode."""
 
-    def __init__(self, model: str = "gpt-4o-mini", client: Optional[Any] = None,
-                 temperature: float = 0.7) -> None:
+    def __init__(
+        self,
+        model: str = "gpt-4o-mini",
+        client: Optional[Any] = None,
+        *,
+        api_key: Optional[str] = None,
+        base_url: Optional[str] = None,
+        temperature: float = 0.7,
+    ) -> None:
         self.model = model
         self.temperature = temperature
         if client is None:
             from openai import OpenAI  # lazy: tests inject a fake
-            client = OpenAI()
+
+            client_kwargs: Dict[str, Any] = {}
+            if api_key is not None:
+                client_kwargs["api_key"] = api_key
+            if base_url is not None:
+                client_kwargs["base_url"] = base_url
+            client = OpenAI(**client_kwargs)
         self._client = client
 
     def complete_json(self, system: str, user: str) -> Dict[str, Any]:

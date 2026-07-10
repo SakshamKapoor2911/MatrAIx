@@ -190,11 +190,18 @@ class OpenHandsSDK(BaseInstalledAgent):
 
         # Pass through LLM configuration from extra_env or environment
         llm_api_key = self._get_env("LLM_API_KEY")
+        if llm_api_key is None and self.model_name and self.model_name.startswith("dashscope/"):
+            llm_api_key = self._get_env("DASHSCOPE_API_KEY")
         if llm_api_key is None:
             raise ValueError("LLM_API_KEY environment variable must be set")
         env["LLM_API_KEY"] = llm_api_key
 
         llm_base_url = self._get_env("LLM_BASE_URL")
+        if llm_base_url is None and self.model_name and self.model_name.startswith("dashscope/"):
+            llm_base_url = (
+                self._get_env("DASHSCOPE_API_BASE")
+                or "https://dashscope.aliyuncs.com/compatible-mode/v1"
+            )
         if llm_base_url is not None:
             env["LLM_BASE_URL"] = llm_base_url
 

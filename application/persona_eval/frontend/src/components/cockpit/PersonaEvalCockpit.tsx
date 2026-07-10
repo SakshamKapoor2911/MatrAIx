@@ -103,7 +103,7 @@ function liveStatusLine(
     return "The app is thinking…";
   if (raw.includes("eval")) return "Scoring how it went…";
   if (job?.phase) return `${job.phase.replace(/^harbor_/, "").replace(/_/g, " ")}…`;
-  return "Running the PersonaEval…";
+  return "Running the playground…";
 }
 
 /** True when focus is in a text input / textarea / select / contenteditable. */
@@ -673,17 +673,26 @@ function ChatbotEvalCockpit({
       ? (domainKnob?.options ?? []).map((o) => ({ ...o, label: fmtDomain(o.label) }))
       : [];
   const chatTransport = selectedTask ? transportForChatTask(selectedTask) : "sidecar";
+  const runningChatTaskIds = useMemo(() => {
+    const ids = new Set<string>();
+    if (isRunning && selectedTaskId) ids.add(selectedTaskId);
+    if (isBatchActive && batchTaskId) ids.add(batchTaskId);
+    return ids;
+  }, [isRunning, selectedTaskId, isBatchActive, batchTaskId]);
   const chatTaskCards = useMemo<TaskCardModel[]>(
     () =>
       chatbotTasks.map((task) => {
         const transport = transportForChatTask(task);
-        const statusTone: "secondary" | "danger" = task.available ? "secondary" : "danger";
+        const runningNow = runningChatTaskIds.has(task.id);
+        const available =
+          runningNow ? true : task.available === null || task.available === undefined ? null : task.available;
+        const statusTone: "secondary" | "danger" = available ? "secondary" : "danger";
         const statusTags =
-          task.available === null || task.available === undefined
+          available === null
             ? []
             : [
                 {
-                  label: task.available ? "Available" : "Unavailable",
+                  label: available ? "Available" : "Unavailable",
                   tone: statusTone,
                 },
               ];
@@ -694,15 +703,12 @@ function ChatbotEvalCockpit({
           taskType: "chatbot",
           taskPath: task.taskPath,
           transport,
-          available: task.available ?? null,
+          available,
           canStart: task.canStart ?? false,
-          statusLabel:
-            task.available === null || task.available === undefined
-              ? undefined
-              : task.available
-                ? "Available"
-                : "Unavailable",
-          statusDetail: task.statusDetail ?? undefined,
+          statusLabel: available === null ? undefined : available ? "Available" : "Unavailable",
+          statusDetail: runningNow
+            ? "Sidecar started for this run."
+            : task.statusDetail ?? undefined,
           domain: task.domain,
           difficulty: task.difficulty,
           taskKind: task.taskKind,
@@ -711,7 +717,7 @@ function ChatbotEvalCockpit({
           tags: [...taskCardTags({ taskPath: task.taskPath }), ...statusTags],
         };
       }),
-    [chatbotTasks],
+    [chatbotTasks, runningChatTaskIds],
   );
   const verifierOnlyFailure = isRewardOnlyTrialFailure(error ?? job?.error ?? null, {
     transcript: turns,

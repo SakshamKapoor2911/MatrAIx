@@ -100,7 +100,7 @@ export default function App() {
   );
 
   const shellFooterContext = storeViewActive
-    ? "persona store"
+    ? "persona world"
     : runsViewActive
       ? "runs"
       : mode === "persona-eval"
@@ -153,7 +153,7 @@ export default function App() {
               backToList={backToRunsList}
               backToHarborJob={backToHarborJob}
               onClose={closeRunsView}
-              backLabel="Back to cockpit"
+              backLabel="Back to playground"
             />
           </div>
           <AppFooter context={shellFooterContext} />

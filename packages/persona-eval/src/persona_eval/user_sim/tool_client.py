@@ -35,6 +35,8 @@ class OpenAIToolStepClient:
         model: str,
         *,
         client: Optional[Any] = None,
+        api_key: Optional[str] = None,
+        base_url: Optional[str] = None,
         temperature: float = 0.7,
     ) -> None:
         self.model = model
@@ -42,7 +44,12 @@ class OpenAIToolStepClient:
         if client is None:
             from openai import OpenAI
 
-            client = OpenAI()
+            client_kwargs: Dict[str, Any] = {}
+            if api_key is not None:
+                client_kwargs["api_key"] = api_key
+            if base_url is not None:
+                client_kwargs["base_url"] = base_url
+            client = OpenAI(**client_kwargs)
         self._client = client
 
     def complete_with_tools(self, messages: List[Dict[str, Any]]) -> List[ToolCall]:
@@ -160,9 +167,19 @@ def _coerce_args(raw: Any) -> Dict[str, Any]:
 
 
 def build_tool_step_client(model: str, *, temperature: float = 0.7) -> ToolStepClient:
+    from persona_eval.model_client import dashscope_openai_client_kwargs
+
     value = (model or "openai/gpt-4o-mini").strip()
     if value.startswith("anthropic/"):
         return AnthropicToolStepClient(value.split("/", 1)[1], temperature=temperature)
+    if value.startswith("dashscope/"):
+        kwargs = dashscope_openai_client_kwargs(value)
+        return OpenAIToolStepClient(
+            kwargs["model"],
+            api_key=kwargs["api_key"],
+            base_url=kwargs["base_url"],
+            temperature=temperature,
+        )
     if value.startswith("openai/"):
         return OpenAIToolStepClient(value.split("/", 1)[1], temperature=temperature)
     if value.startswith("gpt-"):
