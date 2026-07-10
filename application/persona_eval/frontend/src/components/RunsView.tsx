@@ -16,6 +16,7 @@ import {
   StudioToolbarButton,
 } from "./studio/StudioShell";
 import { api, ApiError } from "@/lib/api";
+import { jobDisplayIdentity } from "@/lib/jobDisplay";
 import {
   deriveHarborJobListStatus,
   harborJobListStatusLabel,
@@ -108,7 +109,7 @@ function harborJobAppType(job: HarborJobSummary): string {
 
 /** Shared column template for the Harbor jobs table (header + rows + skeleton). */
 const HARBOR_JOBS_GRID =
-  "grid grid-cols-[minmax(0,1fr)_5.75rem_9.75rem_3.75rem_minmax(5.5rem,6.25rem)_2.25rem] items-center gap-x-5";
+  "grid grid-cols-[minmax(0,1fr)_5.75rem_9.75rem_4.25rem_minmax(5.5rem,6.25rem)_2.25rem] items-center gap-x-5";
 
 type AppTypeFilter = "all" | "chatbot" | "survey" | "web" | "os-app";
 type StatusFilter = "all" | HarborJobListStatus;
@@ -129,9 +130,13 @@ const STATUS_FILTER_OPTIONS: { value: Exclude<StatusFilter, "all">; label: strin
 function harborJobSearchHaystack(job: HarborJobSummary): string {
   const status = deriveHarborJobListStatus(job);
   const timeIso = job.startedAt ?? job.updatedAt;
+  const appType = harborJobAppType(job);
+  const identity = jobDisplayIdentity(job.jobName, appType);
   return [
     job.jobName,
-    harborJobAppType(job),
+    identity.title,
+    identity.shortId,
+    appType,
     harborJobListStatusLabel(status),
     formatJobTimeFull(timeIso),
     `${job.completedTrials ?? job.trialCount}/${job.trialCount}`,
@@ -188,6 +193,141 @@ const JOB_STATUS_STYLES: Record<
     fill: 1,
   },
 };
+
+const JOB_PROGRESS_STYLES: Record<
+  HarborJobListStatus,
+  { bar: string; track?: string }
+> = {
+  running: {
+    bar: "bg-warn animate-pulse",
+  },
+  success: {
+    bar: "bg-secondary",
+  },
+  failed: {
+    bar: "bg-danger",
+  },
+};
+
+function JobTrialProgress({
+  job,
+  status,
+}: {
+  job: HarborJobSummary;
+  status: HarborJobListStatus;
+}) {
+  const completed = job.completedTrials ?? 0;
+  const total = Math.max(job.trialCount ?? 0, 0);
+  const ratio = total > 0 ? Math.min(1, completed / total) : 0;
+  const style = JOB_PROGRESS_STYLES[status];
+  const label =
+    total === 0
+      ? "No trials"
+      : total === 1
+        ? `${completed} of 1 trial complete`
+        : `${completed} of ${total} trials complete`;
+
+  return (
+    <div
+      className="mt-1.5 h-1.5 min-w-[5rem] overflow-hidden rounded-full bg-surface-high"
+      role="progressbar"
+      aria-valuenow={completed}
+      aria-valuemin={0}
+      aria-valuemax={total}
+      aria-label={label}
+    >
+      <div
+        className={`h-full rounded-full transition-[width] duration-300 ${style.bar}`}
+        style={{ width: `${ratio * 100}%` }}
+      />
+    </div>
+  );
+}
+
+const JOB_TRIAL_COUNT_STYLES: Record<HarborJobListStatus, string> = {
+  running: "border-warn/35 bg-warn/5",
+  success: "border-secondary/35 bg-secondary/5",
+  failed: "border-danger/35 bg-danger/5",
+};
+
+function JobTrialCountCell({
+  job,
+  status,
+  onOpen,
+}: {
+  job: HarborJobSummary;
+  status: HarborJobListStatus;
+  onOpen: () => void;
+}) {
+  const completed = job.completedTrials ?? 0;
+  const total = Math.max(job.trialCount ?? 0, 0);
+  const inProgress = status === "running" && completed < total;
+  const countLabel = total === 1 ? "trial" : "trials";
+  const detail =
+    total === 0
+      ? "No trials"
+      : inProgress
+        ? `${completed} of ${total} ${countLabel} complete`
+        : `${total} ${countLabel}`;
+
+  return (
+    <button
+      type="button"
+      onClick={onOpen}
+      title={detail}
+      className={`justify-self-center ${FOCUS_RING}`}
+    >
+      <div
+        className={`inline-flex min-w-[3.5rem] flex-col items-center rounded-lg border px-2.5 py-1.5 ${JOB_TRIAL_COUNT_STYLES[status]}`}
+      >
+        <span className="font-display text-[20px] font-bold leading-none tabular-nums text-text-main">
+          {inProgress ? (
+            <>
+              {completed}
+              <span className="text-[14px] font-semibold text-text-dim">/{total}</span>
+            </>
+          ) : (
+            total
+          )}
+        </span>
+        <span className="mt-0.5 font-mono text-[9px] uppercase tracking-wide text-text-dim">
+          {countLabel}
+        </span>
+      </div>
+    </button>
+  );
+}
+
+function JobListIdentity({
+  job,
+  onOpen,
+}: {
+  job: HarborJobSummary;
+  onOpen: () => void;
+}) {
+  const appType = harborJobAppType(job);
+  const status = deriveHarborJobListStatus(job);
+  const identity = jobDisplayIdentity(job.jobName, appType);
+
+  return (
+    <button
+      type="button"
+      onClick={onOpen}
+      className={`min-w-0 text-left ${FOCUS_RING}`}
+      title={job.jobName}
+    >
+      <p className="truncate font-display text-[13px] font-semibold leading-snug text-text-main group-hover:text-primary">
+        {identity.title}
+      </p>
+      {identity.shortId && identity.shortId !== identity.title ? (
+        <p className="truncate font-mono text-[10px] tracking-wide text-text-dim">{identity.shortId}</p>
+      ) : identity.title !== job.jobName ? (
+        <p className="truncate font-mono text-[10px] tracking-wide text-text-dim">{job.jobName}</p>
+      ) : null}
+      <JobTrialProgress job={job} status={status} />
+    </button>
+  );
+}
 
 function HarborJobStatusBadge({ job }: { job: HarborJobSummary }) {
   const status = deriveHarborJobListStatus(job);
@@ -274,7 +414,7 @@ function HarborJobsList({ openHarborJob, onClose, backLabel }: HarborJobsListPro
           title="Runs"
           subtitle={
             <>
-              Harbor jobs in <span className="font-mono">jobs/</span> — launch from PersonaEval, debrief
+              Harbor jobs in <span className="font-mono">jobs/</span> — launch from Playground, debrief
               trials here.
             </>
           }
@@ -488,7 +628,7 @@ function HarborJobsTable({
         <span>Job</span>
         <span>App type</span>
         <span>Started</span>
-        <span className="text-right">Trials</span>
+        <span className="text-center">Trials</span>
         <span className="justify-self-end">Status</span>
         <span className="sr-only">Actions</span>
       </div>
@@ -498,15 +638,8 @@ function HarborJobsTable({
           const deleting = deletingJobName === job.jobName;
           return (
             <li key={job.jobName} className="group">
-              <div className={`${HARBOR_JOBS_GRID} px-4 py-3`}>
-                <button
-                  type="button"
-                  onClick={() => onOpen(job.jobName)}
-                  className={`min-w-0 truncate text-left font-mono text-[13px] text-text-main hover:text-primary ${FOCUS_RING}`}
-                  title={job.jobName}
-                >
-                  {job.jobName}
-                </button>
+              <div className={`${HARBOR_JOBS_GRID} px-4 py-3.5`}>
+                <JobListIdentity job={job} onOpen={() => onOpen(job.jobName)} />
                 <div className="min-w-0">
                   <AppTypeTag type={harborJobAppType(job)} />
                 </div>
@@ -518,13 +651,11 @@ function HarborJobsTable({
                 >
                   {formatJobTimeFull(timeIso)}
                 </button>
-                <button
-                  type="button"
-                  onClick={() => onOpen(job.jobName)}
-                  className={`text-right font-mono text-[11px] tabular-nums text-text-variant hover:text-text-main ${FOCUS_RING}`}
-                >
-                  {job.completedTrials ?? job.trialCount}/{job.trialCount}
-                </button>
+                <JobTrialCountCell
+                  job={job}
+                  status={deriveHarborJobListStatus(job)}
+                  onOpen={() => onOpen(job.jobName)}
+                />
                 <div className="min-w-0 justify-self-end">
                   <HarborJobStatusBadge job={job} />
                 </div>
@@ -558,10 +689,14 @@ function ListLoading() {
           key={i}
           className={`${HARBOR_JOBS_GRID} border-b border-outline-dim px-4 py-3.5 last:border-b-0`}
         >
-          <div className="h-3.5 animate-rb-pulse rounded bg-surface-high" />
+          <div className="space-y-1.5">
+            <div className="h-3.5 w-3/5 animate-rb-pulse rounded bg-surface-high" />
+            <div className="h-2.5 w-16 animate-rb-pulse rounded bg-surface-high" />
+            <div className="h-1 w-full animate-rb-pulse rounded-full bg-surface-high" />
+          </div>
           <div className="h-3.5 w-14 animate-rb-pulse rounded bg-surface-high" />
           <div className="h-3.5 animate-rb-pulse rounded bg-surface-high" />
-          <div className="ml-auto h-3.5 w-8 animate-rb-pulse rounded bg-surface-high" />
+          <div className="mx-auto h-10 w-12 animate-rb-pulse rounded-lg bg-surface-high" />
           <div className="ml-auto h-3.5 w-16 animate-rb-pulse rounded bg-surface-high" />
         </div>
       ))}
@@ -599,7 +734,7 @@ function ListEmpty({ onClose }: { onClose: () => void }) {
       </div>
       <h2 className="font-display text-[15px] font-semibold text-text-main">No runs yet</h2>
       <p className="mx-auto mt-2 max-w-md text-[13px] leading-relaxed text-text-variant">
-        Launch a batch from PersonaEval to run personas at scale. Results appear here under{" "}
+        Launch a batch from Playground to run personas at scale. Results appear here under{" "}
         <span className="font-mono">jobs/</span>.
       </p>
       <button
