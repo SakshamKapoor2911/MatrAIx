@@ -637,17 +637,17 @@ export interface JobAggregationField {
   textual?: JobAggregationTextual | null;
 }
 
-export interface JobAggregationRelationshipBucket {
+export interface JobAggregationCrossFacetViewBucket {
   category: string;
   count: number;
   samples: string[];
 }
 
-export interface JobAggregationRelationship {
+export interface JobAggregationCrossFacetView {
   type: string;
   primaryFacetKey?: string | null;
   textFacetKey?: string | null;
-  buckets?: JobAggregationRelationshipBucket[];
+  buckets?: JobAggregationCrossFacetViewBucket[];
 }
 
 export interface JobAggregationSummaryBucket {
@@ -738,7 +738,9 @@ export interface HarborJobAggregationContext {
   facets: JobAggregationField[];
   summaries?: JobAggregationSummary[];
   judges?: JobAggregationJudge[];
-  relationships?: JobAggregationRelationship[];
+  crossFacetViews?: JobAggregationCrossFacetView[];
+  /** @deprecated Renamed to `crossFacetViews`. Kept for older aggregation artifacts. */
+  relationships?: JobAggregationCrossFacetView[];
 }
 
 export interface HarborJobAggregation {
