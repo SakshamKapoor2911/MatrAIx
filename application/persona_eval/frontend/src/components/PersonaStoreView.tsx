@@ -13,7 +13,7 @@ export function PersonaStoreView({ selectedId, onSelect }: PersonaStoreViewProps
     <StudioMeshShell>
       <StudioPageFrame>
         <StudioPageHeader
-          eyebrow="MatrAIx · Persona Store"
+          eyebrow="MatrAIx · Persona World"
           title="Browse personas"
           subtitle="bench-dev-sample pool — search by dimension values, source, or persona id."
         />

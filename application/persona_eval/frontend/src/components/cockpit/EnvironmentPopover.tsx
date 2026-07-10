@@ -71,7 +71,7 @@ function EnvRow({ label, value }: { label: string; value: string }) {
 export function EnvironmentPanel({ environment, applicationId }: EnvironmentPanelProps) {
   const app = APP_ENVIRONMENT[applicationId];
   const promptOwnership = environment?.promptOwnership ?? {
-    personaSystemPrompt: "Persona prompt from PersonaEval",
+    personaSystemPrompt: "Persona prompt from Playground",
     taskPrompt: "Application provides the chatbot simulation prompt",
   };
 
@@ -140,10 +140,10 @@ export function EnvironmentPopover({ environment }: EnvironmentPopoverProps) {
   const runtime = environment?.runtime ?? "In-process Harbor runner";
   const runtimeRows: Array<{ label: string; value: string }> = [
     { label: "Runtime", value: runtime },
-    { label: "Persona", value: environment?.personaAgent ?? "PersonaEval simulated user" },
+    { label: "Persona", value: environment?.personaAgent ?? "Playground simulated user" },
     { label: "Persona default", value: environment?.personaModel ?? "anthropic/claude-haiku-4-5" },
     { label: "Application API", value: environment?.applicationApi ?? "direct application adapter" },
-    { label: "Scorer", value: environment?.scorer ?? "PersonaEval self-report scorer" },
+    { label: "Scorer", value: environment?.scorer ?? "Playground self-report scorer" },
     { label: "Cache", value: environment?.cache ?? "local service and model caches" },
   ];
   const stackRows: Array<{ label: string; value: string }> = [
@@ -152,7 +152,7 @@ export function EnvironmentPopover({ environment }: EnvironmentPopoverProps) {
     { label: "Agent", value: environment?.agent ?? "chatbot application adapter" },
   ];
   const promptOwnership = environment?.promptOwnership ?? {
-    personaSystemPrompt: "Persona prompt from PersonaEval",
+    personaSystemPrompt: "Persona prompt from Playground",
     taskPrompt: "Application-provided chatbot simulation prompt",
   };
   const promptRows: Array<{ label: string; value: string }> = [
