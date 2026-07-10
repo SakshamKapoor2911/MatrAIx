@@ -8,7 +8,7 @@ import urllib.error
 import urllib.request
 from typing import Any, Dict, List, Optional, Protocol
 
-from persona_eval.user_sim.tools import ToolCall, tool_definitions
+from persona_eval.user_sim.tools import ToolCall, normalize_sim_message, tool_definitions
 
 
 class ToolStepClient(Protocol):
@@ -66,7 +66,7 @@ class OpenAIToolStepClient:
             fn = tool_call.function
             calls.append(ToolCall(fn.name, _coerce_args(fn.arguments)))
         if not calls:
-            text = str(message.content or "").strip()
+            text = normalize_sim_message(str(message.content or ""))
             if text:
                 calls.append(ToolCall("send_message", {"message": text}))
         return calls
@@ -149,7 +149,9 @@ class AnthropicToolStepClient:
             elif block.get("type") == "text":
                 text_parts.append(str(block.get("text") or ""))
         if not calls and text_parts:
-            calls.append(ToolCall("send_message", {"message": "\n".join(text_parts).strip()}))
+            text = normalize_sim_message("\n".join(text_parts))
+            if text:
+                calls.append(ToolCall("send_message", {"message": text}))
         return calls
 
 

@@ -17,6 +17,20 @@ _START_OBSERVATION = (
 )
 
 
+def _format_assistant_turn(action: TurnAction) -> str:
+    """Record what the simulated user did without echoing tool-call syntax."""
+    parts: List[str] = []
+    if action.message:
+        parts.append(action.message)
+    if action.end_reason:
+        note = (action.note or "").strip()
+        if note:
+            parts.append("[Ended: {} — {}]".format(action.end_reason, note))
+        else:
+            parts.append("[Ended: {}]".format(action.end_reason))
+    return "\n".join(parts) if parts else "(no action)"
+
+
 class UserSimSession:
     """Tool-driven simulated user with real multi-turn ``messages[]`` memory."""
 
@@ -47,20 +61,14 @@ class UserSimSession:
         self._messages.append({"role": "user", "content": observation})
         calls = self._client.complete_with_tools(self._messages)
         action = parse_tool_calls(calls)
-        assistant_notes: List[str] = []
         if action.message:
             stop = extract_stop_token(action.message)
             if stop and not action.end_reason:
                 action.end_reason = stop
-            assistant_notes.append("Tool send_message: {}".format(action.message))
-        if action.end_reason:
-            assistant_notes.append(
-                "Tool end_conversation: {} ({})".format(action.end_reason, action.note or "no note")
-            )
         self._messages.append(
             {
                 "role": "assistant",
-                "content": "\n".join(assistant_notes) or "(no tool action)",
+                "content": _format_assistant_turn(action),
             }
         )
         return action

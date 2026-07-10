@@ -68,6 +68,20 @@ sentence-transformer caches with:
 - `TRANSFORMERS_CACHE`
 - `SENTENCE_TRANSFORMERS_HOME`
 
+## Local credentials
+
+PersonaEval loads secrets from `application/persona_eval/.env.local` (gitignored).
+Copy the template and fill in the keys you need:
+
+```bash
+cd application/persona_eval
+cp .env.local.example .env.local
+```
+
+`run_dev.sh` and `run_demo.sh` source this file automatically. Keys exported only
+in `~/.zshrc` are not available when the IDE or other non-interactive launchers
+start the backend — use `.env.local` for a stable setup.
+
 ## Quickstart
 
 From the repository root:

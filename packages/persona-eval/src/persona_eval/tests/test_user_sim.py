@@ -10,7 +10,7 @@ from persona_eval.types import Persona, PersonaEvalConfig, Questionnaire
 from persona_eval.user_sim.runner import run_persona_eval
 from persona_eval.user_sim.session import UserSimSession
 from persona_eval.user_sim.tool_client import FakeToolStepClient
-from persona_eval.user_sim.tools import ToolCall, parse_tool_calls
+from persona_eval.user_sim.tools import ToolCall, normalize_sim_message, parse_tool_calls
 
 
 class FakeSession:
@@ -47,6 +47,38 @@ def _persona():
         summary="Movie fan",
         context="Name: Alex\nLikes thoughtful dramas.",
     )
+
+
+def test_normalize_sim_message_strips_tool_syntax_leaks():
+    leaked = (
+        "Tool send_message: Tool send_message: I'd rather avoid intense violence."
+    )
+    assert normalize_sim_message(leaked) == "I'd rather avoid intense violence."
+    end_leak = (
+        'Tool end_conversation: The app is stuck.'
+        '<parameter name="reason">give_up</parameter>'
+        '<parameter name="note">No progress</parameter>'
+    )
+    assert normalize_sim_message(end_leak) == "The app is stuck."
+
+
+def test_parse_tool_calls_strips_leaked_prefix():
+    action = parse_tool_calls(
+        [ToolCall("send_message", {"message": "Tool send_message: Something warm"})]
+    )
+    assert action.message == "Something warm"
+
+
+def test_user_sim_session_stores_natural_assistant_memory():
+    client = FakeToolStepClient(
+        [[ToolCall("send_message", {"message": "Hi, need a movie recommendation"})]]
+    )
+    session = UserSimSession(client, _persona())
+    session.opening_action()
+    assistant_turn = session.messages[-1]
+    assert assistant_turn["role"] == "assistant"
+    assert assistant_turn["content"] == "Hi, need a movie recommendation"
+    assert "Tool send_message" not in assistant_turn["content"]
 
 
 def test_parse_tool_calls_send_and_end():

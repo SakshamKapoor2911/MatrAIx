@@ -3,8 +3,17 @@
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
+
+_TOOL_SEND_PREFIX = re.compile(r"^(?:\s*Tool\s+send_message\s*:\s*)+", re.IGNORECASE)
+_TOOL_END_PREFIX = re.compile(r"^\s*Tool\s+end_conversation\s*:\s*", re.IGNORECASE)
+_XML_PARAMETER = re.compile(
+    r"<parameter\s+name=[\"'][^\"']+[\"'][^>]*>.*?</parameter>",
+    re.IGNORECASE | re.DOTALL,
+)
+_INVOKE_BLOCK = re.compile(r"<invoke\b[^>]*>.*?</invoke>", re.IGNORECASE | re.DOTALL)
 
 END_REASONS = frozenset({"satisfied", "give_up", "out_of_scope", "transferred"})
 
@@ -92,6 +101,22 @@ def anthropic_tool_definitions() -> List[Dict[str, Any]]:
     return out
 
 
+def normalize_sim_message(message: str) -> str:
+    """Strip tool-syntax leaks models echo into ``send_message`` payloads."""
+    text = str(message or "").strip()
+    if not text:
+        return ""
+    while True:
+        stripped = _TOOL_SEND_PREFIX.sub("", text, count=1).strip()
+        if stripped == text:
+            break
+        text = stripped
+    text = _TOOL_END_PREFIX.sub("", text).strip()
+    text = _XML_PARAMETER.sub("", text).strip()
+    text = _INVOKE_BLOCK.sub("", text).strip()
+    return text
+
+
 def _parse_arguments(raw: Any) -> Dict[str, Any]:
     if isinstance(raw, dict):
         return dict(raw)
@@ -110,7 +135,7 @@ def parse_tool_calls(calls: List[ToolCall]) -> TurnAction:
     for call in calls:
         args = call.arguments
         if call.name == "send_message":
-            message = str(args.get("message") or "").strip()
+            message = normalize_sim_message(str(args.get("message") or ""))
             if message:
                 action.message = message
         elif call.name == "end_conversation":
@@ -125,7 +150,7 @@ def parse_tool_calls(calls: List[ToolCall]) -> TurnAction:
         and len(calls) == 1
         and calls[0].name == "send_message"
     ):
-        action.message = str(calls[0].arguments.get("message") or "").strip()
+        action.message = normalize_sim_message(str(calls[0].arguments.get("message") or ""))
     return action
 
 

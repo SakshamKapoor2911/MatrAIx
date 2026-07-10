@@ -15,7 +15,7 @@
  * (J/K nav) are owned by the parent; this component registers each turn's DOM
  * node so the parent can scroll to it.
  */
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 
 import { PersonaBubble, RecBotBubble } from "./TurnBubble";
 import { ChatbotChatAvatar, PersonaChatAvatar } from "./ChatBubbleAvatar";
@@ -55,6 +55,24 @@ export interface TrajectoryProps {
   onRetry: () => void;
 }
 
+function scrollTranscriptToBottom(anchor: HTMLElement | null, container: HTMLElement | null) {
+  if (container) {
+    container.scrollTop = container.scrollHeight;
+  }
+  let node: HTMLElement | null = anchor ?? container;
+  while (node) {
+    const { overflowY } = window.getComputedStyle(node);
+    if (
+      (overflowY === "auto" || overflowY === "scroll" || overflowY === "overlay") &&
+      node.scrollHeight > node.clientHeight + 1
+    ) {
+      node.scrollTop = node.scrollHeight;
+    }
+    node = node.parentElement;
+  }
+  anchor?.scrollIntoView({ block: "end", behavior: "auto" });
+}
+
 export function Trajectory({
   turns,
   draftTurn = null,
@@ -74,7 +92,10 @@ export function Trajectory({
   onRetry,
 }: TrajectoryProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const bottomRef = useRef<HTMLDivElement>(null);
   const isRunning = phase === "building" || phase === "running";
+  const followTranscript = isRunning || phase === "done";
   const failed = phase === "error" || phase === "timeout" || (!isRunning && !!error);
   const draft = draftTurn?.userMessage ? draftTurnToView(draftTurn) : null;
   const waitingForAssistant =
@@ -82,16 +103,58 @@ export function Trajectory({
   const personaThinking =
     isRunning && draftTurn?.assistantMessage && livePhase === "persona_thinking";
 
-  // Auto-scroll to the latest content as turns land / status changes.
+  const scrollToBottom = () => {
+    scrollTranscriptToBottom(bottomRef.current, scrollRef.current);
+  };
+
+  // Auto-scroll before paint when transcript content changes.
+  useLayoutEffect(() => {
+    if (!followTranscript) return;
+    scrollToBottom();
+    const raf = requestAnimationFrame(scrollToBottom);
+    return () => cancelAnimationFrame(raf);
+  }, [
+    turns.length,
+    draftTurn?.userMessage,
+    draftTurn?.assistantMessage,
+    followTranscript,
+    liveStatus,
+    livePhase,
+    phase,
+  ]);
+
+  // Keep pinned to the bottom while the run is live (thinking bubbles, folds, layout shifts).
   useEffect(() => {
     if (!isRunning) return;
-    const el = scrollRef.current;
-    if (el) el.scrollTop = el.scrollHeight;
-  }, [turns.length, draftTurn?.userMessage, draftTurn?.assistantMessage, isRunning, liveStatus, livePhase]);
+    const content = contentRef.current;
+    const resizeObserver =
+      content &&
+      new ResizeObserver(() => {
+        scrollToBottom();
+      });
+    if (content && resizeObserver) resizeObserver.observe(content);
+
+    const mutationObserver =
+      content &&
+      new MutationObserver(() => {
+        scrollToBottom();
+      });
+    if (content && mutationObserver) {
+      mutationObserver.observe(content, { childList: true, subtree: true, characterData: true });
+    }
+
+    const intervalId = window.setInterval(scrollToBottom, 250);
+
+    return () => {
+      resizeObserver?.disconnect();
+      mutationObserver?.disconnect();
+      window.clearInterval(intervalId);
+    };
+  }, [isRunning]);
 
   return (
     <div ref={scrollRef} className="custom-scrollbar flex min-h-0 flex-1 flex-col overflow-y-auto bg-surface-dim px-5 py-7 md:px-8">
-      <div className="mx-auto w-full max-w-2xl space-y-7">
+      <div ref={contentRef} className="mx-auto w-full max-w-2xl space-y-7">
         {/* Scenario banner: the real task-backed app context. */}
         {sutDescription && (
           <div className="rise-in flex items-start gap-2.5 rounded-md border border-outline bg-surface-lowest px-4 py-3">
@@ -187,6 +250,7 @@ export function Trajectory({
             </div>
           </div>
         )}
+        <div ref={bottomRef} className="h-px w-full shrink-0" aria-hidden />
       </div>
     </div>
   );
