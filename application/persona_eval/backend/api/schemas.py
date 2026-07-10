@@ -30,6 +30,8 @@ from typing import Any, Dict, List, Literal, Optional
 
 from pydantic import AliasChoices, BaseModel, ConfigDict, Field, field_validator, model_validator
 
+from backend.service.config import PERSONA_MODEL_OPTIONS
+
 __all__ = [
     "HealthResponse",
     "PreflightCheck",
@@ -89,7 +91,6 @@ DEFAULT_APPLICATION_CONTEXTS = {
     "finance_openbb": "financial_research",
     "medical_assistant": "medical_consultation",
 }
-from backend.service.config import PERSONA_MODEL_OPTIONS
 
 SUPPORTED_PERSONA_MODELS = tuple(PERSONA_MODEL_OPTIONS)
 

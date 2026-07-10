@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from backend.service.config import PERSONA_MODEL_OPTIONS
+
 
 def test_domain_allows_all_three(config_manager):
     # ALLOWED still carries every domain; validation accepts each.
@@ -47,9 +49,6 @@ def test_options_returns_enriched_knobs(config_manager):
         for option in knob["options"]:
             assert set(option.keys()) >= {"value", "label", "description"}
             assert option["label"]
-
-
-from backend.service.config import PERSONA_MODEL_OPTIONS
 
 
 def test_options_knob_values_match_allowed(config_manager):
