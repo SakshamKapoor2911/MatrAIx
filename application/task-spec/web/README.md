@@ -21,6 +21,7 @@ flowchart TB
     end
     subgraph W_OPT ["OPTIONAL"]
       direction LR
+      w_ctx["input/context.md"]
       w_self["input/self_report_schema.yaml"]
       w_rep2["reporting.json rules"]
       w_dec["decision contexts in verifier"]
@@ -53,7 +54,9 @@ plus web-specific contexts (`decision`, `decision_process`, `web_interaction`, â
 
 ## Contract
 
-- Task instruction: define the website, realistic user goal, and submission schema.
+- Task instruction: define the user goal, submission steps, and result JSON schema
+  in `instruction.md`. Put long scenario or product background in
+  `input/context.md` (same convention as survey and chatbot tasks).
 - Interaction protocol: browser or computer-use actions, ending with an explicit done action.
 - Runtime environment: a shared or dedicated browser/computer-use stack, plus a
   hosted web application sidecar when the task needs one.

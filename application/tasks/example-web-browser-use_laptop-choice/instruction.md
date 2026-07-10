@@ -1,11 +1,6 @@
 # Laptop shortlist
 
-Browse the public laptop catalog at:
-
-https://webscraper.io/test-sites/e-commerce/static/computers/laptops
-
-Compare a few options as yourself and pick the **one laptop** you would most
-realistically consider.
+Read `input/context.md` for scenario and application background.
 
 Save your choice to `/app/output/laptop_choice.json`:
 
@@ -23,7 +18,6 @@ Save your choice to `/app/output/laptop_choice.json`:
 
 Requirements:
 
-- Read the title and price from the live page; do not invent values.
 - `decision_subject_id` can be a simple slug you derive from the title if the
   page does not expose a cleaner id.
 - `basis_primary` should reflect the main decision axis behind your choice.

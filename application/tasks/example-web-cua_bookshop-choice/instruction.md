@@ -1,11 +1,6 @@
 # Bookshop choice
 
-Browse the public book catalog at:
-
-https://books.toscrape.com/
-
-Pick the **one book** you would most realistically consider for yourself after
-browsing the catalog.
+Read `input/context.md` for scenario and application background.
 
 Save your choice to `/app/output/book_interest.json`:
 
@@ -23,7 +18,6 @@ Save your choice to `/app/output/book_interest.json`:
 
 Requirements:
 
-- Use only information you actually saw on the site.
 - `decision_subject_id` can be a simple slug you derive from the book title if
   the page does not expose a cleaner id.
 - `decision_outcome` should reflect your realistic stance after browsing. For

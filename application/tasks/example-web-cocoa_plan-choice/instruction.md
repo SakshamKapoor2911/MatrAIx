@@ -1,12 +1,6 @@
 # Plan preference
 
-Browse the public pricing page at:
-
-https://www.pythonanywhere.com/pricing/
-
-Imagine you were considering a hosted place for small personal Python projects,
-experiments, or a lightweight web app. Compare the plans as yourself and pick
-the **one plan** you would most realistically consider.
+Read `input/context.md` for scenario and application background.
 
 Save your choice to `/app/output/plan_choice.json`:
 
@@ -24,7 +18,6 @@ Save your choice to `/app/output/plan_choice.json`:
 
 Requirements:
 
-- Read the plan name and price text from the live page; do not invent values.
 - `decision_subject_id` can be a simple slug you derive from the plan name if
   the page does not expose a cleaner id.
 - `basis_primary` should capture the main factor behind your choice.

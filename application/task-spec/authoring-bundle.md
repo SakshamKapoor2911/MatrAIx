@@ -39,9 +39,10 @@ Platform-managed harness artifacts (`transcript.json`,
 ### Web / OS-app
 
 ```text
-instruction.md                 # scenario + inline task-result JSON schema
+instruction.md                 # task goal, steps, inline task-result JSON schema
 reporting.json                 # batch aggregation policy (contextRules)
 input/
+  context.md                   # scenario / product background (optional)
   self_report_schema.yaml      # user_feedback.json (optional)
 ```
 
@@ -55,7 +56,7 @@ same `input/self_report_schema.yaml` convention as chatbot tasks.
 | Concern | survey | chatbot | web / os-app |
 |---|---|---|---|
 | Scenario | `instruction.md` | `instruction.md` | `instruction.md` |
-| Background context | `input/context.md` | `input/context.md` | usually in `instruction.md` |
+| Background context | `input/context.md` | `input/context.md` | `input/context.md` (optional) |
 | Task result JSON | `input/output_schema.md` | platform-managed | inline in `instruction.md` |
 | Persona self-report | — | `input/self_report_schema.yaml` | `input/self_report_schema.yaml` |
 | Batch reporting policy | `reporting.json` | `reporting.json` | `reporting.json` |

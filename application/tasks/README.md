@@ -64,8 +64,9 @@ Platform-managed chat artifacts (`transcript.json`, `application_result.json`) a
 documented in [`../task-spec/chatbot/eval_artifacts.md`](../task-spec/chatbot/eval_artifacts.md),
 not in per-task `output_schema.md`.
 
-For web and OS/app tasks, put the task-result JSON schema inline in
-`instruction.md` and optional persona self-report in
+For web and OS/app tasks, keep the task-result JSON schema inline in
+`instruction.md`, put optional scenario or product background in
+`input/context.md`, and optional persona self-report in
 `input/self_report_schema.yaml`. These tasks do not use `input/output_schema.md`.
 
 Do not create `application/tasks/<your-task-name>/environment/` for surveys.

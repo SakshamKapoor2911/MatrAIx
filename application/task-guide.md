@@ -75,12 +75,12 @@ either. Put those in the task `README.md` under **Suggested setup (non-binding)*
 
 Task-owned materials the agent reads:
 
-- **Survey:** `instruction.md` (optional if task-root copy exists), `context.md`,
-  `questionnaire.yaml`, `output_schema.md`
+- **Survey:** `context.md`, `questionnaire.yaml`, `output_schema.md`
 - **Chat:** `context.md`, `protocol.md`, `chatbot.yaml`, `self_report_schema.yaml`
   (all under `input/`)
-- **Web / OS-app:** `self_report_schema.yaml` under `input/`; task-result JSON
-  schema inline in `instruction.md` (no `input/output_schema.md`)
+- **Web / OS-app:** `context.md` (optional), `self_report_schema.yaml` under
+  `input/`; task-result JSON schema inline in `instruction.md` (no
+  `input/output_schema.md`)
 
 These files are copied or mounted into `/app/input/` by the shared runtime.
 

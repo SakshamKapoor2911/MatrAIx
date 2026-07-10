@@ -154,7 +154,7 @@ and **`reporting.json`**. Supplementary files depend on type:
 | Concern | Survey | Chatbot | Web / OS-app |
 |---|---|---|---|
 | Scenario prose | `instruction.md` | `instruction.md` | `instruction.md` |
-| Background / product context | `input/context.md` | `input/context.md` | usually inline in `instruction.md` |
+| Background / product context | `input/context.md` | `input/context.md` | `input/context.md` (optional) |
 | Structured task input | `input/questionnaire.yaml` | `input/chatbot.yaml`, optional `input/protocol.md` | — |
 | Task result JSON contract | `input/output_schema.md` | platform-managed ([chatbot/eval_artifacts.md](chatbot/eval_artifacts.md)) | inline in `instruction.md` |
 | Persona self-report | — | `input/self_report_schema.yaml` | `input/self_report_schema.yaml` (optional) |
@@ -168,6 +168,8 @@ Harbor metadata (`task.toml`, timeouts, `[environment].definition`): see
 
 - Keep **persona traits out of** `instruction.md` — the runtime injects persona
   context separately.
+- Put **scenario and product background** in `input/context.md` for every task
+  type when it helps; keep `instruction.md` focused on goals, steps, and schemas.
 - Keep **operator setup** (agent names, smoke commands) in the task's own
   `README.md`, not in `instruction.md`.
 - Reuse **`environment/task-environments/application/shared-*`** runtimes when

@@ -1,13 +1,6 @@
 # Note to CSV cleanup (Linux)
 
-You are setting up a new Linux desktop and want a quick structured copy of a
-rough shopping note.
-
-Turn this rough note into a CSV table:
-
-- oat milk | 2 | urgent
-- batteries | 4 | normal
-- trash bags | 1 | low
+Read `input/context.md` for scenario and application background.
 
 Create `/tmp/personabench-linux-note-to-csv/cleaned_list.csv` with this exact
 header:

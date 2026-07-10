@@ -20,6 +20,7 @@ flowchart TB
     end
     subgraph O_OPT ["OPTIONAL"]
       direction LR
+      o_ctx["input/context.md"]
       o_self["input/self_report_schema.yaml"]
       o_rep2["reporting.json rules"]
       o_pers["persona_alignment contexts"]
@@ -41,6 +42,8 @@ flowchart TB
 
 Outcome-based verification (final state, not action sequence). Reuse the **same shared core**
 as web ([shared-core-metrics.md](../shared-core-metrics.md)); add scenario-specific contexts on top.
+Put long scenario or product background in `input/context.md`; keep steps and the
+submission JSON schema in `instruction.md` (same convention as survey, chatbot, and web tasks).
 
 | Context | Priority |
 |---|---|

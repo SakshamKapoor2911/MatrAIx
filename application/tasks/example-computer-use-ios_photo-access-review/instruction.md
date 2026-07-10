@@ -1,6 +1,6 @@
 # Photo access review (iOS)
 
-You just set up a new iPhone and want to be careful about **photo privacy**.
+Read `input/context.md` for scenario and application background.
 
 1. Open **Settings** → **Privacy & Security** → **Photos**.
 2. Pick **one app** you would realistically use to upload or share photos.

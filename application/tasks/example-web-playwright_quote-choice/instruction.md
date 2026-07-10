@@ -1,11 +1,6 @@
 # Quote to save
 
-Browse the public quotes catalog at:
-
-https://quotes.toscrape.com/
-
-Explore at least a few quotes as yourself and pick the **one quote** you would
-most want to save, share, or come back to later.
+Read `input/context.md` for scenario and application background.
 
 Save your choice to `/app/output/quote_choice.json`:
 
@@ -23,7 +18,6 @@ Save your choice to `/app/output/quote_choice.json`:
 
 Requirements:
 
-- Read quote text and author from the live page; do not invent values.
 - `decision_subject_id` can be a simple slug you derive from the quote or
   author if the page does not expose a cleaner id.
 - `basis_primary` should capture the main reason the quote resonated with you.

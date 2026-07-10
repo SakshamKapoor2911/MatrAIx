@@ -106,7 +106,19 @@ def test_canonical_web_task_shape() -> None:
     assert raw["environment"]["definition"] == "application/shared-web-playwright"
     assert "/app/output" in raw["artifacts"]
     assert (task / "input" / "self_report_schema.yaml").is_file()
+    assert (task / "input" / "context.md").is_file()
     assert "quote_choice.json" in (task / "instruction.md").read_text(encoding="utf-8")
     dockerfile = (env / "Dockerfile").read_text(encoding="utf-8")
     assert "playwright" in dockerfile.lower()
     assert "python" in dockerfile.lower()
+
+
+def test_canonical_os_app_task_shape() -> None:
+    task = TASKS_ROOT / "example-computer-use-ios_photo-access-review"
+    raw = tomllib.loads((task / "task.toml").read_text(encoding="utf-8"))
+
+    assert raw["metadata"]["type"] == "os-app"
+    assert (task / "instruction.md").is_file()
+    assert (task / "input" / "context.md").is_file()
+    assert "input/context.md" in (task / "instruction.md").read_text(encoding="utf-8")
+    assert "decision.json" in (task / "instruction.md").read_text(encoding="utf-8")
