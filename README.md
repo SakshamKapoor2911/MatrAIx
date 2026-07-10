@@ -25,7 +25,7 @@ locally with Docker.
 
 - [Docker](https://docs.docker.com/get-docker/)
 - [uv](https://docs.astral.sh/uv/) and Python 3.12
-- Node.js 20+ (Cockpit / viewer frontends only)
+- Node.js 20+ (Playground / viewer frontends only)
 - Model API keys for persona-agent examples — [choosing-an-agent.md](application/choosing-an-agent.md)
 
 ---
@@ -56,7 +56,7 @@ uv run harbor run -c configs/jobs/example-job-recipe/harbor-smoke-local.yaml
 ```
 
 **Application tasks** — follow [QUICKSTART.md](application/QUICKSTART.md) (terminal → batch → UI).
-For interactive play, jump to [Cockpit §10](application/QUICKSTART.md#10-personaeval-cockpit--play-tasks-visually)
+For interactive play, jump to [Playground §10](application/QUICKSTART.md#10-playground--play-tasks-visually)
 (Node.js 20+).
 
 Terminal batch runs (CI, scripts) use the same Harbor jobs, e.g.:
@@ -66,7 +66,7 @@ export ANTHROPIC_API_KEY="sk-ant-..."
 uv run harbor run -c configs/jobs/example-job-recipe/appSim-example-survey-local.yaml
 ```
 
-**Inspect** — Cockpit **Runs** for cohort debrief; `uv run harbor view jobs/<job_name> --build`
+**Inspect** — Playground **Runs** for cohort debrief; `uv run harbor view jobs/<job_name> --build`
 when you need raw ATIF trajectories, agent logs, or file-level artifacts.
 
 More: [docs/running.md](docs/running.md) · [Architecture](docs/architecture.md)
@@ -83,7 +83,7 @@ team's docs — not duplicated here.
 | Team | Path | Scope | Start here |
 |------|------|-------|------------|
 | **Persona** | [`persona/`](persona/) | **Who** — data curation → dimension schema → grounding benchmarks | [docs/personas/README.md](docs/personas/README.md) |
-| **Application** | [`application/`](application/) | **What** — scenarios, tasks, metrics; play & debrief in Cockpit | [QUICKSTART.md](application/QUICKSTART.md) · [Cockpit §10](application/QUICKSTART.md#10-personaeval-cockpit--play-tasks-visually) |
+| **Application** | [`application/`](application/) | **What** — scenarios, tasks, metrics; play & debrief in Playground | [QUICKSTART.md](application/QUICKSTART.md) · [Playground §10](application/QUICKSTART.md#10-playground--play-tasks-visually) |
 | **Environment** | [`environment/`](environment/) | **How** — Harbor runtime, agents, task environments; harbor view for debug | [environment/README.md](environment/README.md) |
 
 ---
@@ -93,7 +93,7 @@ team's docs — not duplicated here.
 ```text
 MatrAIx/
 ├── persona/           curation · schema · datasets · bench tasks · reporting
-├── application/       tasks · task-spec · persona_eval (Cockpit) · QUICKSTART
+├── application/       tasks · task-spec · persona_eval (Playground) · QUICKSTART
 ├── environment/       runtime/harbor · agents · task-environments · harbor view · adapters
 ├── docs/personas/     Persona team guides (data → schema → grounding)
 ├── configs/jobs/      curated Harbor recipes
@@ -120,7 +120,7 @@ table above.
    (background, team placement, paper authorship / acknowledgements).
 2. Open **Start here** for your team (Teams table).
 3. Complete one hands-on pass in that doc. Application team: configure and run in
-   **Cockpit**; use `harbor view` when you need low-level traces.
+   **Playground**; use `harbor view` when you need low-level traces.
 4. Read **[CONTRIBUTING.md](CONTRIBUTING.md)** before opening a PR.
 
 ---

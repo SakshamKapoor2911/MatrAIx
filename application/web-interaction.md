@@ -183,7 +183,7 @@ For **macOS / iOS** screenshot CUA (system settings, not live web), use
 3. Set `network_mode = "public"` where the agent must reach the internet.
 4. Point `[environment].definition` at the matching `shared-web-*` runtime (or
    create a task-specific environment only when the stack is genuinely new).
-5. Register the task for Cockpit — [task-guide.md § Cockpit registration](task-guide.md#cockpit-registration).
+5. Register the task for Playground — [task-guide.md § Playground registration](task-guide.md#playground-registration).
 6. Add **Suggested setup (non-binding)** in `tasks/.../README.md` — do not put
    agent names in `instruction.md`.
 7. Document URL stability and login requirements in README **Known limitations**.
@@ -199,4 +199,4 @@ For **macOS / iOS** screenshot CUA (system settings, not live web), use
 
 See also [task-guide.md](task-guide.md) and [choosing-an-agent.md](choosing-an-agent.md).
 
-Play tasks in the PersonaEval Cockpit: [QUICKSTART.md §10](QUICKSTART.md#10-personaeval-cockpit--play-tasks-visually).
+Play tasks in the Playground: [QUICKSTART.md §10](QUICKSTART.md#10-playground--play-tasks-visually).

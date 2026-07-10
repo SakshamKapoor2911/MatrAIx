@@ -1,4 +1,4 @@
-"""Probe and start local chatbot HTTP sidecars for PersonaEval cockpit."""
+"""Probe and start local chatbot HTTP sidecars for Playground."""
 
 from __future__ import annotations
 

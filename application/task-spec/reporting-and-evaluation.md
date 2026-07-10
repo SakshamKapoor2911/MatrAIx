@@ -1,6 +1,6 @@
 # Reporting and evaluation
 
-Batch reporting turns many persona trials into one job-level summary (Cockpit
+Batch reporting turns many persona trials into one job-level summary (Playground
 **Runs**, job `aggregation.json`). See [README.md](README.md) **Step 4** for the
 onboarding summary; this document is the full reference.
 
@@ -101,7 +101,7 @@ Implementation: `application/persona_eval/backend/service/job_aggregation.py`
 
 When it runs:
 
-- after trials finish and the job view is built in PersonaEval
+- after trials finish and the job view is built in Playground
 - when a reporting refresh is triggered for a completed job
 - when you run `application/scripts/report_job.py` manually
 

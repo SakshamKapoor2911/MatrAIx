@@ -68,7 +68,7 @@ where to write it (`/app/output/...`).
 
 Persona traits do **not** go here — they come from `persona_path` at run time.
 
-Agent names, Cockpit labels, and operator setup hints do **not** belong here
+Agent names, Playground labels, and operator setup hints do **not** belong here
 either. Put those in the task `README.md` under **Suggested setup (non-binding)**.
 
 ### `input/`
@@ -155,9 +155,9 @@ Web stack details — [web-interaction.md](web-interaction.md).
 Real application survey tasks (`survey_*`) follow the same layout as the reference
 example; only **`example-survey_product-feedback`** is the copy-from reference.
 
-## Cockpit registration
+## Playground registration
 
-Tasks appear in the PersonaEval Cockpit only when indexed. After scaffolding,
+Tasks appear in the Playground only when indexed. After scaffolding,
 add an entry to:
 
 `application/persona_eval/backend/service/persona_eval_task_registry.py`
@@ -188,7 +188,7 @@ Restart the PersonaEval backend after registry changes.
 | Config path | Use |
 |-------------|-----|
 | [`configs/jobs/example-job-recipe/`](../configs/jobs/example-job-recipe/) | Hand-written smoke jobs (`appSim-*`, 1 persona) |
-| [`configs/jobs/application-task-job-recipe/`](../configs/jobs/application-task-job-recipe/) | Multi-persona runs from `generate_application_job.py` or Cockpit |
+| [`configs/jobs/application-task-job-recipe/`](../configs/jobs/application-task-job-recipe/) | Multi-persona runs from `generate_application_job.py` or Playground |
 
 **Smoke** (checked-in YAML):
 
@@ -209,7 +209,7 @@ Full list: [`configs/jobs/README.md`](../configs/jobs/README.md).
 
 ## Related
 
-- [QUICKSTART.md](QUICKSTART.md) — install through Cockpit play
+- [QUICKSTART.md](QUICKSTART.md) — install through Playground play
 - [web-interaction.md](web-interaction.md) — live-web modes
 - [choosing-an-agent.md](choosing-an-agent.md) — agents and API keys
 - [task-spec/](task-spec/) — shared metric and artifact contracts

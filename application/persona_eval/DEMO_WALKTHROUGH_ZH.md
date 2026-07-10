@@ -1,4 +1,4 @@
-# MatrAIx Cockpit — 演示顺序手册（中文）
+# MatrAIx Playground — 演示顺序手册（中文）
 
 **用途：** 路演 · 内部分享 · 新人 tutorial · 同事上手  
 **建议时长：** 22–28 分钟（含 batch 等待时间）  
@@ -23,13 +23,13 @@
 
 ```
 Home（开场 + 使命）
-  → Persona Eval Cockpit（主战场）
+  → Playground（主战场）
       → Survey：Quick run → Batch run → View job → Trial 下钻
       → Chatbot：Quick run → Filtered batch → View job → Trial 下钻
       → Web（Cocoa）：Quick run → Step 回放
       → OS app：平台介绍 + 鼓励上手（不等待完整 run）
   → Runs（实验归档）
-  → Persona Store（Persona 库浏览）
+  → Persona World（Persona 库浏览）
   → Home（收尾 + Slogan）
 ```
 
@@ -39,27 +39,27 @@ Home（开场 + 使命）
 
 ### 操作
 
-1. 打开 Cockpit，停留在 **Home**
-2. 指顶部导航：**Home · Persona Eval · Runs · Persona Store**
+1. 打开 Playground，停留在 **Home**
+2. 指顶部导航：**Home · Playground · Runs · Persona World**
 3. 指 hero 区：`8.3B` personas、`Planetary-scale digital humans`
-4. 点击 **PersonaEval cockpit** 进入
+4. 点击 **Playground** 进入
 
 ### 讲解要点
 
 - 大多数团队是在产品上线**之后**才了解用户行为；MatrAIx 问的是：**能否在真实用户接触产品之前，就用结构化行为证据完成评测？**
 - 三个栏目分工：
-  - **Persona Eval** = 开发 cockpit，配置并发起仿真
+  - **Playground** = 开发试验场，配置并发起仿真
   - **Runs** = 实验结果、cohort 报告、per-persona 证据归档
-  - **Persona Store** = 浏览 persona 库、设计 study cohort
+  - **Persona World** = 浏览 persona 库、设计 study cohort
 - 今天走完整条 evaluation 链路，从单次 smoke test 到分布式 cohort batch
 
 ---
 
-## 第二幕：Persona Eval 总览（~1 min）
+## 第二幕：Playground 总览（~1 min）
 
 ### 操作
 
-1. 进入 cockpit，指右上角 **Application type** 四个 tab
+1. 进入 Playground，指右上角 **Application type** 四个 tab
 
 ### 讲解要点
 
@@ -128,7 +128,7 @@ Home（开场 + 使命）
 1. 在 **Runs → Job detail** 页，指 cohort 级 aggregation 指标（挑 2–3 个讲）
 2. 往下滚到 trial 列表
 3. 点开 **某一个 trial**，看该 persona 的 submission / trajectory / verifier / 单项分数
-4. 返回 cockpit（Back to cockpit 或顶栏 Persona Eval）
+4. 返回 Playground（顶栏 Playground）
 
 ### 讲解要点
 
@@ -214,7 +214,7 @@ Home（开场 + 使命）
   - **macOS** — 原生 macOS 应用 computer-use 仿真
   - **iOS** — 移动端设置、权限、in-app 流程
 - 每个 task 定义真实原生场景（如通知偏好设置、系统设置导航）— persona 不是填表或聊天，而是像真实用户一样操作 UI
-- Cockpit 工作流完全一致：采样 → 配置并行 → 启动；但 OS app run **更重** — 可能需要平台专属 runtime、更长 timeout
+- Playground 工作流完全一致：采样 → 配置并行 → 启动；但 OS app run **更重** — 可能需要平台专属 runtime、更长 timeout
 - **Demo 中不等待完整 run 结束。** 单次 trial 可能数分钟，这种深度正是 native app 评测的价值所在 — 也是过早 ship 代价最高的地方
 - **鼓励观众会后自己跑一个：** 选一个平台、指定 persona、看 digital human 如何在真实应用环境中导航 — 这是最好的 firsthand 体验
 
@@ -241,11 +241,11 @@ Home（开场 + 使命）
 
 ---
 
-## 第十一幕：Persona Store（~2 min）
+## 第十一幕：Persona World（~2 min）
 
 ### 操作
 
-1. 顶栏点 **Persona Store**
+1. 顶栏点 **Persona World**
 2. 简述 persona 来源：Nemotron / OASIS / PRIMEX / PersonaHub 及合成 persona
 3. 演示 **搜索** 或 **filter** 某一类属性 cohort
 4. 展示筛选后的 persona grid
@@ -254,7 +254,7 @@ Home（开场 + 使命）
 ### 讲解要点
 
 - Store 既是探索库，也是 cohort 设计入口
-- Filter 与 Persona Eval 采样 filter 同一套逻辑
+- Filter 与 Playground 采样 filter 同一套逻辑
 - Persona 质量是一切下游行为可信度的基础
 
 ---
@@ -270,7 +270,7 @@ Home（开场 + 使命）
 
 **中文：**
 
-> 今天我们走了 MatrAIx 的完整 loop：在 Persona Eval 配置四种应用类型的仿真，从单次 smoke test 到分布式 cohort batch；在 Runs 读 cohort 报告和 per-persona 证据；在 Persona Store 设计 study population。
+> 今天我们走了 MatrAIx 的完整 loop：在 Playground 配置四种应用类型的仿真，从单次 smoke test 到分布式 cohort batch；在 Runs 读 cohort 报告和 per-persona 证据；在 Persona World 设计 study population。
 >
 > 研究价值很直接：**用结构化行为证据替代猜测** — 在真实用户接触产品之前。
 >
@@ -316,7 +316,7 @@ Home（开场 + 使命）
 | 幕 | 内容 | 建议时长 |
 |----|------|----------|
 | 1 | Home 开场 | 2 min |
-| 2 | Persona Eval 总览 | 1 min |
+| 2 | Playground 总览 | 1 min |
 | 3 | Survey quick | 4 min |
 | 4 | Survey batch（含等待） | 5 min |
 | 5 | Survey job + trial | 3 min |
@@ -325,6 +325,6 @@ Home（开场 + 使命）
 | 8 | Web Cocoa | 3 min |
 | 9 | **OS app playground** | **2 min** |
 | 10 | Runs | 2 min |
-| 11 | Persona Store | 2 min |
+| 11 | Persona World | 2 min |
 | 12 | Home 收尾 | 1 min |
 | | **合计** | **~32 min**（含等待；压缩 batch 可压到 ~22 min） |

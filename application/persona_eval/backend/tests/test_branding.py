@@ -1,4 +1,4 @@
-"""Public naming contract for PersonaEval."""
+"""Public naming contract for the Playground UI and PersonaEval API."""
 
 from __future__ import annotations
 
@@ -10,14 +10,15 @@ FORMER_BRAND = "RecBot" + " Studio"
 
 
 def test_public_product_name_is_persona_eval(client):
-    """The public app/API brand should be PersonaEval."""
+    """The public API brand should remain PersonaEval."""
     assert client.app.title == "PersonaEval API"
 
 
-def test_frontend_header_uses_persona_eval_brand():
+def test_frontend_header_uses_playground_nav():
     top_bar = (APP_ROOT / "frontend/src/components/TopBar.tsx").read_text()
 
-    assert "Persona Eval" in top_bar
+    assert "Playground" in top_bar
+    assert "Persona World" in top_bar
     assert FORMER_BRAND not in top_bar
 
 
@@ -29,10 +30,10 @@ def test_public_docs_do_not_use_old_studio_name():
         APP_ROOT / "backend/run_dev.sh",
         APP_ROOT / "backend/run_real.sh",
         APP_ROOT / "frontend/index.html",
-            APP_ROOT / "frontend/package.json",
-            APP_ROOT / "frontend/src/App.tsx",
-            APP_ROOT / "frontend/src/components/ErrorBoundary.tsx",
-        ]
+        APP_ROOT / "frontend/package.json",
+        APP_ROOT / "frontend/src/App.tsx",
+        APP_ROOT / "frontend/src/components/ErrorBoundary.tsx",
+    ]
 
     for path in public_files:
         assert FORMER_BRAND not in path.read_text(), str(path.relative_to(APP_ROOT))

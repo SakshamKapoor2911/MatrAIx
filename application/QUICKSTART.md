@@ -1,7 +1,7 @@
 # Application team — getting started
 
 A step-by-step path from zero to your first multi-persona survey run, then into
-the **PersonaEval Cockpit** for interactive task play. No prior Harbor experience
+the **Playground** for interactive task play. No prior Harbor experience
 required.
 
 **What you are doing:** loading a synthetic user profile (persona), putting that
@@ -18,7 +18,7 @@ user in a product scenario (survey, chat, web, …), and inspecting what they
 |-------------|-----|
 | **[Docker](https://docs.docker.com/get-docker/)** | Web, CUA, and some smoke recipes use containers |
 | **uv** | Python + `harbor` CLI — [install in step 2](#2-install-uv-clone-and-sync) |
-| **Node.js 20+** | PersonaEval Cockpit frontend (optional but recommended) |
+| **Node.js 20+** | Playground frontend (optional but recommended) |
 | **Anthropic API key** | Persona agents (step 6+). [Create one](https://console.anthropic.com/) if needed |
 | **OpenAI API key** | Some chat tasks and alternate LLM backends |
 
@@ -137,8 +137,8 @@ person.
 `generate_application_job.py` **samples N personas** (with a **seed** for
 reproducibility), writes a **job YAML**, then Harbor runs all trials.
 
-**Terminal vs Cockpit:** Steps 6–9 use the terminal (good for CI and smoke).
-[Section 10](#10-personaeval-cockpit-play-tasks-visually) uses the Cockpit UI —
+**Terminal vs Playground:** Steps 6–9 use the terminal (good for CI and smoke).
+[Section 10](#10-playground--play-tasks-visually) uses the Playground UI —
 same Harbor contracts, better for exploring trajectories and iterating on new tasks.
 
 ---
@@ -248,7 +248,7 @@ uv run python application/scripts/generate_application_job.py \
 | `--persona-ids` | (none) | Explicit IDs instead of random sampling |
 | `--seed` | `42` | Random seed — same seed + pool → same persona IDs |
 | `--dataset` | `bench-dev-sample` | Persona pool to sample from |
-| `--execution-mode` | `auto` | Same as PersonaEval Cockpit; use `force_docker` to always run in Docker |
+| `--execution-mode` | `auto` | Same as Playground; use `force_docker` to always run in Docker |
 | `--stratify` | (none) | Balance across a field, e.g. `dimensions.age_bracket` |
 | `--name` | (derived) | Job basename |
 
@@ -311,9 +311,9 @@ Job recipe layout: [../configs/jobs/README.md](../configs/jobs/README.md).
 
 ---
 
-## 10. PersonaEval Cockpit — play tasks visually
+## 10. Playground — play tasks visually
 
-After smoke passes, use the **Cockpit** to pick tasks, sample personas, launch
+After smoke passes, use the **Playground** to pick tasks, sample personas, launch
 Harbor jobs, and inspect trajectories live — without hand-writing job YAML each
 time.
 
@@ -347,9 +347,9 @@ cd ../../.. && application/persona_eval/run_demo.sh
 More detail: [persona_eval/README.md](persona_eval/README.md),
 [persona_eval/REST_API.md](persona_eval/REST_API.md).
 
-### In the Cockpit
+### In the Playground
 
-1. Open the **PersonaEval** tab.
+1. Open the **Playground** tab.
 2. Switch task kind: **Survey** · **Chat** · **Web** · **OS app**.
 3. Pick a task card; read instruction/context in the right panel.
 4. Sample personas — **Quick pick** (`0042` is the default smoke id), **Random**,
@@ -365,13 +365,13 @@ More detail: [persona_eval/README.md](persona_eval/README.md),
 | Web | Docker image build on first run; pick the web agent driver that matches the task stack |
 | OS app | Docker or use.computer depending on platform |
 
-Cockpit launches the same Harbor jobs as `generate_application_job.py --execution-mode auto`.
+Playground launches the same Harbor jobs as `generate_application_job.py --execution-mode auto`.
 Chat env exports (`MATRIX_CHATBOT_*`) are applied automatically from the UI.
 
-### Register a new task for Cockpit
+### Register a new task for Playground
 
 New tasks must be indexed before they appear in the task picker. See
-[task-guide.md § Cockpit registration](task-guide.md#cockpit-registration).
+[task-guide.md § Playground registration](task-guide.md#playground-registration).
 
 ---
 
@@ -389,7 +389,7 @@ and **different persona agents** (e.g. web uses Playwright or browser-use, not
 `persona-claude-code` alone).
 
 Browse the example table in [task-guide.md § Reference scenarios](task-guide.md#reference-scenarios),
-run any example with the suggested agent, then inspect with Cockpit or
+run any example with the suggested agent, then inspect with Playground or
 `harbor view`.
 
 Web stack choice: [web-interaction.md](web-interaction.md).
@@ -439,7 +439,7 @@ uv run python application/scripts/generate_application_job.py \
 
 Use the agent from [choosing-an-agent.md](choosing-an-agent.md) for your form.
 
-### 6. Iterate in Cockpit
+### 6. Iterate in Playground
 
 Register the task ([task-guide.md](task-guide.md)), restart the backend, then
 play with Quick pick personas before scaling sample size.
@@ -450,7 +450,7 @@ Same as [step 7](#7-batch--sample-many-personas-job) with your task path.
 
 ### 8. View outputs
 
-Cockpit **Runs** tab, or:
+Playground **Runs** tab, or:
 
 ```bash
 uv run harbor view jobs/<job_name> --build
@@ -464,12 +464,12 @@ Full task checklist: [tasks/README.md](tasks/README.md).
 
 | Goal | Tool | Output |
 |------|------|--------|
-| Explore / debug visually | PersonaEval Cockpit (Mode **auto**) | `jobs/` |
+| Explore / debug visually | Playground (Mode **auto**) | `jobs/` |
 | Survey / chat (terminal) | `generate_application_job.py --execution-mode auto` | `jobs/<job_name>/` |
 | Validate Docker/Harbor only | `harbor-smoke-local.yaml` | smoke task image |
 | Batch / CI | `generate_application_job.py` + `harbor run` | job YAML + `jobs/` |
-| Browse trajectories | `harbor view` or Cockpit **Runs** | local viewer |
-| New scenario | copy `example-*` + register for Cockpit | `application/tasks/<name>/` |
+| Browse trajectories | `harbor view` or Playground **Runs** | local viewer |
+| New scenario | copy `example-*` + register for Playground | `application/tasks/<name>/` |
 
 ---
 

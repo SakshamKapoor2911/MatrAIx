@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 import { FOCUS_RING, Sym } from "../cockpit/cockpitShared";
 
-/** Cockpit-style mesh background wrapper for Home, Runs, Persona Store, etc. */
+/** Cockpit-style mesh background wrapper for Home, Runs, Persona World, etc. */
 export function StudioMeshShell({ children }: { children: ReactNode }) {
   return (
     <div className="cockpit-mesh-bg flex min-h-0 flex-1 flex-col overflow-hidden">{children}</div>

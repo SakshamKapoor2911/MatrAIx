@@ -1,4 +1,4 @@
-# PRODUCT.md — PersonaEval Workbench
+# PRODUCT.md — Playground Workbench
 
 register: product
 
@@ -10,7 +10,7 @@ Researchers / engineers iterating on an application under test. They are in a fo
 
 ## Surfaces & primary flows
 - **Chat** — manual operator conversation: a human plays the user against the app (3-pane: session rail · conversation · turn inspector).
-- **PersonaEval cockpit** — the core: pick **Application type** (Chatbot / Survey / Web); for Chatbot pick an **application** (RecAI / OpenBB / Medical); choose a **persona** + run knobs; **Run eval** → watch the live trajectory + pipeline, then read the scorecard. Setup-form → live-run flow.
+- **Playground** — the core: pick **Application type** (Chatbot / Survey / Web); for Chatbot pick an **application** (RecAI / OpenBB / Medical); choose a **persona** + run knobs; **Run eval** → watch the live trajectory + pipeline, then read the scorecard. Setup-form → live-run flow.
 - **Runs** — history list, per-run debrief (option-aware), side-by-side compare.
 - **Catalog** — browse/search 336 personas (sources: Nemotron / OASIS / PRIMEX / PersonaHub) + a persona detail drawer; reachable via ⌘K.
 
@@ -19,4 +19,4 @@ Researchers / engineers iterating on an application under test. They are in a fo
 - **Dark default + light** (persisted `<html>.light` toggle). **Friendly, tutorial-first copy** for first-time users; restrained/professional tone — no fake telemetry, no roleplay.
 
 ## Design system
-PersonaEval — see [DESIGN.md](./DESIGN.md). The design system is implemented in the frontend tokens, Tailwind config, and shared cockpit components.
+MatrAIx / Playground — see [DESIGN.md](./DESIGN.md). The design system is implemented in the frontend tokens, Tailwind config, and shared cockpit components.

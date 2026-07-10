@@ -1,7 +1,7 @@
 # Choosing a Persona Agent and Model
 
 Every run specifies the agent, model, persona, and task on the command line (or
-via PersonaEval Cockpit / `generate_application_job.py`, which pin the same
+via Playground / `generate_application_job.py`, which pin the same
 fields in the job YAML).
 
 ## Parameters
@@ -33,7 +33,7 @@ Web/CUA agents (`persona-browser-use`, `persona-computer-1`, …) and auto agent
 (`persona-json-survey`, `persona-user-sim`) all honor the YAML `model_name`.
 CLI wrapper agents (`persona-claude-code`, …) pass `-m` through to the same field.
 
-Supported persona models in Cockpit include Anthropic (`anthropic/claude-*`),
+Supported persona models in Playground include Anthropic (`anthropic/claude-*`),
 OpenAI (`openai/gpt-4o*`), and DashScope OpenAI-compatible models
 (`dashscope/qwen3.6-plus-2026-04-02`, `dashscope/qwen3.7-max`,
 `dashscope/deepseek-v4-pro`, …). Set `DASHSCOPE_API_KEY` (and optional
@@ -63,7 +63,7 @@ set.
 
 Live-web details: [web-interaction.md](web-interaction.md).
 
-The PersonaEval Cockpit selects the web agent driver per task in the UI — that
+The Playground selects the web agent driver per task in the UI — that
 metadata is for operators, not for `instruction.md`.
 
 ### Web modes at a glance
@@ -136,7 +136,7 @@ uv run harbor run \
   -p application/tasks/example-web-browser-use_laptop-choice
 ```
 
-Auto mode (matches PersonaEval Cockpit; `persona-json-survey` / `persona-user-sim`):
+Auto mode (matches Playground; `persona-json-survey` / `persona-user-sim`):
 
 ```bash
 uv run python application/scripts/generate_application_job.py \
@@ -158,7 +158,7 @@ Batch runs: [QUICKSTART.md §7](QUICKSTART.md#7-batch--sample-many-personas-job)
 Add **Suggested setup (non-binding)** in `application/tasks/.../README.md`; do
 not hard-require an agent in `task.toml` or `instruction.md`.
 
-The Cockpit web agent selector and this doc are for **operators**. The simulated
+The Playground web agent selector and this doc are for **operators**. The simulated
 user prompt in `instruction.md` should never mention which Harbor agent runs the
 task.
 

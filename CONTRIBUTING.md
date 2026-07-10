@@ -34,7 +34,7 @@ Questions: [Discord](https://discord.gg/vruP88PTZ) ·
 |------|------------|------------|
 | **Persona** | `persona/` | [docs/personas/README.md](docs/personas/README.md) |
 | **Application** | `application/` | [application/README.md](application/README.md) · [QUICKSTART.md](application/QUICKSTART.md) |
-| **Environment** | `environment/`, `configs/jobs/`, Cockpit, harbor view | [environment/README.md](environment/README.md) |
+| **Environment** | `environment/`, `configs/jobs/`, Playground, harbor view | [environment/README.md](environment/README.md) |
 
 Running simulations: [choosing-an-agent.md](application/choosing-an-agent.md).
 
@@ -59,7 +59,7 @@ Running simulations: [choosing-an-agent.md](application/choosing-an-agent.md).
 | | Persona bench task curation | Task count & quality |
 | **Environment** | Runtime infrastructure, agents, execution planes | Effort |
 | | Persona / application task pipelines | Task count & quality |
-| | Cockpit, harbor view, run inspection | Effort |
+| | Playground, harbor view, run inspection | Effort |
 | **Application** | Application task development (scenarios, metrics, verifiers) | Task count & quality |
 | | Research or demo development | Effort |
 
@@ -71,7 +71,7 @@ Running simulations: [choosing-an-agent.md](application/choosing-an-agent.md).
 | --- | --- | --- |
 | `persona/` | Persona schema, attributes, curated datasets, curation scripts, adherence tasks | Runtime drivers, product scenarios, checked-in job outputs |
 | `application/` | Survey/chat/web/os-app scenarios, metrics, tasks, task specs | Persona source datasets, runtime engines |
-| `environment/` | Harbor runtime, persona agents, job recipes, Cockpit, harbor view, execution backends | Persona schema decisions, application-specific research claims |
+| `environment/` | Harbor runtime, persona agents, job recipes, Playground, harbor view, execution backends | Persona schema decisions, application-specific research claims |
 | `packages/` | Reusable libraries used by multiple modules | One-off scripts or generated outputs |
 
 ## PR expectations

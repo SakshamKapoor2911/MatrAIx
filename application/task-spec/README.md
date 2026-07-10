@@ -246,7 +246,7 @@ End-to-end flow, Layer 1 internals, Layer 2 directives, and template index:
 1. **Smoke one persona** — [`../QUICKSTART.md`](../QUICKSTART.md)
 2. **Launch a batch job** — [`../tasks/README.md`](../tasks/README.md),
    [`../scripts/README.md`](../scripts/README.md)
-3. **Review aggregation** — PersonaEval **Runs** UI or `report_job.py`
+3. **Review aggregation** — Playground **Runs** UI or `report_job.py`
 
 Iterate on `instruction.md` / verifier until smoke passes, then scale personas.
 

@@ -1,7 +1,7 @@
 /**
- * MatrAIx / PersonaEval application shell.
+ * MatrAIx application shell.
  *
- * Routes: Home · PersonaEval cockpit · Runs · Persona Store.
+ * Routes: Home · Playground · Runs · Persona World.
  */
 import { useCallback, useState } from "react";
 import { useQuery } from "@tanstack/react-query";

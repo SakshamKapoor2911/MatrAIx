@@ -41,7 +41,7 @@ __all__ = ["ChatTurn", "RecBotSession", "SessionManager"]
 _AGENT_ERROR_PREFIX = "Something went wrong, please retry."
 _TURN_ATTEMPTS = 2
 # Chat applications that route to an HTTP sidecar (the same finance/medical
-# adapters the PersonaEval cockpit uses) instead of the in-process RecAI engine.
+# adapters the Playground uses) instead of the in-process RecAI engine.
 _SIDECAR_APPLICATION_IDS = ("finance_openbb", "medical_assistant")
 _SIDECAR_APPLICATION_CONTEXT = {
     "finance_openbb": "financial_research",
@@ -366,7 +366,7 @@ class RecBotSession:
     def _run_sidecar_turn(self, application_id: str, user_message: str) -> Dict[str, Any]:
         """Run one turn against a finance/medical HTTP chatbot sidecar.
 
-        Routes to the same adapter the PersonaEval cockpit uses. A sidecar that
+        Routes to the same adapter the Playground uses. A sidecar that
         is offline raises a clear 503 (surfaced as the turn error) rather than
         silently falling back to RecAI. The sidecar response is adapted into the
         same ``TurnView`` shape the chat UI and persistence expect.

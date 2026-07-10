@@ -1,6 +1,6 @@
 # PersonaEval Runtime Runbook
 
-PersonaEval launches evaluations through **Harbor batch jobs**. The Cockpit and
+PersonaEval launches evaluations through **Harbor batch jobs**. The Playground and
 `POST /api/harbor/jobs` always use the same artifact layout under `jobs/`.
 
 ## Execution planes

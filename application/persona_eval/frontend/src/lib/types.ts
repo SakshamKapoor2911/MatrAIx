@@ -854,7 +854,7 @@ export interface TaskDetail {
   profileMarkdown?: string;
 }
 
-/** Unified persona pool for all PersonaEval cockpit sampling. */
+/** Unified persona pool for all Playground sampling. */
 export const PERSONA_BENCH_POOL = "persona/datasets/bench-dev-sample";
 
 export interface PersonaCohortSummary {

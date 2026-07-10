@@ -13,7 +13,7 @@ you are in the right place.
 | You want to… | Go to |
 |--------------|-------|
 | Run your first persona survey (terminal) | **[QUICKSTART.md](QUICKSTART.md)** |
-| Play tasks in the UI | QUICKSTART **[§10 — PersonaEval Cockpit](QUICKSTART.md#10-personaeval-cockpit--play-tasks-visually)** |
+| Play tasks in the UI | QUICKSTART **[§10 — Playground](QUICKSTART.md#10-playground--play-tasks-visually)** |
 | Add a new task | [tasks/README.md](tasks/README.md) + [task-guide.md](task-guide.md) |
 | Pick agent + API keys | [choosing-an-agent.md](choosing-an-agent.md) |
 | Understand how runs execute | [environment/README.md](../environment/README.md) |
@@ -40,7 +40,7 @@ Persona profiles live in `persona/datasets/`. Tasks reference them via
 application/
   tasks/              Executable scenarios (survey, chat, web, os-app)
   task-spec/          Shared contracts per interaction type
-  persona_eval/       Cockpit UI, FastAPI backend, remote runner client
+  persona_eval/       Playground UI, FastAPI backend, remote runner client
   scripts/            generate_application_job.py, report_job.py
   QUICKSTART.md       Contributor walkthrough (terminal → batch → UI)
   task-guide.md       Folder layout and reference tasks
@@ -110,7 +110,7 @@ Reporting is task-owned, not a separate app folder:
 |-------|----------|
 | Policy | `application/tasks/<name>/reporting.json` |
 | Rollup script | `application/scripts/report_job.py` → `jobs/<job>/aggregation.json` |
-| Cockpit / API | optional LLM judges when `PERSONAEVAL_REPORTING_ENABLE_LLM=1` |
+| Playground / API | optional LLM judges when `PERSONAEVAL_REPORTING_ENABLE_LLM=1` |
 
 ---
 
@@ -118,7 +118,7 @@ Reporting is task-owned, not a separate app folder:
 
 | Doc | Purpose |
 |-----|---------|
-| [QUICKSTART.md](QUICKSTART.md) | Zero → first run → batch → Cockpit → new task |
+| [QUICKSTART.md](QUICKSTART.md) | Zero → first run → batch → Playground → new task |
 | [task-guide.md](task-guide.md) | Task folder structure |
 | [task-spec/README.md](task-spec/README.md) | Hub — links to per-type specs and shared reporting docs |
 | [web-interaction.md](web-interaction.md) | Playwright vs browser-use vs Cocoa vs CUA |

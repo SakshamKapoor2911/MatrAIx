@@ -1,4 +1,4 @@
-# MatrAIx Cockpit — Video Demo Script (English)
+# MatrAIx Playground — Video Demo Script (English)
 
 **Audience:** Investors, research partners, YC-style demos, external stakeholders  
 **Estimated runtime:** ~20–24 min (full tutorial) · ~9 min (pitch cut)  
@@ -22,21 +22,21 @@
 >
 > The application organizes around three surfaces:
 >
-> - **Persona Eval** — the developer cockpit where you configure and launch simulations
+> - **Playground** — the developer surface where you configure and launch simulations
 > - **Runs** — where cohort results, aggregation reports, and per-persona evidence live
-> - **Persona Store** — where you browse and design persona cohorts from a curated library
+> - **Persona World** — where you browse and design persona cohorts from a curated library
 >
-> **[CLICK: "PersonaEval cockpit" CTA]**
+> **[CLICK: "Playground" CTA]**
 
 > Let's walk the full loop — from a single smoke test to a distributed cohort evaluation — starting where the work actually happens.
 
 ---
 
-## ACT I — Persona Eval Overview (1:45–2:45)
+## ACT I — Playground Overview (1:45–2:45)
 
-**[VISUAL: Cockpit setup — "Configure a simulation"]**
+**[VISUAL: Playground setup — "Configure a simulation"]**
 
-> This is the **Persona Eval cockpit** — a focused developer surface, not a dashboard decoration. Researchers and engineers come here to answer one question: *How does this product perform when realistic users interact with it?*
+> This is the **Playground** — a focused developer surface, not a dashboard decoration. Researchers and engineers come here to answer one question: *How does this product perform when realistic users interact with it?*
 >
 > Four **application types** share one evaluation philosophy:
 >
@@ -107,7 +107,7 @@
 >
 > **[VISUAL: Briefly open Persona filter modal — age, source, occupation, dimensions]**
 >
-> Filters let you define a study cohort with intent: price-sensitive shoppers, older adults, synthetic versus curated sources. The same filter vocabulary appears in Persona Store and in batch sampling — one cohort definition, reusable everywhere.
+> Filters let you define a study cohort with intent: price-sensitive shoppers, older adults, synthetic versus curated sources. The same filter vocabulary appears in Persona World and in batch sampling — one cohort definition, reusable everywhere.
 >
 > Close the modal. Run unfiltered for this demo.
 >
@@ -291,11 +291,11 @@
 
 ---
 
-## ACT X — Persona Store (22:15–23:15)
+## ACT X — Persona World (22:15–23:15)
 
-**[VISUAL: Top nav → Persona Store]**
+**[VISUAL: Top nav → Persona World]**
 
-> **Persona Store** is the library that powers every simulation.
+> **Persona World** is the library that powers every simulation.
 >
 > Our bench pools personas from multiple curated sources — Nemotron, OASIS, PRIMEX, PersonaHub — alongside synthetic personas, each with rich dimensional attributes.
 >
@@ -305,7 +305,7 @@
 >
 > **[VISUAL: Apply a specific attribute filter → filtered grid]**
 >
-> For example: personas from a given source, within an age band, with a particular occupation. The store is both exploration and cohort design — the same filters feed directly into Persona Eval sampling.
+> For example: personas from a given source, within an age band, with a particular occupation. The store is both exploration and cohort design — the same filters feed directly into Playground sampling.
 >
 > Persona quality is the foundation. Everything downstream — survey answers, chat tone, browsing patterns, app navigation — is only as credible as the identities you start with.
 
@@ -317,10 +317,10 @@
 
 > We walked the full MatrAIx loop:
 >
-> - Configure simulations across four application types in **Persona Eval**
+> - Configure simulations across four application types in **Playground**
 > - Scale from one persona to distributed cohorts with parallel execution
 > - Read cohort insights and per-persona evidence in **Runs**
-> - Design study populations in the **Persona Store**
+> - Design study populations in the **Persona World**
 >
 > The research promise is straightforward: **replace guesswork with structured behavioral evidence** — before real users encounter your product.
 >
@@ -341,7 +341,7 @@
 | Segment | Duration | Keep / Cut |
 |---------|----------|------------|
 | Home + mission framing | 1:30 | **Keep** — problem + ambition |
-| Persona Eval overview (4 types) | 0:45 | **Keep** — one sentence per type |
+| Playground overview (4 types) | 0:45 | **Keep** — one sentence per type |
 | Survey quick run + scorecard | 2:00 | **Keep** — research value of metrics |
 | Survey batch 24×8 + View job | 2:00 | **Keep** — scale story |
 | Job aggregation + 1 trial | 1:00 | **Keep** — evidence layer |
@@ -349,7 +349,7 @@
 | Chatbot filtered batch 4×4 | — | **Cut** — mention in one line |
 | Web Cocoa step replay | 1:00 | **Keep** — behavioral evidence |
 | OS app playground | 0:45 | **Keep** — platform breadth, invite to try |
-| Runs + Persona Store | 0:30 each | **Compress** — one sentence each |
+| Runs + Persona World | 0:30 each | **Compress** — one sentence each |
 | Home close + mission | 0:45 | **Keep** — land the promise |
 
 ---

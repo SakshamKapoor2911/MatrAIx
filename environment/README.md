@@ -48,7 +48,7 @@ Three ways to launch the same Harbor contract:
 | Surface | When to use | Entry |
 |---------|-------------|-------|
 | **Harbor CLI** | Scripts, CI, debugging | `uv run harbor run -c configs/jobs/…` |
-| **PersonaEval Cockpit** | Interactive task play, persona sampling | [application/QUICKSTART.md §10](../application/QUICKSTART.md#10-personaeval-cockpit--play-tasks-visually) |
+| **Playground** | Interactive task play, persona sampling | [application/QUICKSTART.md §10](../application/QUICKSTART.md#10-playground--play-tasks-visually) |
 | **PersonaEval API** | Automation, external tools | `POST /api/harbor/jobs` — [REST_API.md](../application/persona_eval/REST_API.md) |
 
 All paths share:
@@ -175,7 +175,7 @@ flowchart LR
 1. **Job recipe** selects task path, agent, model, and N persona paths.
 2. **Trial** picks one persona, materializes instruction, runs the agent.
 3. **Verifier** (`application/tasks/.../tests/`) scores outputs under `/logs/verifier/`.
-4. **Aggregation** (`report_job.py` or Cockpit) rolls up batch metrics from `reporting.json`.
+4. **Aggregation** (`report_job.py` or Playground) rolls up batch metrics from `reporting.json`.
 
 ---
 

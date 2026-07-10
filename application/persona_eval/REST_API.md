@@ -21,7 +21,7 @@ is running.
 
 ## Runtime boundary
 
-PersonaEval launches evaluations through Harbor batch jobs. The Cockpit and
+PersonaEval launches evaluations through Harbor batch jobs. The Playground and
 `POST /api/harbor/jobs` share the same artifact layout under `jobs/`.
 
 Execution can stay on the API host or dispatch to a Remote Runner worker:
@@ -56,7 +56,7 @@ Optional per-request override: `"plane": "harbor"` or `"plane": "remote"` on
 | `GET` | `/api/harbor/jobs/{job_name}` | Read one job detail view. |
 | `DELETE` | `/api/harbor/jobs/{job_name}` | Delete one job and its artifacts. |
 | `GET` | `/api/harbor/jobs/{job_name}/aggregation` | Read refreshed job aggregation JSON. |
-| `GET` | `/api/harbor/jobs/{job_name}/live` | Live job/trial progress for the Cockpit. |
+| `GET` | `/api/harbor/jobs/{job_name}/live` | Live job/trial progress for the Playground. |
 | `GET` | `/api/harbor/jobs/{job_name}/trials/{trial_name}/events` | Incremental trial event stream. |
 | `GET` | `/api/harbor/jobs/{job_name}/trials/{trial_name}/debrief` | Post-run debrief for one trial. |
 | `GET` | `/api/harbor/jobs/{job_name}/trials/{trial_name}/instruction` | Persona-facing instruction for one trial. |
@@ -70,12 +70,12 @@ Optional per-request override: `"plane": "harbor"` or `"plane": "remote"` on
 | `GET` | `/api/persona-pool/cohorts` | List saved persona cohorts. |
 | `POST` | `/api/persona-pool/cohorts` | Save a persona cohort. |
 | `GET` | `/api/persona-pool/cohorts/{cohort_id}` | Read one saved cohort. |
-| `GET` | `/api/tasks/detail` | Task detail for Cockpit setup (`taskPath` query). |
+| `GET` | `/api/tasks/detail` | Task detail for Playground setup (`taskPath` query). |
 | `GET` | `/api/survey-eval/instruments` | List task-backed survey questionnaires. |
-| `GET` | `/api/survey-eval/harbor-tasks` | List survey Harbor tasks for the Cockpit. |
-| `GET` | `/api/chatbot-eval/tasks` | List chatbot Harbor tasks for the Cockpit. |
-| `GET` | `/api/web-eval/tasks` | List web Harbor tasks for the Cockpit. |
-| `GET` | `/api/os-app-eval/tasks` | List os-app Harbor tasks for the Cockpit. |
+| `GET` | `/api/survey-eval/harbor-tasks` | List survey Harbor tasks for the Playground. |
+| `GET` | `/api/chatbot-eval/tasks` | List chatbot Harbor tasks for the Playground. |
+| `GET` | `/api/web-eval/tasks` | List web Harbor tasks for the Playground. |
+| `GET` | `/api/os-app-eval/tasks` | List os-app Harbor tasks for the Playground. |
 
 ## Health
 
@@ -125,7 +125,7 @@ running. Returns `404` for unknown application ids.
 ### `GET /api/config/options`
 
 Returns the available config knobs, canonical defaults, and fixed runtime
-environment metadata used by the Cockpit.
+environment metadata used by the Playground.
 
 ## Personas
 
@@ -217,7 +217,7 @@ Returns `jobs/{job_name}/aggregation.json`, refreshing it when needed.
 
 ### `GET /api/harbor/jobs/{job_name}/live`
 
-Returns live progress for the Cockpit: launch status, trial phases, and basic
+Returns live progress for the Playground: launch status, trial phases, and basic
 persona labels.
 
 ### Trial inspection routes
@@ -233,7 +233,7 @@ persona labels.
 
 ## Persona pool
 
-Used by the Cockpit setup rails for sampling and cohort management.
+Used by the Playground setup rails for sampling and cohort management.
 
 ### `GET /api/persona-pool/catalog?pool=...`
 
@@ -266,7 +266,7 @@ Returns one saved cohort definition.
 
 ## Task catalogs
 
-Read-only catalogs for Cockpit task pickers. Each route returns a `tasks` array
+Read-only catalogs for Playground task pickers. Each route returns a `tasks` array
 with task metadata plus optional profile markdown when available.
 
 | Route | Surface |
@@ -281,5 +281,5 @@ with task metadata plus optional profile markdown when available.
 ## Related docs
 
 - [UNIFIED_RUNTIME.md](UNIFIED_RUNTIME.md) — Harbor vs remote execution planes
-- [QUICKSTART.md](../QUICKSTART.md) — terminal smoke and Cockpit setup
+- [QUICKSTART.md](../QUICKSTART.md) — terminal smoke and Playground setup
 - OpenAPI `/docs` — generated from FastAPI models in `backend/api/schemas.py`

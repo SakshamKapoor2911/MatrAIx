@@ -7,7 +7,7 @@ export interface UrlState {
   view: string | null;
   harborJob: string | null;
   harborTrial: string | null;
-  /** PersonaEval cockpit task tab (chatbot | survey | web | cua). */
+  /** Playground task tab (chatbot | survey | web | cua). */
   peTask: string | null;
   /** Active single-run Harbor job in the cockpit (not the Runs sub-view). */
   cockpitJob: string | null;
