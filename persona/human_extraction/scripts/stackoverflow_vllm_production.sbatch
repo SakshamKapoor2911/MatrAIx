@@ -1,6 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=so-vllm-production
 #SBATCH --account=torch_pr_543_general
+#SBATCH --comment="preemption=yes;requeue=true"
 #SBATCH --gres=gpu:1
 #SBATCH --constraint=h200
 #SBATCH --nodes=1
