@@ -18,7 +18,7 @@ def test_example_survey_task_metadata_is_clean() -> None:
     task_text = (EXAMPLE_SURVEY / "task.toml").read_text(encoding="utf-8")
     task = tomllib.loads(task_text)
 
-    assert task["task"]["name"] == "personabench/application-survey-product-feedback"
+    assert task["task"]["name"] == "application/survey-product-feedback"
     assert task["metadata"]["type"] == "survey"
     assert "matraix/" not in task_text.lower()
 
@@ -71,7 +71,7 @@ def test_recommender_chat_task_metadata_is_clean() -> None:
     task_text = (RECOMMENDER_CHAT / "task.toml").read_text(encoding="utf-8")
     task = tomllib.loads(task_text)
 
-    assert task["task"]["name"] == "personabench/application-recommender-agent-chat-api"
+    assert task["task"]["name"] == "application/recommender-agent-chat-api"
     assert task["metadata"]["type"] == "chatbot"
     assert task["metadata"]["domain"] == "commerce-retail"
     assert "matraix/" not in task_text.lower()

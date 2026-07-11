@@ -1,9 +1,9 @@
-# Task context
+# Movie recommendation assistant
 
-This task evaluates a conversational movie recommendation application exposed through an HTTP chat API.
+A conversational movie recommendation product that helps people find something to watch.
 
-The application may ask clarifying questions before it recommends movies. Treat the conversation as a real movie-picking interaction: you can refine your needs, reject weak suggestions, ask follow-up questions, and stop once you can clearly judge fit.
+It typically asks a few clarifying questions about taste and constraints, then suggests film titles. Suggestions may come from a catalog that can differ by deployment, so treat whatever titles appear in the chat as the available options for this session.
 
-Stay within the movie domain throughout the conversation. If you need to clarify your preferences, do so in movie terms such as genre, tone, themes, pacing, recency, runtime, language, setting, content boundaries, or who you will watch with.
+What it is good for: discovering movies by genre, tone, themes, pacing, recency, runtime, language, setting, content boundaries, or who you plan to watch with.
 
-The active movie catalog may vary by run configuration. Use only information that naturally comes up in the conversation; do not fabricate item ids or recommendation evidence.
+What it is not: a bookstore, software advisor, legal/finance/medical tool, or a general search engine outside movies.

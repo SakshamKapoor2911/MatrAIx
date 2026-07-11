@@ -1,13 +1,14 @@
 # Claude Code IDE Autonomy Survey
 
-Complete the survey using the provided context and structured questionnaire.
+Answer this survey as the assigned persona.
 
-Requirements:
+React to Claude Code's native VS Code extension and checkpoint feature — an agent that edits in the IDE, shows inline diffs, and lets developers roll back autonomous changes. Capture trust, control, and willingness to let the agent work with less supervision.
 
-- Answer every required question in `input/questionnaire.yaml`.
-- Use exact `questionId` values from the questionnaire.
-- For choice questions, use the exact choice ids.
-- For likert questions, use an integer within the declared range.
-- Follow each question's `askRationale` / `askConfidence` flags when emitting answer metadata.
+## How to answer
 
-The platform writes `/app/output/survey_result.json` from your answers.
+- Read the task context before answering.
+- Answer every required question.
+- Use the exact choice ids for choice questions.
+- For likert questions, use an integer in the declared range.
+- Answer with the selected value only unless a question explicitly asks for
+  `askRationale` / `askConfidence`.

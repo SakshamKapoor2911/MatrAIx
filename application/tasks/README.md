@@ -25,8 +25,8 @@ Copy the closest `example-*` sibling with the same interaction type, then edit
 the scenario, task metadata, and verifier.
 
 1. `cp -R application/tasks/example-survey_product-feedback application/tasks/<your-task-name>`
-2. Set `[task].name` to `personabench/application-{slug}`.
-3. Update `[metadata]` with `type`, `domain`, and task-specific `tags`.
+2. Set `[task].name` to `application/{slug}`.
+3. Update `[metadata]` with `type`, `domain`, `difficulty`, and task-specific `tags`.
 4. For survey tasks, keep `[environment].definition = "application/shared-survey-form"`
    and put task-owned docs under `application/tasks/<your-task-name>/input/`.
 5. For chat and browser tasks, keep contributor-facing docs under the task
@@ -102,7 +102,7 @@ The verifier should extract structured runtime facts into
 
 This keeps the platform generic while letting each task define its own signals.
 
-When the backend is started with `PERSONAEVAL_REPORTING_ENABLE_LLM=1`, completed
+When the backend is started with `PLAYGROUND_REPORTING_ENABLE_LLM=1`, completed
 jobs will queue a background reporting pass for `llm_*` directives and persist
 the results into the job's `aggregation.json`. These LLM results are cached by
 input fingerprint, so reopening the same job detail does not rerun unchanged
@@ -128,7 +128,8 @@ like `outcome_status`, `resolution_basis`, `feedback_reason`, and
 `conversation_path`, plus example templates for `structured_output.json` and
 `reporting.json`.
 
-Example shape:
+Default survey `reporting.json` is Layer 1 only (`contextRules: []`). The
+shape below is an **opt-in** Layer 2 example when `askRationale` is true:
 
 ```json
 {

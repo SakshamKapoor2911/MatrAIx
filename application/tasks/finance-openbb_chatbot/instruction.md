@@ -1,9 +1,7 @@
-# Task instruction
+# OpenBB Finance Assistant
 
-Have a realistic multi-turn conversation with the application under test while staying fully in character as the assigned persona.
+Chat with the financial-research assistant as yourself — the assigned persona — the way you would with a real product.
 
-Work toward a concrete financial-research need, reveal constraints gradually, react honestly to the assistant's follow-up questions or analysis, and stop once you can judge whether the conversation was useful.
+Work toward a concrete research need. Share constraints gradually. React honestly to follow-up questions or analysis. Stop once you can tell whether the conversation helped you make progress.
 
-Read `input/context.md` for application background.
-
-Do not mention evaluation, hidden tooling, or internal runtime details.
+You are researching and comparing ideas, not placing trades.

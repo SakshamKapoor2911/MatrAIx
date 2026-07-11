@@ -87,7 +87,7 @@ flowchart LR
 Layer 1 runs whenever verifier output exists. Layer 2 only adds
 `summaries[]` / `judges[]` when matching `summaryDirectives` or
 `judgeDirectives` are present. LLM-backed directives also need
-`PERSONAEVAL_REPORTING_ENABLE_LLM=1`.
+`PLAYGROUND_REPORTING_ENABLE_LLM=1`.
 
 Contributor minimum:
 
@@ -96,7 +96,7 @@ Contributor minimum:
 
 ### How Layer 1 automatic aggregation works
 
-Implementation: `application/persona_eval/backend/service/job_aggregation.py`
+Implementation: `application/playground/backend/service/job_aggregation.py`
 (`build_job_aggregation()`).
 
 When it runs:
@@ -203,7 +203,7 @@ For each matched context, the platform:
 3. Builds bucket payloads with counts and text samples.
 4. For `summaryKind: "llm_bucket_summary"` or `judgeKind: "llm_signal_judge"`:
    - marks units as `ready_for_llm`
-   - runs the LLM in the background when `PERSONAEVAL_REPORTING_ENABLE_LLM=1`
+   - runs the LLM in the background when `PLAYGROUND_REPORTING_ENABLE_LLM=1`
    - caches results back into `aggregation.json` by fingerprint
 
 Even before LLM runs, Layer 2 still creates the bucket structure and heuristic
@@ -296,7 +296,7 @@ Example rule (summarize `outcome_reason` grouped by `outcome_status`):
 Copy from the canonical task for your type, or from the example JSON templates
 in the type folder (see table below).
 
-When PersonaEval runs with `PERSONAEVAL_REPORTING_ENABLE_LLM=1`, `llm_*`
+When Playground runs with `PLAYGROUND_REPORTING_ENABLE_LLM=1`, `llm_*`
 directives run in the background and results are cached in the job's
 `aggregation.json`. See [`../tasks/README.md`](../tasks/README.md) for UI and
 operational notes.

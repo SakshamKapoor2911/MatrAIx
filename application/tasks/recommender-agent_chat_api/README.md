@@ -54,9 +54,9 @@ uv run harbor run -c configs/jobs/application-task-job-recipe/recommender-agent-
 
 See [Application Quickstart](../../QUICKSTART.md) for the UI path.
 
-## Native RecAI stack (full PersonaEval preflight)
+## Native RecAI stack (full Playground preflight)
 
-The lightweight `server.py` sidecar is enough for Harbor smoke runs. PersonaEval's
+The lightweight `server.py` sidecar is enough for Harbor smoke runs. Playground's
 **Catalog**, **Recommendation engine**, and **RecAI resources** checks need the
 real Microsoft InteRecAgent checkout plus the `all_resources` bundles.
 
@@ -70,7 +70,7 @@ pip install gdown pandas pyarrow   # one-time
 
 This sparse-clones [microsoft/RecAI](https://github.com/microsoft/RecAI) into
 `recai/InteRecAgent/`, downloads `all_resources.zip` (~1–2 GB), and writes
-`data/catalogs/*.parquet`. Restart the PersonaEval backend afterward.
+`data/catalogs/*.parquet`. Restart the Playground backend afterward.
 
 Flags: `--engine-only`, `--skip-download`, `--skip-parquets` (see
 `scripts/setup_recai_resources.py --help`).

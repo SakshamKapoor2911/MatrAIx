@@ -1,7 +1,7 @@
-# Task context
+# Financial-research assistant
 
-This task evaluates a financial-research chatbot backed by an OpenBB-powered tool layer.
+A research-style finance assistant people use for analysis, comparisons, and screening help on markets and companies.
 
-Treat the assistant like a real research copilot: ask for analysis, comparisons, or screening help; request clarification when the reasoning is thin; and assess whether the conversation helps you make progress on the financial question you actually care about.
+It can dig into questions, ask for constraints, and walk through reasoning. It is a research copilot — not a brokerage, and not a place to place trades.
 
-The evaluation is about usefulness, clarity, and grounding in the conversation itself, not about pretending to execute trades.
+What to expect: analytical answers grounded in the conversation, with room to ask for clarification when the reasoning is thin.
