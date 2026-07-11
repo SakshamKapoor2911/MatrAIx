@@ -47,7 +47,7 @@ source-level evidence.
 | OEWS data overview | OEWS tables and data products; occupation and wage data access | The OEWS data overview provides official BLS access to occupation employment and wage tables. | Verified, U.S.-focused |
 | O*NET database releases | Occupation taxonomy; downloadable skill, knowledge, ability, education, tool, and work-context tables | O*NET database releases provide structured occupation, skill, knowledge, education, tool, and work-context data from the O*NET Resource Center. | Verified, U.S.-focused |
 | OECD employment data | Employment and labor-market indicators; OECD and partner country coverage | OECD employment data supports labor-market validation for OECD and partner economies. | Verified, OECD-focused |
-| OECD Education at a Glance | Education indicators; OECD and partner country comparisons | OECD Education at a Glance provides official education indicators for OECD and partner countries, supporting education-system and attainment grounding. | Verified, OECD-focused |
+| OECD Indicators of Education Systems Programme | Internationally comparable education-system indicators; OECD and partner country comparisons | The Indicators of Education Systems programme develops and maintains internationally comparable data used to assess national education-system performance. | Verified, OECD-focused |
 | OECD PISA | Student assessment; education-system indicators; student background data | OECD PISA supports education-system grounding through internationally comparable student assessment and background data. | Verified, student-focused |
 | OECD Income and Wealth Distribution Database | Income and wealth distribution; inequality indicators; OECD and partner coverage | OECD Income and Wealth Distribution Database provides income, wealth, and inequality indicators for OECD and partner countries. | Verified, OECD-focused |
 | World Bank Poverty and Inequality Platform | Poverty, inequality, welfare distribution; country-level socioeconomic indicators | The World Bank Poverty and Inequality Platform supports country-level poverty and inequality grounding. | Verified |
@@ -86,7 +86,7 @@ source-level evidence.
 | Afrobarometer | African public opinion surveys; democracy, governance, trust, values | Afrobarometer provides public opinion survey data across African countries on democracy, governance, trust, values, and social issues. | Verified, region-focused |
 | Arab Barometer | MENA public opinion surveys; politics, society, religion, trust | Arab Barometer provides public opinion survey data across Arab countries on politics, society, religion, trust, and values. | Verified, region-focused |
 | Asian Barometer | Asian public opinion and democracy survey data | Asian Barometer provides public opinion and democracy-related survey data across Asian societies. | Verified, region-focused |
-| Latinobarometro | Latin American public opinion and social-attitude surveys | Latinobarometro provides public opinion and social-attitude survey data across Latin America. | Verified, region-focused |
+| Latinobarometro | Latin American public opinion and social-attitude surveys | The GHDx catalog identifies Latinobarometro as a multinational public-opinion survey series covering Latin American countries from 1995 to the present. | Verified via GHDx catalog, region-focused |
 | Eurobarometer | EU public opinion surveys; politics, trust, society, policy attitudes | Eurobarometer provides EU-focused public opinion survey data on politics, society, trust, and policy attitudes. | Verified, Europe-focused |
 
 ## Personality And Psychometrics
@@ -105,13 +105,15 @@ source-level evidence.
 | CDC National Health Interview Survey | U.S. health status, conditions, disability, healthcare access | CDC NHIS provides U.S. health survey data on health status, conditions, disability, and healthcare access. | Verified, U.S.-focused |
 | CDC Behavioral Risk Factor Surveillance System | U.S. behavioral health and risk-factor survey; state-level coverage | CDC BRFSS provides U.S. state-level behavioral health and risk-factor survey data. | Verified, U.S.-focused |
 
-## Lifestyle, Time Use, And Consumption
+## Lifestyle, Time Use, Consumption, And Culture
 
 | Source | Evidence to look for | Observed evidence | Status |
 | --- | --- | --- | --- |
 | American Time Use Survey | Time-use activity categories; work, leisure, caregiving, household activities | ATUS provides U.S. time-use survey data covering daily activities, work, leisure, caregiving, and household activities. | Verified, U.S.-focused |
 | Consumer Expenditure Surveys | Household spending, income, consumption categories | BLS Consumer Expenditure Surveys provide U.S. household spending, income, and consumption data. | Verified, U.S.-focused |
 | OECD Time Use Database | Cross-national time-use comparison; activity patterns | OECD Time Use Database supports time-use and activity-pattern grounding across OECD and partner countries. | Verified, OECD-focused |
+| FAOSTAT | Food and agriculture indicators; food supply and consumption context; country and time coverage | FAOSTAT provides international food and agriculture statistics that support food-system and consumption-context grounding. | Verified |
+| UNESCO Institute for Statistics Culture | Internationally comparable cultural statistics; cultural participation and cultural-sector context | UNESCO UIS identifies culture as one of its statistical themes and provides internationally comparable cultural data and related statistical frameworks. | Verified |
 
 ## Technology And Developer Behavior
 

@@ -9,14 +9,14 @@ documentation, and follow-up validation.
 | Group | #Dim. | Subgroups | Reference sources |
 | --- | ---: | --- | --- |
 | Demographic information | 52 | Basic (25), Life Events (24), Cultural (2), Family (1) | UN World Population Prospects; UN Population Division; World Bank WDI; WorldPop; Eurostat; ACS PUMS; IPUMS; DHS; UNICEF MICS; OECD Family Database |
-| Language and communication | 90 | Language (53), Communication (37) | ACS PUMS; IPUMS International; IPUMS USA; Pew Research Center; World Values Survey |
-| Education and professional background | 90 | Academic (34), Learning Style (1), Career (4), Industry/Role (51) | UNESCO Institute for Statistics; World Bank Education Statistics; ILOSTAT; OECD Education at a Glance; OECD PISA; BLS OEWS; O*NET; ACS PUMS; IPUMS; IPUMS CPS |
+| Language and communication | 90 | Language (53), Communication (37) | ACS PUMS; IPUMS; Pew Research Center; World Values Survey |
+| Education and professional background | 90 | Academic (34), Learning Style (1), Career (4), Industry/Role (51) | UNESCO Institute for Statistics; World Bank Education Statistics; ILOSTAT; OECD Indicators of Education Systems Programme; OECD PISA; BLS OEWS; O*NET; ACS PUMS; IPUMS |
 | Expertise and skills | 387 | Domains (144), Skills (64), Tools (69), Programming (44), Developer/Coding (66) | ITU statistics; World Bank WDI; DataReportal; Pew Internet & Technology; Stack Overflow Survey; GitHub Octoverse; JetBrains State of Developer Ecosystem; O*NET |
 | Personality | 90 | Character (34), Big Five (50), MBTI (2), Relationships (4) | IPIP; MIDUS |
-| Values and worldview | 120 | Risk & Decision (7), Values & Motivation (46), Beliefs (67) | Pew Research Center Religion; World Values Survey; General Social Survey; European Social Survey; ISSP; Gallup World Poll; Afrobarometer; Arab Barometer; Asian Barometer; Latinobarometro; Eurobarometer; ARDA |
+| Values and worldview | 120 | Risk & Decision (7), Values & Motivation (46), Beliefs (67) | Pew Research Center; World Values Survey; General Social Survey; European Social Survey; ISSP; Gallup World Poll; Afrobarometer; Arab Barometer; Asian Barometer; Latinobarometro; Eurobarometer; ARDA |
 | Health and accessibility | 29 | Physical Health (25), Fitness (2), Health Lifestyle (2) | WHO Global Health Observatory; IHME Global Burden of Disease; ACS PUMS; CDC NHIS; CDC BRFSS; DHS Program; UNICEF MICS |
 | Behavior and interaction state | 74 | Emotional State (5), Time (3), Preferences (34), Work (2), Habits (30) | American Time Use Survey; Consumer Expenditure Surveys; OECD Time Use Database; ITU statistics; DataReportal; Pew Internet & Technology |
-| Interests and culture | 358 | Topics (78), Culture (74), Media (81), Food (35), Sports (40), Hobbies (50) | American Time Use Survey; Consumer Expenditure Surveys; OECD Time Use Database; Pew Research Center; World Values Survey; Gallup World Poll |
+| Interests and culture | 358 | Topics (78), Culture (74), Media (81), Food (35), Sports (40), Hobbies (50) | American Time Use Survey; Consumer Expenditure Surveys; OECD Time Use Database; FAOSTAT; UNESCO Institute for Statistics Culture; Eurobarometer; Pew Research Center; Pew Internet & Technology; DataReportal; World Values Survey; Gallup World Poll |
 
 ## Source Catalog
 
@@ -45,7 +45,7 @@ documentation, and follow-up validation.
 - OEWS data overview: https://www.bls.gov/oes/tables.htm
 - O*NET database releases: https://www.onetcenter.org/database.html (Resource Center: https://www.onetcenter.org/)
 - OECD employment data: https://www.oecd.org/employment/
-- OECD Education at a Glance: https://www.oecd.org/education/education-at-a-glance/
+- OECD Indicators of Education Systems Programme: https://www.oecd.org/en/about/programmes/indicators-of-education-systems-programme.html
 - OECD PISA: https://www.oecd.org/pisa/
 - OECD Income and Wealth Distribution Database: https://www.oecd.org/en/data/datasets/income-and-wealth-distribution-database.html
 - World Bank Poverty and Inequality Platform: https://pip.worldbank.org/
@@ -80,7 +80,7 @@ documentation, and follow-up validation.
 - Afrobarometer: https://www.afrobarometer.org/
 - Arab Barometer: https://www.arabbarometer.org/
 - Asian Barometer: https://www.asianbarometer.org/
-- Latinobarometro: https://www.latinobarometro.org/
+- Latinobarometro: https://ghdx.healthdata.org/series/latinobarometer
 - Eurobarometer: https://europa.eu/eurobarometer/
 
 ### Personality And Psychometrics
@@ -95,15 +95,17 @@ documentation, and follow-up validation.
 - CDC National Health Interview Survey: https://www.cdc.gov/nchs/nhis/
 - CDC Behavioral Risk Factor Surveillance System: https://www.cdc.gov/brfss/
 
-### Lifestyle, Time Use, And Consumption
+### Lifestyle, Time Use, Consumption, And Culture
 
 - American Time Use Survey: https://www.bls.gov/tus/
 - Consumer Expenditure Surveys: https://www.bls.gov/cex/
 - OECD Time Use Database: https://www.oecd.org/en/data/datasets/time-use-database.html
+- FAOSTAT: https://www.fao.org/faostat/
+- UNESCO Institute for Statistics Culture: https://www.uis.unesco.org/en/culture
 
 ### Technology And Developer Behavior
 
-- International Telecommunication Union statistics: https://www.itu.int/itu-d/reports/statistics/
+- International Telecommunication Union statistics: https://www.itu.int/en/ITU-D/Statistics/
 - DataReportal global digital reports: https://datareportal.com/
 - Pew Internet & Technology: https://www.pewresearch.org/internet/
 - Stack Overflow Survey: https://survey.stackoverflow.co/
@@ -115,12 +117,12 @@ documentation, and follow-up validation.
 These shorthand keys identify the grounding sources referenced above.
 
 - `acs_data_portal`: U.S. Census ACS data portal
-- `acs_pums_2024_1yr`: U.S. Census ACS PUMS
+- `acs_pums`: U.S. Census ACS PUMS
 - `afrobarometer`: Afrobarometer
 - `arab_barometer`: Arab Barometer
 - `arda`: Association of Religion Data Archives
 - `asian_barometer`: Asian Barometer
-- `bls_oews_may2025`: BLS Occupational Employment and Wage Statistics
+- `bls_oews`: BLS Occupational Employment and Wage Statistics
 - `cdc_brfss`: CDC Behavioral Risk Factor Surveillance System
 - `cdc_nhis`: CDC National Health Interview Survey
 - `consumer_expenditure_surveys`: Consumer Expenditure Surveys
@@ -130,9 +132,10 @@ These shorthand keys identify the grounding sources referenced above.
 - `eurobarometer`: Eurobarometer
 - `european_social_survey`: European Social Survey
 - `eurostat`: Eurostat
+- `faostat`: FAOSTAT
 - `gallup_world_poll`: Gallup World Poll
 - `github_octoverse`: GitHub Octoverse
-- `gss_1972_2024`: General Social Survey
+- `gss`: General Social Survey
 - `ihme_gbd`: IHME Global Burden of Disease
 - `ilostat`: ILOSTAT
 - `ipip`: International Personality Item Pool
@@ -146,8 +149,8 @@ These shorthand keys identify the grounding sources referenced above.
 - `latinobarometro`: Latinobarometro
 - `luxembourg_income_study`: Luxembourg Income Study
 - `midus`: Midlife in the United States
-- `onet_30_3`: O*NET 30.3
-- `oecd_education_at_a_glance`: OECD Education at a Glance
+- `onet`: O*NET database releases
+- `oecd_ines`: OECD Indicators of Education Systems Programme
 - `oecd_employment`: OECD employment data
 - `oecd_family_database`: OECD Family Database
 - `oecd_income_distribution_database`: OECD Income and Wealth Distribution Database
@@ -157,12 +160,14 @@ These shorthand keys identify the grounding sources referenced above.
 - `pew_npors_2025`: Pew 2025 National Public Opinion Reference Survey
 - `pew_research_center`: Pew Research Center datasets
 - `pew_religion`: Pew Research Center Religion
-- `pew_technology`: Pew Internet & Technology
+- `pew_internet`: Pew Internet & Technology
 - `pew_rls_2023_2024`: Pew 2023-24 Religious Landscape Study
-- `un_wpp_2024`: UN World Population Prospects 2024
+- `un_population_division`: UN Population Division Data Portal
+- `un_wpp`: UN World Population Prospects
 - `un_world_urbanization_prospects`: UN World Urbanization Prospects
 - `un_international_migrant_stock`: UN International Migrant Stock
 - `unesco_uis`: UNESCO Institute for Statistics
+- `unesco_culture_statistics`: UNESCO Institute for Statistics Culture
 - `unicef_mics`: UNICEF Multiple Indicator Cluster Surveys
 - `who_gho`: WHO Global Health Observatory
 - `world_bank_databank`: World Bank DataBank
@@ -173,5 +178,5 @@ These shorthand keys identify the grounding sources referenced above.
 - `world_bank_wdi`: World Bank World Development Indicators
 - `world_inequality_database`: World Inequality Database
 - `worldpop`: WorldPop
-- `wvs_wave7_csv_v6_0`: World Values Survey Wave 7
+- `wvs`: World Values Survey
 - `stackoverflow_survey`: Stack Overflow Survey
