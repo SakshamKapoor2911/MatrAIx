@@ -84,5 +84,5 @@ def test_repo_backed_survey_task_content_uses_task_input_without_infra_copy():
     assert "backend/runtime" not in content.output_schema_markdown
     assert '"trajectory"' not in content.output_schema_markdown
     assert content.instrument is not None
-    assert content.instrument.ask_rationale is True
-    assert content.instrument.ask_confidence is True
+    assert content.instrument.ask_rationale is False
+    assert content.instrument.ask_confidence is False

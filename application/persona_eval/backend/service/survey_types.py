@@ -152,8 +152,9 @@ class SurveyInstrument:
     description: str = ""
     questions: list[SurveyQuestion] = field(default_factory=list)
     # Defaults for answer metadata; questions may override per item.
-    ask_rationale: bool = True
-    ask_confidence: bool = True
+    # Off by default — opt in via questionnaire.yaml when needed.
+    ask_rationale: bool = False
+    ask_confidence: bool = False
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> "SurveyInstrument":
@@ -164,8 +165,8 @@ class SurveyInstrument:
             title=str(data["title"]),
             description=str(data.get("description", "")),
             questions=[SurveyQuestion.from_dict(q) for q in data.get("questions", [])],
-            ask_rationale=True if ask_rationale is None else ask_rationale,
-            ask_confidence=True if ask_confidence is None else ask_confidence,
+            ask_rationale=False if ask_rationale is None else ask_rationale,
+            ask_confidence=False if ask_confidence is None else ask_confidence,
         )
 
     def to_dict(self) -> dict[str, Any]:

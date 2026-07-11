@@ -38,5 +38,5 @@ def test_unmapped_local_survey_prompt_falls_back_to_rendered_docs_only():
     assert "## Answer envelope" in prompt
     assert "## Output schema" not in prompt
     assert "A survey about a concrete feature." in prompt
-    assert "Ask rationale: `true`" in prompt
-    assert "Ask confidence: `true`" in prompt
+    assert "Ask rationale: `false`" in prompt
+    assert "Ask confidence: `false`" in prompt

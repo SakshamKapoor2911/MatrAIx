@@ -89,8 +89,7 @@ schemaVersion: "1.0"
 id: example_survey_v1
 title: Example Survey
 description: Optional one-line summary.
-askRationale: true
-askConfidence: true
+# askRationale / askConfidence default to false; set true to opt in.
 questions:
   - id: q1
     prompt: How likely are you to try this product?
@@ -105,7 +104,6 @@ questions:
     construct: price_stance
     required: true
     askRationale: true
-    askConfidence: false
     options:
       - id: avoid_paying
         label: I would avoid paying unless absolutely necessary.
@@ -122,11 +120,11 @@ Supported question types:
 
 Instrument-level defaults:
 
-- `askRationale` (default `true`) — whether answers include a short reason
-- `askConfidence` (default `true`) — whether answers include a 0–1 confidence
+- `askRationale` (default `false`) — whether answers include a short reason
+- `askConfidence` (default `false`) — whether answers include a 0–1 confidence
 
 Per-question `askRationale` / `askConfidence` override the instrument defaults
-when set.
+when set. Omit both to keep answer metadata off.
 
 For choice questions:
 

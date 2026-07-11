@@ -77,8 +77,8 @@ def test_survey_reference_tasks_use_shared_runtime_and_task_local_input() -> Non
         assert (task / "input" / "questionnaire.yaml").is_file()
         assert not (task / "input" / "output_schema.md").exists()
         questionnaire = (task / "input" / "questionnaire.yaml").read_text(encoding="utf-8")
-        assert "askRationale:" in questionnaire
-        assert "askConfidence:" in questionnaire
+        # Defaults are false; tasks may omit the keys entirely.
+        assert "output_schema" not in questionnaire
 
 
 def test_canonical_chatbot_task_shape() -> None:
