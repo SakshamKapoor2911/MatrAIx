@@ -7,4 +7,4 @@
 #   recipe — filters + seed + sampleSize (re-sample on launch)
 #   frozen — explicit personaIds (fixed group for sign-off)
 #
-# Create via PersonaEval UI (Harbor batch panel) or POST /api/persona-pool/cohorts.
+# Create via Playground UI (Harbor batch panel) or POST /api/persona-pool/cohorts.

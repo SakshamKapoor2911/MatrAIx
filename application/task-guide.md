@@ -159,17 +159,17 @@ example; only **`example-survey_product-feedback`** is the copy-from reference.
 Tasks appear in the Playground only when indexed. After scaffolding,
 add an entry to:
 
-`application/persona_eval/backend/service/persona_eval_task_registry.py`
+`application/playground/backend/service/playground_task_registry.py`
 
 ```python
-"<your-task-folder>": PersonaEvalTaskEntry(application_type="survey"),  # or chatbot / web / os-app
+"<your-task-folder>": PlaygroundTaskEntry(application_type="survey"),  # or chatbot / web / os-app
 ```
 
 **Web tasks** also need `site_name`, `site_url`, `output_artifact`, and
 `submission_profile` (copy fields from the nearest `example-web-*` entry).
 
 **Survey tasks** also need a questionnaire id mapping in
-`packages/persona-eval/src/persona_eval/survey_task_content.py`:
+`packages/playground/src/playground/survey_task_content.py`:
 
 ```python
 SURVEY_TASK_FOLDER_BY_QUESTIONNAIRE_ID = {
@@ -180,7 +180,7 @@ SURVEY_TASK_FOLDER_BY_QUESTIONNAIRE_ID = {
 
 The questionnaire id must match `input/questionnaire.yaml` → `id`.
 
-Restart the PersonaEval backend after registry changes.
+Restart the Playground backend after registry changes.
 
 ## Job recipes
 

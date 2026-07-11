@@ -1,0 +1,614 @@
+"""Persona pool catalog and sampling for Harbor job launch."""
+
+from __future__ import annotations
+
+import json
+import re
+import yaml
+from dataclasses import dataclass
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any, Literal
+
+from personabench.persona_dimension_catalog import values_for_dimension
+from personabench.persona_job import (
+    load_manifest,
+    sample_personas,
+    sample_personas_stratified,
+)
+
+PERSONA_CARD_DIMENSIONS = (
+    "age_bracket",
+    "region",
+    "domain",
+    "intent",
+    "life_stage",
+    "source",
+)
+
+DEFAULT_PERSONA_POOL = "persona/datasets/bench-dev-sample"
+COHORTS_DIR = "persona/datasets/cohorts"
+DIMENSION_CATEGORIES_PATH = "persona/schema/dimension_categories.json"
+CohortKind = Literal["recipe", "frozen"]
+
+
+def _utc_now() -> str:
+    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def _cohort_slug(value: str) -> str:
+    slug = re.sub(r"[^a-z0-9]+", "-", value.strip().lower()).strip("-")
+    if not slug:
+        raise ValueError("cohort id must not be empty")
+    return slug
+
+
+def _repo_root() -> Path:
+    from playground.harbor.playground import _repo_root as harbor_root
+
+    return harbor_root()
+
+
+
+def _resolve_persona_yaml_path(
+    repo_root: Path,
+    entry: dict[str, Any],
+    persona_id: str,
+    pool_dir: Path,
+) -> Path:
+    candidates: list[Path] = []
+    rel_path = str(entry.get("path") or "").strip()
+    if rel_path:
+        path = Path(rel_path)
+        candidates.append(path if path.is_absolute() else repo_root / rel_path)
+    pid = persona_id.strip()
+    candidates.append(pool_dir / "persona_{}.yaml".format(pid))
+    if pid.isdigit():
+        candidates.append(pool_dir / "persona_{}.yaml".format(pid.zfill(4)))
+    for candidate in candidates:
+        if candidate.is_file():
+            return candidate
+    return candidates[0] if candidates else pool_dir / "persona_{}.yaml".format(pid)
+
+
+def _persona_profile_markdown(
+    *,
+    persona_id: str,
+    source: str,
+    path: str,
+    yaml_text: str,
+) -> str:
+    lines = ["**Persona ID:** `{}`".format(persona_id)]
+    if source:
+        lines.append("**Source:** {}".format(source))
+    if path:
+        lines.append("**Path:** `{}`".format(path))
+    if yaml_text.strip():
+        lines.extend(["", "```yaml", yaml_text.rstrip(), "```"])
+    return "\n".join(lines)
+
+
+@dataclass
+class PersonaPoolService:
+    repo_root: Path
+
+    @classmethod
+    def from_repo(cls, *, repo_root: Path | None = None) -> "PersonaPoolService":
+        return cls(repo_root=Path(repo_root) if repo_root is not None else _repo_root())
+
+    def _pool_dir(self, persona_pool: str) -> Path:
+        return self.repo_root / persona_pool
+
+    def _read_json(self, path: Path) -> dict[str, Any]:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        if not isinstance(payload, dict):
+            raise ValueError("{} must contain a JSON object".format(path.name))
+        return payload
+
+    def load_manifest_summary(self, persona_pool: str = DEFAULT_PERSONA_POOL) -> dict[str, Any]:
+        pool_dir = self._pool_dir(persona_pool)
+        manifest_path = pool_dir / "manifest.json"
+        if not manifest_path.is_file():
+            entries = load_manifest(pool_dir, repo_root=self.repo_root)
+            return {
+                "pool": persona_pool,
+                "count": len(entries),
+                "smokePersonaId": None,
+                "sourceCounts": {},
+                "schemaVersion": None,
+                "dimensionCategoriesPath": DIMENSION_CATEGORIES_PATH,
+            }
+        manifest = self._read_json(manifest_path)
+        return {
+            "pool": persona_pool,
+            "count": int(manifest.get("count") or len(manifest.get("personas") or [])),
+            "smokePersonaId": manifest.get("smoke_persona_id"),
+            "sourceCounts": dict(manifest.get("source_counts") or {}),
+            "schemaVersion": manifest.get("schema_version"),
+            "dimensionCategoriesPath": str(
+                manifest.get("dimension_categories") or DIMENSION_CATEGORIES_PATH
+            ),
+        }
+
+    def load_dimension_categories(
+        self, *, path: str | None = None
+    ) -> dict[str, Any]:
+        rel = path or DIMENSION_CATEGORIES_PATH
+        categories_path = Path(rel)
+        if not categories_path.is_absolute():
+            categories_path = self.repo_root / rel
+        if not categories_path.is_file():
+            return {
+                "schemaVersion": "1.0",
+                "personaSources": [],
+                "devProfile": {"dimensionCount": None, "groups": []},
+            }
+        payload = self._read_json(categories_path)
+        dev_profile = payload.get("devProfile")
+        groups: list[dict[str, Any]] = []
+        if isinstance(dev_profile, dict) and isinstance(dev_profile.get("groups"), list):
+            for group in dev_profile["groups"]:
+                if not isinstance(group, dict):
+                    continue
+                dimension_ids = list(group.get("dimensionIds") or [])
+                dimensions = []
+                for dim_id in dimension_ids:
+                    dimensions.append(
+                        {
+                            "id": dim_id,
+                            "values": values_for_dimension(str(dim_id)),
+                        }
+                    )
+                groups.append(
+                    {
+                        "id": str(group.get("id") or ""),
+                        "label": str(group.get("label") or ""),
+                        "dimensionIds": dimension_ids,
+                        "dimensions": dimensions,
+                    }
+                )
+        return {
+            "schemaVersion": payload.get("schemaVersion"),
+            "personaSources": list(payload.get("personaSources") or []),
+            "devProfile": {
+                "dimensionCount": (
+                    int(dev_profile.get("dimensionCount"))
+                    if isinstance(dev_profile, dict) and dev_profile.get("dimensionCount")
+                    else None
+                ),
+                "groups": groups,
+            },
+        }
+
+    def get_catalog(self, persona_pool: str = DEFAULT_PERSONA_POOL) -> dict[str, Any]:
+        summary = self.load_manifest_summary(persona_pool)
+        categories = self.load_dimension_categories(
+            path=str(summary.get("dimensionCategoriesPath") or DIMENSION_CATEGORIES_PATH)
+        )
+        return {**summary, "dimensionCategories": categories}
+
+    def _normalize_dimension_filters(
+        self, dimension_filters: dict[str, str | list[str]] | None
+    ) -> dict[str, str | list[str]]:
+        if not dimension_filters:
+            return {}
+        normalized: dict[str, str | list[str]] = {}
+        for key, value in dimension_filters.items():
+            if isinstance(value, list):
+                cleaned = [str(item).strip() for item in value if str(item).strip()]
+                if cleaned:
+                    normalized[str(key)] = cleaned
+            elif str(value).strip():
+                normalized[str(key)] = str(value).strip()
+        return normalized
+
+    def _entry_dimensions(self, entry: dict[str, Any]) -> dict[str, Any] | None:
+        dims = entry.get("dimensions")
+        if isinstance(dims, dict):
+            return dims
+        from personabench.persona_job import _persona_dimensions
+
+        loaded = _persona_dimensions(entry, repo_root=self.repo_root)
+        return loaded if isinstance(loaded, dict) else None
+
+    def _entry_matches_dimension_filters(
+        self,
+        entry: dict[str, Any],
+        dimension_filters: dict[str, str | list[str]],
+    ) -> bool:
+        if not dimension_filters:
+            return True
+        dims = self._entry_dimensions(entry)
+        if not dims:
+            return False
+        for key, value in dimension_filters.items():
+            actual = dims.get(key)
+            if isinstance(value, list):
+                if actual not in value:
+                    return False
+            elif actual != value:
+                return False
+        return True
+
+    def filter_pool(
+        self,
+        *,
+        persona_pool: str = DEFAULT_PERSONA_POOL,
+        sources: list[str] | None = None,
+        dimension_filters: dict[str, str | list[str]] | None = None,
+    ) -> list[dict[str, Any]]:
+        pool_dir = self._pool_dir(persona_pool)
+        entries = load_manifest(pool_dir, repo_root=self.repo_root)
+        matched = list(entries)
+        if sources:
+            allowed = {source.strip() for source in sources if source.strip()}
+            matched = [
+                entry
+                for entry in matched
+                if str(entry.get("source") or "").strip() in allowed
+            ]
+        filters = self._normalize_dimension_filters(dimension_filters)
+        if filters:
+            matched = [
+                entry
+                for entry in matched
+                if self._entry_matches_dimension_filters(entry, filters)
+            ]
+        return matched
+
+    def _persona_card(self, entry: dict[str, Any]) -> dict[str, Any]:
+        dims = entry.get("dimensions")
+        if not isinstance(dims, dict):
+            from personabench.persona_job import _persona_dimensions
+
+            dims = _persona_dimensions(entry, repo_root=self.repo_root) or {}
+        display = {
+            key: str(dims[key])
+            for key in PERSONA_CARD_DIMENSIONS
+            if isinstance(dims, dict) and dims.get(key)
+        }
+        persona_id = str(entry.get("persona_id") or "")
+        display_name = str(entry.get("display_name") or "").strip()
+        if not display_name:
+            rel_path = str(entry.get("path") or "").strip()
+            if rel_path:
+                yaml_path = self.repo_root / rel_path
+                if yaml_path.is_file():
+                    raw = yaml.safe_load(yaml_path.read_text(encoding="utf-8"))
+                    if isinstance(raw, dict):
+                        display_name = str(raw.get("display_name") or "").strip()
+        if not display_name:
+            from personabench.persona_display_name import synthetic_display_name
+
+            display_name = synthetic_display_name(
+                persona_id,
+                dims if isinstance(dims, dict) else {},
+            )
+        return {
+            "personaId": persona_id,
+            "name": display_name,
+            "source": str(entry.get("source") or ""),
+            "path": str(entry.get("path") or ""),
+            "dimensions": display,
+        }
+
+    def list_persona_cards(
+        self,
+        *,
+        persona_pool: str = DEFAULT_PERSONA_POOL,
+        limit: int = 10,
+        offset: int = 0,
+        persona_ids: list[str] | None = None,
+        seed: int = 42,
+        all_personas: bool = False,
+    ) -> dict[str, Any]:
+        import random
+
+        pool_dir = self._pool_dir(persona_pool)
+        entries = load_manifest(pool_dir, repo_root=self.repo_root)
+        if persona_ids:
+            wanted = {pid.strip() for pid in persona_ids if pid.strip()}
+            chosen = [
+                entry
+                for entry in entries
+                if str(entry.get("persona_id") or "") in wanted
+            ]
+        elif all_personas:
+            sorted_entries = sorted(
+                entries,
+                key=lambda entry: str(entry.get("persona_id") or ""),
+            )
+            start = max(0, offset)
+            end = start + max(1, limit)
+            chosen = sorted_entries[start:end]
+        else:
+            summary = self.load_manifest_summary(persona_pool)
+            smoke_id = str(summary.get("smokePersonaId") or "").strip()
+            smoke_entry = next(
+                (entry for entry in entries if str(entry.get("persona_id") or "") == smoke_id),
+                None,
+            )
+            rest = [
+                entry
+                for entry in entries
+                if str(entry.get("persona_id") or "") != smoke_id
+            ]
+            rng = random.Random(seed)
+            rng.shuffle(rest)
+            chosen = ([smoke_entry] if smoke_entry else []) + rest[: max(0, limit - 1)]
+        cards = [self._persona_card(entry) for entry in chosen]
+        if not all_personas:
+            cards = cards[:limit]
+        return {
+            "pool": persona_pool,
+            "personas": cards,
+            "offset": max(0, offset) if all_personas else 0,
+            "limit": limit,
+        }
+
+    def get_persona_detail(
+        self,
+        persona_id: str,
+        *,
+        persona_pool: str = DEFAULT_PERSONA_POOL,
+    ) -> dict[str, Any]:
+        pool_dir = self._pool_dir(persona_pool)
+        entries = load_manifest(pool_dir, repo_root=self.repo_root)
+        entry = next(
+            (item for item in entries if str(item.get("persona_id") or "") == persona_id.strip()),
+            None,
+        )
+        if entry is None and persona_id.strip().isdigit():
+            padded = persona_id.strip().zfill(4)
+            entry = next(
+                (item for item in entries if str(item.get("persona_id") or "") == padded),
+                None,
+            )
+        if entry is None:
+            raise FileNotFoundError("persona not found: {}".format(persona_id))
+        card = self._persona_card(entry)
+        dims = entry.get("dimensions")
+        if not isinstance(dims, dict):
+            from personabench.persona_job import _persona_dimensions
+
+            dims = _persona_dimensions(entry, repo_root=self.repo_root) or {}
+        full_dimensions = {str(key): str(value) for key, value in dict(dims).items() if value}
+        yaml_path = _resolve_persona_yaml_path(
+            self.repo_root, entry, persona_id, pool_dir
+        )
+        yaml_text = yaml_path.read_text(encoding="utf-8") if yaml_path.is_file() else ""
+        rel_path = str(entry.get("path") or card.get("path") or "")
+        if not rel_path and yaml_path.is_file():
+            try:
+                rel_path = str(yaml_path.relative_to(self.repo_root))
+            except ValueError:
+                rel_path = str(yaml_path)
+        profile_markdown = _persona_profile_markdown(
+            persona_id=str(card.get("personaId") or persona_id),
+            source=str(card.get("source") or ""),
+            path=rel_path,
+            yaml_text=yaml_text,
+        )
+        return {
+            **card,
+            "pool": persona_pool,
+            "path": rel_path,
+            "dimensions": full_dimensions,
+            "yaml": yaml_text,
+            "profileMarkdown": profile_markdown,
+        }
+
+    def sample_pool(
+        self,
+        *,
+        persona_pool: str = DEFAULT_PERSONA_POOL,
+        sample_size: int,
+        seed: int = 42,
+        sources: list[str] | None = None,
+        dimension_filters: dict[str, str | list[str]] | None = None,
+        stratify_fields: list[str] | None = None,
+        sample_size_per_value_group: int | None = None,
+    ) -> dict[str, Any]:
+        matched = self.filter_pool(
+            persona_pool=persona_pool,
+            sources=sources,
+            dimension_filters=dimension_filters,
+        )
+        if sample_size < 1:
+            raise ValueError("sample_size must be >= 1")
+        if stratify_fields:
+            per_group = sample_size_per_value_group or 1
+            chosen = sample_personas_stratified(
+                matched,
+                stratify_fields=list(stratify_fields),
+                sample_size_per_value_group=per_group,
+                seed=seed,
+                repo_root=self.repo_root,
+            )
+            if len(chosen) > sample_size:
+                chosen = chosen[:sample_size]
+        else:
+            if sample_size > len(matched):
+                raise ValueError(
+                    "sample_size={} exceeds matched pool size={}".format(sample_size, len(matched))
+                )
+            chosen = sample_personas(matched, sample_size=sample_size, seed=seed)
+        personas = [self._persona_card(entry) for entry in chosen]
+        return {
+            "pool": persona_pool,
+            "matchedCount": len(matched),
+            "sampleSize": len(personas),
+            "seed": seed,
+            "personaIds": [row["personaId"] for row in personas if row["personaId"]],
+            "personas": personas,
+            "stratifyFields": list(stratify_fields or []),
+        }
+
+    def _cohorts_root(self) -> Path:
+        return self.repo_root / COHORTS_DIR
+
+    def _cohort_path(self, cohort_id: str) -> Path:
+        return self._cohorts_root() / _cohort_slug(cohort_id) / "cohort.json"
+
+    def list_cohorts(self) -> list[dict[str, Any]]:
+        root = self._cohorts_root()
+        if not root.is_dir():
+            return []
+        summaries: list[dict[str, Any]] = []
+        for path in sorted(root.glob("*/cohort.json")):
+            try:
+                payload = self._read_json(path)
+            except Exception:  # noqa: BLE001
+                continue
+            summaries.append(self._cohort_summary(payload, path.parent.name))
+        return summaries
+
+    def get_cohort(self, cohort_id: str) -> dict[str, Any]:
+        path = self._cohort_path(cohort_id)
+        if not path.is_file():
+            raise FileNotFoundError("cohort not found: {}".format(cohort_id))
+        payload = self._read_json(path)
+        return self._cohort_view(payload)
+
+    def save_cohort(
+        self,
+        *,
+        cohort_id: str,
+        name: str | None = None,
+        description: str | None = None,
+        pool: str = DEFAULT_PERSONA_POOL,
+        kind: CohortKind = "recipe",
+        seed: int = 42,
+        sample_size: int = 1,
+        sources: list[str] | None = None,
+        dimension_filters: dict[str, str] | None = None,
+        persona_ids: list[str] | None = None,
+    ) -> dict[str, Any]:
+        slug = _cohort_slug(cohort_id)
+        matched = self.filter_pool(
+            persona_pool=pool,
+            sources=sources,
+            dimension_filters=dimension_filters,
+        )
+        resolved_kind: CohortKind = kind
+        resolved_persona_ids = list(persona_ids or [])
+        personas: list[dict[str, str]] = []
+
+        if resolved_kind == "frozen":
+            if not resolved_persona_ids:
+                if sample_size < 1:
+                    raise ValueError("sample_size must be >= 1 for frozen cohort")
+                if sample_size > len(matched):
+                    raise ValueError(
+                        "sample_size={} exceeds matched pool size={}".format(
+                            sample_size, len(matched)
+                        )
+                    )
+                chosen = sample_personas(matched, sample_size=sample_size, seed=seed)
+                resolved_persona_ids = [
+                    str(entry.get("persona_id") or "") for entry in chosen
+                ]
+            by_id = {str(entry.get("persona_id") or ""): entry for entry in matched}
+            for pid in resolved_persona_ids:
+                entry = by_id.get(pid)
+                if entry is None:
+                    raise ValueError("persona {} not in matched pool".format(pid))
+                personas.append(
+                    {
+                        "personaId": pid,
+                        "source": str(entry.get("source") or ""),
+                        "path": str(entry.get("path") or ""),
+                    }
+                )
+        else:
+            resolved_persona_ids = []
+            personas = []
+
+        payload = {
+            "cohortId": slug,
+            "name": (name or slug).strip(),
+            "description": (description or "").strip(),
+            "createdAt": _utc_now(),
+            "pool": pool,
+            "kind": resolved_kind,
+            "seed": int(seed),
+            "sampleSize": int(sample_size),
+            "sources": list(sources or []),
+            "dimensionFilters": dict(dimension_filters or {}),
+            "matchedCount": len(matched),
+            "personaIds": resolved_persona_ids,
+            "personas": personas,
+        }
+        cohort_dir = self._cohorts_root() / slug
+        cohort_dir.mkdir(parents=True, exist_ok=True)
+        path = cohort_dir / "cohort.json"
+        path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        return self._cohort_view(payload)
+
+    def resolve_cohort_launch(
+        self,
+        cohort_id: str,
+        *,
+        sample_size_override: int | None = None,
+    ) -> dict[str, Any]:
+        cohort = self.get_cohort(cohort_id)
+        pool = str(cohort.get("pool") or DEFAULT_PERSONA_POOL)
+        if cohort.get("kind") == "frozen":
+            persona_ids = list(cohort.get("personaIds") or [])
+            if not persona_ids:
+                raise ValueError("frozen cohort has no personaIds")
+            return {
+                "pool": pool,
+                "personaIds": persona_ids,
+                "seed": cohort.get("seed"),
+                "sources": cohort.get("sources") or [],
+                "dimensionFilters": cohort.get("dimensionFilters") or {},
+                "cohortId": cohort.get("cohortId"),
+            }
+        sample_size = int(
+            sample_size_override if sample_size_override is not None else cohort.get("sampleSize") or 1
+        )
+        sampled = self.sample_pool(
+            persona_pool=pool,
+            sample_size=sample_size,
+            seed=int(cohort.get("seed") or 42),
+            sources=list(cohort.get("sources") or []) or None,
+            dimension_filters=dict(cohort.get("dimensionFilters") or {}) or None,
+        )
+        return {
+            "pool": pool,
+            "personaIds": list(sampled["personaIds"]),
+            "seed": cohort.get("seed"),
+            "sources": cohort.get("sources") or [],
+            "dimensionFilters": cohort.get("dimensionFilters") or {},
+            "cohortId": cohort.get("cohortId"),
+        }
+
+    def _cohort_summary(self, payload: dict[str, Any], fallback_id: str) -> dict[str, Any]:
+        return {
+            "cohortId": str(payload.get("cohortId") or fallback_id),
+            "name": str(payload.get("name") or fallback_id),
+            "kind": str(payload.get("kind") or "recipe"),
+            "pool": str(payload.get("pool") or DEFAULT_PERSONA_POOL),
+            "sampleSize": int(payload.get("sampleSize") or 0),
+            "matchedCount": int(payload.get("matchedCount") or 0),
+            "personaCount": len(payload.get("personaIds") or []),
+            "createdAt": payload.get("createdAt"),
+        }
+
+    def _cohort_view(self, payload: dict[str, Any]) -> dict[str, Any]:
+        return {
+            "cohortId": str(payload.get("cohortId") or ""),
+            "name": str(payload.get("name") or ""),
+            "description": str(payload.get("description") or ""),
+            "createdAt": payload.get("createdAt"),
+            "pool": str(payload.get("pool") or DEFAULT_PERSONA_POOL),
+            "kind": str(payload.get("kind") or "recipe"),
+            "seed": int(payload.get("seed") or 42),
+            "sampleSize": int(payload.get("sampleSize") or 1),
+            "sources": list(payload.get("sources") or []),
+            "dimensionFilters": dict(payload.get("dimensionFilters") or {}),
+            "matchedCount": int(payload.get("matchedCount") or 0),
+            "personaIds": list(payload.get("personaIds") or []),
+            "personas": list(payload.get("personas") or []),
+        }

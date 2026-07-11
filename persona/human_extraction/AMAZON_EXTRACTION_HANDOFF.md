@@ -106,8 +106,7 @@ these overrides (env or edit the job) so nothing lands in the wrong home/scratch
 - HF token: export `HF_TOKEN=<token-with-gated-access>` in their shell.
 - Conda env: either get read access to `env05`, or recreate an equivalent env
   (vLLM ≥ 0.24.0 + torch 2.11 cu129). Setup details are in
-  `persona/human_extraction/README.md` (env/driver notes); related env notes also
-  in `application/persona_eval/RECAI_ENV_NOTES.md` and `UNIFIED_RUNTIME.md`.
+  `persona/human_extraction/README.md` (env/driver notes).
 - `selected_users_100k.parquet` is git-ignored: copy it over, or regenerate via
   `explore_amazon_data.ipynb` (deterministic, `SEED=20260705`).
 

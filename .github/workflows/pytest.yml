@@ -31,7 +31,7 @@ jobs:
         run: |
           uv venv --python 3.12
           uv pip install -e .
-          uv pip install -e packages/persona-eval
+          uv pip install -e packages/playground
           uv pip install -e packages/harbor-langsmith
           uv pip install -e packages/rewardkit
           uv pip install -e environment/adapters/simpleqa
@@ -39,28 +39,28 @@ jobs:
 
       - name: Run curated test suite
         env:
-          PYTHONPATH: .:environment/runtime:packages/persona-eval/src:application/persona_eval
+          PYTHONPATH: .:environment/runtime:packages/playground/src:application/playground
         run: |
           uv run pytest tests/ \
             packages/harbor-langsmith/tests/ \
             packages/rewardkit/tests/ \
-            application/persona_eval/backend/tests/test_api_schemas.py \
-            application/persona_eval/backend/tests/test_application_types.py \
-            application/persona_eval/backend/tests/test_config.py \
-            application/persona_eval/backend/tests/test_harbor_chat_eval.py \
-            application/persona_eval/backend/tests/test_harbor_chat_mcp_session.py \
-            application/persona_eval/backend/tests/test_harbor_job_service.py \
-            application/persona_eval/backend/tests/test_harbor_jobs_api.py \
-            application/persona_eval/backend/tests/test_harbor_persona_eval.py \
-            application/persona_eval/backend/tests/test_harbor_survey_eval.py \
-            application/persona_eval/backend/tests/test_harbor_web_trace.py \
-            application/persona_eval/backend/tests/test_job_aggregation.py \
-            application/persona_eval/backend/tests/test_persona_pool_service.py \
-            application/persona_eval/backend/tests/test_post_run_feedback.py \
-            application/persona_eval/backend/tests/test_remote_runner_client.py \
-            application/persona_eval/backend/tests/test_remote_runner_dispatch.py \
-            application/persona_eval/backend/tests/test_remote_runner_harbor_job_service.py \
-            application/persona_eval/backend/tests/test_remote_runner_server.py \
-            application/persona_eval/backend/tests/test_task_detail_service.py \
-            application/persona_eval/backend/tests/test_trial_events.py \
+            application/playground/backend/tests/test_api_schemas.py \
+            application/playground/backend/tests/test_application_types.py \
+            application/playground/backend/tests/test_config.py \
+            application/playground/backend/tests/test_harbor_chat_eval.py \
+            application/playground/backend/tests/test_harbor_chat_mcp_session.py \
+            application/playground/backend/tests/test_harbor_job_service.py \
+            application/playground/backend/tests/test_harbor_jobs_api.py \
+            application/playground/backend/tests/test_harbor_playground.py \
+            application/playground/backend/tests/test_harbor_survey_eval.py \
+            application/playground/backend/tests/test_harbor_web_trace.py \
+            application/playground/backend/tests/test_job_aggregation.py \
+            application/playground/backend/tests/test_persona_pool_service.py \
+            application/playground/backend/tests/test_post_run_feedback.py \
+            application/playground/backend/tests/test_remote_runner_client.py \
+            application/playground/backend/tests/test_remote_runner_dispatch.py \
+            application/playground/backend/tests/test_remote_runner_harbor_job_service.py \
+            application/playground/backend/tests/test_remote_runner_server.py \
+            application/playground/backend/tests/test_task_detail_service.py \
+            application/playground/backend/tests/test_trial_events.py \
             tests/environment/test_application_tasks.py

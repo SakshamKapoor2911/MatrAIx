@@ -13,17 +13,17 @@ from harbor.environments.base import BaseEnvironment
 from harbor.models.agent.context import AgentContext
 from harbor.models.agent.name import AgentName
 
-from persona_eval.harbor.persona_eval import resolve_repo_root
-from persona_eval.survey_task_content import (
+from playground.harbor.playground import resolve_repo_root
+from playground.survey_task_content import (
     load_survey_task_content_for_questionnaire_id,
     load_survey_task_content_for_task_path,
 )
-from persona_eval.harbor.trial_events import TrialEventWriter
+from playground.harbor.trial_events import TrialEventWriter
 from backend.service.survey_types import SurveyEvalConfig
-from persona_eval.inprocess.survey_eval import InprocessSurveyEvalRunner
-from persona_eval.persona_model import resolve_persona_model
+from playground.inprocess.survey_eval import InprocessSurveyEvalRunner
+from playground.persona_model import resolve_persona_model
 from personabench.agents.persona.mixin import PersonaMixin
-from persona_eval.types import Persona as EvalPersona
+from playground.types import Persona as EvalPersona
 
 
 def _utc_now() -> str:

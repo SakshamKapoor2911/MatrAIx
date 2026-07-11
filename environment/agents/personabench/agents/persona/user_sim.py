@@ -9,10 +9,10 @@ from harbor.environments.base import BaseEnvironment
 from harbor.models.agent.context import AgentContext
 from harbor.models.agent.name import AgentName
 
-from persona_eval.harbor.chat_eval import (
+from playground.harbor.chat_eval import (
     run_harbor_chat_eval_for_persona,
 )
-from persona_eval.harbor.trial_events import TrialEventWriter
+from playground.harbor.trial_events import TrialEventWriter
 from personabench.agents.persona.mixin import PersonaMixin
 
 

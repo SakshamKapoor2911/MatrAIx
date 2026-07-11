@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Install InteRecAgent + native resource bundles + parquet catalogs for PersonaEval.
+# Install InteRecAgent + native resource bundles + parquet catalogs for Playground.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"

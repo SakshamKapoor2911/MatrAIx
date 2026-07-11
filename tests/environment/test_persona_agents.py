@@ -59,7 +59,7 @@ def test_installed_runtime_packages_do_not_import_environment_namespace() -> Non
         for path in root.rglob("*.py"):
             text = path.read_text(encoding="utf-8")
             assert "environment.integrations" not in text, path
-            assert "persona_eval.local" not in text, path
+            assert "playground.local" not in text, path
             assert "from environment." not in text, path
             assert "import environment." not in text, path
 

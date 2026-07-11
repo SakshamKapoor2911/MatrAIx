@@ -16,7 +16,7 @@ snapshots, generated jobs, and full persona datasets are intentionally excluded.
 ## Install
 
 Use the **wide install** in [README.md — Step 1](../README.md#step-1--clone-and-install)
-from the repository root (root package, `persona-eval`, `harbor-langsmith`,
+from the repository root (root package, `playground`, `harbor-langsmith`,
 `rewardkit`, `simpleqa`, and test deps). That is the default for new
 contributors.
 
@@ -33,11 +33,11 @@ uv pip install pytest pytest-asyncio
 Run the curated Python test suite after installing the optional packages above:
 
 ```bash
-PYTHONPATH=.:environment/runtime:packages/persona-eval/src:application/persona_eval \
+PYTHONPATH=.:environment/runtime:packages/playground/src:application/playground \
   uv run pytest tests/ \
     packages/harbor-langsmith/tests/ \
     packages/rewardkit/tests/ \
-    application/persona_eval/backend/tests/ \
+    application/playground/backend/tests/ \
     tests/environment/test_application_tasks.py
 ```
 
