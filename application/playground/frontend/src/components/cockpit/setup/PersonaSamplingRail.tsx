@@ -2,10 +2,15 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import { api, ApiError } from "@/lib/api";
-import { PERSONA_BENCH_POOL, type PersonaPoolPersonaCard } from "@/lib/types";
+import {
+  PERSONA_BENCH_POOL,
+  type PersonaPoolPersonaCard,
+  type TaskPersonaStrategy,
+} from "@/lib/types";
 import { syntheticDisplayName } from "@/lib/personaDisplay";
-import { FOCUS_RING, Sym } from "../cockpitShared";
+import { FOCUS_RING, Sym, humanizeToken } from "../cockpitShared";
 import { CockpitSelect, type CockpitSelectOption } from "./CockpitSelect";
+import { CockpitToggle } from "./CockpitToggle";
 import { BenchPersonaCard } from "./BenchPersonaCard";
 import { BenchPersonaDetailPanel } from "./BenchPersonaDetailPanel";
 import { CockpitRailHeader } from "./CockpitRailHeader";
@@ -34,6 +39,55 @@ function clampSampleSize(value: number): number {
   return Math.min(SAMPLE_SIZE_MAX, Math.max(2, Math.round(value)));
 }
 
+function strategyModeLabel(mode: string | null | undefined): string {
+  if (mode === "stratified") return "Stratified";
+  if (mode === "random") return "Random sample";
+  if (mode === "single") return "Quick pick";
+  return "Custom";
+}
+
+function TaskStrategySummary({ strategy }: { strategy: TaskPersonaStrategy }) {
+  const dimEntries = Object.entries(strategy.dimensionFilters ?? {}).filter(
+    ([, values]) => Array.isArray(values) && values.length > 0,
+  );
+  const sources = (strategy.sources ?? []).filter((value) => value.trim());
+  const stratify = (strategy.stratifyFields ?? []).filter((value) => value.trim());
+  const sample =
+    typeof strategy.sampleSize === "number" && strategy.sampleSize > 0
+      ? strategy.sampleSize
+      : null;
+
+  return (
+    <div className="space-y-1.5 border-t border-primary/15 pt-2">
+      <p className="text-[10px] font-medium text-text-main">
+        {strategyModeLabel(strategy.defaultMode)}
+        {sample != null ? ` · sample ${sample}` : ""}
+      </p>
+      {sources.length > 0 ? (
+        <p className="text-[10px] leading-snug text-text-variant">
+          <span className="text-text-dim">Sources · </span>
+          {sources.join(", ")}
+        </p>
+      ) : null}
+      {dimEntries.map(([dim, values]) => (
+        <p key={dim} className="text-[10px] leading-snug text-text-variant">
+          <span className="text-text-dim">{humanizeToken(dim)} · </span>
+          {values.join(", ")}
+        </p>
+      ))}
+      {stratify.length > 0 ? (
+        <p className="text-[10px] leading-snug text-text-variant">
+          <span className="text-text-dim">Stratify · </span>
+          {stratify.map(humanizeToken).join(", ")}
+        </p>
+      ) : null}
+      {sources.length === 0 && dimEntries.length === 0 && stratify.length === 0 && sample == null ? (
+        <p className="text-[10px] text-text-dim">No filters — full pool.</p>
+      ) : null}
+    </div>
+  );
+}
+
 function fallbackQuickPickCards(): PersonaPoolPersonaCard[] {
   return QUICK_PICK_PERSONA_IDS.map((personaId) => ({
     personaId,
@@ -60,8 +114,9 @@ export interface PersonaSamplingRailProps {
   onStratifyFieldsChange: (fields: string[]) => void;
   taskType?: PlaygroundTaskType;
   hasTaskStrategy?: boolean;
-  strategySampleSize?: number | null;
-  onResetToTaskStrategy?: () => void;
+  taskPersonaStrategy?: TaskPersonaStrategy | null;
+  useTaskDefaultStrategy?: boolean;
+  onUseTaskDefaultStrategyChange?: (useDefault: boolean) => void;
   disabled?: boolean;
 }
 
@@ -82,8 +137,9 @@ export function PersonaSamplingRail({
   onStratifyFieldsChange,
   taskType,
   hasTaskStrategy = false,
-  strategySampleSize = null,
-  onResetToTaskStrategy,
+  taskPersonaStrategy = null,
+  useTaskDefaultStrategy = false,
+  onUseTaskDefaultStrategyChange,
   disabled,
 }: PersonaSamplingRailProps) {
   const [filterOpen, setFilterOpen] = useState(false);
@@ -209,6 +265,8 @@ export function PersonaSamplingRail({
   const poolCount = catalogQuery.data?.count;
   const showModelSelector =
     taskType === "survey" || taskType === "chatbot" || taskType === "web" || taskType === "os-app";
+  const strategyLocked = hasTaskStrategy && useTaskDefaultStrategy;
+  const customSamplingUnlocked = !strategyLocked;
 
   return (
     <aside className="glass-panel glass-panel-rail relative flex h-full min-h-0 flex-col rounded-xl p-4">
@@ -231,7 +289,7 @@ export function PersonaSamplingRail({
           <button
             key={tab}
             type="button"
-            disabled={disabled}
+            disabled={disabled || strategyLocked}
             onClick={() => onModeChange(tab)}
             className={`cockpit-segment__btn w-full ${FOCUS_RING} ${
               mode === tab ? "cockpit-segment__btn--active" : ""
@@ -250,78 +308,83 @@ export function PersonaSamplingRail({
 
       {mode !== "single" && (
         <div className="mb-2 space-y-2">
-          {hasTaskStrategy ? (
-            <div className="flex items-center gap-2 rounded-lg border border-primary/20 bg-primary/5 px-2.5 py-1.5">
-              <Sym name="bookmark" size={14} className="shrink-0 text-primary" />
-              <span className="min-w-0 flex-1 text-[10px] leading-snug text-text-variant">
-                Task default persona strategy
-                {typeof strategySampleSize === "number" ? ` · sample ${strategySampleSize}` : ""}
-              </span>
-              {onResetToTaskStrategy ? (
-                <button
-                  type="button"
-                  disabled={disabled}
-                  onClick={onResetToTaskStrategy}
-                  className={`shrink-0 text-[10px] font-medium text-primary hover:underline disabled:opacity-50 ${FOCUS_RING}`}
-                >
-                  Reset
-                </button>
+          {hasTaskStrategy && taskPersonaStrategy ? (
+            <div className="rounded-lg border border-primary/20 bg-primary/5 px-2.5 py-2">
+              <CockpitToggle
+                label="Task default strategy"
+                description={
+                  useTaskDefaultStrategy
+                    ? "Filters follow persona_strategy.json"
+                    : "Off — edit filters yourself"
+                }
+                checked={useTaskDefaultStrategy}
+                disabled={disabled}
+                onChange={(checked) => onUseTaskDefaultStrategyChange?.(checked)}
+              />
+              {useTaskDefaultStrategy ? (
+                <TaskStrategySummary strategy={taskPersonaStrategy} />
               ) : null}
             </div>
           ) : null}
 
-          <button
-            type="button"
-            disabled={disabled}
-            onClick={() => setFilterOpen(true)}
-            className={`flex w-full items-center gap-2 rounded-lg border border-outline/40 bg-surface/40 px-2.5 py-2 text-left transition hover:border-primary/35 hover:bg-surface/55 ${FOCUS_RING}`}
-          >
-            <Sym name="tune" size={16} className="shrink-0 text-primary" />
-            <span className="min-w-0 flex-1 text-[11px] font-medium text-text-main">Persona filters</span>
-            {filterCount > 0 ? (
-              <span className="rounded-full bg-primary/15 px-1.5 font-mono text-[9px] text-primary">
-                {filterCount}
+          {customSamplingUnlocked ? (
+            <button
+              type="button"
+              disabled={disabled}
+              onClick={() => setFilterOpen(true)}
+              className={`flex w-full items-center gap-2 rounded-lg border border-outline/40 bg-surface/40 px-2.5 py-2 text-left transition hover:border-primary/35 hover:bg-surface/55 ${FOCUS_RING}`}
+            >
+              <Sym name="tune" size={16} className="shrink-0 text-primary" />
+              <span className="min-w-0 flex-1 text-[11px] font-medium text-text-main">
+                Persona filters
               </span>
-            ) : null}
-            <Sym name="chevron_right" size={16} className="shrink-0 text-text-dim" />
-          </button>
+              {filterCount > 0 ? (
+                <span className="rounded-full bg-primary/15 px-1.5 font-mono text-[9px] text-primary">
+                  {filterCount}
+                </span>
+              ) : null}
+              <Sym name="chevron_right" size={16} className="shrink-0 text-text-dim" />
+            </button>
+          ) : null}
 
           <div className="flex items-end gap-2">
-            <label className="flex w-[4.25rem] shrink-0 flex-col gap-0.5">
-              <span className="text-[10px] text-text-dim">
-                Sample{typeof poolCount === "number" ? ` · ${poolCount}` : ""}
-              </span>
-              <input
-                type="number"
-                inputMode="numeric"
-                min={2}
-                max={SAMPLE_SIZE_MAX}
-                step={1}
-                value={sampleSizeDraft ?? sampleSize}
-                disabled={disabled}
-                onFocus={() => setSampleSizeDraft(String(sampleSize))}
-                onChange={(e) => {
-                  const raw = e.target.value;
-                  // Keep empty / partial values while typing; clamp only on blur.
-                  if (raw === "" || /^\d+$/.test(raw)) {
-                    setSampleSizeDraft(raw);
-                  }
-                }}
-                onBlur={() => {
-                  const raw = sampleSizeDraft;
-                  setSampleSizeDraft(null);
-                  onSampleSizeChange(
-                    clampSampleSize(raw === "" || raw == null ? sampleSize : Number(raw)),
-                  );
-                }}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    (e.target as HTMLInputElement).blur();
-                  }
-                }}
-                className={`h-9 w-full rounded-lg border border-outline/50 bg-surface/60 px-1.5 text-center font-mono text-[13px] text-text-main disabled:opacity-50 ${FOCUS_RING}`}
-              />
-            </label>
+            {customSamplingUnlocked ? (
+              <label className="flex w-[4.25rem] shrink-0 flex-col gap-0.5">
+                <span className="text-[10px] text-text-dim">
+                  Sample{typeof poolCount === "number" ? ` · ${poolCount}` : ""}
+                </span>
+                <input
+                  type="number"
+                  inputMode="numeric"
+                  min={2}
+                  max={SAMPLE_SIZE_MAX}
+                  step={1}
+                  value={sampleSizeDraft ?? sampleSize}
+                  disabled={disabled}
+                  onFocus={() => setSampleSizeDraft(String(sampleSize))}
+                  onChange={(e) => {
+                    const raw = e.target.value;
+                    // Keep empty / partial values while typing; clamp only on blur.
+                    if (raw === "" || /^\d+$/.test(raw)) {
+                      setSampleSizeDraft(raw);
+                    }
+                  }}
+                  onBlur={() => {
+                    const raw = sampleSizeDraft;
+                    setSampleSizeDraft(null);
+                    onSampleSizeChange(
+                      clampSampleSize(raw === "" || raw == null ? sampleSize : Number(raw)),
+                    );
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      (e.target as HTMLInputElement).blur();
+                    }
+                  }}
+                  className={`h-9 w-full rounded-lg border border-outline/50 bg-surface/60 px-1.5 text-center font-mono text-[13px] text-text-main disabled:opacity-50 ${FOCUS_RING}`}
+                />
+              </label>
+            ) : null}
             <button
               type="button"
               disabled={disabled || generating}
@@ -369,7 +432,9 @@ export function PersonaSamplingRail({
         )}
         {mode !== "single" && displayCards.length === 0 && !disabled && (
           <p className="rounded-lg border border-dashed border-outline/40 p-4 text-center text-[11px] text-text-dim">
-            Set filters and generate a preview cohort.
+            {strategyLocked
+              ? "Generate a preview cohort from the task default strategy."
+              : "Set filters and generate a preview cohort."}
           </p>
         )}
         {mode !== "single" && displayCards.length === 0 && disabled && lockedCohortQuery.isLoading && (

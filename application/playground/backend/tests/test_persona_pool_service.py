@@ -164,6 +164,16 @@ def test_get_catalog_and_sample_with_filters(tmp_path, monkeypatch):
     assert sampled["matchedCount"] == 1
     assert sampled["personaIds"] == ["0002"]
 
+    stratified = service.sample_pool(
+        sample_size=2,
+        seed=7,
+        stratify_fields=["economic_motivation"],
+        sample_size_per_value_group=1,
+    )
+    assert stratified["matchedCount"] == 2
+    assert set(stratified["personaIds"]) == {"0001", "0002"}
+    assert stratified["stratifyFields"] == ["economic_motivation"]
+
 
 def test_list_persona_cards_all_personas(tmp_path, monkeypatch):
     repo = tmp_path

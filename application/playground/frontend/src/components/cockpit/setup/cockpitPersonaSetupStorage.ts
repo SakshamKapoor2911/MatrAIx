@@ -16,6 +16,8 @@ export interface CockpitPersonaSetupRecord {
   sampleSize: number;
   parallelTrials: number;
   personaModel: string;
+  /** When true, sampling follows the task's persona_strategy.json and custom filters stay locked. */
+  useTaskDefaultStrategy: boolean;
 }
 
 type CockpitPersonaSetupStore = {
@@ -81,6 +83,9 @@ function normalizeRecord(
       typeof record.personaModel === "string" && record.personaModel
         ? record.personaModel
         : fallbackPersonaModel,
+    // Legacy entries omit this flag — prefer task default until the user turns it off.
+    useTaskDefaultStrategy:
+      typeof record.useTaskDefaultStrategy === "boolean" ? record.useTaskDefaultStrategy : true,
   };
 }
 
@@ -93,6 +98,7 @@ export function defaultPersonaSetup(fallbackPersonaModel: string): CockpitPerson
     sampleSize: 4,
     parallelTrials: 2,
     personaModel: fallbackPersonaModel,
+    useTaskDefaultStrategy: false,
   };
 }
 
@@ -143,8 +149,9 @@ export function setupFromPersonaStrategy(
     next.sampleSize = Math.min(500, Math.max(2, Math.round(strategy.sampleSize)));
   }
 
-  // Fresh strategy apply clears prior preview selection.
+  // Fresh strategy apply clears prior preview selection and locks custom filters.
   next.selectedPersonaIds = [];
+  next.useTaskDefaultStrategy = true;
   return next;
 }
 

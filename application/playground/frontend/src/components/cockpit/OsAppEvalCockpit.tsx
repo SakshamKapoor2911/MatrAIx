@@ -135,8 +135,9 @@ export function OsAppEvalCockpit({
     setParallelTrials,
     isBatchRun,
     hasTaskStrategy,
-    strategySampleSize,
-    resetToTaskStrategy,
+    taskPersonaStrategy,
+    useTaskDefaultStrategy,
+    setUseTaskDefaultStrategy,
   } = useSetupPersonaSampling(options, "os-app", setupTaskPath);
   const {
     batchJobName,
@@ -427,8 +428,9 @@ export function OsAppEvalCockpit({
           stratifyFields={stratifyFields}
           onStratifyFieldsChange={setStratifyFields}
           hasTaskStrategy={hasTaskStrategy}
-          strategySampleSize={strategySampleSize}
-          onResetToTaskStrategy={resetToTaskStrategy}
+          taskPersonaStrategy={taskPersonaStrategy}
+          useTaskDefaultStrategy={useTaskDefaultStrategy}
+          onUseTaskDefaultStrategyChange={setUseTaskDefaultStrategy}
           disabled={setupLocked}
         />
       }

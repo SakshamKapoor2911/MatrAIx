@@ -219,8 +219,9 @@ export function SurveyEvalCockpit({
     setParallelTrials,
     isBatchRun,
     hasTaskStrategy,
-    strategySampleSize,
-    resetToTaskStrategy,
+    taskPersonaStrategy,
+    useTaskDefaultStrategy,
+    setUseTaskDefaultStrategy,
   } = useSetupPersonaSampling(options, "survey", setupTaskPath);
   const {
     batchJobName,
@@ -544,8 +545,9 @@ export function SurveyEvalCockpit({
           stratifyFields={stratifyFields}
           onStratifyFieldsChange={setStratifyFields}
           hasTaskStrategy={hasTaskStrategy}
-          strategySampleSize={strategySampleSize}
-          onResetToTaskStrategy={resetToTaskStrategy}
+          taskPersonaStrategy={taskPersonaStrategy}
+          useTaskDefaultStrategy={useTaskDefaultStrategy}
+          onUseTaskDefaultStrategyChange={setUseTaskDefaultStrategy}
           disabled={setupLocked}
         />
       }

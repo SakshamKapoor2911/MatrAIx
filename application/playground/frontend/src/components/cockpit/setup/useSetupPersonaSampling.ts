@@ -41,6 +41,9 @@ export function useSetupPersonaSampling(
   const [parallelTrials, setParallelTrials] = useState(initial.parallelTrials);
   const [persona, setPersona] = useState<PlaygroundPersona | null>(null);
   const [taskPersonaStrategy, setTaskPersonaStrategy] = useState<TaskPersonaStrategy | null>(null);
+  const [useTaskDefaultStrategy, setUseTaskDefaultStrategyState] = useState(
+    initial.useTaskDefaultStrategy,
+  );
   const hydratedPathRef = useRef<string | null>(null);
   const skipNextPersistRef = useRef(false);
 
@@ -64,6 +67,7 @@ export function useSetupPersonaSampling(
     setSampleSize(record.sampleSize);
     setPersonaModel(record.personaModel);
     setParallelTrials(record.parallelTrials);
+    setUseTaskDefaultStrategyState(record.useTaskDefaultStrategy);
   }, []);
 
   const resetToTaskStrategy = useCallback(() => {
@@ -84,6 +88,17 @@ export function useSetupPersonaSampling(
     taskPersonaStrategy,
   ]);
 
+  const setUseTaskDefaultStrategy = useCallback(
+    (next: boolean) => {
+      if (next) {
+        resetToTaskStrategy();
+        return;
+      }
+      setUseTaskDefaultStrategyState(false);
+    },
+    [resetToTaskStrategy],
+  );
+
   useEffect(() => {
     setTaskPersonaStrategy(strategyQuery.data ?? null);
   }, [strategyQuery.data]);
@@ -96,15 +111,27 @@ export function useSetupPersonaSampling(
     }
     if (hydratedPathRef.current === path) return;
 
+    // Wait for strategy fetch so default-on can re-apply persona_strategy.json.
+    if (strategyQuery.isFetching || strategyQuery.isLoading) return;
+
     const stored = readCockpitPersonaSetup(taskKind, fallbackPersonaModel, path);
     if (hasStoredPersonaSetup(path)) {
-      applySetupRecord(stored);
+      if (stored.useTaskDefaultStrategy && strategyQuery.data) {
+        const applied = setupFromPersonaStrategy(strategyQuery.data, fallbackPersonaModel, {
+          ...defaultPersonaSetup(fallbackPersonaModel),
+          personaModel: stored.personaModel,
+          parallelTrials: stored.parallelTrials,
+        });
+        applySetupRecord(applied);
+      } else {
+        applySetupRecord({
+          ...stored,
+          useTaskDefaultStrategy: stored.useTaskDefaultStrategy && Boolean(strategyQuery.data),
+        });
+      }
       hydratedPathRef.current = path;
       return;
     }
-
-    // Wait for strategy fetch when we have a path and no path-specific storage.
-    if (strategyQuery.isFetching || strategyQuery.isLoading) return;
 
     const applied = setupFromPersonaStrategy(strategyQuery.data, fallbackPersonaModel, {
       ...defaultPersonaSetup(fallbackPersonaModel),
@@ -138,6 +165,7 @@ export function useSetupPersonaSampling(
         sampleSize,
         parallelTrials,
         personaModel,
+        useTaskDefaultStrategy,
       },
       normalizedPath,
     );
@@ -151,6 +179,7 @@ export function useSetupPersonaSampling(
     sampleSize,
     parallelTrials,
     personaModel,
+    useTaskDefaultStrategy,
   ]);
 
   useEffect(() => {
@@ -189,10 +218,6 @@ export function useSetupPersonaSampling(
   );
 
   const hasTaskStrategy = Boolean(taskPersonaStrategy);
-  const strategySampleSize =
-    typeof taskPersonaStrategy?.sampleSize === "number" && taskPersonaStrategy.sampleSize > 0
-      ? taskPersonaStrategy.sampleSize
-      : null;
 
   return {
     persona,
@@ -215,7 +240,8 @@ export function useSetupPersonaSampling(
     setParallelTrials,
     isBatchRun,
     hasTaskStrategy,
-    strategySampleSize,
-    resetToTaskStrategy,
+    taskPersonaStrategy,
+    useTaskDefaultStrategy: hasTaskStrategy && useTaskDefaultStrategy,
+    setUseTaskDefaultStrategy,
   };
 }

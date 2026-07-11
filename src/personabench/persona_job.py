@@ -87,13 +87,33 @@ def get_persona_field_value(
     *,
     repo_root: Path,
 ) -> Any:
-    """Read a dotted persona field from manifest entry or YAML file."""
-    if field_path.split(".")[0] in entry:
-        return get_nested(entry, field_path)
-    raw = yaml.safe_load((repo_root / entry["path"]).read_text(encoding="utf-8"))
+    """Read a dotted persona field from manifest entry or YAML file.
+
+    Bare dimension ids (e.g. ``age_bracket``) resolve via ``dimensions.<id>`` so
+    Playground strategies and filter UIs can pass catalog ids without a prefix.
+    Explicit dotted paths (e.g. ``dimensions.age_bracket``) still work.
+    """
+    candidates = [field_path]
+    if "." not in field_path:
+        candidates.append(f"dimensions.{field_path}")
+
+    for path in candidates:
+        if path.split(".")[0] in entry:
+            value = get_nested(entry, path)
+            if value is not None:
+                return value
+
+    rel = entry.get("path")
+    if not rel:
+        return None
+    raw = yaml.safe_load((repo_root / rel).read_text(encoding="utf-8"))
     if not isinstance(raw, dict):
         return None
-    return get_nested(raw, field_path)
+    for path in candidates:
+        value = get_nested(raw, path)
+        if value is not None:
+            return value
+    return None
 
 
 def get_persona_dimension_value(
