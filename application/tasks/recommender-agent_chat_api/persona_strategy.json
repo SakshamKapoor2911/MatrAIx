@@ -1,8 +1,23 @@
 {
   "schemaVersion": "1.0",
-  "defaultMode": "stratified",
   "sources": [],
-  "dimensionFilters": {},
-  "stratifyFields": ["age_bracket", "region"],
+  "defaultMode": "stratified",
+  "dimensionFilters": {
+    "age_bracket": [
+      "18-24",
+      "25-34",
+      "35-44",
+      "55-64"
+    ],
+    "intent": [
+      "Decide",
+      "Brainstorm",
+      "Learn / explain"
+    ]
+  },
+  "stratifyFields": [
+    "age_bracket",
+    "region"
+  ],
   "sampleSize": 8
 }

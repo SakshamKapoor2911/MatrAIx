@@ -1,12 +1,22 @@
 {
-    "schemaVersion": "1.0",
-    "defaultMode": "random",
-    "sources": [],
-    "dimensionFilters": {
-        "age_bracket": [
-            "25-34",
-            "35-44"
-        ]
-    },
-    "sampleSize": 4
+  "schemaVersion": "1.0",
+  "sources": [],
+  "defaultMode": "stratified",
+  "dimensionFilters": {
+    "domain": [
+      "Software & AI",
+      "Engineering",
+      "Education",
+      "Natural Sciences"
+    ],
+    "economic_motivation": [
+      "Cost-sensitive",
+      "Value-driven"
+    ]
+  },
+  "stratifyFields": [
+    "life_stage",
+    "tech_savviness"
+  ],
+  "sampleSize": 6
 }

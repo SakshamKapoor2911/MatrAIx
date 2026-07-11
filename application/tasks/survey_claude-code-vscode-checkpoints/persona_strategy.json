@@ -1,13 +1,22 @@
 {
-    "schemaVersion": "1.0",
-    "defaultMode": "random",
-    "sources": [],
-    "dimensionFilters": {
-        "age_bracket": [
-            "18-24",
-            "25-34",
-            "35-44"
-        ]
-    },
-    "sampleSize": 8
+  "schemaVersion": "1.0",
+  "sources": [],
+  "defaultMode": "stratified",
+  "dimensionFilters": {
+    "domain": [
+      "Software & AI",
+      "Engineering",
+      "Natural Sciences",
+      "Education"
+    ],
+    "tech_savviness": [
+      "Digital native",
+      "Comfortable"
+    ]
+  },
+  "stratifyFields": [
+    "life_stage",
+    "values_priority"
+  ],
+  "sampleSize": 8
 }

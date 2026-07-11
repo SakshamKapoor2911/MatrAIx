@@ -1,12 +1,22 @@
 {
-    "schemaVersion": "1.0",
-    "defaultMode": "random",
-    "sources": [],
-    "dimensionFilters": {
-        "age_bracket": [
-            "25-34",
-            "35-44"
-        ]
-    },
-    "sampleSize": 8
+  "schemaVersion": "1.0",
+  "sources": [],
+  "defaultMode": "stratified",
+  "dimensionFilters": {
+    "domain": [
+      "Finance & Economics",
+      "Business & Management",
+      "Software & AI"
+    ],
+    "age_bracket": [
+      "25-34",
+      "35-44",
+      "55-64"
+    ]
+  },
+  "stratifyFields": [
+    "decision_style",
+    "tech_savviness"
+  ],
+  "sampleSize": 8
 }

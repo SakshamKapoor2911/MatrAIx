@@ -1,13 +1,21 @@
 {
-    "schemaVersion": "1.0",
-    "defaultMode": "random",
-    "sources": [],
-    "dimensionFilters": {
-        "age_bracket": [
-            "25-34",
-            "35-44",
-            "55-64"
-        ]
-    },
-    "sampleSize": 4
+  "schemaVersion": "1.0",
+  "sources": [],
+  "defaultMode": "stratified",
+  "dimensionFilters": {
+    "life_stage": [
+      "Early career",
+      "Mid-life",
+      "Parent of young kids"
+    ],
+    "age_bracket": [
+      "25-34",
+      "35-44"
+    ]
+  },
+  "stratifyFields": [
+    "tech_savviness",
+    "values_priority"
+  ],
+  "sampleSize": 6
 }

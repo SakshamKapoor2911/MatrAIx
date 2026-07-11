@@ -1,9 +1,21 @@
 {
   "schemaVersion": "1.0",
-  "defaultMode": "random",
-  "sources": ["Nemotron"],
+  "sources": [],
+  "defaultMode": "stratified",
   "dimensionFilters": {
-    "age_bracket": ["25-34", "35-44"]
+    "life_stage": [
+      "Parent of young kids",
+      "Mid-life",
+      "Early career"
+    ],
+    "age_bracket": [
+      "25-34",
+      "35-44"
+    ]
   },
-  "sampleSize": 4
+  "stratifyFields": [
+    "economic_motivation",
+    "life_stage"
+  ],
+  "sampleSize": 8
 }

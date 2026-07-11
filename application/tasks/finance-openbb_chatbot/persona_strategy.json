@@ -1,13 +1,21 @@
 {
-    "schemaVersion": "1.0",
-    "defaultMode": "random",
-    "sources": [],
-    "dimensionFilters": {
-        "age_bracket": [
-            "25-34",
-            "35-44",
-            "55-64"
-        ]
-    },
-    "sampleSize": 6
+  "schemaVersion": "1.0",
+  "sources": [],
+  "defaultMode": "stratified",
+  "dimensionFilters": {
+    "domain": [
+      "Finance & Economics",
+      "Business & Management"
+    ],
+    "age_bracket": [
+      "25-34",
+      "35-44",
+      "55-64"
+    ]
+  },
+  "stratifyFields": [
+    "decision_style",
+    "life_stage"
+  ],
+  "sampleSize": 6
 }

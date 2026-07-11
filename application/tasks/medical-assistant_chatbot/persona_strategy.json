@@ -1,13 +1,23 @@
 {
-    "schemaVersion": "1.0",
-    "defaultMode": "random",
-    "sources": [],
-    "dimensionFilters": {
-        "age_bracket": [
-            "25-34",
-            "35-44",
-            "55-64"
-        ]
-    },
-    "sampleSize": 6
+  "schemaVersion": "1.0",
+  "sources": [],
+  "defaultMode": "stratified",
+  "dimensionFilters": {
+    "life_stage": [
+      "Parent of young kids",
+      "Mid-life",
+      "Empty nester",
+      "Retirement"
+    ],
+    "age_bracket": [
+      "25-34",
+      "35-44",
+      "55-64"
+    ]
+  },
+  "stratifyFields": [
+    "tech_savviness",
+    "values_priority"
+  ],
+  "sampleSize": 6
 }
