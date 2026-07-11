@@ -12,7 +12,7 @@ Requires **Docker Compose** (local `docker` environment). Not supported on cloud
 uv run harbor run -p application/tasks/example-chat-mcp_support_chatbot -a oracle
 ```
 
-**Full run** — PersonaEval UI or terminal auto mode: [Application Quickstart](../../QUICKSTART.md).
+**Full run** — Playground UI or terminal auto mode: [Application Quickstart](../../QUICKSTART.md).
 
 ## Layout
 

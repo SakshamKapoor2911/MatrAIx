@@ -69,11 +69,14 @@ supplementary materials under `input/`:
 
 `application/tasks/<task-name>/`
 
-- `instruction.md` — the single task instruction (goal, interaction style, stop
-  conditions)
-- `input/context.md` — optional scenario or application background
-- `input/protocol.md` — optional chat API or MCP contract when the agent needs
-  transport details separate from the persona task
+- `instruction.md` — the single **persona-facing** task brief (goal, interaction
+  style, stop conditions). Write it as instructions for a real person using the
+  product — no file paths, transport contracts, eval jargon, or harness setup.
+- `input/context.md` — optional **product / SUT background** for the persona
+  (what the application is, what it does, what to expect). Same rule: real-user
+  language only — describe the product, not HTTP contracts or eval plumbing.
+- `input/protocol.md` — optional chat API or MCP contract for the **agent /
+  runtime**, never pasted into persona-facing instruction or context
 - `input/chatbot.yaml` — runtime connection metadata
 - `input/self_report_schema.yaml` — machine-readable persona self-report prompts
   for `user_feedback.json`

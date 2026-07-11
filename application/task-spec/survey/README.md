@@ -47,7 +47,7 @@ flowchart TB
 |---|---|
 | `question_response` per question | **Required** |
 | `trial_summary` | **Required** |
-| Layer 2 summarize `reason` by `response` | Optional in `reporting.json` |
+| Layer 2 summarize `reason` by `response` | Only when `askRationale` is on |
 
 ## Contract
 
@@ -65,11 +65,21 @@ supplementary materials under `input/`:
 
 `application/tasks/<task-name>/`
 
-- `instruction.md` — the single task instruction (steps and constraints)
-- `input/context.md` — product brief, scenario, or other context shown before the
-  questionnaire
+- `instruction.md` — what this survey is for and how to answer (task goal +
+  answer rules). Do **not** put platform paths like `/app/output/survey_result.json`
+  here; the runtime writes that artifact for you.
+- `input/context.md` — product brief / scenario the respondent must read before
+  answering (what the app or concept is). Keep answer mechanics out of context.
 - `input/questionnaire.yaml` — the canonical structured questionnaire source,
   including whether each answer should include `rationale` / `confidence`
+
+Split of concerns:
+
+| Asset | Put here | Keep out |
+|---|---|---|
+| `instruction.md` | Survey goal, what to decide/react to, answer rules | Long product prose, platform file paths |
+| `input/context.md` | Product/scenario brief the persona needs | Choice-id mechanics, submission paths |
+| `questionnaire.yaml` | Questions, types, options, ask flags | Marketing essays |
 
 `questionnaire.yaml` is the source of truth for question structure, answer
 metadata flags (`askRationale` / `askConfidence`), UI rendering, and the
@@ -149,9 +159,9 @@ and emits normalized contexts for batch aggregation.
 
 This contract should answer:
 
-- what the persona answered for each question
-- why they answered that way when a rationale is available
+- what the persona answered for each question (choice id / likert / bool / text)
 - how many answers and trajectory events the trial produced
+- optionally why, only when the questionnaire opts into `askRationale`
 
 Keep using the platform's existing artifact shape:
 
@@ -187,8 +197,8 @@ Emit one `question_response` context for each entry in `survey_result.json`
 | Facet key | Role | Kind | Required | Notes |
 |---|---|---|---|---|
 | `response` | `primary` | `numerical`, `categorical`, or `textual` | Yes | Use `numerical` for likert values, `categorical` for choice ids, `textual` for free-text answers |
-| `reason` | `explanation` | `textual` | Prefer | Map from `answers[].rationale` when present |
-| `confidence` | `score` | `numerical` | Optional | Map from `answers[].confidence` when present |
+| `reason` | `explanation` | `textual` | Only if asked | Map from `answers[].rationale` when `askRationale` is true |
+| `confidence` | `score` | `numerical` | Only if asked | Map from `answers[].confidence` when `askConfidence` is true |
 
 The context `label` should normally be the question prompt or a stable question
 id. The context `key` should stay stable across trials, for example
@@ -206,11 +216,29 @@ The `trial_summary` context summarizes the whole survey trial:
 
 ### Default Reporting Pattern
 
-For survey tasks, the default `reporting.json` should usually:
+Default surveys answer with `questionId` + `value` only. Use an empty
+`contextRules` list so Layer 1 aggregates without LLM rollups:
 
-- summarize `reason` by `response` for every `question_response` context
-- optionally judge `reason` for reusable signals such as price sensitivity,
-  preference fit, or hesitation
+```json
+{
+  "schemaVersion": "1.0",
+  "contextRules": []
+}
+```
+
+**What Layer 1 shows by questionnaire type:**
+
+| Question type | Aggregation form |
+|---|---|
+| `likert` | Mean / range of numeric scores |
+| `single_choice` / `multi_choice` | Full response-mix bars (option ids → counts) |
+| `free_text` | Coverage summary + example quotes — **not** fake % bars |
+
+To extract themes / signals from `free_text` (or from `reason` when
+`askRationale` is true), add Layer 2 `summaryDirectives` /
+`judgeDirectives` in `reporting.json` that target the `response` or
+`reason` facet. See `survey_reporting.example.json` and
+`application/tasks/README.md` for a reason-by-response example.
 
 Copy from:
 

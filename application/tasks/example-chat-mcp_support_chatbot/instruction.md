@@ -1,12 +1,7 @@
-# Acme support chat (MCP)
+# Acme Support Chat
 
-Act as the assigned persona while contacting support about the missing order in
-`input/context.md`.
+Chat with Acme Support as yourself — the assigned persona — about your late NovaBuds Pro order **#4521**.
 
-Ask for what you need, react naturally to the responses, and continue until you
-can judge whether support gave you a useful resolution path on order **#4521**.
+Ask for what you need. React naturally to the replies. Continue until you can tell whether support gave you a useful path to resolve the shipment.
 
-Have at least **two** back-and-forth exchanges (four or more messages total).
-Do not promise refunds or replacements you cannot verify.
-
-Use `input/protocol.md` for the MCP tool contract.
+Have at least two back-and-forth exchanges (four or more messages total). Do not promise refunds or replacements you cannot verify.

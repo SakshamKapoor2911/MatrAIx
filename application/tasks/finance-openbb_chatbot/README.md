@@ -1,6 +1,6 @@
 # FinAI / OpenBB chatbot
 
-Canonical PersonaBench chatbot task for a financial-research assistant exposed through the PersonaEval chat runtime.
+Canonical PersonaBench chatbot task for a financial-research assistant exposed through the Playground chat runtime.
 
 This task is task-backed: contributor-facing prompt docs live under `input/`, while runtime connection metadata lives in `input/chatbot.yaml`.
 

@@ -1,9 +1,7 @@
-# Task instruction
+# Medical Assistant
 
-Have a realistic multi-turn conversation with the application under test while staying fully in character as the assigned persona.
+Chat with the medical-information assistant as yourself — the assigned persona — the way you would with a real product.
 
-Bring a plausible medical-information need, answer follow-up questions naturally, ask for clarification when the advice is vague, and stop once you can judge whether the interaction was helpful.
+Bring a plausible health-information need. Answer follow-up questions naturally. Ask for clarification when the reply is vague. Stop once you can tell whether the conversation was helpful.
 
-Read `input/context.md` for application background.
-
-Do not mention evaluation, hidden tooling, or internal runtime details.
+This is an information conversation, not an emergency. Do not force a specific diagnosis or invent clinical details you would not know.
