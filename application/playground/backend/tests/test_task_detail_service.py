@@ -17,7 +17,8 @@ def test_get_task_detail_reads_instruction_markdown(tmp_path):
         encoding="utf-8",
     )
     detail = get_task_detail("application/tasks/example-chat-api_demo", repo_root=tmp_path)
-    assert detail["title"] == "Demo Chat Task"
+    # Display title comes from ``[task].name`` (``demo/chat`` → ``Chat``), not instruction H1.
+    assert detail["title"] == "Chat"
     assert "Talk to the sidecar" in detail["description"]
     assert "Say hi" in detail["profileMarkdown"]
     assert detail["metaType"] == "chatbot"
@@ -73,7 +74,7 @@ def test_get_task_detail_reads_split_survey_content_bundle(tmp_path):
     detail = get_task_detail("application/tasks/example-survey-demo", repo_root=tmp_path)
 
     assert detail["metaType"] == "survey"
-    assert detail["title"] == "Demo Structured Survey"
+    assert detail["title"] == "Survey"
     assert detail["instructionMarkdown"] == "# Demo Structured Survey\n\nAnswer in character."
     assert detail["contextMarkdown"] == "This is the task context."
     assert "survey_result.json" in detail["outputSchemaMarkdown"]
@@ -192,7 +193,7 @@ def test_get_task_detail_prefers_task_root_instruction_and_task_input_supplement
 
     detail = get_task_detail("application/tasks/survey-preferred-input", repo_root=tmp_path)
 
-    assert detail["title"] == "Preferred Input Survey"
+    assert detail["title"] == "Preferred Input"
     assert detail["instructionMarkdown"] == "# Preferred Input Survey\n\nRead task-root instruction."
     assert detail["contextMarkdown"] == "Task-local context."
     assert detail["outputSchemaMarkdown"] == "Task-local schema to `/app/output/survey_result.json`."

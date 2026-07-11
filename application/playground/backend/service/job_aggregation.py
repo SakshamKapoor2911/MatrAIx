@@ -918,7 +918,13 @@ def _aggregate_field(
     present_entries = [entry for entry in values if _has_value(entry.get("value"))]
     missing_count = max(artifact_ready_trials - len(present_entries), 0)
     # Survey choice ids are often emitted as textual strings; recover a real distribution.
-    if kind == "textual" and _entries_look_categorical(present_entries):
+    # Skip explanation/evidence roles — those are free-text even when short.
+    role = str(meta.get("role") or "").strip().lower()
+    if (
+        kind == "textual"
+        and role not in {"explanation", "evidence"}
+        and _entries_look_categorical(present_entries)
+    ):
         kind = "categorical"
     payload = {
         **meta,
@@ -950,6 +956,13 @@ def _entries_look_categorical(entries: list[dict[str, Any]]) -> bool:
             continue
         if " " in text or "\n" in text or len(text) > 64:
             return False
+        # Reject sentence fragments ("Affordable.") and Title Case words without
+        # id separators; keep snake/kebab ids and short lowercase/UPPER tokens.
+        if any(ch in text for ch in ".!?,;:"):
+            return False
+        if "_" not in text and "-" not in text:
+            if not (text.islower() or text.isupper()):
+                return False
     return True
 
 
