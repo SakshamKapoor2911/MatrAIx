@@ -44,6 +44,13 @@ class SurveyOption:
         }
 
 
+def _optional_bool(data: dict[str, Any], *keys: str) -> bool | None:
+    for key in keys:
+        if key in data and data[key] is not None:
+            return bool(data[key])
+    return None
+
+
 @dataclass
 class SurveyQuestion:
     """One question in a task-backed survey questionnaire."""
@@ -57,6 +64,9 @@ class SurveyQuestion:
     max_value: int | None = None
     construct: str = ""
     required: bool = True
+    # None inherits SurveyInstrument.ask_rationale / ask_confidence.
+    ask_rationale: bool | None = None
+    ask_confidence: bool | None = None
 
     def __post_init__(self) -> None:
         if self.type not in QUESTION_TYPES:
@@ -104,10 +114,12 @@ class SurveyQuestion:
             max_value=data.get("maxValue", data.get("max_value")),
             construct=str(data.get("construct", "")),
             required=bool(data.get("required", True)),
+            ask_rationale=_optional_bool(data, "askRationale", "ask_rationale"),
+            ask_confidence=_optional_bool(data, "askConfidence", "ask_confidence"),
         )
 
     def to_dict(self) -> dict[str, Any]:
-        return {
+        payload = {
             "id": self.id,
             "prompt": self.prompt,
             "type": self.type,
@@ -118,6 +130,17 @@ class SurveyQuestion:
             "construct": self.construct,
             "required": self.required,
         }
+        if self.ask_rationale is not None:
+            payload["askRationale"] = self.ask_rationale
+        if self.ask_confidence is not None:
+            payload["askConfidence"] = self.ask_confidence
+        return payload
+
+    def resolves_ask_rationale(self, instrument: "SurveyInstrument") -> bool:
+        return instrument.ask_rationale if self.ask_rationale is None else self.ask_rationale
+
+    def resolves_ask_confidence(self, instrument: "SurveyInstrument") -> bool:
+        return instrument.ask_confidence if self.ask_confidence is None else self.ask_confidence
 
 
 @dataclass
@@ -128,14 +151,21 @@ class SurveyInstrument:
     title: str
     description: str = ""
     questions: list[SurveyQuestion] = field(default_factory=list)
+    # Defaults for answer metadata; questions may override per item.
+    ask_rationale: bool = True
+    ask_confidence: bool = True
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> "SurveyInstrument":
+        ask_rationale = _optional_bool(data, "askRationale", "ask_rationale")
+        ask_confidence = _optional_bool(data, "askConfidence", "ask_confidence")
         return cls(
             id=str(data["id"]),
             title=str(data["title"]),
             description=str(data.get("description", "")),
             questions=[SurveyQuestion.from_dict(q) for q in data.get("questions", [])],
+            ask_rationale=True if ask_rationale is None else ask_rationale,
+            ask_confidence=True if ask_confidence is None else ask_confidence,
         )
 
     def to_dict(self) -> dict[str, Any]:
@@ -143,6 +173,8 @@ class SurveyInstrument:
             "id": self.id,
             "title": self.title,
             "description": self.description,
+            "askRationale": self.ask_rationale,
+            "askConfidence": self.ask_confidence,
             "questions": [question.to_dict() for question in self.questions],
         }
 
@@ -171,7 +203,7 @@ class SurveyTaskContent:
         if self.questionnaire_markdown.strip():
             parts.extend(["## Questionnaire", "", self.questionnaire_markdown.strip(), ""])
         if self.output_schema_markdown.strip():
-            parts.extend(["## Output schema", "", self.output_schema_markdown.strip(), ""])
+            parts.extend(["## Answer envelope", "", self.output_schema_markdown.strip(), ""])
         return "\n".join(parts).strip()
 
 
@@ -181,6 +213,8 @@ class SurveyEvalConfig:
 
     persona_model: str = DEFAULT_PERSONA_MODEL
     mode: str = "inprocess_persona_survey"
+    # Deprecated: rationale/confidence now come from questionnaire.yaml.
+    # Kept for API compatibility; ignored by the survey runner.
     require_rationale: bool = True
 
     def to_dict(self) -> dict[str, Any]:

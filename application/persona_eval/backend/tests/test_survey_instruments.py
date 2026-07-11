@@ -77,7 +77,12 @@ def test_repo_backed_survey_task_content_uses_task_input_without_infra_copy():
 
     assert content is not None
     assert "Complete the survey using the provided context" in content.instruction_markdown
-    assert "input/output_schema.md" in content.instruction_markdown
+    assert "input/output_schema.md" not in content.instruction_markdown
+    assert "askRationale" in content.instruction_markdown or "askRationale" in content.questionnaire_markdown
     assert "backend/runtime" not in content.instruction_markdown
+    assert "Platform-derived answer envelope" in content.output_schema_markdown
     assert "backend/runtime" not in content.output_schema_markdown
     assert '"trajectory"' not in content.output_schema_markdown
+    assert content.instrument is not None
+    assert content.instrument.ask_rationale is True
+    assert content.instrument.ask_confidence is True

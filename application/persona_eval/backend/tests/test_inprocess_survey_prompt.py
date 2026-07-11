@@ -15,7 +15,9 @@ def test_repo_backed_local_survey_prompt_is_only_document_bundle():
     assert "## Task instruction" in prompt
     assert "## Context" in prompt
     assert "## Questionnaire" in prompt
-    assert "## Output schema" in prompt
+    assert "## Answer envelope" in prompt
+    assert "## Output schema" not in prompt
+    assert "input/output_schema.md" not in prompt
 
 
 def test_unmapped_local_survey_prompt_falls_back_to_rendered_docs_only():
@@ -33,5 +35,8 @@ def test_unmapped_local_survey_prompt_falls_back_to_rendered_docs_only():
     assert "## Task instruction" in prompt
     assert "## Context" in prompt
     assert "## Questionnaire" in prompt
-    assert "## Output schema" in prompt
+    assert "## Answer envelope" in prompt
+    assert "## Output schema" not in prompt
     assert "A survey about a concrete feature." in prompt
+    assert "Ask rationale: `true`" in prompt
+    assert "Ask confidence: `true`" in prompt

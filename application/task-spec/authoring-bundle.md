@@ -12,13 +12,15 @@ Supplementary files differ by application type:
 ### Survey
 
 ```text
-instruction.md                 # short scenario; points to output_schema
+instruction.md                 # short scenario / requirements
 reporting.json                 # batch aggregation policy (contextRules)
 input/
   context.md                   # product concept (optional)
-  questionnaire.yaml           # structured questions
-  output_schema.md             # survey_result.json contract
+  questionnaire.yaml           # questions + askRationale / askConfidence
 ```
+
+Do **not** add `input/output_schema.md`. The platform derives the answer
+envelope from `questionnaire.yaml` and writes `survey_result.json`.
 
 ### Chatbot
 
@@ -39,17 +41,17 @@ Platform-managed harness artifacts (`transcript.json`,
 ### Web / OS-app
 
 ```text
-instruction.md                 # task goal, steps, inline task-result JSON schema
+instruction.md                 # task goal, steps, optional submission JSON schema
 reporting.json                 # batch aggregation policy (contextRules)
 input/
   context.md                   # scenario / product background (optional)
   self_report_schema.yaml      # user_feedback.json (optional)
 ```
 
-Web and OS/app tasks do **not** use `input/output_schema.md`. The submission
-shape (for example `quote_choice.json` or `decision.json`) is written directly
-in `instruction.md`, and the verifier enforces it. Persona self-report uses the
-same `input/self_report_schema.yaml` convention as chatbot tasks.
+Prefer verifying from browser/OS traces and final state. When state is hard to
+read, an agent submission schema may still live inline in `instruction.md`.
+Persona self-report uses the same `input/self_report_schema.yaml` convention as
+chatbot tasks.
 
 ### Quick reference
 
@@ -57,9 +59,7 @@ same `input/self_report_schema.yaml` convention as chatbot tasks.
 |---|---|---|---|
 | Scenario | `instruction.md` | `instruction.md` | `instruction.md` |
 | Background context | `input/context.md` | `input/context.md` | `input/context.md` (optional) |
-| Task result JSON | `input/output_schema.md` | platform-managed | inline in `instruction.md` |
+| Structured input | `input/questionnaire.yaml` | `input/chatbot.yaml`, optional `protocol.md` | — |
+| Objective evidence | platform `survey_result.json` | platform harness artifacts | trace/state (optional agent submission) |
 | Persona self-report | — | `input/self_report_schema.yaml` | `input/self_report_schema.yaml` |
 | Batch reporting policy | `reporting.json` | `reporting.json` | `reporting.json` |
-| Structured questions | `input/questionnaire.yaml` | — | — |
-| Transport / runtime | — | `input/protocol.md`, `input/chatbot.yaml` | shared environment |
-

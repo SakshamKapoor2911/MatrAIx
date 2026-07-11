@@ -78,7 +78,7 @@ def test_get_task_detail_reads_split_survey_content_bundle(tmp_path):
     assert detail["contextMarkdown"] == "This is the task context."
     assert "survey_result.json" in detail["outputSchemaMarkdown"]
     assert "Questionnaire" in detail["profileMarkdown"]
-    assert "Output schema" in detail["profileMarkdown"]
+    assert "Answer envelope" in detail["profileMarkdown"]
     assert detail["questionnaire"]["questions"][0]["options"] == ["alpha", "beta"]
     assert detail["questionnaire"]["questions"][0]["optionDetails"][0]["label"] == "Alpha option"
 

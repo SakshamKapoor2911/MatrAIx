@@ -8,7 +8,6 @@ Canonical task-owned content lives in:
 - `application/tasks/example-survey_product-feedback/instruction.md`
 - `application/tasks/example-survey_product-feedback/input/context.md`
 - `application/tasks/example-survey_product-feedback/input/questionnaire.yaml`
-- `application/tasks/example-survey_product-feedback/input/output_schema.md`
 
 This task now reuses the shared `application/shared-survey-form` runtime
 environment. The platform derives runtime prompts and task-detail UI from the

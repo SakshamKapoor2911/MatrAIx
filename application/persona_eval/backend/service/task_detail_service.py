@@ -154,7 +154,7 @@ def get_task_detail(task_path: str, *, repo_root: Path) -> dict[str, Any]:
     if questionnaire_markdown:
         markdown_parts.extend(["", "---", "", "## Questionnaire", "", questionnaire_markdown])
     if output_schema_markdown:
-        markdown_parts.extend(["", "---", "", "## Output schema", "", output_schema_markdown])
+        markdown_parts.extend(["", "---", "", "## Answer envelope", "", output_schema_markdown])
     if self_report_markdown:
         markdown_parts.extend(["", "---", "", "## Persona self-report", "", self_report_markdown])
     for doc in extra_docs:

@@ -119,7 +119,7 @@ def write_survey_task(questionnaire_id: str, *, repo: Path | None = None) -> Pat
         readme.write_text(
             "# {}\n\nHarbor survey task.\n\n"
             "- Task instruction: `instruction.md`\n"
-            "- Supplementary docs: `input/context.md`, `input/questionnaire.yaml`, `input/output_schema.md`\n"
+            "- Supplementary docs: `input/context.md`, `input/questionnaire.yaml`\n"
             "- Output: `/app/output/survey_result.json`\n"
             "- Questionnaire id: `{}`\n".format(questionnaire.title, questionnaire_id),
             encoding="utf-8",

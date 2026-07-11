@@ -155,8 +155,8 @@ and **`reporting.json`**. Supplementary files depend on type:
 |---|---|---|---|
 | Scenario prose | `instruction.md` | `instruction.md` | `instruction.md` |
 | Background / product context | `input/context.md` | `input/context.md` | `input/context.md` (optional) |
-| Structured task input | `input/questionnaire.yaml` | `input/chatbot.yaml`, optional `input/protocol.md` | — |
-| Task result JSON contract | `input/output_schema.md` | platform-managed ([chatbot/eval_artifacts.md](chatbot/eval_artifacts.md)) | inline in `instruction.md` |
+| Structured task input | `input/questionnaire.yaml` (includes `askRationale` / `askConfidence`) | `input/chatbot.yaml`, optional `input/protocol.md` | — |
+| Objective evidence / harness | platform writes `survey_result.json` + trajectory | platform-managed ([chatbot/eval_artifacts.md](chatbot/eval_artifacts.md)) | prefer trace/state; optional agent submission inline in `instruction.md` |
 | Persona self-report | — | `input/self_report_schema.yaml` | `input/self_report_schema.yaml` (optional) |
 | Batch policy stub | `reporting.json` | `reporting.json` | `reporting.json` |
 

@@ -9,5 +9,8 @@ def test_render_survey_instruction_includes_context_and_questions():
     assert "## Context" in markdown
     assert "Dynamic Air" in markdown
     assert "## dynamic_air_appeal" in markdown
-    assert "Return strict JSON matching this shape." in markdown
+    assert "Return strict JSON matching this shape." not in markdown
+    assert "Platform-derived answer envelope" in markdown
     assert "The platform owns the output schema" not in markdown
+    assert "Ask rationale: `true`" in markdown
+    assert "input/output_schema.md" not in markdown

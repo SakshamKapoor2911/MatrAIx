@@ -42,9 +42,7 @@ def persona_system_prompt(persona: Persona) -> str:
     return "\n".join(parts)
 
 
-def build_survey_task_prompt(
-    *, instrument: SurveyInstrument, require_rationale: bool = True
-) -> str:
+def build_survey_task_prompt(*, instrument: SurveyInstrument) -> str:
     from persona_eval.harbor.persona_eval import _repo_root
     from persona_eval.survey_task_content import (
         load_survey_task_content_for_questionnaire_id,
@@ -71,8 +69,14 @@ def build_survey_task_prompt(
         lines.extend(["## Context", "", task_content.context_markdown.strip(), ""])
     if task_content.questionnaire_markdown.strip():
         lines.extend(["## Questionnaire", "", task_content.questionnaire_markdown.strip(), ""])
-    if task_content.output_schema_markdown.strip():
-        lines.extend(["## Output schema", "", task_content.output_schema_markdown.strip(), ""])
+    # Answer envelope is derived from questionnaire flags; keep a short derived
+    # schema section so the model sees the JSON shape without a task-owned file.
+    derived_schema = (
+        task_content.output_schema_markdown.strip()
+        or render_survey_output_schema_markdown(instrument).strip()
+    )
+    if derived_schema:
+        lines.extend(["## Answer envelope", "", derived_schema, ""])
     return "\n".join(lines).strip()
 
 
@@ -94,10 +98,7 @@ class InprocessSurveyEvalRunner:
             if on_event is not None:
                 on_event(event)
 
-        task_prompt = build_survey_task_prompt(
-            instrument=instrument,
-            require_rationale=config.require_rationale,
-        )
+        task_prompt = build_survey_task_prompt(instrument=instrument)
         prompts = {
             "personaPrompt": persona_system_prompt(persona),
             "harborPrompt": persona_system_prompt(persona),
@@ -232,6 +233,10 @@ def _normalize_answers(raw_answers: Any, instrument: SurveyInstrument) -> List[S
         if question is None or answer.question_id in seen:
             continue
         answer.value = _normalize_value(answer.value, question)
+        if not question.resolves_ask_rationale(instrument):
+            answer.rationale = ""
+        if not question.resolves_ask_confidence(instrument):
+            answer.confidence = None
         answers.append(answer)
         seen.add(answer.question_id)
     for question in instrument.questions:
@@ -240,8 +245,14 @@ def _normalize_answers(raw_answers: Any, instrument: SurveyInstrument) -> List[S
                 SurveyAnswer(
                     question_id=question.id,
                     value=_default_value(question),
-                    rationale="No persona-specific answer was produced, so a neutral answer was used.",
-                    confidence=0.0,
+                    rationale=(
+                        "No persona-specific answer was produced, so a neutral answer was used."
+                        if question.resolves_ask_rationale(instrument)
+                        else ""
+                    ),
+                    confidence=(
+                        0.0 if question.resolves_ask_confidence(instrument) else None
+                    ),
                 )
             )
     return answers

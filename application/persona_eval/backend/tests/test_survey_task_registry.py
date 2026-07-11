@@ -61,9 +61,11 @@ def test_harbor_tasks_expose_instrument_and_profile():
     assert product.survey_kind == "example"
     assert "FocusLoop" in product.profile_markdown
     assert product.questionnaire_markdown.startswith("# Survey Product Feedback")
-    assert "Return strict JSON matching this shape." in product.output_schema_markdown
+    assert "Platform-derived answer envelope" in product.output_schema_markdown
     assert "backend/runtime" not in product.output_schema_markdown
     assert product.questionnaire is not None
+    assert product.questionnaire["askRationale"] is True
+    assert product.questionnaire["askConfidence"] is True
     assert product.questionnaire["questions"][0]["optionDetails"][0]["label"].startswith(
         "Keep using free."
     )

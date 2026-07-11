@@ -18,7 +18,6 @@ flowchart TB
       s_inst["instruction.md"]
       s_toml["task.toml"]
       s_q["input/questionnaire.yaml"]
-      s_out["input/output_schema.md"]
       s_test["tests/"]
       s_rep["reporting.json"]
     end
@@ -66,27 +65,20 @@ supplementary materials under `input/`:
 
 `application/tasks/<task-name>/`
 
-- `instruction.md` — the single task instruction (steps, constraints, submission
-  requirements)
+- `instruction.md` — the single task instruction (steps and constraints)
 - `input/context.md` — product brief, scenario, or other context shown before the
   questionnaire
-- `input/questionnaire.yaml` — the canonical structured questionnaire source
-- `input/output_schema.md` — the canonical response artifact contract shown to
-  contributors and the UI
+- `input/questionnaire.yaml` — the canonical structured questionnaire source,
+  including whether each answer should include `rationale` / `confidence`
 
-`questionnaire.yaml` is the source of truth for runtime question structure,
-single-run UI rendering, and task detail panels. `output_schema.md` is the
-source of truth for what the agent must write back. The platform may derive
-display markdown from `questionnaire.yaml`, but contributors should not treat
-question markdown as a canonical task asset.
+`questionnaire.yaml` is the source of truth for question structure, answer
+metadata flags (`askRationale` / `askConfidence`), UI rendering, and the
+platform-derived answer envelope. Do **not** add `input/output_schema.md` —
+the auto / host survey path writes `survey_result.json` for you, and the
+backend appends the standardized survey trajectory after the run.
 
 Keep persona framing out of these task docs. The persona is injected separately
 by the runtime; `instruction.md` should stay focused on what the task requires.
-
-For the host-native / `auto` survey path, `output_schema.md` should describe only
-the contributor-owned response payload. Do **not** specify survey `trajectory`
-there; the backend/runtime appends the standardized survey trajectory after the
-run.
 
 ## `questionnaire.yaml` Contract
 
@@ -97,6 +89,8 @@ schemaVersion: "1.0"
 id: example_survey_v1
 title: Example Survey
 description: Optional one-line summary.
+askRationale: true
+askConfidence: true
 questions:
   - id: q1
     prompt: How likely are you to try this product?
@@ -110,6 +104,8 @@ questions:
     type: single_choice
     construct: price_stance
     required: true
+    askRationale: true
+    askConfidence: false
     options:
       - id: avoid_paying
         label: I would avoid paying unless absolutely necessary.
@@ -124,6 +120,14 @@ Supported question types:
 - `multi_choice`
 - `free_text`
 
+Instrument-level defaults:
+
+- `askRationale` (default `true`) — whether answers include a short reason
+- `askConfidence` (default `true`) — whether answers include a 0–1 confidence
+
+Per-question `askRationale` / `askConfidence` override the instrument defaults
+when set.
+
 For choice questions:
 
 - `options` should normally be a list of objects with at least `id` and `label`
@@ -136,7 +140,8 @@ Notes:
 - `questionId` in runtime answers must match `questions[].id` exactly.
 - Keep `id`, question ids, and option ids stable once data has been collected.
 - Put long scenario prose in `context.md`, not inside `questionnaire.yaml`.
-- Keep the artifact contract in `output_schema.md`, not inside `instruction.md`.
+- Do **not** author a separate `output_schema.md`; the platform derives the
+  answer envelope from this questionnaire.
 
 ## Reporting contract
 

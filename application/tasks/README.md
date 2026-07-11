@@ -50,8 +50,10 @@ with:
 
 - `instruction.md`
 - `context.md`
-- `questionnaire.yaml`
-- `output_schema.md`
+- `questionnaire.yaml` (include `askRationale` / `askConfidence` as needed)
+
+Do **not** add `output_schema.md` for surveys — the platform derives the answer
+envelope from `questionnaire.yaml` and writes `survey_result.json`.
 
 For chatbot tasks, keep contributor-facing docs under `input/`:
 
