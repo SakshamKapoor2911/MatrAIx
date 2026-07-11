@@ -322,13 +322,13 @@ time.
 **Terminal A — API**
 
 ```bash
-VENV=.venv bash application/persona_eval/backend/run_dev.sh
+VENV=.venv bash application/playground/backend/run_dev.sh
 ```
 
 **Terminal B — frontend (hot reload)**
 
 ```bash
-cd application/persona_eval/frontend && npm ci && npm run dev
+cd application/playground/frontend && npm ci && npm run dev
 ```
 
 Open **http://localhost:5173** (proxies `/api` → `:8765`).
@@ -339,13 +339,13 @@ Check the footer **Preflight** chip before blaming a task. Green = keys, Docker
 One-shot (API serves built frontend, no Vite):
 
 ```bash
-cd application/persona_eval/frontend && npm ci && npm run build
-cd ../../.. && application/persona_eval/run_demo.sh
+cd application/playground/frontend && npm ci && npm run build
+cd ../../.. && application/playground/run_demo.sh
 # → http://127.0.0.1:8765
 ```
 
-More detail: [persona_eval/README.md](persona_eval/README.md),
-[persona_eval/REST_API.md](persona_eval/REST_API.md).
+More detail: [playground/README.md](playground/README.md),
+[playground/REST_API.md](playground/REST_API.md).
 
 ### In the Playground
 
@@ -482,4 +482,4 @@ Full task checklist: [tasks/README.md](tasks/README.md).
 | [choosing-an-agent.md](choosing-an-agent.md) | Agent ↔ form mapping and API keys |
 | [tasks/README.md](tasks/README.md) | Contributor checklist and reporting |
 | [scripts/README.md](scripts/README.md) | Job generator and reporting scripts |
-| [persona_eval/UNIFIED_RUNTIME.md](persona_eval/UNIFIED_RUNTIME.md) | Harbor vs remote execution plane |
+| [playground/UNIFIED_RUNTIME.md](playground/UNIFIED_RUNTIME.md) | Harbor vs remote execution plane |

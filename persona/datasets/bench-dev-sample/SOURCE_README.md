@@ -1,6 +1,6 @@
 # bench-dev-sample source
 
-Synthetic dev persona pool for docs, smoke tests, Harbor tasks, and PersonaEval UI.
+Synthetic dev persona pool for docs, smoke tests, Harbor tasks, and Playground UI.
 
 | Field | Value |
 |-------|-------|
@@ -24,7 +24,7 @@ uv run python persona/scripts/generate_dev_personas.py \
   --smoke-id 0042 \
   --version 1.0 \
   --manifest-name bench-dev-sample \
-  --manifest-description "Dev persona pool for docs, smoke tests, and PersonaEval UI."
+  --manifest-description "Dev persona pool for docs, smoke tests, and Playground UI."
 ```
 
 Optional stratum top-up for grounding jobs:

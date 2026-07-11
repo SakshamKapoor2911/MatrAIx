@@ -701,7 +701,7 @@ This log records the curated migration from MatrAIx into PersonaBench.
 
 ### Step 28: Import standalone persona survey application task
 
-- Branch: `codex/application-persona-eval-tasks`
+- Branch: `codex/application-playground-tasks`
 - Source repository: `MatrAIx-ai/MatrAIx`
 - Source PR: `#83`, `Add standalone Harbor-backed survey eval`
 - PersonaBench snapshot PR: `#71`
@@ -718,23 +718,23 @@ This log records the curated migration from MatrAIx into PersonaBench.
     `persona/datasets/bench-dev-sample/persona_0042.yaml`.
 - Deferred:
   - `applications/recommendation_chatbot_eval/backend/service/harbor_survey_eval.py`
-  - PersonaEval backend tests and runner integration
+  - Playground backend tests and runner integration
   - recommender-agent task and sidecar, which depend on the deferred
     recommendation chatbot backend.
 
-### Step 29: Import PersonaEval survey instruments
+### Step 29: Import Playground survey instruments
 
-- Branch: `codex/persona-eval-backend`
+- Branch: `codex/playground-backend`
 - Source repository: `MatrAIx-ai/MatrAIx`
 - Source PR: `#89`, `[codex] Add real-feature survey instruments`
 - PersonaBench snapshot PR: `#68`
-- Purpose: preserve the built-in PersonaEval survey instruments as an
+- Purpose: preserve the built-in Playground survey instruments as an
   application-owned backend foundation without pulling in API routes, frontend
   code, Harbor runners, or historical experiment outputs.
 - Imported into:
-  - `application/persona_eval/backend/service/survey_types.py`
-  - `application/persona_eval/backend/service/survey_instruments.py`
-  - `tests/application/persona_eval/test_survey_instruments.py`
+  - `application/playground/backend/service/survey_types.py`
+  - `application/playground/backend/service/survey_instruments.py`
+  - `tests/application/playground/test_survey_instruments.py`
 - Updated:
   - `application/README.md`
 - Compatibility adjustments:
@@ -742,12 +742,12 @@ This log records the curated migration from MatrAIx into PersonaBench.
     `SurveyQuestion` from the old monolithic `harbor_survey_eval.py` runner.
     PersonaBench splits those lightweight dataclasses into `survey_types.py` so
     survey schema code can land before runner/API migration.
-  - The import path now follows the clean `application/persona_eval/` layout
-    instead of the source `applications/persona_eval/` tree.
+  - The import path now follows the clean `application/playground/` layout
+    instead of the source `applications/playground/` tree.
 - Deferred:
-  - `applications/persona_eval/backend/api/`
-  - `applications/persona_eval/backend/service/harbor_survey_eval.py`
-  - `applications/persona_eval/frontend/`
+  - `applications/playground/backend/api/`
+  - `applications/playground/backend/service/harbor_survey_eval.py`
+  - `applications/playground/frontend/`
   - experiment configs, traces, caches, and generated outputs.
 
 ### Step 30: Ignore editor-local VS Code workspace settings
@@ -975,7 +975,7 @@ This log records the curated migration from MatrAIx into PersonaBench.
   - Full RecAI/backend/frontend migration remains separate application tooling
     work; generated recommender catalog/persona fixture files stay external.
 
-### Step 40: Import recommender PersonaEval artifact helpers
+### Step 40: Import recommender Playground artifact helpers
 
 - Branch: `codex/application-recommender-eval-artifacts`
 - Source repository: `MatrAIx-ai/MatrAIx`
@@ -989,12 +989,12 @@ This log records the curated migration from MatrAIx into PersonaBench.
   persona evaluation without importing the full historical backend, frontend,
   generated data, or raw app snapshot.
 - Imported into:
-  - `application/persona_eval/backend/service/recommender_eval.py`
+  - `application/playground/backend/service/recommender_eval.py`
 - Updated:
-  - `application/persona_eval/README.md`
+  - `application/playground/README.md`
 - Source handling:
   - Result dataclasses, prompt construction, Harbor persona YAML writing, and
-    artifact mapping are adapted to the clean `application/persona_eval/`
+    artifact mapping are adapted to the clean `application/playground/`
     module.
   - Legacy `MATRIX_*` environment variable wiring, API endpoints, subprocess
     Harbor runner integration, and frontend UI remain deferred until the
@@ -1009,7 +1009,7 @@ This log records the curated migration from MatrAIx into PersonaBench.
 - PersonaBench snapshot PR:
   - `#70`
 - Purpose: preserve the survey/chatbot/web application task protocol layer
-  without importing the full generalized PersonaEval backend, frontend, or
+  without importing the full generalized Playground backend, frontend, or
   generated application data.
 - Imported into:
   - `application/tasks/interface/`
@@ -1021,7 +1021,7 @@ This log records the curated migration from MatrAIx into PersonaBench.
   - Canonical paths now point at existing PersonaBench tasks:
     `persona-survey`, `recommender-agent_chat_api`, and
     `example-web-playwright_books-interest`.
-  - The full `applications/persona_eval` app stack from this source PR remains
+  - The full `applications/playground` app stack from this source PR remains
     deferred for separate curated application tooling work.
 
 ### Step 42: Import parity items 1, 2, 3, and 5 from MatrAIx main
@@ -1152,27 +1152,27 @@ This log records the curated migration from MatrAIx into PersonaBench.
     contains `harbor`, `personabench`, `personabench.agents`, and persona agent
     prompt templates.
 
-### Step 45: Clean-import PersonaEval from PR 62 / MatrAIx PR 127
+### Step 45: Clean-import Playground from PR 62 / MatrAIx PR 127
 
-- Branch: `codex/persona-eval-pr62-clean-import`
+- Branch: `codex/playground-pr62-clean-import`
 - Source PR:
   - PersonaBench PR #62 is a raw snapshot wrapper for MatrAIx PR #127, titled
-    "matrAIx UI/UX redesign of the PersonaEval frontend".
+    "matrAIx UI/UX redesign of the Playground frontend".
   - The raw `MatrAIx_PR_127/` snapshot directory was not merged into `main`.
 - Imported into:
-  - `application/persona_eval/backend/`
-  - `application/persona_eval/frontend/`
-  - `application/persona_eval/persona_eval/`
-  - `application/persona_eval/data/personas/`
+  - `application/playground/backend/`
+  - `application/playground/frontend/`
+  - `application/playground/playground/`
+  - `application/playground/data/personas/`
   - `application/tasks/web-ecommerce-platform_product-discovery/`
 - Preserved/adapted:
   - Existing clean-main survey helper imports under
-    `application.persona_eval.backend.service.*`.
+    `application.playground.backend.service.*`.
   - Current `application/tasks/recommender-agent_chat_api/` sidecar path,
     replacing old `applications/tasks/chatbot_chat_api` references.
   - Current `application/tasks/persona-survey/` survey task path, replacing old
     `applications/tasks/survey_form` runtime config.
-  - Frontend visible branding now uses `PersonaEval`; superpowers/redesign
+  - Frontend visible branding now uses `Playground`; superpowers/redesign
     workspace references were removed from imported frontend docs.
 - Source handling:
   - The PR #62 snapshot tree was missing `frontend/src/lib/*` even though the
@@ -1185,14 +1185,14 @@ This log records the curated migration from MatrAIx into PersonaBench.
     outputs, and raw snapshot folders remain excluded. `RECAI_ENV_NOTES.md`
     records this as deferred runtime work.
 - Verification:
-  - `PYTHONPATH=application/persona_eval .venv/bin/python -m pytest application/persona_eval/persona_eval/tests -q`
+  - `PYTHONPATH=application/playground .venv/bin/python -m pytest application/playground/playground/tests -q`
     passed with 35 passed.
-  - `PYTHONPATH=application/persona_eval .venv/bin/python -m pytest application/persona_eval/backend/tests -q`
+  - `PYTHONPATH=application/playground .venv/bin/python -m pytest application/playground/backend/tests -q`
     passed with 228 passed, 6 skipped, 1 warning.
-  - `PYTHONPATH=. .venv/bin/python -m pytest tests/application/persona_eval -q`
+  - `PYTHONPATH=. .venv/bin/python -m pytest tests/application/playground -q`
     passed with 9 passed.
-  - `.venv/bin/ruff check application/persona_eval tests/application/persona_eval`
+  - `.venv/bin/ruff check application/playground tests/application/playground`
     passed.
-  - `npm ci && npm run build` passed in `application/persona_eval/frontend/`;
+  - `npm ci && npm run build` passed in `application/playground/frontend/`;
     npm still reports 1 moderate and 1 high audit finding, and Vite reports a
     non-fatal chunk-size warning.

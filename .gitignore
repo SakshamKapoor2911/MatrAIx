@@ -151,6 +151,8 @@ activemq-data/
 
 # Environments
 .env
+.env.local
+**/.env.local
 .envrc
 .venv
 env/
@@ -258,7 +260,7 @@ configs/jobs/persona-task-grounding-job-recipe/*.meta.json
 # Local Harbor job outputs (recipes live under configs/jobs/)
 /jobs/*
 
-# PersonaEval local runtime cache (Cockpit / harness sessions)
+# Playground local runtime cache (Cockpit / harness sessions)
 /data/cache/
 
 configs/jobs/_generated/
@@ -267,5 +269,5 @@ configs/jobs/_generated/
 plan.md
 user-simulator-chat-design.md
 
-# Generated at runtime by PersonaEval sidecar compose helpers
-**/.persona_eval_sidecar/
+# Generated at runtime by Playground sidecar compose helpers
+**/.playground_sidecar/

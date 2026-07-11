@@ -10,7 +10,7 @@ and link it from the README for the pipeline that produced it.
 ## Current Datasets
 
 - `bench-dev-sample/`: dev persona pool (200 profiles, 82 dimensions each) for
-  schema examples, smoke tests, PersonaEval UI, and curated job recipes.
+  schema examples, smoke tests, Playground UI, and curated job recipes.
   Dimension UI groups live in `persona/schema/dimension_categories.json`.
 
 ## External Dataset Slots

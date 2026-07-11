@@ -38,7 +38,7 @@ Expected contents:
   task carries its own `reporting.json` policy).
 - `application/scripts/` for application job generation and batch reporting
   rollups (`report_job.py` → `jobs/<job_name>/aggregation.json`).
-- `application/persona_eval/` for the PersonaEval app/API/frontend plus survey,
+- `application/playground/` for the Playground app/API/frontend plus survey,
   chatbot, and web evaluation helpers.
 
 Applications should reference persona data through documented inputs instead of

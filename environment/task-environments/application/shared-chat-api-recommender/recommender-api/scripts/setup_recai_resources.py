@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Install the native RecAI / InteRecAgent stack for PersonaEval.
+"""Install the native RecAI / InteRecAgent stack for Playground.
 
 This script is the missing piece called out in ``bundle_catalog.py`` and
 ``app.py`` preflight: it fetches Microsoft's InteRecAgent (``llm4crs/``) and the
@@ -284,7 +284,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0 if engine_ok else 1
 
     if engine_ok and bundles_ok and parquets_ok:
-        print("\nRecAI native stack is ready. Restart PersonaEval backend and re-check preflight.")
+        print("\nRecAI native stack is ready. Restart Playground backend and re-check preflight.")
         return 0
     print("\nSome steps are still incomplete — see messages above.")
     return 1

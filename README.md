@@ -37,7 +37,7 @@ git clone <your-fork-url> && cd MatrAIx
 uv venv --python 3.12
 uv pip install -e .
 uv pip install pytest pytest-asyncio httpx
-uv pip install -e packages/persona-eval
+uv pip install -e packages/playground
 uv pip install -e packages/harbor-langsmith
 uv pip install -e packages/rewardkit
 uv pip install -e environment/adapters/simpleqa
@@ -93,11 +93,11 @@ team's docs — not duplicated here.
 ```text
 MatrAIx/
 ├── persona/           curation · schema · datasets · bench tasks · reporting
-├── application/       tasks · task-spec · persona_eval (Playground) · QUICKSTART
+├── application/       tasks · task-spec · playground (Playground) · QUICKSTART
 ├── environment/       runtime/harbor · agents · task-environments · harbor view · adapters
 ├── docs/personas/     Persona team guides (data → schema → grounding)
 ├── configs/jobs/      curated Harbor recipes
-├── packages/          persona-eval · rewardkit · harbor-langsmith
+├── packages/          playground · rewardkit · harbor-langsmith
 ├── jobs/              local Harbor run outputs (gitignored)
 └── docs/              architecture · running · research
 ```

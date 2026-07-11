@@ -106,7 +106,7 @@ def main() -> None:
         nargs="*",
         default=[],
         metavar="ID",
-        help="Explicit persona ids (pool or application/persona_eval catalog). Skips random sampling.",
+        help="Explicit persona ids (pool or application/playground catalog). Skips random sampling.",
     )
     parser.add_argument(
         "--stratify",
