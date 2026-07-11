@@ -1,0 +1,46 @@
+artifactName: user_feedback.json
+instructions: |
+  Reflect honestly as the persona after using the meal planning nutrition assistant.
+  Judge the experience based on the meal plan you received, whether it respected
+  your dietary needs, and how well the assistant handled your questions.
+fields:
+  - key: needConstraintSatisfaction
+    prompt: How well did the meal plan satisfy your core dietary constraints and health goals?
+    kind: enum
+    choices: [yes, partially, no]
+  - key: personalPreferenceSatisfaction
+    prompt: How well did the meal plan match your personal taste, cooking habits, and budget?
+    kind: enum
+    choices: [yes, partially, no]
+  - key: overallExperienceRating
+    prompt: Overall, how would you rate the experience from 1 to 10?
+    kind: integer
+    minimum: 1
+    maximum: 10
+  - key: reason
+    prompt: Briefly explain the rating in your own voice.
+  - key: askedUsefulClarificationQuestions
+    prompt: Did the assistant ask useful clarification questions about your needs?
+    kind: boolean
+  - key: clarifyingNotes
+    prompt: Which clarification questions helped, or why they did not.
+  - key: trustLevel
+    prompt: How much did you trust the assistant on a scale from 1 to 10?
+    kind: integer
+    minimum: 1
+    maximum: 10
+    required: false
+  - key: feltUnderstood
+    prompt: Did you feel understood by the assistant?
+    kind: boolean
+    required: false
+  - key: safetyFlagged
+    prompt: Did the assistant properly flag any safety concerns (allergens, unsafe calorie levels, clinical boundaries)?
+    kind: boolean
+    required: false
+  - key: adherenceLikelihood
+    prompt: How likely are you to follow the meal plan from 1 to 10?
+    kind: integer
+    minimum: 1
+    maximum: 10
+    required: false
