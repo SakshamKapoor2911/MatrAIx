@@ -39,6 +39,7 @@ One task folder answers four questions:
 | Question | Answered by | Consumed when |
 |---|---|---|
 | What should the persona do? | `instruction.md`, `input/*` | Agent runs the trial |
+| Which personas should Playground sample by default? | `persona_strategy.json` (optional) | Job / Playground launch |
 | Did the run produce valid outputs? | `tests/` verifier | Trial ends |
 | What **facts** should batch reports use? | `verifier/structured_output.json` | Job aggregates trials |
 | What **extra** cross-trial analysis do we want? | `reporting.json` (optional) | Job aggregates trials |
@@ -57,13 +58,15 @@ flowchart TB
     Y2["Author instruction.md + input/*"]
     Y3["tests/ → structured_output.json"]
     Y4["reporting.json stub"]
+    Y5["optional persona_strategy.json"]
     Y1 --> Y2 --> Y3 --> Y4
+    Y2 -.-> Y5
   end
 
   subgraph TASK ["YOUR task folder"]
     direction TB
     T_REQ["REQUIRED: task.toml · instruction · tests · reporting.json"]
-    T_OPT["OPTIONAL: extra input/* · self_report_schema"]
+    T_OPT["OPTIONAL: persona_strategy.json · extra input/* · self_report_schema"]
   end
 
   subgraph PLATFORM ["PLATFORM — automatic"]
@@ -159,15 +162,21 @@ and **`reporting.json`**. Supplementary files depend on type:
 | Objective evidence / harness | platform writes `survey_result.json` + trajectory | platform-managed ([chatbot/eval_artifacts.md](chatbot/eval_artifacts.md)) | prefer trace/state; optional agent submission inline in `instruction.md` |
 | Persona self-report | — | `input/self_report_schema.yaml` | `input/self_report_schema.yaml` (optional) |
 | Batch policy stub | `reporting.json` | `reporting.json` | `reporting.json` |
+| Playground sampling defaults (optional) | `persona_strategy.json` | `persona_strategy.json` | `persona_strategy.json` |
 
-Per-type folder trees and edge cases: [authoring-bundle.md](authoring-bundle.md).
-Harbor metadata (`task.toml`, timeouts, `[environment].definition`): see
-[`../task-guide.md`](../task-guide.md).
+Per-type folder trees, `persona_strategy.json` schema, and edge cases:
+[authoring-bundle.md](authoring-bundle.md). Harbor metadata (`task.toml`,
+timeouts, `[environment].definition`): see [`../task-guide.md`](../task-guide.md).
 
 **Authoring rules that matter early:**
 
 - Keep **persona traits out of** `instruction.md` — the runtime injects persona
   context separately.
+- Put **product-audience sampling defaults** in optional root
+  `persona_strategy.json` (mode, filters, stratify axes, optional `sampleSize`) —
+  not under `input/`. Playground applies them under Random / Stratified; operators
+  can turn the task default off and edit filters. Schema:
+  [authoring-bundle.md § Optional persona_strategy.json](authoring-bundle.md#optional-persona_strategyjson).
 - Put **scenario and product background** in `input/context.md` for every task
   type when it helps; keep `instruction.md` focused on goals, steps, and schemas.
 - Keep **operator setup** (agent names, smoke commands) in the task's own
@@ -257,6 +266,7 @@ Iterate on `instruction.md` / verifier until smoke passes, then scale personas.
 | Layer | Location | Written by | Purpose |
 |---|---|---|---|
 | **Scenario** | `instruction.md`, `input/*` | Contributor | What the persona should do |
+| **Sampling defaults** | `persona_strategy.json` | Contributor (optional) | Playground cohort filters / mode / sample size |
 | **Harness artifacts** | transcript, traces, application results | Platform runtime | Raw interaction record |
 | **Verifier output** | `verifier/structured_output.json` | Contributor (`tests/`) | Normalized evaluation facts for one trial |
 | **Batch policy** | `reporting.json` | Contributor | Optional Layer 2 aggregation rules |
@@ -297,7 +307,7 @@ Use this when a step above is not enough — not as a flat reading list.
 
 **Authoring & folder layout**
 
-- [authoring-bundle.md](authoring-bundle.md) — per-type file trees
+- [authoring-bundle.md](authoring-bundle.md) — per-type file trees + optional `persona_strategy.json`
 - [survey/README.md](survey/README.md) — `questionnaire.yaml` contract
 - [chatbot/README.md](chatbot/README.md) — chat loop + reporting contexts
 - [chatbot/eval_artifacts.md](chatbot/eval_artifacts.md) — platform-managed chat artifacts
@@ -330,6 +340,7 @@ Use this when a step above is not enough — not as a flat reading list.
 - [ ] `task.toml` `[metadata].type` matches the contract folder you followed
 - [ ] Verifier emits `structured_output.json` with shared context names where applicable
 - [ ] `reporting.json` exists (empty `contextRules` is fine)
+- [ ] Optional `persona_strategy.json` at task root when Playground should default to a product cohort (see [authoring-bundle.md](authoring-bundle.md#optional-persona_strategyjson))
 - [ ] Interactive tasks: `self_report_schema.yaml` → `user_feedback` context when used
 - [ ] Smoke run passes on at least one persona before batch scale-up
 

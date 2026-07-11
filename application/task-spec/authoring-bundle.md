@@ -99,5 +99,7 @@ mode). Lives at the **task root** next to `reporting.json` — not under
 | `cohortId` | no | Optional saved cohort under `persona/datasets/cohorts/` |
 | `pool` | no | Defaults to bench-dev-sample |
 
-When the file is absent, Playground keeps its previous UI defaults. Operators can
-still change filters after the task default is applied.
+When the file is absent, Playground keeps its previous UI defaults. When present,
+Playground turns on **Task default strategy** (filters / mode / sampleSize locked
+to the file). Operators can turn that switch off to edit filters themselves, then
+turn it back on to re-apply the task default.
