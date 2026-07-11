@@ -39,7 +39,10 @@ the scenario, task metadata, and verifier.
    file for context-level summaries, grouping rules, and later judge prompts.
    Do not hardcode reporting policy into the verifier unless you are prototyping
    a brand-new schema feature.
-8. Use `persona/datasets/bench-dev-sample/persona_0042.yaml` for lightweight
+8. Add optional Playground sampling defaults in `persona_strategy.json` at the
+   task root (default mode, filters, optional `sampleSize`). See
+   [`../task-spec/authoring-bundle.md`](../task-spec/authoring-bundle.md).
+9. Use `persona/datasets/bench-dev-sample/persona_0042.yaml` for lightweight
    smoke examples until a larger persona dataset is restored externally.
 
 For survey tasks, create a canonical task-local bundle under:
