@@ -67,12 +67,17 @@ CORE_DEV_DIMENSION_ORDER = {
 
 # life_stage must be plausible for age_bracket (no counterfactual life arcs).
 LIFE_STAGE_BY_AGE: dict[str, list[str]] = {
+    "Under 5": ["Student"],
+    "5-12": ["Student"],
     "13-17": ["Student"],
     "18-24": ["Student", "Early career"],
     "25-34": ["Early career", "Parent of young kids", "Career change"],
     "35-44": ["Mid-life", "Parent of young kids", "Early career", "Career change"],
     "45-54": ["Mid-life", "Parent of young kids", "Empty nester", "Career change"],
     "55-64": ["Mid-life", "Empty nester", "Career change", "Retirement"],
+    "65-74": ["Retirement", "Empty nester"],
+    "75-84": ["Retirement", "Empty nester"],
+    "85+": ["Retirement", "Empty nester"],
     "65+": ["Retirement", "Empty nester"],
 }
 
@@ -87,13 +92,85 @@ SENIORITY_BY_LIFE_STAGE: dict[str, list[str]] = {
 }
 
 EDUCATION_BY_AGE: dict[str, list[str]] = {
+    "Under 5": ["No formal"],
+    "5-12": ["No formal", "Primary"],
     "13-17": ["No formal", "Primary", "Secondary"],
-    "18-24": ["Secondary", "Vocational / cert", "Bachelor's"],
-    "25-34": ["Secondary", "Vocational / cert", "Bachelor's", "Master's"],
-    "35-44": ["Vocational / cert", "Bachelor's", "Master's", "Doctorate"],
-    "45-54": ["Bachelor's", "Master's", "Doctorate", "Vocational / cert"],
-    "55-64": ["Secondary", "Vocational / cert", "Bachelor's", "Master's", "Doctorate"],
-    "65+": ["Secondary", "Vocational / cert", "Bachelor's", "Master's", "Doctorate"],
+    "18-24": [
+        "Secondary",
+        "Vocational / cert",
+        "Some college",
+        "Associate's",
+        "Bachelor's",
+    ],
+    "25-34": [
+        "Secondary",
+        "Vocational / cert",
+        "Some college",
+        "Associate's",
+        "Bachelor's",
+        "Master's",
+    ],
+    "35-44": [
+        "Vocational / cert",
+        "Some college",
+        "Associate's",
+        "Bachelor's",
+        "Master's",
+        "Doctorate",
+    ],
+    "45-54": [
+        "Bachelor's",
+        "Master's",
+        "Doctorate",
+        "Vocational / cert",
+        "Some college",
+        "Associate's",
+    ],
+    "55-64": [
+        "Secondary",
+        "Vocational / cert",
+        "Some college",
+        "Associate's",
+        "Bachelor's",
+        "Master's",
+        "Doctorate",
+    ],
+    "65-74": [
+        "Secondary",
+        "Vocational / cert",
+        "Some college",
+        "Associate's",
+        "Bachelor's",
+        "Master's",
+        "Doctorate",
+    ],
+    "75-84": [
+        "Secondary",
+        "Vocational / cert",
+        "Some college",
+        "Associate's",
+        "Bachelor's",
+        "Master's",
+        "Doctorate",
+    ],
+    "85+": [
+        "Secondary",
+        "Vocational / cert",
+        "Some college",
+        "Associate's",
+        "Bachelor's",
+        "Master's",
+        "Doctorate",
+    ],
+    "65+": [
+        "Secondary",
+        "Vocational / cert",
+        "Some college",
+        "Associate's",
+        "Bachelor's",
+        "Master's",
+        "Doctorate",
+    ],
 }
 
 CONSTRAINED_DIMENSIONS = frozenset(
@@ -175,7 +252,7 @@ def allowed_years_experience(*, age_bracket: str, seniority: str) -> list[str]:
         return ["0-2"]
     if seniority == "Entry":
         return ["0-2", "3-5"]
-    if age_bracket in ("13-17", "18-24"):
+    if age_bracket in ("Under 5", "5-12", "13-17", "18-24"):
         return ["0-2", "3-5"]
     if age_bracket == "25-34":
         return ["0-2", "3-5", "6-10"]
@@ -192,9 +269,9 @@ def allowed_life_stages(age_bracket: str) -> list[str]:
 def allowed_seniorities(*, life_stage: str, age_bracket: str) -> list[str]:
     age_bracket = _canonical_age_bracket(age_bracket)
     options = list(SENIORITY_BY_LIFE_STAGE.get(life_stage, []))
-    if age_bracket in ("13-17", "18-24"):
+    if age_bracket in ("Under 5", "5-12", "13-17", "18-24"):
         return [s for s in options if s in ("Student / intern", "Entry", "Mid")]
-    if age_bracket == "65+":
+    if age_bracket in ("65-74", "75-84", "85+", "65+"):
         return [
             s
             for s in options
@@ -206,11 +283,25 @@ def allowed_seniorities(*, life_stage: str, age_bracket: str) -> list[str]:
 def allowed_education(*, age_bracket: str, life_stage: str) -> list[str]:
     age_bracket = _canonical_age_bracket(age_bracket)
     base = list(EDUCATION_BY_AGE.get(age_bracket, []))
-    if life_stage == "Student" and age_bracket in ("13-17", "18-24"):
+    if life_stage == "Student" and age_bracket in (
+        "Under 5",
+        "5-12",
+        "13-17",
+        "18-24",
+    ):
         return [
             e
             for e in base
-            if e in ("Secondary", "Vocational / cert", "Bachelor's", "Primary")
+            if e
+            in (
+                "No formal",
+                "Primary",
+                "Secondary",
+                "Vocational / cert",
+                "Some college",
+                "Associate's",
+                "Bachelor's",
+            )
         ]
     return base
 

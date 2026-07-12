@@ -46,6 +46,23 @@ def _graph_data_payload() -> dict[str, Any]:
     return parser.payload()
 
 
+def test_schema_value_domains_match_emitted_graph_nodes() -> None:
+    graph = json.loads(GRAPH_PATH.read_text(encoding="utf-8"))
+    schema = json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
+
+    graph_values = {
+        node["id"]: node["values"]
+        for node in graph["nodes"]
+        if node.get("emit", True) is not False
+    }
+    schema_values = {
+        dimension["id"]: dimension["values"]
+        for dimension in schema["dimensions"]
+    }
+
+    assert schema_values == graph_values
+
+
 def test_visualization_distinguishes_schema_attributes_from_helper_nodes() -> None:
     graph = json.loads(GRAPH_PATH.read_text(encoding="utf-8"))
     schema = json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
