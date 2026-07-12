@@ -61,7 +61,7 @@ MAPPING_FILES = {
 DEFAULT_MODEL = "Qwen/Qwen3.6-35B-A3B"
 DEFAULT_OUTPUT_TEMPLATE = "extraction_stackoverflow_v2_{year}.jsonl"
 MISSING_TOKENS = {"", "na", "n/a", "none", "nan", "null", "<na>"}
-MAX_PROFILE_CHARS = 24_000
+MAX_PROFILE_CHARS = 36_000
 CSV_FIELD_SIZE_LIMIT = 100_000_000
 DIMENSION_ID_PATTERN = re.compile(r"[a-z][a-z0-9_]*\Z")
 CHUNK_ID_PATTERN = re.compile(r"[a-z][a-z0-9_]*\Z")
@@ -826,15 +826,9 @@ def build_stackoverflow_prompt(profile_text: str, chunk: DimensionChunk) -> str:
     lines = [
         "You are building a persona for a single Stack Overflow Developer Survey respondent from their survey answers.",
         "",
-        "The input is a structured respondent profile assembled from one survey row. It may contain evidence such as the broad categories below.",
-        "These are evidence categories, not required output attributes, and they are not exhaustive across survey years.",
+        "The input is a structured respondent profile assembled from one survey row. It may contain information about a broad range of dimensions about the respondent.",
         "Only emit attributes from the CURRENT CHUNK DIMENSIONS list when directly or strongly supported by the respondent profile.",
-        "- BACKGROUND: age bracket, country, education, employment, and learning history when explicitly answered.",
-        "- WORK CONTEXT: developer type, years of coding, organization size, remote work, industry, purchase influence, and job satisfaction.",
-        "- TECHNICAL PROFILE: languages, databases, platforms, frameworks, tools, operating systems, and development environments.",
-        "- COMMUNITY BEHAVIOR: Stack Overflow visits, account status, participation, community membership, and site activities.",
-        "- AI PROFILE: AI tool usage, sentiment, trust, workflow uses, perceived risks, AI agents, and free-text AI comments.",
-        "- YEAR-SPECIFIC / OTHER SURVEY ANSWERS: attention checks, survey experience, technology endorsement rankings, workplace knowledge questions, tool counts, career changes, or other fields present in a given year.",
+        "If the respondent profile does not contain information about a dimension, omit the dimension.",
         "",
         "Return ONLY one JSON object matching the supplied structured-output schema (no markdown, no commentary), with this shape:",
         '{"fields": [{"field_id": "<one id from CURRENT CHUNK DIMENSIONS below>", "value": "<one allowed value, copied verbatim>", "confidence": 0.0, "evidence": "<short quote copied from the respondent profile>", "assignment_type": "direct"}]}',
@@ -842,8 +836,7 @@ def build_stackoverflow_prompt(profile_text: str, chunk: DimensionChunk) -> str:
         "assignment_type values (Stack Overflow survey context):",
         "- direct: explicitly answered in a survey field, or a deterministic recoding of an explicit answer into an exactly matching allowed value.",
         "- structured_claim: strongly supported by multiple concrete survey answers with little ambiguity.",
-        "- summary_inference: a cautious, low-confidence inference from multiple survey answers. Use sparingly.",
-        "- unsupported: not supported by the survey answers.",
+        "- summary_inference: a cautious, low-confidence inference from multiple survey answers. Use sparingly."
         "",
         "Sparse extraction policy:",
         "- Return a sparse list: emit an object ONLY for dimensions that are clearly supported by the survey answers.",
@@ -854,6 +847,8 @@ def build_stackoverflow_prompt(profile_text: str, chunk: DimensionChunk) -> str:
         '- If an allowed value is more specific than the survey answer, omit the dimension unless the specificity is explicit. For example, generic "Employed" does not prove "Full-time".',
         "",
         "Rules:",
+        "- Read survey question and answer context carefully to determine the most specific and accurate value for each dimension.",
+        "- Be especially careful when surveyanswer is given in a numerical scale, such as a Likert scale or a scale of 1 to 10. YOU MUST follow related question and answer definitions to determine the most specific and accurate value for the dimension.",
         "- value MUST be exactly one of that dimension's allowed values, copied verbatim.",
         "- Use each field_id at most once.",
         "- If multiple allowed values for one field_id are directly supported, emit exactly one.",
@@ -870,7 +865,6 @@ def build_stackoverflow_prompt(profile_text: str, chunk: DimensionChunk) -> str:
         "- Do not infer missing demographics, gender, sexuality, health, disability, family status, religion, ethnicity, politics, income, housing, or socioeconomic status from country, age, job title, technology stack, or developer role unless explicitly answered.",
         "- Do not infer personality traits, values, hobbies, habits, or relationship attributes from technology choices alone.",
         "- Do not infer generation from broad age buckets unless the bucket maps uniquely to one cohort.",
-        "- Do not map generic Employment=Employed to Full-time unless full-time is explicitly stated; omit it if no allowed value matches exactly.",
         '- Treat "None of the above" and "None of these" as valid answers, not missing values.',
         "- When unsure, omit the dimension.",
         "- Return valid JSON only, with no markdown.",
