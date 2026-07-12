@@ -162,6 +162,18 @@ SOFT_COMPLETION_FIELD_IDS = frozenset(
         "learning_style",
     }
 )
+ORGANIZATION_LEVEL_COLUMNS = frozenset(
+    {"OrgSize", "ProfessionalCloud", "ProfessionalTech"}
+)
+PERSONAL_PRACTICE_FIELD_IDS = frozenset(
+    {
+        "habit_backing_up_files",
+        "code_testing_approach",
+        "code_observability_habit",
+        "debugging_strategy",
+        "codebase_onboarding_style",
+    }
+)
 
 DEFAULT_MODEL = "Qwen/Qwen3.6-35B-A3B"
 DEFAULT_OUTPUT_TEMPLATE = "extraction_stackoverflow_v2_{year}.jsonl"
@@ -1370,6 +1382,11 @@ def filter_semantic_overreach(
                 for column in citations
             )
         )
+        organization_only_personal_practice = (
+            field_id in PERSONAL_PRACTICE_FIELD_IDS
+            and citations
+            and citations <= ORGANIZATION_LEVEL_COLUMNS
+        )
         is_soft_completion = field_id in SOFT_COMPLETION_FIELD_IDS or field_id.startswith(
             SOFT_COMPLETION_PREFIXES
         )
@@ -1387,6 +1404,7 @@ def filter_semantic_overreach(
                 retirement_without_retirement_answer,
                 nonparticipation_without_never_answer,
                 git_nonuse_without_git_answer,
+                organization_only_personal_practice,
                 one_source_soft_completion,
             )
         ):
@@ -1532,7 +1550,7 @@ def build_stackoverflow_prompt(
         '- Explicit freelancer, independent-contractor, or solo-work evidence may support company_size="Solo / freelance" because that allowed value includes freelance work. Self-employed status alone does not establish founder status, entrepreneurship history, exact headcount, or a strictly one-person organization.',
         "- Compensation is individual compensation, not household income. Do not map CompTotal to a household-income dimension.",
         "- A generic dependents answer that combines children and elderly people supports caregiving only. It does not establish parenting, children's ages, elder-care status, or that both groups are cared for.",
-        "- Organization-level practices and installed tools directly support claims about the respondent's work environment or exposure. They may also support a compatible personal-practice summary_inference, even when they are the only source, because people working in that environment are plausibly exposed to its practices. Independent respondent-level role, tool-use, task, or workflow evidence strengthens the completion but is not mandatory. Never label organization-only personal-practice completion as direct proof.",
+        "- Organization-level practices and installed tools directly support claims about the respondent's work environment or exposure. A personal-practice summary_inference additionally requires at least one respondent-level role, tool-use, task, or workflow answer that connects the person to that practice. Organization-level evidence alone is insufficient, and the completion must never be labeled direct.",
         "- Technology choices and professional roles may support tool exposure and role facts, but they do not by themselves establish stable personality traits, character strengths, psychological needs, moral foundations, learning pace, emotional state, or broad personal values. Emit such soft attributes as direct or structured_claim only when the survey measures the same construct. A summary_inference still requires at least two independent behavioral answers; technology or role alone is insufficient.",
         "- BFI, SDT, moral-foundation, Schwartz-value, personality, and other psychometric completions should normally be summary_inference unless the survey directly measures the same construct. Require multiple independent, positively relevant answers and do not confuse observed professional behavior with a formally measured psychological score or need.",
         "- For summary_inference personality, cognitive-style, broad-value, emotional-state, decision-style, or learning-style fields, require at least two independently cited source columns. Omit one-source soft completions even when the narrative sounds plausible.",

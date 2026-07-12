@@ -401,7 +401,6 @@ def test_semantic_filter_drops_observed_cross_construct_failures(extractor_modul
 
     assert filtered == {
         "fam_machine_learning": fields[6],
-        "habit_backing_up_files": fields[7],
         "age_bracket": fields[-1],
     }
 
@@ -439,6 +438,17 @@ def test_semantic_filter_keeps_positive_same_construct_evidence(extractor_module
             ),
             "assignment_type": "summary_inference",
         },
+        {
+            "field_id": "code_testing_approach",
+            "value": "Mix of unit and integration tests",
+            "confidence": 0.7,
+            "evidence": (
+                "ProfessionalTech=Automated testing; DevType=Developer, back-end. "
+                "Summary: The respondent is a developer in an automated-testing "
+                "environment."
+            ),
+            "assignment_type": "summary_inference",
+        },
     ]
     row = {
         "LanguageHaveWorkedWith": "Rust",
@@ -446,6 +456,8 @@ def test_semantic_filter_keeps_positive_same_construct_evidence(extractor_module
         "SOPartFreq": "I have never participated in Q&A",
         "CodingActivities": "Hobby",
         "LearnCode": "Books",
+        "ProfessionalTech": "Automated testing",
+        "DevType": "Developer, back-end",
     }
 
     assert extractor_module.filter_semantic_overreach(fields, row) == fields
@@ -654,9 +666,8 @@ def test_prompt_blocks_observed_proxy_failure_modes(extractor_module):
     assert "generic dependents answer" in prompt
     assert "work environment or exposure" in prompt
     assert "limited practical AI/ML familiarity" in prompt
-    assert "support a compatible personal-practice summary_inference" in prompt
-    assert "strengthens the completion but is not mandatory" in prompt
-    assert "Never label organization-only personal-practice completion as direct" in prompt
+    assert "additionally requires at least one respondent-level" in prompt
+    assert "Organization-level evidence alone is insufficient" in prompt
     assert "Technology choices and professional roles may support tool exposure and role facts" in prompt
     assert "psychometric completions should normally be summary_inference" in prompt
     assert "people-manager or executive answer is strong evidence" in prompt
