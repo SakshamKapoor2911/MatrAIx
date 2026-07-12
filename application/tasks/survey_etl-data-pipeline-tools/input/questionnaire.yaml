@@ -1,0 +1,894 @@
+schemaVersion: "1.0"
+id: etl_data_pipeline_tools_v1
+title: "ETL and Data Pipeline Tools Survey"
+description: "How data professionals build, orchestrate, and maintain ETL and data pipelines, and how they choose among pipeline tools."
+questions:
+  - id: q0
+    prompt: "How often do you build or maintain data pipelines?"
+    type: single_choice
+    construct: often_build_maintain_data_pipelines
+    required: true
+    options:
+      - id: "a"
+        label: "Every day"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "A few times a month"
+      - id: "d"
+        label: "Occasionally"
+      - id: "e"
+        label: "Rarely"
+      - id: "f"
+        label: "I don't work with data pipelines"
+  - id: q1
+    prompt: "How long have you worked with ETL or data pipelines?"
+    type: single_choice
+    construct: long_have_worked_etl_data
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+  - id: q2
+    prompt: "What best describes your primary relationship to data pipelines?"
+    type: single_choice
+    construct: best_describes_primary_relationship_data
+    required: true
+    options:
+      - id: "a"
+        label: "Data engineer"
+      - id: "b"
+        label: "Analytics engineer"
+      - id: "c"
+        label: "Data scientist or analyst"
+      - id: "d"
+        label: "Software engineer"
+      - id: "e"
+        label: "Platform or infrastructure engineer"
+      - id: "f"
+        label: "I use pipelines others build"
+  - id: q3
+    prompt: "Which data pipeline or orchestration tool do you use most often?"
+    type: single_choice
+    construct: data_pipeline_orchestration_tool_use
+    required: true
+    options:
+      - id: "a"
+        label: "Apache Airflow"
+      - id: "b"
+        label: "dbt"
+      - id: "c"
+        label: "Fivetran"
+      - id: "d"
+        label: "Apache Spark"
+      - id: "e"
+        label: "Dagster"
+      - id: "f"
+        label: "Prefect"
+      - id: "g"
+        label: "Azure Data Factory"
+      - id: "h"
+        label: "AWS Glue"
+      - id: "i"
+        label: "Custom scripts"
+      - id: "j"
+        label: "Other"
+  - id: q4
+    prompt: "Which data pipeline or orchestration tools have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: data_pipeline_orchestration_tools_have
+    required: true
+    options:
+      - id: "a"
+        label: "Apache Airflow"
+      - id: "b"
+        label: "Dagster"
+      - id: "c"
+        label: "Prefect"
+      - id: "d"
+        label: "dbt"
+      - id: "e"
+        label: "Fivetran"
+      - id: "f"
+        label: "Airbyte"
+      - id: "g"
+        label: "Apache Spark"
+      - id: "h"
+        label: "AWS Glue"
+      - id: "i"
+        label: "Azure Data Factory"
+      - id: "j"
+        label: "Google Cloud Dataflow"
+      - id: "k"
+        label: "None of these"
+  - id: q5
+    prompt: "Which data transformation tools do you use? (Select all that apply)"
+    type: multi_choice
+    construct: data_transformation_tools_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "dbt"
+      - id: "b"
+        label: "Apache Spark"
+      - id: "c"
+        label: "pandas"
+      - id: "d"
+        label: "SQL scripts"
+      - id: "e"
+        label: "Databricks"
+      - id: "f"
+        label: "Snowflake tasks or streams"
+      - id: "g"
+        label: "Talend"
+      - id: "h"
+        label: "Custom code"
+  - id: q6
+    prompt: "Which data ingestion or integration tools do you use? (Select all that apply)"
+    type: multi_choice
+    construct: data_ingestion_integration_tools_use
+    required: true
+    options:
+      - id: "a"
+        label: "Fivetran"
+      - id: "b"
+        label: "Airbyte"
+      - id: "c"
+        label: "Stitch"
+      - id: "d"
+        label: "Apache Kafka"
+      - id: "e"
+        label: "Custom connectors"
+      - id: "f"
+        label: "Cloud-native services (Glue, Data Factory)"
+      - id: "g"
+        label: "Segment"
+      - id: "h"
+        label: "None"
+  - id: q7
+    prompt: "Where do your pipelines load data? (Select all that apply)"
+    type: multi_choice
+    construct: where_pipelines_load_data_select
+    required: true
+    options:
+      - id: "a"
+        label: "Snowflake"
+      - id: "b"
+        label: "Google BigQuery"
+      - id: "c"
+        label: "Amazon Redshift"
+      - id: "d"
+        label: "Databricks"
+      - id: "e"
+        label: "PostgreSQL or another relational database"
+      - id: "f"
+        label: "S3 or a data lake"
+      - id: "g"
+        label: "Elasticsearch"
+  - id: q8
+    prompt: "What processing paradigm do your pipelines mostly use?"
+    type: single_choice
+    construct: processing_paradigm_pipelines_mostly_use
+    required: true
+    options:
+      - id: "a"
+        label: "Batch"
+      - id: "b"
+        label: "Streaming"
+      - id: "c"
+        label: "Micro-batch"
+      - id: "d"
+        label: "A mix of batch and streaming"
+  - id: q9
+    prompt: "How are your pipelines primarily scheduled or triggered?"
+    type: single_choice
+    construct: pipelines_primarily_scheduled_triggered
+    required: true
+    options:
+      - id: "a"
+        label: "Time-based schedules"
+      - id: "b"
+        label: "Event-driven triggers"
+      - id: "c"
+        label: "Manually"
+      - id: "d"
+        label: "Continuous streaming"
+      - id: "e"
+        label: "A mix of methods"
+  - id: q10
+    prompt: "Where do your pipelines primarily run?"
+    type: single_choice
+    construct: where_pipelines_primarily_run
+    required: true
+    options:
+      - id: "a"
+        label: "Managed cloud service"
+      - id: "b"
+        label: "Self-managed on cloud infrastructure"
+      - id: "c"
+        label: "On-premises"
+      - id: "d"
+        label: "Hybrid"
+  - id: q11
+    prompt: "About how many pipelines or DAGs do you maintain? Please enter a number."
+    type: free_text
+    construct: many_pipelines_dags_maintain_please
+    required: true
+  - id: q12
+    prompt: "About how much data does your largest pipeline process per day, in gigabytes? Please enter a number."
+    type: free_text
+    construct: much_data_does_largest_pipeline
+    required: true
+  - id: q13
+    prompt: "Does your team follow ELT (transform after loading) or ETL (transform before loading)?"
+    type: single_choice
+    construct: does_team_follow_elt_transform
+    required: true
+    options:
+      - id: "a"
+        label: "Mostly ELT"
+      - id: "b"
+        label: "Mostly ETL"
+      - id: "c"
+        label: "A mix of both"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q14
+    prompt: "How do you monitor pipeline health and failures? (Select all that apply)"
+    type: multi_choice
+    construct: monitor_pipeline_health_failures_select
+    required: true
+    options:
+      - id: "a"
+        label: "The tool's built-in UI"
+      - id: "b"
+        label: "Alerting (PagerDuty, Slack, email)"
+      - id: "c"
+        label: "Data observability tools (Monte Carlo, etc.)"
+      - id: "d"
+        label: "Logs"
+      - id: "e"
+        label: "Custom dashboards"
+      - id: "f"
+        label: "We don't formally monitor pipelines"
+  - id: q15
+    prompt: "Do you use data quality testing in your pipelines?"
+    type: single_choice
+    construct: use_data_quality_testing_pipelines
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, extensively (dbt tests, Great Expectations, etc.)"
+      - id: "b"
+        label: "Yes, for some pipelines"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "We are planning to add it"
+  - id: q16
+    prompt: "How is your pipeline code managed?"
+    type: single_choice
+    construct: pipeline_code_managed
+    required: true
+    options:
+      - id: "a"
+        label: "Version control with CI/CD"
+      - id: "b"
+        label: "Version control only"
+      - id: "c"
+        label: "No version control"
+      - id: "d"
+        label: "Configured through a GUI"
+  - id: q17
+    prompt: "How much do you agree: Our data pipelines are reliable and rarely fail."
+    type: single_choice
+    construct: much_agree_our_data_pipelines
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: Managed tools reduce our data-engineering burden."
+    type: single_choice
+    construct: much_agree_managed_tools_reduce
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: Pipeline maintenance takes up too much of my time."
+    type: single_choice
+    construct: much_agree_pipeline_maintenance_takes
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: Data quality issues are a major challenge for us."
+    type: single_choice
+    construct: much_agree_data_quality_issues
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: Our pipeline tooling scales well with our data volume."
+    type: single_choice
+    construct: much_agree_our_pipeline_tooling
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How much do you agree: I feel confident debugging pipeline failures."
+    type: single_choice
+    construct: much_agree_i_feel_confident
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "When choosing a data pipeline tool, how important is reliability and fault tolerance?"
+    type: single_choice
+    construct: when_choosing_data_pipeline_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When choosing a data pipeline tool, how important is scalability?"
+    type: single_choice
+    construct: when_choosing_data_pipeline_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing a data pipeline tool, how important is ease of use and developer experience?"
+    type: single_choice
+    construct: when_choosing_data_pipeline_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing a data pipeline tool, how important is cost?"
+    type: single_choice
+    construct: when_choosing_data_pipeline_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When choosing a data pipeline tool, how important is monitoring and observability?"
+    type: single_choice
+    construct: when_choosing_data_pipeline_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "When choosing a data pipeline tool, how important is integration with your sources and destinations?"
+    type: single_choice
+    construct: when_choosing_data_pipeline_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "How often do your pipelines fail or require manual intervention?"
+    type: single_choice
+    construct: often_pipelines_fail_require_manual
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q30
+    prompt: "How often do you refactor or rebuild existing pipelines?"
+    type: single_choice
+    construct: often_refactor_rebuild_existing_pipeline
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q31
+    prompt: "Which are your top 3 factors when choosing a data pipeline tool? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Reliability and fault tolerance"
+      - id: "b"
+        label: "Scalability"
+      - id: "c"
+        label: "Ease of use"
+      - id: "d"
+        label: "Cost"
+      - id: "e"
+        label: "Monitoring and observability"
+      - id: "f"
+        label: "Integration with sources and destinations"
+      - id: "g"
+        label: "Open source availability"
+      - id: "h"
+        label: "Community and ecosystem"
+  - id: q32
+    prompt: "How satisfied are you with the reliability of your data pipelines?"
+    type: single_choice
+    construct: satisfied_reliability_data_pipelines
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "How satisfied are you with your primary orchestration tool?"
+    type: single_choice
+    construct: satisfied_primary_orchestration_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q34
+    prompt: "Overall, how satisfied are you with your data pipeline stack?"
+    type: single_choice
+    construct: overall_satisfied_data_pipeline_stack
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q35
+    prompt: "How likely are you to recommend your primary pipeline tool to a colleague? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_primary_pipeline_tool
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q36
+    prompt: "How likely are you to adopt a new data pipeline tool in the next year?"
+    type: single_choice
+    construct: likely_adopt_new_data_pipeline
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q37
+    prompt: "How likely are you to migrate to a managed or cloud-native pipeline solution in the next year?"
+    type: single_choice
+    construct: likely_migrate_managed_cloud_native
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q38
+    prompt: "Which challenges do you face with data pipelines? (Select all that apply)"
+    type: multi_choice
+    construct: challenges_face_data_pipelines_select
+    required: true
+    options:
+      - id: "a"
+        label: "Reliability and failures"
+      - id: "b"
+        label: "Data quality"
+      - id: "c"
+        label: "Cost"
+      - id: "d"
+        label: "Scaling"
+      - id: "e"
+        label: "Tool complexity"
+      - id: "f"
+        label: "Debugging"
+      - id: "g"
+        label: "Schema changes"
+      - id: "h"
+        label: "Latency or freshness"
+  - id: q39
+    prompt: "What is your biggest pain point with data pipelines? (Optional short answer)"
+    type: free_text
+    construct: biggest_pain_point_data_pipelines
+    required: false
+  - id: q40
+    prompt: "Which best describes your current role?"
+    type: single_choice
+    construct: best_describes_current_role
+    required: true
+    options:
+      - id: "a"
+        label: "Data engineer"
+      - id: "b"
+        label: "Analytics engineer"
+      - id: "c"
+        label: "Data scientist or analyst"
+      - id: "d"
+        label: "Software developer or engineer"
+      - id: "e"
+        label: "Platform or infrastructure engineer"
+      - id: "f"
+        label: "Engineering manager"
+      - id: "g"
+        label: "Student"
+      - id: "h"
+        label: "Other"
+  - id: q41
+    prompt: "How many years have you worked professionally in technology or data (not counting education)?"
+    type: single_choice
+    construct: many_years_have_worked_professionally
+    required: true
+    options:
+      - id: "a"
+        label: "I don't work in this field professionally"
+      - id: "b"
+        label: "Less than 2 years"
+      - id: "c"
+        label: "2 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "11 to 20 years"
+      - id: "f"
+        label: "More than 20 years"
+  - id: q42
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q43
+    prompt: "Approximately how many people work at your company or organization?"
+    type: single_choice
+    construct: approximately_many_people_work_company
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2 to 9"
+      - id: "c"
+        label: "10 to 99"
+      - id: "d"
+        label: "100 to 499"
+      - id: "e"
+        label: "500 to 4,999"
+      - id: "f"
+        label: "5,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q44
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Government"
+      - id: "f"
+        label: "Retail or e-commerce"
+      - id: "g"
+        label: "Manufacturing"
+      - id: "h"
+        label: "Media or entertainment"
+      - id: "i"
+        label: "Other"
+  - id: q45
+    prompt: "Which best describes your organization's data stack maturity?"
+    type: single_choice
+    construct: best_describes_organization_s_data
+    required: true
+    options:
+      - id: "a"
+        label: "Ad hoc scripts and manual processes"
+      - id: "b"
+        label: "A modern data stack in progress"
+      - id: "c"
+        label: "A mature, well-established data platform"
+      - id: "d"
+        label: "Mostly legacy systems"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q46
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q47
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q48
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q49
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q50
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q51
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

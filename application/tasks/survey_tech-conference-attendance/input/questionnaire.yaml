@@ -1,0 +1,866 @@
+schemaVersion: "1.0"
+id: tech_conference_attendance_v1
+title: "Tech Conference Attendance Survey"
+description: "How technology professionals attend conferences, meetups, and industry events, including format preferences, motivations, and spending."
+questions:
+  - id: q0
+    prompt: "In the past two years, how many technology conferences or meetups have you attended?"
+    type: single_choice
+    construct: past_two_years_many_technology
+    required: true
+    options:
+      - id: "a"
+        label: "None"
+      - id: "b"
+        label: "1 event"
+      - id: "c"
+        label: "2 to 3 events"
+      - id: "d"
+        label: "4 to 6 events"
+      - id: "e"
+        label: "7 or more events"
+  - id: q1
+    prompt: "How long have you been attending technology events?"
+    type: single_choice
+    construct: long_have_been_attending_technology
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+  - id: q2
+    prompt: "What is your main reason for attending technology events?"
+    type: single_choice
+    construct: main_reason_attending_technology_events
+    required: true
+    options:
+      - id: "a"
+        label: "Learning new skills and technologies"
+      - id: "b"
+        label: "Networking with peers"
+      - id: "c"
+        label: "Career advancement or job opportunities"
+      - id: "d"
+        label: "Representing my employer or product"
+      - id: "e"
+        label: "Staying current with industry trends"
+      - id: "f"
+        label: "Recruiting or business development"
+  - id: q3
+    prompt: "Which event format do you most often attend?"
+    type: single_choice
+    construct: event_format_most_often_attend
+    required: true
+    options:
+      - id: "a"
+        label: "In-person only"
+      - id: "b"
+        label: "Virtual or online only"
+      - id: "c"
+        label: "Hybrid events"
+      - id: "d"
+        label: "A mix of in-person and virtual"
+  - id: q4
+    prompt: "Which types of technology events have you attended in the past two years? (Select all that apply)"
+    type: multi_choice
+    construct: types_technology_events_have_attended
+    required: true
+    options:
+      - id: "a"
+        label: "Large industry conferences"
+      - id: "b"
+        label: "Vendor or product conferences"
+      - id: "c"
+        label: "Local meetups or user groups"
+      - id: "d"
+        label: "Hackathons"
+      - id: "e"
+        label: "Workshops or training sessions"
+      - id: "f"
+        label: "Unconferences or barcamps"
+      - id: "g"
+        label: "Online webinars"
+      - id: "h"
+        label: "I have not attended any"
+  - id: q5
+    prompt: "Which of these conferences have you attended or closely followed? (Select all that apply)"
+    type: multi_choice
+    construct: these_conferences_have_attended_closely
+    required: true
+    options:
+      - id: "a"
+        label: "AWS re:Invent"
+      - id: "b"
+        label: "Google I/O"
+      - id: "c"
+        label: "Microsoft Build"
+      - id: "d"
+        label: "KubeCon + CloudNativeCon"
+      - id: "e"
+        label: "PyCon"
+      - id: "f"
+        label: "GitHub Universe"
+      - id: "g"
+        label: "Apple WWDC"
+      - id: "h"
+        label: "RSA Conference"
+      - id: "i"
+        label: "DevOpsDays"
+      - id: "j"
+        label: "None of these"
+  - id: q6
+    prompt: "How do you usually find out about technology events? (Select all that apply)"
+    type: multi_choice
+    construct: usually_find_out_technology_events
+    required: true
+    options:
+      - id: "a"
+        label: "Social media"
+      - id: "b"
+        label: "Email newsletters"
+      - id: "c"
+        label: "Colleagues or friends"
+      - id: "d"
+        label: "My employer"
+      - id: "e"
+        label: "Online communities or forums"
+      - id: "f"
+        label: "Event organizer websites"
+      - id: "g"
+        label: "Sponsoring vendors"
+  - id: q7
+    prompt: "Which activities do you typically participate in at events? (Select all that apply)"
+    type: multi_choice
+    construct: activities_typically_participate_events_
+    required: true
+    options:
+      - id: "a"
+        label: "Keynote sessions"
+      - id: "b"
+        label: "Technical talks"
+      - id: "c"
+        label: "Hands-on workshops"
+      - id: "d"
+        label: "Networking and the hallway track"
+      - id: "e"
+        label: "Expo or sponsor hall"
+      - id: "f"
+        label: "Hackathons or coding challenges"
+      - id: "g"
+        label: "Birds-of-a-feather or discussion groups"
+      - id: "h"
+        label: "Social events and after-parties"
+  - id: q8
+    prompt: "Who typically pays for your conference attendance?"
+    type: single_choice
+    construct: who_typically_pays_conference_attendance
+    required: true
+    options:
+      - id: "a"
+        label: "My employer pays fully"
+      - id: "b"
+        label: "My employer pays partially"
+      - id: "c"
+        label: "I pay out of pocket"
+      - id: "d"
+        label: "Events I attend are free"
+      - id: "e"
+        label: "I attend on a scholarship or sponsorship"
+  - id: q9
+    prompt: "About how much was spent on your conference attendance in the past year, including registration, travel, and lodging? Please enter a number in US dollars."
+    type: free_text
+    construct: much_was_spent_conference_attendance
+    required: true
+  - id: q10
+    prompt: "About how many technology events do you attend in a typical year? Please enter a number."
+    type: free_text
+    construct: many_technology_events_attend_typical
+    required: true
+  - id: q11
+    prompt: "How far are you usually willing to travel for an in-person event?"
+    type: single_choice
+    construct: far_usually_willing_travel_person
+    required: true
+    options:
+      - id: "a"
+        label: "Only local events"
+      - id: "b"
+        label: "Within my region"
+      - id: "c"
+        label: "Anywhere in the country"
+      - id: "d"
+        label: "Internationally"
+      - id: "e"
+        label: "I prefer not to travel for events"
+  - id: q12
+    prompt: "Do you usually attend events as an individual or with colleagues?"
+    type: single_choice
+    construct: usually_attend_events_as_individual
+    required: true
+    options:
+      - id: "a"
+        label: "Alone"
+      - id: "b"
+        label: "With one or two colleagues"
+      - id: "c"
+        label: "With a larger team"
+      - id: "d"
+        label: "It varies"
+  - id: q13
+    prompt: "Have you ever spoken or presented at a technology conference?"
+    type: single_choice
+    construct: have_ever_spoken_presented_technology
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, multiple times"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No, but I would like to"
+      - id: "d"
+        label: "No, and I have no interest"
+  - id: q14
+    prompt: "How much do you agree: Attending conferences meaningfully advances my career."
+    type: single_choice
+    construct: much_agree_attending_conferences_meaning
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree: Networking is the most valuable part of attending events."
+    type: single_choice
+    construct: much_agree_networking_most_valuable
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree: Virtual events are as valuable to me as in-person ones."
+    type: single_choice
+    construct: much_agree_virtual_events_as
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: Conferences are worth the time away from my regular work."
+    type: single_choice
+    construct: much_agree_conferences_worth_time
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: The technical content at events I attend is usually high quality."
+    type: single_choice
+    construct: much_agree_technical_content_events
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: I feel energized and motivated after attending an event."
+    type: single_choice
+    construct: much_agree_i_feel_energized
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "When deciding whether to attend an event, how important is the quality of speakers and content?"
+    type: single_choice
+    construct: when_deciding_whether_attend_event
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "When deciding whether to attend an event, how important are networking opportunities?"
+    type: single_choice
+    construct: when_deciding_whether_attend_event
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "When deciding whether to attend an event, how important is the cost of attendance?"
+    type: single_choice
+    construct: when_deciding_whether_attend_event
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When deciding whether to attend an event, how important is the location and travel required?"
+    type: single_choice
+    construct: when_deciding_whether_attend_event
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When deciding whether to attend an event, how important is relevance to your current work?"
+    type: single_choice
+    construct: when_deciding_whether_attend_event
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When deciding whether to attend an event, how important are hands-on workshops or training?"
+    type: single_choice
+    construct: when_deciding_whether_attend_event
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "How often do you follow up with contacts you make at events?"
+    type: single_choice
+    construct: often_follow_up_contacts_make
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q27
+    prompt: "How satisfied are you with in-person events you have attended?"
+    type: single_choice
+    construct: satisfied_person_events_have_attended
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q28
+    prompt: "How satisfied are you with virtual events you have attended?"
+    type: single_choice
+    construct: satisfied_virtual_events_have_attended
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q29
+    prompt: "Which are your top 3 factors when deciding to attend an event? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_when_deciding
+    required: true
+    options:
+      - id: "a"
+        label: "Speaker and content quality"
+      - id: "b"
+        label: "Networking opportunities"
+      - id: "c"
+        label: "Cost"
+      - id: "d"
+        label: "Location and travel"
+      - id: "e"
+        label: "Relevance to my work"
+      - id: "f"
+        label: "Hands-on workshops"
+      - id: "g"
+        label: "Employer sponsorship"
+      - id: "h"
+        label: "Reputation of the event"
+  - id: q30
+    prompt: "If your employer stopped paying for events, how would your attendance change?"
+    type: single_choice
+    construct: if_employer_stopped_paying_events
+    required: true
+    options:
+      - id: "a"
+        label: "I would stop attending entirely"
+      - id: "b"
+        label: "I would attend far fewer events"
+      - id: "c"
+        label: "I would attend somewhat fewer events"
+      - id: "d"
+        label: "It would not change; I would pay myself"
+      - id: "e"
+        label: "Not applicable; I already pay myself"
+  - id: q31
+    prompt: "Looking ahead, which format do you prefer for technology events?"
+    type: single_choice
+    construct: looking_ahead_format_prefer_technology
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly prefer in-person"
+      - id: "b"
+        label: "Slightly prefer in-person"
+      - id: "c"
+        label: "No preference"
+      - id: "d"
+        label: "Slightly prefer virtual"
+      - id: "e"
+        label: "Strongly prefer virtual"
+  - id: q32
+    prompt: "Which barriers keep you from attending more events? (Select all that apply)"
+    type: multi_choice
+    construct: barriers_keep_from_attending_more
+    required: true
+    options:
+      - id: "a"
+        label: "Cost"
+      - id: "b"
+        label: "Time away from work"
+      - id: "c"
+        label: "Travel requirements"
+      - id: "d"
+        label: "Lack of employer approval"
+      - id: "e"
+        label: "Family or personal commitments"
+      - id: "f"
+        label: "Health or safety concerns"
+      - id: "g"
+        label: "Few relevant events near me"
+      - id: "h"
+        label: "No significant barriers"
+  - id: q33
+    prompt: "Overall, how satisfied are you with your technology event experiences?"
+    type: single_choice
+    construct: overall_satisfied_technology_event_exper
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q34
+    prompt: "How likely are you to recommend attending technology conferences to a colleague? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_attending_technology_co
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q35
+    prompt: "How likely are you to attend an in-person conference in the next year?"
+    type: single_choice
+    construct: likely_attend_person_conference_next
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q36
+    prompt: "How likely are you to attend a virtual event in the next year?"
+    type: single_choice
+    construct: likely_attend_virtual_event_next
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q37
+    prompt: "How likely are you to speak or present at an event in the next year?"
+    type: single_choice
+    construct: likely_speak_present_event_next
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q38
+    prompt: "What is one thing that would make technology conferences more valuable to you? (Optional short answer)"
+    type: free_text
+    construct: one_thing_that_would_make
+    required: false
+  - id: q39
+    prompt: "Which best describes your current role?"
+    type: single_choice
+    construct: best_describes_current_role
+    required: true
+    options:
+      - id: "a"
+        label: "Software developer or engineer"
+      - id: "b"
+        label: "Data or machine-learning professional"
+      - id: "c"
+        label: "DevOps or infrastructure engineer"
+      - id: "d"
+        label: "Product or project manager"
+      - id: "e"
+        label: "Designer"
+      - id: "f"
+        label: "Engineering manager or executive"
+      - id: "g"
+        label: "Student"
+      - id: "h"
+        label: "Other"
+  - id: q40
+    prompt: "How many years have you worked professionally in technology (not counting education)?"
+    type: single_choice
+    construct: many_years_have_worked_professionally
+    required: true
+    options:
+      - id: "a"
+        label: "I don't work in tech professionally"
+      - id: "b"
+        label: "Less than 2 years"
+      - id: "c"
+        label: "2 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "11 to 20 years"
+      - id: "f"
+        label: "More than 20 years"
+  - id: q41
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q42
+    prompt: "Approximately how many people work at your company or organization?"
+    type: single_choice
+    construct: approximately_many_people_work_company
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2 to 9"
+      - id: "c"
+        label: "10 to 99"
+      - id: "d"
+        label: "100 to 499"
+      - id: "e"
+        label: "500 to 4,999"
+      - id: "f"
+        label: "5,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q43
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Government"
+      - id: "f"
+        label: "Retail or e-commerce"
+      - id: "g"
+        label: "Manufacturing"
+      - id: "h"
+        label: "Media or entertainment"
+      - id: "i"
+        label: "Other"
+  - id: q44
+    prompt: "Does your employer provide a professional development or conference budget?"
+    type: single_choice
+    construct: does_employer_provide_professional_devel
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a generous budget"
+      - id: "b"
+        label: "Yes, a limited budget"
+      - id: "c"
+        label: "No dedicated budget"
+      - id: "d"
+        label: "I'm not sure"
+      - id: "e"
+        label: "Not applicable"
+  - id: q45
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q46
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q47
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q48
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q49
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q50
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

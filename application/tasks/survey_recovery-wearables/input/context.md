@@ -1,0 +1,7 @@
+# Recovery Wearables
+
+How people use recovery-focused wearables such as Whoop, Oura, and Garmin, the metrics they track, and their attitudes toward the data.
+
+## About this survey
+
+This survey profiles recovery-wearable use, opening with a screener on ownership, tenure, the specific devices worn, and the main reason for starting. It records the metrics tracked, how often the app is checked, which decisions the data guides, how the device was paid for, and the respondent's activity level and trust in the data. Attitudes are captured with an agreement Likert battery on sleep improvement, cost, score anxiety, and privacy, a matrix battery on perceptions of the device, and a per-item importance matrix over device-selection criteria, plus a top-three ranking of choice factors. Additional sections cover sleep-habit change, acting on data, connected apps, comfort sharing data, and satisfaction with accuracy, app, and the device overall, followed by recommendation likelihood and retention and switching intent. Question types include single-choice, multi-select, varied Likert scales, two matrix batteries, a ranking item, an NPS-style 0-to-10 scale, and numeric and open free-text. The survey concludes with a demographic block covering age, gender, race and ethnicity, household income, education, employment, household size, marital status, U.S. region, urbanicity, and ownership of other connected health devices.

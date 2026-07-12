@@ -1,0 +1,857 @@
+schemaVersion: "1.0"
+id: crypto_staking_v1
+title: "Crypto Staking Survey"
+description: "How cryptocurrency holders stake assets to earn yield, including the platforms, rewards, risks, and lockup periods involved."
+questions:
+  - id: q0
+    prompt: "Which of the following best describes your experience with crypto staking?"
+    type: single_choice
+    construct: following_best_describes_experience_cryp
+    required: true
+    options:
+      - id: "a"
+        label: "I currently stake crypto for rewards"
+      - id: "b"
+        label: "I have staked in the past but not now"
+      - id: "c"
+        label: "I hold crypto but do not stake it"
+      - id: "d"
+        label: "I am considering staking"
+      - id: "e"
+        label: "I have never staked crypto"
+  - id: q1
+    prompt: "How long have you been staking crypto?"
+    type: single_choice
+    construct: long_have_been_staking_crypto
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 to 12 months"
+      - id: "c"
+        label: "1 to 2 years"
+      - id: "d"
+        label: "3 to 5 years"
+      - id: "e"
+        label: "More than 5 years"
+      - id: "f"
+        label: "Not applicable"
+  - id: q2
+    prompt: "Which assets do you stake? (Select all that apply)"
+    type: multi_choice
+    construct: assets_stake_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "Ethereum (ETH)"
+      - id: "b"
+        label: "Solana (SOL)"
+      - id: "c"
+        label: "Cardano (ADA)"
+      - id: "d"
+        label: "Polkadot (DOT)"
+      - id: "e"
+        label: "Cosmos (ATOM)"
+      - id: "f"
+        label: "Avalanche (AVAX)"
+      - id: "g"
+        label: "Polygon (MATIC/POL)"
+      - id: "h"
+        label: "Stablecoins (e.g., USDC, USDT)"
+      - id: "i"
+        label: "Another proof-of-stake asset"
+      - id: "j"
+        label: "None"
+  - id: q3
+    prompt: "How did you first learn about crypto staking? (Select all that apply)"
+    type: multi_choice
+    construct: did_first_learn_crypto_staking
+    required: true
+    options:
+      - id: "a"
+        label: "An exchange promoted it to me"
+      - id: "b"
+        label: "Online research or articles"
+      - id: "c"
+        label: "YouTube or a crypto influencer"
+      - id: "d"
+        label: "Friends or family"
+      - id: "e"
+        label: "Reddit, Discord, or crypto forums"
+      - id: "f"
+        label: "X (Twitter) or other social media"
+      - id: "g"
+        label: "A podcast"
+  - id: q4
+    prompt: "How well do you understand how staking works?"
+    type: single_choice
+    construct: well_understand_staking_works
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all well"
+      - id: "b"
+        label: "Slightly well"
+      - id: "c"
+        label: "Moderately well"
+      - id: "d"
+        label: "Very well"
+      - id: "e"
+        label: "Extremely well"
+  - id: q5
+    prompt: "Which platforms or methods do you use to stake? (Select all that apply)"
+    type: multi_choice
+    construct: platforms_methods_use_stake_select
+    required: true
+    options:
+      - id: "a"
+        label: "Coinbase"
+      - id: "b"
+        label: "Kraken"
+      - id: "c"
+        label: "Binance.US"
+      - id: "d"
+        label: "Lido (liquid staking)"
+      - id: "e"
+        label: "Rocket Pool"
+      - id: "f"
+        label: "Ledger Live or a hardware-wallet interface"
+      - id: "g"
+        label: "Running my own validator node"
+      - id: "h"
+        label: "A DeFi staking protocol"
+      - id: "i"
+        label: "Not applicable"
+  - id: q6
+    prompt: "Approximately what total value (in USD) do you currently have staked? (Enter a whole number, or 0 if none.)"
+    type: free_text
+    construct: approximately_total_value_usd_currently
+    required: true
+  - id: q7
+    prompt: "Approximately what annual percentage yield (APY) do you earn on your staked assets?"
+    type: single_choice
+    construct: approximately_annual_percentage_yield_ap
+    required: true
+    options:
+      - id: "a"
+        label: "Under 3%"
+      - id: "b"
+        label: "3% to 4.9%"
+      - id: "c"
+        label: "5% to 7.9%"
+      - id: "d"
+        label: "8% to 12%"
+      - id: "e"
+        label: "More than 12%"
+      - id: "f"
+        label: "Don't know"
+  - id: q8
+    prompt: "Do you use liquid staking (for example, receiving a token like stETH that you can trade)?"
+    type: single_choice
+    construct: use_liquid_staking_example_receiving
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, primarily"
+      - id: "b"
+        label: "Yes, for some assets"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I don't know what that is"
+  - id: q9
+    prompt: "How do you custody your staked assets?"
+    type: single_choice
+    construct: custody_staked_assets
+    required: true
+    options:
+      - id: "a"
+        label: "On a centralized exchange (custodial)"
+      - id: "b"
+        label: "Self-custody with a hardware wallet"
+      - id: "c"
+        label: "Self-custody with a software wallet"
+      - id: "d"
+        label: "Through my own validator node"
+      - id: "e"
+        label: "Not applicable"
+  - id: q10
+    prompt: "What motivates you to stake? (Select all that apply)"
+    type: multi_choice
+    construct: motivates_stake_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "Earning passive income"
+      - id: "b"
+        label: "Offsetting inflation of the token supply"
+      - id: "c"
+        label: "Supporting a network I believe in"
+      - id: "d"
+        label: "It feels safer than active trading"
+      - id: "e"
+        label: "Compounding my holdings over time"
+      - id: "f"
+        label: "Participating in governance"
+      - id: "g"
+        label: "Not applicable"
+  - id: q11
+    prompt: "How often do you claim or compound your staking rewards?"
+    type: single_choice
+    construct: often_claim_compound_staking_rewards
+    required: true
+    options:
+      - id: "a"
+        label: "Never (they auto-compound)"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Monthly"
+      - id: "d"
+        label: "Weekly"
+      - id: "e"
+        label: "Daily"
+  - id: q12
+    prompt: "How well do you understand the lockup or unbonding periods for the assets you stake?"
+    type: single_choice
+    construct: well_understand_lockup_unbonding_periods
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "Slightly"
+      - id: "c"
+        label: "Moderately"
+      - id: "d"
+        label: "Very well"
+      - id: "e"
+        label: "I did not know there were lockups"
+  - id: q13
+    prompt: "Roughly what portion of your total crypto holdings is currently staked?"
+    type: single_choice
+    construct: roughly_portion_total_crypto_holdings
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 10%"
+      - id: "b"
+        label: "10% to 24%"
+      - id: "c"
+        label: "25% to 49%"
+      - id: "d"
+        label: "50% to 74%"
+      - id: "e"
+        label: "75% or more"
+      - id: "f"
+        label: "Don't know"
+  - id: q14
+    prompt: "How often do you check your staking rewards or staked balance?"
+    type: single_choice
+    construct: often_check_staking_rewards_staked
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Monthly"
+      - id: "d"
+        label: "Weekly"
+      - id: "e"
+        label: "Daily or more"
+  - id: q15
+    prompt: "How much do you agree with the following statement about staking: It is a good source of passive income."
+    type: single_choice
+    construct: much_agree_following_statement_staking
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement about staking: I understand the risks involved."
+    type: single_choice
+    construct: much_agree_following_statement_staking
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement about staking: The rewards outweigh the risks."
+    type: single_choice
+    construct: much_agree_following_statement_staking
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement about staking: I worry about platform or counterparty risk."
+    type: single_choice
+    construct: much_agree_following_statement_staking
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement about staking: Lockup periods are a significant drawback."
+    type: single_choice
+    construct: much_agree_following_statement_staking
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree with the following statement about staking: Staking is a more responsible use of crypto than active trading."
+    type: single_choice
+    construct: much_agree_following_statement_staking
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "When choosing where to stake, how important is the APY offered?"
+    type: single_choice
+    construct: when_choosing_where_stake_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "When choosing where to stake, how important is the platform's reputation and security?"
+    type: single_choice
+    construct: when_choosing_where_stake_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When choosing where to stake, how important is liquidity (no long lockup)?"
+    type: single_choice
+    construct: when_choosing_where_stake_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When choosing where to stake, how important is retaining self-custody of your assets?"
+    type: single_choice
+    construct: when_choosing_where_stake_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing where to stake, how important are low fees or commission?"
+    type: single_choice
+    construct: when_choosing_where_stake_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing where to stake, how important is ease of use?"
+    type: single_choice
+    construct: when_choosing_where_stake_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "Have you ever experienced slashing, a hack, or a loss of staked funds?"
+    type: single_choice
+    construct: have_ever_experienced_slashing_hack
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a significant loss"
+      - id: "b"
+        label: "Yes, a minor loss"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not applicable"
+  - id: q28
+    prompt: "How concerned are you about regulation affecting staking?"
+    type: single_choice
+    construct: concerned_regulation_affecting_staking
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q29
+    prompt: "How do you handle staking rewards on your taxes?"
+    type: single_choice
+    construct: handle_staking_rewards_taxes
+    required: true
+    options:
+      - id: "a"
+        label: "I report them as income"
+      - id: "b"
+        label: "I use crypto tax software"
+      - id: "c"
+        label: "I work with a tax professional"
+      - id: "d"
+        label: "I have not reported them"
+      - id: "e"
+        label: "I am unsure how to handle them"
+  - id: q30
+    prompt: "What commission or fee does your validator or staking pool charge?"
+    type: single_choice
+    construct: commission_fee_does_validator_staking
+    required: true
+    options:
+      - id: "a"
+        label: "0% (I run my own)"
+      - id: "b"
+        label: "Under 5%"
+      - id: "c"
+        label: "5% to 10%"
+      - id: "d"
+        label: "More than 10%"
+      - id: "e"
+        label: "Don't know"
+  - id: q31
+    prompt: "Which are your top 3 reasons for staking? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_reasons_staking_select
+    required: true
+    options:
+      - id: "a"
+        label: "Passive income"
+      - id: "b"
+        label: "Long-term belief in the asset"
+      - id: "c"
+        label: "Compounding my holdings"
+      - id: "d"
+        label: "Supporting the network"
+      - id: "e"
+        label: "Lower stress than trading"
+      - id: "f"
+        label: "Beating inflation or savings rates"
+      - id: "g"
+        label: "Governance participation"
+  - id: q32
+    prompt: "Overall, how satisfied are you with your staking rewards?"
+    type: single_choice
+    construct: overall_satisfied_staking_rewards
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "Approximately how much have you earned in staking rewards to date (in USD)? (Enter a whole number, or 0 if none.)"
+    type: free_text
+    construct: approximately_much_have_earned_staking
+    required: true
+  - id: q34
+    prompt: "On a scale from 0 to 10, how likely are you to recommend staking to another crypto holder? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: scale_from_0_10_likely
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q35
+    prompt: "How likely are you to increase the amount you stake over the next 12 months?"
+    type: single_choice
+    construct: likely_increase_amount_stake_over
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q36
+    prompt: "How confident are you that staking will be a safe strategy over the long term?"
+    type: single_choice
+    construct: confident_that_staking_will_be
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Completely confident"
+  - id: q37
+    prompt: "What advice would you give someone thinking about staking their crypto? (Optional)"
+    type: free_text
+    construct: advice_would_give_someone_thinking
+    required: false
+  - id: q38
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: race_ethnicity_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino/a"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Another race or ethnicity"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 to $199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Doctoral or professional degree"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or independent contractor"
+      - id: "d"
+        label: "Unemployed, looking for work"
+      - id: "e"
+        label: "Not employed and not looking"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Unable to work"
+  - id: q44
+    prompt: "Including yourself, how many people live in your household? (Enter a number.)"
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q45
+    prompt: "What is your marital status?"
+    type: single_choice
+    construct: marital_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Widowed"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q47
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q48
+    prompt: "How many years have you been involved in cryptocurrency overall?"
+    type: single_choice
+    construct: many_years_have_been_involved
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 9 years"
+      - id: "e"
+        label: "10 or more years"
+  - id: q49
+    prompt: "How would you describe your overall investment risk tolerance?"
+    type: single_choice
+    construct: would_describe_overall_investment_risk
+    required: true
+    options:
+      - id: "a"
+        label: "Very conservative"
+      - id: "b"
+        label: "Conservative"
+      - id: "c"
+        label: "Moderate"
+      - id: "d"
+        label: "Aggressive"
+      - id: "e"
+        label: "Very aggressive"
+  - id: q50
+    prompt: "Roughly what share of your total investment portfolio is in cryptocurrency?"
+    type: single_choice
+    construct: roughly_share_total_investment_portfolio
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 5%"
+      - id: "b"
+        label: "5% to 14%"
+      - id: "c"
+        label: "15% to 29%"
+      - id: "d"
+        label: "30% to 49%"
+      - id: "e"
+        label: "50% or more"
+      - id: "f"
+        label: "Prefer not to say"

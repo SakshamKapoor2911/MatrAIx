@@ -1,0 +1,7 @@
+# Sugar Reduction Habits
+
+How people reduce their sugar intake, the substitutes they use, and what motivates them.
+
+## About this survey
+
+This survey profiles sugar-reduction habits, opening with a screener on whether respondents are cutting back, tenure, current intake level, and sugary-drink frequency. It records behaviors such as motivations, reduction strategies, sweeteners used (stevia, monk fruit, erythritol, allulose, sucralose), reduced-sugar products bought, and label-checking habits. Attitudes are captured through an agreement Likert battery on how respondents feel, difficulty avoiding sugar, substitute healthiness, and cravings, plus a per-item importance matrix over what matters in choosing a substitute and a top-three ranking of those factors. Additional sections cover the hardest situations for avoiding sugar, success at avoidance, foods cut back on, app tracking, trusted information sources, and change over time, followed by satisfaction with progress and substitutes, recommendation likelihood, and future intent, with numeric free-text on daily added sugar and weekly sugary drinks. Question types include single-choice, multi-select, varied Likert scales, an importance matrix, a ranking item, a 0–10 recommendation scale, and numeric and open free-text. The survey closes with a demographic block covering age, gender, race and ethnicity, household income, education, employment, household size, marital status, activity level, U.S. region, and urbanicity.

@@ -1,0 +1,836 @@
+schemaVersion: "1.0"
+id: travel_insurance_v1
+title: "Travel Insurance Survey"
+description: "How travelers decide whether to buy travel insurance, what coverage they choose, and how they experience purchasing and claims."
+questions:
+  - id: q0
+    prompt: "In the past 2 years, how many trips have you taken that were far from home or international?"
+    type: single_choice
+    construct: past_2_years_many_trips
+    required: true
+    options:
+      - id: "a"
+        label: "None"
+      - id: "b"
+        label: "1 trip"
+      - id: "c"
+        label: "2 to 3 trips"
+      - id: "d"
+        label: "4 to 5 trips"
+      - id: "e"
+        label: "6 or more trips"
+  - id: q1
+    prompt: "Have you purchased travel insurance for a trip in the past 2 years?"
+    type: single_choice
+    construct: have_purchased_travel_insurance_trip
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, for every trip"
+      - id: "b"
+        label: "Yes, for some trips"
+      - id: "c"
+        label: "No, but I have before"
+      - id: "d"
+        label: "No, never"
+      - id: "e"
+        label: "Not sure"
+  - id: q2
+    prompt: "Which type of traveler best describes you?"
+    type: single_choice
+    construct: type_traveler_best_describes
+    required: true
+    options:
+      - id: "a"
+        label: "Mostly domestic leisure"
+      - id: "b"
+        label: "Mostly international leisure"
+      - id: "c"
+        label: "Business traveler"
+      - id: "d"
+        label: "A mix of business and leisure"
+      - id: "e"
+        label: "Infrequent traveler"
+  - id: q3
+    prompt: "For which reasons do you buy (or would you buy) travel insurance? (Select all that apply)"
+    type: multi_choice
+    construct: reasons_buy_would_buy_travel
+    required: true
+    options:
+      - id: "a"
+        label: "Trip cancellation"
+      - id: "b"
+        label: "Medical emergencies abroad"
+      - id: "c"
+        label: "Emergency evacuation"
+      - id: "d"
+        label: "Lost or delayed baggage"
+      - id: "e"
+        label: "Flight delays"
+      - id: "f"
+        label: "Rental car coverage"
+      - id: "g"
+        label: "Protecting an expensive prepaid trip"
+      - id: "h"
+        label: "Traveling with elderly relatives or children"
+      - id: "i"
+        label: "Required by the destination"
+  - id: q4
+    prompt: "How often do you buy travel insurance when you travel?"
+    type: single_choice
+    construct: often_buy_travel_insurance_when
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q5
+    prompt: "Who did you most recently buy travel insurance from?"
+    type: single_choice
+    construct: who_did_most_recently_buy
+    required: true
+    options:
+      - id: "a"
+        label: "Allianz Travel"
+      - id: "b"
+        label: "Travel Guard (AIG)"
+      - id: "c"
+        label: "World Nomads"
+      - id: "d"
+        label: "Travelex"
+      - id: "e"
+        label: "Seven Corners"
+      - id: "f"
+        label: "Nationwide"
+      - id: "g"
+        label: "AXA"
+      - id: "h"
+        label: "My credit card's built-in coverage"
+      - id: "i"
+        label: "The airline or booking site at checkout"
+      - id: "j"
+        label: "Another company"
+      - id: "k"
+        label: "I have not bought travel insurance"
+  - id: q6
+    prompt: "Which providers or channels have you gotten travel insurance quotes from? (Select all that apply)"
+    type: multi_choice
+    construct: providers_channels_have_gotten_travel
+    required: true
+    options:
+      - id: "a"
+        label: "Allianz Travel"
+      - id: "b"
+        label: "Travel Guard"
+      - id: "c"
+        label: "World Nomads"
+      - id: "d"
+        label: "Travelex"
+      - id: "e"
+        label: "A comparison site such as Squaremouth or InsureMyTrip"
+      - id: "f"
+        label: "The airline or online travel agency at checkout"
+      - id: "g"
+        label: "My credit card benefits"
+      - id: "h"
+        label: "A travel agent"
+      - id: "i"
+        label: "I did not compare"
+  - id: q7
+    prompt: "How do you usually purchase travel insurance?"
+    type: single_choice
+    construct: usually_purchase_travel_insurance
+    required: true
+    options:
+      - id: "a"
+        label: "Directly from the insurer's website"
+      - id: "b"
+        label: "As an add-on during flight or hotel booking"
+      - id: "c"
+        label: "Through a comparison marketplace"
+      - id: "d"
+        label: "Through a travel agent"
+      - id: "e"
+        label: "I rely on credit card coverage"
+  - id: q8
+    prompt: "What coverage did your most recent travel insurance policy include? (Select all that apply)"
+    type: multi_choice
+    construct: coverage_did_most_recent_travel
+    required: true
+    options:
+      - id: "a"
+        label: "Trip cancellation"
+      - id: "b"
+        label: "Trip interruption"
+      - id: "c"
+        label: "Emergency medical"
+      - id: "d"
+        label: "Emergency evacuation"
+      - id: "e"
+        label: "Baggage loss or delay"
+      - id: "f"
+        label: "Travel delay"
+      - id: "g"
+        label: "Rental car damage"
+      - id: "h"
+        label: "Cancel For Any Reason (CFAR)"
+      - id: "i"
+        label: "Not sure"
+  - id: q9
+    prompt: "What did your most recent travel insurance policy cost?"
+    type: single_choice
+    construct: did_most_recent_travel_insurance
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25"
+      - id: "b"
+        label: "$25 to $49"
+      - id: "c"
+        label: "$50 to $99"
+      - id: "d"
+        label: "$100 to $199"
+      - id: "e"
+        label: "$200 or more"
+      - id: "f"
+        label: "Not sure"
+  - id: q10
+    prompt: "About how much did your most recent travel insurance policy cost, in U.S. dollars? Enter a whole number."
+    type: free_text
+    construct: much_did_most_recent_travel
+    required: true
+  - id: q11
+    prompt: "Roughly what percent of your trip cost did you spend on travel insurance?"
+    type: single_choice
+    construct: roughly_percent_trip_cost_did
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 3%"
+      - id: "b"
+        label: "3% to 5%"
+      - id: "c"
+        label: "6% to 8%"
+      - id: "d"
+        label: "9% to 12%"
+      - id: "e"
+        label: "More than 12%"
+      - id: "f"
+        label: "Not sure"
+  - id: q12
+    prompt: "Did your most recent policy include Cancel For Any Reason (CFAR) coverage?"
+    type: single_choice
+    construct: did_most_recent_policy_include
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Not sure"
+  - id: q13
+    prompt: "What was the primary trip you most recently insured?"
+    type: single_choice
+    construct: was_primary_trip_most_recently
+    required: true
+    options:
+      - id: "a"
+        label: "Domestic vacation"
+      - id: "b"
+        label: "International vacation"
+      - id: "c"
+        label: "Cruise"
+      - id: "d"
+        label: "Business trip"
+      - id: "e"
+        label: "Adventure or outdoor trip"
+      - id: "f"
+        label: "Visiting family"
+  - id: q14
+    prompt: "About how much did your most recently insured trip cost in total, in U.S. dollars? Enter a whole number."
+    type: free_text
+    construct: much_did_most_recently_insured
+    required: true
+  - id: q15
+    prompt: "How much do you agree with the following statement about travel insurance: Travel insurance is worth the cost."
+    type: single_choice
+    construct: much_agree_following_statement_travel
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement about travel insurance: I understand what my policy covers."
+    type: single_choice
+    construct: much_agree_following_statement_travel
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement about travel insurance: It gives me peace of mind while traveling."
+    type: single_choice
+    construct: much_agree_following_statement_travel
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement about travel insurance: Credit card coverage is enough for most of my trips."
+    type: single_choice
+    construct: much_agree_following_statement_travel
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement about travel insurance: I trust the insurer to pay a valid claim."
+    type: single_choice
+    construct: much_agree_following_statement_travel
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "When choosing travel insurance, how important is each of the following: Low price"
+    type: single_choice
+    construct: when_choosing_travel_insurance_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "When choosing travel insurance, how important is each of the following: High emergency medical coverage limits"
+    type: single_choice
+    construct: when_choosing_travel_insurance_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "When choosing travel insurance, how important is each of the following: Emergency evacuation coverage"
+    type: single_choice
+    construct: when_choosing_travel_insurance_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When choosing travel insurance, how important is each of the following: Cancel For Any Reason flexibility"
+    type: single_choice
+    construct: when_choosing_travel_insurance_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When choosing travel insurance, how important is each of the following: A 24/7 assistance hotline"
+    type: single_choice
+    construct: when_choosing_travel_insurance_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing travel insurance, how important is each of the following: Easy online claims"
+    type: single_choice
+    construct: when_choosing_travel_insurance_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing travel insurance, how important is each of the following: Provider reputation"
+    type: single_choice
+    construct: when_choosing_travel_insurance_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "Which are your top 3 factors when choosing a travel insurance policy? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Price"
+      - id: "b"
+        label: "Medical coverage limits"
+      - id: "c"
+        label: "Cancellation coverage"
+      - id: "d"
+        label: "Evacuation coverage"
+      - id: "e"
+        label: "CFAR option"
+      - id: "f"
+        label: "Ease of claims"
+      - id: "g"
+        label: "Provider reputation"
+      - id: "h"
+        label: "Recommendation"
+      - id: "i"
+        label: "Convenience of buying at checkout"
+  - id: q28
+    prompt: "Have you ever filed a travel insurance claim?"
+    type: single_choice
+    construct: have_ever_filed_travel_insurance
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, one claim"
+      - id: "b"
+        label: "Yes, more than one claim"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q29
+    prompt: "What did your travel insurance claim(s) involve? (Select all that apply)"
+    type: multi_choice
+    construct: did_travel_insurance_claim_s
+    required: true
+    options:
+      - id: "a"
+        label: "Trip cancellation"
+      - id: "b"
+        label: "Trip interruption"
+      - id: "c"
+        label: "Medical treatment abroad"
+      - id: "d"
+        label: "Emergency evacuation"
+      - id: "e"
+        label: "Lost or delayed baggage"
+      - id: "f"
+        label: "Flight delay"
+      - id: "g"
+        label: "Rental car damage"
+      - id: "h"
+        label: "I have never filed a claim"
+  - id: q30
+    prompt: "How satisfied were you with how your travel insurance claim was handled?"
+    type: single_choice
+    construct: satisfied_were_travel_insurance_claim
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neither satisfied nor dissatisfied"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "I have never filed a claim"
+  - id: q31
+    prompt: "About how much was your most recent travel insurance claim payout, in U.S. dollars? Enter a whole number (0 if none)."
+    type: free_text
+    construct: much_was_most_recent_travel
+    required: true
+  - id: q32
+    prompt: "How was your most recent claim resolved?"
+    type: single_choice
+    construct: was_most_recent_claim_resolved
+    required: true
+    options:
+      - id: "a"
+        label: "Fully paid"
+      - id: "b"
+        label: "Partially paid"
+      - id: "c"
+        label: "Denied"
+      - id: "d"
+        label: "Still pending"
+      - id: "e"
+        label: "I have never filed a claim"
+  - id: q33
+    prompt: "Overall, how satisfied are you with your travel insurance experiences?"
+    type: single_choice
+    construct: overall_satisfied_travel_insurance_exper
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neither satisfied nor dissatisfied"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q34
+    prompt: "How likely are you to buy travel insurance for your next trip?"
+    type: single_choice
+    construct: likely_buy_travel_insurance_next
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q35
+    prompt: "How likely are you to use the same provider again next time?"
+    type: single_choice
+    construct: likely_use_same_provider_again
+    required: true
+    options:
+      - id: "a"
+        label: "Definitely will"
+      - id: "b"
+        label: "Probably will"
+      - id: "c"
+        label: "Unsure"
+      - id: "d"
+        label: "Probably will not"
+      - id: "e"
+        label: "Definitely will not"
+  - id: q36
+    prompt: "On a scale of 0 to 10, how likely are you to recommend buying travel insurance to a friend (0 = not at all likely, 10 = extremely likely)?"
+    type: single_choice
+    construct: scale_0_10_likely_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q37
+    prompt: "What is your biggest concern about travel insurance? (Optional open response)"
+    type: free_text
+    construct: biggest_concern_travel_insurance_optiona
+    required: false
+  - id: q38
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic, Latino, or Spanish origin"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "American Indian or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or other Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Some other race or origin"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is your total annual household income before taxes?"
+    type: single_choice
+    construct: total_annual_household_income_before
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 to $199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Professional or doctoral degree"
+  - id: q43
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Unemployed and looking for work"
+      - id: "e"
+        label: "Not in the labor force"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Unable to work"
+  - id: q44
+    prompt: "Including yourself, how many people live in your household? Please enter a whole number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q45
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Widowed"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "In which U.S. region do you live?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+  - id: q47
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q48
+    prompt: "About how often do you travel by air per year?"
+    type: single_choice
+    construct: often_travel_by_air_per
+    required: true
+    options:
+      - id: "a"
+        label: "I do not fly"
+      - id: "b"
+        label: "1 to 2 times"
+      - id: "c"
+        label: "3 to 5 times"
+      - id: "d"
+        label: "6 to 10 times"
+      - id: "e"
+        label: "More than 10 times"
+  - id: q49
+    prompt: "Do you currently have a valid passport?"
+    type: single_choice
+    construct: currently_have_valid_passport
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"

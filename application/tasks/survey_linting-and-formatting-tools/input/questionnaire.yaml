@@ -1,0 +1,938 @@
+schemaVersion: "1.0"
+id: linting_and_formatting_tools_v1
+title: "Linting and Formatting Tools Survey"
+description: "How developers adopt, configure, and feel about code linters and formatters."
+questions:
+  - id: q0
+    prompt: "How often do you use a linter or code formatter?"
+    type: single_choice
+    construct: often_use_linter_code_formatter
+    required: true
+    options:
+      - id: "a"
+        label: "Constantly, it runs as I type"
+      - id: "b"
+        label: "Every day"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "Occasionally"
+      - id: "e"
+        label: "Never"
+  - id: q1
+    prompt: "How long have you been using linters or formatters in your work?"
+    type: single_choice
+    construct: long_have_been_using_linters
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+  - id: q2
+    prompt: "What best describes your relationship to linting and formatting tools?"
+    type: single_choice
+    construct: best_describes_relationship_linting_form
+    required: true
+    options:
+      - id: "a"
+        label: "I set up and maintain the team's configuration"
+      - id: "b"
+        label: "I use whatever the team has configured"
+      - id: "c"
+        label: "I configure my own personal setup"
+      - id: "d"
+        label: "I rarely think about them"
+      - id: "e"
+        label: "I don't use them"
+  - id: q3
+    prompt: "Which linter do you use most often?"
+    type: single_choice
+    construct: linter_use_most_often
+    required: true
+    options:
+      - id: "a"
+        label: "ESLint"
+      - id: "b"
+        label: "Ruff"
+      - id: "c"
+        label: "Pylint"
+      - id: "d"
+        label: "Flake8"
+      - id: "e"
+        label: "RuboCop"
+      - id: "f"
+        label: "golangci-lint"
+      - id: "g"
+        label: "Clippy (Rust)"
+      - id: "h"
+        label: "Biome"
+      - id: "i"
+        label: "Other"
+      - id: "j"
+        label: "I don't use a linter"
+  - id: q4
+    prompt: "Which code formatter do you use most often?"
+    type: single_choice
+    construct: code_formatter_use_most_often
+    required: true
+    options:
+      - id: "a"
+        label: "Prettier"
+      - id: "b"
+        label: "Black"
+      - id: "c"
+        label: "gofmt"
+      - id: "d"
+        label: "Ruff formatter"
+      - id: "e"
+        label: "Biome"
+      - id: "f"
+        label: "rustfmt"
+      - id: "g"
+        label: "clang-format"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "I don't use a formatter"
+  - id: q5
+    prompt: "Which linters have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: linters_have_used_past_year
+    required: true
+    options:
+      - id: "a"
+        label: "ESLint"
+      - id: "b"
+        label: "Ruff"
+      - id: "c"
+        label: "Pylint"
+      - id: "d"
+        label: "Flake8"
+      - id: "e"
+        label: "RuboCop"
+      - id: "f"
+        label: "golangci-lint"
+      - id: "g"
+        label: "Clippy"
+      - id: "h"
+        label: "Stylelint"
+      - id: "i"
+        label: "Biome"
+      - id: "j"
+        label: "SonarLint"
+      - id: "k"
+        label: "None"
+  - id: q6
+    prompt: "Which formatters have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: formatters_have_used_past_year
+    required: true
+    options:
+      - id: "a"
+        label: "Prettier"
+      - id: "b"
+        label: "Black"
+      - id: "c"
+        label: "gofmt"
+      - id: "d"
+        label: "Ruff formatter"
+      - id: "e"
+        label: "Biome"
+      - id: "f"
+        label: "rustfmt"
+      - id: "g"
+        label: "clang-format"
+      - id: "h"
+        label: "dprint"
+      - id: "i"
+        label: "autopep8"
+      - id: "j"
+        label: "None"
+  - id: q7
+    prompt: "In which languages do you regularly lint or format code? (Select all that apply)"
+    type: multi_choice
+    construct: languages_regularly_lint_format_code
+    required: true
+    options:
+      - id: "a"
+        label: "JavaScript or TypeScript"
+      - id: "b"
+        label: "Python"
+      - id: "c"
+        label: "Go"
+      - id: "d"
+        label: "Rust"
+      - id: "e"
+        label: "Ruby"
+      - id: "f"
+        label: "Java or Kotlin"
+      - id: "g"
+        label: "C or C++"
+      - id: "h"
+        label: "CSS or SCSS"
+      - id: "i"
+        label: "Other"
+  - id: q8
+    prompt: "How do you run linters and formatters? (Select all that apply)"
+    type: multi_choice
+    construct: run_linters_formatters_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Automatically on save in my editor"
+      - id: "b"
+        label: "Through a pre-commit hook"
+      - id: "c"
+        label: "In continuous integration"
+      - id: "d"
+        label: "Manually from the command line"
+      - id: "e"
+        label: "On demand before opening a pull request"
+  - id: q9
+    prompt: "Which pre-commit or hook tooling do you use? (Select all that apply)"
+    type: multi_choice
+    construct: pre_commit_hook_tooling_use
+    required: true
+    options:
+      - id: "a"
+        label: "Husky"
+      - id: "b"
+        label: "lint-staged"
+      - id: "c"
+        label: "pre-commit (the framework)"
+      - id: "d"
+        label: "Lefthook"
+      - id: "e"
+        label: "Hand-written Git hooks"
+      - id: "f"
+        label: "None"
+  - id: q10
+    prompt: "How is your linting configuration usually set up?"
+    type: single_choice
+    construct: linting_configuration_usually_set_up
+    required: true
+    options:
+      - id: "a"
+        label: "A shared team preset checked into the repo"
+      - id: "b"
+        label: "A popular preset (Airbnb, Standard, etc.)"
+      - id: "c"
+        label: "A heavily customized config"
+      - id: "d"
+        label: "Minimal or default rules"
+      - id: "e"
+        label: "No configuration"
+  - id: q11
+    prompt: "Does your team enforce linting or formatting in continuous integration?"
+    type: single_choice
+    construct: does_team_enforce_linting_formatting
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, failures block the build"
+      - id: "b"
+        label: "Yes, but only as a warning"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q12
+    prompt: "Do you have format-on-save enabled in your editor?"
+    type: single_choice
+    construct: have_format_save_enabled_editor
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, for all languages"
+      - id: "b"
+        label: "Yes, for some languages"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "My editor doesn't support it"
+  - id: q13
+    prompt: "Which editor integrations do you use for linting or formatting? (Select all that apply)"
+    type: multi_choice
+    construct: editor_integrations_use_linting_formatti
+    required: true
+    options:
+      - id: "a"
+        label: "VS Code extensions"
+      - id: "b"
+        label: "JetBrains IDE integration"
+      - id: "c"
+        label: "Neovim or Vim with an LSP"
+      - id: "d"
+        label: "Emacs integration"
+      - id: "e"
+        label: "Sublime Text plugins"
+      - id: "f"
+        label: "None"
+  - id: q14
+    prompt: "Roughly how many linter rules has your team customized from the defaults? Please enter a number."
+    type: free_text
+    construct: roughly_many_linter_rules_has
+    required: true
+  - id: q15
+    prompt: "About how many minutes per week do you spend adjusting or fighting lint configuration? Please enter a number."
+    type: free_text
+    construct: many_minutes_per_week_spend
+    required: true
+  - id: q16
+    prompt: "How much do you agree: Linters catch real bugs before they reach production."
+    type: single_choice
+    construct: much_agree_linters_catch_real
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: Automatic formatting ends pointless style debates."
+    type: single_choice
+    construct: much_agree_automatic_formatting_ends
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: Maintaining lint configuration is time-consuming."
+    type: single_choice
+    construct: much_agree_maintaining_lint_configuratio
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: Consistent formatting makes code easier to read."
+    type: single_choice
+    construct: much_agree_consistent_formatting_makes
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: Many linter warnings are just noise."
+    type: single_choice
+    construct: much_agree_many_linter_warnings
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: Auto-formatting saves me meaningful time."
+    type: single_choice
+    construct: much_agree_auto_formatting_saves
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How much do you agree: I trust my linter's default rule set."
+    type: single_choice
+    construct: much_agree_i_trust_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "When choosing a linter or formatter, how important is speed and performance?"
+    type: single_choice
+    construct: when_choosing_linter_formatter_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When choosing a linter or formatter, how important are sensible out-of-the-box defaults?"
+    type: single_choice
+    construct: when_choosing_linter_formatter_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing a linter or formatter, how important is configurability?"
+    type: single_choice
+    construct: when_choosing_linter_formatter_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing a linter or formatter, how important is editor integration?"
+    type: single_choice
+    construct: when_choosing_linter_formatter_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When choosing a linter or formatter, how important is broad language support?"
+    type: single_choice
+    construct: when_choosing_linter_formatter_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "When choosing a linter or formatter, how important is automatic fixing of issues?"
+    type: single_choice
+    construct: when_choosing_linter_formatter_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "How often do you disable or ignore individual lint rules in your code?"
+    type: single_choice
+    construct: often_disable_ignore_individual_lint
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q30
+    prompt: "How often do lint or format failures block your pull requests?"
+    type: single_choice
+    construct: often_lint_format_failures_block
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q31
+    prompt: "How satisfied are you with your primary linter?"
+    type: single_choice
+    construct: satisfied_primary_linter
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q32
+    prompt: "How satisfied are you with your primary formatter?"
+    type: single_choice
+    construct: satisfied_primary_formatter
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "What is your view on all-in-one tools like Biome that combine linting and formatting?"
+    type: single_choice
+    construct: view_all_one_tools_like
+    required: true
+    options:
+      - id: "a"
+        label: "I prefer a single all-in-one tool"
+      - id: "b"
+        label: "I prefer separate best-in-class tools"
+      - id: "c"
+        label: "I have no strong preference"
+      - id: "d"
+        label: "I'm not familiar with these tools"
+  - id: q34
+    prompt: "How strict is your team's linting and formatting configuration?"
+    type: single_choice
+    construct: strict_team_s_linting_formatting
+    required: true
+    options:
+      - id: "a"
+        label: "Very strict, almost nothing is allowed to slip"
+      - id: "b"
+        label: "Fairly strict"
+      - id: "c"
+        label: "Moderate"
+      - id: "d"
+        label: "Loose"
+      - id: "e"
+        label: "We have no shared standard"
+  - id: q35
+    prompt: "Which pain points have you experienced with linters or formatters? (Select all that apply)"
+    type: multi_choice
+    construct: pain_points_have_experienced_linters
+    required: true
+    options:
+      - id: "a"
+        label: "Slow performance on large codebases"
+      - id: "b"
+        label: "False positives or noisy warnings"
+      - id: "c"
+        label: "Complex or fragile configuration"
+      - id: "d"
+        label: "Conflicts between the linter and formatter"
+      - id: "e"
+        label: "Large diffs when formatting is first applied"
+      - id: "f"
+        label: "Tools being too opinionated"
+      - id: "g"
+        label: "I haven't hit real pain points"
+  - id: q36
+    prompt: "How likely are you to add linting and formatting to a brand-new project?"
+    type: single_choice
+    construct: likely_add_linting_formatting_brand
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q37
+    prompt: "Which are your top 3 things you value in a formatter? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_things_value_formatter
+    required: true
+    options:
+      - id: "a"
+        label: "Speed"
+      - id: "b"
+        label: "Zero configuration"
+      - id: "c"
+        label: "Consistency across the team"
+      - id: "d"
+        label: "Broad language support"
+      - id: "e"
+        label: "Editor integration"
+      - id: "f"
+        label: "Minimal diffs"
+      - id: "g"
+        label: "Respecting existing style"
+      - id: "h"
+        label: "A large community"
+  - id: q38
+    prompt: "How much do you agree: I would rather use zero-configuration tools than tune rules myself."
+    type: single_choice
+    construct: much_agree_i_would_rather
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q39
+    prompt: "How would you rate the impact of your linting setup on overall code quality?"
+    type: single_choice
+    construct: would_rate_impact_linting_setup
+    required: true
+    options:
+      - id: "a"
+        label: "No impact"
+      - id: "b"
+        label: "Slight impact"
+      - id: "c"
+        label: "Moderate impact"
+      - id: "d"
+        label: "Large impact"
+      - id: "e"
+        label: "Very large impact"
+  - id: q40
+    prompt: "How likely are you to recommend your current linting and formatting setup to another developer? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_current_linting_formatt
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q41
+    prompt: "How likely are you to switch your primary linter or formatter within the next year?"
+    type: single_choice
+    construct: likely_switch_primary_linter_formatter
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q42
+    prompt: "What is one thing you would improve about your linting or formatting tools? (Optional short answer)"
+    type: free_text
+    construct: one_thing_would_improve_linting
+    required: false
+  - id: q43
+    prompt: "Which best describes your current role?"
+    type: single_choice
+    construct: best_describes_current_role
+    required: true
+    options:
+      - id: "a"
+        label: "Front-end developer"
+      - id: "b"
+        label: "Back-end developer"
+      - id: "c"
+        label: "Full-stack developer"
+      - id: "d"
+        label: "DevOps or site reliability engineer"
+      - id: "e"
+        label: "Data engineer"
+      - id: "f"
+        label: "QA or test engineer"
+      - id: "g"
+        label: "Engineering manager"
+      - id: "h"
+        label: "Student"
+      - id: "i"
+        label: "Other"
+  - id: q44
+    prompt: "How many years have you worked professionally in technology (not counting education)?"
+    type: single_choice
+    construct: many_years_have_worked_professionally
+    required: true
+    options:
+      - id: "a"
+        label: "I don't work in tech professionally"
+      - id: "b"
+        label: "Less than 2 years"
+      - id: "c"
+        label: "2 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "11 to 20 years"
+      - id: "f"
+        label: "More than 20 years"
+  - id: q45
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q46
+    prompt: "Approximately how many people work at your company or organization?"
+    type: single_choice
+    construct: approximately_many_people_work_company
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2 to 9"
+      - id: "c"
+        label: "10 to 99"
+      - id: "d"
+        label: "100 to 499"
+      - id: "e"
+        label: "500 to 4,999"
+      - id: "f"
+        label: "5,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q47
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Government"
+      - id: "f"
+        label: "Retail or e-commerce"
+      - id: "g"
+        label: "Manufacturing"
+      - id: "h"
+        label: "Media or entertainment"
+      - id: "i"
+        label: "Other"
+  - id: q48
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q49
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q50
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q51
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q52
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q53
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

@@ -1,0 +1,7 @@
+# Dermatology Access
+
+How people access dermatology and skin-care services, including teledermatology, and their experiences and attitudes toward that care.
+
+## About this survey
+
+This survey profiles how respondents reach dermatology care, opening with a screener on visit history, frequency, what prompts a visit, and the skin concerns involved. It records how people find providers, appointment wait times, teledermatology use and the specific apps and services tried, how care is paid for, and reasons care has been skipped or delayed. Attitudes are captured with an agreement Likert battery on availability, cost, and trust, a matrix battery on perceived barriers to access, and a per-item importance matrix over provider-selection criteria, plus a top-three ranking of decision factors. Additional sections cover sunscreen and skin-check habits, comfort with video visits, information sources, and satisfaction with access, cost, and the most recent visit, followed by recommendation likelihood and future intent to seek care. Question types include single-choice, multi-select, varied Likert scales, two matrix batteries, a ranking item, an NPS-style 0-to-10 scale, and numeric and open free-text. The survey concludes with a demographic block covering age, gender, race and ethnicity, household income, education, employment, household size, marital status, U.S. region, urbanicity, and insurance status.

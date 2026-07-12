@@ -1,0 +1,825 @@
+schemaVersion: "1.0"
+id: employee_stock_purchase_plans_v1
+title: "Employee Stock Purchase Plan Survey"
+description: "How employees use workplace stock purchase plans, including the discount, contribution rate, and the decision to hold or sell shares."
+questions:
+  - id: q0
+    prompt: "Does your current employer offer an employee stock purchase plan (ESPP)?"
+    type: single_choice
+    construct: does_current_employer_offer_employee
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I participate"
+      - id: "b"
+        label: "Yes, but I do not participate"
+      - id: "c"
+        label: "Yes, and I am eligible but haven't enrolled yet"
+      - id: "d"
+        label: "No"
+      - id: "e"
+        label: "Don't know"
+  - id: q1
+    prompt: "Do you currently participate in an ESPP?"
+    type: single_choice
+    construct: currently_participate_espp
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, but I have in the past"
+      - id: "c"
+        label: "No, never"
+      - id: "d"
+        label: "Not applicable"
+  - id: q2
+    prompt: "How long have you participated in an ESPP (at any employer)?"
+    type: single_choice
+    construct: long_have_participated_espp_any
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+      - id: "f"
+        label: "Not applicable"
+  - id: q3
+    prompt: "How did you first learn how your ESPP works? (Select all that apply)"
+    type: multi_choice
+    construct: did_first_learn_espp_works
+    required: true
+    options:
+      - id: "a"
+        label: "HR or benefits onboarding"
+      - id: "b"
+        label: "Company benefits documents or intranet"
+      - id: "c"
+        label: "A coworker or manager"
+      - id: "d"
+        label: "The plan administrator's website"
+      - id: "e"
+        label: "Online research or articles"
+      - id: "f"
+        label: "A financial advisor"
+      - id: "g"
+        label: "Social media or a financial influencer"
+  - id: q4
+    prompt: "How well do you understand how your ESPP works?"
+    type: single_choice
+    construct: well_understand_espp_works
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all well"
+      - id: "b"
+        label: "Slightly well"
+      - id: "c"
+        label: "Moderately well"
+      - id: "d"
+        label: "Very well"
+      - id: "e"
+        label: "Extremely well"
+  - id: q5
+    prompt: "What purchase discount does your ESPP offer?"
+    type: single_choice
+    construct: purchase_discount_does_espp_offer
+    required: true
+    options:
+      - id: "a"
+        label: "5%"
+      - id: "b"
+        label: "10%"
+      - id: "c"
+        label: "15%"
+      - id: "d"
+        label: "Another discount amount"
+      - id: "e"
+        label: "No discount"
+      - id: "f"
+        label: "Don't know"
+  - id: q6
+    prompt: "Does your plan include a \"lookback\" provision (pricing off the lower of the start or end of the period)?"
+    type: single_choice
+    construct: does_plan_include_lookback_provision
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Don't know"
+  - id: q7
+    prompt: "What percentage of your salary do you contribute to the ESPP?"
+    type: single_choice
+    construct: percentage_salary_contribute_espp
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 5%"
+      - id: "b"
+        label: "5% to 9%"
+      - id: "c"
+        label: "10% to 14%"
+      - id: "d"
+        label: "15% (or the plan maximum)"
+      - id: "e"
+        label: "Not applicable"
+  - id: q8
+    prompt: "Approximately how much do you contribute to your ESPP per year? (Enter a whole-dollar number, or 0 if none.)"
+    type: free_text
+    construct: approximately_much_contribute_espp_per
+    required: true
+  - id: q9
+    prompt: "What do you typically do with shares after they are purchased?"
+    type: single_choice
+    construct: typically_shares_after_they_purchased
+    required: true
+    options:
+      - id: "a"
+        label: "Sell immediately (quick sale)"
+      - id: "b"
+        label: "Hold for less than 1 year, then sell"
+      - id: "c"
+        label: "Hold more than 1 year to qualify for long-term treatment, then sell"
+      - id: "d"
+        label: "Hold indefinitely as a long-term investment"
+      - id: "e"
+        label: "Not applicable"
+  - id: q10
+    prompt: "What drives your decision to hold or sell ESPP shares? (Select all that apply)"
+    type: multi_choice
+    construct: drives_decision_hold_sell_espp
+    required: true
+    options:
+      - id: "a"
+        label: "Locking in the discount as guaranteed gain"
+      - id: "b"
+        label: "Avoiding too much concentration in company stock"
+      - id: "c"
+        label: "Qualifying for long-term capital gains tax treatment"
+      - id: "d"
+        label: "Belief in the company's long-term growth"
+      - id: "e"
+        label: "Needing the cash for expenses or goals"
+      - id: "f"
+        label: "Advice from a financial advisor"
+      - id: "g"
+        label: "Not applicable"
+  - id: q11
+    prompt: "Roughly what share of your total net worth is held in your company's stock (ESPP, RSUs, options combined)?"
+    type: single_choice
+    construct: roughly_share_total_net_worth
+    required: true
+    options:
+      - id: "a"
+        label: "None"
+      - id: "b"
+        label: "Less than 10%"
+      - id: "c"
+        label: "10% to 24%"
+      - id: "d"
+        label: "25% to 49%"
+      - id: "e"
+        label: "50% or more"
+      - id: "f"
+        label: "Don't know"
+  - id: q12
+    prompt: "Which brokerage or administrator handles your ESPP shares? (Select all that apply)"
+    type: multi_choice
+    construct: brokerage_administrator_handles_espp_sha
+    required: true
+    options:
+      - id: "a"
+        label: "Fidelity"
+      - id: "b"
+        label: "Morgan Stanley at Work (E*TRADE / Shareworks)"
+      - id: "c"
+        label: "Charles Schwab (Equity Award Center)"
+      - id: "d"
+        label: "Computershare"
+      - id: "e"
+        label: "Carta"
+      - id: "f"
+        label: "UBS"
+      - id: "g"
+        label: "Don't know"
+  - id: q13
+    prompt: "How long is your ESPP's offering or purchase period?"
+    type: single_choice
+    construct: long_espp_s_offering_purchase
+    required: true
+    options:
+      - id: "a"
+        label: "3 months"
+      - id: "b"
+        label: "6 months"
+      - id: "c"
+        label: "12 months"
+      - id: "d"
+        label: "24 months"
+      - id: "e"
+        label: "Don't know"
+  - id: q14
+    prompt: "How often do you check your company's stock price or ESPP account?"
+    type: single_choice
+    construct: often_check_company_s_stock
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Monthly"
+      - id: "d"
+        label: "Weekly"
+      - id: "e"
+        label: "Daily or more"
+  - id: q15
+    prompt: "How much do you agree with the following statement about your ESPP: It is one of the best benefits my employer offers."
+    type: single_choice
+    construct: much_agree_following_statement_espp
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement about your ESPP: I understand the tax implications of buying and selling the shares."
+    type: single_choice
+    construct: much_agree_following_statement_espp
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement about your ESPP: The discount makes participating clearly worthwhile."
+    type: single_choice
+    construct: much_agree_following_statement_espp
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement about your ESPP: I worry about having too much of my wealth in company stock."
+    type: single_choice
+    construct: much_agree_following_statement_espp
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement about your ESPP: It is easy to enroll in and manage."
+    type: single_choice
+    construct: much_agree_following_statement_espp
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree with the following statement about your ESPP: I wish I contributed more than I currently do."
+    type: single_choice
+    construct: much_agree_following_statement_espp
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "When deciding how much to contribute to an ESPP, how important is the size of the discount?"
+    type: single_choice
+    construct: when_deciding_much_contribute_espp
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "When deciding how much to contribute to an ESPP, how important is the lookback feature?"
+    type: single_choice
+    construct: when_deciding_much_contribute_espp
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When deciding how much to contribute to an ESPP, how important are your current cash-flow needs?"
+    type: single_choice
+    construct: when_deciding_much_contribute_espp
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When deciding how much to contribute to an ESPP, how important is diversifying away from company stock?"
+    type: single_choice
+    construct: when_deciding_much_contribute_espp
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When deciding how much to contribute to an ESPP, how important is your confidence in the company's future?"
+    type: single_choice
+    construct: when_deciding_much_contribute_espp
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When deciding how much to contribute to an ESPP, how important is favorable tax treatment?"
+    type: single_choice
+    construct: when_deciding_much_contribute_espp
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "Do you contribute the maximum amount your plan (or the IRS limit) allows?"
+    type: single_choice
+    construct: contribute_maximum_amount_plan_irs
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I max it out"
+      - id: "b"
+        label: "No, I contribute less than the maximum"
+      - id: "c"
+        label: "Not applicable"
+  - id: q28
+    prompt: "Have you ever sold ESPP shares to fund a specific goal? (Select all that apply)"
+    type: multi_choice
+    construct: have_ever_sold_espp_shares
+    required: true
+    options:
+      - id: "a"
+        label: "An emergency expense"
+      - id: "b"
+        label: "A home down payment"
+      - id: "c"
+        label: "Paying down debt"
+      - id: "d"
+        label: "A large purchase or vacation"
+      - id: "e"
+        label: "Reinvesting in a diversified portfolio"
+      - id: "f"
+        label: "I have never sold to fund a goal"
+  - id: q29
+    prompt: "How well do you understand the difference between a qualifying and a disqualifying disposition of ESPP shares?"
+    type: single_choice
+    construct: well_understand_difference_between_quali
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "Slightly"
+      - id: "c"
+        label: "Moderately"
+      - id: "d"
+        label: "Very well"
+      - id: "e"
+        label: "I have never heard these terms"
+  - id: q30
+    prompt: "Do you also participate in other forms of equity compensation (RSUs or stock options)?"
+    type: single_choice
+    construct: also_participate_other_forms_equity
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, RSUs"
+      - id: "b"
+        label: "Yes, stock options"
+      - id: "c"
+        label: "Yes, both"
+      - id: "d"
+        label: "No"
+      - id: "e"
+        label: "Not applicable"
+  - id: q31
+    prompt: "Which are your top 3 reasons for participating in your ESPP? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_reasons_participating_espp
+    required: true
+    options:
+      - id: "a"
+        label: "The guaranteed discount"
+      - id: "b"
+        label: "Building long-term wealth"
+      - id: "c"
+        label: "Belief in the company"
+      - id: "d"
+        label: "Easy automatic payroll deductions"
+      - id: "e"
+        label: "Tax advantages"
+      - id: "f"
+        label: "It feels like free money"
+      - id: "g"
+        label: "Everyone at my company does it"
+  - id: q32
+    prompt: "Overall, how satisfied are you with your ESPP?"
+    type: single_choice
+    construct: overall_satisfied_espp
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "Approximately how much total gain have you realized from your ESPP to date? (Enter a whole-dollar number, or 0 if none.)"
+    type: free_text
+    construct: approximately_much_total_gain_have
+    required: true
+  - id: q34
+    prompt: "On a scale from 0 to 10, how likely are you to recommend participating in the ESPP to a coworker? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: scale_from_0_10_likely
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q35
+    prompt: "How likely are you to continue or increase your ESPP contribution next year?"
+    type: single_choice
+    construct: likely_continue_increase_espp_contributi
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q36
+    prompt: "What advice would you give a coworker deciding whether to join the ESPP? (Optional)"
+    type: free_text
+    construct: advice_would_give_coworker_deciding
+    required: false
+  - id: q37
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q38
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "What is your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: race_ethnicity_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino/a"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Another race or ethnicity"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $50,000"
+      - id: "b"
+        label: "$50,000 to $99,999"
+      - id: "c"
+        label: "$100,000 to $149,999"
+      - id: "d"
+        label: "$150,000 to $199,999"
+      - id: "e"
+        label: "$200,000 to $299,999"
+      - id: "f"
+        label: "$300,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Doctoral or professional degree"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or independent contractor"
+      - id: "d"
+        label: "Unemployed, looking for work"
+      - id: "e"
+        label: "Not employed and not looking"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Unable to work"
+  - id: q43
+    prompt: "Including yourself, how many people live in your household? (Enter a number.)"
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q44
+    prompt: "What is your marital status?"
+    type: single_choice
+    construct: marital_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Widowed"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q47
+    prompt: "Which industry do you work in?"
+    type: single_choice
+    construct: industry_work
+    required: true
+    options:
+      - id: "a"
+        label: "Technology or software"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare or pharmaceuticals"
+      - id: "d"
+        label: "Manufacturing or industrials"
+      - id: "e"
+        label: "Retail or consumer goods"
+      - id: "f"
+        label: "Energy or utilities"
+      - id: "g"
+        label: "Another industry"
+  - id: q48
+    prompt: "Which best describes your role level?"
+    type: single_choice
+    construct: best_describes_role_level
+    required: true
+    options:
+      - id: "a"
+        label: "Individual contributor (entry or mid-level)"
+      - id: "b"
+        label: "Senior individual contributor"
+      - id: "c"
+        label: "Manager"
+      - id: "d"
+        label: "Director or above"
+      - id: "e"
+        label: "Executive"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q49
+    prompt: "How long have you worked at your current employer?"
+    type: single_choice
+    construct: long_have_worked_current_employer
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 3 years"
+      - id: "c"
+        label: "4 to 7 years"
+      - id: "d"
+        label: "8 to 15 years"
+      - id: "e"
+        label: "More than 15 years"

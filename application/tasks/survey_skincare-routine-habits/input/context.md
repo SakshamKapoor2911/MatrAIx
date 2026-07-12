@@ -1,0 +1,7 @@
+# Skincare Routine Habits
+
+People's daily skincare routines, the products and ingredients they use, and their attitudes toward skincare.
+
+## About this survey
+
+This survey profiles consumer skincare behavior, opening with a screener on routine extent, how long respondents have had one, and the number of steps in their morning and evening routines. It records skin type, products used, active ingredients sought (hyaluronic acid, vitamin C, niacinamide, retinol, and more), brands such as CeraVe, The Ordinary, La Roche-Posay, Paula's Choice, and Drunk Elephant, where products are bought, monthly spending, product count, and routine goals. Attitudes are captured with an agreement Likert battery on routine importance, enjoyment, results, and confidence and a per-item importance matrix over product-selection criteria such as price, ingredients, brand, reviews, gentleness, and clean labeling, plus a top-three ranking of routine goals and a barriers multi-select. Later sections cover how products are chosen, sunscreen frequency, how often new products are tried, routine adherence, dermatologist consultation, reliance on social media, product confidence, satisfaction with results and value, recommendation likelihood, and future routine and brand-switching intent. The survey closes with a demographic block covering age, gender, race and ethnicity, household income, education, employment, household size, marital status, U.S. region, and urbanicity.

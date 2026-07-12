@@ -1,0 +1,7 @@
+# Home Server and NAS Usage
+
+How enthusiasts run home servers and network-attached storage using platforms like Synology, Unraid, Proxmox, and TrueNAS.
+
+## About this survey
+
+This survey profiles home server and NAS usage, opening with a screener on activity frequency, tenure, and enthusiast type. It records the primary platform alongside platforms used and wanted, what the server is used for, hardware type, storage and filesystem features, backup and remote-access approaches, and the operating environments run. Attitudes are captured with an agreement Likert battery covering daily reliance, maintenance effort, data-safety confidence, enjoyment, power costs, prebuilt-versus-DIY value, and network bottlenecks, plus a per-item importance matrix over platform-selection criteria, a top-three ranking of decision factors, and a multi-select of hosted services. Further sections examine hardware-issue frequency, network wiring, build spend, UPS use, and data-loss worry, followed by satisfaction, a recommendation scale, and intent to expand storage or switch platforms. Question types include single-choice, multi-select, several Likert scales, an importance matrix, a ranking item, a 0–10 recommendation scale, and numeric free-text. The survey ends with a demographic block covering occupation, technology experience, employment, household size, industry, age, gender, race and ethnicity, education, U.S. region, and urbanicity.

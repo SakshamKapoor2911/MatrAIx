@@ -1,0 +1,7 @@
+# Shell and Dotfiles Customization
+
+How technical users choose their shell and customize their dotfiles, prompt, and plugins.
+
+## About this survey
+
+This survey profiles shell and dotfiles customization, opening with a screener on shell usage frequency, customization tenure, and the respondent's primary shell along with shells used and reasons for their choice. It records shell frameworks and prompt tools, how dotfiles are managed and which files are maintained, the customizations and prompt information in use, plugin managers, and how configurations are synced and sourced. Attitudes are captured through an agreement Likert battery on productivity, tinkering, minimalism, version control, and maintainability, an importance matrix over customization priorities, and frequency scales for editing configuration, startup slowness, and autosuggestion use, plus a top-three ranking of setup priorities. Later sections cover fonts, publishing dotfiles, learning channels, setup style, satisfaction with speed and dotfile management, overall satisfaction, recommendation likelihood, switching intent, and an optional open comment. Question types include single-choice, multi-select, several Likert scales, an importance matrix, a ranking item, an NPS-style 0–10 scale, and numeric free-text. The survey concludes with a demographic block covering role, professional experience, employment, company size, industry, age, gender, race and ethnicity, education, U.S. region, and urbanicity.

@@ -1,0 +1,873 @@
+schemaVersion: "1.0"
+id: running_jogging_habits_v1
+title: "Running and Jogging Habits Survey"
+description: "How people run and jog for fitness, including their frequency, gear, and tracking apps."
+questions:
+  - id: q0
+    prompt: "Do you run or jog for exercise?"
+    type: single_choice
+    construct: run_jog_exercise
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but I used to"
+      - id: "d"
+        label: "No, I never have"
+  - id: q1
+    prompt: "How long have you been running or jogging?"
+    type: single_choice
+    construct: long_have_been_running_jogging
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "4 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+      - id: "f"
+        label: "I don't run or jog"
+  - id: q2
+    prompt: "How often do you run or jog?"
+    type: single_choice
+    construct: often_run_jog
+    required: true
+    options:
+      - id: "a"
+        label: "5 or more times a week"
+      - id: "b"
+        label: "3 to 4 times a week"
+      - id: "c"
+        label: "1 to 2 times a week"
+      - id: "d"
+        label: "A few times a month"
+      - id: "e"
+        label: "Rarely"
+  - id: q3
+    prompt: "About how many miles do you run in a typical week? Please enter a number."
+    type: free_text
+    construct: many_miles_run_typical_week
+    required: true
+  - id: q4
+    prompt: "What is the main reason you run or jog?"
+    type: single_choice
+    construct: main_reason_run_jog
+    required: true
+    options:
+      - id: "a"
+        label: "General fitness and health"
+      - id: "b"
+        label: "Weight management"
+      - id: "c"
+        label: "Stress relief and mental health"
+      - id: "d"
+        label: "Training for a race or event"
+      - id: "e"
+        label: "Enjoyment or social reasons"
+      - id: "f"
+        label: "Competing in the sport"
+  - id: q5
+    prompt: "Where do you usually run? (Select all that apply)"
+    type: multi_choice
+    construct: where_usually_run_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Neighborhood streets and sidewalks"
+      - id: "b"
+        label: "Parks or trails"
+      - id: "c"
+        label: "A track"
+      - id: "d"
+        label: "A treadmill at home"
+      - id: "e"
+        label: "A treadmill at a gym"
+      - id: "f"
+        label: "Beach or waterfront paths"
+  - id: q6
+    prompt: "What time of day do you usually run? (Select all that apply)"
+    type: multi_choice
+    construct: time_day_usually_run_select
+    required: true
+    options:
+      - id: "a"
+        label: "Early morning"
+      - id: "b"
+        label: "Mid-morning"
+      - id: "c"
+        label: "Midday"
+      - id: "d"
+        label: "Afternoon"
+      - id: "e"
+        label: "Evening"
+      - id: "f"
+        label: "No set time"
+  - id: q7
+    prompt: "Which running shoe brands do you currently wear or have bought recently? (Select all that apply)"
+    type: multi_choice
+    construct: running_shoe_brands_currently_wear
+    required: true
+    options:
+      - id: "a"
+        label: "Nike"
+      - id: "b"
+        label: "Brooks"
+      - id: "c"
+        label: "Hoka"
+      - id: "d"
+        label: "Asics"
+      - id: "e"
+        label: "Adidas"
+      - id: "f"
+        label: "Saucony"
+      - id: "g"
+        label: "New Balance"
+      - id: "h"
+        label: "On"
+      - id: "i"
+        label: "Other"
+  - id: q8
+    prompt: "How do you typically track your runs? (Select all that apply)"
+    type: multi_choice
+    construct: typically_track_runs_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Strava"
+      - id: "b"
+        label: "Nike Run Club"
+      - id: "c"
+        label: "Garmin Connect"
+      - id: "d"
+        label: "Apple Fitness or Health"
+      - id: "e"
+        label: "MapMyRun"
+      - id: "f"
+        label: "A GPS running watch"
+      - id: "g"
+        label: "I don't track my runs"
+  - id: q9
+    prompt: "Which devices do you use while running? (Select all that apply)"
+    type: multi_choice
+    construct: devices_use_while_running_select
+    required: true
+    options:
+      - id: "a"
+        label: "Smartphone"
+      - id: "b"
+        label: "GPS running watch (Garmin, Coros, etc.)"
+      - id: "c"
+        label: "Apple Watch or smartwatch"
+      - id: "d"
+        label: "Wireless earbuds or headphones"
+      - id: "e"
+        label: "Heart-rate monitor chest strap"
+      - id: "f"
+        label: "Fitness band (Fitbit, etc.)"
+      - id: "g"
+        label: "None"
+  - id: q10
+    prompt: "Which running gear do you consider essential? (Select all that apply)"
+    type: multi_choice
+    construct: running_gear_consider_essential_select
+    required: true
+    options:
+      - id: "a"
+        label: "Quality running shoes"
+      - id: "b"
+        label: "Moisture-wicking clothing"
+      - id: "c"
+        label: "GPS watch"
+      - id: "d"
+        label: "Earbuds or headphones"
+      - id: "e"
+        label: "Hydration pack or water bottle"
+      - id: "f"
+        label: "Running belt or armband"
+      - id: "g"
+        label: "Reflective or high-visibility gear"
+      - id: "h"
+        label: "Compression socks or sleeves"
+  - id: q11
+    prompt: "How often do you replace your running shoes?"
+    type: single_choice
+    construct: often_replace_running_shoes
+    required: true
+    options:
+      - id: "a"
+        label: "Every few months"
+      - id: "b"
+        label: "Twice a year"
+      - id: "c"
+        label: "Once a year"
+      - id: "d"
+        label: "When they wear out visibly"
+      - id: "e"
+        label: "I don't track this"
+  - id: q12
+    prompt: "About how much did you spend on your most recent pair of running shoes, in U.S. dollars? Please enter a number."
+    type: free_text
+    construct: much_did_spend_most_recent
+    required: true
+  - id: q13
+    prompt: "Have you participated in any organized races? (Select all that apply)"
+    type: multi_choice
+    construct: have_participated_any_organized_races
+    required: true
+    options:
+      - id: "a"
+        label: "5K"
+      - id: "b"
+        label: "10K"
+      - id: "c"
+        label: "Half marathon"
+      - id: "d"
+        label: "Marathon"
+      - id: "e"
+        label: "Ultramarathon"
+      - id: "f"
+        label: "Fun run or charity run"
+      - id: "g"
+        label: "Virtual race"
+      - id: "h"
+        label: "I have not raced"
+  - id: q14
+    prompt: "Do you follow a structured training plan?"
+    type: single_choice
+    construct: follow_structured_training_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a formal plan or coach"
+      - id: "b"
+        label: "Yes, an app-based plan"
+      - id: "c"
+        label: "Somewhat, a loose routine"
+      - id: "d"
+        label: "No, I run how I feel"
+  - id: q15
+    prompt: "Thinking about your running, how much do you agree: Running is an important part of my lifestyle."
+    type: single_choice
+    construct: thinking_running_much_agree_running
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "Thinking about your running, how much do you agree: Tracking my runs motivates me to keep going."
+    type: single_choice
+    construct: thinking_running_much_agree_tracking
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "Thinking about your running, how much do you agree: Good running shoes make a big difference for me."
+    type: single_choice
+    construct: thinking_running_much_agree_good
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "Thinking about your running, how much do you agree: It is one of my main ways to manage stress."
+    type: single_choice
+    construct: thinking_running_much_agree_it
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "Thinking about your running, how much do you agree: I worry about getting injured when I run."
+    type: single_choice
+    construct: thinking_running_much_agree_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "Thinking about your running, how much do you agree: Running with others or in a group keeps me motivated."
+    type: single_choice
+    construct: thinking_running_much_agree_running
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "When choosing running shoes, how important is comfort and fit?"
+    type: single_choice
+    construct: when_choosing_running_shoes_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "When choosing running shoes, how important is cushioning?"
+    type: single_choice
+    construct: when_choosing_running_shoes_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When choosing running shoes, how important is price?"
+    type: single_choice
+    construct: when_choosing_running_shoes_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When choosing running shoes, how important is the brand?"
+    type: single_choice
+    construct: when_choosing_running_shoes_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing running shoes, how important is durability?"
+    type: single_choice
+    construct: when_choosing_running_shoes_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing running shoes, how important is style or appearance?"
+    type: single_choice
+    construct: when_choosing_running_shoes_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "Which are your top 3 factors when buying running shoes? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_when_buying
+    required: true
+    options:
+      - id: "a"
+        label: "Comfort and fit"
+      - id: "b"
+        label: "Cushioning"
+      - id: "c"
+        label: "Price"
+      - id: "d"
+        label: "Brand"
+      - id: "e"
+        label: "Durability"
+      - id: "f"
+        label: "Style"
+      - id: "g"
+        label: "Support for my foot type"
+      - id: "h"
+        label: "Recommendations or reviews"
+  - id: q28
+    prompt: "Which app features do you find most useful? (Select all that apply)"
+    type: multi_choice
+    construct: app_features_find_most_useful
+    required: true
+    options:
+      - id: "a"
+        label: "GPS route mapping"
+      - id: "b"
+        label: "Pace and split tracking"
+      - id: "c"
+        label: "Training plans"
+      - id: "d"
+        label: "Social sharing and challenges"
+      - id: "e"
+        label: "Audio coaching or guided runs"
+      - id: "f"
+        label: "Heart-rate and health metrics"
+      - id: "g"
+        label: "Leaderboards and segments"
+      - id: "h"
+        label: "I don't use app features"
+  - id: q29
+    prompt: "How often do you share your runs on social media or apps like Strava?"
+    type: single_choice
+    construct: often_share_runs_social_media
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q30
+    prompt: "How often do you experience running-related aches or minor injuries?"
+    type: single_choice
+    construct: often_experience_running_related_aches
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q31
+    prompt: "Which activities do you do to complement your running? (Select all that apply)"
+    type: multi_choice
+    construct: activities_complement_running_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Strength training"
+      - id: "b"
+        label: "Stretching or yoga"
+      - id: "c"
+        label: "Cycling"
+      - id: "d"
+        label: "Swimming"
+      - id: "e"
+        label: "Foam rolling or mobility work"
+      - id: "f"
+        label: "Rest and recovery days"
+      - id: "g"
+        label: "None"
+  - id: q32
+    prompt: "How satisfied are you with your current running routine?"
+    type: single_choice
+    construct: satisfied_current_running_routine
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "How satisfied are you with the running app you use most?"
+    type: single_choice
+    construct: satisfied_running_app_use_most
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "I don't use a running app"
+  - id: q34
+    prompt: "How satisfied are you with your current running shoes?"
+    type: single_choice
+    construct: satisfied_current_running_shoes
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q35
+    prompt: "How satisfied are you with your progress as a runner?"
+    type: single_choice
+    construct: satisfied_progress_as_runner
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q36
+    prompt: "How likely are you to recommend running as exercise to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_running_as_exercise
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q37
+    prompt: "How likely are you to run a race or event in the next year?"
+    type: single_choice
+    construct: likely_run_race_event_next
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q38
+    prompt: "How likely are you to increase your running distance or frequency next year?"
+    type: single_choice
+    construct: likely_increase_running_distance_frequen
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q39
+    prompt: "How likely are you to still be running regularly a year from now?"
+    type: single_choice
+    construct: likely_still_be_running_regularly
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q40
+    prompt: "What is one thing that would improve your running experience? (Optional short answer)"
+    type: free_text
+    construct: one_thing_that_would_improve
+    required: false
+  - id: q41
+    prompt: "How would you describe your overall fitness level?"
+    type: single_choice
+    construct: would_describe_overall_fitness_level
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Recreational"
+      - id: "c"
+        label: "Intermediate"
+      - id: "d"
+        label: "Advanced"
+      - id: "e"
+        label: "Competitive"
+  - id: q42
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q43
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q47
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q48
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q49
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "In a relationship or partnered"
+      - id: "c"
+        label: "Married"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q50
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q51
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

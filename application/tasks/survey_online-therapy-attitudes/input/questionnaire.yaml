@@ -1,0 +1,889 @@
+schemaVersion: "1.0"
+id: online_therapy_attitudes_v1
+title: "Online Therapy Attitudes Survey"
+description: "Consumer awareness, preferences, and attitudes toward online and virtual therapy services."
+questions:
+  - id: q0
+    prompt: "How familiar are you with online or virtual therapy services?"
+    type: single_choice
+    construct: familiar_online_virtual_therapy_services
+    required: true
+    options:
+      - id: "a"
+        label: "Very familiar"
+      - id: "b"
+        label: "Somewhat familiar"
+      - id: "c"
+        label: "I have heard of them but know little"
+      - id: "d"
+        label: "Not familiar at all"
+  - id: q1
+    prompt: "Have you ever used an online or virtual therapy service?"
+    type: single_choice
+    construct: have_ever_used_online_virtual
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, currently"
+      - id: "b"
+        label: "Yes, in the past"
+      - id: "c"
+        label: "No, but I have considered it"
+      - id: "d"
+        label: "No, and I have not considered it"
+  - id: q2
+    prompt: "In the past 12 months, about how many online or virtual therapy sessions have you attended? Please enter a number (enter 0 if none)."
+    type: free_text
+    construct: past_12_months_many_online
+    required: true
+  - id: q3
+    prompt: "How did you first learn about online therapy services?"
+    type: single_choice
+    construct: did_first_learn_online_therapy
+    required: true
+    options:
+      - id: "a"
+        label: "A friend or family member"
+      - id: "b"
+        label: "Social media"
+      - id: "c"
+        label: "An online search or advertisement"
+      - id: "d"
+        label: "A doctor or health provider"
+      - id: "e"
+        label: "Through my employer or insurance"
+      - id: "f"
+        label: "A podcast, article, or news story"
+  - id: q4
+    prompt: "Which online therapy services have you heard of? (Select all that apply)"
+    type: multi_choice
+    construct: online_therapy_services_have_heard
+    required: true
+    options:
+      - id: "a"
+        label: "BetterHelp"
+      - id: "b"
+        label: "Talkspace"
+      - id: "c"
+        label: "Cerebral"
+      - id: "d"
+        label: "Teladoc"
+      - id: "e"
+        label: "Amwell"
+      - id: "f"
+        label: "MDLIVE"
+      - id: "g"
+        label: "Brightside"
+      - id: "h"
+        label: "A local provider's telehealth option"
+      - id: "i"
+        label: "None of these"
+  - id: q5
+    prompt: "Which online therapy services have you used? (Select all that apply)"
+    type: multi_choice
+    construct: online_therapy_services_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "BetterHelp"
+      - id: "b"
+        label: "Talkspace"
+      - id: "c"
+        label: "Cerebral"
+      - id: "d"
+        label: "Teladoc"
+      - id: "e"
+        label: "Amwell"
+      - id: "f"
+        label: "A local provider's telehealth option"
+      - id: "g"
+        label: "None"
+  - id: q6
+    prompt: "Which online therapy formats appeal to you? (Select all that apply)"
+    type: multi_choice
+    construct: online_therapy_formats_appeal_select
+    required: true
+    options:
+      - id: "a"
+        label: "Live video sessions"
+      - id: "b"
+        label: "Phone sessions"
+      - id: "c"
+        label: "Text messaging"
+      - id: "d"
+        label: "Live chat"
+      - id: "e"
+        label: "Recorded or asynchronous messages"
+      - id: "f"
+        label: "None appeal to me"
+  - id: q7
+    prompt: "Which reasons would lead you to consider online therapy? (Select all that apply)"
+    type: multi_choice
+    construct: reasons_would_lead_consider_online
+    required: true
+    options:
+      - id: "a"
+        label: "Convenience and flexibility"
+      - id: "b"
+        label: "Lower cost than in-person"
+      - id: "c"
+        label: "More privacy"
+      - id: "d"
+        label: "No need to travel"
+      - id: "e"
+        label: "Shorter wait to get started"
+      - id: "f"
+        label: "More choice of therapists"
+      - id: "g"
+        label: "I would not consider it"
+  - id: q8
+    prompt: "Which are your top 3 factors when choosing an online therapy service? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Cost or insurance coverage"
+      - id: "b"
+        label: "Therapist qualifications"
+      - id: "c"
+        label: "Privacy and confidentiality"
+      - id: "d"
+        label: "Ease of scheduling"
+      - id: "e"
+        label: "Choice of therapist"
+      - id: "f"
+        label: "Range of communication options"
+      - id: "g"
+        label: "Reputation and reviews"
+      - id: "h"
+        label: "Speed of getting started"
+  - id: q9
+    prompt: "How much do you agree: Online therapy can be as effective as in-person therapy."
+    type: single_choice
+    construct: much_agree_online_therapy_can
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q10
+    prompt: "How much do you agree: Online therapy is more convenient than in-person therapy."
+    type: single_choice
+    construct: much_agree_online_therapy_more
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q11
+    prompt: "How much do you agree: I would trust an online therapy service to protect my privacy."
+    type: single_choice
+    construct: much_agree_i_would_trust
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree: Online therapy makes mental health support more accessible."
+    type: single_choice
+    construct: much_agree_online_therapy_makes
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree: I would feel comfortable talking to a therapist over video."
+    type: single_choice
+    construct: much_agree_i_would_feel
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree: Online therapy is a good value for the money."
+    type: single_choice
+    construct: much_agree_online_therapy_good
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree: I worry about the quality of care from online therapy."
+    type: single_choice
+    construct: much_agree_i_worry_quality
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "When choosing an online therapy service, how important is cost or insurance coverage?"
+    type: single_choice
+    construct: when_choosing_online_therapy_service
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q17
+    prompt: "When choosing an online therapy service, how important are the therapist's qualifications?"
+    type: single_choice
+    construct: when_choosing_online_therapy_service
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q18
+    prompt: "When choosing an online therapy service, how important is privacy and confidentiality?"
+    type: single_choice
+    construct: when_choosing_online_therapy_service
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "When choosing an online therapy service, how important is ease of scheduling?"
+    type: single_choice
+    construct: when_choosing_online_therapy_service
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "When choosing an online therapy service, how important is being able to choose your therapist?"
+    type: single_choice
+    construct: when_choosing_online_therapy_service
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "When choosing an online therapy service, how important is the range of communication options?"
+    type: single_choice
+    construct: when_choosing_online_therapy_service
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How likely would you be to try online therapy if you wanted mental health support?"
+    type: single_choice
+    construct: likely_would_be_try_online
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q23
+    prompt: "How likely would you be to prefer online therapy over in-person therapy?"
+    type: single_choice
+    construct: likely_would_be_prefer_online
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q24
+    prompt: "How comfortable would you be discussing personal topics with a therapist online?"
+    type: single_choice
+    construct: comfortable_would_be_discussing_personal
+    required: true
+    options:
+      - id: "a"
+        label: "Very uncomfortable"
+      - id: "b"
+        label: "Somewhat uncomfortable"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Somewhat comfortable"
+      - id: "e"
+        label: "Very comfortable"
+  - id: q25
+    prompt: "Which communication method would you most prefer for online therapy?"
+    type: single_choice
+    construct: communication_method_would_most_prefer
+    required: true
+    options:
+      - id: "a"
+        label: "Live video"
+      - id: "b"
+        label: "Phone call"
+      - id: "c"
+        label: "Text messaging"
+      - id: "d"
+        label: "Live chat"
+      - id: "e"
+        label: "No preference"
+  - id: q26
+    prompt: "Who do you think online therapy is a good fit for? (Select all that apply)"
+    type: multi_choice
+    construct: who_think_online_therapy_good
+    required: true
+    options:
+      - id: "a"
+        label: "People with busy schedules"
+      - id: "b"
+        label: "People in rural or remote areas"
+      - id: "c"
+        label: "People with mobility or transportation limits"
+      - id: "d"
+        label: "People who want lower-cost options"
+      - id: "e"
+        label: "People who value privacy"
+      - id: "f"
+        label: "People trying therapy for the first time"
+      - id: "g"
+        label: "I don't think it fits anyone well"
+  - id: q27
+    prompt: "What concerns do you have about online therapy? (Select all that apply)"
+    type: multi_choice
+    construct: concerns_have_online_therapy_select
+    required: true
+    options:
+      - id: "a"
+        label: "Privacy and data security"
+      - id: "b"
+        label: "Quality of care"
+      - id: "c"
+        label: "Difficulty building rapport"
+      - id: "d"
+        label: "Technology or connection issues"
+      - id: "e"
+        label: "Cost or unclear pricing"
+      - id: "f"
+        label: "Therapist qualifications"
+      - id: "g"
+        label: "I have no major concerns"
+  - id: q28
+    prompt: "What would make you more likely to try online therapy? (Select all that apply)"
+    type: multi_choice
+    construct: would_make_more_likely_try
+    required: true
+    options:
+      - id: "a"
+        label: "Insurance coverage"
+      - id: "b"
+        label: "A recommendation from someone I trust"
+      - id: "c"
+        label: "Clear pricing"
+      - id: "d"
+        label: "Strong privacy protections"
+      - id: "e"
+        label: "A free trial or first session"
+      - id: "f"
+        label: "Being able to choose my therapist"
+      - id: "g"
+        label: "Nothing would make me more likely"
+  - id: q29
+    prompt: "How would you most likely pay for online therapy?"
+    type: single_choice
+    construct: would_most_likely_pay_online
+    required: true
+    options:
+      - id: "a"
+        label: "Through health insurance"
+      - id: "b"
+        label: "Out of pocket"
+      - id: "c"
+        label: "Through an employer or assistance program"
+      - id: "d"
+        label: "I would not pay for it"
+  - id: q30
+    prompt: "What would you consider a reasonable cost for a single online therapy session?"
+    type: single_choice
+    construct: would_consider_reasonable_cost_single
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25"
+      - id: "b"
+        label: "$25 to $49"
+      - id: "c"
+        label: "$50 to $99"
+      - id: "d"
+        label: "$100 to $149"
+      - id: "e"
+        label: "$150 or more"
+      - id: "f"
+        label: "I would only use it if covered by insurance"
+  - id: q31
+    prompt: "What monthly amount would you consider reasonable for an online therapy subscription, in U.S. dollars? Please enter a number."
+    type: free_text
+    construct: monthly_amount_would_consider_reasonable
+    required: true
+  - id: q32
+    prompt: "About how many minutes would you want a typical online therapy session to last? Please enter a number."
+    type: free_text
+    construct: many_minutes_would_want_typical
+    required: true
+  - id: q33
+    prompt: "Among people you know, what is the general impression of online therapy?"
+    type: single_choice
+    construct: among_people_know_general_impression
+    required: true
+    options:
+      - id: "a"
+        label: "Very negative"
+      - id: "b"
+        label: "Somewhat negative"
+      - id: "c"
+        label: "Mixed or neutral"
+      - id: "d"
+        label: "Somewhat positive"
+      - id: "e"
+        label: "Very positive"
+      - id: "f"
+        label: "I don't know anyone's views"
+  - id: q34
+    prompt: "Which do you think you would prefer?"
+    type: single_choice
+    construct: think_would_prefer
+    required: true
+    options:
+      - id: "a"
+        label: "An app-based therapy service"
+      - id: "b"
+        label: "A telehealth option from a traditional provider"
+      - id: "c"
+        label: "No preference"
+      - id: "d"
+        label: "Neither"
+  - id: q35
+    prompt: "How much do you agree: Online therapy should be covered by health insurance the same as in-person therapy."
+    type: single_choice
+    construct: much_agree_online_therapy_should
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q36
+    prompt: "Have your views on online therapy changed in recent years?"
+    type: single_choice
+    construct: have_views_online_therapy_changed
+    required: true
+    options:
+      - id: "a"
+        label: "Much more positive"
+      - id: "b"
+        label: "Somewhat more positive"
+      - id: "c"
+        label: "No change"
+      - id: "d"
+        label: "Somewhat more negative"
+      - id: "e"
+        label: "Much more negative"
+  - id: q37
+    prompt: "Overall, what is your attitude toward online therapy?"
+    type: single_choice
+    construct: overall_attitude_toward_online_therapy
+    required: true
+    options:
+      - id: "a"
+        label: "Very negative"
+      - id: "b"
+        label: "Somewhat negative"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Somewhat positive"
+      - id: "e"
+        label: "Very positive"
+  - id: q38
+    prompt: "How likely are you to use an online therapy service within the next year?"
+    type: single_choice
+    construct: likely_use_online_therapy_service
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q39
+    prompt: "How likely are you to recommend online therapy to a friend who was interested? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_online_therapy_friend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q40
+    prompt: "What would make online therapy more appealing to you? (Optional short answer)"
+    type: free_text
+    construct: would_make_online_therapy_more
+    required: false
+  - id: q41
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q42
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q46
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q47
+    prompt: "How many people live in your household, including yourself?"
+    type: single_choice
+    construct: many_people_live_household_including
+    required: true
+    options:
+      - id: "a"
+        label: "1"
+      - id: "b"
+        label: "2"
+      - id: "c"
+        label: "3"
+      - id: "d"
+        label: "4"
+      - id: "e"
+        label: "5 or more"
+  - id: q48
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "In a domestic partnership or living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q49
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q50
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q51
+    prompt: "What is your current health insurance status?"
+    type: single_choice
+    construct: current_health_insurance_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employer-sponsored insurance"
+      - id: "b"
+        label: "Insurance purchased on my own"
+      - id: "c"
+        label: "Medicare"
+      - id: "d"
+        label: "Medicaid"
+      - id: "e"
+        label: "Uninsured"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q52
+    prompt: "Does your health insurance currently cover telehealth or virtual care?"
+    type: single_choice
+    construct: does_health_insurance_currently_cover
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Not sure"
+      - id: "d"
+        label: "I don't have health insurance"
+  - id: q53
+    prompt: "In general, how comfortable are you using new technology?"
+    type: single_choice
+    construct: general_comfortable_using_new_technology
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all comfortable"
+      - id: "b"
+        label: "Slightly comfortable"
+      - id: "c"
+        label: "Moderately comfortable"
+      - id: "d"
+        label: "Very comfortable"
+      - id: "e"
+        label: "Extremely comfortable"

@@ -1,0 +1,930 @@
+schemaVersion: "1.0"
+id: linux_distro_preference_v1
+title: "Linux Distribution Preference Survey"
+description: "Which Linux distributions people choose and how they feel about them, across Ubuntu, Debian, Arch, Fedora, Mint, and others."
+questions:
+  - id: q0
+    prompt: "How often do you use Linux?"
+    type: single_choice
+    construct: often_use_linux
+    required: true
+    options:
+      - id: "a"
+        label: "It's my daily driver"
+      - id: "b"
+        label: "Most days"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "Occasionally"
+      - id: "e"
+        label: "I'm just getting started with Linux"
+  - id: q1
+    prompt: "How long have you been using Linux?"
+    type: single_choice
+    construct: long_have_been_using_linux
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+  - id: q2
+    prompt: "Which best describes how you use Linux?"
+    type: single_choice
+    construct: best_describes_use_linux
+    required: true
+    options:
+      - id: "a"
+        label: "On my main desktop or laptop"
+      - id: "b"
+        label: "On servers I administer"
+      - id: "c"
+        label: "In a homelab or hobby setup"
+      - id: "d"
+        label: "For software development"
+      - id: "e"
+        label: "In a virtual machine or dual-boot only"
+  - id: q3
+    prompt: "Which Linux distribution do you use most often?"
+    type: single_choice
+    construct: linux_distribution_use_most_often
+    required: true
+    options:
+      - id: "a"
+        label: "Ubuntu"
+      - id: "b"
+        label: "Debian"
+      - id: "c"
+        label: "Arch Linux"
+      - id: "d"
+        label: "Fedora"
+      - id: "e"
+        label: "Linux Mint"
+      - id: "f"
+        label: "openSUSE"
+      - id: "g"
+        label: "Pop!_OS"
+      - id: "h"
+        label: "Other"
+  - id: q4
+    prompt: "Which Linux distributions have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: linux_distributions_have_used_past
+    required: true
+    options:
+      - id: "a"
+        label: "Ubuntu"
+      - id: "b"
+        label: "Debian"
+      - id: "c"
+        label: "Arch Linux"
+      - id: "d"
+        label: "Fedora"
+      - id: "e"
+        label: "Linux Mint"
+      - id: "f"
+        label: "openSUSE"
+      - id: "g"
+        label: "Pop!_OS"
+      - id: "h"
+        label: "Manjaro"
+      - id: "i"
+        label: "EndeavourOS"
+      - id: "j"
+        label: "Kali or a security distro"
+      - id: "k"
+        label: "None"
+  - id: q5
+    prompt: "Which distributions are you interested in trying over the next year? (Select all that apply)"
+    type: multi_choice
+    construct: distributions_interested_trying_over_nex
+    required: true
+    options:
+      - id: "a"
+        label: "Arch Linux"
+      - id: "b"
+        label: "Fedora"
+      - id: "c"
+        label: "Debian"
+      - id: "d"
+        label: "NixOS"
+      - id: "e"
+        label: "openSUSE Tumbleweed"
+      - id: "f"
+        label: "An immutable distro (Silverblue, Bazzite)"
+      - id: "g"
+        label: "I'm happy with what I use"
+  - id: q6
+    prompt: "Which desktop environments do you use? (Select all that apply)"
+    type: multi_choice
+    construct: desktop_environments_use_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "GNOME"
+      - id: "b"
+        label: "KDE Plasma"
+      - id: "c"
+        label: "Xfce"
+      - id: "d"
+        label: "Cinnamon"
+      - id: "e"
+        label: "MATE"
+      - id: "f"
+        label: "i3, Sway, or another tiling WM"
+      - id: "g"
+        label: "Hyprland"
+      - id: "h"
+        label: "I use a server without a desktop"
+  - id: q7
+    prompt: "Which package managers do you regularly use? (Select all that apply)"
+    type: multi_choice
+    construct: package_managers_regularly_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "APT (Debian/Ubuntu)"
+      - id: "b"
+        label: "DNF (Fedora)"
+      - id: "c"
+        label: "Pacman (Arch)"
+      - id: "d"
+        label: "Zypper (openSUSE)"
+      - id: "e"
+        label: "Flatpak"
+      - id: "f"
+        label: "Snap"
+      - id: "g"
+        label: "AppImage"
+      - id: "h"
+        label: "Nix"
+  - id: q8
+    prompt: "What do you primarily use Linux for? (Select all that apply)"
+    type: multi_choice
+    construct: primarily_use_linux_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Software development"
+      - id: "b"
+        label: "General desktop and web browsing"
+      - id: "c"
+        label: "Gaming"
+      - id: "d"
+        label: "Servers and self-hosting"
+      - id: "e"
+        label: "System administration"
+      - id: "f"
+        label: "Content creation"
+      - id: "g"
+        label: "Security or penetration testing"
+      - id: "h"
+        label: "Learning and experimenting"
+  - id: q9
+    prompt: "Which release model do you prefer?"
+    type: single_choice
+    construct: release_model_prefer
+    required: true
+    options:
+      - id: "a"
+        label: "Stable / long-term support"
+      - id: "b"
+        label: "Regular fixed releases"
+      - id: "c"
+        label: "Rolling release"
+      - id: "d"
+        label: "Immutable / atomic"
+      - id: "e"
+        label: "No preference"
+  - id: q10
+    prompt: "How do you typically install software on Linux? (Select all that apply)"
+    type: multi_choice
+    construct: typically_install_software_linux_select
+    required: true
+    options:
+      - id: "a"
+        label: "The distribution's package manager"
+      - id: "b"
+        label: "Flatpak"
+      - id: "c"
+        label: "Snap"
+      - id: "d"
+        label: "AppImage"
+      - id: "e"
+        label: "Compiling from source"
+      - id: "f"
+        label: "The AUR (Arch User Repository)"
+      - id: "g"
+        label: "Language package managers (pip, npm, cargo)"
+  - id: q11
+    prompt: "Which init system or service manager does your main distro use?"
+    type: single_choice
+    construct: init_system_service_manager_does
+    required: true
+    options:
+      - id: "a"
+        label: "systemd"
+      - id: "b"
+        label: "OpenRC"
+      - id: "c"
+        label: "runit"
+      - id: "d"
+        label: "SysVinit"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q12
+    prompt: "About how many different Linux distributions have you tried? Please enter a number."
+    type: free_text
+    construct: many_different_linux_distributions_have
+    required: true
+  - id: q13
+    prompt: "About how many Linux machines (physical or virtual) do you currently run? Please enter a number."
+    type: free_text
+    construct: many_linux_machines_physical_virtual
+    required: true
+  - id: q14
+    prompt: "How would you rate your Linux proficiency?"
+    type: single_choice
+    construct: would_rate_linux_proficiency
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Intermediate"
+      - id: "c"
+        label: "Advanced"
+      - id: "d"
+        label: "Expert"
+  - id: q15
+    prompt: "How did you learn Linux? (Select all that apply)"
+    type: multi_choice
+    construct: did_learn_linux_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "On the job"
+      - id: "b"
+        label: "Official documentation and wikis"
+      - id: "c"
+        label: "YouTube tutorials"
+      - id: "d"
+        label: "Forums and communities"
+      - id: "e"
+        label: "A course or class"
+      - id: "f"
+        label: "Trial and error"
+  - id: q16
+    prompt: "How much do you agree: I chose my distribution mainly for its stability."
+    type: single_choice
+    construct: much_agree_i_chose_my
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: I enjoy customizing and configuring my Linux system."
+    type: single_choice
+    construct: much_agree_i_enjoy_customizing
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: My distribution's community is helpful and welcoming."
+    type: single_choice
+    construct: much_agree_my_distribution_s
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: Rolling-release distributions are worth the extra maintenance."
+    type: single_choice
+    construct: much_agree_rolling_release_distributions
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: Flatpak and Snap have improved the Linux software experience."
+    type: single_choice
+    construct: much_agree_flatpak_snap_have
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: Linux gaming has gotten good enough for me."
+    type: single_choice
+    construct: much_agree_linux_gaming_has
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How much do you agree: I would happily recommend Linux to a non-technical friend."
+    type: single_choice
+    construct: much_agree_i_would_happily
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "When choosing a Linux distribution, how important is stability?"
+    type: single_choice
+    construct: when_choosing_linux_distribution_importa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When choosing a Linux distribution, how important is having up-to-date software?"
+    type: single_choice
+    construct: when_choosing_linux_distribution_importa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing a Linux distribution, how important is the size of the community?"
+    type: single_choice
+    construct: when_choosing_linux_distribution_importa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing a Linux distribution, how important is ease of use?"
+    type: single_choice
+    construct: when_choosing_linux_distribution_importa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When choosing a Linux distribution, how important is customizability?"
+    type: single_choice
+    construct: when_choosing_linux_distribution_importa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "When choosing a Linux distribution, how important is the software repository size?"
+    type: single_choice
+    construct: when_choosing_linux_distribution_importa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "Which are your top 3 factors when choosing a Linux distribution? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Stability"
+      - id: "b"
+        label: "Up-to-date software"
+      - id: "c"
+        label: "Community size"
+      - id: "d"
+        label: "Ease of use"
+      - id: "e"
+        label: "Customizability"
+      - id: "f"
+        label: "Software repository size"
+      - id: "g"
+        label: "Hardware compatibility"
+      - id: "h"
+        label: "Documentation quality"
+  - id: q30
+    prompt: "What has kept you from switching distributions? (Select all that apply)"
+    type: multi_choice
+    construct: has_kept_from_switching_distributions
+    required: true
+    options:
+      - id: "a"
+        label: "Everything works, no reason to switch"
+      - id: "b"
+        label: "Familiarity and muscle memory"
+      - id: "c"
+        label: "Effort of migrating my setup"
+      - id: "d"
+        label: "Hardware compatibility concerns"
+      - id: "e"
+        label: "Community and support"
+      - id: "f"
+        label: "I do switch distributions often"
+      - id: "g"
+        label: "Nothing — I'm considering a switch"
+  - id: q31
+    prompt: "How often do you run into hardware compatibility issues on Linux?"
+    type: single_choice
+    construct: often_run_into_hardware_compatibility
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q32
+    prompt: "Do you dual-boot with another operating system?"
+    type: single_choice
+    construct: dual_boot_another_operating_system
+    required: true
+    options:
+      - id: "a"
+        label: "No, Linux only"
+      - id: "b"
+        label: "Yes, with Windows"
+      - id: "c"
+        label: "Yes, with macOS"
+      - id: "d"
+        label: "I use Linux only in a virtual machine"
+      - id: "e"
+        label: "Other"
+  - id: q33
+    prompt: "How do you feel about the command line?"
+    type: single_choice
+    construct: feel_command_line
+    required: true
+    options:
+      - id: "a"
+        label: "I prefer doing everything in the terminal"
+      - id: "b"
+        label: "I'm comfortable but use a GUI when I can"
+      - id: "c"
+        label: "I use it only when necessary"
+      - id: "d"
+        label: "I try to avoid it"
+  - id: q34
+    prompt: "How often do you distro-hop (try or switch to a new distribution)?"
+    type: single_choice
+    construct: often_distro_hop_try_switch
+    required: true
+    options:
+      - id: "a"
+        label: "Never — I've settled"
+      - id: "b"
+        label: "Every few years"
+      - id: "c"
+        label: "About once a year"
+      - id: "d"
+        label: "Several times a year"
+      - id: "e"
+        label: "Constantly"
+  - id: q35
+    prompt: "How often does a system update cause you problems?"
+    type: single_choice
+    construct: often_does_system_update_cause
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q36
+    prompt: "How satisfied are you with your distribution's stability?"
+    type: single_choice
+    construct: satisfied_distribution_s_stability
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q37
+    prompt: "How satisfied are you with your distribution's software availability?"
+    type: single_choice
+    construct: satisfied_distribution_s_software_availa
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q38
+    prompt: "Overall, how satisfied are you with your main Linux distribution?"
+    type: single_choice
+    construct: overall_satisfied_main_linux_distributio
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q39
+    prompt: "How likely are you to recommend your distribution to another Linux user? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_distribution_another_li
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q40
+    prompt: "How likely are you to try a new distribution within the next year?"
+    type: single_choice
+    construct: likely_try_new_distribution_within
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q41
+    prompt: "How likely are you to switch your main distribution within the next year?"
+    type: single_choice
+    construct: likely_switch_main_distribution_within
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q42
+    prompt: "What is one thing you would improve about your Linux distribution? (Optional short answer)"
+    type: free_text
+    construct: one_thing_would_improve_linux
+    required: false
+  - id: q43
+    prompt: "Which best describes your day-to-day occupation?"
+    type: single_choice
+    construct: best_describes_day_day_occupation
+    required: true
+    options:
+      - id: "a"
+        label: "Software developer or engineer"
+      - id: "b"
+        label: "IT or systems administrator"
+      - id: "c"
+        label: "Other technology role"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "A non-technology profession"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Other"
+  - id: q44
+    prompt: "How would you describe your professional technology experience?"
+    type: single_choice
+    construct: would_describe_professional_technology_e
+    required: true
+    options:
+      - id: "a"
+        label: "I don't work in technology"
+      - id: "b"
+        label: "Less than 2 years"
+      - id: "c"
+        label: "2 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "11 to 20 years"
+      - id: "f"
+        label: "More than 20 years"
+  - id: q45
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q46
+    prompt: "Approximately how many people work at your company or organization?"
+    type: single_choice
+    construct: approximately_many_people_work_company
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2 to 9"
+      - id: "c"
+        label: "10 to 99"
+      - id: "d"
+        label: "100 to 499"
+      - id: "e"
+        label: "500 to 4,999"
+      - id: "f"
+        label: "5,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q47
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Government"
+      - id: "f"
+        label: "Retail or e-commerce"
+      - id: "g"
+        label: "Manufacturing"
+      - id: "h"
+        label: "Not currently working"
+      - id: "i"
+        label: "Other"
+  - id: q48
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q49
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q50
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q51
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q52
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q53
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

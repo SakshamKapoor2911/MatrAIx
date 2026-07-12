@@ -1,0 +1,936 @@
+schemaVersion: "1.0"
+id: secrets_management_tools_v1
+title: "Secrets Management Tools Survey"
+description: "How developers and teams store, protect, and manage application secrets and credentials."
+questions:
+  - id: q0
+    prompt: "How often do you work with secrets or credentials (API keys, passwords, tokens)?"
+    type: single_choice
+    construct: often_work_secrets_credentials_api
+    required: true
+    options:
+      - id: "a"
+        label: "Every day"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "A few times a month"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q1
+    prompt: "How long have you worked with secrets management?"
+    type: single_choice
+    construct: long_have_worked_secrets_management
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+  - id: q2
+    prompt: "What best describes your relationship to secrets management?"
+    type: single_choice
+    construct: best_describes_relationship_secrets_mana
+    required: true
+    options:
+      - id: "a"
+        label: "I own or administer our secrets platform"
+      - id: "b"
+        label: "I manage secrets for my services"
+      - id: "c"
+        label: "I consume secrets others provision"
+      - id: "d"
+        label: "I handle secrets only occasionally"
+      - id: "e"
+        label: "I rarely deal with secrets"
+  - id: q3
+    prompt: "Which secrets-management tool do you use most often?"
+    type: single_choice
+    construct: secrets_management_tool_use_most
+    required: true
+    options:
+      - id: "a"
+        label: "HashiCorp Vault"
+      - id: "b"
+        label: "AWS Secrets Manager"
+      - id: "c"
+        label: "AWS Systems Manager Parameter Store"
+      - id: "d"
+        label: "Azure Key Vault"
+      - id: "e"
+        label: "Google Secret Manager"
+      - id: "f"
+        label: "1Password"
+      - id: "g"
+        label: "Doppler"
+      - id: "h"
+        label: "Infisical"
+      - id: "i"
+        label: "Plain .env files"
+      - id: "j"
+        label: "Other"
+  - id: q4
+    prompt: "Which secrets-management tools have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: secrets_management_tools_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "HashiCorp Vault"
+      - id: "b"
+        label: "AWS Secrets Manager"
+      - id: "c"
+        label: "AWS Parameter Store"
+      - id: "d"
+        label: "Azure Key Vault"
+      - id: "e"
+        label: "Google Secret Manager"
+      - id: "f"
+        label: "1Password"
+      - id: "g"
+        label: "Doppler"
+      - id: "h"
+        label: "Infisical"
+      - id: "i"
+        label: "SOPS"
+      - id: "j"
+        label: "Kubernetes Sealed Secrets"
+      - id: "k"
+        label: "Plain .env files"
+      - id: "l"
+        label: "None"
+  - id: q5
+    prompt: "Which kinds of secrets do you manage? (Select all that apply)"
+    type: multi_choice
+    construct: kinds_secrets_manage_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "API keys"
+      - id: "b"
+        label: "Database credentials"
+      - id: "c"
+        label: "TLS or SSL certificates"
+      - id: "d"
+        label: "OAuth or access tokens"
+      - id: "e"
+        label: "SSH keys"
+      - id: "f"
+        label: "Encryption keys"
+      - id: "g"
+        label: "Cloud provider credentials"
+      - id: "h"
+        label: "Third-party service credentials"
+  - id: q6
+    prompt: "How are secrets injected into your applications? (Select all that apply)"
+    type: multi_choice
+    construct: secrets_injected_into_applications_selec
+    required: true
+    options:
+      - id: "a"
+        label: "Environment variables"
+      - id: "b"
+        label: "Mounted files"
+      - id: "c"
+        label: "CI/CD secret stores"
+      - id: "d"
+        label: "Kubernetes secrets"
+      - id: "e"
+        label: "Fetched at runtime via an SDK or API"
+      - id: "f"
+        label: "Hard-coded in config (I know it's not ideal)"
+  - id: q7
+    prompt: "How do you store secrets during local development?"
+    type: single_choice
+    construct: store_secrets_during_local_development
+    required: true
+    options:
+      - id: "a"
+        label: "A .env file that is git-ignored"
+      - id: "b"
+        label: "A secrets manager or CLI (Doppler, Vault, etc.)"
+      - id: "c"
+        label: "A password manager"
+      - id: "d"
+        label: "Environment variables in my shell"
+      - id: "e"
+        label: "I avoid using real secrets locally"
+  - id: q8
+    prompt: "Does your team rotate secrets?"
+    type: single_choice
+    construct: does_team_rotate_secrets
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, automatically"
+      - id: "b"
+        label: "Yes, manually on a schedule"
+      - id: "c"
+        label: "Only when we suspect a compromise"
+      - id: "d"
+        label: "No"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q9
+    prompt: "How frequently are your important secrets rotated?"
+    type: single_choice
+    construct: frequently_important_secrets_rotated
+    required: true
+    options:
+      - id: "a"
+        label: "Continuously or very short-lived"
+      - id: "b"
+        label: "At least monthly"
+      - id: "c"
+        label: "A few times a year"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+      - id: "f"
+        label: "I'm not sure"
+  - id: q10
+    prompt: "Which secrets-management practices does your team follow? (Select all that apply)"
+    type: multi_choice
+    construct: secrets_management_practices_does_team
+    required: true
+    options:
+      - id: "a"
+        label: "Least-privilege access"
+      - id: "b"
+        label: "Regular rotation"
+      - id: "c"
+        label: "Audit logging of access"
+      - id: "d"
+        label: "Encryption at rest"
+      - id: "e"
+        label: "No secrets committed to code"
+      - id: "f"
+        label: "Short-lived or dynamic credentials"
+      - id: "g"
+        label: "Separate secrets per environment"
+      - id: "h"
+        label: "None of these"
+  - id: q11
+    prompt: "Does your team scan code for accidentally committed secrets?"
+    type: single_choice
+    construct: does_team_scan_code_accidentally
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, automatically in CI"
+      - id: "b"
+        label: "Yes, with a pre-commit hook"
+      - id: "c"
+        label: "Occasionally and manually"
+      - id: "d"
+        label: "No"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q12
+    prompt: "Which secret-scanning tools do you use? (Select all that apply)"
+    type: multi_choice
+    construct: secret_scanning_tools_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "GitHub secret scanning"
+      - id: "b"
+        label: "Gitleaks"
+      - id: "c"
+        label: "TruffleHog"
+      - id: "d"
+        label: "git-secrets"
+      - id: "e"
+        label: "A pre-commit hook"
+      - id: "f"
+        label: "None"
+  - id: q13
+    prompt: "How does your CI/CD pipeline access secrets?"
+    type: single_choice
+    construct: does_ci_cd_pipeline_access
+    required: true
+    options:
+      - id: "a"
+        label: "Native CI/CD secret store"
+      - id: "b"
+        label: "Pulled from a secrets manager at runtime"
+      - id: "c"
+        label: "Injected as environment variables"
+      - id: "d"
+        label: "Short-lived cloud credentials (OIDC, etc.)"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q14
+    prompt: "About how many distinct secrets do you or your team actively manage? Please enter a number."
+    type: free_text
+    construct: many_distinct_secrets_team_actively
+    required: true
+  - id: q15
+    prompt: "About how many days is your typical rotation interval for an important secret? Please enter a number."
+    type: free_text
+    construct: many_days_typical_rotation_interval
+    required: true
+  - id: q16
+    prompt: "How much do you agree: Our secrets are well protected."
+    type: single_choice
+    construct: much_agree_our_secrets_well
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: Secrets sprawl is a problem for us."
+    type: single_choice
+    construct: much_agree_secrets_sprawl_problem
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: Managing secrets is more painful than it should be."
+    type: single_choice
+    construct: much_agree_managing_secrets_more
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: I'm confident no live secrets are committed in our repositories."
+    type: single_choice
+    construct: much_agree_i_m_confident
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: Rotating secrets is too hard to do regularly."
+    type: single_choice
+    construct: much_agree_rotating_secrets_too
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: Our secrets tooling integrates well with our stack."
+    type: single_choice
+    construct: much_agree_our_secrets_tooling
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How much do you agree: Developers can access the secrets they need easily."
+    type: single_choice
+    construct: much_agree_developers_can_access
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "When choosing a secrets tool, how important is fine-grained access control?"
+    type: single_choice
+    construct: when_choosing_secrets_tool_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When choosing a secrets tool, how important is audit logging?"
+    type: single_choice
+    construct: when_choosing_secrets_tool_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing a secrets tool, how important is automatic rotation?"
+    type: single_choice
+    construct: when_choosing_secrets_tool_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing a secrets tool, how important is ease of integration with your stack?"
+    type: single_choice
+    construct: when_choosing_secrets_tool_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When choosing a secrets tool, how important is support for dynamic or short-lived secrets?"
+    type: single_choice
+    construct: when_choosing_secrets_tool_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "When choosing a secrets tool, how important is cost?"
+    type: single_choice
+    construct: when_choosing_secrets_tool_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "How often does a secret get accidentally exposed or committed on your team?"
+    type: single_choice
+    construct: often_does_secret_get_accidentally
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q30
+    prompt: "How often do you personally rotate credentials you are responsible for?"
+    type: single_choice
+    construct: often_personally_rotate_credentials_resp
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q31
+    prompt: "How satisfied are you with your primary secrets-management tool?"
+    type: single_choice
+    construct: satisfied_primary_secrets_management_too
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q32
+    prompt: "How satisfied are you with the developer experience of your secrets workflow?"
+    type: single_choice
+    construct: satisfied_developer_experience_secrets_w
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "Do you still use plain .env files for any secrets?"
+    type: single_choice
+    construct: still_use_plain_env_files
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, for most secrets"
+      - id: "b"
+        label: "Yes, for local development only"
+      - id: "c"
+        label: "Rarely"
+      - id: "d"
+        label: "No, never"
+  - id: q34
+    prompt: "How does your team share secrets among members?"
+    type: single_choice
+    construct: does_team_share_secrets_among
+    required: true
+    options:
+      - id: "a"
+        label: "Through a shared secrets manager"
+      - id: "b"
+        label: "Through a shared password manager"
+      - id: "c"
+        label: "Through encrypted messages or files"
+      - id: "d"
+        label: "Through plain chat or email (I know it's risky)"
+      - id: "e"
+        label: "We avoid sharing secrets directly"
+  - id: q35
+    prompt: "Which secrets-management pain points do you experience? (Select all that apply)"
+    type: multi_choice
+    construct: secrets_management_pain_points_experienc
+    required: true
+    options:
+      - id: "a"
+        label: "Rotation is burdensome"
+      - id: "b"
+        label: "Local development friction"
+      - id: "c"
+        label: "Secrets ending up in code"
+      - id: "d"
+        label: "Secrets sprawl across systems"
+      - id: "e"
+        label: "Granting access during onboarding"
+      - id: "f"
+        label: "Keeping secrets in sync across environments"
+      - id: "g"
+        label: "Cost of tooling"
+      - id: "h"
+        label: "I don't hit major pain points"
+  - id: q36
+    prompt: "Does your team use dynamic secrets (generated on demand and short-lived)?"
+    type: single_choice
+    construct: does_team_use_dynamic_secrets
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, extensively"
+      - id: "b"
+        label: "Yes, for some systems"
+      - id: "c"
+        label: "We are evaluating them"
+      - id: "d"
+        label: "No"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q37
+    prompt: "If you don't already, how likely are you to adopt a centralized secrets manager?"
+    type: single_choice
+    construct: if_don_t_already_likely
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+      - id: "f"
+        label: "We already use one"
+  - id: q38
+    prompt: "Which are your top 3 priorities in secrets management? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_priorities_secrets_management
+    required: true
+    options:
+      - id: "a"
+        label: "Strong access control"
+      - id: "b"
+        label: "Automatic rotation"
+      - id: "c"
+        label: "Audit logging"
+      - id: "d"
+        label: "Keeping secrets out of code"
+      - id: "e"
+        label: "Ease of use for developers"
+      - id: "f"
+        label: "Dynamic short-lived credentials"
+      - id: "g"
+        label: "Encryption"
+      - id: "h"
+        label: "Low cost"
+  - id: q39
+    prompt: "How much do you agree: Short-lived dynamic secrets are safer than long-lived static ones."
+    type: single_choice
+    construct: much_agree_short_lived_dynamic
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q40
+    prompt: "How likely are you to recommend your current secrets-management setup to another team? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_current_secrets_managem
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q41
+    prompt: "How likely is your team to change secrets-management tools within the next year?"
+    type: single_choice
+    construct: likely_team_change_secrets_management
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q42
+    prompt: "What is one thing you would improve about how your team manages secrets? (Optional short answer)"
+    type: free_text
+    construct: one_thing_would_improve_team
+    required: false
+  - id: q43
+    prompt: "Which best describes your current role?"
+    type: single_choice
+    construct: best_describes_current_role
+    required: true
+    options:
+      - id: "a"
+        label: "Front-end developer"
+      - id: "b"
+        label: "Back-end developer"
+      - id: "c"
+        label: "Full-stack developer"
+      - id: "d"
+        label: "DevOps or site reliability engineer"
+      - id: "e"
+        label: "Platform or infrastructure engineer"
+      - id: "f"
+        label: "Security engineer"
+      - id: "g"
+        label: "Engineering manager"
+      - id: "h"
+        label: "Student"
+      - id: "i"
+        label: "Other"
+  - id: q44
+    prompt: "How many years have you worked professionally in technology (not counting education)?"
+    type: single_choice
+    construct: many_years_have_worked_professionally
+    required: true
+    options:
+      - id: "a"
+        label: "I don't work in tech professionally"
+      - id: "b"
+        label: "Less than 2 years"
+      - id: "c"
+        label: "2 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "11 to 20 years"
+      - id: "f"
+        label: "More than 20 years"
+  - id: q45
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q46
+    prompt: "Approximately how many people work at your company or organization?"
+    type: single_choice
+    construct: approximately_many_people_work_company
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2 to 9"
+      - id: "c"
+        label: "10 to 99"
+      - id: "d"
+        label: "100 to 499"
+      - id: "e"
+        label: "500 to 4,999"
+      - id: "f"
+        label: "5,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q47
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Government"
+      - id: "f"
+        label: "Retail or e-commerce"
+      - id: "g"
+        label: "Manufacturing"
+      - id: "h"
+        label: "Media or entertainment"
+      - id: "i"
+        label: "Other"
+  - id: q48
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q49
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q50
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q51
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q52
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q53
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

@@ -1,0 +1,7 @@
+# Organic Food Attitudes
+
+How people shop for organic food and the attitudes that shape their purchasing decisions.
+
+## About this survey
+
+This survey profiles organic food purchasing, opening with a screener on buying frequency, tenure, the organic share of groceries, and overall attitude. It records behaviors such as motivations, categories bought, items respondents will pay extra for, where they shop, recognized brands (Organic Valley, Stonyfield, Annie's, 365 by Whole Foods), and understanding of the USDA Organic seal. Attitudes are captured through an agreement Likert battery on health, cost, environment, taste, and label trust, plus a per-item importance matrix over food-purchase criteria and a top-three ranking of those factors. Additional sections cover other food labels, barriers to buying organic, change over time, home growing, and trusted information sources, followed by satisfaction with selection and price, recommendation likelihood, and future intent, with numeric free-text on price premium and monthly spend. Question types include single-choice, multi-select, varied Likert scales, an importance matrix, a ranking item, a 0–10 recommendation scale, and numeric and open free-text. The survey closes with a demographic block covering age, gender, race and ethnicity, household income, education, employment, household size, children in the household, marital status, U.S. region, urbanicity, and grocery-shopping role.

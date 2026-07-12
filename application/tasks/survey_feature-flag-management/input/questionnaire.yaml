@@ -1,0 +1,932 @@
+schemaVersion: "1.0"
+id: feature_flag_management_v1
+title: "Feature Flag Management Survey"
+description: "How software teams adopt, manage, and feel about feature flags and toggles."
+questions:
+  - id: q0
+    prompt: "How often does your team use feature flags or toggles?"
+    type: single_choice
+    construct: often_does_team_use_feature
+    required: true
+    options:
+      - id: "a"
+        label: "Constantly, they are core to how we ship"
+      - id: "b"
+        label: "Regularly"
+      - id: "c"
+        label: "Occasionally"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q1
+    prompt: "How long have you worked with feature flags?"
+    type: single_choice
+    construct: long_have_worked_feature_flags
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+      - id: "f"
+        label: "I never have"
+  - id: q2
+    prompt: "What best describes your relationship to feature flags?"
+    type: single_choice
+    construct: best_describes_relationship_feature_flag
+    required: true
+    options:
+      - id: "a"
+        label: "I own or administer our flagging platform"
+      - id: "b"
+        label: "I create and manage flags for my features"
+      - id: "c"
+        label: "I use flags others have set up"
+      - id: "d"
+        label: "I mostly toggle flags as a PM or operator"
+      - id: "e"
+        label: "I rarely deal with flags"
+  - id: q3
+    prompt: "Which feature-flag tool does your team use most often?"
+    type: single_choice
+    construct: feature_flag_tool_does_team
+    required: true
+    options:
+      - id: "a"
+        label: "LaunchDarkly"
+      - id: "b"
+        label: "Split"
+      - id: "c"
+        label: "Unleash"
+      - id: "d"
+        label: "Flagsmith"
+      - id: "e"
+        label: "ConfigCat"
+      - id: "f"
+        label: "PostHog feature flags"
+      - id: "g"
+        label: "GrowthBook"
+      - id: "h"
+        label: "A homegrown or in-house system"
+      - id: "i"
+        label: "Config files or environment variables"
+      - id: "j"
+        label: "Other"
+  - id: q4
+    prompt: "Which feature-flag tools have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: feature_flag_tools_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "LaunchDarkly"
+      - id: "b"
+        label: "Split"
+      - id: "c"
+        label: "Unleash"
+      - id: "d"
+        label: "Flagsmith"
+      - id: "e"
+        label: "ConfigCat"
+      - id: "f"
+        label: "PostHog feature flags"
+      - id: "g"
+        label: "GrowthBook"
+      - id: "h"
+        label: "Optimizely"
+      - id: "i"
+        label: "A homegrown system"
+      - id: "j"
+        label: "Config or environment based flags"
+      - id: "k"
+        label: "None"
+  - id: q5
+    prompt: "What do you use feature flags for? (Select all that apply)"
+    type: multi_choice
+    construct: use_feature_flags_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Gradual or percentage rollouts"
+      - id: "b"
+        label: "Kill switches"
+      - id: "c"
+        label: "A/B testing or experimentation"
+      - id: "d"
+        label: "Canary releases"
+      - id: "e"
+        label: "Trunk-based development"
+      - id: "f"
+        label: "Entitlements or plan-based access"
+      - id: "g"
+        label: "Operational toggles"
+      - id: "h"
+        label: "Targeting specific users or segments"
+  - id: q6
+    prompt: "In which languages or platforms do you use feature-flag SDKs? (Select all that apply)"
+    type: multi_choice
+    construct: languages_platforms_use_feature_flag
+    required: true
+    options:
+      - id: "a"
+        label: "JavaScript or TypeScript"
+      - id: "b"
+        label: "Python"
+      - id: "c"
+        label: "Java or Kotlin"
+      - id: "d"
+        label: "C# or .NET"
+      - id: "e"
+        label: "Go"
+      - id: "f"
+        label: "Ruby"
+      - id: "g"
+        label: "Mobile (iOS or Android)"
+      - id: "h"
+        label: "Other"
+  - id: q7
+    prompt: "How is your feature-flag system deployed?"
+    type: single_choice
+    construct: feature_flag_system_deployed
+    required: true
+    options:
+      - id: "a"
+        label: "A SaaS or managed service"
+      - id: "b"
+        label: "Self-hosted open source"
+      - id: "c"
+        label: "A homegrown in-house system"
+      - id: "d"
+        label: "Config files in the codebase"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q8
+    prompt: "Who can toggle flags in production?"
+    type: single_choice
+    construct: who_can_toggle_flags_production
+    required: true
+    options:
+      - id: "a"
+        label: "Only engineers"
+      - id: "b"
+        label: "Engineers and product managers"
+      - id: "c"
+        label: "A broad set of roles, with permissions"
+      - id: "d"
+        label: "Anyone with access"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q9
+    prompt: "How does your team handle removing stale or obsolete flags?"
+    type: single_choice
+    construct: does_team_handle_removing_stale
+    required: true
+    options:
+      - id: "a"
+        label: "We have a formal cleanup process"
+      - id: "b"
+        label: "We clean them up occasionally"
+      - id: "c"
+        label: "We rarely clean them up"
+      - id: "d"
+        label: "We never clean them up"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q10
+    prompt: "Which targeting rules do you use for flags? (Select all that apply)"
+    type: multi_choice
+    construct: targeting_rules_use_flags_select
+    required: true
+    options:
+      - id: "a"
+        label: "Individual user or account attributes"
+      - id: "b"
+        label: "Percentage rollouts"
+      - id: "c"
+        label: "User segments"
+      - id: "d"
+        label: "Environment (dev, staging, prod)"
+      - id: "e"
+        label: "Geography"
+      - id: "f"
+        label: "Plan or subscription tier"
+      - id: "g"
+        label: "We use only on/off flags"
+  - id: q11
+    prompt: "How integrated are feature flags with your CI/CD pipeline?"
+    type: single_choice
+    construct: integrated_feature_flags_ci_cd
+    required: true
+    options:
+      - id: "a"
+        label: "Tightly integrated with automated flag changes"
+      - id: "b"
+        label: "Somewhat integrated"
+      - id: "c"
+        label: "Managed separately from deploys"
+      - id: "d"
+        label: "Not integrated"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q12
+    prompt: "Do you run A/B tests or experiments using feature flags?"
+    type: single_choice
+    construct: run_b_tests_experiments_using
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, frequently"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "Rarely"
+      - id: "d"
+        label: "No"
+  - id: q13
+    prompt: "Which feature-flag challenges does your team face? (Select all that apply)"
+    type: multi_choice
+    construct: feature_flag_challenges_does_team
+    required: true
+    options:
+      - id: "a"
+        label: "Flag debt and cleanup"
+      - id: "b"
+        label: "Testing all flag combinations"
+      - id: "c"
+        label: "Cost of the platform"
+      - id: "d"
+        label: "Configuration drift across environments"
+      - id: "e"
+        label: "Limited visibility into flag state"
+      - id: "f"
+        label: "Accidental exposure of unfinished features"
+      - id: "g"
+        label: "Performance of flag evaluation"
+      - id: "h"
+        label: "We don't face major challenges"
+  - id: q14
+    prompt: "About how many active feature flags does your team have right now? Please enter a number."
+    type: free_text
+    construct: many_active_feature_flags_does
+    required: true
+  - id: q15
+    prompt: "About how many days does a temporary flag typically live before removal? Please enter a number."
+    type: free_text
+    construct: many_days_does_temporary_flag
+    required: true
+  - id: q16
+    prompt: "How much do you agree: Feature flags let us ship more safely."
+    type: single_choice
+    construct: much_agree_feature_flags_let
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: We accumulate too much flag debt."
+    type: single_choice
+    construct: much_agree_we_accumulate_too
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: Feature flags make our code harder to test."
+    type: single_choice
+    construct: much_agree_feature_flags_make
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: Feature flags speed up our release cadence."
+    type: single_choice
+    construct: much_agree_feature_flags_speed
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: I trust our flag targeting to behave as intended."
+    type: single_choice
+    construct: much_agree_i_trust_our
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: Kill switches have saved us from production incidents."
+    type: single_choice
+    construct: much_agree_kill_switches_have
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How much do you agree: Managing flags adds meaningful overhead."
+    type: single_choice
+    construct: much_agree_managing_flags_adds
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "When choosing a flag platform, how important is targeting granularity?"
+    type: single_choice
+    construct: when_choosing_flag_platform_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When choosing a flag platform, how important is SDK and language coverage?"
+    type: single_choice
+    construct: when_choosing_flag_platform_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing a flag platform, how important is low-latency flag evaluation?"
+    type: single_choice
+    construct: when_choosing_flag_platform_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing a flag platform, how important is ease of flag cleanup?"
+    type: single_choice
+    construct: when_choosing_flag_platform_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When choosing a flag platform, how important are audit logs and permissions?"
+    type: single_choice
+    construct: when_choosing_flag_platform_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "When choosing a flag platform, how important are experimentation and analytics features?"
+    type: single_choice
+    construct: when_choosing_flag_platform_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "How often does your team use a kill switch or toggle during an incident?"
+    type: single_choice
+    construct: often_does_team_use_kill
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q30
+    prompt: "How often do stale or forgotten flags cause problems?"
+    type: single_choice
+    construct: often_stale_forgotten_flags_cause
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q31
+    prompt: "How satisfied are you with your primary feature-flag tool?"
+    type: single_choice
+    construct: satisfied_primary_feature_flag_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q32
+    prompt: "How satisfied are you with how flags are governed on your team?"
+    type: single_choice
+    construct: satisfied_flags_governed_team
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "Does your team have a defined flag lifecycle or cleanup policy?"
+    type: single_choice
+    construct: does_team_have_defined_flag
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and it is followed"
+      - id: "b"
+        label: "Yes, but it is loosely followed"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q34
+    prompt: "What is your team's default rollout strategy for a new feature behind a flag?"
+    type: single_choice
+    construct: team_s_default_rollout_strategy
+    required: true
+    options:
+      - id: "a"
+        label: "Gradual percentage rollout"
+      - id: "b"
+        label: "Internal or beta users first"
+      - id: "c"
+        label: "Canary to a small cohort"
+      - id: "d"
+        label: "All at once once enabled"
+      - id: "e"
+        label: "It varies by feature"
+  - id: q35
+    prompt: "Who at your organization uses feature flags? (Select all that apply)"
+    type: multi_choice
+    construct: who_organization_uses_feature_flags
+    required: true
+    options:
+      - id: "a"
+        label: "Engineers"
+      - id: "b"
+        label: "Product managers"
+      - id: "c"
+        label: "Marketing or growth teams"
+      - id: "d"
+        label: "Operations or support"
+      - id: "e"
+        label: "Data or experimentation teams"
+      - id: "f"
+        label: "Only engineers"
+  - id: q36
+    prompt: "Where are your flags primarily evaluated?"
+    type: single_choice
+    construct: where_flags_primarily_evaluated
+    required: true
+    options:
+      - id: "a"
+        label: "Server-side"
+      - id: "b"
+        label: "Client-side"
+      - id: "c"
+        label: "At the edge"
+      - id: "d"
+        label: "A mix"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q37
+    prompt: "On your next risky change, how likely are you to put it behind a feature flag?"
+    type: single_choice
+    construct: next_risky_change_likely_put
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q38
+    prompt: "Which are your top 3 reasons for using feature flags? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_reasons_using_feature
+    required: true
+    options:
+      - id: "a"
+        label: "Safer rollouts"
+      - id: "b"
+        label: "Kill switches"
+      - id: "c"
+        label: "Experimentation"
+      - id: "d"
+        label: "Decoupling deploy from release"
+      - id: "e"
+        label: "Trunk-based development"
+      - id: "f"
+        label: "Targeting specific users"
+      - id: "g"
+        label: "Faster iteration"
+      - id: "h"
+        label: "Managing entitlements"
+  - id: q39
+    prompt: "How much do you agree: Feature flags should be short-lived, not permanent configuration."
+    type: single_choice
+    construct: much_agree_feature_flags_should
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q40
+    prompt: "How likely are you to recommend your feature-flag platform to another team? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_feature_flag_platform
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q41
+    prompt: "How likely is your team to change feature-flag tools within the next year?"
+    type: single_choice
+    construct: likely_team_change_feature_flag
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q42
+    prompt: "What is one thing you would improve about how your team uses feature flags? (Optional short answer)"
+    type: free_text
+    construct: one_thing_would_improve_team
+    required: false
+  - id: q43
+    prompt: "Which best describes your current role?"
+    type: single_choice
+    construct: best_describes_current_role
+    required: true
+    options:
+      - id: "a"
+        label: "Front-end developer"
+      - id: "b"
+        label: "Back-end developer"
+      - id: "c"
+        label: "Full-stack developer"
+      - id: "d"
+        label: "DevOps or site reliability engineer"
+      - id: "e"
+        label: "Product manager"
+      - id: "f"
+        label: "Data or experimentation specialist"
+      - id: "g"
+        label: "Engineering manager"
+      - id: "h"
+        label: "Student"
+      - id: "i"
+        label: "Other"
+  - id: q44
+    prompt: "How many years have you worked professionally in technology (not counting education)?"
+    type: single_choice
+    construct: many_years_have_worked_professionally
+    required: true
+    options:
+      - id: "a"
+        label: "I don't work in tech professionally"
+      - id: "b"
+        label: "Less than 2 years"
+      - id: "c"
+        label: "2 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "11 to 20 years"
+      - id: "f"
+        label: "More than 20 years"
+  - id: q45
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q46
+    prompt: "Approximately how many people work at your company or organization?"
+    type: single_choice
+    construct: approximately_many_people_work_company
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2 to 9"
+      - id: "c"
+        label: "10 to 99"
+      - id: "d"
+        label: "100 to 499"
+      - id: "e"
+        label: "500 to 4,999"
+      - id: "f"
+        label: "5,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q47
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Government"
+      - id: "f"
+        label: "Retail or e-commerce"
+      - id: "g"
+        label: "Manufacturing"
+      - id: "h"
+        label: "Media or entertainment"
+      - id: "i"
+        label: "Other"
+  - id: q48
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q49
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q50
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q51
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q52
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q53
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

@@ -1,0 +1,7 @@
+# Mindfulness Practices
+
+How people build, sustain, and experience mindfulness and meditation practices.
+
+## About this survey
+
+This survey explores personal mindfulness and meditation practices, opening with a screener on whether someone practices, how long they have practiced, how often, and typical session length. It captures specific behaviors including the types of practice performed, where and how people practice, the apps and resources they use, the times of day they practice, and how they first got started. Attitudes are measured with an agreement Likert battery on stress, focus, routine, patience, and sleep, an importance matrix over factors that help sustain a practice such as a quiet space, guidance, and consistency, plus frequency scales and satisfaction ratings for progress and overall experience. Further sections address goals, perceived benefits, barriers, consistency, complementary wellness activities, retreat and class attendance, progress tracking, a top-three ranking of reasons for practicing, continuation and recommendation intent including a 0-to-10 recommend scale, and numeric free-text items on weekly practice days, session length, and in-person sessions attended. The survey ends with a demographic block covering age, gender, race and ethnicity, household income, education, employment, household size, marital status, U.S. region, urbanicity, insurance status, and self-rated overall wellbeing.

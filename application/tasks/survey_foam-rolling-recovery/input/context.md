@@ -1,0 +1,7 @@
+# Foam Rolling and Muscle Recovery
+
+How people use foam rolling and other tools and routines to recover their muscles around exercise.
+
+## About this survey
+
+This survey profiles consumer muscle-recovery behavior, opening with a screener on whether and how often respondents foam roll or use recovery tools and when in their routine they do it. It records the tools owned (foam rollers, percussion guns, massage balls, sticks, and bands), brands such as TriggerPoint, Theragun, Hyperice, and RumbleRoller, the primary tool, body areas targeted, session length, spending, reasons for recovery work, and other recovery practices used. Attitudes are captured with an agreement Likert battery on routine value and perceived benefits and a per-item importance matrix over tool-selection criteria such as price, durability, ease of use, portability, reviews, and brand, plus a top-three ranking of sought benefits and a barriers multi-select. Later sections cover how respondents learned their techniques, whether they follow a guided program, soreness frequency, technique confidence, skipped sessions, workout intensity, satisfaction with results and tools, recommendation likelihood, and future purchase and consistency intent. The survey closes with a demographic block covering age, gender, race and ethnicity, household income, education, employment, household size, marital status, U.S. region, urbanicity, and primary type of exercise.

@@ -1,0 +1,942 @@
+schemaVersion: "1.0"
+id: observability_monitoring_tools_v1
+title: "Observability and Monitoring Tools Survey"
+description: "How engineering teams monitor and observe their software systems, and their attitudes toward the tooling."
+questions:
+  - id: q0
+    prompt: "How often do you work with observability or monitoring tools?"
+    type: single_choice
+    construct: often_work_observability_monitoring_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Every day"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "A few times a month"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q1
+    prompt: "How long have you worked with observability or monitoring tools?"
+    type: single_choice
+    construct: long_have_worked_observability_monitorin
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+  - id: q2
+    prompt: "What best describes your relationship to observability?"
+    type: single_choice
+    construct: best_describes_relationship_observabilit
+    required: true
+    options:
+      - id: "a"
+        label: "I own or build our observability platform"
+      - id: "b"
+        label: "I instrument and monitor my own services"
+      - id: "c"
+        label: "I mainly consume dashboards and alerts"
+      - id: "d"
+        label: "I use it only during incidents"
+      - id: "e"
+        label: "I rarely use these tools"
+  - id: q3
+    prompt: "Which observability or monitoring platform do you use most often?"
+    type: single_choice
+    construct: observability_monitoring_platform_use_mo
+    required: true
+    options:
+      - id: "a"
+        label: "Datadog"
+      - id: "b"
+        label: "Grafana"
+      - id: "c"
+        label: "Prometheus"
+      - id: "d"
+        label: "New Relic"
+      - id: "e"
+        label: "Sentry"
+      - id: "f"
+        label: "Splunk"
+      - id: "g"
+        label: "Dynatrace"
+      - id: "h"
+        label: "Amazon CloudWatch"
+      - id: "i"
+        label: "Other"
+      - id: "j"
+        label: "We don't use a dedicated platform"
+  - id: q4
+    prompt: "Which monitoring or observability platforms have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: monitoring_observability_platforms_have_
+    required: true
+    options:
+      - id: "a"
+        label: "Datadog"
+      - id: "b"
+        label: "Grafana"
+      - id: "c"
+        label: "Prometheus"
+      - id: "d"
+        label: "New Relic"
+      - id: "e"
+        label: "Sentry"
+      - id: "f"
+        label: "Splunk"
+      - id: "g"
+        label: "Dynatrace"
+      - id: "h"
+        label: "Honeycomb"
+      - id: "i"
+        label: "Elastic or the ELK stack"
+      - id: "j"
+        label: "Amazon CloudWatch"
+      - id: "k"
+        label: "Azure Monitor"
+      - id: "l"
+        label: "None"
+  - id: q5
+    prompt: "Which kinds of telemetry does your team collect? (Select all that apply)"
+    type: multi_choice
+    construct: kinds_telemetry_does_team_collect
+    required: true
+    options:
+      - id: "a"
+        label: "Metrics"
+      - id: "b"
+        label: "Logs"
+      - id: "c"
+        label: "Distributed traces"
+      - id: "d"
+        label: "Events"
+      - id: "e"
+        label: "Real user monitoring"
+      - id: "f"
+        label: "Synthetic monitoring"
+      - id: "g"
+        label: "Continuous profiling"
+      - id: "h"
+        label: "I'm not sure"
+  - id: q6
+    prompt: "Which instrumentation or tracing tools do you use? (Select all that apply)"
+    type: multi_choice
+    construct: instrumentation_tracing_tools_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "OpenTelemetry"
+      - id: "b"
+        label: "Jaeger"
+      - id: "c"
+        label: "Zipkin"
+      - id: "d"
+        label: "A vendor agent (Datadog, New Relic, etc.)"
+      - id: "e"
+        label: "Sentry SDKs"
+      - id: "f"
+        label: "Custom instrumentation"
+      - id: "g"
+        label: "None"
+  - id: q7
+    prompt: "Which tools do you use to build dashboards or visualize telemetry? (Select all that apply)"
+    type: multi_choice
+    construct: tools_use_build_dashboards_visualize
+    required: true
+    options:
+      - id: "a"
+        label: "Grafana"
+      - id: "b"
+        label: "Datadog dashboards"
+      - id: "c"
+        label: "Kibana"
+      - id: "d"
+        label: "New Relic dashboards"
+      - id: "e"
+        label: "CloudWatch dashboards"
+      - id: "f"
+        label: "Custom or in-house dashboards"
+      - id: "g"
+        label: "None"
+  - id: q8
+    prompt: "Which alerting integrations does your team use? (Select all that apply)"
+    type: multi_choice
+    construct: alerting_integrations_does_team_use
+    required: true
+    options:
+      - id: "a"
+        label: "PagerDuty"
+      - id: "b"
+        label: "Opsgenie"
+      - id: "c"
+        label: "Slack notifications"
+      - id: "d"
+        label: "Email alerts"
+      - id: "e"
+        label: "Datadog monitors"
+      - id: "f"
+        label: "Prometheus Alertmanager"
+      - id: "g"
+        label: "None"
+  - id: q9
+    prompt: "How would you describe the maturity of your team's observability?"
+    type: single_choice
+    construct: would_describe_maturity_team_s
+    required: true
+    options:
+      - id: "a"
+        label: "Very mature and comprehensive"
+      - id: "b"
+        label: "Solid but with gaps"
+      - id: "c"
+        label: "Basic monitoring only"
+      - id: "d"
+        label: "Minimal or ad hoc"
+      - id: "e"
+        label: "Essentially none"
+  - id: q10
+    prompt: "Which of the three observability pillars does your team actively use?"
+    type: single_choice
+    construct: three_observability_pillars_does_team
+    required: true
+    options:
+      - id: "a"
+        label: "Metrics, logs, and traces all together"
+      - id: "b"
+        label: "Metrics and logs"
+      - id: "c"
+        label: "Mostly logs"
+      - id: "d"
+        label: "Mostly metrics"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q11
+    prompt: "Does your team use OpenTelemetry?"
+    type: single_choice
+    construct: does_team_use_opentelemetry
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, across most services"
+      - id: "b"
+        label: "Yes, for some services"
+      - id: "c"
+        label: "We are evaluating it"
+      - id: "d"
+        label: "No"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q12
+    prompt: "How are production alerts primarily routed to people?"
+    type: single_choice
+    construct: production_alerts_primarily_routed_peopl
+    required: true
+    options:
+      - id: "a"
+        label: "Through an on-call paging tool"
+      - id: "b"
+        label: "Through a team chat channel"
+      - id: "c"
+        label: "Through email"
+      - id: "d"
+        label: "There is no formal routing"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q13
+    prompt: "What does your team actively monitor? (Select all that apply)"
+    type: multi_choice
+    construct: does_team_actively_monitor_select
+    required: true
+    options:
+      - id: "a"
+        label: "Uptime and availability"
+      - id: "b"
+        label: "Latency and response times"
+      - id: "c"
+        label: "Error rates"
+      - id: "d"
+        label: "Resource usage (CPU, memory)"
+      - id: "e"
+        label: "Business or product metrics"
+      - id: "f"
+        label: "Service level objectives"
+      - id: "g"
+        label: "Security and anomalous activity"
+      - id: "h"
+        label: "Cost and spend"
+  - id: q14
+    prompt: "About how many dashboards does your team actively use? Please enter a number."
+    type: free_text
+    construct: many_dashboards_does_team_actively
+    required: true
+  - id: q15
+    prompt: "About how many active alerts or monitors does your team have configured? Please enter a number."
+    type: free_text
+    construct: many_active_alerts_monitors_does
+    required: true
+  - id: q16
+    prompt: "How much do you agree: Our observability helps us find root cause quickly."
+    type: single_choice
+    construct: much_agree_our_observability_helps
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: We get too many noisy or low-value alerts."
+    type: single_choice
+    construct: much_agree_we_get_too
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: I trust our dashboards to accurately reflect system state."
+    type: single_choice
+    construct: much_agree_i_trust_our
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: Instrumenting our code is a significant burden."
+    type: single_choice
+    construct: much_agree_instrumenting_our_code
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: Our observability tooling is too expensive for the value it provides."
+    type: single_choice
+    construct: much_agree_our_observability_tooling
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: We can debug most production issues with the data we already collect."
+    type: single_choice
+    construct: much_agree_we_can_debug
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How much do you agree: Our on-call responders are well supported by our monitoring."
+    type: single_choice
+    construct: much_agree_our_call_responders
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "When choosing an observability tool, how important is ease of instrumentation?"
+    type: single_choice
+    construct: when_choosing_observability_tool_importa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When choosing an observability tool, how important is the cost and pricing model?"
+    type: single_choice
+    construct: when_choosing_observability_tool_importa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing an observability tool, how important is query and dashboarding power?"
+    type: single_choice
+    construct: when_choosing_observability_tool_importa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing an observability tool, how important is alerting flexibility?"
+    type: single_choice
+    construct: when_choosing_observability_tool_importa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When choosing an observability tool, how important are integrations with your stack?"
+    type: single_choice
+    construct: when_choosing_observability_tool_importa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "When choosing an observability tool, how important is data retention?"
+    type: single_choice
+    construct: when_choosing_observability_tool_importa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "How often do your alerts turn out to be false positives?"
+    type: single_choice
+    construct: often_alerts_turn_out_be
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q30
+    prompt: "How often do you consult dashboards during an incident?"
+    type: single_choice
+    construct: often_consult_dashboards_during_incident
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q31
+    prompt: "How satisfied are you with your primary observability platform?"
+    type: single_choice
+    construct: satisfied_primary_observability_platform
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q32
+    prompt: "How satisfied are you with your team's alerting setup?"
+    type: single_choice
+    construct: satisfied_team_s_alerting_setup
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "Does your team define service level objectives (SLOs) or indicators (SLIs)?"
+    type: single_choice
+    construct: does_team_define_service_level
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, for most critical services"
+      - id: "b"
+        label: "Yes, for a few services"
+      - id: "c"
+        label: "We are starting to"
+      - id: "d"
+        label: "No"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q34
+    prompt: "How does your team handle high log volume?"
+    type: single_choice
+    construct: does_team_handle_high_log
+    required: true
+    options:
+      - id: "a"
+        label: "We keep everything"
+      - id: "b"
+        label: "We sample or filter logs"
+      - id: "c"
+        label: "We keep logs only for a short retention window"
+      - id: "d"
+        label: "Log volume isn't a concern for us"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q35
+    prompt: "Which observability challenges does your team face? (Select all that apply)"
+    type: multi_choice
+    construct: observability_challenges_does_team_face
+    required: true
+    options:
+      - id: "a"
+        label: "High and unpredictable cost"
+      - id: "b"
+        label: "Alert fatigue"
+      - id: "c"
+        label: "High cardinality data"
+      - id: "d"
+        label: "Instrumentation effort"
+      - id: "e"
+        label: "Too many disconnected tools"
+      - id: "f"
+        label: "Data silos across teams"
+      - id: "g"
+        label: "Skills or knowledge gaps"
+      - id: "h"
+        label: "We don't face major challenges"
+  - id: q36
+    prompt: "How has your team's mean time to resolution trended recently?"
+    type: single_choice
+    construct: has_team_s_mean_time
+    required: true
+    options:
+      - id: "a"
+        label: "Improving significantly"
+      - id: "b"
+        label: "Improving somewhat"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Getting worse"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q37
+    prompt: "How likely is your team to expand its use of OpenTelemetry over the next year?"
+    type: single_choice
+    construct: likely_team_expand_its_use
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q38
+    prompt: "Which are your top 3 observability priorities right now? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_observability_priorities_right
+    required: true
+    options:
+      - id: "a"
+        label: "Reducing alert noise"
+      - id: "b"
+        label: "Lowering cost"
+      - id: "c"
+        label: "Faster root-cause analysis"
+      - id: "d"
+        label: "Better distributed tracing"
+      - id: "e"
+        label: "Consolidating tools"
+      - id: "f"
+        label: "Defining SLOs"
+      - id: "g"
+        label: "Broader instrumentation coverage"
+      - id: "h"
+        label: "Improving dashboards"
+  - id: q39
+    prompt: "How much do you agree: Consolidating on a single platform beats a best-of-breed mix of tools."
+    type: single_choice
+    construct: much_agree_consolidating_single_platform
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q40
+    prompt: "How likely are you to recommend your current observability stack to another team? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_current_observability_s
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q41
+    prompt: "How likely is your team to change observability vendors within the next year?"
+    type: single_choice
+    construct: likely_team_change_observability_vendors
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q42
+    prompt: "What is one thing you would improve about your observability setup? (Optional short answer)"
+    type: free_text
+    construct: one_thing_would_improve_observability
+    required: false
+  - id: q43
+    prompt: "Which best describes your current role?"
+    type: single_choice
+    construct: best_describes_current_role
+    required: true
+    options:
+      - id: "a"
+        label: "Front-end developer"
+      - id: "b"
+        label: "Back-end developer"
+      - id: "c"
+        label: "Full-stack developer"
+      - id: "d"
+        label: "DevOps or site reliability engineer"
+      - id: "e"
+        label: "Platform or infrastructure engineer"
+      - id: "f"
+        label: "Data engineer"
+      - id: "g"
+        label: "Engineering manager"
+      - id: "h"
+        label: "Student"
+      - id: "i"
+        label: "Other"
+  - id: q44
+    prompt: "How many years have you worked professionally in technology (not counting education)?"
+    type: single_choice
+    construct: many_years_have_worked_professionally
+    required: true
+    options:
+      - id: "a"
+        label: "I don't work in tech professionally"
+      - id: "b"
+        label: "Less than 2 years"
+      - id: "c"
+        label: "2 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "11 to 20 years"
+      - id: "f"
+        label: "More than 20 years"
+  - id: q45
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q46
+    prompt: "Approximately how many people work at your company or organization?"
+    type: single_choice
+    construct: approximately_many_people_work_company
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2 to 9"
+      - id: "c"
+        label: "10 to 99"
+      - id: "d"
+        label: "100 to 499"
+      - id: "e"
+        label: "500 to 4,999"
+      - id: "f"
+        label: "5,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q47
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Government"
+      - id: "f"
+        label: "Retail or e-commerce"
+      - id: "g"
+        label: "Manufacturing"
+      - id: "h"
+        label: "Media or entertainment"
+      - id: "i"
+        label: "Other"
+  - id: q48
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q49
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q50
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q51
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q52
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q53
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

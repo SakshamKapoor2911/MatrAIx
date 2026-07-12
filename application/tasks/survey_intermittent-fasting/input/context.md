@@ -1,0 +1,7 @@
+# Intermittent Fasting
+
+How people practice intermittent fasting, the methods they use, and their attitudes toward it.
+
+## About this survey
+
+This survey profiles intermittent fasting habits, beginning with a screener on current practice, tenure, preferred method (16:8, 5:2, OMAD, alternate-day), eating-window timing, and fasting frequency. It records behaviors such as goals, what respondents consume during the fast, supporting tools and apps (Zero, Fastic, DoFasting, MyFitnessPal), and how they break the fast. Attitudes are captured through an agreement Likert battery on results, routine fit, focus, and long-term concerns, plus a per-item importance matrix over what matters in a fasting approach and a top-three ranking of those factors. Additional sections cover challenges, adherence frequency, food attention during the eating window, combined eating approaches, professional guidance, trusted information sources, and changes in energy, followed by satisfaction, recommendation likelihood, and future intent, with numeric free-text on fasting hours and planning time. Question types include single-choice, multi-select, varied Likert scales, an importance matrix, a ranking item, a 0–10 recommendation scale, and numeric and open free-text. The survey closes with a demographic block covering age, gender, race and ethnicity, household income, education, employment, household size, marital status, activity level, U.S. region, and urbanicity.

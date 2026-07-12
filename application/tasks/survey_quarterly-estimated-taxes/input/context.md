@@ -1,0 +1,7 @@
+# Quarterly Estimated Taxes
+
+How self-employed and 1099 earners calculate, save for, pay, and manage quarterly estimated taxes.
+
+## About this survey
+
+This survey profiles how people who owe estimated taxes handle the process, opening with a screener on whether they pay quarterly, how long they have done so, the income that triggers the requirement, and its share of household income. It records the income sources involved, how respondents calculate each payment, the tools and services they use (TurboTax, QuickBooks Self-Employed, FreeTaxUSA, Keeper, a CPA, and others), how they submit federal payments through IRS Direct Pay, EFTPS, or by mail, and how they set money aside and track expenses. Attitudes are captured with an agreement Likert battery on stress, understanding, and confidence, and a per-item importance matrix over what matters in a tax tool, plus a top-three ranking of challenges and a recommendation likelihood scale. Additional sections cover state payments, deadlines, missed payments, underpayment penalties, safe-harbor rules, review frequency, satisfaction, and change intent. Question types include single-choice, multi-select, agreement and importance matrices, satisfaction and likelihood Likert scales, an NPS-style 0–10 item, a ranking item, and numeric free-text. The survey closes with a demographic block covering business structure, years self-employed, age, gender, race and ethnicity, household income, education, employment, household size, marital status, U.S. region, and urbanicity.

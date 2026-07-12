@@ -1,0 +1,7 @@
+# Serverless Adoption
+
+How developers adopt, use, and evaluate serverless and functions-as-a-service platforms such as AWS Lambda, Cloudflare Workers, and Vercel Functions.
+
+## About this survey
+
+This survey profiles serverless adoption, opening with a screener on frequency, tenure, and the respondent's role. It records the primary platform alongside platforms used and wanted, what respondents build, the languages written, and the deployment frameworks, adjacent managed services, monitoring, and local-development approaches they rely on. Attitudes are captured with an agreement Likert battery covering shipping speed, cold starts, cost predictability, lock-in, debugging, and operational burden, plus a per-item importance matrix over platform-selection criteria, a top-three ranking of decision factors, and multi-selects of challenges experienced. Further sections examine architectural fit, cost surprises, handling of execution limits, migration history, and cold-start frequency, followed by satisfaction, recommendation likelihood, and intent to expand or roll back serverless use. Question types include single-choice, multi-select, several Likert scales, an importance matrix, a ranking item, a 0–10 recommendation scale, and numeric free-text. The survey ends with a demographic block covering role, professional experience, employment, company size, industry, age, gender, race and ethnicity, education, U.S. region, and urbanicity.

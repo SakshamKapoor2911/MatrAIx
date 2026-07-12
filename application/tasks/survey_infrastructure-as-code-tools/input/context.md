@@ -1,0 +1,7 @@
+# Infrastructure as Code Tools
+
+How engineers adopt, use, and evaluate infrastructure-as-code tools such as Terraform, OpenTofu, Pulumi, Ansible, CloudFormation, and CDK.
+
+## About this survey
+
+This survey profiles how practitioners work with infrastructure-as-code, opening with a screener on frequency, tenure, and the respondent's role. It records the primary IaC tool alongside tools used and wanted, the cloud providers managed, the languages and formats written, where state is stored, and the workflow, testing, and module-reuse tooling relied upon. Attitudes are captured with an agreement Likert battery covering reliability, state pain, plan trust, licensing, and code organization, plus a per-item importance matrix over tool-selection criteria, a top-three ranking of decision factors, and multi-selects of tasks performed and secret-handling methods. Further sections examine configuration drift, coverage of managed infrastructure, incident frequency, and the Terraform-to-OpenTofu evaluation, followed by satisfaction, recommendation likelihood, and adoption and migration intent. Question types include single-choice, multi-select, several Likert scales, an importance matrix, a ranking item, a 0–10 recommendation scale, and numeric free-text. The survey ends with a demographic block covering role, professional experience, employment, company size, industry, age, gender, race and ethnicity, education, U.S. region, and urbanicity.

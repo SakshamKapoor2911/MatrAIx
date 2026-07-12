@@ -1,0 +1,7 @@
+# Workplace Mental Health Attitudes
+
+Attitudes toward mental-health support and stigma at work, including the resources employers offer and how comfortable people feel using them.
+
+## About this survey
+
+This survey profiles attitudes toward workplace mental health, opening with a screener on employment, work arrangement, and whether an employer offers mental-health support. It records the resources offered and personally used, comfort discussing struggles, stress frequency, work-life balance, wellbeing time off, and the factors most affecting wellbeing. Attitudes are captured with an agreement Likert battery on employer care, stigma, career worry, and manager support, a matrix battery on workplace stigma, and a per-item importance matrix over desired employer supports, plus a top-three ranking of valued supports. Additional sections cover stress spillover, personal coping strategies, resource communication, year-over-year change, comfort with coworkers, and satisfaction with employer and manager support, followed by an NPS-style recommendation and future intent to use resources or weigh them in a job search. Question types include single-choice, multi-select, varied Likert scales, two matrix batteries, a ranking item, an NPS-style 0-to-10 scale, and numeric and open free-text. The survey concludes with a demographic block covering age, gender, race and ethnicity, household income, education, industry, organization size, household size, marital status, U.S. region, and urbanicity.

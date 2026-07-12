@@ -1,0 +1,7 @@
+# Work Expense Tracking
+
+How employees and contractors track, submit, and get reimbursed for work-related expenses.
+
+## About this survey
+
+This survey profiles how respondents manage work expenses and reimbursement, opening with a screener on whether they incur such expenses, how they are handled, tenure, and submission frequency. It records the expense types they track, the tools their organization uses such as Expensify, SAP Concur, Ramp, Brex, Zoho Expense, and Certify, how they capture receipts, how they cover out-of-pocket costs, and whether they keep card rewards. Attitudes are measured with an agreement Likert battery on effort, ease of use, reimbursement speed, and financial strain, plus a per-item importance matrix over expense-tool features, a top-three ranking of frustrations, and a multi-select of desired improvements. Additional sections cover receipt loss, expense rejections, submission timing, mileage tracking, and outcomes including satisfaction with the process, software, and reimbursement speed, recommendation likelihood, and future intent. Question types include single-choice, multi-select, varied Likert scales, an importance matrix, a ranking item, and numeric free-text. The survey closes with a demographic block covering role, industry, organization size, travel frequency, age, gender, race and ethnicity, household income, education, employment, marital status, U.S. region, and urbanicity.

@@ -1,0 +1,939 @@
+schemaVersion: "1.0"
+id: cycling_for_fitness_v1
+title: "Cycling for Fitness Survey"
+description: "How people cycle for fitness and recreation, including their gear, indoor versus outdoor riding, and apps."
+questions:
+  - id: q0
+    prompt: "Do you cycle for fitness or recreation?"
+    type: single_choice
+    construct: cycle_fitness_recreation
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but I used to"
+      - id: "d"
+        label: "No, I never have"
+  - id: q1
+    prompt: "How long have you been cycling for fitness or recreation?"
+    type: single_choice
+    construct: long_have_been_cycling_fitness
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "4 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+      - id: "f"
+        label: "I don't cycle"
+  - id: q2
+    prompt: "How often do you ride?"
+    type: single_choice
+    construct: often_ride
+    required: true
+    options:
+      - id: "a"
+        label: "5 or more times a week"
+      - id: "b"
+        label: "3 to 4 times a week"
+      - id: "c"
+        label: "1 to 2 times a week"
+      - id: "d"
+        label: "A few times a month"
+      - id: "e"
+        label: "Rarely"
+  - id: q3
+    prompt: "About how many miles do you ride in a typical week? Please enter a number."
+    type: free_text
+    construct: many_miles_ride_typical_week
+    required: true
+  - id: q4
+    prompt: "Do you ride mostly indoors or outdoors?"
+    type: single_choice
+    construct: ride_mostly_indoors_outdoors
+    required: true
+    options:
+      - id: "a"
+        label: "Almost entirely outdoors"
+      - id: "b"
+        label: "Mostly outdoors, some indoors"
+      - id: "c"
+        label: "About equal"
+      - id: "d"
+        label: "Mostly indoors, some outdoors"
+      - id: "e"
+        label: "Almost entirely indoors"
+  - id: q5
+    prompt: "What is your main reason for cycling?"
+    type: single_choice
+    construct: main_reason_cycling
+    required: true
+    options:
+      - id: "a"
+        label: "General fitness and health"
+      - id: "b"
+        label: "Weight management"
+      - id: "c"
+        label: "Stress relief and mental health"
+      - id: "d"
+        label: "Training or competition"
+      - id: "e"
+        label: "Commuting combined with exercise"
+      - id: "f"
+        label: "Enjoyment and being outdoors"
+  - id: q6
+    prompt: "Which types of cycling do you do? (Select all that apply)"
+    type: multi_choice
+    construct: types_cycling_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "Road cycling"
+      - id: "b"
+        label: "Mountain biking"
+      - id: "c"
+        label: "Gravel or adventure riding"
+      - id: "d"
+        label: "Indoor cycling / spin classes"
+      - id: "e"
+        label: "Smart-trainer virtual riding"
+      - id: "f"
+        label: "Commuting"
+      - id: "g"
+        label: "Casual or leisure riding"
+  - id: q7
+    prompt: "Which types of bikes do you own? (Select all that apply)"
+    type: multi_choice
+    construct: types_bikes_own_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Road bike"
+      - id: "b"
+        label: "Mountain bike"
+      - id: "c"
+        label: "Gravel or hybrid bike"
+      - id: "d"
+        label: "Electric bike (e-bike)"
+      - id: "e"
+        label: "Indoor bike or smart trainer"
+      - id: "f"
+        label: "Commuter or city bike"
+      - id: "g"
+        label: "I don't own a bike"
+  - id: q8
+    prompt: "Which bike or trainer brands do you own or use? (Select all that apply)"
+    type: multi_choice
+    construct: bike_trainer_brands_own_use
+    required: true
+    options:
+      - id: "a"
+        label: "Trek"
+      - id: "b"
+        label: "Specialized"
+      - id: "c"
+        label: "Cannondale"
+      - id: "d"
+        label: "Giant"
+      - id: "e"
+        label: "Peloton"
+      - id: "f"
+        label: "Wahoo (trainer)"
+      - id: "g"
+        label: "Zwift-compatible smart trainer"
+      - id: "h"
+        label: "Other"
+  - id: q9
+    prompt: "Which cycling apps or platforms do you use? (Select all that apply)"
+    type: multi_choice
+    construct: cycling_apps_platforms_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Strava"
+      - id: "b"
+        label: "Zwift"
+      - id: "c"
+        label: "Wahoo or Garmin Connect"
+      - id: "d"
+        label: "Peloton app"
+      - id: "e"
+        label: "TrainerRoad"
+      - id: "f"
+        label: "Komoot or Ride with GPS"
+      - id: "g"
+        label: "Apple Fitness or Health"
+      - id: "h"
+        label: "I don't use a cycling app"
+  - id: q10
+    prompt: "Which cycling gear do you consider essential? (Select all that apply)"
+    type: multi_choice
+    construct: cycling_gear_consider_essential_select
+    required: true
+    options:
+      - id: "a"
+        label: "Helmet"
+      - id: "b"
+        label: "Padded cycling shorts"
+      - id: "c"
+        label: "Cycling shoes and clipless pedals"
+      - id: "d"
+        label: "Bike computer or GPS"
+      - id: "e"
+        label: "Water bottles or hydration"
+      - id: "f"
+        label: "Lights and reflective gear"
+      - id: "g"
+        label: "Heart-rate monitor or power meter"
+      - id: "h"
+        label: "Repair kit and spare tube"
+  - id: q11
+    prompt: "Which devices do you use while riding? (Select all that apply)"
+    type: multi_choice
+    construct: devices_use_while_riding_select
+    required: true
+    options:
+      - id: "a"
+        label: "Bike computer (Garmin, Wahoo)"
+      - id: "b"
+        label: "Smartphone"
+      - id: "c"
+        label: "Apple Watch or smartwatch"
+      - id: "d"
+        label: "Heart-rate monitor"
+      - id: "e"
+        label: "Power meter"
+      - id: "f"
+        label: "Cadence or speed sensor"
+      - id: "g"
+        label: "None"
+  - id: q12
+    prompt: "About how much did you spend on your primary bike, in U.S. dollars? Please enter a number."
+    type: free_text
+    construct: much_did_spend_primary_bike
+    required: true
+  - id: q13
+    prompt: "Have you participated in any organized cycling events? (Select all that apply)"
+    type: multi_choice
+    construct: have_participated_any_organized_cycling
+    required: true
+    options:
+      - id: "a"
+        label: "Charity or fundraising ride"
+      - id: "b"
+        label: "Century (100-mile) ride"
+      - id: "c"
+        label: "Gran fondo"
+      - id: "d"
+        label: "Road race or criterium"
+      - id: "e"
+        label: "Mountain bike race"
+      - id: "f"
+        label: "Virtual race or event"
+      - id: "g"
+        label: "I have not participated in events"
+  - id: q14
+    prompt: "Do you follow a structured training plan?"
+    type: single_choice
+    construct: follow_structured_training_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a formal plan or coach"
+      - id: "b"
+        label: "Yes, an app-based plan"
+      - id: "c"
+        label: "Somewhat, a loose routine"
+      - id: "d"
+        label: "No, I ride how I feel"
+  - id: q15
+    prompt: "Thinking about your cycling, how much do you agree: Cycling is an important part of my lifestyle."
+    type: single_choice
+    construct: thinking_cycling_much_agree_cycling
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "Thinking about your cycling, how much do you agree: Apps and data motivate me to ride more."
+    type: single_choice
+    construct: thinking_cycling_much_agree_apps
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "Thinking about your cycling, how much do you agree: Indoor training is a good substitute when I can't ride outside."
+    type: single_choice
+    construct: thinking_cycling_much_agree_indoor
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "Thinking about your cycling, how much do you agree: It is one of my main ways to relieve stress."
+    type: single_choice
+    construct: thinking_cycling_much_agree_it
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "Thinking about your cycling, how much do you agree: I worry about safety when riding outdoors."
+    type: single_choice
+    construct: thinking_cycling_much_agree_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "Thinking about your cycling, how much do you agree: Riding with a club or group keeps me motivated."
+    type: single_choice
+    construct: thinking_cycling_much_agree_riding
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "When choosing a bike or cycling gear, how important is performance?"
+    type: single_choice
+    construct: when_choosing_bike_cycling_gear
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "When choosing a bike or cycling gear, how important is comfort?"
+    type: single_choice
+    construct: when_choosing_bike_cycling_gear
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When choosing a bike or cycling gear, how important is price?"
+    type: single_choice
+    construct: when_choosing_bike_cycling_gear
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When choosing a bike or cycling gear, how important is the brand?"
+    type: single_choice
+    construct: when_choosing_bike_cycling_gear
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing a bike or cycling gear, how important is durability?"
+    type: single_choice
+    construct: when_choosing_bike_cycling_gear
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing a bike or cycling gear, how important is technology and connectivity?"
+    type: single_choice
+    construct: when_choosing_bike_cycling_gear
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "Which are your top 3 factors when buying a bike or major gear? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_when_buying
+    required: true
+    options:
+      - id: "a"
+        label: "Performance"
+      - id: "b"
+        label: "Comfort"
+      - id: "c"
+        label: "Price"
+      - id: "d"
+        label: "Brand"
+      - id: "e"
+        label: "Durability"
+      - id: "f"
+        label: "Technology and connectivity"
+      - id: "g"
+        label: "Weight"
+      - id: "h"
+        label: "Reviews and recommendations"
+  - id: q28
+    prompt: "What are the biggest barriers to cycling more for you? (Select all that apply)"
+    type: multi_choice
+    construct: biggest_barriers_cycling_more_select
+    required: true
+    options:
+      - id: "a"
+        label: "Weather"
+      - id: "b"
+        label: "Safety concerns with traffic"
+      - id: "c"
+        label: "Lack of time"
+      - id: "d"
+        label: "Cost of equipment"
+      - id: "e"
+        label: "Lack of safe routes or trails"
+      - id: "f"
+        label: "Bike storage or transport"
+      - id: "g"
+        label: "Physical limitations"
+      - id: "h"
+        label: "No barriers"
+  - id: q29
+    prompt: "How much of a barrier is weather to riding more?"
+    type: single_choice
+    construct: much_barrier_weather_riding_more
+    required: true
+    options:
+      - id: "a"
+        label: "Not a barrier at all"
+      - id: "b"
+        label: "A slight barrier"
+      - id: "c"
+        label: "A moderate barrier"
+      - id: "d"
+        label: "A significant barrier"
+      - id: "e"
+        label: "A major barrier"
+  - id: q30
+    prompt: "How much of a barrier is traffic safety to riding more?"
+    type: single_choice
+    construct: much_barrier_traffic_safety_riding
+    required: true
+    options:
+      - id: "a"
+        label: "Not a barrier at all"
+      - id: "b"
+        label: "A slight barrier"
+      - id: "c"
+        label: "A moderate barrier"
+      - id: "d"
+        label: "A significant barrier"
+      - id: "e"
+        label: "A major barrier"
+  - id: q31
+    prompt: "How much of a barrier is the cost of equipment?"
+    type: single_choice
+    construct: much_barrier_cost_equipment
+    required: true
+    options:
+      - id: "a"
+        label: "Not a barrier at all"
+      - id: "b"
+        label: "A slight barrier"
+      - id: "c"
+        label: "A moderate barrier"
+      - id: "d"
+        label: "A significant barrier"
+      - id: "e"
+        label: "A major barrier"
+  - id: q32
+    prompt: "How much of a barrier is lack of time?"
+    type: single_choice
+    construct: much_barrier_lack_time
+    required: true
+    options:
+      - id: "a"
+        label: "Not a barrier at all"
+      - id: "b"
+        label: "A slight barrier"
+      - id: "c"
+        label: "A moderate barrier"
+      - id: "d"
+        label: "A significant barrier"
+      - id: "e"
+        label: "A major barrier"
+  - id: q33
+    prompt: "How often do you share your rides on apps like Strava?"
+    type: single_choice
+    construct: often_share_rides_apps_like
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q34
+    prompt: "How often do you do bike maintenance yourself?"
+    type: single_choice
+    construct: often_bike_maintenance_yourself
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q35
+    prompt: "Which activities complement your cycling? (Select all that apply)"
+    type: multi_choice
+    construct: activities_complement_cycling_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Strength training"
+      - id: "b"
+        label: "Stretching or yoga"
+      - id: "c"
+        label: "Running"
+      - id: "d"
+        label: "Swimming"
+      - id: "e"
+        label: "Core work"
+      - id: "f"
+        label: "Rest and recovery"
+      - id: "g"
+        label: "None"
+  - id: q36
+    prompt: "How satisfied are you with your current cycling routine?"
+    type: single_choice
+    construct: satisfied_current_cycling_routine
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q37
+    prompt: "How satisfied are you with the cycling app you use most?"
+    type: single_choice
+    construct: satisfied_cycling_app_use_most
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "I don't use a cycling app"
+  - id: q38
+    prompt: "How satisfied are you with your bike and gear?"
+    type: single_choice
+    construct: satisfied_bike_gear
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q39
+    prompt: "Overall, how satisfied are you with cycling as your form of exercise?"
+    type: single_choice
+    construct: overall_satisfied_cycling_as_form
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q40
+    prompt: "How likely are you to recommend cycling for fitness to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_cycling_fitness_friend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q41
+    prompt: "How likely are you to participate in a cycling event next year?"
+    type: single_choice
+    construct: likely_participate_cycling_event_next
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q42
+    prompt: "How likely are you to buy a new bike or major gear in the next year?"
+    type: single_choice
+    construct: likely_buy_new_bike_major
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q43
+    prompt: "How likely are you to still be cycling regularly a year from now?"
+    type: single_choice
+    construct: likely_still_be_cycling_regularly
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q44
+    prompt: "What is one thing that would improve your cycling experience? (Optional short answer)"
+    type: free_text
+    construct: one_thing_that_would_improve
+    required: false
+  - id: q45
+    prompt: "How would you describe your overall fitness level?"
+    type: single_choice
+    construct: would_describe_overall_fitness_level
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Recreational"
+      - id: "c"
+        label: "Intermediate"
+      - id: "d"
+        label: "Advanced"
+      - id: "e"
+        label: "Competitive"
+  - id: q46
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q47
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q48
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q49
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q50
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q51
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q52
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q53
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "In a relationship or partnered"
+      - id: "c"
+        label: "Married"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q54
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q55
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

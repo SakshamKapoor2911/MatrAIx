@@ -1,0 +1,886 @@
+schemaVersion: "1.0"
+id: intermittent_fasting_v1
+title: "Intermittent Fasting Survey"
+description: "How people practice intermittent fasting, the methods they use, and their attitudes toward it."
+questions:
+  - id: q0
+    prompt: "Do you currently practice intermittent fasting?"
+    type: single_choice
+    construct: currently_practice_intermittent_fasting
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I do it consistently"
+      - id: "b"
+        label: "Yes, but only occasionally"
+      - id: "c"
+        label: "No, but I have tried it in the past"
+      - id: "d"
+        label: "No, but I am interested in trying it"
+      - id: "e"
+        label: "No, and I am not interested"
+  - id: q1
+    prompt: "How long have you practiced intermittent fasting?"
+    type: single_choice
+    construct: long_have_practiced_intermittent_fasting
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 month"
+      - id: "b"
+        label: "1 to 6 months"
+      - id: "c"
+        label: "6 months to 1 year"
+      - id: "d"
+        label: "1 to 3 years"
+      - id: "e"
+        label: "More than 3 years"
+      - id: "f"
+        label: "This does not apply to me"
+  - id: q2
+    prompt: "Which intermittent fasting method do you use most often?"
+    type: single_choice
+    construct: intermittent_fasting_method_use_most
+    required: true
+    options:
+      - id: "a"
+        label: "16:8 (16-hour fast, 8-hour eating window)"
+      - id: "b"
+        label: "14:10 (14-hour fast, 10-hour eating window)"
+      - id: "c"
+        label: "18:6 (18-hour fast, 6-hour eating window)"
+      - id: "d"
+        label: "5:2 (two low-calorie days per week)"
+      - id: "e"
+        label: "One meal a day (OMAD)"
+      - id: "f"
+        label: "Alternate-day fasting"
+      - id: "g"
+        label: "I do not follow a specific method"
+  - id: q3
+    prompt: "On days you fast, when does your eating window usually start?"
+    type: single_choice
+    construct: days_fast_when_does_eating
+    required: true
+    options:
+      - id: "a"
+        label: "Early morning (before 9 a.m.)"
+      - id: "b"
+        label: "Late morning (9 a.m. to noon)"
+      - id: "c"
+        label: "Early afternoon (noon to 3 p.m.)"
+      - id: "d"
+        label: "Late afternoon or evening (after 3 p.m.)"
+      - id: "e"
+        label: "It varies day to day"
+      - id: "f"
+        label: "This does not apply to me"
+  - id: q4
+    prompt: "How many days per week do you typically fast?"
+    type: single_choice
+    construct: many_days_per_week_typically
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 day"
+      - id: "b"
+        label: "1 to 2 days"
+      - id: "c"
+        label: "3 to 4 days"
+      - id: "d"
+        label: "5 to 6 days"
+      - id: "e"
+        label: "Every day"
+  - id: q5
+    prompt: "What first motivated you to try intermittent fasting?"
+    type: single_choice
+    construct: first_motivated_try_intermittent_fasting
+    required: true
+    options:
+      - id: "a"
+        label: "Weight loss"
+      - id: "b"
+        label: "General health"
+      - id: "c"
+        label: "Metabolic or blood sugar concerns"
+      - id: "d"
+        label: "Simplifying meals and routine"
+      - id: "e"
+        label: "Athletic or fitness performance"
+      - id: "f"
+        label: "Mental clarity or focus"
+      - id: "g"
+        label: "This does not apply to me"
+  - id: q6
+    prompt: "Which goals do you hope to achieve with intermittent fasting? (Select all that apply)"
+    type: multi_choice
+    construct: goals_hope_achieve_intermittent_fasting
+    required: true
+    options:
+      - id: "a"
+        label: "Lose weight"
+      - id: "b"
+        label: "Maintain weight"
+      - id: "c"
+        label: "Improve energy levels"
+      - id: "d"
+        label: "Improve focus or mental clarity"
+      - id: "e"
+        label: "Manage blood sugar"
+      - id: "f"
+        label: "Reduce inflammation"
+      - id: "g"
+        label: "Simplify eating routine"
+      - id: "h"
+        label: "Improve athletic performance"
+      - id: "i"
+        label: "Longevity or healthy aging"
+      - id: "j"
+        label: "None of these"
+  - id: q7
+    prompt: "What do you consume during your fasting window? (Select all that apply)"
+    type: multi_choice
+    construct: consume_during_fasting_window_select
+    required: true
+    options:
+      - id: "a"
+        label: "Water"
+      - id: "b"
+        label: "Black coffee"
+      - id: "c"
+        label: "Plain tea"
+      - id: "d"
+        label: "Sparkling or flavored water"
+      - id: "e"
+        label: "Electrolyte drinks (no calories)"
+      - id: "f"
+        label: "Bone broth"
+      - id: "g"
+        label: "Nothing at all"
+      - id: "h"
+        label: "I sometimes have a small snack"
+  - id: q8
+    prompt: "Which tools or resources do you use to support your fasting? (Select all that apply)"
+    type: multi_choice
+    construct: tools_resources_use_support_fasting
+    required: true
+    options:
+      - id: "a"
+        label: "A fasting app (Zero, Fastic, DoFasting)"
+      - id: "b"
+        label: "A general diet or calorie app (MyFitnessPal, Lose It!)"
+      - id: "c"
+        label: "A smartwatch or fitness tracker"
+      - id: "d"
+        label: "A simple timer or clock"
+      - id: "e"
+        label: "Online communities or forums"
+      - id: "f"
+        label: "Books or podcasts"
+      - id: "g"
+        label: "Guidance from a doctor or dietitian"
+      - id: "h"
+        label: "I do not use any tools"
+  - id: q9
+    prompt: "Which fasting or health app do you use most often?"
+    type: single_choice
+    construct: fasting_health_app_use_most
+    required: true
+    options:
+      - id: "a"
+        label: "Zero"
+      - id: "b"
+        label: "Fastic"
+      - id: "c"
+        label: "DoFasting"
+      - id: "d"
+        label: "MyFitnessPal"
+      - id: "e"
+        label: "A smartwatch's built-in app"
+      - id: "f"
+        label: "Another app"
+      - id: "g"
+        label: "I do not use an app"
+  - id: q10
+    prompt: "How do you usually break your fast?"
+    type: single_choice
+    construct: usually_break_fast
+    required: true
+    options:
+      - id: "a"
+        label: "A full balanced meal"
+      - id: "b"
+        label: "A high-protein meal"
+      - id: "c"
+        label: "A light snack first"
+      - id: "d"
+        label: "Fruit or something small"
+      - id: "e"
+        label: "Whatever is convenient"
+      - id: "f"
+        label: "This does not apply to me"
+  - id: q11
+    prompt: "About how many hours do you typically fast on a fasting day? Please enter a number."
+    type: free_text
+    construct: many_hours_typically_fast_fasting
+    required: true
+  - id: q12
+    prompt: "About how many hours per week do you spend planning or tracking your fasting? Please enter a number."
+    type: free_text
+    construct: many_hours_per_week_spend
+    required: true
+  - id: q13
+    prompt: "How much do you agree: Intermittent fasting has helped me reach my health goals."
+    type: single_choice
+    construct: much_agree_intermittent_fasting_has
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree: Intermittent fasting fits easily into my daily routine."
+    type: single_choice
+    construct: much_agree_intermittent_fasting_fits
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree: Intermittent fasting is easier to stick with than counting calories."
+    type: single_choice
+    construct: much_agree_intermittent_fasting_easier
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree: I feel more focused during my fasting window."
+    type: single_choice
+    construct: much_agree_i_feel_more
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: I worry about the long-term effects of fasting."
+    type: single_choice
+    construct: much_agree_i_worry_long
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: Social events make fasting harder to maintain."
+    type: single_choice
+    construct: much_agree_social_events_make
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: The health benefits of fasting are well supported by evidence."
+    type: single_choice
+    construct: much_agree_health_benefits_fasting
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "When choosing a fasting approach, how important is ease of sticking with it?"
+    type: single_choice
+    construct: when_choosing_fasting_approach_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "When choosing a fasting approach, how important is flexibility with your schedule?"
+    type: single_choice
+    construct: when_choosing_fasting_approach_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "When choosing a fasting approach, how important is weight-loss effectiveness?"
+    type: single_choice
+    construct: when_choosing_fasting_approach_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When choosing a fasting approach, how important is fitting around social meals?"
+    type: single_choice
+    construct: when_choosing_fasting_approach_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When choosing a fasting approach, how important is scientific evidence behind it?"
+    type: single_choice
+    construct: when_choosing_fasting_approach_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "Which are the top 3 factors that matter most in your fasting approach? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_that_matter
+    required: true
+    options:
+      - id: "a"
+        label: "Ease of sticking with it"
+      - id: "b"
+        label: "Schedule flexibility"
+      - id: "c"
+        label: "Weight-loss effectiveness"
+      - id: "d"
+        label: "Fitting around social meals"
+      - id: "e"
+        label: "Scientific evidence"
+      - id: "f"
+        label: "Energy and focus"
+      - id: "g"
+        label: "Simplicity"
+      - id: "h"
+        label: "Guidance from experts"
+  - id: q26
+    prompt: "Which challenges have you experienced with intermittent fasting? (Select all that apply)"
+    type: multi_choice
+    construct: challenges_have_experienced_intermittent
+    required: true
+    options:
+      - id: "a"
+        label: "Hunger during the fast"
+      - id: "b"
+        label: "Low energy or fatigue"
+      - id: "c"
+        label: "Irritability or mood changes"
+      - id: "d"
+        label: "Trouble concentrating"
+      - id: "e"
+        label: "Difficulty with social meals"
+      - id: "f"
+        label: "Overeating during the eating window"
+      - id: "g"
+        label: "Trouble sleeping"
+      - id: "h"
+        label: "Headaches"
+      - id: "i"
+        label: "I have had no real challenges"
+  - id: q27
+    prompt: "How often do you find it hard to stick to your fasting schedule?"
+    type: single_choice
+    construct: often_find_it_hard_stick
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q28
+    prompt: "How often do you break your fast earlier than planned?"
+    type: single_choice
+    construct: often_break_fast_earlier_than
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q29
+    prompt: "During your eating window, how much attention do you pay to what you eat?"
+    type: single_choice
+    construct: during_eating_window_much_attention
+    required: true
+    options:
+      - id: "a"
+        label: "None at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "A lot"
+      - id: "e"
+        label: "I follow a strict plan"
+  - id: q30
+    prompt: "Do you combine intermittent fasting with any other eating approach? (Select all that apply)"
+    type: multi_choice
+    construct: combine_intermittent_fasting_any_other
+    required: true
+    options:
+      - id: "a"
+        label: "Low-carb or keto"
+      - id: "b"
+        label: "High-protein"
+      - id: "c"
+        label: "Calorie counting"
+      - id: "d"
+        label: "Plant-based eating"
+      - id: "e"
+        label: "Mediterranean-style eating"
+      - id: "f"
+        label: "No other approach"
+  - id: q31
+    prompt: "Did you consult a healthcare professional before starting intermittent fasting?"
+    type: single_choice
+    construct: did_consult_healthcare_professional_befo
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and they supported it"
+      - id: "b"
+        label: "Yes, with mixed guidance"
+      - id: "c"
+        label: "No, but I plan to"
+      - id: "d"
+        label: "No, and I do not plan to"
+      - id: "e"
+        label: "This does not apply to me"
+  - id: q32
+    prompt: "Which sources do you trust for information about intermittent fasting? (Select all that apply)"
+    type: multi_choice
+    construct: sources_trust_information_intermittent_f
+    required: true
+    options:
+      - id: "a"
+        label: "Doctor or registered dietitian"
+      - id: "b"
+        label: "Scientific studies or journals"
+      - id: "c"
+        label: "Health and wellness websites"
+      - id: "d"
+        label: "Social media influencers"
+      - id: "e"
+        label: "Podcasts or books"
+      - id: "f"
+        label: "Friends and family"
+      - id: "g"
+        label: "Fasting apps"
+      - id: "h"
+        label: "I do not seek out this information"
+  - id: q33
+    prompt: "Since starting intermittent fasting, how has your energy level changed?"
+    type: single_choice
+    construct: since_starting_intermittent_fasting_has
+    required: true
+    options:
+      - id: "a"
+        label: "Much lower"
+      - id: "b"
+        label: "Somewhat lower"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Somewhat higher"
+      - id: "e"
+        label: "Much higher"
+      - id: "f"
+        label: "This does not apply to me"
+  - id: q34
+    prompt: "How satisfied are you with the results you have seen from intermittent fasting?"
+    type: single_choice
+    construct: satisfied_results_have_seen_from
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "This does not apply to me"
+  - id: q35
+    prompt: "How satisfied are you with how intermittent fasting fits your lifestyle?"
+    type: single_choice
+    construct: satisfied_intermittent_fasting_fits_life
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "This does not apply to me"
+  - id: q36
+    prompt: "How likely are you to recommend intermittent fasting to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_intermittent_fasting_fr
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q37
+    prompt: "How likely are you to continue intermittent fasting over the next year?"
+    type: single_choice
+    construct: likely_continue_intermittent_fasting_ove
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q38
+    prompt: "How likely are you to try a different fasting method in the future?"
+    type: single_choice
+    construct: likely_try_different_fasting_method
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q39
+    prompt: "What is one thing that would make intermittent fasting easier for you? (Optional short answer)"
+    type: free_text
+    construct: one_thing_that_would_make
+    required: false
+  - id: q40
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q41
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q45
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q46
+    prompt: "How many people, including you, live in your household?"
+    type: single_choice
+    construct: many_people_including_live_household
+    required: true
+    options:
+      - id: "a"
+        label: "1"
+      - id: "b"
+        label: "2"
+      - id: "c"
+        label: "3"
+      - id: "d"
+        label: "4"
+      - id: "e"
+        label: "5 or more"
+  - id: q47
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "In a relationship, not married"
+      - id: "c"
+        label: "Married"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q48
+    prompt: "How would you describe your current activity level?"
+    type: single_choice
+    construct: would_describe_current_activity_level
+    required: true
+    options:
+      - id: "a"
+        label: "Mostly sedentary"
+      - id: "b"
+        label: "Lightly active"
+      - id: "c"
+        label: "Moderately active"
+      - id: "d"
+        label: "Very active"
+      - id: "e"
+        label: "Athlete or highly active"
+  - id: q49
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q50
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

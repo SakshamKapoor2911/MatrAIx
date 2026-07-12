@@ -1,0 +1,7 @@
+# Prepaid Debit Card
+
+How people use prepaid and reloadable debit cards, including their purposes, fees, and satisfaction.
+
+## About this survey
+
+This survey profiles use of prepaid and reloadable debit cards, opening with a screener on whether and how long respondents use them and which cards they hold, such as Netspend, Bluebird, Chime, Green Dot, PayPal Prepaid, Cash App, and Walmart MoneyCard. It records why they started, what they use the card for, how they load money, reload frequency, and whether they also hold a traditional bank account, along with the fees they have paid and how they check balances. Attitudes are measured with an agreement Likert battery on spending control, fees, safety, and everyday sufficiency, plus a per-item importance matrix over card-selection factors, a top-three ranking of reasons for choosing prepaid over a bank account, and multi-selects of features used and frustrations. Additional sections cover ATM use, fee surprises, and outcomes including satisfaction with the card, fees, and app, recommendation likelihood, and retention and switching intent. Question types include single-choice, multi-select, varied Likert scales, an importance matrix, a ranking item, and numeric free-text. The survey closes with a demographic block covering age, gender, race and ethnicity, household income, education, employment, banking status, household size, marital status, U.S. region, and urbanicity.

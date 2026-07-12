@@ -1,0 +1,7 @@
+# Sauna and Cold Therapy
+
+How people use and feel about saunas, cold plunges, and other hot-and-cold recovery practices.
+
+## About this survey
+
+This survey profiles consumer use of heat and cold therapy, opening with a screener on whether respondents use sauna, cold therapy, or both and how often each is used per week. It records the specific heat and cold modalities tried (dry and infrared saunas, steam rooms, cold plunges, cold showers, contrast, and cryotherapy), where they are accessed, home equipment and brands owned (such as Plunge, Ice Barrel, HigherDOSE, and Sunlighten), typical session lengths, target cold temperatures, and reasons for use. Attitudes are captured with an agreement Likert battery on routine value and perceived benefits and a per-item importance matrix over facility-selection criteria such as convenience, cost, cleanliness, privacy, temperature control, and social setting, plus a top-three ranking of sought benefits and a barriers multi-select. Later sections cover contrast-therapy habits, timing, recovery routines, safety confidence, how respondents learned the practices, satisfaction with access, recommendation likelihood, and future purchase and continuation intent. The survey closes with a demographic block covering age, gender, race and ethnicity, household income, education, employment, household size, marital status, U.S. region, urbanicity, physical activity level, and homeownership.

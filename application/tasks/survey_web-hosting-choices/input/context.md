@@ -1,0 +1,7 @@
+# Web Hosting Choices
+
+How developers and site owners choose and use web hosting providers and platforms.
+
+## About this survey
+
+This survey profiles web hosting choices, opening with a screener on how often the respondent manages hosting, tenure, hosting type, and the primary provider along with providers used and wanted. It records what is hosted, reasons for the choice, number of sites, monthly spend, deployment methods, hosting-related services in use, SSL handling, cost band, scaling approach, and migration history. Attitudes are captured through an agreement Likert battery on deployment ease, managed infrastructure, billing worries, lock-in, free tiers, and self-management comfort, an importance matrix over provider-selection criteria, and frequency scales for deployment, downtime, and cost review, plus a top-three ranking of decision factors. Later sections cover CDN usage, who manages hosting, discovery channels, satisfaction with reliability and value, overall satisfaction, recommendation likelihood, switching intent, and an optional open comment. Question types include single-choice, multi-select, several Likert scales, an importance matrix, a ranking item, an NPS-style 0–10 scale, and numeric free-text. The survey concludes with a demographic block covering role, professional experience, employment, company size, industry, age, gender, race and ethnicity, education, U.S. region, and urbanicity.

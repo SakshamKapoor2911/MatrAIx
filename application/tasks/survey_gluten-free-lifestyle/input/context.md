@@ -1,0 +1,7 @@
+# Gluten-Free Lifestyle
+
+How people follow a gluten-free diet and lifestyle, their reasons, the products they buy, and how they dine out.
+
+## About this survey
+
+This survey profiles the gluten-free lifestyle, opening with a screener on whether and how strictly respondents eat gluten-free, tenure, the main reason, and how that reason was determined. It records behaviors such as foods bought, recognized brands (Bob's Red Mill, Schar, Udi's, Canyon Bakehouse), where respondents shop, and label-reading habits. Attitudes are captured through an agreement Likert battery on how respondents feel, cost, taste, availability, and label trust, plus a per-item importance matrix over product-selection criteria and a top-three ranking of those factors. Additional sections cover dining out frequency and strategies, confidence in restaurants, challenges, app usage, trusted information sources, and change in strictness over time, followed by satisfaction with products and dining out, recommendation likelihood, and future intent, with numeric free-text on added cost and home meals. Question types include single-choice, multi-select, varied Likert scales, an importance matrix, a ranking item, a 0–10 recommendation scale, and numeric and open free-text. The survey closes with a demographic block covering age, gender, race and ethnicity, household income, education, employment, household size, others in the household who eat gluten-free, marital status, U.S. region, and urbanicity.

@@ -1,0 +1,898 @@
+schemaVersion: "1.0"
+id: static_site_generator_usage_v1
+title: "Static Site Generator Usage Survey"
+description: "How developers choose and use static site generators such as Hugo, Jekyll, Astro, Eleventy, Next.js, and Gatsby."
+questions:
+  - id: q0
+    prompt: "How often do you work with static site generators?"
+    type: single_choice
+    construct: often_work_static_site_generators
+    required: true
+    options:
+      - id: "a"
+        label: "Regularly, as part of my main work"
+      - id: "b"
+        label: "Occasionally for side projects"
+      - id: "c"
+        label: "Rarely"
+      - id: "d"
+        label: "I am just starting to learn them"
+      - id: "e"
+        label: "I don't use static site generators"
+  - id: q1
+    prompt: "How long have you been using static site generators?"
+    type: single_choice
+    construct: long_have_been_using_static
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+  - id: q2
+    prompt: "Which static site generator do you use most often?"
+    type: single_choice
+    construct: static_site_generator_use_most
+    required: true
+    options:
+      - id: "a"
+        label: "Hugo"
+      - id: "b"
+        label: "Jekyll"
+      - id: "c"
+        label: "Astro"
+      - id: "d"
+        label: "Eleventy (11ty)"
+      - id: "e"
+        label: "Next.js"
+      - id: "f"
+        label: "Gatsby"
+      - id: "g"
+        label: "Nuxt"
+      - id: "h"
+        label: "Docusaurus"
+      - id: "i"
+        label: "Other"
+  - id: q3
+    prompt: "Which static site generators have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: static_site_generators_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "Hugo"
+      - id: "b"
+        label: "Jekyll"
+      - id: "c"
+        label: "Astro"
+      - id: "d"
+        label: "Eleventy (11ty)"
+      - id: "e"
+        label: "Next.js"
+      - id: "f"
+        label: "Gatsby"
+      - id: "g"
+        label: "Nuxt"
+      - id: "h"
+        label: "Docusaurus"
+      - id: "i"
+        label: "SvelteKit"
+      - id: "j"
+        label: "Zola or Pelican"
+      - id: "k"
+        label: "None of these"
+  - id: q4
+    prompt: "Which static site generators are you interested in trying next? (Select all that apply)"
+    type: multi_choice
+    construct: static_site_generators_interested_trying
+    required: true
+    options:
+      - id: "a"
+        label: "Astro"
+      - id: "b"
+        label: "Hugo"
+      - id: "c"
+        label: "Eleventy (11ty)"
+      - id: "d"
+        label: "Next.js"
+      - id: "e"
+        label: "SvelteKit"
+      - id: "f"
+        label: "Docusaurus"
+      - id: "g"
+        label: "I'm happy with what I use"
+  - id: q5
+    prompt: "What kinds of sites do you build with static site generators? (Select all that apply)"
+    type: multi_choice
+    construct: kinds_sites_build_static_site
+    required: true
+    options:
+      - id: "a"
+        label: "Personal blog"
+      - id: "b"
+        label: "Documentation site"
+      - id: "c"
+        label: "Marketing or company website"
+      - id: "d"
+        label: "Portfolio"
+      - id: "e"
+        label: "Landing pages"
+      - id: "f"
+        label: "E-commerce or storefront"
+      - id: "g"
+        label: "A large content site"
+      - id: "h"
+        label: "Internal tools or dashboards"
+  - id: q6
+    prompt: "Why did you choose your primary static site generator?"
+    type: single_choice
+    construct: why_did_choose_primary_static
+    required: true
+    options:
+      - id: "a"
+        label: "Build speed and performance"
+      - id: "b"
+        label: "The templating or component model"
+      - id: "c"
+        label: "The programming language it uses"
+      - id: "d"
+        label: "Ecosystem and plugins"
+      - id: "e"
+        label: "Familiarity or prior experience"
+      - id: "f"
+        label: "A team or client requirement"
+  - id: q7
+    prompt: "About how many static sites have you built or maintained? Please enter a number."
+    type: free_text
+    construct: many_static_sites_have_built
+    required: true
+  - id: q8
+    prompt: "Where do you host the static sites you build? (Select all that apply)"
+    type: multi_choice
+    construct: where_host_static_sites_build
+    required: true
+    options:
+      - id: "a"
+        label: "Netlify"
+      - id: "b"
+        label: "Vercel"
+      - id: "c"
+        label: "Cloudflare Pages"
+      - id: "d"
+        label: "GitHub Pages"
+      - id: "e"
+        label: "A VPS or self-hosted server"
+      - id: "f"
+        label: "AWS (S3, Amplify)"
+      - id: "g"
+        label: "GitLab Pages"
+      - id: "h"
+        label: "Other"
+  - id: q9
+    prompt: "How is your site content authored? (Select all that apply)"
+    type: multi_choice
+    construct: site_content_authored_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Markdown files"
+      - id: "b"
+        label: "MDX"
+      - id: "c"
+        label: "A headless CMS"
+      - id: "d"
+        label: "Data files (YAML, JSON, TOML)"
+      - id: "e"
+        label: "A Git-based CMS"
+      - id: "f"
+        label: "Hand-written HTML"
+  - id: q10
+    prompt: "Do you use a headless CMS with your static site?"
+    type: single_choice
+    construct: use_headless_cms_static_site
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a hosted CMS (Contentful, Sanity, etc.)"
+      - id: "b"
+        label: "Yes, a Git-based CMS (Decap, TinaCMS, etc.)"
+      - id: "c"
+        label: "No, I write content directly in files"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q11
+    prompt: "How do you deploy your static sites?"
+    type: single_choice
+    construct: deploy_static_sites
+    required: true
+    options:
+      - id: "a"
+        label: "Automatic deploys on Git push"
+      - id: "b"
+        label: "A CI/CD pipeline I configured"
+      - id: "c"
+        label: "Manual uploads"
+      - id: "d"
+        label: "A CLI command"
+      - id: "e"
+        label: "It varies by project"
+  - id: q12
+    prompt: "About how long does a typical production build take, in seconds? Please enter a number."
+    type: free_text
+    construct: long_does_typical_production_build
+    required: true
+  - id: q13
+    prompt: "Which features matter for the sites you build? (Select all that apply)"
+    type: multi_choice
+    construct: features_matter_sites_build_select
+    required: true
+    options:
+      - id: "a"
+        label: "Fast build times"
+      - id: "b"
+        label: "Incremental or partial builds"
+      - id: "c"
+        label: "Image optimization"
+      - id: "d"
+        label: "Built-in RSS or sitemap"
+      - id: "e"
+        label: "Internationalization"
+      - id: "f"
+        label: "Search"
+      - id: "g"
+        label: "Server-side rendering options"
+      - id: "h"
+        label: "Component islands or partial hydration"
+  - id: q14
+    prompt: "How do you style your static sites? (Select all that apply)"
+    type: multi_choice
+    construct: style_static_sites_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Tailwind CSS"
+      - id: "b"
+        label: "Plain CSS or Sass"
+      - id: "c"
+        label: "CSS modules"
+      - id: "d"
+        label: "A CSS-in-JS library"
+      - id: "e"
+        label: "A UI component library"
+      - id: "f"
+        label: "A prebuilt theme"
+  - id: q15
+    prompt: "Do you use a prebuilt theme or start from scratch?"
+    type: single_choice
+    construct: use_prebuilt_theme_start_from
+    required: true
+    options:
+      - id: "a"
+        label: "I use a prebuilt theme"
+      - id: "b"
+        label: "I start from a theme and heavily customize it"
+      - id: "c"
+        label: "I build everything from scratch"
+      - id: "d"
+        label: "It depends on the project"
+  - id: q16
+    prompt: "How much do you agree: Static sites are faster and more secure than traditional server-rendered sites."
+    type: single_choice
+    construct: much_agree_static_sites_faster
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: Build speed is a major factor in how I feel about a generator."
+    type: single_choice
+    construct: much_agree_build_speed_major
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: I prefer a generator that lets me use my favorite front-end framework."
+    type: single_choice
+    construct: much_agree_i_prefer_generator
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: The JavaScript ecosystem changes too fast to keep up with."
+    type: single_choice
+    construct: much_agree_javascript_ecosystem_changes
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: I value being able to move my content between generators easily."
+    type: single_choice
+    construct: much_agree_i_value_being
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: Setting up and configuring a generator is more painful than it should be."
+    type: single_choice
+    construct: much_agree_setting_up_configuring
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "When choosing a static site generator, how important is build speed?"
+    type: single_choice
+    construct: when_choosing_static_site_generator
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When choosing a static site generator, how important is the templating or component model?"
+    type: single_choice
+    construct: when_choosing_static_site_generator
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When choosing a static site generator, how important is the plugin and theme ecosystem?"
+    type: single_choice
+    construct: when_choosing_static_site_generator
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing a static site generator, how important is documentation quality?"
+    type: single_choice
+    construct: when_choosing_static_site_generator
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing a static site generator, how important is the programming language used?"
+    type: single_choice
+    construct: when_choosing_static_site_generator
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When choosing a static site generator, how important is output performance (page speed)?"
+    type: single_choice
+    construct: when_choosing_static_site_generator
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "Which are your top 3 factors when choosing a static site generator? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Build speed"
+      - id: "b"
+        label: "Templating or component model"
+      - id: "c"
+        label: "Plugin and theme ecosystem"
+      - id: "d"
+        label: "Documentation quality"
+      - id: "e"
+        label: "Programming language"
+      - id: "f"
+        label: "Output performance"
+      - id: "g"
+        label: "Community size"
+      - id: "h"
+        label: "Ease of getting started"
+  - id: q29
+    prompt: "How often do you build or launch a new static site?"
+    type: single_choice
+    construct: often_build_launch_new_static
+    required: true
+    options:
+      - id: "a"
+        label: "Never anymore"
+      - id: "b"
+        label: "Once a year or less"
+      - id: "c"
+        label: "A few times a year"
+      - id: "d"
+        label: "Monthly"
+      - id: "e"
+        label: "More than monthly"
+  - id: q30
+    prompt: "How often do you run into build errors or configuration problems?"
+    type: single_choice
+    construct: often_run_into_build_errors
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q31
+    prompt: "How often do you update your generator to a new major version?"
+    type: single_choice
+    construct: often_update_generator_new_major
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "As soon as one is released"
+  - id: q32
+    prompt: "Do you use serverless functions or edge functions with your static sites?"
+    type: single_choice
+    construct: use_serverless_functions_edge_functions
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, frequently"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but I'd like to"
+      - id: "d"
+        label: "No"
+  - id: q33
+    prompt: "Which best describes your front-end background?"
+    type: single_choice
+    construct: best_describes_front_end_background
+    required: true
+    options:
+      - id: "a"
+        label: "Primarily a front-end or full-stack developer"
+      - id: "b"
+        label: "A back-end developer who also does front-end"
+      - id: "c"
+        label: "A designer who codes"
+      - id: "d"
+        label: "A hobbyist or content creator"
+      - id: "e"
+        label: "Other"
+  - id: q34
+    prompt: "How did you discover your primary generator? (Select all that apply)"
+    type: multi_choice
+    construct: did_discover_primary_generator_select
+    required: true
+    options:
+      - id: "a"
+        label: "Documentation or official site"
+      - id: "b"
+        label: "Social media or online communities"
+      - id: "c"
+        label: "A colleague or friend"
+      - id: "d"
+        label: "Blog posts or tutorials"
+      - id: "e"
+        label: "YouTube or courses"
+      - id: "f"
+        label: "It was used at work"
+  - id: q35
+    prompt: "How satisfied are you with your generator's build performance?"
+    type: single_choice
+    construct: satisfied_generator_s_build_performance
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q36
+    prompt: "How satisfied are you with your generator's documentation and community?"
+    type: single_choice
+    construct: satisfied_generator_s_documentation_comm
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q37
+    prompt: "Overall, how satisfied are you with your primary static site generator?"
+    type: single_choice
+    construct: overall_satisfied_primary_static_site
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q38
+    prompt: "How likely are you to recommend your primary generator to another developer? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_primary_generator_anoth
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q39
+    prompt: "How likely are you to switch your primary generator within the next year?"
+    type: single_choice
+    construct: likely_switch_primary_generator_within
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q40
+    prompt: "What is one thing you would improve about your static site generator? (Optional short answer)"
+    type: free_text
+    construct: one_thing_would_improve_static
+    required: false
+  - id: q41
+    prompt: "Which best describes your current role?"
+    type: single_choice
+    construct: best_describes_current_role
+    required: true
+    options:
+      - id: "a"
+        label: "Front-end developer"
+      - id: "b"
+        label: "Back-end developer"
+      - id: "c"
+        label: "Full-stack developer"
+      - id: "d"
+        label: "Designer or design engineer"
+      - id: "e"
+        label: "DevOps or platform engineer"
+      - id: "f"
+        label: "Technical writer"
+      - id: "g"
+        label: "Engineering manager"
+      - id: "h"
+        label: "Student"
+      - id: "i"
+        label: "Other"
+  - id: q42
+    prompt: "How many years have you worked professionally in technology (not counting education)?"
+    type: single_choice
+    construct: many_years_have_worked_professionally
+    required: true
+    options:
+      - id: "a"
+        label: "I don't work in tech professionally"
+      - id: "b"
+        label: "Less than 2 years"
+      - id: "c"
+        label: "2 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "11 to 20 years"
+      - id: "f"
+        label: "More than 20 years"
+  - id: q43
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q44
+    prompt: "Approximately how many people work at your company or organization?"
+    type: single_choice
+    construct: approximately_many_people_work_company
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2 to 9"
+      - id: "c"
+        label: "10 to 99"
+      - id: "d"
+        label: "100 to 499"
+      - id: "e"
+        label: "500 to 4,999"
+      - id: "f"
+        label: "5,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q45
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Government"
+      - id: "f"
+        label: "Retail or e-commerce"
+      - id: "g"
+        label: "Media or entertainment"
+      - id: "h"
+        label: "Other"
+  - id: q46
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q47
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q48
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q49
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q50
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q51
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

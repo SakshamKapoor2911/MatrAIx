@@ -1,0 +1,938 @@
+schemaVersion: "1.0"
+id: package_manager_usage_v1
+title: "Package Manager Usage Survey"
+description: "How developers choose and use package managers across JavaScript, Python, system, and other language ecosystems."
+questions:
+  - id: q0
+    prompt: "How often do you install or manage software packages and dependencies?"
+    type: single_choice
+    construct: often_install_manage_software_packages
+    required: true
+    options:
+      - id: "a"
+        label: "Every day"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "Occasionally"
+      - id: "d"
+        label: "I am just learning"
+      - id: "e"
+        label: "I rarely do"
+  - id: q1
+    prompt: "How long have you been using package managers?"
+    type: single_choice
+    construct: long_have_been_using_package
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+  - id: q2
+    prompt: "What best describes your primary role?"
+    type: single_choice
+    construct: best_describes_primary_role
+    required: true
+    options:
+      - id: "a"
+        label: "Front-end developer"
+      - id: "b"
+        label: "Back-end developer"
+      - id: "c"
+        label: "Full-stack developer"
+      - id: "d"
+        label: "DevOps or platform engineer"
+      - id: "e"
+        label: "Data or ML practitioner"
+      - id: "f"
+        label: "I write code occasionally"
+  - id: q3
+    prompt: "Which language ecosystem do you manage packages in most often?"
+    type: single_choice
+    construct: language_ecosystem_manage_packages_most
+    required: true
+    options:
+      - id: "a"
+        label: "JavaScript / TypeScript"
+      - id: "b"
+        label: "Python"
+      - id: "c"
+        label: "Rust"
+      - id: "d"
+        label: "Java or Kotlin"
+      - id: "e"
+        label: "Go"
+      - id: "f"
+        label: "Other"
+  - id: q4
+    prompt: "Which JavaScript package managers have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: javascript_package_managers_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "npm"
+      - id: "b"
+        label: "pnpm"
+      - id: "c"
+        label: "Yarn"
+      - id: "d"
+        label: "Bun"
+      - id: "e"
+        label: "None"
+  - id: q5
+    prompt: "Which Python package or environment tools have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: python_package_environment_tools_have
+    required: true
+    options:
+      - id: "a"
+        label: "pip"
+      - id: "b"
+        label: "uv"
+      - id: "c"
+        label: "Poetry"
+      - id: "d"
+        label: "conda"
+      - id: "e"
+        label: "Pipenv"
+      - id: "f"
+        label: "PDM"
+      - id: "g"
+        label: "None"
+  - id: q6
+    prompt: "Which system or OS package managers have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: system_os_package_managers_have
+    required: true
+    options:
+      - id: "a"
+        label: "Homebrew"
+      - id: "b"
+        label: "apt"
+      - id: "c"
+        label: "dnf / yum"
+      - id: "d"
+        label: "winget"
+      - id: "e"
+        label: "Chocolatey"
+      - id: "f"
+        label: "Nix"
+      - id: "g"
+        label: "None"
+  - id: q7
+    prompt: "Which other language package managers have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: other_language_package_managers_have
+    required: true
+    options:
+      - id: "a"
+        label: "Cargo (Rust)"
+      - id: "b"
+        label: "Go modules"
+      - id: "c"
+        label: "Maven or Gradle (Java)"
+      - id: "d"
+        label: "NuGet (.NET)"
+      - id: "e"
+        label: "RubyGems"
+      - id: "f"
+        label: "Composer (PHP)"
+      - id: "g"
+        label: "None"
+  - id: q8
+    prompt: "Which JavaScript package manager do you use most often?"
+    type: single_choice
+    construct: javascript_package_manager_use_most
+    required: true
+    options:
+      - id: "a"
+        label: "npm"
+      - id: "b"
+        label: "pnpm"
+      - id: "c"
+        label: "Yarn"
+      - id: "d"
+        label: "Bun"
+      - id: "e"
+        label: "I don't use JavaScript package managers"
+  - id: q9
+    prompt: "Which Python package tool do you use most often?"
+    type: single_choice
+    construct: python_package_tool_use_most
+    required: true
+    options:
+      - id: "a"
+        label: "pip"
+      - id: "b"
+        label: "uv"
+      - id: "c"
+        label: "Poetry"
+      - id: "d"
+        label: "conda"
+      - id: "e"
+        label: "I don't use Python package tools"
+  - id: q10
+    prompt: "How do you handle lockfiles?"
+    type: single_choice
+    construct: handle_lockfiles
+    required: true
+    options:
+      - id: "a"
+        label: "I always commit lockfiles"
+      - id: "b"
+        label: "I commit lockfiles for applications, not libraries"
+      - id: "c"
+        label: "I rarely commit lockfiles"
+      - id: "d"
+        label: "I don't use lockfiles"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q11
+    prompt: "Which monorepo or workspace tools do you use? (Select all that apply)"
+    type: multi_choice
+    construct: monorepo_workspace_tools_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "npm / pnpm / Yarn workspaces"
+      - id: "b"
+        label: "Nx"
+      - id: "c"
+        label: "Turborepo"
+      - id: "d"
+        label: "Lerna"
+      - id: "e"
+        label: "Cargo workspaces"
+      - id: "f"
+        label: "None"
+  - id: q12
+    prompt: "How do you primarily handle dependency security?"
+    type: single_choice
+    construct: primarily_handle_dependency_security
+    required: true
+    options:
+      - id: "a"
+        label: "Built-in audit commands"
+      - id: "b"
+        label: "A dedicated scanning tool (Snyk, Socket, etc.)"
+      - id: "c"
+        label: "Automated update bots"
+      - id: "d"
+        label: "Manual review"
+      - id: "e"
+        label: "I don't formally check dependency security"
+  - id: q13
+    prompt: "How often do you update your project dependencies?"
+    type: single_choice
+    construct: often_update_project_dependencies
+    required: true
+    options:
+      - id: "a"
+        label: "Continuously / automatically"
+      - id: "b"
+        label: "Weekly"
+      - id: "c"
+        label: "Monthly"
+      - id: "d"
+        label: "Only when something breaks"
+      - id: "e"
+        label: "Rarely"
+  - id: q14
+    prompt: "Do you use an automated dependency-update tool (Dependabot, Renovate)?"
+    type: single_choice
+    construct: use_automated_dependency_update_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, on most projects"
+      - id: "b"
+        label: "Yes, on some projects"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q15
+    prompt: "About how many direct dependencies does a typical project of yours have? Please enter a number."
+    type: free_text
+    construct: many_direct_dependencies_does_typical
+    required: true
+  - id: q16
+    prompt: "How many distinct package managers do you use in a typical week? Please enter a number."
+    type: free_text
+    construct: many_distinct_package_managers_use
+    required: true
+  - id: q17
+    prompt: "How did you learn to use package managers? (Select all that apply)"
+    type: multi_choice
+    construct: did_learn_use_package_managers
+    required: true
+    options:
+      - id: "a"
+        label: "On the job"
+      - id: "b"
+        label: "Online courses or documentation"
+      - id: "c"
+        label: "A course or bootcamp"
+      - id: "d"
+        label: "School or university"
+      - id: "e"
+        label: "A colleague or mentor"
+      - id: "f"
+        label: "Trial and error"
+  - id: q18
+    prompt: "How would you rate your proficiency with package managers?"
+    type: single_choice
+    construct: would_rate_proficiency_package_managers
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Intermediate"
+      - id: "c"
+        label: "Advanced"
+      - id: "d"
+        label: "Expert"
+  - id: q19
+    prompt: "Thinking about your primary package manager, how much do you agree: it installs packages quickly."
+    type: single_choice
+    construct: thinking_primary_package_manager_much
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "Thinking about your primary package manager, how much do you agree: it is reliable and consistent."
+    type: single_choice
+    construct: thinking_primary_package_manager_much
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "Thinking about your primary package manager, how much do you agree: it handles lockfiles and reproducibility well."
+    type: single_choice
+    construct: thinking_primary_package_manager_much
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "Thinking about your primary package manager, how much do you agree: it uses disk space efficiently."
+    type: single_choice
+    construct: thinking_primary_package_manager_much
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "Thinking about your primary package manager, how much do you agree: its command-line interface is easy to use."
+    type: single_choice
+    construct: thinking_primary_package_manager_much
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q24
+    prompt: "Thinking about your primary package manager, how much do you agree: it has good monorepo or workspace support."
+    type: single_choice
+    construct: thinking_primary_package_manager_much
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q25
+    prompt: "Thinking about your primary package manager, how much do you agree: I trust its security posture."
+    type: single_choice
+    construct: thinking_primary_package_manager_much
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q26
+    prompt: "When choosing a package manager, how important is install speed?"
+    type: single_choice
+    construct: when_choosing_package_manager_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When choosing a package manager, how important is disk efficiency?"
+    type: single_choice
+    construct: when_choosing_package_manager_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "When choosing a package manager, how important is reproducibility?"
+    type: single_choice
+    construct: when_choosing_package_manager_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "When choosing a package manager, how important is dependency security?"
+    type: single_choice
+    construct: when_choosing_package_manager_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q30
+    prompt: "When choosing a package manager, how important is ecosystem compatibility?"
+    type: single_choice
+    construct: when_choosing_package_manager_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q31
+    prompt: "When choosing a package manager, how important is monorepo support?"
+    type: single_choice
+    construct: when_choosing_package_manager_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q32
+    prompt: "When choosing a package manager, how important is ease of use?"
+    type: single_choice
+    construct: when_choosing_package_manager_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q33
+    prompt: "How often do you audit or review your dependencies for vulnerabilities?"
+    type: single_choice
+    construct: often_audit_review_dependencies_vulnerab
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q34
+    prompt: "How much do you agree: newer package managers like pnpm and uv are worth switching to."
+    type: single_choice
+    construct: much_agree_newer_package_managers
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q35
+    prompt: "How much do you agree: software supply-chain security is a serious concern for me."
+    type: single_choice
+    construct: much_agree_software_supply_chain
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q36
+    prompt: "How much do you agree: having many competing package managers fragments the ecosystem."
+    type: single_choice
+    construct: much_agree_having_many_competing
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q37
+    prompt: "Which are your top 3 factors when choosing a package manager? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Install speed"
+      - id: "b"
+        label: "Disk efficiency"
+      - id: "c"
+        label: "Reproducibility"
+      - id: "d"
+        label: "Security"
+      - id: "e"
+        label: "Ecosystem compatibility"
+      - id: "f"
+        label: "Monorepo support"
+      - id: "g"
+        label: "Ease of use"
+      - id: "h"
+        label: "Team or company standard"
+  - id: q38
+    prompt: "Which pain points have you experienced with package managers? (Select all that apply)"
+    type: multi_choice
+    construct: pain_points_have_experienced_package
+    required: true
+    options:
+      - id: "a"
+        label: "Slow installs"
+      - id: "b"
+        label: "Large node_modules or cache size"
+      - id: "c"
+        label: "Dependency conflicts"
+      - id: "d"
+        label: "Broken or non-reproducible builds"
+      - id: "e"
+        label: "Security vulnerabilities"
+      - id: "f"
+        label: "Confusing configuration"
+      - id: "g"
+        label: "No major pain points"
+  - id: q39
+    prompt: "How satisfied are you with your primary package manager?"
+    type: single_choice
+    construct: satisfied_primary_package_manager
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q40
+    prompt: "How satisfied are you with your package manager's install speed?"
+    type: single_choice
+    construct: satisfied_package_manager_s_install
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q41
+    prompt: "How likely are you to recommend your primary package manager to another developer? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_primary_package_manager
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q42
+    prompt: "How likely are you to try a new package manager within the next year?"
+    type: single_choice
+    construct: likely_try_new_package_manager
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q43
+    prompt: "How likely are you to switch your primary package manager within the next year?"
+    type: single_choice
+    construct: likely_switch_primary_package_manager
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q44
+    prompt: "What is one thing you would improve about the package managers you use? (Optional short answer)"
+    type: free_text
+    construct: one_thing_would_improve_package
+    required: false
+  - id: q45
+    prompt: "Which best describes your current role?"
+    type: single_choice
+    construct: best_describes_current_role
+    required: true
+    options:
+      - id: "a"
+        label: "Front-end developer"
+      - id: "b"
+        label: "Back-end developer"
+      - id: "c"
+        label: "Full-stack developer"
+      - id: "d"
+        label: "DevOps or platform engineer"
+      - id: "e"
+        label: "Data or ML practitioner"
+      - id: "f"
+        label: "Engineering manager"
+      - id: "g"
+        label: "Student"
+      - id: "h"
+        label: "Other"
+  - id: q46
+    prompt: "How many years have you worked professionally in technology (not counting education)?"
+    type: single_choice
+    construct: many_years_have_worked_professionally
+    required: true
+    options:
+      - id: "a"
+        label: "I don't work in tech professionally"
+      - id: "b"
+        label: "Less than 2 years"
+      - id: "c"
+        label: "2 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "11 to 20 years"
+      - id: "f"
+        label: "More than 20 years"
+  - id: q47
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q48
+    prompt: "Approximately how many people work at your company or organization?"
+    type: single_choice
+    construct: approximately_many_people_work_company
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2 to 9"
+      - id: "c"
+        label: "10 to 99"
+      - id: "d"
+        label: "100 to 499"
+      - id: "e"
+        label: "500 to 4,999"
+      - id: "f"
+        label: "5,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q49
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Government"
+      - id: "f"
+        label: "Retail or e-commerce"
+      - id: "g"
+        label: "Manufacturing"
+      - id: "h"
+        label: "Media or entertainment"
+      - id: "i"
+        label: "Other"
+  - id: q50
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q51
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q52
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q53
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q54
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q55
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

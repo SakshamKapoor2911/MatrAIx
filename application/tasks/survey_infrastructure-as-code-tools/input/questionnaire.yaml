@@ -1,0 +1,956 @@
+schemaVersion: "1.0"
+id: infrastructure_as_code_tools_v1
+title: "Infrastructure as Code Tools Survey"
+description: "How engineers adopt, use, and evaluate infrastructure-as-code tools such as Terraform, OpenTofu, Pulumi, Ansible, CloudFormation, and CDK."
+questions:
+  - id: q0
+    prompt: "How often do you write or maintain infrastructure-as-code?"
+    type: single_choice
+    construct: often_write_maintain_infrastructure_as
+    required: true
+    options:
+      - id: "a"
+        label: "Every day"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "A few times a month"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "I don't use infrastructure-as-code"
+  - id: q1
+    prompt: "How long have you been using infrastructure-as-code tools?"
+    type: single_choice
+    construct: long_have_been_using_infrastructure
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+  - id: q2
+    prompt: "Which best describes your relationship to infrastructure-as-code?"
+    type: single_choice
+    construct: best_describes_relationship_infrastructu
+    required: true
+    options:
+      - id: "a"
+        label: "Platform or DevOps engineer who owns IaC"
+      - id: "b"
+        label: "Software engineer who writes IaC for my own services"
+      - id: "c"
+        label: "Site reliability engineer"
+      - id: "d"
+        label: "Cloud or infrastructure architect"
+      - id: "e"
+        label: "Manager or lead who reviews IaC"
+      - id: "f"
+        label: "I use it only occasionally"
+  - id: q3
+    prompt: "Which infrastructure-as-code tool do you use most often?"
+    type: single_choice
+    construct: infrastructure_as_code_tool_use
+    required: true
+    options:
+      - id: "a"
+        label: "Terraform"
+      - id: "b"
+        label: "OpenTofu"
+      - id: "c"
+        label: "Pulumi"
+      - id: "d"
+        label: "Ansible"
+      - id: "e"
+        label: "AWS CloudFormation"
+      - id: "f"
+        label: "AWS CDK"
+      - id: "g"
+        label: "Other"
+  - id: q4
+    prompt: "Which infrastructure-as-code tools have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: infrastructure_as_code_tools_have
+    required: true
+    options:
+      - id: "a"
+        label: "Terraform"
+      - id: "b"
+        label: "OpenTofu"
+      - id: "c"
+        label: "Pulumi"
+      - id: "d"
+        label: "Ansible"
+      - id: "e"
+        label: "AWS CloudFormation"
+      - id: "f"
+        label: "AWS CDK"
+      - id: "g"
+        label: "Azure Resource Manager or Bicep"
+      - id: "h"
+        label: "Google Cloud Deployment Manager"
+      - id: "i"
+        label: "Chef"
+      - id: "j"
+        label: "Puppet"
+      - id: "k"
+        label: "None"
+  - id: q5
+    prompt: "Which tools would you like to use more over the next year? (Select all that apply)"
+    type: multi_choice
+    construct: tools_would_like_use_more
+    required: true
+    options:
+      - id: "a"
+        label: "Terraform"
+      - id: "b"
+        label: "OpenTofu"
+      - id: "c"
+        label: "Pulumi"
+      - id: "d"
+        label: "Ansible"
+      - id: "e"
+        label: "AWS CDK"
+      - id: "f"
+        label: "Bicep"
+      - id: "g"
+        label: "Crossplane"
+      - id: "h"
+        label: "I'm happy with what I use"
+  - id: q6
+    prompt: "Which cloud or platform providers do you manage with IaC? (Select all that apply)"
+    type: multi_choice
+    construct: cloud_platform_providers_manage_iac
+    required: true
+    options:
+      - id: "a"
+        label: "Amazon Web Services"
+      - id: "b"
+        label: "Microsoft Azure"
+      - id: "c"
+        label: "Google Cloud Platform"
+      - id: "d"
+        label: "Kubernetes clusters"
+      - id: "e"
+        label: "On-premises or private cloud"
+      - id: "f"
+        label: "DigitalOcean, Linode, or similar"
+      - id: "g"
+        label: "Cloudflare"
+      - id: "h"
+        label: "SaaS providers (Datadog, GitHub, etc.)"
+  - id: q7
+    prompt: "Which languages or formats do you write IaC in? (Select all that apply)"
+    type: multi_choice
+    construct: languages_formats_write_iac_select
+    required: true
+    options:
+      - id: "a"
+        label: "HashiCorp Configuration Language (HCL)"
+      - id: "b"
+        label: "YAML"
+      - id: "c"
+        label: "JSON"
+      - id: "d"
+        label: "TypeScript or JavaScript"
+      - id: "e"
+        label: "Python"
+      - id: "f"
+        label: "Go"
+      - id: "g"
+        label: "C#"
+  - id: q8
+    prompt: "Where do you store the state for your infrastructure? (Select all that apply)"
+    type: multi_choice
+    construct: where_store_state_infrastructure_select
+    required: true
+    options:
+      - id: "a"
+        label: "Terraform Cloud or HCP Terraform"
+      - id: "b"
+        label: "An S3 bucket or equivalent object store"
+      - id: "c"
+        label: "A managed backend (Spacelift, env0, Scalr)"
+      - id: "d"
+        label: "Local state files"
+      - id: "e"
+        label: "Pulumi Cloud"
+      - id: "f"
+        label: "Not applicable to my tool"
+      - id: "g"
+        label: "I'm not sure"
+  - id: q9
+    prompt: "Which IaC-related workflow tools do you use? (Select all that apply)"
+    type: multi_choice
+    construct: iac_related_workflow_tools_use
+    required: true
+    options:
+      - id: "a"
+        label: "Atlantis"
+      - id: "b"
+        label: "Terraform Cloud / HCP Terraform"
+      - id: "c"
+        label: "Spacelift"
+      - id: "d"
+        label: "env0"
+      - id: "e"
+        label: "Scalr"
+      - id: "f"
+        label: "GitHub Actions or GitLab CI"
+      - id: "g"
+        label: "Terragrunt"
+      - id: "h"
+        label: "None"
+  - id: q10
+    prompt: "How do you typically run your IaC changes? (Select all that apply)"
+    type: multi_choice
+    construct: typically_run_iac_changes_select
+    required: true
+    options:
+      - id: "a"
+        label: "Manually from my laptop"
+      - id: "b"
+        label: "Through a CI/CD pipeline"
+      - id: "c"
+        label: "Through a dedicated IaC automation platform"
+      - id: "d"
+        label: "Via pull-request automation (plan on PR, apply on merge)"
+      - id: "e"
+        label: "Through a GitOps controller"
+  - id: q11
+    prompt: "Which IaC testing or validation tools do you use? (Select all that apply)"
+    type: multi_choice
+    construct: iac_testing_validation_tools_use
+    required: true
+    options:
+      - id: "a"
+        label: "terraform validate / fmt"
+      - id: "b"
+        label: "tflint"
+      - id: "c"
+        label: "Checkov"
+      - id: "d"
+        label: "tfsec or Trivy"
+      - id: "e"
+        label: "Open Policy Agent / Sentinel"
+      - id: "f"
+        label: "Terratest"
+      - id: "g"
+        label: "None"
+  - id: q12
+    prompt: "How do you manage reusable IaC components? (Select all that apply)"
+    type: multi_choice
+    construct: manage_reusable_iac_components_select
+    required: true
+    options:
+      - id: "a"
+        label: "Private module registry"
+      - id: "b"
+        label: "Public registry modules"
+      - id: "c"
+        label: "Git-sourced modules"
+      - id: "d"
+        label: "Copy and paste between projects"
+      - id: "e"
+        label: "Pulumi component resources"
+      - id: "f"
+        label: "I don't reuse components"
+  - id: q13
+    prompt: "About how many distinct IaC codebases or repositories do you work with? Please enter a number."
+    type: free_text
+    construct: many_distinct_iac_codebases_repositories
+    required: true
+  - id: q14
+    prompt: "About how many cloud resources does your largest IaC-managed environment contain? Please enter a number."
+    type: free_text
+    construct: many_cloud_resources_does_largest
+    required: true
+  - id: q15
+    prompt: "How would you rate your proficiency with your primary IaC tool?"
+    type: single_choice
+    construct: would_rate_proficiency_primary_iac
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Intermediate"
+      - id: "c"
+        label: "Advanced"
+      - id: "d"
+        label: "Expert"
+  - id: q16
+    prompt: "How did you learn infrastructure-as-code? (Select all that apply)"
+    type: multi_choice
+    construct: did_learn_infrastructure_as_code
+    required: true
+    options:
+      - id: "a"
+        label: "On the job"
+      - id: "b"
+        label: "Official documentation"
+      - id: "c"
+        label: "Online courses or tutorials"
+      - id: "d"
+        label: "A colleague or mentor"
+      - id: "e"
+        label: "Conference talks or blogs"
+      - id: "f"
+        label: "Trial and error"
+  - id: q17
+    prompt: "How much do you agree: Infrastructure-as-code has made our deployments more reliable."
+    type: single_choice
+    construct: much_agree_infrastructure_as_code
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: Managing IaC state is a frequent source of pain for me."
+    type: single_choice
+    construct: much_agree_managing_iac_state
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: I trust `plan` output to accurately predict what `apply` will do."
+    type: single_choice
+    construct: much_agree_i_trust_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: The licensing changes around Terraform influenced my tooling choices."
+    type: single_choice
+    construct: much_agree_licensing_changes_around
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: I would recommend OpenTofu as a Terraform replacement."
+    type: single_choice
+    construct: much_agree_i_would_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How much do you agree: Writing IaC in a general-purpose language is better than using a domain-specific language."
+    type: single_choice
+    construct: much_agree_writing_iac_general
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "How much do you agree: My team's IaC codebase is well organized and maintainable."
+    type: single_choice
+    construct: much_agree_my_team_s
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q24
+    prompt: "When choosing an IaC tool, how important is multi-cloud support?"
+    type: single_choice
+    construct: when_choosing_iac_tool_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing an IaC tool, how important is the size of the community and ecosystem?"
+    type: single_choice
+    construct: when_choosing_iac_tool_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing an IaC tool, how important is the licensing model?"
+    type: single_choice
+    construct: when_choosing_iac_tool_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When choosing an IaC tool, how important is state management?"
+    type: single_choice
+    construct: when_choosing_iac_tool_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "When choosing an IaC tool, how important is language and syntax familiarity?"
+    type: single_choice
+    construct: when_choosing_iac_tool_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "When choosing an IaC tool, how important is integration with existing CI/CD?"
+    type: single_choice
+    construct: when_choosing_iac_tool_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q30
+    prompt: "Which are your top 3 factors when choosing an IaC tool? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Multi-cloud support"
+      - id: "b"
+        label: "Community and ecosystem"
+      - id: "c"
+        label: "Licensing model"
+      - id: "d"
+        label: "State management"
+      - id: "e"
+        label: "Language and syntax familiarity"
+      - id: "f"
+        label: "CI/CD integration"
+      - id: "g"
+        label: "Maturity and stability"
+      - id: "h"
+        label: "Cost"
+  - id: q31
+    prompt: "Which IaC tasks do you regularly perform? (Select all that apply)"
+    type: multi_choice
+    construct: iac_tasks_regularly_perform_select
+    required: true
+    options:
+      - id: "a"
+        label: "Provisioning new infrastructure"
+      - id: "b"
+        label: "Writing reusable modules"
+      - id: "c"
+        label: "Reviewing IaC pull requests"
+      - id: "d"
+        label: "Importing existing resources into IaC"
+      - id: "e"
+        label: "Managing state (moves, splits, imports)"
+      - id: "f"
+        label: "Policy and compliance enforcement"
+      - id: "g"
+        label: "Drift detection and remediation"
+  - id: q32
+    prompt: "How often do you encounter configuration drift between IaC and actual infrastructure?"
+    type: single_choice
+    construct: often_encounter_configuration_drift_betw
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q33
+    prompt: "What share of your infrastructure is managed by IaC?"
+    type: single_choice
+    construct: share_infrastructure_managed_by_iac
+    required: true
+    options:
+      - id: "a"
+        label: "None"
+      - id: "b"
+        label: "Less than a quarter"
+      - id: "c"
+        label: "About half"
+      - id: "d"
+        label: "Most of it"
+      - id: "e"
+        label: "Essentially all of it"
+  - id: q34
+    prompt: "How do you handle secrets in your IaC? (Select all that apply)"
+    type: multi_choice
+    construct: handle_secrets_iac_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "A dedicated secrets manager (Vault, AWS Secrets Manager, etc.)"
+      - id: "b"
+        label: "Encrypted variables in the CI/CD system"
+      - id: "c"
+        label: "Cloud provider parameter stores"
+      - id: "d"
+        label: "Environment variables"
+      - id: "e"
+        label: "SOPS or similar file encryption"
+      - id: "f"
+        label: "I try to avoid secrets in IaC"
+  - id: q35
+    prompt: "How often do IaC changes cause an unexpected outage or incident?"
+    type: single_choice
+    construct: often_iac_changes_cause_unexpected
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q36
+    prompt: "Have the recent Terraform license changes led you to evaluate OpenTofu?"
+    type: single_choice
+    construct: have_recent_terraform_license_changes
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and we migrated or plan to"
+      - id: "b"
+        label: "Yes, but we decided to stay on Terraform"
+      - id: "c"
+        label: "We evaluated but haven't decided"
+      - id: "d"
+        label: "No, we haven't looked into it"
+      - id: "e"
+        label: "Not applicable — we don't use Terraform"
+  - id: q37
+    prompt: "How satisfied are you with your primary IaC tool's reliability?"
+    type: single_choice
+    construct: satisfied_primary_iac_tool_s
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q38
+    prompt: "How satisfied are you with the tooling and ecosystem around your primary IaC tool?"
+    type: single_choice
+    construct: satisfied_tooling_ecosystem_around_prima
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q39
+    prompt: "Overall, how satisfied are you with your infrastructure-as-code setup?"
+    type: single_choice
+    construct: overall_satisfied_infrastructure_as_code
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q40
+    prompt: "How likely are you to recommend your primary IaC tool to another engineer? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_primary_iac_tool
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q41
+    prompt: "How likely are you to adopt a new IaC tool within the next year?"
+    type: single_choice
+    construct: likely_adopt_new_iac_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q42
+    prompt: "How likely are you to migrate your primary IaC tool within the next year?"
+    type: single_choice
+    construct: likely_migrate_primary_iac_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q43
+    prompt: "What is one thing you would improve about your infrastructure-as-code workflow? (Optional short answer)"
+    type: free_text
+    construct: one_thing_would_improve_infrastructure
+    required: false
+  - id: q44
+    prompt: "Which best describes your current role?"
+    type: single_choice
+    construct: best_describes_current_role
+    required: true
+    options:
+      - id: "a"
+        label: "DevOps or platform engineer"
+      - id: "b"
+        label: "Site reliability engineer"
+      - id: "c"
+        label: "Back-end developer"
+      - id: "d"
+        label: "Full-stack developer"
+      - id: "e"
+        label: "Cloud or infrastructure architect"
+      - id: "f"
+        label: "Engineering manager"
+      - id: "g"
+        label: "Security engineer"
+      - id: "h"
+        label: "Other"
+  - id: q45
+    prompt: "How many years have you worked professionally in technology (not counting education)?"
+    type: single_choice
+    construct: many_years_have_worked_professionally
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 2 years"
+      - id: "b"
+        label: "2 to 5 years"
+      - id: "c"
+        label: "6 to 10 years"
+      - id: "d"
+        label: "11 to 20 years"
+      - id: "e"
+        label: "More than 20 years"
+  - id: q46
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q47
+    prompt: "Approximately how many people work at your company or organization?"
+    type: single_choice
+    construct: approximately_many_people_work_company
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2 to 9"
+      - id: "c"
+        label: "10 to 99"
+      - id: "d"
+        label: "100 to 499"
+      - id: "e"
+        label: "500 to 4,999"
+      - id: "f"
+        label: "5,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q48
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Government"
+      - id: "f"
+        label: "Retail or e-commerce"
+      - id: "g"
+        label: "Manufacturing"
+      - id: "h"
+        label: "Media or entertainment"
+      - id: "i"
+        label: "Other"
+  - id: q49
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q50
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q51
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q52
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q53
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q54
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

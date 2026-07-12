@@ -1,0 +1,880 @@
+schemaVersion: "1.0"
+id: organic_food_attitudes_v1
+title: "Organic Food Attitudes Survey"
+description: "How people shop for organic food and the attitudes that shape their purchasing decisions."
+questions:
+  - id: q0
+    prompt: "How often do you buy organic food?"
+    type: single_choice
+    construct: often_buy_organic_food
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Almost always"
+  - id: q1
+    prompt: "How long have you been buying organic food regularly?"
+    type: single_choice
+    construct: long_have_been_buying_organic
+    required: true
+    options:
+      - id: "a"
+        label: "I do not buy it regularly"
+      - id: "b"
+        label: "Less than 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "4 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+  - id: q2
+    prompt: "Roughly what share of the groceries you buy are organic?"
+    type: single_choice
+    construct: roughly_share_groceries_buy_organic
+    required: true
+    options:
+      - id: "a"
+        label: "None"
+      - id: "b"
+        label: "Less than a quarter"
+      - id: "c"
+        label: "About a quarter to half"
+      - id: "d"
+        label: "About half to three quarters"
+      - id: "e"
+        label: "More than three quarters"
+  - id: q3
+    prompt: "Which best describes your attitude toward organic food?"
+    type: single_choice
+    construct: best_describes_attitude_toward_organic
+    required: true
+    options:
+      - id: "a"
+        label: "I strongly prefer organic whenever possible"
+      - id: "b"
+        label: "I buy organic for certain items only"
+      - id: "c"
+        label: "I buy organic when it is on sale"
+      - id: "d"
+        label: "I am indifferent to organic labels"
+      - id: "e"
+        label: "I avoid paying extra for organic"
+  - id: q4
+    prompt: "What first led you to buy organic food?"
+    type: single_choice
+    construct: first_led_buy_organic_food
+    required: true
+    options:
+      - id: "a"
+        label: "Personal health"
+      - id: "b"
+        label: "Avoiding pesticides"
+      - id: "c"
+        label: "Environmental concerns"
+      - id: "d"
+        label: "Animal welfare"
+      - id: "e"
+        label: "Taste"
+      - id: "f"
+        label: "Family or children's health"
+      - id: "g"
+        label: "I do not buy organic"
+  - id: q5
+    prompt: "Which reasons motivate you to buy organic? (Select all that apply)"
+    type: multi_choice
+    construct: reasons_motivate_buy_organic_select
+    required: true
+    options:
+      - id: "a"
+        label: "Fewer pesticides and chemicals"
+      - id: "b"
+        label: "Personal or family health"
+      - id: "c"
+        label: "Better for the environment"
+      - id: "d"
+        label: "No genetically modified ingredients"
+      - id: "e"
+        label: "Better animal welfare"
+      - id: "f"
+        label: "Better taste"
+      - id: "g"
+        label: "Supporting local or small farms"
+      - id: "h"
+        label: "Avoiding artificial additives"
+      - id: "i"
+        label: "None of these"
+  - id: q6
+    prompt: "Which organic food categories do you regularly buy? (Select all that apply)"
+    type: multi_choice
+    construct: organic_food_categories_regularly_buy
+    required: true
+    options:
+      - id: "a"
+        label: "Fresh fruits and vegetables"
+      - id: "b"
+        label: "Dairy (milk, cheese, yogurt)"
+      - id: "c"
+        label: "Eggs"
+      - id: "d"
+        label: "Meat and poultry"
+      - id: "e"
+        label: "Packaged and pantry foods"
+      - id: "f"
+        label: "Coffee or tea"
+      - id: "g"
+        label: "Baby or children's food"
+      - id: "h"
+        label: "Snacks"
+      - id: "i"
+        label: "I do not buy organic"
+  - id: q7
+    prompt: "For which items are you most willing to pay extra for organic?"
+    type: single_choice
+    construct: items_most_willing_pay_extra
+    required: true
+    options:
+      - id: "a"
+        label: "Fruits and vegetables"
+      - id: "b"
+        label: "Dairy and eggs"
+      - id: "c"
+        label: "Meat and poultry"
+      - id: "d"
+        label: "Packaged foods"
+      - id: "e"
+        label: "Baby or children's food"
+      - id: "f"
+        label: "I am not willing to pay extra"
+  - id: q8
+    prompt: "Where do you most often buy organic food?"
+    type: single_choice
+    construct: where_most_often_buy_organic
+    required: true
+    options:
+      - id: "a"
+        label: "Large grocery chain (Kroger, Safeway, etc.)"
+      - id: "b"
+        label: "Warehouse club (Costco, Sam's Club)"
+      - id: "c"
+        label: "Natural or specialty grocer (Whole Foods, Sprouts, Trader Joe's)"
+      - id: "d"
+        label: "Discount grocer (Aldi, Lidl)"
+      - id: "e"
+        label: "Farmers market or co-op"
+      - id: "f"
+        label: "Online or grocery delivery"
+      - id: "g"
+        label: "I do not buy organic"
+  - id: q9
+    prompt: "Which organic or natural brands do you recognize and buy? (Select all that apply)"
+    type: multi_choice
+    construct: organic_natural_brands_recognize_buy
+    required: true
+    options:
+      - id: "a"
+        label: "Organic Valley"
+      - id: "b"
+        label: "Stonyfield"
+      - id: "c"
+        label: "Annie's"
+      - id: "d"
+        label: "Amy's"
+      - id: "e"
+        label: "365 by Whole Foods"
+      - id: "f"
+        label: "Simple Truth Organic (Kroger)"
+      - id: "g"
+        label: "Cascadian Farm"
+      - id: "h"
+        label: "Store or private-label organic"
+      - id: "i"
+        label: "I do not pay attention to brands"
+  - id: q10
+    prompt: "About how much more, as a percentage, are you willing to pay for organic versus conventional? Please enter a number from 0 to 100."
+    type: free_text
+    construct: much_more_as_percentage_willing
+    required: true
+  - id: q11
+    prompt: "About how much do you spend on organic food in a typical month, in U.S. dollars? Please enter a number."
+    type: free_text
+    construct: much_spend_organic_food_typical
+    required: true
+  - id: q12
+    prompt: "How often do you look for the USDA Organic seal when shopping?"
+    type: single_choice
+    construct: often_look_usda_organic_seal
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q13
+    prompt: "How well do you understand what the USDA Organic label means?"
+    type: single_choice
+    construct: well_understand_usda_organic_label
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "A moderate amount"
+      - id: "d"
+        label: "Well"
+      - id: "e"
+        label: "Very well"
+  - id: q14
+    prompt: "How much do you agree: Organic food is healthier than conventional food."
+    type: single_choice
+    construct: much_agree_organic_food_healthier
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree: Organic food is worth the extra cost."
+    type: single_choice
+    construct: much_agree_organic_food_worth
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree: Organic farming is better for the environment."
+    type: single_choice
+    construct: much_agree_organic_farming_better
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: Organic food tastes better than conventional food."
+    type: single_choice
+    construct: much_agree_organic_food_tastes
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: The organic label can be trusted."
+    type: single_choice
+    construct: much_agree_organic_label_can
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: Some organic claims are just marketing."
+    type: single_choice
+    construct: much_agree_some_organic_claims
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: Organic food is too expensive for me to buy regularly."
+    type: single_choice
+    construct: much_agree_organic_food_too
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "When buying food, how important is that it is organic?"
+    type: single_choice
+    construct: when_buying_food_important_that
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "When buying food, how important is price?"
+    type: single_choice
+    construct: when_buying_food_important_price
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When buying food, how important is being free of pesticides?"
+    type: single_choice
+    construct: when_buying_food_important_being
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When buying food, how important is being locally grown?"
+    type: single_choice
+    construct: when_buying_food_important_being
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When buying food, how important is freshness?"
+    type: single_choice
+    construct: when_buying_food_important_freshness
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When buying food, how important is being non-GMO?"
+    type: single_choice
+    construct: when_buying_food_important_being
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "Which are the top 3 factors when deciding whether to buy organic? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_when_deciding
+    required: true
+    options:
+      - id: "a"
+        label: "Health benefits"
+      - id: "b"
+        label: "Price"
+      - id: "c"
+        label: "Pesticide avoidance"
+      - id: "d"
+        label: "Environmental impact"
+      - id: "e"
+        label: "Locally grown"
+      - id: "f"
+        label: "Taste"
+      - id: "g"
+        label: "Non-GMO"
+      - id: "h"
+        label: "Animal welfare"
+  - id: q28
+    prompt: "Which labels, besides organic, influence your food purchases? (Select all that apply)"
+    type: multi_choice
+    construct: labels_besides_organic_influence_food
+    required: true
+    options:
+      - id: "a"
+        label: "Non-GMO Project Verified"
+      - id: "b"
+        label: "Locally grown"
+      - id: "c"
+        label: "Grass-fed"
+      - id: "d"
+        label: "Cage-free or free-range"
+      - id: "e"
+        label: "Fair Trade"
+      - id: "f"
+        label: "No artificial ingredients"
+      - id: "g"
+        label: "Gluten-free"
+      - id: "h"
+        label: "None of these"
+  - id: q29
+    prompt: "What most often stops you from buying organic? (Select all that apply)"
+    type: multi_choice
+    construct: most_often_stops_from_buying
+    required: true
+    options:
+      - id: "a"
+        label: "Higher price"
+      - id: "b"
+        label: "Limited selection where I shop"
+      - id: "c"
+        label: "Doubts about the benefits"
+      - id: "d"
+        label: "Distrust of the label"
+      - id: "e"
+        label: "Shorter shelf life"
+      - id: "f"
+        label: "Habit or convenience"
+      - id: "g"
+        label: "Nothing stops me"
+      - id: "h"
+        label: "I do not want to buy organic"
+  - id: q30
+    prompt: "How has your organic food buying changed over the past year?"
+    type: single_choice
+    construct: has_organic_food_buying_changed
+    required: true
+    options:
+      - id: "a"
+        label: "Much less"
+      - id: "b"
+        label: "Somewhat less"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Somewhat more"
+      - id: "e"
+        label: "Much more"
+  - id: q31
+    prompt: "Do you grow any of your own fruits, vegetables, or herbs?"
+    type: single_choice
+    construct: grow_any_own_fruits_vegetables
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a significant amount"
+      - id: "b"
+        label: "Yes, a small amount"
+      - id: "c"
+        label: "No, but I would like to"
+      - id: "d"
+        label: "No"
+  - id: q32
+    prompt: "Which sources do you trust for information about organic food? (Select all that apply)"
+    type: multi_choice
+    construct: sources_trust_information_organic_food
+    required: true
+    options:
+      - id: "a"
+        label: "Government agencies (USDA, FDA)"
+      - id: "b"
+        label: "Doctors or dietitians"
+      - id: "c"
+        label: "Scientific studies"
+      - id: "d"
+        label: "Health and food websites"
+      - id: "e"
+        label: "Social media"
+      - id: "f"
+        label: "Friends and family"
+      - id: "g"
+        label: "Product packaging"
+      - id: "h"
+        label: "I do not seek out this information"
+  - id: q33
+    prompt: "How satisfied are you with the organic selection where you shop?"
+    type: single_choice
+    construct: satisfied_organic_selection_where_shop
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q34
+    prompt: "How satisfied are you with the price of organic food where you shop?"
+    type: single_choice
+    construct: satisfied_price_organic_food_where
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q35
+    prompt: "How satisfied are you overall with the organic food you buy?"
+    type: single_choice
+    construct: satisfied_overall_organic_food_buy
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q36
+    prompt: "How likely are you to recommend buying organic to a friend or family member? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_buying_organic_friend
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q37
+    prompt: "How likely are you to buy more organic food over the next year?"
+    type: single_choice
+    construct: likely_buy_more_organic_food
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q38
+    prompt: "How likely would you be to buy more organic if prices dropped by 20 percent?"
+    type: single_choice
+    construct: likely_would_be_buy_more
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q39
+    prompt: "What is one thing that would make you buy more organic food? (Optional short answer)"
+    type: free_text
+    construct: one_thing_that_would_make
+    required: false
+  - id: q40
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q41
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q45
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q46
+    prompt: "How many people, including you, live in your household?"
+    type: single_choice
+    construct: many_people_including_live_household
+    required: true
+    options:
+      - id: "a"
+        label: "1"
+      - id: "b"
+        label: "2"
+      - id: "c"
+        label: "3"
+      - id: "d"
+        label: "4"
+      - id: "e"
+        label: "5 or more"
+  - id: q47
+    prompt: "Do children under 18 live in your household?"
+    type: single_choice
+    construct: children_under_18_live_household
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q48
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "In a relationship, not married"
+      - id: "c"
+        label: "Married"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q49
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q50
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q51
+    prompt: "Are you the primary person who shops for groceries in your household?"
+    type: single_choice
+    construct: primary_person_who_shops_groceries
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I do most of the shopping"
+      - id: "b"
+        label: "I share it about equally"
+      - id: "c"
+        label: "No, someone else does most of it"

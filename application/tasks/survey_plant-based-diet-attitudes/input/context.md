@@ -1,0 +1,7 @@
+# Plant-Based Diet Attitudes
+
+How people approach plant-based, vegetarian, and vegan eating, and the attitudes and habits behind their food choices.
+
+## About this survey
+
+This survey profiles plant-based eating, opening with a screener on dietary identity, how long the respondent has eaten this way, weekly plant-based meal counts, and red-meat frequency. It records behaviors and specifics such as motivations, protein sources, plant-based meat brands (Beyond Meat, Impossible Foods, Gardein), milk alternatives, where respondents shop, and which categories they buy. Attitudes are captured through an agreement Likert battery on health, environment, taste, protein, and cost, plus a per-item importance matrix over product-selection criteria and a top-three ranking of decision factors. Additional sections cover cooking frequency, label reading, challenges, dining out, supplements, trusted information sources, and change over time, followed by satisfaction, recommendation likelihood, and future intent, with numeric free-text on grocery share and cost. Question types include single-choice, multi-select, varied Likert scales, an importance matrix, a ranking item, a 0–10 recommendation scale, and numeric and open free-text. The survey closes with a demographic block covering age, gender, race and ethnicity, household income, education, employment, household size, marital status, U.S. region, urbanicity, and grocery-shopping role.

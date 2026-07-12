@@ -1,0 +1,898 @@
+schemaVersion: "1.0"
+id: crowdfunding_backing_v1
+title: "Crowdfunding Backing Survey"
+description: "Why and how people back crowdfunding campaigns and how they evaluate the projects they support."
+questions:
+  - id: q0
+    prompt: "Have you ever backed or donated to a crowdfunding campaign?"
+    type: single_choice
+    construct: have_ever_backed_donated_crowdfunding
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, many times"
+      - id: "b"
+        label: "Yes, a few times"
+      - id: "c"
+        label: "Yes, once"
+      - id: "d"
+        label: "No, but I have considered it"
+      - id: "e"
+        label: "No, and I have not considered it"
+  - id: q1
+    prompt: "How long have you been backing crowdfunding campaigns?"
+    type: single_choice
+    construct: long_have_been_backing_crowdfunding
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+      - id: "f"
+        label: "I have never backed one"
+  - id: q2
+    prompt: "In the past 12 months, how many campaigns have you backed?"
+    type: single_choice
+    construct: past_12_months_many_campaigns
+    required: true
+    options:
+      - id: "a"
+        label: "None"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2 to 3"
+      - id: "d"
+        label: "4 to 6"
+      - id: "e"
+        label: "7 to 10"
+      - id: "f"
+        label: "More than 10"
+  - id: q3
+    prompt: "Which crowdfunding platforms have you used? (Select all that apply)"
+    type: multi_choice
+    construct: crowdfunding_platforms_have_used_select
+    required: true
+    options:
+      - id: "a"
+        label: "Kickstarter"
+      - id: "b"
+        label: "GoFundMe"
+      - id: "c"
+        label: "Indiegogo"
+      - id: "d"
+        label: "Patreon"
+      - id: "e"
+        label: "Fundrazr"
+      - id: "f"
+        label: "Crowdfunder"
+      - id: "g"
+        label: "GiveSendGo"
+      - id: "h"
+        label: "None of these"
+  - id: q4
+    prompt: "Which types of campaigns have you backed? (Select all that apply)"
+    type: multi_choice
+    construct: types_campaigns_have_backed_select
+    required: true
+    options:
+      - id: "a"
+        label: "Technology or gadgets"
+      - id: "b"
+        label: "Video games"
+      - id: "c"
+        label: "Films, music, or the arts"
+      - id: "d"
+        label: "Board games or tabletop"
+      - id: "e"
+        label: "Personal or medical emergencies"
+      - id: "f"
+        label: "Charitable or community causes"
+      - id: "g"
+        label: "Books or publishing"
+      - id: "h"
+        label: "Fashion or design products"
+  - id: q5
+    prompt: "Which best describes your most common reason for backing?"
+    type: single_choice
+    construct: best_describes_most_common_reason
+    required: true
+    options:
+      - id: "a"
+        label: "I want the product or reward"
+      - id: "b"
+        label: "I want to support a creator or cause"
+      - id: "c"
+        label: "I want early access to something new"
+      - id: "d"
+        label: "I want to help someone in need"
+      - id: "e"
+        label: "A friend or family member asked me"
+      - id: "f"
+        label: "I enjoy discovering new projects"
+  - id: q6
+    prompt: "How do you usually discover campaigns to back? (Select all that apply)"
+    type: multi_choice
+    construct: usually_discover_campaigns_back_select
+    required: true
+    options:
+      - id: "a"
+        label: "Browsing the crowdfunding platform itself"
+      - id: "b"
+        label: "Social media"
+      - id: "c"
+        label: "Friends or family sharing them"
+      - id: "d"
+        label: "Email newsletters"
+      - id: "e"
+        label: "News articles or blogs"
+      - id: "f"
+        label: "Online communities or forums"
+      - id: "g"
+        label: "Ads"
+  - id: q7
+    prompt: "What was your largest single contribution to a campaign, in U.S. dollars? Please enter a number."
+    type: free_text
+    construct: was_largest_single_contribution_campaign
+    required: true
+  - id: q8
+    prompt: "About how much have you contributed to crowdfunding in total over your lifetime, in U.S. dollars? Please enter a number."
+    type: free_text
+    construct: much_have_contributed_crowdfunding_total
+    required: true
+  - id: q9
+    prompt: "How much do you typically contribute to a single campaign?"
+    type: single_choice
+    construct: much_typically_contribute_single_campaig
+    required: true
+    options:
+      - id: "a"
+        label: "Under $10"
+      - id: "b"
+        label: "$10 to $24"
+      - id: "c"
+        label: "$25 to $49"
+      - id: "d"
+        label: "$50 to $99"
+      - id: "e"
+        label: "$100 to $249"
+      - id: "f"
+        label: "$250 or more"
+  - id: q10
+    prompt: "For reward-based campaigns, how important is the reward to your decision to back?"
+    type: single_choice
+    construct: reward_based_campaigns_important_reward
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important — I would back with no reward"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important — the reward is the point"
+  - id: q11
+    prompt: "How much do you agree: Backing a campaign feels more like a donation than a purchase."
+    type: single_choice
+    construct: much_agree_backing_campaign_feels
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree: I enjoy being part of bringing a new product to life."
+    type: single_choice
+    construct: much_agree_i_enjoy_being
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree: I trust that creators will deliver what they promise."
+    type: single_choice
+    construct: much_agree_i_trust_that
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree: I have been burned by a campaign that never delivered."
+    type: single_choice
+    construct: much_agree_i_have_been
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree: Personal fundraisers for emergencies are a good use of my money."
+    type: single_choice
+    construct: much_agree_personal_fundraisers_emergenc
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree: Platform fees make me hesitant to back campaigns."
+    type: single_choice
+    construct: much_agree_platform_fees_make
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How concerned are you about campaigns failing to deliver their reward?"
+    type: single_choice
+    construct: concerned_campaigns_failing_deliver_thei
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q18
+    prompt: "How concerned are you about scams or fraudulent campaigns?"
+    type: single_choice
+    construct: concerned_scams_fraudulent_campaigns
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q19
+    prompt: "How concerned are you about long delays before a reward arrives?"
+    type: single_choice
+    construct: concerned_long_delays_before_reward
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q20
+    prompt: "How concerned are you about how personal-cause donations are actually spent?"
+    type: single_choice
+    construct: concerned_personal_cause_donations_actua
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all concerned"
+      - id: "b"
+        label: "Slightly concerned"
+      - id: "c"
+        label: "Moderately concerned"
+      - id: "d"
+        label: "Very concerned"
+      - id: "e"
+        label: "Extremely concerned"
+  - id: q21
+    prompt: "When deciding to back a campaign, how important is the creator's track record?"
+    type: single_choice
+    construct: when_deciding_back_campaign_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "When deciding to back a campaign, how important is a clear and detailed project plan?"
+    type: single_choice
+    construct: when_deciding_back_campaign_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When deciding to back a campaign, how important is the quality of the video and images?"
+    type: single_choice
+    construct: when_deciding_back_campaign_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When deciding to back a campaign, how important is the estimated delivery date?"
+    type: single_choice
+    construct: when_deciding_back_campaign_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When deciding to back a campaign, how important are updates and creator communication?"
+    type: single_choice
+    construct: when_deciding_back_campaign_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When deciding to back a campaign, how important is how close it is to its funding goal?"
+    type: single_choice
+    construct: when_deciding_back_campaign_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "Which are your top 3 factors when deciding to back a campaign? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_when_deciding
+    required: true
+    options:
+      - id: "a"
+        label: "Creator's track record"
+      - id: "b"
+        label: "The reward or product"
+      - id: "c"
+        label: "A clear project plan"
+      - id: "d"
+        label: "The cause or story behind it"
+      - id: "e"
+        label: "Presentation quality"
+      - id: "f"
+        label: "Estimated delivery date"
+      - id: "g"
+        label: "Price or contribution amount"
+      - id: "h"
+        label: "Recommendations from others"
+  - id: q28
+    prompt: "How often do you back a campaign purely to help someone, expecting nothing in return?"
+    type: single_choice
+    construct: often_back_campaign_purely_help
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q29
+    prompt: "How often do you read the comments and updates before backing?"
+    type: single_choice
+    construct: often_read_comments_updates_before
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q30
+    prompt: "How often do you share campaigns you have backed with others?"
+    type: single_choice
+    construct: often_share_campaigns_have_backed
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q31
+    prompt: "Have you experienced any of the following as a backer? (Select all that apply)"
+    type: multi_choice
+    construct: have_experienced_any_following_as
+    required: true
+    options:
+      - id: "a"
+        label: "A reward that never arrived"
+      - id: "b"
+        label: "A reward that arrived very late"
+      - id: "c"
+        label: "A reward that did not match its description"
+      - id: "d"
+        label: "A campaign I suspected was a scam"
+      - id: "e"
+        label: "A refund I had to request"
+      - id: "f"
+        label: "A campaign that was canceled"
+      - id: "g"
+        label: "None of these"
+  - id: q32
+    prompt: "Have you ever launched a crowdfunding campaign of your own?"
+    type: single_choice
+    construct: have_ever_launched_crowdfunding_campaign
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and it was funded"
+      - id: "b"
+        label: "Yes, but it was not funded"
+      - id: "c"
+        label: "No, but I have considered it"
+      - id: "d"
+        label: "No, and I have not considered it"
+  - id: q33
+    prompt: "Which best describes your typical stance when backing?"
+    type: single_choice
+    construct: best_describes_typical_stance_when
+    required: true
+    options:
+      - id: "a"
+        label: "I only back if I really want the reward"
+      - id: "b"
+        label: "I back to support causes and creators regardless of reward"
+      - id: "c"
+        label: "A mix of both depending on the campaign"
+      - id: "d"
+        label: "I mostly respond to friends' requests"
+  - id: q34
+    prompt: "When a reward is delayed, how do you usually react?"
+    type: single_choice
+    construct: when_reward_delayed_usually_react
+    required: true
+    options:
+      - id: "a"
+        label: "I am patient and wait"
+      - id: "b"
+        label: "I follow up but stay understanding"
+      - id: "c"
+        label: "I get frustrated"
+      - id: "d"
+        label: "I request a refund"
+      - id: "e"
+        label: "Not applicable"
+  - id: q35
+    prompt: "How satisfied are you with the rewards or outcomes of campaigns you have backed?"
+    type: single_choice
+    construct: satisfied_rewards_outcomes_campaigns_hav
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q36
+    prompt: "How satisfied are you with the platforms you have used?"
+    type: single_choice
+    construct: satisfied_platforms_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q37
+    prompt: "How satisfied are you with the communication from creators you have backed?"
+    type: single_choice
+    construct: satisfied_communication_from_creators_ha
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q38
+    prompt: "Overall, how satisfied are you with your crowdfunding backing experiences?"
+    type: single_choice
+    construct: overall_satisfied_crowdfunding_backing_e
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q39
+    prompt: "How likely are you to recommend crowdfunding to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_crowdfunding_friend_0
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q40
+    prompt: "How likely are you to back another campaign in the next 6 months?"
+    type: single_choice
+    construct: likely_back_another_campaign_next
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q41
+    prompt: "How likely are you to increase how much you back over the next year?"
+    type: single_choice
+    construct: likely_increase_much_back_over
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q42
+    prompt: "What would make you back more campaigns, or what holds you back? (Optional short answer)"
+    type: free_text
+    construct: would_make_back_more_campaigns
+    required: false
+  - id: q43
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q44
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 to $199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q47
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q48
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q49
+    prompt: "How many people, including yourself, live in your household?"
+    type: single_choice
+    construct: many_people_including_yourself_live
+    required: true
+    options:
+      - id: "a"
+        label: "1"
+      - id: "b"
+        label: "2"
+      - id: "c"
+        label: "3"
+      - id: "d"
+        label: "4"
+      - id: "e"
+        label: "5 or more"
+  - id: q50
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "In a domestic partnership"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q51
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q52
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q53
+    prompt: "How often do you donate to charity in general?"
+    type: single_choice
+    construct: often_donate_charity_general
+    required: true
+    options:
+      - id: "a"
+        label: "Regularly throughout the year"
+      - id: "b"
+        label: "A few times a year"
+      - id: "c"
+        label: "Once a year"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"

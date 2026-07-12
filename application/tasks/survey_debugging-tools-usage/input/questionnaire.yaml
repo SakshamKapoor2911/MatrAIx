@@ -1,0 +1,946 @@
+schemaVersion: "1.0"
+id: debugging_tools_usage_v1
+title: "Debugging Tools Usage Survey"
+description: "How developers debug software, including the tools, techniques, and habits they rely on."
+questions:
+  - id: q0
+    prompt: "How often do you debug code?"
+    type: single_choice
+    construct: often_debug_code
+    required: true
+    options:
+      - id: "a"
+        label: "Many times a day"
+      - id: "b"
+        label: "Every day"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "Occasionally"
+      - id: "e"
+        label: "Rarely"
+  - id: q1
+    prompt: "How long have you been debugging software professionally or as a hobby?"
+    type: single_choice
+    construct: long_have_been_debugging_software
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+  - id: q2
+    prompt: "What best describes your relationship to debugging?"
+    type: single_choice
+    construct: best_describes_relationship_debugging
+    required: true
+    options:
+      - id: "a"
+        label: "I debug complex systems as a core part of my job"
+      - id: "b"
+        label: "I debug my own application code regularly"
+      - id: "c"
+        label: "I mostly debug while learning"
+      - id: "d"
+        label: "I debug only occasionally"
+      - id: "e"
+        label: "I rarely debug"
+  - id: q3
+    prompt: "What is your primary way of debugging?"
+    type: single_choice
+    construct: primary_way_debugging
+    required: true
+    options:
+      - id: "a"
+        label: "Print or logging statements"
+      - id: "b"
+        label: "An interactive IDE debugger"
+      - id: "c"
+        label: "Browser developer tools"
+      - id: "d"
+        label: "A command-line debugger (gdb, lldb, pdb)"
+      - id: "e"
+        label: "Reading code and reasoning through it"
+      - id: "f"
+        label: "It varies widely"
+  - id: q4
+    prompt: "Which debugger or debugging tool do you use most often?"
+    type: single_choice
+    construct: debugger_debugging_tool_use_most
+    required: true
+    options:
+      - id: "a"
+        label: "VS Code debugger"
+      - id: "b"
+        label: "JetBrains IDE debugger"
+      - id: "c"
+        label: "Chrome DevTools"
+      - id: "d"
+        label: "Visual Studio debugger"
+      - id: "e"
+        label: "gdb or lldb"
+      - id: "f"
+        label: "pdb (Python)"
+      - id: "g"
+        label: "Delve (Go)"
+      - id: "h"
+        label: "Browser framework devtools (React, Vue)"
+      - id: "i"
+        label: "Other"
+      - id: "j"
+        label: "I don't use a dedicated debugger"
+  - id: q5
+    prompt: "Which debugging techniques do you regularly use? (Select all that apply)"
+    type: multi_choice
+    construct: debugging_techniques_regularly_use_selec
+    required: true
+    options:
+      - id: "a"
+        label: "Print or logging statements"
+      - id: "b"
+        label: "Breakpoints and stepping"
+      - id: "c"
+        label: "Conditional breakpoints"
+      - id: "d"
+        label: "Watch expressions"
+      - id: "e"
+        label: "Rubber-duck debugging"
+      - id: "f"
+        label: "Bisecting with git bisect"
+      - id: "g"
+        label: "Profiling"
+      - id: "h"
+        label: "Reading stack traces carefully"
+      - id: "i"
+        label: "Adding assertions"
+  - id: q6
+    prompt: "Which debuggers or dev tools have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: debuggers_dev_tools_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "VS Code debugger"
+      - id: "b"
+        label: "JetBrains IDE debugger"
+      - id: "c"
+        label: "Chrome DevTools"
+      - id: "d"
+        label: "Firefox DevTools"
+      - id: "e"
+        label: "Visual Studio debugger"
+      - id: "f"
+        label: "gdb"
+      - id: "g"
+        label: "lldb"
+      - id: "h"
+        label: "pdb"
+      - id: "i"
+        label: "Delve"
+      - id: "j"
+        label: "React or Vue devtools"
+      - id: "k"
+        label: "None"
+  - id: q7
+    prompt: "In which languages do you most often debug? (Select all that apply)"
+    type: multi_choice
+    construct: languages_most_often_debug_select
+    required: true
+    options:
+      - id: "a"
+        label: "JavaScript or TypeScript"
+      - id: "b"
+        label: "Python"
+      - id: "c"
+        label: "Java or Kotlin"
+      - id: "d"
+        label: "C# or .NET"
+      - id: "e"
+        label: "Go"
+      - id: "f"
+        label: "C or C++"
+      - id: "g"
+        label: "Rust"
+      - id: "h"
+        label: "Ruby"
+      - id: "i"
+        label: "Other"
+  - id: q8
+    prompt: "Which logging or error-tracking tools do you use when debugging? (Select all that apply)"
+    type: multi_choice
+    construct: logging_error_tracking_tools_use
+    required: true
+    options:
+      - id: "a"
+        label: "Plain console or print output"
+      - id: "b"
+        label: "A structured logging library"
+      - id: "c"
+        label: "Sentry"
+      - id: "d"
+        label: "Application logs in a log aggregator"
+      - id: "e"
+        label: "Distributed tracing"
+      - id: "f"
+        label: "Debugger breakpoints only"
+      - id: "g"
+        label: "None"
+  - id: q9
+    prompt: "When you have both available, which do you reach for first?"
+    type: single_choice
+    construct: when_have_both_available_reach
+    required: true
+    options:
+      - id: "a"
+        label: "Print or logging statements"
+      - id: "b"
+        label: "An interactive debugger"
+      - id: "c"
+        label: "It depends entirely on the bug"
+      - id: "d"
+        label: "Whichever is already set up"
+  - id: q10
+    prompt: "How often do you use an interactive step debugger rather than print statements?"
+    type: single_choice
+    construct: often_use_interactive_step_debugger
+    required: true
+    options:
+      - id: "a"
+        label: "Almost always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q11
+    prompt: "Which kinds of bugs do you deal with most often? (Select all that apply)"
+    type: multi_choice
+    construct: kinds_bugs_deal_most_often
+    required: true
+    options:
+      - id: "a"
+        label: "Logic errors"
+      - id: "b"
+        label: "Null or undefined references"
+      - id: "c"
+        label: "Race conditions or concurrency bugs"
+      - id: "d"
+        label: "Memory issues or leaks"
+      - id: "e"
+        label: "Performance problems"
+      - id: "f"
+        label: "Integration or API issues"
+      - id: "g"
+        label: "Configuration or environment issues"
+      - id: "h"
+        label: "Intermittent or flaky failures"
+  - id: q12
+    prompt: "Do you write a test to reproduce a bug before fixing it?"
+    type: single_choice
+    construct: write_test_reproduce_bug_before
+    required: true
+    options:
+      - id: "a"
+        label: "Almost always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q13
+    prompt: "Which tools do you reach for on especially hard bugs? (Select all that apply)"
+    type: multi_choice
+    construct: tools_reach_especially_hard_bugs
+    required: true
+    options:
+      - id: "a"
+        label: "A profiler"
+      - id: "b"
+        label: "A memory analyzer"
+      - id: "c"
+        label: "A network or request inspector"
+      - id: "d"
+        label: "git bisect"
+      - id: "e"
+        label: "Core dumps"
+      - id: "f"
+        label: "strace, dtrace, or similar"
+      - id: "g"
+        label: "Time-travel or record-replay debugging"
+      - id: "h"
+        label: "None of these"
+  - id: q14
+    prompt: "About how many hours per week do you spend debugging? Please enter a number."
+    type: free_text
+    construct: many_hours_per_week_spend
+    required: true
+  - id: q15
+    prompt: "About how many hours does it typically take you to resolve a nontrivial bug? Please enter a number."
+    type: free_text
+    construct: many_hours_does_it_typically
+    required: true
+  - id: q16
+    prompt: "How much do you agree: Print debugging is often faster than an interactive debugger."
+    type: single_choice
+    construct: much_agree_print_debugging_often
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: Interactive debuggers are worth learning well."
+    type: single_choice
+    construct: much_agree_interactive_debuggers_worth
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: I feel confident debugging unfamiliar code."
+    type: single_choice
+    construct: much_agree_i_feel_confident
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: Good logging prevents most debugging pain."
+    type: single_choice
+    construct: much_agree_good_logging_prevents
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: Debugging is one of the most frustrating parts of my job."
+    type: single_choice
+    construct: much_agree_debugging_one_most
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: Reproducing a bug reliably is the hardest part of fixing it."
+    type: single_choice
+    construct: much_agree_reproducing_bug_reliably
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How much do you agree: I form and test hypotheses systematically when debugging."
+    type: single_choice
+    construct: much_agree_i_form_test
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "When picking a debugging approach, how important is speed to reproduce the problem?"
+    type: single_choice
+    construct: when_picking_debugging_approach_importan
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When picking a debugging approach, how important is deep visibility into program state?"
+    type: single_choice
+    construct: when_picking_debugging_approach_importan
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When picking a debugging approach, how important is minimal setup?"
+    type: single_choice
+    construct: when_picking_debugging_approach_importan
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When picking a debugging approach, how important is not disrupting the running system?"
+    type: single_choice
+    construct: when_picking_debugging_approach_importan
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When picking a debugging approach, how important is the ability to inspect production behavior?"
+    type: single_choice
+    construct: when_picking_debugging_approach_importan
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "When picking a debugging approach, how important is familiarity with the tooling?"
+    type: single_choice
+    construct: when_picking_debugging_approach_importan
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "How often are you unable to reproduce a reported bug?"
+    type: single_choice
+    construct: often_unable_reproduce_reported_bug
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q30
+    prompt: "How often do you debug issues directly in production?"
+    type: single_choice
+    construct: often_debug_issues_directly_production
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q31
+    prompt: "How satisfied are you with your current debugging tools?"
+    type: single_choice
+    construct: satisfied_current_debugging_tools
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q32
+    prompt: "How satisfied are you with your own debugging skills?"
+    type: single_choice
+    construct: satisfied_own_debugging_skills
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "How do you usually approach debugging a production issue?"
+    type: single_choice
+    construct: usually_approach_debugging_production_is
+    required: true
+    options:
+      - id: "a"
+        label: "Search existing logs"
+      - id: "b"
+        label: "Add logging and redeploy"
+      - id: "c"
+        label: "Attach a remote debugger"
+      - id: "d"
+        label: "Use observability and tracing tools"
+      - id: "e"
+        label: "Reproduce it locally first"
+  - id: q34
+    prompt: "Do you use a step debugger in your primary editor or IDE?"
+    type: single_choice
+    construct: use_step_debugger_primary_editor
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, frequently"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but it is available"
+      - id: "d"
+        label: "No, it isn't set up"
+  - id: q35
+    prompt: "Which debugging pain points do you experience most? (Select all that apply)"
+    type: multi_choice
+    construct: debugging_pain_points_experience_most
+    required: true
+    options:
+      - id: "a"
+        label: "Hard-to-reproduce bugs"
+      - id: "b"
+        label: "Poor or missing logs"
+      - id: "c"
+        label: "Slow feedback loops"
+      - id: "d"
+        label: "Complex debugger setup"
+      - id: "e"
+        label: "Concurrency and timing issues"
+      - id: "f"
+        label: "Debugging across service boundaries"
+      - id: "g"
+        label: "Debugging minified or compiled code"
+      - id: "h"
+        label: "I don't hit major pain points"
+  - id: q36
+    prompt: "When you first hit a new bug, what do you usually do first?"
+    type: single_choice
+    construct: when_first_hit_new_bug
+    required: true
+    options:
+      - id: "a"
+        label: "Read the error message and stack trace"
+      - id: "b"
+        label: "Add a print or log statement"
+      - id: "c"
+        label: "Set a breakpoint"
+      - id: "d"
+        label: "Search online or documentation"
+      - id: "e"
+        label: "Ask a colleague or an AI assistant"
+  - id: q37
+    prompt: "On your next tricky bug, how likely are you to reach for an interactive debugger?"
+    type: single_choice
+    construct: next_tricky_bug_likely_reach
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q38
+    prompt: "Which are your top 3 most valuable debugging techniques? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_most_valuable_debugging
+    required: true
+    options:
+      - id: "a"
+        label: "Logging and print statements"
+      - id: "b"
+        label: "Breakpoints and stepping"
+      - id: "c"
+        label: "Reading stack traces"
+      - id: "d"
+        label: "Bisecting changes"
+      - id: "e"
+        label: "Profiling"
+      - id: "f"
+        label: "Rubber-duck reasoning"
+      - id: "g"
+        label: "Writing a reproducing test"
+      - id: "h"
+        label: "Asking an AI assistant"
+  - id: q39
+    prompt: "How much do you agree: AI assistants help me debug faster."
+    type: single_choice
+    construct: much_agree_ai_assistants_help
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q40
+    prompt: "How likely are you to recommend your current debugging toolkit to another developer? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_current_debugging_toolk
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q41
+    prompt: "How likely are you to invest time learning new debugging tools over the next year?"
+    type: single_choice
+    construct: likely_invest_time_learning_new
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q42
+    prompt: "What is one thing that would make debugging easier for you? (Optional short answer)"
+    type: free_text
+    construct: one_thing_that_would_make
+    required: false
+  - id: q43
+    prompt: "Which best describes your current role?"
+    type: single_choice
+    construct: best_describes_current_role
+    required: true
+    options:
+      - id: "a"
+        label: "Front-end developer"
+      - id: "b"
+        label: "Back-end developer"
+      - id: "c"
+        label: "Full-stack developer"
+      - id: "d"
+        label: "DevOps or site reliability engineer"
+      - id: "e"
+        label: "Data engineer"
+      - id: "f"
+        label: "QA or test engineer"
+      - id: "g"
+        label: "Engineering manager"
+      - id: "h"
+        label: "Student"
+      - id: "i"
+        label: "Other"
+  - id: q44
+    prompt: "How many years have you worked professionally in technology (not counting education)?"
+    type: single_choice
+    construct: many_years_have_worked_professionally
+    required: true
+    options:
+      - id: "a"
+        label: "I don't work in tech professionally"
+      - id: "b"
+        label: "Less than 2 years"
+      - id: "c"
+        label: "2 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "11 to 20 years"
+      - id: "f"
+        label: "More than 20 years"
+  - id: q45
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q46
+    prompt: "Approximately how many people work at your company or organization?"
+    type: single_choice
+    construct: approximately_many_people_work_company
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2 to 9"
+      - id: "c"
+        label: "10 to 99"
+      - id: "d"
+        label: "100 to 499"
+      - id: "e"
+        label: "500 to 4,999"
+      - id: "f"
+        label: "5,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q47
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Government"
+      - id: "f"
+        label: "Retail or e-commerce"
+      - id: "g"
+        label: "Manufacturing"
+      - id: "h"
+        label: "Media or entertainment"
+      - id: "i"
+        label: "Other"
+  - id: q48
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q49
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q50
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q51
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q52
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q53
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

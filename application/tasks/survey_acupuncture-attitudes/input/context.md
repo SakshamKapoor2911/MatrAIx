@@ -1,0 +1,7 @@
+# Acupuncture Attitudes
+
+People's experiences with and attitudes toward acupuncture as a wellness practice.
+
+## About this survey
+
+This survey profiles consumer experiences with and attitudes toward acupuncture, opening with a screener on whether respondents have tried it, when they first went, how often they go, and their most recent session. It records what led people to try it, the settings used, related practices tried (cupping, acupressure, moxibustion, and herbal consultations), session length, price, payment methods, and associated wellness goals. Attitudes are captured with an agreement Likert battery on legitimacy, relaxation, value, and trust and a per-item importance matrix over practitioner-selection criteria such as credentials, cost, convenience, cleanliness, reviews, and recommendations, plus a top-three ranking of reasons to consider acupuncture and a concerns-and-barriers multi-select. Later sections cover comfort with needles, overall attitude, how respondents learned about it, comparison with other practices, combined use, post-session relaxation, satisfaction, recommendation likelihood, and future usage intent. The survey closes with a demographic block covering age, gender, race and ethnicity, household income, education, employment, household size, marital status, insurance status, U.S. region, and urbanicity. All content is framed attitudinally and around general wellness.

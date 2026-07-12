@@ -1,0 +1,7 @@
+# Fractional Share Investing
+
+How people use fractional-share and micro-investing apps to start investing, build habits, and grow small balances over time.
+
+## About this survey
+
+This survey profiles users of fractional-share and micro-investing apps, opening with a screener on whether and how long they invest this way, their primary app, and the apps they have tried across services such as Robinhood, Acorns, Stash, Public, SoFi Invest, and Cash App Investing. It records what drew them in, how they fund investments including round-ups and recurring deposits, monthly amounts and total balances, what they invest in, checking and trading frequency, goals, fees, and how they learned about investing. Attitudes are captured with an agreement Likert battery on accessibility, habit-building, risk understanding, and temptation to overtrade, and a per-item importance matrix over app-selection factors, plus a top-three ranking of reasons for using the app and a recommendation likelihood scale. Additional sections cover decision-making, regrets, outside accounts, feature usage, and satisfaction with ease of use, returns, and fees. Question types include single-choice, multi-select, agreement and importance matrices, satisfaction and likelihood Likert scales, an NPS-style 0–10 item, a ranking item, and numeric free-text. The survey closes with a demographic block covering age, gender, race and ethnicity, household income, education, employment, household size, marital status, investing experience, U.S. region, and urbanicity.

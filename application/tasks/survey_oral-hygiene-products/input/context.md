@@ -1,0 +1,7 @@
+# Oral Hygiene Products
+
+How people use and choose oral hygiene products, including manual and electric toothbrushes, floss, water flossers, whitening, and mouthwash.
+
+## About this survey
+
+This survey profiles oral care behavior, opening with a screener on brushing and flossing frequency, toothbrush type, and the interdental and whitening products used. It records specific brands of toothbrush and toothpaste, where products are bought, replacement habits, and how long respondents have used an electric toothbrush. Attitudes are captured with an agreement Likert battery on electric brushing, flossing, and whitening, a matrix battery on perceptions of electric toothbrushes, and a per-item importance matrix over product-selection criteria, plus a top-three ranking of purchase factors. Additional sections cover mouthwash use, dental visit frequency, how routines were learned, and satisfaction with the toothbrush, whitening results, and the overall routine, followed by recommendation likelihood and purchase intent. Question types include single-choice, multi-select, varied Likert scales, two matrix batteries, a ranking item, an NPS-style 0-to-10 scale, and numeric and open free-text. The survey concludes with a demographic block covering age, gender, race and ethnicity, household income, education, employment, household size, marital status, U.S. region, urbanicity, and dental insurance status.

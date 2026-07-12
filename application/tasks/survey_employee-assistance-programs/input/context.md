@@ -1,0 +1,7 @@
+# Employee Assistance Programs
+
+Employee awareness, understanding, and use of workplace employee assistance program (EAP) wellness resources.
+
+## About this survey
+
+This survey examines how employees perceive and use workplace employee assistance programs, starting with a screener on whether an EAP is offered, how familiar the respondent is with it, how they learned about it, and whether they have used it. It records specific behaviors including which services people are aware of and have used, the provider behind their EAP, reasons to use it, and how they would access it. Attitudes are captured through an agreement Likert battery on access, ease of use, confidentiality, employer encouragement, and relevance, an importance matrix over qualities of workplace wellness resources such as confidentiality, access, and cost, plus frequency, likelihood, satisfaction, and confidentiality-concern scales. Additional sections cover barriers, other wellness benefits used, preferred communication channels, overall attitude, a top-three ranking of valued services, a 0-to-10 recommend scale, and numeric free-text items on EAP contacts and monthly wellness communications. The survey closes with a demographic block covering age, gender, race and ethnicity, household income, education, employment, household size, marital status, U.S. region, urbanicity, insurance status, employer size, industry, and role level.

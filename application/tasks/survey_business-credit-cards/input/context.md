@@ -1,0 +1,7 @@
+# Small Business Credit Card
+
+How small business owners choose, use, and manage business credit cards for rewards and expense separation.
+
+## About this survey
+
+This survey profiles how small business owners and operators use business credit cards, beginning with a screener on business ownership, card usage, tenure, and number of cards held. It records the issuers used such as Chase Ink, American Express Business, Capital One Spark, Brex, and Ramp, the card used most, spending categories, preferred rewards type, how business and personal expenses are separated, and which accounting tools like QuickBooks, Xero, and Expensify are paired with the card. Attitudes are measured with an agreement Likert battery on bookkeeping ease, rewards value, annual fee worth, and cash-flow reliance, plus a per-item importance matrix over card-selection factors, a top-three ranking of reasons for using a business card, and multi-selects of spending uses and challenges. Additional sections cover employee cards, payment behavior, business-credit reporting, and outcomes including satisfaction, recommendation likelihood, and application and switching intent. Question types include single-choice, multi-select, varied Likert scales, an importance matrix, a ranking item, and numeric free-text. The survey ends with a demographic block covering business type, employee count, revenue, age, gender, race and ethnicity, household income, education, marital status, U.S. region, and urbanicity.

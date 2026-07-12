@@ -1,0 +1,871 @@
+schemaVersion: "1.0"
+id: yoga_practice_v1
+title: "Yoga Practice Survey"
+description: "How people practice yoga, including their styles, studio-versus-home settings, apps, and attitudes."
+questions:
+  - id: q0
+    prompt: "Do you practice yoga?"
+    type: single_choice
+    construct: practice_yoga
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but I used to"
+      - id: "d"
+        label: "No, I never have"
+  - id: q1
+    prompt: "How long have you been practicing yoga?"
+    type: single_choice
+    construct: long_have_been_practicing_yoga
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "4 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+      - id: "f"
+        label: "I don't practice yoga"
+  - id: q2
+    prompt: "How often do you practice yoga?"
+    type: single_choice
+    construct: often_practice_yoga
+    required: true
+    options:
+      - id: "a"
+        label: "Daily"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "About once a week"
+      - id: "d"
+        label: "A few times a month"
+      - id: "e"
+        label: "Rarely"
+  - id: q3
+    prompt: "About how many minutes does a typical yoga session last for you? Please enter a number."
+    type: free_text
+    construct: many_minutes_does_typical_yoga
+    required: true
+  - id: q4
+    prompt: "Where do you usually practice yoga?"
+    type: single_choice
+    construct: where_usually_practice_yoga
+    required: true
+    options:
+      - id: "a"
+        label: "At a yoga studio"
+      - id: "b"
+        label: "At a gym or fitness center"
+      - id: "c"
+        label: "At home with videos or apps"
+      - id: "d"
+        label: "At home on my own"
+      - id: "e"
+        label: "Outdoors or in a park"
+      - id: "f"
+        label: "A mix of settings"
+  - id: q5
+    prompt: "What is your main reason for practicing yoga?"
+    type: single_choice
+    construct: main_reason_practicing_yoga
+    required: true
+    options:
+      - id: "a"
+        label: "Flexibility and mobility"
+      - id: "b"
+        label: "Strength and toning"
+      - id: "c"
+        label: "Stress relief and relaxation"
+      - id: "d"
+        label: "Mental focus and mindfulness"
+      - id: "e"
+        label: "Managing aches or improving posture"
+      - id: "f"
+        label: "General fitness"
+  - id: q6
+    prompt: "Which yoga styles do you practice? (Select all that apply)"
+    type: multi_choice
+    construct: yoga_styles_practice_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Hatha"
+      - id: "b"
+        label: "Vinyasa or flow"
+      - id: "c"
+        label: "Ashtanga or power yoga"
+      - id: "d"
+        label: "Yin or restorative"
+      - id: "e"
+        label: "Bikram or hot yoga"
+      - id: "f"
+        label: "Kundalini"
+      - id: "g"
+        label: "Gentle or chair yoga"
+      - id: "h"
+        label: "I'm not sure of the style"
+  - id: q7
+    prompt: "Which settings have you practiced yoga in over the past year? (Select all that apply)"
+    type: multi_choice
+    construct: settings_have_practiced_yoga_over
+    required: true
+    options:
+      - id: "a"
+        label: "In-person studio class"
+      - id: "b"
+        label: "Gym class"
+      - id: "c"
+        label: "Live online class"
+      - id: "d"
+        label: "On-demand video or app"
+      - id: "e"
+        label: "Self-guided at home"
+      - id: "f"
+        label: "Outdoor or community class"
+      - id: "g"
+        label: "Private or one-on-one session"
+  - id: q8
+    prompt: "Which yoga or wellness apps do you use? (Select all that apply)"
+    type: multi_choice
+    construct: yoga_wellness_apps_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Down Dog"
+      - id: "b"
+        label: "Alo Moves"
+      - id: "c"
+        label: "Glo"
+      - id: "d"
+        label: "Peloton app"
+      - id: "e"
+        label: "YouTube channels (Yoga with Adriene, etc.)"
+      - id: "f"
+        label: "Apple Fitness+"
+      - id: "g"
+        label: "Calm or Headspace (for related practice)"
+      - id: "h"
+        label: "I don't use a yoga app"
+  - id: q9
+    prompt: "Which yoga gear do you own? (Select all that apply)"
+    type: multi_choice
+    construct: yoga_gear_own_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Yoga mat"
+      - id: "b"
+        label: "Blocks"
+      - id: "c"
+        label: "Strap"
+      - id: "d"
+        label: "Bolster or cushion"
+      - id: "e"
+        label: "Yoga blanket"
+      - id: "f"
+        label: "Yoga wheel"
+      - id: "g"
+        label: "Dedicated yoga clothing"
+      - id: "h"
+        label: "None of these"
+  - id: q10
+    prompt: "Which yoga apparel or mat brands do you use? (Select all that apply)"
+    type: multi_choice
+    construct: yoga_apparel_mat_brands_use
+    required: true
+    options:
+      - id: "a"
+        label: "Lululemon"
+      - id: "b"
+        label: "Manduka"
+      - id: "c"
+        label: "Gaiam"
+      - id: "d"
+        label: "Alo Yoga"
+      - id: "e"
+        label: "Athleta"
+      - id: "f"
+        label: "liforme"
+      - id: "g"
+        label: "A generic or store brand"
+      - id: "h"
+        label: "Other"
+  - id: q11
+    prompt: "About how much do you spend on yoga in a typical month (classes, apps, gear), in U.S. dollars? Please enter a number."
+    type: free_text
+    construct: much_spend_yoga_typical_month
+    required: true
+  - id: q12
+    prompt: "Have you ever attended a yoga workshop, retreat, or teacher training?"
+    type: single_choice
+    construct: have_ever_attended_yoga_workshop
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a teacher training"
+      - id: "b"
+        label: "Yes, a retreat"
+      - id: "c"
+        label: "Yes, a workshop"
+      - id: "d"
+        label: "No, but I'd like to"
+      - id: "e"
+        label: "No, and I'm not interested"
+  - id: q13
+    prompt: "Do you incorporate meditation or breathwork into your yoga practice?"
+    type: single_choice
+    construct: incorporate_meditation_breathwork_into_y
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, every session"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q14
+    prompt: "Thinking about your yoga practice, how much do you agree: Yoga is an important part of my routine."
+    type: single_choice
+    construct: thinking_yoga_practice_much_agree
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "Thinking about your yoga practice, how much do you agree: It helps me manage stress."
+    type: single_choice
+    construct: thinking_yoga_practice_much_agree
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "Thinking about your yoga practice, how much do you agree: It has improved my flexibility or strength."
+    type: single_choice
+    construct: thinking_yoga_practice_much_agree
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "Thinking about your yoga practice, how much do you agree: Practicing at home works well for me."
+    type: single_choice
+    construct: thinking_yoga_practice_much_agree
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "Thinking about your yoga practice, how much do you agree: A good instructor makes a big difference."
+    type: single_choice
+    construct: thinking_yoga_practice_much_agree
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "Thinking about your yoga practice, how much do you agree: The cost of classes is a concern for me."
+    type: single_choice
+    construct: thinking_yoga_practice_much_agree
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "When choosing where or how to practice yoga, how important is cost?"
+    type: single_choice
+    construct: when_choosing_where_practice_yoga
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "When choosing where or how to practice yoga, how important is instructor quality?"
+    type: single_choice
+    construct: when_choosing_where_practice_yoga
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "When choosing where or how to practice yoga, how important is convenience or location?"
+    type: single_choice
+    construct: when_choosing_where_practice_yoga
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When choosing where or how to practice yoga, how important is class schedule and flexibility?"
+    type: single_choice
+    construct: when_choosing_where_practice_yoga
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When choosing where or how to practice yoga, how important is the community or social atmosphere?"
+    type: single_choice
+    construct: when_choosing_where_practice_yoga
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing where or how to practice yoga, how important is the variety of styles offered?"
+    type: single_choice
+    construct: when_choosing_where_practice_yoga
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "Which are your top 3 reasons for practicing yoga? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_reasons_practicing_yoga
+    required: true
+    options:
+      - id: "a"
+        label: "Flexibility and mobility"
+      - id: "b"
+        label: "Stress relief"
+      - id: "c"
+        label: "Strength and toning"
+      - id: "d"
+        label: "Mindfulness and mental focus"
+      - id: "e"
+        label: "Posture and pain management"
+      - id: "f"
+        label: "General fitness"
+      - id: "g"
+        label: "Community and connection"
+      - id: "h"
+        label: "Better sleep"
+  - id: q27
+    prompt: "What are the biggest barriers to practicing yoga more? (Select all that apply)"
+    type: multi_choice
+    construct: biggest_barriers_practicing_yoga_more
+    required: true
+    options:
+      - id: "a"
+        label: "Cost of classes"
+      - id: "b"
+        label: "Lack of time"
+      - id: "c"
+        label: "Studio location or distance"
+      - id: "d"
+        label: "Feeling self-conscious"
+      - id: "e"
+        label: "Not knowing where to start"
+      - id: "f"
+        label: "Physical limitations"
+      - id: "g"
+        label: "Preferring other forms of exercise"
+      - id: "h"
+        label: "No barriers"
+  - id: q28
+    prompt: "How often do you take an in-person studio class?"
+    type: single_choice
+    construct: often_take_person_studio_class
+    required: true
+    options:
+      - id: "a"
+        label: "Weekly or more"
+      - id: "b"
+        label: "A few times a month"
+      - id: "c"
+        label: "Occasionally"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q29
+    prompt: "How often do you use online or app-based yoga?"
+    type: single_choice
+    construct: often_use_online_app_based
+    required: true
+    options:
+      - id: "a"
+        label: "Weekly or more"
+      - id: "b"
+        label: "A few times a month"
+      - id: "c"
+        label: "Occasionally"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q30
+    prompt: "Do you have a studio or gym membership for yoga?"
+    type: single_choice
+    construct: have_studio_gym_membership_yoga
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a dedicated yoga studio membership"
+      - id: "b"
+        label: "Yes, a gym membership that includes yoga"
+      - id: "c"
+        label: "Yes, a class pass or drop-in package"
+      - id: "d"
+        label: "No, I use free or online resources"
+      - id: "e"
+        label: "No membership"
+  - id: q31
+    prompt: "Which other wellness activities do you pair with yoga? (Select all that apply)"
+    type: multi_choice
+    construct: other_wellness_activities_pair_yoga
+    required: true
+    options:
+      - id: "a"
+        label: "Meditation"
+      - id: "b"
+        label: "Pilates"
+      - id: "c"
+        label: "Strength training"
+      - id: "d"
+        label: "Walking or running"
+      - id: "e"
+        label: "Stretching or mobility work"
+      - id: "f"
+        label: "Breathwork"
+      - id: "g"
+        label: "None"
+  - id: q32
+    prompt: "How satisfied are you with your current yoga practice?"
+    type: single_choice
+    construct: satisfied_current_yoga_practice
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "How satisfied are you with the instruction you receive (in person or online)?"
+    type: single_choice
+    construct: satisfied_instruction_receive_person_onl
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q34
+    prompt: "How satisfied are you with the value for money of your yoga practice?"
+    type: single_choice
+    construct: satisfied_value_money_yoga_practice
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q35
+    prompt: "Overall, how satisfied are you with yoga as part of your wellness routine?"
+    type: single_choice
+    construct: overall_satisfied_yoga_as_part
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q36
+    prompt: "How likely are you to recommend yoga to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_yoga_friend_0
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q37
+    prompt: "How likely are you to practice yoga more often over the next year?"
+    type: single_choice
+    construct: likely_practice_yoga_more_often
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q38
+    prompt: "How likely are you to try a new yoga style or class next year?"
+    type: single_choice
+    construct: likely_try_new_yoga_style
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q39
+    prompt: "How likely are you to still be practicing yoga a year from now?"
+    type: single_choice
+    construct: likely_still_be_practicing_yoga
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q40
+    prompt: "What is one thing that would improve your yoga experience? (Optional short answer)"
+    type: free_text
+    construct: one_thing_that_would_improve
+    required: false
+  - id: q41
+    prompt: "How would you describe your yoga experience level?"
+    type: single_choice
+    construct: would_describe_yoga_experience_level
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Novice"
+      - id: "c"
+        label: "Intermediate"
+      - id: "d"
+        label: "Advanced"
+      - id: "e"
+        label: "Instructor or very experienced"
+  - id: q42
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q43
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q47
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q48
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q49
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "In a relationship or partnered"
+      - id: "c"
+        label: "Married"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q50
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q51
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

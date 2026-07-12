@@ -1,0 +1,882 @@
+schemaVersion: "1.0"
+id: domain_management_v1
+title: "Domain Management Survey"
+description: "How people register domain names and manage DNS across registrars such as Namecheap, Cloudflare, GoDaddy, and Porkbun."
+questions:
+  - id: q0
+    prompt: "How often do you register or manage domain names?"
+    type: single_choice
+    construct: often_register_manage_domain_names
+    required: true
+    options:
+      - id: "a"
+        label: "Regularly, as part of my main work"
+      - id: "b"
+        label: "Occasionally for projects"
+      - id: "c"
+        label: "Rarely"
+      - id: "d"
+        label: "I am just learning"
+      - id: "e"
+        label: "I don't manage domains"
+  - id: q1
+    prompt: "How long have you been registering or managing domains?"
+    type: single_choice
+    construct: long_have_been_registering_managing
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+  - id: q2
+    prompt: "Which registrar do you use most often?"
+    type: single_choice
+    construct: registrar_use_most_often
+    required: true
+    options:
+      - id: "a"
+        label: "Namecheap"
+      - id: "b"
+        label: "Cloudflare Registrar"
+      - id: "c"
+        label: "GoDaddy"
+      - id: "d"
+        label: "Google Domains / Squarespace Domains"
+      - id: "e"
+        label: "Porkbun"
+      - id: "f"
+        label: "Name.com"
+      - id: "g"
+        label: "Gandi"
+      - id: "h"
+        label: "My hosting provider"
+      - id: "i"
+        label: "Other"
+  - id: q3
+    prompt: "Which registrars have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: registrars_have_used_past_year
+    required: true
+    options:
+      - id: "a"
+        label: "Namecheap"
+      - id: "b"
+        label: "Cloudflare Registrar"
+      - id: "c"
+        label: "GoDaddy"
+      - id: "d"
+        label: "Squarespace Domains (formerly Google Domains)"
+      - id: "e"
+        label: "Porkbun"
+      - id: "f"
+        label: "Name.com"
+      - id: "g"
+        label: "Gandi"
+      - id: "h"
+        label: "Hover"
+      - id: "i"
+        label: "A hosting provider's registrar"
+      - id: "j"
+        label: "None of these"
+  - id: q4
+    prompt: "Which registrars are you interested in trying next? (Select all that apply)"
+    type: multi_choice
+    construct: registrars_interested_trying_next_select
+    required: true
+    options:
+      - id: "a"
+        label: "Cloudflare Registrar"
+      - id: "b"
+        label: "Porkbun"
+      - id: "c"
+        label: "Namecheap"
+      - id: "d"
+        label: "Gandi"
+      - id: "e"
+        label: "Hover"
+      - id: "f"
+        label: "I'm happy with what I use"
+  - id: q5
+    prompt: "Where do you manage your DNS records?"
+    type: single_choice
+    construct: where_manage_dns_records
+    required: true
+    options:
+      - id: "a"
+        label: "Cloudflare"
+      - id: "b"
+        label: "At my registrar"
+      - id: "c"
+        label: "At my hosting provider"
+      - id: "d"
+        label: "A dedicated DNS provider (Route 53, NS1, etc.)"
+      - id: "e"
+        label: "I don't manage DNS directly"
+  - id: q6
+    prompt: "About how many domains do you currently own or manage? Please enter a number."
+    type: free_text
+    construct: many_domains_currently_own_manage
+    required: true
+  - id: q7
+    prompt: "About how much do you spend on domain registrations per year, in US dollars? Please enter a number."
+    type: free_text
+    construct: much_spend_domain_registrations_per
+    required: true
+  - id: q8
+    prompt: "What do you use your domains for? (Select all that apply)"
+    type: multi_choice
+    construct: use_domains_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "Personal websites or blogs"
+      - id: "b"
+        label: "Business or client websites"
+      - id: "c"
+        label: "Email addresses"
+      - id: "d"
+        label: "Side projects"
+      - id: "e"
+        label: "Redirects or short links"
+      - id: "f"
+        label: "Protecting a brand or name"
+      - id: "g"
+        label: "Investing or reselling"
+      - id: "h"
+        label: "APIs or internal services"
+  - id: q9
+    prompt: "Which top-level domains do you use? (Select all that apply)"
+    type: multi_choice
+    construct: top_level_domains_use_select
+    required: true
+    options:
+      - id: "a"
+        label: ".com"
+      - id: "b"
+        label: ".net or .org"
+      - id: "c"
+        label: ".io"
+      - id: "d"
+        label: ".dev or .app"
+      - id: "e"
+        label: ".co"
+      - id: "f"
+        label: "A country-code TLD (.us, .uk, etc.)"
+      - id: "g"
+        label: "A newer TLD (.xyz, .me, etc.)"
+      - id: "h"
+        label: "Other"
+  - id: q10
+    prompt: "Why did you choose your primary registrar?"
+    type: single_choice
+    construct: why_did_choose_primary_registrar
+    required: true
+    options:
+      - id: "a"
+        label: "Low prices and renewal costs"
+      - id: "b"
+        label: "Good management interface"
+      - id: "c"
+        label: "Free WHOIS privacy"
+      - id: "d"
+        label: "Bundled with hosting or other services"
+      - id: "e"
+        label: "Reputation and trust"
+      - id: "f"
+        label: "Familiarity or prior use"
+  - id: q11
+    prompt: "Which DNS record types do you regularly configure? (Select all that apply)"
+    type: multi_choice
+    construct: dns_record_types_regularly_configure
+    required: true
+    options:
+      - id: "a"
+        label: "A / AAAA records"
+      - id: "b"
+        label: "CNAME records"
+      - id: "c"
+        label: "MX records (email)"
+      - id: "d"
+        label: "TXT records (SPF, DKIM, verification)"
+      - id: "e"
+        label: "Nameserver (NS) records"
+      - id: "f"
+        label: "CAA records"
+      - id: "g"
+        label: "I use presets and rarely edit records"
+      - id: "h"
+        label: "I don't configure DNS myself"
+  - id: q12
+    prompt: "How do you handle WHOIS privacy for your domains?"
+    type: single_choice
+    construct: handle_whois_privacy_domains
+    required: true
+    options:
+      - id: "a"
+        label: "I use free WHOIS privacy"
+      - id: "b"
+        label: "I pay for WHOIS privacy"
+      - id: "c"
+        label: "I don't use WHOIS privacy"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q13
+    prompt: "How do you manage domain renewals?"
+    type: single_choice
+    construct: manage_domain_renewals
+    required: true
+    options:
+      - id: "a"
+        label: "Auto-renew is on for everything"
+      - id: "b"
+        label: "Auto-renew for some domains"
+      - id: "c"
+        label: "I renew manually"
+      - id: "d"
+        label: "I've let domains expire by accident"
+  - id: q14
+    prompt: "Do you use email hosting on your domains?"
+    type: single_choice
+    construct: use_email_hosting_domains
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a paid email service (Google Workspace, etc.)"
+      - id: "b"
+        label: "Yes, email forwarding only"
+      - id: "c"
+        label: "Yes, self-hosted email"
+      - id: "d"
+        label: "No"
+  - id: q15
+    prompt: "Have you ever transferred a domain between registrars?"
+    type: single_choice
+    construct: have_ever_transferred_domain_between
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, once"
+      - id: "b"
+        label: "Yes, more than once"
+      - id: "c"
+        label: "No, but I've considered it"
+      - id: "d"
+        label: "No"
+  - id: q16
+    prompt: "How much do you agree: Low renewal prices matter more to me than the initial registration price."
+    type: single_choice
+    construct: much_agree_low_renewal_prices
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: I prefer to manage DNS separately from where I register domains."
+    type: single_choice
+    construct: much_agree_i_prefer_manage
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: DNS configuration is confusing or error-prone for me."
+    type: single_choice
+    construct: much_agree_dns_configuration_confusing
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: WHOIS privacy should be included for free."
+    type: single_choice
+    construct: much_agree_whois_privacy_should
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: I worry about losing a domain to expiration or hijacking."
+    type: single_choice
+    construct: much_agree_i_worry_losing
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: Upselling and add-ons make some registrars frustrating to use."
+    type: single_choice
+    construct: much_agree_upselling_add_ons
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "When choosing a registrar, how important is renewal price?"
+    type: single_choice
+    construct: when_choosing_registrar_important_renewa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When choosing a registrar, how important is the quality of the management interface?"
+    type: single_choice
+    construct: when_choosing_registrar_important_qualit
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When choosing a registrar, how important is free WHOIS privacy?"
+    type: single_choice
+    construct: when_choosing_registrar_important_free
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing a registrar, how important is DNS management quality?"
+    type: single_choice
+    construct: when_choosing_registrar_important_dns
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing a registrar, how important is customer support?"
+    type: single_choice
+    construct: when_choosing_registrar_important_custom
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When choosing a registrar, how important is security (two-factor, transfer lock, etc.)?"
+    type: single_choice
+    construct: when_choosing_registrar_important_securi
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "Which are your top 3 factors when choosing a registrar? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Renewal price"
+      - id: "b"
+        label: "Management interface"
+      - id: "c"
+        label: "Free WHOIS privacy"
+      - id: "d"
+        label: "DNS management quality"
+      - id: "e"
+        label: "Customer support"
+      - id: "f"
+        label: "Security features"
+      - id: "g"
+        label: "Reputation and trust"
+      - id: "h"
+        label: "Bundled services"
+  - id: q29
+    prompt: "How often do you change or update DNS records?"
+    type: single_choice
+    construct: often_change_update_dns_records
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q30
+    prompt: "How often do you register a new domain?"
+    type: single_choice
+    construct: often_register_new_domain
+    required: true
+    options:
+      - id: "a"
+        label: "Never anymore"
+      - id: "b"
+        label: "Once a year or less"
+      - id: "c"
+        label: "A few times a year"
+      - id: "d"
+        label: "Monthly"
+      - id: "e"
+        label: "More than monthly"
+  - id: q31
+    prompt: "How often do you worry about a domain expiring unexpectedly?"
+    type: single_choice
+    construct: often_worry_domain_expiring_unexpectedly
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q32
+    prompt: "Do you use two-factor authentication on your registrar account?"
+    type: single_choice
+    construct: use_two_factor_authentication_registrar
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "I'm not sure"
+  - id: q33
+    prompt: "Do you enable a registrar or transfer lock on your domains?"
+    type: single_choice
+    construct: enable_registrar_transfer_lock_domains
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, on all of them"
+      - id: "b"
+        label: "Yes, on some"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q34
+    prompt: "How did you discover your primary registrar? (Select all that apply)"
+    type: multi_choice
+    construct: did_discover_primary_registrar_select
+    required: true
+    options:
+      - id: "a"
+        label: "Word of mouth"
+      - id: "b"
+        label: "Social media or online communities"
+      - id: "c"
+        label: "Blog posts or comparisons"
+      - id: "d"
+        label: "Price comparison sites"
+      - id: "e"
+        label: "It was bundled with hosting"
+      - id: "f"
+        label: "I searched and compared options"
+  - id: q35
+    prompt: "How satisfied are you with your registrar's pricing?"
+    type: single_choice
+    construct: satisfied_registrar_s_pricing
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q36
+    prompt: "How satisfied are you with your registrar's DNS and management tools?"
+    type: single_choice
+    construct: satisfied_registrar_s_dns_management
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q37
+    prompt: "Overall, how satisfied are you with your primary registrar?"
+    type: single_choice
+    construct: overall_satisfied_primary_registrar
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q38
+    prompt: "How likely are you to recommend your primary registrar to someone else? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_primary_registrar_someo
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q39
+    prompt: "How likely are you to transfer a domain to a different registrar within the next year?"
+    type: single_choice
+    construct: likely_transfer_domain_different_registr
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q40
+    prompt: "What is one thing you would improve about your registrar or DNS provider? (Optional short answer)"
+    type: free_text
+    construct: one_thing_would_improve_registrar
+    required: false
+  - id: q41
+    prompt: "Which best describes your current role?"
+    type: single_choice
+    construct: best_describes_current_role
+    required: true
+    options:
+      - id: "a"
+        label: "Front-end developer"
+      - id: "b"
+        label: "Back-end developer"
+      - id: "c"
+        label: "Full-stack developer"
+      - id: "d"
+        label: "DevOps or platform engineer"
+      - id: "e"
+        label: "Systems or network administrator"
+      - id: "f"
+        label: "Freelancer or agency owner"
+      - id: "g"
+        label: "Small business owner"
+      - id: "h"
+        label: "Student"
+      - id: "i"
+        label: "Other"
+  - id: q42
+    prompt: "How many years have you worked professionally in technology (not counting education)?"
+    type: single_choice
+    construct: many_years_have_worked_professionally
+    required: true
+    options:
+      - id: "a"
+        label: "I don't work in tech professionally"
+      - id: "b"
+        label: "Less than 2 years"
+      - id: "c"
+        label: "2 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "11 to 20 years"
+      - id: "f"
+        label: "More than 20 years"
+  - id: q43
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q44
+    prompt: "Approximately how many people work at your company or organization?"
+    type: single_choice
+    construct: approximately_many_people_work_company
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2 to 9"
+      - id: "c"
+        label: "10 to 99"
+      - id: "d"
+        label: "100 to 499"
+      - id: "e"
+        label: "500 to 4,999"
+      - id: "f"
+        label: "5,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q45
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Government"
+      - id: "f"
+        label: "Retail or e-commerce"
+      - id: "g"
+        label: "Media or entertainment"
+      - id: "h"
+        label: "Other"
+  - id: q46
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q47
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q48
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q49
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q50
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q51
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

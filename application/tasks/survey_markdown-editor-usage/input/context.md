@@ -1,0 +1,7 @@
+# Markdown Editor Usage
+
+How people choose and use Markdown editors and note-taking tools for writing and knowledge management.
+
+## About this survey
+
+This survey profiles Markdown editor and note-taking usage, opening with a screener on writing frequency, tenure, and the respondent's primary editor along with tools used and wanted. It records what Markdown is used for, preferred editing mode, note counts, the Markdown features and organization methods in use, where files are stored and synced, plugin usage, and publishing habits. Attitudes are captured through an agreement Likert battery on focus, plain-text ownership, distraction-free writing, note linking, and lock-in, an importance matrix over editor-selection criteria, and frequency scales for revisiting notes, feeling overwhelmed, and searching, plus a top-three ranking of decision factors. Later sections cover payment, AI writing assistance, note-taking style, discovery channels, satisfaction with writing experience and sync, overall satisfaction, recommendation likelihood, switching intent, and an optional open comment. Question types include single-choice, multi-select, several Likert scales, an importance matrix, a ranking item, an NPS-style 0–10 scale, and numeric free-text. The survey concludes with a demographic block covering role, professional experience, employment, company size, industry, age, gender, race and ethnicity, education, U.S. region, and urbanicity.

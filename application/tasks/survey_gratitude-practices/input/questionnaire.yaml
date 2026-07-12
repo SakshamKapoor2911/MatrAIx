@@ -1,0 +1,827 @@
+schemaVersion: "1.0"
+id: gratitude_practices_v1
+title: "Gratitude Practices Survey"
+description: "How people practice gratitude, including methods, frequency, and perceived benefits."
+questions:
+  - id: q0
+    prompt: "Do you have a regular gratitude practice?"
+    type: single_choice
+    construct: have_regular_gratitude_practice
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, as a regular routine"
+      - id: "b"
+        label: "Yes, but only occasionally"
+      - id: "c"
+        label: "I used to but stopped"
+      - id: "d"
+        label: "No, but I am interested"
+      - id: "e"
+        label: "No, and I am not interested"
+  - id: q1
+    prompt: "How long have you had a gratitude practice?"
+    type: single_choice
+    construct: long_have_had_gratitude_practice
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 3 months"
+      - id: "b"
+        label: "3 to 12 months"
+      - id: "c"
+        label: "1 to 2 years"
+      - id: "d"
+        label: "3 to 5 years"
+      - id: "e"
+        label: "More than 5 years"
+      - id: "f"
+        label: "I don't currently practice"
+  - id: q2
+    prompt: "How often do you practice gratitude?"
+    type: single_choice
+    construct: often_practice_gratitude
+    required: true
+    options:
+      - id: "a"
+        label: "Daily"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "About once a week"
+      - id: "d"
+        label: "A few times a month"
+      - id: "e"
+        label: "Rarely"
+  - id: q3
+    prompt: "Which gratitude methods do you use? (Select all that apply)"
+    type: multi_choice
+    construct: gratitude_methods_use_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "A gratitude journal"
+      - id: "b"
+        label: "Saying what I'm thankful for aloud"
+      - id: "c"
+        label: "A gratitude jar"
+      - id: "d"
+        label: "Sharing gratitude at meals"
+      - id: "e"
+        label: "Prayer or reflection"
+      - id: "f"
+        label: "Writing thank-you notes"
+      - id: "g"
+        label: "A gratitude app"
+      - id: "h"
+        label: "Making a mental list"
+  - id: q4
+    prompt: "Which gratitude apps or tools do you use? (Select all that apply)"
+    type: multi_choice
+    construct: gratitude_apps_tools_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Gratitude"
+      - id: "b"
+        label: "Presently"
+      - id: "c"
+        label: "Reflectly"
+      - id: "d"
+        label: "Day One"
+      - id: "e"
+        label: "Grateful"
+      - id: "f"
+        label: "365 Gratitude"
+      - id: "g"
+        label: "Pen and paper"
+      - id: "h"
+        label: "None"
+  - id: q5
+    prompt: "When do you usually practice gratitude? (Select all that apply)"
+    type: multi_choice
+    construct: when_usually_practice_gratitude_select
+    required: true
+    options:
+      - id: "a"
+        label: "First thing in the morning"
+      - id: "b"
+        label: "Before meals"
+      - id: "c"
+        label: "In the evening"
+      - id: "d"
+        label: "Right before bed"
+      - id: "e"
+        label: "In the moment, as things happen"
+  - id: q6
+    prompt: "With whom do you share your gratitude? (Select all that apply)"
+    type: multi_choice
+    construct: whom_share_gratitude_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Family"
+      - id: "b"
+        label: "My partner"
+      - id: "c"
+        label: "Friends"
+      - id: "d"
+        label: "Coworkers"
+      - id: "e"
+        label: "My faith community"
+      - id: "f"
+        label: "On social media"
+      - id: "g"
+        label: "I keep it to myself"
+  - id: q7
+    prompt: "How did you first start practicing gratitude?"
+    type: single_choice
+    construct: did_first_start_practicing_gratitude
+    required: true
+    options:
+      - id: "a"
+        label: "A friend or family member suggested it"
+      - id: "b"
+        label: "An app or online content"
+      - id: "c"
+        label: "A book or podcast"
+      - id: "d"
+        label: "A class, workshop, or faith community"
+      - id: "e"
+        label: "A recommendation from a health provider"
+      - id: "f"
+        label: "On my own"
+  - id: q8
+    prompt: "What is your primary goal for practicing gratitude?"
+    type: single_choice
+    construct: primary_goal_practicing_gratitude
+    required: true
+    options:
+      - id: "a"
+        label: "Feeling more positive"
+      - id: "b"
+        label: "Reducing stress"
+      - id: "c"
+        label: "Strengthening relationships"
+      - id: "d"
+        label: "Sleeping better"
+      - id: "e"
+        label: "Spiritual or personal growth"
+      - id: "f"
+        label: "General wellbeing"
+  - id: q9
+    prompt: "Which are your top 3 reasons for practicing gratitude? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_reasons_practicing_gratitude
+    required: true
+    options:
+      - id: "a"
+        label: "Feeling more positive"
+      - id: "b"
+        label: "Lower stress"
+      - id: "c"
+        label: "Better relationships"
+      - id: "d"
+        label: "Improved mood"
+      - id: "e"
+        label: "Greater appreciation for daily life"
+      - id: "f"
+        label: "Spiritual growth"
+      - id: "g"
+        label: "Better sleep"
+      - id: "h"
+        label: "Perspective during hard times"
+  - id: q10
+    prompt: "In a typical week, on how many days do you practice gratitude? Please enter a number."
+    type: free_text
+    construct: typical_week_many_days_practice
+    required: true
+  - id: q11
+    prompt: "In a typical gratitude session, about how many things do you list or reflect on? Please enter a number."
+    type: free_text
+    construct: typical_gratitude_session_many_things
+    required: true
+  - id: q12
+    prompt: "In a typical month, about how many thank-you notes or messages of appreciation do you send? Please enter a number."
+    type: free_text
+    construct: typical_month_many_thank_notes
+    required: true
+  - id: q13
+    prompt: "How much do you agree: My gratitude practice helps me feel more positive."
+    type: single_choice
+    construct: much_agree_my_gratitude_practice
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree: My gratitude practice improves my relationships."
+    type: single_choice
+    construct: much_agree_my_gratitude_practice
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree: My gratitude practice fits easily into my routine."
+    type: single_choice
+    construct: much_agree_my_gratitude_practice
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree: My gratitude practice helps me manage stress."
+    type: single_choice
+    construct: much_agree_my_gratitude_practice
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: My gratitude practice helps me sleep better."
+    type: single_choice
+    construct: much_agree_my_gratitude_practice
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: My gratitude practice makes me more appreciative day to day."
+    type: single_choice
+    construct: much_agree_my_gratitude_practice
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "When keeping a gratitude practice, how important is making it a daily habit?"
+    type: single_choice
+    construct: when_keeping_gratitude_practice_importan
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "When keeping a gratitude practice, how important is writing things down?"
+    type: single_choice
+    construct: when_keeping_gratitude_practice_importan
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "When keeping a gratitude practice, how important is sharing gratitude with others?"
+    type: single_choice
+    construct: when_keeping_gratitude_practice_importan
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "When keeping a gratitude practice, how important is having reminders or prompts?"
+    type: single_choice
+    construct: when_keeping_gratitude_practice_importan
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When keeping a gratitude practice, how important is being specific about what you are grateful for?"
+    type: single_choice
+    construct: when_keeping_gratitude_practice_importan
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When keeping a gratitude practice, how important is keeping it simple and quick?"
+    type: single_choice
+    construct: when_keeping_gratitude_practice_importan
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How often do you feel more positive after practicing gratitude?"
+    type: single_choice
+    construct: often_feel_more_positive_after
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q26
+    prompt: "How often do you express gratitude directly to other people?"
+    type: single_choice
+    construct: often_express_gratitude_directly_other
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q27
+    prompt: "How satisfied are you with your gratitude practice?"
+    type: single_choice
+    construct: satisfied_gratitude_practice
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q28
+    prompt: "Overall, how meaningful is your gratitude practice to you?"
+    type: single_choice
+    construct: overall_meaningful_gratitude_practice
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all meaningful"
+      - id: "b"
+        label: "Slightly meaningful"
+      - id: "c"
+        label: "Moderately meaningful"
+      - id: "d"
+        label: "Very meaningful"
+      - id: "e"
+        label: "Extremely meaningful"
+  - id: q29
+    prompt: "Which benefits have you noticed from practicing gratitude? (Select all that apply)"
+    type: multi_choice
+    construct: benefits_have_noticed_from_practicing
+    required: true
+    options:
+      - id: "a"
+        label: "More positive mood"
+      - id: "b"
+        label: "Less stress"
+      - id: "c"
+        label: "Stronger relationships"
+      - id: "d"
+        label: "Better sleep"
+      - id: "e"
+        label: "Greater appreciation for daily life"
+      - id: "f"
+        label: "More resilience during hard times"
+      - id: "g"
+        label: "I have not noticed clear benefits"
+  - id: q30
+    prompt: "What makes it hard to keep up your gratitude practice? (Select all that apply)"
+    type: multi_choice
+    construct: makes_it_hard_keep_up
+    required: true
+    options:
+      - id: "a"
+        label: "Not enough time"
+      - id: "b"
+        label: "Forgetting to practice"
+      - id: "c"
+        label: "Feeling repetitive"
+      - id: "d"
+        label: "Losing motivation"
+      - id: "e"
+        label: "Feeling it doesn't help"
+      - id: "f"
+        label: "Difficult periods in life"
+      - id: "g"
+        label: "Nothing in particular"
+  - id: q31
+    prompt: "Which best describes how consistent your gratitude practice is?"
+    type: single_choice
+    construct: best_describes_consistent_gratitude_prac
+    required: true
+    options:
+      - id: "a"
+        label: "Very consistent, almost every day"
+      - id: "b"
+        label: "Fairly consistent most weeks"
+      - id: "c"
+        label: "On and off"
+      - id: "d"
+        label: "Only when I feel I need it"
+  - id: q32
+    prompt: "Do you use reminders or prompts for your gratitude practice?"
+    type: single_choice
+    construct: use_reminders_prompts_gratitude_practice
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, from an app"
+      - id: "b"
+        label: "Yes, a personal reminder or routine"
+      - id: "c"
+        label: "No, but I would like to"
+      - id: "d"
+        label: "No"
+  - id: q33
+    prompt: "How likely are you to continue your gratitude practice over the next year?"
+    type: single_choice
+    construct: likely_continue_gratitude_practice_over
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q34
+    prompt: "How likely are you to try a gratitude app in the next year?"
+    type: single_choice
+    construct: likely_try_gratitude_app_next
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q35
+    prompt: "How likely are you to recommend a gratitude practice to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_gratitude_practice_frie
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q36
+    prompt: "What has helped you most in keeping up your gratitude practice? (Optional short answer)"
+    type: free_text
+    construct: has_helped_most_keeping_up
+    required: false
+  - id: q37
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q38
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q39
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q42
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q43
+    prompt: "How many people live in your household, including yourself?"
+    type: single_choice
+    construct: many_people_live_household_including
+    required: true
+    options:
+      - id: "a"
+        label: "1"
+      - id: "b"
+        label: "2"
+      - id: "c"
+        label: "3"
+      - id: "d"
+        label: "4"
+      - id: "e"
+        label: "5 or more"
+  - id: q44
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "In a domestic partnership or living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q45
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q46
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+  - id: q47
+    prompt: "What is your current health insurance status?"
+    type: single_choice
+    construct: current_health_insurance_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employer-sponsored insurance"
+      - id: "b"
+        label: "Insurance purchased on my own"
+      - id: "c"
+        label: "Medicare"
+      - id: "d"
+        label: "Medicaid"
+      - id: "e"
+        label: "Uninsured"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q48
+    prompt: "In general, how would you rate your overall wellbeing?"
+    type: single_choice
+    construct: general_would_rate_overall_wellbeing
+    required: true
+    options:
+      - id: "a"
+        label: "Poor"
+      - id: "b"
+        label: "Fair"
+      - id: "c"
+        label: "Good"
+      - id: "d"
+        label: "Very good"
+      - id: "e"
+        label: "Excellent"
+  - id: q49
+    prompt: "How important is religion or spirituality in your daily life?"
+    type: single_choice
+    construct: important_religion_spirituality_daily_li
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+      - id: "f"
+        label: "Prefer not to say"

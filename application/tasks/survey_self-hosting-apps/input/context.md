@@ -1,0 +1,7 @@
+# Self-Hosting Apps
+
+How hobbyists and prosumers self-host apps and services at home using Docker and tools like Nextcloud, Home Assistant, Jellyfin, and Immich.
+
+## About this survey
+
+This survey profiles the home self-hosting hobby, opening with a screener on tinkering frequency, tenure, and self-hoster type. It records the centerpiece app alongside apps run and wanted, motivations for self-hosting, deployment methods, management and dashboard tools, remote-access approaches, reverse-proxy choice, and backup practices. Attitudes are captured with an agreement Likert battery covering privacy, maintenance time, security worry, Docker's role, daily reliance, cost savings, and household satisfaction, plus a per-item importance matrix over app-selection criteria, a top-three ranking of decision factors, and a multi-select of cloud services replaced. Further sections examine breakage frequency, update habits, hosting hardware, internet exposure, and data-loss worry, followed by satisfaction, a recommendation scale, and intent to add apps or return to the cloud. Question types include single-choice, multi-select, several Likert scales, an importance matrix, a ranking item, a 0–10 recommendation scale, and numeric free-text. The survey ends with a demographic block covering occupation, technology experience, employment, household size, industry, age, gender, race and ethnicity, education, U.S. region, and urbanicity.

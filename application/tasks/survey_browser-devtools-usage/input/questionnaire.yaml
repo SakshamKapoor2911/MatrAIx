@@ -1,0 +1,916 @@
+schemaVersion: "1.0"
+id: browser_devtools_usage_v1
+title: "Browser Developer Tools Usage Survey"
+description: "How developers use browser developer tools such as Chrome DevTools and Firefox Developer Tools, including which panels and features they rely on."
+questions:
+  - id: q0
+    prompt: "How often do you open browser developer tools?"
+    type: single_choice
+    construct: often_open_browser_developer_tools
+    required: true
+    options:
+      - id: "a"
+        label: "Many times a day"
+      - id: "b"
+        label: "A few times a day"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "Occasionally"
+      - id: "e"
+        label: "Almost never"
+  - id: q1
+    prompt: "How long have you been using browser developer tools?"
+    type: single_choice
+    construct: long_have_been_using_browser
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+  - id: q2
+    prompt: "Which best describes your work with the web?"
+    type: single_choice
+    construct: best_describes_work_web
+    required: true
+    options:
+      - id: "a"
+        label: "Front-end developer"
+      - id: "b"
+        label: "Full-stack developer"
+      - id: "c"
+        label: "Web designer"
+      - id: "d"
+        label: "QA or test engineer"
+      - id: "e"
+        label: "Back-end developer who touches the front end"
+      - id: "f"
+        label: "I use DevTools occasionally"
+  - id: q3
+    prompt: "Which browser's developer tools do you use most often?"
+    type: single_choice
+    construct: browser_s_developer_tools_use
+    required: true
+    options:
+      - id: "a"
+        label: "Chrome DevTools"
+      - id: "b"
+        label: "Firefox Developer Tools"
+      - id: "c"
+        label: "Edge DevTools"
+      - id: "d"
+        label: "Safari Web Inspector"
+      - id: "e"
+        label: "Other"
+  - id: q4
+    prompt: "Which browsers' developer tools have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: browsers_developer_tools_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "Chrome DevTools"
+      - id: "b"
+        label: "Firefox Developer Tools"
+      - id: "c"
+        label: "Edge DevTools"
+      - id: "d"
+        label: "Safari Web Inspector"
+      - id: "e"
+        label: "Brave DevTools"
+      - id: "f"
+        label: "Arc or another Chromium browser"
+      - id: "g"
+        label: "None"
+  - id: q5
+    prompt: "Which DevTools panels do you use regularly? (Select all that apply)"
+    type: multi_choice
+    construct: devtools_panels_use_regularly_select
+    required: true
+    options:
+      - id: "a"
+        label: "Elements / Inspector"
+      - id: "b"
+        label: "Console"
+      - id: "c"
+        label: "Network"
+      - id: "d"
+        label: "Sources / Debugger"
+      - id: "e"
+        label: "Performance"
+      - id: "f"
+        label: "Memory"
+      - id: "g"
+        label: "Application / Storage"
+      - id: "h"
+        label: "Lighthouse"
+      - id: "i"
+        label: "Accessibility"
+  - id: q6
+    prompt: "Which DevTools features do you use for debugging? (Select all that apply)"
+    type: multi_choice
+    construct: devtools_features_use_debugging_select
+    required: true
+    options:
+      - id: "a"
+        label: "Breakpoints"
+      - id: "b"
+        label: "Console logging"
+      - id: "c"
+        label: "Watch expressions"
+      - id: "d"
+        label: "Call stack inspection"
+      - id: "e"
+        label: "Conditional breakpoints"
+      - id: "f"
+        label: "Network request inspection"
+      - id: "g"
+        label: "Blackboxing / ignore lists"
+      - id: "h"
+        label: "Source maps"
+  - id: q7
+    prompt: "What do you most commonly use DevTools for? (Select all that apply)"
+    type: multi_choice
+    construct: most_commonly_use_devtools_select
+    required: true
+    options:
+      - id: "a"
+        label: "Inspecting and editing the DOM"
+      - id: "b"
+        label: "Tweaking CSS live"
+      - id: "c"
+        label: "Debugging JavaScript"
+      - id: "d"
+        label: "Inspecting network requests"
+      - id: "e"
+        label: "Measuring performance"
+      - id: "f"
+        label: "Testing responsive layouts"
+      - id: "g"
+        label: "Auditing accessibility"
+      - id: "h"
+        label: "Inspecting storage and cookies"
+  - id: q8
+    prompt: "Which device or responsive testing features do you use? (Select all that apply)"
+    type: multi_choice
+    construct: device_responsive_testing_features_use
+    required: true
+    options:
+      - id: "a"
+        label: "Device toolbar / responsive mode"
+      - id: "b"
+        label: "Network throttling"
+      - id: "c"
+        label: "CPU throttling"
+      - id: "d"
+        label: "Device emulation (touch, orientation)"
+      - id: "e"
+        label: "Geolocation override"
+      - id: "f"
+        label: "I test on real devices instead"
+      - id: "g"
+        label: "I don't use these"
+  - id: q9
+    prompt: "Which performance or auditing tools do you use? (Select all that apply)"
+    type: multi_choice
+    construct: performance_auditing_tools_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Lighthouse"
+      - id: "b"
+        label: "Performance panel / flame charts"
+      - id: "c"
+        label: "Core Web Vitals overlay"
+      - id: "d"
+        label: "Coverage tool"
+      - id: "e"
+        label: "Memory profiler"
+      - id: "f"
+        label: "WebPageTest or external tools"
+      - id: "g"
+        label: "None"
+  - id: q10
+    prompt: "Which CSS-related DevTools features do you use? (Select all that apply)"
+    type: multi_choice
+    construct: css_related_devtools_features_use
+    required: true
+    options:
+      - id: "a"
+        label: "The box-model viewer"
+      - id: "b"
+        label: "Flexbox / Grid inspectors"
+      - id: "c"
+        label: "Color picker and contrast checker"
+      - id: "d"
+        label: "Editing styles live"
+      - id: "e"
+        label: "Computed styles panel"
+      - id: "f"
+        label: "Animations inspector"
+      - id: "g"
+        label: "Changes / diff view"
+  - id: q11
+    prompt: "How do you usually open developer tools?"
+    type: single_choice
+    construct: usually_open_developer_tools
+    required: true
+    options:
+      - id: "a"
+        label: "Keyboard shortcut (F12 or equivalent)"
+      - id: "b"
+        label: "Right-click and Inspect"
+      - id: "c"
+        label: "The browser menu"
+      - id: "d"
+        label: "It varies"
+  - id: q12
+    prompt: "About how many hours per week do you spend with DevTools open? Please enter a number."
+    type: free_text
+    construct: many_hours_per_week_spend
+    required: true
+  - id: q13
+    prompt: "About how many DevTools keyboard shortcuts do you know by heart? Please enter a number."
+    type: free_text
+    construct: many_devtools_keyboard_shortcuts_know
+    required: true
+  - id: q14
+    prompt: "How would you rate your proficiency with browser developer tools?"
+    type: single_choice
+    construct: would_rate_proficiency_browser_developer
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Intermediate"
+      - id: "c"
+        label: "Advanced"
+      - id: "d"
+        label: "Expert"
+  - id: q15
+    prompt: "How did you learn to use developer tools? (Select all that apply)"
+    type: multi_choice
+    construct: did_learn_use_developer_tools
+    required: true
+    options:
+      - id: "a"
+        label: "On the job"
+      - id: "b"
+        label: "Official documentation"
+      - id: "c"
+        label: "YouTube tutorials"
+      - id: "d"
+        label: "Blogs and articles"
+      - id: "e"
+        label: "A course or bootcamp"
+      - id: "f"
+        label: "Trial and error"
+  - id: q16
+    prompt: "How much do you agree: I could not do my job effectively without DevTools."
+    type: single_choice
+    construct: much_agree_i_could_not
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: I only use a small fraction of what DevTools offers."
+    type: single_choice
+    construct: much_agree_i_only_use
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: Chrome DevTools is better than the alternatives."
+    type: single_choice
+    construct: much_agree_chrome_devtools_better
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: The Performance panel is difficult to understand."
+    type: single_choice
+    construct: much_agree_performance_panel_difficult
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: I regularly discover new DevTools features."
+    type: single_choice
+    construct: much_agree_i_regularly_discover
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: DevTools has become too crowded and complex."
+    type: single_choice
+    construct: much_agree_devtools_has_become
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How much do you agree: I trust the accessibility auditing in DevTools."
+    type: single_choice
+    construct: much_agree_i_trust_accessibility
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "How important to your workflow is the Elements/Inspector panel?"
+    type: single_choice
+    construct: important_workflow_elements_inspector_pa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important to your workflow is the Console panel?"
+    type: single_choice
+    construct: important_workflow_console_panel
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How important to your workflow is the Network panel?"
+    type: single_choice
+    construct: important_workflow_network_panel
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "How important to your workflow is the Sources/Debugger panel?"
+    type: single_choice
+    construct: important_workflow_sources_debugger_pane
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "How important to your workflow is the Performance panel?"
+    type: single_choice
+    construct: important_workflow_performance_panel
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "How important to your workflow is the Application/Storage panel?"
+    type: single_choice
+    construct: important_workflow_application_storage_p
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "Which are your top 3 most-used DevTools panels? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_most_used_devtools
+    required: true
+    options:
+      - id: "a"
+        label: "Elements / Inspector"
+      - id: "b"
+        label: "Console"
+      - id: "c"
+        label: "Network"
+      - id: "d"
+        label: "Sources / Debugger"
+      - id: "e"
+        label: "Performance"
+      - id: "f"
+        label: "Memory"
+      - id: "g"
+        label: "Application / Storage"
+      - id: "h"
+        label: "Lighthouse"
+  - id: q30
+    prompt: "How do you primarily debug JavaScript?"
+    type: single_choice
+    construct: primarily_debug_javascript
+    required: true
+    options:
+      - id: "a"
+        label: "Breakpoints in the Sources panel"
+      - id: "b"
+        label: "console.log statements"
+      - id: "c"
+        label: "A mix of both"
+      - id: "d"
+        label: "An IDE debugger instead"
+      - id: "e"
+        label: "I rarely debug JavaScript"
+  - id: q31
+    prompt: "How often do you use DevTools to diagnose network or API issues?"
+    type: single_choice
+    construct: often_use_devtools_diagnose_network
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q32
+    prompt: "How do you handle DevTools while working on responsive designs?"
+    type: single_choice
+    construct: handle_devtools_while_working_responsive
+    required: true
+    options:
+      - id: "a"
+        label: "I rely heavily on the device toolbar"
+      - id: "b"
+        label: "I use it plus real devices"
+      - id: "c"
+        label: "I mostly test on real devices"
+      - id: "d"
+        label: "I rarely test responsiveness"
+  - id: q33
+    prompt: "Do you customize your DevTools settings or theme?"
+    type: single_choice
+    construct: customize_devtools_settings_theme
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, extensively"
+      - id: "b"
+        label: "A few tweaks (dark mode, etc.)"
+      - id: "c"
+        label: "No, I use the defaults"
+      - id: "d"
+        label: "I didn't know you could"
+  - id: q34
+    prompt: "Do you use any DevTools browser extensions (React DevTools, Vue DevTools, etc.)?"
+    type: single_choice
+    construct: use_any_devtools_browser_extensions
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, several"
+      - id: "b"
+        label: "Yes, one or two"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not applicable to my work"
+  - id: q35
+    prompt: "How often do you feel overwhelmed by the number of DevTools features?"
+    type: single_choice
+    construct: often_feel_overwhelmed_by_number
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q36
+    prompt: "How satisfied are you with the performance and responsiveness of DevTools?"
+    type: single_choice
+    construct: satisfied_performance_responsiveness_dev
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q37
+    prompt: "How satisfied are you with the debugging experience in DevTools?"
+    type: single_choice
+    construct: satisfied_debugging_experience_devtools
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q38
+    prompt: "Overall, how satisfied are you with your primary browser's developer tools?"
+    type: single_choice
+    construct: overall_satisfied_primary_browser_s
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q39
+    prompt: "How likely are you to recommend your primary browser's DevTools to another developer? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_primary_browser_s
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q40
+    prompt: "How likely are you to learn a new DevTools feature within the next month?"
+    type: single_choice
+    construct: likely_learn_new_devtools_feature
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q41
+    prompt: "How likely are you to switch your primary browser for development within the next year?"
+    type: single_choice
+    construct: likely_switch_primary_browser_developmen
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q42
+    prompt: "What is one DevTools feature you wish worked better? (Optional short answer)"
+    type: free_text
+    construct: one_devtools_feature_wish_worked
+    required: false
+  - id: q43
+    prompt: "Which best describes your current role?"
+    type: single_choice
+    construct: best_describes_current_role
+    required: true
+    options:
+      - id: "a"
+        label: "Front-end developer"
+      - id: "b"
+        label: "Full-stack developer"
+      - id: "c"
+        label: "Back-end developer"
+      - id: "d"
+        label: "Web designer"
+      - id: "e"
+        label: "QA or test engineer"
+      - id: "f"
+        label: "Engineering manager"
+      - id: "g"
+        label: "Student"
+      - id: "h"
+        label: "Other"
+  - id: q44
+    prompt: "How many years have you worked professionally in technology (not counting education)?"
+    type: single_choice
+    construct: many_years_have_worked_professionally
+    required: true
+    options:
+      - id: "a"
+        label: "I don't work in tech professionally"
+      - id: "b"
+        label: "Less than 2 years"
+      - id: "c"
+        label: "2 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "11 to 20 years"
+      - id: "f"
+        label: "More than 20 years"
+  - id: q45
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q46
+    prompt: "Approximately how many people work at your company or organization?"
+    type: single_choice
+    construct: approximately_many_people_work_company
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2 to 9"
+      - id: "c"
+        label: "10 to 99"
+      - id: "d"
+        label: "100 to 499"
+      - id: "e"
+        label: "500 to 4,999"
+      - id: "f"
+        label: "5,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q47
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Government"
+      - id: "f"
+        label: "Retail or e-commerce"
+      - id: "g"
+        label: "Manufacturing"
+      - id: "h"
+        label: "Media or entertainment"
+      - id: "i"
+        label: "Other"
+  - id: q48
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q49
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q50
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q51
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q52
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q53
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

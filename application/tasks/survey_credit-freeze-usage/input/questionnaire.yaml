@@ -1,0 +1,843 @@
+schemaVersion: "1.0"
+id: credit_freeze_usage_v1
+title: "Credit Freeze Usage Survey"
+description: "How consumers freeze or lock their credit at the major bureaus, why they do it, and how the process works for them."
+questions:
+  - id: q0
+    prompt: "Which of the following best describes your experience with credit freezes or locks?"
+    type: single_choice
+    construct: following_best_describes_experience_cred
+    required: true
+    options:
+      - id: "a"
+        label: "I currently have a freeze or lock active on my credit"
+      - id: "b"
+        label: "I have used a freeze or lock in the past but not now"
+      - id: "c"
+        label: "I am considering placing a freeze or lock"
+      - id: "d"
+        label: "I know what they are but have never used one"
+      - id: "e"
+        label: "I have never heard of credit freezes or locks"
+  - id: q1
+    prompt: "How familiar are you with the difference between a credit \"freeze\" and a credit \"lock\"?"
+    type: single_choice
+    construct: familiar_difference_between_credit_freez
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all familiar"
+      - id: "b"
+        label: "Slightly familiar"
+      - id: "c"
+        label: "Moderately familiar"
+      - id: "d"
+        label: "Very familiar"
+      - id: "e"
+        label: "Extremely familiar"
+  - id: q2
+    prompt: "Do you currently have a freeze or lock in place at one or more credit bureaus?"
+    type: single_choice
+    construct: currently_have_freeze_lock_place
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a freeze"
+      - id: "b"
+        label: "Yes, a lock"
+      - id: "c"
+        label: "Yes, both freezes and locks"
+      - id: "d"
+        label: "No"
+  - id: q3
+    prompt: "At which credit bureaus do you currently have a freeze or lock? (Select all that apply)"
+    type: multi_choice
+    construct: credit_bureaus_currently_have_freeze
+    required: true
+    options:
+      - id: "a"
+        label: "Equifax"
+      - id: "b"
+        label: "Experian"
+      - id: "c"
+        label: "TransUnion"
+      - id: "d"
+        label: "Innovis"
+      - id: "e"
+        label: "None currently"
+  - id: q4
+    prompt: "When did you first place a credit freeze or lock?"
+    type: single_choice
+    construct: when_did_first_place_credit
+    required: true
+    options:
+      - id: "a"
+        label: "Within the past 6 months"
+      - id: "b"
+        label: "6 to 12 months ago"
+      - id: "c"
+        label: "1 to 2 years ago"
+      - id: "d"
+        label: "3 to 5 years ago"
+      - id: "e"
+        label: "More than 5 years ago"
+      - id: "f"
+        label: "I have never placed one"
+  - id: q5
+    prompt: "What prompted you to freeze or lock your credit? (Select all that apply)"
+    type: multi_choice
+    construct: prompted_freeze_lock_credit_select
+    required: true
+    options:
+      - id: "a"
+        label: "A data breach notification"
+      - id: "b"
+        label: "I was a victim of identity theft or fraud"
+      - id: "c"
+        label: "General precaution"
+      - id: "d"
+        label: "A news story about breaches or scams"
+      - id: "e"
+        label: "Advice from a financial expert or article"
+      - id: "f"
+        label: "A friend or family member recommended it"
+      - id: "g"
+        label: "A lost or stolen wallet or documents"
+      - id: "h"
+        label: "I finished making major purchases and didn't need new credit"
+  - id: q6
+    prompt: "How did you place your freeze or lock? (Select all that apply)"
+    type: multi_choice
+    construct: did_place_freeze_lock_select
+    required: true
+    options:
+      - id: "a"
+        label: "Directly on a bureau's website"
+      - id: "b"
+        label: "By phone"
+      - id: "c"
+        label: "By mail"
+      - id: "d"
+        label: "Through a bureau's mobile app (e.g., the Experian app)"
+      - id: "e"
+        label: "Through a credit monitoring or identity protection service"
+  - id: q7
+    prompt: "Which products or services have you used to freeze, lock, or monitor your credit? (Select all that apply)"
+    type: multi_choice
+    construct: products_services_have_used_freeze
+    required: true
+    options:
+      - id: "a"
+        label: "Free credit freeze at the bureaus"
+      - id: "b"
+        label: "Experian CreditLock"
+      - id: "c"
+        label: "Equifax Lock & Alert"
+      - id: "d"
+        label: "TransUnion credit lock"
+      - id: "e"
+        label: "Credit Karma or a similar free monitoring app"
+      - id: "f"
+        label: "LifeLock / Norton"
+      - id: "g"
+        label: "Aura or IdentityForce"
+      - id: "h"
+        label: "Monitoring from my bank or card issuer"
+  - id: q8
+    prompt: "Do you currently pay for any credit monitoring or identity protection service?"
+    type: single_choice
+    construct: currently_pay_any_credit_monitoring
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a paid subscription"
+      - id: "b"
+        label: "No, I only use free services"
+      - id: "c"
+        label: "No, none at all"
+  - id: q9
+    prompt: "Approximately how much do you pay per year for credit monitoring or identity protection? (Enter a whole-dollar number, or 0 if none.)"
+    type: free_text
+    construct: approximately_much_pay_per_year
+    required: true
+  - id: q10
+    prompt: "In the past 12 months, about how many times did you temporarily lift (thaw) a freeze or lock? (Enter a number.)"
+    type: free_text
+    construct: past_12_months_many_times
+    required: true
+  - id: q11
+    prompt: "For what reasons have you thawed or lifted a freeze? (Select all that apply)"
+    type: multi_choice
+    construct: reasons_have_thawed_lifted_freeze
+    required: true
+    options:
+      - id: "a"
+        label: "Applying for a credit card"
+      - id: "b"
+        label: "Applying for a mortgage or refinance"
+      - id: "c"
+        label: "Applying for an auto loan"
+      - id: "d"
+        label: "Renting an apartment"
+      - id: "e"
+        label: "Opening a new utility, phone, or internet account"
+      - id: "f"
+        label: "A job or tenant background check"
+      - id: "g"
+        label: "Getting an insurance quote"
+      - id: "h"
+        label: "I have never needed to thaw"
+  - id: q12
+    prompt: "When you thaw a freeze, how long does it typically take you?"
+    type: single_choice
+    construct: when_thaw_freeze_long_does
+    required: true
+    options:
+      - id: "a"
+        label: "Almost instant (online, within minutes)"
+      - id: "b"
+        label: "Same day"
+      - id: "c"
+        label: "1 to 2 days"
+      - id: "d"
+        label: "Longer than 2 days"
+      - id: "e"
+        label: "I have never thawed a freeze"
+  - id: q13
+    prompt: "How often do you review your credit reports?"
+    type: single_choice
+    construct: often_review_credit_reports
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "A few times a year"
+      - id: "d"
+        label: "Monthly"
+      - id: "e"
+        label: "Weekly or more"
+  - id: q14
+    prompt: "How often do you receive data breach or fraud alert notifications?"
+    type: single_choice
+    construct: often_receive_data_breach_fraud
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q15
+    prompt: "How much do you agree with the following statement about credit freezes: Freezing my credit is worth the hassle."
+    type: single_choice
+    construct: much_agree_following_statement_credit
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree with the following statement about credit freezes: They are easy to set up."
+    type: single_choice
+    construct: much_agree_following_statement_credit
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree with the following statement about credit freezes: Thawing a freeze when I need credit is inconvenient."
+    type: single_choice
+    construct: much_agree_following_statement_credit
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree with the following statement about credit freezes: They are effective at preventing fraud."
+    type: single_choice
+    construct: much_agree_following_statement_credit
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree with the following statement about credit freezes: I trust the bureaus to handle my freeze properly."
+    type: single_choice
+    construct: much_agree_following_statement_credit
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree with the following statement about credit freezes: I know how to lift a freeze whenever I need new credit."
+    type: single_choice
+    construct: much_agree_following_statement_credit
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "When protecting your credit, how important is freezing at all three major bureaus?"
+    type: single_choice
+    construct: when_protecting_credit_important_freezin
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "When protecting your credit, how important is monitoring for newly opened accounts or alerts?"
+    type: single_choice
+    construct: when_protecting_credit_important_monitor
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When protecting your credit, how important is using strong passwords and two-factor authentication?"
+    type: single_choice
+    construct: when_protecting_credit_important_using
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When protecting your credit, how important is reviewing your credit reports regularly?"
+    type: single_choice
+    construct: when_protecting_credit_important_reviewi
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When protecting your credit, how important is having identity theft insurance?"
+    type: single_choice
+    construct: when_protecting_credit_important_having
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When protecting your credit, how important is being able to thaw a freeze quickly?"
+    type: single_choice
+    construct: when_protecting_credit_important_being
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "Have you placed a freeze at all three major bureaus, or fewer?"
+    type: single_choice
+    construct: have_placed_freeze_all_three
+    required: true
+    options:
+      - id: "a"
+        label: "All three (Equifax, Experian, TransUnion)"
+      - id: "b"
+        label: "Two of the three"
+      - id: "c"
+        label: "Only one"
+      - id: "d"
+        label: "None"
+      - id: "e"
+        label: "Not sure"
+  - id: q28
+    prompt: "Have you placed a credit freeze on a child or dependent?"
+    type: single_choice
+    construct: have_placed_credit_freeze_child
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, but I have considered it"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not applicable (no dependents)"
+  - id: q29
+    prompt: "Have you ever run into problems trying to thaw or lift a freeze?"
+    type: single_choice
+    construct: have_ever_run_into_problems
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, significant problems"
+      - id: "b"
+        label: "Yes, minor problems"
+      - id: "c"
+        label: "No problems"
+      - id: "d"
+        label: "I have never thawed a freeze"
+  - id: q30
+    prompt: "In the past 12 months, did you request your free reports through AnnualCreditReport.com?"
+    type: single_choice
+    construct: past_12_months_did_request
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "I did not know this was available"
+  - id: q31
+    prompt: "Have you ever been a victim of identity theft or credit fraud?"
+    type: single_choice
+    construct: have_ever_been_victim_identity
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, more than once"
+      - id: "b"
+        label: "Yes, once"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Not sure"
+  - id: q32
+    prompt: "Which are your top 3 reasons for freezing (or considering freezing) your credit? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_reasons_freezing_considering
+    required: true
+    options:
+      - id: "a"
+        label: "Preventing new accounts opened in my name"
+      - id: "b"
+        label: "Peace of mind"
+      - id: "c"
+        label: "Reacting to a data breach"
+      - id: "d"
+        label: "It is free"
+      - id: "e"
+        label: "Recovering from past fraud"
+      - id: "f"
+        label: "Protecting a child or dependent"
+      - id: "g"
+        label: "General distrust of data security"
+  - id: q33
+    prompt: "Overall, how satisfied are you with your experience using credit freezes or locks?"
+    type: single_choice
+    construct: overall_satisfied_experience_using_credi
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q34
+    prompt: "How satisfied are you with the bureau websites and apps used to manage freezes?"
+    type: single_choice
+    construct: satisfied_bureau_websites_apps_used
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q35
+    prompt: "On a scale from 0 to 10, how likely are you to recommend freezing your credit to a friend or family member? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: scale_from_0_10_likely
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q36
+    prompt: "How likely are you to keep a freeze or lock in place over the next 12 months?"
+    type: single_choice
+    construct: likely_keep_freeze_lock_place
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q37
+    prompt: "How confident are you that your identity and credit are well protected today?"
+    type: single_choice
+    construct: confident_that_identity_credit_well
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Slightly confident"
+      - id: "c"
+        label: "Moderately confident"
+      - id: "d"
+        label: "Very confident"
+      - id: "e"
+        label: "Completely confident"
+  - id: q38
+    prompt: "What advice would you give someone thinking about freezing their credit? (Optional)"
+    type: free_text
+    construct: advice_would_give_someone_thinking
+    required: false
+  - id: q39
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Woman"
+      - id: "b"
+        label: "Man"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: race_ethnicity_select_all_that
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino/a"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Another race or ethnicity"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 to $199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school diploma or GED"
+      - id: "c"
+        label: "Some college, no degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor's degree"
+      - id: "f"
+        label: "Master's degree"
+      - id: "g"
+        label: "Doctoral or professional degree"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed or independent contractor"
+      - id: "d"
+        label: "Unemployed, looking for work"
+      - id: "e"
+        label: "Not employed and not looking"
+      - id: "f"
+        label: "Student"
+      - id: "g"
+        label: "Retired"
+      - id: "h"
+        label: "Unable to work"
+  - id: q45
+    prompt: "Including yourself, how many people live in your household? (Enter a number.)"
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q46
+    prompt: "What is your marital status?"
+    type: single_choice
+    construct: marital_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Widowed"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q47
+    prompt: "Which U.S. region do you live in?"
+    type: single_choice
+    construct: u_s_region_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q48
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"
+      - id: "d"
+        label: "Prefer not to say"
+  - id: q49
+    prompt: "Do you own or rent your home?"
+    type: single_choice
+    construct: own_rent_home
+    required: true
+    options:
+      - id: "a"
+        label: "Own with a mortgage"
+      - id: "b"
+        label: "Own outright"
+      - id: "c"
+        label: "Rent"
+      - id: "d"
+        label: "Live with family or others without paying rent"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q50
+    prompt: "How comfortable are you using online tools and apps to manage financial accounts?"
+    type: single_choice
+    construct: comfortable_using_online_tools_apps
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all comfortable"
+      - id: "b"
+        label: "Slightly comfortable"
+      - id: "c"
+        label: "Moderately comfortable"
+      - id: "d"
+        label: "Very comfortable"
+      - id: "e"
+        label: "Extremely comfortable"
+  - id: q51
+    prompt: "Do you plan to apply for major new credit (mortgage, auto loan, or credit card) in the next 12 months?"
+    type: single_choice
+    construct: plan_apply_major_new_credit
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Not sure"

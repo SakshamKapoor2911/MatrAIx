@@ -1,0 +1,7 @@
+# Probiotic Usage
+
+How people use probiotics and gut-health foods and supplements, and their attitudes toward them.
+
+## About this survey
+
+This survey profiles probiotic and gut-health product usage, opening with a screener on whether respondents use probiotics, tenure, the form they take, and frequency. It records behaviors such as health goals, probiotic-rich foods eaten, brands tried (Culturelle, Align, Garden of Life, Seed, Florastor), where products are bought, and label checking for strains and CFU counts. Attitudes are captured through an agreement Likert battery on digestion, gut-health importance, value, and trust in claims, plus a per-item importance matrix over product-selection criteria and a top-three ranking of those factors. Additional sections cover companion supplements, professional recommendations, challenges, fermented-food frequency, trusted information sources, and change over time, followed by satisfaction with results and products, recommendation likelihood, and future intent, with numeric free-text on monthly spend and weekly supplement days. Question types include single-choice, multi-select, varied Likert scales, an importance matrix, a ranking item, a 0–10 recommendation scale, and numeric and open free-text. The survey closes with a demographic block covering age, gender, race and ethnicity, household income, education, employment, household size, marital status, wellness-benefit insurance, U.S. region, and urbanicity.

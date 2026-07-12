@@ -1,0 +1,846 @@
+schemaVersion: "1.0"
+id: sugar_reduction_habits_v1
+title: "Sugar Reduction Habits Survey"
+description: "How people reduce their sugar intake, the substitutes they use, and what motivates them."
+questions:
+  - id: q0
+    prompt: "Are you currently trying to reduce the amount of sugar you eat or drink?"
+    type: single_choice
+    construct: currently_trying_reduce_amount_sugar
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, actively"
+      - id: "b"
+        label: "Yes, but casually"
+      - id: "c"
+        label: "No, but I have in the past"
+      - id: "d"
+        label: "No, but I am considering it"
+      - id: "e"
+        label: "No, and I am not interested"
+  - id: q1
+    prompt: "How long have you been trying to reduce your sugar intake?"
+    type: single_choice
+    construct: long_have_been_trying_reduce
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 month"
+      - id: "b"
+        label: "1 to 6 months"
+      - id: "c"
+        label: "6 months to 1 year"
+      - id: "d"
+        label: "1 to 3 years"
+      - id: "e"
+        label: "More than 3 years"
+      - id: "f"
+        label: "This does not apply to me"
+  - id: q2
+    prompt: "How would you describe your current sugar intake?"
+    type: single_choice
+    construct: would_describe_current_sugar_intake
+    required: true
+    options:
+      - id: "a"
+        label: "Very low"
+      - id: "b"
+        label: "Low"
+      - id: "c"
+        label: "Moderate"
+      - id: "d"
+        label: "High"
+      - id: "e"
+        label: "Very high"
+  - id: q3
+    prompt: "How often do you drink sugar-sweetened beverages (regular soda, sweet tea, sports drinks)?"
+    type: single_choice
+    construct: often_drink_sugar_sweetened_beverages
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "Once a day"
+      - id: "e"
+        label: "Several times a day"
+  - id: q4
+    prompt: "What first motivated you to cut back on sugar?"
+    type: single_choice
+    construct: first_motivated_cut_back_sugar
+    required: true
+    options:
+      - id: "a"
+        label: "Weight management"
+      - id: "b"
+        label: "General health"
+      - id: "c"
+        label: "Blood sugar concerns"
+      - id: "d"
+        label: "Dental health"
+      - id: "e"
+        label: "Energy levels"
+      - id: "f"
+        label: "A doctor's recommendation"
+      - id: "g"
+        label: "This does not apply to me"
+  - id: q5
+    prompt: "Which reasons motivate you to reduce sugar? (Select all that apply)"
+    type: multi_choice
+    construct: reasons_motivate_reduce_sugar_select
+    required: true
+    options:
+      - id: "a"
+        label: "Manage or lose weight"
+      - id: "b"
+        label: "General health"
+      - id: "c"
+        label: "Manage blood sugar"
+      - id: "d"
+        label: "Dental health"
+      - id: "e"
+        label: "More stable energy"
+      - id: "f"
+        label: "Reduce cravings"
+      - id: "g"
+        label: "Skin or complexion"
+      - id: "h"
+        label: "Doctor's advice"
+      - id: "i"
+        label: "None of these"
+  - id: q6
+    prompt: "Which strategies do you use to cut back on sugar? (Select all that apply)"
+    type: multi_choice
+    construct: strategies_use_cut_back_sugar
+    required: true
+    options:
+      - id: "a"
+        label: "Reading nutrition labels for added sugar"
+      - id: "b"
+        label: "Swapping soda for water or unsweetened drinks"
+      - id: "c"
+        label: "Using sugar substitutes"
+      - id: "d"
+        label: "Cutting back on desserts and sweets"
+      - id: "e"
+        label: "Cooking more from scratch"
+      - id: "f"
+        label: "Buying fewer packaged or processed foods"
+      - id: "g"
+        label: "Avoiding sugary breakfast foods"
+      - id: "h"
+        label: "Portion control"
+      - id: "i"
+        label: "I do not use any strategies"
+  - id: q7
+    prompt: "Which sugar substitutes or sweeteners do you use? (Select all that apply)"
+    type: multi_choice
+    construct: sugar_substitutes_sweeteners_use_select
+    required: true
+    options:
+      - id: "a"
+        label: "Stevia"
+      - id: "b"
+        label: "Monk fruit"
+      - id: "c"
+        label: "Erythritol"
+      - id: "d"
+        label: "Allulose"
+      - id: "e"
+        label: "Sucralose (Splenda)"
+      - id: "f"
+        label: "Aspartame (Equal)"
+      - id: "g"
+        label: "Honey or maple syrup"
+      - id: "h"
+        label: "I use no substitutes"
+  - id: q8
+    prompt: "Which sugar-free or reduced-sugar products do you regularly buy? (Select all that apply)"
+    type: multi_choice
+    construct: sugar_free_reduced_sugar_products
+    required: true
+    options:
+      - id: "a"
+        label: "Diet or zero-sugar sodas"
+      - id: "b"
+        label: "Sugar-free gum or candy"
+      - id: "c"
+        label: "Reduced-sugar yogurt"
+      - id: "d"
+        label: "Low-sugar protein or snack bars"
+      - id: "e"
+        label: "Unsweetened plant or dairy milk"
+      - id: "f"
+        label: "Sugar-free coffee syrups or creamers"
+      - id: "g"
+        label: "Low-sugar cereals"
+      - id: "h"
+        label: "I do not buy these products"
+  - id: q9
+    prompt: "How often do you check the added-sugar line on nutrition labels?"
+    type: single_choice
+    construct: often_check_added_sugar_line
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q10
+    prompt: "About how many grams of added sugar do you think you eat on a typical day? Please enter a number."
+    type: free_text
+    construct: many_grams_added_sugar_think
+    required: true
+  - id: q11
+    prompt: "About how many sugar-sweetened drinks do you have in a typical week? Please enter a number."
+    type: free_text
+    construct: many_sugar_sweetened_drinks_have
+    required: true
+  - id: q12
+    prompt: "How much do you agree: Cutting back on sugar has improved how I feel."
+    type: single_choice
+    construct: much_agree_cutting_back_sugar
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree: It is hard to avoid added sugar in everyday foods."
+    type: single_choice
+    construct: much_agree_it_hard_avoid
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree: Sugar substitutes are a healthy alternative to sugar."
+    type: single_choice
+    construct: much_agree_sugar_substitutes_healthy
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree: I have strong cravings for sugary foods."
+    type: single_choice
+    construct: much_agree_i_have_strong
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree: Nutrition labels make it easy to track added sugar."
+    type: single_choice
+    construct: much_agree_nutrition_labels_make
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: Reducing sugar is important for long-term health."
+    type: single_choice
+    construct: much_agree_reducing_sugar_important
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: Low-sugar foods usually do not taste as good."
+    type: single_choice
+    construct: much_agree_low_sugar_foods
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "When cutting back on sugar, how important is taste of the alternatives?"
+    type: single_choice
+    construct: when_cutting_back_sugar_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "When cutting back on sugar, how important is that a substitute is natural?"
+    type: single_choice
+    construct: when_cutting_back_sugar_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "When cutting back on sugar, how important is the calorie count of alternatives?"
+    type: single_choice
+    construct: when_cutting_back_sugar_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "When cutting back on sugar, how important is avoiding effects on blood sugar?"
+    type: single_choice
+    construct: when_cutting_back_sugar_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When cutting back on sugar, how important is cost of the alternatives?"
+    type: single_choice
+    construct: when_cutting_back_sugar_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "Which are the top 3 factors when choosing a sugar substitute? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Taste"
+      - id: "b"
+        label: "Being natural"
+      - id: "c"
+        label: "Low or no calories"
+      - id: "d"
+        label: "No effect on blood sugar"
+      - id: "e"
+        label: "Cost"
+      - id: "f"
+        label: "Ease of use in cooking"
+      - id: "g"
+        label: "No aftertaste"
+      - id: "h"
+        label: "Wide availability"
+  - id: q25
+    prompt: "In which situations do you find it hardest to avoid sugar? (Select all that apply)"
+    type: multi_choice
+    construct: situations_find_it_hardest_avoid
+    required: true
+    options:
+      - id: "a"
+        label: "Social gatherings and parties"
+      - id: "b"
+        label: "Holidays"
+      - id: "c"
+        label: "When stressed"
+      - id: "d"
+        label: "Afternoon energy slumps"
+      - id: "e"
+        label: "Eating out at restaurants"
+      - id: "f"
+        label: "Late-night snacking"
+      - id: "g"
+        label: "At work or the office"
+      - id: "h"
+        label: "I do not find it hard"
+  - id: q26
+    prompt: "How often do you successfully avoid sugary foods when you intend to?"
+    type: single_choice
+    construct: often_successfully_avoid_sugary_foods
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q27
+    prompt: "How often do you replace dessert with fruit or a lower-sugar option?"
+    type: single_choice
+    construct: often_replace_dessert_fruit_lower
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q28
+    prompt: "Which foods have you cut back on the most? (Select all that apply)"
+    type: multi_choice
+    construct: foods_have_cut_back_most
+    required: true
+    options:
+      - id: "a"
+        label: "Soda and sweet drinks"
+      - id: "b"
+        label: "Candy and chocolate"
+      - id: "c"
+        label: "Baked goods and desserts"
+      - id: "d"
+        label: "Sweetened cereals"
+      - id: "e"
+        label: "Flavored yogurt"
+      - id: "f"
+        label: "Ice cream"
+      - id: "g"
+        label: "Coffee drinks"
+      - id: "h"
+        label: "I have not cut back"
+  - id: q29
+    prompt: "Do you use any app to track your sugar or food intake?"
+    type: single_choice
+    construct: use_any_app_track_sugar
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "No, but I would consider it"
+      - id: "d"
+        label: "No"
+  - id: q30
+    prompt: "Which sources do you trust for information about sugar and health? (Select all that apply)"
+    type: multi_choice
+    construct: sources_trust_information_sugar_health
+    required: true
+    options:
+      - id: "a"
+        label: "Doctor or dietitian"
+      - id: "b"
+        label: "Government health guidelines"
+      - id: "c"
+        label: "Scientific studies"
+      - id: "d"
+        label: "Health and nutrition websites"
+      - id: "e"
+        label: "Social media"
+      - id: "f"
+        label: "Friends and family"
+      - id: "g"
+        label: "Product packaging"
+      - id: "h"
+        label: "I do not seek out this information"
+  - id: q31
+    prompt: "Compared with a year ago, how has your sugar intake changed?"
+    type: single_choice
+    construct: compared_year_ago_has_sugar
+    required: true
+    options:
+      - id: "a"
+        label: "Much lower"
+      - id: "b"
+        label: "Somewhat lower"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Somewhat higher"
+      - id: "e"
+        label: "Much higher"
+  - id: q32
+    prompt: "How satisfied are you with your progress in reducing sugar?"
+    type: single_choice
+    construct: satisfied_progress_reducing_sugar
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "This does not apply to me"
+  - id: q33
+    prompt: "How satisfied are you with the sugar substitutes you have tried?"
+    type: single_choice
+    construct: satisfied_sugar_substitutes_have_tried
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "I have not tried any"
+  - id: q34
+    prompt: "How likely are you to recommend cutting back on sugar to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_cutting_back_sugar
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q35
+    prompt: "How likely are you to reduce your sugar intake further over the next year?"
+    type: single_choice
+    construct: likely_reduce_sugar_intake_further
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q36
+    prompt: "How likely are you to try a new sugar substitute in the next three months?"
+    type: single_choice
+    construct: likely_try_new_sugar_substitute
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q37
+    prompt: "What is one thing that would make it easier for you to cut back on sugar? (Optional short answer)"
+    type: free_text
+    construct: one_thing_that_would_make
+    required: false
+  - id: q38
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q39
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q40
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Under $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q43
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q44
+    prompt: "How many people, including you, live in your household?"
+    type: single_choice
+    construct: many_people_including_live_household
+    required: true
+    options:
+      - id: "a"
+        label: "1"
+      - id: "b"
+        label: "2"
+      - id: "c"
+        label: "3"
+      - id: "d"
+        label: "4"
+      - id: "e"
+        label: "5 or more"
+  - id: q45
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "In a relationship, not married"
+      - id: "c"
+        label: "Married"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q46
+    prompt: "How would you describe your current activity level?"
+    type: single_choice
+    construct: would_describe_current_activity_level
+    required: true
+    options:
+      - id: "a"
+        label: "Mostly sedentary"
+      - id: "b"
+        label: "Lightly active"
+      - id: "c"
+        label: "Moderately active"
+      - id: "d"
+        label: "Very active"
+      - id: "e"
+        label: "Athlete or highly active"
+  - id: q47
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q48
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

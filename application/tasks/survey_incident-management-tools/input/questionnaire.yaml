@@ -1,0 +1,922 @@
+schemaVersion: "1.0"
+id: incident_management_tools_v1
+title: "Incident Management Tools Survey"
+description: "How engineering teams handle on-call and incident response, including tooling, practices, and postmortems."
+questions:
+  - id: q0
+    prompt: "Are you part of an on-call or incident-response rotation?"
+    type: single_choice
+    construct: part_call_incident_response_rotation
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I am on call regularly"
+      - id: "b"
+        label: "Yes, but only as a backup or escalation"
+      - id: "c"
+        label: "I respond to incidents but am not formally on call"
+      - id: "d"
+        label: "I used to be on call but no longer am"
+      - id: "e"
+        label: "No"
+  - id: q1
+    prompt: "How long have you participated in on-call or incident response?"
+    type: single_choice
+    construct: long_have_participated_call_incident
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+      - id: "f"
+        label: "I never have"
+  - id: q2
+    prompt: "What best describes your relationship to incident management?"
+    type: single_choice
+    construct: best_describes_relationship_incident_man
+    required: true
+    options:
+      - id: "a"
+        label: "I own or run our incident-management program"
+      - id: "b"
+        label: "I respond to incidents on my team"
+      - id: "c"
+        label: "I often act as incident commander"
+      - id: "d"
+        label: "I get involved only for major incidents"
+      - id: "e"
+        label: "I am rarely involved"
+  - id: q3
+    prompt: "Which on-call or incident-management tool does your team use most often?"
+    type: single_choice
+    construct: call_incident_management_tool_does
+    required: true
+    options:
+      - id: "a"
+        label: "PagerDuty"
+      - id: "b"
+        label: "Opsgenie"
+      - id: "c"
+        label: "incident.io"
+      - id: "d"
+        label: "Grafana OnCall"
+      - id: "e"
+        label: "Splunk On-Call"
+      - id: "f"
+        label: "FireHydrant"
+      - id: "g"
+        label: "Rootly"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "We don't use a dedicated tool"
+  - id: q4
+    prompt: "Which incident or on-call tools have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: incident_call_tools_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "PagerDuty"
+      - id: "b"
+        label: "Opsgenie"
+      - id: "c"
+        label: "incident.io"
+      - id: "d"
+        label: "Grafana OnCall"
+      - id: "e"
+        label: "Splunk On-Call"
+      - id: "f"
+        label: "FireHydrant"
+      - id: "g"
+        label: "Rootly"
+      - id: "h"
+        label: "Blameless"
+      - id: "i"
+        label: "Jeli"
+      - id: "j"
+        label: "None"
+  - id: q5
+    prompt: "Where does your team coordinate during an active incident? (Select all that apply)"
+    type: multi_choice
+    construct: where_does_team_coordinate_during
+    required: true
+    options:
+      - id: "a"
+        label: "A dedicated Slack channel"
+      - id: "b"
+        label: "Microsoft Teams"
+      - id: "c"
+        label: "A Zoom or video bridge"
+      - id: "d"
+        label: "Google Meet"
+      - id: "e"
+        label: "A physical or virtual war room"
+      - id: "f"
+        label: "Within the incident-management tool itself"
+      - id: "g"
+        label: "Email"
+  - id: q6
+    prompt: "What typically triggers a page or incident? (Select all that apply)"
+    type: multi_choice
+    construct: typically_triggers_page_incident_select
+    required: true
+    options:
+      - id: "a"
+        label: "Alerts from monitoring tools"
+      - id: "b"
+        label: "Automated health checks"
+      - id: "c"
+        label: "Customer or support reports"
+      - id: "d"
+        label: "Manual escalation by a teammate"
+      - id: "e"
+        label: "Synthetic monitoring failures"
+      - id: "f"
+        label: "Security detections"
+  - id: q7
+    prompt: "How is your on-call schedule structured?"
+    type: single_choice
+    construct: call_schedule_structured
+    required: true
+    options:
+      - id: "a"
+        label: "Weekly rotations"
+      - id: "b"
+        label: "Daily rotations"
+      - id: "c"
+        label: "Follow-the-sun across time zones"
+      - id: "d"
+        label: "Ad hoc, whoever is available"
+      - id: "e"
+        label: "We don't have a formal schedule"
+  - id: q8
+    prompt: "How often are you on call?"
+    type: single_choice
+    construct: often_call
+    required: true
+    options:
+      - id: "a"
+        label: "Always or nearly always"
+      - id: "b"
+        label: "About one week a month"
+      - id: "c"
+        label: "A few weeks a quarter"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q9
+    prompt: "Does your team use defined incident severity levels?"
+    type: single_choice
+    construct: does_team_use_defined_incident
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and they are consistently applied"
+      - id: "b"
+        label: "Yes, but they are applied loosely"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q10
+    prompt: "Does your team conduct postmortems or retrospectives after incidents?"
+    type: single_choice
+    construct: does_team_conduct_postmortems_retrospect
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, for all significant incidents"
+      - id: "b"
+        label: "Yes, for major incidents only"
+      - id: "c"
+        label: "Occasionally"
+      - id: "d"
+        label: "No"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q11
+    prompt: "Which postmortem practices does your team follow? (Select all that apply)"
+    type: multi_choice
+    construct: postmortem_practices_does_team_follow
+    required: true
+    options:
+      - id: "a"
+        label: "Blameless postmortems"
+      - id: "b"
+        label: "Tracking action items to completion"
+      - id: "c"
+        label: "Publishing postmortems internally"
+      - id: "d"
+        label: "Reconstructing an incident timeline"
+      - id: "e"
+        label: "Formal root-cause analysis"
+      - id: "f"
+        label: "Sharing summaries with customers"
+      - id: "g"
+        label: "We don't do postmortems"
+  - id: q12
+    prompt: "Does your team use a designated incident commander role?"
+    type: single_choice
+    construct: does_team_use_designated_incident
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, always for significant incidents"
+      - id: "b"
+        label: "Yes, for major incidents only"
+      - id: "c"
+        label: "Informally"
+      - id: "d"
+        label: "No"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q13
+    prompt: "Which incident roles does your team use? (Select all that apply)"
+    type: multi_choice
+    construct: incident_roles_does_team_use
+    required: true
+    options:
+      - id: "a"
+        label: "Incident commander"
+      - id: "b"
+        label: "Communications lead"
+      - id: "c"
+        label: "Scribe or note-taker"
+      - id: "d"
+        label: "Subject-matter expert"
+      - id: "e"
+        label: "Customer or support liaison"
+      - id: "f"
+        label: "We don't assign roles"
+  - id: q14
+    prompt: "About how many incidents does your team handle in a typical month? Please enter a number."
+    type: free_text
+    construct: many_incidents_does_team_handle
+    required: true
+  - id: q15
+    prompt: "In a typical month, about how many nights are you paged while on call? Please enter a number."
+    type: free_text
+    construct: typical_month_many_nights_paged
+    required: true
+  - id: q16
+    prompt: "How much do you agree: Our on-call load is sustainable."
+    type: single_choice
+    construct: much_agree_our_call_load
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: The alerts that page me are usually actionable."
+    type: single_choice
+    construct: much_agree_alerts_that_page
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: Our incident process is clear and well understood."
+    type: single_choice
+    construct: much_agree_our_incident_process
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: Our postmortems lead to real improvements."
+    type: single_choice
+    construct: much_agree_our_postmortems_lead
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: Being on call is a significant source of stress for me."
+    type: single_choice
+    construct: much_agree_being_call_significant
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: Our team genuinely learns from its incidents."
+    type: single_choice
+    construct: much_agree_our_team_genuinely
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How much do you agree: Our tooling makes incident response smoother."
+    type: single_choice
+    construct: much_agree_our_tooling_makes
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "When evaluating an incident tool, how important is reliable paging and notifications?"
+    type: single_choice
+    construct: when_evaluating_incident_tool_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When evaluating an incident tool, how important are flexible escalation policies?"
+    type: single_choice
+    construct: when_evaluating_incident_tool_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When evaluating an incident tool, how important are integrations with your monitoring stack?"
+    type: single_choice
+    construct: when_evaluating_incident_tool_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When evaluating an incident tool, how important is postmortem and retrospective support?"
+    type: single_choice
+    construct: when_evaluating_incident_tool_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When evaluating an incident tool, how important is a public status-page capability?"
+    type: single_choice
+    construct: when_evaluating_incident_tool_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "When evaluating an incident tool, how important is on-call schedule management?"
+    type: single_choice
+    construct: when_evaluating_incident_tool_important
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "How often are you paged outside of normal working hours?"
+    type: single_choice
+    construct: often_paged_outside_normal_working
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q30
+    prompt: "How often do incidents receive a formal postmortem?"
+    type: single_choice
+    construct: often_incidents_receive_formal_postmorte
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q31
+    prompt: "How satisfied are you with your team's incident-management tooling?"
+    type: single_choice
+    construct: satisfied_team_s_incident_management
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q32
+    prompt: "How satisfied are you with your overall on-call experience?"
+    type: single_choice
+    construct: satisfied_overall_call_experience
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "How is on-call compensated at your organization?"
+    type: single_choice
+    construct: call_compensated_organization
+    required: true
+    options:
+      - id: "a"
+        label: "Extra pay or a stipend"
+      - id: "b"
+        label: "Time off in lieu"
+      - id: "c"
+        label: "It is part of the regular salary"
+      - id: "d"
+        label: "It isn't compensated"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q34
+    prompt: "Does your team have a defined expectation for how quickly a page must be acknowledged?"
+    type: single_choice
+    construct: does_team_have_defined_expectation
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a strict target"
+      - id: "b"
+        label: "Yes, a loose guideline"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I'm not sure"
+  - id: q35
+    prompt: "Which incident-response pain points does your team face? (Select all that apply)"
+    type: multi_choice
+    construct: incident_response_pain_points_does
+    required: true
+    options:
+      - id: "a"
+        label: "Alert fatigue"
+      - id: "b"
+        label: "Unclear ownership of services"
+      - id: "c"
+        label: "Missing or outdated runbooks"
+      - id: "d"
+        label: "Gaps in tooling"
+      - id: "e"
+        label: "On-call burnout"
+      - id: "f"
+        label: "Noisy or non-actionable alerts"
+      - id: "g"
+        label: "Messy handoffs between responders"
+      - id: "h"
+        label: "We don't face major pain points"
+  - id: q36
+    prompt: "Does your team use runbooks for common incidents?"
+    type: single_choice
+    construct: does_team_use_runbooks_common
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and they are well maintained"
+      - id: "b"
+        label: "Yes, but they are often outdated"
+      - id: "c"
+        label: "For some services only"
+      - id: "d"
+        label: "No"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q37
+    prompt: "How likely are you to recommend changes to improve your team's on-call process?"
+    type: single_choice
+    construct: likely_recommend_changes_improve_team
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q38
+    prompt: "Which are your top 3 things that make incident response effective? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_things_that_make
+    required: true
+    options:
+      - id: "a"
+        label: "Clear roles and ownership"
+      - id: "b"
+        label: "Actionable, low-noise alerts"
+      - id: "c"
+        label: "Good runbooks"
+      - id: "d"
+        label: "Reliable tooling"
+      - id: "e"
+        label: "Strong communication"
+      - id: "f"
+        label: "Blameless culture"
+      - id: "g"
+        label: "Fast escalation"
+      - id: "h"
+        label: "Effective postmortems"
+  - id: q39
+    prompt: "How much do you agree: A blameless culture is essential to good incident response."
+    type: single_choice
+    construct: much_agree_blameless_culture_essential
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q40
+    prompt: "How likely are you to recommend your team's incident-management setup to another team? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_team_s_incident
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q41
+    prompt: "How likely is your team to change incident-management tools within the next year?"
+    type: single_choice
+    construct: likely_team_change_incident_management
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q42
+    prompt: "What is one thing you would improve about your team's incident management? (Optional short answer)"
+    type: free_text
+    construct: one_thing_would_improve_team
+    required: false
+  - id: q43
+    prompt: "Which best describes your current role?"
+    type: single_choice
+    construct: best_describes_current_role
+    required: true
+    options:
+      - id: "a"
+        label: "Front-end developer"
+      - id: "b"
+        label: "Back-end developer"
+      - id: "c"
+        label: "Full-stack developer"
+      - id: "d"
+        label: "DevOps or site reliability engineer"
+      - id: "e"
+        label: "Platform or infrastructure engineer"
+      - id: "f"
+        label: "Support or operations engineer"
+      - id: "g"
+        label: "Engineering manager"
+      - id: "h"
+        label: "Student"
+      - id: "i"
+        label: "Other"
+  - id: q44
+    prompt: "How many years have you worked professionally in technology (not counting education)?"
+    type: single_choice
+    construct: many_years_have_worked_professionally
+    required: true
+    options:
+      - id: "a"
+        label: "I don't work in tech professionally"
+      - id: "b"
+        label: "Less than 2 years"
+      - id: "c"
+        label: "2 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "11 to 20 years"
+      - id: "f"
+        label: "More than 20 years"
+  - id: q45
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q46
+    prompt: "Approximately how many people work at your company or organization?"
+    type: single_choice
+    construct: approximately_many_people_work_company
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2 to 9"
+      - id: "c"
+        label: "10 to 99"
+      - id: "d"
+        label: "100 to 499"
+      - id: "e"
+        label: "500 to 4,999"
+      - id: "f"
+        label: "5,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q47
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Government"
+      - id: "f"
+        label: "Retail or e-commerce"
+      - id: "g"
+        label: "Manufacturing"
+      - id: "h"
+        label: "Media or entertainment"
+      - id: "i"
+        label: "Other"
+  - id: q48
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q49
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q50
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q51
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q52
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q53
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

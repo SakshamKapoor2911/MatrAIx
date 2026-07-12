@@ -1,0 +1,946 @@
+schemaVersion: "1.0"
+id: serverless_adoption_v1
+title: "Serverless Adoption Survey"
+description: "How developers adopt, use, and evaluate serverless and functions-as-a-service platforms such as AWS Lambda, Cloudflare Workers, and Vercel Functions."
+questions:
+  - id: q0
+    prompt: "How often do you build or maintain serverless functions?"
+    type: single_choice
+    construct: often_build_maintain_serverless_function
+    required: true
+    options:
+      - id: "a"
+        label: "Every day"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "A few times a month"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "I don't use serverless"
+  - id: q1
+    prompt: "How long have you been using serverless platforms?"
+    type: single_choice
+    construct: long_have_been_using_serverless
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+  - id: q2
+    prompt: "Which best describes your relationship to serverless?"
+    type: single_choice
+    construct: best_describes_relationship_serverless
+    required: true
+    options:
+      - id: "a"
+        label: "Back-end developer building serverless services"
+      - id: "b"
+        label: "Full-stack developer using serverless for parts of an app"
+      - id: "c"
+        label: "Platform or DevOps engineer supporting serverless"
+      - id: "d"
+        label: "Architect deciding on serverless adoption"
+      - id: "e"
+        label: "Hobbyist or side-project builder"
+      - id: "f"
+        label: "I use it only occasionally"
+  - id: q3
+    prompt: "Which serverless platform do you use most often?"
+    type: single_choice
+    construct: serverless_platform_use_most_often
+    required: true
+    options:
+      - id: "a"
+        label: "AWS Lambda"
+      - id: "b"
+        label: "Cloudflare Workers"
+      - id: "c"
+        label: "Vercel Functions"
+      - id: "d"
+        label: "Google Cloud Functions or Cloud Run"
+      - id: "e"
+        label: "Azure Functions"
+      - id: "f"
+        label: "Netlify Functions"
+      - id: "g"
+        label: "Other"
+  - id: q4
+    prompt: "Which serverless or functions platforms have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: serverless_functions_platforms_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "AWS Lambda"
+      - id: "b"
+        label: "Cloudflare Workers"
+      - id: "c"
+        label: "Vercel Functions"
+      - id: "d"
+        label: "Google Cloud Functions"
+      - id: "e"
+        label: "Google Cloud Run"
+      - id: "f"
+        label: "Azure Functions"
+      - id: "g"
+        label: "Netlify Functions"
+      - id: "h"
+        label: "Deno Deploy"
+      - id: "i"
+        label: "Fastly Compute"
+      - id: "j"
+        label: "Supabase Edge Functions"
+      - id: "k"
+        label: "None"
+  - id: q5
+    prompt: "Which platforms would you like to use more over the next year? (Select all that apply)"
+    type: multi_choice
+    construct: platforms_would_like_use_more
+    required: true
+    options:
+      - id: "a"
+        label: "AWS Lambda"
+      - id: "b"
+        label: "Cloudflare Workers"
+      - id: "c"
+        label: "Vercel Functions"
+      - id: "d"
+        label: "Google Cloud Run"
+      - id: "e"
+        label: "Azure Functions"
+      - id: "f"
+        label: "Deno Deploy"
+      - id: "g"
+        label: "Fastly Compute"
+      - id: "h"
+        label: "I'm happy with what I use"
+  - id: q6
+    prompt: "What do you primarily build with serverless? (Select all that apply)"
+    type: multi_choice
+    construct: primarily_build_serverless_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "HTTP APIs and backends"
+      - id: "b"
+        label: "Webhooks and integrations"
+      - id: "c"
+        label: "Scheduled or cron jobs"
+      - id: "d"
+        label: "Event or stream processing"
+      - id: "e"
+        label: "Image or media processing"
+      - id: "f"
+        label: "Edge rendering or middleware"
+      - id: "g"
+        label: "Machine-learning inference"
+      - id: "h"
+        label: "Glue and automation scripts"
+  - id: q7
+    prompt: "Which languages do you write serverless functions in? (Select all that apply)"
+    type: multi_choice
+    construct: languages_write_serverless_functions_sel
+    required: true
+    options:
+      - id: "a"
+        label: "JavaScript or TypeScript"
+      - id: "b"
+        label: "Python"
+      - id: "c"
+        label: "Go"
+      - id: "d"
+        label: "Rust"
+      - id: "e"
+        label: "Java or Kotlin"
+      - id: "f"
+        label: "C# or .NET"
+      - id: "g"
+        label: "Ruby"
+  - id: q8
+    prompt: "Which serverless deployment or framework tools do you use? (Select all that apply)"
+    type: multi_choice
+    construct: serverless_deployment_framework_tools_us
+    required: true
+    options:
+      - id: "a"
+        label: "Serverless Framework"
+      - id: "b"
+        label: "AWS SAM"
+      - id: "c"
+        label: "AWS CDK"
+      - id: "d"
+        label: "Terraform or OpenTofu"
+      - id: "e"
+        label: "Wrangler (Cloudflare)"
+      - id: "f"
+        label: "Vercel CLI"
+      - id: "g"
+        label: "SST"
+      - id: "h"
+        label: "None"
+  - id: q9
+    prompt: "Which serverless-adjacent managed services do you rely on? (Select all that apply)"
+    type: multi_choice
+    construct: serverless_adjacent_managed_services_rel
+    required: true
+    options:
+      - id: "a"
+        label: "API Gateway or equivalent"
+      - id: "b"
+        label: "Managed queues (SQS, etc.)"
+      - id: "c"
+        label: "Event buses (EventBridge, etc.)"
+      - id: "d"
+        label: "Serverless databases (DynamoDB, Aurora Serverless)"
+      - id: "e"
+        label: "Object storage (S3, R2)"
+      - id: "f"
+        label: "Key-value or edge stores (KV, Durable Objects)"
+      - id: "g"
+        label: "Step Functions or workflow orchestration"
+      - id: "h"
+        label: "None"
+  - id: q10
+    prompt: "How do you monitor and debug your serverless functions? (Select all that apply)"
+    type: multi_choice
+    construct: monitor_debug_serverless_functions_selec
+    required: true
+    options:
+      - id: "a"
+        label: "Cloud provider logs (CloudWatch, etc.)"
+      - id: "b"
+        label: "Datadog"
+      - id: "c"
+        label: "Sentry"
+      - id: "d"
+        label: "New Relic"
+      - id: "e"
+        label: "OpenTelemetry"
+      - id: "f"
+        label: "Platform-native dashboards"
+      - id: "g"
+        label: "Print statements and manual inspection"
+      - id: "h"
+        label: "I don't really monitor them"
+  - id: q11
+    prompt: "How do you handle local development and testing of serverless code? (Select all that apply)"
+    type: multi_choice
+    construct: handle_local_development_testing_serverl
+    required: true
+    options:
+      - id: "a"
+        label: "Local emulators (SAM local, Miniflare, etc.)"
+      - id: "b"
+        label: "Deploy to a dev or staging environment"
+      - id: "c"
+        label: "Unit tests that mock the platform"
+      - id: "d"
+        label: "Integration tests against real cloud resources"
+      - id: "e"
+        label: "I test mostly in production"
+      - id: "f"
+        label: "Not applicable"
+  - id: q12
+    prompt: "About how many serverless functions do you actively maintain? Please enter a number."
+    type: free_text
+    construct: many_serverless_functions_actively_maint
+    required: true
+  - id: q13
+    prompt: "About how many times per month do you deploy serverless changes? Please enter a number."
+    type: free_text
+    construct: many_times_per_month_deploy
+    required: true
+  - id: q14
+    prompt: "How would you rate your proficiency with serverless development?"
+    type: single_choice
+    construct: would_rate_proficiency_serverless_develo
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Intermediate"
+      - id: "c"
+        label: "Advanced"
+      - id: "d"
+        label: "Expert"
+  - id: q15
+    prompt: "How did you learn serverless development? (Select all that apply)"
+    type: multi_choice
+    construct: did_learn_serverless_development_select
+    required: true
+    options:
+      - id: "a"
+        label: "On the job"
+      - id: "b"
+        label: "Official documentation"
+      - id: "c"
+        label: "Online courses or tutorials"
+      - id: "d"
+        label: "A colleague or mentor"
+      - id: "e"
+        label: "Conference talks or blogs"
+      - id: "f"
+        label: "Trial and error"
+  - id: q16
+    prompt: "How much do you agree: Serverless has let us ship features faster."
+    type: single_choice
+    construct: much_agree_serverless_has_let
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: Cold starts are a real problem for my workloads."
+    type: single_choice
+    construct: much_agree_cold_starts_real
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: Serverless makes cost harder to predict."
+    type: single_choice
+    construct: much_agree_serverless_makes_cost
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: Vendor lock-in is a serious concern with serverless."
+    type: single_choice
+    construct: much_agree_vendor_lock_serious
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: Debugging serverless functions is harder than debugging traditional services."
+    type: single_choice
+    construct: much_agree_debugging_serverless_function
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: Edge functions are a better fit for my apps than regional functions."
+    type: single_choice
+    construct: much_agree_edge_functions_better
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How much do you agree: Serverless has reduced our operational burden."
+    type: single_choice
+    construct: much_agree_serverless_has_reduced
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "When choosing a serverless platform, how important is cold-start performance?"
+    type: single_choice
+    construct: when_choosing_serverless_platform_import
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When choosing a serverless platform, how important is pricing?"
+    type: single_choice
+    construct: when_choosing_serverless_platform_import
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing a serverless platform, how important is the developer experience?"
+    type: single_choice
+    construct: when_choosing_serverless_platform_import
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing a serverless platform, how important is language and runtime support?"
+    type: single_choice
+    construct: when_choosing_serverless_platform_import
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When choosing a serverless platform, how important is the ecosystem of integrations?"
+    type: single_choice
+    construct: when_choosing_serverless_platform_import
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "When choosing a serverless platform, how important is avoiding vendor lock-in?"
+    type: single_choice
+    construct: when_choosing_serverless_platform_import
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "Which are your top 3 factors when choosing a serverless platform? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Cold-start performance"
+      - id: "b"
+        label: "Pricing"
+      - id: "c"
+        label: "Developer experience"
+      - id: "d"
+        label: "Language and runtime support"
+      - id: "e"
+        label: "Ecosystem of integrations"
+      - id: "f"
+        label: "Avoiding vendor lock-in"
+      - id: "g"
+        label: "Global edge presence"
+      - id: "h"
+        label: "Scaling behavior"
+  - id: q30
+    prompt: "Which challenges have you experienced with serverless? (Select all that apply)"
+    type: multi_choice
+    construct: challenges_have_experienced_serverless_s
+    required: true
+    options:
+      - id: "a"
+        label: "Cold starts and latency"
+      - id: "b"
+        label: "Unpredictable costs"
+      - id: "c"
+        label: "Local development friction"
+      - id: "d"
+        label: "Debugging and observability gaps"
+      - id: "e"
+        label: "Execution time or memory limits"
+      - id: "f"
+        label: "Vendor lock-in"
+      - id: "g"
+        label: "State and data management"
+      - id: "h"
+        label: "None of these"
+  - id: q31
+    prompt: "How does serverless fit into your overall architecture?"
+    type: single_choice
+    construct: does_serverless_fit_into_overall
+    required: true
+    options:
+      - id: "a"
+        label: "Our whole backend is serverless"
+      - id: "b"
+        label: "Serverless for some services, servers for others"
+      - id: "c"
+        label: "Only for peripheral tasks (cron, glue, webhooks)"
+      - id: "d"
+        label: "Experimenting but not in production"
+      - id: "e"
+        label: "Not using serverless"
+  - id: q32
+    prompt: "How often do serverless cost surprises affect your budget?"
+    type: single_choice
+    construct: often_serverless_cost_surprises_affect
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q33
+    prompt: "How do you handle functions that exceed serverless time or memory limits?"
+    type: single_choice
+    construct: handle_functions_that_exceed_serverless
+    required: true
+    options:
+      - id: "a"
+        label: "Split work into smaller functions"
+      - id: "b"
+        label: "Move to containers or long-running services"
+      - id: "c"
+        label: "Use workflow orchestration (Step Functions, etc.)"
+      - id: "d"
+        label: "Haven't hit those limits"
+      - id: "e"
+        label: "Not sure"
+  - id: q34
+    prompt: "Which best describes your migration history with serverless?"
+    type: single_choice
+    construct: best_describes_migration_history_serverl
+    required: true
+    options:
+      - id: "a"
+        label: "We built serverless-first from the start"
+      - id: "b"
+        label: "We migrated existing services to serverless"
+      - id: "c"
+        label: "We migrated some serverless workloads back to servers"
+      - id: "d"
+        label: "We are still evaluating"
+      - id: "e"
+        label: "Not applicable"
+  - id: q35
+    prompt: "How often do you run into cold-start latency issues in practice?"
+    type: single_choice
+    construct: often_run_into_cold_start
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+  - id: q36
+    prompt: "How satisfied are you with your primary serverless platform's performance?"
+    type: single_choice
+    construct: satisfied_primary_serverless_platform_s
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q37
+    prompt: "How satisfied are you with the developer experience of your primary platform?"
+    type: single_choice
+    construct: satisfied_developer_experience_primary_p
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q38
+    prompt: "Overall, how satisfied are you with your serverless setup?"
+    type: single_choice
+    construct: overall_satisfied_serverless_setup
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q39
+    prompt: "How likely are you to recommend your primary serverless platform to another developer? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_primary_serverless_plat
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q40
+    prompt: "How likely are you to expand your use of serverless within the next year?"
+    type: single_choice
+    construct: likely_expand_use_serverless_within
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q41
+    prompt: "How likely are you to move some serverless workloads back to servers or containers within the next year?"
+    type: single_choice
+    construct: likely_move_some_serverless_workloads
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q42
+    prompt: "What is one thing you would improve about serverless platforms? (Optional short answer)"
+    type: free_text
+    construct: one_thing_would_improve_serverless
+    required: false
+  - id: q43
+    prompt: "Which best describes your current role?"
+    type: single_choice
+    construct: best_describes_current_role
+    required: true
+    options:
+      - id: "a"
+        label: "Back-end developer"
+      - id: "b"
+        label: "Full-stack developer"
+      - id: "c"
+        label: "Front-end developer"
+      - id: "d"
+        label: "DevOps or platform engineer"
+      - id: "e"
+        label: "Cloud or software architect"
+      - id: "f"
+        label: "Engineering manager"
+      - id: "g"
+        label: "Student"
+      - id: "h"
+        label: "Other"
+  - id: q44
+    prompt: "How many years have you worked professionally in technology (not counting education)?"
+    type: single_choice
+    construct: many_years_have_worked_professionally
+    required: true
+    options:
+      - id: "a"
+        label: "I don't work in tech professionally"
+      - id: "b"
+        label: "Less than 2 years"
+      - id: "c"
+        label: "2 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "11 to 20 years"
+      - id: "f"
+        label: "More than 20 years"
+  - id: q45
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q46
+    prompt: "Approximately how many people work at your company or organization?"
+    type: single_choice
+    construct: approximately_many_people_work_company
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2 to 9"
+      - id: "c"
+        label: "10 to 99"
+      - id: "d"
+        label: "100 to 499"
+      - id: "e"
+        label: "500 to 4,999"
+      - id: "f"
+        label: "5,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q47
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Government"
+      - id: "f"
+        label: "Retail or e-commerce"
+      - id: "g"
+        label: "Manufacturing"
+      - id: "h"
+        label: "Media or entertainment"
+      - id: "i"
+        label: "Other"
+  - id: q48
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q49
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q50
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q51
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q52
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q53
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

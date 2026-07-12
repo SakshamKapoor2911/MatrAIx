@@ -1,0 +1,7 @@
+# Blue-Light Glasses Usage
+
+How people use blue-light glasses for eye comfort during screen use, and their perceived benefits and attitudes.
+
+## About this survey
+
+This survey profiles blue-light glasses usage, opening with a screener on current use, tenure, and the main reason for trying them. It records daily screen time, the devices driving it, when the glasses are worn, the brands and lens types tried, where they were bought, and other eye-comfort steps taken. Attitudes are captured with an agreement Likert battery on strain reduction, sleep, value, and skepticism, a matrix battery on perceived changes since starting to wear them, and a per-item importance matrix over selection criteria, plus a top-three ranking of choice factors. Additional sections cover wear frequency, where respondents learned about the glasses, corrective-lens status, eye comfort during the workday, and satisfaction with comfort, value, and the glasses overall, followed by recommendation likelihood and retention and purchase intent. Question types include single-choice, multi-select, varied Likert scales, two matrix batteries, a ranking item, an NPS-style 0-to-10 scale, and numeric and open free-text. The survey concludes with a demographic block covering age, gender, race and ethnicity, household income, education, employment, household size, marital status, U.S. region, urbanicity, and daily work or study setting.

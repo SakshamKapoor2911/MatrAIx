@@ -1,0 +1,890 @@
+schemaVersion: "1.0"
+id: data_visualization_tools_v1
+title: "Data Visualization Tools Survey"
+description: "How analysts, scientists, and developers create data visualizations and choose among BI platforms and charting libraries."
+questions:
+  - id: q0
+    prompt: "How often do you create data visualizations?"
+    type: single_choice
+    construct: often_create_data_visualizations
+    required: true
+    options:
+      - id: "a"
+        label: "Every day"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "A few times a month"
+      - id: "d"
+        label: "Occasionally"
+      - id: "e"
+        label: "Rarely"
+      - id: "f"
+        label: "I don't create data visualizations"
+  - id: q1
+    prompt: "How long have you been creating data visualizations?"
+    type: single_choice
+    construct: long_have_been_creating_data
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 year"
+      - id: "b"
+        label: "1 to 2 years"
+      - id: "c"
+        label: "3 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "More than 10 years"
+  - id: q2
+    prompt: "What is your primary reason for creating data visualizations?"
+    type: single_choice
+    construct: primary_reason_creating_data_visualizati
+    required: true
+    options:
+      - id: "a"
+        label: "Business reporting and dashboards"
+      - id: "b"
+        label: "Exploratory data analysis"
+      - id: "c"
+        label: "Presentations"
+      - id: "d"
+        label: "Publications or research"
+      - id: "e"
+        label: "Monitoring and operations"
+      - id: "f"
+        label: "Data storytelling and communication"
+  - id: q3
+    prompt: "Which data visualization tool do you use most often?"
+    type: single_choice
+    construct: data_visualization_tool_use_most
+    required: true
+    options:
+      - id: "a"
+        label: "Tableau"
+      - id: "b"
+        label: "Microsoft Power BI"
+      - id: "c"
+        label: "Looker"
+      - id: "d"
+        label: "matplotlib"
+      - id: "e"
+        label: "Plotly"
+      - id: "f"
+        label: "D3.js"
+      - id: "g"
+        label: "Microsoft Excel"
+      - id: "h"
+        label: "Google Sheets"
+      - id: "i"
+        label: "seaborn or ggplot2"
+      - id: "j"
+        label: "Other"
+  - id: q4
+    prompt: "Which BI or dashboard tools have you used in the past year? (Select all that apply)"
+    type: multi_choice
+    construct: bi_dashboard_tools_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "Tableau"
+      - id: "b"
+        label: "Microsoft Power BI"
+      - id: "c"
+        label: "Looker"
+      - id: "d"
+        label: "Looker Studio"
+      - id: "e"
+        label: "Qlik"
+      - id: "f"
+        label: "Metabase"
+      - id: "g"
+        label: "Apache Superset"
+      - id: "h"
+        label: "Microsoft Excel"
+      - id: "i"
+        label: "Google Sheets"
+      - id: "j"
+        label: "None of these"
+  - id: q5
+    prompt: "Which programming visualization libraries have you used? (Select all that apply)"
+    type: multi_choice
+    construct: programming_visualization_libraries_have
+    required: true
+    options:
+      - id: "a"
+        label: "matplotlib"
+      - id: "b"
+        label: "seaborn"
+      - id: "c"
+        label: "Plotly"
+      - id: "d"
+        label: "D3.js"
+      - id: "e"
+        label: "ggplot2"
+      - id: "f"
+        label: "Bokeh"
+      - id: "g"
+        label: "Altair"
+      - id: "h"
+        label: "Highcharts"
+      - id: "i"
+        label: "ECharts"
+      - id: "j"
+        label: "None of these"
+  - id: q6
+    prompt: "What types of visualizations do you create most often? (Select all that apply)"
+    type: multi_choice
+    construct: types_visualizations_create_most_often
+    required: true
+    options:
+      - id: "a"
+        label: "Line charts"
+      - id: "b"
+        label: "Bar charts"
+      - id: "c"
+        label: "Scatter plots"
+      - id: "d"
+        label: "Pie or donut charts"
+      - id: "e"
+        label: "Heatmaps"
+      - id: "f"
+        label: "Geographic maps"
+      - id: "g"
+        label: "Dashboards"
+      - id: "h"
+        label: "Network or relationship graphs"
+      - id: "i"
+        label: "Treemaps or hierarchical charts"
+  - id: q7
+    prompt: "What data sources do you visualize? (Select all that apply)"
+    type: multi_choice
+    construct: data_sources_visualize_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Spreadsheets or CSV files"
+      - id: "b"
+        label: "SQL databases"
+      - id: "c"
+        label: "Data warehouses"
+      - id: "d"
+        label: "APIs"
+      - id: "e"
+        label: "Cloud storage"
+      - id: "f"
+        label: "Streaming or real-time data"
+  - id: q8
+    prompt: "Who is the primary audience for your visualizations?"
+    type: single_choice
+    construct: who_primary_audience_visualizations
+    required: true
+    options:
+      - id: "a"
+        label: "Executives and leadership"
+      - id: "b"
+        label: "Business stakeholders"
+      - id: "c"
+        label: "My technical team"
+      - id: "d"
+        label: "External customers"
+      - id: "e"
+        label: "Mainly myself"
+      - id: "f"
+        label: "The general public"
+  - id: q9
+    prompt: "Where do your visualizations typically end up? (Select all that apply)"
+    type: multi_choice
+    construct: where_visualizations_typically_end_up
+    required: true
+    options:
+      - id: "a"
+        label: "Interactive dashboards"
+      - id: "b"
+        label: "Slide decks"
+      - id: "c"
+        label: "Reports or documents"
+      - id: "d"
+        label: "Web applications"
+      - id: "e"
+        label: "Emails"
+      - id: "f"
+        label: "Publications"
+      - id: "g"
+        label: "Notebooks"
+  - id: q10
+    prompt: "About how many visualizations or dashboards do you create in a typical month? Please enter a number."
+    type: free_text
+    construct: many_visualizations_dashboards_create_ty
+    required: true
+  - id: q11
+    prompt: "About how many hours per week do you spend creating visualizations? Please enter a number."
+    type: free_text
+    construct: many_hours_per_week_spend
+    required: true
+  - id: q12
+    prompt: "How do you primarily build visualizations?"
+    type: single_choice
+    construct: primarily_build_visualizations
+    required: true
+    options:
+      - id: "a"
+        label: "Drag-and-drop or GUI tools"
+      - id: "b"
+        label: "Writing code"
+      - id: "c"
+        label: "Spreadsheets"
+      - id: "d"
+        label: "A mix of approaches"
+  - id: q13
+    prompt: "Do you follow any data visualization design principles or guidelines?"
+    type: single_choice
+    construct: follow_any_data_visualization_design
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, formally and consistently"
+      - id: "b"
+        label: "Yes, informally"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I'm not familiar with any"
+  - id: q14
+    prompt: "How do you usually choose colors for your visualizations?"
+    type: single_choice
+    construct: usually_choose_colors_visualizations
+    required: true
+    options:
+      - id: "a"
+        label: "Default palettes"
+      - id: "b"
+        label: "A brand or organizational palette"
+      - id: "c"
+        label: "Accessibility-focused palettes"
+      - id: "d"
+        label: "Custom palettes I design"
+      - id: "e"
+        label: "I don't put much thought into it"
+  - id: q15
+    prompt: "Do you consider accessibility (such as colorblind-safe palettes or alt text)?"
+    type: single_choice
+    construct: consider_accessibility_such_as_colorblin
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, always"
+      - id: "b"
+        label: "Yes, sometimes"
+      - id: "c"
+        label: "Rarely"
+      - id: "d"
+        label: "Never"
+      - id: "e"
+        label: "I hadn't considered it"
+  - id: q16
+    prompt: "How much do you agree: Good visualizations significantly improve decision-making."
+    type: single_choice
+    construct: much_agree_good_visualizations_significa
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: I feel confident choosing the right chart type for my data."
+    type: single_choice
+    construct: much_agree_i_feel_confident
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: Code-based tools give me more control than GUI tools."
+    type: single_choice
+    construct: much_agree_code_based_tools
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: Creating polished visualizations takes too much time."
+    type: single_choice
+    construct: much_agree_creating_polished_visualizati
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: My organization values data visualization highly."
+    type: single_choice
+    construct: much_agree_my_organization_values
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: I often struggle to make my visualizations clear to my audience."
+    type: single_choice
+    construct: much_agree_i_often_struggle
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "When choosing a data visualization tool, how important is ease of use?"
+    type: single_choice
+    construct: when_choosing_data_visualization_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When choosing a data visualization tool, how important is customization and flexibility?"
+    type: single_choice
+    construct: when_choosing_data_visualization_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When choosing a data visualization tool, how important is interactivity?"
+    type: single_choice
+    construct: when_choosing_data_visualization_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When choosing a data visualization tool, how important is integration with your data sources?"
+    type: single_choice
+    construct: when_choosing_data_visualization_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When choosing a data visualization tool, how important is cost or licensing?"
+    type: single_choice
+    construct: when_choosing_data_visualization_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When choosing a data visualization tool, how important are collaboration and sharing features?"
+    type: single_choice
+    construct: when_choosing_data_visualization_tool
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "How often do you build interactive rather than static visualizations?"
+    type: single_choice
+    construct: often_build_interactive_rather_than
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q29
+    prompt: "How often do stakeholders request changes to your visualizations?"
+    type: single_choice
+    construct: often_stakeholders_request_changes_visua
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q30
+    prompt: "Which are your top 3 factors when choosing a data visualization tool? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_factors_when_choosing
+    required: true
+    options:
+      - id: "a"
+        label: "Ease of use"
+      - id: "b"
+        label: "Customization and flexibility"
+      - id: "c"
+        label: "Interactivity"
+      - id: "d"
+        label: "Integration with data sources"
+      - id: "e"
+        label: "Cost or licensing"
+      - id: "f"
+        label: "Collaboration and sharing"
+      - id: "g"
+        label: "Performance with large data"
+      - id: "h"
+        label: "Familiarity"
+  - id: q31
+    prompt: "How satisfied are you with your primary tool's ease of use?"
+    type: single_choice
+    construct: satisfied_primary_tool_s_ease
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q32
+    prompt: "How satisfied are you with your primary tool's customization capabilities?"
+    type: single_choice
+    construct: satisfied_primary_tool_s_customization
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "Overall, how satisfied are you with your primary data visualization tool?"
+    type: single_choice
+    construct: overall_satisfied_primary_data_visualiza
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q34
+    prompt: "How likely are you to recommend your primary tool to a colleague? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_primary_tool_colleague
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q35
+    prompt: "How likely are you to adopt a new data visualization tool in the next year?"
+    type: single_choice
+    construct: likely_adopt_new_data_visualization
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q36
+    prompt: "How likely are you to learn a new visualization library or skill in the next year?"
+    type: single_choice
+    construct: likely_learn_new_visualization_library
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q37
+    prompt: "Which challenges do you face with data visualization? (Select all that apply)"
+    type: multi_choice
+    construct: challenges_face_data_visualization_selec
+    required: true
+    options:
+      - id: "a"
+        label: "Preparing and cleaning data"
+      - id: "b"
+        label: "Choosing the right chart type"
+      - id: "c"
+        label: "Tool limitations"
+      - id: "d"
+        label: "Performance with large datasets"
+      - id: "e"
+        label: "Making visualizations clear"
+      - id: "f"
+        label: "Keeping dashboards up to date"
+      - id: "g"
+        label: "Cost or licensing"
+      - id: "h"
+        label: "I have not faced significant challenges"
+  - id: q38
+    prompt: "What is one thing that would improve your data visualization workflow? (Optional short answer)"
+    type: free_text
+    construct: one_thing_that_would_improve
+    required: false
+  - id: q39
+    prompt: "Which best describes your current role?"
+    type: single_choice
+    construct: best_describes_current_role
+    required: true
+    options:
+      - id: "a"
+        label: "Data analyst"
+      - id: "b"
+        label: "Data scientist"
+      - id: "c"
+        label: "Business or BI analyst"
+      - id: "d"
+        label: "Software developer or engineer"
+      - id: "e"
+        label: "Data engineer"
+      - id: "f"
+        label: "Researcher"
+      - id: "g"
+        label: "Manager or executive"
+      - id: "h"
+        label: "Student"
+      - id: "i"
+        label: "Other"
+  - id: q40
+    prompt: "How many years have you worked professionally in your field (not counting education)?"
+    type: single_choice
+    construct: many_years_have_worked_professionally
+    required: true
+    options:
+      - id: "a"
+        label: "I don't work professionally in this field"
+      - id: "b"
+        label: "Less than 2 years"
+      - id: "c"
+        label: "2 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "11 to 20 years"
+      - id: "f"
+        label: "More than 20 years"
+  - id: q41
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q42
+    prompt: "Approximately how many people work at your company or organization?"
+    type: single_choice
+    construct: approximately_many_people_work_company
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2 to 9"
+      - id: "c"
+        label: "10 to 99"
+      - id: "d"
+        label: "100 to 499"
+      - id: "e"
+        label: "500 to 4,999"
+      - id: "f"
+        label: "5,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q43
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Government"
+      - id: "f"
+        label: "Retail or e-commerce"
+      - id: "g"
+        label: "Manufacturing"
+      - id: "h"
+        label: "Media or entertainment"
+      - id: "i"
+        label: "Other"
+  - id: q44
+    prompt: "How would you rate your data visualization skills?"
+    type: single_choice
+    construct: would_rate_data_visualization_skills
+    required: true
+    options:
+      - id: "a"
+        label: "Beginner"
+      - id: "b"
+        label: "Intermediate"
+      - id: "c"
+        label: "Advanced"
+      - id: "d"
+        label: "Expert"
+  - id: q45
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q46
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q47
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q48
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q49
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q50
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

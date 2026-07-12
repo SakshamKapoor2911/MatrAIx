@@ -1,0 +1,886 @@
+schemaVersion: "1.0"
+id: workplace_financial_wellness_v1
+title: "Workplace Financial Wellness Survey"
+description: "How employees learn about, use, and value the financial wellness benefits and programs their employers provide."
+questions:
+  - id: q0
+    prompt: "Does your employer offer any financial wellness benefits or programs?"
+    type: single_choice
+    construct: does_employer_offer_any_financial
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, several"
+      - id: "b"
+        label: "Yes, at least one"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "I'm not sure"
+      - id: "e"
+        label: "I'm not currently employed"
+  - id: q1
+    prompt: "How many years have you been at your current employer? Please enter a number."
+    type: free_text
+    construct: many_years_have_been_current
+    required: true
+  - id: q2
+    prompt: "Which financial wellness benefits does your employer offer? (Select all that apply)"
+    type: multi_choice
+    construct: financial_wellness_benefits_does_employe
+    required: true
+    options:
+      - id: "a"
+        label: "A 401(k) or similar retirement plan"
+      - id: "b"
+        label: "Employer retirement matching"
+      - id: "c"
+        label: "Financial education workshops or seminars"
+      - id: "d"
+        label: "Access to a financial coach or advisor"
+      - id: "e"
+        label: "Student loan repayment assistance"
+      - id: "f"
+        label: "Emergency savings programs"
+      - id: "g"
+        label: "Earned wage access or on-demand pay"
+      - id: "h"
+        label: "Debt management or counseling"
+      - id: "i"
+        label: "I don't know of any"
+  - id: q3
+    prompt: "Which financial wellness tools or providers does your employer use, if any? (Select all that apply)"
+    type: multi_choice
+    construct: financial_wellness_tools_providers_does
+    required: true
+    options:
+      - id: "a"
+        label: "Fidelity"
+      - id: "b"
+        label: "Vanguard"
+      - id: "c"
+        label: "Empower"
+      - id: "d"
+        label: "SoFi at Work"
+      - id: "e"
+        label: "Financial Finesse"
+      - id: "f"
+        label: "Origin or a similar platform"
+      - id: "g"
+        label: "An in-house program"
+      - id: "h"
+        label: "I don't know"
+  - id: q4
+    prompt: "How did you first learn about your employer's financial wellness benefits? (Select all that apply)"
+    type: multi_choice
+    construct: did_first_learn_employer_s
+    required: true
+    options:
+      - id: "a"
+        label: "New-hire onboarding"
+      - id: "b"
+        label: "Open enrollment materials"
+      - id: "c"
+        label: "Email or company newsletter"
+      - id: "d"
+        label: "A manager or HR representative"
+      - id: "e"
+        label: "A coworker"
+      - id: "f"
+        label: "A benefits portal or app"
+      - id: "g"
+        label: "I found out on my own"
+  - id: q5
+    prompt: "Which financial wellness benefits have you actually used? (Select all that apply)"
+    type: multi_choice
+    construct: financial_wellness_benefits_have_actuall
+    required: true
+    options:
+      - id: "a"
+        label: "The retirement plan"
+      - id: "b"
+        label: "Financial education workshops"
+      - id: "c"
+        label: "A financial coach or advisor"
+      - id: "d"
+        label: "Student loan assistance"
+      - id: "e"
+        label: "An emergency savings program"
+      - id: "f"
+        label: "Earned wage access"
+      - id: "g"
+        label: "Debt counseling"
+      - id: "h"
+        label: "I haven't used any"
+  - id: q6
+    prompt: "How often do you use your employer's financial wellness resources?"
+    type: single_choice
+    construct: often_use_employer_s_financial
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "A few times a year"
+      - id: "d"
+        label: "Monthly"
+      - id: "e"
+        label: "Weekly or more often"
+  - id: q7
+    prompt: "Do you participate in your employer's retirement plan?"
+    type: single_choice
+    construct: participate_employer_s_retirement_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, and I get the full match"
+      - id: "b"
+        label: "Yes, but not enough for the full match"
+      - id: "c"
+        label: "Yes, but there is no match"
+      - id: "d"
+        label: "No, I'm eligible but don't participate"
+      - id: "e"
+        label: "No, I'm not eligible"
+  - id: q8
+    prompt: "What percentage of your salary do you contribute to your retirement plan? Please enter a number."
+    type: free_text
+    construct: percentage_salary_contribute_retirement_
+    required: true
+  - id: q9
+    prompt: "How financially stressed do you feel on a typical day?"
+    type: single_choice
+    construct: financially_stressed_feel_typical_day
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all stressed"
+      - id: "b"
+        label: "Slightly stressed"
+      - id: "c"
+        label: "Moderately stressed"
+      - id: "d"
+        label: "Very stressed"
+      - id: "e"
+        label: "Extremely stressed"
+  - id: q10
+    prompt: "How often does financial stress affect your focus or productivity at work?"
+    type: single_choice
+    construct: often_does_financial_stress_affect
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q11
+    prompt: "Which financial topics do you most want help with? (Select all that apply)"
+    type: multi_choice
+    construct: financial_topics_most_want_help
+    required: true
+    options:
+      - id: "a"
+        label: "Budgeting and saving"
+      - id: "b"
+        label: "Paying down debt"
+      - id: "c"
+        label: "Retirement planning"
+      - id: "d"
+        label: "Investing"
+      - id: "e"
+        label: "Buying a home"
+      - id: "f"
+        label: "Managing student loans"
+      - id: "g"
+        label: "Building emergency savings"
+      - id: "h"
+        label: "Taxes"
+      - id: "i"
+        label: "Insurance and protection"
+  - id: q12
+    prompt: "Which best describes your emergency savings?"
+    type: single_choice
+    construct: best_describes_emergency_savings
+    required: true
+    options:
+      - id: "a"
+        label: "I could not cover an unexpected $400 expense"
+      - id: "b"
+        label: "Less than one month of expenses"
+      - id: "c"
+        label: "One to three months of expenses"
+      - id: "d"
+        label: "Three to six months of expenses"
+      - id: "e"
+        label: "More than six months of expenses"
+  - id: q13
+    prompt: "How much do you agree: My employer genuinely cares about my financial wellbeing."
+    type: single_choice
+    construct: much_agree_my_employer_genuinely
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree: The financial wellness benefits offered are useful to me."
+    type: single_choice
+    construct: much_agree_financial_wellness_benefits
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree: I feel confident about my financial future."
+    type: single_choice
+    construct: much_agree_i_feel_confident
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree: I know where to go for financial help through my employer."
+    type: single_choice
+    construct: much_agree_i_know_where
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: Financial benefits matter to me when choosing an employer."
+    type: single_choice
+    construct: much_agree_financial_benefits_matter
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: I would use financial wellness benefits more if they were easier to access."
+    type: single_choice
+    construct: much_agree_i_would_use
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: I worry about privacy when using employer financial tools."
+    type: single_choice
+    construct: much_agree_i_worry_privacy
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How important to you is an employer-sponsored retirement plan?"
+    type: single_choice
+    construct: important_employer_sponsored_retirement_
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "How important to you is access to a financial coach or advisor?"
+    type: single_choice
+    construct: important_access_financial_coach_advisor
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "How important to you is help with paying down debt?"
+    type: single_choice
+    construct: important_help_paying_down_debt
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "How important to you is an emergency savings program?"
+    type: single_choice
+    construct: important_emergency_savings_program
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "How important to you is student loan repayment assistance?"
+    type: single_choice
+    construct: important_student_loan_repayment_assista
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "How important to you is financial education and workshops?"
+    type: single_choice
+    construct: important_financial_education_workshops
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "Which are your top 3 most valuable financial wellness benefits? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_most_valuable_financial
+    required: true
+    options:
+      - id: "a"
+        label: "Retirement plan and matching"
+      - id: "b"
+        label: "Financial coaching or advice"
+      - id: "c"
+        label: "Debt assistance"
+      - id: "d"
+        label: "Emergency savings help"
+      - id: "e"
+        label: "Student loan repayment"
+      - id: "f"
+        label: "Financial education"
+      - id: "g"
+        label: "Earned wage access"
+      - id: "h"
+        label: "Insurance and protection benefits"
+  - id: q27
+    prompt: "What prevents you from using financial wellness benefits more? (Select all that apply)"
+    type: multi_choice
+    construct: prevents_from_using_financial_wellness
+    required: true
+    options:
+      - id: "a"
+        label: "I don't know what's available"
+      - id: "b"
+        label: "I don't have time"
+      - id: "c"
+        label: "The tools are hard to use"
+      - id: "d"
+        label: "Privacy concerns"
+      - id: "e"
+        label: "I don't think they'd help me"
+      - id: "f"
+        label: "I prefer to handle finances on my own"
+      - id: "g"
+        label: "Nothing prevents me"
+  - id: q28
+    prompt: "How well do your employer's benefits match your financial needs?"
+    type: single_choice
+    construct: well_employer_s_benefits_match
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all well"
+      - id: "b"
+        label: "Slightly well"
+      - id: "c"
+        label: "Moderately well"
+      - id: "d"
+        label: "Very well"
+      - id: "e"
+        label: "Extremely well"
+  - id: q29
+    prompt: "Have your employer's financial wellness benefits improved your finances?"
+    type: single_choice
+    construct: have_employer_s_financial_wellness
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, significantly"
+      - id: "b"
+        label: "Yes, somewhat"
+      - id: "c"
+        label: "No noticeable change"
+      - id: "d"
+        label: "I haven't used them"
+      - id: "e"
+        label: "I'm not sure"
+  - id: q30
+    prompt: "Do you talk to a professional about your finances outside of work?"
+    type: single_choice
+    construct: talk_professional_finances_outside_work
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a paid financial advisor"
+      - id: "b"
+        label: "Yes, a free or employer-provided resource"
+      - id: "c"
+        label: "No, but I'd like to"
+      - id: "d"
+        label: "No, and I don't feel the need"
+  - id: q31
+    prompt: "Where do you primarily go for financial guidance? (Select all that apply)"
+    type: multi_choice
+    construct: where_primarily_go_financial_guidance
+    required: true
+    options:
+      - id: "a"
+        label: "Employer resources"
+      - id: "b"
+        label: "A personal financial advisor"
+      - id: "c"
+        label: "Family or friends"
+      - id: "d"
+        label: "Online articles or videos"
+      - id: "e"
+        label: "Banking or investing apps"
+      - id: "f"
+        label: "Books or courses"
+      - id: "g"
+        label: "I don't seek guidance"
+  - id: q32
+    prompt: "How satisfied are you with your employer's financial wellness benefits?"
+    type: single_choice
+    construct: satisfied_employer_s_financial_wellness
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "How satisfied are you with how your employer communicates about these benefits?"
+    type: single_choice
+    construct: satisfied_employer_communicates_these_be
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q34
+    prompt: "How satisfied are you with your overall financial situation?"
+    type: single_choice
+    construct: satisfied_overall_financial_situation
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q35
+    prompt: "Overall, how satisfied are you with your employer's support for your financial wellbeing?"
+    type: single_choice
+    construct: overall_satisfied_employer_s_support
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q36
+    prompt: "How likely are you to recommend your employer's financial wellness benefits to a coworker? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_employer_s_financial
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q37
+    prompt: "How likely are you to use a financial wellness benefit you haven't tried in the next year?"
+    type: single_choice
+    construct: likely_use_financial_wellness_benefit
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q38
+    prompt: "How much would better financial benefits influence your decision to stay with your employer?"
+    type: single_choice
+    construct: much_would_better_financial_benefits
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "Slightly"
+      - id: "c"
+        label: "Moderately"
+      - id: "d"
+        label: "A lot"
+      - id: "e"
+        label: "It would be a major factor"
+  - id: q39
+    prompt: "What is one financial wellness benefit you wish your employer offered? (Optional short answer)"
+    type: free_text
+    construct: one_financial_wellness_benefit_wish
+    required: false
+  - id: q40
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q41
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "What was your total household income last year?"
+    type: single_choice
+    construct: was_total_household_income_last
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 to $199,999"
+      - id: "g"
+        label: "$200,000 or more"
+      - id: "h"
+        label: "Prefer not to say"
+  - id: q44
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q45
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Contractor or temporary worker"
+      - id: "d"
+        label: "Self-employed"
+      - id: "e"
+        label: "Not currently employed"
+  - id: q46
+    prompt: "Approximately how many people work at your employer?"
+    type: single_choice
+    construct: approximately_many_people_work_employer
+    required: true
+    options:
+      - id: "a"
+        label: "Fewer than 50"
+      - id: "b"
+        label: "50 to 249"
+      - id: "c"
+        label: "250 to 999"
+      - id: "d"
+        label: "1,000 to 4,999"
+      - id: "e"
+        label: "5,000 or more"
+      - id: "f"
+        label: "I'm not sure"
+  - id: q47
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Healthcare"
+      - id: "b"
+        label: "Technology"
+      - id: "c"
+        label: "Finance or banking"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Retail or hospitality"
+      - id: "f"
+        label: "Manufacturing"
+      - id: "g"
+        label: "Government"
+      - id: "h"
+        label: "Other"
+  - id: q48
+    prompt: "How many people live in your household, including yourself?"
+    type: single_choice
+    construct: many_people_live_household_including
+    required: true
+    options:
+      - id: "a"
+        label: "1"
+      - id: "b"
+        label: "2"
+      - id: "c"
+        label: "3"
+      - id: "d"
+        label: "4"
+      - id: "e"
+        label: "5 or more"
+  - id: q49
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "Living with a partner"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q50
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q51
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

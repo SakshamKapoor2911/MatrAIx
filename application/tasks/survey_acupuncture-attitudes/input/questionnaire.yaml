@@ -1,0 +1,846 @@
+schemaVersion: "1.0"
+id: acupuncture_attitudes_v1
+title: "Acupuncture Attitudes Survey"
+description: "People's experiences with and attitudes toward acupuncture as a wellness practice."
+questions:
+  - id: q0
+    prompt: "Have you ever tried acupuncture?"
+    type: single_choice
+    construct: have_ever_tried_acupuncture
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I go regularly"
+      - id: "b"
+        label: "Yes, occasionally"
+      - id: "c"
+        label: "Yes, but only once or twice"
+      - id: "d"
+        label: "No, but I'm open to it"
+      - id: "e"
+        label: "No, and I'm not interested"
+  - id: q1
+    prompt: "How long ago did you first try acupuncture?"
+    type: single_choice
+    construct: long_ago_did_first_try
+    required: true
+    options:
+      - id: "a"
+        label: "Within the past year"
+      - id: "b"
+        label: "1 to 3 years ago"
+      - id: "c"
+        label: "4 to 10 years ago"
+      - id: "d"
+        label: "More than 10 years ago"
+      - id: "e"
+        label: "I have never tried it"
+  - id: q2
+    prompt: "In a typical year, about how often do you get acupuncture?"
+    type: single_choice
+    construct: typical_year_often_get_acupuncture
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Once or twice a year"
+      - id: "c"
+        label: "Every few months"
+      - id: "d"
+        label: "About once a month"
+      - id: "e"
+        label: "Two or more times a month"
+  - id: q3
+    prompt: "When did you last have an acupuncture session?"
+    type: single_choice
+    construct: when_did_last_have_acupuncture
+    required: true
+    options:
+      - id: "a"
+        label: "Within the past month"
+      - id: "b"
+        label: "Within the past 6 months"
+      - id: "c"
+        label: "Within the past year"
+      - id: "d"
+        label: "More than a year ago"
+      - id: "e"
+        label: "Never"
+  - id: q4
+    prompt: "What first led you to try acupuncture? (Select all that apply)"
+    type: multi_choice
+    construct: first_led_try_acupuncture_select
+    required: true
+    options:
+      - id: "a"
+        label: "General wellness and prevention"
+      - id: "b"
+        label: "Muscle or joint discomfort"
+      - id: "c"
+        label: "Stress or relaxation"
+      - id: "d"
+        label: "Sleep concerns"
+      - id: "e"
+        label: "Curiosity"
+      - id: "f"
+        label: "A recommendation from friends or family"
+      - id: "g"
+        label: "A recommendation from a health professional"
+      - id: "h"
+        label: "I have never tried it"
+  - id: q5
+    prompt: "Where have you received acupuncture? (Select all that apply)"
+    type: multi_choice
+    construct: where_have_received_acupuncture_select
+    required: true
+    options:
+      - id: "a"
+        label: "A dedicated acupuncture clinic"
+      - id: "b"
+        label: "A community acupuncture setting"
+      - id: "c"
+        label: "A wellness or integrative health center"
+      - id: "d"
+        label: "A chiropractic or physical therapy office"
+      - id: "e"
+        label: "A spa"
+      - id: "f"
+        label: "A practitioner's home studio"
+      - id: "g"
+        label: "I have never received it"
+  - id: q6
+    prompt: "Which related practices have you tried? (Select all that apply)"
+    type: multi_choice
+    construct: related_practices_have_tried_select
+    required: true
+    options:
+      - id: "a"
+        label: "Cupping"
+      - id: "b"
+        label: "Acupressure"
+      - id: "c"
+        label: "Moxibustion"
+      - id: "d"
+        label: "Herbal wellness consultations"
+      - id: "e"
+        label: "Massage therapy"
+      - id: "f"
+        label: "Reflexology"
+      - id: "g"
+        label: "None of these"
+  - id: q7
+    prompt: "How long is your typical acupuncture session, in minutes? Please enter a number."
+    type: free_text
+    construct: long_typical_acupuncture_session_minutes
+    required: true
+  - id: q8
+    prompt: "About how much do you typically pay per session, in U.S. dollars? Please enter a number."
+    type: free_text
+    construct: much_typically_pay_per_session
+    required: true
+  - id: q9
+    prompt: "How do you usually pay for acupuncture? (Select all that apply)"
+    type: multi_choice
+    construct: usually_pay_acupuncture_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Out of pocket"
+      - id: "b"
+        label: "Health insurance"
+      - id: "c"
+        label: "HSA or FSA funds"
+      - id: "d"
+        label: "A package or membership plan"
+      - id: "e"
+        label: "Covered by an employer wellness benefit"
+      - id: "f"
+        label: "I have never paid for it"
+  - id: q10
+    prompt: "What wellness goals do you associate with acupuncture? (Select all that apply)"
+    type: multi_choice
+    construct: wellness_goals_associate_acupuncture_sel
+    required: true
+    options:
+      - id: "a"
+        label: "Relaxation and stress relief"
+      - id: "b"
+        label: "General muscle and joint comfort"
+      - id: "c"
+        label: "Better sleep"
+      - id: "d"
+        label: "Energy and balance"
+      - id: "e"
+        label: "Seasonal wellness"
+      - id: "f"
+        label: "Overall sense of well-being"
+      - id: "g"
+        label: "Recovery from exercise"
+  - id: q11
+    prompt: "How much do you agree: Acupuncture is a legitimate wellness practice."
+    type: single_choice
+    construct: much_agree_acupuncture_legitimate_wellne
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q12
+    prompt: "How much do you agree: I feel relaxed during or after an acupuncture session."
+    type: single_choice
+    construct: much_agree_i_feel_relaxed
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q13
+    prompt: "How much do you agree: Acupuncture has been worth the cost for me."
+    type: single_choice
+    construct: much_agree_acupuncture_has_been
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q14
+    prompt: "How much do you agree: I would recommend acupuncture to friends or family."
+    type: single_choice
+    construct: much_agree_i_would_recommend
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q15
+    prompt: "How much do you agree: I feel comfortable during acupuncture sessions."
+    type: single_choice
+    construct: much_agree_i_feel_comfortable
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q16
+    prompt: "How much do you agree: I would like to include acupuncture in my routine more often."
+    type: single_choice
+    construct: much_agree_i_would_like
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: I trust acupuncture as much as other wellness practices."
+    type: single_choice
+    construct: much_agree_i_trust_acupuncture
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "When choosing an acupuncture practitioner, how important is their training and credentials?"
+    type: single_choice
+    construct: when_choosing_acupuncture_practitioner_i
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q19
+    prompt: "When choosing an acupuncture practitioner, how important is cost?"
+    type: single_choice
+    construct: when_choosing_acupuncture_practitioner_i
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q20
+    prompt: "When choosing an acupuncture practitioner, how important is location and convenience?"
+    type: single_choice
+    construct: when_choosing_acupuncture_practitioner_i
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q21
+    prompt: "When choosing an acupuncture practitioner, how important is the cleanliness of the setting?"
+    type: single_choice
+    construct: when_choosing_acupuncture_practitioner_i
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q22
+    prompt: "When choosing an acupuncture practitioner, how important are online reviews?"
+    type: single_choice
+    construct: when_choosing_acupuncture_practitioner_i
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q23
+    prompt: "When choosing an acupuncture practitioner, how important is a personal recommendation?"
+    type: single_choice
+    construct: when_choosing_acupuncture_practitioner_i
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "Which are your top 3 reasons you would consider acupuncture? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_reasons_would_consider
+    required: true
+    options:
+      - id: "a"
+        label: "Relaxation"
+      - id: "b"
+        label: "Muscle and joint comfort"
+      - id: "c"
+        label: "Stress relief"
+      - id: "d"
+        label: "Better sleep"
+      - id: "e"
+        label: "General wellness"
+      - id: "f"
+        label: "A natural, drug-free approach"
+      - id: "g"
+        label: "Curiosity"
+      - id: "h"
+        label: "Energy and balance"
+  - id: q25
+    prompt: "Which of these are concerns or barriers for you about acupuncture? (Select all that apply)"
+    type: multi_choice
+    construct: these_concerns_barriers_acupuncture_sele
+    required: true
+    options:
+      - id: "a"
+        label: "Discomfort with needles"
+      - id: "b"
+        label: "Cost"
+      - id: "c"
+        label: "Skepticism about effectiveness"
+      - id: "d"
+        label: "Lack of insurance coverage"
+      - id: "e"
+        label: "Hard to find a trusted practitioner"
+      - id: "f"
+        label: "Lack of time"
+      - id: "g"
+        label: "No concerns"
+  - id: q26
+    prompt: "How comfortable are you with the idea of thin needles being used?"
+    type: single_choice
+    construct: comfortable_idea_thin_needles_being
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all comfortable"
+      - id: "b"
+        label: "Slightly comfortable"
+      - id: "c"
+        label: "Moderately comfortable"
+      - id: "d"
+        label: "Very comfortable"
+      - id: "e"
+        label: "Extremely comfortable"
+  - id: q27
+    prompt: "How would you describe your overall attitude toward acupuncture?"
+    type: single_choice
+    construct: would_describe_overall_attitude_toward
+    required: true
+    options:
+      - id: "a"
+        label: "Very negative"
+      - id: "b"
+        label: "Somewhat negative"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Somewhat positive"
+      - id: "e"
+        label: "Very positive"
+  - id: q28
+    prompt: "How did you learn about acupuncture? (Select all that apply)"
+    type: multi_choice
+    construct: did_learn_acupuncture_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Friends or family"
+      - id: "b"
+        label: "A health professional"
+      - id: "c"
+        label: "Online articles or social media"
+      - id: "d"
+        label: "A wellness podcast or video"
+      - id: "e"
+        label: "Personal research"
+      - id: "f"
+        label: "A local clinic or advertisement"
+  - id: q29
+    prompt: "How does acupuncture compare with other wellness practices you use?"
+    type: single_choice
+    construct: does_acupuncture_compare_other_wellness
+    required: true
+    options:
+      - id: "a"
+        label: "Much less helpful"
+      - id: "b"
+        label: "Somewhat less helpful"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Somewhat more helpful"
+      - id: "e"
+        label: "Much more helpful"
+      - id: "f"
+        label: "I don't use other practices"
+  - id: q30
+    prompt: "How often do you combine acupuncture with other wellness practices?"
+    type: single_choice
+    construct: often_combine_acupuncture_other_wellness
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+      - id: "f"
+        label: "Not applicable"
+  - id: q31
+    prompt: "How relaxed do you typically feel after a session?"
+    type: single_choice
+    construct: relaxed_typically_feel_after_session
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all relaxed"
+      - id: "b"
+        label: "Slightly relaxed"
+      - id: "c"
+        label: "Moderately relaxed"
+      - id: "d"
+        label: "Very relaxed"
+      - id: "e"
+        label: "Extremely relaxed"
+      - id: "f"
+        label: "Not applicable"
+  - id: q32
+    prompt: "How satisfied are you with your acupuncture experiences so far?"
+    type: single_choice
+    construct: satisfied_acupuncture_experiences_so_far
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "Not applicable"
+  - id: q33
+    prompt: "How satisfied are you with the value for money of acupuncture?"
+    type: single_choice
+    construct: satisfied_value_money_acupuncture
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "Not applicable"
+  - id: q34
+    prompt: "Overall, how satisfied are you with acupuncture as a wellness option?"
+    type: single_choice
+    construct: overall_satisfied_acupuncture_as_wellnes
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+      - id: "f"
+        label: "Not applicable"
+  - id: q35
+    prompt: "How likely are you to recommend acupuncture to a friend? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_acupuncture_friend_0
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q36
+    prompt: "How likely are you to get acupuncture in the next year?"
+    type: single_choice
+    construct: likely_get_acupuncture_next_year
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q37
+    prompt: "How likely are you to try a related practice such as cupping or acupressure?"
+    type: single_choice
+    construct: likely_try_related_practice_such
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q38
+    prompt: "What would make you more likely to try or continue acupuncture? (Optional short answer)"
+    type: free_text
+    construct: would_make_more_likely_try
+    required: false
+  - id: q39
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q40
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q41
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q42
+    prompt: "What is your annual household income?"
+    type: single_choice
+    construct: annual_household_income
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $25,000"
+      - id: "b"
+        label: "$25,000 to $49,999"
+      - id: "c"
+        label: "$50,000 to $74,999"
+      - id: "d"
+        label: "$75,000 to $99,999"
+      - id: "e"
+        label: "$100,000 to $149,999"
+      - id: "f"
+        label: "$150,000 or more"
+      - id: "g"
+        label: "Prefer not to say"
+  - id: q43
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q44
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Self-employed"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q45
+    prompt: "How many people live in your household, including yourself?"
+    type: single_choice
+    construct: many_people_live_household_including
+    required: true
+    options:
+      - id: "a"
+        label: "1"
+      - id: "b"
+        label: "2"
+      - id: "c"
+        label: "3"
+      - id: "d"
+        label: "4"
+      - id: "e"
+        label: "5 or more"
+  - id: q46
+    prompt: "What is your marital or relationship status?"
+    type: single_choice
+    construct: marital_relationship_status
+    required: true
+    options:
+      - id: "a"
+        label: "Single, never married"
+      - id: "b"
+        label: "Married"
+      - id: "c"
+        label: "In a domestic partnership"
+      - id: "d"
+        label: "Divorced or separated"
+      - id: "e"
+        label: "Widowed"
+      - id: "f"
+        label: "Prefer not to say"
+  - id: q47
+    prompt: "Do you currently have health insurance?"
+    type: single_choice
+    construct: currently_have_health_insurance
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, through an employer"
+      - id: "b"
+        label: "Yes, through a government program"
+      - id: "c"
+        label: "Yes, purchased on my own"
+      - id: "d"
+        label: "No"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q48
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q49
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

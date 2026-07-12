@@ -1,0 +1,918 @@
+schemaVersion: "1.0"
+id: pair_programming_habits_v1
+title: "Pair Programming Habits Survey"
+description: "How developers practice pair and mob programming, the tools they use, and their attitudes toward it."
+questions:
+  - id: q0
+    prompt: "How often do you pair program?"
+    type: single_choice
+    construct: often_pair_program
+    required: true
+    options:
+      - id: "a"
+        label: "Every day"
+      - id: "b"
+        label: "A few times a week"
+      - id: "c"
+        label: "A few times a month"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q1
+    prompt: "How long have you been practicing pair programming?"
+    type: single_choice
+    construct: long_have_been_practicing_pair
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 6 months"
+      - id: "b"
+        label: "6 months to 1 year"
+      - id: "c"
+        label: "1 to 3 years"
+      - id: "d"
+        label: "4 to 7 years"
+      - id: "e"
+        label: "More than 7 years"
+      - id: "f"
+        label: "I have never paired"
+  - id: q2
+    prompt: "What is your relationship to pair programming?"
+    type: single_choice
+    construct: relationship_pair_programming
+    required: true
+    options:
+      - id: "a"
+        label: "I pair as a core part of my daily workflow"
+      - id: "b"
+        label: "I pair when a task calls for it"
+      - id: "c"
+        label: "I mostly pair to mentor or onboard others"
+      - id: "d"
+        label: "I mostly pair to learn from more senior developers"
+      - id: "e"
+        label: "I rarely or never pair"
+  - id: q3
+    prompt: "In a typical pairing session, which role do you play most often?"
+    type: single_choice
+    construct: typical_pairing_session_role_play
+    required: true
+    options:
+      - id: "a"
+        label: "Driver (writing the code)"
+      - id: "b"
+        label: "Navigator (reviewing and directing)"
+      - id: "c"
+        label: "I switch roles frequently"
+      - id: "d"
+        label: "It depends on the session"
+  - id: q4
+    prompt: "How are your pairing sessions usually conducted?"
+    type: single_choice
+    construct: pairing_sessions_usually_conducted
+    required: true
+    options:
+      - id: "a"
+        label: "Fully remote"
+      - id: "b"
+        label: "Fully in person"
+      - id: "c"
+        label: "A mix of remote and in person"
+      - id: "d"
+        label: "I don't pair"
+  - id: q5
+    prompt: "Which pairing style does your team use most often?"
+    type: single_choice
+    construct: pairing_style_does_team_use
+    required: true
+    options:
+      - id: "a"
+        label: "Driver and navigator"
+      - id: "b"
+        label: "Ping-pong (one writes a test, the other makes it pass)"
+      - id: "c"
+        label: "Strong-style pairing"
+      - id: "d"
+        label: "Unstructured, whoever has the keyboard"
+      - id: "e"
+        label: "We don't have a defined style"
+  - id: q6
+    prompt: "Which tools do you use for remote pairing or screen collaboration? (Select all that apply)"
+    type: multi_choice
+    construct: tools_use_remote_pairing_screen
+    required: true
+    options:
+      - id: "a"
+        label: "VS Code Live Share"
+      - id: "b"
+        label: "Tuple"
+      - id: "c"
+        label: "JetBrains Code With Me"
+      - id: "d"
+        label: "Zoom screen sharing"
+      - id: "e"
+        label: "Microsoft Teams screen sharing"
+      - id: "f"
+        label: "Google Meet"
+      - id: "g"
+        label: "Slack Huddles"
+      - id: "h"
+        label: "CoScreen"
+      - id: "i"
+        label: "Pop"
+      - id: "j"
+        label: "A single shared physical machine"
+      - id: "k"
+        label: "None"
+  - id: q7
+    prompt: "In which situations do you typically pair? (Select all that apply)"
+    type: multi_choice
+    construct: situations_typically_pair_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Onboarding new team members"
+      - id: "b"
+        label: "Building complex or unfamiliar features"
+      - id: "c"
+        label: "Hunting down difficult bugs"
+      - id: "d"
+        label: "Reviewing or refactoring code"
+      - id: "e"
+        label: "Knowledge transfer before someone leaves"
+      - id: "f"
+        label: "Responding to production incidents"
+      - id: "g"
+        label: "Learning a new language or framework"
+      - id: "h"
+        label: "Working through a spike or prototype"
+  - id: q8
+    prompt: "Which benefits have you personally experienced from pairing? (Select all that apply)"
+    type: multi_choice
+    construct: benefits_have_personally_experienced_fro
+    required: true
+    options:
+      - id: "a"
+        label: "Fewer bugs in the code we wrote together"
+      - id: "b"
+        label: "Faster onboarding"
+      - id: "c"
+        label: "Better shared understanding of the codebase"
+      - id: "d"
+        label: "Learning new tools or shortcuts"
+      - id: "e"
+        label: "Higher focus and less procrastination"
+      - id: "f"
+        label: "Better design decisions"
+      - id: "g"
+        label: "Stronger team relationships"
+      - id: "h"
+        label: "I haven't noticed clear benefits"
+  - id: q9
+    prompt: "How often do you participate in mob or ensemble programming (three or more people)?"
+    type: single_choice
+    construct: often_participate_mob_ensemble_programmi
+    required: true
+    options:
+      - id: "a"
+        label: "Regularly"
+      - id: "b"
+        label: "Occasionally"
+      - id: "c"
+        label: "Rarely"
+      - id: "d"
+        label: "Never"
+  - id: q10
+    prompt: "How long is a typical pairing session for you?"
+    type: single_choice
+    construct: long_typical_pairing_session
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 30 minutes"
+      - id: "b"
+        label: "30 minutes to 1 hour"
+      - id: "c"
+        label: "1 to 2 hours"
+      - id: "d"
+        label: "2 to 4 hours"
+      - id: "e"
+        label: "More than 4 hours"
+  - id: q11
+    prompt: "In which languages or stacks do you most often pair? (Select all that apply)"
+    type: multi_choice
+    construct: languages_stacks_most_often_pair
+    required: true
+    options:
+      - id: "a"
+        label: "JavaScript or TypeScript"
+      - id: "b"
+        label: "Python"
+      - id: "c"
+        label: "Java or Kotlin"
+      - id: "d"
+        label: "C# or .NET"
+      - id: "e"
+        label: "Go"
+      - id: "f"
+        label: "Ruby"
+      - id: "g"
+        label: "C or C++"
+      - id: "h"
+        label: "Rust"
+      - id: "i"
+        label: "Other"
+  - id: q12
+    prompt: "Who usually initiates a pairing session on your team?"
+    type: single_choice
+    construct: who_usually_initiates_pairing_session
+    required: true
+    options:
+      - id: "a"
+        label: "Whoever owns the task"
+      - id: "b"
+        label: "A manager or team lead assigns it"
+      - id: "c"
+        label: "It is scheduled on a rotation"
+      - id: "d"
+        label: "Someone asks for help ad hoc"
+      - id: "e"
+        label: "It rarely happens"
+  - id: q13
+    prompt: "How do you rotate the driver and navigator roles?"
+    type: single_choice
+    construct: rotate_driver_navigator_roles
+    required: true
+    options:
+      - id: "a"
+        label: "On a fixed timer (for example, every 10 minutes)"
+      - id: "b"
+        label: "After each small task or test"
+      - id: "c"
+        label: "Whenever it feels natural"
+      - id: "d"
+        label: "We don't really rotate"
+      - id: "e"
+        label: "Not applicable"
+  - id: q14
+    prompt: "About how many hours per week do you spend pair programming? Please enter a number."
+    type: free_text
+    construct: many_hours_per_week_spend
+    required: true
+  - id: q15
+    prompt: "With about how many different people did you pair in the last month? Please enter a number."
+    type: free_text
+    construct: many_different_people_did_pair
+    required: true
+  - id: q16
+    prompt: "How much do you agree: Pair programming improves the quality of the code we write."
+    type: single_choice
+    construct: much_agree_pair_programming_improves
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q17
+    prompt: "How much do you agree: Pair programming helps catch bugs earlier."
+    type: single_choice
+    construct: much_agree_pair_programming_helps
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q18
+    prompt: "How much do you agree: Pair programming accelerates onboarding of new developers."
+    type: single_choice
+    construct: much_agree_pair_programming_accelerates
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q19
+    prompt: "How much do you agree: Pair programming is mentally exhausting."
+    type: single_choice
+    construct: much_agree_pair_programming_mentally
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q20
+    prompt: "How much do you agree: Pair programming is a good use of my time."
+    type: single_choice
+    construct: much_agree_pair_programming_good
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q21
+    prompt: "How much do you agree: Pair programming improves knowledge sharing across the team."
+    type: single_choice
+    construct: much_agree_pair_programming_improves
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q22
+    prompt: "How much do you agree: I generally enjoy pairing with my colleagues."
+    type: single_choice
+    construct: much_agree_i_generally_enjoy
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q23
+    prompt: "When pairing, how important is a low-latency screen-sharing tool?"
+    type: single_choice
+    construct: when_pairing_important_low_latency
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q24
+    prompt: "When pairing, how important is a quiet, distraction-free environment?"
+    type: single_choice
+    construct: when_pairing_important_quiet_distraction
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q25
+    prompt: "When pairing, how important is personality compatibility with your partner?"
+    type: single_choice
+    construct: when_pairing_important_personality_compa
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q26
+    prompt: "When pairing, how important is having clearly defined driver and navigator roles?"
+    type: single_choice
+    construct: when_pairing_important_having_clearly
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q27
+    prompt: "When pairing, how important is scheduling dedicated, uninterrupted time blocks?"
+    type: single_choice
+    construct: when_pairing_important_scheduling_dedica
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q28
+    prompt: "When pairing, how important is a similar skill level between partners?"
+    type: single_choice
+    construct: when_pairing_important_similar_skill
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all important"
+      - id: "b"
+        label: "Slightly important"
+      - id: "c"
+        label: "Moderately important"
+      - id: "d"
+        label: "Very important"
+      - id: "e"
+        label: "Extremely important"
+  - id: q29
+    prompt: "How often do pairing sessions lead to disagreements about approach?"
+    type: single_choice
+    construct: often_pairing_sessions_lead_disagreement
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q30
+    prompt: "How often do you take short breaks during long pairing sessions?"
+    type: single_choice
+    construct: often_take_short_breaks_during
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q31
+    prompt: "How satisfied are you with the tools you use for pairing?"
+    type: single_choice
+    construct: satisfied_tools_use_pairing
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q32
+    prompt: "How satisfied are you with your team's overall pairing culture?"
+    type: single_choice
+    construct: satisfied_team_s_overall_pairing
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Dissatisfied"
+      - id: "c"
+        label: "Neutral"
+      - id: "d"
+        label: "Satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q33
+    prompt: "What is the biggest barrier to pairing more often on your team?"
+    type: single_choice
+    construct: biggest_barrier_pairing_more_often
+    required: true
+    options:
+      - id: "a"
+        label: "Scheduling and time-zone conflicts"
+      - id: "b"
+        label: "It feels less productive for some tasks"
+      - id: "c"
+        label: "Tooling or connectivity friction"
+      - id: "d"
+        label: "Personality or comfort issues"
+      - id: "e"
+        label: "Lack of management support"
+      - id: "f"
+        label: "There are no real barriers"
+  - id: q34
+    prompt: "Does your team set aside dedicated time for pairing or mobbing?"
+    type: single_choice
+    construct: does_team_set_aside_dedicated
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, it is a scheduled part of our week"
+      - id: "b"
+        label: "Yes, but only informally"
+      - id: "c"
+        label: "No, it happens only as needed"
+      - id: "d"
+        label: "No, we don't pair"
+  - id: q35
+    prompt: "How often do you run into latency or audio problems during remote pairing?"
+    type: single_choice
+    construct: often_run_into_latency_audio
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Very often"
+      - id: "f"
+        label: "I don't pair remotely"
+  - id: q36
+    prompt: "How would you rate the value of pairing specifically for debugging hard problems?"
+    type: single_choice
+    construct: would_rate_value_pairing_specifically
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all valuable"
+      - id: "b"
+        label: "Slightly valuable"
+      - id: "c"
+        label: "Moderately valuable"
+      - id: "d"
+        label: "Very valuable"
+      - id: "e"
+        label: "Extremely valuable"
+  - id: q37
+    prompt: "How likely are you to ask a colleague to pair when you hit a tricky bug?"
+    type: single_choice
+    construct: likely_ask_colleague_pair_when
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q38
+    prompt: "Which are your top 3 reasons for choosing to pair on a task? (Select all that apply)"
+    type: multi_choice
+    construct: top_3_reasons_choosing_pair
+    required: true
+    options:
+      - id: "a"
+        label: "Catching bugs early"
+      - id: "b"
+        label: "Sharing knowledge"
+      - id: "c"
+        label: "Onboarding or mentoring"
+      - id: "d"
+        label: "Staying focused"
+      - id: "e"
+        label: "Making better design decisions"
+      - id: "f"
+        label: "Getting unstuck faster"
+      - id: "g"
+        label: "Building team trust"
+      - id: "h"
+        label: "Meeting a code-review requirement"
+  - id: q39
+    prompt: "How much do you agree: Mob programming is worth the cost of everyone's time."
+    type: single_choice
+    construct: much_agree_mob_programming_worth
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q40
+    prompt: "How likely are you to recommend pair programming to another developer? (0 = Not at all likely, 10 = Extremely likely)"
+    type: single_choice
+    construct: likely_recommend_pair_programming_anothe
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2"
+      - id: "d"
+        label: "3"
+      - id: "e"
+        label: "4"
+      - id: "f"
+        label: "5"
+      - id: "g"
+        label: "6"
+      - id: "h"
+        label: "7"
+      - id: "i"
+        label: "8"
+      - id: "j"
+        label: "9"
+      - id: "k"
+        label: "10"
+  - id: q41
+    prompt: "How likely are you to increase how much you pair over the next year?"
+    type: single_choice
+    construct: likely_increase_much_pair_over
+    required: true
+    options:
+      - id: "a"
+        label: "Very unlikely"
+      - id: "b"
+        label: "Unlikely"
+      - id: "c"
+        label: "Neither likely nor unlikely"
+      - id: "d"
+        label: "Likely"
+      - id: "e"
+        label: "Very likely"
+  - id: q42
+    prompt: "What is one thing you would change to make pairing better on your team? (Optional short answer)"
+    type: free_text
+    construct: one_thing_would_change_make
+    required: false
+  - id: q43
+    prompt: "Which best describes your current role?"
+    type: single_choice
+    construct: best_describes_current_role
+    required: true
+    options:
+      - id: "a"
+        label: "Front-end developer"
+      - id: "b"
+        label: "Back-end developer"
+      - id: "c"
+        label: "Full-stack developer"
+      - id: "d"
+        label: "DevOps or site reliability engineer"
+      - id: "e"
+        label: "Data engineer"
+      - id: "f"
+        label: "QA or test engineer"
+      - id: "g"
+        label: "Engineering manager"
+      - id: "h"
+        label: "Student"
+      - id: "i"
+        label: "Other"
+  - id: q44
+    prompt: "How many years have you worked professionally in technology (not counting education)?"
+    type: single_choice
+    construct: many_years_have_worked_professionally
+    required: true
+    options:
+      - id: "a"
+        label: "I don't work in tech professionally"
+      - id: "b"
+        label: "Less than 2 years"
+      - id: "c"
+        label: "2 to 5 years"
+      - id: "d"
+        label: "6 to 10 years"
+      - id: "e"
+        label: "11 to 20 years"
+      - id: "f"
+        label: "More than 20 years"
+  - id: q45
+    prompt: "What is your current employment status?"
+    type: single_choice
+    construct: current_employment_status
+    required: true
+    options:
+      - id: "a"
+        label: "Employed full-time"
+      - id: "b"
+        label: "Employed part-time"
+      - id: "c"
+        label: "Independent contractor or freelancer"
+      - id: "d"
+        label: "Student"
+      - id: "e"
+        label: "Not currently employed"
+      - id: "f"
+        label: "Retired"
+  - id: q46
+    prompt: "Approximately how many people work at your company or organization?"
+    type: single_choice
+    construct: approximately_many_people_work_company
+    required: true
+    options:
+      - id: "a"
+        label: "Just me"
+      - id: "b"
+        label: "2 to 9"
+      - id: "c"
+        label: "10 to 99"
+      - id: "d"
+        label: "100 to 499"
+      - id: "e"
+        label: "500 to 4,999"
+      - id: "f"
+        label: "5,000 or more"
+      - id: "g"
+        label: "Not applicable"
+  - id: q47
+    prompt: "What industry do you primarily work in?"
+    type: single_choice
+    construct: industry_primarily_work
+    required: true
+    options:
+      - id: "a"
+        label: "Software or technology"
+      - id: "b"
+        label: "Finance or banking"
+      - id: "c"
+        label: "Healthcare"
+      - id: "d"
+        label: "Education"
+      - id: "e"
+        label: "Government"
+      - id: "f"
+        label: "Retail or e-commerce"
+      - id: "g"
+        label: "Manufacturing"
+      - id: "h"
+        label: "Media or entertainment"
+      - id: "i"
+        label: "Other"
+  - id: q48
+    prompt: "What is your age?"
+    type: single_choice
+    construct: age
+    required: true
+    options:
+      - id: "a"
+        label: "Under 18"
+      - id: "b"
+        label: "18 to 24"
+      - id: "c"
+        label: "25 to 34"
+      - id: "d"
+        label: "35 to 44"
+      - id: "e"
+        label: "45 to 54"
+      - id: "f"
+        label: "55 to 64"
+      - id: "g"
+        label: "65 or older"
+  - id: q49
+    prompt: "What is your gender?"
+    type: single_choice
+    construct: gender
+    required: true
+    options:
+      - id: "a"
+        label: "Man"
+      - id: "b"
+        label: "Woman"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer to self-describe"
+      - id: "e"
+        label: "Prefer not to say"
+  - id: q50
+    prompt: "Which best describes your race or ethnicity? (Select all that apply)"
+    type: multi_choice
+    construct: best_describes_race_ethnicity_select
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Asian"
+      - id: "e"
+        label: "Native American or Alaska Native"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "Middle Eastern or North African"
+      - id: "h"
+        label: "Other"
+      - id: "i"
+        label: "Prefer not to say"
+  - id: q51
+    prompt: "What is the highest level of education you have completed?"
+    type: single_choice
+    construct: highest_level_education_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "High school or less"
+      - id: "b"
+        label: "Some college, no degree"
+      - id: "c"
+        label: "Associate degree"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Master's degree"
+      - id: "f"
+        label: "Doctoral or professional degree"
+  - id: q52
+    prompt: "Which region of the United States do you live in?"
+    type: single_choice
+    construct: region_united_states_live
+    required: true
+    options:
+      - id: "a"
+        label: "Northeast"
+      - id: "b"
+        label: "Midwest"
+      - id: "c"
+        label: "South"
+      - id: "d"
+        label: "West"
+      - id: "e"
+        label: "I live outside the United States"
+  - id: q53
+    prompt: "How would you describe the area where you live?"
+    type: single_choice
+    construct: would_describe_area_where_live
+    required: true
+    options:
+      - id: "a"
+        label: "Urban"
+      - id: "b"
+        label: "Suburban"
+      - id: "c"
+        label: "Rural"

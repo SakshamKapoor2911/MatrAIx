@@ -1,0 +1,7 @@
+# Travel Rewards Credit Cards
+
+How people choose, use, and get value from travel rewards credit cards, their points and miles, and premium perks.
+
+## About this survey
+
+This survey profiles travel rewards credit card holders, opening with a screener on how many cards they hold and how long they have used them. It records the primary card and full wallet across issuers such as Chase Sapphire, American Express Gold and Platinum, Capital One Venture, and co-branded airline and hotel cards, the rewards currencies earned, spending levels, annual fees, payment behavior, bonus categories, redemption methods, and which premium perks respondents actually use. Attitudes are captured with an agreement Likert battery on fee value, point-maximizing skill, and overspending worries, and a per-item importance matrix over card-selection factors, plus a top-three ranking of decision factors and a recommendation likelihood scale. Additional sections cover sign-up-bonus behavior, point valuation, travel frequency, cancellations, tracking methods, and satisfaction with rewards, redemptions, and service. Question types include single-choice, multi-select, agreement and importance matrices, satisfaction and likelihood Likert scales, an NPS-style 0–10 item, a ranking item, and numeric free-text. The survey closes with a demographic block covering age, gender, race and ethnicity, household income, education, employment, household size, marital status, credit score range, U.S. region, and urbanicity.
