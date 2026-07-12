@@ -72,3 +72,17 @@ def test_node_detail_endpoint(synthesis_client):
 def test_node_detail_unknown_is_404(synthesis_client):
     response = synthesis_client.get("/api/synthesis/nodes/nope")
     assert response.status_code == 404
+
+
+def test_node_detail_internal_key_error_is_not_mislabeled_404(
+    client, app, tmp_path
+):
+    graph = json.loads(json.dumps(SYNTH_GRAPH))
+    condition = next(node for node in graph["nodes"] if node["id"] == "c")
+    condition["prior"] = {"q": 0.7}  # Existing node, corrupt mapping misses "p".
+    graph_path = tmp_path / "corrupt-prior-graph.json"
+    graph_path.write_text(json.dumps(graph), encoding="utf-8")
+    app.state.services.persona_synthesis = PersonaSynthesisService(graph_path)
+
+    with pytest.raises(KeyError, match="p"):
+        client.get("/api/synthesis/nodes/c")

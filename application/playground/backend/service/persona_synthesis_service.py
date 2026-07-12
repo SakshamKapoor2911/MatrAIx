@@ -13,11 +13,14 @@ from __future__ import annotations
 import json
 import threading
 from collections import deque
+from copy import deepcopy
+from heapq import heappop, heappush
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 __all__ = [
     "PersonaSynthesisService",
+    "UnknownNodeError",
     "DEFAULT_GRAPH_RELPATH",
     "MAX_SUBGRAPH_NODES_PER_DIRECTION",
 ]
@@ -29,6 +32,10 @@ MAX_SUBGRAPH_NODES_PER_DIRECTION = 60
 
 #: Cap on the per-node edge lists in node detail payloads.
 MAX_DETAIL_EDGES = 20
+
+
+class UnknownNodeError(KeyError):
+    """Raised when a requested graph node does not exist."""
 
 
 def _category(node: Dict[str, Any]) -> str:
@@ -170,7 +177,7 @@ class PersonaSynthesisService:
     def overview(self) -> Dict[str, Any]:
         self._ensure_loaded()
         assert self._overview is not None
-        return self._overview
+        return deepcopy(self._overview)
 
     # -------------------------------------------------------------- subgraph
     def _walk(
@@ -199,12 +206,64 @@ class PersonaSynthesisService:
                 queue.append((neighbor, hops + 1))
         return distances, truncated
 
+    def _topological_layers(
+        self, included: set[str], *, center: str
+    ) -> Dict[str, int]:
+        """Rank an induced DAG by longest predecessor path, centered at zero.
+
+        Parallel edges are collapsed for the Kahn pass only; the response still
+        preserves every source edge. Ready-node and successor ordering use the
+        graph's global topological order with node id as a stable tie-breaker.
+        """
+        successors: Dict[str, set[str]] = {node_id: set() for node_id in included}
+        in_degree = {node_id: 0 for node_id in included}
+        for source in included:
+            for edge in self._out_edges[source]:
+                target = edge["target"]
+                if target not in included or target in successors[source]:
+                    continue
+                successors[source].add(target)
+                in_degree[target] += 1
+
+        ready: List[Tuple[int, str]] = []
+        for node_id, degree in in_degree.items():
+            if degree == 0:
+                heappush(ready, (self._topo(node_id), node_id))
+
+        ranks = {node_id: 0 for node_id in included}
+        processed = 0
+        while ready:
+            _, source = heappop(ready)
+            processed += 1
+            for target in sorted(
+                successors[source], key=lambda node_id: (self._topo(node_id), node_id)
+            ):
+                ranks[target] = max(ranks[target], ranks[source] + 1)
+                in_degree[target] -= 1
+                if in_degree[target] == 0:
+                    heappush(ready, (self._topo(target), target))
+
+        if processed != len(included):
+            cyclic = sorted(
+                (node_id for node_id, degree in in_degree.items() if degree > 0),
+                key=lambda node_id: (self._topo(node_id), node_id),
+            )
+            preview = ", ".join(cyclic[:5])
+            raise ValueError(
+                f"induced subgraph around {center!r} contains a cycle: {preview}"
+            )
+
+        center_rank = ranks[center]
+        return {
+            node_id: rank - center_rank for node_id, rank in ranks.items()
+        }
+
     def subgraph(
         self, node_id: str, *, up: int = 1, down: int = 1
     ) -> Dict[str, Any]:
         self._ensure_loaded()
         if node_id not in self._nodes_by_id:
-            raise KeyError(node_id)
+            raise UnknownNodeError(node_id)
         upstream, up_truncated = self._walk(
             node_id, downstream=False, max_hops=up
         )
@@ -212,14 +271,8 @@ class PersonaSynthesisService:
             node_id, downstream=True, max_hops=down
         )
 
-        layer_by_id: Dict[str, int] = {node_id: 0}
-        for other, hops in upstream.items():
-            layer_by_id[other] = -hops
-        for other, hops in downstream.items():
-            # A node reachable both ways keeps its upstream (negative) layer.
-            layer_by_id.setdefault(other, hops)
-
-        included = set(layer_by_id)
+        included = {node_id} | set(upstream) | set(downstream)
+        layer_by_id = self._topological_layers(included, center=node_id)
         node_payload = [
             {
                 "id": nid,
@@ -262,7 +315,7 @@ class PersonaSynthesisService:
         self._ensure_loaded()
         node = self._nodes_by_id.get(node_id)
         if node is None:
-            raise KeyError(node_id)
+            raise UnknownNodeError(node_id)
 
         def edge_view(edge: Dict[str, Any], other_key: str) -> Dict[str, Any]:
             other = self._nodes_by_id[edge[other_key]]

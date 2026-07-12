@@ -56,6 +56,7 @@ from starlette.responses import Response as StarletteResponse
 import backend.api  # noqa: F401  (side effect: sys.path wiring)
 from backend.api import schemas
 from backend.api.deps import AppState, build_state, state_from_request
+from backend.service.persona_synthesis_service import UnknownNodeError
 
 __all__ = ["create_app", "app", "preflight_checks", "catalog_item_view"]
 
@@ -1181,10 +1182,10 @@ def create_app(catalog_path: Optional[str] = None) -> FastAPI:
         down: int = Query(1, ge=0, le=4),
         services: AppState = Depends(get_services),
     ):
-        """Hop-limited local subgraph around one node, with topological layers."""
+        """Hop-limited induced subgraph with center-relative topological layers."""
         try:
             return services.persona_synthesis.subgraph(node, up=up, down=down)
-        except KeyError:
+        except UnknownNodeError:
             raise HTTPException(status_code=404, detail=f"unknown graph node: {node}")
 
     @app.get(
@@ -1199,7 +1200,7 @@ def create_app(catalog_path: Optional[str] = None) -> FastAPI:
         """Full detail for one graph node: values, prior, and incident edges."""
         try:
             return services.persona_synthesis.node_detail(node_id)
-        except KeyError:
+        except UnknownNodeError:
             raise HTTPException(status_code=404, detail=f"unknown graph node: {node_id}")
 
     # --- static SPA (production single-origin) ------------------------- #

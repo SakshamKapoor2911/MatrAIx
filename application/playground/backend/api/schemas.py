@@ -998,7 +998,12 @@ class SynthesisSubgraphNode(BaseModel):
     id: str
     label: str
     category: str
-    layer: int
+    layer: int = Field(
+        description=(
+            "Center-relative longest-predecessor topological rank within the "
+            "induced subgraph"
+        )
+    )
     valuesCount: int
     emit: bool
     inDegree: int

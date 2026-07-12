@@ -6,6 +6,7 @@ import json
 
 import pytest
 
+from backend.service import persona_synthesis_service as synthesis_service
 from backend.service.persona_synthesis_service import PersonaSynthesisService
 
 SYNTH_GRAPH = {
@@ -78,6 +79,31 @@ SYNTH_GRAPH = {
 }
 
 
+SHORTCUT_DIAMOND_GRAPH = {
+    "nodes": [
+        {
+            "id": node_id,
+            "label": node_id.title(),
+            "category": "Test",
+            "values": [],
+            "prior": [],
+        }
+        for node_id in ("center", "left", "right", "join")
+    ],
+    "directed_proposal_edges": [
+        {"source": "center", "target": "left"},
+        {"source": "center", "target": "right"},
+        {"source": "center", "target": "join"},
+        {"source": "left", "target": "join"},
+        {"source": "left", "target": "join"},  # duplicate edge
+        {"source": "right", "target": "join"},
+    ],
+    "proposal_view": {
+        "topological_order": ["center", "right", "left", "join"]
+    },
+}
+
+
 @pytest.fixture()
 def service(tmp_path):
     graph_path = tmp_path / "graph.json"
@@ -130,6 +156,19 @@ def test_overview_counts(service):
     }
 
 
+def test_overview_result_is_isolated_from_cached_aggregate(service):
+    first = service.overview()
+    first["counts"]["graphNodes"] = -1
+    first["categories"][0]["attributes"].clear()
+    first["edges"].clear()
+
+    second = service.overview()
+
+    assert second["counts"]["graphNodes"] == 5
+    assert second["categories"][0]["attributes"]
+    assert second["edges"]
+
+
 def test_subgraph_layers_and_edges(service):
     result = service.subgraph("c", up=1, down=1)
     assert result["center"] == "c"
@@ -138,6 +177,48 @@ def test_subgraph_layers_and_edges(service):
     edge_pairs = {(e["source"], e["target"]) for e in result["edges"]}
     assert edge_pairs == {("b", "c"), ("h", "c"), ("c", "d")}
     assert result["truncated"] is False
+
+
+def test_subgraph_layers_are_induced_dag_ranks_with_center_at_zero(tmp_path):
+    graph_path = tmp_path / "shortcut-diamond.json"
+    graph_path.write_text(json.dumps(SHORTCUT_DIAMOND_GRAPH), encoding="utf-8")
+
+    result = PersonaSynthesisService(graph_path).subgraph(
+        "center", up=0, down=1
+    )
+
+    layers = {node["id"]: node["layer"] for node in result["nodes"]}
+    assert layers == {"center": 0, "right": 1, "left": 1, "join": 2}
+    assert [node["id"] for node in result["nodes"]] == [
+        "center",
+        "right",
+        "left",
+        "join",
+    ]
+    assert all(
+        layers[edge["target"]] > layers[edge["source"]]
+        for edge in result["edges"]
+    )
+    assert sum(
+        edge["source"] == "left" and edge["target"] == "join"
+        for edge in result["edges"]
+    ) == 2
+
+
+def test_subgraph_cycle_fails_explicitly(tmp_path):
+    graph = {
+        "nodes": [{"id": "a"}, {"id": "b"}],
+        "directed_proposal_edges": [
+            {"source": "a", "target": "b"},
+            {"source": "b", "target": "a"},
+        ],
+        "proposal_view": {"topological_order": ["a", "b"]},
+    }
+    graph_path = tmp_path / "cycle.json"
+    graph_path.write_text(json.dumps(graph), encoding="utf-8")
+
+    with pytest.raises(ValueError, match="cycle"):
+        PersonaSynthesisService(graph_path).subgraph("a", up=1, down=1)
 
 
 def test_subgraph_zero_hops_is_center_only(service):
@@ -149,7 +230,7 @@ def test_subgraph_zero_hops_is_center_only(service):
 def test_subgraph_two_hops_upstream(service):
     result = service.subgraph("c", up=2, down=0)
     layers = {n["id"]: n["layer"] for n in result["nodes"]}
-    assert layers == {"a": -2, "b": -1, "h": -1, "c": 0}
+    assert layers == {"a": -2, "h": -2, "b": -1, "c": 0}
     # a->b is between included nodes, so it appears.
     edge_pairs = {(e["source"], e["target"]) for e in result["edges"]}
     assert ("a", "b") in edge_pairs
@@ -158,6 +239,16 @@ def test_subgraph_two_hops_upstream(service):
 def test_subgraph_unknown_node_raises(service):
     with pytest.raises(KeyError):
         service.subgraph("nope")
+
+
+@pytest.mark.parametrize("method_name", ["subgraph", "node_detail"])
+def test_unknown_node_raises_dedicated_error(service, method_name):
+    assert hasattr(synthesis_service, "UnknownNodeError")
+    error_type = synthesis_service.UnknownNodeError
+    assert issubclass(error_type, KeyError)
+
+    with pytest.raises(error_type):
+        getattr(service, method_name)("nope")
 
 
 def test_node_detail_fields(service):
