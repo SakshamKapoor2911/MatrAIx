@@ -11,15 +11,29 @@ import { useMemo, useState } from "react";
 
 import type { SynthesisCategoryEdge, SynthesisOverviewResponse } from "@/lib/types";
 
-const SIZE = 720;
+const SIZE = 840;
 const CENTER = SIZE / 2;
-const RING_RADIUS = SIZE / 2 - 120;
 const MIN_NODE_R = 7;
 const MAX_NODE_R = 22;
 const LABEL_GAP = 10;
 const LABEL_MAX_CHARS = 20;
+const LABEL_FONT_SIZE = 10.5;
+const LABEL_CHAR_WIDTH = 6.5;
+const LABEL_MAX_WIDTH = LABEL_MAX_CHARS * LABEL_CHAR_WIDTH;
+const CANVAS_PADDING = 16;
+const RING_RADIUS =
+  SIZE / 2 - MAX_NODE_R - LABEL_GAP - LABEL_MAX_WIDTH - CANVAS_PADDING;
 const MIN_HIT_R = 22;
 const HIT_PADDING = 10;
+const EDGE_NODE_GAP = 2;
+const ARROW_SIZE = 8;
+const EDGE_ARROW_ID = "synthesis-category-edge-arrow";
+const ACTIVE_EDGE_ARROW_ID = "synthesis-category-edge-arrow-active";
+
+interface Point {
+  x: number;
+  y: number;
+}
 
 interface PlacedCategory {
   name: string;
@@ -33,6 +47,17 @@ interface PlacedCategory {
 
 function truncate(text: string): string {
   return text.length > LABEL_MAX_CHARS ? `${text.slice(0, LABEL_MAX_CHARS - 1)}…` : text;
+}
+
+function pointToward(from: Point, toward: Point, distance: number): Point {
+  const dx = toward.x - from.x;
+  const dy = toward.y - from.y;
+  const length = Math.hypot(dx, dy);
+  if (length === 0) return from;
+  return {
+    x: from.x + (dx / length) * distance,
+    y: from.y + (dy / length) * distance,
+  };
 }
 
 export function CategoryOverviewGraph({
@@ -81,9 +106,13 @@ export function CategoryOverviewGraph({
     const midY = (s.y + t.y) / 2;
     // Pull the control point 45% of the way toward the ring center so
     // long-range edges arc through the middle instead of hugging the rim.
-    const cx = midX + (CENTER - midX) * 0.45;
-    const cy = midY + (CENTER - midY) * 0.45;
-    return `M ${s.x} ${s.y} Q ${cx} ${cy} ${t.x} ${t.y}`;
+    const control = {
+      x: midX + (CENTER - midX) * 0.45,
+      y: midY + (CENTER - midY) * 0.45,
+    };
+    const start = pointToward(s, control, s.r + EDGE_NODE_GAP);
+    const end = pointToward(t, control, t.r + EDGE_NODE_GAP);
+    return `M ${start.x} ${start.y} Q ${control.x} ${control.y} ${end.x} ${end.y}`;
   }
 
   function selectCategory(name: string, isSelected: boolean): void {
@@ -97,24 +126,65 @@ export function CategoryOverviewGraph({
         width={SIZE}
         height={SIZE}
         className="block max-w-none"
-        role="img"
+        role="group"
         aria-label="Persona DAG category overview"
         onClick={() => onSelectCategory(null)}
       >
+        <defs aria-hidden="true">
+          <marker
+            id={EDGE_ARROW_ID}
+            viewBox={`0 0 ${ARROW_SIZE} ${ARROW_SIZE}`}
+            markerWidth={ARROW_SIZE}
+            markerHeight={ARROW_SIZE}
+            refX={ARROW_SIZE}
+            refY={ARROW_SIZE / 2}
+            orient="auto"
+            markerUnits="userSpaceOnUse"
+          >
+            <path
+              d={`M 0 0 L ${ARROW_SIZE} ${ARROW_SIZE / 2} L 0 ${ARROW_SIZE} Z`}
+              style={{ fill: "rgb(var(--outline))" }}
+            />
+          </marker>
+          <marker
+            id={ACTIVE_EDGE_ARROW_ID}
+            viewBox={`0 0 ${ARROW_SIZE} ${ARROW_SIZE}`}
+            markerWidth={ARROW_SIZE}
+            markerHeight={ARROW_SIZE}
+            refX={ARROW_SIZE}
+            refY={ARROW_SIZE / 2}
+            orient="auto"
+            markerUnits="userSpaceOnUse"
+          >
+            <path
+              d={`M 0 0 L ${ARROW_SIZE} ${ARROW_SIZE / 2} L 0 ${ARROW_SIZE} Z`}
+              style={{ fill: "rgb(var(--primary))" }}
+            />
+          </marker>
+        </defs>
         {/* Edges under nodes. Non-focused edges are recessive. */}
         <g fill="none">
           {overview.edges.map((edge) => {
             const active = focus !== null && (edge.source === focus || edge.target === focus);
-            const width = 0.8 + 2.4 * Math.sqrt(edge.count / maxEdgeCount);
+            const edgeStrength = Math.sqrt(edge.count / maxEdgeCount);
+            const width = 0.8 + 2.4 * edgeStrength;
+            const baselineOpacity = 0.12 + 0.36 * edgeStrength;
+            const opacity =
+              focus === null
+                ? baselineOpacity
+                : active
+                  ? Math.min(0.92, 0.35 + baselineOpacity * 1.15)
+                  : baselineOpacity * 0.18;
             return (
               <path
                 key={`${edge.source}->${edge.target}`}
                 d={edgePath(edge)}
+                markerEnd={`url(#${active ? ACTIVE_EDGE_ARROW_ID : EDGE_ARROW_ID})`}
                 style={{
                   stroke: active ? "rgb(var(--primary))" : "rgb(var(--outline))",
-                  strokeOpacity: focus === null ? 0.28 : active ? 0.85 : 0.08,
+                  opacity,
                   strokeWidth: active ? width + 0.6 : width,
-                  transition: "stroke-opacity 150ms ease-out",
+                  transition: "opacity 150ms ease-out",
                 }}
               />
             );
@@ -128,6 +198,7 @@ export function CategoryOverviewGraph({
           const labelX = cat.x + (cat.r + LABEL_GAP) * Math.cos(cat.angle);
           const labelY = cat.y + (cat.r + LABEL_GAP) * Math.sin(cat.angle);
           const accessibleLabel = `${cat.name} — ${cat.attributeCount} attributes / ${cat.nodeCount} nodes`;
+          const label = truncate(cat.name);
           return (
             <g
               key={cat.name}
@@ -178,15 +249,17 @@ export function CategoryOverviewGraph({
                 textAnchor={rightSide ? "start" : "end"}
                 dominantBaseline="middle"
                 className="font-mono"
+                textLength={label.length * LABEL_CHAR_WIDTH}
+                lengthAdjust="spacingAndGlyphs"
                 style={{
-                  fontSize: 10.5,
+                  fontSize: LABEL_FONT_SIZE,
                   fill:
                     isFocus || isSelected
                       ? "rgb(var(--text-main))"
                       : "rgb(var(--text-dim))",
                 }}
               >
-                {truncate(cat.name)}
+                {label}
               </text>
             </g>
           );

@@ -36,6 +36,7 @@ export function CategoryAttributeList({
       </div>
       <input
         type="search"
+        aria-label="Filter attributes"
         value={query}
         onChange={(event) => setQuery(event.target.value)}
         placeholder="Filter attributes…"
