@@ -922,7 +922,7 @@ export interface PersonaCohortDetail extends PersonaCohortSummary {
 /** Default Harbor task paths for cockpit launch (one trial per persona). */
 export const HARBOR_TASK_PATHS = {
   chatbot: "application/tasks/recommender-agent_chat_api",
-  survey: "application/tasks/persona-survey",
+  survey: "application/tasks/example-survey_product-feedback",
   web: "application/tasks/example-web-playwright_quote-choice",
   cuaLinux: "application/tasks/example-computer-use-linux_note-to-csv",
   cuaWeb: "application/tasks/example-web-cua_bookshop-choice",

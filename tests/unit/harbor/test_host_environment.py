@@ -42,8 +42,8 @@ def test_host_environment_resolves_container_paths(tmp_path: Path) -> None:
     trial_paths = TrialPaths(trial_dir=trial_dir)
     env = HostEnvironment(
         environment_dir=tmp_path / "environment",
-        environment_name="persona-survey",
-        session_id="persona-survey__abc",
+        environment_name="shared-survey-form",
+        session_id="shared-survey-form__abc",
         trial_paths=trial_paths,
         task_env_config=EnvironmentConfig(),
     )
@@ -72,8 +72,8 @@ async def test_host_exec_exports_verifier_and_tests_dirs(tmp_path: Path) -> None
     )
     env = HostEnvironment(
         environment_dir=tmp_path / "environment",
-        environment_name="persona-survey",
-        session_id="persona-survey__probe",
+        environment_name="shared-survey-form",
+        session_id="shared-survey-form__probe",
         trial_paths=trial_paths,
         task_env_config=EnvironmentConfig(),
     )
@@ -92,8 +92,8 @@ def test_host_rewrite_command_paths_rewrites_verifier_stdout(tmp_path: Path) -> 
     trial_paths = TrialPaths(trial_dir=tmp_path / "trial")
     env = HostEnvironment(
         environment_dir=tmp_path / "environment",
-        environment_name="persona-survey",
-        session_id="persona-survey__rewrite",
+        environment_name="shared-survey-form",
+        session_id="shared-survey-form__rewrite",
         trial_paths=trial_paths,
         task_env_config=EnvironmentConfig(),
     )
@@ -128,8 +128,8 @@ async def test_host_exec_with_relative_trial_dir(tmp_path: Path, monkeypatch: py
     monkeypatch.chdir(repo)
     env = HostEnvironment(
         environment_dir=repo / "environment",
-        environment_name="persona-survey",
-        session_id="persona-survey__relative",
+        environment_name="shared-survey-form",
+        session_id="shared-survey-form__relative",
         trial_paths=trial_paths,
         task_env_config=EnvironmentConfig(),
     )
@@ -174,8 +174,8 @@ async def test_host_exec_runs_verifier_style_command(tmp_path: Path) -> None:
     (tests_root / "verifier_env.sh").write_text(_HOST_VERIFIER_ENV, encoding="utf-8")
     env = HostEnvironment(
         environment_dir=tmp_path / "environment",
-        environment_name="persona-survey",
-        session_id="persona-survey__verify",
+        environment_name="shared-survey-form",
+        session_id="shared-survey-form__verify",
         trial_paths=trial_paths,
         task_env_config=EnvironmentConfig(),
     )

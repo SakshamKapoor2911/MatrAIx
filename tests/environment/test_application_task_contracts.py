@@ -19,18 +19,6 @@ TASKS_ROOT = REPO_ROOT / "application" / "tasks"
 ENVIRONMENTS_ROOT = REPO_ROOT / "environment" / "task-environments"
 ALLOWED_TYPES = frozenset({"survey", "chatbot", "web", "os-app"})
 
-# Runtime-injected / transitional tasks that intentionally diverge. Do not add
-# new product tasks here — fix the task instead.
-CONTRACT_EXCEPTIONS: dict[str, frozenset[str]] = {
-    # Instrument is appended at job launch; not a product-survey authoring task.
-    "persona-survey": frozenset(
-        {
-            "survey.questionnaire",
-            "survey.shared_runtime",
-        }
-    ),
-}
-
 
 def _task_dirs() -> list[Path]:
     return sorted(
@@ -46,10 +34,6 @@ def _load_task(task_dir: Path) -> dict:
 
 def _env_dir(definition: str) -> Path:
     return ENVIRONMENTS_ROOT / definition
-
-
-def _exception_allows(task_dir: Path, rule: str) -> bool:
-    return rule in CONTRACT_EXCEPTIONS.get(task_dir.name, frozenset())
 
 
 def _require(errors: list[str], ok: bool, message: str) -> None:
@@ -147,43 +131,41 @@ def test_application_task_matches_type_contract(task_dir: Path) -> None:
         )
 
     if task_type == "survey":
-        if not _exception_allows(task_dir, "survey.questionnaire"):
-            q_path = task_dir / "input" / "questionnaire.yaml"
-            _require(
-                errors,
-                q_path.is_file(),
-                "survey tasks require input/questionnaire.yaml",
-            )
-            if q_path.is_file():
-                try:
-                    questionnaire = yaml.safe_load(q_path.read_text(encoding="utf-8"))
-                except yaml.YAMLError as exc:
-                    errors.append(f"questionnaire.yaml is not valid YAML: {exc}")
-                else:
+        q_path = task_dir / "input" / "questionnaire.yaml"
+        _require(
+            errors,
+            q_path.is_file(),
+            "survey tasks require input/questionnaire.yaml",
+        )
+        if q_path.is_file():
+            try:
+                questionnaire = yaml.safe_load(q_path.read_text(encoding="utf-8"))
+            except yaml.YAMLError as exc:
+                errors.append(f"questionnaire.yaml is not valid YAML: {exc}")
+            else:
+                _require(
+                    errors,
+                    isinstance(questionnaire, dict),
+                    "questionnaire.yaml must parse to a mapping",
+                )
+                if isinstance(questionnaire, dict):
                     _require(
                         errors,
-                        isinstance(questionnaire, dict),
-                        "questionnaire.yaml must parse to a mapping",
+                        isinstance(questionnaire.get("questions"), list)
+                        and bool(questionnaire.get("questions")),
+                        "questionnaire.yaml must define a non-empty questions list",
                     )
-                    if isinstance(questionnaire, dict):
-                        _require(
-                            errors,
-                            isinstance(questionnaire.get("questions"), list)
-                            and bool(questionnaire.get("questions")),
-                            "questionnaire.yaml must define a non-empty questions list",
-                        )
-                        _require(
-                            errors,
-                            "output_schema" not in questionnaire,
-                            "questionnaire.yaml must not define output_schema",
-                        )
-        if not _exception_allows(task_dir, "survey.shared_runtime"):
-            _require(
-                errors,
-                definition == "application/shared-survey-form",
-                "survey tasks must use environment.definition = "
-                "'application/shared-survey-form'",
-            )
+                    _require(
+                        errors,
+                        "output_schema" not in questionnaire,
+                        "questionnaire.yaml must not define output_schema",
+                    )
+        _require(
+            errors,
+            definition == "application/shared-survey-form",
+            "survey tasks must use environment.definition = "
+            "'application/shared-survey-form'",
+        )
 
     elif task_type == "chatbot":
         _require(
@@ -201,9 +183,3 @@ def test_application_task_matches_type_contract(task_dir: Path) -> None:
         f"{task_dir.relative_to(REPO_ROOT)} failed application task contract:\n- "
         + "\n- ".join(errors)
     )
-
-
-def test_contract_exceptions_only_cover_existing_tasks() -> None:
-    known = {path.name for path in _task_dirs()}
-    unknown = sorted(set(CONTRACT_EXCEPTIONS) - known)
-    assert unknown == [], f"stale CONTRACT_EXCEPTIONS entries: {unknown}"
