@@ -93,6 +93,24 @@ STACKOVERFLOW_2025_AI_TASK_FIELD_ORDER = tuple(
 STACKOVERFLOW_2025_AI_TASK_FIELD_IDS = frozenset(
     STACKOVERFLOW_2025_AI_TASK_FIELD_ORDER
 )
+AI_HISTORY_COLUMNS = (
+    "AISearchDevHaveWorkedWith",
+    "AISearchHaveWorkedWith",
+    "AIDevHaveWorkedWith",
+)
+AISELECT_ALLOWED_AGENT_FIELDS = frozenset(
+    {
+        "coding_agent_usage_frequency",
+        "coding_agent_workflow_impact",
+        "coding_agent_failure_tolerance",
+    }
+)
+AISELECT_UNRELATED_FIELD_IDS = frozenset(
+    {
+        "human_help_boundary_for_ai_coding",
+        "future_developer_skill_belief",
+    }
+)
 
 DEFAULT_MODEL = "Qwen/Qwen3.6-35B-A3B"
 DEFAULT_OUTPUT_TEMPLATE = "extraction_stackoverflow_v2_{year}.jsonl"
@@ -674,6 +692,16 @@ def validate_evidence_style(evidence: str, *, location: str) -> None:
         )
 
 
+def evidence_cited_columns(evidence: str) -> tuple[str, ...]:
+    """Return source columns explicitly cited by an evidence string."""
+    return tuple(
+        dict.fromkeys(
+            match.group(1).strip()
+            for match in EVIDENCE_SOURCE_CITATION_PATTERN.finditer(evidence)
+        )
+    )
+
+
 def validate_evidence_provenance(
     evidence: str, source_answers: dict[str, str], *, location: str
 ) -> None:
@@ -783,6 +811,20 @@ def validate_chunk_payload(
         if field["assignment_type"] not in ASSIGNMENT_TYPES:
             raise ValueError(
                 f"{location}.assignment_type {field['assignment_type']!r} is invalid"
+            )
+        is_language_field = field_id in {
+            "primary_language",
+            "english_proficiency",
+            "multilingualism",
+        } or field_id.startswith("lang_")
+        if (
+            is_language_field
+            and field["assignment_type"] == "direct"
+            and "Country" in evidence_cited_columns(evidence)
+        ):
+            raise ValueError(
+                f"{location}.assignment_type must be summary_inference for a "
+                "Country-based language completion"
             )
         validated.append(dict(field))
     return validated
@@ -1013,6 +1055,110 @@ def visible_profile_source_answers(
     return source_answers
 
 
+def source_evidence(
+    row: dict[str, Any], mapping: dict[str, dict[str, str]], column: str
+) -> str:
+    """Format one present survey answer as canonical direct evidence."""
+    raw_value = row.get(column)
+    if not is_present(raw_value):
+        raise ValueError(f"cannot build evidence for absent source column {column!r}")
+    entry = mapping.get(column, {})
+    clean_column = clean_value(column, max_chars=200)
+    label = clean_value(entry.get("description") or column, max_chars=1_200)
+    clean_raw_value = clean_value(raw_value)
+    return (
+        f"{clean_column} - {label}: {clean_raw_value}"
+        if label != clean_column
+        else f"{clean_column}={clean_raw_value}"
+    )
+
+
+def extract_generic_ai_no_plan_task_fields(
+    row: dict[str, Any], mapping: dict[str, dict[str, str]]
+) -> list[dict[str, Any]]:
+    """Expand an explicit overall AI no-plan answer to every AI task."""
+    raw_value = row.get("AISelect")
+    if not is_present(raw_value) or str(raw_value).strip().casefold() != (
+        "no, and i don't plan to"
+    ):
+        return []
+    evidence = source_evidence(row, mapping, "AISelect")
+    return [
+        {
+            "field_id": field_id,
+            "value": "Does not plan AI use",
+            "confidence": 1.0,
+            "evidence": evidence,
+            "assignment_type": "direct",
+        }
+        for field_id in STACKOVERFLOW_2025_AI_TASK_FIELD_ORDER
+    ]
+
+
+def reconcile_ai_fields(
+    fields: list[dict[str, Any]],
+    row: dict[str, Any],
+    mapping: dict[str, dict[str, str]],
+) -> list[dict[str, Any]]:
+    """Resolve generic-AI fan-out and current-vs-past AI usage conflicts."""
+    ai_select = row.get("AISelect")
+    no_current_or_planned_ai = is_present(ai_select) and str(ai_select).strip().casefold() == (
+        "no, and i don't plan to"
+    )
+    reconciled: list[dict[str, Any]] = []
+    for original in fields:
+        field = dict(original)
+        field_id = str(field["field_id"])
+        citations = set(evidence_cited_columns(str(field.get("evidence", ""))))
+        only_generic_ai_select = citations == {"AISelect"}
+
+        unrelated_agent_completion = (
+            field_id.startswith("coding_agent_")
+            and field_id not in AISELECT_ALLOWED_AGENT_FIELDS
+        )
+        if only_generic_ai_select and (
+            unrelated_agent_completion
+            or field_id.startswith("coding_tool_")
+            or field_id.startswith("tool_")
+            or field_id in AISELECT_UNRELATED_FIELD_IDS
+        ):
+            continue
+
+        if only_generic_ai_select and field_id in {
+            "att_ai",
+            "coding_ai_usage_frequency",
+        }:
+            field["assignment_type"] = "summary_inference"
+        reconciled.append(field)
+
+    past_use_columns = [
+        column for column in AI_HISTORY_COLUMNS if is_present(row.get(column))
+    ]
+    if not no_current_or_planned_ai or not past_use_columns:
+        return reconciled
+
+    history_column = past_use_columns[0]
+    history_answer = clean_value(row[history_column])
+    summary_evidence = (
+        f"AISelect={clean_value(ai_select)}; "
+        f"{history_column}={history_answer}. Summary: The respondent reports specific "
+        "past-year AI-tool use but no current use or future adoption plan, supporting "
+        "a tried-but-not-active status."
+    )
+    replacement = {
+        "field_id": "coding_ai_usage_frequency",
+        "value": "Tried but not active",
+        "confidence": 0.95,
+        "evidence": summary_evidence[:MAX_EVIDENCE_CHARS],
+        "assignment_type": "summary_inference",
+    }
+    return [
+        field
+        for field in reconciled
+        if field["field_id"] != "coding_ai_usage_frequency"
+    ] + [replacement]
+
+
 def extract_2025_ai_task_fields(
     row: dict[str, Any], year: int, mapping: dict[str, dict[str, str]]
 ) -> list[dict[str, Any]]:
@@ -1133,16 +1279,17 @@ def build_stackoverflow_prompt(
         "High-precision source-to-target rules:",
         "- Intent is not experience: WantToWorkWith, interested-in, admired, and future-plan answers may support preferences or intentions only. They do not establish current familiarity, proficiency, skill, habitual behavior, or actual usage.",
         "- Task use is not task mastery: using or planning to use AI for debugging, review, writing, analytics, or another task does not establish proficiency in that task and does not identify the respondent's dominant method or problem profile.",
-        "- Tenure and job title directly support role, seniority, and broad experience, and they are valid supporting evidence for a specific-skill summary_inference when combined with independent task-, responsibility-, or tool-specific evidence. Do not treat tenure or title alone as direct proof of an exact proficiency level, and do not automatically assign Advanced or Master across unrelated skills.",
+        "- Tenure and job title directly support role, seniority, and broad experience. Long professional tenure in an active developer role can strongly support high-confidence summary_inference for core skills that are intrinsic to that role: skill_coding, skill_debugging, and skill_problem_solving may reasonably reach Master for a long-tenured professional developer. Role-relevant system-design or code-review evidence may similarly support high levels. Do not spread tenure into unrelated skills such as writing, time management, leadership, research, or mentoring without separate responsibility-, behavior-, or achievement-specific evidence.",
         "- Worked-with answers establish use or exposure. Do not infer Expert or Master from a technology list alone; use the least specific supported familiarity or proficiency value, or omit when the allowed scale cannot be justified.",
-        '- Current status is not complete history: an individual contributor is not proven to have no leadership or management skill; a current industry does not prove no experience in other industries. A no-current-AI-use answer directly constrains overall coding-AI usage and adoption dimensions. For example, AISelect="No, and I don\'t plan to" may support either coding_ai_usage_frequency="Never used" or "Tried but not active" as an evidence-compatible summary_inference when both values are allowed; choose one reasonable completion without claiming the answer uniquely determined the respondent\'s history. The generic AISelect answer does not by itself constrain the history of every named AI product.',
+        '- Current status is not complete history: an individual contributor is not proven to have no leadership or management skill; a current industry does not prove no experience in other industries. AISelect="No, and I don\'t plan to" deterministically supports ai_task_*=Does not plan AI use for every development task, because the overall no-plan answer applies to all task subsets. It also constrains overall coding-AI adoption: coding_ai_usage_frequency may be "Never used" or "Tried but not active" as a summary_inference, with specific past-use answers taking priority. AISelect="Yes" or a generic answer indicating future interest does not identify individual tasks; use AITool current/interested/not-interested answers for those. Generic AISelect does not constrain named-product history or agent memory, security, context-sharing, explanation, tool-integration, API, ethics, human-help, or similar preferences.',
         "- Absence of evidence is not negative evidence. Never emit None, Never, Absent, no experience, no mobility, or a similar negative value merely because the profile does not mention the construct.",
-        "- Country may support region only. It does not establish native language, language proficiency, nationality, cultural identity, immigration history, hometown mobility, adversity, or other personal history.",
+        "- Country directly supports region and may provide positive statistical support for a likely dominant, native, or working language as summary_inference. Never label a Country-based language completion as direct. Reduce certainty for multilingual countries and use professional or language-use context when available. If the country's likely dominant language is absent from primary_language's allowed values, omit primary_language rather than substitute an implausible listed language; prefer a matching lang_* dimension when available. Country alone still does not establish nationality, cultural identity, immigration history, hometown mobility, adversity, or other personal history.",
         '- Explicit freelancer, independent-contractor, or solo-work evidence may support company_size="Solo / freelance" because that allowed value includes freelance work. Self-employed status alone does not establish founder status, entrepreneurship history, exact headcount, or a strictly one-person organization.',
         "- Compensation is individual compensation, not household income. Do not map CompTotal to a household-income dimension.",
         "- A generic dependents answer that combines children and elderly people supports caregiving only. It does not establish parenting, children's ages, elder-care status, or that both groups are cared for.",
         "- Organization-level practices and installed tools directly support claims about the respondent's work environment or exposure. They may also contribute to a personal-practice summary_inference when combined with independent respondent-level role, tool-use, task, or workflow evidence. Do not treat organization-level evidence alone as direct proof of one exact personal testing, coding, review, debugging, onboarding, abstraction, or observability value.",
         "- Technology choices and professional roles may support tool exposure and role facts, but they do not by themselves establish stable personality traits, character strengths, psychological needs, moral foundations, learning pace, emotional state, or broad personal values. Emit such soft attributes as direct or structured_claim only when the survey measures the same construct. A summary_inference still requires at least two independent behavioral answers; technology or role alone is insufficient.",
+        "- BFI, SDT, moral-foundation, Schwartz-value, personality, and other psychometric completions should normally be summary_inference unless the survey directly measures the same construct. Require multiple independent, positively relevant answers and do not confuse observed professional behavior with a formally measured psychological score or need.",
         "- A people-manager or executive answer is strong evidence of management responsibility and experience and may support a skill_people_management or skill_leadership summary_inference. Use independent evidence such as management tenure, strategy ownership, mentoring, decision scope, or team responsibility to select higher proficiency levels or Strong/Signature trait_leadership values. Do not automatically map the role alone to Master or Signature.",
         "- If a survey answer bucket crosses more than one allowed output range, omit the dimension rather than choosing one side of the boundary.",
         "",
@@ -1671,15 +1818,26 @@ def extract_year(
                 year=work.year,
             )
             for row_index, row in batch:
-                deterministic_fields = extract_2025_ai_task_fields(
+                generic_no_plan_fields = extract_generic_ai_no_plan_task_fields(
+                    row, work.mapping
+                )
+                year_specific_fields = extract_2025_ai_task_fields(
                     row, work.year, work.mapping
+                )
+                deterministic_fields = overlay_deterministic_fields(
+                    generic_no_plan_fields,
+                    year_specific_fields,
+                    frozenset(
+                        field["field_id"] for field in year_specific_fields
+                    ),
                 )
                 final_fields = overlay_deterministic_fields(
                     merged[row_index],
                     deterministic_fields,
-                    STACKOVERFLOW_2025_AI_TASK_FIELD_IDS
-                    if work.year == 2025
-                    else frozenset(),
+                    frozenset(field["field_id"] for field in deterministic_fields),
+                )
+                final_fields = reconcile_ai_fields(
+                    final_fields, row, work.mapping
                 )
                 final_fields = drop_unsupported_fields(final_fields)
                 record = {

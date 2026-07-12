@@ -89,6 +89,64 @@ def test_2025_aggregated_tasks_use_strongest_current_status(extractor_module):
     assert "Generating content or synthetic data" in data_generation["evidence"]
 
 
+def test_generic_ai_no_plan_expands_to_all_tasks(extractor_module):
+    row = {"AISelect": "No, and I don't plan to"}
+
+    fields = extractor_module.extract_generic_ai_no_plan_task_fields(
+        row, mapping_for("AISelect")
+    )
+
+    assert {field["field_id"] for field in fields} == set(
+        extractor_module.STACKOVERFLOW_2025_AI_TASK_FIELD_ORDER
+    )
+    assert all(field["value"] == "Does not plan AI use" for field in fields)
+    assert all(field["assignment_type"] == "direct" for field in fields)
+    assert all(field["confidence"] == 1.0 for field in fields)
+
+
+def test_ai_reconciliation_prefers_specific_past_use_and_drops_unrelated_fanout(
+    extractor_module,
+):
+    row = {
+        "AISelect": "No, and I don't plan to",
+        "AISearchDevHaveWorkedWith": "ChatGPT;Google Gemini",
+    }
+    generated = [
+        {
+            "field_id": "coding_ai_usage_frequency",
+            "value": "Never used",
+            "confidence": 0.95,
+            "evidence": "AISelect - Current AI use: No, and I don't plan to",
+            "assignment_type": "direct",
+        },
+        {
+            "field_id": "coding_agent_memory_preference",
+            "value": "Prefers stateless interactions",
+            "confidence": 0.4,
+            "evidence": "AISelect - Current AI use: No, and I don't plan to",
+            "assignment_type": "summary_inference",
+        },
+        {
+            "field_id": "att_ai",
+            "value": "Opposed",
+            "confidence": 0.8,
+            "evidence": "AISelect - Current AI use: No, and I don't plan to",
+            "assignment_type": "direct",
+        },
+    ]
+
+    fields = fields_by_id(
+        extractor_module.reconcile_ai_fields(generated, row, mapping_for(*row))
+    )
+
+    assert "coding_agent_memory_preference" not in fields
+    assert fields["coding_ai_usage_frequency"]["value"] == "Tried but not active"
+    assert fields["coding_ai_usage_frequency"]["assignment_type"] == (
+        "summary_inference"
+    )
+    assert fields["att_ai"]["assignment_type"] == "summary_inference"
+
+
 @pytest.mark.parametrize("year", [2023, 2024])
 def test_2025_ai_task_crosswalk_is_year_isolated(extractor_module, year):
     row = {"AIToolPlan to partially use AI": "Testing code"}
@@ -254,8 +312,9 @@ def test_prompt_restores_high_precision_sparse_policy(extractor_module):
     assert 'AISelect="No" narrows coding-AI usage away from Daily or Weekly' in prompt
     assert "not a fallback for missing evidence" in prompt
     assert "Task use is not task mastery" in prompt
-    assert "valid supporting evidence for a specific-skill summary_inference" in prompt
-    assert "do not automatically assign Advanced or Master across unrelated skills" in prompt
+    assert "Long professional tenure in an active developer role" in prompt
+    assert "skill_coding, skill_debugging, and skill_problem_solving" in prompt
+    assert "Do not spread tenure into unrelated skills" in prompt
 
 
 def test_prompt_blocks_observed_proxy_failure_modes(extractor_module):
@@ -280,10 +339,12 @@ def test_prompt_blocks_observed_proxy_failure_modes(extractor_module):
 
     assert "Intent is not experience" in prompt
     assert "Absence of evidence is not negative evidence" in prompt
-    assert "Country may support region only" in prompt
-    assert "no-current-AI-use answer directly constrains overall coding-AI usage" in prompt
-    assert 'coding_ai_usage_frequency="Never used" or "Tried but not active"' in prompt
-    assert "does not by itself constrain the history of every named AI product" in prompt
+    assert "Country directly supports region" in prompt
+    assert "likely dominant, native, or working language as summary_inference" in prompt
+    assert "Never label a Country-based language completion as direct" in prompt
+    assert "deterministically supports ai_task_*=Does not plan AI use" in prompt
+    assert "specific past-use answers taking priority" in prompt
+    assert "Generic AISelect does not constrain named-product history" in prompt
     assert 'company_size="Solo / freelance"' in prompt
     assert "does not establish founder status" in prompt
     assert "Compensation is individual compensation, not household income" in prompt
@@ -292,6 +353,7 @@ def test_prompt_blocks_observed_proxy_failure_modes(extractor_module):
     assert "contribute to a personal-practice summary_inference" in prompt
     assert "organization-level evidence alone" in prompt
     assert "Technology choices and professional roles may support tool exposure and role facts" in prompt
+    assert "psychometric completions should normally be summary_inference" in prompt
     assert "people-manager or executive answer is strong evidence" in prompt
     assert "may support a skill_people_management or skill_leadership summary_inference" in prompt
     assert "Do not automatically map the role alone to Master or Signature" in prompt
@@ -429,6 +491,42 @@ def test_validator_accepts_single_source_summary_inference(extractor_module):
     assert extractor_module.validate_chunk_payload(
         {"fields": [one_source]}, chunk, sources
     ) == [one_source]
+
+
+def test_country_based_language_completion_must_be_summary(extractor_module):
+    chunk = extractor_module.DimensionChunk(
+        chunk_id="language_test",
+        label="Language test",
+        description="Test Country-based language completion typing.",
+        source_categories=("Linguistic: Language",),
+        dimensions=(
+            {
+                "id": "primary_language",
+                "label": "Primary language",
+                "description": "First or dominant language.",
+                "values": ["Japanese"],
+            },
+        ),
+    )
+    direct = {
+        "field_id": "primary_language",
+        "value": "Japanese",
+        "confidence": 0.9,
+        "evidence": (
+            "Country=Japan. Summary: Japan provides positive statistical support "
+            "for Japanese as a likely dominant language."
+        ),
+        "assignment_type": "direct",
+    }
+    summary = {**direct, "assignment_type": "summary_inference"}
+
+    with pytest.raises(ValueError, match="must be summary_inference"):
+        extractor_module.validate_chunk_payload(
+            {"fields": [direct]}, chunk, {"Country": "Japan"}
+        )
+    assert extractor_module.validate_chunk_payload(
+        {"fields": [summary]}, chunk, {"Country": "Japan"}
+    ) == [summary]
 
 
 def test_zero_field_salvage_triggers_retry(extractor_module, monkeypatch):
