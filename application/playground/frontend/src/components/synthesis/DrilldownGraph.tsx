@@ -1,8 +1,9 @@
 /**
- * Layered drill-down subgraph: columns are hop layers (upstream left of the
- * center node, downstream right), so proposal direction always reads
- * left-to-right. Nodes are labeled boxes; edges are cubic curves with
- * arrowheads. Click selects, double-click re-centers.
+ * Layered drill-down subgraph: columns are center-relative longest-path
+ * topological ranks (upstream left of the center node, downstream right), so
+ * proposal direction always reads left-to-right. Nodes are labeled boxes;
+ * edges are cubic curves with arrowheads. Click selects, double-click
+ * re-centers.
  */
 import { useId, useMemo, useState } from "react";
 
