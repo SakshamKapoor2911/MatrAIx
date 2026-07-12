@@ -162,18 +162,6 @@ SOFT_COMPLETION_FIELD_IDS = frozenset(
         "learning_style",
     }
 )
-ORGANIZATION_LEVEL_COLUMNS = frozenset(
-    {"OrgSize", "ProfessionalCloud", "ProfessionalTech"}
-)
-PERSONAL_PRACTICE_FIELD_IDS = frozenset(
-    {
-        "habit_backing_up_files",
-        "code_testing_approach",
-        "code_observability_habit",
-        "debugging_strategy",
-        "codebase_onboarding_style",
-    }
-)
 
 DEFAULT_MODEL = "Qwen/Qwen3.6-35B-A3B"
 DEFAULT_OUTPUT_TEMPLATE = "extraction_stackoverflow_v2_{year}.jsonl"
@@ -1382,16 +1370,6 @@ def filter_semantic_overreach(
                 for column in citations
             )
         )
-        ai_nonuse_as_domain_ignorance = (
-            field_id.startswith("fam_")
-            and value == "None"
-            and citations == {"AISelect"}
-        )
-        organization_only_personal_practice = (
-            field_id in PERSONAL_PRACTICE_FIELD_IDS
-            and citations
-            and citations <= ORGANIZATION_LEVEL_COLUMNS
-        )
         is_soft_completion = field_id in SOFT_COMPLETION_FIELD_IDS or field_id.startswith(
             SOFT_COMPLETION_PREFIXES
         )
@@ -1409,8 +1387,6 @@ def filter_semantic_overreach(
                 retirement_without_retirement_answer,
                 nonparticipation_without_never_answer,
                 git_nonuse_without_git_answer,
-                ai_nonuse_as_domain_ignorance,
-                organization_only_personal_practice,
                 one_source_soft_completion,
             )
         ):
@@ -1546,7 +1522,7 @@ def build_stackoverflow_prompt(
         "- Task use is not task mastery: using or planning to use AI for debugging, review, writing, analytics, or another task does not establish proficiency in that task and does not identify the respondent's dominant method or problem profile.",
         "- Tenure and job title directly support role, seniority, and broad experience. Long professional tenure in an active developer role can strongly support high-confidence summary_inference for core skills that are intrinsic to that role: skill_coding, skill_debugging, and skill_problem_solving may reasonably reach Master for a long-tenured professional developer. Role-relevant system-design or code-review evidence may similarly support high levels. Do not spread tenure into unrelated skills such as writing, time management, leadership, research, or mentoring without separate responsibility-, behavior-, or achievement-specific evidence.",
         "- Worked-with answers establish use or exposure. Do not infer Expert or Master from a technology list alone; use the least specific supported familiarity or proficiency value, or omit when the allowed scale cannot be justified.",
-        '- Current status is not complete history: an individual contributor is not proven to have no leadership or management skill; a current industry does not prove no experience in other industries. AISelect="No, and I don\'t plan to" positively supports ai_task_*=Does not plan AI use as summary_inference because the overall no-plan answer is compatible with every task subset, but it is not an explicit per-task response: do not mark these completions direct or force confidence to 1.0. Let confidence reflect evidence compatibility. The answer also constrains overall coding-AI adoption: coding_ai_usage_frequency may be "Never used" or "Tried but not active" as summary_inference, with specific past-use answers taking priority. AISelect="Yes" or generic future interest does not identify individual tasks; use AITool current/interested/not-interested answers for those. Generic AISelect does not constrain named-product history or agent memory, security, context-sharing, explanation, tool-integration, API, ethics, human-help, or similar preferences.',
+        '- Current status is not complete history: an individual contributor is not proven to have no leadership or management skill; a current industry does not prove no experience in other industries. AISelect="No, and I don\'t plan to" positively supports ai_task_*=Does not plan AI use as summary_inference because the overall no-plan answer is compatible with every task subset, but it is not an explicit per-task response: do not mark these completions direct or force confidence to 1.0. Let confidence reflect evidence compatibility. The answer also constrains overall coding-AI adoption: coding_ai_usage_frequency may be "Never used" or "Tried but not active" as summary_inference, with specific past-use answers taking priority. Generic AI non-adoption may also support a cautious, low-confidence summary_inference about limited practical AI/ML familiarity when no domain-role, study, or tool evidence contradicts it; it is not direct proof of conceptual knowledge. AISelect="Yes" or generic future interest does not identify individual tasks; use AITool current/interested/not-interested answers for those. Generic AISelect does not constrain named-product history or agent memory, security, context-sharing, explanation, tool-integration, API, ethics, human-help, or similar preferences.',
         "- Absence of evidence is not negative evidence. Never emit None, Never, Absent, no experience, no mobility, or a similar negative value merely because the profile does not mention the construct.",
         "- Country directly supports region and may provide positive statistical support for a likely dominant, native, or working language as summary_inference. Never label a Country-based language completion as direct. Reduce certainty for multilingual countries and use professional or language-use context when available. If the country's likely dominant language is absent from primary_language's allowed values, omit primary_language rather than substitute an implausible listed language; prefer a matching lang_* dimension when available. Country alone still does not establish nationality, cultural identity, immigration history, hometown mobility, adversity, or other personal history.",
         "- Never emit cult_* or lifex_geographic_mobility from Country, currency, current residence, or professional location. Cultural identity and migration history require explicit person-level evidence.",
@@ -1556,7 +1532,7 @@ def build_stackoverflow_prompt(
         '- Explicit freelancer, independent-contractor, or solo-work evidence may support company_size="Solo / freelance" because that allowed value includes freelance work. Self-employed status alone does not establish founder status, entrepreneurship history, exact headcount, or a strictly one-person organization.',
         "- Compensation is individual compensation, not household income. Do not map CompTotal to a household-income dimension.",
         "- A generic dependents answer that combines children and elderly people supports caregiving only. It does not establish parenting, children's ages, elder-care status, or that both groups are cared for.",
-        "- Organization-level practices and installed tools directly support claims about the respondent's work environment or exposure. They may also contribute to a personal-practice summary_inference when combined with independent respondent-level role, tool-use, task, or workflow evidence. Do not treat organization-level evidence alone as direct proof of one exact personal testing, coding, review, debugging, onboarding, abstraction, or observability value.",
+        "- Organization-level practices and installed tools directly support claims about the respondent's work environment or exposure. They may also support a compatible personal-practice summary_inference, even when they are the only source, because people working in that environment are plausibly exposed to its practices. Independent respondent-level role, tool-use, task, or workflow evidence strengthens the completion but is not mandatory. Never label organization-only personal-practice completion as direct proof.",
         "- Technology choices and professional roles may support tool exposure and role facts, but they do not by themselves establish stable personality traits, character strengths, psychological needs, moral foundations, learning pace, emotional state, or broad personal values. Emit such soft attributes as direct or structured_claim only when the survey measures the same construct. A summary_inference still requires at least two independent behavioral answers; technology or role alone is insufficient.",
         "- BFI, SDT, moral-foundation, Schwartz-value, personality, and other psychometric completions should normally be summary_inference unless the survey directly measures the same construct. Require multiple independent, positively relevant answers and do not confuse observed professional behavior with a formally measured psychological score or need.",
         "- For summary_inference personality, cognitive-style, broad-value, emotional-state, decision-style, or learning-style fields, require at least two independently cited source columns. Omit one-source soft completions even when the narrative sounds plausible.",

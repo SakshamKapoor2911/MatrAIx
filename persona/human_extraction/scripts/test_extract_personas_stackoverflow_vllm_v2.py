@@ -399,7 +399,11 @@ def test_semantic_filter_drops_observed_cross_construct_failures(extractor_modul
         extractor_module.filter_semantic_overreach(fields, row)
     )
 
-    assert filtered == {"age_bracket": fields[-1]}
+    assert filtered == {
+        "fam_machine_learning": fields[6],
+        "habit_backing_up_files": fields[7],
+        "age_bracket": fields[-1],
+    }
 
 
 def test_semantic_filter_keeps_positive_same_construct_evidence(extractor_module):
@@ -649,8 +653,10 @@ def test_prompt_blocks_observed_proxy_failure_modes(extractor_module):
     assert "Compensation is individual compensation, not household income" in prompt
     assert "generic dependents answer" in prompt
     assert "work environment or exposure" in prompt
-    assert "contribute to a personal-practice summary_inference" in prompt
-    assert "organization-level evidence alone" in prompt
+    assert "limited practical AI/ML familiarity" in prompt
+    assert "support a compatible personal-practice summary_inference" in prompt
+    assert "strengthens the completion but is not mandatory" in prompt
+    assert "Never label organization-only personal-practice completion as direct" in prompt
     assert "Technology choices and professional roles may support tool exposure and role facts" in prompt
     assert "psychometric completions should normally be summary_inference" in prompt
     assert "people-manager or executive answer is strong evidence" in prompt
