@@ -1,0 +1,110 @@
+#!/bin/bash
+#SBATCH --job-name=so-vllm-prod-rtx-bf16
+#SBATCH --account=torch_pr_543_general
+#SBATCH --comment="preemption=yes;requeue=true"
+#SBATCH --gres=gpu:1
+#SBATCH --constraint=rtx6000
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=24G
+#SBATCH --time=1:00:00
+#SBATCH --output=/scratch/yl6586/slurm_logs/slurm-%x-%j.out
+#SBATCH --error=/scratch/yl6586/slurm_logs/slurm-%x-%j.err
+#SBATCH --mail-type=FAIL,END
+#SBATCH --mail-user=yl6586@nyu.edu
+
+set -euo pipefail
+
+YEAR=""
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    --year)
+      YEAR="$2"
+      shift 2
+      ;;
+    *)
+      echo "Unknown option: $1"
+      exit 1
+      ;;
+  esac
+done
+
+if [[ -z "$YEAR" ]]; then
+  echo "Error: --year flag is required."
+  exit 1
+fi
+
+WORKDIR=/scratch/yl6586/MatrAIx
+SCRIPT="$WORKDIR/persona/human_extraction/scripts/extract_personas_stackoverflow_vllm_v2.py"
+SURVEY_ROOT="$WORKDIR/persona/human_extraction/data/stackoverflow_survey"
+OUTPUT="$SURVEY_ROOT/extraction_stackoverflow_v2_rtx6000_$YEAR_$SLURM_JOB_ID.jsonl"
+IMAGE=/scratch/yl6586/containers/vllm-v0.19.0.sif
+
+export HF_HOME=/scratch/yl6586/.cache/huggingface
+export HF_HUB_CACHE="$HF_HOME/hub"
+export HF_XET_CACHE="$HF_HOME/xet"
+export VLLM_CACHE_ROOT=/scratch/yl6586/.cache/vllm
+export TMPDIR=/scratch/yl6586/.cache/tmp
+export VLLM_WORKER_MULTIPROC_METHOD=spawn
+export VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS=1
+export TOKENIZERS_PARALLELISM=true
+export PYTHONUNBUFFERED=1
+
+# Avoid inheriting an expired temporary path from the submitting shell.
+if [[ -n "${SLURM_TMPDIR:-}" ]]; then
+    export APPTAINER_TMPDIR="$SLURM_TMPDIR"
+else
+    unset APPTAINER_TMPDIR
+fi
+
+
+mkdir -p \
+  "$HF_HOME" \
+  "$HF_HUB_CACHE" \
+  "$HF_XET_CACHE" \
+  "$VLLM_CACHE_ROOT" \
+  "$TMPDIR" \
+  "$(dirname "$OUTPUT")" \
+  /scratch/yl6586/slurm_logs
+cd "$WORKDIR"
+
+echo "Job ID: $SLURM_JOB_ID"
+echo "Node: $(hostname)"
+echo "Image: $IMAGE"
+echo "Output: $OUTPUT"
+echo "Existing output rows: $(test -f "$OUTPUT" && wc -l < "$OUTPUT" || echo 0)"
+nvidia-smi
+
+APPTAINER_ARGS=(
+  exec
+  --nv
+  --bind /scratch:/scratch
+  --pwd "$WORKDIR"
+  "$IMAGE"
+)
+
+
+# Each batch makes 45 same-schema chunk-outer calls. Compatible rows already
+# present in this RTX-specific output are skipped when the job is resubmitted.
+apptainer "${APPTAINER_ARGS[@]}" \
+  /usr/bin/python3 \
+  "$SCRIPT" \
+  --year "$YEAR" \
+  --survey-root "$SURVEY_ROOT" \
+  --execute \
+  --model Qwen/Qwen3.6-35B-A3B \
+  --batch-profiles 8 \
+  --max-num-seqs 8 \
+  --max-model-len 32768 \
+  --max-tokens 8192 \
+  --dtype bfloat16 \
+  --tensor-parallel-size 1 \
+  --pipeline-parallel-size 1 \
+  --quantization none \
+  --gpu-memory-utilization 0.90 \
+  --download-dir "$HF_HUB_CACHE" \
+  --output "$OUTPUT"
+
+echo "RTX Pro 6000 BF16 production run completed: $OUTPUT"
+echo "Final output rows: $(wc -l < "$OUTPUT")"
