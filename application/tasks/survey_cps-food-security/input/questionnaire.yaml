@@ -1,0 +1,743 @@
+schemaVersion: "1.0"
+id: cps_food_security_v1
+title: "CPS Food Security Supplement Survey"
+description: "The December Food Security Supplement to the Current Population Survey is conducted by the U.S. Census Bureau for the U.S. Department of Agriculture's Economic Research Service (US"
+questions:
+  - id: q0
+    prompt: "These first questions are about all the places at which you bought food LAST WEEK, meaning from Sunday through Saturday. First, did you or anyone in your household shop for food at a supermarket, grocery store, Walmart or Target LAST WEEK?"
+    type: single_choice
+    construct: these_first_questions_all_places
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q1
+    prompt: "Think about other places where people buy food, such as dollar stores, pharmacies, club stores, farmers markets, or online. Did you or anyone in your household buy food from any stores such as these LAST WEEK?"
+    type: single_choice
+    construct: think_other_places_where_people
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q2
+    prompt: "LAST WEEK, did you or anyone in your household buy food at a restaurant, fast food place, cafeteria, deli, convenience store, or vending machine? (Include any children who may have bought food at the school cafeteria.)"
+    type: single_choice
+    construct: last_week_did_anyone_household
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q3
+    prompt: "Did you or anyone in your household buy food from any other kind of place LAST WEEK?"
+    type: single_choice
+    construct: did_anyone_household_buy_food
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q4
+    prompt: "How much did you or anyone in your household spend in total at supermarkets, grocery stores, Walmart or Target LAST WEEK (including any purchases made with SNAP or food stamp benefits)? Enter a dollar amount."
+    type: free_text
+    construct: much_did_anyone_household_spend
+    required: true
+  - id: q5
+    prompt: "How much of that supermarket/grocery spending was for non-food items, such as pet food, paper products, alcohol, detergents, or cleaning supplies? Enter a dollar amount."
+    type: free_text
+    construct: much_that_supermarket_grocery_spending
+    required: true
+  - id: q6
+    prompt: "How much did you or your household spend at stores such as dollar stores, pharmacies, club stores, farmers markets, or online LAST WEEK (including any purchases made with SNAP or food stamp benefits)? Enter a dollar amount."
+    type: free_text
+    construct: much_did_household_spend_stores
+    required: true
+  - id: q7
+    prompt: "How much of that spending at dollar stores, pharmacies, club stores, farmers markets, or online was for non-food items, such as pet food, paper products, alcohol, detergents, or cleaning supplies? Enter a dollar amount."
+    type: free_text
+    construct: much_that_spending_dollar_stores
+    required: true
+  - id: q8
+    prompt: "How much did you or your household spend for food at restaurants, fast food places, cafeterias, delis, convenience stores, and vending machines LAST WEEK, not including alcohol purchases (including any purchases made with SNAP or food stamp benefits)? Enter a dollar amount."
+    type: free_text
+    construct: much_did_household_spend_food
+    required: true
+  - id: q9
+    prompt: "How much did you or your household spend for food at any other kind of place LAST WEEK? Enter a dollar amount."
+    type: free_text
+    construct: much_did_household_spend_food
+    required: true
+  - id: q10
+    prompt: "Now think about how much you or anyone in your household USUALLY spends. How much do you or your household USUALLY spend on food at all the different places we've been talking about IN A WEEK (including any purchases made with SNAP or food stamp benefits, but not non-food items such as pet food, paper products, detergent or cleaning supplies)? Enter a dollar amount."
+    type: free_text
+    construct: now_think_much_anyone_household
+    required: true
+  - id: q11
+    prompt: "In order to buy just enough food to meet the needs of your household, would you need to spend more than you do now, or could you spend less?"
+    type: single_choice
+    construct: order_buy_just_enough_food
+    required: true
+    options:
+      - id: "a"
+        label: "More"
+      - id: "b"
+        label: "Less"
+      - id: "c"
+        label: "Same"
+  - id: q12
+    prompt: "About how much MORE would you need to spend each week to buy just enough food to meet the needs of your household? Enter a dollar amount."
+    type: free_text
+    construct: much_more_would_need_spend
+    required: true
+  - id: q13
+    prompt: "About how much LESS could you spend each week and still buy enough food to meet the needs of your household? Enter a dollar amount."
+    type: free_text
+    construct: much_less_could_spend_each
+    required: true
+  - id: q14
+    prompt: "In the last 12 months, since December of last year, did you ever run short of money and try to make your food or your food money go further?"
+    type: single_choice
+    construct: last_12_months_since_december
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q15
+    prompt: "Which of these statements best describes the food eaten in your household in the last 12 months?"
+    type: single_choice
+    construct: these_statements_best_describes_food
+    required: true
+    options:
+      - id: "a"
+        label: "Enough of the kinds of food I/we want to eat"
+      - id: "b"
+        label: "Enough but not always the kinds of food I/we want to eat"
+      - id: "c"
+        label: "Sometimes not enough to eat"
+      - id: "d"
+        label: "Often not enough to eat"
+  - id: q16
+    prompt: "Was the following statement OFTEN true, SOMETIMES true, or NEVER true for you or your household in the last 12 months? \"I/We worried whether my/our food would run out before I/we got money to buy more.\""
+    type: single_choice
+    construct: was_following_statement_often_true
+    required: true
+    options:
+      - id: "a"
+        label: "Often true"
+      - id: "b"
+        label: "Sometimes true"
+      - id: "c"
+        label: "Never true"
+  - id: q17
+    prompt: "In the last 30 days, did you or your household worry whether your food would run out before you got money to buy more?"
+    type: single_choice
+    construct: last_30_days_did_household
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q18
+    prompt: "Was the following statement OFTEN true, SOMETIMES true, or NEVER true for you or your household in the last 12 months? \"The food that I/we bought just didn't last, and I/we didn't have money to get more.\""
+    type: single_choice
+    construct: was_following_statement_often_true
+    required: true
+    options:
+      - id: "a"
+        label: "Often true"
+      - id: "b"
+        label: "Sometimes true"
+      - id: "c"
+        label: "Never true"
+  - id: q19
+    prompt: "In the last 30 days, did the food that you bought just not last, and you didn't have money to get more?"
+    type: single_choice
+    construct: last_30_days_did_food
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q20
+    prompt: "Was the following statement OFTEN true, SOMETIMES true, or NEVER true for you or your household in the last 12 months? \"I/We couldn't afford to eat balanced meals.\""
+    type: single_choice
+    construct: was_following_statement_often_true
+    required: true
+    options:
+      - id: "a"
+        label: "Often true"
+      - id: "b"
+        label: "Sometimes true"
+      - id: "c"
+        label: "Never true"
+  - id: q21
+    prompt: "In the last 30 days, were you or your household unable to afford to eat balanced meals?"
+    type: single_choice
+    construct: last_30_days_were_household
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q22
+    prompt: "In the last 12 months, did you (or you or other adults in your household) ever cut the size of your meals or skip meals because there wasn't enough money for food?"
+    type: single_choice
+    construct: last_12_months_did_other
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q23
+    prompt: "How often did you cut the size of your meals or skip meals because there wasn't enough money for food?"
+    type: single_choice
+    construct: often_did_cut_size_meals
+    required: true
+    options:
+      - id: "a"
+        label: "Almost every month"
+      - id: "b"
+        label: "Some months but not every month"
+      - id: "c"
+        label: "Only 1 or 2 months"
+  - id: q24
+    prompt: "In the last 30 days, did you (or you or other adults in your household) ever cut the size of your meals or skip meals because there wasn't enough money for food?"
+    type: single_choice
+    construct: last_30_days_did_other
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q25
+    prompt: "In the last 30 days, how many days did you cut the size of your meals or skip meals because there wasn't enough money for food? Please enter a number of days."
+    type: free_text
+    construct: last_30_days_many_days
+    required: true
+  - id: q26
+    prompt: "In the last 12 months, did you ever eat less than you felt you should because there wasn't enough money for food?"
+    type: single_choice
+    construct: last_12_months_did_ever
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q27
+    prompt: "How often did you eat less than you felt you should because there wasn't enough money for food?"
+    type: single_choice
+    construct: often_did_eat_less_than
+    required: true
+    options:
+      - id: "a"
+        label: "Almost every month"
+      - id: "b"
+        label: "Some months but not every month"
+      - id: "c"
+        label: "Only 1 or 2 months"
+  - id: q28
+    prompt: "In the last 30 days, did you eat less than you felt you should because there wasn't enough money for food?"
+    type: single_choice
+    construct: last_30_days_did_eat
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q29
+    prompt: "In the last 30 days, how many days did you eat less than you felt you should because there wasn't enough money for food? Please enter a number of days."
+    type: free_text
+    construct: last_30_days_many_days
+    required: true
+  - id: q30
+    prompt: "In the last 12 months, were you ever hungry but didn't eat because there wasn't enough money for food?"
+    type: single_choice
+    construct: last_12_months_were_ever
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q31
+    prompt: "How often were you hungry but didn't eat because there wasn't enough money for food?"
+    type: single_choice
+    construct: often_were_hungry_but_didn
+    required: true
+    options:
+      - id: "a"
+        label: "Almost every month"
+      - id: "b"
+        label: "Some months but not every month"
+      - id: "c"
+        label: "Only 1 or 2 months"
+  - id: q32
+    prompt: "In the last 30 days, were you hungry but didn't eat because there wasn't enough money for food?"
+    type: single_choice
+    construct: last_30_days_were_hungry
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q33
+    prompt: "In the last 30 days, how many days were you hungry but didn't eat because there wasn't enough money for food? Please enter a number of days."
+    type: free_text
+    construct: last_30_days_many_days
+    required: true
+  - id: q34
+    prompt: "In the last 12 months, did you lose weight because there wasn't enough money for food?"
+    type: single_choice
+    construct: last_12_months_did_lose
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q35
+    prompt: "In the last 30 days, did you lose weight because there wasn't enough money for food?"
+    type: single_choice
+    construct: last_30_days_did_lose
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q36
+    prompt: "In the last 12 months, did you (or you or other adults in your household) ever not eat for a whole day because there wasn't enough money for food?"
+    type: single_choice
+    construct: last_12_months_did_other
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q37
+    prompt: "How often did you not eat for a whole day because there wasn't enough money for food?"
+    type: single_choice
+    construct: often_did_not_eat_whole
+    required: true
+    options:
+      - id: "a"
+        label: "Almost every month"
+      - id: "b"
+        label: "Some months but not every month"
+      - id: "c"
+        label: "Only 1 or 2 months"
+  - id: q38
+    prompt: "In the last 30 days, did you (or you or other adults in your household) ever not eat for a whole day because there wasn't enough money for food?"
+    type: single_choice
+    construct: last_30_days_did_other
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q39
+    prompt: "In the last 30 days, how many times did you not eat for a whole day because there wasn't enough money for food? Please enter a number."
+    type: free_text
+    construct: last_30_days_many_times
+    required: true
+  - id: q40
+    prompt: "Was the following statement OFTEN true, SOMETIMES true, or NEVER true for you or your household in the last 12 months? \"I/We relied on only a few kinds of low-cost food to feed the children because I was/we were running out of money to buy food.\""
+    type: single_choice
+    construct: was_following_statement_often_true
+    required: true
+    options:
+      - id: "a"
+        label: "Often true"
+      - id: "b"
+        label: "Sometimes true"
+      - id: "c"
+        label: "Never true"
+  - id: q41
+    prompt: "In the last 30 days, did you rely on only a few kinds of low-cost food to feed the children because you were running out of money to buy food?"
+    type: single_choice
+    construct: last_30_days_did_rely
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q42
+    prompt: "Was the following statement OFTEN true, SOMETIMES true, or NEVER true for you or your household in the last 12 months? \"I/We couldn't feed the children a balanced meal, because I/we couldn't afford that.\""
+    type: single_choice
+    construct: was_following_statement_often_true
+    required: true
+    options:
+      - id: "a"
+        label: "Often true"
+      - id: "b"
+        label: "Sometimes true"
+      - id: "c"
+        label: "Never true"
+  - id: q43
+    prompt: "In the last 30 days, were you unable to feed the children a balanced meal because you couldn't afford that?"
+    type: single_choice
+    construct: last_30_days_were_unable
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q44
+    prompt: "Was the following statement OFTEN true, SOMETIMES true, or NEVER true for you or your household in the last 12 months? \"The children were not eating enough because there wasn't enough money for food.\""
+    type: single_choice
+    construct: was_following_statement_often_true
+    required: true
+    options:
+      - id: "a"
+        label: "Often true"
+      - id: "b"
+        label: "Sometimes true"
+      - id: "c"
+        label: "Never true"
+  - id: q45
+    prompt: "In the last 30 days, were the children not eating enough because there wasn't enough money for food?"
+    type: single_choice
+    construct: last_30_days_were_children
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q46
+    prompt: "In the last 12 months, did you ever cut the size of any of the children's meals because there wasn't enough money for food?"
+    type: single_choice
+    construct: last_12_months_did_ever
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q47
+    prompt: "How often did you cut the size of the children's meals because there wasn't enough money for food?"
+    type: single_choice
+    construct: often_did_cut_size_children
+    required: true
+    options:
+      - id: "a"
+        label: "Almost every month"
+      - id: "b"
+        label: "Some months but not every month"
+      - id: "c"
+        label: "Only 1 or 2 months"
+  - id: q48
+    prompt: "In the last 30 days, did you cut the size of any of the children's meals because there wasn't enough money for food?"
+    type: single_choice
+    construct: last_30_days_did_cut
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q49
+    prompt: "In the last 30 days, how many days did you cut the size of the children's meals because there wasn't enough money for food? Please enter a number of days."
+    type: free_text
+    construct: last_30_days_many_days
+    required: true
+  - id: q50
+    prompt: "In the last 12 months, were any of the children ever hungry because there wasn't enough money for food?"
+    type: single_choice
+    construct: last_12_months_were_any
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q51
+    prompt: "How often were the children hungry because there wasn't enough money for food?"
+    type: single_choice
+    construct: often_were_children_hungry_because
+    required: true
+    options:
+      - id: "a"
+        label: "Almost every month"
+      - id: "b"
+        label: "Some months but not every month"
+      - id: "c"
+        label: "Only 1 or 2 months"
+  - id: q52
+    prompt: "In the last 30 days, were any of the children hungry because there wasn't enough money for food?"
+    type: single_choice
+    construct: last_30_days_were_any
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q53
+    prompt: "In the last 30 days, how many days were the children hungry because there wasn't enough money for food? Please enter a number of days."
+    type: free_text
+    construct: last_30_days_many_days
+    required: true
+  - id: q54
+    prompt: "In the last 12 months, did any of the children ever skip a meal because there wasn't enough money for food?"
+    type: single_choice
+    construct: last_12_months_did_any
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q55
+    prompt: "How often did the children skip a meal because there wasn't enough money for food?"
+    type: single_choice
+    construct: often_did_children_skip_meal
+    required: true
+    options:
+      - id: "a"
+        label: "Almost every month"
+      - id: "b"
+        label: "Some months but not every month"
+      - id: "c"
+        label: "Only 1 or 2 months"
+  - id: q56
+    prompt: "In the last 30 days, did any of the children ever skip a meal because there wasn't enough money for food?"
+    type: single_choice
+    construct: last_30_days_did_any
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q57
+    prompt: "In the last 30 days, how many days did the children skip a meal because there wasn't enough money for food? Please enter a number of days."
+    type: free_text
+    construct: last_30_days_many_days
+    required: true
+  - id: q58
+    prompt: "In the last 12 months, did any of the children ever not eat for a whole day because there wasn't enough money for food?"
+    type: single_choice
+    construct: last_12_months_did_any
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q59
+    prompt: "In the last 30 days, did any of the children not eat for a whole day because there wasn't enough money for food?"
+    type: single_choice
+    construct: last_30_days_did_any
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q60
+    prompt: "In the past 12 months, since December of last year, did you or anyone in this household get SNAP or food stamp benefits?"
+    type: single_choice
+    construct: past_12_months_since_december
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q61
+    prompt: "In which months of the past year were SNAP or food stamp benefits received? (Select all that apply)"
+    type: multi_choice
+    construct: months_past_year_were_snap
+    required: true
+    options:
+      - id: "a"
+        label: "January"
+      - id: "b"
+        label: "February"
+      - id: "c"
+        label: "March"
+      - id: "d"
+        label: "April"
+      - id: "e"
+        label: "May"
+      - id: "f"
+        label: "June"
+      - id: "g"
+        label: "July"
+      - id: "h"
+        label: "August"
+      - id: "i"
+        label: "September"
+      - id: "j"
+        label: "October"
+      - id: "k"
+        label: "November"
+      - id: "l"
+        label: "December"
+      - id: "m"
+        label: "All months"
+  - id: q62
+    prompt: "How much did you or your household receive the last time you got SNAP or food stamp benefits? Enter a dollar amount."
+    type: free_text
+    construct: much_did_household_receive_last
+    required: true
+  - id: q63
+    prompt: "During the past 30 days, did any children in the household receive free or reduced-price lunches at school?"
+    type: single_choice
+    construct: during_past_30_days_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q64
+    prompt: "During the past 30 days, did any children in the household receive free or reduced-price breakfasts at school?"
+    type: single_choice
+    construct: during_past_30_days_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q65
+    prompt: "During the past 30 days, did any children in the household receive a free or reduced-price meal or snack at an after-school program?"
+    type: single_choice
+    construct: during_past_30_days_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q66
+    prompt: "During the past 30 days, did any children in the household receive free or reduced-price food at a day-care or Head Start program?"
+    type: single_choice
+    construct: during_past_30_days_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q67
+    prompt: "During the past 30 days, did any women or children in this household get food through the WIC program?"
+    type: single_choice
+    construct: during_past_30_days_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q68
+    prompt: "How many women or children in the household got WIC foods? Please enter a number."
+    type: free_text
+    construct: many_women_children_household_got
+    required: true
+  - id: q69
+    prompt: "In the last 12 months, did you or anyone in your household ever get free groceries from a food pantry, food bank, church, or other place that helps with free food?"
+    type: single_choice
+    construct: last_12_months_did_anyone
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q70
+    prompt: "How often did you get free groceries from a food pantry, food bank, church, or other place that helps with free food?"
+    type: single_choice
+    construct: often_did_get_free_groceries
+    required: true
+    options:
+      - id: "a"
+        label: "Almost every month"
+      - id: "b"
+        label: "Some months but not every month"
+      - id: "c"
+        label: "Only 1 or 2 months"
+  - id: q71
+    prompt: "In the last 30 days, did you get free groceries from a food pantry, food bank, church, or other place that helps with free food?"
+    type: single_choice
+    construct: last_30_days_did_get
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q72
+    prompt: "Is there a food pantry, food bank, church, or other place in your community where you could get free groceries if you needed it?"
+    type: single_choice
+    construct: there_food_pantry_food_bank
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q73
+    prompt: "In the last 12 months, have you or anyone in your household received a free meal from a church, shelter, home-delivered meal service like Meals on Wheels, or other place that helps with free meals?"
+    type: single_choice
+    construct: last_12_months_have_anyone
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q74
+    prompt: "How often did you receive a free meal from a church, shelter, home-delivered meal service, or other place that helps with free meals?"
+    type: single_choice
+    construct: often_did_receive_free_meal
+    required: true
+    options:
+      - id: "a"
+        label: "Almost every month"
+      - id: "b"
+        label: "Some months but not every month"
+      - id: "c"
+        label: "Only 1 or 2 months"
+  - id: q75
+    prompt: "In the last 30 days, did you receive a free meal from a church, shelter, home-delivered meal service, or other place that helps with free meals?"
+    type: single_choice
+    construct: last_30_days_did_receive
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q76
+    prompt: "Is there a church, shelter, home-delivered meal service like Meals on Wheels, or other place in your community where you could get free meals if you needed it?"
+    type: single_choice
+    construct: there_church_shelter_home_delivered
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"

@@ -1,0 +1,2104 @@
+schemaVersion: "1.0"
+id: cfpb_mem_v1
+title: "CFPB Making Ends Meet Survey"
+description: "The CFPB's Making Ends Meet survey tracks the financial lives of U.S. consumers who have a credit record — how they are faring financially, their ability to pay bills and cover exp"
+questions:
+  - id: q0
+    prompt: "How well does this statement describe you or your situation? \"I know how to make complex financial decisions.\""
+    type: single_choice
+    construct: well_does_this_statement_describe
+    required: true
+    options:
+      - id: "a"
+        label: "Completely"
+      - id: "b"
+        label: "Very well"
+      - id: "c"
+        label: "Somewhat"
+      - id: "d"
+        label: "Very little"
+      - id: "e"
+        label: "Not at all"
+  - id: q1
+    prompt: "How well does this statement describe you or your situation? \"I am comfortable using English to perform financial transactions.\""
+    type: single_choice
+    construct: well_does_this_statement_describe
+    required: true
+    options:
+      - id: "a"
+        label: "Completely"
+      - id: "b"
+        label: "Very well"
+      - id: "c"
+        label: "Somewhat"
+      - id: "d"
+        label: "Very little"
+      - id: "e"
+        label: "Not at all"
+  - id: q2
+    prompt: "How well does this statement describe you or your situation? \"I am just getting by financially.\""
+    type: single_choice
+    construct: well_does_this_statement_describe
+    required: true
+    options:
+      - id: "a"
+        label: "Completely"
+      - id: "b"
+        label: "Very well"
+      - id: "c"
+        label: "Somewhat"
+      - id: "d"
+        label: "Very little"
+      - id: "e"
+        label: "Not at all"
+  - id: q3
+    prompt: "How well does this statement describe you or your situation? \"I am concerned that the money I have or will save won't last.\""
+    type: single_choice
+    construct: well_does_this_statement_describe
+    required: true
+    options:
+      - id: "a"
+        label: "Completely"
+      - id: "b"
+        label: "Very well"
+      - id: "c"
+        label: "Somewhat"
+      - id: "d"
+        label: "Very little"
+      - id: "e"
+        label: "Not at all"
+  - id: q4
+    prompt: "How well does this statement describe you or your situation? \"Because of my money situation, I feel like I will never have the things I want in life.\""
+    type: single_choice
+    construct: well_does_this_statement_describe
+    required: true
+    options:
+      - id: "a"
+        label: "Completely"
+      - id: "b"
+        label: "Very well"
+      - id: "c"
+        label: "Somewhat"
+      - id: "d"
+        label: "Very little"
+      - id: "e"
+        label: "Not at all"
+  - id: q5
+    prompt: "How often does this statement apply to you? \"I have money left over at the end of the month.\""
+    type: single_choice
+    construct: often_does_this_statement_apply
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q6
+    prompt: "How often does this statement apply to you? \"My finances control my life.\""
+    type: single_choice
+    construct: often_does_this_statement_apply
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q7
+    prompt: "What is your current work status? (Select all that apply)"
+    type: multi_choice
+    construct: current_work_status_select_all
+    required: true
+    options:
+      - id: "a"
+        label: "Self-employed"
+      - id: "b"
+        label: "Work full time"
+      - id: "c"
+        label: "Work part time"
+      - id: "d"
+        label: "Retired"
+      - id: "e"
+        label: "Temporarily laid off or on leave"
+      - id: "f"
+        label: "Unemployed"
+      - id: "g"
+        label: "Not working for pay (homemaker, student, disabled, etc.)"
+  - id: q8
+    prompt: "In the past 12 months, how often did you typically work from home?"
+    type: single_choice
+    construct: past_12_months_often_did
+    required: true
+    options:
+      - id: "a"
+        label: "Never in the past 12 months"
+      - id: "b"
+        label: "Occasionally"
+      - id: "c"
+        label: "1-2 days per week"
+      - id: "d"
+        label: "3-4 days per week"
+      - id: "e"
+        label: "5 or more days per week"
+  - id: q9
+    prompt: "Do you own your own business?"
+    type: single_choice
+    construct: own_own_business
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q10
+    prompt: "Is this business your primary income source?"
+    type: single_choice
+    construct: this_business_primary_income_source
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q11
+    prompt: "Do you have a separate line of credit or credit card for the business?"
+    type: single_choice
+    construct: have_separate_line_credit_credit
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q12
+    prompt: "Do you have a spouse or partner whom you share finances with?"
+    type: single_choice
+    construct: have_spouse_partner_whom_share
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q13
+    prompt: "Do you have any children, parents, relatives, or other dependents whom you share your finances with or who are financially dependent on you?"
+    type: single_choice
+    construct: have_any_children_parents_relatives
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q14
+    prompt: "What was your household's annual gross income (before taxes) in 2024 from all sources (wages, tips, child support, alimony, investment or rental income, retirement, Social Security, unemployment insurance and government benefits such as rental assistance)?"
+    type: single_choice
+    construct: was_household_s_annual_gross
+    required: true
+    options:
+      - id: "a"
+        label: "$20,000 or less"
+      - id: "b"
+        label: "$20,001 to $35,000"
+      - id: "c"
+        label: "$35,001 to $50,000"
+      - id: "d"
+        label: "$50,001 to $65,000"
+      - id: "e"
+        label: "$65,001 to $80,000"
+      - id: "f"
+        label: "$80,001 to $100,000"
+      - id: "g"
+        label: "$100,001 to $125,000"
+      - id: "h"
+        label: "$125,001 to $175,000"
+      - id: "i"
+        label: "$175,001 to $250,000"
+      - id: "j"
+        label: "$250,001 or more"
+  - id: q15
+    prompt: "Which best describes your household's income from month to month?"
+    type: single_choice
+    construct: best_describes_household_s_income
+    required: true
+    options:
+      - id: "a"
+        label: "Income is about the same each month"
+      - id: "b"
+        label: "Income varies somewhat from month to month"
+      - id: "c"
+        label: "Income varies a lot from month to month"
+  - id: q16
+    prompt: "In the past 12 months, how often has your household received financial assistance from family or friends who are not in your household?"
+    type: single_choice
+    construct: past_12_months_often_has
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Once"
+      - id: "c"
+        label: "2-4 times"
+      - id: "d"
+        label: "5 or more times"
+  - id: q17
+    prompt: "In the past 12 months, how often has your household provided financial assistance to family or friends who are not in your household?"
+    type: single_choice
+    construct: past_12_months_often_has
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Once"
+      - id: "c"
+        label: "2-4 times"
+      - id: "d"
+        label: "5 or more times"
+  - id: q18
+    prompt: "In the past year, did your household receive benefits from this government program: Temporary Assistance for Needy Families (TANF)?"
+    type: single_choice
+    construct: past_year_did_household_receive
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q19
+    prompt: "In the past year, did your household receive benefits from this government program: Supplemental Nutrition Assistance Program (SNAP, food stamps, or WIC)?"
+    type: single_choice
+    construct: past_year_did_household_receive
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q20
+    prompt: "In the past year, did your household receive benefits from this government program: Earned Income Tax Credit (EITC)?"
+    type: single_choice
+    construct: past_year_did_household_receive
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q21
+    prompt: "In the past year, did your household receive benefits from this government program: housing or rental assistance (such as Section 8 housing vouchers or public housing placement)?"
+    type: single_choice
+    construct: past_year_did_household_receive
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q22
+    prompt: "In the past year, did your household receive benefits from this government program: Supplemental Security Income (SSI) or Social Security Disability Insurance (SSDI)?"
+    type: single_choice
+    construct: past_year_did_household_receive
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q23
+    prompt: "In the past year, did your household receive benefits from this government program: Medicaid?"
+    type: single_choice
+    construct: past_year_did_household_receive
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q24
+    prompt: "In the past year, did your household receive benefits from this government program: Low-Income Home Energy Assistance Program (LIHEAP)?"
+    type: single_choice
+    construct: past_year_did_household_receive
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q25
+    prompt: "In the past year, did your household receive benefits from another government program (other)?"
+    type: single_choice
+    construct: past_year_did_household_receive
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q26
+    prompt: "Do you or anyone in your household currently have a checking or savings account? Please include any accounts you can access to pay for things, such as money market or prepaid accounts."
+    type: single_choice
+    construct: anyone_household_currently_have_checking
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q27
+    prompt: "Altogether, about how much money does your household have right now in all of its checking and savings accounts?"
+    type: single_choice
+    construct: altogether_much_money_does_household
+    required: true
+    options:
+      - id: "a"
+        label: "$0"
+      - id: "b"
+        label: "Less than $100"
+      - id: "c"
+        label: "$101 to $500"
+      - id: "d"
+        label: "$501 to $1,000"
+      - id: "e"
+        label: "$1,001 to $5,000"
+      - id: "f"
+        label: "$5,001 to $10,000"
+      - id: "g"
+        label: "$10,001 to $20,000"
+      - id: "h"
+        label: "$20,001 or more"
+  - id: q28
+    prompt: "In the past 12 months, did you open a new checking or savings account?"
+    type: single_choice
+    construct: past_12_months_did_open
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a new checking account"
+      - id: "b"
+        label: "Yes, a new savings account"
+      - id: "c"
+        label: "Yes, both a new savings and a new checking account"
+      - id: "d"
+        label: "No"
+  - id: q29
+    prompt: "Without looking it up, what is your approximate credit score? It is okay if you have to guess. Enter a number ranging from 300 to 850. (Free-text: answer with a number as a string, e.g. \"700\")"
+    type: free_text
+    construct: without_looking_it_up_approximate
+    required: true
+  - id: q30
+    prompt: "When was the last time you checked your credit score or credit report?"
+    type: single_choice
+    construct: when_was_last_time_checked
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "At least one year ago"
+      - id: "c"
+        label: "Within the last year"
+  - id: q31
+    prompt: "If your household lost its main source of income, about how long could you cover expenses by, for example, borrowing, using savings, selling assets, or seeking help from family or friends?"
+    type: single_choice
+    construct: if_household_lost_its_main
+    required: true
+    options:
+      - id: "a"
+        label: "Less than two weeks"
+      - id: "b"
+        label: "About one month"
+      - id: "c"
+        label: "About two months"
+      - id: "d"
+        label: "Three to six months"
+      - id: "e"
+        label: "More than six months"
+  - id: q32
+    prompt: "Thinking about your non-retirement accounts and any cash savings, about how much money does your household currently have that could be used for unexpected expenses or emergencies? (Free-text: answer with a dollar amount as a string, e.g. \"5000\")"
+    type: free_text
+    construct: thinking_non_retirement_accounts_any
+    required: true
+  - id: q33
+    prompt: "Does anyone in your household have any stocks, bonds, or mutual funds outside of retirement accounts?"
+    type: single_choice
+    construct: does_anyone_household_have_any
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q34
+    prompt: "Whether or not your household is currently saving for retirement, does anyone in your household have an IRA, 401(k) account, pension plan, or other retirement account?"
+    type: single_choice
+    construct: whether_not_household_currently_saving
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q35
+    prompt: "In the past 12 months, have you or anyone in your household used this payment or money transfer method, even once: checks?"
+    type: single_choice
+    construct: past_12_months_have_anyone
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q36
+    prompt: "In the past 12 months, have you or anyone in your household used this payment or money transfer method, even once: prepaid cards?"
+    type: single_choice
+    construct: past_12_months_have_anyone
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q37
+    prompt: "In the past 12 months, have you or anyone in your household used this payment or money transfer method, even once: remittances (international money transfer)?"
+    type: single_choice
+    construct: past_12_months_have_anyone
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q38
+    prompt: "In the past 12 months, have you or anyone in your household used this payment or money transfer method, even once: peer-to-peer payment apps (such as Venmo, Zelle, or CashApp)?"
+    type: single_choice
+    construct: past_12_months_have_anyone
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q39
+    prompt: "In the past 12 months, have you or anyone in your household used this payment or money transfer method, even once: virtual currencies (such as bitcoin or Ethereum)?"
+    type: single_choice
+    construct: past_12_months_have_anyone
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q40
+    prompt: "In the past 12 months, have you or anyone in your household used this payment or money transfer method, even once: check cashing services?"
+    type: single_choice
+    construct: past_12_months_have_anyone
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q41
+    prompt: "Did you consider flood or fire risk when you last decided where to live?"
+    type: single_choice
+    construct: did_consider_flood_fire_risk
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q42
+    prompt: "Do you or someone in your household own your current residence?"
+    type: single_choice
+    construct: someone_household_own_current_residence
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q43
+    prompt: "About how much does your household spend on your mortgage (including property taxes and homeowners insurance) each month? (Free-text: answer with a dollar amount as a string, e.g. \"1500\")"
+    type: free_text
+    construct: much_does_household_spend_mortgage
+    required: true
+  - id: q44
+    prompt: "Has your household had a homeowners insurance policy cancelled in the past 12 months?"
+    type: single_choice
+    construct: has_household_had_homeowners_insurance
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, the insurance company cancelled it"
+      - id: "b"
+        label: "Yes, we cancelled it ourselves"
+      - id: "c"
+        label: "No"
+  - id: q45
+    prompt: "In the past year, have you been threatened with eviction?"
+    type: single_choice
+    construct: past_year_have_been_threatened
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q46
+    prompt: "In the past year, have you been given an eviction notice?"
+    type: single_choice
+    construct: past_year_have_been_given
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q47
+    prompt: "In the past year, have you moved because of rent increases?"
+    type: single_choice
+    construct: past_year_have_moved_because
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q48
+    prompt: "In the past year, have you moved because your lease was not renewed?"
+    type: single_choice
+    construct: past_year_have_moved_because
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q49
+    prompt: "In the past year, have you experienced a rent increase that strained your budget?"
+    type: single_choice
+    construct: past_year_have_experienced_rent
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q50
+    prompt: "Do you rent your current residence?"
+    type: single_choice
+    construct: rent_current_residence
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q51
+    prompt: "About how much does your household spend on rent each month? (Free-text: answer with a dollar amount as a string, e.g. \"1200\")"
+    type: free_text
+    construct: much_does_household_spend_rent
+    required: true
+  - id: q52
+    prompt: "In the past year, how often did you not pay or were late with the rent payment?"
+    type: single_choice
+    construct: past_year_often_did_not
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "1 time"
+      - id: "c"
+        label: "2-3 times"
+      - id: "d"
+        label: "More than 3 times"
+  - id: q53
+    prompt: "Are you current on your rent payments?"
+    type: single_choice
+    construct: current_rent_payments
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q54
+    prompt: "In the past 12 months, has your household experienced a significant unexpected expense from a major out-of-pocket medical or dental expense?"
+    type: single_choice
+    construct: past_12_months_has_household
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q55
+    prompt: "In the past 12 months, has your household experienced a significant unexpected expense from an unplanned gift or loan to a family member or friend outside your household?"
+    type: single_choice
+    construct: past_12_months_has_household
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q56
+    prompt: "In the past 12 months, has your household experienced a significant unexpected expense from a major vehicle repair or replacement?"
+    type: single_choice
+    construct: past_12_months_has_household
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q57
+    prompt: "In the past 12 months, has your household experienced a significant unexpected expense from a major house or appliance repair?"
+    type: single_choice
+    construct: past_12_months_has_household
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q58
+    prompt: "In the past 12 months, has your household experienced a significant unexpected expense from a computer or mobile phone repair or replacement?"
+    type: single_choice
+    construct: past_12_months_has_household
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q59
+    prompt: "In the past 12 months, has your household experienced a significant unexpected expense from legal expenses, taxes, or fines?"
+    type: single_choice
+    construct: past_12_months_has_household
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q60
+    prompt: "In the past 12 months, has your household experienced a significant unexpected expense from an increase in childcare or dependent care expenses?"
+    type: single_choice
+    construct: past_12_months_has_household
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q61
+    prompt: "In the past 12 months, has your household experienced a significant unexpected expense from moving costs?"
+    type: single_choice
+    construct: past_12_months_has_household
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q62
+    prompt: "In the past 12 months, has your household experienced a significant unexpected expense from some other major unexpected expense?"
+    type: single_choice
+    construct: past_12_months_has_household
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q63
+    prompt: "In the past 12 months, has your household experienced a significant drop in income from a period of unemployment or furlough?"
+    type: single_choice
+    construct: past_12_months_has_household
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q64
+    prompt: "In the past 12 months, has your household experienced a significant drop in income from a reduction in work hours?"
+    type: single_choice
+    construct: past_12_months_has_household
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q65
+    prompt: "In the past 12 months, has your household experienced a significant drop in income from a reduction in wages at your job?"
+    type: single_choice
+    construct: past_12_months_has_household
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q66
+    prompt: "In the past 12 months, has your household experienced a significant drop in income from changing to a lower-paying job?"
+    type: single_choice
+    construct: past_12_months_has_household
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q67
+    prompt: "In the past 12 months, has your household experienced a significant drop in income from loss of government benefits?"
+    type: single_choice
+    construct: past_12_months_has_household
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q68
+    prompt: "In the past 12 months, has your household experienced a significant drop in income from working less because of illness or injury?"
+    type: single_choice
+    construct: past_12_months_has_household
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q69
+    prompt: "In the past 12 months, has your household experienced a significant drop in income from working less to care for others who were sick or injured?"
+    type: single_choice
+    construct: past_12_months_has_household
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q70
+    prompt: "In the past 12 months, has your household experienced a significant drop in income from working less or stopping work to take care of children?"
+    type: single_choice
+    construct: past_12_months_has_household
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q71
+    prompt: "In the past 12 months, has your household experienced a significant drop in income from loss of revenue from a business you own?"
+    type: single_choice
+    construct: past_12_months_has_household
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q72
+    prompt: "In the past 12 months, has your household experienced a significant drop in income from loss of income due to a natural disaster?"
+    type: single_choice
+    construct: past_12_months_has_household
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q73
+    prompt: "In the past 12 months, has your household experienced another significant drop in income?"
+    type: single_choice
+    construct: past_12_months_has_household
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q74
+    prompt: "In the past 12 months, has this happened to your household: someone in your household got married?"
+    type: single_choice
+    construct: past_12_months_has_this
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q75
+    prompt: "In the past 12 months, has this happened to your household: someone in your household divorced or separated?"
+    type: single_choice
+    construct: past_12_months_has_this
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q76
+    prompt: "In the past 12 months, has this happened to your household: someone in your household had a major illness or injury?"
+    type: single_choice
+    construct: past_12_months_has_this
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q77
+    prompt: "In the past 12 months, has this happened to your household: someone in your household died?"
+    type: single_choice
+    construct: past_12_months_has_this
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q78
+    prompt: "In the past 12 months, has this happened to your household: someone was born, adopted, or moved into your household?"
+    type: single_choice
+    construct: past_12_months_has_this
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q79
+    prompt: "In the past 12 months, has this happened to your household: someone left your household?"
+    type: single_choice
+    construct: past_12_months_has_this
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q80
+    prompt: "In the past 12 months, has this happened to your household: someone in your household retired?"
+    type: single_choice
+    construct: past_12_months_has_this
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q81
+    prompt: "In the past 12 months, has this happened to your household: a natural disaster affected your home, employer, or business?"
+    type: single_choice
+    construct: past_12_months_has_this
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q82
+    prompt: "In the past 12 months, has this happened to your household: you moved to a new residence?"
+    type: single_choice
+    construct: past_12_months_has_this
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q83
+    prompt: "In the past 12 months, has this happened to your household: a car was repossessed?"
+    type: single_choice
+    construct: past_12_months_has_this
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q84
+    prompt: "In the past 12 months, has this happened to your household: someone in your household was arrested, charged with a crime, or held in jail or prison?"
+    type: single_choice
+    construct: past_12_months_has_this
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q85
+    prompt: "In the past 12 months, has this happened to your household: you started a new business?"
+    type: single_choice
+    construct: past_12_months_has_this
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q86
+    prompt: "In the past 12 months, has this happened to your household: you closed a business you owned?"
+    type: single_choice
+    construct: past_12_months_has_this
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q87
+    prompt: "In the past year, have you paid a company or service to try to help repair your credit or improve your credit score?"
+    type: single_choice
+    construct: past_year_have_paid_company
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q88
+    prompt: "Who did you pay to help repair your credit? (Select all that apply)"
+    type: multi_choice
+    construct: who_did_pay_help_repair
+    required: true
+    options:
+      - id: "a"
+        label: "Credit repair services, where you pay a company that provides dispute templates or promises to fix your credit or improve your credit score by disputing items on your credit report"
+      - id: "b"
+        label: "Credit counseling, where a nonprofit or professional advises you on managing your money and debts"
+      - id: "c"
+        label: "Debt consolidation loans, where you pay a company to combine your debts into one loan that you pay off in installments"
+      - id: "d"
+        label: "Debt relief or settlement companies, that say they can renegotiate, settle, or in some way change the terms of a person's debt to a creditor or debt collector"
+      - id: "e"
+        label: "Other"
+  - id: q89
+    prompt: "How successful was the company or service you paid in improving your credit?"
+    type: single_choice
+    construct: successful_was_company_service_paid
+    required: true
+    options:
+      - id: "a"
+        label: "Very successful"
+      - id: "b"
+        label: "Somewhat successful"
+      - id: "c"
+        label: "Not successful at all"
+      - id: "d"
+        label: "I'm still in the process (i.e., no results yet)"
+      - id: "e"
+        label: "I don't know"
+  - id: q90
+    prompt: "In the past year, have you disputed an item on your credit report by contacting a credit bureau?"
+    type: single_choice
+    construct: past_year_have_disputed_item
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q91
+    prompt: "Was the item you disputed on your credit report removed?"
+    type: single_choice
+    construct: was_item_disputed_credit_report
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q92
+    prompt: "In the past year, have you lost money to this type of fraud or scam, including any instances where the money was eventually recovered or refunded: theft, misuse, or financial exploitation by a known or trusted person?"
+    type: single_choice
+    construct: past_year_have_lost_money
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q93
+    prompt: "In the past year, have you lost money to this type of fraud or scam, including any instances where the money was eventually recovered or refunded: credit or debit card fraud or unauthorized use?"
+    type: single_choice
+    construct: past_year_have_lost_money
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q94
+    prompt: "In the past year, have you lost money to this type of fraud or scam, including any instances where the money was eventually recovered or refunded: imposter scams (where scammers impersonate tech support, government, businesses, charities, or family members)?"
+    type: single_choice
+    construct: past_year_have_lost_money
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q95
+    prompt: "In the past year, have you lost money to this type of fraud or scam, including any instances where the money was eventually recovered or refunded: phishing scams (where scammers steal your password or other personal information)?"
+    type: single_choice
+    construct: past_year_have_lost_money
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q96
+    prompt: "In the past year, have you lost money to this type of fraud or scam, including any instances where the money was eventually recovered or refunded: investment scams (including fake cryptocurrency investments)?"
+    type: single_choice
+    construct: past_year_have_lost_money
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q97
+    prompt: "In the past year, have you lost money to this type of fraud or scam, including any instances where the money was eventually recovered or refunded: prize, sweepstakes, or lottery scams?"
+    type: single_choice
+    construct: past_year_have_lost_money
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q98
+    prompt: "In the past year, have you lost money to this type of fraud or scam, including any instances where the money was eventually recovered or refunded: fake job opportunity or business opportunity?"
+    type: single_choice
+    construct: past_year_have_lost_money
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q99
+    prompt: "In the past year, have you lost money to this type of fraud or scam, including any instances where the money was eventually recovered or refunded: online shopping scams?"
+    type: single_choice
+    construct: past_year_have_lost_money
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q100
+    prompt: "In the past year, have you lost money to this type of fraud or scam, including any instances where the money was eventually recovered or refunded: identity theft?"
+    type: single_choice
+    construct: past_year_have_lost_money
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q101
+    prompt: "In the past year, have you lost money to this type of fraud or scam, including any instances where the money was eventually recovered or refunded: social media scams?"
+    type: single_choice
+    construct: past_year_have_lost_money
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q102
+    prompt: "In the past year, have you lost money to some other type of fraud or scam, including any instances where the money was eventually recovered or refunded?"
+    type: single_choice
+    construct: past_year_have_lost_money
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q103
+    prompt: "In the past year, how many times have you lost money to a fraud or scam?"
+    type: single_choice
+    construct: past_year_many_times_have
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "One time"
+      - id: "c"
+        label: "Two or three times"
+      - id: "d"
+        label: "More than three times"
+  - id: q104
+    prompt: "For the most recent fraud or scam, did you ultimately lose any money?"
+    type: single_choice
+    construct: most_recent_fraud_scam_did
+    required: true
+    options:
+      - id: "a"
+        label: "I lost money, but all of it was recovered or refunded"
+      - id: "b"
+        label: "I lost money, and most of it was recovered or refunded"
+      - id: "c"
+        label: "I lost money, and some of it was recovered or refunded"
+      - id: "d"
+        label: "I lost money, and none of it was recovered or refunded"
+      - id: "e"
+        label: "I did not lose any money to the most recent fraud or scam"
+  - id: q105
+    prompt: "At any time in the past 12 months have you or your household had difficulty paying for a bill or expense?"
+    type: single_choice
+    construct: any_time_past_12_months
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q106
+    prompt: "When was the most recent time that you or your household had difficulty paying a bill or expense?"
+    type: single_choice
+    construct: when_was_most_recent_time
+    required: true
+    options:
+      - id: "a"
+        label: "In the last month"
+      - id: "b"
+        label: "1-3 months ago"
+      - id: "c"
+        label: "4-6 months ago"
+      - id: "d"
+        label: "7-12 months ago"
+  - id: q107
+    prompt: "Thinking back to the most recent time you had difficulty paying a bill or expense, did you have difficulty paying for a medical expense?"
+    type: single_choice
+    construct: thinking_back_most_recent_time
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q108
+    prompt: "Thinking back to the most recent time you had difficulty paying a bill or expense, did you have difficulty paying for a car or vehicle repair?"
+    type: single_choice
+    construct: thinking_back_most_recent_time
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q109
+    prompt: "Thinking back to the most recent time you had difficulty paying a bill or expense, did you have difficulty paying for a home repair?"
+    type: single_choice
+    construct: thinking_back_most_recent_time
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q110
+    prompt: "Thinking back to the most recent time you had difficulty paying a bill or expense, did you have difficulty paying for food?"
+    type: single_choice
+    construct: thinking_back_most_recent_time
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q111
+    prompt: "Thinking back to the most recent time you had difficulty paying a bill or expense, did you have difficulty paying for mortgage or rent?"
+    type: single_choice
+    construct: thinking_back_most_recent_time
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q112
+    prompt: "Thinking back to the most recent time you had difficulty paying a bill or expense, did you have difficulty paying for utilities?"
+    type: single_choice
+    construct: thinking_back_most_recent_time
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q113
+    prompt: "Thinking back to the most recent time you had difficulty paying a bill or expense, did you have difficulty paying for taxes, fees, or legal bills?"
+    type: single_choice
+    construct: thinking_back_most_recent_time
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q114
+    prompt: "Thinking back to the most recent time you had difficulty paying a bill or expense, did you have difficulty paying for death or funeral costs?"
+    type: single_choice
+    construct: thinking_back_most_recent_time
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q115
+    prompt: "Thinking back to the most recent time you had difficulty paying a bill or expense, did you have difficulty paying for student loan, school, or tuition costs?"
+    type: single_choice
+    construct: thinking_back_most_recent_time
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q116
+    prompt: "Thinking back to the most recent time you had difficulty paying a bill or expense, did you have difficulty paying for childcare?"
+    type: single_choice
+    construct: thinking_back_most_recent_time
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q117
+    prompt: "Thinking back to the most recent time you had difficulty paying a bill or expense, did you have difficulty paying for other regular household expenses?"
+    type: single_choice
+    construct: thinking_back_most_recent_time
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q118
+    prompt: "Thinking back to the most recent time you had difficulty paying a bill or expense, did you have difficulty paying for some other expense?"
+    type: single_choice
+    construct: thinking_back_most_recent_time
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q119
+    prompt: "Thinking back to the most recent time you had difficulty, was there an event or expense that caused this difficulty?"
+    type: single_choice
+    construct: thinking_back_most_recent_time
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q120
+    prompt: "What was that event or expense? (Select all that apply)"
+    type: multi_choice
+    construct: was_that_event_expense_select
+    required: true
+    options:
+      - id: "a"
+        label: "Medical expenses or fees"
+      - id: "b"
+        label: "Loss of income from illness"
+      - id: "c"
+        label: "Loss of job"
+      - id: "d"
+        label: "Other loss of income"
+      - id: "e"
+        label: "Home repair"
+      - id: "f"
+        label: "Auto repair"
+      - id: "g"
+        label: "Taxes or fees"
+      - id: "h"
+        label: "Legal bills"
+      - id: "i"
+        label: "Death or funeral costs"
+      - id: "j"
+        label: "Helping children, parents, or other family members"
+      - id: "k"
+        label: "Student loan, school, or tuition costs"
+      - id: "l"
+        label: "Moving costs"
+      - id: "m"
+        label: "Fraud or theft"
+      - id: "n"
+        label: "Gambling losses"
+      - id: "o"
+        label: "Other"
+  - id: q121
+    prompt: "Which of the following did you do when you had difficulty paying the most recent bill or expense? (Select all that apply)"
+    type: multi_choice
+    construct: following_did_when_had_difficulty
+    required: true
+    options:
+      - id: "a"
+        label: "Did not pay for all of this expense"
+      - id: "b"
+        label: "Negotiated a lower or delayed payment for this expense"
+      - id: "c"
+        label: "Used non-retirement savings or investments"
+      - id: "d"
+        label: "Used retirement savings"
+      - id: "e"
+        label: "Sold or pawned something"
+      - id: "f"
+        label: "Cut back on other expenses"
+      - id: "g"
+        label: "Paid another bill late or skipped a payment"
+      - id: "h"
+        label: "Increased income, for example, by working overtime or taking an extra job"
+      - id: "i"
+        label: "Donated plasma or blood for money"
+      - id: "j"
+        label: "Used a credit card and paid it off over time"
+      - id: "k"
+        label: "Borrowed money from friends or family"
+      - id: "l"
+        label: "Took out or used a home equity line of credit"
+      - id: "m"
+        label: "Took out a loan from a bank, credit union, or other financial institution"
+      - id: "n"
+        label: "Took out a cash advance from your employer"
+      - id: "o"
+        label: "Took out a payday or auto title loan"
+      - id: "p"
+        label: "Other"
+  - id: q122
+    prompt: "Thinking back to the most recent time you had difficulty, did you miss a payment for any of the following? (Select all that apply)"
+    type: multi_choice
+    construct: thinking_back_most_recent_time
+    required: true
+    options:
+      - id: "a"
+        label: "Mortgage"
+      - id: "b"
+        label: "Credit card bill"
+      - id: "c"
+        label: "Student loan"
+      - id: "d"
+        label: "Auto loan"
+      - id: "e"
+        label: "Payday, auto title, or pawn loan"
+      - id: "f"
+        label: "Personal loan from a bank or other financial services provider"
+      - id: "g"
+        label: "Loan from a family member, friend, or acquaintance"
+      - id: "h"
+        label: "Buy-now-pay-later payments"
+      - id: "i"
+        label: "Cash advance from your employer"
+      - id: "j"
+        label: "Other"
+  - id: q123
+    prompt: "How often did you have trouble in the last 12 months?"
+    type: single_choice
+    construct: often_did_have_trouble_last
+    required: true
+    options:
+      - id: "a"
+        label: "Only once in the last 12 months"
+      - id: "b"
+        label: "2 times"
+      - id: "c"
+        label: "3 or 4 times"
+      - id: "d"
+        label: "5 to 12 times"
+      - id: "e"
+        label: "More than 12 times"
+  - id: q124
+    prompt: "Getting enough food can also be a problem for some people. In the last 7 days, which of these statements best describes the food eaten in your household?"
+    type: single_choice
+    construct: getting_enough_food_can_also
+    required: true
+    options:
+      - id: "a"
+        label: "Enough of the kinds of food (I/we) wanted to eat"
+      - id: "b"
+        label: "Enough, but not always the kinds of food (I/we) wanted to eat"
+      - id: "c"
+        label: "Sometimes not enough to eat"
+      - id: "d"
+        label: "Often not enough to eat"
+  - id: q125
+    prompt: "Do you expect to have difficulty paying for a bill or expense in the next 12 months?"
+    type: single_choice
+    construct: expect_have_difficulty_paying_bill
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q126
+    prompt: "Suppose you won a prize and could decide when you would get the amount. Would you rather get:"
+    type: single_choice
+    construct: suppose_won_prize_could_decide
+    required: true
+    options:
+      - id: "a"
+        label: "$1000 in one month"
+      - id: "b"
+        label: "$1050 in six months"
+  - id: q127
+    prompt: "Suppose you won a prize and could decide when you would get the amount. Would you rather get:"
+    type: single_choice
+    construct: suppose_won_prize_could_decide
+    required: true
+    options:
+      - id: "a"
+        label: "$1000 in one month"
+      - id: "b"
+        label: "$1100 in six months"
+  - id: q128
+    prompt: "Suppose you won a prize and could decide when you would get the amount. Would you rather get:"
+    type: single_choice
+    construct: suppose_won_prize_could_decide
+    required: true
+    options:
+      - id: "a"
+        label: "$1000 in one month"
+      - id: "b"
+        label: "$1150 in six months"
+  - id: q129
+    prompt: "Do you have health insurance (through an employer, purchased independently, or from a government program like Medicare or Medicaid)?"
+    type: single_choice
+    construct: have_health_insurance_through_employer
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q130
+    prompt: "Does everyone else in your household have health insurance?"
+    type: single_choice
+    construct: does_everyone_else_household_have
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q131
+    prompt: "Do you or your household have any medical or dental bills that are past due or that you are unable to pay?"
+    type: single_choice
+    construct: household_have_any_medical_dental
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q132
+    prompt: "Do you or your household have any medical or dental bills that you are paying off over time directly to the provider?"
+    type: single_choice
+    construct: household_have_any_medical_dental
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q133
+    prompt: "Do you or your household owe money because you took out a loan or used a credit card to pay medical or dental bills?"
+    type: single_choice
+    construct: household_owe_money_because_took
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q134
+    prompt: "Do you have a credit card that only lets you pay for medical or dental expenses with it? Please do not include debit cards for prepaid accounts like a Health Savings Account (HSA) or Flexible Spending Account (FSA)."
+    type: single_choice
+    construct: have_credit_card_that_only
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q135
+    prompt: "In the past year, have you been contacted by someone other than your medical or dental provider to collect a past-due medical or dental bill?"
+    type: single_choice
+    construct: past_year_have_been_contacted
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q136
+    prompt: "In the past year, how many different bills has someone other than your medical or dental provider tried to collect from you?"
+    type: single_choice
+    construct: past_year_many_different_bills
+    required: true
+    options:
+      - id: "a"
+        label: "1 bill"
+      - id: "b"
+        label: "2-4 bills"
+      - id: "c"
+        label: "5 or more bills"
+  - id: q137
+    prompt: "In the past year, how often has someone other than your medical or dental provider tried to collect a past-due medical or dental bill from you?"
+    type: single_choice
+    construct: past_year_often_has_someone
+    required: true
+    options:
+      - id: "a"
+        label: "More than once per week"
+      - id: "b"
+        label: "Weekly"
+      - id: "c"
+        label: "A few times per month"
+      - id: "d"
+        label: "Monthly"
+      - id: "e"
+        label: "Once every few months"
+      - id: "f"
+        label: "Only once"
+  - id: q138
+    prompt: "In the past month, about how much in past-due medical or dental bills has someone other than your medical or dental provider tried to collect from you? (Free-text: answer with a dollar amount as a string, e.g. \"500\")"
+    type: free_text
+    construct: past_month_much_past_due
+    required: true
+  - id: q139
+    prompt: "The most recent time you were contacted, did you dispute the bill?"
+    type: single_choice
+    construct: most_recent_time_were_contacted
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q140
+    prompt: "Do you have an auto loan?"
+    type: single_choice
+    construct: have_auto_loan
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q141
+    prompt: "Did you get the auto loan through the dealer or by going to a lender yourself?"
+    type: single_choice
+    construct: did_get_auto_loan_through
+    required: true
+    options:
+      - id: "a"
+        label: "Through the dealer"
+      - id: "b"
+        label: "By going to a lender myself"
+      - id: "c"
+        label: "Don't know"
+  - id: q142
+    prompt: "Have you taken out a pawn shop loan in the past 12 months?"
+    type: single_choice
+    construct: have_taken_out_pawn_shop
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q143
+    prompt: "Have you taken out an auto title loan in the past 12 months? An auto title loan uses the car's value to borrow money for a short period of time."
+    type: single_choice
+    construct: have_taken_out_auto_title
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q144
+    prompt: "What sources of information do you use to make decisions about borrowing, credit, savings, or investments? (Select all that apply)"
+    type: multi_choice
+    construct: sources_information_use_make_decisions
+    required: true
+    options:
+      - id: "a"
+        label: "Family or friends"
+      - id: "b"
+        label: "Financial planner, advisor, or broker"
+      - id: "c"
+        label: "Internet, web service, or application"
+      - id: "d"
+        label: "Banker, lawyer, or accountant"
+      - id: "e"
+        label: "Books, magazines, newspapers, or mail"
+      - id: "f"
+        label: "Podcasts, radio, or television"
+      - id: "g"
+        label: "Conferences, workshops, or other events"
+      - id: "h"
+        label: "Social media (TikTok, YouTube, Reddit, etc.)"
+  - id: q145
+    prompt: "Have you applied for any type of credit or loan in the past year?"
+    type: single_choice
+    construct: have_applied_any_type_credit
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q146
+    prompt: "In the past year, were you turned down for a loan or not given as much credit as you applied for?"
+    type: single_choice
+    construct: past_year_were_turned_down
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q147
+    prompt: "Did you then apply somewhere else?"
+    type: single_choice
+    construct: did_then_apply_somewhere_else
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q148
+    prompt: "In the past year, did you think of applying for credit or a loan but changed your mind because you thought you might be turned down?"
+    type: single_choice
+    construct: past_year_did_think_applying
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q149
+    prompt: "Have you used earned wage access in the past 12 months? Earned wage access allows workers access to a portion of their paycheck before payday. It is also called on-demand pay, instant pay, or a paycheck advance."
+    type: single_choice
+    construct: have_used_earned_wage_access
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes, with a service or app connected to my employer"
+      - id: "c"
+        label: "Yes, with an app not connected to my employer"
+  - id: q150
+    prompt: "Did you pay a fee or tip to access the money?"
+    type: single_choice
+    construct: did_pay_fee_tip_access
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q151
+    prompt: "Did you pay the fee or tip so that you could access the money quickly?"
+    type: single_choice
+    construct: did_pay_fee_tip_so
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q152
+    prompt: "Have you taken out a payday loan in the past 12 months or continued to owe money on a previous payday loan? A payday loan is a loan that you must repay, make a payment on, or rollover on your next payday."
+    type: single_choice
+    construct: have_taken_out_payday_loan
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q153
+    prompt: "Have you rolled over a payday loan in the last 12 months?"
+    type: single_choice
+    construct: have_rolled_over_payday_loan
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q154
+    prompt: "In the past year, how many times have you purchased something using a \"buy now, pay later\" option, in which you did not pay for the full price at the time of purchase, but rather paid in four or fewer interest-free installments? Some retailers offer these payment plans through companies such as Affirm, Afterpay, and Klarna."
+    type: single_choice
+    construct: past_year_many_times_have
+    required: true
+    options:
+      - id: "a"
+        label: "Never in the past year"
+      - id: "b"
+        label: "1-2 times"
+      - id: "c"
+        label: "3-6 times"
+      - id: "d"
+        label: "More than 6 times"
+  - id: q155
+    prompt: "In the past year, did a credit card company unexpectedly cancel your credit card or reduce your credit card limit?"
+    type: single_choice
+    construct: past_year_did_credit_card
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q156
+    prompt: "Do you currently have a credit card?"
+    type: single_choice
+    construct: currently_have_credit_card
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q157
+    prompt: "In the past 12 months, have you incurred a late fee on any of your credit cards?"
+    type: single_choice
+    construct: past_12_months_have_incurred
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q158
+    prompt: "Did you have an unpaid balance on any of your cards after making your last payment?"
+    type: single_choice
+    construct: did_have_unpaid_balance_any
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q159
+    prompt: "Do you think you will pay the full balance in the next year?"
+    type: single_choice
+    construct: think_will_pay_full_balance
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q160
+    prompt: "Do you have autopay set up for the credit card you use most regularly? Autopay has an amount automatically deducted from your bank account to pay your credit card bill."
+    type: single_choice
+    construct: have_autopay_set_up_credit
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q161
+    prompt: "In the past 12 months, how many overdraft fees have you or others in your household been charged? An overdraft fee occurs when your account balance is less than a payment, but your bank covers the transaction and charges you a fee."
+    type: single_choice
+    construct: past_12_months_many_overdraft
+    required: true
+    options:
+      - id: "a"
+        label: "None in the past 12 months"
+      - id: "b"
+        label: "1-3 fees"
+      - id: "c"
+        label: "4-10 fees"
+      - id: "d"
+        label: "More than 10 fees"
+  - id: q162
+    prompt: "In the past 12 months, how many insufficient funds fees have you or others in your household been charged? An insufficient funds fee occurs when your account balance is less than a payment, and your bank denies the payment and charges you a fee."
+    type: single_choice
+    construct: past_12_months_many_insufficient
+    required: true
+    options:
+      - id: "a"
+        label: "None in the past 12 months"
+      - id: "b"
+        label: "1-3 fees"
+      - id: "c"
+        label: "More than 3 fees"
+  - id: q163
+    prompt: "What is your current marital status?"
+    type: single_choice
+    construct: current_marital_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Never married, living with a partner"
+      - id: "c"
+        label: "Never married, not living with a partner"
+      - id: "d"
+        label: "Separated"
+      - id: "e"
+        label: "Divorced"
+      - id: "f"
+        label: "Widowed"
+  - id: q164
+    prompt: "Besides you and your spouse/partner, how many other adults over 18 live in your household?"
+    type: single_choice
+    construct: besides_spouse_partner_many_other
+    required: true
+    options:
+      - id: "a"
+        label: "No others"
+      - id: "b"
+        label: "1 other"
+      - id: "c"
+        label: "2 or more"
+  - id: q165
+    prompt: "How many children live in your household?"
+    type: single_choice
+    construct: many_children_live_household
+    required: true
+    options:
+      - id: "a"
+        label: "No children"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2 or more"
+  - id: q166
+    prompt: "What is your race and/or ethnicity? Note, you may report more than one group. (Select all that apply)"
+    type: multi_choice
+    construct: race_ethnicity_note_may_report
+    required: true
+    options:
+      - id: "a"
+        label: "American Indian or Alaska Native"
+      - id: "b"
+        label: "Asian"
+      - id: "c"
+        label: "Hispanic or Latino"
+      - id: "d"
+        label: "Black or African American"
+      - id: "e"
+        label: "Middle Eastern or North African"
+      - id: "f"
+        label: "Native Hawaiian or Pacific Islander"
+      - id: "g"
+        label: "White"
+  - id: q167
+    prompt: "Were you born in the United States?"
+    type: single_choice
+    construct: were_born_united_states
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q168
+    prompt: "What is your highest level of education?"
+    type: single_choice
+    construct: highest_level_education
+    required: true
+    options:
+      - id: "a"
+        label: "Less than a high school degree"
+      - id: "b"
+        label: "High school degree"
+      - id: "c"
+        label: "Technical or vocational degree"
+      - id: "d"
+        label: "Some college, but no degree"
+      - id: "e"
+        label: "Two-year college degree"
+      - id: "f"
+        label: "Four-year college degree"
+      - id: "g"
+        label: "Postgraduate degree (for example, MA, PhD, JD, MBA, MD)"
+  - id: q169
+    prompt: "Are you currently attending school?"
+    type: single_choice
+    construct: currently_attending_school
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, full time"
+      - id: "b"
+        label: "Yes, part time"
+      - id: "c"
+        label: "No"
+  - id: q170
+    prompt: "Did either of your parents complete a four-year college degree?"
+    type: single_choice
+    construct: did_either_parents_complete_four
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q171
+    prompt: "What is your current military status?"
+    type: single_choice
+    construct: current_military_status
+    required: true
+    options:
+      - id: "a"
+        label: "No military service"
+      - id: "b"
+        label: "On active duty"
+      - id: "c"
+        label: "Reserve or National Guard"
+      - id: "d"
+        label: "Veteran or retired"
+  - id: q172
+    prompt: "What is your gender? (Select all that apply)"
+    type: multi_choice
+    construct: gender_select_all_that_apply
+    required: true
+    options:
+      - id: "a"
+        label: "Male"
+      - id: "b"
+        label: "Female"
+      - id: "c"
+        label: "Non-binary"
+      - id: "d"
+        label: "Prefer not to answer"
+  - id: q173
+    prompt: "Do you consider yourself to be?"
+    type: single_choice
+    construct: consider_yourself_be
+    required: true
+    options:
+      - id: "a"
+        label: "Straight or heterosexual"
+      - id: "b"
+        label: "Gay, lesbian, or homosexual"
+      - id: "c"
+        label: "Bisexual"
+      - id: "d"
+        label: "Other or don't know"
+      - id: "e"
+        label: "Prefer not to answer"
+  - id: q174
+    prompt: "Have you placed a bet on a sporting event or outcome in the last year?"
+    type: single_choice
+    construct: have_placed_bet_sporting_event
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q175
+    prompt: "Did you use a mobile phone to place a bet?"
+    type: single_choice
+    construct: did_use_mobile_phone_place
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q176
+    prompt: "How frequently did you take part in sports betting in the past year?"
+    type: single_choice
+    construct: frequently_did_take_part_sports
+    required: true
+    options:
+      - id: "a"
+        label: "Once"
+      - id: "b"
+        label: "A few times"
+      - id: "c"
+        label: "Monthly"
+      - id: "d"
+        label: "Weekly"
+      - id: "e"
+        label: "A few times a week"
+      - id: "f"
+        label: "Daily"
+  - id: q177
+    prompt: "In the past year, how much money did you wager for a typical bet?"
+    type: single_choice
+    construct: past_year_much_money_did
+    required: true
+    options:
+      - id: "a"
+        label: "$20 or less"
+      - id: "b"
+        label: "Between $21 and $50"
+      - id: "c"
+        label: "Between $51 and $100"
+      - id: "d"
+        label: "Between $101 and $250"
+      - id: "e"
+        label: "More than $250"
+  - id: q178
+    prompt: "In the past year, what was your largest loss in a single day?"
+    type: single_choice
+    construct: past_year_was_largest_loss
+    required: true
+    options:
+      - id: "a"
+        label: "$50 or less"
+      - id: "b"
+        label: "Between $51 and $100"
+      - id: "c"
+        label: "Between $101 and $250"
+      - id: "d"
+        label: "Between $251 and $500"
+      - id: "e"
+        label: "More than $500"
+  - id: q179
+    prompt: "Did you gamble at a casino in the last year?"
+    type: single_choice
+    construct: did_gamble_casino_last_year
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"

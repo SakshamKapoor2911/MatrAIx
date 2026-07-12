@@ -1,0 +1,660 @@
+schemaVersion: "1.0"
+id: tus_cps_v1
+title: "CPS Tobacco Use Supplement Survey"
+description: "The Tobacco Use Supplement to the Current Population Survey (TUS-CPS) is sponsored by the National Cancer Institute (NCI) and fielded by the U.S. Census Bureau. It is a key source "
+questions:
+  - id: q0
+    prompt: "Have you smoked at least 100 cigarettes in your entire life? (100 cigarettes is approximately 5 packs.)"
+    type: single_choice
+    construct: have_smoked_least_100_cigarettes
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q1
+    prompt: "How old were you when you first started smoking cigarettes FAIRLY REGULARLY (that is, on a routine basis, as opposed to when you first tried a cigarette)? Enter an age, or enter 0 if you never smoked regularly."
+    type: free_text
+    construct: old_were_when_first_started
+    required: true
+  - id: q2
+    prompt: "Do you now smoke cigarettes every day, some days, or not at all?"
+    type: single_choice
+    construct: now_smoke_cigarettes_every_day
+    required: true
+    options:
+      - id: "a"
+        label: "Every day"
+      - id: "b"
+        label: "Some days"
+      - id: "c"
+        label: "Not at all"
+  - id: q3
+    prompt: "On average, about how many cigarettes do you now smoke each day? (One pack usually equals 20 cigarettes.) Please enter a number."
+    type: free_text
+    construct: average_many_cigarettes_now_smoke
+    required: true
+  - id: q4
+    prompt: "Do you usually smoke menthol or non-menthol cigarettes?"
+    type: single_choice
+    construct: usually_smoke_menthol_non_menthol
+    required: true
+    options:
+      - id: "a"
+        label: "Menthol"
+      - id: "b"
+        label: "Non-menthol"
+      - id: "c"
+        label: "No usual type"
+  - id: q5
+    prompt: "How soon after you wake up do you typically smoke your first cigarette of the day? Please give your best answer in minutes or hours."
+    type: free_text
+    construct: soon_after_wake_up_typically
+    required: true
+  - id: q6
+    prompt: "Would you say you smoke your first cigarette of the day within the first 30 minutes?"
+    type: single_choice
+    construct: would_say_smoke_first_cigarette
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Varies"
+  - id: q7
+    prompt: "Do you usually buy your own cigarettes?"
+    type: single_choice
+    construct: usually_buy_own_cigarettes
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q8
+    prompt: "Do you usually buy your cigarettes by the pack or by the carton? (A carton has 10 packs.)"
+    type: single_choice
+    construct: usually_buy_cigarettes_by_pack
+    required: true
+    options:
+      - id: "a"
+        label: "Pack"
+      - id: "b"
+        label: "Carton"
+      - id: "c"
+        label: "Buy both packs and cartons"
+  - id: q9
+    prompt: "In the LAST 2 months, have you bought any single or individual cigarettes?"
+    type: single_choice
+    construct: last_2_months_have_bought
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q10
+    prompt: "In the LAST 2 months, have you bought loose tobacco to roll your own cigarettes?"
+    type: single_choice
+    construct: last_2_months_have_bought
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q11
+    prompt: "For how long have you smoked EVERY DAY?"
+    type: single_choice
+    construct: long_have_smoked_every_day
+    required: true
+    options:
+      - id: "a"
+        label: "All or nearly all the years you have smoked"
+      - id: "b"
+        label: "Most of the years you have smoked"
+      - id: "c"
+        label: "Half of the years you have smoked"
+      - id: "d"
+        label: "Less than half the years you have smoked"
+      - id: "e"
+        label: "Less than one year"
+  - id: q12
+    prompt: "Have you EVER smoked MENTHOL cigarettes for 6 months or more?"
+    type: single_choice
+    construct: have_ever_smoked_menthol_cigarettes
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q13
+    prompt: "Around this time 12 MONTHS AGO, were you smoking cigarettes every day, some days, or not at all?"
+    type: single_choice
+    construct: around_this_time_12_months
+    required: true
+    options:
+      - id: "a"
+        label: "Every day"
+      - id: "b"
+        label: "Some days"
+      - id: "c"
+        label: "Not at all"
+  - id: q14
+    prompt: "During the PAST 12 MONTHS, have you TRIED to QUIT smoking COMPLETELY?"
+    type: single_choice
+    construct: during_past_12_months_have
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q15
+    prompt: "Have you EVER TRIED to QUIT smoking COMPLETELY?"
+    type: single_choice
+    construct: have_ever_tried_quit_smoking
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q16
+    prompt: "During the PAST 12 MONTHS, have you stopped smoking for ONE DAY or longer BECAUSE YOU WERE TRYING TO QUIT SMOKING?"
+    type: single_choice
+    construct: during_past_12_months_have
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q17
+    prompt: "How many TIMES during the past 12 months have you stopped smoking for one day or longer because you were trying to quit smoking?"
+    type: single_choice
+    construct: many_times_during_past_12
+    required: true
+    options:
+      - id: "a"
+        label: "Once (1 time)"
+      - id: "b"
+        label: "2-3 times"
+      - id: "c"
+        label: "4 or more times"
+  - id: q18
+    prompt: "During the PAST 12 MONTHS, have you made a serious attempt to stop smoking because you were TRYING to quit — even if you stopped for less than a day?"
+    type: single_choice
+    construct: during_past_12_months_have
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q19
+    prompt: "Thinking back to the last time you tried to QUIT smoking in the past 12 months, did you use a NICOTINE patch, gum, lozenge, nasal spray, or inhaler?"
+    type: single_choice
+    construct: thinking_back_last_time_tried
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q20
+    prompt: "Thinking back to the last time you tried to QUIT smoking in the past 12 months, did you use a prescription pill, such as Chantix, Varenicline, Zyban, Bupropion, or Wellbutrin?"
+    type: single_choice
+    construct: thinking_back_last_time_tried
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q21
+    prompt: "The last time you tried to QUIT smoking in the past 12 months, did you use a telephone help line or quit line?"
+    type: single_choice
+    construct: last_time_tried_quit_smoking
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q22
+    prompt: "The last time you tried to QUIT smoking in the past 12 months, did you use one-on-one IN-PERSON counseling by a health professional?"
+    type: single_choice
+    construct: last_time_tried_quit_smoking
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q23
+    prompt: "The last time you tried to QUIT smoking in the past 12 months, did you use a stop smoking clinic, class, or support group?"
+    type: single_choice
+    construct: last_time_tried_quit_smoking
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q24
+    prompt: "The last time you tried to QUIT smoking in the past 12 months, did you use an internet or web-based program or tool, including smartphone apps and text messaging programs?"
+    type: single_choice
+    construct: last_time_tried_quit_smoking
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q25
+    prompt: "The last time you tried to QUIT smoking in the past 12 months, did you try to quit by SWITCHING to electronic or e-cigarettes?"
+    type: single_choice
+    construct: last_time_tried_quit_smoking
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q26
+    prompt: "The last time you tried to QUIT smoking in the past 12 months, did you try to quit by SWITCHING to smokeless tobacco such as chewing tobacco, snuff, or snus?"
+    type: single_choice
+    construct: last_time_tried_quit_smoking
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q27
+    prompt: "The last time you tried to QUIT smoking in the past 12 months, did you try to quit by SWITCHING to nicotine pouches?"
+    type: single_choice
+    construct: last_time_tried_quit_smoking
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q28
+    prompt: "The last time you tried to QUIT smoking in the past 12 months, did you try to quit by SWITCHING to regular cigars, cigarillos, little filtered cigars, or any pipes filled with tobacco?"
+    type: single_choice
+    construct: last_time_tried_quit_smoking
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q29
+    prompt: "In the PAST 12 MONTHS, have you SEEN a medical doctor (for any medical reason)?"
+    type: single_choice
+    construct: past_12_months_have_seen
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q30
+    prompt: "During the PAST 12 MONTHS, did any medical doctor ADVISE you to stop smoking?"
+    type: single_choice
+    construct: during_past_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q31
+    prompt: "Are you seriously considering quitting smoking within the next 6 months?"
+    type: single_choice
+    construct: seriously_considering_quitting_smoking_w
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q32
+    prompt: "Are you planning to quit within the next 30 days?"
+    type: single_choice
+    construct: planning_quit_within_next_30
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q33
+    prompt: "On a scale from 1 to 10, where 1 is NOT AT ALL interested and 10 is EXTREMELY interested, how interested are you in quitting smoking? Please enter a number from 1 to 10."
+    type: free_text
+    construct: scale_from_1_10_where
+    required: true
+  - id: q34
+    prompt: "If you did try to quit smoking altogether in the next 6 months, how LIKELY do you think you would be to succeed?"
+    type: single_choice
+    construct: if_did_try_quit_smoking
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little likely"
+      - id: "c"
+        label: "Somewhat likely"
+      - id: "d"
+        label: "Very likely"
+  - id: q35
+    prompt: "About how long has it been since you COMPLETELY quit smoking cigarettes? Please give a number and a unit (days, weeks, months, or years)."
+    type: free_text
+    construct: long_has_it_been_since
+    required: true
+  - id: q36
+    prompt: "Have you EVER used a regular cigar or cigarillo, or a little filtered cigar, EVEN ONE TIME?"
+    type: single_choice
+    construct: have_ever_used_regular_cigar
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q37
+    prompt: "Have you EVER used a regular pipe filled with tobacco, EVEN ONE TIME?"
+    type: single_choice
+    construct: have_ever_used_regular_pipe
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q38
+    prompt: "Have you EVER used a water pipe or hookah pipe filled with tobacco, EVEN ONE TIME?"
+    type: single_choice
+    construct: have_ever_used_water_pipe
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q39
+    prompt: "Have you EVER used e-cigarettes (also known as vape-pens, e-hookahs, vapes, or mods), EVEN ONE TIME?"
+    type: single_choice
+    construct: have_ever_used_e_cigarettes
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q40
+    prompt: "Have you EVER used smokeless tobacco (such as moist snuff, dip, spit, chew tobacco, or snus), EVEN ONE TIME?"
+    type: single_choice
+    construct: have_ever_used_smokeless_tobacco
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q41
+    prompt: "Have you EVER used a nicotine pouch (such as Zyn, Rogue, ON!, or Velo), EVEN ONE TIME?"
+    type: single_choice
+    construct: have_ever_used_nicotine_pouch
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Never heard of it"
+  - id: q42
+    prompt: "Have you EVER tried a heated tobacco product (a \"heat-not-burn\" product such as iQOS, glo, or Eclipse), EVEN ONE TIME?"
+    type: single_choice
+    construct: have_ever_tried_heated_tobacco
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q43
+    prompt: "Do you use e-cigarettes to help you quit smoking cigarettes?"
+    type: single_choice
+    construct: use_e_cigarettes_help_quit
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q44
+    prompt: "Which of the following best describes the type of e-cigarette you currently use? If you use more than one type, think of the one you use most often."
+    type: single_choice
+    construct: following_best_describes_type_e
+    required: true
+    options:
+      - id: "a"
+        label: "A disposable e-cigarette"
+      - id: "b"
+        label: "An e-cigarette that uses replaceable prefilled or refillable pods or cartridges"
+      - id: "c"
+        label: "An e-cigarette with a tank that you refill with liquids"
+      - id: "d"
+        label: "A mod system"
+      - id: "e"
+        label: "You don't know the type"
+  - id: q45
+    prompt: "Do you mainly work indoors or outdoors?"
+    type: single_choice
+    construct: mainly_work_indoors_outdoors
+    required: true
+    options:
+      - id: "a"
+        label: "Indoors"
+      - id: "b"
+        label: "Outdoors"
+      - id: "c"
+        label: "About equally indoors and outdoors"
+      - id: "d"
+        label: "Works mainly indoors in a non-traditional environment such as a warehouse or other similar large semi-structured area"
+      - id: "e"
+        label: "Mainly travel around to different clients or sites, or mainly in a motor vehicle, bus, train, boat, airplane, underground, in a mine, etc."
+      - id: "f"
+        label: "Varies"
+  - id: q46
+    prompt: "Do you mainly work in an office building, in your own home, in someone else's home, or in another indoor place?"
+    type: single_choice
+    construct: mainly_work_office_building_own
+    required: true
+    options:
+      - id: "a"
+        label: "Office building"
+      - id: "b"
+        label: "Own home"
+      - id: "c"
+        label: "Someone else's home"
+      - id: "d"
+        label: "Another indoor place"
+  - id: q47
+    prompt: "Is smoking restricted in ANY WAY at your place of work? (By restricted, we mean any limitation on smoking, regardless of who is responsible for it.)"
+    type: single_choice
+    construct: smoking_restricted_any_way_place
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q48
+    prompt: "Which of these best describes the smoking policy at your place of work for INDOOR PUBLIC OR COMMON AREAS, such as lobbies, restrooms, and lunchrooms?"
+    type: single_choice
+    construct: these_best_describes_smoking_policy
+    required: true
+    options:
+      - id: "a"
+        label: "Not allowed in ANY public areas"
+      - id: "b"
+        label: "Allowed in SOME public areas"
+      - id: "c"
+        label: "Allowed in ALL public areas"
+      - id: "d"
+        label: "Not applicable"
+  - id: q49
+    prompt: "Which of these best describes the smoking policy at your place of work for INDOOR WORK AREAS?"
+    type: single_choice
+    construct: these_best_describes_smoking_policy
+    required: true
+    options:
+      - id: "a"
+        label: "Not allowed in ANY work areas"
+      - id: "b"
+        label: "Allowed in SOME work areas"
+      - id: "c"
+        label: "Allowed in ALL work areas"
+      - id: "d"
+        label: "Not applicable"
+  - id: q50
+    prompt: "During the PAST TWO WEEKS, has anyone smoked in the area in which you work?"
+    type: single_choice
+    construct: during_past_two_weeks_has
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q51
+    prompt: "Which of these best describes the vaping or e-cigarette policy at your place of work for INDOOR PUBLIC OR COMMON AREAS AND INDOOR WORK AREAS?"
+    type: single_choice
+    construct: these_best_describes_vaping_e
+    required: true
+    options:
+      - id: "a"
+        label: "Not allowed in ANY public and ANY work areas"
+      - id: "b"
+        label: "Allowed in SOME public or SOME work areas"
+      - id: "c"
+        label: "Allowed in ALL public and ALL work areas"
+      - id: "d"
+        label: "Not applicable"
+  - id: q52
+    prompt: "During the PAST TWO WEEKS, has anyone vaped or used e-cigarettes in the area in which you work?"
+    type: single_choice
+    construct: during_past_two_weeks_has
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q53
+    prompt: "Which statement best describes the rules about smoking INSIDE YOUR HOME?"
+    type: single_choice
+    construct: statement_best_describes_rules_smoking
+    required: true
+    options:
+      - id: "a"
+        label: "No one is allowed to smoke anywhere inside your home"
+      - id: "b"
+        label: "Smoking is allowed in some places or at some times inside your home"
+      - id: "c"
+        label: "Smoking is permitted anywhere inside your home"
+  - id: q54
+    prompt: "Which statement best describes the rules about vaping or using e-cigarettes INSIDE YOUR HOME?"
+    type: single_choice
+    construct: statement_best_describes_rules_vaping
+    required: true
+    options:
+      - id: "a"
+        label: "No one is allowed to vape anywhere inside your home"
+      - id: "b"
+        label: "Vaping is allowed in some places or at some times inside your home"
+      - id: "c"
+        label: "Vaping is permitted anywhere inside your home"
+  - id: q55
+    prompt: "In buildings with MULTIPLE apartments or living areas, do you THINK that smoking should be..."
+    type: single_choice
+    construct: buildings_multiple_apartments_living_are
+    required: true
+    options:
+      - id: "a"
+        label: "Allowed inside ALL apartments or living areas"
+      - id: "b"
+        label: "Allowed inside SOME apartments"
+      - id: "c"
+        label: "Not allowed at ALL inside apartments"
+  - id: q56
+    prompt: "In indoor work areas, do you THINK that smoking SHOULD be allowed in ALL areas, allowed in SOME areas, or NOT allowed at ALL?"
+    type: single_choice
+    construct: indoor_work_areas_think_that
+    required: true
+    options:
+      - id: "a"
+        label: "Allowed in ALL areas"
+      - id: "b"
+        label: "Allowed in SOME areas"
+      - id: "c"
+        label: "Not allowed at ALL"
+  - id: q57
+    prompt: "Inside bars, cocktail lounges, and clubs, do you THINK that smoking SHOULD be allowed in ALL areas, allowed in SOME areas, or NOT allowed at ALL?"
+    type: single_choice
+    construct: inside_bars_cocktail_lounges_clubs
+    required: true
+    options:
+      - id: "a"
+        label: "Allowed in ALL areas"
+      - id: "b"
+        label: "Allowed in SOME areas"
+      - id: "c"
+        label: "Not allowed at ALL"
+  - id: q58
+    prompt: "Inside casinos, do you THINK that smoking SHOULD be allowed in ALL areas, allowed in SOME areas, or NOT allowed at ALL?"
+    type: single_choice
+    construct: inside_casinos_think_that_smoking
+    required: true
+    options:
+      - id: "a"
+        label: "Allowed in ALL areas"
+      - id: "b"
+        label: "Allowed in SOME areas"
+      - id: "c"
+        label: "Not allowed at ALL"
+  - id: q59
+    prompt: "Inside a car, when there are other people present, do you THINK that smoking SHOULD..."
+    type: single_choice
+    construct: inside_car_when_there_other
+    required: true
+    options:
+      - id: "a"
+        label: "Always be allowed"
+      - id: "b"
+        label: "Be allowed under some conditions"
+      - id: "c"
+        label: "Never be allowed"
+  - id: q60
+    prompt: "If children are present inside the car, do you think that smoking SHOULD..."
+    type: single_choice
+    construct: if_children_present_inside_car
+    required: true
+    options:
+      - id: "a"
+        label: "Always be allowed"
+      - id: "b"
+        label: "Be allowed under some conditions"
+      - id: "c"
+        label: "Never be allowed"

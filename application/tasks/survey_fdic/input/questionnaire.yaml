@@ -1,0 +1,755 @@
+schemaVersion: "1.0"
+id: fdic_v1
+title: "FDIC National Survey of Unbanked and Underbanked Households Survey"
+description: "The FDIC National Survey of Unbanked and Underbanked Households is a biennial survey (fielded as a supplement to the Census Bureau's Current Population Survey) that measures U.S. h"
+questions:
+  - id: q0
+    prompt: "Which of the following best describes how adults in your household handle finances?"
+    type: single_choice
+    construct: following_best_describes_adults_househol
+    required: true
+    options:
+      - id: "a"
+        label: "Share all finances"
+      - id: "b"
+        label: "Share some finances"
+      - id: "c"
+        label: "Share no finances at all"
+      - id: "d"
+        label: "I am the only adult in the household"
+  - id: q1
+    prompt: "How much do you participate in making financial decisions for your household?"
+    type: single_choice
+    construct: much_participate_making_financial_decisi
+    required: true
+    options:
+      - id: "a"
+        label: "A lot"
+      - id: "b"
+        label: "Some"
+      - id: "c"
+        label: "Not at all"
+  - id: q2
+    prompt: "Do you or anyone else in your household have a checking or savings account now at a bank, including credit unions?"
+    type: single_choice
+    construct: anyone_else_household_have_checking
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q3
+    prompt: "In the past 12 months, that is since June 2022, was there any time when no one in your household had an account?"
+    type: single_choice
+    construct: past_12_months_that_since
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q4
+    prompt: "In the past 12 months, did you or anyone in your household access a bank account by visiting a bank teller?"
+    type: single_choice
+    construct: past_12_months_did_anyone
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q5
+    prompt: "In the past 12 months, did you or anyone in your household access a bank account by using an ATM or bank kiosk?"
+    type: single_choice
+    construct: past_12_months_did_anyone
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q6
+    prompt: "In the past 12 months, did you or anyone in your household access a bank account by calling the bank?"
+    type: single_choice
+    construct: past_12_months_did_anyone
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q7
+    prompt: "In the past 12 months, did you or anyone in your household access a bank account by using an app, text messaging, or Internet browser on a mobile phone?"
+    type: single_choice
+    construct: past_12_months_did_anyone
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q8
+    prompt: "In the past 12 months, did you or anyone in your household access a bank account by using a computer or tablet?"
+    type: single_choice
+    construct: past_12_months_did_anyone
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q9
+    prompt: "In the past 12 months, did you or anyone in your household access a bank account in any other way?"
+    type: single_choice
+    construct: past_12_months_did_anyone
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q10
+    prompt: "What was the most common way that you or anyone in your household accessed a bank account in the past 12 months?"
+    type: single_choice
+    construct: was_most_common_way_that
+    required: true
+    options:
+      - id: "a"
+        label: "Visiting a bank teller"
+      - id: "b"
+        label: "Using an ATM or bank kiosk"
+      - id: "c"
+        label: "Calling the bank"
+      - id: "d"
+        label: "Using an app, text messaging, or Internet browser on a mobile phone"
+      - id: "e"
+        label: "Using a computer or tablet"
+      - id: "f"
+        label: "Other"
+  - id: q11
+    prompt: "Have you or anyone else in your household ever had a bank account?"
+    type: single_choice
+    construct: have_anyone_else_household_ever
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q12
+    prompt: "In the past 12 months, that is since June 2022, have you or anyone in your household had a bank account?"
+    type: single_choice
+    construct: past_12_months_that_since
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q13
+    prompt: "How interested are you or anyone in your household in having a bank account?"
+    type: single_choice
+    construct: interested_anyone_household_having_bank
+    required: true
+    options:
+      - id: "a"
+        label: "Very interested"
+      - id: "b"
+        label: "Somewhat interested"
+      - id: "c"
+        label: "Not very interested"
+      - id: "d"
+        label: "Not at all interested"
+  - id: q14
+    prompt: "There are different reasons people might not have a checking or savings account. Do you not have an account because bank locations are inconvenient?"
+    type: single_choice
+    construct: there_different_reasons_people_might
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q15
+    prompt: "Do you not have an account because bank account fees are too high?"
+    type: single_choice
+    construct: not_have_account_because_bank
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q16
+    prompt: "Do you not have an account because bank account fees are too unpredictable?"
+    type: single_choice
+    construct: not_have_account_because_bank
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q17
+    prompt: "Do you not have an account because banks do not offer products and services you need?"
+    type: single_choice
+    construct: not_have_account_because_banks
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q18
+    prompt: "Do you not have an account because you don't trust banks?"
+    type: single_choice
+    construct: not_have_account_because_don
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q19
+    prompt: "Do you not have an account because you don't have enough money to meet minimum balance requirements?"
+    type: single_choice
+    construct: not_have_account_because_don
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q20
+    prompt: "Do you not have an account because avoiding a bank gives more privacy?"
+    type: single_choice
+    construct: not_have_account_because_avoiding
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q21
+    prompt: "Do you not have an account because you don't have the personal identification required to open an account?"
+    type: single_choice
+    construct: not_have_account_because_don
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q22
+    prompt: "Do you not have an account because you cannot open an account due to problems with past banking or credit history?"
+    type: single_choice
+    construct: not_have_account_because_cannot
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q23
+    prompt: "Do you not have an account because of some other reason?"
+    type: single_choice
+    construct: not_have_account_because_some
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q24
+    prompt: "What is the main reason why no one in your household has an account?"
+    type: single_choice
+    construct: main_reason_why_no_one
+    required: true
+    options:
+      - id: "a"
+        label: "Bank locations are inconvenient"
+      - id: "b"
+        label: "Bank account fees are too high"
+      - id: "c"
+        label: "Bank account fees are too unpredictable"
+      - id: "d"
+        label: "Banks do not offer products and services you need"
+      - id: "e"
+        label: "Don't trust banks"
+      - id: "f"
+        label: "Don't have enough money to meet minimum balance requirements"
+      - id: "g"
+        label: "Avoiding a bank gives more privacy"
+      - id: "h"
+        label: "Don't have the personal identification required to open an account"
+      - id: "i"
+        label: "Cannot open an account due to problems with past banking or credit history"
+      - id: "j"
+        label: "Some other reason"
+  - id: q25
+    prompt: "Do you or anyone else in your household use any online payment services with an account feature that allows you to receive and store money in the account? Examples are PayPal, Venmo, or Cash App. Do not include Zelle."
+    type: single_choice
+    construct: anyone_else_household_use_any
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q26
+    prompt: "Do you or anyone else in your household use any prepaid cards now? Prepaid cards allow you or others, like relatives, an employer, or a government agency, to load or reload funds that can later be spent, and allow you to withdraw cash from ATMs. Do not include gift cards or debit cards linked to a checking account or online payment service."
+    type: single_choice
+    construct: anyone_else_household_use_any
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q27
+    prompt: "In the past 12 months, did you or others in your household use your accounts with online payment services like PayPal, Venmo, or Cash App to build savings or keep money in a safe place?"
+    type: single_choice
+    construct: past_12_months_did_others
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q28
+    prompt: "In the past 12 months, did you or others in your household use your accounts with online payment services to pay bills like rent, mortgage, utilities, or child care?"
+    type: single_choice
+    construct: past_12_months_did_others
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q29
+    prompt: "In the past 12 months, did you or others in your household use your accounts with online payment services to receive money from work, retirement, or a government agency?"
+    type: single_choice
+    construct: past_12_months_did_others
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q30
+    prompt: "In the past 12 months, did you or others in your household use your accounts with online payment services to send or receive money from family or friends?"
+    type: single_choice
+    construct: past_12_months_did_others
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q31
+    prompt: "In the past 12 months, did you or others in your household use your accounts with online payment services to make purchases in person?"
+    type: single_choice
+    construct: past_12_months_did_others
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q32
+    prompt: "In the past 12 months, did you or others in your household use your accounts with online payment services to make purchases online?"
+    type: single_choice
+    construct: past_12_months_did_others
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q33
+    prompt: "Are there any other ways you used online payment services in the past 12 months?"
+    type: single_choice
+    construct: there_any_other_ways_used
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q34
+    prompt: "Thinking about your household's accounts with online payment services like PayPal, Venmo, or Cash App, are any of those accounts linked to the following? (Select all that apply)"
+    type: multi_choice
+    construct: thinking_household_s_accounts_online
+    required: true
+    options:
+      - id: "a"
+        label: "Credit card"
+      - id: "b"
+        label: "Bank account"
+      - id: "c"
+        label: "Prepaid card"
+      - id: "d"
+        label: "Some other account"
+      - id: "e"
+        label: "Not linked to any accounts"
+  - id: q35
+    prompt: "In the past 12 months, did you or others in your household use your prepaid cards to build savings or keep money in a safe place?"
+    type: single_choice
+    construct: past_12_months_did_others
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q36
+    prompt: "In the past 12 months, did you or others in your household use your prepaid cards to pay bills like rent, mortgage, utilities, or child care?"
+    type: single_choice
+    construct: past_12_months_did_others
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q37
+    prompt: "In the past 12 months, did you or others in your household use your prepaid cards to receive money from work, retirement, or a government agency?"
+    type: single_choice
+    construct: past_12_months_did_others
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q38
+    prompt: "In the past 12 months, did you or others in your household use your prepaid cards to send or receive money from family or friends?"
+    type: single_choice
+    construct: past_12_months_did_others
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q39
+    prompt: "In the past 12 months, did you or others in your household use your prepaid cards to make purchases in person?"
+    type: single_choice
+    construct: past_12_months_did_others
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q40
+    prompt: "In the past 12 months, did you or others in your household use your prepaid cards to make purchases online?"
+    type: single_choice
+    construct: past_12_months_did_others
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q41
+    prompt: "Are there any other ways you used prepaid cards in the past 12 months?"
+    type: single_choice
+    construct: there_any_other_ways_used
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q42
+    prompt: "In the past 12 months, did you or anyone in your household go to some place other than a bank to purchase a money order?"
+    type: single_choice
+    construct: past_12_months_did_anyone
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q43
+    prompt: "What were those money orders used for? (Select all that apply)"
+    type: multi_choice
+    construct: were_those_money_orders_used
+    required: true
+    options:
+      - id: "a"
+        label: "Pay bills like rent, mortgage, utilities, or child care"
+      - id: "b"
+        label: "Send money to family or friends"
+      - id: "c"
+        label: "Make purchases"
+      - id: "d"
+        label: "Some other use"
+  - id: q44
+    prompt: "In the past 12 months, did you or anyone in your household use money transfer services from a company like Western Union, MoneyGram, Walmart Money Center, or Ria Money Transfer? Do not include services from a bank or online services such as PayPal, Venmo, or Cash App."
+    type: single_choice
+    construct: past_12_months_did_anyone
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q45
+    prompt: "What were those money transfer services used for? (Select all that apply)"
+    type: multi_choice
+    construct: were_those_money_transfer_services
+    required: true
+    options:
+      - id: "a"
+        label: "Pay bills like rent, mortgage, utilities, or child care"
+      - id: "b"
+        label: "Send or receive money from family or friends in the U.S."
+      - id: "c"
+        label: "Send or receive money from family or friends outside the U.S."
+      - id: "d"
+        label: "Some other use"
+  - id: q46
+    prompt: "In the past 12 months, did you or anyone in your household go to some place other than a bank to cash a check?"
+    type: single_choice
+    construct: past_12_months_did_anyone
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q47
+    prompt: "Were any of those checks from work, retirement, or a government agency?"
+    type: single_choice
+    construct: were_any_those_checks_from
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q48
+    prompt: "In the past 12 months, did you or anyone in your household take out a payday loan or payday advance from a provider other than a bank?"
+    type: single_choice
+    construct: past_12_months_did_anyone
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q49
+    prompt: "In the past 12 months, did you or anyone in your household pawn an item at a pawn shop? Do not include selling an unwanted item to a pawn shop."
+    type: single_choice
+    construct: past_12_months_did_anyone
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q50
+    prompt: "In the past 12 months, did you or anyone in your household pay a fee to get your tax refund faster than the IRS would provide it? This includes products like refund anticipation loans and refund advances."
+    type: single_choice
+    construct: past_12_months_did_anyone
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q51
+    prompt: "Auto title loans use a car title to borrow money for a short period of time. They are NOT loans used to purchase a car. In the past 12 months, did you or anyone in your household take out an auto title loan?"
+    type: single_choice
+    construct: auto_title_loans_use_car
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q52
+    prompt: "Some stores allow people to rent to own items such as furniture or appliances. We do not mean stores that offer installment plans or layaway plans. In the past 12 months, did you or anyone in your household rent anything from a rent-to-own store because it couldn't be financed any other way?"
+    type: single_choice
+    construct: some_stores_allow_people_rent
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q53
+    prompt: "In the past 12 months, did you or anyone in your household pay for something making one payment every two weeks? This is sometimes called Buy Now, Pay Later or Pay-in-4."
+    type: single_choice
+    construct: past_12_months_did_anyone
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q54
+    prompt: "In the past 12 months, how many times did you or anyone in your household pay for something by making one payment every two weeks?"
+    type: single_choice
+    construct: past_12_months_many_times
+    required: true
+    options:
+      - id: "a"
+        label: "1"
+      - id: "b"
+        label: "2 to 10"
+      - id: "c"
+        label: "More than 10"
+  - id: q55
+    prompt: "Did you or anyone in your household make any of these Buy Now, Pay Later purchases in the following ways? (Select all that apply)"
+    type: multi_choice
+    construct: did_anyone_household_make_any
+    required: true
+    options:
+      - id: "a"
+        label: "Online"
+      - id: "b"
+        label: "In person"
+      - id: "c"
+        label: "Other"
+  - id: q56
+    prompt: "In the past 12 months, did you or anyone in your household miss or make a late payment on any of these Buy Now, Pay Later purchases?"
+    type: single_choice
+    construct: past_12_months_did_anyone
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q57
+    prompt: "In the past 12 months, have you or anyone else in your household had a credit card from Visa, MasterCard, American Express, or Discover? Please do not include debit cards."
+    type: single_choice
+    construct: past_12_months_have_anyone
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q58
+    prompt: "In the past 12 months, have you or anyone else in your household had a store credit card that can only be used at that store? Do not include gift cards."
+    type: single_choice
+    construct: past_12_months_have_anyone
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q59
+    prompt: "In the past 12 months, have you or anyone else in your household had an auto loan? This is different from an auto title loan."
+    type: single_choice
+    construct: past_12_months_have_anyone
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q60
+    prompt: "In the past 12 months, have you or anyone else in your household had a mortgage or home equity loan or home equity line of credit?"
+    type: single_choice
+    construct: past_12_months_have_anyone
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q61
+    prompt: "In the past 12 months, have you or anyone else in your household had a student loan?"
+    type: single_choice
+    construct: past_12_months_have_anyone
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q62
+    prompt: "In the past 12 months, have you or anyone else in your household had other personal loans or lines of credit from a bank?"
+    type: single_choice
+    construct: past_12_months_have_anyone
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q63
+    prompt: "In the past 12 months, have you or anyone else in your household had other personal loans or lines of credit from a company other than a bank? Do not include payday, pawn, or auto title loans."
+    type: single_choice
+    construct: past_12_months_have_anyone
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q64
+    prompt: "In the past 12 months, did you or anyone in your household own or use any crypto such as Bitcoin or Ether?"
+    type: single_choice
+    construct: past_12_months_did_anyone
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q65
+    prompt: "How did you or others in your household use crypto? (Select all that apply)"
+    type: multi_choice
+    construct: did_others_household_use_crypto
+    required: true
+    options:
+      - id: "a"
+        label: "Hold as an investment"
+      - id: "b"
+        label: "Send or receive money from friends or family"
+      - id: "c"
+        label: "Buy items online"
+      - id: "d"
+        label: "Buy items in person"
+      - id: "e"
+        label: "Some other use"
+  - id: q66
+    prompt: "Which best describes your household's income over the past 12 months?"
+    type: single_choice
+    construct: best_describes_household_s_income
+    required: true
+    options:
+      - id: "a"
+        label: "Income is about the same each month"
+      - id: "b"
+        label: "Income varies somewhat from month to month"
+      - id: "c"
+        label: "Income varies a lot from month to month"
+  - id: q67
+    prompt: "Often times, households find that they are not able to keep up with their bills. Over the past 12 months, was there a time when you or someone else in your household fell behind on bill payments?"
+    type: single_choice
+    construct: often_times_households_find_that
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q68
+    prompt: "Do you or anyone else in your household currently own or have regular access to a smartphone with features to access the Internet, send emails, and download apps?"
+    type: single_choice
+    construct: anyone_else_household_currently_own
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"

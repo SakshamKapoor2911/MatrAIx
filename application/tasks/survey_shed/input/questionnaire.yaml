@@ -1,0 +1,3674 @@
+schemaVersion: "1.0"
+id: shed_v1
+title: "Federal Reserve SHED Survey"
+description: "The Federal Reserve's Survey of Household Economics and Decisionmaking (SHED) is an annual survey that measures the economic well-being and financial lives of U.S. households — cov"
+questions:
+  - id: q0
+    prompt: "First, do each of the following people currently live with you? — My spouse or partner"
+    type: single_choice
+    construct: first_each_following_people_currently
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q1
+    prompt: "First, do each of the following people currently live with you? — My child(ren) under age 18"
+    type: single_choice
+    construct: first_each_following_people_currently
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q2
+    prompt: "First, do each of the following people currently live with you? — My adult child(ren) age 18 or older"
+    type: single_choice
+    construct: first_each_following_people_currently
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q3
+    prompt: "First, do each of the following people currently live with you? — My parent(s)"
+    type: single_choice
+    construct: first_each_following_people_currently
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q4
+    prompt: "First, do each of the following people currently live with you? — Other individuals"
+    type: single_choice
+    construct: first_each_following_people_currently
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q5
+    prompt: "Your brother(s) or sister(s) – Are the people living with you:"
+    type: single_choice
+    construct: brother_s_sister_s_people
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q6
+    prompt: "Other relatives – Are the people living with you:"
+    type: single_choice
+    construct: other_relatives_people_living
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q7
+    prompt: "Other people not related to you – Are the people living with you:"
+    type: single_choice
+    construct: other_people_not_related_people
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q8
+    prompt: "How many children do you have who are under age 18 and currently live with you?"
+    type: single_choice
+    construct: many_children_have_who_under
+    required: true
+    options:
+      - id: "a"
+        label: "5 or more"
+  - id: q9
+    prompt: "How old is your (youngest) child that lives with you?"
+    type: single_choice
+    construct: old_youngest_child_that_lives
+    required: true
+    options:
+      - id: "a"
+        label: "0 to 2 years old"
+      - id: "b"
+        label: "3 to 5"
+      - id: "c"
+        label: "6 to 12"
+      - id: "d"
+        label: "13 to 17"
+  - id: q10
+    prompt: "Overall, which one of the following best describes how well you are managing financially these days?"
+    type: single_choice
+    construct: overall_one_following_best_describes
+    required: true
+    options:
+      - id: "a"
+        label: "Finding it difficult to get by"
+      - id: "b"
+        label: "Just getting by"
+      - id: "c"
+        label: "Doing okay"
+      - id: "d"
+        label: "Living comfortably"
+  - id: q11
+    prompt: "Compared to 12 months ago, would you say that you (and your family) are better off, the same, or worse off financially?"
+    type: single_choice
+    construct: compared_12_months_ago_would
+    required: true
+    options:
+      - id: "a"
+        label: "Much worse off"
+      - id: "b"
+        label: "Somewhat worse off"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Somewhat better off"
+      - id: "e"
+        label: "Much better off"
+  - id: q12
+    prompt: "You said that you (and your family) are (somewhat/much) worse off financially compared to 12 months ago. What factor(s) have contributed to that? Please select all that apply. — My income is lower"
+    type: single_choice
+    construct: said_that_family_somewhat_much
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q13
+    prompt: "You said that you (and your family) are (somewhat/much) worse off financially compared to 12 months ago. What factor(s) have contributed to that? Please select all that apply. — My expenses are higher"
+    type: single_choice
+    construct: said_that_family_somewhat_much
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q14
+    prompt: "You said that you (and your family) are somewhat worse off financially compared to 12 months ago. What factor(s) have contributed to that? Please select all that apply. — The value of my assets decreased- You said that you (and your family) are somewhat worse off financially compared to 12 months ago. What factor(s) have contributed to that? Please select all that apply."
+    type: single_choice
+    construct: said_that_family_somewhat_worse
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q15
+    prompt: "You said that you (and your family) are somewhat worse off financially compared to 12 months ago. What factor(s) have contributed to that? Please select all that apply. — I have more debt"
+    type: single_choice
+    construct: said_that_family_somewhat_worse
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q16
+    prompt: "You said that you (and your family) are somewhat worse off financially compared to 12 months ago. What factor(s) have contributed to that? Please select all that apply. — Other (please specify)"
+    type: single_choice
+    construct: said_that_family_somewhat_worse
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q17
+    prompt: "You said that you (and your family) are somewhat better off financially compared to 12 months ago. What factor(s) have contributed to that? Please select all that apply. — My income is higher"
+    type: single_choice
+    construct: said_that_family_somewhat_better
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q18
+    prompt: "You said that you (and your family) are somewhat better off financially compared to 12 months ago. What factor(s) have contributed to that? Please select all that apply. — My expenses are lower"
+    type: single_choice
+    construct: said_that_family_somewhat_better
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q19
+    prompt: "You said that you (and your family) are somewhat better off financially compared to 12 months ago. What factor(s) have contributed to that? Please select all that apply. — The value of my assets increased- You said that you (and your family) are somewhat better off financially compared to 12 months ago. What factor(s) have contributed to that? Please select all that apply."
+    type: single_choice
+    construct: said_that_family_somewhat_better
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q20
+    prompt: "You said that you (and your family) are somewhat better off financially compared to 12 months ago. What factor(s) have contributed to that? Please select all that apply. — I have less debt"
+    type: single_choice
+    construct: said_that_family_somewhat_better
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q21
+    prompt: "You said that you (and your family) are somewhat better off financially compared to 12 months ago. What factor(s) have contributed to that? Please select all that apply. — Other (please specify)"
+    type: single_choice
+    construct: said_that_family_somewhat_better
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q22
+    prompt: "How would you rate economic conditions today: In your community"
+    type: single_choice
+    construct: would_rate_economic_conditions_today
+    required: true
+    options:
+      - id: "a"
+        label: "Poor"
+      - id: "b"
+        label: "Only fair"
+      - id: "c"
+        label: "Good"
+      - id: "d"
+        label: "Excellent"
+  - id: q23
+    prompt: "How would you rate economic conditions today: In this country"
+    type: single_choice
+    construct: would_rate_economic_conditions_today
+    required: true
+    options:
+      - id: "a"
+        label: "Poor"
+      - id: "b"
+        label: "Only fair"
+      - id: "c"
+        label: "Good"
+      - id: "d"
+        label: "Excellent"
+  - id: q24
+    prompt: "X11 None selected"
+    type: single_choice
+    construct: x11_none_selected
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q25
+    prompt: "Are each of the following a financial challenge or concern you or your family? — Finding or keeping a job"
+    type: single_choice
+    construct: each_following_financial_challenge_conce
+    required: true
+    options:
+      - id: "a"
+        label: "Not a concern"
+      - id: "b"
+        label: "Minor concern"
+      - id: "c"
+        label: "Major concern"
+  - id: q26
+    prompt: "Are each of the following a financial challenge concern for you or your family? — Increases in prices for things you buy"
+    type: single_choice
+    construct: each_following_financial_challenge_conce
+    required: true
+    options:
+      - id: "a"
+        label: "Not a concern"
+      - id: "b"
+        label: "Minor concern"
+      - id: "c"
+        label: "Major concern"
+  - id: q27
+    prompt: "Are each of the following a financial challenge or concern for you or your family? — Housing costs or availability"
+    type: single_choice
+    construct: each_following_financial_challenge_conce
+    required: true
+    options:
+      - id: "a"
+        label: "Not a concern"
+      - id: "b"
+        label: "Minor concern"
+      - id: "c"
+        label: "Major concern"
+  - id: q28
+    prompt: "Are each of the following a financial challenge or concern for you of your family? — Retirement savings"
+    type: single_choice
+    construct: each_following_financial_challenge_conce
+    required: true
+    options:
+      - id: "a"
+        label: "Not a concern"
+      - id: "b"
+        label: "Minor concern"
+      - id: "c"
+        label: "Major concern"
+  - id: q29
+    prompt: "Are each of the following a financial challenge or concern for you or your family? — Making ends meet"
+    type: single_choice
+    construct: each_following_financial_challenge_conce
+    required: true
+    options:
+      - id: "a"
+        label: "Not a concern"
+      - id: "b"
+        label: "Minor concern"
+      - id: "c"
+        label: "Major concern"
+  - id: q30
+    prompt: "Are each of the following a financial challenge or concern for you or your family? — Medical debt or affording medical care"
+    type: single_choice
+    construct: each_following_financial_challenge_conce
+    required: true
+    options:
+      - id: "a"
+        label: "Not a concern"
+      - id: "b"
+        label: "Minor concern"
+      - id: "c"
+        label: "Major concern"
+  - id: q31
+    prompt: "Are each of the following a financial challenge or concern for you or your family? — Student loans or education costs"
+    type: single_choice
+    construct: each_following_financial_challenge_conce
+    required: true
+    options:
+      - id: "a"
+        label: "Not a concern"
+      - id: "b"
+        label: "Minor concern"
+      - id: "c"
+        label: "Major concern"
+  - id: q32
+    prompt: "In the prior question you indicated that finding or keeping a job and increases in prices for things you buy were both (minor/ major) concerns. Between the two, are you:"
+    type: single_choice
+    construct: prior_question_indicated_that_finding
+    required: true
+    options:
+      - id: "a"
+        label: "More concerned about finding or keeping a job"
+      - id: "b"
+        label: "More concerned about increases in prices for things you buy"
+      - id: "c"
+        label: "Both are of equal concern"
+  - id: q33
+    prompt: "In the past week, did you use any paid childcare?"
+    type: single_choice
+    construct: past_week_did_use_any
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q34
+    prompt: "In the past week, how many hours did you use paid childcare?"
+    type: single_choice
+    construct: past_week_many_hours_did
+    required: true
+    options:
+      - id: "a"
+        label: "1 to 9 hours"
+      - id: "b"
+        label: "10 to 19 hours"
+      - id: "c"
+        label: "20 to 39 hours"
+      - id: "d"
+        label: "40 hours or more"
+  - id: q35
+    prompt: "How much do you pay per week for childcare in total for all of your children?"
+    type: free_text
+    construct: much_pay_per_week_childcare
+    required: true
+  - id: q36
+    prompt: "In the past week, did you use any of the following forms of unpaid childcare (select all that apply)? — Child's grandparent"
+    type: multi_choice
+    construct: past_week_did_use_any
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q37
+    prompt: "In the past week, did you use any of the following forms of unpaid childcare (select all that apply)? — Child's sibling"
+    type: multi_choice
+    construct: past_week_did_use_any
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q38
+    prompt: "In the past week, did you use any of the following forms of unpaid childcare (select all that apply)? — Another relative other than the parent"
+    type: multi_choice
+    construct: past_week_did_use_any
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q39
+    prompt: "In the past week, did you use any of the following forms of unpaid childcare (select all that apply)? — A nonrelative such as a friend or neighbor"
+    type: multi_choice
+    construct: past_week_did_use_any
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q40
+    prompt: "In the past week, did you use any of the following forms of unpaid childcare (select all that apply)? — Headstart or another preschool that you don't pay for"
+    type: multi_choice
+    construct: past_week_did_use_any
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q41
+    prompt: "In the past week, did you use any of the following forms of unpaid childcare (select all that apply)? — Other unpaid childcare (please specify)"
+    type: multi_choice
+    construct: past_week_did_use_any
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q42
+    prompt: "In the past week, did you use any of the following forms of unpaid childcare (select all that apply)? — Did not use unpaid childcare"
+    type: multi_choice
+    construct: past_week_did_use_any
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q43
+    prompt: "Does the [child’s grandparent/child’s relative] who provided unpaid care in the past week currently live with you?"
+    type: single_choice
+    construct: does_child_s_grandparent_child
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q44
+    prompt: "In the past week, how many hours did you use the unpaid childcare you just mentioned?"
+    type: single_choice
+    construct: past_week_many_hours_did
+    required: true
+    options:
+      - id: "a"
+        label: "1 to 9 hours"
+      - id: "b"
+        label: "10 to 19 hours"
+      - id: "c"
+        label: "20 to 39 hours"
+      - id: "d"
+        label: "40 hours or more"
+  - id: q45
+    prompt: "When it comes to taking care of your children when they are at home, which of the following statements best describes the caretaking responsibilities?"
+    type: single_choice
+    construct: when_it_comes_taking_care
+    required: true
+    options:
+      - id: "a"
+        label: "I am usually the primary caretaker"
+      - id: "b"
+        label: "My spouse/partner is usually the primary caretaker"
+      - id: "c"
+        label: "My spouse/partner and I equally share caretaking responsibilities"
+  - id: q46
+    prompt: "Do you regularly provide unpaid help or take care of an adult relative or friend who needs assistance due to aging, disability, or illness?"
+    type: single_choice
+    construct: regularly_provide_unpaid_help_take
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q47
+    prompt: "Do you regularly provide unpaid help or care to each of the following people due to aging, disability, or illness? — Your parent- Do you regularly provide unpaid help or care to each of the following people due to aging, disability, or illness?"
+    type: single_choice
+    construct: regularly_provide_unpaid_help_care
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q48
+    prompt: "Do you regularly provide unpaid help or care to each of the following people due to aging, disability, or illness? — Your spouse's or partner's parent"
+    type: single_choice
+    construct: regularly_provide_unpaid_help_care
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q49
+    prompt: "Do you regularly provide unpaid help or care to each of the following people due to aging, disability, or illness? — Your spouse or partner- Do you regularly provide unpaid help or care to each of the following people due to aging, disability, or illness?"
+    type: single_choice
+    construct: regularly_provide_unpaid_help_care
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q50
+    prompt: "Do you regularly provide unpaid help or care to each of the following people due to aging, disability, or illness? — An adult child (age 18 or older)"
+    type: single_choice
+    construct: regularly_provide_unpaid_help_care
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q51
+    prompt: "Do you regularly provide unpaid help or care to each of the following people due to aging, disability, or illness? — Another relative"
+    type: single_choice
+    construct: regularly_provide_unpaid_help_care
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q52
+    prompt: "Do you regularly provide unpaid help or care to each of the following people due to aging, disability, or illness? — A friend or neighbor"
+    type: single_choice
+    construct: regularly_provide_unpaid_help_care
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q53
+    prompt: "About how often do you provide unpaid help or care to an adult relative or friend who needs assistance due to aging, disability, or illness?"
+    type: single_choice
+    construct: often_provide_unpaid_help_care
+    required: true
+    options:
+      - id: "a"
+        label: "Daily"
+      - id: "b"
+        label: "Several days per week"
+      - id: "c"
+        label: "Several days per month"
+      - id: "d"
+        label: "Once per month"
+      - id: "e"
+        label: "Less than once per month"
+  - id: q54
+    prompt: "Last month, did you do any work for either pay or profit?"
+    type: single_choice
+    construct: last_month_did_any_work
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q55
+    prompt: "Last month, did you have more than one job, including part time, evening or weekend work?"
+    type: single_choice
+    construct: last_month_did_have_more
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q56
+    prompt: "(Thinking about all your jobs, do/Do) you usually work 35 hours or more per week?"
+    type: single_choice
+    construct: thinking_all_jobs_usually_work
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q57
+    prompt: "Thinking about your main job (where you earn the most money), do you usually work 35 hours or more per week?"
+    type: single_choice
+    construct: thinking_main_job_where_earn
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q58
+    prompt: "At any time during the past month, did you want to work (more hours)?"
+    type: single_choice
+    construct: any_time_during_past_month
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q59
+    prompt: "Did each of the following contribute to you (not working/ working less than 35 hours per week) in the last month? — Could not find (more) work"
+    type: single_choice
+    construct: did_each_following_contribute_not
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q60
+    prompt: "Did each of the following contribute to you (not working/working less than 35 hours per week) in the last month? — Full-time workweek less than 35 hours"
+    type: single_choice
+    construct: did_each_following_contribute_not
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q61
+    prompt: "Did each of the following contribute to you (not working/working less than 35 hours per week) in the last month? — Childcare"
+    type: single_choice
+    construct: did_each_following_contribute_not
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q62
+    prompt: "Did each of the following contribute to you (not working/working less than 35 hours per week) in the last month? — Caregiving for an elderly, disabled, or sick adult"
+    type: single_choice
+    construct: did_each_following_contribute_not
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q63
+    prompt: "Did each of the following contribute to you (not working/working less than 35 hours per week) in the last month? — Other family or personal obligations"
+    type: single_choice
+    construct: did_each_following_contribute_not
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q64
+    prompt: "Did each of the following contribute to you (not working/ working less than 35 hours per week) in the last month? — Would lose access to unemployment benefits or other government programs"
+    type: single_choice
+    construct: did_each_following_contribute_not
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q65
+    prompt: "Did each of the following contribute to you (not working/working less than 35 hours per week) in the last month? — Health limitations or disability- Did each of the following contribute to you (not working/ working less than 35 hours per week) in the last month?"
+    type: single_choice
+    construct: did_each_following_contribute_not
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q66
+    prompt: "Did each of the following contribute to you (not working/ working less than 35 hours per week) in the last month? — In school or training"
+    type: single_choice
+    construct: did_each_following_contribute_not
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q67
+    prompt: "Did each of the following contribute to you not working/working less than 35 hours per week) in the last month? — Retired"
+    type: single_choice
+    construct: did_each_following_contribute_not
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q68
+    prompt: "Think about your main job (the job from which you earned the most money in the past month). In this job, (were you working/Did you work) for someone else, were you self-employed, or something else?"
+    type: single_choice
+    construct: think_main_job_job_from
+    required: true
+    options:
+      - id: "a"
+        label: "Working for someone else"
+      - id: "b"
+        label: "Self-employed (working for myself)"
+      - id: "c"
+        label: "Other work arrangement"
+  - id: q69
+    prompt: "You indicated that you are [self-employed/do not work for someone else]. Do you own a business that has any paid employees, excluding owner(s)?"
+    type: single_choice
+    construct: indicated_that_self_employed_not
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+      - id: "c"
+        label: "Unsure. Please explain"
+  - id: q70
+    prompt: "How often do each of these statements describe your work situation (at your main job)? — I can choose what tasks I work on"
+    type: single_choice
+    construct: often_each_these_statements_describe
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q71
+    prompt: "How often do each of these statements describe your work situation (at your main job)? — I can choose how I complete tasks at work"
+    type: single_choice
+    construct: often_each_these_statements_describe
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q72
+    prompt: "Still thinking about your main job, do/Do you normally start and end work around the same time each day that you work, or does it vary?"
+    type: single_choice
+    construct: still_thinking_main_job_normally
+    required: true
+    options:
+      - id: "a"
+        label: "Normally work the same hours"
+      - id: "b"
+        label: "Schedule varies, primarily at my request"
+      - id: "c"
+        label: "Schedule varies, primarily based on my employer’s needs"
+  - id: q73
+    prompt: "In your main job, did/Did you agree that if you leave your employer, you will not start or work for a competing business? This is often called a non-compete agreement."
+    type: single_choice
+    construct: main_job_did_did_agree
+    required: true
+    options:
+      - id: "a"
+        label: "Don’t know"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Yes"
+  - id: q74
+    prompt: "Thinking about the work you did last week, how much of it did you do by telecommuting or working from home?"
+    type: single_choice
+    construct: thinking_work_did_last_week
+    required: true
+    options:
+      - id: "a"
+        label: "None"
+      - id: "b"
+        label: "Some"
+      - id: "c"
+        label: "All"
+  - id: q75
+    prompt: "How likely would you be to actively look for another job or leave your job if your employer (kept your pay the same for a year/ decreased your pay by 1 percent / decreased your pay by 5 percent / decreased your pay by 10 percent)"
+    type: single_choice
+    construct: likely_would_be_actively_look
+    required: true
+    options:
+      - id: "a"
+        label: "Very likely"
+      - id: "b"
+        label: "Somewhat likely"
+      - id: "c"
+        label: "Not that likely"
+      - id: "d"
+        label: "Not at all likely"
+  - id: q76
+    prompt: "(Think about any job in the past 12 months.) In the past 12 months, have you: Think about any job in the past 12 months, not just your main job. In the past 12 months, have you gotten laid off or lost a job (including a temporary layoff)?"
+    type: single_choice
+    construct: think_any_job_past_12
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q77
+    prompt: "(Think about any job in the past 12 months.) In the past 12 months, have you: Asked for a raise or a promotion – (Think about any job in the past 12 months.) In the past 12 months, have you:"
+    type: single_choice
+    construct: think_any_job_past_12
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q78
+    prompt: "(Think about any job in the past 12 months.) In the past 12 months, have you: Received a raise or a promotion"
+    type: single_choice
+    construct: think_any_job_past_12
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q79
+    prompt: "(Think about any job in the past 12 months.) In the past 12 months, have you: Applied for a new job"
+    type: single_choice
+    construct: think_any_job_past_12
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q80
+    prompt: "(Think about any job in the past 12 months.) In the past 12 months, have you: Started a new job"
+    type: single_choice
+    construct: think_any_job_past_12
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q81
+    prompt: "(Think about any job in the past 12 months.) In the past 12 months, have you: Voluntarily left a job"
+    type: single_choice
+    construct: think_any_job_past_12
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q82
+    prompt: "You indicated that you started a new job in the past 12 months. Is your main job (where you earn the most money) the same as it was a year ago?"
+    type: single_choice
+    construct: indicated_that_started_new_job
+    required: true
+    options:
+      - id: "a"
+        label: "Different main job – new employer"
+      - id: "b"
+        label: "Different main job – same employer"
+      - id: "c"
+        label: "Same main job – started a second job"
+      - id: "d"
+        label: "Was not working a year ago"
+      - id: "e"
+        label: "Other"
+  - id: q83
+    prompt: "Are each of the following better, the same, or worse at the main job you have now than the one you had a year ago? — Pay or benefits"
+    type: single_choice
+    construct: each_following_better_same_worse
+    required: true
+    options:
+      - id: "a"
+        label: "Better"
+      - id: "b"
+        label: "About the same"
+      - id: "c"
+        label: "Worse"
+  - id: q84
+    prompt: "Are each of the following better, the same, or worse at the main job you have now than the one you had a year ago? — Opportunities for advancement"
+    type: single_choice
+    construct: each_following_better_same_worse
+    required: true
+    options:
+      - id: "a"
+        label: "Better"
+      - id: "b"
+        label: "About the same"
+      - id: "c"
+        label: "Worse"
+  - id: q85
+    prompt: "Are each of the following better, the same, or worse at the main job you have now than the one you had a year ago? — Your interest in the work"
+    type: single_choice
+    construct: each_following_better_same_worse
+    required: true
+    options:
+      - id: "a"
+        label: "Better"
+      - id: "b"
+        label: "About the same"
+      - id: "c"
+        label: "Worse"
+  - id: q86
+    prompt: "Are each of the following better, the same, or worse at the main job you have now than the one you had a year ago? — Physical demands of the job"
+    type: single_choice
+    construct: each_following_better_same_worse
+    required: true
+    options:
+      - id: "a"
+        label: "Better"
+      - id: "b"
+        label: "About the same"
+      - id: "c"
+        label: "Worse"
+  - id: q87
+    prompt: "Are each of the following better, the same, or worse at the main job you have now than the one you had a year ago? — Work-life balance"
+    type: single_choice
+    construct: each_following_better_same_worse
+    required: true
+    options:
+      - id: "a"
+        label: "Better"
+      - id: "b"
+        label: "About the same"
+      - id: "c"
+        label: "Worse"
+  - id: q88
+    prompt: "Overall, is the main job you have now better, the same, or worse than the one you had a year ago?"
+    type: single_choice
+    construct: overall_main_job_have_now
+    required: true
+    options:
+      - id: "a"
+        label: "Better"
+      - id: "b"
+        label: "About the same"
+      - id: "c"
+        label: "Worse"
+  - id: q89
+    prompt: "If you wanted to, how confident are you that you could get a [new] job in the next 3 months?"
+    type: single_choice
+    construct: if_wanted_confident_that_could
+    required: true
+    options:
+      - id: "a"
+        label: "Not confident"
+      - id: "b"
+        label: "Somewhat confident"
+      - id: "c"
+        label: "Very confident"
+      - id: "d"
+        label: "Not working and not interested in working right now"
+  - id: q90
+    prompt: "Last month, did your spouse or partner do any work for either pay or profit?"
+    type: single_choice
+    construct: last_month_did_spouse_partner
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q91
+    prompt: "Does your spouse or partner usually work 35 hours or more per week?"
+    type: single_choice
+    construct: does_spouse_partner_usually_work
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q92
+    prompt: "Did each of the following contribute to your spouse or partner (not working/working less than 35 hours per week) in the last month? — Could not find (more) work"
+    type: single_choice
+    construct: did_each_following_contribute_spouse
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q93
+    prompt: "Did each of the following contribute to your spouse or partner (not working/working less than 35 hours per week) in the last month? — Full-time workweek less than 35 hours"
+    type: single_choice
+    construct: did_each_following_contribute_spouse
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q94
+    prompt: "Did each of the following contribute to your spouse or partner (not working/working less than 35 hours per week) in the last month? — Childcare"
+    type: single_choice
+    construct: did_each_following_contribute_spouse
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q95
+    prompt: "Did each of the following contribute to your spouse or partner (not working/ working less than 35 hours per week) in the last month? — Caregiving for an elderly, disabled, or sick adult"
+    type: single_choice
+    construct: did_each_following_contribute_spouse
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q96
+    prompt: "Did each of the following contribute to your spouse or partner (not working/working less than 35 hours per week) in the last month? — Other family or personal obligations"
+    type: single_choice
+    construct: did_each_following_contribute_spouse
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q97
+    prompt: "Did each of the following contribute to your spouse or partner (not working/working less than 35 hours per week) in the last month? — Would lose access to unemployment benefits or other government programs"
+    type: single_choice
+    construct: did_each_following_contribute_spouse
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q98
+    prompt: "Did each of the following contribute to your spouse or partner (not working/working less than 35 hours per week) in the last month? — Health limitations or disability"
+    type: single_choice
+    construct: did_each_following_contribute_spouse
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q99
+    prompt: "Did each of the following contribute to your spouse or partner (not working/working less than 35 hours per week) in the last month? — In school or training"
+    type: single_choice
+    construct: did_each_following_contribute_spouse
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q100
+    prompt: "Did each of the following contribute to your spouse or partner (not working/working less than 35 hours per week) in the last month? — Retired"
+    type: single_choice
+    construct: did_each_following_contribute_spouse
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q101
+    prompt: "Some people earn money by selling items at places like flea markets and garage sales or through online marketplaces like eBay or Etsy. In the past month, have you made money by selling items in any of these ways?"
+    type: single_choice
+    construct: some_people_earn_money_by
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q102
+    prompt: "Are the items you sold ones that you: Made or repurposed, such as handmade crafts"
+    type: single_choice
+    construct: items_sold_ones_that_made
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q103
+    prompt: "Are the items you sold ones that you: Purchased to resell for a profit"
+    type: single_choice
+    construct: items_sold_ones_that_purchased
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q104
+    prompt: "Are the items you sold ones that you: Previously owned for personal use, such as old clothing"
+    type: single_choice
+    construct: items_sold_ones_that_previously
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q105
+    prompt: "Some people earn money by offering short-term rentals of items or property they own through platforms such as Turo or Airbnb. In the past month, have you made money from short-term rentals of items or property that you own?"
+    type: single_choice
+    construct: some_people_earn_money_by
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q106
+    prompt: "In the past month, have you done any freelance or gig work, either to supplement your income or as your main job?"
+    type: single_choice
+    construct: past_month_have_done_any
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q107
+    prompt: "In the past month, did you earn money in a way that involves obtaining short-term tasks or projects that you can complete?"
+    type: single_choice
+    construct: past_month_did_earn_money
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q108
+    prompt: "Do you use an app or website to get these short-term tasks or projects?"
+    type: single_choice
+    construct: use_app_website_get_these
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+      - id: "c"
+        label: "Sometimes"
+  - id: q109
+    prompt: "In the past month, did you use an app or website to select projects, pick tasks, or directly connect with customers to do tasks?"
+    type: single_choice
+    construct: past_month_did_use_app
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q110
+    prompt: "Once a task or project is completed, what are the ways that you get your next one (select all that apply)? — A boss, supervisor, or dispatcher assigns it"
+    type: multi_choice
+    construct: once_task_project_completed_ways
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q111
+    prompt: "Once a task or project is completed, what are the ways that you get your next one (select all that apply)? — Line up work on your own"
+    type: multi_choice
+    construct: once_task_project_completed_ways
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q112
+    prompt: "Once a task or project is completed, what are the ways that you get your next one (select all that apply)? — Go to an app or website"
+    type: multi_choice
+    construct: once_task_project_completed_ways
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q113
+    prompt: "Once a task or project is completed, what are the ways that you get your next one (select all that apply)? — Something else (please specify)"
+    type: multi_choice
+    construct: once_task_project_completed_ways
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q114
+    prompt: "Once a task or project is completed, what are the ways that you get your next one (select all that apply)? — Only completed one task and do not expect additional ones"
+    type: multi_choice
+    construct: once_task_project_completed_ways
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q115
+    prompt: "Was [doing freelance or gig work/doing these short-term tasks/doing projects found through an app or website/selling or renting items you own] (your main/the) job that you told us about earlier?"
+    type: single_choice
+    construct: was_doing_freelance_gig_work
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q116
+    prompt: "How many hours per week do you usually spend [doing freelance or gig work/doing these short-term tasks/doing projects found through an app or website/selling or renting items you own]?"
+    type: single_choice
+    construct: many_hours_per_week_usually
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 1 hour"
+      - id: "b"
+        label: "1 to 4 hours"
+      - id: "c"
+        label: "5 to 19 hours"
+      - id: "d"
+        label: "20 to 34 hours"
+      - id: "e"
+        label: "35 hours or more"
+  - id: q117
+    prompt: "Do you agree or disagree with the following statements about [doing freelance or gig work/doing these short-term tasks/doing projects found through an app or website/selling or renting items you own]? — It gives me work-life balance"
+    type: single_choice
+    construct: agree_disagree_following_statements_doin
+    required: true
+    options:
+      - id: "a"
+        label: "Agree"
+      - id: "b"
+        label: "Neither agree nor disagree"
+      - id: "c"
+        label: "Disagree"
+  - id: q118
+    prompt: "Do you agree or disagree with the following statements about [doing freelance or gig work/doing these short-term tasks/doing projects found through an app or website/selling or renting items you own]? — It lets me work flexible hours"
+    type: single_choice
+    construct: agree_disagree_following_statements_doin
+    required: true
+    options:
+      - id: "a"
+        label: "Agree"
+      - id: "b"
+        label: "Neither agree nor disagree"
+      - id: "c"
+        label: "Disagree"
+  - id: q119
+    prompt: "Do you agree or disagree with the following statements about [doing freelance or gig work/doing these short-term tasks/doing projects found through an app or website/selling or renting items you own]? — Without it, I would have trouble making ends meet"
+    type: single_choice
+    construct: agree_disagree_following_statements_doin
+    required: true
+    options:
+      - id: "a"
+        label: "Agree"
+      - id: "b"
+        label: "Neither agree nor disagree"
+      - id: "c"
+        label: "Disagree"
+  - id: q120
+    prompt: "Do you agree or disagree with the following statements about [doing freelance or gig work/doing these short-term tasks/doing projects found through an app or website/selling or renting items you own]? — I am my own boss doing it"
+    type: single_choice
+    construct: agree_disagree_following_statements_doin
+    required: true
+    options:
+      - id: "a"
+        label: "Agree"
+      - id: "b"
+        label: "Neither agree nor disagree"
+      - id: "c"
+        label: "Disagree"
+  - id: q121
+    prompt: "Do you agree or disagree with the following statements about [doing freelance or gig work/doing these short-term tasks/doing projects found through an app or website/selling or renting items you own]? — I wish I got benefits, like health insurance, from doing it"
+    type: single_choice
+    construct: agree_disagree_following_statements_doin
+    required: true
+    options:
+      - id: "a"
+        label: "Agree"
+      - id: "b"
+        label: "Neither agree nor disagree"
+      - id: "c"
+        label: "Disagree"
+  - id: q122
+    prompt: "Do you agree or disagree with the following statements about [doing freelance or gig work/doing these short-term tasks/doing projects found through an app or website/selling or renting items you own]? — I wish the pay was more consistent"
+    type: single_choice
+    construct: agree_disagree_following_statements_doin
+    required: true
+    options:
+      - id: "a"
+        label: "Agree"
+      - id: "b"
+        label: "Neither agree nor disagree"
+      - id: "c"
+        label: "Disagree"
+  - id: q123
+    prompt: "This section will ask some questions about your home. Do you (and/or your spouse or partner):"
+    type: single_choice
+    construct: this_section_will_ask_some
+    required: true
+    options:
+      - id: "a"
+        label: "Own your home with a mortgage or loan"
+      - id: "b"
+        label: "Own your home free and clear (without a mortgage or loan)"
+      - id: "c"
+        label: "Pay rent"
+      - id: "d"
+        label: "Neither own nor pay rent"
+  - id: q124
+    prompt: "Do you have either a homeowners insurance or a condo insurance policy for your primary residence?"
+    type: single_choice
+    construct: have_either_homeowners_insurance_condo
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q125
+    prompt: "What is the main reason you do not have homeowners insurance?"
+    type: single_choice
+    construct: main_reason_not_have_homeowners
+    required: true
+    options:
+      - id: "a"
+        label: "I can’t afford it"
+      - id: "b"
+        label: "It is not worth the cost"
+      - id: "c"
+        label: "I self-insure or prefer not to buy insurance"
+      - id: "d"
+        label: "No insurance company will insure my home"
+      - id: "e"
+        label: "Other (please specify)"
+  - id: q126
+    prompt: "Which of the following statements describes your current situation regarding flood insurance? (Please select all that apply) — I believe my general homeowner's insurance policy covers me for such flood damage – Which of the following statements describes your current situation regarding flood insurance? (Please select all that apply)"
+    type: single_choice
+    construct: following_statements_describes_current_s
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q127
+    prompt: "Which of the following statements describes your current situation regarding flood insurance? (Please select all that apply) — I believe my homeowner's association (HOA) covers me for such flood damage"
+    type: single_choice
+    construct: following_statements_describes_current_s
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q128
+    prompt: "Which of the following statements describes your current situation regarding flood insurance? (Please select all that apply) — I have a separate policy specifically for such flood damage"
+    type: single_choice
+    construct: following_statements_describes_current_s
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q129
+    prompt: "Which of the following statements describes your current situation regarding flood insurance? (Please select all that apply) — I do not have any policy that covers flood damage where I live"
+    type: single_choice
+    construct: following_statements_describes_current_s
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q130
+    prompt: "Are each of the following a reason why you rent your home rather than own? — Renting is cheaper"
+    type: single_choice
+    construct: each_following_reason_why_rent
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q131
+    prompt: "Are each of the following a reason why you rent your home rather than own? — Renting is less financially risky"
+    type: single_choice
+    construct: each_following_reason_why_rent
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q132
+    prompt: "Are each of the following a reason why you rent your home rather than own? — Renting is more convenient or flexible"
+    type: single_choice
+    construct: each_following_reason_why_rent
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q133
+    prompt: "Are each of the following a reason why you rent your home rather than own? — Trying to buy"
+    type: single_choice
+    construct: each_following_reason_why_rent
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q134
+    prompt: "Are each of the following a reason why you rent your home rather than own? — Can't qualify for home mortgage"
+    type: single_choice
+    construct: each_following_reason_why_rent
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q135
+    prompt: "Are each of the following a reason why you rent your home rather than own? — Can't afford down payment to buy"
+    type: single_choice
+    construct: each_following_reason_why_rent
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q136
+    prompt: "Are each of the following a reason why you rent your home rather than own? — Can't afford mortgage monthly payment"
+    type: single_choice
+    construct: each_following_reason_why_rent
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q137
+    prompt: "Are each of the following a reason why you rent your home rather than own? — Prefer to rent"
+    type: single_choice
+    construct: each_following_reason_why_rent
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q138
+    prompt: "When did you move into your current home?"
+    type: single_choice
+    construct: when_did_move_into_current
+    required: true
+    options:
+      - id: "a"
+        label: "Before 2023"
+      - id: "b"
+        label: "2023"
+      - id: "c"
+        label: "2024"
+  - id: q139
+    prompt: "Before your most recent move, did you own your previous home?"
+    type: single_choice
+    construct: before_most_recent_move_did
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes, and I still own that home"
+      - id: "c"
+        label: "Yes, and I no longer own that home"
+  - id: q140
+    prompt: "Did each of the following contribute to your moving in the past year? — Evicted or received an eviction notice"
+    type: single_choice
+    construct: did_each_following_contribute_moving
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q141
+    prompt: "Did each of the following contribute to your moving in the past year? — Landlord told you, or a person you were staying with, to leave"
+    type: single_choice
+    construct: did_each_following_contribute_moving
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q142
+    prompt: "Did each of the following contribute to your moving in the past year? — You missed a rent payment and thought you would be evicted"
+    type: single_choice
+    construct: did_each_following_contribute_moving
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q143
+    prompt: "Did each of the following contribute to your moving in the past year? — City condemned the property and forced you to leave"
+    type: single_choice
+    construct: did_each_following_contribute_moving
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q144
+    prompt: "Did each of the following contribute to your moving in the past year? — Bank took possession of your home in foreclosure"
+    type: single_choice
+    construct: did_each_following_contribute_moving
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q145
+    prompt: "Did each of the following contribute to your moving in the past year? — Received a notice from bank that they planned to foreclose- Did each of the following contribute to your moving in the past year?"
+    type: single_choice
+    construct: did_each_following_contribute_moving
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q146
+    prompt: "Did each of the following contribute to your moving in the past year? — Missed mortgage payments and thought bank would foreclose"
+    type: single_choice
+    construct: did_each_following_contribute_moving
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q147
+    prompt: "Did each of the following contribute to your moving in the past year? — City condemned the property and forced you to leave"
+    type: single_choice
+    construct: did_each_following_contribute_moving
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q148
+    prompt: "Approximately how much do you and/or your spouse or partner pay for rent each month?"
+    type: free_text
+    construct: approximately_much_spouse_partner_pay
+    required: true
+  - id: q149
+    prompt: "Have you been behind on your rent at any time in the past year?"
+    type: single_choice
+    construct: have_been_behind_rent_any
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q150
+    prompt: "Approximately how much is your total monthly mortgage payment (i.e. the amount you send to the bank)?"
+    type: free_text
+    construct: approximately_much_total_monthly_mortgag
+    required: true
+  - id: q151
+    prompt: "How satisfied are you with each of the following aspects of your neighborhood? — Overall quality"
+    type: single_choice
+    construct: satisfied_each_following_aspects_neighbo
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Somewhat dissatisfied"
+      - id: "c"
+        label: "Neither satisfied nor dissatisfied"
+      - id: "d"
+        label: "Somewhat satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q152
+    prompt: "How satisfied are you with each of the following aspects of your neighborhood? — Quality of your local schools"
+    type: single_choice
+    construct: satisfied_each_following_aspects_neighbo
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Somewhat dissatisfied"
+      - id: "c"
+        label: "Neither satisfied nor dissatisfied"
+      - id: "d"
+        label: "Somewhat satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q153
+    prompt: "How satisfied are you with each of the following aspects of your neighborhood? — Crime risk"
+    type: single_choice
+    construct: satisfied_each_following_aspects_neighbo
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Somewhat dissatisfied"
+      - id: "c"
+        label: "Neither satisfied nor dissatisfied"
+      - id: "d"
+        label: "Somewhat satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q154
+    prompt: "How satisfied are you with each of the following aspects of your neighborhood? — Natural disaster and severe weather risk"
+    type: single_choice
+    construct: satisfied_each_following_aspects_neighbo
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Somewhat dissatisfied"
+      - id: "c"
+        label: "Neither satisfied nor dissatisfied"
+      - id: "d"
+        label: "Somewhat satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q155
+    prompt: "How satisfied are you with each of the following aspects of your neighborhood? — Cost of housing"
+    type: single_choice
+    construct: satisfied_each_following_aspects_neighbo
+    required: true
+    options:
+      - id: "a"
+        label: "Very dissatisfied"
+      - id: "b"
+        label: "Somewhat dissatisfied"
+      - id: "c"
+        label: "Neither satisfied nor dissatisfied"
+      - id: "d"
+        label: "Somewhat satisfied"
+      - id: "e"
+        label: "Very satisfied"
+  - id: q156
+    prompt: "In the past year, have you been financially affected by natural disasters or severe weather events like flooding, hurricanes, wildfires, or extreme temperatures?"
+    type: single_choice
+    construct: past_year_have_been_financially
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes, slightly"
+      - id: "c"
+        label: "Yes, moderately"
+      - id: "d"
+        label: "Yes, substantially"
+  - id: q157
+    prompt: "In the past year, have natural disasters or severe weather events like flooding, hurricanes, wildfires, or extreme temperatures affected you in each of the following ways? — Income loss or work disruption"
+    type: single_choice
+    construct: past_year_have_natural_disasters
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q158
+    prompt: "In the past year, have natural disasters or severe weather events like flooding, hurricanes, wildfires, or extreme temperatures affected you in each of the following ways? — Property damage"
+    type: single_choice
+    construct: past_year_have_natural_disasters
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q159
+    prompt: "In the past year, have natural disasters or severe weather events like flooding, hurricanes, wildfires, or extreme temperatures affected you in each of the following ways? — Needed to evacuate temporarily"
+    type: single_choice
+    construct: past_year_have_natural_disasters
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q160
+    prompt: "In the past year, have natural disasters or severe weather events like flooding, hurricanes, wildfires, or extreme temperatures affected you in each of the following ways? — Longer-term displacement from home"
+    type: single_choice
+    construct: past_year_have_natural_disasters
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q161
+    prompt: "In the past year, have natural disasters or severe weather events like flooding, hurricanes, wildfires, or extreme temperatures affected you in each of the following ways? — Other (please specify)"
+    type: single_choice
+    construct: past_year_have_natural_disasters
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q162
+    prompt: "Five years from now, do you think that the chance that you will experience a natural disaster or severe weather event will be higher, lower, or about the same as it is now?"
+    type: single_choice
+    construct: five_years_from_now_think
+    required: true
+    options:
+      - id: "a"
+        label: "Much higher"
+      - id: "b"
+        label: "Somewhat higher"
+      - id: "c"
+        label: "About the same"
+      - id: "d"
+        label: "Somewhat lower"
+      - id: "e"
+        label: "Much lower"
+  - id: q163
+    prompt: "In the past year, have you done each of the following at least partially because of the threat of natural disasters or severe weather events? — Investigated other places to live"
+    type: single_choice
+    construct: past_year_have_done_each
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q164
+    prompt: "In the past year, have you done each of the following at least partially because of the threat of natural disasters or severe weather events? — Improved your property to reduce risk"
+    type: single_choice
+    construct: past_year_have_done_each
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q165
+    prompt: "In the past year, have you done each of the following at least partially because of the threat of natural disasters or severe weather events? — Purchased additional insurance"
+    type: single_choice
+    construct: past_year_have_done_each
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q166
+    prompt: "Do you (and/or your spouse or partner) currently have a checking, savings, or money market account?"
+    type: single_choice
+    construct: spouse_partner_currently_have_checking
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q167
+    prompt: "In the past 12 months, did you (and/or your spouse or partner): Purchase a money order from a place other than a bank"
+    type: single_choice
+    construct: past_12_months_did_spouse
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q168
+    prompt: "In the past 12 months, did you (and/or your spouse or partner): Cash a check at a place other than a bank"
+    type: single_choice
+    construct: past_12_months_did_spouse
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q169
+    prompt: "In the past 12 months, did you (and/or your spouse or partner): Take out a payday loan or payday advance"
+    type: single_choice
+    construct: past_12_months_did_spouse
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q170
+    prompt: "In the past 12 months, did you (and/or your spouse or partner): Take out a pawn shop loan or an auto title loan"
+    type: single_choice
+    construct: past_12_months_did_spouse
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q171
+    prompt: "In the past 12 months, did you (and/or your spouse or partner): Obtain a tax refund advance to receive your refund faster"
+    type: single_choice
+    construct: past_12_months_did_spouse
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q172
+    prompt: "In the past 12 months, did you (and/or your spouse or partner): Pay an overdraft fee on a bank account"
+    type: single_choice
+    construct: past_12_months_did_spouse
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q173
+    prompt: "In the past year, have you personally experienced either of the following fraud or scams involving your money? — Credit card fraud or scam"
+    type: single_choice
+    construct: past_year_have_personally_experienced
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q174
+    prompt: "In the past year, have you personally experienced either of the following fraud or scams involving your money? — Another type of financial fraud or scam"
+    type: single_choice
+    construct: past_year_have_personally_experienced
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q175
+    prompt: "Did you lose any money to the fraud or scam?"
+    type: single_choice
+    construct: did_lose_any_money_fraud
+    required: true
+    options:
+      - id: "a"
+        label: "I lost money, but all of it was recovered or refunded"
+      - id: "b"
+        label: "I lost money, and some of it was recovered or refunded"
+      - id: "c"
+        label: "I lost money, and none of it was recovered or refunded"
+      - id: "d"
+        label: "No money was ever transferred out of or taken from my account"
+      - id: "e"
+        label: "I don’t know"
+  - id: q176
+    prompt: "Approximately how much money did you lose in the fraud or scam (before any money was recovered)?"
+    type: free_text
+    construct: approximately_much_money_did_lose
+    required: true
+  - id: q177
+    prompt: "Approximately how much money did you recover or get refunded?"
+    type: free_text
+    construct: approximately_much_money_did_recover
+    required: true
+  - id: q178
+    prompt: "Still thinking about the most recent financial fraud or scam you experienced in the past year, how much time have you spent trying to recover funds or dealing with the consequences?"
+    type: single_choice
+    construct: still_thinking_most_recent_financial
+    required: true
+    options:
+      - id: "a"
+        label: "less than 1 hour"
+      - id: "b"
+        label: "1 to 9 hours"
+      - id: "c"
+        label: "10 to 39 hours"
+      - id: "d"
+        label: "40 to 79 hours"
+      - id: "e"
+        label: "80 hours or more"
+  - id: q179
+    prompt: "Did the financial fraud or scam that you experienced involve your checking, savings, or money market account?"
+    type: single_choice
+    construct: did_financial_fraud_scam_that
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q180
+    prompt: "What service or product from your bank or credit union was involved in the most recent fraud or scam involving money from your checking, savings, or money market account (NOT a credit card)? Please select all that apply. — Debit card"
+    type: single_choice
+    construct: service_product_from_bank_credit
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q181
+    prompt: "What service or product from your bank or credit union was involved in the most recent fraud or scam involving money from your checking, savings, or money market account (NOT a credit card)? Please select all that apply. — Peer-to-peer payment service (such as Zelle)"
+    type: single_choice
+    construct: service_product_from_bank_credit
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q182
+    prompt: "What service or product from your bank or credit union was involved in the most recent fraud or scam involving money from your checking, savings, or money market account (NOT a credit card)? Please select all that apply. — Bank wire transfer or payment"
+    type: single_choice
+    construct: service_product_from_bank_credit
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q183
+    prompt: "What service or product from your bank or credit union was involved in the most recent fraud or scam involving money from your checking, savings, or money market account (NOT a credit card)? Please select all that apply. — Personal check"
+    type: single_choice
+    construct: service_product_from_bank_credit
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q184
+    prompt: "What service or product from your bank or credit union was involved in the most recent fraud or scam involving money from your checking, savings, or money market account (NOT a credit card)? Please select all that apply. — Cashier's check or money order"
+    type: single_choice
+    construct: service_product_from_bank_credit
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q185
+    prompt: "What service or product from your bank or credit union was involved in the most recent fraud or scam involving money from your checking, savings, or money market account (NOT a credit card)? Please select all that apply. — Cash withdrawal (from an ATM or a branch)"
+    type: single_choice
+    construct: service_product_from_bank_credit
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q186
+    prompt: "What service or product from your bank or credit union was involved in the most recent fraud or scam involving money from your checking, savings, or money market account (NOT a credit card)? Please select all that apply. — Loan"
+    type: single_choice
+    construct: service_product_from_bank_credit
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q187
+    prompt: "What service or product from your bank or credit union was involved in the most recent fraud or scam involving money from your checking, savings, or money market account (NOT a credit card)? Please select all that apply. — Other service or product (please specify)"
+    type: single_choice
+    construct: service_product_from_bank_credit
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q188
+    prompt: "If you were to apply for a credit card today, how confident are you that your application would be approved?"
+    type: single_choice
+    construct: if_were_apply_credit_card
+    required: true
+    options:
+      - id: "a"
+        label: "Don’t know"
+      - id: "b"
+        label: "Very confident"
+      - id: "c"
+        label: "Somewhat confident"
+      - id: "d"
+        label: "Not confident"
+  - id: q189
+    prompt: "In the past 12 months have you applied for any credit (such as a credit card, higher credit card limit, mortgage, refinance, student loan, personal loan, or other loan)?"
+    type: single_choice
+    construct: past_12_months_have_applied
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q190
+    prompt: "Have you applied for each of the following types of credit in the past 12 months? — Credit card"
+    type: single_choice
+    construct: have_applied_each_following_types
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q191
+    prompt: "Have you applied for each of the following types of credit in the past 12 months? — Car/auto loan"
+    type: single_choice
+    construct: have_applied_each_following_types
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q192
+    prompt: "Have you applied for each of the following types of credit in the past 12 months? — Student loan"
+    type: single_choice
+    construct: have_applied_each_following_types
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q193
+    prompt: "Have you applied for each of the following types of credit in the past 12 months? — Mortgage (purchase or refinance)"
+    type: single_choice
+    construct: have_applied_each_following_types
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q194
+    prompt: "Have you applied for each of the following types of credit in the past 12 months? — Home equity loan or line of credit"
+    type: single_choice
+    construct: have_applied_each_following_types
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q195
+    prompt: "Have you applied for each of the following types of credit in the past 12 months? — Other credit or loan"
+    type: single_choice
+    construct: have_applied_each_following_types
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q196
+    prompt: "Was there a time in the past 12 months that you desired credit but chose not to submit a credit application?"
+    type: single_choice
+    construct: was_there_time_past_12
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q197
+    prompt: "In the past 12 months, has each of the following happened to you: Turned down for credit"
+    type: single_choice
+    construct: past_12_months_has_each
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q198
+    prompt: "In the past 12 months, has each of the following happened to you: Approved for credit, but were not given as much credit as you applied for"
+    type: single_choice
+    construct: past_12_months_has_each
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q199
+    prompt: "In the past 12 months, has each of the following happened to you: Put off applying for credit because you thought you might be turned down"
+    type: single_choice
+    construct: past_12_months_has_each
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q200
+    prompt: "Were you turned down or offered less credit than requested for the following types of credit in the past 12 months? — Credit card"
+    type: single_choice
+    construct: were_turned_down_offered_less
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q201
+    prompt: "Were you turned down or offered less credit than requested for the following types of credit in the past 12 months? — Car/auto loan"
+    type: single_choice
+    construct: were_turned_down_offered_less
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q202
+    prompt: "Were you turned down or offered less credit than requested for the following types of credit in the past 12 months? — Student loan"
+    type: single_choice
+    construct: were_turned_down_offered_less
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q203
+    prompt: "Were you turned down or offered less credit than requested for the following types of credit in the past 12 months? — Mortgage (purchase or refinance)"
+    type: single_choice
+    construct: were_turned_down_offered_less
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q204
+    prompt: "Were you turned down or offered less credit than requested for the following types of credit in the past 12 months? — Home equity loan or line of credit"
+    type: single_choice
+    construct: were_turned_down_offered_less
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q205
+    prompt: "Were you turned down or offered less credit than requested for the following types of credit in the past 12 months? — Other credit or loan"
+    type: single_choice
+    construct: were_turned_down_offered_less
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q206
+    prompt: "You indicated that you desired credit in the past 12 months but did not submit a credit application. Was this because you thought that you might be turned down or denied credit?"
+    type: single_choice
+    construct: indicated_that_desired_credit_past
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q207
+    prompt: "Do you currently have at least one credit card? Please do not include debit cards or prepaid cards."
+    type: single_choice
+    construct: currently_have_least_one_credit
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q208
+    prompt: "Last month, how did you handle your credit card bills?"
+    type: single_choice
+    construct: last_month_did_handle_credit
+    required: true
+    options:
+      - id: "a"
+        label: "did not use any of my credit cards so had no balances"
+      - id: "b"
+        label: "paid at least the minimum payment on all credit cards"
+      - id: "c"
+        label: "did not pay or paid less than the minimum payment on at least one card"
+  - id: q209
+    prompt: "In the past 12 months, how frequently have you carried an unpaid balance on one or more of your credit cards?"
+    type: single_choice
+    construct: past_12_months_frequently_have
+    required: true
+    options:
+      - id: "a"
+        label: "Never carried an unpaid balance (always pay in full)"
+      - id: "b"
+        label: "Once"
+      - id: "c"
+        label: "Some of the time"
+      - id: "d"
+        label: "Most or all of the time"
+  - id: q210
+    prompt: "In the past year, have you used a “Buy Now Pay Later” service to buy something?"
+    type: single_choice
+    construct: past_year_have_used_buy
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q211
+    prompt: "In the past year, have you ever been late making a payment for something you bought using a Buy Now Pay Later service?"
+    type: single_choice
+    construct: past_year_have_ever_been
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q212
+    prompt: "In the past year, have you been charged extra because you were late on a buy now pay later payment?"
+    type: single_choice
+    construct: past_year_have_been_charged
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q213
+    prompt: "Thinking about the most recent time you used a Buy Now Pay Later service, were each of the following a reason why you chose to finance the purchase in this way? — Avoid interest charges"
+    type: single_choice
+    construct: thinking_most_recent_time_used
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q214
+    prompt: "Thinking about the most recent time you used a Buy Now Pay Later service, were each of the following a reason why you chose to finance the purchase in this way? — Wanted to spread out payments"
+    type: single_choice
+    construct: thinking_most_recent_time_used
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q215
+    prompt: "Thinking about the most recent time you used a Buy Now Pay Later service, were each of the following a reason why you chose to finance the purchase in this way? — Wanted a fixed number of payments"
+    type: single_choice
+    construct: thinking_most_recent_time_used
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q216
+    prompt: "Thinking about the most recent time you used a Buy Now Pay Later service, were each of the following a reason why you chose to finance the purchase in this way? — Convenience"
+    type: single_choice
+    construct: thinking_most_recent_time_used
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q217
+    prompt: "Thinking about the most recent time you used a Buy Now Pay Later service, were each of the following a reason why you chose to finance the purchase in this way? — Only way I could afford it"
+    type: single_choice
+    construct: thinking_most_recent_time_used
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q218
+    prompt: "Thinking about the most recent time you used a Buy Now Pay Later service, were each of the following a reason why you chose to finance the purchase in this way? — Only accepted payment method I had – Thinking about the most recent time you used a Buy Now Pay Later service, were each of the following a reason why you chose to finance the purchase in this way?"
+    type: single_choice
+    construct: thinking_most_recent_time_used
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q219
+    prompt: "Thinking about the most recent time you used a Buy Now Pay Later service, were each of the following a reason why you chose to finance the purchase in this way? — Did not want to use a credit card"
+    type: single_choice
+    construct: thinking_most_recent_time_used
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q220
+    prompt: "In the past year, have you done the following with cryptocurrency, such as Bitcoin or Ethereum? — Bought cryptocurrency or held as an investment"
+    type: single_choice
+    construct: past_year_have_done_following
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q221
+    prompt: "In the past year, have you done the following with cryptocurrency, such as Bitcoin or Ethereum? — Used cryptocurrency to buy something or make a payment"
+    type: single_choice
+    construct: past_year_have_done_following
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q222
+    prompt: "In the past year, have you done the following with cryptocurrency, such as Bitcoin or Ethereum? — Used cryptocurrency to send money to friends or family"
+    type: single_choice
+    construct: past_year_have_done_following
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q223
+    prompt: "Were any of the family or friends you sent cryptocurrency to living outside of the United States?"
+    type: single_choice
+    construct: were_any_family_friends_sent
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q224
+    prompt: "What was the main reason you used cryptocurrency to buy something, make a payment, or send money?"
+    type: single_choice
+    construct: was_main_reason_used_cryptocurrency
+    required: true
+    options:
+      - id: "a"
+        label: "Privacy"
+      - id: "b"
+        label: "To send the money faster"
+      - id: "c"
+        label: "Cheaper"
+      - id: "d"
+        label: "Safer"
+      - id: "e"
+        label: "Don’t trust banks"
+      - id: "f"
+        label: "Person or business receiving the money preferred cryptocurrency"
+      - id: "g"
+        label: "Other (please specify)"
+  - id: q225
+    prompt: "What is the highest level of school you have completed or the highest degree you have received?"
+    type: single_choice
+    construct: highest_level_school_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school degree"
+      - id: "b"
+        label: "High school degree or GED"
+      - id: "c"
+        label: "Some college but no degree (including currently enrolled in college)"
+      - id: "d"
+        label: "Certificate or technical degree"
+      - id: "e"
+        label: "Associate degree"
+      - id: "f"
+        label: "Bachelor’s degree"
+      - id: "g"
+        label: "Master’s degree"
+      - id: "h"
+        label: "Professional degree (e.g., MBA, MD, JD)"
+      - id: "i"
+        label: "Doctoral degree"
+  - id: q226
+    prompt: "Are you currently enrolled as a student?"
+    type: single_choice
+    construct: currently_enrolled_as_student
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes, as a part-time student"
+      - id: "c"
+        label: "Yes, as a full-time student"
+  - id: q227
+    prompt: "What type of program are you currently pursuing?"
+    type: single_choice
+    construct: type_program_currently_pursuing
+    required: true
+    options:
+      - id: "a"
+        label: "High school or GED program"
+      - id: "b"
+        label: "Non-degree training program"
+      - id: "c"
+        label: "Certificate or technical degree"
+      - id: "d"
+        label: "Associate degree"
+      - id: "e"
+        label: "Bachelor’s degree"
+      - id: "f"
+        label: "Master’s degree"
+      - id: "g"
+        label: "Professional degree (e.g., MBA, MD, JD)"
+      - id: "h"
+        label: "Doctoral degree"
+  - id: q228
+    prompt: "Have you ever enrolled in an educational degree program beyond high school?"
+    type: single_choice
+    construct: have_ever_enrolled_educational_degree
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q229
+    prompt: "Which one of the following broad categories best describes your (current/most recent) educational program?"
+    type: free_text
+    construct: one_following_broad_categories_best
+    required: true
+  - id: q230
+    prompt: "Do you currently have any student loan debt from your own education?"
+    type: single_choice
+    construct: currently_have_any_student_loan
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q231
+    prompt: "How much do you currently owe on student loans for your own education?"
+    type: free_text
+    construct: much_currently_owe_student_loans
+    required: true
+  - id: q232
+    prompt: "Are you currently required to make monthly payments on any of your student loans from your own education?"
+    type: single_choice
+    construct: currently_required_make_monthly_payments
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q233
+    prompt: "Approximately how much is your current required monthly payment on the student loans from your own education?"
+    type: single_choice
+    construct: approximately_much_current_required_mont
+    required: true
+    options:
+      - id: "a"
+        label: "Don’t know"
+      - id: "b"
+        label: "$1 to $99"
+      - id: "c"
+        label: "$100 to $199"
+      - id: "d"
+        label: "$200 to $299"
+      - id: "e"
+        label: "$300 to $399"
+      - id: "f"
+        label: "$400 to $499"
+      - id: "g"
+        label: "$500 to $999"
+      - id: "h"
+        label: "$1,000 or above"
+  - id: q234
+    prompt: "Are you behind on payments or in collections for one or more of the student loans from your own education?"
+    type: single_choice
+    construct: behind_payments_collections_one_more
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q235
+    prompt: "Did you take out any student loans to pay for your own education that you have since repaid?"
+    type: single_choice
+    construct: did_take_out_any_student
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q236
+    prompt: "Still thinking about your own education, did you take out any student loans for each of the following educational programs (including any repaid loans for education you did not complete)? — Certificate or technical training"
+    type: single_choice
+    construct: still_thinking_own_education_did
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q237
+    prompt: "Still thinking about your own education, did you take out any student loans for each of the following educational programs (including any repaid loans for education you did not complete?? — Associate degree – Still thinking about your own education, did you take out any student loans for each of the following educational programs (including any repaid loans for education you did not complete)?"
+    type: single_choice
+    construct: still_thinking_own_education_did
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q238
+    prompt: "Still thinking about your own education, did you take out any student loans for each of the following educational programs (including any repaid loans for education you did not complete?? — Bachelor's degree – Still thinking about your own education, did you take out any student loans for each of the following educational programs (including any repaid loans for education you did not complete)?"
+    type: single_choice
+    construct: still_thinking_own_education_did
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q239
+    prompt: "Still thinking about your own education, did you take out any student loans for each of the following educational programs (including any repaid loans for education you did not complete?? — Professional degree (e.g., MBA, MD, JD)"
+    type: single_choice
+    construct: still_thinking_own_education_did
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q240
+    prompt: "Still thinking about your own education, did you take out any student loans for each of the following educational programs (including any repaid loans for education you did not complete? — Master's degree or doctoral degree"
+    type: single_choice
+    construct: still_thinking_own_education_did
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q241
+    prompt: "Does your spouse or partner currently have any student loans used to pay for their education?"
+    type: single_choice
+    construct: does_spouse_partner_currently_have
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q242
+    prompt: "Do you currently have any student loans used to pay for your child's or grandchild’s education?"
+    type: single_choice
+    construct: currently_have_any_student_loans
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+      - id: "c"
+        label: "Do not have children or grandchildren"
+  - id: q243
+    prompt: "How much do you owe on student loans for your child's or grandchild’s education?"
+    type: free_text
+    construct: much_owe_student_loans_child
+    required: true
+  - id: q244
+    prompt: "Do you consider yourself to be retired?"
+    type: single_choice
+    construct: consider_yourself_be_retired
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q245
+    prompt: "Do you think that your retirement savings plan is currently on track?"
+    type: single_choice
+    construct: think_that_retirement_savings_plan
+    required: true
+    options:
+      - id: "a"
+        label: "Don’t know"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Yes"
+  - id: q246
+    prompt: "When did you retire?"
+    type: single_choice
+    construct: when_did_retire
+    required: true
+    options:
+      - id: "a"
+        label: "Within the past year"
+      - id: "b"
+        label: "1 or 2 years ago"
+      - id: "c"
+        label: "3 or 4 years ago"
+      - id: "d"
+        label: "5 years ago or more"
+  - id: q247
+    prompt: "Were each of the following important to your decision to retire at the age that you did? — Health problem"
+    type: single_choice
+    construct: were_each_following_important_decision
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q248
+    prompt: "Were each of the following important to your decision to retire at the age that you did? — Wanted to do other things or spend time with family"
+    type: single_choice
+    construct: were_each_following_important_decision
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q249
+    prompt: "Were each of the following important to your decision to retire at the age that you did? — Didn't like the work"
+    type: single_choice
+    construct: were_each_following_important_decision
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q250
+    prompt: "Were each of the following important to your decision to retire at the age that you did? — Care for family members"
+    type: single_choice
+    construct: were_each_following_important_decision
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q251
+    prompt: "Were each of the following important to your decision to retire at the age that you did? — Reached normal retirement age"
+    type: single_choice
+    construct: were_each_following_important_decision
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q252
+    prompt: "Were each of the following important to your decision to retire at the age that you did? — Forced to retire or lack of available work"
+    type: single_choice
+    construct: were_each_following_important_decision
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q253
+    prompt: "You indicated you consider yourself to be retired and that you worked for pay last month. Were each of the following important for your decision to work last month? — Financial reasons (such as earning money or keeping health insurance)"
+    type: single_choice
+    construct: indicated_consider_yourself_be_retired
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q254
+    prompt: "You indicated you consider yourself to be retired and that you worked for pay last month. Were each of the following important for your decision to work last month? — Nonfinancial reasons (such as enjoy work/sense of purpose or social connections)"
+    type: single_choice
+    construct: indicated_consider_yourself_be_retired
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q255
+    prompt: "Were each of the following true about your decision to work last month? — I needed money to make ends meet"
+    type: single_choice
+    construct: were_each_following_true_decision
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q256
+    prompt: "Were each of the following true about your decision to work last month? — I wanted extra spending money"
+    type: single_choice
+    construct: were_each_following_true_decision
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q257
+    prompt: "Were each of the following true about your decision to work last month? — I worked because I needed to keep health insurance"
+    type: single_choice
+    construct: were_each_following_true_decision
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q258
+    prompt: "Were each of the following true about your decision to work last month? — I worked to save more money, make retirement savings last longer, or delay claiming Social Security"
+    type: single_choice
+    construct: were_each_following_true_decision
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q259
+    prompt: "Were each of the following true about your decision to work last month? — Working enabled me to give financial help to family members or friends"
+    type: single_choice
+    construct: were_each_following_true_decision
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q260
+    prompt: "Do you currently have each of the following types of savings or assets? — Retirement savings account, such as a 401(k) plan through an employer, IRA or Roth IRA – Do you currently have each of the following types of savings or assets?"
+    type: single_choice
+    construct: currently_have_each_following_types
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q261
+    prompt: "Do you currently have each of the following types of savings or assets? — Pension with a defined benefit through an employer that will pay a monthly amount in retirement"
+    type: single_choice
+    construct: currently_have_each_following_types
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q262
+    prompt: "Do you currently have each of the following types of savings or assets? — Stocks, bonds, ETFs, or mutual funds held outside a retirement account"
+    type: single_choice
+    construct: currently_have_each_following_types
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q263
+    prompt: "Do you currently have each of the following types of savings or assets? — Savings account, money market account, or certificate of deposit (CD)"
+    type: single_choice
+    construct: currently_have_each_following_types
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q264
+    prompt: "Do you currently have each of the following types of savings or assets? — Cash value in a life insurance policy"
+    type: single_choice
+    construct: currently_have_each_following_types
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q265
+    prompt: "Do you currently have each of the following types of savings or assets? — Business or real estate investment (other than your primary residence)"
+    type: single_choice
+    construct: currently_have_each_following_types
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q266
+    prompt: "How comfortable are you with choosing and managing your investments?"
+    type: single_choice
+    construct: comfortable_choosing_managing_investment
+    required: true
+    options:
+      - id: "a"
+        label: "Very comfortable"
+      - id: "b"
+        label: "Mostly comfortable"
+      - id: "c"
+        label: "Slightly comfortable"
+      - id: "d"
+        label: "Not comfortable"
+  - id: q267
+    prompt: "In the past 12 months, have you done each of the following? — Borrowed money from your retirement accounts"
+    type: single_choice
+    construct: past_12_months_have_done
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q268
+    prompt: "In the past 12 months, have you done each of the following? — Cashed out (permanently withdrawn) money from your retirement account"
+    type: single_choice
+    construct: past_12_months_have_done
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q269
+    prompt: "In the past 12 months, have you done each of the following? — Reduced your regular contributions to your retirement accounts"
+    type: single_choice
+    construct: past_12_months_have_done
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q270
+    prompt: "In the past 12 months, did you (and/or your spouse or partner) receive any income from the following sources: Wages, salaries, or self-employment income"
+    type: single_choice
+    construct: past_12_months_did_spouse
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q271
+    prompt: "In the past 12 months, did you (and/or your spouse or partner) receive any income from the following sources: Interest, dividends, or rental income"
+    type: single_choice
+    construct: past_12_months_did_spouse
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q272
+    prompt: "In the past 12 months, did you (and/or your spouse or partner) receive any income from the following sources: Social Security (including old age and DI)"
+    type: single_choice
+    construct: past_12_months_did_spouse
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q273
+    prompt: "In the past 12 months, did you (and/or your spouse or partner) receive any income from the following sources: Supplemental Security Income (SSI), TANF, or cash assistance from a welfare program – In the past 12 months, did you (and/or your spouse or partner) receive any income from the following sources:"
+    type: single_choice
+    construct: past_12_months_did_spouse
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q274
+    prompt: "In the past 12 months, did you (and/or your spouse or partner) receive any income from the following sources: Unemployment income"
+    type: single_choice
+    construct: past_12_months_did_spouse
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q275
+    prompt: "In the past 12 months, did you (and/or your spouse or partner) receive any income from the following sources: Pension"
+    type: single_choice
+    construct: past_12_months_did_spouse
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q276
+    prompt: "Which category represents your (and your spouse/partner’s) total combined income in the past 12 months?"
+    type: free_text
+    construct: category_represents_spouse_partner_s
+    required: true
+  - id: q277
+    prompt: "In the past 12 months, have you (and/or your spouse or partner) received any of the following? — Earned Income Tax Credit (EITC)"
+    type: single_choice
+    construct: past_12_months_have_spouse
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q278
+    prompt: "In the past 12 months, have you (and/or your spouse or partner) received any of the following? — Supplemental Nutrition Assistance Program (SNAP or food stamps)"
+    type: single_choice
+    construct: past_12_months_have_spouse
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q279
+    prompt: "In the past 12 months, have you (and/or your spouse or partner) received any of the following? — Women, Infants, and Children (WIC) nutrition program benefits"
+    type: single_choice
+    construct: past_12_months_have_spouse
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q280
+    prompt: "In the past 12 months, have you (and/or your spouse or partner) received any of the following? — Housing assistance from government program"
+    type: single_choice
+    construct: past_12_months_have_spouse
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q281
+    prompt: "In the past 12 months, have you (and/or your spouse or partner) received any of the following? — Free or reduced price school lunches for your children"
+    type: single_choice
+    construct: past_12_months_have_spouse
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q282
+    prompt: "In the past 12 months, which one of the following best describes your (and your spouse’s or partner’s) income?"
+    type: single_choice
+    construct: past_12_months_one_following
+    required: true
+    options:
+      - id: "a"
+        label: "Roughly the same amount each month"
+      - id: "b"
+        label: "Occasionally varies from month to month"
+      - id: "c"
+        label: "Varies quite often from month to month"
+  - id: q283
+    prompt: "Because your income varies, have you and your spouse or partner struggled to pay your bills in the past 12 months?"
+    type: single_choice
+    construct: because_income_varies_have_spouse
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q284
+    prompt: "In the past month, would you say that your [and your spouse’s or partner’s] total spending was:"
+    type: single_choice
+    construct: past_month_would_say_that
+    required: true
+    options:
+      - id: "a"
+        label: "Less than your income"
+      - id: "b"
+        label: "The same as your income"
+      - id: "c"
+        label: "More than your income"
+  - id: q285
+    prompt: "Compared to a year ago, have each of the following [for you and your spouse or partner] increased, decreased, or stayed about the same? — Total monthly income"
+    type: single_choice
+    construct: compared_year_ago_have_each
+    required: true
+    options:
+      - id: "a"
+        label: "Decreased"
+      - id: "b"
+        label: "About the same"
+      - id: "c"
+        label: "Increased"
+  - id: q286
+    prompt: "Compared to a year ago, have each of the following [for you and your spouse or partner] increased, decreased, or stayed about the same? — Total monthly spending"
+    type: single_choice
+    construct: compared_year_ago_have_each
+    required: true
+    options:
+      - id: "a"
+        label: "Decreased"
+      - id: "b"
+        label: "About the same"
+      - id: "c"
+        label: "Increased"
+  - id: q287
+    prompt: "Overall, have changes in the prices you pay compared to last year made your financial situation worse, better, or had little to no effect?"
+    type: single_choice
+    construct: overall_have_changes_prices_pay
+    required: true
+    options:
+      - id: "a"
+        label: "Much worse"
+      - id: "b"
+        label: "Somewhat worse"
+      - id: "c"
+        label: "Little or no effect"
+      - id: "d"
+        label: "Somewhat better"
+      - id: "e"
+        label: "Much better"
+  - id: q288
+    prompt: "Did you take any of the following actions because of increase in prices over the past 12 months? — Switched to cheaper products"
+    type: single_choice
+    construct: did_take_any_following_actions
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q289
+    prompt: "Did you take any of the following actions because of increases in prices over the past 12 months? — Used less or stopped using products"
+    type: single_choice
+    construct: did_take_any_following_actions
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q290
+    prompt: "Did you take any of the following actions because of increases in prices over the past 12 months? — Reduced savings"
+    type: single_choice
+    construct: did_take_any_following_actions
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q291
+    prompt: "Did you take any of the following actions because of increases in prices over the past 12 months? — Increased borrowing"
+    type: single_choice
+    construct: did_take_any_following_actions
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q292
+    prompt: "Did you take any of the following actions because of increases in prices over the past 12 months? — Delayed a major purchase"
+    type: single_choice
+    construct: did_take_any_following_actions
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q293
+    prompt: "Did you take any of the following actions because of increases in prices over the past 12 months? — Worked more or got another job"
+    type: single_choice
+    construct: did_take_any_following_actions
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q294
+    prompt: "Did you take any of the following actions because of increases in prices over the past 12 months? — Asked for a raise"
+    type: single_choice
+    construct: did_take_any_following_actions
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q295
+    prompt: "Have you set aside emergency or rainy day funds that would cover your expenses for 3 months in case of sickness, job loss, economic downturn, or other emergencies?"
+    type: single_choice
+    construct: have_set_aside_emergency_rainy
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q296
+    prompt: "If you were to lose your main source of income (for example job or government benefits), could you cover you expenses for 3 months by borrowing money, using savings, or selling assets?"
+    type: single_choice
+    construct: if_were_lose_main_source
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q297
+    prompt: "Suppose that you have an emergency expense that costs $400. Based on your current financial situation, how would you pay for this expense? — Put it on my credit card and pay it off in full at the next statement – Suppose that you have an emergency expense that costs $400. Based on your current financial situation, How would you pay for this expense?"
+    type: single_choice
+    construct: suppose_that_have_emergency_expense
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q298
+    prompt: "Suppose that you have an emergency expense that costs $400. Based on your current financial situation, how would you pay for this expense? — Put it on my credit card and pay it off over time"
+    type: single_choice
+    construct: suppose_that_have_emergency_expense
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q299
+    prompt: "Suppose that you have an emergency expense that costs $400. Based on your current financial situation, how would you pay for this expense? — With the money currently in my checking/savings account or with cash"
+    type: single_choice
+    construct: suppose_that_have_emergency_expense
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q300
+    prompt: "Suppose that you have an emergency expense that costs $400. Based on your current financial situation, how would you pay for this expense? — Using money from a bank loan or line of credit"
+    type: single_choice
+    construct: suppose_that_have_emergency_expense
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q301
+    prompt: "Suppose that you have an emergency expense that costs $400. Based on your current financial situation, how would you pay for this expense? — By borrowing from a friend or family member"
+    type: single_choice
+    construct: suppose_that_have_emergency_expense
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q302
+    prompt: "Suppose that you have an emergency expense that costs $400. Based on your current financial situation, how would you pay for this expense? — Using a payday loan, deposit advance, or overdraft"
+    type: single_choice
+    construct: suppose_that_have_emergency_expense
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q303
+    prompt: "Suppose that you have an emergency expense that costs $400. Based on your current financial situation, how would you pay for this expense? — By selling something"
+    type: single_choice
+    construct: suppose_that_have_emergency_expense
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q304
+    prompt: "Suppose that you have an emergency expense that costs $400. Based on your current financial situation, how would you pay for this expense? — I wouldn't be able to pay for the expense right now"
+    type: single_choice
+    construct: suppose_that_have_emergency_expense
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q305
+    prompt: "Other than any credit card bills you may have, did you pay all your bills in full last month?"
+    type: single_choice
+    construct: other_than_any_credit_card
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q306
+    prompt: "How did you handle each of the following types of bills last month? — Rent or mortgage"
+    type: single_choice
+    construct: did_handle_each_following_types
+    required: true
+    options:
+      - id: "a"
+        label: "Does not apply (do not have bill)"
+      - id: "b"
+        label: "Made partial payment or did not pay"
+      - id: "c"
+        label: "Paid in full"
+  - id: q307
+    prompt: "How did you handle each of the following types of bills last month? — Water, gas, and electric bills"
+    type: single_choice
+    construct: did_handle_each_following_types
+    required: true
+    options:
+      - id: "a"
+        label: "Does not apply (do not have bill)"
+      - id: "b"
+        label: "Made partial payment or did not pay"
+      - id: "c"
+        label: "Paid in full"
+  - id: q308
+    prompt: "How did you handle each of the following type of bills last month? — Phone, internet, and cable bills"
+    type: single_choice
+    construct: did_handle_each_following_type
+    required: true
+    options:
+      - id: "a"
+        label: "Does not apply (do not have bill)"
+      - id: "b"
+        label: "Made partial payment or did not pay"
+      - id: "c"
+        label: "Paid in full"
+  - id: q309
+    prompt: "How did you handle each of the following types of bills last month? — Car payment"
+    type: single_choice
+    construct: did_handle_each_following_types
+    required: true
+    options:
+      - id: "a"
+        label: "Does not apply (do not have bill)"
+      - id: "b"
+        label: "Made partial payment or did not pay"
+      - id: "c"
+        label: "Paid in full"
+  - id: q310
+    prompt: "Based on your current financial situation, what is the largest emergency expense that you could handle right now using only your savings?"
+    type: single_choice
+    construct: based_current_financial_situation_larges
+    required: true
+    options:
+      - id: "a"
+        label: "Under $100"
+      - id: "b"
+        label: "$100 to $499"
+      - id: "c"
+        label: "$500 to $999"
+      - id: "d"
+        label: "$1,000 to $1,999"
+      - id: "e"
+        label: "$2,000 or more"
+  - id: q311
+    prompt: "How well do each of these statements describe you or your situation? — Because of my money situation, I feel like I will never have the things I want in life – How well do each of these statements describe you or your situation?"
+    type: single_choice
+    construct: well_each_these_statements_describe
+    required: true
+    options:
+      - id: "a"
+        label: "Completely"
+      - id: "b"
+        label: "Very well"
+      - id: "c"
+        label: "Somewhat"
+      - id: "d"
+        label: "Very little"
+      - id: "e"
+        label: "Not at all"
+  - id: q312
+    prompt: "How well do each of these statements describe you or your situation? — I am just getting by financially"
+    type: single_choice
+    construct: well_each_these_statements_describe
+    required: true
+    options:
+      - id: "a"
+        label: "Completely"
+      - id: "b"
+        label: "Very well"
+      - id: "c"
+        label: "Somewhat"
+      - id: "d"
+        label: "Very little"
+      - id: "e"
+        label: "Not at all"
+  - id: q313
+    prompt: "How well do each of these statements apply to you? — I am concerned that the money I have or will save won't last"
+    type: single_choice
+    construct: well_each_these_statements_apply
+    required: true
+    options:
+      - id: "a"
+        label: "Completely"
+      - id: "b"
+        label: "Very well"
+      - id: "c"
+        label: "Somewhat"
+      - id: "d"
+        label: "Very little"
+      - id: "e"
+        label: "Not at all"
+  - id: q314
+    prompt: "How often do each of these statements apply to you? — I have money left over at the end of the month"
+    type: single_choice
+    construct: often_each_these_statements_apply
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q315
+    prompt: "How often do each of these statements apply to you? — My finances control my life"
+    type: single_choice
+    construct: often_each_these_statements_apply
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Often"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Rarely"
+      - id: "e"
+        label: "Never"
+  - id: q316
+    prompt: "In the past month, which of these statements best describes the food eaten in your household?"
+    type: single_choice
+    construct: past_month_these_statements_best
+    required: true
+    options:
+      - id: "a"
+        label: "Enough of the kinds of food we wanted to eat"
+      - id: "b"
+        label: "Enough, but not always the kinds of food we wanted to eat"
+      - id: "c"
+        label: "Sometimes not enough to eat"
+      - id: "d"
+        label: "Often not enough to eat"
+  - id: q317
+    prompt: "Have you ever been: Arrested or taken into custody by the police"
+    type: single_choice
+    construct: have_ever_been_arrested_taken
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q318
+    prompt: "Have you ever been: Convicted of a criminal offense but never received a prison sentence"
+    type: single_choice
+    construct: have_ever_been_convicted_criminal
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q319
+    prompt: "Have you ever been: Convicted of a criminal offense and received a prison sentence"
+    type: single_choice
+    construct: have_ever_been_convicted_criminal
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q320
+    prompt: "During the past 12 months, was there a time when you needed each of the following, but went without because you couldn’t afford it? — Prescription medicine"
+    type: single_choice
+    construct: during_past_12_months_was
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q321
+    prompt: "During the past 12 months, was there a time when you needed each of the following, but went without because you couldn’t afford it? — Seeing a doctor or specialist"
+    type: single_choice
+    construct: during_past_12_months_was
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q322
+    prompt: "During the past 12 months, was there a time when you needed each of the following, but went without because you couldn’t afford it? — Mental health care or counseling"
+    type: single_choice
+    construct: during_past_12_months_was
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q323
+    prompt: "During the past 12 months, was there a time when you needed each of the following, but went without because you couldn’t afford it? — Dental care"
+    type: single_choice
+    construct: during_past_12_months_was
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q324
+    prompt: "During the past 12 months, was there a time when you needed each of the following, but went without because you couldn’t afford it? — Follow-up care"
+    type: single_choice
+    construct: during_past_12_months_was
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q325
+    prompt: "During the past 12 months, have you had any unexpected major medical expenses that you had to pay out of pocket because they were not completely paid for by insurance?"
+    type: single_choice
+    construct: during_past_12_months_have
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q326
+    prompt: "Approximately how much did you pay out of pocket for unexpected major medical expenses in the past 12 months?"
+    type: single_choice
+    construct: approximately_much_did_pay_out
+    required: true
+    options:
+      - id: "a"
+        label: "Don’t know"
+      - id: "b"
+        label: "$1 to $499"
+      - id: "c"
+        label: "$500 to $999"
+      - id: "d"
+        label: "$1,000 to $1,999"
+      - id: "e"
+        label: "$2,000 to $4,999"
+      - id: "f"
+        label: "$5,000 or higher"
+  - id: q327
+    prompt: "Do you currently have any debt from medical care you or your family members have received?"
+    type: single_choice
+    construct: currently_have_any_debt_from
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q328
+    prompt: "Are you currently covered by any of the following types of health insurance or health coverage plans? — Insurance through an employer or union"
+    type: single_choice
+    construct: currently_covered_by_any_following
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q329
+    prompt: "Are you currently covered by any of the following types of health insurance or health coverage plans? — Insurance purchased directly from an insurance company"
+    type: single_choice
+    construct: currently_covered_by_any_following
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q330
+    prompt: "Are you currently covered by any of the following types of the following types of health insurance or health coverage plans? — Medicare or Medicaid"
+    type: single_choice
+    construct: currently_covered_by_any_following
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q331
+    prompt: "Are you currently covered by any of the following types of health insurance or health coverage plans? — TRICARE, VA, or other military or veteran's health care"
+    type: single_choice
+    construct: currently_covered_by_any_following
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q332
+    prompt: "Are you currently covered by any of the following types of health insurance or health coverage plans? — Insurance purchased through a health insurance exchange"
+    type: single_choice
+    construct: currently_covered_by_any_following
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q333
+    prompt: "Are you currently covered by any of the following types of health insurance or health coverage plans? — Any other health insurance"
+    type: single_choice
+    construct: currently_covered_by_any_following
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+  - id: q334
+    prompt: "Thinking about your family or primary caregivers growing up, what was the highest level of education achieved by any parent or guardian?"
+    type: single_choice
+    construct: thinking_family_primary_caregivers_growi
+    required: true
+    options:
+      - id: "a"
+        label: "Don’t know"
+      - id: "b"
+        label: "Less than high school degree"
+      - id: "c"
+        label: "High school degree or GED"
+      - id: "d"
+        label: "Some college but no degree"
+      - id: "e"
+        label: "Certificate or technical degree"
+      - id: "f"
+        label: "Associate degree"
+      - id: "g"
+        label: "Bachelor’s degree"
+      - id: "h"
+        label: "Graduate degree"
+  - id: q335
+    prompt: "What is the highest level of school you have completed or the highest degree you have received?"
+    type: single_choice
+    construct: highest_level_school_have_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school degree"
+      - id: "b"
+        label: "High school degree or GED"
+      - id: "c"
+        label: "Some college but no degree (including currently enrolled in college)"
+      - id: "d"
+        label: "Certificate or technical degree"
+      - id: "e"
+        label: "Associate degree"
+      - id: "f"
+        label: "Bachelor’s degree"
+      - id: "g"
+        label: "Master’s degree"
+      - id: "h"
+        label: "Professional degree (e.g., MBA, MD, JD)"
+      - id: "i"
+        label: "Doctoral degree"

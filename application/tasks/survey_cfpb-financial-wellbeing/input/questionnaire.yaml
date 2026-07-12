@@ -1,0 +1,1908 @@
+schemaVersion: "1.0"
+id: cfpb_financial_wellbeing_v1
+title: "CFPB National Financial Well-Being Survey"
+description: "The CFPB's National Financial Well-Being Survey measures the financial well-being of U.S. adults and the individual, household, and financial factors that shape it, using the CFPB'"
+questions:
+  - id: q0
+    prompt: "Please indicate the degree to which you agree or disagree with the following statement: \"I am satisfied with my life.\""
+    type: single_choice
+    construct: please_indicate_degree_agree_disagree
+    required: true
+    options:
+      - id: "a"
+        label: "1 - Strongly disagree"
+      - id: "b"
+        label: "2"
+      - id: "c"
+        label: "3"
+      - id: "d"
+        label: "4"
+      - id: "e"
+        label: "5"
+      - id: "f"
+        label: "6"
+      - id: "g"
+        label: "7 - Strongly agree"
+  - id: q1
+    prompt: "Please indicate the degree to which you agree or disagree with the following statement: \"I am optimistic about my future.\""
+    type: single_choice
+    construct: please_indicate_degree_agree_disagree
+    required: true
+    options:
+      - id: "a"
+        label: "1 - Strongly disagree"
+      - id: "b"
+        label: "2"
+      - id: "c"
+        label: "3"
+      - id: "d"
+        label: "4"
+      - id: "e"
+        label: "5"
+      - id: "f"
+        label: "6"
+      - id: "g"
+        label: "7 - Strongly agree"
+  - id: q2
+    prompt: "Please indicate the degree to which you agree or disagree with the following statement: \"If I work hard today, I will be more successful in the future.\""
+    type: single_choice
+    construct: please_indicate_degree_agree_disagree
+    required: true
+    options:
+      - id: "a"
+        label: "1 - Strongly disagree"
+      - id: "b"
+        label: "2"
+      - id: "c"
+        label: "3"
+      - id: "d"
+        label: "4"
+      - id: "e"
+        label: "5"
+      - id: "f"
+        label: "6"
+      - id: "g"
+        label: "7 - Strongly agree"
+  - id: q3
+    prompt: "How well does this statement describe you or your situation? \"I could handle a major unexpected expense.\""
+    type: single_choice
+    construct: well_does_this_statement_describe
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "Very little"
+      - id: "c"
+        label: "Somewhat"
+      - id: "d"
+        label: "Very well"
+      - id: "e"
+        label: "Completely"
+  - id: q4
+    prompt: "How well does this statement describe you or your situation? \"I am securing my financial future.\""
+    type: single_choice
+    construct: well_does_this_statement_describe
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "Very little"
+      - id: "c"
+        label: "Somewhat"
+      - id: "d"
+        label: "Very well"
+      - id: "e"
+        label: "Completely"
+  - id: q5
+    prompt: "How well does this statement describe you or your situation? \"Because of my money situation, I feel like I will never have the things I want in life.\""
+    type: single_choice
+    construct: well_does_this_statement_describe
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "Very little"
+      - id: "c"
+        label: "Somewhat"
+      - id: "d"
+        label: "Very well"
+      - id: "e"
+        label: "Completely"
+  - id: q6
+    prompt: "How well does this statement describe you or your situation? \"I can enjoy life because of the way I'm managing my money.\""
+    type: single_choice
+    construct: well_does_this_statement_describe
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "Very little"
+      - id: "c"
+        label: "Somewhat"
+      - id: "d"
+        label: "Very well"
+      - id: "e"
+        label: "Completely"
+  - id: q7
+    prompt: "How well does this statement describe you or your situation? \"I am just getting by financially.\""
+    type: single_choice
+    construct: well_does_this_statement_describe
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "Very little"
+      - id: "c"
+        label: "Somewhat"
+      - id: "d"
+        label: "Very well"
+      - id: "e"
+        label: "Completely"
+  - id: q8
+    prompt: "How well does this statement describe you or your situation? \"I am concerned that the money I have or will save won't last.\""
+    type: single_choice
+    construct: well_does_this_statement_describe
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "Very little"
+      - id: "c"
+        label: "Somewhat"
+      - id: "d"
+        label: "Very well"
+      - id: "e"
+        label: "Completely"
+  - id: q9
+    prompt: "How often does this statement apply to you or your situation? \"Giving a gift for a wedding, birthday or other occasion would put a strain on my finances for the month.\""
+    type: single_choice
+    construct: often_does_this_statement_apply
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q10
+    prompt: "How often does this statement apply to you or your situation? \"I have money left over at the end of the month.\""
+    type: single_choice
+    construct: often_does_this_statement_apply
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q11
+    prompt: "How often does this statement apply to you or your situation? \"I am behind with my finances.\""
+    type: single_choice
+    construct: often_does_this_statement_apply
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q12
+    prompt: "How often does this statement apply to you or your situation? \"My finances control my life.\""
+    type: single_choice
+    construct: often_does_this_statement_apply
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q13
+    prompt: "How well does this statement describe you or your situation? \"I know how to get myself to follow through on my financial intentions.\""
+    type: single_choice
+    construct: well_does_this_statement_describe
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "Very little"
+      - id: "c"
+        label: "Somewhat"
+      - id: "d"
+        label: "Very well"
+      - id: "e"
+        label: "Completely"
+  - id: q14
+    prompt: "How well does this statement describe you or your situation? \"I know where to find the advice I need to make decisions involving money.\""
+    type: single_choice
+    construct: well_does_this_statement_describe
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "Very little"
+      - id: "c"
+        label: "Somewhat"
+      - id: "d"
+        label: "Very well"
+      - id: "e"
+        label: "Completely"
+  - id: q15
+    prompt: "How well does this statement describe you or your situation? \"I know how to make complex financial decisions.\""
+    type: single_choice
+    construct: well_does_this_statement_describe
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "Very little"
+      - id: "c"
+        label: "Somewhat"
+      - id: "d"
+        label: "Very well"
+      - id: "e"
+        label: "Completely"
+  - id: q16
+    prompt: "How well does this statement describe you or your situation? \"I am able to make good financial decisions that are new to me.\""
+    type: single_choice
+    construct: well_does_this_statement_describe
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "Very little"
+      - id: "c"
+        label: "Somewhat"
+      - id: "d"
+        label: "Very well"
+      - id: "e"
+        label: "Completely"
+  - id: q17
+    prompt: "How well does this statement describe you or your situation? \"I am able to recognize a good financial investment.\""
+    type: single_choice
+    construct: well_does_this_statement_describe
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "Very little"
+      - id: "c"
+        label: "Somewhat"
+      - id: "d"
+        label: "Very well"
+      - id: "e"
+        label: "Completely"
+  - id: q18
+    prompt: "How well does this statement describe you or your situation? \"I know how to keep myself from spending too much.\""
+    type: single_choice
+    construct: well_does_this_statement_describe
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "Very little"
+      - id: "c"
+        label: "Somewhat"
+      - id: "d"
+        label: "Very well"
+      - id: "e"
+        label: "Completely"
+  - id: q19
+    prompt: "How well does this statement describe you or your situation? \"I know how to make myself save.\""
+    type: single_choice
+    construct: well_does_this_statement_describe
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "Very little"
+      - id: "c"
+        label: "Somewhat"
+      - id: "d"
+        label: "Very well"
+      - id: "e"
+        label: "Completely"
+  - id: q20
+    prompt: "How often does this statement apply to you or your situation? \"I know when I do not have enough information to make a good decision involving my money.\""
+    type: single_choice
+    construct: often_does_this_statement_apply
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q21
+    prompt: "How often does this statement apply to you or your situation? \"I know when I need advice about my money.\""
+    type: single_choice
+    construct: often_does_this_statement_apply
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q22
+    prompt: "How often does this statement apply to you or your situation? \"I struggle to understand financial information.\""
+    type: single_choice
+    construct: often_does_this_statement_apply
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q23
+    prompt: "How would you assess your overall financial knowledge?"
+    type: single_choice
+    construct: would_assess_overall_financial_knowledge
+    required: true
+    options:
+      - id: "a"
+        label: "1 - Very low"
+      - id: "b"
+        label: "2"
+      - id: "c"
+        label: "3"
+      - id: "d"
+        label: "4"
+      - id: "e"
+        label: "5"
+      - id: "f"
+        label: "6"
+      - id: "g"
+        label: "7 - Very high"
+  - id: q24
+    prompt: "How well does this statement describe you? \"I follow-through on my financial commitments to others.\""
+    type: single_choice
+    construct: well_does_this_statement_describe
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "Very little"
+      - id: "c"
+        label: "Somewhat"
+      - id: "d"
+        label: "Very well"
+      - id: "e"
+        label: "Completely"
+  - id: q25
+    prompt: "How well does this statement describe you? \"I follow-through on financial goals I set for myself.\""
+    type: single_choice
+    construct: well_does_this_statement_describe
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "Very little"
+      - id: "c"
+        label: "Somewhat"
+      - id: "d"
+        label: "Very well"
+      - id: "e"
+        label: "Completely"
+  - id: q26
+    prompt: "Some people set financial goals for themselves, such as planning to buy a car, becoming debt-free, paying for a vacation or preparing for college expenses. Do you have a current or recent financial goal?"
+    type: single_choice
+    construct: some_people_set_financial_goals
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q27
+    prompt: "To what extent do you agree or disagree with the following statement? \"I consult my budget to see how much money I have left.\""
+    type: single_choice
+    construct: extent_agree_disagree_following_statemen
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q28
+    prompt: "To what extent do you agree or disagree with the following statement? \"I actively consider the steps I need to take to stick to my budget.\""
+    type: single_choice
+    construct: extent_agree_disagree_following_statemen
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q29
+    prompt: "To what extent do you agree or disagree with the following statement? \"I set financial goals for what I want to achieve with my money.\""
+    type: single_choice
+    construct: extent_agree_disagree_following_statemen
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q30
+    prompt: "To what extent do you agree or disagree with the following statement? \"I prepare a clear plan of action with detailed steps to achieve my financial goals.\""
+    type: single_choice
+    construct: extent_agree_disagree_following_statemen
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q31
+    prompt: "How often have you engaged in the following activity in the past six months: paid all your bills on time?"
+    type: single_choice
+    construct: often_have_engaged_following_activity
+    required: true
+    options:
+      - id: "a"
+        label: "Not applicable or never"
+      - id: "b"
+        label: "Seldom"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q32
+    prompt: "How often have you engaged in the following activity in the past six months: stayed within your budget or spending plan?"
+    type: single_choice
+    construct: often_have_engaged_following_activity
+    required: true
+    options:
+      - id: "a"
+        label: "Not applicable or never"
+      - id: "b"
+        label: "Seldom"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q33
+    prompt: "How often have you engaged in the following activity in the past six months: paid off credit card balance in full each month?"
+    type: single_choice
+    construct: often_have_engaged_following_activity
+    required: true
+    options:
+      - id: "a"
+        label: "Not applicable or never"
+      - id: "b"
+        label: "Seldom"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q34
+    prompt: "How often have you engaged in the following activity in the past six months: checked your statements, bills and receipts to make sure there were no errors?"
+    type: single_choice
+    construct: often_have_engaged_following_activity
+    required: true
+    options:
+      - id: "a"
+        label: "Not applicable or never"
+      - id: "b"
+        label: "Seldom"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q35
+    prompt: "To what extent do you agree or disagree with the following statement? \"Putting money into savings is a habit for me.\""
+    type: single_choice
+    construct: extent_agree_disagree_following_statemen
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Disagree slightly"
+      - id: "d"
+        label: "Agree slightly"
+      - id: "e"
+        label: "Agree"
+      - id: "f"
+        label: "Strongly agree"
+  - id: q36
+    prompt: "To what extent do you agree or disagree with the following statement? \"If I can re-use an item I already have, there's no sense in buying something new.\""
+    type: single_choice
+    construct: extent_agree_disagree_following_statemen
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Disagree slightly"
+      - id: "d"
+        label: "Agree slightly"
+      - id: "e"
+        label: "Agree"
+      - id: "f"
+        label: "Strongly agree"
+  - id: q37
+    prompt: "Do you currently have money automatically transferred to a Retirement Savings Account?"
+    type: single_choice
+    construct: currently_have_money_automatically_trans
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+      - id: "c"
+        label: "I do not have this type of account"
+  - id: q38
+    prompt: "Do you currently have money automatically transferred to a Non-Retirement Savings Account?"
+    type: single_choice
+    construct: currently_have_money_automatically_trans
+    required: true
+    options:
+      - id: "a"
+        label: "No"
+      - id: "b"
+        label: "Yes"
+      - id: "c"
+        label: "I do not have this type of account"
+  - id: q39
+    prompt: "Thinking about all the large and small decisions you make involving money, how often do you do the following? \"I do my own research before making decisions involving money.\""
+    type: single_choice
+    construct: thinking_all_large_small_decisions
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Seldom"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q40
+    prompt: "Thinking about all the large and small decisions you make involving money, how often do you do the following? \"I ask other people their opinions before making decisions involving money.\""
+    type: single_choice
+    construct: thinking_all_large_small_decisions
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Seldom"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+      - id: "e"
+        label: "Always"
+  - id: q41
+    prompt: "When people tell you the chance of something happening, do you prefer that they use words (\"It rarely happens\") or numbers (\"There's a 1% chance\")?"
+    type: single_choice
+    construct: when_people_tell_chance_something
+    required: true
+    options:
+      - id: "a"
+        label: "1 - Always prefer words"
+      - id: "b"
+        label: "2"
+      - id: "c"
+        label: "3"
+      - id: "d"
+        label: "4"
+      - id: "e"
+        label: "5"
+      - id: "f"
+        label: "6 - Always prefer numbers"
+  - id: q42
+    prompt: "How good are you at working with percentages?"
+    type: single_choice
+    construct: good_working_percentages
+    required: true
+    options:
+      - id: "a"
+        label: "1 - Not good at all"
+      - id: "b"
+        label: "2"
+      - id: "c"
+        label: "3"
+      - id: "d"
+        label: "4"
+      - id: "e"
+        label: "5"
+      - id: "f"
+        label: "6 - Extremely good"
+  - id: q43
+    prompt: "To what extent do you agree or disagree with the following statement: A person's ability to manage money is something very basic about them and it cannot be changed much."
+    type: single_choice
+    construct: extent_agree_disagree_following_statemen
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Somewhat disagree"
+      - id: "d"
+        label: "Neither agree nor disagree"
+      - id: "e"
+        label: "Somewhat agree"
+      - id: "f"
+        label: "Agree"
+      - id: "g"
+        label: "Strongly agree"
+  - id: q44
+    prompt: "If you were to set a financial goal for yourself today, how confident are you in your ability to achieve it?"
+    type: single_choice
+    construct: if_were_set_financial_goal
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all confident"
+      - id: "b"
+        label: "Not very confident"
+      - id: "c"
+        label: "Somewhat confident"
+      - id: "d"
+        label: "Very confident"
+  - id: q45
+    prompt: "Suppose you had $100 in a savings account and the interest rate was 2% per year. After 5 years, how much do you think you would have in the account if you left the money to grow?"
+    type: single_choice
+    construct: suppose_had_100_savings_account
+    required: true
+    options:
+      - id: "a"
+        label: "More than $102"
+      - id: "b"
+        label: "Exactly $102"
+      - id: "c"
+        label: "Less than $102"
+  - id: q46
+    prompt: "Imagine that the interest rate on your savings account was 1% per year and inflation was 2% per year. After 1 year, how much would you be able to buy with the money in this account?"
+    type: single_choice
+    construct: imagine_that_interest_rate_savings
+    required: true
+    options:
+      - id: "a"
+        label: "More than today"
+      - id: "b"
+        label: "Exactly the same"
+      - id: "c"
+        label: "Less than today"
+  - id: q47
+    prompt: "Do you think the following statement is true or false? \"Buying a single company's stock usually provides a safer return than a stock mutual fund.\""
+    type: single_choice
+    construct: think_following_statement_true_false
+    required: true
+    options:
+      - id: "a"
+        label: "True"
+      - id: "b"
+        label: "False"
+  - id: q48
+    prompt: "Considering a long time period (for example 10 or 20 years), which asset described below normally gives the highest return?"
+    type: single_choice
+    construct: considering_long_time_period_example
+    required: true
+    options:
+      - id: "a"
+        label: "Savings accounts"
+      - id: "b"
+        label: "Bonds"
+      - id: "c"
+        label: "Stocks"
+  - id: q49
+    prompt: "Normally, which asset described below displays the highest fluctuations over time?"
+    type: single_choice
+    construct: normally_asset_described_below_displays
+    required: true
+    options:
+      - id: "a"
+        label: "Savings accounts"
+      - id: "b"
+        label: "Bonds"
+      - id: "c"
+        label: "Stocks"
+  - id: q50
+    prompt: "When an investor spreads his or her money among different assets, does the risk of losing a lot of money increase, decrease or stay the same?"
+    type: single_choice
+    construct: when_investor_spreads_his_her
+    required: true
+    options:
+      - id: "a"
+        label: "Increase"
+      - id: "b"
+        label: "Decrease"
+      - id: "c"
+        label: "Stay the same"
+  - id: q51
+    prompt: "Do you think the following statement is true or false? \"If you were to invest $1,000 in a stock mutual fund, it would be possible to have less than $1,000 when you withdraw your money.\""
+    type: single_choice
+    construct: think_following_statement_true_false
+    required: true
+    options:
+      - id: "a"
+        label: "True"
+      - id: "b"
+        label: "False"
+  - id: q52
+    prompt: "Do you think the following statement is true or false? \"'Whole life' insurance has a savings feature while 'term' insurance does not.\""
+    type: single_choice
+    construct: think_following_statement_true_false
+    required: true
+    options:
+      - id: "a"
+        label: "True"
+      - id: "b"
+        label: "False"
+  - id: q53
+    prompt: "Do you think the following statement is true or false? \"Housing prices in the US can never go down.\""
+    type: single_choice
+    construct: think_following_statement_true_false
+    required: true
+    options:
+      - id: "a"
+        label: "True"
+      - id: "b"
+        label: "False"
+  - id: q54
+    prompt: "Suppose you owe $3,000 on your credit card. You pay a minimum payment of $30 each month. At an Annual Percentage Rate of 12% (or 1% per month), how many years would it take to eliminate your credit card debt if you made no additional new charges?"
+    type: single_choice
+    construct: suppose_owe_3_000_credit
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 5 years"
+      - id: "b"
+        label: "Between 5 and 10 years"
+      - id: "c"
+        label: "Between 10 and 15 years"
+      - id: "d"
+        label: "Never, you will continue to be in debt"
+  - id: q55
+    prompt: "If interest rates rise, what will typically happen to bond prices?"
+    type: single_choice
+    construct: if_interest_rates_rise_will
+    required: true
+    options:
+      - id: "a"
+        label: "They will rise"
+      - id: "b"
+        label: "They will fall"
+      - id: "c"
+        label: "They will stay the same"
+      - id: "d"
+        label: "There is no relationship between bond prices and the interest rate"
+  - id: q56
+    prompt: "Do you think the following statement is true or false? \"A 15-year mortgage typically requires higher monthly payments than a 30-year mortgage, but the total interest paid over the life of the loan will be less.\""
+    type: single_choice
+    construct: think_following_statement_true_false
+    required: true
+    options:
+      - id: "a"
+        label: "True"
+      - id: "b"
+        label: "False"
+  - id: q57
+    prompt: "In a typical month, how difficult is it for you to cover your expenses and pay all your bills?"
+    type: single_choice
+    construct: typical_month_difficult_it_cover
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all difficult"
+      - id: "b"
+        label: "Somewhat difficult"
+      - id: "c"
+        label: "Very difficult"
+  - id: q58
+    prompt: "Which one of the following best describes your housing situation?"
+    type: single_choice
+    construct: one_following_best_describes_housing
+    required: true
+    options:
+      - id: "a"
+        label: "I own my home"
+      - id: "b"
+        label: "I rent"
+      - id: "c"
+        label: "I do not currently own or rent"
+  - id: q59
+    prompt: "Thinking of the adults in your household, which of the following best describes your current living arrangements?"
+    type: single_choice
+    construct: thinking_adults_household_following_best
+    required: true
+    options:
+      - id: "a"
+        label: "I am the only adult in the household"
+      - id: "b"
+        label: "I live with my spouse/partner/significant other"
+      - id: "c"
+        label: "I live in my parents' home"
+      - id: "d"
+        label: "I live with other family, friends, or roommates"
+      - id: "e"
+        label: "Some other arrangement"
+  - id: q60
+    prompt: "About how much do you pay for your home each month?"
+    type: single_choice
+    construct: much_pay_home_each_month
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $300"
+      - id: "b"
+        label: "$300-499"
+      - id: "c"
+        label: "$500-749"
+      - id: "d"
+        label: "$750-999"
+      - id: "e"
+        label: "$1,000-1,499"
+      - id: "f"
+        label: "$1,500-1,999"
+      - id: "g"
+        label: "$2,000 or more"
+      - id: "h"
+        label: "I don't know"
+  - id: q61
+    prompt: "If you were to sell your home today, what do you think it would be worth?"
+    type: single_choice
+    construct: if_were_sell_home_today
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $150,000"
+      - id: "b"
+        label: "$150,000-249,999"
+      - id: "c"
+        label: "$250,000-399,999"
+      - id: "d"
+        label: "$400,000 or more"
+      - id: "e"
+        label: "I don't know"
+  - id: q62
+    prompt: "What do you owe on your home today?"
+    type: single_choice
+    construct: owe_home_today
+    required: true
+    options:
+      - id: "a"
+        label: "Less than $50,000"
+      - id: "b"
+        label: "$50,000-199,999"
+      - id: "c"
+        label: "$200,000 or more"
+      - id: "d"
+        label: "I don't know"
+  - id: q63
+    prompt: "How much money do you have in savings today (in cash, checking, and savings account balances)?"
+    type: single_choice
+    construct: much_money_have_savings_today
+    required: true
+    options:
+      - id: "a"
+        label: "$0"
+      - id: "b"
+        label: "$1-99"
+      - id: "c"
+        label: "$100-999"
+      - id: "d"
+        label: "$1,000-4,999"
+      - id: "e"
+        label: "$5,000-19,999"
+      - id: "f"
+        label: "$20,000-74,999"
+      - id: "g"
+        label: "$75,000 or more"
+      - id: "h"
+        label: "I don't know"
+  - id: q64
+    prompt: "Which of the following financial products and services do you currently have? (Select all that apply)"
+    type: multi_choice
+    construct: following_financial_products_services_cu
+    required: true
+    options:
+      - id: "a"
+        label: "Checking or Savings Account at a bank or credit union"
+      - id: "b"
+        label: "Life Insurance"
+      - id: "c"
+        label: "Health Insurance"
+      - id: "d"
+        label: "Retirement Account (such as a 401k or IRA)"
+      - id: "e"
+        label: "Pension"
+      - id: "f"
+        label: "Non-Retirement Investments (such as stocks, bonds or mutual funds)"
+      - id: "g"
+        label: "Education Savings Account (such as 529 or Coverdale)"
+      - id: "h"
+        label: "Student/Education Loan (for yourself or someone else)"
+  - id: q65
+    prompt: "Which of the following, if any, have you used in the past 12 months? (Select all that apply)"
+    type: multi_choice
+    construct: following_if_any_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "Payday Loan or Cash Advance Loan"
+      - id: "b"
+        label: "Pawn Loan or Auto Title Loan"
+      - id: "c"
+        label: "A reloadable card that is not linked with a checking or savings account"
+      - id: "d"
+        label: "A place other than a bank or credit union to give or send money to relatives or friends outside the U.S."
+      - id: "e"
+        label: "A place other than a bank or credit union to cash a check or purchase a money order"
+  - id: q66
+    prompt: "How often have you had experiences with financial services where you did not feel respected or where you felt mistreated?"
+    type: single_choice
+    construct: often_have_had_experiences_financial
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Often"
+  - id: q67
+    prompt: "How familiar are you with any agencies or organizations that can help you resolve problems with financial services you are using?"
+    type: single_choice
+    construct: familiar_any_agencies_organizations_that
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all familiar"
+      - id: "b"
+        label: "Somewhat familiar"
+      - id: "c"
+        label: "Very familiar"
+  - id: q68
+    prompt: "Have you ever reported a problem to one of these agencies or organizations?"
+    type: single_choice
+    construct: have_ever_reported_problem_one
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q69
+    prompt: "How many people currently contribute to the income used to pay bills for your household?"
+    type: single_choice
+    construct: many_people_currently_contribute_income
+    required: true
+    options:
+      - id: "a"
+        label: "One"
+      - id: "b"
+        label: "Two"
+      - id: "c"
+        label: "More than two"
+  - id: q70
+    prompt: "Which of the following best describes how your household's income changes from month to month, if at all?"
+    type: single_choice
+    construct: following_best_describes_household_s
+    required: true
+    options:
+      - id: "a"
+        label: "Roughly the same each month"
+      - id: "b"
+        label: "Roughly the same most months, but some unusually high or low months during the year"
+      - id: "c"
+        label: "Often varies quite a bit from one month to the next"
+  - id: q71
+    prompt: "In the past 12 months, did you or any member of your household receive benefits from the Food Stamp Program or SNAP (the Supplemental Nutrition Assistance Program)?"
+    type: single_choice
+    construct: past_12_months_did_any
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Not sure"
+  - id: q72
+    prompt: "Was this statement often, sometimes, or never true for you in the past 12 months? \"I worried whether our food would run out before I got money to buy more.\""
+    type: single_choice
+    construct: was_this_statement_often_sometimes
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Sometimes"
+      - id: "c"
+        label: "Often"
+  - id: q73
+    prompt: "Was this statement often, sometimes, or never true for you in the past 12 months? \"The food that I bought just didn't last and I didn't have money to get more.\""
+    type: single_choice
+    construct: was_this_statement_often_sometimes
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Sometimes"
+      - id: "c"
+        label: "Often"
+  - id: q74
+    prompt: "Was this statement often, sometimes, or never true for you in the past 12 months? \"I couldn't afford a place to live.\""
+    type: single_choice
+    construct: was_this_statement_often_sometimes
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Sometimes"
+      - id: "c"
+        label: "Often"
+  - id: q75
+    prompt: "Was this statement often, sometimes, or never true for you in the past 12 months? \"I or someone in my household needed to see a doctor or go to the hospital but did not go because we couldn't afford it.\""
+    type: single_choice
+    construct: was_this_statement_often_sometimes
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Sometimes"
+      - id: "c"
+        label: "Often"
+  - id: q76
+    prompt: "Was this statement often, sometimes, or never true for you in the past 12 months? \"I or someone in my household stopped taking a medication or took less than directed due to the costs.\""
+    type: single_choice
+    construct: was_this_statement_often_sometimes
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Sometimes"
+      - id: "c"
+        label: "Often"
+  - id: q77
+    prompt: "Was this statement often, sometimes, or never true for you in the past 12 months? \"One or more of my utilities was shut off due to non-payment.\""
+    type: single_choice
+    construct: was_this_statement_often_sometimes
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Sometimes"
+      - id: "c"
+        label: "Often"
+  - id: q78
+    prompt: "In the past 12 months, have you been contacted by a person or company trying to collect a past-due debt from you? Include instances when you were contacted about debts that you believed you did not owe. Do not include instances when the person or company was trying to reach someone else."
+    type: single_choice
+    construct: past_12_months_have_been
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Not sure"
+  - id: q79
+    prompt: "In the past 12 months, has the following happened to you: \"I applied for credit and was turned down\"?"
+    type: single_choice
+    construct: past_12_months_has_following
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q80
+    prompt: "In the past 12 months, has the following happened to you: \"I did not apply for credit because I thought I would be turned down\"?"
+    type: single_choice
+    construct: past_12_months_has_following
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q81
+    prompt: "How confident are you that you could come up with $2,000 in 30 days if an unexpected need arose within the next month?"
+    type: single_choice
+    construct: confident_that_could_come_up
+    required: true
+    options:
+      - id: "a"
+        label: "I am certain I could not come up with $2,000"
+      - id: "b"
+        label: "I could probably not come up with $2,000"
+      - id: "c"
+        label: "I could probably come up with $2,000"
+      - id: "d"
+        label: "I am certain I could come up with the full $2,000"
+      - id: "e"
+        label: "I don't know"
+  - id: q82
+    prompt: "Do you have access to the following benefit through your or your spouse's/partner's/other's current or former employer: Health Insurance?"
+    type: single_choice
+    construct: have_access_following_benefit_through
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q83
+    prompt: "Do you have access to the following benefit through your or your spouse's/partner's/other's current or former employer: 401(k) or Other Employer-Sponsored Retirement Savings Account?"
+    type: single_choice
+    construct: have_access_following_benefit_through
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q84
+    prompt: "Do you have access to the following benefit through your or your spouse's/partner's/other's current or former employer: Defined-Benefit Pension?"
+    type: single_choice
+    construct: have_access_following_benefit_through
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q85
+    prompt: "Do you have access to the following benefit through your or your spouse's/partner's/other's current or former employer: Tuition Reimbursement and/or Student Debt Repayment?"
+    type: single_choice
+    construct: have_access_following_benefit_through
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q86
+    prompt: "Do you have access to the following benefit through your or your spouse's/partner's/other's current or former employer: Work/Life Benefits (such as family leave, emergency dependent care, vacation, etc.)?"
+    type: single_choice
+    construct: have_access_following_benefit_through
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q87
+    prompt: "In the past 5 years, has someone without your permission used or attempted to use an existing account of yours, such as a credit or debit card, checking, savings, telephone, online, or insurance account?"
+    type: single_choice
+    construct: past_5_years_has_someone
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Not sure"
+  - id: q88
+    prompt: "If you were to find that your income did not cover your living costs, which one of the following would you be most likely to do first to make ends meet?"
+    type: single_choice
+    construct: if_were_find_that_income
+    required: true
+    options:
+      - id: "a"
+        label: "Use savings or sell something you own"
+      - id: "b"
+        label: "Cut back or do without"
+      - id: "c"
+        label: "Earn more money"
+      - id: "d"
+        label: "Borrow money"
+  - id: q89
+    prompt: "If you found yourself needing extra money to make ends meet, would the following statement be true for you? \"My friends or family would lend me the money and expect me to repay them.\""
+    type: single_choice
+    construct: if_found_yourself_needing_extra
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q90
+    prompt: "If you found yourself needing extra money to make ends meet, would the following statement be true for you? \"My friends or family would give me the money with no expectation of repayment.\""
+    type: single_choice
+    construct: if_found_yourself_needing_extra
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q91
+    prompt: "In the past 12 months, did you or any members of your household experience any of the following? (Select all that apply)"
+    type: multi_choice
+    construct: past_12_months_did_any
+    required: true
+    options:
+      - id: "a"
+        label: "Lost a job"
+      - id: "b"
+        label: "Had work hours and/or pay reduced or a business I or someone in my household owned had financial difficulty"
+      - id: "c"
+        label: "Received a foreclosure notice"
+      - id: "d"
+        label: "Had a major car or home repair"
+      - id: "e"
+        label: "Had a health emergency"
+      - id: "f"
+        label: "Got a divorce or separation"
+      - id: "g"
+        label: "Added a child to the household"
+      - id: "h"
+        label: "Experienced the death of primary breadwinner"
+      - id: "i"
+        label: "Received a large sum of money beyond normal income (such as inheritance, bonus or other windfall)"
+      - id: "j"
+        label: "Had a child start daycare or college"
+      - id: "k"
+        label: "Provided unexpected financial support to a family member or friend"
+  - id: q92
+    prompt: "Besides regular spending decisions, which of the following options best describes who takes care of the money matters in your household (for example, making investments, paying bills, making decisions)?"
+    type: single_choice
+    construct: besides_regular_spending_decisions_follo
+    required: true
+    options:
+      - id: "a"
+        label: "Someone else takes care of all or most money matters in my household."
+      - id: "b"
+        label: "Someone else and I take care of money matters in my household about the same."
+      - id: "c"
+        label: "I take care of all or most money matters in my household."
+  - id: q93
+    prompt: "Do you pay the person who helps take care of money matters in your household?"
+    type: single_choice
+    construct: pay_person_who_helps_take
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q94
+    prompt: "Where did you live on your 17th birthday?"
+    type: single_choice
+    construct: where_did_live_17th_birthday
+    required: true
+    options:
+      - id: "a"
+        label: "U.S. and territories"
+      - id: "b"
+        label: "Outside the U.S."
+      - id: "c"
+        label: "I can't recall"
+  - id: q95
+    prompt: "What is the highest level of education completed by the person or any of the people who raised you?"
+    type: single_choice
+    construct: highest_level_education_completed_by
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school degree/GED"
+      - id: "c"
+        label: "Some college/Associate"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate/professional degree"
+  - id: q96
+    prompt: "While growing up at home, did your family do the following? \"Discussed family financial matters with me.\""
+    type: single_choice
+    construct: while_growing_up_home_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q97
+    prompt: "While growing up at home, did your family do the following? \"Spoke to me about the importance of saving.\""
+    type: single_choice
+    construct: while_growing_up_home_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q98
+    prompt: "While growing up at home, did your family do the following? \"Discussed how to establish a good credit rating.\""
+    type: single_choice
+    construct: while_growing_up_home_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q99
+    prompt: "While growing up at home, did your family do the following? \"Taught me how to be a smart shopper.\""
+    type: single_choice
+    construct: while_growing_up_home_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q100
+    prompt: "While growing up at home, did your family do the following? \"Taught me that my actions determine my success in life.\""
+    type: single_choice
+    construct: while_growing_up_home_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q101
+    prompt: "While growing up at home, did your family do the following? \"Provided me with a regular allowance.\""
+    type: single_choice
+    construct: while_growing_up_home_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q102
+    prompt: "While growing up at home, did your family do the following? \"Provided me with a savings account.\""
+    type: single_choice
+    construct: while_growing_up_home_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q103
+    prompt: "In the Bingo Lottery, the chance of winning a $10 prize is 1%. What is your best guess about how many people will win a $10 prize if 1,000 people each buy a single ticket for the Bingo Lottery? (Free-text: answer with a number between 0 and 1000 as a string, e.g. \"10\")"
+    type: free_text
+    construct: bingo_lottery_chance_winning_10
+    required: true
+  - id: q104
+    prompt: "Which of the following represents the biggest risk of getting a disease?"
+    type: single_choice
+    construct: following_represents_biggest_risk_gettin
+    required: true
+    options:
+      - id: "a"
+        label: "1%"
+      - id: "b"
+        label: "10%"
+      - id: "c"
+        label: "5%"
+  - id: q105
+    prompt: "Thinking about yourself in everyday life, to what extent do you agree or disagree with the following statement? \"I admire people who own expensive homes, cars and clothes.\""
+    type: single_choice
+    construct: thinking_yourself_everyday_life_extent
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q106
+    prompt: "Thinking about yourself in everyday life, to what extent do you agree or disagree with the following statement? \"The things I own say a lot about how well I'm doing in life.\""
+    type: single_choice
+    construct: thinking_yourself_everyday_life_extent
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q107
+    prompt: "Thinking about yourself in everyday life, to what extent do you agree or disagree with the following statement? \"I like to own things that impress people.\""
+    type: single_choice
+    construct: thinking_yourself_everyday_life_extent
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q108
+    prompt: "Please think about the important characteristics that make you the person you are now – your personality, temperament, major likes and dislikes, beliefs, values, ambitions, life goals, and ideals – and please rate the degree of connectedness between the person you expect to be in 5 years compared to the person you are now, where 0 means \"I will be completely different in the future\" and 100 means \"I will be exactly the same in the future.\" (Free-text: answer with a number between 0 and 100 as a string, e.g. \"80\")"
+    type: free_text
+    construct: please_think_important_characteristics_t
+    required: true
+  - id: q109
+    prompt: "In general, would you say your health is . . ."
+    type: single_choice
+    construct: general_would_say_health
+    required: true
+    options:
+      - id: "a"
+        label: "Poor"
+      - id: "b"
+        label: "Fair"
+      - id: "c"
+        label: "Good"
+      - id: "d"
+        label: "Very good"
+      - id: "e"
+        label: "Excellent"
+  - id: q110
+    prompt: "In planning your and/or your family's saving and spending, which of the time periods is most important?"
+    type: single_choice
+    construct: planning_family_s_saving_spending
+    required: true
+    options:
+      - id: "a"
+        label: "The next few months"
+      - id: "b"
+        label: "The next year"
+      - id: "c"
+        label: "The next few years"
+      - id: "d"
+        label: "The next 5 to 10 years"
+      - id: "e"
+        label: "Longer than 10 years"
+  - id: q111
+    prompt: "If you had a choice, would you rather receive . . .?"
+    type: single_choice
+    construct: if_had_choice_would_rather
+    required: true
+    options:
+      - id: "a"
+        label: "$816 now"
+      - id: "b"
+        label: "$860 in three months"
+  - id: q112
+    prompt: "During the past 12 months, have you experienced confusion or memory loss that is happening more often or is getting worse?"
+    type: single_choice
+    construct: during_past_12_months_have
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q113
+    prompt: "Please indicate your level of agreement with the following statement: \"I have a lot of stress in my life.\""
+    type: single_choice
+    construct: please_indicate_level_agreement_followin
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q114
+    prompt: "How well does this statement describe you? \"I often act without thinking through all the alternatives.\""
+    type: single_choice
+    construct: well_does_this_statement_describe
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "Not very well"
+      - id: "c"
+        label: "Very well"
+      - id: "d"
+        label: "Completely well"
+  - id: q115
+    prompt: "How well does this statement describe you? \"I am good at resisting temptation.\""
+    type: single_choice
+    construct: well_does_this_statement_describe
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "Not very well"
+      - id: "c"
+        label: "Very well"
+      - id: "d"
+        label: "Completely well"
+  - id: q116
+    prompt: "How well does this statement describe you? \"I am able to work diligently toward long-term goals.\""
+    type: single_choice
+    construct: well_does_this_statement_describe
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "Not very well"
+      - id: "c"
+        label: "Very well"
+      - id: "d"
+        label: "Completely well"
+  - id: q117
+    prompt: "To what extent do you agree or disagree with the following statement? \"There are services in this area to help me (such as transportation, child care, health care, in-home services, etc.).\""
+    type: single_choice
+    construct: extent_agree_disagree_following_statemen
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Somewhat disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Somewhat agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q118
+    prompt: "To what extent do you agree or disagree with the following statement? \"There are good work opportunities for me, if I choose to take them.\""
+    type: single_choice
+    construct: extent_agree_disagree_following_statemen
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Somewhat disagree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Somewhat agree"
+      - id: "e"
+        label: "Strongly agree"
+  - id: q119
+    prompt: "Do you seek advice on matters involving money from any of the following types of people or organizations? (Select all that apply)"
+    type: multi_choice
+    construct: seek_advice_matters_involving_money
+    required: true
+    options:
+      - id: "a"
+        label: "Parent"
+      - id: "b"
+        label: "Spouse/Partner"
+      - id: "c"
+        label: "Extended family (e.g., uncle, aunt, cousins, grandparents)"
+      - id: "d"
+        label: "Employer"
+      - id: "e"
+        label: "Friends/Co-workers"
+      - id: "f"
+        label: "Community or faith-based organizations"
+      - id: "g"
+        label: "Financial institution"
+      - id: "h"
+        label: "Professional advisor, planner or counselor/coach"
+      - id: "i"
+        label: "Government"
+  - id: q120
+    prompt: "To what extent do you agree or disagree with the following statement? \"Everyone has a fair chance at moving up the economic ladder.\""
+    type: single_choice
+    construct: extent_agree_disagree_following_statemen
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly disagree"
+      - id: "b"
+        label: "Disagree"
+      - id: "c"
+        label: "Somewhat disagree"
+      - id: "d"
+        label: "Neither agree nor disagree"
+      - id: "e"
+        label: "Somewhat agree"
+      - id: "f"
+        label: "Agree"
+      - id: "g"
+        label: "Strongly agree"
+  - id: q121
+    prompt: "How satisfied are you with the place you live currently?"
+    type: single_choice
+    construct: satisfied_place_live_currently
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all satisfied"
+      - id: "b"
+        label: "Not very satisfied"
+      - id: "c"
+        label: "Somewhat satisfied"
+      - id: "d"
+        label: "Very satisfied"
+  - id: q122
+    prompt: "Have you started receiving Social Security retirement benefits?"
+    type: single_choice
+    construct: have_started_receiving_social_security
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q123
+    prompt: "At what age did you begin receiving benefits?"
+    type: single_choice
+    construct: age_did_begin_receiving_benefits
+    required: true
+    options:
+      - id: "a"
+        label: "62"
+      - id: "b"
+        label: "63"
+      - id: "c"
+        label: "64"
+      - id: "d"
+        label: "65"
+      - id: "e"
+        label: "66"
+      - id: "f"
+        label: "67"
+      - id: "g"
+        label: "68"
+      - id: "h"
+        label: "69"
+      - id: "i"
+        label: "70 and above"
+  - id: q124
+    prompt: "People can choose to receive Social Security retirement benefits at different ages. At what age do you think you will be likely to start receiving Social Security retirement benefits?"
+    type: single_choice
+    construct: people_can_choose_receive_social
+    required: true
+    options:
+      - id: "a"
+        label: "61 and below"
+      - id: "b"
+        label: "62"
+      - id: "c"
+        label: "63"
+      - id: "d"
+        label: "64"
+      - id: "e"
+        label: "65"
+      - id: "f"
+        label: "66"
+      - id: "g"
+        label: "67"
+      - id: "h"
+        label: "68"
+      - id: "i"
+        label: "69"
+      - id: "j"
+        label: "70"
+      - id: "k"
+        label: "71 and above"
+  - id: q125
+    prompt: "How likely do you believe it is that you will live beyond age 75? Use the scale from zero to 100 to indicate your response. 0 would mean not at all likely and 100 would mean that it is certain. (Free-text: answer with a number between 0 and 100 as a string, e.g. \"75\")"
+    type: free_text
+    construct: likely_believe_it_that_will
+    required: true
+  - id: q126
+    prompt: "What is the highest level of education anyone in your household (including yourself) has completed?"
+    type: single_choice
+    construct: highest_level_education_anyone_household
+    required: true
+    options:
+      - id: "a"
+        label: "Less than high school"
+      - id: "b"
+        label: "High school degree/GED"
+      - id: "c"
+        label: "Some college/Associate"
+      - id: "d"
+        label: "Bachelor's degree"
+      - id: "e"
+        label: "Graduate/professional degree"
+  - id: q127
+    prompt: "How many children less than 7 years old do you currently support financially, either living with you or not?"
+    type: single_choice
+    construct: many_children_less_than_7
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2+"
+  - id: q128
+    prompt: "How many children 7 to 12 years old do you currently support financially, either living with you or not?"
+    type: single_choice
+    construct: many_children_7_12_years
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2+"
+  - id: q129
+    prompt: "How many children 13 to 17 years old do you currently support financially, either living with you or not?"
+    type: single_choice
+    construct: many_children_13_17_years
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2+"
+  - id: q130
+    prompt: "How many children more than 18 years old do you currently support financially, either living with you or not?"
+    type: single_choice
+    construct: many_children_more_than_18
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1"
+      - id: "c"
+        label: "2+"
+  - id: q131
+    prompt: "Which of the following describe(s) your current employment or work status? (Select all that apply)"
+    type: multi_choice
+    construct: following_describe_s_current_employment
+    required: true
+    options:
+      - id: "a"
+        label: "Self-employed"
+      - id: "b"
+        label: "Work full-time for an employer or the military"
+      - id: "c"
+        label: "Work part-time for an employer or the military"
+      - id: "d"
+        label: "Homemaker"
+      - id: "e"
+        label: "Full-time student"
+      - id: "f"
+        label: "Permanently sick, disabled or unable to work"
+      - id: "g"
+        label: "Unemployed or temporarily laid off"
+      - id: "h"
+        label: "Retired"
+  - id: q132
+    prompt: "Did you retire earlier than you planned, later than you planned, or about when you planned?"
+    type: single_choice
+    construct: did_retire_earlier_than_planned
+    required: true
+    options:
+      - id: "a"
+        label: "Earlier than planned"
+      - id: "b"
+        label: "About when planned"
+      - id: "c"
+        label: "Later than planned"
+  - id: q133
+    prompt: "Are you a current or former member of the United States Armed Forces, or the spouse or dependent of a service member or veteran?"
+    type: single_choice
+    construct: current_former_member_united_states
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
