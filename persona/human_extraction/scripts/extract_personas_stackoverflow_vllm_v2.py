@@ -58,6 +58,42 @@ MAPPING_FILES = {
     2025: "2025/stackoverflow_column_mapping_2025.csv",
 }
 
+STACKOVERFLOW_2025_AI_STATUS_TO_VALUE = {
+    "AIToolCurrently mostly AI": "Currently mostly AI-assisted",
+    "AIToolCurrently partially AI": "Currently partially AI-assisted",
+    "AIToolPlan to mostly use AI": "Plans mostly AI use",
+    "AIToolPlan to partially use AI": "Plans partial AI use",
+    "AIToolDon't plan to use AI for this task": "Does not plan AI use",
+}
+STACKOVERFLOW_2025_AI_VALUE_PRIORITY = {
+    "Currently mostly AI-assisted": 5,
+    "Currently partially AI-assisted": 4,
+    "Plans mostly AI use": 3,
+    "Plans partial AI use": 2,
+    "Does not plan AI use": 1,
+}
+STACKOVERFLOW_2025_AI_TASK_TO_FIELD = {
+    "Writing code": "ai_task_code_generation",
+    "Debugging or fixing code": "ai_task_debugging_fixing",
+    "Testing code": "ai_task_testing",
+    "Committing and reviewing code": "ai_task_code_review",
+    "Documenting code": "ai_task_documentation",
+    "Creating or maintaining documentation": "ai_task_documentation",
+    "Learning about a codebase": "ai_task_codebase_learning",
+    "Project planning": "ai_task_project_planning",
+    "Deployment and monitoring": "ai_task_deployment_monitoring",
+    "Search for answers": "ai_task_search_answers",
+    "Learning new concepts or technologies": "ai_task_learning_concepts",
+    "Predictive analytics": "ai_task_data_generation_analytics",
+    "Generating content or synthetic data": "ai_task_data_generation_analytics",
+}
+STACKOVERFLOW_2025_AI_TASK_FIELD_ORDER = tuple(
+    dict.fromkeys(STACKOVERFLOW_2025_AI_TASK_TO_FIELD.values())
+)
+STACKOVERFLOW_2025_AI_TASK_FIELD_IDS = frozenset(
+    STACKOVERFLOW_2025_AI_TASK_FIELD_ORDER
+)
+
 DEFAULT_MODEL = "Qwen/Qwen3.6-35B-A3B"
 DEFAULT_OUTPUT_TEMPLATE = "extraction_stackoverflow_v2_{year}.jsonl"
 MISSING_TOKENS = {"", "na", "n/a", "none", "nan", "null", "<na>"}
@@ -820,6 +856,75 @@ def assemble_stackoverflow_profile(
     return truncate_profile("\n".join(lines))
 
 
+def extract_2025_ai_task_fields(
+    row: dict[str, Any], year: int, mapping: dict[str, dict[str, str]]
+) -> list[dict[str, Any]]:
+    """Deterministically map the 2025 AITool matrix to persona task fields."""
+    if year != 2025:
+        return []
+
+    candidates: dict[str, list[tuple[str, str]]] = {}
+    for column, target_value in STACKOVERFLOW_2025_AI_STATUS_TO_VALUE.items():
+        raw_value = row.get(column)
+        if not is_present(raw_value):
+            continue
+        entry = mapping.get(column, {})
+        clean_column = clean_value(column, max_chars=200)
+        label = clean_value(entry.get("description") or column, max_chars=1_200)
+        clean_raw_value = clean_value(raw_value)
+        evidence = (
+            f"{clean_column} - {label}: {clean_raw_value}"
+            if label != clean_column
+            else f"{clean_column}: {clean_raw_value}"
+        )
+        for item in str(raw_value).split(";"):
+            task = unicodedata.normalize("NFKC", item).strip()
+            field_id = STACKOVERFLOW_2025_AI_TASK_TO_FIELD.get(task)
+            if field_id is not None:
+                candidates.setdefault(field_id, []).append((target_value, evidence))
+
+    fields: list[dict[str, Any]] = []
+    for field_id in STACKOVERFLOW_2025_AI_TASK_FIELD_ORDER:
+        field_candidates = candidates.get(field_id)
+        if not field_candidates:
+            continue
+        selected_value = max(
+            (value for value, _ in field_candidates),
+            key=STACKOVERFLOW_2025_AI_VALUE_PRIORITY.__getitem__,
+        )
+        evidence_parts = list(dict.fromkeys(evidence for _, evidence in field_candidates))
+        fields.append(
+            {
+                "field_id": field_id,
+                "value": selected_value,
+                "confidence": 1.0,
+                "evidence": "; ".join(evidence_parts),
+                "assignment_type": "direct",
+            }
+        )
+    return fields
+
+
+def overlay_deterministic_fields(
+    generated_fields: list[dict[str, Any]],
+    deterministic_fields: list[dict[str, Any]],
+    reserved_field_ids: frozenset[str],
+) -> list[dict[str, Any]]:
+    """Replace model-generated reserved fields with deterministic assignments."""
+    return [
+        field
+        for field in generated_fields
+        if field["field_id"] not in reserved_field_ids
+    ] + deterministic_fields
+
+
+def drop_unsupported_fields(fields: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Defensively keep unsupported placeholders out of final JSONL records."""
+    return [
+        field for field in fields if field.get("assignment_type") != "unsupported"
+    ]
+
+
 def build_stackoverflow_prompt(profile_text: str, chunk: DimensionChunk) -> str:
     """Build V1's detailed sparse-extraction prompt for one manifest chunk."""
     profile_text = normalize_prompt_text(profile_text)
@@ -849,6 +954,11 @@ def build_stackoverflow_prompt(profile_text: str, chunk: DimensionChunk) -> str:
         "Rules:",
         "- Read survey question and answer context carefully to determine the most specific and accurate value for each dimension.",
         "- Be especially careful when surveyanswer is given in a numerical scale, such as a Likert scale or a scale of 1 to 10. YOU MUST follow related question and answer definitions to determine the most specific and accurate value for the dimension.",
+        "- For a numeric answer mapped to a range-valued dimension, treat every range endpoint literally and select the range that contains the exact cited number.",
+        '- For example, years_experience evidence of 10 maps to "6-10", not "11-20"; evidence of 11 maps to "11-20", not "6-10".',
+        "- If several survey fields could support one dimension, choose the field whose question best matches the dimension, cite that field in evidence, and make the output value consistent with the cited answer.",
+        "- Never move a numeric answer into an adjacent range based on job title, seniority, age, or an overall impression of the respondent.",
+        "- Before returning JSON, verify that the specific numeric answer used to support a range-valued dimension falls within the selected allowed-value range.",
         "- value MUST be exactly one of that dimension's allowed values, copied verbatim.",
         "- Use each field_id at most once.",
         "- If multiple allowed values for one field_id are directly supported, emit exactly one.",
@@ -1328,6 +1438,17 @@ def extract_year(
                 year=work.year,
             )
             for row_index, row in batch:
+                deterministic_fields = extract_2025_ai_task_fields(
+                    row, work.year, work.mapping
+                )
+                final_fields = overlay_deterministic_fields(
+                    merged[row_index],
+                    deterministic_fields,
+                    STACKOVERFLOW_2025_AI_TASK_FIELD_IDS
+                    if work.year == 2025
+                    else frozenset(),
+                )
+                final_fields = drop_unsupported_fields(final_fields)
                 record = {
                     "year": work.year,
                     "row_index": row_index,
@@ -1337,7 +1458,7 @@ def extract_year(
                     "extractor_version": EXTRACTOR_VERSION,
                     "manifest_version": manifest.version,
                     "source_catalog_sha256": manifest.source_catalog_sha256,
-                    "fields": merged[row_index],
+                    "fields": final_fields,
                 }
                 output_handle.write(json.dumps(record, ensure_ascii=False) + "\n")
             output_handle.flush()
