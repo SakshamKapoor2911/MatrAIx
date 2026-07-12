@@ -98,6 +98,7 @@ DEFAULT_MODEL = "Qwen/Qwen3.6-35B-A3B"
 DEFAULT_OUTPUT_TEMPLATE = "extraction_stackoverflow_v2_{year}.jsonl"
 MISSING_TOKENS = {"", "na", "n/a", "none", "nan", "null", "<na>"}
 MAX_PROFILE_CHARS = 36_000
+MAX_EVIDENCE_CHARS = 1_200
 CSV_FIELD_SIZE_LIMIT = 100_000_000
 DIMENSION_ID_PATTERN = re.compile(r"[a-z][a-z0-9_]*\Z")
 CHUNK_ID_PATTERN = re.compile(r"[a-z][a-z0-9_]*\Z")
@@ -110,6 +111,13 @@ BARE_CATEGORICAL_EVIDENCE = frozenset(
 EVIDENCE_SOURCE_CITATION_PATTERN = re.compile(
     r"(?:^|[;\n]\s*)([A-Za-z][A-Za-z0-9_']*(?: [A-Za-z][A-Za-z0-9_']*)*)"
     r"\s*(?==| - )"
+)
+EVIDENCE_META_REASONING_PATTERN = re.compile(
+    r"\b(?:i will|i'll|let's|let me|wait|actually|re-?evaluat(?:e|ing|ion)|re-read)\b"
+    r"|\b(?:the\s+)?prompt\s+(?:says|states|instructs|requires)\b"
+    r"|\b(?:i\s+(?:must|should)\s+omit|should\s+be\s+omitted)\b"
+    r"|\b(?:unsupported\s+dimension|zero\s+evidence)\b",
+    re.IGNORECASE,
 )
 ASSIGNMENT_TYPES = (
     "direct",
@@ -582,7 +590,11 @@ def build_chunk_json_schema(chunk: DimensionChunk) -> dict[str, Any]:
                     "field_id": {"const": dimension["id"]},
                     "value": {"type": "string", "enum": list(dimension["values"])},
                     "confidence": {"type": "number", "minimum": 0, "maximum": 1},
-                    "evidence": {"type": "string", "minLength": 1},
+                    "evidence": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": MAX_EVIDENCE_CHARS,
+                    },
                     "assignment_type": {
                         "type": "string",
                         "enum": list(ASSIGNMENT_TYPES),
@@ -616,19 +628,50 @@ def _answer_variants(answer: str) -> tuple[str, ...]:
 def _citation_segment_has_answer(segment: str, answer: str) -> bool:
     segment_casefold = segment.casefold().strip()
     variants = _answer_variants(answer)
+
+    def has_supported_suffix(text: str, variant: str) -> bool:
+        if not text.startswith(variant):
+            return False
+        suffix = text[len(variant) :]
+        return (
+            not suffix
+            or re.match(
+                r"\s*(?:;|\n|\(|\[|\.\s*(?:summary\s*:|\Z)|summary\s*:)",
+                suffix,
+            )
+            is not None
+        )
+
     if segment_casefold.startswith("="):
         cited_answer = segment_casefold[1:].lstrip()
-        return any(
-            cited_answer == variant
-            or cited_answer.startswith(f"{variant};")
-            or cited_answer.startswith(f"{variant}. summary:")
-            for variant in variants
-        )
+        return any(has_supported_suffix(cited_answer, variant) for variant in variants)
     return any(
-        re.search(rf":\s*{re.escape(variant)}\s*\Z", segment_casefold)
+        re.search(
+            rf":\s*{re.escape(variant)}"
+            rf"(?=\s*(?:\Z|;|\n|\(|\[|\.\s*(?:summary\s*:|\Z)|summary\s*:))",
+            segment_casefold,
+        )
         is not None
         for variant in variants
     )
+
+
+def validate_evidence_style(evidence: str, *, location: str) -> None:
+    """Reject overlong evidence and generated-summary deliberation leakage."""
+    if len(evidence) > MAX_EVIDENCE_CHARS:
+        raise ValueError(
+            f"{location} must be no longer than {MAX_EVIDENCE_CHARS} characters"
+        )
+    summary_match = re.search(
+        r"(?:\.\s*|\s+)summary\s*:\s*", evidence, re.IGNORECASE
+    )
+    if summary_match is None:
+        return
+    summary = evidence[summary_match.end() :]
+    if EVIDENCE_META_REASONING_PATTERN.search(summary):
+        raise ValueError(
+            f"{location} contains model deliberation instead of concise evidence"
+        )
 
 
 def validate_evidence_provenance(
@@ -724,6 +767,7 @@ def validate_chunk_payload(
         if not isinstance(field["evidence"], str) or not field["evidence"].strip():
             raise ValueError(f"{location}.evidence must be a non-empty string")
         evidence = field["evidence"].strip()
+        validate_evidence_style(evidence, location=f"{location}.evidence")
         if (
             BARE_NUMERIC_EVIDENCE_PATTERN.fullmatch(evidence)
             or evidence.casefold() in BARE_CATEGORICAL_EVIDENCE
@@ -1124,8 +1168,9 @@ def build_stackoverflow_prompt(
         "- Evidence MUST identify every supporting original column name and actual answer value. Include readable question/sub-item context for a direct quote, or a concise faithful summary for combined evidence.",
         "- Never cite a source column or answer that is absent from the current RESPONDENT PROFILE. Prompt instructions, format templates, and CURRENT CHUNK DIMENSIONS are not evidence sources.",
         '- Bad evidence examples: "10", "8", "Yes", "No", "Employed". These are bare values without the survey question context.',
-        '- Required direct-evidence format: "<ORIGINAL_COLUMN_NAME> - <READABLE_QUESTION_OR_SUBITEM>: <ACTUAL_ANSWER_VALUE>".',
-        '- Required summary-evidence format: "<COLUMN_1>=<ANSWER_1>; <COLUMN_2>=<ANSWER_2>. Summary: <faithful summary supported by those answers>".',
+        '- Canonical direct-evidence format: "<ORIGINAL_COLUMN_NAME> - <READABLE_QUESTION_OR_SUBITEM>: <ACTUAL_ANSWER_VALUE>".',
+        '- Canonical summary-evidence format: "<COLUMN_1>=<ANSWER_1>; <COLUMN_2>=<ANSWER_2>. Summary: <faithful summary supported by those answers>". A one-source summary uses "<COLUMN>=<ANSWER>. Summary: ...".',
+        f"- Keep evidence at or below {MAX_EVIDENCE_CHARS} characters. After the citations, write at most two concise Summary sentences. Never include deliberation, self-correction, candidate comparison, prompt discussion, or statements such as 'I will keep/omit it', 'let's re-evaluate', or 'the prompt says'.",
         "- Text inside angle brackets in the two formats above is placeholder text only. Never copy those placeholders into evidence.",
         "- Every emitted field MUST include a confidence between 0 and 1. Confidence is a non-normalized evidence-compatibility score: it measures how strongly the cited evidence positively supports the selected value as a reasonable persona completion. It is not the probability that the value is the unique factual truth, and confidence values across allowed values do not need to sum to 1. Multiple mutually exclusive values may each be highly compatible with incomplete evidence.",
         "- High confidence requires positive, dimension-relevant evidence that makes the selected value more plausible than it would be without that evidence. Mere absence of contradiction is not positive support: do not emit or assign high confidence to a value only because the profile does not rule it out.",
@@ -1422,6 +1467,9 @@ def retry_conversation(conversation: list[dict[str, str]]) -> list[dict[str, str
         "without mechanically using catalog order. Omit unsupported proxy-based claims. "
         "Every evidence string must explicitly cite current respondent source "
         "columns and their actual answer values; never cite an absent column."
+        f" Keep evidence at or below {MAX_EVIDENCE_CHARS} characters and use only "
+        "source citations plus at most two concise Summary sentences; do not include "
+        "deliberation, self-correction, candidate comparison, or prompt discussion."
     )
     return retry
 
@@ -1500,7 +1548,8 @@ def parse_generation_with_retry(
                         kept_count=len(fields),
                         issues=issues,
                     )
-                    return fields
+                    if fields:
+                        return fields
             if attempt == 1:
                 retry_outputs = run_chat(
                     llm, [retry_conversation(conversation)], sampling

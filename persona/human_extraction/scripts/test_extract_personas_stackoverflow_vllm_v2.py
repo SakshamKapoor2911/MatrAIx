@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 import sys
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
@@ -369,6 +371,52 @@ def test_validator_accepts_current_source_quote_and_summary(extractor_module):
     ) == [summary]
 
 
+@pytest.mark.parametrize(
+    ("evidence", "sources"),
+    [
+        (
+            "JobSatPoints_6 - Improving quality of code: 20. Summary: "
+            "Quality is a strong professional priority.",
+            {"JobSatPoints_6": "20"},
+        ),
+        (
+            "YearsCode=10 (total coding years). Summary: The respondent has "
+            "substantial coding experience.",
+            {"YearsCode": "10"},
+        ),
+    ],
+)
+def test_validator_accepts_common_evidence_format_variants(
+    extractor_module, evidence, sources
+):
+    chunk = evidence_test_chunk(extractor_module)
+    field = evidence_test_field(evidence, assignment_type="summary_inference")
+
+    assert extractor_module.validate_chunk_payload(
+        {"fields": [field]}, chunk, sources
+    ) == [field]
+
+
+def test_validator_rejects_overlong_or_deliberative_evidence(extractor_module):
+    chunk = evidence_test_chunk(extractor_module)
+    overlong = evidence_test_field(
+        "YearsCode=10. Summary: "
+        + "x" * extractor_module.MAX_EVIDENCE_CHARS
+    )
+    deliberative = evidence_test_field(
+        "YearsCode=10. Summary: Let's re-evaluate whether this should be omitted."
+    )
+
+    with pytest.raises(ValueError, match="must be no longer than"):
+        extractor_module.validate_chunk_payload(
+            {"fields": [overlong]}, chunk, {"YearsCode": "10"}
+        )
+    with pytest.raises(ValueError, match="contains model deliberation"):
+        extractor_module.validate_chunk_payload(
+            {"fields": [deliberative]}, chunk, {"YearsCode": "10"}
+        )
+
+
 def test_validator_accepts_single_source_summary_inference(extractor_module):
     chunk = evidence_test_chunk(extractor_module)
     one_source = evidence_test_field(
@@ -381,6 +429,45 @@ def test_validator_accepts_single_source_summary_inference(extractor_module):
     assert extractor_module.validate_chunk_payload(
         {"fields": [one_source]}, chunk, sources
     ) == [one_source]
+
+
+def test_zero_field_salvage_triggers_retry(extractor_module, monkeypatch):
+    chunk = evidence_test_chunk(extractor_module)
+    invalid_field = evidence_test_field("YearsCode - Total coding years: 11")
+    valid_field = evidence_test_field("YearsCode - Total coding years: 10")
+
+    def output_for(field):
+        return SimpleNamespace(
+            outputs=[
+                SimpleNamespace(
+                    text=json.dumps({"fields": [field]}),
+                    finish_reason="stop",
+                    stop_reason=None,
+                )
+            ]
+        )
+
+    retry_calls = []
+
+    def fake_run_chat(llm, conversations, sampling):
+        retry_calls.append(conversations)
+        return [output_for(valid_field)]
+
+    monkeypatch.setattr(extractor_module, "run_chat", fake_run_chat)
+
+    fields = extractor_module.parse_generation_with_retry(
+        llm=object(),
+        sampling=object(),
+        chunk=chunk,
+        conversation=[{"role": "user", "content": "test prompt"}],
+        initial_output=output_for(invalid_field),
+        year=2024,
+        row_index=0,
+        source_answers={"YearsCode": "10"},
+    )
+
+    assert fields == [valid_field]
+    assert len(retry_calls) == 1
 
 
 def test_validator_rejects_source_absent_from_current_profile(extractor_module):
