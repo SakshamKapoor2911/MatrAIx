@@ -1,6 +1,6 @@
-# 🧪 Application Team — Plan & Task Assignments
+# 🧪 Application Team — Plan
 
-> Working plan for the [Application team](README.md). Each task has an **Owner** field — add your name to a placeholder slot. Each task can take **1–3 people** to start, and more can be added later (just append `@you`).
+> Working plan for the [Application team](README.md). Each task can take **1–3 people** to start, and more can be added later.
 
 > 🧭 **Scope from kickoff (Jun 13).** Block 3 is where many contributors plug in: each application = **a defined task + a concrete environment** (ideally an open-source app/website/prototype). We **sample** the personas that fit the task (e.g. 10K–100K, not the whole pool), run them through the environment (Block 2), collect the **telemetry**, and turn it into a **feedback report**. Keep each scenario simple; the value is a working task → simulation → report loop.
 
@@ -9,8 +9,6 @@
 ## 📚 Related Work
 
 Collect and summarize prior work on user simulation, evaluation scenarios, and domain-specific agent benchmarks.
-
-**Owner(s):** @Shirley-Huang, _@name2, @name3_ (add more as needed)
 
 > 📌 **Default item format** — each entry should look like:
 >
@@ -183,8 +181,6 @@ Lock down the shared scenario format so every application runs end-to-end and is
 - Define how a scenario references personas (Team 1) and an environment (Team 2), including **persona sampling** (which subset to pull and how many).
 - One fully worked reference scenario others can copy.
 
-**Owner(s):** _@name1, @name2, @name3_ (add more as needed)
-
 ---
 
 > 📌 The next four tasks mirror the four [environment types](../environments/PLAN.md). Each task = build the **task library + metrics** for scenarios running on that environment type. Start with Types 1 & 2.
@@ -196,8 +192,6 @@ Scenarios where the agent reads a stimulus and returns structured feedback.
 - 2–3 scenarios (e.g. product concept testing, messaging eval, UI-mockup feedback).
 - Each with task prompt, persona requirements, structured output schema, metrics, example run.
 
-**Owner(s):** @Shirley-Huang, _@name2, @name3_ (add more as needed)
-
 ---
 
 ## 💬 Task 3 — Type 2: Chatbot Scenarios _(priority)_
@@ -208,8 +202,6 @@ Scenarios where the agent converses with a target AI system and evaluates it.
 - Include **hard users** (privacy-sensitive, low-literacy/elderly, confused, adversarial).
 - Each with task prompt, persona requirements, metrics, example run.
 
-**Owner(s):** @Shirley-Huang, @Eliza_Fan, @name3_ (add more as needed)
-
 ---
 
 ## 🌐 Task 4 — Type 3: Web Scenarios
@@ -219,8 +211,6 @@ Scenarios on web surfaces (landing pages, prototypes, dashboards, forums) — co
 - Example shapes: a **landing/checkout** flow → where do users drop off? a **web/forum** feature → does it attract usage?
 - Tag each with persona requirements + the signals to capture (clicks, scroll, hesitation, final decision).
 
-**Owner(s):** _@name1, @name2, @name3_ (add more as needed)
-
 ---
 
 ## 📱 Task 5 — Type 4: App / Sandbox Scenarios _(longer-term)_
@@ -229,8 +219,6 @@ Scenarios on complex interactive products (mobile / desktop / sandbox builds). D
 
 - Example shapes: a **game** prototype → do users engage with a new feature (dwell time, click frequency)? a **coding assistant** → is the output good, who likes/dislikes it and why?
 - Tag each with persona requirements + environment build format.
-
-**Owner(s):** _@name1, @name2, @name3_ (add more as needed)
 
 ---
 
@@ -242,13 +230,11 @@ Cross-cutting layer: standardize how scenario outputs are scored, then turn raw 
 - **Report generation**: given the task + the full telemetry trace from Block 2, produce the final **feedback report** (e.g. "users engaged X with feature Y; main objections were Z").
 - Reusable analysis/report templates over collected traces.
 
-**Owner(s):** @Shirley-Huang, @Eliza_Fan, @name3_ (add more as needed)
-
 ---
 
 ## 🤝 How to Contribute
 
-1. Pick a task above and add your name to its **Owner** field.
+1. Pick a task above to work on.
 2. Open an issue for your task to track details and progress.
 3. Align early on the shared **Application Template** (Task 1) — it blocks Tasks 2–6.
 4. Keep your own `Status Update - <Your Name>` issue and add the `status-update` + `team: application` labels so it's easy to find.

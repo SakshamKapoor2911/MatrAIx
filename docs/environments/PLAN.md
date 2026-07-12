@@ -1,6 +1,6 @@
-# 🌐 Environment Team — Plan & Task Assignments
+# 🌐 Environment Team — Plan
 
-> Working plan for the [Environment team](README.md). Each task has an **Owner** field — add your name to a placeholder slot. Each task can take **1–3 people** to start, and more can be added later (just append `@you`).
+> Working plan for the [Environment team](README.md). Each task can take **1–3 people** to start, and more can be added later.
 
 > 🧭 **Scope from kickoff (Jun 13).** Block 2 is mostly **engineering** and **task-agnostic**: given a persona-conditioned agent (persona injected via system prompt) and a defined environment, make the agent *run* and emit a full **telemetry trace**. We do **not** design tasks here (that's the Application team) — we provide a few general environment *types* they plug into. Keep each type **basic** so the end-to-end pipeline works first; depth can come later.
 
@@ -9,8 +9,6 @@
 ## 📚 Related Work
 
 Collect and summarize prior work on agent environments, evaluation harnesses, and simulation frameworks.
-
-**Owner(s):** _@name1, @name2, @name3_ (add more as needed)
 
 > 📌 **Default item format** — each entry should look like:
 >
@@ -42,7 +40,6 @@ _Multi-agent / social simulation, long-horizon tasks, related work._
 - The environment includes dynamic social networks, evolving post/content states, diverse user actions such as posting, following, reposting, liking, and commenting, plus recommendation systems based on user interests and hot-score ranking; it supports simulations with up to one million agents.
 - Relevant to MatrAIx because it provides a strong reference for large-scale multi-agent social simulation: agent personas, network evolution, recommender-mediated interaction, long-horizon collective dynamics, and environment-level metrics for studying emergent behavior.
 
-
 ---
 
 ## 🧩 Task 1 — Shared Environment Interface & Telemetry
@@ -55,8 +52,6 @@ Define the common contract every environment implements so personas, tasks, and 
 - **Telemetry trace** is the required output: full record of steps, actions, signals, timings, outcome — this feeds the Application team's report (Block 3).
 - Two integration paths: **(a) hosted sandbox playground** (contributor supplies the surface) and **(b) agent API** that an external system drives.
 
-**Owner(s):** @JianhengHou, @name2, @name3_ (add more as needed)
-
 ---
 
 ## 📝 Task 2 — Type 1: Survey Environment _(simplest / start here)_
@@ -65,8 +60,6 @@ The simplest surface — the agent reads a stimulus (product concept, message, d
 
 - Define input formats and a **structured output schema** (rating scores, free-form feedback, ranked preferences, objections, predicted adoption).
 - Reference implementation + a couple of example stimuli.
-
-**Owner(s):** _@name1, @name2, @name3_ (add more as needed)
 
 ---
 
@@ -79,8 +72,6 @@ High-value surface — many target products *are* AI systems, so they can be tes
 - Conversation logging + metrics (helpfulness, trust, clarity, satisfaction, length).
 - Cover **cooperative** users **and** hard/realistic users (privacy-sensitive, low-literacy / elderly, confused, adversarial) — the realistic-but-hard cases are where simulation adds value.
 
-**Owner(s):** _@name1, @name2, @name3_ (add more as needed)
-
 ---
 
 ## 🌐 Task 4 — Type 3: Web Environment
@@ -91,8 +82,6 @@ Agent interaction with web surfaces (landing pages, prototypes, dashboards, **fo
 - Capture signals: pages, clicks, scroll, hesitation, failed actions, final decision.
 - Forum/social subtype: read posts, comment, initiate DMs — same interaction layer, different surface.
 
-**Owner(s):** _@name1, @name2, @name3_ (add more as needed)
-
 ---
 
 ## 📱 Task 5 — Type 4: App / Sandbox Environment _(longer-term, deprioritized)_
@@ -101,13 +90,11 @@ Complex interactive products (mobile / desktop / sandbox builds). Pulls in low-v
 
 - Scope build formats and UI-automation approach for later.
 
-**Owner(s):** _@name1, @name2, @name3_ (add more as needed)
-
 ---
 
 ## 🤝 How to Contribute
 
-1. Pick a task above and add your name to its **Owner** field.
+1. Pick a task above to work on.
 2. Open an issue for your task to track details and progress.
 3. Align early on the shared **interface + telemetry** (Task 1) — it blocks Tasks 2–5.
 4. Keep your own `Status Update - <Your Name>` issue and add the `status-update` + `team: environment` labels so it's easy to find.
