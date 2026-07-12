@@ -1,0 +1,28 @@
+{
+  "seed": 1,
+  "hole_cards": ["Ah", "Ad"],
+  "bot_cards": ["7c", "2d"],
+  "community_order": ["Ks", "Qh", "3d", "9s", "5c"],
+  "bot_policy": "deterministic-treys-v1",
+  "optimal_action_tree": {
+    "preflop": {
+      "optimal_action": "raise",
+      "rationale": "Premium pair AA vs weak 72o. Raise forces bot to fold weak hand.",
+      "bot_response_to_raise": "fold",
+      "bot_response_to_call": "check",
+      "bot_response_to_check": "raise_bot"
+    }
+  },
+  "chip_delta_by_action": {
+    "raise": 30,
+    "call": -60,
+    "check": -60,
+    "fold": -10
+  },
+  "outcome_by_action": {
+    "raise": {"winner": "player", "reason": "Bot folds to preflop raise. Player wins pot uncontested."},
+    "call": {"winner": "opponent", "reason": "Bot checks, then value-bets postflop. AA loses to runner-runner straight."},
+    "check": {"winner": "opponent", "reason": "Bot raises, player calls, bot catches straight on river."},
+    "fold": {"winner": "opponent", "reason": "Player folds preflop, loses small blind."}
+  }
+}

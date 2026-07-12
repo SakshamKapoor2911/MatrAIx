@@ -36,9 +36,8 @@ RISK_POSTURES = {"risk_averse", "balanced", "risk_seeking", "opportunistic"}
 EXPLORATION_STYLES = {"quick_pick", "compared_multiple", "deep_research", "hesitant"}
 
 
-SCENARIOS_DIR = Path(os.environ.get("SCENARIOS_DIR", ""))
-if not SCENARIOS_DIR.is_dir():
-    SCENARIOS_DIR = Path(__file__).resolve().parent / "scenarios"
+_scenarios_env = os.environ.get("SCENARIOS_DIR", "")
+SCENARIOS_DIR = Path(_scenarios_env) if _scenarios_env else Path(__file__).resolve().parent / "scenarios"
 
 SCENARIO_CACHE: dict[int, dict] = {}
 

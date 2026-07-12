@@ -1,0 +1,46 @@
+{
+  "seed": 4,
+  "hole_cards": ["Jh", "Th"],
+  "bot_cards": ["Ac", "Kd"],
+  "community_order": ["Qh", "9h", "2s", "3c", "8h"],
+  "bot_policy": "deterministic-treys-v1",
+  "optimal_action_tree": {
+    "preflop": {
+      "optimal_action": "call",
+      "rationale": "Suited connector JhTh. Call to see flop cheaply. Bot checks behind with AK.",
+      "bot_response_to_raise": "call",
+      "bot_response_to_call": "check",
+      "bot_response_to_check": "raise_bot"
+    },
+    "flop": {
+      "optimal_action": "raise",
+      "rationale": "Open-ended straight flush draw (Qh9h flop gives JhTh straight draw + flush draw). Raise for value. Bot has ace-high nothing.",
+      "bot_response_to_raise": "call",
+      "bot_response_to_call": "check",
+      "bot_response_to_check": "check"
+    },
+    "turn": {
+      "optimal_action": "raise",
+      "rationale": "Still on strong draw. Bot checks behind. Semi-bluff raise.",
+      "bot_response_to_raise": "fold",
+      "bot_response_to_check": "check"
+    },
+    "river": {
+      "optimal_action": "call",
+      "rationale": "Flush completed with 8h. Bot may bet small. Call to extract value.",
+      "bot_response_to_call": "call"
+    }
+  },
+  "chip_delta_by_action_sequence": {
+    "preflop:call,flop:raise,turn:raise": 120,
+    "preflop:call,flop:raise,turn:check,river:call": 130,
+    "preflop:raise,flop:raise,turn:raise": 140,
+    "preflop:fold": -10
+  },
+  "outcome_by_sequence": {
+    "preflop:call,flop:raise,turn:raise": "Bot folds on turn. Player wins pot with strong draw.",
+    "preflop:call,flop:raise,turn:check,river:call": "Showdown: player wins with flush.",
+    "preflop:raise,flop:raise,turn:raise": "Bot folds on turn. Player wins bigger pot with aggressive line.",
+    "preflop:fold": "Player folds preflop, loses small blind."
+  }
+}
