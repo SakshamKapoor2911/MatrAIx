@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "1.0",
+  "contextRules": [
+    {
+      "match": {
+        "contextType": "question_response"
+      },
+      "summaryDirectives": [
+        {
+          "id": "survey.response_distribution",
+          "title": "Response distribution by question",
+          "targetFacetKey": "response",
+          "groupByFacetKey": "response",
+          "groupByMode": "categorical",
+          "summaryKind": "distribution"
+        }
+      ]
+    }
+  ]
+}
