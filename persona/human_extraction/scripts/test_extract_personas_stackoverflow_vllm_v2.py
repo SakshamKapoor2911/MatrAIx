@@ -286,6 +286,167 @@ def test_2025_so_actions_choose_top_style_and_never_participated_wins(
     assert never_field["confidence"] == 1.0
 
 
+def test_2025_comment_reading_or_voting_maps_to_votes(extractor_module):
+    actions = {"SO_Actions_16": "1", "SO_Actions_9": "2"}
+
+    field = extractor_module.extract_2025_stackoverflow_participation_field(
+        actions, 2025, mapping_for(*actions)
+    )[0]
+
+    assert field["value"] == "Votes / bookmarks"
+
+
+def test_semantic_filter_drops_observed_cross_construct_failures(extractor_module):
+    fields = [
+        {
+            "field_id": "prog_rust",
+            "value": "Familiar",
+            "confidence": 0.2,
+            "evidence": (
+                "LanguageWantToWorkWith=Rust; DevType=Developer. Summary: "
+                "The respondent wants to use Rust next year."
+            ),
+            "assignment_type": "summary_inference",
+        },
+        {
+            "field_id": "cult_united_states",
+            "value": "Native",
+            "confidence": 0.8,
+            "evidence": "Country=United States. Summary: The respondent lives there.",
+            "assignment_type": "summary_inference",
+        },
+        {
+            "field_id": "lifex_geographic_mobility",
+            "value": "Moved internationally",
+            "confidence": 0.6,
+            "evidence": (
+                "Country=Luxembourg; Currency=EUR. Summary: Luxembourg has many "
+                "international workers."
+            ),
+            "assignment_type": "summary_inference",
+        },
+        {
+            "field_id": "seniority",
+            "value": "Retired",
+            "confidence": 0.85,
+            "evidence": (
+                "MainBranch=I used to be a developer by profession, but no longer am"
+            ),
+            "assignment_type": "direct",
+        },
+        {
+            "field_id": "stackoverflow_participation_style",
+            "value": "Does not participate",
+            "confidence": 0.9,
+            "evidence": "SOPartFreq=Infrequently, less than once per year",
+            "assignment_type": "direct",
+        },
+        {
+            "field_id": "tool_git",
+            "value": "Never used",
+            "confidence": 0.8,
+            "evidence": "DevEnvsChoice=No. Summary: No development environments.",
+            "assignment_type": "summary_inference",
+        },
+        {
+            "field_id": "fam_machine_learning",
+            "value": "None",
+            "confidence": 0.8,
+            "evidence": "AISelect=No, and I don't plan to",
+            "assignment_type": "summary_inference",
+        },
+        {
+            "field_id": "habit_backing_up_files",
+            "value": "Daily",
+            "confidence": 0.85,
+            "evidence": (
+                "ProfessionalTech=Automated testing;Observability tools. Summary: "
+                "The organization uses mature engineering practices."
+            ),
+            "assignment_type": "summary_inference",
+        },
+        {
+            "field_id": "trait_curiosity",
+            "value": "Strong",
+            "confidence": 0.7,
+            "evidence": "CodingActivities=Hobby. Summary: The respondent codes for fun.",
+            "assignment_type": "summary_inference",
+        },
+        {
+            "field_id": "age_bracket",
+            "value": "25-34",
+            "confidence": 1.0,
+            "evidence": "Age=25-34 years old",
+            "assignment_type": "direct",
+        },
+    ]
+    row = {
+        "Employment": "Employed, full-time",
+        "MainBranch": "I used to be a developer by profession, but no longer am",
+        "SOPartFreq": "Infrequently, less than once per year",
+        "LanguageWantToWorkWith": "Rust",
+        "DevType": "Developer",
+        "Country": "Luxembourg",
+        "Currency": "EUR",
+        "DevEnvsChoice": "No",
+        "AISelect": "No, and I don't plan to",
+        "ProfessionalTech": "Automated testing;Observability tools",
+        "CodingActivities": "Hobby",
+        "Age": "25-34 years old",
+    }
+
+    filtered = fields_by_id(
+        extractor_module.filter_semantic_overreach(fields, row)
+    )
+
+    assert filtered == {"age_bracket": fields[-1]}
+
+
+def test_semantic_filter_keeps_positive_same_construct_evidence(extractor_module):
+    fields = [
+        {
+            "field_id": "prog_rust",
+            "value": "Proficient",
+            "confidence": 0.8,
+            "evidence": "LanguageHaveWorkedWith=Rust",
+            "assignment_type": "direct",
+        },
+        {
+            "field_id": "seniority",
+            "value": "Retired",
+            "confidence": 1.0,
+            "evidence": "Employment=Retired",
+            "assignment_type": "direct",
+        },
+        {
+            "field_id": "stackoverflow_participation_style",
+            "value": "Does not participate",
+            "confidence": 1.0,
+            "evidence": "SOPartFreq=I have never participated in Q&A",
+            "assignment_type": "direct",
+        },
+        {
+            "field_id": "trait_curiosity",
+            "value": "Strong",
+            "confidence": 0.7,
+            "evidence": (
+                "CodingActivities=Hobby; LearnCode=Books. Summary: The respondent "
+                "codes for fun and learns from books."
+            ),
+            "assignment_type": "summary_inference",
+        },
+    ]
+    row = {
+        "LanguageHaveWorkedWith": "Rust",
+        "Employment": "Retired",
+        "SOPartFreq": "I have never participated in Q&A",
+        "CodingActivities": "Hobby",
+        "LearnCode": "Books",
+    }
+
+    assert extractor_module.filter_semantic_overreach(fields, row) == fields
+
+
 def test_deterministic_fields_replace_model_values(extractor_module):
     generated = [
         {
@@ -449,6 +610,9 @@ def test_prompt_restores_high_precision_sparse_policy(extractor_module):
     assert "Long professional tenure in an active developer role" in prompt
     assert "skill_coding, skill_debugging, and skill_problem_solving" in prompt
     assert "Do not spread tenure into unrelated skills" in prompt
+    assert "Do not optimize for coverage or a target field count" in prompt
+    assert "wanting to use Rust next year is not evidence" in prompt
+    assert "Omit one-source soft completions" in prompt
 
 
 def test_prompt_blocks_observed_proxy_failure_modes(extractor_module):
@@ -493,6 +657,10 @@ def test_prompt_blocks_observed_proxy_failure_modes(extractor_module):
     assert "may support a skill_people_management or skill_leadership summary_inference" in prompt
     assert "Do not automatically map the role alone to Master or Signature" in prompt
     assert "bucket crosses more than one allowed output range" in prompt
+    assert "Never emit cult_* or lifex_geographic_mobility" in prompt
+    assert 'seniority="Retired" only when a source answer explicitly states retirement' in prompt
+    assert "Infrequent Q&A participation is still participation" in prompt
+    assert "does not prove that a named tool such as Git was never used" in prompt
 
 
 @pytest.mark.parametrize("evidence", ["10", "8.5", "20%", "Yes", "No", "Employed"])
@@ -594,23 +762,35 @@ def test_validator_accepts_common_evidence_format_variants(
     ) == [field]
 
 
-def test_validator_rejects_overlong_or_deliberative_evidence(extractor_module):
+@pytest.mark.parametrize(
+    "summary",
+    [
+        "Let's re-evaluate whether this should be omitted.",
+        "The prompt asks for the closest allowed value.",
+        "The prompt allows Master for long-tenured developers.",
+        "Given the prompt's instruction, this value is the closest match.",
+    ],
+)
+def test_validator_rejects_deliberative_evidence(extractor_module, summary):
+    chunk = evidence_test_chunk(extractor_module)
+    deliberative = evidence_test_field(f"YearsCode=10. Summary: {summary}")
+
+    with pytest.raises(ValueError, match="contains model deliberation"):
+        extractor_module.validate_chunk_payload(
+            {"fields": [deliberative]}, chunk, {"YearsCode": "10"}
+        )
+
+
+def test_validator_rejects_overlong_evidence(extractor_module):
     chunk = evidence_test_chunk(extractor_module)
     overlong = evidence_test_field(
         "YearsCode=10. Summary: "
         + "x" * extractor_module.MAX_EVIDENCE_CHARS
     )
-    deliberative = evidence_test_field(
-        "YearsCode=10. Summary: Let's re-evaluate whether this should be omitted."
-    )
 
     with pytest.raises(ValueError, match="must be no longer than"):
         extractor_module.validate_chunk_payload(
             {"fields": [overlong]}, chunk, {"YearsCode": "10"}
-        )
-    with pytest.raises(ValueError, match="contains model deliberation"):
-        extractor_module.validate_chunk_payload(
-            {"fields": [deliberative]}, chunk, {"YearsCode": "10"}
         )
 
 

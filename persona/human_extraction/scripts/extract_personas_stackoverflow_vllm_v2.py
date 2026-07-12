@@ -137,12 +137,43 @@ STACKOVERFLOW_2025_SO_ACTION_STYLE_MAP = {
     "SO_Actions_4": "Reads / searches only",
     "SO_Actions_3": "Votes / bookmarks",
     "SO_Actions_7": "Votes / bookmarks",
-    "SO_Actions_16": "Comments / discusses",
+    "SO_Actions_16": "Votes / bookmarks",
     "SO_Actions_9": "Comments / discusses",
     "SO_Actions_10": "Comments / discusses",
     "SO_Actions_5": "Asks questions",
     "SO_Actions_6": "Answers questions",
 }
+SOFT_COMPLETION_PREFIXES = (
+    "trait_",
+    "cog_",
+    "val_",
+    "schwartz_",
+    "sdt_",
+    "need_",
+    "big5_",
+    "bfi2_",
+    "mft_",
+    "interpersonal_",
+)
+SOFT_COMPLETION_FIELD_IDS = frozenset(
+    {
+        "decision_style",
+        "emotional_state",
+        "learning_style",
+    }
+)
+ORGANIZATION_LEVEL_COLUMNS = frozenset(
+    {"OrgSize", "ProfessionalCloud", "ProfessionalTech"}
+)
+PERSONAL_PRACTICE_FIELD_IDS = frozenset(
+    {
+        "habit_backing_up_files",
+        "code_testing_approach",
+        "code_observability_habit",
+        "debugging_strategy",
+        "codebase_onboarding_style",
+    }
+)
 
 DEFAULT_MODEL = "Qwen/Qwen3.6-35B-A3B"
 DEFAULT_OUTPUT_TEMPLATE = "extraction_stackoverflow_v2_{year}.jsonl"
@@ -164,7 +195,8 @@ EVIDENCE_SOURCE_CITATION_PATTERN = re.compile(
 )
 EVIDENCE_META_REASONING_PATTERN = re.compile(
     r"\b(?:i will|i'll|let's|let me|wait|actually|re-?evaluat(?:e|ing|ion)|re-read)\b"
-    r"|\b(?:the\s+)?prompt\s+(?:says|states|instructs|requires)\b"
+    r"|\b(?:the\s+)?prompt(?:['’]s)?\s+"
+    r"(?:says|states|instructs|requires|asks|allows|guidance|instructions?)\b"
     r"|\b(?:i\s+(?:must|should)\s+omit|should\s+be\s+omitted)\b"
     r"|\b(?:unsupported\s+dimension|zero\s+evidence)\b",
     re.IGNORECASE,
@@ -1307,6 +1339,86 @@ def reconcile_ai_fields(
     ] + [replacement]
 
 
+def filter_semantic_overreach(
+    fields: list[dict[str, Any]], row: dict[str, Any]
+) -> list[dict[str, Any]]:
+    """Drop recurring cross-construct completions that prompts alone do not prevent."""
+    filtered: list[dict[str, Any]] = []
+    for field in fields:
+        field_id = str(field["field_id"])
+        value = str(field["value"])
+        citations = set(evidence_cited_columns(str(field.get("evidence", ""))))
+
+        intent_only_programming_skill = (
+            field_id.startswith("prog_")
+            and "LanguageWantToWorkWith" in citations
+            and "LanguageHaveWorkedWith" not in citations
+        )
+        country_based_cultural_identity = (
+            field_id.startswith("cult_") and "Country" in citations
+        )
+        country_based_mobility = (
+            field_id == "lifex_geographic_mobility" and "Country" in citations
+        )
+        retirement_without_retirement_answer = (
+            field_id == "seniority"
+            and value == "Retired"
+            and not any(
+                "retired" in str(answer).casefold()
+                for answer in row.values()
+                if is_present(answer)
+            )
+        )
+        nonparticipation_without_never_answer = (
+            field_id == "stackoverflow_participation_style"
+            and value == "Does not participate"
+            and "never participated" not in str(row.get("SOPartFreq", "")).casefold()
+        )
+        git_nonuse_without_git_answer = (
+            field_id == "tool_git"
+            and value == "Never used"
+            and not any(
+                re.search(r"\bgit\b", str(row.get(column, "")), re.IGNORECASE)
+                for column in citations
+            )
+        )
+        ai_nonuse_as_domain_ignorance = (
+            field_id.startswith("fam_")
+            and value == "None"
+            and citations == {"AISelect"}
+        )
+        organization_only_personal_practice = (
+            field_id in PERSONAL_PRACTICE_FIELD_IDS
+            and citations
+            and citations <= ORGANIZATION_LEVEL_COLUMNS
+        )
+        is_soft_completion = field_id in SOFT_COMPLETION_FIELD_IDS or field_id.startswith(
+            SOFT_COMPLETION_PREFIXES
+        )
+        one_source_soft_completion = (
+            field.get("assignment_type") == "summary_inference"
+            and is_soft_completion
+            and len(citations) < 2
+        )
+
+        if any(
+            (
+                intent_only_programming_skill,
+                country_based_cultural_identity,
+                country_based_mobility,
+                retirement_without_retirement_answer,
+                nonparticipation_without_never_answer,
+                git_nonuse_without_git_answer,
+                ai_nonuse_as_domain_ignorance,
+                organization_only_personal_practice,
+                one_source_soft_completion,
+            )
+        ):
+            continue
+        filtered.append(field)
+    return filtered
+
+
 def extract_2025_ai_task_fields(
     row: dict[str, Any], year: int, mapping: dict[str, dict[str, str]]
 ) -> list[dict[str, Any]]:
@@ -1417,6 +1529,7 @@ def build_stackoverflow_prompt(
         "Sparse extraction policy:",
         "- Return a sparse list: emit an object ONLY for dimensions that are clearly supported by the survey answers.",
         "- Do NOT try to cover every dimension. Missing attributes are better than weak or invented attributes.",
+        "- Do not optimize for coverage or a target field count. Prioritize the strongest same-construct evidence; a useful rich persona may still be sparse.",
         "- An empty fields list is a correct result when this chunk has no directly supported dimensions.",
         "- Default decision: OMIT until concrete survey evidence constrains the target dimension. Direct and structured_claim assignments should distinguish the selected value; summary_inference may select one evidence-compatible value when incomplete evidence leaves several plausible alternatives.",
         "- Omit unsupported dimensions entirely. Do not emit null values and do not emit unsupported placeholder objects.",
@@ -1429,19 +1542,24 @@ def build_stackoverflow_prompt(
         '- For direct or structured_claim, omit an allowed value that is more specific than the survey answer unless that specificity is explicit. A non-sensitive, more-specific value may be selected as summary_inference only when it is a reasonable completion that does not contradict the evidence. For example, generic "Employed" does not directly prove "Full-time".',
         "",
         "High-precision source-to-target rules:",
-        "- Intent is not experience: WantToWorkWith, interested-in, admired, and future-plan answers may support preferences or intentions only. They do not establish current familiarity, proficiency, skill, habitual behavior, or actual usage.",
+        "- Intent is not experience: WantToWorkWith, interested-in, admired, and future-plan answers may support preferences or intentions only. They do not establish current familiarity, proficiency, skill, habitual behavior, or actual usage. In particular, LanguageWantToWorkWith alone must never emit prog_*=Familiar (even at low confidence): wanting to use Rust next year is not evidence of any current Rust proficiency. Omit the prog_* field unless worked-with or explicit proficiency evidence is also present.",
         "- Task use is not task mastery: using or planning to use AI for debugging, review, writing, analytics, or another task does not establish proficiency in that task and does not identify the respondent's dominant method or problem profile.",
         "- Tenure and job title directly support role, seniority, and broad experience. Long professional tenure in an active developer role can strongly support high-confidence summary_inference for core skills that are intrinsic to that role: skill_coding, skill_debugging, and skill_problem_solving may reasonably reach Master for a long-tenured professional developer. Role-relevant system-design or code-review evidence may similarly support high levels. Do not spread tenure into unrelated skills such as writing, time management, leadership, research, or mentoring without separate responsibility-, behavior-, or achievement-specific evidence.",
         "- Worked-with answers establish use or exposure. Do not infer Expert or Master from a technology list alone; use the least specific supported familiarity or proficiency value, or omit when the allowed scale cannot be justified.",
         '- Current status is not complete history: an individual contributor is not proven to have no leadership or management skill; a current industry does not prove no experience in other industries. AISelect="No, and I don\'t plan to" positively supports ai_task_*=Does not plan AI use as summary_inference because the overall no-plan answer is compatible with every task subset, but it is not an explicit per-task response: do not mark these completions direct or force confidence to 1.0. Let confidence reflect evidence compatibility. The answer also constrains overall coding-AI adoption: coding_ai_usage_frequency may be "Never used" or "Tried but not active" as summary_inference, with specific past-use answers taking priority. AISelect="Yes" or generic future interest does not identify individual tasks; use AITool current/interested/not-interested answers for those. Generic AISelect does not constrain named-product history or agent memory, security, context-sharing, explanation, tool-integration, API, ethics, human-help, or similar preferences.',
         "- Absence of evidence is not negative evidence. Never emit None, Never, Absent, no experience, no mobility, or a similar negative value merely because the profile does not mention the construct.",
         "- Country directly supports region and may provide positive statistical support for a likely dominant, native, or working language as summary_inference. Never label a Country-based language completion as direct. Reduce certainty for multilingual countries and use professional or language-use context when available. If the country's likely dominant language is absent from primary_language's allowed values, omit primary_language rather than substitute an implausible listed language; prefer a matching lang_* dimension when available. Country alone still does not establish nationality, cultural identity, immigration history, hometown mobility, adversity, or other personal history.",
+        "- Never emit cult_* or lifex_geographic_mobility from Country, currency, current residence, or professional location. Cultural identity and migration history require explicit person-level evidence.",
+        '- "I used to be a developer by profession, but no longer am" means former/inactive developer, not retired. Emit seniority="Retired" only when a source answer explicitly states retirement.',
+        '- Infrequent Q&A participation is still participation. Emit stackoverflow_participation_style="Does not participate" only for an explicit never-participated answer; otherwise use a supported action style or omit.',
+        '- A broad category answer such as DevEnvsChoice="No" does not prove that a named tool such as Git was never used. Named-tool negative values require an answer that explicitly identifies that tool.',
         '- Explicit freelancer, independent-contractor, or solo-work evidence may support company_size="Solo / freelance" because that allowed value includes freelance work. Self-employed status alone does not establish founder status, entrepreneurship history, exact headcount, or a strictly one-person organization.',
         "- Compensation is individual compensation, not household income. Do not map CompTotal to a household-income dimension.",
         "- A generic dependents answer that combines children and elderly people supports caregiving only. It does not establish parenting, children's ages, elder-care status, or that both groups are cared for.",
         "- Organization-level practices and installed tools directly support claims about the respondent's work environment or exposure. They may also contribute to a personal-practice summary_inference when combined with independent respondent-level role, tool-use, task, or workflow evidence. Do not treat organization-level evidence alone as direct proof of one exact personal testing, coding, review, debugging, onboarding, abstraction, or observability value.",
         "- Technology choices and professional roles may support tool exposure and role facts, but they do not by themselves establish stable personality traits, character strengths, psychological needs, moral foundations, learning pace, emotional state, or broad personal values. Emit such soft attributes as direct or structured_claim only when the survey measures the same construct. A summary_inference still requires at least two independent behavioral answers; technology or role alone is insufficient.",
         "- BFI, SDT, moral-foundation, Schwartz-value, personality, and other psychometric completions should normally be summary_inference unless the survey directly measures the same construct. Require multiple independent, positively relevant answers and do not confuse observed professional behavior with a formally measured psychological score or need.",
+        "- For summary_inference personality, cognitive-style, broad-value, emotional-state, decision-style, or learning-style fields, require at least two independently cited source columns. Omit one-source soft completions even when the narrative sounds plausible.",
         "- A people-manager or executive answer is strong evidence of management responsibility and experience and may support a skill_people_management or skill_leadership summary_inference. Use independent evidence such as management tenure, strategy ownership, mentoring, decision scope, or team responsibility to select higher proficiency levels or Strong/Signature trait_leadership values. Do not automatically map the role alone to Master or Signature.",
         "- If a survey answer bucket crosses more than one allowed output range, omit the dimension rather than choosing one side of the boundary.",
         "",
@@ -2011,6 +2129,7 @@ def extract_year(
                 final_fields = reconcile_ai_fields(
                     final_fields, row, work.mapping
                 )
+                final_fields = filter_semantic_overreach(final_fields, row)
                 final_fields = drop_unsupported_fields(final_fields)
                 record = {
                     "year": work.year,
