@@ -8,9 +8,12 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import { api } from "@/lib/api";
-import type { SynthesisOverviewResponse } from "@/lib/types";
+import type { SynthesisOverviewResponse, SynthesisSubgraphResponse } from "@/lib/types";
 import { CategoryAttributeList } from "./CategoryAttributeList";
 import { CategoryOverviewGraph } from "./CategoryOverviewGraph";
+import { DrilldownGraph } from "./DrilldownGraph";
+import { NodeDetailRail } from "./NodeDetailRail";
+import { FOCUS_RING } from "../cockpit/cockpitShared";
 import {
   StudioGlassPanel,
   StudioMeshShell,
@@ -21,9 +24,17 @@ import {
 export function SynthesisStudioView() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [centerNode, setCenterNode] = useState<string | null>(null);
+  const [selectedNode, setSelectedNode] = useState<string | null>(null);
+  const [hops, setHops] = useState<{ up: number; down: number }>({ up: 1, down: 1 });
   const overviewQuery = useQuery<SynthesisOverviewResponse>({
     queryKey: ["synthesis", "overview"],
     queryFn: api.getSynthesisOverview,
+    staleTime: Infinity,
+  });
+  const subgraphQuery = useQuery<SynthesisSubgraphResponse>({
+    queryKey: ["synthesis", "subgraph", centerNode, hops.up, hops.down],
+    queryFn: () => api.getSynthesisSubgraph(centerNode as string, hops.up, hops.down),
+    enabled: centerNode !== null,
     staleTime: Infinity,
   });
   const overview = overviewQuery.data ?? null;
@@ -48,7 +59,10 @@ export function SynthesisStudioView() {
               <CategoryOverviewGraph
                 overview={overview}
                 selectedCategory={selectedCategory}
-                onSelectCategory={setSelectedCategory}
+                onSelectCategory={(name) => {
+                  setSelectedCategory(name);
+                  setSelectedNode(null);
+                }}
               />
             ) : (
               <div className="grid h-full place-items-center text-sm text-text-dim">
@@ -57,16 +71,92 @@ export function SynthesisStudioView() {
             )}
           </StudioGlassPanel>
           <StudioGlassPanel className="min-h-[420px] overflow-hidden">
-            <div className="grid h-full place-items-center text-sm text-text-dim">
-              {centerNode ? `Drill-down: ${centerNode} (Task 6)` : "Drill-down subgraph (Task 6)"}
-            </div>
+            {centerNode === null ? (
+              <div className="grid h-full place-items-center px-6 text-center text-sm text-text-dim">
+                Pick a category, then an attribute, to see its dependency neighborhood.
+              </div>
+            ) : (
+              <div className="flex h-full min-h-0 flex-col">
+                <div className="flex flex-none items-center gap-3 border-b border-outline-dim px-3 py-2">
+                  <span className="hud text-text-dim">Hops</span>
+                  {(["up", "down"] as const).map((direction) => (
+                    <label
+                      key={direction}
+                      className="flex items-center gap-1.5 text-xs text-text-variant"
+                    >
+                      {direction}
+                      <select
+                        value={hops[direction]}
+                        onChange={(event) =>
+                          setHops((previous) => ({
+                            ...previous,
+                            [direction]: Number(event.target.value),
+                          }))
+                        }
+                        className={`h-7 rounded border border-outline bg-field px-1.5 text-xs text-text-main ${FOCUS_RING}`}
+                      >
+                        {[0, 1, 2, 3, 4].map((hopCount) => (
+                          <option key={hopCount} value={hopCount}>
+                            {hopCount}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                  ))}
+                  {subgraphQuery.data?.truncated ? (
+                    <span className="text-[11px] text-warn">
+                      truncated to nearest 60/direction
+                    </span>
+                  ) : null}
+                </div>
+                <div className="min-h-0 flex-1">
+                  {subgraphQuery.data ? (
+                    <DrilldownGraph
+                      subgraph={subgraphQuery.data}
+                      selectedNode={selectedNode}
+                      onSelectNode={setSelectedNode}
+                      onRecenter={(id) => {
+                        setCenterNode(id);
+                        setSelectedNode(id);
+                      }}
+                    />
+                  ) : (
+                    <div className="grid h-full place-items-center text-sm text-text-dim">
+                      {subgraphQuery.isError ? "Failed to load subgraph." : "Loading…"}
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
           </StudioGlassPanel>
           <StudioGlassPanel className="min-h-[420px] overflow-hidden">
-            {selectedCategoryData ? (
+            {selectedNode ? (
+              <div className="flex h-full min-h-0 flex-col">
+                <button
+                  type="button"
+                  onClick={() => setSelectedNode(null)}
+                  className={`flex-none px-4 pt-3 text-left text-[11px] text-text-dim transition-colors hover:text-text-main motion-reduce:transition-none ${FOCUS_RING}`}
+                >
+                  ← back to category list
+                </button>
+                <div className="min-h-0 flex-1">
+                  <NodeDetailRail
+                    nodeId={selectedNode}
+                    onJumpToNode={(id) => {
+                      setCenterNode(id);
+                      setSelectedNode(id);
+                    }}
+                  />
+                </div>
+              </div>
+            ) : selectedCategoryData ? (
               <CategoryAttributeList
                 key={selectedCategoryData.name}
                 category={selectedCategoryData}
-                onSelectAttribute={setCenterNode}
+                onSelectAttribute={(id) => {
+                  setCenterNode(id);
+                  setSelectedNode(id);
+                }}
               />
             ) : (
               <div className="grid h-full place-items-center px-6 text-center text-sm text-text-dim">
