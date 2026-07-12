@@ -919,3 +919,85 @@ export const HARBOR_CHAT_TASKS: Record<string, string> = {
   finance_openbb: "application/tasks/finance-openbb_chatbot",
   medical_assistant: "application/tasks/medical-assistant_chatbot",
 };
+
+// ---------------------------------------------------------------------------
+// Synthesis Studio (Persona Full DAG browsing)
+// ---------------------------------------------------------------------------
+export interface SynthesisCategoryAttribute {
+  id: string;
+  label: string;
+  valuesCount: number;
+  degree: number;
+}
+
+export interface SynthesisCategorySummary {
+  name: string;
+  nodeCount: number;
+  attributeCount: number;
+  helperCount: number;
+  avgTopo: number;
+  internalEdgeCount: number;
+  attributes: SynthesisCategoryAttribute[];
+}
+
+export interface SynthesisCategoryEdge {
+  source: string;
+  target: string;
+  count: number;
+  weightSum: number;
+}
+
+export interface SynthesisOverviewResponse {
+  categories: SynthesisCategorySummary[];
+  edges: SynthesisCategoryEdge[];
+  counts: Record<string, number>;
+}
+
+export interface SynthesisSubgraphNode {
+  id: string;
+  label: string;
+  category: string;
+  layer: number;
+  valuesCount: number;
+  emit: boolean;
+  inDegree: number;
+  outDegree: number;
+}
+
+export interface SynthesisSubgraphEdge {
+  source: string;
+  target: string;
+  weight: number;
+  relation: string;
+}
+
+export interface SynthesisSubgraphResponse {
+  center: string;
+  up: number;
+  down: number;
+  truncated: boolean;
+  nodes: SynthesisSubgraphNode[];
+  edges: SynthesisSubgraphEdge[];
+}
+
+export interface SynthesisNodeEdgeView {
+  id: string;
+  label: string;
+  relation: string;
+  weight: number;
+}
+
+export interface SynthesisNodeDetail {
+  id: string;
+  label: string;
+  category: string;
+  description: string;
+  type: string;
+  values: string[];
+  prior: number[];
+  parents: string[];
+  inDegree: number;
+  outDegree: number;
+  inEdges: SynthesisNodeEdgeView[];
+  outEdges: SynthesisNodeEdgeView[];
+}

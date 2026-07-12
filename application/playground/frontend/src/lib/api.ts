@@ -23,6 +23,9 @@ import type {
   WebEvalTasksResponse,
   WebTrace,
   OsAppEvalTasksResponse,
+  SynthesisNodeDetail,
+  SynthesisOverviewResponse,
+  SynthesisSubgraphResponse,
 } from "./types";
 import { PERSONA_BENCH_POOL } from "./types";
 import { normalizePersonaPoolName } from "./personaDisplay";
@@ -92,6 +95,14 @@ export const api = {
       { method: "POST" },
     ),
   getConfigOptions: () => request<ConfigOptionsResponse>("/api/config/options"),
+  getSynthesisOverview: () =>
+    request<SynthesisOverviewResponse>("/api/synthesis/graph/overview"),
+  getSynthesisSubgraph: (node: string, up: number, down: number) =>
+    request<SynthesisSubgraphResponse>(
+      `/api/synthesis/graph/subgraph${qs({ node, up, down })}`,
+    ),
+  getSynthesisNode: (id: string) =>
+    request<SynthesisNodeDetail>(`/api/synthesis/nodes/${encodeURIComponent(id)}`),
   listChatbotEvalTasks: () => request<ChatbotEvalTasksResponse>("/api/chatbot-eval/tasks"),
 
   listHarborJobs: () => request<HarborJobsListResponse>("/api/harbor/jobs"),
