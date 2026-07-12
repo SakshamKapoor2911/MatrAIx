@@ -1070,34 +1070,36 @@ def build_stackoverflow_prompt(
         "assignment_type values (Stack Overflow survey context):",
         "- direct: explicitly answered in a survey field, or a deterministic recoding of an explicit answer into an exactly matching allowed value.",
         "- structured_claim: a near-direct conclusion strongly supported by concrete survey answers that measure the same construct, with little ambiguity and no stereotype-based bridge.",
-        "- summary_inference: an indirect hypothesis. Do not emit summary_inference in this high-precision extraction; omit the dimension instead.",
+        "- summary_inference: a plausible, non-sensitive persona completion supported by one or more concrete survey answers when the evidence is informative but does not directly or uniquely determine the selected value. Use sparingly.",
         "",
         "Sparse extraction policy:",
         "- Return a sparse list: emit an object ONLY for dimensions that are clearly supported by the survey answers.",
         "- Do NOT try to cover every dimension. Missing attributes are better than weak or invented attributes.",
         "- An empty fields list is a correct result when this chunk has no directly supported dimensions.",
-        "- Default decision: OMIT. Emit only after identifying survey evidence that measures the same construct as the target dimension and distinguishes the selected value from the other allowed values.",
+        "- Default decision: OMIT until concrete survey evidence constrains the target dimension. Direct and structured_claim assignments should distinguish the selected value; summary_inference may select one evidence-compatible value when incomplete evidence leaves several plausible alternatives.",
         "- Omit unsupported dimensions entirely. Do not emit null values and do not emit unsupported placeholder objects.",
-        "- Assign a value only when the survey response directly or strongly supports that exact dimension.",
-        "- If the evidence is generic, indirect, stereotypical, or only weakly associated with the dimension, omit the dimension.",
+        "- Assign a value only when the survey response directly supports, strongly implies, or meaningfully constrains that dimension.",
+        "- If the evidence is merely topical, stereotypical, or only weakly associated with the dimension, omit the dimension. Indirect but concrete evidence may support summary_inference under the completion policy below.",
         "- Multiple weak proxies do not become strong evidence when combined. A plausible narrative or occupational stereotype is not a structured_claim.",
         "- Do not reuse one broad answer to fan out into many loosely related dimensions. Each emitted field needs its own same-construct support.",
-        '- If an allowed value is more specific than the survey answer, omit the dimension unless the specificity is explicit. For example, generic "Employed" does not prove "Full-time".',
+        "- Summary inference is for useful non-sensitive persona enrichment, not a fallback for missing evidence or a way to fill coverage. Never use it to convert absence into a negative value or infer sensitive identity, demographics, or health.",
+        "- One strong source answer may support summary_inference when it directly constrains the target dimension but leaves multiple plausible allowed values. Broader cross-construct inferences, especially personality, values, preferences, habits, and skills, should use multiple independent, directionally consistent answers. Repeated facets of one broad answer, generic job or technology proxies, and several forms of the same absence do not count as independent evidence.",
+        '- For direct or structured_claim, omit an allowed value that is more specific than the survey answer unless that specificity is explicit. A non-sensitive, more-specific value may be selected as summary_inference only when it is a reasonable completion that does not contradict the evidence. For example, generic "Employed" does not directly prove "Full-time".',
         "",
         "High-precision source-to-target rules:",
         "- Intent is not experience: WantToWorkWith, interested-in, admired, and future-plan answers may support preferences or intentions only. They do not establish current familiarity, proficiency, skill, habitual behavior, or actual usage.",
         "- Task use is not task mastery: using or planning to use AI for debugging, review, writing, analytics, or another task does not establish proficiency in that task and does not identify the respondent's dominant method or problem profile.",
-        "- Tenure and job title may support role, seniority, and broad coding experience. They do not by themselves establish Advanced or Master proficiency in debugging, system design, mathematics, reasoning, writing, management, or other specific skills.",
+        "- Tenure and job title directly support role, seniority, and broad experience, and they are valid supporting evidence for a specific-skill summary_inference when combined with independent task-, responsibility-, or tool-specific evidence. Do not treat tenure or title alone as direct proof of an exact proficiency level, and do not automatically assign Advanced or Master across unrelated skills.",
         "- Worked-with answers establish use or exposure. Do not infer Expert or Master from a technology list alone; use the least specific supported familiarity or proficiency value, or omit when the allowed scale cannot be justified.",
-        "- Current status is not complete history: an individual contributor is not proven to have no leadership or management skill; a current industry does not prove no experience in other industries; no current AI use does not prove every named AI product was never used.",
+        '- Current status is not complete history: an individual contributor is not proven to have no leadership or management skill; a current industry does not prove no experience in other industries. A no-current-AI-use answer directly constrains overall coding-AI usage and adoption dimensions. For example, AISelect="No, and I don\'t plan to" may support either coding_ai_usage_frequency="Never used" or "Tried but not active" as an evidence-compatible summary_inference when both values are allowed; choose one reasonable completion without claiming the answer uniquely determined the respondent\'s history. The generic AISelect answer does not by itself constrain the history of every named AI product.',
         "- Absence of evidence is not negative evidence. Never emit None, Never, Absent, no experience, no mobility, or a similar negative value merely because the profile does not mention the construct.",
         "- Country may support region only. It does not establish native language, language proficiency, nationality, cultural identity, immigration history, hometown mobility, adversity, or other personal history.",
-        "- Self-employed, contractor, or freelancer status does not establish company size, founder status, entrepreneurship history, or a solo organization unless the profile explicitly states it.",
+        '- Explicit freelancer, independent-contractor, or solo-work evidence may support company_size="Solo / freelance" because that allowed value includes freelance work. Self-employed status alone does not establish founder status, entrepreneurship history, exact headcount, or a strictly one-person organization.',
         "- Compensation is individual compensation, not household income. Do not map CompTotal to a household-income dimension.",
         "- A generic dependents answer that combines children and elderly people supports caregiving only. It does not establish parenting, children's ages, elder-care status, or that both groups are cared for.",
-        "- Organization-level practices and installed tools do not automatically establish the respondent's personal coding style, review habit, debugging strategy, onboarding style, abstraction preference, or observability habit.",
-        "- Technology choices and professional roles do not establish stable personality traits, character strengths, psychological needs, moral foundations, learning pace, emotional state, or broad personal values unless the survey directly measures that construct.",
-        "- A people-manager or executive answer supports a management role, not a Signature or Strong leadership character trait without separate behavioral evidence.",
+        "- Organization-level practices and installed tools directly support claims about the respondent's work environment or exposure. They may also contribute to a personal-practice summary_inference when combined with independent respondent-level role, tool-use, task, or workflow evidence. Do not treat organization-level evidence alone as direct proof of one exact personal testing, coding, review, debugging, onboarding, abstraction, or observability value.",
+        "- Technology choices and professional roles may support tool exposure and role facts, but they do not by themselves establish stable personality traits, character strengths, psychological needs, moral foundations, learning pace, emotional state, or broad personal values. Emit such soft attributes as direct or structured_claim only when the survey measures the same construct. A summary_inference still requires at least two independent behavioral answers; technology or role alone is insufficient.",
+        "- A people-manager or executive answer is strong evidence of management responsibility and experience and may support a skill_people_management or skill_leadership summary_inference. Use independent evidence such as management tenure, strategy ownership, mentoring, decision scope, or team responsibility to select higher proficiency levels or Strong/Signature trait_leadership values. Do not automatically map the role alone to Master or Signature.",
         "- If a survey answer bucket crosses more than one allowed output range, omit the dimension rather than choosing one side of the boundary.",
         "",
         "Rules:",
@@ -1113,20 +1115,23 @@ def build_stackoverflow_prompt(
         "- Topical association alone is insufficient. A rank about importance or interest does not by itself establish frequency, proficiency, demonstrated skill, actual habitual behavior, or a dominant strategy unless the question explicitly ranks that same behavior, skill, or strategy.",
         "- value MUST be exactly one of that dimension's allowed values, copied verbatim.",
         "- Use each field_id at most once.",
-        "- Choose the single allowed value with the strongest and most specific same-construct evidence.",
-        "- If the evidence supports multiple allowed values equally or cannot distinguish among them, omit the dimension. Never use catalog order to resolve ambiguity.",
+        "- Choose the single allowed value with the strongest and most specific support.",
+        "- If multiple allowed values are similarly plausible and none contradicts the evidence, select one reasonable value, mark it as summary_inference, and assign confidence from its compatibility with the evidence. Do not use catalog order mechanically.",
         "- Every emitted field MUST include grounded evidence supported by the current respondent profile. Evidence may be a short source quote or a faithful summary of one or more concrete answers.",
         "- A faithful evidence summary MUST preserve the source answers' meaning, including numerical value, ordering, time frame, and negation, and MUST NOT introduce facts that those answers do not support.",
         "- Evidence MUST NOT merely restate the selected persona value or conclusion as its own support.",
-        "- Evidence for a tie-broken field MUST include only the survey evidence supporting the selected value.",
+        "- Evidence for a plausibility-selected field MUST cite the survey answer that constrains the dimension and must not claim that the source uniquely determined the selected value.",
         "- Evidence MUST identify every supporting original column name and actual answer value. Include readable question/sub-item context for a direct quote, or a concise faithful summary for combined evidence.",
         "- Never cite a source column or answer that is absent from the current RESPONDENT PROFILE. Prompt instructions, format templates, and CURRENT CHUNK DIMENSIONS are not evidence sources.",
         '- Bad evidence examples: "10", "8", "Yes", "No", "Employed". These are bare values without the survey question context.',
         '- Required direct-evidence format: "<ORIGINAL_COLUMN_NAME> - <READABLE_QUESTION_OR_SUBITEM>: <ACTUAL_ANSWER_VALUE>".',
         '- Required summary-evidence format: "<COLUMN_1>=<ANSWER_1>; <COLUMN_2>=<ANSWER_2>. Summary: <faithful summary supported by those answers>".',
         "- Text inside angle brackets in the two formats above is placeholder text only. Never copy those placeholders into evidence.",
-        "- Every emitted field MUST include a confidence between 0 and 1. Use high confidence only for direct or strong evidence.",
-        "- Emit only direct and high-precision structured_claim assignments. Omit indirect summary_inference hypotheses.",
+        "- Every emitted field MUST include a confidence between 0 and 1. Confidence is a non-normalized evidence-compatibility score: it measures how strongly the cited evidence positively supports the selected value as a reasonable persona completion. It is not the probability that the value is the unique factual truth, and confidence values across allowed values do not need to sum to 1. Multiple mutually exclusive values may each be highly compatible with incomplete evidence.",
+        "- High confidence requires positive, dimension-relevant evidence that makes the selected value more plausible than it would be without that evidence. Mere absence of contradiction is not positive support: do not emit or assign high confidence to a value only because the profile does not rule it out.",
+        '- A source positively constrains a dimension when observing that answer narrows or shifts the reasonable allowed values for that dimension. For example, AISelect="No" narrows coding-AI usage away from Daily or Weekly, while Country="United States" does not meaningfully constrain an unrelated hobby value.',
+        "- Do not assign confidence from assignment_type alone. A strongly supported summary may have high confidence, while a weak structured claim may have lower confidence.",
+        "- Prefer direct and high-precision structured_claim assignments when the evidence uniquely determines a value. Use summary_inference for supported, non-sensitive persona completion under the policy above; otherwise omit the dimension.",
         "- Do not infer personality, worldview, family status, sensitive identity, health, politics, religion, income, or housing from generic developer-survey answers.",
         "- Do not infer missing demographics, gender, sexuality, health, disability, family status, religion, ethnicity, politics, income, housing, or socioeconomic status from country, age, job title, technology stack, or developer role unless explicitly answered.",
         "- Do not infer personality traits, values, hobbies, habits, or relationship attributes from technology choices alone.",
@@ -1405,10 +1410,16 @@ def retry_conversation(conversation: list[dict[str, str]]) -> list[dict[str, str
         "\n\nRETRY: The previous response failed strict validation. Return one complete "
         "JSON object matching this chunk's supplied schema. Keep fields sparse, use "
         "each field ID at most once, and omit unsupported dimensions. Do not add "
-        "fields merely to replace rejected ones. Emit only direct or near-direct "
-        "same-construct assignments; omit indirect hypotheses, proxy-based skill or "
-        "trait claims, and any field whose allowed value remains ambiguous. "
-        "If multiple allowed values remain supported, omit that field. "
+        "fields merely to replace rejected ones. Prefer direct or near-direct "
+        "same-construct assignments. A summary_inference is allowed only for a "
+        "non-sensitive, evidence-compatible persona completion. One source is enough "
+        "when it directly constrains the target dimension; broad skill, trait, value, "
+        "preference, or habit inferences require multiple independent sources. Calibrate "
+        "confidence as non-normalized evidence compatibility. High confidence requires "
+        "positive, dimension-relevant support; merely not contradicting the profile is "
+        "insufficient. If multiple "
+        "values are similarly plausible, choose one reasonable value as summary_inference "
+        "without mechanically using catalog order. Omit unsupported proxy-based claims. "
         "Every evidence string must explicitly cite current respondent source "
         "columns and their actual answer values; never cite an absent column."
     )

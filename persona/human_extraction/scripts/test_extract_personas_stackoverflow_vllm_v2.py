@@ -243,10 +243,17 @@ def test_prompt_restores_high_precision_sparse_policy(extractor_module):
     assert "An empty fields list is a correct result" in prompt
     assert "Multiple weak proxies do not become strong evidence" in prompt
     assert "Do not reuse one broad answer to fan out" in prompt
-    assert "Do not emit summary_inference" in prompt
+    assert "summary_inference: a plausible, non-sensitive persona completion" in prompt
+    assert "One strong source answer may support summary_inference" in prompt
+    assert "non-normalized evidence-compatibility score" in prompt
+    assert "Multiple mutually exclusive values may each be highly compatible" in prompt
+    assert "High confidence requires positive, dimension-relevant evidence" in prompt
+    assert "Mere absence of contradiction is not positive support" in prompt
+    assert 'AISelect="No" narrows coding-AI usage away from Daily or Weekly' in prompt
+    assert "not a fallback for missing evidence" in prompt
     assert "Task use is not task mastery" in prompt
-    assert "Tenure and job title" in prompt
-    assert "do not by themselves establish Advanced or Master" in prompt
+    assert "valid supporting evidence for a specific-skill summary_inference" in prompt
+    assert "do not automatically assign Advanced or Master across unrelated skills" in prompt
 
 
 def test_prompt_blocks_observed_proxy_failure_modes(extractor_module):
@@ -272,10 +279,20 @@ def test_prompt_blocks_observed_proxy_failure_modes(extractor_module):
     assert "Intent is not experience" in prompt
     assert "Absence of evidence is not negative evidence" in prompt
     assert "Country may support region only" in prompt
-    assert "Self-employed, contractor, or freelancer status" in prompt
+    assert "no-current-AI-use answer directly constrains overall coding-AI usage" in prompt
+    assert 'coding_ai_usage_frequency="Never used" or "Tried but not active"' in prompt
+    assert "does not by itself constrain the history of every named AI product" in prompt
+    assert 'company_size="Solo / freelance"' in prompt
+    assert "does not establish founder status" in prompt
     assert "Compensation is individual compensation, not household income" in prompt
     assert "generic dependents answer" in prompt
-    assert "Organization-level practices and installed tools" in prompt
+    assert "work environment or exposure" in prompt
+    assert "contribute to a personal-practice summary_inference" in prompt
+    assert "organization-level evidence alone" in prompt
+    assert "Technology choices and professional roles may support tool exposure and role facts" in prompt
+    assert "people-manager or executive answer is strong evidence" in prompt
+    assert "may support a skill_people_management or skill_leadership summary_inference" in prompt
+    assert "Do not automatically map the role alone to Master or Signature" in prompt
     assert "bucket crosses more than one allowed output range" in prompt
 
 
@@ -324,13 +341,13 @@ def evidence_test_chunk(extractor_module):
     )
 
 
-def evidence_test_field(evidence):
+def evidence_test_field(evidence, *, assignment_type="direct", confidence=0.9):
     return {
         "field_id": "years_experience",
         "value": "6-10",
-        "confidence": 0.9,
+        "confidence": confidence,
         "evidence": evidence,
-        "assignment_type": "summary_inference",
+        "assignment_type": assignment_type,
     }
 
 
@@ -339,7 +356,9 @@ def test_validator_accepts_current_source_quote_and_summary(extractor_module):
     sources = {"YearsCode": "10", "DevType": "Developer;Researcher"}
     direct = evidence_test_field("YearsCode - Total coding years: 10")
     summary = evidence_test_field(
-        "YearsCode=10; DevType=Developer. Summary: ten years of coding experience"
+        "YearsCode=10; DevType=Developer. Summary: ten years of coding experience",
+        assignment_type="summary_inference",
+        confidence=0.85,
     )
 
     assert extractor_module.validate_chunk_payload(
@@ -348,6 +367,20 @@ def test_validator_accepts_current_source_quote_and_summary(extractor_module):
     assert extractor_module.validate_chunk_payload(
         {"fields": [summary]}, chunk, sources
     ) == [summary]
+
+
+def test_validator_accepts_single_source_summary_inference(extractor_module):
+    chunk = evidence_test_chunk(extractor_module)
+    one_source = evidence_test_field(
+        "YearsCode - Total coding years: 10",
+        assignment_type="summary_inference",
+        confidence=0.85,
+    )
+    sources = {"YearsCode": "10"}
+
+    assert extractor_module.validate_chunk_payload(
+        {"fields": [one_source]}, chunk, sources
+    ) == [one_source]
 
 
 def test_validator_rejects_source_absent_from_current_profile(extractor_module):
