@@ -1,0 +1,25 @@
+version = "1.0"
+artifacts = ["/app/output"]
+
+[task]
+name = "personabench/application-game-starclash"
+
+[metadata]
+difficulty = "medium"
+type = "web"
+domain = "software"
+tags = ["multi-agent", "social-simulation", "rock-paper-scissors", "persona-reasoning-styles", "reasoning-trajectory"]
+
+[verifier]
+timeout_sec = 300.0
+
+[agent]
+timeout_sec = 1800.0
+
+[environment]
+definition = "application/game-starclash"
+build_timeout_sec = 900.0
+cpus = 2
+memory_mb = 4096
+storage_mb = 10240
+gpus = 0

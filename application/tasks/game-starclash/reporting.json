@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "1.0",
+  "contextRules": [
+    {
+      "context": "task_outcome",
+      "description": "Per-persona game outcome, the closest existing shared facet for game success rate.",
+      "source": "artifacts:/app/output/final_state.json",
+      "facets": {
+        "outcome_status": {
+          "type": "enum",
+          "values": ["survived", "eliminated", "bystander"],
+          "description": "eliminated: persona.eliminated == true in final_state. survived: eliminated == false and the persona appears in at least one battle_resolved event in game_log.json.events. bystander: eliminated == false and the persona never appears in a battle_resolved event (timed out without ever finishing a duel)."
+        },
+        "final_stars": {
+          "type": "number",
+          "description": "final_state.<persona_id>.stars at the end of the run."
+        },
+        "termination_reason": {
+          "type": "enum",
+          "values": ["one_survivor", "max_ticks"],
+          "description": "final_state.json.termination_reason for the run."
+        }
+      }
+    },
+    {
+      "context": "task_reasoning_trajectory",
+      "description": "Per-persona free-text reasoning attached to decisions over the course of a run, grouped by trait so reasoning style can be compared across personas and across sessions with different crew_manifest.yaml trait mixes.",
+      "source": "artifacts:/app/output/game_log.json",
+      "facets": {
+        "dominant_trait": {
+          "type": "string",
+          "description": "game_log.json.personas[*].traits_summary.dominant_trait, the trait dimension brains.py already keys challenge-probability bias off of."
+        },
+        "reasoning_events": {
+          "type": "array",
+          "description": "The optional free-text 'reasoning' field on game_log.json.events entries (say/move/challenge/play_card/private_message/battle_resolved, etc.) where a persona's brain supplied one. Not every event carries this field."
+        }
+      },
+      "summaryDirectives": [
+        {
+          "type": "group_and_summarize",
+          "groupBy": "dominant_trait",
+          "field": "reasoning_events",
+          "description": "Summarize each persona's reasoning trajectory text, grouped by dominant_trait, to compare how reasoning style differs across trait groups within and across sessions."
+        }
+      ],
+      "judgeDirectives": [
+        {
+          "type": "llm_signal_judge",
+          "appliesTo": "reasoning_events",
+          "signals": ["confusion", "funness", "engagement"],
+          "description": "Score the persona's reasoning trajectory text for confusion (did the persona seem lost or contradictory about the game state), funness, and engagement (did the persona seem invested in the moment-to-moment play). This is a starting rubric set, not exhaustive -- some funness/engagement/confusion signals are inherently game-dependent (e.g. specific to duels, proximity-seeking, or bluffing) and should be extended per-game rather than assumed to transfer as-is to other game tasks."
+        }
+      ]
+    }
+  ]
+}
