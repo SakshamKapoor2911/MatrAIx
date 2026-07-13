@@ -373,6 +373,30 @@ def test_semantic_filter_drops_observed_cross_construct_failures(extractor_modul
             "assignment_type": "summary_inference",
         },
         {
+            "field_id": "att_remote_work",
+            "value": "Positive",
+            "confidence": 0.8,
+            "evidence": "RemoteWork=Remote",
+            "assignment_type": "direct",
+        },
+        {
+            "field_id": "att_working_from_office",
+            "value": "Positive",
+            "confidence": 0.8,
+            "evidence": (
+                "RemoteWork=Remote; JobSatPoints_2=1. Summary: The respondent "
+                "works remotely and values autonomy."
+            ),
+            "assignment_type": "structured_claim",
+        },
+        {
+            "field_id": "pref_work_location",
+            "value": "Strongly remote",
+            "confidence": 0.9,
+            "evidence": "RemoteWork=Remote",
+            "assignment_type": "direct",
+        },
+        {
             "field_id": "age_bracket",
             "value": "25-34",
             "confidence": 1.0,
@@ -392,6 +416,8 @@ def test_semantic_filter_drops_observed_cross_construct_failures(extractor_modul
         "AISelect": "No, and I don't plan to",
         "ProfessionalTech": "Automated testing;Observability tools",
         "CodingActivities": "Hobby",
+        "RemoteWork": "Remote",
+        "JobSatPoints_2": "1",
         "Age": "25-34 years old",
     }
 
@@ -449,6 +475,13 @@ def test_semantic_filter_keeps_positive_same_construct_evidence(extractor_module
             ),
             "assignment_type": "summary_inference",
         },
+        {
+            "field_id": "att_remote_work",
+            "value": "Positive",
+            "confidence": 0.9,
+            "evidence": "WorkPreference=I prefer remote work",
+            "assignment_type": "direct",
+        },
     ]
     row = {
         "LanguageHaveWorkedWith": "Rust",
@@ -458,6 +491,7 @@ def test_semantic_filter_keeps_positive_same_construct_evidence(extractor_module
         "LearnCode": "Books",
         "ProfessionalTech": "Automated testing",
         "DevType": "Developer, back-end",
+        "WorkPreference": "I prefer remote work",
     }
 
     assert extractor_module.filter_semantic_overreach(fields, row) == fields
@@ -579,15 +613,14 @@ def test_prompt_rank_guidance_is_year_specific_and_semantic(extractor_module):
         "SO_Actions_4 - Directly open a Q&A post via search: 1", chunk, 2025
     )
 
-    assert "JobSatPoints_* values are allocated points, not ordinal ranks" in prompt_2024
-    assert "TechEndorse answer is a select-all response" in prompt_2024
-    assert "TechEndorse_*, JobSatPoints_*, and SO_Actions_* are ordinal ranks" in prompt_2025
-    assert '1-2="Critical", 3-5="High", 6-9="Moderate"' in prompt_2025
-    assert '1="Hard blocker", 2-3="Major concern"' in prompt_2025
-    assert '1-3="Core value", 4-6="Important"' in prompt_2025
-    assert "explicit never-participated evidence wins" in prompt_2025
-    assert "ranked options themselves are those behaviors or strategies" in prompt_2025
-    assert "Topical association alone is insufficient" in prompt_2025
+    assert "JobSatPoints_* are allocated points, not ranks" in prompt_2024
+    assert "TechEndorse is select-all, not ranked" in prompt_2024
+    assert "TechEndorse_*, TechOppose_*, JobSatPoints_*, and SO_Actions_* are ordinal ranks" in prompt_2025
+    assert "smaller numbers rank higher" in prompt_2025
+    assert "A rank is relative order, not an absolute intensity" in prompt_2025
+    assert "Do not use ranks for other dimensions" in prompt_2025
+    assert "A rank supports only the construct named by the ranked item" in prompt_2025
+    assert "Do not convert ranks into skills, personality, psychometrics" in prompt_2025
 
 
 def test_prompt_restores_high_precision_sparse_policy(extractor_module):
@@ -610,25 +643,21 @@ def test_prompt_restores_high_precision_sparse_policy(extractor_module):
         "AIToolPlan to partially use AI - Planned AI tasks: Debugging", chunk, 2025
     )
 
-    assert "Default decision: OMIT" in prompt
-    assert "An empty fields list is a correct result" in prompt
+    assert "an empty fields list is correct" in prompt
     assert "Multiple weak proxies do not become strong evidence" in prompt
-    assert "Do not reuse one broad answer to fan out" in prompt
-    assert "summary_inference: a plausible, non-sensitive persona completion" in prompt
-    assert "One strong source answer may support summary_inference" in prompt
-    assert "non-normalized evidence-compatibility score" in prompt
-    assert "Multiple mutually exclusive values may each be highly compatible" in prompt
-    assert "High confidence requires positive, dimension-relevant evidence" in prompt
-    assert "Mere absence of contradiction is not positive support" in prompt
-    assert 'AISelect="No" narrows coding-AI usage away from Daily or Weekly' in prompt
-    assert "not a fallback for missing evidence" in prompt
-    assert "Task use is not task mastery" in prompt
-    assert "Long professional tenure in an active developer role" in prompt
-    assert "skill_coding, skill_debugging, and skill_problem_solving" in prompt
-    assert "Do not spread tenure into unrelated skills" in prompt
-    assert "Do not optimize for coverage or a target field count" in prompt
-    assert "wanting to use Rust next year is not evidence" in prompt
-    assert "Omit one-source soft completions" in prompt
+    assert "Do not fan one broad answer out" in prompt
+    assert "Do not optimize for coverage, complete the persona" in prompt
+    assert "Summary inference is exceptional" in prompt
+    assert "at least two independent, directionally consistent, same-construct answers" in prompt
+    assert "Intent is not experience; task use is not mastery" in prompt
+    assert "current status or work location is not attitude or preference" in prompt
+    assert "tenure or job title is not proof of skill" in prompt
+    assert "Overall AI use, non-use, sentiment, or future interest does not identify per-task AI behavior" in prompt
+    assert "summary_inference should normally be low confidence" in prompt
+    assert "When unsure, omit" in prompt
+    assert "choose a merely plausible allowed value" in prompt
+    assert "One strong source answer may support summary_inference" not in prompt
+    assert "persona completion" not in prompt.lower()
 
 
 def test_prompt_blocks_observed_proxy_failure_modes(extractor_module):
@@ -651,33 +680,48 @@ def test_prompt_blocks_observed_proxy_failure_modes(extractor_module):
         "Country - Where do you live?: Netherlands", chunk, 2025
     )
 
-    assert "Intent is not experience" in prompt
-    assert "Absence of evidence is not negative evidence" in prompt
-    assert "Country directly supports region" in prompt
-    assert "likely dominant, native, or working language as summary_inference" in prompt
-    assert "Never label a Country-based language completion as direct" in prompt
-    assert "positively supports ai_task_*=Does not plan AI use" in prompt
-    assert "do not mark these completions direct or force confidence to 1.0" in prompt
-    assert "specific past-use answers taking priority" in prompt
-    assert "Generic AISelect does not constrain named-product history" in prompt
-    assert 'company_size="Solo / freelance"' in prompt
-    assert "does not establish founder status" in prompt
-    assert "Compensation is individual compensation, not household income" in prompt
-    assert "generic dependents answer" in prompt
-    assert "work environment or exposure" in prompt
-    assert "limited practical AI/ML familiarity" in prompt
-    assert "additionally requires at least one respondent-level" in prompt
-    assert "Organization-level evidence alone is insufficient" in prompt
-    assert "Technology choices and professional roles may support tool exposure and role facts" in prompt
-    assert "psychometric completions should normally be summary_inference" in prompt
-    assert "people-manager or executive answer is strong evidence" in prompt
-    assert "may support a skill_people_management or skill_leadership summary_inference" in prompt
-    assert "Do not automatically map the role alone to Master or Signature" in prompt
-    assert "bucket crosses more than one allowed output range" in prompt
-    assert "Never emit cult_* or lifex_geographic_mobility" in prompt
-    assert 'seniority="Retired" only when a source answer explicitly states retirement' in prompt
-    assert "Infrequent Q&A participation is still participation" in prompt
-    assert "does not prove that a named tool such as Git was never used" in prompt
+    assert "Country supports region only" in prompt
+    assert "Do not infer language, culture, nationality, migration, childhood" in prompt
+    assert "C# is not C" in prompt
+    assert "Worked-with establishes use, not Expert or Master proficiency" in prompt
+    assert "A rank supports only the construct named by the ranked item" in prompt
+    assert "Do not infer personality, cognitive style, broad values, moral foundations" in prompt
+    assert "health, emotion, lifestyle, hobbies, habits, family" in prompt
+    assert "Organization practices describe the work environment" in prompt
+    assert "Do not infer negative values from missing evidence" in prompt
+    assert "Generic Employment=Employed does not prove Full-time" in prompt
+    assert "Country directly supports region and may provide positive statistical support" not in prompt
+
+
+def test_prompt_and_retry_are_compact_and_do_not_encourage_completion(extractor_module):
+    chunk = extractor_module.DimensionChunk(
+        chunk_id="compact_test",
+        label="Compact test",
+        description="Test compact instructions.",
+        source_categories=("Professional: Career",),
+        dimensions=(
+            {
+                "id": "seniority",
+                "label": "Seniority",
+                "description": "Career seniority.",
+                "values": ["Entry", "Mid", "Senior"],
+            },
+        ),
+    )
+    prompt = extractor_module.build_stackoverflow_prompt(
+        "YearsCodePro - Professional coding years: 5", chunk, 2025
+    )
+    instructions = prompt.split("RESPONDENT PROFILE:", 1)[0]
+    retry = extractor_module.retry_conversation(
+        [{"role": "user", "content": "base"}]
+    )[-1]["content"]
+
+    assert len(instructions) < 7_000
+    assert "persona completion" not in instructions.lower()
+    assert "choose one reasonable value" not in instructions
+    assert "at least two independent same-construct sources" in retry
+    assert "an empty fields list is valid" in retry
+    assert len(retry) < 900
 
 
 @pytest.mark.parametrize("evidence", ["10", "8.5", "20%", "Yes", "No", "Employed"])
@@ -742,7 +786,7 @@ def test_validator_accepts_current_source_quote_and_summary(extractor_module):
     summary = evidence_test_field(
         "YearsCode=10; DevType=Developer. Summary: ten years of coding experience",
         assignment_type="summary_inference",
-        confidence=0.85,
+        confidence=0.7,
     )
 
     assert extractor_module.validate_chunk_payload(
@@ -772,7 +816,7 @@ def test_validator_accepts_common_evidence_format_variants(
     extractor_module, evidence, sources
 ):
     chunk = evidence_test_chunk(extractor_module)
-    field = evidence_test_field(evidence, assignment_type="summary_inference")
+    field = evidence_test_field(evidence, assignment_type="structured_claim")
 
     assert extractor_module.validate_chunk_payload(
         {"fields": [field]}, chunk, sources
@@ -811,7 +855,7 @@ def test_validator_rejects_overlong_evidence(extractor_module):
         )
 
 
-def test_validator_accepts_single_source_summary_inference(extractor_module):
+def test_validator_rejects_single_source_summary_inference(extractor_module):
     chunk = evidence_test_chunk(extractor_module)
     one_source = evidence_test_field(
         "YearsCode - Total coding years: 10",
@@ -820,12 +864,13 @@ def test_validator_accepts_single_source_summary_inference(extractor_module):
     )
     sources = {"YearsCode": "10"}
 
-    assert extractor_module.validate_chunk_payload(
-        {"fields": [one_source]}, chunk, sources
-    ) == [one_source]
+    with pytest.raises(ValueError, match="at least two independent source columns"):
+        extractor_module.validate_chunk_payload(
+            {"fields": [one_source]}, chunk, sources
+        )
 
 
-def test_country_based_language_completion_must_be_summary(extractor_module):
+def test_country_based_language_completion_is_rejected(extractor_module):
     chunk = extractor_module.DimensionChunk(
         chunk_id="language_test",
         label="Language test",
@@ -852,13 +897,30 @@ def test_country_based_language_completion_must_be_summary(extractor_module):
     }
     summary = {**direct, "assignment_type": "summary_inference"}
 
-    with pytest.raises(ValueError, match="must be summary_inference"):
+    with pytest.raises(ValueError, match="cannot infer language from Country"):
         extractor_module.validate_chunk_payload(
             {"fields": [direct]}, chunk, {"Country": "Japan"}
         )
-    assert extractor_module.validate_chunk_payload(
-        {"fields": [summary]}, chunk, {"Country": "Japan"}
-    ) == [summary]
+    with pytest.raises(ValueError, match="at least two independent source columns"):
+        extractor_module.validate_chunk_payload(
+            {"fields": [summary]}, chunk, {"Country": "Japan"}
+        )
+
+
+def test_validator_rejects_high_confidence_summary_inference(extractor_module):
+    chunk = evidence_test_chunk(extractor_module)
+    field = evidence_test_field(
+        "YearsCode=10; DevType=Developer. Summary: ten years of coding experience",
+        assignment_type="summary_inference",
+        confidence=0.71,
+    )
+
+    with pytest.raises(ValueError, match="confidence must be at most 0.7"):
+        extractor_module.validate_chunk_payload(
+            {"fields": [field]},
+            chunk,
+            {"YearsCode": "10", "DevType": "Developer"},
+        )
 
 
 def test_zero_field_salvage_triggers_retry(extractor_module, monkeypatch):
