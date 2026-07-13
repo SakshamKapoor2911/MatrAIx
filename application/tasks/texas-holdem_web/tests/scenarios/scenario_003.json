@@ -1,0 +1,28 @@
+{
+  "seed": 3,
+  "hole_cards": ["7h", "2s"],
+  "bot_cards": ["9c", "8d"],
+  "community_order": ["As", "Kd", "Qc", "4h", "5s"],
+  "bot_policy": "deterministic-treys-v1",
+  "optimal_action_tree": {
+    "preflop": {
+      "optimal_action": "fold",
+      "rationale": "72o is the worst starting hand. Fold and lose small blind. Any call/check leads to bot raising with 9-high.",
+      "bot_response_to_raise": "call",
+      "bot_response_to_call": "raise_bot",
+      "bot_response_to_check": "raise_bot"
+    }
+  },
+  "chip_delta_by_action": {
+    "fold": -10,
+    "call": -30,
+    "raise": -60,
+    "check": -60
+  },
+  "outcome_by_action": {
+    "fold": {"winner": "opponent", "reason": "Player folds preflop, loses small blind. Best play with 72o."},
+    "call": {"winner": "opponent", "reason": "Bot raises, player calls. Player has nothing on A-K-Q board."},
+    "check": {"winner": "opponent", "reason": "Bot raises, player calls. Player loses to bot's 9-high at showdown."},
+    "raise": {"winner": "opponent", "reason": "Bot calls with 9-high, which is unbeaten on A-K-Q board."}
+  }
+}

@@ -1,5 +1,3 @@
-# Your healthcare scenario
+# healthcare assistant
 
-You are a 34-year-old office worker. For the past 3 days you have had sharp intermittent chest pain after climbing stairs, mild shortness of breath, and occasional dizziness. You have not seen a doctor yet.
-
-You are interacting with the healthcare chatbot about this situation.
+A conversational healthcare chatbot. It asks relevant questions and provides information about healthcare topics. It is designed for healthcare discussions and is not a general-purpose assistant.

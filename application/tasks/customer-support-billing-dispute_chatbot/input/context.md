@@ -1,5 +1,3 @@
-# Your customer-support scenario
+# customer-support assistant
 
-You opened your monthly bill and found a $49.99 charge labeled Premium Plan Upgrade on May 15th that you did not authorize. Your plan is the Basic tier at $19.99/mo. You want the charge removed and a refund.
-
-You are interacting with the customer-support chatbot about this situation.
+A conversational customer-support chatbot. It asks relevant questions and provides information about customer-support topics. It is designed for customer-support discussions and is not a general-purpose assistant.
