@@ -516,13 +516,24 @@ class HarborJobService:
         except (FileNotFoundError, ValueError, OSError):
             detail = None
         if isinstance(detail, dict) and detail.get("title"):
+            questionnaire = detail.get("questionnaire")
+            instrument_title = None
+            if isinstance(questionnaire, dict):
+                raw = questionnaire.get("title")
+                if isinstance(raw, str) and raw.strip():
+                    instrument_title = raw.strip()
             return {
-                "taskTitle": str(detail.get("title") or "").strip() or None,
+                "taskTitle": instrument_title
+                or (str(detail.get("title") or "").strip() or None),
                 "taskName": str(detail.get("taskName") or "").strip() or None,
                 "domain": str(detail.get("domain") or "").strip() or None,
                 "difficulty": str(detail.get("difficulty") or "").strip() or None,
                 "tags": detail.get("tags") if isinstance(detail.get("tags"), list) else [],
                 "metaType": str(detail.get("metaType") or "").strip() or None,
+                "description": str(detail.get("description") or "").strip() or None,
+                "personaStrategy": detail.get("personaStrategy")
+                if isinstance(detail.get("personaStrategy"), dict)
+                else None,
             }
         try:
             from backend.service.application_task_metadata import parse_application_task
@@ -540,6 +551,8 @@ class HarborJobService:
             "difficulty": record.difficulty or None,
             "tags": list(record.tags),
             "metaType": record.meta_type or None,
+            "description": None,
+            "personaStrategy": None,
         }
 
     def _job_task_title(self, job_name: str, job_dir: Path) -> str | None:
@@ -798,9 +811,20 @@ class HarborJobService:
         with self._guard:
             launch = self._launches.get(job_name)
 
+        task_meta = self._job_task_meta(job_name, job_dir)
         return {
             "jobName": job_name,
             "jobsDir": _rel_path(self.jobs_dir, self.repo_root),
+            "applicationType": self._job_application_type(job_name, job_dir),
+            "taskPath": self._job_task_path(job_name, job_dir),
+            "taskTitle": task_meta.get("taskTitle"),
+            "taskName": task_meta.get("taskName"),
+            "domain": task_meta.get("domain"),
+            "difficulty": task_meta.get("difficulty"),
+            "tags": task_meta.get("tags") or [],
+            "metaType": task_meta.get("metaType"),
+            "description": task_meta.get("description"),
+            "personaStrategy": task_meta.get("personaStrategy"),
             "config": self._read_json(job_dir / "config.json"),
             "result": self._read_json(job_dir / "result.json"),
             "trials": trials,

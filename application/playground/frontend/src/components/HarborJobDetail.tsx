@@ -1,17 +1,32 @@
 /**
  * Harbor batch job detail — trial index only; open a trial for evaluation + run content.
  */
-import { type ReactNode, useId, useMemo, useState } from "react";
+import { useId, useMemo, useRef, useState, type ReactNode } from "react";
+import { flushSync } from "react-dom";
 import { useQuery } from "@tanstack/react-query";
 
 import { api, ApiError } from "@/lib/api";
+import {
+  exportBatchReportPdf,
+  humanizePathLeaf,
+  plainTextFromMarkdown,
+  type BatchReportPdfMeta,
+  type BatchReportPdfPersona,
+  type BatchReportPdfPersonaStrategy,
+  type BatchReportPdfSnapshot,
+} from "@/lib/exportBatchReportPdf";
 import { personaDisplayId, personaPrimaryName } from "@/lib/personaDisplay";
 import {
   surveyQuestionTypeChipClass,
   surveyQuestionTypeLabel,
   type SurveyQuestionTypeCount,
 } from "@/lib/surveyDisplay";
-import type { HarborJobAggregation, HarborJobDetail, JobAggregationCrossFacetView } from "@/lib/types";
+import type {
+  HarborJobAggregation,
+  HarborJobDetail,
+  JobAggregationCrossFacetView,
+  TaskPersonaStrategy,
+} from "@/lib/types";
 import { PersonaAvatar } from "./cockpit/setup/PersonaAvatar";
 import { FOCUS_RING, Sym } from "./cockpit/cockpitShared";
 import {
@@ -284,7 +299,7 @@ function TrialStatusBadge({ trial }: { trial: HarborTrialRow }) {
   const style = TRIAL_STATUS_STYLES[status];
   return (
     <span
-      className={`inline-flex items-center gap-1 rounded-md border px-2 py-0.5 font-mono text-[10px] uppercase tracking-wide ${style.className}`}
+      className={`inline-flex items-center gap-1 rounded-md border px-2 py-0.5 font-mono text-[12px] uppercase tracking-wide ${style.className}`}
     >
       <Sym
         name={style.icon}
@@ -307,7 +322,7 @@ function TrialPersonaIdentity({ trial }: { trial: HarborTrialRow }) {
       <PersonaAvatar personaId={personaKey} size="sm" />
       <div className="min-w-0">
         <p className="truncate font-medium text-text-main">{displayName}</p>
-        <p className="truncate font-mono text-[10px] text-text-dim">{codename}</p>
+        <p className="truncate font-mono text-[12px] text-text-dim">{codename}</p>
       </div>
     </div>
   );
@@ -1127,8 +1142,8 @@ function InsightChip({
         colored ? toneBoxClass[tone] : "border-outline/40 bg-surface/55"
       }`}
     >
-      <div className="text-[9px] uppercase tracking-wide text-text-dim">{label}</div>
-      <div className={`mt-0.5 text-[12px] font-medium ${colored ? toneTextClass[tone] : "text-text-main"}`}>
+      <div className="text-[11px] uppercase tracking-wide text-text-dim">{label}</div>
+      <div className={`mt-0.5 text-[14px] font-medium ${colored ? toneTextClass[tone] : "text-text-main"}`}>
         {value}
       </div>
       {meterPct != null ? (
@@ -1160,11 +1175,11 @@ function BatchInsightsPanel({
   return (
     <div className="mt-3 space-y-3 rounded-xl border border-primary/30 bg-primary/10 p-3">
       <div>
-        <div className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-wide text-primary">
+        <div className="flex items-center gap-2 text-[13px] font-medium uppercase tracking-wide text-primary">
           <Sym name="insights" size={14} />
           Batch insights
         </div>
-        <p className="mt-1 text-[11px] leading-relaxed text-text-variant">
+        <p className="mt-1 text-[13px] leading-relaxed text-text-variant">
           Compact signals first; tables below expand the top outcome mixes. Open the detailed report for
           per-context evidence.
         </p>
@@ -1225,7 +1240,7 @@ function ContractBatchInsights({
 function ScoreMetricStrip({ stats, trialCount }: { stats: string[]; trialCount: number }) {
   return (
     <div className="overflow-hidden rounded-lg border border-outline/40 bg-surface/45 px-3 py-2.5">
-      <div className="flex flex-wrap gap-x-4 gap-y-1 text-[12px] text-text-main">
+      <div className="flex flex-wrap gap-x-4 gap-y-1 text-[14px] text-text-main">
         {stats.map((stat) => (
           <span key={stat}>{stat}</span>
         ))}
@@ -1251,9 +1266,9 @@ function DistributionBreakdownTable({
   return (
     <div className="overflow-hidden rounded-lg border border-outline/40 bg-surface/45">
       <div className="border-b border-outline/35 bg-surface/30 px-3 py-1.5">
-        <div className="text-[10px] font-medium uppercase tracking-wide text-text-dim">{breakdown.contextLabel}</div>
+        <div className="text-[12px] font-medium uppercase tracking-wide text-text-dim">{breakdown.contextLabel}</div>
       </div>
-      <div className="grid gap-2 border-b border-outline/35 bg-surface/30 px-3 py-1.5 text-[9px] uppercase tracking-wide text-text-dim sm:grid-cols-[minmax(0,1.4fr)_auto_auto_auto]">
+      <div className="grid gap-2 border-b border-outline/35 bg-surface/30 px-3 py-1.5 text-[11px] uppercase tracking-wide text-text-dim sm:grid-cols-[minmax(0,1.4fr)_auto_auto_auto]">
         <span>{breakdown.dimensionLabel}</span>
         <span className="sm:text-right">Count</span>
         <span className="sm:text-right">Share</span>
@@ -1266,13 +1281,13 @@ function DistributionBreakdownTable({
             className="grid gap-2 px-3 py-2.5 sm:grid-cols-[minmax(0,1.4fr)_auto_auto_auto]"
           >
             <div className="min-w-0">
-              <div className="truncate text-[13px] font-medium text-text-main">{row.label}</div>
+              <div className="truncate text-[15px] font-medium text-text-main">{row.label}</div>
             </div>
-            <div className="text-[12px] font-mono text-text-main sm:text-right">{row.count}</div>
-            <div className="text-[11px] text-text-dim sm:text-right">
+            <div className="text-[14px] font-mono text-text-main sm:text-right">{row.count}</div>
+            <div className="text-[13px] text-text-dim sm:text-right">
               {Math.round((row.count / Math.max(trialCount, 1)) * 100)}%
             </div>
-            <div className="truncate text-[11px] text-text-variant sm:text-right">
+            <div className="truncate text-[13px] text-text-variant sm:text-right">
               {unanimousDetail ?? (detailSamples.length > 0 ? "varies" : "—")}
             </div>
           </div>
@@ -1295,13 +1310,13 @@ function PersonaTextSnapshots({
 
   return (
     <div className="overflow-hidden rounded-lg border border-outline/40 bg-surface/45">
-      <div className="border-b border-outline/35 px-3 py-2 text-[10px] font-medium uppercase tracking-wide text-text-dim">
+      <div className="border-b border-outline/35 px-3 py-2 text-[12px] font-medium uppercase tracking-wide text-text-dim">
         Persona voice
       </div>
       <div className="divide-y divide-outline/30">
         {Array.from({ length: visibleRows }, (_, index) => (
           <div key={`snapshot-${index}`} className="space-y-2 px-3 py-2.5">
-            <div className="font-mono text-[10px] uppercase tracking-wide text-text-dim">
+            <div className="font-mono text-[12px] uppercase tracking-wide text-text-dim">
               Persona {index + 1}
             </div>
             {fields.map((field) => {
@@ -1309,8 +1324,8 @@ function PersonaTextSnapshots({
               if (!sample) return null
               return (
                 <div key={`${field.key}-${index}`}>
-                  <div className="text-[10px] uppercase tracking-wide text-text-dim">{field.label}</div>
-                  <p className="mt-0.5 text-[12px] leading-relaxed text-text-main">
+                  <div className="text-[12px] uppercase tracking-wide text-text-dim">{field.label}</div>
+                  <p className="mt-0.5 text-[14px] leading-relaxed text-text-main">
                     {previewText(sample, 260)}
                   </p>
                 </div>
@@ -1335,12 +1350,12 @@ function CompactContextGroup({ contexts }: { contexts: AggregationContext[] }) {
         className={`flex w-full items-center justify-between gap-3 px-4 py-3 text-left hover:bg-surface/25 ${FOCUS_RING}`}
       >
         <div>
-          <div className="text-[13px] font-medium text-text-main">Execution checks</div>
-          <p className="mt-1 text-[11px] text-text-dim">
+          <div className="text-[15px] font-medium text-text-main">Execution checks</div>
+          <p className="mt-1 text-[13px] text-text-dim">
             {contexts.length} contexts · all personas agreed
           </p>
         </div>
-        <span className="inline-flex items-center gap-1 text-[10px] uppercase tracking-wide text-text-dim">
+        <span className="inline-flex items-center gap-1 text-[12px] uppercase tracking-wide text-text-dim">
           {open ? "Hide" : "Show"}
           <Sym name={open ? "expand_less" : "expand_more"} size={14} />
         </span>
@@ -1353,21 +1368,21 @@ function CompactContextGroup({ contexts }: { contexts: AggregationContext[] }) {
             <div key={context.key} className="flex items-center gap-3 px-4 py-2.5">
               <Sym name="check_circle" size={16} className="shrink-0 text-secondary" fill={1} />
               <div className="min-w-0 flex-1">
-                <div className="text-[12px] font-medium text-text-main">{context.label}</div>
+                <div className="text-[14px] font-medium text-text-main">{context.label}</div>
                 {contextTypeDescription(context) ? (
-                  <div className="truncate text-[10px] text-text-dim">{contextTypeDescription(context)}</div>
+                  <div className="truncate text-[12px] text-text-dim">{contextTypeDescription(context)}</div>
                 ) : null}
               </div>
               <div className="shrink-0 text-right">
-                <div className="text-[12px] font-medium text-text-main">{value}</div>
-                <div className="font-mono text-[10px] text-text-dim">{primary?.presentCount ?? 0}/{primary?.presentCount ?? 0}</div>
+                <div className="text-[14px] font-medium text-text-main">{value}</div>
+                <div className="font-mono text-[12px] text-text-dim">{primary?.presentCount ?? 0}/{primary?.presentCount ?? 0}</div>
               </div>
             </div>
           )
         })}
       </div>
       {!open && contexts.length > 4 ? (
-        <div className="border-t border-outline/35 px-4 py-2 text-[11px] text-text-dim">
+        <div className="border-t border-outline/35 px-4 py-2 text-[13px] text-text-dim">
           +{contexts.length - 4} more unanimous checks
         </div>
       ) : null}
@@ -1375,80 +1390,475 @@ function CompactContextGroup({ contexts }: { contexts: AggregationContext[] }) {
   )
 }
 
+
+function readAgentModel(config: Record<string, unknown> | null): string | null {
+  const agents = Array.isArray(config?.agents) ? config.agents : [];
+  const firstAgent =
+    agents.length > 0 && agents[0] && typeof agents[0] === "object"
+      ? (agents[0] as Record<string, unknown>)
+      : null;
+  return typeof firstAgent?.model_name === "string" ? firstAgent.model_name : null;
+}
+
+function readTaskPathFromConfig(config: Record<string, unknown> | null): string | null {
+  const tasks = Array.isArray(config?.tasks) ? config.tasks : [];
+  const first =
+    tasks.length > 0 && tasks[0] && typeof tasks[0] === "object"
+      ? (tasks[0] as Record<string, unknown>)
+      : null;
+  return typeof first?.path === "string" && first.path.trim() ? first.path.trim() : null;
+}
+
+function personaPoolFromPath(personaPath: string | null | undefined): string | null {
+  if (!personaPath) return null;
+  const parts = personaPath.replace(/\\/g, "/").split("/").filter(Boolean);
+  if (parts.length < 2) return null;
+  const leaf = parts[parts.length - 1] ?? "";
+  const parent = parts[parts.length - 2] ?? "";
+  if (/^persona_\d+/i.test(leaf) || leaf.endsWith(".yaml") || leaf.endsWith(".yml")) {
+    return parent || null;
+  }
+  return parent || leaf || null;
+}
+
+function readPersonaPool(config: Record<string, unknown> | null): string | null {
+  const agents = Array.isArray(config?.agents) ? config.agents : [];
+  for (const agent of agents) {
+    if (!agent || typeof agent !== "object") continue;
+    const kwargs = (agent as Record<string, unknown>).kwargs;
+    if (!kwargs || typeof kwargs !== "object") continue;
+    const personaPath = (kwargs as Record<string, unknown>).persona_path;
+    if (typeof personaPath === "string" && personaPath.trim()) {
+      return personaPoolFromPath(personaPath.trim());
+    }
+  }
+  return null;
+}
+
+function buildPersonaRoster(trials: HarborJobDetail["trials"] | undefined): BatchReportPdfPersona[] {
+  const seen = new Set<string>();
+  const personas: BatchReportPdfPersona[] = [];
+  for (const trial of trials ?? []) {
+    const idRaw = (trial.personaId ?? "").trim();
+    const id = idRaw ? personaDisplayId(idRaw) : "";
+    const name = personaPrimaryName(trial.personaName, trial.personaId);
+    const key = idRaw || name || trial.trialName;
+    if (!key || seen.has(key)) continue;
+    seen.add(key);
+    personas.push({
+      id: id || key,
+      name: name || key,
+    });
+  }
+  return personas.sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
+}
+
+function buildCoverageSnapshot(
+  aggregation: HarborJobAggregation | null | undefined,
+): BatchReportPdfSnapshot[] {
+  if (!aggregation) return [];
+  const coverage = aggregation.coverage;
+  const snap: BatchReportPdfSnapshot[] = [
+    {
+      label: "Trials",
+      value: String(coverage.completedTrials),
+      hint: coverage.trialCount !== coverage.completedTrials ? `/ ${coverage.trialCount}` : undefined,
+    },
+  ];
+  if (coverage.pendingTrials > 0) {
+    snap.push({ label: "Pending", value: String(coverage.pendingTrials) });
+  }
+  if (coverage.completedWithoutArtifactTrials > 0) {
+    snap.push({
+      label: "No artifact",
+      value: String(coverage.completedWithoutArtifactTrials),
+    });
+  }
+  const reportingStatus = aggregation.reporting?.status;
+  if (reportingStatus && reportingStatus !== "not_applicable") {
+    snap.push({ label: "Reporting", value: reportingStatus });
+  }
+  return snap.slice(0, 4);
+}
+
+function normalizePersonaStrategy(
+  strategy: TaskPersonaStrategy | null | undefined,
+): BatchReportPdfPersonaStrategy | null {
+  if (!strategy) return null;
+  return {
+    mode: strategy.defaultMode ?? null,
+    sampleSizePerValueGroup: strategy.sampleSizePerValueGroup ?? null,
+    sampleSize: strategy.sampleSize ?? null,
+    seed: strategy.seed ?? null,
+    stratifyFields: strategy.stratifyFields ?? undefined,
+    dimensionFilters: strategy.dimensionFilters ?? undefined,
+    sources: strategy.sources ?? undefined,
+  };
+}
+
+async function enrichBatchReportPdfMeta(meta: BatchReportPdfMeta): Promise<BatchReportPdfMeta> {
+  if (!meta.taskPath) return meta;
+  try {
+    const detail = await api.getTaskDetail(meta.taskPath);
+    const instrumentTitle = detail.questionnaire?.title?.trim() || null;
+    const instructionPlain = plainTextFromMarkdown(detail.instructionMarkdown);
+    const contextPlain = plainTextFromMarkdown(detail.contextMarkdown);
+    const description =
+      (detail.description || "").trim() ||
+      instructionPlain
+        .split(/\n\n+/)
+        .map((p) => p.trim())
+        .find((p) => p.length > 40 && !/^how to answer/i.test(p)) ||
+      null;
+    return {
+      ...meta,
+      taskTitle: instrumentTitle || detail.title?.trim() || meta.taskTitle,
+      taskDescription: description || meta.taskDescription || null,
+      taskContext: contextPlain || meta.taskContext || null,
+      taskInstruction: instructionPlain || meta.taskInstruction || null,
+      taskDomain: detail.domain?.trim() || meta.taskDomain || null,
+      taskDifficulty: detail.difficulty?.trim() || meta.taskDifficulty || null,
+      taskTags: Array.isArray(detail.tags) && detail.tags.length ? detail.tags.map(String) : meta.taskTags,
+      taskName: detail.taskName?.trim() || meta.taskName || null,
+      applicationType: meta.applicationType || detail.metaType || null,
+      personaStrategy: normalizePersonaStrategy(detail.personaStrategy) ?? meta.personaStrategy,
+    };
+  } catch {
+    return meta;
+  }
+}
+
+function buildBatchReportPdfMeta(jobName: string, job: HarborJobDetail | undefined): BatchReportPdfMeta {
+  const launch = job?.launch ?? null;
+  const result = (job?.result ?? null) as Record<string, unknown> | null;
+  const config = (job?.config ?? null) as Record<string, unknown> | null;
+
+  let status = launch?.status ?? null;
+  if (!status) {
+    if (result?.finished_at) status = "completed";
+    else if (result?.started_at) status = "running";
+  }
+
+  const started = typeof result?.started_at === "string" ? result.started_at : null;
+  const finished = typeof result?.finished_at === "string" ? result.finished_at : null;
+  const runWindow = started || finished ? `${started || "-"} -> ${finished || "-"}` : null;
+  const generatedAt =
+    typeof job?.aggregation?.generatedAt === "string" && job.aggregation.generatedAt
+      ? job.aggregation.generatedAt
+      : null;
+  const parallelismRaw = config?.n_concurrent_trials;
+  const parallelism =
+    typeof parallelismRaw === "number" && Number.isFinite(parallelismRaw)
+      ? Math.max(1, Math.floor(parallelismRaw))
+      : typeof parallelismRaw === "string" && parallelismRaw.trim() !== "" && Number.isFinite(Number(parallelismRaw))
+        ? Math.max(1, Math.floor(Number(parallelismRaw)))
+        : null;
+
+  const taskPath = (job?.taskPath ?? readTaskPathFromConfig(config) ?? "").trim() || null;
+  const taskTitle =
+    (job?.taskTitle ?? "").trim() ||
+    humanizePathLeaf(taskPath) ||
+    null;
+  const applicationType =
+    (job?.applicationType ?? job?.metaType ?? "").trim() ||
+    (taskPath && /\/survey[_-]/i.test(taskPath) ? "survey" : null);
+  const personas = buildPersonaRoster(job?.trials);
+
+  return {
+    jobName,
+    status,
+    configPath: launch?.configPath ?? null,
+    agentModel: readAgentModel(config),
+    parallelism,
+    runWindow,
+    startedAt: started,
+    finishedAt: finished,
+    generatedAt,
+    applicationType,
+    taskPath,
+    taskTitle,
+    taskDescription: (job?.description ?? "").trim() || null,
+    taskDomain: (job?.domain ?? "").trim() || null,
+    taskDifficulty: (job?.difficulty ?? "").trim() || null,
+    taskTags: Array.isArray(job?.tags) ? job.tags.map(String) : undefined,
+    taskName: (job?.taskName ?? "").trim() || null,
+    personaPool: readPersonaPool(config),
+    personaStrategy: normalizePersonaStrategy(job?.personaStrategy),
+    personas,
+    snapshot: buildCoverageSnapshot(job?.aggregation),
+  };
+}
+
+function shortModelLabel(model: string): string {
+  return model.split("/").pop()?.trim() || model;
+}
+
+function formatRunDuration(startedAt: string | null | undefined, finishedAt: string | null | undefined): string | null {
+  if (!startedAt || !finishedAt) return null;
+  const start = Date.parse(startedAt);
+  const end = Date.parse(finishedAt);
+  if (Number.isNaN(start) || Number.isNaN(end) || end < start) return null;
+  const sec = Math.round((end - start) / 1000);
+  if (sec < 60) return `${sec}s`;
+  const min = Math.floor(sec / 60);
+  const rem = sec % 60;
+  if (min < 60) return rem ? `${min}m ${rem}s` : `${min}m`;
+  const hr = Math.floor(min / 60);
+  const minRem = min % 60;
+  return minRem ? `${hr}h ${minRem}m` : `${hr}h`;
+}
+
+/** Compact absolute timestamp for report chrome (`Jul 13, 00:38:25`). */
+function formatTimestamp(iso: string | null | undefined, withSeconds = false): string | null {
+  if (!iso) return null;
+  const t = Date.parse(iso);
+  if (Number.isNaN(t)) return null;
+  return new Date(t).toLocaleString(undefined, {
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    ...(withSeconds ? { second: "2-digit" as const } : {}),
+    hour12: false,
+  });
+}
+
+function BatchReportMetaFact({
+  label,
+  value,
+  title,
+}: {
+  label: string;
+  value: string;
+  title?: string;
+}) {
+  return (
+    <div className="min-w-0 bg-surface/80 px-3 py-2.5" title={title}>
+      <div className="text-[11px] font-medium uppercase tracking-wide text-text-dim">{label}</div>
+      <div className="mt-1 text-[13px] leading-snug text-text-main">{value}</div>
+    </div>
+  );
+}
+
+function BatchReportMetaByline({ meta }: { meta: BatchReportPdfMeta }) {
+  const model = meta.agentModel ? shortModelLabel(meta.agentModel) : null;
+  const duration = formatRunDuration(meta.startedAt, meta.finishedAt);
+  const runStart = formatTimestamp(meta.startedAt, true);
+  const runEnd = formatTimestamp(meta.finishedAt, true);
+  const reportAt = formatTimestamp(meta.generatedAt, true);
+
+  let runValue: string | null = null;
+  if (runStart && runEnd) {
+    runValue = duration ? `${runStart} → ${runEnd} · ${duration}` : `${runStart} → ${runEnd}`;
+  } else if (runStart || runEnd) {
+    runValue = duration ? `${runStart ?? runEnd} · ${duration}` : (runStart ?? runEnd);
+  } else if (duration) {
+    runValue = `Duration ${duration}`;
+  }
+
+  const facts: Array<{ label: string; value: string; title?: string }> = [];
+  if (meta.taskTitle || meta.taskPath) {
+    facts.push({
+      label: "Task",
+      value: meta.taskTitle || humanizePathLeaf(meta.taskPath) || meta.taskPath || "",
+      title: meta.taskPath ?? undefined,
+    });
+  }
+  if (meta.personas && meta.personas.length > 0) {
+    facts.push({
+      label: "Personas",
+      value:
+        meta.personaPool != null
+          ? `${meta.personas.length} · ${meta.personaPool}`
+          : String(meta.personas.length),
+      title: meta.personas.map((p) => `${p.id} ${p.name}`).join(", "),
+    });
+  }
+  if (model) {
+    facts.push({
+      label: "Agent model",
+      value: model,
+      title: meta.agentModel ?? undefined,
+    });
+  }
+  if (meta.parallelism != null) {
+    facts.push({
+      label: "Parallelism",
+      value: String(meta.parallelism),
+      title: `${meta.parallelism} concurrent trials`,
+    });
+  }
+  if (runValue) {
+    facts.push({
+      label: "Run",
+      value: runValue,
+      title: meta.runWindow ?? undefined,
+    });
+  }
+  if (reportAt) {
+    facts.push({
+      label: "Report",
+      value: reportAt,
+      title: meta.generatedAt ?? undefined,
+    });
+  }
+
+  if (facts.length === 0) return null;
+
+  const colClass =
+    facts.length >= 5
+      ? "grid-cols-1 sm:grid-cols-2 xl:grid-cols-3"
+      : facts.length === 4
+        ? "grid-cols-1 sm:grid-cols-2 xl:grid-cols-4"
+        : facts.length === 3
+          ? "grid-cols-1 sm:grid-cols-3"
+          : facts.length === 2
+            ? "grid-cols-1 sm:grid-cols-2"
+            : "grid-cols-1";
+
+  return (
+    <div className={`mt-3 grid gap-px overflow-hidden rounded-lg border border-outline/40 bg-outline/40 ${colClass}`}>
+      {facts.map((fact) => (
+        <BatchReportMetaFact key={fact.label} label={fact.label} value={fact.value} title={fact.title} />
+      ))}
+    </div>
+  );
+}
+
 function AggregationDashboard({
   aggregation,
   applicationType,
+  pdfMeta,
 }: {
-  aggregation: HarborJobAggregation
-  applicationType?: string | null
+  aggregation: HarborJobAggregation;
+  applicationType?: string | null;
+  pdfMeta: BatchReportPdfMeta;
 }) {
-  const [open, setOpen] = useState(false)
-  const allContexts = useMemo(() => aggregation.contexts ?? [], [aggregation.contexts])
+  const rootRef = useRef<HTMLDivElement>(null);
+  const [open, setOpen] = useState(false);
+  const [downloadBusy, setDownloadBusy] = useState(false);
+  const [captureError, setCaptureError] = useState<string | null>(null);
+  const allContexts = useMemo(() => aggregation.contexts ?? [], [aggregation.contexts]);
   const category = useMemo(
     () => inferReportingCategory(allContexts, applicationType),
     [allContexts, applicationType],
-  )
+  );
   const { headline: headlineContexts, compact: compactContexts } = useMemo(
     () => splitContexts(allContexts, category),
     [allContexts, category],
-  )
-  const contexts = allContexts
-  const numerical = aggregation.fields.filter((field) => field.kind === "numerical")
-  const categorical = aggregation.fields.filter((field) => field.kind === "categorical")
-  const textual = aggregation.fields.filter((field) => field.kind === "textual")
-  const coverage = aggregation.coverage
-  const reporting = aggregation.reporting ?? null
-  const reportingChip = reportingSummary(reporting)
-  const hasDetails = contexts.length > 0 || numerical.length > 0 || categorical.length > 0 || textual.length > 0
-  const isSurvey = category === "survey"
-  const questionCount = allContexts.filter((context) => context.contextType === "question_response").length
+  );
+  const contexts = allContexts;
+  const numerical = aggregation.fields.filter((field) => field.kind === "numerical");
+  const categorical = aggregation.fields.filter((field) => field.kind === "categorical");
+  const textual = aggregation.fields.filter((field) => field.kind === "textual");
+  const coverage = aggregation.coverage;
+  const reporting = aggregation.reporting ?? null;
+  const reportingChip = reportingSummary(reporting);
+  const hasDetails = contexts.length > 0 || numerical.length > 0 || categorical.length > 0 || textual.length > 0;
+  const isSurvey = category === "survey";
+  const questionCount = allContexts.filter((context) => context.contextType === "question_response").length;
   const detailCount = isSurvey
     ? questionCount || contexts.length
     : contexts.length > 0
       ? contexts.length
-      : numerical.length + categorical.length + textual.length
-  const detailLabel = isSurvey ? "questions" : contexts.length > 0 ? "contexts" : "fields"
+      : numerical.length + categorical.length + textual.length;
+  const detailLabel = isSurvey ? "questions" : contexts.length > 0 ? "contexts" : "fields";
   const trialHint =
     coverage.pendingTrials > 0
       ? `${coverage.completedTrials}/${coverage.trialCount} complete`
-      : `${coverage.completedTrials} completed`
+      : `${coverage.completedTrials} completed`;
   const showArtifactsChip =
-    coverage.completedWithoutArtifactTrials > 0 || coverage.artifactReadyTrials !== coverage.trialCount
-  const showPendingChip = coverage.pendingTrials > 0
+    coverage.completedWithoutArtifactTrials > 0 || coverage.artifactReadyTrials !== coverage.trialCount;
+  const showPendingChip = coverage.pendingTrials > 0;
   const surveyStats = useMemo(
     () => (isSurvey ? buildSurveyCoverageStats(contexts, coverage) : []),
     [contexts, coverage, isSurvey],
-  )
+  );
   const surveyTypeCounts = useMemo(
     () => (isSurvey ? buildSurveyQuestionTypeCounts(contexts) : []),
     [contexts, isSurvey],
-  )
+  );
   const showReportingBadge =
-    reporting != null && (reporting.status ?? "").trim().toLowerCase() !== "not_applicable"
+    reporting != null && (reporting.status ?? "").trim().toLowerCase() !== "not_applicable";
+
+  const downloadPdf = async () => {
+    if (downloadBusy) return;
+    setDownloadBusy(true);
+    setCaptureError(null);
+    try {
+      flushSync(() => {
+        if (hasDetails) setOpen(true);
+      });
+      await new Promise<void>((resolve) => {
+        requestAnimationFrame(() => requestAnimationFrame(() => resolve()));
+      });
+      await new Promise((resolve) => window.setTimeout(resolve, 150));
+      const root = rootRef.current;
+      if (!root) {
+        throw new Error("Batch report is not ready to capture.");
+      }
+      const enriched = await enrichBatchReportPdfMeta({
+        ...pdfMeta,
+        applicationType: pdfMeta.applicationType ?? applicationType ?? null,
+        snapshot:
+          pdfMeta.snapshot && pdfMeta.snapshot.length > 0
+            ? pdfMeta.snapshot
+            : buildCoverageSnapshot(aggregation),
+      });
+      await exportBatchReportPdf(root, enriched);
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Could not download PDF report.";
+      setCaptureError(message);
+    } finally {
+      setDownloadBusy(false);
+    }
+  };
 
   return (
-    <div className="mb-5 space-y-5">
-      <StudioGlassPanel className="px-4 py-3">
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <div className="flex items-center gap-2 text-[12px] font-medium text-text-main">
-            <Sym name="analytics" size={16} className="text-primary" />
-            Batch report
+    <div ref={rootRef} className="mb-5 space-y-5" data-batch-report-root>
+      <StudioGlassPanel className="bg-surface/95 px-4 py-3">
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex min-w-0 items-center gap-2 text-[14px] font-medium text-text-main">
+            <Sym name="analytics" size={16} className="shrink-0 text-primary" />
+            Persona-task batch report
           </div>
-          {showReportingBadge ? (
-            <span
-              className={`inline-flex items-center gap-1 rounded-md border px-2 py-0.5 font-mono text-[10px] uppercase tracking-wide ${reportingStatusClassName(
-                reporting.status,
-              )}`}
+          <div className="flex shrink-0 flex-wrap items-center justify-end gap-2">
+            <button
+              type="button"
+              data-pdf-ignore
+              onClick={() => {
+                void downloadPdf();
+              }}
+              disabled={downloadBusy}
+              className={`inline-flex items-center gap-1.5 rounded-md border border-outline/50 bg-surface/60 px-2.5 py-1 text-[12px] font-medium text-text-variant transition hover:border-primary/40 hover:bg-surface hover:text-text-main disabled:opacity-55 ${FOCUS_RING}`}
             >
-              <Sym
-                name={reporting.status === "queued" || reporting.status === "running" ? "autorenew" : "analytics"}
-                size={12}
-                className={reporting.status === "queued" || reporting.status === "running" ? "animate-rb-spin" : ""}
-              />
-              LLM report · {reportingStatusLabel(reporting.status)}
-            </span>
-          ) : null}
+              <Sym name="download" size={14} />
+              {downloadBusy ? "Preparing PDF…" : "Download PDF"}
+            </button>
+            {showReportingBadge ? (
+              <span
+                className={`inline-flex items-center gap-1 rounded-md border px-2 py-0.5 font-mono text-[12px] uppercase tracking-wide ${reportingStatusClassName(
+                  reporting.status,
+                )}`}
+              >
+                <Sym
+                  name={reporting.status === "queued" || reporting.status === "running" ? "autorenew" : "analytics"}
+                  size={12}
+                  className={reporting.status === "queued" || reporting.status === "running" ? "animate-rb-spin" : ""}
+                />
+                LLM report · {reportingStatusLabel(reporting.status)}
+              </span>
+            ) : null}
+          </div>
         </div>
+
+        <BatchReportMetaByline meta={pdfMeta} />
+
+        {captureError ? (
+          <p className="mt-2 text-[13px] text-danger" data-pdf-ignore>
+            {captureError}
+          </p>
+        ) : null}
 
         <div className="mt-3 flex flex-wrap gap-2">
           <CoverageTile
@@ -1488,13 +1898,16 @@ function AggregationDashboard({
           ) : null}
         </div>
         {reporting?.error ? (
-          <p className="mt-3 text-[12px] leading-relaxed text-danger">{reporting.error}</p>
+          <p className="mt-3 text-[14px] leading-relaxed text-danger">{reporting.error}</p>
         ) : null}
         {!isSurvey && contexts.length > 0 ? (
           <BatchInsightsPanel aggregation={aggregation} category={category} />
         ) : null}
         {hasDetails ? (
-          <div className={`space-y-2 ${contexts.length > 0 ? "mt-3 border-t border-outline/35 pt-3" : "mt-3"}`}>
+          <div
+            data-pdf-ignore
+            className={`space-y-2 ${contexts.length > 0 ? "mt-3 border-t border-outline/35 pt-3" : "mt-3"}`}
+          >
             <button
               type="button"
               onClick={() => setOpen((value) => !value)}
@@ -1506,7 +1919,7 @@ function AggregationDashboard({
               }`}
             >
               <div className="min-w-0">
-                <div className="text-[12px] font-medium text-on-primary">
+                <div className="text-[14px] font-medium text-on-primary">
                   {open
                     ? isSurvey
                       ? "Hide per-question report"
@@ -1515,13 +1928,13 @@ function AggregationDashboard({
                       ? "Show per-question report"
                       : "Show detailed report"}
                 </div>
-                <div className="mt-0.5 text-[11px] leading-relaxed text-on-primary/80">
+                <div className="mt-0.5 text-[13px] leading-relaxed text-on-primary/80">
                   {isSurvey
                     ? `${detailCount} ${detailLabel} · answer mix, open Reasons for quotes`
                     : `${detailCount} ${detailLabel} · signals, grouped summaries, and evidence`}
                 </div>
               </div>
-              <div className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-white/15 bg-white/10 px-2.5 py-1.5 text-[11px] text-on-primary">
+              <div className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-white/15 bg-white/10 px-2.5 py-1.5 text-[13px] text-on-primary">
                 <span>{open ? "Collapse" : "Expand"}</span>
                 <Sym name={open ? "expand_less" : "expand_more"} size={16} />
               </div>
@@ -1532,7 +1945,7 @@ function AggregationDashboard({
 
       {open ? (
         contexts.length > 0 ? (
-          <StudioGlassPanel className="overflow-hidden">
+          <StudioGlassPanel className="overflow-hidden bg-surface/95">
             <SectionHeader
               title={isSurvey ? "Per-question report" : "Detailed contexts"}
               subtitle={
@@ -1565,7 +1978,7 @@ function AggregationDashboard({
         )
       ) : null}
     </div>
-  )
+  );
 }
 
 function scoreFacetsForContext(context: AggregationContext): AggregationField[] {
@@ -1651,7 +2064,7 @@ function ChoiceCompositionChart({
   return (
     <div className="space-y-3">
       <div className="flex flex-wrap items-end justify-between gap-2">
-        <div className="min-w-0 text-[12px] text-text-main">
+        <div className="min-w-0 text-[14px] text-text-main">
           {leader && leader.count > 0 ? (
             <>
               Top pick <span className="font-medium">{leader.label}</span>
@@ -1666,9 +2079,9 @@ function ChoiceCompositionChart({
         </div>
         <div className="flex flex-wrap items-center gap-2">
           {multi ? (
-            <span className="text-[10px] text-text-dim">Multi-select · shares can exceed 100%</span>
+            <span className="text-[12px] text-text-dim">Multi-select · shares can exceed 100%</span>
           ) : null}
-          <span className="rounded-md border border-outline/40 bg-surface/50 px-2 py-1 text-[11px] text-text-variant">
+          <span className="rounded-md border border-outline/40 bg-surface/50 px-2 py-1 text-[13px] text-text-variant">
             {consensus}
           </span>
         </div>
@@ -1691,7 +2104,7 @@ function ChoiceCompositionChart({
                       : "bg-primary/40"
             return (
               <div key={`${item.id ?? item.label}-${item.count}`} className="space-y-1">
-                <div className="flex items-start justify-between gap-3 text-[12px]">
+                <div className="flex items-start justify-between gap-3 text-[14px]">
                   <span className={`min-w-0 leading-snug ${item.count > 0 ? "text-text-main" : "text-text-dim"}`}>
                     {item.label}
                   </span>
@@ -1822,12 +2235,12 @@ function FreeTextThemeTags({ themes, label }: { themes: FreeTextTheme[]; label: 
   if (themes.length === 0) return null
   return (
     <div className="space-y-1.5">
-      <div className="text-[10px] font-medium uppercase tracking-wide text-text-dim">{label}</div>
+      <div className="text-[12px] font-medium uppercase tracking-wide text-text-dim">{label}</div>
       <div className="flex flex-wrap gap-1.5">
         {themes.map((theme) => (
           <span
             key={`${theme.label}-${theme.count}`}
-            className="inline-flex max-w-full items-start gap-1.5 rounded-lg border border-outline/45 bg-surface/70 px-2.5 py-1.5 text-[11px] leading-snug text-text-main"
+            className="inline-flex max-w-full items-start gap-1.5 rounded-lg border border-outline/45 bg-surface/70 px-2.5 py-1.5 text-[13px] leading-snug text-text-main"
           >
             <span className="min-w-0 whitespace-normal break-words">{theme.label}</span>
             <span className="shrink-0 font-mono text-text-dim">{theme.count}</span>
@@ -1845,14 +2258,14 @@ function FreeTextThemeExamples({ themes }: { themes: FreeTextTheme[] }) {
       {themes.map((theme) => (
         <div key={`${theme.label}-${theme.count}`} className="space-y-1.5">
           <div className="flex items-start justify-between gap-3">
-            <div className="min-w-0 text-[12px] font-medium leading-snug text-text-main">{theme.label}</div>
-            <span className="shrink-0 font-mono text-[11px] text-text-dim">{theme.count}</span>
+            <div className="min-w-0 text-[14px] font-medium leading-snug text-text-main">{theme.label}</div>
+            <span className="shrink-0 font-mono text-[13px] text-text-dim">{theme.count}</span>
           </div>
           <div className="space-y-1.5">
             {theme.samples.slice(0, 2).map((sample) => (
               <div
                 key={`${theme.label}-${sample.slice(0, 40)}`}
-                className="rounded-md border border-outline/40 bg-surface/60 px-3 py-2 text-[12px] leading-relaxed text-text-variant"
+                className="rounded-md border border-outline/40 bg-surface/60 px-3 py-2 text-[14px] leading-relaxed text-text-variant"
               >
                 {sample}
               </div>
@@ -1968,7 +2381,7 @@ function LikertSpectrumChart({
             className="pointer-events-none absolute bottom-8 top-3 z-10 w-px -translate-x-1/2 bg-text-main/70"
             style={{ left: `calc(12px + (100% - 24px) * ${Math.max(0, Math.min(100, avgPct)) / 100})` }}
           >
-            <span className="absolute -top-1 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-text-main px-1.5 py-0.5 font-mono text-[10px] text-surface">
+            <span className="absolute -top-1 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-text-main px-1.5 py-0.5 font-mono text-[12px] text-surface">
               avg {metricValue(avg)}
             </span>
           </div>
@@ -1985,7 +2398,7 @@ function LikertSpectrumChart({
                     title={`${point.label}: ${point.count}`}
                   />
                 </div>
-                <div className="font-mono text-[10px] text-text-dim">{point.value}</div>
+                <div className="font-mono text-[12px] text-text-dim">{point.value}</div>
               </div>
             )
           })}
@@ -1995,7 +2408,7 @@ function LikertSpectrumChart({
         {points.map((point, index) => {
           const share = Math.round((point.count / safeTotal) * 100)
           return (
-            <div key={point.value} className="flex items-center gap-2 text-[11px]">
+            <div key={point.value} className="flex items-center gap-2 text-[13px]">
               <span className={`h-2.5 w-2.5 shrink-0 rounded-sm ${likertSegmentClass(index, points.length)}`} />
               <span className={`min-w-0 flex-1 ${point.count > 0 ? "text-text-main" : "text-text-dim"}`}>
                 {point.label}
@@ -2045,19 +2458,19 @@ function LikertQuestionBody({
       <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-2">
         <div className="flex flex-wrap items-end gap-x-4 gap-y-1">
           <div>
-            <div className="text-[10px] uppercase tracking-wide text-text-dim">Average</div>
+            <div className="text-[12px] uppercase tracking-wide text-text-dim">Average</div>
             <div className="flex items-baseline gap-1.5">
               <span className="font-mono text-[22px] text-text-main">{metricValue(avg)}</span>
-              <span className="font-mono text-[13px] text-text-dim">/{scale.max}</span>
+              <span className="font-mono text-[15px] text-text-dim">/{scale.max}</span>
             </div>
           </div>
-          {avgLabel ? <div className="pb-1 text-[13px] text-text-main">{avgLabel}</div> : null}
+          {avgLabel ? <div className="pb-1 text-[15px] text-text-main">{avgLabel}</div> : null}
         </div>
-        <div className="rounded-md border border-outline/40 bg-surface/50 px-2 py-1 text-[11px] text-text-variant">
+        <div className="rounded-md border border-outline/40 bg-surface/50 px-2 py-1 text-[13px] text-text-variant">
           {consensus}
         </div>
       </div>
-      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-text-dim">
+      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] text-text-dim">
         <span>
           {scale.min}
           {lowLabel ? ` · ${lowLabel}` : ""}
@@ -2144,7 +2557,7 @@ function SurveyQuestionCard({ context }: { context: AggregationContext }) {
             <FieldTitle field={context.label} />
             {typeChip ? <InlineBadge>{typeChip}</InlineBadge> : null}
             {primaryFacet?.presentCount != null ? (
-              <span className="font-mono text-[11px] text-text-dim">
+              <span className="font-mono text-[13px] text-text-dim">
                 {primaryFacet.presentCount} answered
                 {primaryFacet.missingCount > 0 ? ` · ${primaryFacet.missingCount} missing` : ""}
               </span>
@@ -2162,7 +2575,7 @@ function SurveyQuestionCard({ context }: { context: AggregationContext }) {
                   null
                 return (
                   <>
-                    <p className="text-[13px] leading-relaxed text-text-main">
+                    <p className="text-[15px] leading-relaxed text-text-main">
                       {reportingSummary || freeText.summary || "No written answers yet."}
                     </p>
                     <FreeTextThemeTags
@@ -2182,12 +2595,12 @@ function SurveyQuestionCard({ context }: { context: AggregationContext }) {
               multi={questionType === "multi_choice"}
             />
           ) : (
-            <p className="text-[12px] text-text-variant">No response mix available.</p>
+            <p className="text-[14px] text-text-variant">No response mix available.</p>
           )}
         </div>
 
         {scoreFacets.length > 0 && !scoreNeedsDetail ? (
-          <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-[12px] text-text-main">
+          <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-[14px] text-text-main">
             {scoreFacets.map((facet) => (
               <span key={facet.key} className="inline-flex items-baseline gap-1.5">
                 <span className="text-text-dim">{facet.label}</span>
@@ -2214,8 +2627,8 @@ function SurveyQuestionCard({ context }: { context: AggregationContext }) {
             className={`flex w-full cursor-pointer items-center justify-between gap-3 px-4 py-2.5 text-left transition-colors duration-200 hover:bg-surface/40 ${FOCUS_RING}`}
           >
             <div className="min-w-0">
-              <div className="text-[12px] font-medium text-text-main">Examples by theme</div>
-              <div className="mt-0.5 text-[11px] text-text-dim">
+              <div className="text-[14px] font-medium text-text-main">Examples by theme</div>
+              <div className="mt-0.5 text-[13px] text-text-dim">
                 {freeTextDisplayThemes.length} theme{freeTextDisplayThemes.length === 1 ? "" : "s"}
                 {" · "}1–2 quotes each
               </div>
@@ -2240,10 +2653,10 @@ function SurveyQuestionCard({ context }: { context: AggregationContext }) {
             className={`flex w-full cursor-pointer items-center justify-between gap-3 px-4 py-2.5 text-left transition-colors duration-200 hover:bg-surface/40 ${FOCUS_RING}`}
           >
             <div className="min-w-0">
-              <div className="text-[12px] font-medium text-text-main">
+              <div className="text-[14px] font-medium text-text-main">
                 {scoreFacets.length === 1 ? scoreFacets[0].label : "Scores"}
               </div>
-              <div className="mt-0.5 text-[11px] text-text-dim">
+              <div className="mt-0.5 text-[13px] text-text-dim">
                 {scoreFacets
                   .map((facet) =>
                     facet.kind === "numerical"
@@ -2260,7 +2673,7 @@ function SurveyQuestionCard({ context }: { context: AggregationContext }) {
               {scoreFacets.map((facet) => (
                 <div key={facet.key} className="space-y-2">
                   {scoreFacets.length > 1 ? (
-                    <div className="text-[12px] font-medium text-text-main">{facet.label}</div>
+                    <div className="text-[14px] font-medium text-text-main">{facet.label}</div>
                   ) : null}
                   <FacetVisual field={facet} />
                 </div>
@@ -2285,8 +2698,8 @@ function SurveyQuestionCard({ context }: { context: AggregationContext }) {
                 className={`flex w-full cursor-pointer items-center justify-between gap-3 px-4 py-2.5 text-left transition-colors duration-200 hover:bg-surface/40 ${FOCUS_RING}`}
               >
                 <div className="min-w-0">
-                  <div className="text-[12px] font-medium text-text-main">Reasons</div>
-                  <div className="mt-0.5 text-[11px] text-text-dim">
+                  <div className="text-[14px] font-medium text-text-main">Reasons</div>
+                  <div className="mt-0.5 text-[13px] text-text-dim">
                     {quoteCount > 0
                       ? `${quoteCount} quote${quoteCount === 1 ? "" : "s"}`
                       : "Why personas answered this way"}
@@ -2301,7 +2714,7 @@ function SurveyQuestionCard({ context }: { context: AggregationContext }) {
               {reasonsOpen ? (
                 <div id={reasonsPanelId} className="space-y-3 border-t border-outline/35 bg-surface/20 px-4 py-3">
                   {reasonSummary ? (
-                    <p className="text-[12px] leading-relaxed text-text-main">{reasonSummary}</p>
+                    <p className="text-[14px] leading-relaxed text-text-main">{reasonSummary}</p>
                   ) : null}
                   {reasonSamples.length > 0 ? <SampleList samples={reasonSamples} /> : null}
                 </div>
@@ -2317,7 +2730,7 @@ function SurveyQuestionCard({ context }: { context: AggregationContext }) {
                   : ""
               }`}
             >
-              <div className="text-[11px] font-medium uppercase tracking-wide text-text-dim">
+              <div className="text-[13px] font-medium uppercase tracking-wide text-text-dim">
                 Grouped analysis
               </div>
               {summaries.map((summary) => (
@@ -2359,8 +2772,8 @@ function SurveyQuestionCard({ context }: { context: AggregationContext }) {
                 className={`flex w-full cursor-pointer items-center justify-between gap-3 px-4 py-2.5 text-left transition-colors duration-200 hover:bg-surface/40 ${FOCUS_RING}`}
               >
                 <div className="min-w-0">
-                  <div className="text-[12px] font-medium text-text-main">More signals</div>
-                  <div className="mt-0.5 text-[11px] text-text-dim">
+                  <div className="text-[14px] font-medium text-text-main">More signals</div>
+                  <div className="mt-0.5 text-[13px] text-text-dim">
                     {leftoverFacets.length} additional field{leftoverFacets.length === 1 ? "" : "s"}
                   </div>
                 </div>
@@ -2506,19 +2919,19 @@ function UserFeedbackBatchCard({ context }: { context: AggregationContext }) {
             <FieldTitle field={context.label} />
             <InlineBadge>Persona self-report</InlineBadge>
             {analysisCount > 0 ? <InlineBadge>{analysisCount} analyses</InlineBadge> : null}
-            <span className="font-mono text-[11px] text-text-dim">{respondentCount} personas</span>
+            <span className="font-mono text-[13px] text-text-dim">{respondentCount} personas</span>
           </div>
           {typeDescription ? (
-            <p className="mt-1 text-[11px] leading-relaxed text-text-dim">{typeDescription}</p>
+            <p className="mt-1 text-[13px] leading-relaxed text-text-dim">{typeDescription}</p>
           ) : null}
           {leadText ? (
-            <p className="mt-1.5 max-w-4xl text-[12px] leading-relaxed text-text-main">{leadText}</p>
+            <p className="mt-1.5 max-w-4xl text-[14px] leading-relaxed text-text-main">{leadText}</p>
           ) : null}
         </div>
 
         {primaryRating ? (
           <div className="rounded-xl border border-outline/40 bg-surface/55 p-3">
-            <div className="mb-2 text-[11px] font-medium uppercase tracking-wide text-text-dim">
+            <div className="mb-2 text-[13px] font-medium uppercase tracking-wide text-text-dim">
               {primaryRating.label}
             </div>
             <LikertQuestionBody context={feedbackRatingContext(primaryRating)} primary={primaryRating} />
@@ -2536,7 +2949,7 @@ function UserFeedbackBatchCard({ context }: { context: AggregationContext }) {
               )
               return (
                 <div key={facet.key} className="rounded-xl border border-outline/40 bg-surface/55 p-3">
-                  <div className="mb-2 text-[11px] font-medium uppercase tracking-wide text-text-dim">
+                  <div className="mb-2 text-[13px] font-medium uppercase tracking-wide text-text-dim">
                     {facet.label}
                   </div>
                   <ChoiceCompositionChart items={items} respondentCount={total} />
@@ -2550,7 +2963,7 @@ function UserFeedbackBatchCard({ context }: { context: AggregationContext }) {
           <div className="grid gap-3 lg:grid-cols-2">
             {otherRatings.map((facet) => (
               <div key={facet.key} className="rounded-xl border border-outline/40 bg-surface/55 p-3">
-                <div className="mb-2 text-[11px] font-medium uppercase tracking-wide text-text-dim">
+                <div className="mb-2 text-[13px] font-medium uppercase tracking-wide text-text-dim">
                   {facet.label}
                 </div>
                 <LikertQuestionBody context={feedbackRatingContext(facet)} primary={facet} />
@@ -2567,9 +2980,9 @@ function UserFeedbackBatchCard({ context }: { context: AggregationContext }) {
           const themes = signalThemes.length > 0 ? signalThemes : coverage.themes
           return (
             <div key={facet.key} className="space-y-2 rounded-xl border border-outline/40 bg-surface/55 p-3">
-              <div className="text-[11px] font-medium uppercase tracking-wide text-text-dim">{facet.label}</div>
+              <div className="text-[13px] font-medium uppercase tracking-wide text-text-dim">{facet.label}</div>
               {coverage.summary ? (
-                <p className="text-[12px] leading-relaxed text-text-main">{coverage.summary}</p>
+                <p className="text-[14px] leading-relaxed text-text-main">{coverage.summary}</p>
               ) : null}
               <FreeTextThemeTags themes={themes} label="Themes" />
               {(facet.textual?.samples?.length ?? 0) > 0 ? (
@@ -2588,7 +3001,7 @@ function UserFeedbackBatchCard({ context }: { context: AggregationContext }) {
               onClick={() => setMoreOpen((value) => !value)}
               aria-expanded={moreOpen}
               aria-controls={morePanelId}
-              className={`inline-flex items-center gap-1 rounded-md border border-outline/50 bg-surface/60 px-2 py-1 text-[10px] uppercase tracking-wide text-text-dim hover:bg-surface/80 ${FOCUS_RING}`}
+              className={`inline-flex items-center gap-1 rounded-md border border-outline/50 bg-surface/60 px-2 py-1 text-[12px] uppercase tracking-wide text-text-dim hover:bg-surface/80 ${FOCUS_RING}`}
             >
               {moreOpen ? "Hide analyses" : "Show analyses"}
               <Sym name={moreOpen ? "expand_less" : "expand_more"} size={14} />
@@ -2665,7 +3078,7 @@ function ContextCard({ context }: { context: AggregationContext }) {
               <FieldTitle field={context.label} />
               {typeBadge ? <InlineBadge>{typeBadge}</InlineBadge> : null}
               {unanimousPrimary && primaryValue ? (
-                <span className="inline-flex items-center gap-1 rounded-md border border-secondary/35 bg-secondary/10 px-2 py-0.5 text-[11px] font-medium text-secondary">
+                <span className="inline-flex items-center gap-1 rounded-md border border-secondary/35 bg-secondary/10 px-2 py-0.5 text-[13px] font-medium text-secondary">
                   <Sym name="check_circle" size={12} fill={1} />
                   {primaryValue}
                 </span>
@@ -2673,13 +3086,13 @@ function ContextCard({ context }: { context: AggregationContext }) {
               {analysisCount > 0 ? <InlineBadge>{analysisCount} analyses</InlineBadge> : null}
             </div>
             {typeDescription ? (
-              <p className="mt-1 text-[11px] leading-relaxed text-text-dim">{typeDescription}</p>
+              <p className="mt-1 text-[13px] leading-relaxed text-text-dim">{typeDescription}</p>
             ) : null}
             {leadText ? (
-              <p className="mt-1.5 max-w-4xl text-[12px] leading-relaxed text-text-main">{leadText}</p>
+              <p className="mt-1.5 max-w-4xl text-[14px] leading-relaxed text-text-main">{leadText}</p>
             ) : null}
           </div>
-          <span className="inline-flex items-center gap-1 rounded-md border border-outline/50 bg-surface/60 px-2 py-1 text-[10px] uppercase tracking-wide text-text-dim">
+          <span className="inline-flex items-center gap-1 rounded-md border border-outline/50 bg-surface/60 px-2 py-1 text-[12px] uppercase tracking-wide text-text-dim">
             {open ? "Collapse" : "Expand"}
             <Sym name={open ? "expand_less" : "expand_more"} size={14} />
           </span>
@@ -2690,7 +3103,7 @@ function ContextCard({ context }: { context: AggregationContext }) {
             {primaryFacet && showPrimaryPreview ? (
               <div className="rounded-xl border border-outline/40 bg-surface/55 p-2.5">
                 <div className="mb-1.5 flex items-center justify-between gap-2">
-                  <div className="text-[11px] font-medium uppercase tracking-wide text-text-dim">Primary signal</div>
+                  <div className="text-[13px] font-medium uppercase tracking-wide text-text-dim">Primary signal</div>
                   {primaryFacet.role ? <InlineBadge>{primaryFacet.role}</InlineBadge> : null}
                 </div>
                 <FacetVisual field={primaryFacet} compact />
@@ -2699,7 +3112,7 @@ function ContextCard({ context }: { context: AggregationContext }) {
 
             {showDistribution ? (
               <div className="rounded-xl border border-outline/40 bg-surface/55 p-2.5">
-                <div className="mb-1.5 text-[11px] font-medium uppercase tracking-wide text-text-dim">
+                <div className="mb-1.5 text-[13px] font-medium uppercase tracking-wide text-text-dim">
                   Grouped responses
                 </div>
                 <CountBars
@@ -2713,7 +3126,7 @@ function ContextCard({ context }: { context: AggregationContext }) {
 
             {primaryFacet?.kind === "categorical" && !showPrimaryPreview && !showDistribution ? (
               <div className="rounded-xl border border-outline/40 bg-surface/55 p-2.5">
-                <div className="mb-1.5 text-[11px] font-medium uppercase tracking-wide text-text-dim">
+                <div className="mb-1.5 text-[13px] font-medium uppercase tracking-wide text-text-dim">
                   Distribution
                 </div>
                 <FacetVisual field={primaryFacet} compact />
@@ -2791,8 +3204,8 @@ function FacetCard({ field }: { field: AggregationField }) {
     <div className="rounded-xl border border-outline/40 bg-surface/50 p-3">
       <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
         <div className="min-w-0">
-          <div className="text-[13px] font-medium text-text-main">{field.label}</div>
-          <div className="mt-1 flex flex-wrap items-center gap-2 text-[10px] uppercase tracking-wide text-text-dim">
+          <div className="text-[15px] font-medium text-text-main">{field.label}</div>
+          <div className="mt-1 flex flex-wrap items-center gap-2 text-[12px] uppercase tracking-wide text-text-dim">
             <span>{field.kind}</span>
             {field.role ? <InlineBadge>{field.role}</InlineBadge> : null}
             <span>{field.presentCount} present</span>
@@ -2806,7 +3219,7 @@ function FacetCard({ field }: { field: AggregationField }) {
       {field.kind === "textual" && (textSummary || textSamples.length > 0) ? (
         <div className="mt-3 space-y-2">
           {textSummary ? (
-            <p className="text-[12px] leading-relaxed text-text-main">{textSummary}</p>
+            <p className="text-[14px] leading-relaxed text-text-main">{textSummary}</p>
           ) : null}
           {textSamples.length > 0 ? (
             <DisclosurePanel title="Evidence samples" subtitle={`${textSamples.length} captured`} badge="quotes">
@@ -2828,9 +3241,9 @@ function SummaryDisclosure({ summary }: { summary: AggregationSummary }) {
       subtitle={summary.overall?.summary ? previewText(summary.overall.summary, 120) : undefined}
       badge={summary.status ? summary.status.replace(/_/g, " ") : undefined}
     >
-      {summary.error ? <p className="text-[12px] leading-relaxed text-danger">{summary.error}</p> : null}
+      {summary.error ? <p className="text-[14px] leading-relaxed text-danger">{summary.error}</p> : null}
       {summary.overall?.summary ? (
-        <p className="text-[12px] leading-relaxed text-text-main">{summary.overall.summary}</p>
+        <p className="text-[14px] leading-relaxed text-text-main">{summary.overall.summary}</p>
       ) : null}
       {summary.buckets.length > 0 ? (
         <div className="mt-3 space-y-3">
@@ -2845,12 +3258,12 @@ function SummaryDisclosure({ summary }: { summary: AggregationSummary }) {
           <div className="space-y-2">
             {summary.buckets.map((bucket) => (
               <div key={`${summary.id}-${bucket.bucket}`} className="rounded-lg border border-outline/40 bg-surface/70 p-3">
-                <div className="flex items-center justify-between gap-3 text-[12px]">
+                <div className="flex items-center justify-between gap-3 text-[14px]">
                   <span className="font-medium text-text-main">{bucket.bucket}</span>
                   <span className="font-mono text-text-variant">{bucket.count}</span>
                 </div>
                 {bucket.summary ? (
-                  <p className="mt-2 text-[12px] leading-relaxed text-text-variant">{bucket.summary}</p>
+                  <p className="mt-2 text-[14px] leading-relaxed text-text-variant">{bucket.summary}</p>
                 ) : null}
                 {(bucket.samples?.length ?? 0) > 0 ? (
                   <div className="mt-2">
@@ -2880,7 +3293,7 @@ function JudgeDisclosure({ judge }: { judge: AggregationJudge }) {
           {judge.signals.map((signal) => (
             <span
               key={signal.key}
-              className="rounded border border-outline/40 bg-surface/70 px-2 py-1 text-[11px] text-text-variant"
+              className="rounded border border-outline/40 bg-surface/70 px-2 py-1 text-[13px] text-text-variant"
               title={signal.description ?? undefined}
             >
               {signal.label}
@@ -2890,12 +3303,12 @@ function JudgeDisclosure({ judge }: { judge: AggregationJudge }) {
         </div>
       ) : null}
       {typeof judge.rubric === "string" && judge.rubric.trim() ? (
-        <p className="mb-3 text-[12px] leading-relaxed text-text-variant">{judge.rubric}</p>
+        <p className="mb-3 text-[14px] leading-relaxed text-text-variant">{judge.rubric}</p>
       ) : null}
       {judge.overallAssessment ? (
-        <p className="mb-3 text-[12px] leading-relaxed text-text-main">{judge.overallAssessment}</p>
+        <p className="mb-3 text-[14px] leading-relaxed text-text-main">{judge.overallAssessment}</p>
       ) : null}
-      {judge.error ? <p className="mb-3 text-[12px] leading-relaxed text-danger">{judge.error}</p> : null}
+      {judge.error ? <p className="mb-3 text-[14px] leading-relaxed text-danger">{judge.error}</p> : null}
       {judge.buckets.length > 0 ? (
         <div className="space-y-3">
           <CountBars
@@ -2909,19 +3322,19 @@ function JudgeDisclosure({ judge }: { judge: AggregationJudge }) {
           <div className="space-y-2">
             {judge.buckets.map((bucket) => (
               <div key={`${judge.id}-${bucket.bucket}`} className="rounded-lg border border-outline/40 bg-surface/70 p-3">
-                <div className="flex items-center justify-between gap-3 text-[12px]">
+                <div className="flex items-center justify-between gap-3 text-[14px]">
                   <span className="font-medium text-text-main">{bucket.bucket}</span>
                   <span className="font-mono text-text-variant">{bucket.count}</span>
                 </div>
                 {bucket.assessment ? (
-                  <p className="mt-2 text-[12px] leading-relaxed text-text-variant">{bucket.assessment}</p>
+                  <p className="mt-2 text-[14px] leading-relaxed text-text-variant">{bucket.assessment}</p>
                 ) : null}
                 {(bucket.signals?.length ?? 0) > 0 ? (
                   <div className="mt-2 flex flex-wrap gap-2">
                     {bucket.signals?.map((signal) => (
                       <span
                         key={`${judge.id}-${bucket.bucket}-${signal.key}`}
-                        className={`rounded border px-2 py-1 text-[11px] ${
+                        className={`rounded border px-2 py-1 text-[13px] ${
                           signal.present
                             ? "border-secondary/40 bg-secondary/10 text-secondary"
                             : "border-outline/40 bg-surface text-text-dim"
@@ -2979,7 +3392,7 @@ function CrossFacetViewDisclosure({
       <div className="mt-3 space-y-2">
         {buckets.map((bucket) => (
           <div key={`${crossFacetView.type}-${bucket.category}`} className="rounded-lg border border-outline/40 bg-surface/70 p-3">
-            <div className="flex items-center justify-between gap-3 text-[12px]">
+            <div className="flex items-center justify-between gap-3 text-[14px]">
               <span className="font-medium text-text-main">{bucket.category}</span>
               <span className="font-mono text-text-variant">{bucket.count}</span>
             </div>
@@ -3061,19 +3474,19 @@ function FacetVisual({ field, compact = false }: { field: AggregationField; comp
       <div className="space-y-3">
         <div className={`flex flex-wrap items-end justify-between gap-3 ${compact ? "sm:flex-nowrap" : ""}`}>
           <div>
-            <div className="text-[10px] uppercase tracking-wide text-text-dim">Average</div>
+            <div className="text-[12px] uppercase tracking-wide text-text-dim">Average</div>
             <div className={`${compact ? "text-[22px]" : "text-[30px]"} font-mono text-text-main`}>
               {metricValue(avg)}
             </div>
           </div>
           {compact ? (
-            <div className="flex flex-wrap items-center gap-2 text-[11px] text-text-variant">
+            <div className="flex flex-wrap items-center gap-2 text-[13px] text-text-variant">
               <span>Std {metricValue(field.numerical?.std)}</span>
               <span>Present {field.presentCount}</span>
               {field.missingCount > 0 ? <span>Missing {field.missingCount}</span> : null}
             </div>
           ) : (
-            <div className="grid grid-cols-2 gap-2 text-[12px] text-text-variant sm:min-w-[220px]">
+            <div className="grid grid-cols-2 gap-2 text-[14px] text-text-variant sm:min-w-[220px]">
               <MetricLine label="Std" value={metricValue(field.numerical?.std)} />
               <MetricLine label="Range" value={`${metricValue(min)} - ${metricValue(max)}`} />
               <MetricLine label="Present" value={String(field.presentCount)} />
@@ -3089,7 +3502,7 @@ function FacetVisual({ field, compact = false }: { field: AggregationField; comp
                 style={{ left: `${avgPct}%` }}
               />
             </div>
-            <div className="flex items-center justify-between text-[11px] text-text-dim">
+            <div className="flex items-center justify-between text-[13px] text-text-dim">
               <span>{metricValue(min)}</span>
               <span>{metricValue(max)}</span>
             </div>
@@ -3116,14 +3529,14 @@ function FacetVisual({ field, compact = false }: { field: AggregationField; comp
   return (
     <div className="space-y-2">
       {field.textual?.summary ? (
-        <p className="text-[12px] leading-relaxed text-text-main">
+        <p className="text-[14px] leading-relaxed text-text-main">
           {compact ? previewText(field.textual.summary, 90) : field.textual.summary}
         </p>
       ) : (
-        <p className="text-[12px] text-text-variant">No text summary available.</p>
+        <p className="text-[14px] text-text-variant">No text summary available.</p>
       )}
       {!compact && (field.textual?.samples?.length ?? 0) > 0 ? (
-        <div className="text-[11px] text-text-dim">{field.textual?.samples.length} evidence samples available</div>
+        <div className="text-[13px] text-text-dim">{field.textual?.samples.length} evidence samples available</div>
       ) : null}
     </div>
   )
@@ -3143,7 +3556,7 @@ function CountBars({
   showShare?: boolean
 }) {
   if (items.length === 0) {
-    return <p className="text-[12px] text-text-variant">No distribution available.</p>
+    return <p className="text-[14px] text-text-variant">No distribution available.</p>
   }
 
   return (
@@ -3152,7 +3565,7 @@ function CountBars({
         const share = Math.round((item.count / Math.max(total, 1)) * 100)
         return (
           <div key={`${item.label}-${item.count}`} className="space-y-1">
-            <div className={`flex items-center justify-between gap-3 ${compact ? "text-[11px]" : "text-[12px]"}`}>
+            <div className={`flex items-center justify-between gap-3 ${compact ? "text-[13px]" : "text-[14px]"}`}>
               <span className="truncate text-text-main">{item.label}</span>
               <span className="shrink-0 font-mono text-text-variant">
                 {item.count}
@@ -3163,7 +3576,7 @@ function CountBars({
               <div className="h-2 rounded-full bg-primary/75" style={{ width: ratioWidth(item.count, total) }} />
             </div>
             {showDetails && item.detail ? (
-              <p className="text-[11px] leading-relaxed text-text-dim">{previewText(item.detail, compact ? 90 : 140)}</p>
+              <p className="text-[13px] leading-relaxed text-text-dim">{previewText(item.detail, compact ? 90 : 140)}</p>
             ) : null}
           </div>
         )
@@ -3181,7 +3594,7 @@ function SampleList({ samples }: { samples: string[] }) {
       {shown.map((sample, index) => (
         <div
           key={`${index}-${sample.slice(0, 24)}`}
-          className="rounded-md border border-outline/40 bg-surface/60 px-3 py-2 text-[12px] leading-relaxed text-text-variant"
+          className="rounded-md border border-outline/40 bg-surface/60 px-3 py-2 text-[14px] leading-relaxed text-text-variant"
         >
           {sample}
         </div>
@@ -3190,7 +3603,7 @@ function SampleList({ samples }: { samples: string[] }) {
         <button
           type="button"
           onClick={() => setExpanded((value) => !value)}
-          className={`inline-flex items-center gap-1 rounded border border-outline/40 bg-surface/50 px-2 py-1 text-[11px] text-text-dim hover:bg-surface/70 ${FOCUS_RING}`}
+          className={`inline-flex items-center gap-1 rounded border border-outline/40 bg-surface/50 px-2 py-1 text-[13px] text-text-dim hover:bg-surface/70 ${FOCUS_RING}`}
         >
           <Sym name={expanded ? "expand_less" : "expand_more"} size={14} />
           {expanded ? "Show fewer quotes" : `Show ${samples.length - shown.length} more quotes`}
@@ -3227,12 +3640,12 @@ function DisclosurePanel({
       >
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-2">
-            <div className="text-[12px] font-medium text-text-main">{title}</div>
+            <div className="text-[14px] font-medium text-text-main">{title}</div>
             {badge ? <InlineBadge>{badge}</InlineBadge> : null}
           </div>
-          {subtitle ? <p className="mt-1 text-[12px] leading-relaxed text-text-dim">{subtitle}</p> : null}
+          {subtitle ? <p className="mt-1 text-[14px] leading-relaxed text-text-dim">{subtitle}</p> : null}
         </div>
-        <span className="inline-flex items-center gap-1 text-[10px] uppercase tracking-wide text-text-dim">
+        <span className="inline-flex items-center gap-1 text-[12px] uppercase tracking-wide text-text-dim">
           {open ? "Hide" : "View"}
           <Sym name={open ? "expand_less" : "expand_more"} size={14} />
         </span>
@@ -3255,8 +3668,8 @@ function SectionHeader({
 }) {
   return (
     <div className="border-b border-outline/40 px-4 py-3">
-      <div className="text-[10px] font-medium uppercase tracking-wide text-text-dim">{title}</div>
-      {subtitle ? <p className="mt-1 text-[12px] leading-relaxed text-text-variant">{subtitle}</p> : null}
+      <div className="text-[12px] font-medium uppercase tracking-wide text-text-dim">{title}</div>
+      {subtitle ? <p className="mt-1 text-[14px] leading-relaxed text-text-variant">{subtitle}</p> : null}
     </div>
   )
 }
@@ -3264,15 +3677,15 @@ function SectionHeader({
 function SubsectionTitle({ title, subtitle }: { title: string; subtitle?: string | null }) {
   return (
     <div>
-      <div className="text-[11px] font-medium uppercase tracking-wide text-text-dim">{title}</div>
-      {subtitle ? <p className="mt-1 text-[12px] leading-relaxed text-text-variant">{subtitle}</p> : null}
+      <div className="text-[13px] font-medium uppercase tracking-wide text-text-dim">{title}</div>
+      {subtitle ? <p className="mt-1 text-[14px] leading-relaxed text-text-variant">{subtitle}</p> : null}
     </div>
   )
 }
 
 function InlineBadge({ children }: { children: ReactNode }) {
   return (
-    <span className="rounded border border-outline/50 bg-surface/60 px-1.5 py-0.5 text-[10px] uppercase tracking-wide text-text-dim">
+    <span className="rounded border border-outline/50 bg-surface/60 px-1.5 py-0.5 text-[12px] uppercase tracking-wide text-text-dim">
       {children}
     </span>
   )
@@ -3289,10 +3702,10 @@ function CoverageTile({
 }) {
   return (
     <div className="min-w-[108px] rounded-lg border border-outline/40 bg-surface/35 px-2.5 py-2">
-      <div className="text-[9px] uppercase tracking-wide text-text-dim">{label}</div>
+      <div className="text-[11px] uppercase tracking-wide text-text-dim">{label}</div>
       <div className="mt-1 flex items-baseline gap-2">
         <span className="font-mono text-[18px] text-text-main">{value}</span>
-        {hint ? <span className="truncate text-[10px] text-text-variant">{hint}</span> : null}
+        {hint ? <span className="truncate text-[12px] text-text-variant">{hint}</span> : null}
       </div>
     </div>
   )
@@ -3302,12 +3715,12 @@ function CoverageTile({
 function SurveyQuestionTypesTile({ counts }: { counts: SurveyQuestionTypeCount[] }) {
   return (
     <div className="min-w-[140px] rounded-lg border border-outline/40 bg-surface/35 px-2.5 py-2">
-      <div className="text-[9px] uppercase tracking-wide text-text-dim">Question types</div>
+      <div className="text-[11px] uppercase tracking-wide text-text-dim">Question types</div>
       <div className="mt-1.5 flex flex-wrap gap-1.5">
         {counts.map((entry) => (
           <span
             key={entry.type}
-            className={`inline-flex items-center gap-1 rounded border px-2 py-1 text-[10px] ${surveyQuestionTypeChipClass(entry.type)}`}
+            className={`inline-flex items-center gap-1 rounded border px-2 py-1 text-[12px] ${surveyQuestionTypeChipClass(entry.type)}`}
           >
             <span className="font-mono font-semibold tabular-nums">{entry.count}</span>
             {entry.label}
@@ -3357,6 +3770,7 @@ export function HarborJobDetail({ jobName, onBack, onOpenTrial }: HarborJobDetai
   const launch = job?.launch;
   const trials = job?.trials ?? [];
   const aggregation = job?.aggregation ?? null;
+  const pdfMeta = useMemo(() => buildBatchReportPdfMeta(jobName, job), [jobName, job]);
 
   const progress = useMemo(() => {
     const done = trials.filter((trial) => trial.completed && trial.succeeded !== false && !trial.error).length;
@@ -3371,15 +3785,13 @@ export function HarborJobDetail({ jobName, onBack, onOpenTrial }: HarborJobDetai
         eyebrow="MatrAIx · Runs"
         title={jobName}
         subtitle={
-          launch?.configPath ? (
-            <span className="font-mono text-[11px]">Config: {launch.configPath}</span>
-          ) : (
-            "Open a trial for evaluation and the run transcript."
-          )
+          launch?.configPath
+            ? undefined
+            : "Open a trial for evaluation and the run transcript."
         }
         meta={
           launch?.status ? (
-            <span className="rounded-lg border border-outline/50 bg-surface/60 px-2.5 py-1 font-mono text-[11px] text-text-variant backdrop-blur">
+            <span className="rounded-lg border border-outline/50 bg-surface/60 px-2.5 py-1 font-mono text-[13px] text-text-variant backdrop-blur">
               {launch.status}
               {launch.exitCode != null ? ` · exit ${launch.exitCode}` : ""}
             </span>
@@ -3400,23 +3812,28 @@ export function HarborJobDetail({ jobName, onBack, onOpenTrial }: HarborJobDetai
           </>
         }
       />
+      {launch?.configPath ? (
+        <p className="-mt-3 mb-5 break-all font-mono text-[13px] leading-snug text-text-variant">
+          Config: {launch.configPath}
+        </p>
+      ) : null}
 
       {query.isLoading ? (
-        <p className="text-[13px] text-text-variant">Loading job…</p>
+        <p className="text-[15px] text-text-variant">Loading job…</p>
       ) : query.isError ? (
-        <p className="text-[13px] text-danger">
+        <p className="text-[15px] text-danger">
           {query.error instanceof ApiError ? query.error.message : "Failed to load job."}
         </p>
       ) : (
         <>
           {launch?.error && (
-            <div className="mb-4 rounded-lg border border-danger/40 bg-danger/10 px-4 py-3 text-[13px] text-danger">
+            <div className="mb-4 rounded-lg border border-danger/40 bg-danger/10 px-4 py-3 text-[15px] text-danger">
               {launch.error}
             </div>
           )}
 
           {progress.total > 0 && !aggregation && (
-            <StudioGlassPanel className="mb-5 flex flex-wrap items-center gap-3 px-4 py-3 text-[12px] text-text-variant">
+            <StudioGlassPanel className="mb-5 flex flex-wrap items-center gap-3 px-4 py-3 text-[14px] text-text-variant">
               <span className="font-mono text-text-main">
                 {progress.done}/{progress.total} trials finished
               </span>
@@ -3438,12 +3855,13 @@ export function HarborJobDetail({ jobName, onBack, onOpenTrial }: HarborJobDetai
           {aggregation && (
             <AggregationDashboard
               aggregation={aggregation}
-              applicationType={(job as { applicationType?: string | null } | undefined)?.applicationType}
+              applicationType={job?.applicationType}
+              pdfMeta={pdfMeta}
             />
           )}
 
           <StudioGlassPanel className="overflow-hidden rounded-xl">
-            <div className="grid grid-cols-[minmax(0,1.4fr)_minmax(0,1.2fr)_5.5rem_2rem] gap-3 border-b border-outline/40 px-4 py-2.5 text-[10px] uppercase tracking-wide text-text-dim">
+            <div className="grid grid-cols-[minmax(0,1.4fr)_minmax(0,1.2fr)_5.5rem_2rem] gap-3 border-b border-outline/40 px-4 py-2.5 text-[12px] uppercase tracking-wide text-text-dim">
               <span>Persona</span>
               <span>Trial</span>
               <span>Status</span>
@@ -3451,7 +3869,7 @@ export function HarborJobDetail({ jobName, onBack, onOpenTrial }: HarborJobDetai
             </div>
             <ul className="divide-y divide-outline-dim">
               {trials.length === 0 ? (
-                <li className="px-4 py-8 text-center text-[13px] text-text-variant">
+                <li className="px-4 py-8 text-center text-[15px] text-text-variant">
                   {launch?.status === "running" || launch?.status === "queued"
                     ? "Trials are starting — they will appear here as they launch."
                     : "No trials yet."}
@@ -3465,12 +3883,12 @@ export function HarborJobDetail({ jobName, onBack, onOpenTrial }: HarborJobDetai
                         type="button"
                         disabled={!clickable}
                         onClick={() => onOpenTrial?.(trial.trialName)}
-                        className={`grid w-full grid-cols-[minmax(0,1.4fr)_minmax(0,1.2fr)_5.5rem_2rem] items-center gap-3 px-4 py-3 text-left text-[13px] ${
+                        className={`grid w-full grid-cols-[minmax(0,1.4fr)_minmax(0,1.2fr)_5.5rem_2rem] items-center gap-3 px-4 py-3 text-left text-[15px] ${
                           clickable ? "hover:bg-surface/40" : ""
                         } ${FOCUS_RING}`}
                       >
                         <TrialPersonaIdentity trial={trial} />
-                        <span className="truncate font-mono text-[11px] text-text-variant">
+                        <span className="truncate font-mono text-[13px] text-text-variant">
                           {trial.trialName}
                         </span>
                         <TrialStatusBadge trial={trial} />

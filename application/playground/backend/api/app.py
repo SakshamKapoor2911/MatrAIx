@@ -721,6 +721,35 @@ def create_app(catalog_path: Optional[str] = None) -> FastAPI:
         except ValueError as exc:
             raise HTTPException(status_code=404, detail=str(exc)) from exc
 
+    @app.get(
+        "/api/harbor/jobs/{job_name}/report.pdf",
+        tags=["harbor-jobs"],
+    )
+    def download_harbor_job_report_pdf(
+        job_name: str, services: AppState = Depends(get_services)
+    ):
+        from fastapi.responses import Response
+
+        from backend.service.report_pdf import build_batch_report_pdf, pdf_filename
+
+        job = services.harbor_jobs.get_job(job_name)
+        if job is None:
+            raise HTTPException(status_code=404, detail="harbor job not found")
+        try:
+            aggregation = services.harbor_jobs.get_job_aggregation(job_name)
+        except ValueError as exc:
+            raise HTTPException(status_code=404, detail=str(exc)) from exc
+        payload = build_batch_report_pdf(
+            job_name=job_name,
+            job=job,
+            aggregation=aggregation,
+        )
+        filename = pdf_filename(job_name, "batch-report")
+        return Response(
+            content=payload,
+            media_type="application/pdf",
+            headers={"Content-Disposition": f'attachment; filename="{filename}"'},
+        )
 
     @app.delete(
         "/api/harbor/jobs/{job_name}",
@@ -855,6 +884,34 @@ def create_app(catalog_path: Optional[str] = None) -> FastAPI:
         except ValueError as exc:
             raise HTTPException(status_code=404, detail=str(exc)) from exc
 
+    @app.get(
+        "/api/harbor/jobs/{job_name}/trials/{trial_name}/report.pdf",
+        tags=["harbor-jobs"],
+    )
+    def download_harbor_trial_report_pdf(
+        job_name: str,
+        trial_name: str,
+        services: AppState = Depends(get_services),
+    ):
+        from fastapi.responses import Response
+
+        from backend.service.report_pdf import build_trial_report_pdf, pdf_filename
+
+        try:
+            debrief = services.harbor_jobs.get_trial_debrief(job_name, trial_name)
+        except ValueError as exc:
+            raise HTTPException(status_code=404, detail=str(exc)) from exc
+        payload = build_trial_report_pdf(
+            job_name=job_name,
+            trial_name=trial_name,
+            debrief=debrief,
+        )
+        filename = pdf_filename(job_name, trial_name, "trial-report")
+        return Response(
+            content=payload,
+            media_type="application/pdf",
+            headers={"Content-Disposition": f'attachment; filename="{filename}"'},
+        )
 
     @app.get(
         "/api/harbor/jobs/{job_name}/trials/{trial_name}/instruction",
