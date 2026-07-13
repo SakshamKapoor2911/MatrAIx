@@ -3,23 +3,19 @@
 from __future__ import annotations
 
 import json
-import sys
 from pathlib import Path
-
-ROOT = Path(__file__).resolve().parents[2]
-PLAYGROUND = ROOT / "application" / "playground"
-if str(PLAYGROUND) not in sys.path:
-    sys.path.insert(0, str(PLAYGROUND))
-
-from backend.service.persona_strategy import validate_persona_strategy_file
 
 
 def test_validate_persona_strategy_requires_file(tmp_path: Path) -> None:
+    from backend.service.persona_strategy import validate_persona_strategy_file
+
     errors = validate_persona_strategy_file(tmp_path)
     assert any("missing required persona_strategy.json" in err for err in errors)
 
 
 def test_validate_persona_strategy_requires_cohort(tmp_path: Path) -> None:
+    from backend.service.persona_strategy import validate_persona_strategy_file
+
     (tmp_path / "persona_strategy.json").write_text(
         json.dumps(
             {
@@ -38,6 +34,8 @@ def test_validate_persona_strategy_requires_cohort(tmp_path: Path) -> None:
 
 
 def test_validate_persona_strategy_stratified_needs_axes(tmp_path: Path) -> None:
+    from backend.service.persona_strategy import validate_persona_strategy_file
+
     (tmp_path / "persona_strategy.json").write_text(
         json.dumps(
             {
