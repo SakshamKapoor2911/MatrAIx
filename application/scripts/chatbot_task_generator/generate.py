@@ -87,7 +87,7 @@ def write_knowledge_base(task_dir: Path, row: dict) -> None:
     }
 
     (input_dir / "knowledge_base.json").write_text(
-        json.dumps(kb, ensure_ascii=False, indent=2),
+        json.dumps(kb, ensure_ascii=True, indent=2),
         encoding="utf-8",
     )
 
