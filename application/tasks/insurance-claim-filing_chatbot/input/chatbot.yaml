@@ -1,0 +1,24 @@
+transport: sidecar_http
+runtimeDefaults:
+  applicationId: insurance_claim_chat
+  applicationContext: insurance_claims
+  domain: insurance
+connection:
+  baseUrl: http://chat-sim:8000
+  healthPath: /health
+protocol:
+  sendMessage:
+    method: POST
+    path: /v1/messages
+    sessionIdField: ""
+    messageField: message
+    titleField: ""
+    botTypeField: ""
+    staticBody: {}
+  response:
+    sessionIdField: ""
+    replyField: reply
+artifacts:
+  transcript: transcript.json
+  applicationResult: application_result.json
+  feedback: user_feedback.json
