@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Extract Stack Overflow personas with manifest-defined structured output.
 
-V3 uses ``schema/dimension_chunks_finer.jsonl`` as its only chunk definition. The
+V3 uses ``schema/dimension_chunks_finer.jsonl`` by default. The
 safe default is a CPU-only dry run; pass ``--execute`` to load vLLM and run
 inference.
 """
@@ -37,9 +37,9 @@ def find_repo_root(script_path: Path) -> Path:
 REPO_ROOT = find_repo_root(Path(__file__))
 HUMAN_EXTRACTION_ROOT = REPO_ROOT / "persona" / "human_extraction"
 DEFAULT_SURVEY_ROOT = HUMAN_EXTRACTION_ROOT / "data" / "stackoverflow_survey"
-DIMENSION_CHUNKS_JSONL = HUMAN_EXTRACTION_ROOT / "schema" / "dimension_chunks.jsonl"
+DIMENSION_CHUNKS_JSONL = HUMAN_EXTRACTION_ROOT / "schema" / "dimension_chunks_finer.jsonl"
 
-EXTRACTOR_VERSION = "stackoverflow_vllm_v2"
+EXTRACTOR_VERSION = "stackoverflow_vllm_v3"
 
 SURVEY_FILES = {
     2023: "2023/results_2023_completeness_60.csv",

@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=so-vllm-prod-rtx-bf16
+#SBATCH --job-name=so-vllm-test-rtx6000
 #SBATCH --account=torch_pr_543_general
 #SBATCH --comment="preemption=yes;requeue=true"
 #SBATCH --gres=gpu:1
@@ -36,9 +36,18 @@ if [[ -z "$YEAR" ]]; then
 fi
 
 WORKDIR=/scratch/yl6586/MatrAIx
-SCRIPT="$WORKDIR/persona/human_extraction/scripts/extract_personas_stackoverflow_vllm_v2.py"
+SCRIPT="$WORKDIR/persona/human_extraction/scripts/extract_personas_stackoverflow_vllm_v3.py"
 SURVEY_ROOT="$WORKDIR/persona/human_extraction/data/stackoverflow_survey"
-OUTPUT="$SURVEY_ROOT/extraction_stackoverflow_v2_rtx6000_$YEAR_$SLURM_JOB_ID.jsonl"
+case "$YEAR" in
+  2023) SURVEY_FILE="$SURVEY_ROOT/2023/results_2023_completeness_60.csv" ;;
+  2024) SURVEY_FILE="$SURVEY_ROOT/2024/results_2024_completeness_60_attention.csv" ;;
+  2025) SURVEY_FILE="$SURVEY_ROOT/2025/results_2025_completeness_60.csv" ;;
+  *)
+    echo "Error: unsupported year: $YEAR"
+    exit 1
+    ;;
+esac
+OUTPUT="$SURVEY_ROOT/extraction_stackoverflow_v3_rtx6000_${YEAR}_${SLURM_JOB_ID}.jsonl"
 IMAGE=/scratch/yl6586/containers/vllm-v0.19.0.sif
 
 export HF_HOME=/scratch/yl6586/.cache/huggingface
@@ -69,10 +78,15 @@ mkdir -p \
   /scratch/yl6586/slurm_logs
 cd "$WORKDIR"
 
+# random start row
+LINE_COUNT=$(wc -l < "$SURVEY_FILE")
+START_ROW=$(shuf -i "0-$((LINE_COUNT - 5000))" -n 1)
+
 echo "Job ID: $SLURM_JOB_ID"
 echo "Node: $(hostname)"
 echo "Image: $IMAGE"
 echo "Output: $OUTPUT"
+echo "Random start row: $START_ROW (CSV lines: $LINE_COUNT)"
 echo "Existing output rows: $(test -f "$OUTPUT" && wc -l < "$OUTPUT" || echo 0)"
 nvidia-smi
 
@@ -85,13 +99,13 @@ APPTAINER_ARGS=(
 )
 
 
-# Each batch makes 45 same-schema chunk-outer calls. Compatible rows already
-# present in this RTX-specific output are skipped when the job is resubmitted.
+
 apptainer "${APPTAINER_ARGS[@]}" \
   /usr/bin/python3 \
   "$SCRIPT" \
   --year "$YEAR" \
   --survey-root "$SURVEY_ROOT" \
+  --start-row "$START_ROW" \
   --execute \
   --model Qwen/Qwen3.6-35B-A3B \
   --batch-profiles 8 \
