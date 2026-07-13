@@ -51,6 +51,7 @@ uv run python application/scripts/chatbot_task_generator/generate.py \
 | `greeting` | Yes | Chatbot's first message |
 | `fallback` | Yes | Chatbot's response when no rules match |
 | `bot_name` | No | Display name for the chatbot assistant |
+| `rules` | No | Newline-separated domain rules in `pattern|response|priority` format (one per line, priority optional, defaults to 0). Injected into `knowledge_base.json`. |
 
 ## What gets generated
 

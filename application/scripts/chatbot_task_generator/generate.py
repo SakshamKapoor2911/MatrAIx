@@ -29,6 +29,29 @@ def _slugify(name: str) -> str:
     return name.strip().lower().replace(" ", "-").replace("_", "-")
 
 
+def _parse_rules(rules_text: str) -> list[dict]:
+    """Parse rules column into knowledge_base.json rule entries.
+
+    Format: one rule per line, each line: pattern|response|priority
+    Priority is optional (defaults to 0).
+    """
+    rules = []
+    for line in rules_text.strip().split("\n"):
+        line = line.strip()
+        if not line:
+            continue
+        parts = line.split("|", 2)
+        if len(parts) < 2:
+            continue
+        pattern = parts[0].strip()
+        response = parts[1].strip()
+        priority = 0
+        if len(parts) >= 3 and parts[2].strip().isdigit():
+            priority = int(parts[2].strip())
+        rules.append({"pattern": pattern, "response": response, "priority": priority})
+    return rules
+
+
 def substitute_file(template: Path, output: Path, variables: dict) -> None:
     output.parent.mkdir(parents=True, exist_ok=True)
     content = template.read_text(encoding="utf-8")
@@ -47,11 +70,14 @@ def write_knowledge_base(task_dir: Path, row: dict) -> None:
     input_dir = task_dir / "input"
     input_dir.mkdir(parents=True, exist_ok=True)
 
+    rules_text = row.get("rules", "").strip()
+    rules = _parse_rules(rules_text) if rules_text else []
+
     kb = {
         "bot_name": row.get("bot_name", row["domain"].title() + " Assistant"),
         "greeting": row["greeting"],
         "fallback": row["fallback"],
-        "rules": [],
+        "rules": rules,
         "context": {},
     }
 
