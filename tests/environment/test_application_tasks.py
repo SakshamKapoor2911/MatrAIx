@@ -204,3 +204,28 @@ def test_application_task_spec_docs_cover_each_protocol() -> None:
     assert os_app_doc.is_file()
     os_app_text = os_app_doc.read_text(encoding="utf-8")
     assert "evaluation and reporting contract" in os_app_text.lower()
+
+
+def _iter_application_task_dirs() -> list[Path]:
+    tasks_root = ROOT / "application" / "tasks"
+    return sorted(
+        path
+        for path in tasks_root.iterdir()
+        if path.is_dir() and (path / "task.toml").is_file()
+    )
+
+
+def test_every_application_task_has_valid_persona_strategy() -> None:
+    """CI gate: persona_strategy.json is required and must declare a cohort."""
+    from backend.service.persona_strategy import validate_persona_strategy_file
+
+    task_dirs = _iter_application_task_dirs()
+    assert task_dirs, "expected at least one application task under application/tasks/"
+
+    failures: list[str] = []
+    for task_dir in task_dirs:
+        failures.extend(validate_persona_strategy_file(task_dir, require_cohort=True))
+
+    assert not failures, "persona_strategy.json validation failed:\n- " + "\n- ".join(
+        failures
+    )

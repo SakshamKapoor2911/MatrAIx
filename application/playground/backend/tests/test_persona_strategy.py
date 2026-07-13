@@ -1,10 +1,14 @@
-"""Tests for optional per-task persona_strategy.json loading."""
+"""Tests for per-task persona_strategy.json loading and validation."""
 
 from __future__ import annotations
 
 import json
 
-from backend.service.persona_strategy import load_persona_strategy, normalize_persona_strategy
+from backend.service.persona_strategy import (
+    load_persona_strategy,
+    normalize_persona_strategy,
+    validate_persona_strategy_file,
+)
 from backend.service.task_detail_service import get_task_detail
 
 
@@ -17,6 +21,7 @@ def test_normalize_persona_strategy_keeps_optional_sample_size() -> None:
             "dimensionFilters": {"age_bracket": ["25-34", "35-44"], "region": "North America"},
             "stratifyFields": ["age_bracket"],
             "sampleSize": 8,
+            "sampleSizePerValueGroup": 2,
         }
     )
     assert payload["defaultMode"] == "stratified"
@@ -26,11 +31,50 @@ def test_normalize_persona_strategy_keeps_optional_sample_size() -> None:
         "region": ["North America"],
     }
     assert payload["sampleSize"] == 8
+    assert payload["sampleSizePerValueGroup"] == 2
     assert "seed" not in payload
 
 
 def test_load_persona_strategy_missing_file_returns_none(tmp_path) -> None:
     assert load_persona_strategy(tmp_path) is None
+
+
+def test_validate_persona_strategy_requires_file(tmp_path) -> None:
+    errors = validate_persona_strategy_file(tmp_path)
+    assert any("missing required persona_strategy.json" in err for err in errors)
+
+
+def test_validate_persona_strategy_requires_cohort(tmp_path) -> None:
+    (tmp_path / "persona_strategy.json").write_text(
+        json.dumps(
+            {
+                "schemaVersion": "1.0",
+                "defaultMode": "random",
+                "dimensionFilters": {},
+            }
+        ),
+        encoding="utf-8",
+    )
+    errors = validate_persona_strategy_file(tmp_path, require_cohort=True)
+    assert any("target cohort" in err for err in errors)
+
+    errors_relaxed = validate_persona_strategy_file(tmp_path, require_cohort=False)
+    assert errors_relaxed == []
+
+
+def test_validate_persona_strategy_stratified_needs_axes(tmp_path) -> None:
+    (tmp_path / "persona_strategy.json").write_text(
+        json.dumps(
+            {
+                "schemaVersion": "1.0",
+                "defaultMode": "stratified",
+                "dimensionFilters": {"region": ["Oceania"]},
+            }
+        ),
+        encoding="utf-8",
+    )
+    errors = validate_persona_strategy_file(tmp_path)
+    assert any("stratifyFields" in err for err in errors)
 
 
 def test_get_task_detail_includes_persona_strategy(tmp_path) -> None:

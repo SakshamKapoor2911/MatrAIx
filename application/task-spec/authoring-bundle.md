@@ -6,7 +6,8 @@ type README ([survey](survey/README.md), [chatbot](chatbot/README.md),
 [web](web/README.md), [os-app](os-app/README.md)).
 
 Each runnable task lives under `application/tasks/<task-name>/` and always
-includes `instruction.md`, `task.toml`, `tests/`, and `reporting.json`.
+includes `instruction.md`, `task.toml`, `tests/`, `reporting.json`, and
+`persona_strategy.json` (target cohort / Playground sampling defaults).
 Supplementary files differ by application type:
 
 ### Survey
@@ -14,7 +15,7 @@ Supplementary files differ by application type:
 ```text
 instruction.md                 # short scenario / requirements
 reporting.json                 # batch aggregation policy (contextRules)
-persona_strategy.json          # optional Playground sampling defaults
+persona_strategy.json          # target cohort + Playground sampling defaults
 input/
   context.md                   # product concept (optional)
   questionnaire.yaml           # questions + askRationale / askConfidence
@@ -28,7 +29,7 @@ envelope from `questionnaire.yaml` and writes `survey_result.json`.
 ```text
 instruction.md                 # conversation goal
 reporting.json                 # batch aggregation policy (contextRules)
-persona_strategy.json          # optional Playground sampling defaults
+persona_strategy.json          # target cohort + Playground sampling defaults
 input/
   context.md                   # application background (optional)
   protocol.md                  # chat API / MCP contract (optional)
@@ -45,7 +46,7 @@ Platform-managed harness artifacts (`transcript.json`,
 ```text
 instruction.md                 # task goal, steps, optional submission JSON schema
 reporting.json                 # batch aggregation policy (contextRules)
-persona_strategy.json          # optional Playground sampling defaults
+persona_strategy.json          # target cohort + Playground sampling defaults
 input/
   context.md                   # scenario / product background (optional)
   self_report_schema.yaml      # user_feedback.json (optional)
@@ -66,18 +67,20 @@ chatbot tasks.
 | Objective evidence | platform `survey_result.json` | platform harness artifacts | trace/state (optional agent submission) |
 | Persona self-report | — | `input/self_report_schema.yaml` | `input/self_report_schema.yaml` |
 | Batch reporting policy | `reporting.json` | `reporting.json` | `reporting.json` |
-| Persona sampling defaults (optional) | `persona_strategy.json` | `persona_strategy.json` | `persona_strategy.json` |
+| Target cohort / sampling | `persona_strategy.json` | `persona_strategy.json` | `persona_strategy.json` |
 
-### Optional `persona_strategy.json`
+### `persona_strategy.json`
 
-Playground sampling defaults for Random / Stratified (and optional Quick pick
-mode). Lives at the **task root** next to `reporting.json` — not under
-`input/`, because it is launch policy, not persona-facing content.
+Lives at the **task root** next to `reporting.json`. Most tasks declare a
+**target cohort** with `dimensionFilters` (and/or `cohortId`). Field values may
+use defaults; the file itself and a cohort declaration are checked in CI.
+
+Playground uses this for Random / Stratified (and optional Quick pick) defaults.
 
 ```json
 {
   "schemaVersion": "1.0",
-  "defaultMode": "random",
+  "defaultMode": "stratified",
   "pool": "persona/datasets/bench-dev-sample",
   "sources": ["Nemotron"],
   "dimensionFilters": {
@@ -85,21 +88,60 @@ mode). Lives at the **task root** next to `reporting.json` — not under
     "region": ["North America"]
   },
   "stratifyFields": ["age_bracket", "region"],
-  "sampleSize": 8,
+  "sampleSizePerValueGroup": 2,
   "cohortId": null
 }
 ```
 
-| Field | Required | Notes |
-|---|---|---|
-| `defaultMode` | no | `single` \| `random` \| `stratified` |
-| `sources` / `dimensionFilters` | no | Applied as the task-default persona filter |
-| `stratifyFields` | no | Used when mode is `stratified` |
-| `sampleSize` | no | When set, overrides the Playground sample-size control on apply/reset; omit to leave size UI-owned |
-| `cohortId` | no | Optional saved cohort under `persona/datasets/cohorts/` |
-| `pool` | no | Defaults to bench-dev-sample |
+| Field | Notes |
+|---|---|
+| `schemaVersion` | Use `"1.0"` |
+| `defaultMode` | `single` \| `random` \| `stratified` |
+| `dimensionFilters` / `cohortId` | Non-empty filters and/or a saved `cohortId` — who this task is for |
+| `sources` | Optional source allow-list |
+| `stratifyFields` | Needed when `defaultMode` is `stratified` |
+| `sampleSizePerValueGroup` | Stratified: **N personas per stratify combination** (cell). Total cohort ≈ `N × (# non-empty cells)`. When set, Playground honors the full per-cell quota and does not clip to `sampleSize`. |
+| `sampleSize` | Random: hard sample count. Stratified without `sampleSizePerValueGroup`: post-stratify cap. When `sampleSizePerValueGroup` is set, omit `sampleSize` (per-cell N is primary). |
+| `cohortId` | Optional saved cohort under `persona/datasets/cohorts/` |
+| `pool` | Defaults to bench-dev-sample |
 
-When the file is absent, Playground keeps its previous UI defaults. When present,
-Playground turns on **Task default strategy** (filters / mode / sampleSize locked
-to the file). Operators can turn that switch off to edit filters themselves, then
-turn it back on to re-apply the task default.
+Playground turns on **Task default strategy** from this file (filters / mode /
+per-cell N / sampleSize locked to the file). Operators can turn that switch off
+to edit filters themselves, then turn it back on to re-apply the task default.
+
+### Ensuring pool coverage
+
+**Why this exists:** the production persona dataset is not ready yet. Until then
+we use **synthetic** personas (`bench-dev-sample` + optional
+`generate_dev_personas.py` top-ups) so contributors can still **validate task
+design** and the **persona-aware reporting / analysis** the task needs — not so
+the small fixture is treated as a final population.
+
+The checked-in fixture `persona/datasets/bench-dev-sample/` is only ~200
+personas. Narrow `dimensionFilters` (and stratified cells) often undershoot
+that pool.
+
+**Recommended (manual, before Playground):** top up a local pool from the
+strategy so contributors never surprise-fail on the 200-person fixture:
+
+```bash
+uv run python persona/scripts/generate_dev_personas.py \
+  --strategy application/tasks/<your-task>/persona_strategy.json
+```
+
+This expands `dimensionFilters` into strata, synthesizes consistent personas
+into `persona/datasets/_generated/strategy-<task-slug>/` (gitignored), and
+prints next steps. Point `"pool"` at that directory for local runs (do **not**
+commit generated YAML into `bench-dev-sample` unless you are intentionally
+curating the shared fixture).
+
+**Playground / job launch fallback:** if sampling still hits a coverage error
+(or stratified mode finds empty/thin cells vs `sampleSizePerValueGroup`)
+and the request has `dimensionFilters`, the backend auto-generates (or reuses)
+the same `_generated/strategy-<slug>/` pool and retries — synthesizing persona
+cards for missing filter strata. If auto top-up fails, the UI / API error
+includes the manual CLI command above.
+
+If `stratifyFields` are not also listed under `dimensionFilters`, those axes
+stay randomly filled — add them to the filters when stratified sampling must
+guarantee cell coverage.

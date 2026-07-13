@@ -19,6 +19,7 @@ application/tasks/example-survey_product-feedback/
 │   ├── test.sh
 │   └── test_*.py       # optional helpers
 ├── reporting.json      # Batch reporting policy (contextRules, judge directives)
+├── persona_strategy.json  # target cohort + Playground sampling defaults
 ├── solution/           # optional — reference solution for CI smoke
 └── README.md           # notes for your team (smoke commands, suggested agent)
 ```
@@ -109,6 +110,25 @@ Each task should define batch reporting policy here (even if minimal):
 
 See [tasks/README.md](tasks/README.md) and the task specs under
 [task-spec/](task-spec/).
+
+### `persona_strategy.json`
+
+Target cohort and Playground sampling defaults (mode, `dimensionFilters`
+and/or `cohortId`, optional `sampleSize`). Other fields may use defaults.
+The checked-in `bench-dev-sample` pool is only ~200 personas — narrow filters
+often undershoot it. Prefer generating a local strategy pool first.
+
+Until the production persona dataset ships, these synthetic pools are how we
+**validate task design** and the **persona reporting / analysis** the task
+needs — not a final population substitute.
+
+```bash
+uv run python persona/scripts/generate_dev_personas.py \
+  --strategy application/tasks/<your-task-name>/persona_strategy.json
+```
+
+Playground auto top-ups `_generated/` when coverage fails; see
+[Ensuring pool coverage](task-spec/authoring-bundle.md#ensuring-pool-coverage).
 
 ## Conventions
 

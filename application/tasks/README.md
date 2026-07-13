@@ -39,10 +39,25 @@ the scenario, task metadata, and verifier.
    file for context-level summaries, grouping rules, and later judge prompts.
    Do not hardcode reporting policy into the verifier unless you are prototyping
    a brand-new schema feature.
-8. Add optional Playground sampling defaults in `persona_strategy.json` at the
-   task root (default mode, filters, optional `sampleSize`). See
-   [`../task-spec/authoring-bundle.md`](../task-spec/authoring-bundle.md).
-9. Use `persona/datasets/bench-dev-sample/persona_0042.yaml` for lightweight
+8. Add `persona_strategy.json` at the task root with a target cohort
+   (`dimensionFilters` and/or `cohortId`; default mode, optional `sampleSize`).
+   See
+   [`../task-spec/authoring-bundle.md`](../task-spec/authoring-bundle.md#persona_strategyjson).
+9. If those filters are narrower than `bench-dev-sample` (~200 personas),
+   generate a local coverage pool **before** Playground / CLI sampling fails.
+   The production persona dataset is not ready yet — synthetic pools exist so
+   you can ship and exercise **task design** plus the **persona reporting /
+   analysis** path, not as a stand-in for the final population:
+
+   ```bash
+   uv run python persona/scripts/generate_dev_personas.py \
+     --strategy application/tasks/<your-task-name>/persona_strategy.json
+   ```
+
+   Playground will also auto top-up `_generated/` when coverage is too thin;
+   the CLI is the preferred contributor path. Details:
+   [Ensuring pool coverage](../task-spec/authoring-bundle.md#ensuring-pool-coverage).
+10. Use `persona/datasets/bench-dev-sample/persona_0042.yaml` for lightweight
    smoke examples until a larger persona dataset is restored externally.
 
 For survey tasks, create a canonical task-local bundle under:

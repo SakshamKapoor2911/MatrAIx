@@ -271,7 +271,7 @@ with task metadata plus optional profile markdown when available.
 
 | Route | Surface |
 |---|---|
-| `GET /api/tasks/detail?taskPath=...` | One task detail record (includes optional `personaStrategy` from `persona_strategy.json`) |
+| `GET /api/tasks/detail?taskPath=...` | One task detail record (includes `personaStrategy` from `persona_strategy.json`) |
 | `GET /api/survey-eval/instruments` | Survey questionnaires |
 | `GET /api/survey-eval/harbor-tasks` | Survey Harbor tasks |
 | `GET /api/chatbot-eval/tasks` | Chatbot Harbor tasks |
