@@ -32,22 +32,27 @@ def _slugify(name: str) -> str:
 def _parse_rules(rules_text: str) -> list[dict]:
     """Parse rules column into knowledge_base.json rule entries.
 
-    Format: one rule per line, each line: pattern|response|priority
-    Priority is optional (defaults to 0).
+    Format: one JSON object per line, each with keys:
+      pattern (str, required), response (str, required), priority (int, optional, defaults to 0).
     """
+    import json as _json
+
     rules = []
     for line in rules_text.strip().split("\n"):
         line = line.strip()
         if not line:
             continue
-        parts = line.split("|", 2)
-        if len(parts) < 2:
+        try:
+            rule = _json.loads(line)
+        except _json.JSONDecodeError:
             continue
-        pattern = parts[0].strip()
-        response = parts[1].strip()
-        priority = 0
-        if len(parts) >= 3 and parts[2].strip().isdigit():
-            priority = int(parts[2].strip())
+        if not isinstance(rule, dict):
+            continue
+        pattern = rule.get("pattern", "").strip()
+        response = rule.get("response", "").strip()
+        if not pattern or not response:
+            continue
+        priority = int(rule.get("priority", 0)) if "priority" in rule else 0
         rules.append({"pattern": pattern, "response": response, "priority": priority})
     return rules
 
