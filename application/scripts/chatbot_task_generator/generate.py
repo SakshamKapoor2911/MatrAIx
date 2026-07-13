@@ -104,10 +104,12 @@ def generate_task(row: dict, dry_run: bool = False) -> Path | None:
     full_name = row.get("full_name", "").strip() or f"personabench/application-{_slugify(name)}"
     domain = row["domain"].strip()
     difficulty = row.get("difficulty", "medium").strip()
-    tags_raw = row.get("tags", f'"{domain}"').strip()
-    if not tags_raw.startswith('"'):
-        tags_raw = f'"{tags_raw}"'
-    tags = ", ".join(f'"{t.strip()}"' for t in tags_raw.split(",")) if "," in tags_raw else tags_raw
+    tags_raw = row.get("tags", "").strip()
+    if tags_raw:
+        tag_list = [f'"{t.strip()}"' for t in tags_raw.split(",") if t.strip()]
+        tags = ", ".join(tag_list)
+    else:
+        tags = f'"{domain}"'
 
     app_id = row.get("application_id", "").strip() or f"{_slugify(domain)}_chat"
     app_ctx = row.get("application_context", "").strip() or f"{domain}_support"
