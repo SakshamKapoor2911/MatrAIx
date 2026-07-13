@@ -171,17 +171,17 @@ export function PersonaGroupBuilder({
   return (
     <div className="mt-3 rounded-md border border-outline/70 bg-surface px-3 py-3">
       <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
-        <p className="text-[12px] font-medium text-text-main">Persona group</p>
-        {poolSummary && <p className="font-mono text-[11px] text-text-dim">{poolSummary}</p>}
+        <p className="text-[14px] font-medium text-text-main">Persona group</p>
+        {poolSummary && <p className="font-mono text-[13px] text-text-dim">{poolSummary}</p>}
       </div>
 
       <div className="mb-3 flex flex-wrap items-end gap-2">
-        <label className="flex min-w-[12rem] flex-1 flex-col gap-1 text-[11px] text-text-variant">
+        <label className="flex min-w-[12rem] flex-1 flex-col gap-1 text-[13px] text-text-variant">
           Saved cohort
           <select
             value={selectedCohortId ?? ""}
             onChange={(e) => void loadCohort(e.target.value)}
-            className="h-8 rounded border border-outline bg-surface px-2 text-[12px] text-text-main"
+            className="h-8 rounded border border-outline bg-surface px-2 text-[14px] text-text-main"
           >
             <option value="">(none — ad hoc filters)</option>
             {cohorts.map((cohort) => (
@@ -197,7 +197,7 @@ export function PersonaGroupBuilder({
             setSaveOpen((open) => !open);
             setSaveError(null);
           }}
-          className={`h-8 rounded-md border border-outline px-3 text-[11px] text-text-main hover:bg-surface-low ${FOCUS_RING}`}
+          className={`h-8 rounded-md border border-outline px-3 text-[13px] text-text-main hover:bg-surface-low ${FOCUS_RING}`}
         >
           {saveOpen ? "Cancel save" : "Save cohort…"}
         </button>
@@ -205,30 +205,30 @@ export function PersonaGroupBuilder({
 
       {saveOpen && (
         <div className="mb-3 grid gap-2 rounded border border-outline/60 p-2 sm:grid-cols-2">
-          <label className="flex flex-col gap-1 text-[11px] text-text-variant">
+          <label className="flex flex-col gap-1 text-[13px] text-text-variant">
             Cohort id
             <input
               value={saveId}
               onChange={(e) => setSaveId(e.target.value)}
               placeholder="price-sensitive-nemotron"
-              className="h-8 rounded border border-outline bg-surface px-2 font-mono text-[12px]"
+              className="h-8 rounded border border-outline bg-surface px-2 font-mono text-[14px]"
             />
           </label>
-          <label className="flex flex-col gap-1 text-[11px] text-text-variant">
+          <label className="flex flex-col gap-1 text-[13px] text-text-variant">
             Display name
             <input
               value={saveName}
               onChange={(e) => setSaveName(e.target.value)}
               placeholder="Optional label"
-              className="h-8 rounded border border-outline bg-surface px-2 text-[12px]"
+              className="h-8 rounded border border-outline bg-surface px-2 text-[14px]"
             />
           </label>
-          <label className="flex flex-col gap-1 text-[11px] text-text-variant">
+          <label className="flex flex-col gap-1 text-[13px] text-text-variant">
             Kind
             <select
               value={saveKind}
               onChange={(e) => setSaveKind(e.target.value as "recipe" | "frozen")}
-              className="h-8 rounded border border-outline bg-surface px-2 text-[12px]"
+              className="h-8 rounded border border-outline bg-surface px-2 text-[14px]"
             >
               <option value="recipe">recipe (re-sample on launch)</option>
               <option value="frozen">frozen (fixed persona list)</option>
@@ -239,26 +239,26 @@ export function PersonaGroupBuilder({
               type="button"
               disabled={!saveId.trim() || saveMutation.isPending}
               onClick={() => saveMutation.mutate()}
-              className={`h-8 rounded-md bg-primary px-3 text-[11px] text-on-primary disabled:opacity-55 ${FOCUS_RING}`}
+              className={`h-8 rounded-md bg-primary px-3 text-[13px] text-on-primary disabled:opacity-55 ${FOCUS_RING}`}
             >
               {saveMutation.isPending ? "Saving…" : "Save to persona/datasets/cohorts/"}
             </button>
           </div>
-          {saveError && <p className="text-[11px] text-danger sm:col-span-2">{saveError}</p>}
+          {saveError && <p className="text-[13px] text-danger sm:col-span-2">{saveError}</p>}
         </div>
       )}
 
       {catalogQuery.isLoading && (
-        <p className="text-[11px] text-text-variant">Loading dev persona catalog…</p>
+        <p className="text-[13px] text-text-variant">Loading dev persona catalog…</p>
       )}
       {catalogQuery.isError && (
-        <p className="text-[11px] text-danger">Could not load persona pool catalog.</p>
+        <p className="text-[13px] text-danger">Could not load persona pool catalog.</p>
       )}
 
       {catalog && (
         <>
           <div className="mb-3">
-            <p className="mb-1.5 text-[11px] text-text-variant">Provenance</p>
+            <p className="mb-1.5 text-[13px] text-text-variant">Provenance</p>
             <div className="flex flex-wrap gap-1.5">
               {sources.map((source) => {
                 const active = filters.sources.includes(source);
@@ -268,7 +268,7 @@ export function PersonaGroupBuilder({
                     key={source}
                     type="button"
                     onClick={() => toggleSource(source)}
-                    className={`rounded-full border px-2.5 py-1 text-[11px] ${FOCUS_RING} ${
+                    className={`rounded-full border px-2.5 py-1 text-[13px] ${FOCUS_RING} ${
                       active
                         ? "border-primary bg-primary/10 text-primary"
                         : "border-outline bg-surface-low text-text-variant hover:border-primary/40"
@@ -283,7 +283,7 @@ export function PersonaGroupBuilder({
           </div>
 
           <div className="space-y-2">
-            <p className="text-[11px] text-text-variant">Dimension filters (dev profile)</p>
+            <p className="text-[13px] text-text-variant">Dimension filters (dev profile)</p>
             {groups.map((group) => {
               const open = expandedGroup === group.id;
               const groupActive = group.dimensions.some(
@@ -294,7 +294,7 @@ export function PersonaGroupBuilder({
                   <button
                     type="button"
                     onClick={() => setExpandedGroup(open ? null : group.id)}
-                    className={`flex w-full items-center justify-between px-2.5 py-2 text-left text-[12px] ${FOCUS_RING}`}
+                    className={`flex w-full items-center justify-between px-2.5 py-2 text-left text-[14px] ${FOCUS_RING}`}
                   >
                     <span className={groupActive ? "text-primary" : "text-text-main"}>
                       {group.label}
@@ -306,13 +306,13 @@ export function PersonaGroupBuilder({
                       {group.dimensions.map((dim) => (
                         <label
                           key={dim.id}
-                          className="flex flex-col gap-1 text-[11px] text-text-variant"
+                          className="flex flex-col gap-1 text-[13px] text-text-variant"
                         >
-                          <span className="font-mono text-[10px] text-text-dim">{dim.id}</span>
+                          <span className="font-mono text-[12px] text-text-dim">{dim.id}</span>
                           <select
                             value={filters.dimensionFilters[dim.id] ?? ""}
                             onChange={(e) => setDimensionFilter(dim.id, e.target.value)}
-                            className="h-8 rounded border border-outline bg-surface px-2 text-[12px] text-text-main"
+                            className="h-8 rounded border border-outline bg-surface px-2 text-[14px] text-text-main"
                           >
                             <option value="">Any</option>
                             {dim.values.map((value) => (
@@ -330,7 +330,7 @@ export function PersonaGroupBuilder({
             })}
           </div>
 
-          <p className="mt-3 text-[11px] text-text-variant">
+          <p className="mt-3 text-[13px] text-text-variant">
             {selectedCohortId ? (
               <>
                 Using cohort <span className="font-mono text-text-main">{selectedCohortId}</span>

@@ -55,8 +55,8 @@ export interface EnvironmentPanelProps {
 function EnvRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-start justify-between gap-2">
-      <span className="hud shrink-0 text-[9px] text-text-dim">{label}</span>
-      <span className="min-w-0 break-words text-right font-mono text-[11px] text-text-variant">{friendlyEnv(value)}</span>
+      <span className="hud shrink-0 text-[11px] text-text-dim">{label}</span>
+      <span className="min-w-0 break-words text-right font-mono text-[13px] text-text-variant">{friendlyEnv(value)}</span>
     </div>
   );
 }
@@ -78,18 +78,18 @@ export function EnvironmentPanel({ environment, applicationId }: EnvironmentPane
   return (
     <div className="rounded-md border border-outline bg-surface-lowest p-5">
       <div className="mb-3.5 flex items-center justify-between">
-        <h3 className="hud flex items-center gap-1.5 text-[10px] text-text-dim">
+        <h3 className="hud flex items-center gap-1.5 text-[12px] text-text-dim">
           <Sym name="dns" size={14} />
           Local runtime
         </h3>
         <span
-          className="hud rounded border border-outline px-1.5 py-0.5 text-[8px] text-text-dim"
+          className="hud rounded border border-outline px-1.5 py-0.5 text-[11px] text-text-dim"
           title="These runtime facts are fixed for this run."
         >
           Read-only
         </span>
       </div>
-      <div className="space-y-3 text-[12px]">
+      <div className="space-y-3 text-[14px]">
         <EnvRow label="Runtime" value={environment?.runtime ?? "In-process Harbor runner"} />
         <EnvRow label="Application API" value={environment?.applicationApi ?? "direct application adapter"} />
         <EnvRow label="Selection" value={app?.selection ?? environment?.ranker ?? "application ranking"} />
@@ -98,8 +98,8 @@ export function EnvironmentPanel({ environment, applicationId }: EnvironmentPane
         <EnvRow label="Scorer" value={environment?.scorer ?? "self-report"} />
       </div>
       <div className="mt-4 border-t border-outline pt-3">
-        <div className="hud mb-1.5 text-[8px] text-text-dim">Prompt boundary</div>
-        <p className="text-[11px] leading-relaxed text-text-variant">
+        <div className="hud mb-1.5 text-[11px] text-text-dim">Prompt boundary</div>
+        <p className="text-[13px] leading-relaxed text-text-variant">
           {promptOwnership.personaSystemPrompt} · {promptOwnership.taskPrompt}
         </p>
       </div>
@@ -167,7 +167,7 @@ export function EnvironmentPopover({ environment }: EnvironmentPopoverProps) {
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-controls={panelId}
-        className={`flex items-center gap-1.5 rounded border border-outline bg-surface-low px-3 py-1.5 text-[13px] font-medium text-text-variant transition ease-out hover:border-primary hover:text-text-main active:scale-[0.98] ${FOCUS_RING}`}
+        className={`flex items-center gap-1.5 rounded border border-outline bg-surface-low px-3 py-1.5 text-[15px] font-medium text-text-variant transition ease-out hover:border-primary hover:text-text-main active:scale-[0.98] ${FOCUS_RING}`}
       >
         <Sym name="hub" size={16} className="shrink-0 text-text-dim" />
         <span className="min-w-0 truncate" title={runtime}>{runtime}</span>
@@ -182,12 +182,12 @@ export function EnvironmentPopover({ environment }: EnvironmentPopoverProps) {
           className="pop-in absolute right-0 top-full z-30 mt-2 w-80 max-w-[calc(100vw-1.5rem)] max-h-[70vh] overflow-y-auto custom-scrollbar rounded-md border border-outline bg-surface-lowest p-3 shadow-2xl"
         >
           <div className="mb-2 flex items-center justify-between gap-2">
-            <p className="flex items-center gap-1 hud text-[10px] text-text-dim">
+            <p className="flex items-center gap-1 hud text-[12px] text-text-dim">
               <Sym name="lock" size={13} />
               Test environment
             </p>
             <span
-              className="hud rounded border border-outline px-1.5 py-0.5 text-[8px] text-text-dim"
+              className="hud rounded border border-outline px-1.5 py-0.5 text-[11px] text-text-dim"
               title="These runtime facts are fixed for this run."
             >
               Read-only
@@ -196,27 +196,27 @@ export function EnvironmentPopover({ environment }: EnvironmentPopoverProps) {
           <div className="space-y-2">
             {runtimeRows.map((r) => (
               <div key={r.label} className="flex items-start justify-between gap-3">
-                <span className="hud shrink-0 text-[9px] text-text-dim" title={ROW_TOOLTIPS[r.label]}>
+                <span className="hud shrink-0 text-[11px] text-text-dim" title={ROW_TOOLTIPS[r.label]}>
                   {r.label}
                 </span>
-                <span className="min-w-0 break-words text-right font-mono text-[11px] text-text-variant">
+                <span className="min-w-0 break-words text-right font-mono text-[13px] text-text-variant">
                   {friendlyEnv(r.value)}
                 </span>
               </div>
             ))}
           </div>
           <div className="mt-3 border-t border-outline-dim pt-3">
-            <p className="mb-2 flex items-center gap-1 hud text-[10px] text-text-dim">
+            <p className="mb-2 flex items-center gap-1 hud text-[12px] text-text-dim">
               <Sym name="storage" size={13} />
               What&apos;s running inside the app
             </p>
             <div className="space-y-2">
               {stackRows.map((r) => (
                 <div key={r.label} className="flex items-start justify-between gap-3">
-                  <span className="hud shrink-0 text-[9px] text-text-dim" title={ROW_TOOLTIPS[r.label]}>
+                  <span className="hud shrink-0 text-[11px] text-text-dim" title={ROW_TOOLTIPS[r.label]}>
                     {r.label}
                   </span>
-                  <span className="min-w-0 break-words text-right font-mono text-[11px] text-text-variant">
+                  <span className="min-w-0 break-words text-right font-mono text-[13px] text-text-variant">
                     {friendlyEnv(r.value)}
                   </span>
                 </div>
@@ -224,15 +224,15 @@ export function EnvironmentPopover({ environment }: EnvironmentPopoverProps) {
             </div>
           </div>
           <div className="mt-3 border-t border-outline-dim pt-3">
-            <p className="mb-2 flex items-center gap-1 hud text-[10px] text-text-dim">
+            <p className="mb-2 flex items-center gap-1 hud text-[12px] text-text-dim">
               <Sym name="account_tree" size={13} />
               Who writes which prompt
             </p>
             <div className="space-y-2">
               {promptRows.map((r) => (
                 <div key={r.label} className="flex items-start justify-between gap-3">
-                  <span className="shrink-0 hud text-[9px] text-text-dim">{r.label}</span>
-                  <span className="max-w-[12.5rem] text-right text-[11px] leading-relaxed text-text-variant">
+                  <span className="shrink-0 hud text-[11px] text-text-dim">{r.label}</span>
+                  <span className="max-w-[12.5rem] text-right text-[13px] leading-relaxed text-text-variant">
                     {r.value}
                   </span>
                 </div>

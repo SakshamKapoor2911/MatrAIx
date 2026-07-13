@@ -128,7 +128,7 @@ export function PersonaFilterModal({
       >
         <div className="flex items-center justify-between border-b border-outline/40 px-5 py-4">
           <div>
-            <p className="hud text-[9px] text-primary">bench-dev-sample</p>
+            <p className="hud text-[11px] text-primary">bench-dev-sample</p>
             <h2 id="persona-filter-modal-title" className="font-display text-[18px] font-semibold text-text-main">
               Persona filters
             </h2>
@@ -139,7 +139,7 @@ export function PersonaFilterModal({
         </div>
 
         <div className="custom-scrollbar flex-1 overflow-y-auto px-5 py-4">
-          <p className="mb-2 text-[11px] text-text-variant">Provenance</p>
+          <p className="mb-2 text-[13px] text-text-variant">Provenance</p>
           <div className="mb-5 flex flex-wrap gap-2">
             {sources.map((source) => {
               const active = draft.sources.includes(source);
@@ -149,7 +149,7 @@ export function PersonaFilterModal({
                   key={source}
                   type="button"
                   onClick={() => toggleSource(source)}
-                  className={`rounded-full border px-3 py-1.5 text-[11px] transition ${FOCUS_RING} ${
+                  className={`rounded-full border px-3 py-1.5 text-[13px] transition ${FOCUS_RING} ${
                     active
                       ? "border-primary bg-primary/15 text-primary"
                       : "border-outline/50 bg-surface/50 text-text-variant hover:border-primary/40"
@@ -162,7 +162,7 @@ export function PersonaFilterModal({
             })}
           </div>
 
-          <p className="mb-2 text-[11px] text-text-variant">Profile dimensions</p>
+          <p className="mb-2 text-[13px] text-text-variant">Profile dimensions</p>
           <div className="space-y-2">
             {groups.map((group) => {
               const groupOpen = expandedGroup === group.id;
@@ -171,7 +171,7 @@ export function PersonaFilterModal({
                   <button
                     type="button"
                     onClick={() => setExpandedGroup(groupOpen ? null : group.id)}
-                    className={`flex w-full items-center justify-between px-3 py-2.5 text-left text-[12px] font-medium text-text-main ${FOCUS_RING}`}
+                    className={`flex w-full items-center justify-between px-3 py-2.5 text-left text-[14px] font-medium text-text-main ${FOCUS_RING}`}
                   >
                     {group.label}
                     <Sym name={groupOpen ? "expand_less" : "expand_more"} size={18} className="text-text-dim" />
@@ -187,7 +187,7 @@ export function PersonaFilterModal({
                             <button
                               type="button"
                               onClick={() => setExpandedDim(dimOpen ? null : dim.id)}
-                              className={`flex w-full items-center justify-between gap-2 px-2.5 py-2 text-left text-[11px] ${FOCUS_RING}`}
+                              className={`flex w-full items-center justify-between gap-2 px-2.5 py-2 text-left text-[13px] ${FOCUS_RING}`}
                             >
                               <span className={selected.length ? "text-primary" : "text-text-main"}>
                                 {dim.id.replace(/_/g, " ")}
@@ -201,7 +201,7 @@ export function PersonaFilterModal({
                                       e.stopPropagation();
                                       toggleStratifyField(dim.id);
                                     }}
-                                    className={`rounded-full border px-2 py-0.5 text-[9px] ${
+                                    className={`rounded-full border px-2 py-0.5 text-[11px] ${
                                       stratified
                                         ? "border-secondary/40 bg-secondary/10 text-secondary"
                                         : "border-outline/40 text-text-dim"
@@ -222,7 +222,7 @@ export function PersonaFilterModal({
                                       key={value}
                                       type="button"
                                       onClick={() => toggleDimensionValue(dim.id, value)}
-                                      className={`rounded-full border px-2.5 py-1 text-[10px] ${FOCUS_RING} ${
+                                      className={`rounded-full border px-2.5 py-1 text-[12px] ${FOCUS_RING} ${
                                         active
                                           ? "border-primary bg-primary/15 text-primary"
                                           : "border-outline/40 text-text-variant hover:border-primary/35"
@@ -253,7 +253,7 @@ export function PersonaFilterModal({
                   key={chip.key}
                   type="button"
                   onClick={() => removeChip(chip)}
-                  className="inline-flex items-center gap-1 rounded-full border border-primary/30 bg-primary/10 px-2.5 py-1 text-[10px] text-primary"
+                  className="inline-flex items-center gap-1 rounded-full border border-primary/30 bg-primary/10 px-2.5 py-1 text-[12px] text-primary"
                 >
                   <span className="text-text-dim">{chip.label}:</span> {chip.value}
                   <Sym name="close" size={12} />
@@ -261,10 +261,10 @@ export function PersonaFilterModal({
               ))}
             </div>
           ) : (
-            <p className="mb-3 text-[11px] text-text-dim">No filters — full pool eligible.</p>
+            <p className="mb-3 text-[13px] text-text-dim">No filters — full pool eligible.</p>
           )}
           <div className="flex items-center justify-between gap-3">
-            <p className="text-[11px] text-text-variant">
+            <p className="text-[13px] text-text-variant">
               <span className="font-mono text-text-main">{activeFilterCount(draft)}</span> filter groups
               {stratifyMode && stratifyFields.length > 0 && (
                 <span>
@@ -277,7 +277,7 @@ export function PersonaFilterModal({
               <button
                 type="button"
                 onClick={onClose}
-                className={`rounded-md border border-outline px-3 py-2 text-[12px] text-text-variant ${FOCUS_RING}`}
+                className={`rounded-md border border-outline px-3 py-2 text-[14px] text-text-variant ${FOCUS_RING}`}
               >
                 Cancel
               </button>
@@ -287,7 +287,7 @@ export function PersonaFilterModal({
                   onConfirm(draft);
                   onClose();
                 }}
-                className={`rounded-md bg-primary px-4 py-2 text-[12px] font-medium text-on-primary ${FOCUS_RING}`}
+                className={`rounded-md bg-primary px-4 py-2 text-[14px] font-medium text-on-primary ${FOCUS_RING}`}
               >
                 Apply filters
               </button>

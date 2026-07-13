@@ -116,7 +116,7 @@ export function KnobSelect({
   if (block) {
     return (
       <div ref={rootRef} className="block">
-        <span className="hud mb-1.5 block text-[9px] text-text-dim">
+        <span className="hud mb-1.5 block text-[11px] text-text-dim">
           {label}
           {labelAccent && <span className="ml-1 normal-case tracking-normal text-primary">{labelAccent}</span>}
         </span>
@@ -129,7 +129,7 @@ export function KnobSelect({
             aria-haspopup="listbox"
             aria-expanded={open}
             aria-label={`${label}: ${currentLabel}`}
-            className={`flex w-full items-center justify-between gap-2 rounded border px-3 py-2.5 text-left text-[13px] transition ease-out active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-55 disabled:active:scale-100 ${FOCUS_RING} ${
+            className={`flex w-full items-center justify-between gap-2 rounded border px-3 py-2.5 text-left text-[15px] transition ease-out active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-55 disabled:active:scale-100 ${FOCUS_RING} ${
               accent
                 ? "border-primary bg-primary/10 text-primary hover:bg-primary/15"
                 : "border-outline bg-field text-text-main hover:border-primary"
@@ -163,7 +163,7 @@ export function KnobSelect({
   // --- Inline (compact) layout: Chat workbench config bars. ------------------
   return (
     <div ref={rootRef} className="flex flex-shrink-0 items-center gap-2">
-      <span className="hud text-[10px] text-text-dim">{label}</span>
+      <span className="hud text-[12px] text-text-dim">{label}</span>
       <div className="relative">
         <button
           type="button"
@@ -173,7 +173,7 @@ export function KnobSelect({
           aria-haspopup="listbox"
           aria-expanded={open}
           aria-label={`${label}: ${currentLabel}`}
-          className={`flex items-center gap-2 rounded border px-3 py-1.5 text-[13px] font-medium transition ease-out active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-55 disabled:active:scale-100 ${FOCUS_RING} ${
+          className={`flex items-center gap-2 rounded border px-3 py-1.5 text-[15px] font-medium transition ease-out active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-55 disabled:active:scale-100 ${FOCUS_RING} ${
             accent
               ? "border-primary bg-primary/10 text-primary hover:bg-primary/15"
               : "border-outline bg-field text-text-main hover:border-primary"
@@ -251,14 +251,14 @@ function Listbox({
             <div className="flex items-center justify-between gap-2">
               <span
                 title={opt.label}
-                className={`min-w-0 truncate text-[13px] font-medium ${isSelected ? "text-primary" : "text-text-main"}`}
+                className={`min-w-0 truncate text-[15px] font-medium ${isSelected ? "text-primary" : "text-text-main"}`}
               >
                 {opt.label}
               </span>
               {isSelected && <Sym name="check" size={16} className="shrink-0 text-primary" />}
             </div>
             {opt.description && (
-              <p className="mt-0.5 text-[11px] leading-relaxed text-text-variant">{opt.description}</p>
+              <p className="mt-0.5 text-[13px] leading-relaxed text-text-variant">{opt.description}</p>
             )}
           </li>
         );

@@ -19,7 +19,7 @@ const SUBTITLES: Record<PlaygroundTaskType, string> = {
 };
 
 const SUBTITLE_CLASS =
-  "mt-1 text-[12px] leading-relaxed text-text-variant sm:whitespace-nowrap sm:text-[13px]";
+  "mt-1 text-[14px] leading-relaxed text-text-variant sm:whitespace-nowrap sm:text-[15px]";
 
 export function RunHeader({ taskType, onTaskTypeChange }: RunHeaderProps) {
   return (

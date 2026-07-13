@@ -78,7 +78,7 @@ export function CockpitSelect({ label, value, options, onChange, disabled, hint 
 
   return (
     <div ref={rootRef} className="flex flex-col gap-1.5">
-      <span className="text-[11px] font-medium text-text-dim normal-case tracking-normal">{label}</span>
+      <span className="text-[13px] font-medium text-text-dim normal-case tracking-normal">{label}</span>
       <div className="relative">
         <button
           type="button"
@@ -91,11 +91,11 @@ export function CockpitSelect({ label, value, options, onChange, disabled, hint 
           className={`flex w-full items-center justify-between gap-2 rounded-lg border border-outline/50 bg-surface/60 px-2.5 py-2 text-left backdrop-blur transition ease-out hover:border-primary/40 hover:bg-surface/75 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-55 disabled:active:scale-100 ${FOCUS_RING}`}
         >
           <span className="min-w-0 flex-1">
-            <span className="block truncate text-[13px] font-medium text-text-main">
+            <span className="block truncate text-[15px] font-medium text-text-main">
               {selected?.label ?? value}
             </span>
             {selected?.meta ? (
-              <span className="block truncate text-[10px] text-text-dim">{selected.meta}</span>
+              <span className="block truncate text-[12px] text-text-dim">{selected.meta}</span>
             ) : null}
           </span>
           <Sym
@@ -131,14 +131,14 @@ export function CockpitSelect({ label, value, options, onChange, disabled, hint 
                   <div className="flex items-start justify-between gap-2">
                     <div className="min-w-0">
                       <span
-                        className={`block truncate text-[13px] font-medium ${
+                        className={`block truncate text-[15px] font-medium ${
                           isSelected ? "text-primary" : "text-text-main"
                         }`}
                       >
                         {opt.label}
                       </span>
                       {opt.meta ? (
-                        <span className="mt-0.5 block text-[10px] leading-snug text-text-dim">{opt.meta}</span>
+                        <span className="mt-0.5 block text-[12px] leading-snug text-text-dim">{opt.meta}</span>
                       ) : null}
                     </div>
                     {isSelected ? <Sym name="check" size={16} className="mt-0.5 shrink-0 text-primary" /> : null}
@@ -150,7 +150,7 @@ export function CockpitSelect({ label, value, options, onChange, disabled, hint 
         )}
       </div>
       {footer ? (
-        <p className="text-[10px] leading-relaxed text-text-dim normal-case">{footer}</p>
+        <p className="text-[12px] leading-relaxed text-text-dim normal-case">{footer}</p>
       ) : null}
     </div>
   );

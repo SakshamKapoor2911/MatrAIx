@@ -51,9 +51,9 @@
   --score-mid: 242 181 59;      /* = warn */
   --score-high: 78 222 163;     /* = secondary (mint) */
 
-  /* Type */
+  /* Type — Inter for UI + headings (matches public MatrAIx site) */
   --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --display: "Space Grotesk", var(--sans);
+  --display: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
   /* Radii */
@@ -116,9 +116,10 @@
     font-family: var(--sans);
     color: rgb(var(--text-main));
     background: rgb(var(--surface-dim));
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
   ::selection {
@@ -236,7 +237,7 @@
   }
 
   .cockpit-field-label {
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -250,8 +251,8 @@
     gap: 0.35rem;
     border-radius: 9999px;
     border: 1px solid transparent;
-    padding: 0.25rem 0.6rem;
-    font-size: 10px;
+    padding: 0.25rem 0.65rem;
+    font-size: 12px;
     font-weight: 500;
     line-height: 1.25;
   }
@@ -453,7 +454,7 @@
     border: none;
     border-radius: 0.25rem;
     padding: 0.5rem 0.75rem;
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 600;
     line-height: 1.2;
     color: rgb(var(--text-dim));
@@ -462,6 +463,12 @@
       background-color 0.15s ease,
       color 0.15s ease,
       box-shadow 0.15s ease;
+  }
+
+  .cockpit-segment__btn--compact {
+    padding: 0.3rem 0.4rem;
+    font-size: 11px;
+    letter-spacing: 0.01em;
   }
 
   .cockpit-segment__btn:hover:not(:disabled):not(.cockpit-segment__btn--active) {
@@ -666,7 +673,7 @@
 
   .landing-stat-label {
     font-family: var(--mono);
-    font-size: 11px;
+    font-size: 12px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: rgb(var(--primary) / 0.85);
@@ -679,7 +686,7 @@
     border-radius: 8px;
     background: rgb(var(--primary));
     padding: 10px 22px;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 600;
     color: rgb(var(--on-primary));
     box-shadow: 0 0 28px rgb(var(--primary) / 0.4);
@@ -720,4 +727,15 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
+}
+
+/* Batch report PDF capture: solid surfaces so html-to-image stays readable */
+.batch-report-pdf-capture {
+  background: #ffffff !important;
+}
+.batch-report-pdf-capture .glass-panel,
+.batch-report-pdf-capture [class*="backdrop-blur"] {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background-color: #ffffff !important;
 }

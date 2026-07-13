@@ -51,7 +51,7 @@ function ItemListField({ field }: { field: PersonaExposureField }) {
   const label = field.label ?? field.key ?? "Details";
   return (
     <div>
-      <div className="hud mb-2 text-[9px] text-text-dim">{label}</div>
+      <div className="hud mb-2 text-[11px] text-text-dim">{label}</div>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         {items.map((item) => {
           const title = item.title ?? item.itemId;
@@ -62,24 +62,24 @@ function ItemListField({ field }: { field: PersonaExposureField }) {
               className="relative rounded border border-outline bg-surface-low p-3 transition-colors hover:border-primary/60"
             >
               {isFirst && (
-                <div className="hud absolute right-0 top-0 rounded-bl border-b border-l border-secondary/25 bg-secondary/10 px-1 py-0.5 text-[7px] text-secondary">
+                <div className="hud absolute right-0 top-0 rounded-bl border-b border-l border-secondary/25 bg-secondary/10 px-1 py-0.5 text-[10px] text-secondary">
                   Top
                 </div>
               )}
               <div className="mb-1 flex items-start gap-2">
-                <span className="shrink-0 font-mono text-[10px] font-bold text-primary">
+                <span className="shrink-0 font-mono text-[12px] font-bold text-primary">
                   {String(item.rank ?? 1).padStart(2, "0")}
                 </span>
                 <span
-                  className={`min-w-0 break-words text-[12px] font-semibold text-text-main ${isFirst ? "pr-12" : ""}`}
+                  className={`min-w-0 break-words text-[14px] font-semibold text-text-main ${isFirst ? "pr-12" : ""}`}
                   title={title}
                 >
                   {title}
                 </span>
               </div>
-              {item.meta && <p className="text-[11px] leading-snug text-text-variant">{item.meta}</p>}
+              {item.meta && <p className="text-[13px] leading-snug text-text-variant">{item.meta}</p>}
               {item.title && (
-                <p className="mt-1 truncate font-mono text-[10px] text-text-dim" title={item.itemId}>
+                <p className="mt-1 truncate font-mono text-[12px] text-text-dim" title={item.itemId}>
                   {item.itemId}
                 </p>
               )}
@@ -97,8 +97,8 @@ function TextField({ field }: { field: PersonaExposureField }) {
   const label = field.label ?? field.key ?? "Details";
   return (
     <div>
-      <div className="hud mb-2 text-[9px] text-text-dim">{label}</div>
-      <pre className="overflow-x-auto rounded border border-outline bg-surface-low p-3 text-[11px] leading-relaxed text-text-variant whitespace-pre-wrap">
+      <div className="hud mb-2 text-[11px] text-text-dim">{label}</div>
+      <pre className="overflow-x-auto rounded border border-outline bg-surface-low p-3 text-[13px] leading-relaxed text-text-variant whitespace-pre-wrap">
         {text}
       </pre>
     </div>

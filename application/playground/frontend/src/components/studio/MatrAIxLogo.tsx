@@ -9,9 +9,9 @@ export interface MatrAIxLogoProps {
 }
 
 const SIZE_CLASS: Record<NonNullable<MatrAIxLogoProps["size"]>, string> = {
-  sm: "text-[17px]",
-  md: "text-[19px]",
-  lg: "text-[28px]",
+  sm: "text-[18px]",
+  md: "text-[20px]",
+  lg: "text-[30px]",
 };
 
 export function MatrAIxLogo({ size = "md", onClick, className = "" }: MatrAIxLogoProps) {

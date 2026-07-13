@@ -51,16 +51,16 @@ const COMPONENTS: Components = {
 
   // Sub-headings: a small bold heading, not a giant H1/H2.
   h1: ({ node: _node, ...props }) => (
-    <h3 className="mb-1 mt-2 text-[13px] font-semibold text-text-main first:mt-0" {...props} />
+    <h3 className="mb-1 mt-2 text-[15px] font-semibold text-text-main first:mt-0" {...props} />
   ),
   h2: ({ node: _node, ...props }) => (
-    <h3 className="mb-1 mt-2 text-[13px] font-semibold text-text-main first:mt-0" {...props} />
+    <h3 className="mb-1 mt-2 text-[15px] font-semibold text-text-main first:mt-0" {...props} />
   ),
   h3: ({ node: _node, ...props }) => (
-    <h3 className="mb-1 mt-2 text-[13px] font-semibold text-text-main first:mt-0" {...props} />
+    <h3 className="mb-1 mt-2 text-[15px] font-semibold text-text-main first:mt-0" {...props} />
   ),
   h4: ({ node: _node, ...props }) => (
-    <h4 className="mb-1 mt-2 text-[12px] font-semibold uppercase tracking-wide text-text-variant first:mt-0" {...props} />
+    <h4 className="mb-1 mt-2 text-[14px] font-semibold uppercase tracking-wide text-text-variant first:mt-0" {...props} />
   ),
 
   // Inline code: mono on a faint surface tint, kept readable at body size.
@@ -89,7 +89,7 @@ const COMPONENTS: Components = {
   // Fenced code blocks (docs / YAML records).
   pre: ({ node: _node, ...props }) => (
     <pre
-      className="mb-2 overflow-x-auto rounded-md border border-outline/40 bg-field p-3 font-mono text-[10px] leading-relaxed text-primary last:mb-0"
+      className="mb-2 overflow-x-auto rounded-md border border-outline/40 bg-field p-3 font-mono text-[12px] leading-relaxed text-primary last:mb-0"
       {...props}
     />
   ),

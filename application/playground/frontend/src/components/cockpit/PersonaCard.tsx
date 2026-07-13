@@ -85,7 +85,7 @@ function PersonaCardInner({ persona, selected, onSelect }: PersonaCardProps) {
         {persona.source && (
           <span
             title={`Source dataset: ${persona.source}`}
-            className={`hud flex-none rounded border px-1.5 py-0.5 text-[8px] ${tone}`}
+            className={`hud flex-none rounded border px-1.5 py-0.5 text-[11px] ${tone}`}
           >
             {persona.source}
           </span>
@@ -104,14 +104,14 @@ function PersonaCardInner({ persona, selected, onSelect }: PersonaCardProps) {
 
       {/* Age · Sex · id micro-label. */}
       {metaLabel && (
-        <p title="Age · sex · persona id" className="hud mt-1 truncate text-[8px] text-text-dim">
+        <p title="Age · sex · persona id" className="hud mt-1 truncate text-[11px] text-text-dim">
           {metaLabel}
         </p>
       )}
 
       {/* Optional one-line trait. */}
       {traitLine && (
-        <p className="mt-2 line-clamp-2 text-[11px] leading-snug text-text-variant">{traitLine}</p>
+        <p className="mt-2 line-clamp-2 text-[13px] leading-snug text-text-variant">{traitLine}</p>
       )}
     </button>
   );

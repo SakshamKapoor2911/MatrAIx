@@ -30,18 +30,18 @@ function QuestionCard({ question, index }: { question: SurveyQuestion; index: nu
   return (
     <article className="rounded-lg border border-outline/40 bg-surface/40 px-3.5 py-3">
       <div className="mb-1.5 flex flex-wrap items-center gap-2">
-        <span className="hud text-[9px] text-primary">Q{index + 1}</span>
-        <span className={`hud rounded border px-1.5 py-0.5 text-[8px] ${surveyQuestionTypeChipClass(question.type)}`}>
+        <span className="hud text-[11px] text-primary">Q{index + 1}</span>
+        <span className={`hud rounded border px-1.5 py-0.5 text-[11px] ${surveyQuestionTypeChipClass(question.type)}`}>
           {typeLabel}
         </span>
         {question.required === false ? (
-          <span className="hud text-[8px] text-text-dim">Optional</span>
+          <span className="hud text-[11px] text-text-dim">Optional</span>
         ) : null}
       </div>
-      <p className="text-[13px] font-medium leading-snug text-text-main">{question.prompt}</p>
+      <p className="text-[15px] font-medium leading-snug text-text-main">{question.prompt}</p>
 
       {isLikert ? (
-        <p className="mt-2 font-mono text-[11px] text-text-variant">
+        <p className="mt-2 font-mono text-[13px] text-text-variant">
           Scale {min}–{max}
         </p>
       ) : null}
@@ -51,11 +51,11 @@ function QuestionCard({ question, index }: { question: SurveyQuestion; index: nu
           {options.map((option) => (
             <li
               key={option.id}
-              className="rounded-md border border-outline/30 bg-surface/50 px-2.5 py-1.5 text-[12px] leading-relaxed text-text-main"
+              className="rounded-md border border-outline/30 bg-surface/50 px-2.5 py-1.5 text-[14px] leading-relaxed text-text-main"
             >
               <span>{option.label}</span>
               {option.label !== option.id ? (
-                <span className="mt-0.5 block font-mono text-[10px] text-text-dim">{option.id}</span>
+                <span className="mt-0.5 block font-mono text-[12px] text-text-dim">{option.id}</span>
               ) : null}
             </li>
           ))}
@@ -63,7 +63,7 @@ function QuestionCard({ question, index }: { question: SurveyQuestion; index: nu
       ) : null}
 
       {question.type === "free_text" ? (
-        <p className="mt-2 text-[11px] text-text-dim">Free-text answer</p>
+        <p className="mt-2 text-[13px] text-text-dim">Free-text answer</p>
       ) : null}
     </article>
   );
@@ -76,14 +76,14 @@ export function QuestionnairePreview({ instrument, className = "" }: Questionnai
       <div>
         <h3 className="font-display text-[15px] font-semibold text-text-main">{instrument.title}</h3>
         {instrument.description?.trim() ? (
-          <p className="mt-1 text-[12px] leading-relaxed text-text-variant">{instrument.description}</p>
+          <p className="mt-1 text-[14px] leading-relaxed text-text-variant">{instrument.description}</p>
         ) : null}
-        <p className="mt-1 hud text-[9px] text-text-dim">
+        <p className="mt-1 hud text-[11px] text-text-dim">
           {questions.length} question{questions.length === 1 ? "" : "s"}
         </p>
       </div>
       {questions.length === 0 ? (
-        <p className="text-[12px] text-text-dim">This questionnaire has no questions.</p>
+        <p className="text-[14px] text-text-dim">This questionnaire has no questions.</p>
       ) : (
         questions.map((question, index) => (
           <QuestionCard key={question.id || `q-${index}`} question={question} index={index} />

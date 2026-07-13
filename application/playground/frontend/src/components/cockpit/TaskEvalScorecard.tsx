@@ -38,10 +38,10 @@ function ScorecardShell({
         <div className="flex items-center justify-between border-b border-outline bg-surface-low px-3 py-2.5">
           <div className="flex items-center gap-2">
             <Sym name="verified" fill={1} size={18} className="text-primary" />
-            <h3 className="hud text-[11px] text-primary">Scorecard</h3>
+            <h3 className="hud text-[13px] text-primary">Scorecard</h3>
           </div>
           {scored ? (
-            <span className="flex items-center gap-1 hud text-[10px] text-text-dim">
+            <span className="flex items-center gap-1 hud text-[12px] text-text-dim">
               <span className="h-2 w-2 rounded-full bg-secondary" aria-hidden />
               Scored
             </span>
@@ -78,7 +78,7 @@ function EmptyScorecard({ phase }: { phase: TaskEvalPhase }) {
     <div className="p-md">
       <div className="rise-in rounded-md border border-dashed border-outline-dim bg-surface-low px-4 py-10 text-center">
         <Sym name="fact_check" size={28} className="text-text-dim" />
-        <p className="mt-2 text-[13px] leading-relaxed text-text-variant">
+        <p className="mt-2 text-[15px] leading-relaxed text-text-variant">
           {failedPhase(phase)
             ? "This run stopped before it could be scored."
             : "Run a simulation and the scores will appear here."}
@@ -108,7 +108,7 @@ function CriterionRow({
   return (
     <div>
       <div className="mb-1 flex items-center justify-between">
-        <span className="flex items-center gap-1.5 text-[12px] font-medium text-text-main">
+        <span className="flex items-center gap-1.5 text-[14px] font-medium text-text-main">
           <Sym
             name={passing ? "check_circle" : band === "low" ? "cancel" : "remove_circle"}
             fill={1}
@@ -117,14 +117,14 @@ function CriterionRow({
           />
           {label}
         </span>
-        <span className={`font-mono text-[12px] font-bold tabular-nums ${color.text}`}>
+        <span className={`font-mono text-[14px] font-bold tabular-nums ${color.text}`}>
           {value} / {max}
         </span>
       </div>
       <div className="h-1.5 w-full overflow-hidden rounded-full bg-field">
         <div className={`h-full rounded-full transition-[width] duration-200 ${color.bar}`} style={{ width: `${pct}%` }} />
       </div>
-      {rationale ? <p className="mt-1 text-[11px] leading-snug text-text-variant">{rationale}</p> : null}
+      {rationale ? <p className="mt-1 text-[13px] leading-snug text-text-variant">{rationale}</p> : null}
     </div>
   );
 }
@@ -139,15 +139,15 @@ export function VerifierStrip({ verifier }: { verifier: VerifierSummary }) {
     >
       <div className="flex items-center gap-2">
         <Sym name={passed ? "task_alt" : "error"} fill={1} size={18} className={passed ? "text-secondary" : "text-danger"} />
-        <span className="text-[12px] font-semibold text-text-main">
+        <span className="text-[14px] font-semibold text-text-main">
           Verifier · {passed ? "Passed" : "Failed"}
         </span>
-        <span className="ml-auto font-mono text-[11px] tabular-nums text-text-variant">
+        <span className="ml-auto font-mono text-[13px] tabular-nums text-text-variant">
           reward {verifier.reward}
         </span>
       </div>
       {verifier.detail ? (
-        <pre className="custom-scrollbar mt-2 max-h-28 overflow-auto whitespace-pre-wrap font-mono text-[10px] leading-snug text-text-variant">
+        <pre className="custom-scrollbar mt-2 max-h-28 overflow-auto whitespace-pre-wrap font-mono text-[12px] leading-snug text-text-variant">
           {verifier.detail}
         </pre>
       ) : null}
@@ -159,7 +159,7 @@ function MetricTile({ value, caption }: { value: string; caption: string }) {
   return (
     <div className="flex flex-col items-center justify-center rounded-md border border-outline bg-surface py-2.5">
       <span className="font-display text-[22px] font-bold tabular-nums text-text-main">{value}</span>
-      <span className="mt-0.5 text-center hud text-[10px] leading-tight text-text-dim">{caption}</span>
+      <span className="mt-0.5 text-center hud text-[12px] leading-tight text-text-dim">{caption}</span>
     </div>
   );
 }
@@ -194,13 +194,13 @@ export function WebEvalScorecard({ webResult, verifier, phase }: WebEvalScorecar
             <span className={`font-display text-[44px] font-bold leading-none tracking-tight tabular-nums ${overallColor.text}`}>
               {overall}
             </span>
-            <span className="text-[13px] text-text-dim">/ 10</span>
+            <span className="text-[15px] text-text-dim">/ 10</span>
           </div>
-          <span className="mt-1 text-center hud text-[10px] text-text-dim">How the user rated it</span>
+          <span className="mt-1 text-center hud text-[12px] text-text-dim">How the user rated it</span>
         </div>
         {webResult.reason ? (
           <div className={`flex-1 border-l-2 pl-3 ${overallBorder}`}>
-            <p className="text-[12px] italic leading-relaxed text-text-variant">&ldquo;{webResult.reason}&rdquo;</p>
+            <p className="text-[14px] italic leading-relaxed text-text-variant">&ldquo;{webResult.reason}&rdquo;</p>
           </div>
         ) : null}
       </div>
@@ -221,9 +221,9 @@ export function WebEvalScorecard({ webResult, verifier, phase }: WebEvalScorecar
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-[13px] font-semibold text-text-main">{webResult.selectedProductName}</span>
+            <span className="text-[15px] font-semibold text-text-main">{webResult.selectedProductName}</span>
             <span
-              className={`hud rounded border px-1.5 py-0.5 text-[8px] ${
+              className={`hud rounded border px-1.5 py-0.5 text-[11px] ${
                 webResult.valid
                   ? "border-secondary/30 bg-secondary/10 text-secondary"
                   : "border-danger/30 bg-danger/10 text-danger"
@@ -232,13 +232,13 @@ export function WebEvalScorecard({ webResult, verifier, phase }: WebEvalScorecar
               {webResult.valid ? "Complete" : "Incomplete"}
             </span>
           </div>
-          <div className="mt-0.5 truncate font-mono text-[10px] text-text-variant">{webResult.selectedProductId}</div>
+          <div className="mt-0.5 truncate font-mono text-[12px] text-text-variant">{webResult.selectedProductId}</div>
         </div>
       </div>
 
       {verifier ? <VerifierStrip verifier={verifier} /> : null}
 
-      <p className="mt-3 text-[10px] leading-relaxed text-text-dim">
+      <p className="mt-3 text-[12px] leading-relaxed text-text-dim">
         Scores read <span className="text-secondary">green</span> when the app did well,{" "}
         <span className="text-warn">amber</span> when so-so, <span className="text-danger">red</span> when it missed.
       </p>
@@ -272,12 +272,12 @@ export function SurveyEvalScorecard({ surveyResult, verifier, phase }: SurveyEva
             <span className={`font-display text-[44px] font-bold leading-none tracking-tight tabular-nums ${mainColor.text}`}>
               {pct}
             </span>
-            <span className="text-[13px] text-text-dim">/ 100</span>
+            <span className="text-[15px] text-text-dim">/ 100</span>
           </div>
-          <span className="mt-1 text-center hud text-[10px] text-text-dim">Completion</span>
+          <span className="mt-1 text-center hud text-[12px] text-text-dim">Completion</span>
         </div>
         <div className="flex-1 border-l-2 border-l-outline pl-3">
-          <p className="text-[12px] leading-relaxed text-text-variant">
+          <p className="text-[14px] leading-relaxed text-text-variant">
             {answered} of {total} questions answered
             {completion.valid ? " · responses passed validation" : " · validation flagged issues"}
           </p>
@@ -304,12 +304,12 @@ export function SurveyEvalScorecard({ surveyResult, verifier, phase }: SurveyEva
 
       {typeCounts.length > 0 ? (
         <div className="mb-3 rounded border border-outline bg-surface-low px-3 py-2.5">
-          <div className="hud mb-1.5 text-[9px] text-text-dim">Question types</div>
+          <div className="hud mb-1.5 text-[11px] text-text-dim">Question types</div>
           <div className="flex flex-wrap gap-1.5">
             {typeCounts.map((entry) => (
               <span
                 key={entry.type}
-                className={`hud inline-flex items-center gap-1 rounded border px-2 py-1 text-[9px] ${surveyQuestionTypeChipClass(entry.type)}`}
+                className={`hud inline-flex items-center gap-1 rounded border px-2 py-1 text-[11px] ${surveyQuestionTypeChipClass(entry.type)}`}
               >
                 <span className="tabular-nums font-semibold">{entry.count}</span>
                 {entry.label}
@@ -350,10 +350,10 @@ export function OsAppEvalScorecard({ osAppResult, verifier, traceStepCount = 0, 
               {displayReward}
             </span>
           </div>
-          <span className="mt-1 text-center hud text-[10px] text-text-dim">Verifier reward</span>
+          <span className="mt-1 text-center hud text-[12px] text-text-dim">Verifier reward</span>
         </div>
         <div className={`flex-1 border-l-2 pl-3 ${passed ? "border-l-score-high" : "border-l-score-low"}`}>
-          <p className="text-[12px] leading-relaxed text-text-variant">
+          <p className="text-[14px] leading-relaxed text-text-variant">
             {passed
               ? "The automated verifier accepted the desktop agent's output."
               : "The verifier did not accept the output — check the trace and artifact in the center panel."}
@@ -376,7 +376,7 @@ export function OsAppEvalScorecard({ osAppResult, verifier, traceStepCount = 0, 
       </div>
 
       {osAppResult.artifactName ? (
-        <div className="mt-3 flex items-center gap-2 rounded-md border border-outline bg-surface px-3 py-2 text-[11px] text-text-variant">
+        <div className="mt-3 flex items-center gap-2 rounded-md border border-outline bg-surface px-3 py-2 text-[13px] text-text-variant">
           <Sym name="description" size={16} className="text-primary" />
           Output artifact · <span className="font-mono text-text-main">{osAppResult.artifactName}</span>
         </div>

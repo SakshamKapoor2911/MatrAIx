@@ -97,7 +97,7 @@ export function HarborTraceReplay({
 
   if (events.length === 0) {
     return (
-      <div className="rise-in rounded-md border border-dashed border-outline bg-surface-low px-4 py-6 text-center text-[12px] text-text-variant">
+      <div className="rise-in rounded-md border border-dashed border-outline bg-surface-low px-4 py-6 text-center text-[14px] text-text-variant">
         {emptyMessage}
       </div>
     );
@@ -143,7 +143,7 @@ export function HarborTraceReplay({
           }}
           className="min-w-[120px] flex-1 accent-primary"
         />
-        <span className="font-mono text-[10px] text-text-dim">
+        <span className="font-mono text-[12px] text-text-dim">
           Step {previewEvent.step} / {events.length}
         </span>
       </div>
@@ -206,12 +206,12 @@ function TraceHeroScreenshot({
         <div className="grid aspect-video max-h-[360px] w-full place-items-center bg-surface-lowest text-text-dim">
           <div className="text-center">
             <Sym name="image" size={28} className="text-text-dim" />
-            <p className="mt-1 text-[12px] text-text-variant">Screenshot unavailable for this step.</p>
+            <p className="mt-1 text-[14px] text-text-variant">Screenshot unavailable for this step.</p>
           </div>
         </div>
       )}
       {event.screenshotFile && showImage && (
-        <div className="border-t border-outline px-2 py-1 font-mono text-[11px] text-text-variant">
+        <div className="border-t border-outline px-2 py-1 font-mono text-[13px] text-text-variant">
           {event.screenshotFile}
         </div>
       )}
@@ -224,24 +224,24 @@ function TraceStepDetail({ event }: { event: WebTraceEvent }) {
   return (
     <div className="rounded-md border border-outline bg-surface p-3">
       <div className="mb-2 flex flex-wrap items-center gap-2">
-        <span className="hud text-[10px] text-primary">
+        <span className="hud text-[12px] text-primary">
           Step {event.step} · {summarizeAction(event) ?? event.source ?? "agent"}
         </span>
-        <span className="truncate font-mono text-[10px] text-text-dim">{actionSignature(event)}</span>
+        <span className="truncate font-mono text-[12px] text-text-dim">{actionSignature(event)}</span>
       </div>
       <div className="min-w-0 rounded-md border border-outline bg-surface-low p-2">
         {message && (
-          <p className="whitespace-pre-wrap break-words text-[12px] leading-relaxed text-text-variant">{message}</p>
+          <p className="whitespace-pre-wrap break-words text-[14px] leading-relaxed text-text-variant">{message}</p>
         )}
         {event.actions.length > 0 && (
           <pre
-            className={`${message ? "mt-2" : ""} max-h-52 overflow-auto whitespace-pre-wrap break-words rounded bg-field p-2 font-mono text-[11px] text-text-variant`}
+            className={`${message ? "mt-2" : ""} max-h-52 overflow-auto whitespace-pre-wrap break-words rounded bg-field p-2 font-mono text-[13px] text-text-variant`}
           >
             {JSON.stringify(event.actions, null, 2)}
           </pre>
         )}
         {!message && event.actions.length === 0 && (
-          <p className="text-[12px] text-text-variant">No extra detail recorded for this step.</p>
+          <p className="text-[14px] text-text-variant">No extra detail recorded for this step.</p>
         )}
       </div>
     </div>
@@ -290,10 +290,10 @@ function TraceTile({
         )}
       </div>
       <div className="p-2.5">
-        <div className="hud truncate text-[8px] text-text-dim">
+        <div className="hud truncate text-[11px] text-text-dim">
           Step {event.step} · {hint ?? event.source ?? "agent"}
         </div>
-        <div className="mt-0.5 truncate font-mono text-[10px] text-text-variant">{actionSignature(event)}</div>
+        <div className="mt-0.5 truncate font-mono text-[12px] text-text-variant">{actionSignature(event)}</div>
       </div>
     </button>
   );
@@ -320,11 +320,11 @@ function TraceImageLightbox({
       >
         <div className="flex items-center justify-between gap-3 border-b border-outline px-4 py-3">
           <div className="min-w-0">
-            <div className="hud text-[10px] text-primary">
+            <div className="hud text-[12px] text-primary">
               Step {event.step} · {summarizeAction(event) ?? event.source ?? "agent"}
             </div>
             {event.screenshotFile && (
-              <div className="truncate font-mono text-[11px] text-text-variant">
+              <div className="truncate font-mono text-[13px] text-text-variant">
                 {event.screenshotFile}
               </div>
             )}

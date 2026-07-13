@@ -41,7 +41,7 @@ export function Scorecard({ questionnaire, metrics, phase }: ScorecardProps) {
       <div className="p-md">
         <div className="rise-in rounded-md border border-dashed border-outline-dim bg-surface-low px-4 py-10 text-center">
           <Sym name="fact_check" size={28} className="text-text-dim" />
-          <p className="mt-2 text-[13px] leading-relaxed text-text-variant">
+          <p className="mt-2 text-[15px] leading-relaxed text-text-variant">
             {phase === "error" || phase === "timeout"
               ? "This run stopped before it could be scored."
               : "Run a simulation and the scores will appear here."}
@@ -70,9 +70,9 @@ export function Scorecard({ questionnaire, metrics, phase }: ScorecardProps) {
         <div className="flex items-center justify-between border-b border-outline bg-surface-low px-3 py-2.5">
           <div className="flex items-center gap-2">
             <Sym name="verified" fill={1} size={18} className="text-primary" />
-            <h3 className="hud text-[11px] text-primary">Scorecard</h3>
+            <h3 className="hud text-[13px] text-primary">Scorecard</h3>
           </div>
-          <span className="flex items-center gap-1 hud text-[10px] text-text-dim">
+          <span className="flex items-center gap-1 hud text-[12px] text-text-dim">
             <span className="h-2 w-2 rounded-full bg-secondary" aria-hidden />
             Scored
           </span>
@@ -86,15 +86,15 @@ export function Scorecard({ questionnaire, metrics, phase }: ScorecardProps) {
                 <span className={`font-display text-[44px] font-bold leading-none tracking-tight tabular-nums ${overallColor.text}`}>
                   {overall}
                 </span>
-                <span className="text-[13px] text-text-dim">/ 10</span>
+                <span className="text-[15px] text-text-dim">/ 10</span>
               </div>
-              <span className="mt-1 text-center hud text-[10px] text-text-dim">
+              <span className="mt-1 text-center hud text-[12px] text-text-dim">
                 How the user rated it
               </span>
             </div>
             {questionnaire.ratingReason && (
               <div className={`flex-1 border-l-2 pl-3 ${overallBorder}`}>
-                <p className="text-[12px] italic leading-relaxed text-text-variant">
+                <p className="text-[14px] italic leading-relaxed text-text-variant">
                   &ldquo;{questionnaire.ratingReason}&rdquo;
                 </p>
               </div>
@@ -129,7 +129,7 @@ export function Scorecard({ questionnaire, metrics, phase }: ScorecardProps) {
           </div>
 
           {/* Scale hint: what the colours mean. */}
-          <p className="mt-3 text-[10px] leading-relaxed text-text-dim">
+          <p className="mt-3 text-[12px] leading-relaxed text-text-dim">
             Scores read <span className="text-secondary">green</span> when the app did well,{" "}
             <span className="text-warn">amber</span> when so-so, <span className="text-danger">red</span> when it missed.
           </p>
@@ -160,7 +160,7 @@ function CriterionRow({
   return (
     <div>
       <div className="mb-1 flex items-center justify-between">
-        <span className="flex items-center gap-1.5 text-[12px] font-medium text-text-main">
+        <span className="flex items-center gap-1.5 text-[14px] font-medium text-text-main">
           <Sym
             name={passing ? "check_circle" : band === "low" ? "cancel" : "remove_circle"}
             fill={1}
@@ -169,14 +169,14 @@ function CriterionRow({
           />
           {label}
         </span>
-        <span className={`font-mono text-[12px] font-bold tabular-nums ${color.text}`}>
+        <span className={`font-mono text-[14px] font-bold tabular-nums ${color.text}`}>
           {value} / {max}
         </span>
       </div>
       <div className="h-1.5 w-full overflow-hidden rounded-full bg-field">
         <div className={`h-full rounded-full transition-[width] duration-200 ${color.bar}`} style={{ width: `${pct}%` }} />
       </div>
-      {rationale && <p className="mt-1 text-[11px] leading-snug text-text-variant">{rationale}</p>}
+      {rationale && <p className="mt-1 text-[13px] leading-snug text-text-variant">{rationale}</p>}
     </div>
   );
 }
@@ -195,7 +195,7 @@ function ClarifyingLine({ asked, notes }: { asked: boolean; notes: string }) {
         size={18}
         className={`mt-0.5 ${asked ? "text-secondary" : "text-text-dim"}`}
       />
-      <span className="text-[12px] text-text-main">
+      <span className="text-[14px] text-text-main">
         <span className="font-semibold">Follow-up questions</span>
         {asked ? ": asked helpful ones" : ": didn't ask any"}
         {notes ? `. ${notes}` : "."}
@@ -209,7 +209,7 @@ function MetricTile({ value, caption }: { value: string; caption: string }) {
   return (
     <div className="flex flex-col items-center justify-center rounded-md border border-outline bg-surface py-2.5">
       <span className="font-display text-[22px] font-bold tabular-nums text-text-main">{value}</span>
-      <span className="mt-0.5 text-center hud text-[10px] leading-tight text-text-dim">
+      <span className="mt-0.5 text-center hud text-[12px] leading-tight text-text-dim">
         {caption}
       </span>
     </div>

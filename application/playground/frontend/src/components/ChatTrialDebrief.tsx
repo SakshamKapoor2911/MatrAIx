@@ -40,18 +40,18 @@ function clamp(value: number, max: number): number {
 
 function DashedNote({ children }: { children: ReactNode }) {
   return (
-    <div className="rounded-md border border-dashed border-outline bg-surface-low px-4 py-8 text-center text-[13px] text-text-variant">
+    <div className="rounded-md border border-dashed border-outline bg-surface-low px-4 py-8 text-center text-[15px] text-text-variant">
       {children}
     </div>
   );
 }
 
 function SectionHeading({ children }: { children: ReactNode }) {
-  return <h2 className="hud text-[10px] text-primary">{children}</h2>;
+  return <h2 className="hud text-[12px] text-primary">{children}</h2>;
 }
 
 function SubsectionHeading({ children }: { children: ReactNode }) {
-  return <h3 className="text-[12px] font-semibold text-text-main">{children}</h3>;
+  return <h3 className="text-[14px] font-semibold text-text-main">{children}</h3>;
 }
 
 function previewText(value: string | null | undefined, limit = 180): string {
@@ -108,15 +108,15 @@ function SummarySignalCard({
   return (
     <div className="rounded-md border border-outline/40 bg-surface p-4">
       <div className="flex items-center justify-between gap-2">
-        <span className="hud text-[9px] text-text-dim">{title}</span>
+        <span className="hud text-[11px] text-text-dim">{title}</span>
         {eyebrow ? (
-          <span className="inline-flex items-center rounded border border-outline/40 bg-surface-high px-2 py-0.5 text-[10px] text-text-variant">
+          <span className="inline-flex items-center rounded border border-outline/40 bg-surface-high px-2 py-0.5 text-[12px] text-text-variant">
             {eyebrow}
           </span>
         ) : null}
       </div>
       <div className="mt-2 text-[20px] font-semibold leading-tight text-text-main">{value}</div>
-      {detail ? <p className="mt-2 text-[11px] leading-relaxed text-text-variant">{detail}</p> : null}
+      {detail ? <p className="mt-2 text-[13px] leading-relaxed text-text-variant">{detail}</p> : null}
     </div>
   );
 }
@@ -150,7 +150,7 @@ function ChatContractSummary({
     <div className="space-y-3 rounded-md border border-outline bg-surface-low p-4">
       <div className="space-y-1">
         <SubsectionHeading>Trial summary</SubsectionHeading>
-        <p className="text-[11px] leading-relaxed text-text-variant">
+        <p className="text-[13px] leading-relaxed text-text-variant">
           Chat-specific signals from this trial: outcome, how the conversation unfolded, and the
           persona&apos;s post-chat rating.
         </p>
@@ -206,7 +206,7 @@ export function ChatSelfReport({
           overall == null ? "border-l-outline" : bandBorderL(band)
         }`}
       >
-        <span className={`hud text-[9px] ${overall == null ? "text-text-dim" : color.text}`}>
+        <span className={`hud text-[11px] ${overall == null ? "text-text-dim" : color.text}`}>
           Overall satisfaction
         </span>
         <div className="mt-1.5 flex items-baseline gap-1.5">
@@ -217,9 +217,9 @@ export function ChatSelfReport({
           >
             {overall == null ? "-" : overall}
           </span>
-          <span className="text-[13px] text-text-dim">/ 10</span>
+          <span className="text-[15px] text-text-dim">/ 10</span>
         </div>
-        <p className="mt-3 text-[12px] leading-relaxed text-text-variant">
+        <p className="mt-3 text-[14px] leading-relaxed text-text-variant">
           {questionnaire?.ratingReason ||
             "After the chat, the persona simulator rates how well the app understood and met their needs."}
         </p>
@@ -230,7 +230,7 @@ export function ChatSelfReport({
       ) : (
         <DashedNote>
           No persona self-report was recorded. The simulator writes{" "}
-          <span className="font-mono text-[11px]">user_feedback.json</span> after the conversation ends.
+          <span className="font-mono text-[13px]">user_feedback.json</span> after the conversation ends.
         </DashedNote>
       )}
     </div>
@@ -263,29 +263,29 @@ export function ChatObjectiveEvaluation({
                 : "border-danger/40 bg-danger/10"
             }`}
           >
-            <span className="hud text-[9px] text-text-dim">Run complete</span>
+            <span className="hud text-[11px] text-text-dim">Run complete</span>
             <div className="mt-1 flex items-center gap-2">
-              <span className="text-[13px] font-semibold text-text-main">
+              <span className="text-[15px] font-semibold text-text-main">
                 {verifier.passed ? "Passed checks" : "Failed checks"}
               </span>
-              <span className="font-mono text-[11px] text-text-variant">reward {verifier.reward}</span>
+              <span className="font-mono text-[13px] text-text-variant">reward {verifier.reward}</span>
             </div>
           </div>
         ) : (
           <div className="flex flex-col justify-center rounded-lg border border-dashed border-outline/50 bg-surface/40 px-3 py-2.5">
-            <span className="hud text-[9px] text-text-dim">Run complete</span>
-            <span className="mt-1 text-[13px] text-text-variant">Checks pending</span>
+            <span className="hud text-[11px] text-text-dim">Run complete</span>
+            <span className="mt-1 text-[15px] text-text-variant">Checks pending</span>
           </div>
         )}
       </div>
       {artifactMissing ? (
-        <p className="text-[11px] leading-relaxed text-text-variant">
+        <p className="text-[13px] leading-relaxed text-text-variant">
           Scores above were recovered from the live event stream. Artifact checks failed because
           output files were missing on this run. Re-run the job for a clean pass.
         </p>
       ) : null}
       {verifier?.detail && !verifier.passed ? (
-        <pre className="custom-scrollbar max-h-24 overflow-auto whitespace-pre-wrap rounded-md border border-outline/40 bg-surface/50 px-3 py-2 font-mono text-[10px] leading-snug text-text-variant">
+        <pre className="custom-scrollbar max-h-24 overflow-auto whitespace-pre-wrap rounded-md border border-outline/40 bg-surface/50 px-3 py-2 font-mono text-[12px] leading-snug text-text-variant">
           {verifier.detail}
         </pre>
       ) : null}
@@ -341,7 +341,7 @@ export function ChatTrialDebriefBody({
       <section className="space-y-4">
         {showSectionHeadings && <SectionHeading>Evaluation</SectionHeading>}
         <div className="space-y-2 rounded-md border border-outline/50 bg-surface/40 p-3">
-          <p className="text-[11px] leading-relaxed text-text-variant">
+          <p className="text-[13px] leading-relaxed text-text-variant">
             Run checks confirm the conversation finished and artifacts are valid — not a quality
             score.
           </p>
@@ -350,7 +350,7 @@ export function ChatTrialDebriefBody({
         <ChatContractSummary trialEvaluation={trialEvaluation} />
         <div className="space-y-3 rounded-md border border-outline bg-surface-low p-4">
           {showSectionHeadings && <SubsectionHeading>Persona self-report</SubsectionHeading>}
-          <p className="text-[11px] leading-relaxed text-text-variant">
+          <p className="text-[13px] leading-relaxed text-text-variant">
             How the simulated user rated the chat after it ended.
           </p>
           <ChatSelfReport questionnaire={questionnaire} />
@@ -397,7 +397,7 @@ function TranscriptTurn({
       style={{ animationDelay: `${Math.min(index, 6) * 30}ms`, animationFillMode: "backwards" }}
     >
       <div className="flex items-center justify-center">
-        <span className="hud text-[9px] text-text-dim">Turn {index + 1}</span>
+        <span className="hud text-[11px] text-text-dim">Turn {index + 1}</span>
       </div>
       <PersonaBubble
         message={turn.userMessage}
@@ -428,7 +428,7 @@ function DecisionTag({ decision }: { decision: string }) {
     : "text-warn border border-warn/30 bg-warn/10";
   const label = satisfied ? "Got what they needed" : decision === "give_up" ? "Gave up" : humanizeToken(decision);
   return (
-    <span className={`inline-flex items-center rounded px-1.5 py-px hud text-[9px] ${cls}`}>{label}</span>
+    <span className={`inline-flex items-center rounded px-1.5 py-px hud text-[11px] ${cls}`}>{label}</span>
   );
 }
 
@@ -449,9 +449,9 @@ function DebriefScorecard({ q }: { q: PlaygroundQuestionnaire }) {
       />
       <div className="border-t border-outline pt-3">
         <div className="flex items-center justify-between gap-2">
-          <span className="text-[12px] font-medium text-text-main">Asked helpful follow-up questions</span>
+          <span className="text-[14px] font-medium text-text-main">Asked helpful follow-up questions</span>
           <span
-            className={`inline-flex items-center rounded border px-2 py-1 hud text-[9px] ${
+            className={`inline-flex items-center rounded border px-2 py-1 hud text-[11px] ${
               q.askedUsefulClarifyingQuestions
                 ? "border-secondary/30 bg-secondary/10 text-secondary"
                 : "border-outline bg-surface-high text-text-variant"
@@ -461,7 +461,7 @@ function DebriefScorecard({ q }: { q: PlaygroundQuestionnaire }) {
           </span>
         </div>
         {q.clarifyingNotes && (
-          <p className="mt-1.5 text-[11px] leading-snug text-text-variant">{q.clarifyingNotes}</p>
+          <p className="mt-1.5 text-[13px] leading-snug text-text-variant">{q.clarifyingNotes}</p>
         )}
       </div>
     </div>
@@ -486,15 +486,15 @@ function CriterionBar({
   return (
     <div>
       <div className="mb-1.5 flex items-center justify-between gap-2">
-        <span className="text-[12px] font-medium text-text-main">{label}</span>
-        <span className={`font-mono text-[12px] font-bold tabular-nums ${color.text}`}>
+        <span className="text-[14px] font-medium text-text-main">{label}</span>
+        <span className={`font-mono text-[14px] font-bold tabular-nums ${color.text}`}>
           {value} / {max}
         </span>
       </div>
       <div className="h-1.5 overflow-hidden rounded-full bg-field">
         <div className={`h-full ${color.bar}`} style={{ width: `${pct}%` }} />
       </div>
-      {rationale && <p className="mt-1.5 text-[11px] leading-snug text-text-variant">{rationale}</p>}
+      {rationale && <p className="mt-1.5 text-[13px] leading-snug text-text-variant">{rationale}</p>}
     </div>
   );
 }

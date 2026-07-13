@@ -49,7 +49,7 @@ export function TopBar({
       <div className="flex h-14 items-center justify-between gap-4 px-5">
         <div className="flex min-w-0 items-center gap-8">
           <MatrAIxLogo size="md" onClick={onOpenHome} />
-          <nav className="hidden h-14 items-stretch gap-7 text-[13px] font-medium md:flex" aria-label="Application">
+          <nav className="hidden h-14 items-stretch gap-7 text-[15px] font-medium md:flex" aria-label="Application">
             {nav.map(({ key, label, active, onClick }) => (
               <button
                 key={key}

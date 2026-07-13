@@ -145,7 +145,7 @@ export function PersonaStoreContent({
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search persona id or name…"
               aria-label="Search personas"
-              className="h-full w-full min-w-0 bg-transparent px-3 text-[13px] text-text-main outline-none placeholder:text-text-variant"
+              className="h-full w-full min-w-0 bg-transparent px-3 text-[15px] text-text-main outline-none placeholder:text-text-variant"
             />
             {query && (
               <button
@@ -159,14 +159,14 @@ export function PersonaStoreContent({
             )}
           </div>
           <div className="rounded-lg border border-outline/50 bg-surface/60 px-3 py-1.5 text-center backdrop-blur sm:shrink-0">
-            <div className="hud text-[8px] text-text-dim">Pool</div>
+            <div className="hud text-[11px] text-text-dim">Pool</div>
             <div className="font-mono text-[16px] font-bold text-primary">{loadedLabel}</div>
           </div>
         </div>
 
         <div className="mt-3 flex flex-col gap-2.5 border-t border-outline/20 pt-3 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex min-w-0 flex-col gap-1.5 sm:flex-row sm:items-center sm:gap-3">
-            <span className="cockpit-field-label shrink-0 text-[10px] text-text-dim">Source</span>
+            <span className="cockpit-field-label shrink-0 text-[12px] text-text-dim">Source</span>
             <div className="flex flex-wrap gap-2" role="group" aria-label="Filter by data source">
               <FilterChip
                 label="All"
@@ -187,13 +187,13 @@ export function PersonaStoreContent({
 
           <div className="flex shrink-0 items-center gap-2 lg:pl-4">
             <span className="hidden h-6 w-px bg-outline/30 lg:block" aria-hidden />
-            <span className="cockpit-field-label shrink-0 text-[10px] text-text-dim lg:sr-only">
+            <span className="cockpit-field-label shrink-0 text-[12px] text-text-dim lg:sr-only">
               Dimensions
             </span>
             <button
               type="button"
               onClick={() => setFilterModalOpen(true)}
-              className={`inline-flex h-8 items-center gap-1.5 rounded-md border px-3 text-[11px] font-medium transition-colors ${FOCUS_RING} ${
+              className={`inline-flex h-8 items-center gap-1.5 rounded-md border px-3 text-[13px] font-medium transition-colors ${FOCUS_RING} ${
                 filterCount > filters.sources.length
                   ? "border-primary bg-primary/10 text-primary"
                   : "border-outline/50 bg-surface/50 text-text-variant hover:border-primary/40 hover:text-text-main"
@@ -202,7 +202,7 @@ export function PersonaStoreContent({
               <Sym name="tune" size={15} />
               Dimension filters
               {filterCount > filters.sources.length ? (
-                <span className="rounded bg-primary px-1.5 py-0.5 text-[9px] font-bold text-on-primary">
+                <span className="rounded bg-primary px-1.5 py-0.5 text-[11px] font-bold text-on-primary">
                   {filterCount - filters.sources.length}
                 </span>
               ) : null}
@@ -211,7 +211,7 @@ export function PersonaStoreContent({
         </div>
 
         {(filterCount > 0 || debouncedQuery) && (
-          <p className="mt-3 text-[11px] text-text-variant">
+          <p className="mt-3 text-[13px] text-text-variant">
             Showing <span className="font-semibold text-text-main">{personas.length}</span> of{" "}
             {all.length} loaded · bench-dev-sample
           </p>
@@ -310,7 +310,7 @@ function FilterChip({
       onClick={onClick}
       title={title}
       aria-pressed={active}
-      className={`inline-flex h-8 items-center rounded-md border px-3 text-[11px] font-medium transition-colors ${FOCUS_RING} ${
+      className={`inline-flex h-8 items-center rounded-md border px-3 text-[13px] font-medium transition-colors ${FOCUS_RING} ${
         active
           ? "border-primary bg-primary text-on-primary"
           : "border-outline/50 bg-surface/50 text-text-variant hover:border-primary/40 hover:text-text-main"
@@ -355,7 +355,7 @@ function CatalogEmpty({
       <p className="font-display text-[15px] font-semibold text-text-main">
         {query || hasFilters ? "No matches" : "No personas yet"}
       </p>
-      <p className="mt-1 max-w-[320px] text-[12px] leading-snug text-text-variant">
+      <p className="mt-1 max-w-[320px] text-[14px] leading-snug text-text-variant">
         {query
           ? `Nothing matches "${query}". Try a dimension value or persona id.`
           : hasFilters
@@ -371,13 +371,13 @@ function CatalogError({ onRetry }: { onRetry: () => void }) {
     <div className="glass-panel rise-in mx-auto max-w-md rounded-xl border-l-4 border-l-danger px-4 py-6 text-center">
       <Sym name="error" size={24} className="mx-auto mb-2 text-danger" />
       <p className="font-display text-[15px] font-semibold text-text-main">Couldn&apos;t load personas</p>
-      <p className="mx-auto mt-1 max-w-[300px] text-[12px] leading-snug text-text-variant">
+      <p className="mx-auto mt-1 max-w-[300px] text-[14px] leading-snug text-text-variant">
         Check the backend is running, then retry.
       </p>
       <button
         type="button"
         onClick={onRetry}
-        className={`mt-3 inline-flex items-center gap-1.5 rounded-md border border-danger/40 bg-danger/10 px-3 py-1.5 text-[11px] font-medium text-danger ${FOCUS_RING}`}
+        className={`mt-3 inline-flex items-center gap-1.5 rounded-md border border-danger/40 bg-danger/10 px-3 py-1.5 text-[13px] font-medium text-danger ${FOCUS_RING}`}
       >
         <Sym name="refresh" size={15} />
         Try again

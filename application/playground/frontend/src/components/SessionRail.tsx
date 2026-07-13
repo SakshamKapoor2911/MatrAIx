@@ -87,7 +87,7 @@ export function SessionRail({
           type="button"
           onClick={onNew}
           aria-label="Start a new chat"
-          className={`flex h-9 w-full items-center justify-center gap-2 rounded-md bg-primary text-[12px] font-semibold text-on-primary transition hover:bg-primary-dim active:scale-[0.98] ${FOCUS_RING}`}
+          className={`flex h-9 w-full items-center justify-center gap-2 rounded-md bg-primary text-[14px] font-semibold text-on-primary transition hover:bg-primary-dim active:scale-[0.98] ${FOCUS_RING}`}
         >
           <Sym name="add" size={16} />
           New chat
@@ -97,13 +97,13 @@ export function SessionRail({
       {/* Session list */}
       <div className="custom-scrollbar min-h-0 flex-1 overflow-auto p-3">
         <div className="flex items-center justify-between px-1 pb-2">
-          <span className="hud text-[9px] text-text-dim">Your chats</span>
+          <span className="hud text-[11px] text-text-dim">Your chats</span>
           {sessions.length > 0 && (
             <button
               type="button"
               onClick={onClearAll}
               title="Delete every saved chat"
-              className={`hud rounded text-[9px] text-text-dim transition hover:text-danger ${FOCUS_RING}`}
+              className={`hud rounded text-[11px] text-text-dim transition hover:text-danger ${FOCUS_RING}`}
             >
               Clear all
             </button>
@@ -115,15 +115,15 @@ export function SessionRail({
             <div className="flex items-start gap-2">
               <Sym name="error" fill={1} size={16} className="mt-px flex-none text-warn" />
               <div className="min-w-0">
-                <div className="text-[12px] font-medium text-text-main">Couldn&apos;t load your chats</div>
-                <p className="mt-0.5 text-[11px] leading-relaxed text-text-variant">The backend may be starting up.</p>
+                <div className="text-[14px] font-medium text-text-main">Couldn&apos;t load your chats</div>
+                <p className="mt-0.5 text-[13px] leading-relaxed text-text-variant">The backend may be starting up.</p>
               </div>
             </div>
             {onRetry && (
               <button
                 type="button"
                 onClick={onRetry}
-                className={`mt-2.5 inline-flex items-center gap-1.5 rounded-md border border-warn/40 bg-warn/10 px-3 py-1.5 text-[11px] font-medium text-warn transition hover:bg-warn/20 active:scale-[0.98] ${FOCUS_RING}`}
+                className={`mt-2.5 inline-flex items-center gap-1.5 rounded-md border border-warn/40 bg-warn/10 px-3 py-1.5 text-[13px] font-medium text-warn transition hover:bg-warn/20 active:scale-[0.98] ${FOCUS_RING}`}
               >
                 <Sym name="refresh" size={14} />
                 Recheck
@@ -137,7 +137,7 @@ export function SessionRail({
             <SkeletonRow />
           </div>
         ) : sessions.length === 0 ? (
-          <div className="px-1 py-2 text-[12px] leading-relaxed text-text-variant">
+          <div className="px-1 py-2 text-[14px] leading-relaxed text-text-variant">
             No chats yet. Start one to try the recommender. You&apos;ll play the user and RecAI replies.
           </div>
         ) : (
@@ -161,13 +161,13 @@ export function SessionRail({
                     }`}
                   >
                     <div
-                      className={`truncate text-[13px] ${active ? "font-medium text-text-main" : "text-text-variant"}`}
+                      className={`truncate text-[15px] ${active ? "font-medium text-text-main" : "text-text-variant"}`}
                       title={s.title || "Untitled chat"}
                     >
                       {s.title || "Untitled chat"}
                     </div>
                     <div
-                      className="hud mt-1 flex items-start gap-1.5 text-[9px] text-text-dim"
+                      className="hud mt-1 flex items-start gap-1.5 text-[11px] text-text-dim"
                       title={`Ranker: ${s.config?.rankerMode ?? "not set"} · Model: ${s.config?.engine ?? "not set"}. Change these in the bar above`}
                     >
                       {active && <span className="mt-px h-1.5 w-1.5 flex-none rounded-full bg-secondary" aria-hidden />}

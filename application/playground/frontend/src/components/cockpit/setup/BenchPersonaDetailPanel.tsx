@@ -70,7 +70,7 @@ export function BenchPersonaDetailPanel({
         }`}
       >
         <div className="min-w-0">
-          <p className="cockpit-field-label text-[10px] text-text-dim">Persona profile</p>
+          <p className="cockpit-field-label text-[12px] text-text-dim">Persona profile</p>
         </div>
         <button
           type="button"
@@ -93,7 +93,7 @@ export function BenchPersonaDetailPanel({
             <h2 className="font-display text-[18px] font-semibold leading-tight text-text-main">
               {displayName}
             </h2>
-            <p className="mt-0.5 font-mono text-[11px] tracking-wide text-text-dim">{codename}</p>
+            <p className="mt-0.5 font-mono text-[13px] tracking-wide text-text-dim">{codename}</p>
             {persona.source ? (
               <ToneChip tone="primary" className={`${CHIP_TEXT_CLASS} mt-2`}>
                 {persona.source}
@@ -103,7 +103,7 @@ export function BenchPersonaDetailPanel({
         </div>
 
         {blurb ? (
-          <p className="mt-4 text-[12px] leading-relaxed text-text-variant">{blurb}</p>
+          <p className="mt-4 text-[14px] leading-relaxed text-text-variant">{blurb}</p>
         ) : null}
 
         <div className="mt-4 grid grid-cols-2 gap-3">
@@ -112,7 +112,7 @@ export function BenchPersonaDetailPanel({
             if (!value) return null;
             return (
               <div key={key} className="min-w-0">
-                <p className="cockpit-field-label mb-1 text-[9px] text-text-dim">{label}</p>
+                <p className="cockpit-field-label mb-1 text-[11px] text-text-dim">{label}</p>
                 <ToneChip tone={personaDimChipTone(key, index)} className={CHIP_TEXT_CLASS}>
                   {value}
                 </ToneChip>
@@ -122,10 +122,10 @@ export function BenchPersonaDetailPanel({
         </div>
 
         {detailQuery.isLoading && (
-          <p className="mt-4 text-[12px] text-text-dim">Loading persona record…</p>
+          <p className="mt-4 text-[14px] text-text-dim">Loading persona record…</p>
         )}
         {detailQuery.isError && (
-          <p className="mt-4 text-[12px] text-danger">
+          <p className="mt-4 text-[14px] text-danger">
             {detailQuery.error instanceof ApiError
               ? detailQuery.error.message
               : "Could not load persona record."}
@@ -133,12 +133,12 @@ export function BenchPersonaDetailPanel({
         )}
         {markdown ? (
           <div className="mt-4 border-t border-outline/25 pt-4">
-            <p className="cockpit-field-label mb-2 text-[10px] text-text-dim">Record</p>
-            <Markdown className="text-[12px] leading-relaxed text-text-variant">{markdown}</Markdown>
+            <p className="cockpit-field-label mb-2 text-[12px] text-text-dim">Record</p>
+            <Markdown className="text-[14px] leading-relaxed text-text-variant">{markdown}</Markdown>
           </div>
         ) : null}
 
-        <p className="mt-4 font-mono text-[10px] text-text-dim">{PERSONA_BENCH_POOL}</p>
+        <p className="mt-4 font-mono text-[12px] text-text-dim">{PERSONA_BENCH_POOL}</p>
       </div>
 
       {onUse ? (
@@ -146,7 +146,7 @@ export function BenchPersonaDetailPanel({
           <button
             type="button"
             onClick={() => onUse(persona)}
-            className={`inline-flex h-9 w-full items-center justify-center rounded-md bg-primary text-[12px] font-medium text-on-primary transition hover:bg-primary/90 ${FOCUS_RING}`}
+            className={`inline-flex h-9 w-full items-center justify-center rounded-md bg-primary text-[14px] font-medium text-on-primary transition hover:bg-primary/90 ${FOCUS_RING}`}
           >
             Use persona
           </button>

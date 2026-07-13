@@ -37,17 +37,17 @@ export function BenchPersonaDetailModal({
       onClose={onClose}
     >
       {detailQuery.isLoading && (
-        <p className="text-[12px] text-text-dim">Loading persona record…</p>
+        <p className="text-[14px] text-text-dim">Loading persona record…</p>
       )}
       {detailQuery.isError && (
-        <p className="text-[12px] text-danger">
+        <p className="text-[14px] text-danger">
           {detailQuery.error instanceof ApiError
             ? detailQuery.error.message
             : "Could not load persona record."}
         </p>
       )}
       {markdown && (
-        <Markdown className="text-[12px] leading-relaxed text-text-variant">{markdown}</Markdown>
+        <Markdown className="text-[14px] leading-relaxed text-text-variant">{markdown}</Markdown>
       )}
       {onUse && persona && (
         <div className="mt-4 flex justify-end border-t border-outline/30 pt-4">
@@ -57,7 +57,7 @@ export function BenchPersonaDetailModal({
               onUse(persona);
               onClose();
             }}
-            className="inline-flex h-9 items-center rounded-md bg-primary px-4 text-[12px] font-medium text-on-primary transition hover:bg-primary/90"
+            className="inline-flex h-9 items-center rounded-md bg-primary px-4 text-[14px] font-medium text-on-primary transition hover:bg-primary/90"
           >
             Use persona
           </button>

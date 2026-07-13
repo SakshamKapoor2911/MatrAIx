@@ -56,7 +56,7 @@ export function RunLaunchBar({
   return (
     <div className="glass-panel-strong w-full shrink-0 rounded-xl border border-primary/20 px-4 py-3 sm:px-5">
       {error && (
-        <p className="mb-2 w-full rounded-md border border-danger/40 bg-danger/10 px-3 py-2 text-[11px] text-danger">
+        <p className="mb-2 w-full rounded-md border border-danger/40 bg-danger/10 px-3 py-2 text-[13px] text-danger">
           {error}
         </p>
       )}
@@ -79,11 +79,11 @@ export function RunLaunchBar({
                 </span>
               )}
               <div className="min-w-0">
-                <p className="truncate font-display text-[13px] font-semibold leading-tight text-text-main">
+                <p className="truncate font-display text-[15px] font-semibold leading-tight text-text-main">
                   {progressLabel ?? (isBatch ? "Batch run" : "Running simulation")}
                 </p>
                 {progressSublabel && (
-                  <p className="mt-0.5 truncate text-[10px] text-text-dim">{progressSublabel}</p>
+                  <p className="mt-0.5 truncate text-[12px] text-text-dim">{progressSublabel}</p>
                 )}
               </div>
             </div>
@@ -94,7 +94,7 @@ export function RunLaunchBar({
                   type="button"
                   onClick={onCancelRun}
                   disabled={cancelRunBusy}
-                  className={`inline-flex items-center gap-1.5 rounded-lg border border-danger/35 bg-danger/8 px-3.5 py-2 text-[12px] font-medium text-danger transition hover:border-danger/50 hover:bg-danger/14 active:scale-[0.98] disabled:opacity-50 ${FOCUS_RING}`}
+                  className={`inline-flex items-center gap-1.5 rounded-lg border border-danger/35 bg-danger/8 px-3.5 py-2 text-[14px] font-medium text-danger transition hover:border-danger/50 hover:bg-danger/14 active:scale-[0.98] disabled:opacity-50 ${FOCUS_RING}`}
                 >
                   <Sym name="stop_circle" size={16} />
                   {cancelRunBusy ? "Stopping…" : isBatch ? "Stop batch" : "Stop run"}
@@ -105,7 +105,7 @@ export function RunLaunchBar({
                   type="button"
                   onClick={onDownload}
                   disabled={!canDownload}
-                  className={`inline-flex items-center gap-1.5 rounded-lg border border-outline/60 bg-surface/40 px-3.5 py-2 text-[12px] font-medium text-text-variant backdrop-blur-sm transition hover:border-outline hover:bg-surface-high hover:text-text-main active:scale-[0.98] disabled:opacity-50 ${FOCUS_RING}`}
+                  className={`inline-flex items-center gap-1.5 rounded-lg border border-outline/60 bg-surface/40 px-3.5 py-2 text-[14px] font-medium text-text-variant backdrop-blur-sm transition hover:border-outline hover:bg-surface-high hover:text-text-main active:scale-[0.98] disabled:opacity-50 ${FOCUS_RING}`}
                 >
                   <Sym name="download" size={16} />
                   Download
@@ -115,7 +115,7 @@ export function RunLaunchBar({
                 <button
                   type="button"
                   onClick={onViewJob}
-                  className={`inline-flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2 font-display text-[12px] font-semibold text-on-primary shadow-[0_4px_16px_-6px_rgb(var(--primary)/0.55)] transition hover:bg-primary-dim active:scale-[0.98] ${FOCUS_RING}`}
+                  className={`inline-flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2 font-display text-[14px] font-semibold text-on-primary shadow-[0_4px_16px_-6px_rgb(var(--primary)/0.55)] transition hover:bg-primary-dim active:scale-[0.98] ${FOCUS_RING}`}
                 >
                   <Sym name="open_in_new" size={16} />
                   {isBatch ? "View job" : "View trial"}
@@ -125,7 +125,7 @@ export function RunLaunchBar({
                 <button
                   type="button"
                   onClick={onNewRun}
-                  className={`inline-flex items-center gap-1.5 rounded-lg border border-outline/55 bg-transparent px-3.5 py-2 text-[12px] font-medium text-text-dim transition hover:border-outline hover:bg-surface-low hover:text-text-variant active:scale-[0.98] ${FOCUS_RING}`}
+                  className={`inline-flex items-center gap-1.5 rounded-lg border border-outline/55 bg-transparent px-3.5 py-2 text-[14px] font-medium text-text-dim transition hover:border-outline hover:bg-surface-low hover:text-text-variant active:scale-[0.98] ${FOCUS_RING}`}
                 >
                   <Sym name="restart_alt" size={16} />
                   Reset
@@ -166,7 +166,7 @@ export function RunLaunchBar({
               />
             )}
           </div>
-          <p className="mt-2 text-center text-[10px] text-text-dim">
+          <p className="mt-2 text-center text-[12px] text-text-dim">
             {isBatch
               ? "Trials appear in the center — status lights update as each finishes."
               : "Live updates appear in the center frame."}

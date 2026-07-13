@@ -158,21 +158,21 @@ export function TaskSelectionRail({
             disabled={disabled}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Filter by name, description, or tag…"
-            className="h-9 w-full rounded-lg border border-outline/50 bg-surface/60 pl-9 pr-2.5 text-[12px] text-text-main placeholder:text-text-dim"
+            className="h-9 w-full rounded-lg border border-outline/50 bg-surface/60 pl-9 pr-2.5 text-[14px] text-text-main placeholder:text-text-dim"
           />
         </div>
       </label>
 
       {tasksLoading && (
-        <p className="mb-2 text-[11px] text-text-dim">Loading tasks…</p>
+        <p className="mb-2 text-[13px] text-text-dim">Loading tasks…</p>
       )}
       {tasksError && (
-        <p className="mb-2 text-[11px] text-danger">{tasksError}</p>
+        <p className="mb-2 text-[13px] text-danger">{tasksError}</p>
       )}
 
       <div className="custom-scrollbar min-h-0 flex-1 space-y-2.5 overflow-y-auto pr-0.5">
         {filteredCards.length === 0 && !tasksLoading && (
-          <p className="rounded-lg border border-outline/35 bg-surface/25 px-3 py-4 text-center text-[11px] text-text-dim">
+          <p className="rounded-lg border border-outline/35 bg-surface/25 px-3 py-4 text-center text-[13px] text-text-dim">
             {searchQuery.trim() ? "No tasks match your search." : "No tasks available."}
           </p>
         )}
@@ -216,7 +216,7 @@ export function TaskSelectionRail({
                       {card.title}
                     </p>
                     {card.subtitle && (
-                      <p className="mt-1 line-clamp-2 text-[11px] leading-relaxed text-text-dim">
+                      <p className="mt-1 line-clamp-2 text-[13px] leading-relaxed text-text-dim">
                         {card.subtitle}
                       </p>
                     )}
@@ -297,7 +297,7 @@ export function TaskSelectionRail({
                       href={USE_COMPUTER_URL}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-[10px] font-medium text-primary hover:underline"
+                      className="text-[12px] font-medium text-primary hover:underline"
                     >
                       use.computer setup →
                     </a>
@@ -332,10 +332,10 @@ export function TaskSelectionRail({
                     />
                   ) : (
                     <div className="rounded-md border border-outline/35 bg-surface/30 px-3 py-2">
-                      <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-text-dim">
+                      <p className="text-[12px] font-semibold uppercase tracking-[0.14em] text-text-dim">
                         Connection
                       </p>
-                      <p className="mt-1 text-[11px] leading-relaxed text-text-variant">
+                      <p className="mt-1 text-[13px] leading-relaxed text-text-variant">
                         {card.statusDetail ??
                           (card.transport === "mcp"
                             ? "MCP-backed task; no local HTTP health toggle is available."
@@ -344,7 +344,7 @@ export function TaskSelectionRail({
                     </div>
                   )}
                   {sidecarActionError && settingsOpen === card.id && (
-                    <p className="text-[10px] text-danger">{sidecarActionError}</p>
+                    <p className="text-[12px] text-danger">{sidecarActionError}</p>
                   )}
                   <label className="cockpit-field-label flex flex-col gap-1.5">
                     Application model
@@ -352,7 +352,7 @@ export function TaskSelectionRail({
                       value={engine}
                       disabled={disabled}
                       onChange={(e) => onEngineChange(e.target.value)}
-                      className="h-8 rounded-md border border-outline/50 bg-surface/60 px-2 text-[12px] font-medium text-text-main"
+                      className="h-8 rounded-md border border-outline/50 bg-surface/60 px-2 text-[14px] font-medium text-text-main"
                     >
                       {engineOptions.map((opt) => (
                         <option key={opt.value} value={opt.value}>
@@ -368,7 +368,7 @@ export function TaskSelectionRail({
                         value={domain}
                         disabled={disabled}
                         onChange={(e) => onDomainChange(e.target.value)}
-                        className="h-8 rounded-md border border-outline/50 bg-surface/60 px-2 text-[12px] font-medium text-text-main"
+                        className="h-8 rounded-md border border-outline/50 bg-surface/60 px-2 text-[14px] font-medium text-text-main"
                       >
                         {domainOptions.map((opt) => (
                           <option key={opt.value} value={opt.value}>
@@ -402,7 +402,7 @@ export function TaskSelectionRail({
                           const next = e.currentTarget.valueAsNumber;
                           if (Number.isFinite(next) && next >= 1) onMaxTurnsChange(next);
                         }}
-                        className="h-8 rounded-md border border-outline/50 bg-surface/60 px-2 text-[12px] font-medium text-text-main"
+                        className="h-8 rounded-md border border-outline/50 bg-surface/60 px-2 text-[14px] font-medium text-text-main"
                       />
                     </label>
                   )}

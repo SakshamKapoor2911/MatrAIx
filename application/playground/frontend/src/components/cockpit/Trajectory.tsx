@@ -160,8 +160,8 @@ export function Trajectory({
           <div className="rise-in flex items-start gap-2.5 rounded-md border border-outline bg-surface-lowest px-4 py-3">
             <Sym name="info" size={16} className="mt-0.5 shrink-0 text-primary" />
             <div className="min-w-0">
-              <div className="hud mb-1 text-[9px] text-primary">Scenario</div>
-              <p className="text-[12px] leading-relaxed text-text-variant">
+              <div className="hud mb-1 text-[11px] text-primary">Scenario</div>
+              <p className="text-[14px] leading-relaxed text-text-variant">
                 {sutDescription}
               </p>
             </div>
@@ -235,7 +235,7 @@ export function Trajectory({
               <Sym name="error" fill={1} size={20} className="mt-0.5 text-danger" />
               <div className="min-w-0 flex-1">
                 <h4 className="text-sm font-semibold text-text-main">The simulation didn&apos;t finish</h4>
-                <p className="mt-1 break-words text-[13px] leading-relaxed text-text-variant">
+                <p className="mt-1 break-words text-[15px] leading-relaxed text-text-variant">
                   {error ?? "It stopped before completing. Your settings are untouched, so you can try again right away."}
                 </p>
                 <button
@@ -268,7 +268,7 @@ function PersonaThinkingBubble({
     <div className="flex w-full items-start gap-2.5 pr-10" aria-live="polite">
       <PersonaChatAvatar personaId={personaId} dimensions={personaDimensions} />
       <div className="flex min-w-0 flex-1 flex-col items-start">
-        <div className="hud mb-1.5 flex items-center gap-2 text-[9px] text-text-dim">
+        <div className="hud mb-1.5 flex items-center gap-2 text-[11px] text-text-dim">
           <span>Persona · thinking</span>
           <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" aria-hidden />
         </div>
@@ -289,7 +289,7 @@ function GeneratingBubble({ appName }: { appName: string }) {
     <div className="rise-in flex w-full justify-end pl-10" aria-live="polite">
       <div className="flex max-w-full items-start gap-2.5">
         <div className="flex min-w-0 flex-col items-end">
-          <div className="hud mb-1.5 flex items-center gap-2 text-[9px] text-primary">
+          <div className="hud mb-1.5 flex items-center gap-2 text-[11px] text-primary">
             <span>{appName} · generating</span>
             <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" aria-hidden />
           </div>
@@ -335,7 +335,7 @@ function SkeletonTurn({ label }: { label: string | null }) {
       {label && (
         <div className="flex items-center justify-center gap-2 py-1">
           <Sym name="autorenew" size={16} className="animate-rb-spin text-primary" />
-          <span className="text-[13px] text-text-variant">{label}</span>
+          <span className="text-[15px] text-text-variant">{label}</span>
         </div>
       )}
     </div>

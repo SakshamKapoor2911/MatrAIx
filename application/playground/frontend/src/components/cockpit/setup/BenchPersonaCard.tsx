@@ -72,7 +72,7 @@ export function BenchPersonaCard({
               <p className="truncate font-display text-[14px] font-semibold leading-tight text-text-main">
                 {displayName}
               </p>
-              <p className="mt-0.5 font-mono text-[10px] tracking-wide text-text-dim">{codename}</p>
+              <p className="mt-0.5 font-mono text-[12px] tracking-wide text-text-dim">{codename}</p>
             </button>
             <div className="flex shrink-0 items-center gap-1">
               {persona.source ? (
@@ -104,7 +104,7 @@ export function BenchPersonaCard({
       </div>
 
       {blurb ? (
-        <p className="mb-2 line-clamp-2 text-[11px] leading-snug text-text-variant">{blurb}</p>
+        <p className="mb-2 line-clamp-2 text-[13px] leading-snug text-text-variant">{blurb}</p>
       ) : null}
 
       <button

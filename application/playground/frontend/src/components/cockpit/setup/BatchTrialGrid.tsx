@@ -117,17 +117,17 @@ function BatchTrialCellView({
       >
         <p
           className={`truncate font-display font-semibold leading-snug text-text-main ${
-            portrait ? "text-[12px] px-1" : "text-[11px]"
+            portrait ? "text-[14px] px-1" : "text-[13px]"
           }`}
         >
           {displayName}
         </p>
-        <p className="truncate font-mono text-[9px] tracking-wide text-text-dim">
+        <p className="truncate font-mono text-[11px] tracking-wide text-text-dim">
           {personaId}
         </p>
         <p
           className={`truncate font-medium ${statusLineClass(trial.status)} ${
-            portrait ? "text-[11px] px-1" : "text-[10px]"
+            portrait ? "text-[13px] px-1" : "text-[12px]"
           }`}
         >
           {statusLabel}
@@ -155,7 +155,7 @@ function CohortStat({
           ? "bg-danger"
           : "bg-text-dim/50";
   return (
-    <span className="inline-flex items-center gap-1 rounded-full border border-outline/35 bg-surface/80 px-2 py-0.5 text-[10px] text-text-variant">
+    <span className="inline-flex items-center gap-1 rounded-full border border-outline/35 bg-surface/80 px-2 py-0.5 text-[12px] text-text-variant">
       <span className={`h-1.5 w-1.5 rounded-full ${dot} ${pulse ? "animate-pulse" : ""}`} />
       {label}
     </span>
@@ -175,7 +175,7 @@ export function BatchTrialGrid({ trials, jobLabel, className = "" }: BatchTrialG
       <header className="mb-2 shrink-0 space-y-1 border-b border-outline/25 pb-2">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div className="min-w-0">
-            <p className="hud text-[10px] text-primary">Simulated cohort</p>
+            <p className="hud text-[12px] text-primary">Simulated cohort</p>
             <p className="font-display text-[15px] font-bold tracking-tight text-text-main">
               {trials.length} {trials.length === 1 ? "person" : "people"}
             </p>
@@ -188,7 +188,7 @@ export function BatchTrialGrid({ trials, jobLabel, className = "" }: BatchTrialG
           </div>
         </div>
         {jobLabel ? (
-          <p className="truncate font-mono text-[10px] text-text-dim" title={jobLabel}>
+          <p className="truncate font-mono text-[12px] text-text-dim" title={jobLabel}>
             {jobLabel}
           </p>
         ) : null}

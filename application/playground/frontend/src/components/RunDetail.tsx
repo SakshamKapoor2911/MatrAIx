@@ -8,7 +8,7 @@
  * Option-aware, honestly scoped (spec §05): the debrief renders the stored
  * application artifact shape: chatbot, survey, web, or OS app.
  */
-import { useMemo, type ReactNode } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import {
@@ -89,6 +89,8 @@ function runDebriefMetaLine(run: RunDetailView, appType: RunApplicationType): st
 }
 
 export function RunDetail({ harborTrial, onBack }: RunDetailProps) {
+  const [pdfBusy, setPdfBusy] = useState(false);
+  const [pdfError, setPdfError] = useState<string | null>(null);
   const query = useQuery<PlaygroundResult>({
     queryKey: ["harbor-trial-debrief", harborTrial.jobName, harborTrial.trialName],
     queryFn: () => api.getHarborTrialDebrief(harborTrial.jobName, harborTrial.trialName),
@@ -101,6 +103,18 @@ export function RunDetail({ harborTrial, onBack }: RunDetailProps) {
     ? run.surveyResult?.createdAt ?? run.webResult?.createdAt ?? run.createdAt ?? null
     : null;
 
+  const handleDownloadPdf = async () => {
+    setPdfBusy(true);
+    setPdfError(null);
+    try {
+      await api.downloadHarborTrialReportPdf(harborTrial.jobName, harborTrial.trialName);
+    } catch (err) {
+      setPdfError(err instanceof ApiError ? err.message : "Could not download PDF report.");
+    } finally {
+      setPdfBusy(false);
+    }
+  };
+
   return (
     <StudioPageFrame>
       <StudioPageHeader
@@ -108,8 +122,8 @@ export function RunDetail({ harborTrial, onBack }: RunDetailProps) {
         eyebrow="MatrAIx · Runs"
         title={harborTrial.trialName}
         subtitle={
-          <span className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[12px] text-text-variant">
-            <span className="font-mono text-[11px]" title={harborTrial.jobName}>
+          <span className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[14px] text-text-variant">
+            <span className="font-mono text-[13px]" title={harborTrial.jobName}>
               Job {harborTrial.jobName}
             </span>
             {metaLine ? (
@@ -128,6 +142,15 @@ export function RunDetail({ harborTrial, onBack }: RunDetailProps) {
             <StudioToolbarButton icon="arrow_back" onClick={onBack}>
               Back to job
             </StudioToolbarButton>
+            {run ? (
+              <StudioToolbarButton
+                icon="download"
+                onClick={() => void handleDownloadPdf()}
+                disabled={pdfBusy}
+              >
+                {pdfBusy ? "PDF…" : "PDF report"}
+              </StudioToolbarButton>
+            ) : null}
             <StudioToolbarButton
               icon="refresh"
               onClick={() => query.refetch()}
@@ -138,6 +161,9 @@ export function RunDetail({ harborTrial, onBack }: RunDetailProps) {
           </>
         }
       />
+      {pdfError ? (
+        <p className="mb-4 text-[14px] text-danger">{pdfError}</p>
+      ) : null}
 
       {query.isLoading ? (
         <DetailLoading />
@@ -182,7 +208,7 @@ function DebriefPanel({
   return (
     <StudioGlassPanel className={`flex h-full flex-col overflow-hidden ${className}`}>
       {title ? (
-        <div className="flex shrink-0 items-center gap-2 border-b border-outline/40 px-4 py-2.5 text-[10px] font-medium uppercase tracking-wide text-text-dim">
+        <div className="flex shrink-0 items-center gap-2 border-b border-outline/40 px-4 py-2.5 text-[12px] font-medium uppercase tracking-wide text-text-dim">
           {icon ? <Sym name={icon} size={14} className="text-primary" /> : null}
           {title}
         </div>
@@ -239,7 +265,7 @@ function TrialDebriefChrome({
 /** A quiet dashed "nothing here" note, reused by empty bodies. */
 function DashedNote({ children }: { children: ReactNode }) {
   return (
-    <div className="px-4 py-10 text-center text-[13px] text-text-variant">{children}</div>
+    <div className="px-4 py-10 text-center text-[15px] text-text-variant">{children}</div>
   );
 }
 
@@ -255,7 +281,7 @@ function ValidityBadge({
 }) {
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-[11px] font-semibold ${
+      className={`inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-[13px] font-semibold ${
         valid
           ? "bg-secondary/15 text-secondary"
           : "bg-danger/15 text-danger"
@@ -358,11 +384,11 @@ function UserFeedbackPanel({
       {!feedback || Object.keys(feedback).length === 0 ? (
         <DashedNote>
           No post-run self-report was recorded. This section appears when the task writes{" "}
-          <span className="font-mono text-[11px]">user_feedback.json</span>.
+          <span className="font-mono text-[13px]">user_feedback.json</span>.
         </DashedNote>
       ) : (
         <div className="space-y-4">
-          <p className="text-[11px] leading-relaxed text-text-variant">
+          <p className="text-[13px] leading-relaxed text-text-variant">
             Subjective reflection captured after task completion from{" "}
             <span className="font-mono">user_feedback.json</span>.
           </p>
@@ -382,7 +408,7 @@ function UserFeedbackPanel({
             {clarity != null ? <StatTile caption="Next step clarity" value={clarity} /> : null}
             {feltUnderstood != null ? (
               <div className="flex flex-col justify-center rounded-lg border border-outline/40 bg-surface/40 p-4 backdrop-blur-sm">
-                <span className="hud text-[9px] text-text-dim">Felt understood</span>
+                <span className="hud text-[11px] text-text-dim">Felt understood</span>
                 <div className="mt-1.5">
                   <ValidityBadge
                     valid={feltUnderstood}
@@ -395,7 +421,7 @@ function UserFeedbackPanel({
           </div>
 
           {reason ? (
-            <div className="rounded-lg border border-outline/40 bg-surface/40 p-4 text-[12px] leading-relaxed text-text-variant">
+            <div className="rounded-lg border border-outline/40 bg-surface/40 p-4 text-[14px] leading-relaxed text-text-variant">
               <span className="font-medium text-text-main">Why:</span> {reason}
             </div>
           ) : null}
@@ -407,10 +433,10 @@ function UserFeedbackPanel({
                   key={key}
                   className="rounded-lg border border-outline/40 bg-surface/40 p-3 backdrop-blur-sm"
                 >
-                  <div className="text-[10px] uppercase tracking-wide text-text-dim">
+                  <div className="text-[12px] uppercase tracking-wide text-text-dim">
                     {humanizeFeedbackKey(key)}
                   </div>
-                  <div className="mt-1.5 text-[13px] leading-relaxed text-text-main">
+                  <div className="mt-1.5 text-[15px] leading-relaxed text-text-main">
                     {feedbackDisplayValue(value)}
                   </div>
                 </div>
@@ -496,21 +522,21 @@ function SurveyDebrief({ run }: { run: RunDetailView }) {
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           <StatTile lead caption="Questions answered" value={`${c.numAnswered}/${c.numQuestions}`} />
           <div className="flex flex-col justify-center rounded-lg border border-outline/40 bg-surface/40 p-4 backdrop-blur-sm">
-            <span className="hud text-[9px] text-text-dim">Answers look valid</span>
+            <span className="hud text-[11px] text-text-dim">Answers look valid</span>
             <div className="mt-1.5">
               <ValidityBadge valid={c.valid} validLabel="Valid" invalidLabel="Needs review" />
             </div>
           </div>
           <div className="flex flex-col justify-center rounded-lg border border-outline/40 bg-surface/40 p-4 backdrop-blur-sm">
-            <span className="hud text-[9px] text-text-dim">Question types</span>
+            <span className="hud text-[11px] text-text-dim">Question types</span>
             <div className="mt-2 flex flex-wrap gap-1.5">
               {typeCounts.length === 0 ? (
-                <span className="text-[12px] text-text-dim">n/a</span>
+                <span className="text-[14px] text-text-dim">n/a</span>
               ) : (
                 typeCounts.map((entry) => (
                   <span
                     key={entry.type}
-                    className={`hud inline-flex items-center gap-1 rounded border px-2 py-1 text-[9px] ${surveyQuestionTypeChipClass(entry.type)}`}
+                    className={`hud inline-flex items-center gap-1 rounded border px-2 py-1 text-[11px] ${surveyQuestionTypeChipClass(entry.type)}`}
                   >
                     <span className="tabular-nums font-semibold">{entry.count}</span>
                     {entry.label}
@@ -608,13 +634,13 @@ function SurveyAnswerRow({
       style={{ animationDelay: `${Math.min(index, 6) * 30}ms`, animationFillMode: "backwards" }}
     >
       <div className="mb-3 flex items-start justify-between gap-3">
-        <p className="min-w-0 flex-1 text-[13px] font-medium leading-snug text-text-main">
+        <p className="min-w-0 flex-1 text-[15px] font-medium leading-snug text-text-main">
           <span className="text-text-dim">Q{index + 1}</span>
           <span className="text-text-dim"> · </span>
           {prompt}
         </p>
         {type ? (
-          <span className={`shrink-0 hud rounded border px-1.5 py-0.5 text-[8px] ${typeChipClass}`}>
+          <span className={`shrink-0 hud rounded border px-1.5 py-0.5 text-[11px] ${typeChipClass}`}>
             {typeLabel}
           </span>
         ) : null}
@@ -623,7 +649,7 @@ function SurveyAnswerRow({
       <SurveyAnswerVisual answer={answer} question={question} />
 
       {answer.rationale ? (
-        <p className="mt-3 rounded-lg border border-outline/30 bg-surface/25 px-3 py-2 text-[11px] leading-relaxed text-text-variant">
+        <p className="mt-3 rounded-lg border border-outline/30 bg-surface/25 px-3 py-2 text-[13px] leading-relaxed text-text-variant">
           {singleChoice || likert ? "Why: " : ""}
           {answer.rationale}
           {conf != null && (
@@ -631,7 +657,7 @@ function SurveyAnswerRow({
           )}
         </p>
       ) : conf != null ? (
-        <p className="mt-2 text-[11px] text-text-variant">How sure: {(conf * 100).toFixed(0)}%</p>
+        <p className="mt-2 text-[13px] text-text-variant">How sure: {(conf * 100).toFixed(0)}%</p>
       ) : null}
     </li>
   );
@@ -662,7 +688,7 @@ function SurveyAnswerVisual({
               return (
                 <span
                   key={n}
-                  className={`grid h-9 w-9 place-items-center rounded-full border font-mono text-[12px] ${
+                  className={`grid h-9 w-9 place-items-center rounded-full border font-mono text-[14px] ${
                     selected
                       ? `${color.bar} border-transparent font-bold text-on-primary`
                       : "border-outline/60 bg-surface/40 text-text-dim"
@@ -672,7 +698,7 @@ function SurveyAnswerVisual({
                 </span>
               );
             })}
-            <span className={`ml-1 font-mono text-[13px] font-bold tabular-nums ${color.text}`}>
+            <span className={`ml-1 font-mono text-[15px] font-bold tabular-nums ${color.text}`}>
               {chosen}/{max}
             </span>
           </div>
@@ -697,7 +723,7 @@ function SurveyAnswerVisual({
       return (
         <div className="space-y-1.5">
           {multi ? (
-            <p className="hud text-[8px] text-text-dim">{selected.length} selected</p>
+            <p className="hud text-[11px] text-text-dim">{selected.length} selected</p>
           ) : null}
           {optionDetails.map((option) => {
             const isSelected = selected.includes(option.id);
@@ -728,7 +754,7 @@ function SurveyAnswerVisual({
                   </span>
                 )}
                 <span
-                  className={`min-w-0 text-[12px] leading-snug ${
+                  className={`min-w-0 text-[14px] leading-snug ${
                     isSelected ? "font-medium text-text-main" : "text-text-dim"
                   }`}
                 >
@@ -744,7 +770,7 @@ function SurveyAnswerVisual({
 
   const fallback = fmtAnswerValue(answer.value, question);
   return (
-    <p className="rounded-lg border border-outline/30 bg-surface/35 px-3 py-2 text-[12px] leading-relaxed text-text-main break-words">
+    <p className="rounded-lg border border-outline/30 bg-surface/35 px-3 py-2 text-[14px] leading-relaxed text-text-main break-words">
       {fallback || "(no answer)"}
     </p>
   );
@@ -785,14 +811,14 @@ function SurveyTrajectoryMilestone({ event }: { event: SurveyTrajectoryEvent }) 
       <span className="relative z-[1] mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full border-2 border-primary bg-surface-lowest" />
       <div className="min-w-0 flex-1">
         <div className="flex items-baseline justify-between gap-2">
-          <span className="text-[12px] font-semibold text-text-main">{title}</span>
+          <span className="text-[14px] font-semibold text-text-main">{title}</span>
           {event.timestamp ? (
-            <span className="shrink-0 font-mono text-[9px] text-text-dim">
+            <span className="shrink-0 font-mono text-[11px] text-text-dim">
               {compactTimestamp(event.timestamp)}
             </span>
           ) : null}
         </div>
-        {detail ? <p className="mt-0.5 text-[11px] leading-snug text-text-variant">{detail}</p> : null}
+        {detail ? <p className="mt-0.5 text-[13px] leading-snug text-text-variant">{detail}</p> : null}
       </div>
     </div>
   );
@@ -818,20 +844,20 @@ function SurveyTrajectoryQaCard({
       <div className="min-w-0 flex-1 rounded-lg border border-outline/35 bg-surface/40 px-2.5 py-2">
         <div className="flex items-center justify-between gap-2">
           <div className="flex min-w-0 items-center gap-1.5">
-            <span className="hud text-[9px] text-primary">{index != null ? `Q${index}` : "Q"}</span>
+            <span className="hud text-[11px] text-primary">{index != null ? `Q${index}` : "Q"}</span>
             {type ? (
-              <span className={`hud rounded border px-1.5 py-0.5 text-[8px] ${surveyQuestionTypeChipClass(type)}`}>
+              <span className={`hud rounded border px-1.5 py-0.5 text-[11px] ${surveyQuestionTypeChipClass(type)}`}>
                 {surveyQuestionTypeLabel(type)}
               </span>
             ) : null}
           </div>
           {answer.timestamp ? (
-            <span className="shrink-0 font-mono text-[9px] text-text-dim">
+            <span className="shrink-0 font-mono text-[11px] text-text-dim">
               {compactTimestamp(answer.timestamp)}
             </span>
           ) : null}
         </div>
-        <p className="mt-1 text-[12px] font-medium leading-snug text-text-main line-clamp-3">
+        <p className="mt-1 text-[14px] font-medium leading-snug text-text-main line-clamp-3">
           {valueLabel || "(no answer)"}
         </p>
       </div>
@@ -942,10 +968,10 @@ function WebDebrief({ run }: { run: RunDetailView }) {
                 <ValidityBadge valid={result.valid} validLabel="Valid pick" invalidLabel="Invalid pick" />
               </div>
               {result.selectedProductId && (
-                <div className="mt-0.5 font-mono text-[10px] text-text-dim">{result.selectedProductId}</div>
+                <div className="mt-0.5 font-mono text-[12px] text-text-dim">{result.selectedProductId}</div>
               )}
               {result.reason && (
-                <p className="mt-1 text-[11px] leading-snug text-text-variant">
+                <p className="mt-1 text-[13px] leading-snug text-text-variant">
                   Why this one: {result.reason}
                 </p>
               )}
@@ -1030,7 +1056,7 @@ function DetailNotFound() {
       <h2 className="font-display text-[15px] font-semibold text-text-main">
         We couldn&apos;t find this run
       </h2>
-      <p className="mx-auto mt-2 max-w-sm text-[13px] leading-relaxed text-text-variant">
+      <p className="mx-auto mt-2 max-w-sm text-[15px] leading-relaxed text-text-variant">
         It may have been deleted. Go back to the list to pick another.
       </p>
     </StudioGlassPanel>
@@ -1052,13 +1078,13 @@ function DetailError({ error, onRetry }: { error: unknown; onRetry: () => void }
       <h2 className="font-display text-[15px] font-semibold text-text-main">
         We couldn&apos;t open this run
       </h2>
-      <p className="mx-auto mt-1.5 max-w-md break-words text-[13px] leading-relaxed text-text-variant">
+      <p className="mx-auto mt-1.5 max-w-md break-words text-[15px] leading-relaxed text-text-variant">
         {message}
       </p>
       <button
         type="button"
         onClick={onRetry}
-        className={`mt-4 inline-flex items-center gap-1.5 rounded-md border border-danger/40 bg-danger/10 px-4 py-2 text-[12px] text-danger transition ease-out hover:border-danger/60 hover:bg-danger/20 active:scale-[0.97] ${FOCUS_RING}`}
+        className={`mt-4 inline-flex items-center gap-1.5 rounded-md border border-danger/40 bg-danger/10 px-4 py-2 text-[14px] text-danger transition ease-out hover:border-danger/60 hover:bg-danger/20 active:scale-[0.97] ${FOCUS_RING}`}
       >
         <Sym name="refresh" size={16} />
         Try again

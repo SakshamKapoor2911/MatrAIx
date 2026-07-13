@@ -11,7 +11,7 @@ export function PromptPanel({ prompts }: PromptPanelProps) {
       <div className="p-md">
         <div className="rise-in rounded-md border border-dashed border-outline-dim bg-surface-low px-4 py-10 text-center">
           <Sym name="terminal" size={28} className="text-text-dim" />
-          <p className="mt-2 text-[13px] leading-relaxed text-text-variant">
+          <p className="mt-2 text-[15px] leading-relaxed text-text-variant">
             Run a simulation to see the exact prompts used.
           </p>
         </div>
@@ -51,11 +51,11 @@ function PromptBlock({
       <div className="flex items-center justify-between gap-3 border-b border-outline bg-surface-low px-3 py-2">
         <div className="min-w-0">
           <h3 className="font-semibold text-sm text-text-main">{label}</h3>
-          <p className="hud break-words text-[9px] text-text-dim">{sublabel}</p>
+          <p className="hud break-words text-[11px] text-text-dim">{sublabel}</p>
         </div>
         <Sym name="data_object" size={16} className="flex-shrink-0 text-text-dim" />
       </div>
-      <pre className="custom-scrollbar max-h-72 overflow-auto whitespace-pre-wrap break-words bg-field p-3 font-mono text-[11px] leading-relaxed text-text-variant">
+      <pre className="custom-scrollbar max-h-72 overflow-auto whitespace-pre-wrap break-words bg-field p-3 font-mono text-[13px] leading-relaxed text-text-variant">
         {value || "(empty)"}
       </pre>
     </section>

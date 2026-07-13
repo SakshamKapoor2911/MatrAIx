@@ -32,7 +32,7 @@ export function StudioPageHeader({
       className={`flex flex-wrap items-center gap-x-3 ${compact ? "mb-3 gap-y-1" : "mb-5 items-start gap-y-3"}`}
     >
       <div className="min-w-0 flex-1">
-        <span className={`hud text-primary ${compact ? "text-[9px]" : "text-[10px]"}`}>{eyebrow}</span>
+        <span className={`hud text-primary ${compact ? "text-[11px]" : "text-[12px]"}`}>{eyebrow}</span>
         <h1
           className={`font-display font-bold tracking-tight text-text-main ${
             compact ? "text-[20px] leading-tight" : "text-[22px]"
@@ -44,8 +44,8 @@ export function StudioPageHeader({
           <p
             className={
               compact
-                ? "mt-0.5 truncate text-[12px] leading-snug text-text-variant"
-                : "mt-1.5 max-w-2xl text-[13px] leading-relaxed text-text-variant"
+                ? "mt-0.5 truncate text-[14px] leading-snug text-text-variant"
+                : "mt-1.5 text-[15px] leading-relaxed text-text-variant"
             }
           >
             {subtitle}
@@ -92,7 +92,7 @@ export function StudioToolbarButton({
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className={`flex items-center gap-1.5 rounded-lg border border-outline/50 bg-surface/60 px-3 py-2 text-[12px] text-text-variant backdrop-blur transition ease-out hover:border-primary/40 hover:bg-surface hover:text-text-main active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-55 ${FOCUS_RING}`}
+      className={`flex items-center gap-1.5 rounded-lg border border-outline/50 bg-surface/60 px-3 py-2 text-[14px] text-text-variant backdrop-blur transition ease-out hover:border-primary/40 hover:bg-surface hover:text-text-main active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-55 ${FOCUS_RING}`}
     >
       {icon && <Sym name={icon} size={16} className={disabled ? "" : ""} />}
       {children}

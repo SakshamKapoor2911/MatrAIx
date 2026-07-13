@@ -10,7 +10,7 @@ Dark-first, restrained "mission control". Authoritative tokens live in `src/inde
 - **Status:** `danger` · `warn`. **Scores only:** `score-low|mid|high` (red→amber→mint) via `SCORE_BAND_CLASS` in `cockpit/cockpitShared.tsx` — never use the primary accent for a score.
 
 ## Type
-Three faces: **Inter** (`font-sans`, default UI) · **Space Grotesk** (`font-display`, headings + the `Playground` wordmark) · **JetBrains Mono** (`font-mono`, data + the uppercase `.hud` micro-label). Fixed rem-ish sizes (product register — not fluid clamps).
+**Inter** for both `font-sans` (UI) and `font-display` (headings / wordmark) — same face as the public MatrAIx site ([Google Fonts](https://fonts.google.com/specimen/Inter)). **JetBrains Mono** for `font-mono` (data + uppercase `.hud` micro-labels). Base body is 16px; Tailwind `text-xs`/`text-sm`/… are bumped ~2px vs defaults for cockpit readability.
 
 ## Utilities (in `index.css`)
 - `.panel` — bordered box with a top-left cyan corner bracket (signature; use on key panels, not everything).

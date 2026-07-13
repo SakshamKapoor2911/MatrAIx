@@ -46,7 +46,7 @@ export function AppFooter({ context }: AppFooterProps) {
   return (
     <footer className="flex-shrink-0 border-t border-outline bg-surface-lowest">
       <div className="flex items-center justify-between gap-4 px-5 py-2 text-text-dim">
-        <div className="hud flex min-w-0 items-center gap-3 text-[9px]">
+        <div className="hud flex min-w-0 items-center gap-3 text-[11px]">
           <span className="flex-none text-text-variant">
             Matr<span className="text-primary">AI</span>x
           </span>
@@ -54,7 +54,7 @@ export function AppFooter({ context }: AppFooterProps) {
           <span className="min-w-0 truncate" title={context}>{context}</span>
         </div>
         <div
-          className="hud flex flex-shrink-0 items-center gap-2 text-[9px] text-text-variant"
+          className="hud flex flex-shrink-0 items-center gap-2 text-[11px] text-text-variant"
           aria-label="Backend connection status"
         >
           <span

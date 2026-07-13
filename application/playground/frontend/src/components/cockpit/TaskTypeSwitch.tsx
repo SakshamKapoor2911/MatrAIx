@@ -35,7 +35,7 @@ const OPTIONS: ReadonlyArray<{ value: PlaygroundTaskType; label: string; icon: s
 export function TaskTypeSwitch({ value, onChange, disabled, showLabel = true, className = "" }: TaskTypeSwitchProps) {
   return (
     <div className={className}>
-      {showLabel && <div className="hud mb-1.5 text-[9px] text-primary">Application type</div>}
+      {showLabel && <div className="hud mb-1.5 text-[11px] text-primary">Application type</div>}
       <div className="cockpit-segment inline-flex">
         {OPTIONS.map((option) => {
           const selected = option.value === value;
@@ -47,7 +47,7 @@ export function TaskTypeSwitch({ value, onChange, disabled, showLabel = true, cl
               title={option.hint}
               aria-pressed={selected}
               onClick={() => onChange(option.value)}
-              className={`cockpit-segment__btn flex items-center gap-1.5 px-3 py-1.5 text-[12px] transition ease-out active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-60 disabled:active:scale-100 ${FOCUS_RING} ${
+              className={`cockpit-segment__btn flex items-center gap-1.5 px-3 py-1.5 text-[14px] transition ease-out active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-60 disabled:active:scale-100 ${FOCUS_RING} ${
                 selected ? "cockpit-segment__btn--active" : ""
               }`}
             >

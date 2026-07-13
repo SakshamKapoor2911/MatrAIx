@@ -245,7 +245,7 @@ export function fmtSource(source: string | null | undefined): string {
 /** A quiet domain pill (reused across list / detail / compare headers). */
 export function DomainPill({ domain }: { domain: string | null | undefined }) {
   return (
-    <span className="inline-flex items-center rounded border border-outline bg-surface-high px-2 py-0.5 text-[11px] font-medium text-text-variant">
+    <span className="inline-flex items-center rounded border border-outline bg-surface-high px-2 py-0.5 text-[13px] font-medium text-text-variant">
       {fmtDomain(domain)}
     </span>
   );
@@ -254,7 +254,7 @@ export function DomainPill({ domain }: { domain: string | null | undefined }) {
 /** A small muted source tag next to a persona name. */
 export function SourceTag({ source }: { source: string | null | undefined }) {
   return (
-    <span className="inline-flex shrink-0 items-center rounded bg-surface-high px-1.5 py-px font-mono text-[10px] text-text-variant">
+    <span className="inline-flex shrink-0 items-center rounded bg-surface-high px-1.5 py-px font-mono text-[12px] text-text-variant">
       {fmtSource(source)}
     </span>
   );
@@ -264,10 +264,10 @@ export function SourceTag({ source }: { source: string | null | undefined }) {
 export function RecChip({ item }: { item: RunRecItem }) {
   return (
     <span
-      className="inline-flex max-w-full items-center gap-1.5 rounded border border-outline bg-surface-low px-2 py-1 text-[11px]"
+      className="inline-flex max-w-full items-center gap-1.5 rounded border border-outline bg-surface-low px-2 py-1 text-[13px]"
       title={item.title ?? undefined}
     >
-      <span className="font-mono text-[10px] text-text-dim">{item.id}</span>
+      <span className="font-mono text-[12px] text-text-dim">{item.id}</span>
       {item.title && <span className="truncate text-text-variant">{item.title}</span>}
     </span>
   );
@@ -308,7 +308,7 @@ export function AppTypeTag({ type }: { type?: string | null }) {
   const meta = APP_TYPE_META[key] ?? APP_TYPE_META.chatbot;
   return (
     <span
-      className="inline-flex items-center gap-1 rounded border border-outline bg-surface-high px-1.5 py-0.5 text-[11px] text-text-variant"
+      className="inline-flex items-center gap-1 rounded border border-outline bg-surface-high px-1.5 py-0.5 text-[13px] text-text-variant"
       title="Application type for this run."
     >
       <Sym name={meta.icon} size={13} />
@@ -363,14 +363,14 @@ export function StatTile({
   const captionTone = lead ? (color ? color.text : "text-secondary") : "text-text-dim";
   return (
     <div className={`flex flex-col justify-center rounded-lg border border-outline/40 bg-surface/50 p-4 backdrop-blur-sm ${leadBorder}`}>
-      <span className={`hud text-[9px] ${captionTone}`}>{caption}</span>
+      <span className={`hud text-[11px] ${captionTone}`}>{caption}</span>
       <div className="mt-1.5 flex items-baseline gap-1">
         <span
           className={`font-display text-[26px] font-bold leading-none tabular-nums ${color ? color.text : "text-text-main"}`}
         >
           {value}
         </span>
-        {unit && <span className="font-sans text-[13px] text-text-dim">{unit}</span>}
+        {unit && <span className="font-sans text-[15px] text-text-dim">{unit}</span>}
       </div>
     </div>
   );

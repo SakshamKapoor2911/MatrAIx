@@ -18,9 +18,9 @@ export function CockpitToggle({
   return (
     <div className="flex items-center justify-between gap-3">
       <div className="min-w-0">
-        <p className="text-[12px] font-semibold text-text-main">{label}</p>
+        <p className="text-[14px] font-semibold text-text-main">{label}</p>
         {description && (
-          <p className="mt-0.5 text-[10px] leading-snug text-text-dim">{description}</p>
+          <p className="mt-0.5 text-[12px] leading-snug text-text-dim">{description}</p>
         )}
       </div>
       <button

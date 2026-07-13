@@ -29,7 +29,7 @@ export function RatingChip({ rating, size = "sm", className = "" }: RatingChipPr
     rating === null || rating === undefined || Number.isNaN(rating) ? null : rating / 10,
   );
   const color = SCORE_BAND_CLASS[band];
-  const pad = size === "md" ? "px-2.5 py-1 text-[13px]" : "px-2 py-0.5 text-[11px]";
+  const pad = size === "md" ? "px-2.5 py-1 text-[15px]" : "px-2 py-0.5 text-[13px]";
 
   if (band === "none") {
     return (

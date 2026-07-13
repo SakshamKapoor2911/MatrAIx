@@ -137,21 +137,21 @@ export function PreflightChip() {
           aria-label="Setup checklist"
           className="pop-in absolute right-0 top-full z-30 mt-2 w-80 max-w-[calc(100vw-1.5rem)] max-h-[70vh] overflow-y-auto custom-scrollbar rounded-xl border border-outline bg-surface-lowest p-3 shadow-2xl"
         >
-          <p className="hud mb-2.5 text-[10px] text-text-dim">System readiness</p>
+          <p className="hud mb-2.5 text-[12px] text-text-dim">System readiness</p>
           {allGreen ? (
-            <p className="text-[12px] text-secondary">All checks passed.</p>
+            <p className="text-[14px] text-secondary">All checks passed.</p>
           ) : popoverChecks.length === 0 ? (
-            <p className="text-[12px] text-secondary">All required checks passed.</p>
+            <p className="text-[14px] text-secondary">All required checks passed.</p>
           ) : (
             <div className="space-y-3.5">
               {data.ready && optionalFailing.length > 0 && (
-                <p className="text-[11px] leading-relaxed text-text-variant">
+                <p className="text-[13px] leading-relaxed text-text-variant">
                   Required checks passed. Optional adapters below still need attention.
                 </p>
               )}
               {popoverChecks.map((g) => (
                 <div key={g.group}>
-                  <div className="hud mb-1.5 text-[9px] text-primary">{g.group}</div>
+                  <div className="hud mb-1.5 text-[11px] text-primary">{g.group}</div>
                   <ul className="space-y-2">
                     {g.items.map((check) => {
                       const iconClass = check.optional ? "text-warn" : "text-danger";
@@ -159,13 +159,13 @@ export function PreflightChip() {
                         <li key={check.name} className="flex items-start gap-2">
                           <Sym name="error" fill={1} size={16} className={`mt-px flex-none ${iconClass}`} />
                           <div className="min-w-0">
-                            <div className="text-[12px] font-medium text-text-main">
+                            <div className="text-[14px] font-medium text-text-main">
                               {check.name}
                               {check.optional && (
-                                <span className="hud ml-1.5 text-[8px] text-text-dim">optional</span>
+                                <span className="hud ml-1.5 text-[11px] text-text-dim">optional</span>
                               )}
                             </div>
-                            <div className="text-[11px] leading-relaxed text-text-variant">
+                            <div className="text-[13px] leading-relaxed text-text-variant">
                               {check.detail}
                             </div>
                           </div>

@@ -45,7 +45,7 @@ function TaskDocTabBar({
             role="tab"
             aria-selected={selected}
             onClick={() => onChange(section.id)}
-            className={`-mb-px flex items-center gap-1 border-b-2 px-2 py-2 text-[10px] font-medium transition ${FOCUS_RING} ${
+            className={`-mb-px flex items-center gap-1 border-b-2 px-2 py-2 text-[12px] font-medium transition ${FOCUS_RING} ${
               selected
                 ? "border-primary text-primary"
                 : "border-transparent text-text-variant hover:text-text-main"
@@ -140,11 +140,11 @@ export function TaskDetailModal({ open, card, onClose }: TaskDetailModalProps) {
           </div>
 
           {!taskPath && (
-            <p className="text-[12px] text-danger">This task has no task path — no instruction document to show.</p>
+            <p className="text-[14px] text-danger">This task has no task path — no instruction document to show.</p>
           )}
-          {loading && <p className="text-[12px] text-text-dim">Loading task documents…</p>}
+          {loading && <p className="text-[14px] text-text-dim">Loading task documents…</p>}
           {failed && (
-            <p className="text-[12px] text-danger">
+            <p className="text-[14px] text-danger">
               {detailQuery.error instanceof ApiError
                 ? detailQuery.error.message
                 : "Could not load task documents."}
@@ -159,7 +159,7 @@ export function TaskDetailModal({ open, card, onClose }: TaskDetailModalProps) {
                   {activeSection.id === "questionnaire" && structuredQuestionnaire ? (
                     <QuestionnairePreview instrument={structuredQuestionnaire} />
                   ) : (
-                    <Markdown className="text-[12px] leading-relaxed text-text-variant">
+                    <Markdown className="text-[14px] leading-relaxed text-text-variant">
                       {activeSection.markdown}
                     </Markdown>
                   )}
@@ -169,7 +169,7 @@ export function TaskDetailModal({ open, card, onClose }: TaskDetailModalProps) {
           ) : null}
 
           {!loading && !failed && taskPath && sections.length === 0 ? (
-            <p className="text-[12px] text-text-dim">No task documents are available for this task.</p>
+            <p className="text-[14px] text-text-dim">No task documents are available for this task.</p>
           ) : null}
         </div>
       )}

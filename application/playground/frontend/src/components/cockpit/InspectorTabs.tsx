@@ -73,8 +73,8 @@ export function InspectorTabs({
   return (
     <aside className="z-0 flex h-[340px] w-full flex-shrink-0 flex-col border-t border-outline bg-surface-lowest lg:h-full lg:w-[360px] lg:border-l lg:border-t-0">
       <div className="flex shrink-0 items-center justify-between border-b border-outline bg-surface px-4 py-3">
-        <span className="hud text-[10px] text-primary">Inspector</span>
-        <span className="hud text-[9px] text-text-dim">{activeLabel}</span>
+        <span className="hud text-[12px] text-primary">Inspector</span>
+        <span className="hud text-[11px] text-text-dim">{activeLabel}</span>
       </div>
 
       <div
@@ -98,7 +98,7 @@ export function InspectorTabs({
                 onChange(tab.id);
               }}
               onKeyDown={(e) => onKeyDown(e, i)}
-              className={`-mb-px flex min-w-0 select-none items-center gap-1.5 border-b-2 py-2.5 text-[11px] font-medium transition ease-out active:opacity-70 lg:text-[12px] ${FOCUS_RING} ${
+              className={`-mb-px flex min-w-0 select-none items-center gap-1.5 border-b-2 py-2.5 text-[13px] font-medium transition ease-out active:opacity-70 lg:text-[14px] ${FOCUS_RING} ${
                 selected ? "border-primary text-primary" : "border-transparent text-text-variant hover:text-text-main"
               }`}
             >

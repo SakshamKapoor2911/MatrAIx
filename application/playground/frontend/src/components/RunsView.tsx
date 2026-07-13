@@ -295,7 +295,7 @@ function JobTrialCountCell({
             total
           )}
         </span>
-        <span className="mt-0.5 font-mono text-[9px] uppercase tracking-wide text-text-dim">
+        <span className="mt-0.5 font-mono text-[11px] uppercase tracking-wide text-text-dim">
           {countLabel}
         </span>
       </div>
@@ -329,22 +329,22 @@ function JobListIdentity({
       className={`min-w-0 text-left ${FOCUS_RING}`}
       title={job.taskName || job.jobName}
     >
-      <p className="truncate font-display text-[13px] font-semibold leading-snug text-text-main group-hover:text-primary">
+      <p className="truncate font-display text-[15px] font-semibold leading-snug text-text-main group-hover:text-primary">
         {title}
       </p>
       {job.taskName ? (
-        <p className="truncate font-mono text-[10px] tracking-wide text-text-dim">{job.taskName}</p>
+        <p className="truncate font-mono text-[12px] tracking-wide text-text-dim">{job.taskName}</p>
       ) : identity.shortId && identity.shortId !== title ? (
-        <p className="truncate font-mono text-[10px] tracking-wide text-text-dim">{identity.shortId}</p>
+        <p className="truncate font-mono text-[12px] tracking-wide text-text-dim">{identity.shortId}</p>
       ) : title !== job.jobName ? (
-        <p className="truncate font-mono text-[10px] tracking-wide text-text-dim">{job.jobName}</p>
+        <p className="truncate font-mono text-[12px] tracking-wide text-text-dim">{job.jobName}</p>
       ) : null}
       {metaChips.length > 0 ? (
         <div className="mt-1 flex flex-wrap gap-1">
           {metaChips.map((chip) => (
             <span
               key={chip}
-              className="rounded border border-outline/40 bg-surface/50 px-1.5 py-0.5 text-[9px] text-text-variant"
+              className="rounded border border-outline/40 bg-surface/50 px-1.5 py-0.5 text-[11px] text-text-variant"
             >
               {chip}
             </span>
@@ -367,7 +367,7 @@ function HarborJobStatusBadge({ job }: { job: HarborJobSummary }) {
 
   return (
     <span
-      className={`inline-flex max-w-full items-center gap-1 truncate rounded-md border px-2 py-0.5 font-mono text-[10px] uppercase tracking-wide ${style.className}`}
+      className={`inline-flex max-w-full items-center gap-1 truncate rounded-md border px-2 py-0.5 font-mono text-[12px] uppercase tracking-wide ${style.className}`}
       title={detail}
     >
       <Sym
@@ -447,7 +447,7 @@ function HarborJobsList({ openHarborJob, onClose, backLabel }: HarborJobsListPro
           }
           meta={
             !harborQuery.isLoading && !harborQuery.isError ? (
-              <span className="font-mono text-[11px] text-text-variant">
+              <span className="font-mono text-[13px] text-text-variant">
                 {filtersActive
                   ? `${filteredJobs.length} of ${harborJobs.length}`
                   : harborJobs.length}{" "}
@@ -471,7 +471,7 @@ function HarborJobsList({ openHarborJob, onClose, backLabel }: HarborJobsListPro
           }
         />
         {deleteError && (
-          <p className="mb-4 text-[12px] text-danger" role="alert">
+          <p className="mb-4 text-[14px] text-danger" role="alert">
             {deleteError}
           </p>
         )}
@@ -540,7 +540,7 @@ function HarborJobsFilterBar({
           onChange={(e) => onSearchQueryChange(e.target.value)}
           placeholder="Search by job name, app type, or status…"
           aria-label="Search runs"
-          className="h-full w-full min-w-0 bg-transparent px-3 text-[13px] text-text-main outline-none placeholder:text-text-variant"
+          className="h-full w-full min-w-0 bg-transparent px-3 text-[15px] text-text-main outline-none placeholder:text-text-variant"
         />
         {searchQuery && (
           <button
@@ -556,7 +556,7 @@ function HarborJobsFilterBar({
 
       <div className="mt-2.5 flex flex-col gap-2 border-t border-outline/20 pt-2.5 lg:flex-row lg:items-center lg:justify-between">
         <div className="flex min-w-0 flex-col gap-1.5 sm:flex-row sm:items-center sm:gap-3">
-          <span className="cockpit-field-label shrink-0 text-[10px] text-text-dim">App type</span>
+          <span className="cockpit-field-label shrink-0 text-[12px] text-text-dim">App type</span>
           <div className="flex flex-wrap gap-2" role="group" aria-label="Filter by app type">
             <RunsFilterChip
               label="All"
@@ -576,7 +576,7 @@ function HarborJobsFilterBar({
 
         <div className="flex min-w-0 flex-col gap-1.5 sm:flex-row sm:items-center sm:gap-3 lg:pl-4">
           <span className="hidden h-6 w-px bg-outline/30 sm:block" aria-hidden />
-          <span className="cockpit-field-label shrink-0 text-[10px] text-text-dim">Status</span>
+          <span className="cockpit-field-label shrink-0 text-[12px] text-text-dim">Status</span>
           <div className="flex flex-wrap gap-2" role="group" aria-label="Filter by status">
             <RunsFilterChip
               label="All"
@@ -600,7 +600,7 @@ function HarborJobsFilterBar({
           <button
             type="button"
             onClick={onClearFilters}
-            className={`inline-flex h-8 items-center gap-1.5 rounded-md border border-outline/50 bg-surface/50 px-3 text-[11px] font-medium text-text-variant transition-colors hover:border-primary/40 hover:text-text-main ${FOCUS_RING}`}
+            className={`inline-flex h-8 items-center gap-1.5 rounded-md border border-outline/50 bg-surface/50 px-3 text-[13px] font-medium text-text-variant transition-colors hover:border-primary/40 hover:text-text-main ${FOCUS_RING}`}
           >
             <Sym name="filter_alt_off" size={15} />
             Clear filters
@@ -625,7 +625,7 @@ function RunsFilterChip({
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={`inline-flex h-8 items-center rounded-full border px-2.5 text-[11px] font-medium transition-colors ${FOCUS_RING} ${
+      className={`inline-flex h-8 items-center rounded-full border px-2.5 text-[13px] font-medium transition-colors ${FOCUS_RING} ${
         active
           ? "border-primary bg-primary text-on-primary active:bg-primary-dim"
           : "border-outline bg-surface text-text-variant hover:border-primary hover:bg-surface-low hover:text-text-main active:bg-surface-high"
@@ -650,7 +650,7 @@ function HarborJobsTable({
   return (
     <StudioGlassPanel className="rounded-xl">
       <div
-        className={`${HARBOR_JOBS_GRID} border-b border-outline/40 px-4 py-2.5 text-[10px] uppercase tracking-wide text-text-dim`}
+        className={`${HARBOR_JOBS_GRID} border-b border-outline/40 px-4 py-2.5 text-[12px] uppercase tracking-wide text-text-dim`}
       >
         <span>Job</span>
         <span>App type</span>
@@ -674,7 +674,7 @@ function HarborJobsTable({
                   type="button"
                   onClick={() => onOpen(job.jobName)}
                   title={timeIso ?? undefined}
-                  className={`whitespace-nowrap text-left font-mono text-[11px] tabular-nums text-text-variant hover:text-text-main ${FOCUS_RING}`}
+                  className={`whitespace-nowrap text-left font-mono text-[13px] tabular-nums text-text-variant hover:text-text-main ${FOCUS_RING}`}
                 >
                   {formatJobTimeFull(timeIso)}
                 </button>
@@ -738,13 +738,13 @@ function ListFilterEmpty({ onClearFilters }: { onClearFilters: () => void }) {
         <Sym name="search_off" size={24} className="text-text-dim" />
       </div>
       <h2 className="font-display text-[15px] font-semibold text-text-main">No matching runs</h2>
-      <p className="mx-auto mt-2 max-w-md text-[13px] leading-relaxed text-text-variant">
+      <p className="mx-auto mt-2 max-w-md text-[15px] leading-relaxed text-text-variant">
         Try a different search term or clear the app type and status filters.
       </p>
       <button
         type="button"
         onClick={onClearFilters}
-        className={`mt-4 inline-flex items-center gap-1.5 rounded-md border border-outline/50 bg-surface/60 px-4 py-2 text-[12px] text-text-variant transition hover:border-primary/40 hover:text-text-main ${FOCUS_RING}`}
+        className={`mt-4 inline-flex items-center gap-1.5 rounded-md border border-outline/50 bg-surface/60 px-4 py-2 text-[14px] text-text-variant transition hover:border-primary/40 hover:text-text-main ${FOCUS_RING}`}
       >
         <Sym name="filter_alt_off" size={16} />
         Clear filters
@@ -760,14 +760,14 @@ function ListEmpty({ onClose }: { onClose: () => void }) {
         <Sym name="history" size={26} className="text-text-dim" />
       </div>
       <h2 className="font-display text-[15px] font-semibold text-text-main">No runs yet</h2>
-      <p className="mx-auto mt-2 max-w-md text-[13px] leading-relaxed text-text-variant">
+      <p className="mx-auto mt-2 max-w-md text-[15px] leading-relaxed text-text-variant">
         Launch a batch from Playground to run personas at scale. Results appear here under{" "}
         <span className="font-mono">jobs/</span>.
       </p>
       <button
         type="button"
         onClick={onClose}
-        className={`mt-4 inline-flex items-center gap-1.5 rounded-md bg-primary px-4 py-2 text-[12px] text-on-primary glow transition ease-out hover:bg-primary-dim active:scale-[0.97] ${FOCUS_RING}`}
+        className={`mt-4 inline-flex items-center gap-1.5 rounded-md bg-primary px-4 py-2 text-[14px] text-on-primary glow transition ease-out hover:bg-primary-dim active:scale-[0.97] ${FOCUS_RING}`}
       >
         <Sym name="play_arrow" fill={1} size={16} />
         Back to home
@@ -784,13 +784,13 @@ function ListError({ error, onRetry }: { error: unknown; onRetry: () => void }) 
   return (
     <StudioGlassPanel className="border-l-4 border-l-danger px-5 py-8 text-center rise-in">
       <h2 className="font-display text-[15px] font-semibold text-text-main">Couldn&apos;t load jobs</h2>
-      <p className="mx-auto mt-1.5 max-w-md break-words text-[13px] leading-relaxed text-text-variant">
+      <p className="mx-auto mt-1.5 max-w-md break-words text-[15px] leading-relaxed text-text-variant">
         {message}
       </p>
       <button
         type="button"
         onClick={onRetry}
-        className={`mt-4 inline-flex items-center gap-1.5 rounded-md border border-danger/40 bg-danger/10 px-4 py-2 text-[12px] text-danger ${FOCUS_RING}`}
+        className={`mt-4 inline-flex items-center gap-1.5 rounded-md border border-danger/40 bg-danger/10 px-4 py-2 text-[14px] text-danger ${FOCUS_RING}`}
       >
         <Sym name="refresh" size={16} />
         Try again

@@ -55,12 +55,12 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
             <Sym name="error" fill={1} size={22} className="flex-none text-danger" />
             <h1 className="font-display text-lg font-bold tracking-tight text-text-main">Something went wrong</h1>
           </div>
-          <p className="mt-2 text-[13px] leading-relaxed text-text-variant">
+          <p className="mt-2 text-[15px] leading-relaxed text-text-variant">
             Playground hit an unexpected error and stopped rendering. Your data is safe. You can
             recover the view or reload the app.
           </p>
           {error.message && (
-            <pre className="mt-3 max-h-32 overflow-auto whitespace-pre-wrap break-words rounded-md border border-outline bg-field px-3 py-2 font-mono text-[11px] leading-relaxed text-text-variant">
+            <pre className="mt-3 max-h-32 overflow-auto whitespace-pre-wrap break-words rounded-md border border-outline bg-field px-3 py-2 font-mono text-[13px] leading-relaxed text-text-variant">
               {error.message}
             </pre>
           )}

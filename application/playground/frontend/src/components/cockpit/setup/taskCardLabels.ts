@@ -67,7 +67,7 @@ export function personaDimChipTone(dimensionKey: string, index: number): ToneChi
 }
 
 /** Shared chip typography (task rail + persona cards). */
-export const CHIP_TEXT_CLASS = "text-[9px]";
+export const CHIP_TEXT_CLASS = "text-[11px]";
 
 /** OS chips use a distinct tone so they do not collide with difficulty (secondary). */
 export function osChipTone(os?: string | null): ToneChipTone {

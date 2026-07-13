@@ -51,9 +51,9 @@ function PipelineNode({ label, icon, detail, active = false, visible = true }: N
       >
         <Sym name={icon} size={24} className={active ? "text-primary" : "text-text-variant"} />
       </div>
-      <p className="text-[13px] font-semibold leading-tight text-text-main sm:text-[14px]">{label}</p>
+      <p className="text-[15px] font-semibold leading-tight text-text-main sm:text-[14px]">{label}</p>
       {detail && (
-        <p className="mt-1.5 line-clamp-2 text-[10px] leading-snug text-text-dim">{detail}</p>
+        <p className="mt-1.5 line-clamp-2 text-[12px] leading-snug text-text-dim">{detail}</p>
       )}
     </div>
   );
@@ -149,7 +149,7 @@ function PathForkRow({
         <div className="min-w-0">
           <p
             className={`font-semibold leading-tight ${
-              dense ? "text-[10px] sm:text-[11px]" : "text-[11px] sm:text-[12px]"
+              dense ? "text-[12px] sm:text-[13px]" : "text-[13px] sm:text-[14px]"
             } ${active ? "text-text-main" : "text-text-variant"}`}
           >
             {option.label}
@@ -157,7 +157,7 @@ function PathForkRow({
           {option.hint && (
             <p
               className={`mt-0.5 leading-[1.2] text-text-dim line-clamp-2 ${
-                dense ? "text-[7px] sm:text-[8px]" : "text-[8px] leading-snug sm:text-[9px]"
+                dense ? "text-[10px] sm:text-[11px]" : "text-[11px] leading-snug sm:text-[11px]"
               }`}
             >
               {option.hint}
@@ -194,7 +194,7 @@ function PipelinePathFork({
       )} ${visible ? "opacity-100" : "opacity-0"}`}
     >
       {caption && (
-        <p className="hud mb-1 text-center text-[9px] tracking-wide text-text-dim sm:text-[10px]">{caption}</p>
+        <p className="hud mb-1 text-center text-[11px] tracking-wide text-text-dim sm:text-[12px]">{caption}</p>
       )}
       {options.map((option, index) => (
         <PathForkRow
@@ -428,7 +428,7 @@ export function CockpitPipelineDiagram({
         {pipelineBody}
       </div>
 
-      <p className="shrink-0 text-center text-[13px] font-medium leading-snug sm:text-[14px]">
+      <p className="shrink-0 text-center text-[15px] font-medium leading-snug sm:text-[14px]">
         {ready ? (
           <span className="font-semibold text-secondary">Ready to launch — pipeline locked.</span>
         ) : (

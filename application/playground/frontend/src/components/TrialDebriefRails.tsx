@@ -70,19 +70,19 @@ function DebriefRail({
       >
         <span className="flex min-w-0 items-center gap-2.5">
           <Sym name={icon} fill={1} size={18} className="flex-none text-primary/80" />
-          <span className="hud text-[9px] text-text-dim">{label}</span>
+          <span className="hud text-[11px] text-text-dim">{label}</span>
           {subtitle ? (
-            <span className="truncate font-display text-[13px] font-semibold text-text-main">{subtitle}</span>
+            <span className="truncate font-display text-[15px] font-semibold text-text-main">{subtitle}</span>
           ) : null}
           {badge ? (
-            <span className="hud flex-none rounded border border-outline/50 bg-surface/50 px-1.5 py-0.5 text-[8px] text-text-dim">
+            <span className="hud flex-none rounded border border-outline/50 bg-surface/50 px-1.5 py-0.5 text-[11px] text-text-dim">
               {badge}
             </span>
           ) : null}
         </span>
         {expandable ? (
           <span className="flex flex-none items-center gap-2">
-            <span className="hud text-[9px] text-text-dim">{open ? "Hide" : "View"}</span>
+            <span className="hud text-[11px] text-text-dim">{open ? "Hide" : "View"}</span>
             <Sym name={open ? "expand_more" : "chevron_right"} size={18} className="text-text-dim" />
           </span>
         ) : null}
@@ -93,7 +93,7 @@ function DebriefRail({
             {children ? (
               children
             ) : (
-              <Markdown className="max-w-none text-[12px] leading-relaxed text-text-variant">
+              <Markdown className="max-w-none text-[14px] leading-relaxed text-text-variant">
                 {body ?? ""}
               </Markdown>
             )}

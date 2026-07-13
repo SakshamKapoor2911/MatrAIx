@@ -124,15 +124,15 @@ export function ComponentPipeline({
   if (variant === "live") {
     return (
       <div className="flex min-w-0 items-center gap-3">
-        <span className="hud shrink-0 text-[9px] text-text-dim">Pipeline</span>
+        <span className="hud shrink-0 text-[11px] text-text-dim">Pipeline</span>
         <span className="h-3.5 w-px shrink-0 bg-outline" aria-hidden />
-        <div className="custom-scrollbar flex items-center gap-2.5 overflow-x-auto text-[12px]">
+        <div className="custom-scrollbar flex items-center gap-2.5 overflow-x-auto text-[14px]">
           {nodes.map((node, i) => (
             <div key={node.key} className="flex shrink-0 items-center gap-2.5">
               <span className="flex items-center gap-1.5">
                 <StateMarker tone={node.tone} />
                 <span className={node.tone === "idle" ? "text-text-variant" : "text-text-main"}>{node.label}</span>
-                <span className={`hud rounded border px-1.5 py-0.5 text-[8px] ${CHIP_TONE[node.tone]}`}>{node.status}</span>
+                <span className={`hud rounded border px-1.5 py-0.5 text-[11px] ${CHIP_TONE[node.tone]}`}>{node.status}</span>
               </span>
               {i < nodes.length - 1 && <Sym name="chevron_right" size={14} className="text-text-dim" />}
             </div>
@@ -145,8 +145,8 @@ export function ComponentPipeline({
   // setup variant: the bordered "Pipeline" panel.
   return (
     <div className="rounded-md border border-outline bg-surface-lowest px-4 py-3">
-      <div className="hud mb-2.5 text-[9px] text-text-dim">Pipeline</div>
-      <div className="custom-scrollbar flex items-center gap-2 overflow-x-auto text-[11px]">
+      <div className="hud mb-2.5 text-[11px] text-text-dim">Pipeline</div>
+      <div className="custom-scrollbar flex items-center gap-2 overflow-x-auto text-[13px]">
         {nodes.map((node, i) => (
           <div key={node.key} className="flex shrink-0 items-center gap-2">
             <span className="flex items-center gap-1.5 text-text-main">
