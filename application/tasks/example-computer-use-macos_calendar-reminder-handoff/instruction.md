@@ -1,6 +1,6 @@
 # Calendar + reminder handoff (macOS)
 
-Read `input/context.md` for scenario and application background.
+Read the scenario brief in `input/context.md`, then set up a small Calendar and Reminders handoff.
 
 Create `/tmp/personabench-macos-calendar-reminder-handoff/handoff.txt` with
 exactly these two lines:

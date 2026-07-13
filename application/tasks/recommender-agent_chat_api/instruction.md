@@ -1,8 +1,8 @@
 # Recommender Agent
 
-Chat with the movie recommendation assistant as yourself — the assigned persona — the way you would with a real product.
+Chat with the movie recommendation assistant the way you would with a real product.
 
-You are looking for a film to watch, not books, software, legal research, finance, medical advice, or anything outside movies.
+You're looking for a film to watch — not books, software, legal research, finance, medical advice, or anything outside movies.
 
 Start from a plausible viewing need. Share details gradually. Answer follow-up questions honestly. React to recommendations the way you would in real life: accept what fits, push back on weak suggestions, and ask follow-ups when something is unclear.
 

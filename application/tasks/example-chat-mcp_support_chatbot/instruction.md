@@ -1,6 +1,6 @@
 # Acme Support Chat
 
-Chat with Acme Support as yourself — the assigned persona — about your late NovaBuds Pro order **#4521**.
+Chat with Acme Support about your late NovaBuds Pro order **#4521**.
 
 Ask for what you need. React naturally to the replies. Continue until you can tell whether support gave you a useful path to resolve the shipment.
 

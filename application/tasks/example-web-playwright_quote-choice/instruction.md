@@ -1,6 +1,6 @@
 # Quote to save
 
-Read `input/context.md` for scenario and application background.
+Read the scenario brief in `input/context.md`, then pick one quote that resonates with you.
 
 Save your choice to `/app/output/quote_choice.json`:
 
@@ -18,9 +18,8 @@ Save your choice to `/app/output/quote_choice.json`:
 
 Requirements:
 
-- `decision_subject_id` can be a simple slug you derive from the quote or
-  author if the page does not expose a cleaner id.
+- `decision_subject_id` can be a simple slug derived from the quote or author if the page does not expose a cleaner id.
 - `basis_primary` should capture the main reason the quote resonated with you.
-- Keep `reason` specific to the chosen quote and your persona's preferences.
+- Keep `reason` specific to the chosen quote and what mattered to you.
 
 No login or sharing action is required.

@@ -1,6 +1,6 @@
 # Laptop shortlist
 
-Read `input/context.md` for scenario and application background.
+Read the scenario brief in `input/context.md`, then pick a laptop you'd seriously consider.
 
 Save your choice to `/app/output/laptop_choice.json`:
 
@@ -18,9 +18,8 @@ Save your choice to `/app/output/laptop_choice.json`:
 
 Requirements:
 
-- `decision_subject_id` can be a simple slug you derive from the title if the
-  page does not expose a cleaner id.
-- `basis_primary` should reflect the main decision axis behind your choice.
-- Keep `reason` specific to the selected laptop and your persona's preferences.
+- `decision_subject_id` can be a simple slug derived from the title if the page does not expose a cleaner id.
+- `basis_primary` should reflect the main factor behind your choice.
+- Keep `reason` specific to the selected laptop and what mattered to you.
 
 No login or purchase is required.

@@ -1,20 +1,14 @@
 # Ecommerce product discovery
 
-You are using a small ecommerce platform at:
+You're shopping on a small ecommerce site at:
 
 http://ecommerce-web:8000/
 
-Browse the site in the browser. Based on your persona, silently decide what kind
-of product you realistically need today and what constraints matter to you, such
-as price, quality, space, style, durability, or ease of setup. Explore the
-catalog and product details, compare at least two products, and choose one item
-you would seriously consider.
+Browse in the browser. Decide what kind of product you realistically need today and what constraints matter — price, quality, space, style, durability, ease of setup, and so on. Explore the catalog and product details, compare at least two products, and pick one item you would seriously consider.
 
-Do not place an order or enter payment details. The task is to evaluate the
-shopping and product-discovery experience.
+Do not place an order or enter payment details. We're evaluating the shopping and product-discovery experience.
 
-When you are done, submit your result as JSON in your final answer. Do not use
-Save dialogs or manual file editing.
+When you're done, submit your result as JSON in your final answer. Do not use Save dialogs or manual file editing.
 
 ```json
 {
@@ -27,5 +21,4 @@ Save dialogs or manual file editing.
 }
 ```
 
-Ratings must be integers from 1 to 10. Use only product ids and names shown on
-the site.
+Ratings must be integers from 1 to 10. Use only product ids and names shown on the site.

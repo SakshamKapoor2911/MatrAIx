@@ -1,6 +1,6 @@
 # Note to CSV cleanup (Linux)
 
-Read `input/context.md` for scenario and application background.
+Read the scenario brief in `input/context.md`, then clean a short note into a CSV.
 
 Create `/tmp/personabench-linux-note-to-csv/cleaned_list.csv` with this exact
 header:

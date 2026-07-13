@@ -1,6 +1,6 @@
 # Medical Assistant
 
-Chat with the medical-information assistant as yourself — the assigned persona — the way you would with a real product.
+Chat with the medical-information assistant the way you would with a real product.
 
 Bring a plausible health-information need. Answer follow-up questions naturally. Ask for clarification when the reply is vague. Stop once you can tell whether the conversation was helpful.
 

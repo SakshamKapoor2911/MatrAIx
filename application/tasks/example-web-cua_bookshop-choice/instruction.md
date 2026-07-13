@@ -1,6 +1,6 @@
 # Bookshop choice
 
-Read `input/context.md` for scenario and application background.
+Read the scenario brief in `input/context.md`, then pick a book you'd seriously consider.
 
 Save your choice to `/app/output/book_interest.json`:
 
@@ -18,8 +18,6 @@ Save your choice to `/app/output/book_interest.json`:
 
 Requirements:
 
-- `decision_subject_id` can be a simple slug you derive from the book title if
-  the page does not expose a cleaner id.
-- `decision_outcome` should reflect your realistic stance after browsing. For
-  this task, `selected` or `considered` will usually make the most sense.
-- Keep `reason` specific to the selected book and your persona's preferences.
+- `decision_subject_id` can be a simple slug derived from the book title if the page does not expose a cleaner id.
+- `decision_outcome` should reflect your realistic stance after browsing. For this task, `selected` or `considered` will usually make the most sense.
+- Keep `reason` specific to the selected book and what mattered to you.

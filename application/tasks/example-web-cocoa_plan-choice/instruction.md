@@ -1,6 +1,6 @@
 # Plan preference
 
-Read `input/context.md` for scenario and application background.
+Read the scenario brief in `input/context.md`, then pick a plan that fits you.
 
 Save your choice to `/app/output/plan_choice.json`:
 
@@ -18,9 +18,8 @@ Save your choice to `/app/output/plan_choice.json`:
 
 Requirements:
 
-- `decision_subject_id` can be a simple slug you derive from the plan name if
-  the page does not expose a cleaner id.
+- `decision_subject_id` can be a simple slug derived from the plan name if the page does not expose a cleaner id.
 - `basis_primary` should capture the main factor behind your choice.
-- Keep `reason` specific to the selected plan and your persona's preferences.
+- Keep `reason` specific to the selected plan and what mattered to you.
 
 No signup is required.
