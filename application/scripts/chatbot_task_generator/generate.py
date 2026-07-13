@@ -1,8 +1,8 @@
-"""Chatbot Task Generator — CSV → task directory.
+"""Chatbot Task Generator - CSV to task directory.
 
 Usage:
-    uv run python -m application.scripts.chatbot_task_generator.generate --csv domains.csv
-    uv run python -m application.scripts.chatbot_task_generator.generate --csv domains.csv --task-name meal-planning
+    uv run python application/scripts/chatbot_task_generator/generate.py --csv domains.csv
+    uv run python application/scripts/chatbot_task_generator/generate.py --csv domains.csv --task-name education-ai-tutoring_chatbot
 """
 
 import argparse
@@ -13,41 +13,16 @@ from pathlib import Path
 
 TEMPLATES = Path(__file__).resolve().parent.parent / "task_templates" / "chatbot"
 TASKS_DIR = Path(__file__).resolve().parent.parent.parent / "tasks"
-ENVS_DIR = (
-    Path(__file__).resolve().parent.parent.parent.parent
-    / "environment"
-    / "task-environments"
-    / "application"
-)
-
-FIXED_ENV_DIR = ENVS_DIR / "shared-chat-sim"
 
 REQUIRED_FIELDS = [
     "name",
     "domain",
-    "difficulty",
     "summarized_goal",
     "persona_background",
     "task_goal_label",
     "greeting",
     "fallback",
-    "tags",
-    "full_name",
-    "application_id",
-    "application_context",
-    "task_title",
-    "persona_background_header",
 ]
-
-OPTIONAL_FIELDS = {
-    "tags": '"generated", "chatbot"',
-    "difficulty": "medium",
-    "full_name": "",
-    "application_id": "",
-    "application_context": "",
-    "task_title": "",
-    "persona_background_header": "",
-}
 
 
 def _slugify(name: str) -> str:
@@ -101,7 +76,7 @@ def generate_task(row: dict, dry_run: bool = False) -> Path | None:
         return None
 
     name = row["name"].strip()
-    full_name = row.get("full_name", "").strip() or f"personabench/application-{_slugify(name)}"
+    full_name = row.get("full_name", "").strip() or f"application/{_slugify(name)}"
     domain = row["domain"].strip()
     difficulty = row.get("difficulty", "medium").strip()
     tags_raw = row.get("tags", "").strip()
