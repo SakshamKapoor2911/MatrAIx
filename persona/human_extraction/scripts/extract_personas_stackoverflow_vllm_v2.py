@@ -1547,6 +1547,8 @@ def build_stackoverflow_prompt(
         "- Do not fan one broad answer out across loosely related fields. Each field needs its own same-construct evidence.",
         "- Summary inference is exceptional: require at least two independent, directionally consistent, same-construct answers; repeated facets of one answer do not count.",
         "- Omit unsupported fields entirely. Do not emit null or unsupported placeholders, and do not infer negative values from missing evidence.",
+        "- Worked-with, used, and select-all inventories provide positive evidence only. An option not selected or not listed is unknown, not evidence of non-use, no familiarity, or no proficiency.",
+        "- Never emit prog_*=None, fam_*=None, or tool_*=Never used merely because the named technology is absent from a worked-with or used list.",
         "- If an allowed value is more specific than the answer, omit it. Generic Employment=Employed does not prove Full-time.",
         "",
         "High-precision rules:",

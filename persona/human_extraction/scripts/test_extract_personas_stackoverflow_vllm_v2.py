@@ -649,6 +649,9 @@ def test_prompt_restores_high_precision_sparse_policy(extractor_module):
     assert "Do not optimize for coverage, complete the persona" in prompt
     assert "Summary inference is exceptional" in prompt
     assert "at least two independent, directionally consistent, same-construct answers" in prompt
+    assert "inventories provide positive evidence only" in prompt
+    assert "not selected or not listed is unknown" in prompt
+    assert "Never emit prog_*=None, fam_*=None, or tool_*=Never used" in prompt
     assert "Intent is not experience; task use is not mastery" in prompt
     assert "current status or work location is not attitude or preference" in prompt
     assert "tenure or job title is not proof of skill" in prompt
@@ -688,7 +691,7 @@ def test_prompt_blocks_observed_proxy_failure_modes(extractor_module):
     assert "Do not infer personality, cognitive style, broad values, moral foundations" in prompt
     assert "health, emotion, lifestyle, hobbies, habits, family" in prompt
     assert "Organization practices describe the work environment" in prompt
-    assert "Do not infer negative values from missing evidence" in prompt
+    assert "do not infer negative values from missing evidence" in prompt.casefold()
     assert "Generic Employment=Employed does not prove Full-time" in prompt
     assert "Country directly supports region and may provide positive statistical support" not in prompt
 
