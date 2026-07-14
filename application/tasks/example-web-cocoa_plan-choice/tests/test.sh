@@ -6,7 +6,7 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/verifier_env.sh"
 
 if ! command -v uvx >/dev/null 2>&1; then
   curl -LsSf https://astral.sh/uv/0.9.7/install.sh | sh
-  source "$HOME/.local/bin/env"
+  export PATH="$HOME/.local/bin:$PATH"
 fi
 
 if uvx \
