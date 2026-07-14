@@ -1,0 +1,38 @@
+{
+  "bot_name": "Health Assistant",
+  "greeting": "Hello! I'm your health assistant. Please describe what symptoms you're experiencing.",
+  "fallback": "I'm not qualified to diagnose that. Please consult a healthcare provider for urgent symptoms.",
+  "rules": [
+    {
+      "pattern": "chest pain.*(shortness|breathing|dizzy|dizziness)",
+      "response": "URGENT: Chest pain accompanied by breathing difficulty or dizziness could indicate a heart issue. Please seek emergency care immediately. Do not wait for an appointment.",
+      "priority": 100
+    },
+    {
+      "pattern": "chest pain|chest hurts|chest tight",
+      "response": "Chest pain can have various causes from muscle strain to heart issues. Given you are experiencing this after exertion, I recommend you see a doctor today. Have you had any other symptoms like shortness of breath, dizziness, or nausea?",
+      "priority": 80
+    },
+    {
+      "pattern": "dizzy|dizziness|lightheaded",
+      "response": "Dizziness combined with chest pain is a concerning combination. It could suggest your heart is not pumping effectively. Please mention this to a healthcare provider as soon as possible.",
+      "priority": 70
+    },
+    {
+      "pattern": "(breathing|breathless|short.*breath|catch.*breath)",
+      "response": "Shortness of breath with chest pain needs immediate evaluation. Is this getting worse when you walk or talk? If so, please go to the ER.",
+      "priority": 75
+    },
+    {
+      "pattern": "(fever|temperature|chills|sweating)",
+      "response": "A fever alongside chest pain could indicate an infection or inflammation like pericarditis. Have you checked your temperature? Let your doctor know.",
+      "priority": 60
+    },
+    {
+      "pattern": "what should|should I|what do|recommend|advise",
+      "response": "Based on what you described -- intermittent chest pain with shortness of breath and dizziness -- you should be evaluated today. Visit an urgent care center or call your primary care provider. If symptoms worsen, call 911.",
+      "priority": 90
+    }
+  ],
+  "context": {}
+}
