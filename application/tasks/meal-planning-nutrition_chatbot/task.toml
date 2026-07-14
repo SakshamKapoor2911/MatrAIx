@@ -2,7 +2,7 @@ version = "1.0"
 artifacts = ["/app/output"]
 
 [task]
-name = "personabench/application-meal-planning-nutrition-chatbot"
+name = "application/meal-planning-nutrition-chatbot"
 
 [metadata]
 difficulty = "medium"
@@ -24,7 +24,8 @@ timeout_sec = 300.0
 timeout_sec = 900.0
 
 [environment]
-definition = "application/meal-planning-nutrition_chatbot"
+definition = "application/shared-chat-persona"
+local_compose = "application/chatbot-api-sidecar_meal-plan-api"
 build_timeout_sec = 900.0
 cpus = 1
 memory_mb = 2048
