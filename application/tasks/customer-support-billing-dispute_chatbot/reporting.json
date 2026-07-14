@@ -11,6 +11,14 @@
           "groupByFacetKey": "outcome_status",
           "groupByMode": "categorical",
           "summaryKind": "llm_bucket_summary"
+        },
+        {
+          "id": "task_outcome.reason_by_basis",
+          "title": "Outcome reason by resolution basis",
+          "targetFacetKey": "outcome_reason",
+          "groupByFacetKey": "resolution_basis",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
         }
       ],
       "judgeDirectives": [
@@ -69,6 +77,7 @@
           "title": "Feedback signal scan",
           "targetFacetKey": "feedback_reason",
           "groupByFacetKey": "need_constraint_satisfaction",
+          "groupByMode": "categorical",
           "judgeKind": "llm_signal_judge",
           "prompt": "Read the user's feedback reason and classify which reusable persona-facing signals are explicitly present.",
           "rubric": "Mark a signal true only when the feedback clearly states or strongly implies that signal.",

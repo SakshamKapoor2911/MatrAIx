@@ -3,8 +3,11 @@ runtimeDefaults:
   applicationId: customer-support_chat
   applicationContext: customer-support_support
   domain: customer-support
+capabilities:
+  - text_chat
 connection:
-  baseUrl: http://chat-sim:8000
+  baseUrlEnv: CHATBOT_API_URL
+  baseUrl: http://customer-support-billing-dispute-chatbot:8000
   healthPath: /health
 protocol:
   sendMessage:
@@ -18,6 +21,9 @@ protocol:
   response:
     sessionIdField: ""
     replyField: reply
+    turnField: turn
+personaExposure:
+  fields: []
 artifacts:
   transcript: transcript.json
   applicationResult: application_result.json
