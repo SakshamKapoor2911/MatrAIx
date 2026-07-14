@@ -784,6 +784,16 @@ export interface HarborJobAggregation {
 export interface HarborJobDetail {
   jobName: string;
   jobsDir?: string | null;
+  applicationType?: string | null;
+  taskPath?: string | null;
+  taskTitle?: string | null;
+  taskName?: string | null;
+  domain?: string | null;
+  difficulty?: string | null;
+  tags?: string[];
+  metaType?: string | null;
+  description?: string | null;
+  personaStrategy?: TaskPersonaStrategy | null;
   config?: Record<string, unknown> | null;
   result?: Record<string, unknown> | null;
   trials: HarborTrialView[];
@@ -888,6 +898,9 @@ export interface TaskDetail {
   description?: string;
   metaType?: string;
   taskName?: string;
+  domain?: string | null;
+  difficulty?: string | null;
+  tags?: string[];
   instructionMarkdown?: string;
   contextMarkdown?: string;
   questionnaireMarkdown?: string;

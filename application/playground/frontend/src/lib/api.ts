@@ -57,6 +57,34 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   return data as T;
 }
 
+async function downloadFile(path: string, fallbackFilename: string): Promise<void> {
+  const response = await fetch(path);
+  if (!response.ok) {
+    let message = response.statusText || "Download failed";
+    try {
+      const data = await response.json();
+      if (data && typeof data === "object" && "detail" in data && typeof data.detail === "string") {
+        message = data.detail;
+      }
+    } catch {
+      /* ignore */
+    }
+    throw new ApiError(response.status, message);
+  }
+  const blob = await response.blob();
+  const disposition = response.headers.get("Content-Disposition") || "";
+  const match = /filename="?([^";]+)"?/i.exec(disposition);
+  const filename = match?.[1]?.trim() || fallbackFilename;
+  const url = URL.createObjectURL(blob);
+  const anchor = document.createElement("a");
+  anchor.href = url;
+  anchor.download = filename;
+  document.body.appendChild(anchor);
+  anchor.click();
+  anchor.remove();
+  URL.revokeObjectURL(url);
+}
+
 function qs(params: Record<string, string | number | null | undefined>): string {
   const search = new URLSearchParams();
   for (const [key, value] of Object.entries(params)) {
@@ -106,11 +134,21 @@ export const api = {
     request<HarborJobDetail["aggregation"]>(
       `/api/harbor/jobs/${encodeURIComponent(jobName)}/aggregation`,
     ),
+  downloadHarborJobReportPdf: (jobName: string) =>
+    downloadFile(
+      `/api/harbor/jobs/${encodeURIComponent(jobName)}/report.pdf`,
+      `${jobName}-batch-report.pdf`,
+    ),
   getHarborJobLive: (jobName: string) =>
     request<HarborJobLiveResponse>(`/api/harbor/jobs/${encodeURIComponent(jobName)}/live`),
   getHarborTrialDebrief: (jobName: string, trialName: string) =>
     request<PlaygroundResult>(
       `/api/harbor/jobs/${encodeURIComponent(jobName)}/trials/${encodeURIComponent(trialName)}/debrief`,
+    ),
+  downloadHarborTrialReportPdf: (jobName: string, trialName: string) =>
+    downloadFile(
+      `/api/harbor/jobs/${encodeURIComponent(jobName)}/trials/${encodeURIComponent(trialName)}/report.pdf`,
+      `${jobName}-${trialName}-trial-report.pdf`,
     ),
   getHarborTrialTrace: (jobName: string, trialName: string) =>
     request<{ trace: WebTrace }>(
