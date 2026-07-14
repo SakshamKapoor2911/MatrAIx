@@ -79,14 +79,36 @@ def _parse_dimension_filters(text: str) -> dict:
     return {}
 
 
+def _default_dimension_filters(domain: str) -> dict:
+    """Return sensible dimension filters per domain for the CI cohort gate."""
+    domain = domain.lower()
+    intent_map = {
+        "education": ["Learn / explain", "Brainstorm", "Get task done"],
+        "legal": ["Get task done", "Vent / support", "Decide"],
+        "travel": ["Get task done", "Decide"],
+        "real-estate": ["Get task done", "Decide"],
+        "telecom": ["Vent / support", "Get task done"],
+        "insurance": ["Get task done", "Decide"],
+        "healthcare": ["Vent / support", "Get task done", "Learn / explain"],
+        "customer-support": ["Vent / support", "Get task done"],
+    }
+    intent = intent_map.get(domain, ["Get task done"])
+    return {
+        "age_bracket": ["18-24", "25-34", "35-44", "45-54", "55-64"],
+        "intent": intent,
+    }
+
+
 def _build_persona_strategy(row: dict) -> dict:
     """Build persona_strategy.json content from CSV row data."""
-    filters = _parse_dimension_filters(_v(row, "ps_dimensionFilters", ""))
-    sample_size_text = _v(row, "ps_sampleSize", "").strip()
+    filters = _parse_dimension_filters(row.get("ps_dimensionFilters", ""))
+    sample_size_text = row.get("ps_sampleSize", "").strip()
+    if not filters:
+        filters = _default_dimension_filters(row.get("domain", ""))
     strategy = {
         "schemaVersion": "1.0",
         "sources": [],
-        "defaultMode": _v(row, "ps_defaultMode", "").strip() or "random",
+        "defaultMode": row.get("ps_defaultMode", "").strip() or "random",
         "dimensionFilters": filters,
     }
     stratify_raw = _v(row, "ps_stratifyFields", "").strip()
