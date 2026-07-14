@@ -59,7 +59,7 @@ def _format_transcript_turns(
     for turn in transcript:
         lines.append("you: {}".format(turn.user_message))
         lines.append("{}: {}".format(chatbot_label, turn.assistant_message))
-        for item in turn.persona_exposure:
+        for item in turn.structured_exposure:
             label = str(item.get("label") or item.get("key") or "Visible detail")
             kind = str(item.get("format") or "text")
             value = _format_exposure_value(item.get("value"), kind=kind)

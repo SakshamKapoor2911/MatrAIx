@@ -1,8 +1,13 @@
 """Task-declared chatbot capabilities for UserSim and Harbor persona agents.
 
-Product features (upload, recommendations, …) are declared in ``chatbot.yaml``
-and assembled into tools / prompts per task. Shared chat always includes text
-messaging plus the UserSim control tool ``end_conversation``.
+Contract names (one concept):
+- yaml section: ``structuredExposure.fields[]``
+- capability id: ``structured_exposure`` (list in ``capabilities``; also
+  auto-added when exposure fields exist)
+- turn wire field: ``structuredExposure``
+
+Shared chat always includes text messaging plus the UserSim control tool
+``end_conversation``.
 """
 
 from __future__ import annotations
@@ -54,18 +59,20 @@ _TEXT_CHAT = ChatbotCapability(
     http=ChatbotCapabilityHttp(method="POST", path="/v1/messages"),
 )
 
+STRUCTURED_EXPOSURE = ChatbotCapability(
+    id="structured_exposure",
+    label="Structured reply details",
+    description=(
+        "The chatbot may attach structured details in its replies; "
+        "inspect task-configured structuredExposure.fields after each turn."
+    ),
+    kind="exposure",
+    tool="",
+)
+
 _KNOWN: dict[str, ChatbotCapability] = {
     "text_chat": _TEXT_CHAT,
-    "recommendations": ChatbotCapability(
-        id="recommendations",
-        label="Item recommendations",
-        description=(
-            "The chatbot may return recommended items in its replies; "
-            "inspect visible structured details after each turn."
-        ),
-        kind="exposure",
-        tool="",
-    ),
+    "structured_exposure": STRUCTURED_EXPOSURE,
     "upload_image": ChatbotCapability(
         id="upload_image",
         label="Image upload",
@@ -89,7 +96,6 @@ _KNOWN: dict[str, ChatbotCapability] = {
         http=ChatbotCapabilityHttp(method="POST", path="/v1/validate"),
     ),
 }
-
 
 
 def default_capabilities() -> tuple[ChatbotCapability, ...]:
@@ -119,6 +125,21 @@ def parse_capabilities(raw: Any) -> tuple[ChatbotCapability, ...]:
     if "text_chat" not in seen:
         out.insert(0, _TEXT_CHAT)
     return tuple(out) if out else default_capabilities()
+
+
+def with_structured_exposure_capability(
+    capabilities: Sequence[ChatbotCapability],
+    *,
+    has_exposure_fields: bool,
+) -> tuple[ChatbotCapability, ...]:
+    """Ensure capability ``structured_exposure`` when yaml defines exposure fields."""
+    caps = list(capabilities) if capabilities else list(default_capabilities())
+    ids = {item.id for item in caps}
+    if has_exposure_fields and "structured_exposure" not in ids:
+        caps.append(STRUCTURED_EXPOSURE)
+    if "text_chat" not in ids:
+        caps.insert(0, _TEXT_CHAT)
+    return tuple(caps)
 
 
 def _parse_one(entry: Any) -> ChatbotCapability | None:

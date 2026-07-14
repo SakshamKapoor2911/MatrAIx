@@ -386,7 +386,7 @@ function TranscriptTurn({
   const turnView: TurnView = {
     userMessage: turn.userMessage,
     assistantMessage: turn.assistantMessage ?? "",
-    personaExposure: turn.personaExposure ?? [],
+    structuredExposure: turn.structuredExposure ?? [],
     durationSeconds: turn.durationSeconds,
     plan: [],
   };

@@ -24,7 +24,7 @@ shape is (approximately)::
       "userMessage": "...",
       "assistantMessage": "...",
       "plan": [{"tool": "HardFilter", "detail": "...", "status": "ok"}, ...],
-      "personaExposure": [
+      "structuredExposure": [
           {"key": "...", "label": "...", "format": "item_list", "value": [...]},
       ],
       "nativeRaw": <stringified native_action.raw>,
@@ -43,7 +43,7 @@ import json
 import re
 from typing import Any, Dict, List, Optional
 
-from playground.persona_exposure import (
+from playground.structured_exposure import (
     coerce_turn_view,
     item_list_from_exposure,
 )
@@ -140,9 +140,9 @@ class TraceView:
         resolved_items = TraceView._resolve_items(
             recommended_ids, trace, catalog
         )
-        persona_exposure: List[Dict[str, Any]] = []
+        structured_exposure: List[Dict[str, Any]] = []
         if resolved_items:
-            persona_exposure.append(
+            structured_exposure.append(
                 {
                     "key": "structuredItems",
                     "label": "Structured details",
@@ -162,7 +162,7 @@ class TraceView:
             "userMessage": user_message,
             "assistantMessage": assistant_message,
             "plan": plan,
-            "personaExposure": persona_exposure,
+            "structuredExposure": structured_exposure,
             "nativeRaw": native_raw,
             "rawToolOutputs": trace.get("raw_tool_outputs"),
             "durationSeconds": (

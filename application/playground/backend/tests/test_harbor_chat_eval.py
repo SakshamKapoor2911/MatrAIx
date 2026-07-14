@@ -50,7 +50,7 @@ def test_harbor_output_artifacts_from_result_maps_chat_contract(monkeypatch):
                 turn_index=2,
                 user_message="Something warm",
                 assistant_message="Try Past Lives",
-                persona_exposure=[
+                structured_exposure=[
                     {
                         "key": "recommendedItems",
                         "label": "Recommended items",
@@ -99,7 +99,7 @@ def test_harbor_output_artifacts_from_result_maps_chat_contract(monkeypatch):
                     "turnIndex": 2,
                     "userMessage": "Something warm",
                     "assistantMessage": "Try Past Lives",
-                    "personaExposure": [
+                    "structuredExposure": [
                         {
                             "key": "recommendedItems",
                             "label": "Recommended items",
@@ -114,7 +114,7 @@ def test_harbor_output_artifacts_from_result_maps_chat_contract(monkeypatch):
     transcript = artifacts["transcript.json"]
     assert transcript["sessionId"] == "sess-1"
     assert len(transcript["messages"]) == 4
-    assert transcript["turns"][1]["personaExposure"][0]["value"] == [
+    assert transcript["turns"][1]["structuredExposure"][0]["value"] == [
         {"id": "movie-past-lives", "title": "Past Lives"}
     ]
     application_result = artifacts["application_result.json"]
@@ -237,7 +237,7 @@ async def test_run_harbor_chat_eval_for_persona_writes_output_artifacts(
                     turn_index=2,
                     user_message="Something warm",
                     assistant_message="Try Past Lives",
-                    persona_exposure=[
+                    structured_exposure=[
                         {
                             "key": "recommendedItems",
                             "label": "Recommended items",
@@ -280,7 +280,7 @@ async def test_run_harbor_chat_eval_for_persona_writes_output_artifacts(
                     "turnIndex": 2,
                     "userMessage": "Something warm",
                     "assistantMessage": "Try Past Lives",
-                    "personaExposure": [
+                    "structuredExposure": [
                         {
                             "key": "recommendedItems",
                             "label": "Recommended items",

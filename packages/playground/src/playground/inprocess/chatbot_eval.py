@@ -19,7 +19,7 @@ except ModuleNotFoundError:  # pragma: no cover - test env fallback
 from playground.chatbot_task_config import (
     load_chatbot_task_config_for_task_path,
 )
-from playground.persona_exposure import build_persona_exposure
+from playground.structured_exposure import build_structured_exposure
 from playground.types import PlaygroundConfig
 
 
@@ -57,14 +57,14 @@ class DirectApplicationSession:
             or ""
         )
         merged = {**response, **turn, "userMessage": message}
-        exposure = build_persona_exposure(
+        exposure = build_structured_exposure(
             merged,
-            self._task_config.persona_exposure if self._task_config else None,
+            self._task_config.structured_exposure if self._task_config else None,
         )
         view = {
             "assistantMessage": assistant,
             "userMessage": message,
-            "personaExposure": exposure,
+            "structuredExposure": exposure,
         }
         self.turns.append(view)
         return view

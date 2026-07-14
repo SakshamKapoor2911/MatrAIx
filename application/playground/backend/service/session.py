@@ -202,7 +202,7 @@ class RecBotSession:
 
         Persisted turns are passed through :func:`normalize_turn_view` so legacy
         artifacts (``turnId`` stored as an int, missing ``plan`` /
-        ``personaExposure``) are coerced to the wire contract on read — the
+        ``structuredExposure``) are coerced to the wire contract on read — the
         session re-serializes clean and ``GET /api/sessions/{id}`` no longer
         500s on response validation.
         """
@@ -393,7 +393,7 @@ class RecBotSession:
                 "userMessage": user_message,
                 "assistantMessage": turn.get("assistantMessage") or "",
                 "plan": [],
-                "personaExposure": turn.get("personaExposure") or [],
+                "structuredExposure": turn.get("structuredExposure") or [],
                 "durationSeconds": duration_seconds,
                 "raw": turn,
             }

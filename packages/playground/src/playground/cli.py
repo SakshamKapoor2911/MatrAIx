@@ -21,14 +21,14 @@ def format_transcript(result: PlaygroundResult) -> str:
         or "chatbot"
     )
     lines = [
-        "=== Persona eval: {} ({}) ===".format(result.persona.name, context_label),
+        "=== Playground run: {} ({}) ===".format(result.persona.name, context_label),
         "Persona goal: {}".format(result.persona.goal),
         "",
     ]
     for t in result.transcript:
         lines.append("USER:  {}".format(t.user_message))
         lines.append("AGENT: {}".format(t.assistant_message))
-        for item in t.persona_exposure:
+        for item in t.structured_exposure:
             label = item.get("label") or item.get("key") or "detail"
             value = item.get("value")
             if value not in (None, "", []):

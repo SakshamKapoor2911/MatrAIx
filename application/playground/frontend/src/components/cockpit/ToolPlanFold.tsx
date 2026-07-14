@@ -13,7 +13,7 @@
  */
 import { useId } from "react";
 
-import type { ExposureItem } from "./PersonaExposurePanel";
+import type { ExposureItem } from "./StructuredExposurePanel";
 import { Sym, FOCUS_RING } from "./cockpitShared";
 import type { PlanStep } from "@/lib/types";
 

@@ -21,7 +21,7 @@ from typing import Any, Callable, Dict, List, Optional, Sequence
 import yaml
 
 from backend.service.config import harbor_persona_model
-from playground.persona_exposure import coerce_turn_view
+from playground.structured_exposure import coerce_turn_view
 from playground.feedback import questionnaire_from_feedback
 from playground.types import Persona, PlaygroundConfig
 

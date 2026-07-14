@@ -143,7 +143,7 @@ def test_run_playground_tool_loop(monkeypatch):
     assert result.transcript[0].user_message == "Hi, looking for a warm drama"
     assert result.transcript[-1].decision == "satisfied"
     assert result.metric_scores.num_turns == 2
-    assert result.transcript[-1].persona_exposure[0]["value"] == [
+    assert result.transcript[-1].structured_exposure[0]["value"] == [
         {"itemId": "movie-1", "title": "Past Lives"}
     ]
     assert isinstance(result.questionnaire, Questionnaire)

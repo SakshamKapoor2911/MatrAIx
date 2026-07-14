@@ -38,7 +38,7 @@ export interface RunTranscriptTurn {
   turnIndex: number;
   userMessage: string;
   assistantMessage: string;
-  personaExposure?: { key?: string | null; label?: string | null; format?: string | null; value?: unknown }[];
+  structuredExposure?: { key?: string | null; label?: string | null; format?: string | null; value?: unknown }[];
   decision: RunDecision | string;
   durationSeconds: number | null;
 }

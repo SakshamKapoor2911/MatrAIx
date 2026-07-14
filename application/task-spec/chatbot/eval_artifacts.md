@@ -70,8 +70,10 @@ appear at the cwd — delete it or rerun from the task folder.
 ### `transcript.json`
 
 Conversation record for the trial. Includes user/assistant turns and any structured
-fields the task exposes to the persona via `input/chatbot.yaml`
-(`personaExposure.fields[]`).
+fields the task exposes via `input/chatbot.yaml` `structuredExposure.fields[]`
+(list capability id `structured_exposure` in `capabilities`; it is also
+auto-added when those fields exist; selectors are the source of truth for
+concrete field names).
 
 Harness may stamp run metadata on the root object:
 

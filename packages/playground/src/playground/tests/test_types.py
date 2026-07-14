@@ -59,7 +59,7 @@ def test_result_to_dict_has_camelcase_sections():
         turn_index=1,
         user_message="u",
         assistant_message="a",
-        persona_exposure=[
+        structured_exposure=[
             {"key": "items", "label": "Items", "format": "item_list", "value": [{"itemId": "6574", "title": "X"}]}
         ],
         decision="satisfied",
@@ -86,7 +86,7 @@ def test_result_to_dict_has_camelcase_sections():
     d = res.to_dict()
     assert d["config"]["domain"] == "game"
     assert d["config"]["personaModel"] == "anthropic/claude-haiku-4-5"
-    assert d["transcript"][0]["personaExposure"][0]["value"][0]["title"] == "X"
+    assert d["transcript"][0]["structuredExposure"][0]["value"][0]["title"] == "X"
     assert d["metricScores"]["numTurns"] == 1
 
 

@@ -1,4 +1,4 @@
-"""Build and normalize task-configured persona-visible turn fields."""
+"""Build and normalize task-configured structured turn fields."""
 
 from __future__ import annotations
 
@@ -15,7 +15,7 @@ def lookup_path(value: Any, path: str) -> Any:
     return current
 
 
-def build_persona_exposure(
+def build_structured_exposure(
     source: Dict[str, Any],
     fields: Sequence[Any] | None,
 ) -> List[Dict[str, Any]]:
@@ -53,7 +53,7 @@ def item_list_from_exposure(exposure: Any) -> List[Dict[str, Any]]:
 
 
 def coerce_turn_view(view: Any) -> Dict[str, Any]:
-    """Normalize a persisted or live turn dict to the wire contract."""
+    """Normalize a turn dict to the wire contract."""
     if not isinstance(view, dict):
         return {}
     out = dict(view)
@@ -65,20 +65,12 @@ def coerce_turn_view(view: Any) -> Dict[str, Any]:
         out["conversationId"] = str(conv_id)
     if not isinstance(out.get("plan"), list):
         out["plan"] = []
-    exposure = out.get("personaExposure")
+    exposure = out.get("structuredExposure")
     if not isinstance(exposure, list):
         exposure = []
-    legacy_items = out.pop("recommendedItems", None)
-    if not exposure and isinstance(legacy_items, list) and legacy_items:
-        exposure = [
-            {
-                "key": "items",
-                "label": "Structured details",
-                "format": "item_list",
-                "value": legacy_items,
-            }
-        ]
-    out["personaExposure"] = exposure
+    out["structuredExposure"] = [
+        dict(item) for item in exposure if isinstance(item, dict)
+    ]
     return out
 
 
@@ -99,9 +91,9 @@ def normalize_transcript_payload(
         if not isinstance(turn, dict):
             continue
         coerced = coerce_turn_view(turn)
-        if not coerced.get("personaExposure"):
-            exposure = build_persona_exposure({**out, **turn}, fields)
-            coerced["personaExposure"] = exposure
+        if not coerced.get("structuredExposure"):
+            exposure = build_structured_exposure({**out, **turn}, fields)
+            coerced["structuredExposure"] = exposure
         if coerced.get("turnId") is None:
             coerced["turnId"] = str(turn.get("turnIndex", index))
         normalized.append(coerced)

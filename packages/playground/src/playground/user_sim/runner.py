@@ -65,10 +65,10 @@ def _format_exposure_value(value: Any, *, kind: str) -> str:
 def _chatbot_observation(
     chatbot_label: str,
     assistant_message: str,
-    persona_exposure: Optional[List[Dict[str, Any]]] = None,
+    structured_exposure: Optional[List[Dict[str, Any]]] = None,
 ) -> str:
     details = []
-    for item in persona_exposure or []:
+    for item in structured_exposure or []:
         value = _format_exposure_value(
             item.get("value"), kind=str(item.get("format") or "text")
         ).strip()
@@ -180,23 +180,23 @@ def run_playground(
         view = normalize_agent_turn(
             raw_view,
             message,
-            persona_exposure_fields=task_config.persona_exposure if task_config else None,
+            structured_exposure_fields=task_config.structured_exposure if task_config else None,
         )
         assistant = str(view.get("assistantMessage") or "")
-        persona_exposure = list(view.get("personaExposure") or [])
+        structured_exposure = list(view.get("structuredExposure") or [])
         emit(
             {
                 "type": "assistant_message",
                 "turnIndex": index,
                 "userMessage": message,
                 "assistantMessage": assistant,
-                "personaExposure": persona_exposure,
+                "structuredExposure": structured_exposure,
                 "durationSeconds": view.get("durationSeconds"),
             }
         )
         emit({"type": "phase", "phase": "persona_thinking"})
         action = sim.next_action(
-            _chatbot_observation(chatbot_label, assistant, persona_exposure)
+            _chatbot_observation(chatbot_label, assistant, structured_exposure)
         )
 
         decision = action.decision if action.end_reason else "continue"
@@ -204,7 +204,7 @@ def run_playground(
             turn_index=index,
             user_message=message,
             assistant_message=assistant,
-            persona_exposure=persona_exposure,
+            structured_exposure=structured_exposure,
             decision=decision,
             duration_seconds=view.get("durationSeconds"),
         )
@@ -303,23 +303,23 @@ async def run_playground_async(
         view = normalize_agent_turn(
             raw_view,
             message,
-            persona_exposure_fields=task_config.persona_exposure if task_config else None,
+            structured_exposure_fields=task_config.structured_exposure if task_config else None,
         )
         assistant = str(view.get("assistantMessage") or "")
-        persona_exposure = list(view.get("personaExposure") or [])
+        structured_exposure = list(view.get("structuredExposure") or [])
         emit(
             {
                 "type": "assistant_message",
                 "turnIndex": index,
                 "userMessage": message,
                 "assistantMessage": assistant,
-                "personaExposure": persona_exposure,
+                "structuredExposure": structured_exposure,
                 "durationSeconds": view.get("durationSeconds"),
             }
         )
         emit({"type": "phase", "phase": "persona_thinking"})
         action = sim.next_action(
-            _chatbot_observation(chatbot_label, assistant, persona_exposure)
+            _chatbot_observation(chatbot_label, assistant, structured_exposure)
         )
 
         decision = action.decision if action.end_reason else "continue"
@@ -327,7 +327,7 @@ async def run_playground_async(
             turn_index=index,
             user_message=message,
             assistant_message=assistant,
-            persona_exposure=persona_exposure,
+            structured_exposure=structured_exposure,
             decision=decision,
             duration_seconds=view.get("durationSeconds"),
         )

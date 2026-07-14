@@ -5,7 +5,7 @@ runtimeDefaults:
   domain: financial_research
 capabilities:
   - text_chat
-  - recommendations
+  - structured_exposure
 connection:
   baseUrlEnv: CHATBOT_UPSTREAM_FINANCE
   legacyBaseUrlEnv: FINANCE_CHATBOT_URL
@@ -27,12 +27,11 @@ protocol:
     sessionIdField: sessionId
     replyField: reply
     turnField: turn
-    recommendedItemsField: recommendedItems
-personaExposure:
+structuredExposure:
   fields:
-    - key: recommendedItems
+    - key: groundedItems
       label: Suggested tickers, funds, or instruments
-      selector: recommendedItems
+      selector: groundedItems
       format: item_list
 artifacts:
   transcript: transcript.json

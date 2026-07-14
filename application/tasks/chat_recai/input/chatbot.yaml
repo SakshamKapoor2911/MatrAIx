@@ -5,7 +5,7 @@ runtimeDefaults:
   domain: movie
 capabilities:
   - text_chat
-  - recommendations
+  - structured_exposure
 connection:
   baseUrlEnv: CHATBOT_API_URL
   baseUrl: http://rec-agent-api:8000
@@ -24,8 +24,7 @@ protocol:
     sessionIdField: sessionId
     replyField: reply
     turnField: turn
-    recommendedItemsField: recommendedItems
-personaExposure:
+structuredExposure:
   fields:
     - key: recommendedItems
       label: Recommended items

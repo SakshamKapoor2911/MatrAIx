@@ -42,7 +42,7 @@ __all__ = [
     "ConfigOptionsResponse",
     "ChatMessageModel",
     "PlanStep",
-    "PersonaExposureField",
+    "StructuredExposureField",
     "TurnView",
     "SessionConfig",
     "Session",
@@ -258,8 +258,8 @@ class PlanStep(BaseModel):
         return value if isinstance(value, str) else str(value)
 
 
-class PersonaExposureField(BaseModel):
-    """One task-configured field visible to the persona or UI on a turn."""
+class StructuredExposureField(BaseModel):
+    """One task-configured structured field visible on a turn."""
 
     model_config = ConfigDict(extra="allow")
 
@@ -284,7 +284,7 @@ class TurnView(BaseModel):
     userMessage: Optional[str] = None
     assistantMessage: Optional[str] = None
     plan: List[PlanStep] = Field(default_factory=list)
-    personaExposure: List[PersonaExposureField] = Field(default_factory=list)
+    structuredExposure: List[StructuredExposureField] = Field(default_factory=list)
     nativeRaw: Optional[str] = None
     rawToolOutputs: Any = None
 
@@ -423,7 +423,7 @@ class CatalogSearchResponse(BaseModel):
 
 
 # --------------------------------------------------------------------------- #
-# Persona eval (persona catalog + Harbor debrief views)
+# Playground persona catalog + Harbor debrief views
 # --------------------------------------------------------------------------- #
 class PersonaSummary(BaseModel):
     """A persona as surfaced by ``GET /api/playground/personas``.

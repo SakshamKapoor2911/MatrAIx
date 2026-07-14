@@ -81,7 +81,7 @@ supplementary materials under `input/`:
   runtime**, never pasted into persona-facing instruction or context
 - `input/chatbot.yaml` — runtime connection metadata. Treat the sidecar as a
   black box: declare transport, connection, `capabilities` (machine tool /
-  HTTP wiring for UserSim), and optional `personaExposure.fields[]`. Playground
+  HTTP wiring for UserSim), and optional `structuredExposure.fields[]`. Playground
   / Harbor pass through `runtimeDefaults` without interpreting SUT catalogs.
   Do not mirror sidecar-internal knobs in the UI.
 - `input/self_report_schema.yaml` — machine-readable persona self-report prompts
@@ -94,8 +94,13 @@ use per-task `input/output_schema.md`; subjective feedback is owned by
 
 Use machine-readable files for runtime-owned behavior:
 
-- `chatbot.yaml` owns transport metadata, `capabilities[]` for tool assembly,
-  and `personaExposure.fields[]` for structured reply fields
+- `chatbot.yaml` owns transport metadata and `capabilities[]` for tools.
+  Persona-visible structured reply details use one name: yaml
+  `structuredExposure.fields[]` (source of truth for selectors). List the
+  matching capability id `structured_exposure` in `capabilities` (also
+  auto-added when those fields are present). SUT JSON keys
+  (`recommendedItems`, `groundedItems`, …) are not platform fields — only
+  `selector` targets.
 - `context.md` owns persona-facing product / capability prose
 - `self_report_schema.yaml` owns the post-chat self-report contract written to
   `user_feedback.json`

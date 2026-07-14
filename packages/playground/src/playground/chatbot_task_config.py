@@ -13,6 +13,7 @@ from playground.chatbot_capabilities import (
     ChatbotCapability,
     default_capabilities,
     parse_capabilities,
+    with_structured_exposure_capability,
 )
 from playground.task_content_bundle import (
     content_dir_for_task_path,
@@ -57,11 +58,10 @@ class ChatbotProtocolConfig:
     response_session_id_field: str = "sessionId"
     response_reply_field: str = "reply"
     response_turn_field: str = "turn"
-    response_recommended_items_field: str = "recommendedItems"
 
 
 @dataclass(frozen=True)
-class ChatbotPersonaExposureField:
+class ChatbotStructuredExposureField:
     key: str
     label: str
     selector: str
@@ -83,7 +83,9 @@ class ChatbotTaskConfig:
     connection: ChatbotConnectionConfig = field(default_factory=ChatbotConnectionConfig)
     protocol: ChatbotProtocolConfig = field(default_factory=ChatbotProtocolConfig)
     capabilities: tuple[ChatbotCapability, ...] = field(default_factory=default_capabilities)
-    persona_exposure: tuple[ChatbotPersonaExposureField, ...] = field(default_factory=tuple)
+    structured_exposure: tuple[ChatbotStructuredExposureField, ...] = field(
+        default_factory=tuple
+    )
     artifacts: dict[str, str] = field(default_factory=dict)
 
 
@@ -121,7 +123,7 @@ def _load_from_payload(payload: dict[str, Any]) -> ChatbotTaskConfig:
     runtime = _as_mapping(payload.get("runtimeDefaults"))
     connection = _as_mapping(payload.get("connection"))
     protocol = _as_mapping(payload.get("protocol"))
-    persona_exposure = _as_mapping(payload.get("personaExposure"))
+    structured_exposure = _as_mapping(payload.get("structuredExposure"))
     send = _as_mapping(protocol.get("sendMessage"))
     response = _as_mapping(protocol.get("response"))
     artifacts = {
@@ -130,18 +132,18 @@ def _load_from_payload(payload: dict[str, Any]) -> ChatbotTaskConfig:
         if _as_string(value)
     }
     exposure_fields = []
-    for index, entry in enumerate(_as_sequence(persona_exposure.get("fields"))):
+    for index, entry in enumerate(_as_sequence(structured_exposure.get("fields"))):
         field_payload = _as_mapping(entry)
         key = _as_string(field_payload.get("key"))
         selector = _as_string(field_payload.get("selector"))
         if not key or not selector:
             raise ValueError(
-                "chatbot.yaml personaExposure.fields[{}] requires key and selector".format(
+                "chatbot.yaml structuredExposure.fields[{}] requires key and selector".format(
                     index
                 )
             )
         exposure_fields.append(
-            ChatbotPersonaExposureField(
+            ChatbotStructuredExposureField(
                 key=key,
                 label=_as_string(field_payload.get("label")) or key,
                 selector=selector,
@@ -180,12 +182,12 @@ def _load_from_payload(payload: dict[str, Any]) -> ChatbotTaskConfig:
             ),
             response_reply_field=_as_string(response.get("replyField")) or "reply",
             response_turn_field=_as_string(response.get("turnField")) or "turn",
-            response_recommended_items_field=(
-                _as_string(response.get("recommendedItemsField")) or "recommendedItems"
-            ),
         ),
-        capabilities=parse_capabilities(payload.get("capabilities")),
-        persona_exposure=tuple(exposure_fields),
+        capabilities=with_structured_exposure_capability(
+            parse_capabilities(payload.get("capabilities")),
+            has_exposure_fields=bool(exposure_fields),
+        ),
+        structured_exposure=tuple(exposure_fields),
         artifacts=artifacts,
     )
 

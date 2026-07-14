@@ -80,13 +80,13 @@ export interface TurnView {
   userMessage: string;
   assistantMessage: string;
   plan?: PlanStep[];
-  personaExposure?: PersonaExposureField[];
+  structuredExposure?: StructuredExposureField[];
   nativeRaw?: string | null;
   rawToolOutputs?: unknown;
   durationSeconds?: number | null;
 }
 
-export interface PersonaExposureField {
+export interface StructuredExposureField {
   key?: string | null;
   label?: string | null;
   format?: string | null;
@@ -205,7 +205,7 @@ export interface HarborDraftTurn {
   turnIndex?: number;
   userMessage?: string;
   assistantMessage?: string;
-  personaExposure?: PersonaExposureField[];
+  structuredExposure?: StructuredExposureField[];
   durationSeconds?: number | null;
 }
 

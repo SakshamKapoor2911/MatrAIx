@@ -5,6 +5,7 @@ import type {
   PlaygroundPrompts,
   PlaygroundQuestionnaire,
   PlaygroundResult,
+  StructuredExposureField,
   SurveyEvalJobView,
   SurveyResult,
   TurnView,
@@ -39,6 +40,11 @@ function asTurns(transcript: unknown): TurnView[] {
   return transcript.map((turn) => normalizeTurnDict(turn as Record<string, unknown>));
 }
 
+function asStructuredExposure(raw: unknown): StructuredExposureField[] {
+  if (!Array.isArray(raw)) return [];
+  return raw.filter((item): item is StructuredExposureField => Boolean(item) && typeof item === "object");
+}
+
 export function normalizeTurnDict(turn: Record<string, unknown>): TurnView {
   const assistant = turn.assistantMessage;
   const legacyAssistant = turn.assistantReply;
@@ -51,6 +57,7 @@ export function normalizeTurnDict(turn: Record<string, unknown>): TurnView {
     assistantMessage: String(assistant ?? legacyAssistant ?? ""),
     durationSeconds: (durationSeconds as number | null | undefined) ?? null,
     plan: Array.isArray(turn.plan) ? (turn.plan as TurnView["plan"]) : [],
+    structuredExposure: asStructuredExposure(turn.structuredExposure),
     nativeRaw: typeof turn.nativeRaw === "string" ? turn.nativeRaw : null,
     rawToolOutputs: turn.rawToolOutputs ?? null,
   };
@@ -62,6 +69,7 @@ export function draftTurnToView(draft: HarborDraftTurn): TurnView {
     userMessage: draft.userMessage ?? "",
     assistantMessage: draft.assistantMessage ?? "",
     durationSeconds: draft.durationSeconds ?? null,
+    structuredExposure: draft.structuredExposure ?? [],
     plan: [],
   };
 }
@@ -162,6 +170,7 @@ export function applyHarborTrialEvents(
     message?: string;
     userMessage?: string;
     assistantMessage?: string;
+    structuredExposure?: StructuredExposureField[];
     durationSeconds?: number | null;
   }>,
   prev: HarborCockpitLiveState,
@@ -182,6 +191,7 @@ export function applyHarborTrialEvents(
         turnIndex: event.turnIndex,
         userMessage: event.message,
         assistantMessage: "",
+        structuredExposure: [],
       };
       phase = "recommender_thinking";
     } else if (event.type === "assistant_message") {
@@ -189,6 +199,7 @@ export function applyHarborTrialEvents(
         turnIndex: event.turnIndex ?? draftTurn?.turnIndex,
         userMessage: event.userMessage ?? draftTurn?.userMessage ?? "",
         assistantMessage: event.assistantMessage ?? "",
+        structuredExposure: asStructuredExposure(event.structuredExposure),
         durationSeconds: event.durationSeconds ?? null,
       };
       phase = "persona_thinking";
@@ -199,6 +210,7 @@ export function applyHarborTrialEvents(
           turnIndex: draftTurn?.turnIndex,
           userMessage: event.userMessage,
           assistantMessage: draftTurn?.assistantMessage ?? "",
+          structuredExposure: draftTurn?.structuredExposure ?? [],
         };
       }
     } else if (event.type === "turn" && event.turn) {

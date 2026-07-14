@@ -23,8 +23,8 @@ from playground.harbor.chat_mcp_session import (
 )
 from playground.harbor.chat_sidecar_io import parse_json_stdout
 from playground.inprocess.chatbot_eval import config_context
-from playground.persona_exposure import (
-    build_persona_exposure,
+from playground.structured_exposure import (
+    build_structured_exposure,
     normalize_transcript_payload,
 )
 from playground.task_content_bundle import (
@@ -182,11 +182,11 @@ def _normalize_turn_view(
         or ""
     )
     merged = {**response, **turn, "userMessage": user_message}
-    exposure = build_persona_exposure(merged, runtime.persona_exposure)
+    exposure = build_structured_exposure(merged, runtime.structured_exposure)
     return {
         "assistantMessage": assistant,
         "userMessage": user_message,
-        "personaExposure": exposure,
+        "structuredExposure": exposure,
     }
 
 
@@ -473,7 +473,7 @@ async def _write_output_artifacts(
     }
     transcript_payload = normalize_transcript_payload(
         transcript_payload,
-        fields=session.runtime.persona_exposure,
+        fields=session.runtime.structured_exposure,
     )
     artifacts = harbor_output_artifacts_from_result(
         result,

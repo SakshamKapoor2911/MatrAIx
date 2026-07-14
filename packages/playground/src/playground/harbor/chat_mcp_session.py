@@ -144,7 +144,7 @@ class HarborMcpChatSession:
         view = {
             "assistantMessage": assistant,
             "userMessage": message,
-            "personaExposure": [],
+            "structuredExposure": [],
         }
         self.turns.append(view)
         return view

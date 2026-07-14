@@ -45,7 +45,7 @@ def test_build_result_from_harbor_artifacts_maps_transcript_feedback_and_metrics
                         "userMessage": "I want something tense but not graphic.",
                         "assistantMessage": "Do you prefer mainstream or lesser-known films?",
                         "plan": [],
-                        "recommendedItems": [],
+                        "structuredExposure": [],
                         "nativeRaw": None,
                         "rawToolOutputs": None,
                     },
@@ -56,8 +56,15 @@ def test_build_result_from_harbor_artifacts_maps_transcript_feedback_and_metrics
                         "userMessage": "Lesser-known is fine if it fits.",
                         "assistantMessage": "Try Movie A.",
                         "plan": [],
-                        "recommendedItems": [
-                            {"itemId": "42", "title": "Movie A", "rank": 1}
+                        "structuredExposure": [
+                            {
+                                "key": "recommendedItems",
+                                "label": "Recommended items",
+                                "format": "item_list",
+                                "value": [
+                                    {"itemId": "42", "title": "Movie A", "rank": 1}
+                                ],
+                            }
                         ],
                         "nativeRaw": None,
                         "rawToolOutputs": None,
@@ -103,7 +110,7 @@ def test_build_result_from_harbor_artifacts_maps_transcript_feedback_and_metrics
         },
     )
 
-    assert result.turn_views[1]["personaExposure"][0]["value"] == [
+    assert result.turn_views[1]["structuredExposure"][0]["value"] == [
         {"itemId": "42", "title": "Movie A", "rank": 1}
     ]
     payload = result.to_dict()
@@ -144,7 +151,7 @@ def test_build_result_from_harbor_artifacts_maps_persona_self_report_keys(tmp_pa
                         "turnId": "0",
                         "userMessage": "I want a movie.",
                         "assistantMessage": "Try Movie A.",
-                        "recommendedItems": [{"itemId": "42", "title": "Movie A"}],
+                        "structuredExposure": [{"key": "recommendedItems", "label": "Recommended items", "format": "item_list", "value": [{"itemId": "42", "title": "Movie A"}]}],
                     }
                 ],
             }
@@ -202,7 +209,7 @@ def test_build_result_from_harbor_artifacts_normalizes_legacy_turn_fields(tmp_pa
                         "index": 1,
                         "userMessage": "I want a thoughtful movie.",
                         "assistantReply": "Try Movie A.",
-                        "recommendedItems": [{"itemId": "42", "title": "Movie A"}],
+                        "structuredExposure": [{"key": "recommendedItems", "label": "Recommended items", "format": "item_list", "value": [{"itemId": "42", "title": "Movie A"}]}],
                     }
                 ],
             }
@@ -250,7 +257,7 @@ def test_build_result_from_harbor_artifacts_fills_application_result_from_transc
                         "turnId": "0",
                         "userMessage": "I want a movie.",
                         "assistantMessage": "Try Movie A.",
-                        "recommendedItems": [{"itemId": "42", "title": "Movie A"}],
+                        "structuredExposure": [{"key": "recommendedItems", "label": "Recommended items", "format": "item_list", "value": [{"itemId": "42", "title": "Movie A"}]}],
                     }
                 ],
             }
@@ -297,7 +304,7 @@ def test_build_result_from_harbor_artifacts_allows_general_chatbot_without_items
                         "assistantMessage": (
                             "What time horizon and risk constraints matter?"
                         ),
-                        "recommendedItems": [],
+                        "structuredExposure": [],
                     }
                 ],
             }
@@ -370,7 +377,7 @@ def test_build_result_from_harbor_artifacts_accepts_application_scorer_questionn
                         "backend": "interecagent",
                         "userMessage": "I want a movie.",
                         "assistantMessage": "Try Movie A.",
-                        "recommendedItems": [{"itemId": "42", "title": "Movie A"}],
+                        "structuredExposure": [{"key": "recommendedItems", "label": "Recommended items", "format": "item_list", "value": [{"itemId": "42", "title": "Movie A"}]}],
                     }
                 ],
             }
@@ -441,7 +448,7 @@ def test_build_result_from_harbor_artifacts_maps_turns_to_result(tmp_path):
                         "turnId": "0",
                         "userMessage": "I want a movie.",
                         "assistantMessage": "Try Movie A.",
-                        "recommendedItems": [{"itemId": "42", "title": "Movie A"}],
+                        "structuredExposure": [{"key": "recommendedItems", "label": "Recommended items", "format": "item_list", "value": [{"itemId": "42", "title": "Movie A"}]}],
                     }
                 ],
             }
@@ -499,7 +506,7 @@ def test_build_result_from_harbor_artifacts_reads_verifier_feedback(tmp_path):
                         "turnId": "0",
                         "userMessage": "I want a movie.",
                         "assistantMessage": "Try Movie A.",
-                        "recommendedItems": [{"itemId": "42", "title": "Movie A"}],
+                        "structuredExposure": [{"key": "recommendedItems", "label": "Recommended items", "format": "item_list", "value": [{"itemId": "42", "title": "Movie A"}]}],
                     }
                 ],
             }
@@ -804,7 +811,7 @@ def test_harbor_runner_writes_run_inputs_invokes_harbor_and_maps_artifacts(
                             "turnId": "0",
                             "userMessage": "I want a movie.",
                             "assistantMessage": "Try Movie A.",
-                            "recommendedItems": [{"itemId": "42", "title": "Movie A"}],
+                            "structuredExposure": [{"key": "recommendedItems", "label": "Recommended items", "format": "item_list", "value": [{"itemId": "42", "title": "Movie A"}]}],
                         }
                     ],
                 }
@@ -863,7 +870,7 @@ def test_harbor_runner_writes_run_inputs_invokes_harbor_and_maps_artifacts(
     assert "--agent-env" in calls[0][0]
     assert "--verifier-env" not in calls[0][0]
     assert "--env-file" in calls[0][0]
-    assert session.turns[0]["personaExposure"][0]["value"][0]["itemId"] == "42"
+    assert session.turns[0]["structuredExposure"][0]["value"][0]["itemId"] == "42"
     payload = result.to_dict()
     assert payload["questionnaire"]["overallRating"] == 9
     assert payload["prompts"]["harborPrompt"] == "A careful viewer."
@@ -916,10 +923,17 @@ def test_harbor_runner_uses_finance_compose_profile(tmp_path):
                             "turnId": "fin_turn_1",
                             "userMessage": "Compare fintech securities.",
                             "assistantMessage": "I used OpenBB data.",
-                            "recommendedItems": [
+                            "structuredExposure": [
+                                {
+                                    "key": "recommendedItems",
+                                    "label": "Recommended items",
+                                    "format": "item_list",
+                                    "value": [
                                 {
                                     "itemId": "finance:openbb:equity_screener:0",
                                     "title": "OpenBB equity_screener",
+                                }
+                                    ]
                                 }
                             ],
                         }
@@ -1036,7 +1050,7 @@ def test_harbor_runner_uses_medical_compose_profile(tmp_path):
                             "assistantMessage": (
                                 "I can share general guidance and red flags."
                             ),
-                            "recommendedItems": [],
+                            "structuredExposure": [],
                         }
                     ],
                 }
@@ -1138,7 +1152,7 @@ def test_harbor_runner_reads_feedback_written_by_application_scorer_artifact(tmp
                             "turnId": "0",
                             "userMessage": "I want a movie.",
                             "assistantMessage": "Try Movie A.",
-                            "recommendedItems": [{"itemId": "42", "title": "Movie A"}],
+                            "structuredExposure": [{"key": "recommendedItems", "label": "Recommended items", "format": "item_list", "value": [{"itemId": "42", "title": "Movie A"}]}],
                         }
                     ],
                 }
@@ -1225,7 +1239,7 @@ def test_harbor_runner_persona_model_can_be_overridden(tmp_path, monkeypatch):
                             "turnId": "0",
                             "userMessage": "I want a movie.",
                             "assistantMessage": "Try Movie A.",
-                            "recommendedItems": [{"itemId": "42", "title": "Movie A"}],
+                            "structuredExposure": [{"key": "recommendedItems", "label": "Recommended items", "format": "item_list", "value": [{"itemId": "42", "title": "Movie A"}]}],
                         }
                     ],
                 }
@@ -1302,7 +1316,7 @@ def test_harbor_runner_cache_flags_can_be_overridden(tmp_path, monkeypatch):
                             "turnId": "0",
                             "userMessage": "I want a movie.",
                             "assistantMessage": "Try Movie A.",
-                            "recommendedItems": [{"itemId": "42", "title": "Movie A"}],
+                            "structuredExposure": [{"key": "recommendedItems", "label": "Recommended items", "format": "item_list", "value": [{"itemId": "42", "title": "Movie A"}]}],
                         }
                     ],
                 }
@@ -1379,7 +1393,7 @@ def test_harbor_runner_default_command_uses_configured_harbor_command(
                             "turnId": "0",
                             "userMessage": "I want a movie.",
                             "assistantMessage": "Try Movie A.",
-                            "recommendedItems": [{"itemId": "42", "title": "Movie A"}],
+                            "structuredExposure": [{"key": "recommendedItems", "label": "Recommended items", "format": "item_list", "value": [{"itemId": "42", "title": "Movie A"}]}],
                         }
                     ],
                 }

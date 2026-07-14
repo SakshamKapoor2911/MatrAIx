@@ -35,11 +35,11 @@ def test_load_chatbot_task_config_from_input_dir(tmp_path, monkeypatch) -> None:
                 "      applicationContext: financial_research",
                 "  response:",
                 "    replyField: reply",
-                "personaExposure:",
+                "structuredExposure:",
                 "  fields:",
-                "    - key: recommendedItems",
+                "    - key: groundedItems",
                 "      label: Suggested instruments",
-                "      selector: recommendedItems",
+                "      selector: groundedItems",
                 "      format: item_list",
             ]
         ),
@@ -55,7 +55,7 @@ def test_load_chatbot_task_config_from_input_dir(tmp_path, monkeypatch) -> None:
     assert config.runtime_defaults.max_turns == 9
     assert config.protocol.engine_field == "engine"
     assert config.protocol.static_body["applicationId"] == "finance_openbb"
-    assert config.persona_exposure[0].selector == "recommendedItems"
+    assert config.structured_exposure[0].selector == "groundedItems"
 
     monkeypatch.setenv("CHATBOT_UPSTREAM_FINANCE", "http://finance.local:9000")
     assert chat_api_url_from_env("finance_openbb", task_config=config) == "http://finance.local:9000"

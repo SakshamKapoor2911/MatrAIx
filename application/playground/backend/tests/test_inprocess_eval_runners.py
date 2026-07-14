@@ -158,7 +158,7 @@ def test_direct_finance_session_uses_http_sidecar(monkeypatch):
     assert calls[0]["body"]["applicationContext"] == "financial_research"
     assert calls[0]["body"]["message"] == "Can you compare low-cost broad market ETFs?"
     assert turn["assistantMessage"] == "I can compare ETFs and risk constraints."
-    assert isinstance(turn.get("personaExposure"), list)
+    assert isinstance(turn.get("structuredExposure"), list)
 
 
 def test_direct_medical_session_uses_http_sidecar(monkeypatch):

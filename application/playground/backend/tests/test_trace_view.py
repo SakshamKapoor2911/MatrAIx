@@ -18,7 +18,7 @@ from backend.tests.conftest import (
 
 
 def _items(view):
-    return item_list_from_exposure(view.get("personaExposure"))
+    return item_list_from_exposure(view.get("structuredExposure"))
 
 
 def _make_result() -> RecBotTurnResult:
@@ -215,7 +215,7 @@ def test_empty_dict_is_tolerated(catalog):
     assert view["turnId"] is None
     assert view["userMessage"] is None
     assert view["plan"] == []
-    assert view["personaExposure"] == []
+    assert view["structuredExposure"] == []
     assert view["nativeRaw"] == ""
     assert view["durationSeconds"] is None
 

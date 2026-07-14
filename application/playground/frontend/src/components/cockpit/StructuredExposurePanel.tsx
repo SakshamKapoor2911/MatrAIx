@@ -1,11 +1,11 @@
 /**
- * PersonaExposurePanel: generic structured fields visible on an app turn.
+ * StructuredExposurePanel: generic structured fields visible on an app turn.
  *
- * Renders task-configured ``personaExposure`` entries (item lists, text, JSON).
+ * Renders task-configured ``structuredExposure`` entries (item lists, text, JSON).
  * The platform does not hard-code recommender semantics; tasks declare fields in
  * ``input/chatbot.yaml``.
  */
-import type { PersonaExposureField } from "@/lib/types";
+import type { StructuredExposureField } from "@/lib/types";
 
 export interface ExposureItem {
   itemId: string;
@@ -15,7 +15,7 @@ export interface ExposureItem {
   score?: number | null;
 }
 
-function exposureItems(field: PersonaExposureField): ExposureItem[] {
+function exposureItems(field: StructuredExposureField): ExposureItem[] {
   if (field.format !== "item_list" || !Array.isArray(field.value)) return [];
   return field.value.flatMap((raw, index) => {
     if (!raw || typeof raw !== "object") return [];
@@ -34,7 +34,7 @@ function exposureItems(field: PersonaExposureField): ExposureItem[] {
   });
 }
 
-function formatValue(field: PersonaExposureField): string {
+function formatValue(field: StructuredExposureField): string {
   const value = field.value;
   if (value === null || value === undefined) return "";
   if (typeof value === "string") return value;
@@ -45,7 +45,7 @@ function formatValue(field: PersonaExposureField): string {
   }
 }
 
-function ItemListField({ field }: { field: PersonaExposureField }) {
+function ItemListField({ field }: { field: StructuredExposureField }) {
   const items = exposureItems(field);
   if (items.length === 0) return null;
   const label = field.label ?? field.key ?? "Details";
@@ -91,7 +91,7 @@ function ItemListField({ field }: { field: PersonaExposureField }) {
   );
 }
 
-function TextField({ field }: { field: PersonaExposureField }) {
+function TextField({ field }: { field: StructuredExposureField }) {
   const text = formatValue(field).trim();
   if (!text) return null;
   const label = field.label ?? field.key ?? "Details";
@@ -105,7 +105,7 @@ function TextField({ field }: { field: PersonaExposureField }) {
   );
 }
 
-export function exposureItemLists(exposure: PersonaExposureField[] | undefined): ExposureItem[] {
+export function exposureItemLists(exposure: StructuredExposureField[] | undefined): ExposureItem[] {
   const items: ExposureItem[] = [];
   for (const field of exposure ?? []) {
     items.push(...exposureItems(field));
@@ -113,11 +113,11 @@ export function exposureItemLists(exposure: PersonaExposureField[] | undefined):
   return items;
 }
 
-export interface PersonaExposurePanelProps {
-  exposure: PersonaExposureField[];
+export interface StructuredExposurePanelProps {
+  exposure: StructuredExposureField[];
 }
 
-export function PersonaExposurePanel({ exposure }: PersonaExposurePanelProps) {
+export function StructuredExposurePanel({ exposure }: StructuredExposurePanelProps) {
   if (!exposure.length) return null;
   return (
     <div className="space-y-4">
@@ -132,4 +132,4 @@ export function PersonaExposurePanel({ exposure }: PersonaExposurePanelProps) {
   );
 }
 
-export default PersonaExposurePanel;
+export default StructuredExposurePanel;

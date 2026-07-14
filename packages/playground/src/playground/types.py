@@ -98,7 +98,7 @@ class PlaygroundTurn:
     turn_index: int
     user_message: str
     assistant_message: str
-    persona_exposure: List[Dict[str, Any]] = field(default_factory=list)
+    structured_exposure: List[Dict[str, Any]] = field(default_factory=list)
     decision: str = "continue"
     duration_seconds: Optional[float] = None
 
@@ -107,7 +107,7 @@ class PlaygroundTurn:
             "turnIndex": self.turn_index,
             "userMessage": self.user_message,
             "assistantMessage": self.assistant_message,
-            "personaExposure": [dict(item) for item in self.persona_exposure],
+            "structuredExposure": [dict(item) for item in self.structured_exposure],
             "decision": self.decision,
             "durationSeconds": self.duration_seconds,
         }

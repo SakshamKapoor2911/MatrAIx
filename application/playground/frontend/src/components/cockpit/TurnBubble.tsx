@@ -11,7 +11,7 @@
 import { type ReactNode } from "react";
 
 import { ChatbotChatAvatar, PersonaChatAvatar } from "./ChatBubbleAvatar";
-import { PersonaExposurePanel, exposureItemLists } from "./PersonaExposurePanel";
+import { StructuredExposurePanel, exposureItemLists } from "./StructuredExposurePanel";
 import { ToolPlanFold } from "./ToolPlanFold";
 import { Sym, fmtLatency } from "./cockpitShared";
 import { Markdown } from "../Markdown";
@@ -60,7 +60,7 @@ export interface RecBotBubbleProps {
 /** The app reply: right-aligned, with exposure + optional tool-plan fold + meta chips. */
 export function RecBotBubble({ turn, domain, appName, foldOpen, onToggleFold }: RecBotBubbleProps) {
   void domain;
-  const exposure = turn.personaExposure ?? [];
+  const exposure = turn.structuredExposure ?? [];
   const items = exposureItemLists(exposure);
   const hiccup = isHiccup(turn.assistantMessage);
   const textlessStructured = hiccup && (items.length > 0 || exposure.length > 0);
@@ -94,7 +94,7 @@ export function RecBotBubble({ turn, domain, appName, foldOpen, onToggleFold }: 
               <p className="text-[15px] italic leading-relaxed text-danger">The app didn&apos;t reply on this turn.</p>
             )}
 
-            {exposure.length > 0 && <PersonaExposurePanel exposure={exposure} />}
+            {exposure.length > 0 && <StructuredExposurePanel exposure={exposure} />}
 
             {showDecisionFold ? (
               <div className={exposure.length > 0 || !hiccup ? "mt-3" : ""}>

@@ -26,9 +26,9 @@ def _turn_from_view(index: int, turn: Dict[str, Any]) -> PlaygroundTurn:
         turn_index=index,
         user_message=str(turn.get("userMessage") or ""),
         assistant_message=str(turn.get("assistantMessage") or ""),
-        persona_exposure=[
+        structured_exposure=[
             dict(item)
-            for item in (turn.get("personaExposure") or [])
+            for item in (turn.get("structuredExposure") or [])
             if isinstance(item, dict)
         ],
         decision=str(turn.get("decision") or "continue"),
