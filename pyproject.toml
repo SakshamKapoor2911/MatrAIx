@@ -158,6 +158,12 @@ matraix = [
 ]
 
 [tool.pytest.ini_options]
+pythonpath = [
+    ".",
+    "environment/runtime",
+    "packages/playground/src",
+    "application/playground",
+]
 testpaths = ["tests"]
 python_files = ["test_*.py"]
 markers = [
