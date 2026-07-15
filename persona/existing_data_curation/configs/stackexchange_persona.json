@@ -1,0 +1,21 @@
+{
+  "id": "stackexchange_persona",
+  "source": {
+    "type": "huggingface_parquet_year_batches",
+    "repo_id": "MatrAIx2026/MatrAIx2026",
+    "dataset_url": "https://huggingface.co/datasets/MatrAIx2026/MatrAIx2026",
+    "artifact_prefix": "StackExchange_Persona",
+    "layout": "StackExchange_Persona/<year>/stackoverflow_persona_batch_*.parquet"
+  },
+  "format": "partitioned parquet (by year)",
+  "normalized_output": "user_histories.jsonl or user_histories.jsonl.gz",
+  "package_builder_input": "Pass the normalized output to scripts/make_stackoverflow_package.sh as USER_HISTORIES_JSONL.",
+  "persona_relevance": [
+    "Longitudinal public Q&A posting histories",
+    "Technical skills, tools, and domain expertise signals",
+    "Topic and tag interests over time",
+    "Problem-solving and learning behavior",
+    "Communication style in public technical writing"
+  ],
+  "notes": "The dataset is gated on Hugging Face; request access before exporting. The exporter's parquet column-alias table is an assumption pending verification against the real artifact (see docs/superpowers/specs/2026-07-01-stackoverflow-collab-package-design.md)."
+}
