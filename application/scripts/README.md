@@ -45,7 +45,7 @@ Chatbot / user simulator:
 
 ```bash
 uv run python application/scripts/generate_application_job.py \
-  --task application/tasks/chat_recai \
+  --task application/tasks/recommender-agent_chat_api \
   --execution-mode auto \
   --persona-ids 0042
 
@@ -54,7 +54,7 @@ export OPENAI_API_KEY="sk-..."
 export MATRIX_CHATBOT_DOMAIN=movie
 export MATRIX_CHATBOT_APPLICATION_ID=recai
 export MATRIX_CHATBOT_MAX_TURNS=8
-uv run harbor run -c configs/jobs/application-task-job-recipe/chat-recai-auto-n1.yaml
+uv run harbor run -c configs/jobs/application-task-job-recipe/recommender-agent-chat-api-auto-n1.yaml
 ```
 
 Refresh reporting for a completed job:
