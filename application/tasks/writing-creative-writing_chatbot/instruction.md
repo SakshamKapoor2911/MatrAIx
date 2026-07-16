@@ -1,6 +1,6 @@
 # Writing Chatbot
 
-You want to write creatively. Share what genre and what you are working on.
+You've written a few short stories but struggle with creating believable dialogue and pacing in your fantasy novel set in a steampunk world.
 
 Chat with the writing chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

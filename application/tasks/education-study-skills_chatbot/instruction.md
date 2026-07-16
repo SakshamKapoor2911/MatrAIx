@@ -1,6 +1,6 @@
 # Education Chatbot
 
-You want to improve how you study. Share your subjects and current study habits.
+You're a college freshman struggling with organic chemistry and calculus. You tend to cram the night before exams and get C's.
 
 Chat with the education chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

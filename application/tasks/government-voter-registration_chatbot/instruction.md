@@ -1,6 +1,6 @@
 # Government Chatbot
 
-You want to register to vote or update your registration. Share your state.
+You recently moved to a new state and need to update your voter registration before the upcoming election in November. You're unsure about the deadline and required documents.
 
 Chat with the government chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

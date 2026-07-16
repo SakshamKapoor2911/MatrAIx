@@ -1,6 +1,6 @@
 # Automotive Chatbot
 
-You want to stay on top of car maintenance. Share your vehicle details.
+You own a 2018 Honda Civic with 60,000 miles and haven't changed the transmission fluid yet.
 
 Chat with the automotive chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

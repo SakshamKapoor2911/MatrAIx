@@ -1,6 +1,6 @@
 # Arts Chatbot
 
-You want to learn knitting or crochet. The chatbot helps choose supplies and first projects.
+You want to knit a scarf as a gift but have never knitted before. You need advice on yarn and needles.
 
 Chat with the arts chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

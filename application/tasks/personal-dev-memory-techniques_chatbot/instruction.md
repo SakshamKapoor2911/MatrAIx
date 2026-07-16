@@ -1,6 +1,6 @@
 # Personal-Development Chatbot
 
-You want to improve your memory for study work or daily life. Share what you need to remember.
+You're studying for a medical licensing exam and need to memorize hundreds of terms and drug names. You're looking for effective mnemonic techniques.
 
 Chat with the personal-development chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

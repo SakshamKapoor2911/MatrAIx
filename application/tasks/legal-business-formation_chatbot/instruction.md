@@ -1,6 +1,6 @@
 # Legal Chatbot
 
-You want to start a business. Share your industry and how many founders.
+You and two friends want to start a mobile app development company. You're unsure whether to form an LLC or a corporation.
 
 Chat with the legal chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

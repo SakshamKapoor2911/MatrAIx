@@ -1,6 +1,6 @@
 # Volunteering Chatbot
 
-You want to organize your community around an issue. Share the cause and your community.
+You want to start a neighborhood watch program in your suburban community after a series of car break-ins, but you're not sure how to get neighbors involved.
 
 Chat with the volunteering chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

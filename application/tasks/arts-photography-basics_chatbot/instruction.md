@@ -1,6 +1,6 @@
 # Arts Chatbot
 
-You want to take better photos. Share what camera you use and what you photograph.
+You just bought a DSLR camera and want to learn how to take portraits with blurred backgrounds.
 
 Chat with the arts chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

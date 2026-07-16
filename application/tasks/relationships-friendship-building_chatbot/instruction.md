@@ -1,6 +1,6 @@
 # Relationships Chatbot
 
-You want to expand your social circle. Share your current situation and what holds you back.
+You moved to a new city six months ago for work and still haven't made any close friends, often spending weekends alone.
 
 Chat with the relationships chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

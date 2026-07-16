@@ -1,6 +1,6 @@
 # Career Chatbot
 
-You want to ask for a promotion. Share your role and recent accomplishments.
+You've led three major projects in the past year that increased revenue by 20%, and you want to prepare a promotion pitch to your manager for a senior analyst position.
 
 Chat with the career chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

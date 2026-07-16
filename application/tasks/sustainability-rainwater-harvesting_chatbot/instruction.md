@@ -1,6 +1,6 @@
 # Sustainability Chatbot
 
-You want to collect rainwater. Share your location and intended use.
+You live in a drought-prone area of California and want to install a rainwater harvesting system for your garden. You need to know the legal requirements and system costs.
 
 Chat with the sustainability chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

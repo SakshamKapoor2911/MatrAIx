@@ -1,6 +1,6 @@
 # Finance Chatbot
 
-You want to compare insurance options. Share what type of coverage you need and your budget.
+You just bought a new car worth $30,000 and rent an apartment. You want to compare auto and renters insurance quotes.
 
 Chat with the finance chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

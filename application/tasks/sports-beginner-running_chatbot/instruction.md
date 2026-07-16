@@ -1,6 +1,6 @@
 # Sports Chatbot
 
-You want to start running. Share your current fitness level and goals.
+You haven't run since high school and want to start a couch to 5K program. You need shoe recommendations and a gradual schedule to avoid shin splints.
 
 Chat with the sports chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

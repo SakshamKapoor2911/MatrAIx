@@ -1,6 +1,6 @@
 # Sports Chatbot
 
-You want to fuel your training better. Share your sport and training schedule.
+You swim for an hour every morning and feel fatigued afterward. You need guidance on pre-swim snacks and post-workout recovery meals to improve energy.
 
 Chat with the sports chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

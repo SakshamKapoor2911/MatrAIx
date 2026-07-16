@@ -1,6 +1,6 @@
 # Pets Chatbot
 
-You want to adopt a pet. Share what type of animal and your living situation.
+You live in a one-bedroom apartment with no yard and want to adopt a cat. You need to understand the adoption fees, home visit requirements, and how to prepare your space.
 
 Chat with the pets chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

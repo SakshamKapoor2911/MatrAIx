@@ -1,6 +1,6 @@
 # Gardening Chatbot
 
-You want a productive garden all year. Share your climate zone and garden size.
+You have a 20x30 foot garden in zone 6a, and last year your spring crops bolted early while fall crops didn't mature before frost.
 
 Chat with the gardening chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

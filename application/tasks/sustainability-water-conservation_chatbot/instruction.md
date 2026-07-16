@@ -1,6 +1,6 @@
 # Sustainability Chatbot
 
-You want to reduce water usage. Share your household size and current water habits.
+Your water bill has doubled this summer and you have a lawn and a vegetable garden. You want to reduce outdoor water use.
 
 Chat with the sustainability chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

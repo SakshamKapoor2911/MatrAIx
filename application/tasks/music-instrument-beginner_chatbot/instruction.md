@@ -1,6 +1,6 @@
 # Music Chatbot
 
-You want to learn an instrument. Share which instrument interests you.
+You've always wanted to play the acoustic guitar and just bought a used Yamaha F310, but you've never played any instrument before.
 
 Chat with the music chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

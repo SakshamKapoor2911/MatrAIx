@@ -1,6 +1,6 @@
 # Pets Chatbot
 
-You want to get a pet. Share your living situation and activity level.
+You live in a 1-bedroom apartment and work from home. You want a dog that is low-energy and good with cats.
 
 Chat with the pets chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

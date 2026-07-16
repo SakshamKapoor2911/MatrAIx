@@ -1,6 +1,6 @@
 # Arts Chatbot
 
-You want to learn to paint. The chatbot helps choose a medium and supplies.
+You've never painted before but want to start with watercolors. You have a $50 budget for supplies.
 
 Chat with the arts chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

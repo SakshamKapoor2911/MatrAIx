@@ -1,6 +1,6 @@
 # Relationships Chatbot
 
-You want to improve your dating profile. Share what platform and what kind of connection you seek.
+You just joined Hinge after a breakup and want a profile that attracts people interested in hiking and board game nights.
 
 Chat with the relationships chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

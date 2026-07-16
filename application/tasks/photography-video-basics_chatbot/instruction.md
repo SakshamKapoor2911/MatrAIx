@@ -1,6 +1,6 @@
 # Photography Chatbot
 
-You want to record better video. Share your equipment and content type.
+You have a GoPro Hero 11 and want to record smooth action footage of mountain biking trails, but the footage is shaky.
 
 Chat with the photography chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

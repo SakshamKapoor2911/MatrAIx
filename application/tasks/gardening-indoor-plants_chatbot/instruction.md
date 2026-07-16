@@ -1,6 +1,6 @@
 # Gardening Chatbot
 
-You want to keep indoor plants healthy. Share what plants you have and your space.
+Your apartment gets low indirect light, and your pothos and snake plant are developing yellow leaves and drooping stems.
 
 Chat with the gardening chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

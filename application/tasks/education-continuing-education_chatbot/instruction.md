@@ -1,6 +1,6 @@
 # Education Chatbot
 
-You want to keep learning professionally. Share your field and career goals.
+You've been working as a project manager for five years and want to earn a certification in agile methodologies to advance your career. You're looking for online courses that offer micro-credentials in this field.
 
 Chat with the education chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

@@ -1,6 +1,6 @@
 # Writing Chatbot
 
-You want to write a nonfiction book. Share your topic and target audience.
+You're a certified financial planner who wants to write a book for millennials on investing basics, but you're unsure how to structure chapters.
 
 Chat with the writing chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

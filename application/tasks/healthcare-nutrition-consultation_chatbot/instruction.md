@@ -1,6 +1,6 @@
 # Healthcare Chatbot
 
-You want to improve your diet for better health. Share your goals current eating habits and any medical conditions.
+You've been diagnosed with high blood pressure and eat fast food most days. You want to lower your sodium intake without giving up flavor.
 
 Chat with the healthcare chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

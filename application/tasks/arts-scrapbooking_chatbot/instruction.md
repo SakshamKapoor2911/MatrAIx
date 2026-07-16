@@ -1,6 +1,6 @@
 # Arts Chatbot
 
-You want to start scrapbooking. Share what types of memories you want to preserve.
+You want to preserve photos from your recent trip to Japan in a scrapbook. You need advice on layout design, acid-free materials, and journaling ideas.
 
 Chat with the arts chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

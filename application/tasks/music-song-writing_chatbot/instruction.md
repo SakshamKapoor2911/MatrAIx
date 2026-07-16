@@ -1,6 +1,6 @@
 # Music Chatbot
 
-You want to write a song. Share your musical background and what inspires you.
+You've been playing guitar for two years and have a few chord progressions and a melody in your head, but you struggle to write lyrics that feel personal.
 
 Chat with the music chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

@@ -1,6 +1,6 @@
 # Technology Chatbot
 
-You want to start streaming. Share what content you want to create.
+You want to stream your indie game development process on Twitch, but you only have a single-monitor setup and a basic headset microphone.
 
 Chat with the technology chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

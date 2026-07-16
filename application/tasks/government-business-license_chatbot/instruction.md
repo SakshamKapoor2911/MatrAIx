@@ -1,6 +1,6 @@
 # Government Chatbot
 
-You want to start a business and need licenses. Share your business type and location.
+You want to open a food truck in Austin, Texas. You need to know what licenses and permits are required.
 
 Chat with the government chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

@@ -1,6 +1,6 @@
 # Arts Chatbot
 
-You want to make jewelry. Share what type of jewelry interests you.
+You're interested in making beaded earrings and bracelets as gifts. You need recommendations for beginner tools and supplies, and a simple project to start.
 
 Chat with the arts chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

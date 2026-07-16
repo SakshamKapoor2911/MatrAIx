@@ -1,6 +1,6 @@
 # Personal-Development Chatbot
 
-You want to understand emotions better. Share what situations challenge you emotionally.
+You often get defensive during feedback at work and want to learn to respond calmly and understand your triggers better.
 
 Chat with the personal-development chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).
