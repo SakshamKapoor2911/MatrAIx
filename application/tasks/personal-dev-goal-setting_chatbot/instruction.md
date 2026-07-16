@@ -1,6 +1,6 @@
 # Personal-Development Chatbot
 
-You want to set goals for personal or professional growth. Share what you want to achieve.
+You want to learn Spanish to conversational fluency within 6 months for an upcoming trip to Spain.
 
 Chat with the personal-development chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

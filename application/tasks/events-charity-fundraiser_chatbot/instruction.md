@@ -1,6 +1,6 @@
 # Events Chatbot
 
-You want to organize a fundraiser. Share the cause and your target amount.
+You're organizing a bake sale to raise $5,000 for a local animal shelter. You need ideas for promotion, volunteer coordination, and donor outreach.
 
 Chat with the events chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

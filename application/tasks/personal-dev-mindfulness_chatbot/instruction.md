@@ -1,6 +1,6 @@
 # Personal-Development Chatbot
 
-You want to start a mindfulness practice. Share your experience level and goals.
+You feel anxious before presentations at work and want to try meditation to calm your nerves.
 
 Chat with the personal-development chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

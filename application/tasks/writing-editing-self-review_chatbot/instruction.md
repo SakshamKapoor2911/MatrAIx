@@ -1,6 +1,6 @@
 # Writing Chatbot
 
-You want to polish your writing before sharing or submitting. Share what you are editing.
+You've finished the first draft of a 80,000-word mystery novel and need to cut 10,000 words while tightening the plot.
 
 Chat with the writing chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

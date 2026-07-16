@@ -1,6 +1,6 @@
 # Entertainment Chatbot
 
-You want a new board game for game night. Share how many players and what types of games you enjoy.
+Your game night group has 4-6 players who enjoy strategy games like Settlers of Catan but want something with more depth and a fantasy theme.
 
 Chat with the entertainment chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

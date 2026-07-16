@@ -1,6 +1,6 @@
 # Healthcare Chatbot
 
-You want to start or improve your fitness routine. Share your current activity level goals and equipment access.
+You've been sedentary for months and want to start running, but only have a pair of sneakers and a nearby park. Your goal is to run a 5K in 8 weeks.
 
 Chat with the healthcare chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

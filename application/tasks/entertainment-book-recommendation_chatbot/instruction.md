@@ -1,6 +1,6 @@
 # Entertainment Chatbot
 
-You want a new book to read. Share books or authors you have enjoyed.
+You loved 'The Martian' and 'Project Hail Mary' and want another hard science fiction novel with a lone protagonist.
 
 Chat with the entertainment chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

@@ -1,6 +1,6 @@
 # Pets Chatbot
 
-You want to feed your pet better. Share pet type breed age and current diet.
+Your 8-year-old golden retriever has gained 10 pounds and has joint issues. You want a weight management diet.
 
 Chat with the pets chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

@@ -1,6 +1,6 @@
 # Sports Chatbot
 
-You want to get fit for a specific sport. Share your activity and goals.
+You're training for your first half-marathon in 12 weeks and want a running plan that builds mileage safely, along with strength training to prevent injuries.
 
 Chat with the sports chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

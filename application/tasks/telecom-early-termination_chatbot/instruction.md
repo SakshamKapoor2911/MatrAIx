@@ -1,6 +1,6 @@
 # Telecom Chatbot
 
-You want to leave your current carrier early. The chatbot explains fees and switching options.
+You're 8 months into a 2-year contract and want to switch to a cheaper carrier. You're worried about early termination fees.
 
 Chat with the telecom chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

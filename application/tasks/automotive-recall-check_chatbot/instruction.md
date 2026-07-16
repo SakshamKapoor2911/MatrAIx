@@ -1,6 +1,6 @@
 # Automotive Chatbot
 
-You want to check for recalls on your vehicle. Share the VIN or make model year.
+You just bought a used 2020 Ford Explorer and want to check if there are any open recalls.
 
 Chat with the automotive chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

@@ -1,6 +1,6 @@
 # Gardening Chatbot
 
-You want to garden organically. Share your current garden setup.
+You have a small vegetable garden that's been hit by aphids and powdery mildew, and you want to avoid chemical pesticides.
 
 Chat with the gardening chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

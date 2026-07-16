@@ -1,6 +1,6 @@
 # Entertainment Chatbot
 
-You want new YouTube channels to follow. Share your interests and preferred video length.
+You enjoy DIY woodworking and home improvement projects and want to find YouTube channels that offer detailed tutorials with minimal fluff, around 10-15 minutes each.
 
 Chat with the entertainment chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).
