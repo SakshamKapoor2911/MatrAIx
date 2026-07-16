@@ -1,0 +1,9 @@
+# Real-Estate Chatbot
+
+You or a family member are considering downsizing. Share your needs and budget.
+
+Chat with the real-estate chatbot about this situation. Have at least two
+back-and-forth exchanges (four or more messages total).
+
+Continue until you can tell whether the chatbot actually helped you
+resolve your situation.
