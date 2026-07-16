@@ -1,0 +1,30 @@
+transport: sidecar_http
+runtimeDefaults:
+  applicationId: customer-support_chat
+  applicationContext: customer-support_support
+  domain: customer-support
+capabilities:
+  - text_chat
+connection:
+  baseUrlEnv: CHATBOT_API_URL
+  baseUrl: http://customer-support-account-closure-chatbot:8000
+  healthPath: /health
+protocol:
+  sendMessage:
+    method: POST
+    path: /v1/messages
+    sessionIdField: ""
+    messageField: message
+    titleField: ""
+    botTypeField: ""
+    staticBody: {}
+  response:
+    sessionIdField: ""
+    replyField: reply
+    turnField: turn
+personaExposure:
+  fields: []
+artifacts:
+  transcript: transcript.json
+  applicationResult: application_result.json
+  feedback: user_feedback.json
