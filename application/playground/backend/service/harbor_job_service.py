@@ -1205,6 +1205,7 @@ class HarborJobService:
             record.exit_code = exit_code
             record.error = error
             record.finished_at = _utc_now()
+        self._maybe_run_host_verifier(job_name)
         self._maybe_generate_post_run_feedback(job_name)
         self._maybe_schedule_reporting(job_name, self.jobs_dir / job_name)
 
@@ -1257,6 +1258,7 @@ class HarborJobService:
             record.exit_code = exit_code
             record.error = error
             record.finished_at = _utc_now()
+        self._maybe_run_host_verifier(job_name)
         self._maybe_generate_post_run_feedback(job_name)
         self._maybe_schedule_reporting(job_name, self.jobs_dir / job_name)
 
@@ -1316,8 +1318,25 @@ class HarborJobService:
             record.exit_code = exit_code
             record.error = error
             record.finished_at = _utc_now()
+        self._maybe_run_host_verifier(job_name)
         self._maybe_generate_post_run_feedback(job_name)
         self._maybe_schedule_reporting(job_name, self.jobs_dir / job_name)
+
+    def _maybe_run_host_verifier(self, job_name: str) -> None:
+        from playground.host_verifier import maybe_run_host_verifier
+
+        job_dir = self.jobs_dir / job_name
+        if not job_dir.is_dir():
+            return
+        for trial_dir in sorted(job_dir.iterdir()):
+            if not trial_dir.is_dir() or trial_dir.name.startswith("_"):
+                continue
+            if not (trial_dir / "config.json").is_file():
+                continue
+            try:
+                maybe_run_host_verifier(repo_root=self.repo_root, trial_dir=trial_dir)
+            except Exception:
+                continue
 
     def _maybe_generate_post_run_feedback(self, job_name: str) -> None:
         from playground.post_run_feedback import (

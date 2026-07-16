@@ -1301,15 +1301,22 @@ def _map_cua_debrief(
     )
 
     reward = _read_reward_score(trial_dir)
-    success = reward is not None and reward >= 1.0
+    if reward is not None:
+        success = reward >= 1.0
+        score = reward
+    else:
+        # Artifact alone is not a pass — host verifiers may have crashed
+        # before writing reward.txt (common on macOS system Python 3.9).
+        success = False
+        score = 0.0
     return {
         "id": "harbor-trial",
         "applicationType": "os-app",
         "createdAt": created_at,
         "persona": run_store.persona_summary(persona),
         "osAppResult": {
-            "success": success if reward is not None else artifact is not None,
-            "score": reward if reward is not None else (1.0 if success else 0.0),
+            "success": success,
+            "score": score,
             "artifactName": artifact_path.name if artifact_path is not None else None,
             "artifact": artifact,
             "createdAt": created_at,

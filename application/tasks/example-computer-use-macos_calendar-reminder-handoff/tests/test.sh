@@ -5,6 +5,8 @@ set -euo pipefail
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/verifier_env.sh"
 
 python3 <<'PY'
+from __future__ import annotations
+
 import json
 import os
 import sys

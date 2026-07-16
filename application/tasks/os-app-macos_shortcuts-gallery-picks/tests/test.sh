@@ -13,6 +13,8 @@ export VERIFIER_DIR
 
 set +e
 python3 <<'PY'
+from __future__ import annotations
+
 import json
 import os
 import re

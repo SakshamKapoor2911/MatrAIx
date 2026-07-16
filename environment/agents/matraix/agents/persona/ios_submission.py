@@ -20,7 +20,7 @@ async def materialize_ios_decision_file(
     environment: Any,
     logs_dir: Path,
     *,
-    output_path: str = "/tmp/matraix-ios-photo-access-review/decision.json",
+    output_path: str = "/tmp/os-app-ios-photo-access-review/decision.json",
     logger: Any | None = None,
 ) -> bool:
     """Write decision.json on the simulator host from trajectory `done` tool output."""

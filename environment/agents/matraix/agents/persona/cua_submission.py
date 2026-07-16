@@ -289,7 +289,7 @@ async def materialize_ios_news_subscription_file(
     environment: Any,
     logs_dir: Path,
     *,
-    output_path: str = "/tmp/matraix-ios-news-subscription-decision/decision.json",
+    output_path: str = "/tmp/os-app-ios-news-subscription-decision/decision.json",
     logger: Any | None = None,
 ) -> bool:
     """Write decision.json from an iOS News+ subscription CUA trajectory."""
