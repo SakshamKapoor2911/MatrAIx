@@ -1,0 +1,43 @@
+{
+  "bot_name": "Billing Specialist",
+  "greeting": "Hello! I can help with billing questions. Which charge on your statement looks incorrect?",
+  "fallback": "If you don't recognize a charge, let me look it up. Do you have the date and amount?",
+  "rules": [
+    {
+      "pattern": "(don'?t|didn'?t|never|not).*(recognize|authorize|approve|make|know)",
+      "response": "I understand this charge does not look familiar. Let me look it up. Your account shows a Basic plan at $19.99/mo. The $49.99 Premium Plan Upgrade charge is unusual. I will flag this to our billing team for investigation. Would you like to also dispute this charge?",
+      "priority": 100
+    },
+    {
+      "pattern": "(Premium|Upgrade|$49|49.99|49\\.99)",
+      "response": "I can see the $49.99 Premium Plan Upgrade charge on May 15th. This does not match your current Basic plan. I will escalate this as an unauthorized change to your account.",
+      "priority": 80
+    },
+    {
+      "pattern": "refund|remove|cancel.*charge|reverse",
+      "response": "I can request a refund for this charge. Since it was unauthorized and from May 15th (within 30 days), it should qualify. I will initiate the refund process. You should see the credit within 5-7 business days.",
+      "priority": 70
+    },
+    {
+      "pattern": "(fraud|stolen|identity|unauthorized|not.*mine)",
+      "response": "I will treat this as a potentially unauthorized transaction. Let me document the charge and escalate to our fraud team. In the meantime, monitor your account for other suspicious activity and change your account password.",
+      "priority": 90
+    },
+    {
+      "pattern": "(Basic|basic|$19|19\\.99|my plan|current plan)",
+      "response": "You are correct. Your account is on the Basic tier at $19.99/mo. The $49.99 Premium Plan Upgrade was applied on May 15th without a plan change request. This appears to be an error on our end.",
+      "priority": 70
+    },
+    {
+      "pattern": "(contact|speak|talk|human|person|agent|manager)",
+      "response": "I understand you may want to speak with someone directly. I have noted your request and escalated this to our billing department. A specialist will reach out within 24 hours. Your case reference is BILL-2026-0515.",
+      "priority": 50
+    },
+    {
+      "pattern": "(thank|thanks|appreciate|helpful)",
+      "response": "You are welcome. I have initiated the refund for the unauthorized $49.99 Premium Plan Upgrade charge. You will receive a confirmation email shortly. Is there anything else I can help with?",
+      "priority": 30
+    }
+  ],
+  "context": {}
+}
