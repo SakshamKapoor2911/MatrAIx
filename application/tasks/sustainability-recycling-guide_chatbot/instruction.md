@@ -1,6 +1,6 @@
 # Sustainability Chatbot
 
-You want to recycle properly. Share what items you are unsure about.
+You're unsure if pizza boxes, plastic bags, and glass jars can go in your curbside bin. Your local program is confusing.
 
 Chat with the sustainability chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

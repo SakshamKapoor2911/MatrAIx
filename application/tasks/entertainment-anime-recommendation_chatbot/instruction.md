@@ -1,6 +1,6 @@
 # Entertainment Chatbot
 
-You want to find a new anime series. Share what you have enjoyed and your preferred genres.
+You loved Attack on Titan and Death Note and are looking for similar dark, psychological thrillers with complex plots. You prefer dubbed versions.
 
 Chat with the entertainment chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

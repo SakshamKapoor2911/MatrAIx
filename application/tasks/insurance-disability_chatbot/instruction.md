@@ -1,6 +1,6 @@
 # Insurance Chatbot
 
-You want to protect your income if you cannot work. The chatbot explains disability insurance.
+You're a self-employed graphic designer with no sick leave. You want to protect your income if you get injured.
 
 Chat with the insurance chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

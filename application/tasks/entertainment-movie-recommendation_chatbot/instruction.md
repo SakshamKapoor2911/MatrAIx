@@ -1,6 +1,6 @@
 # Entertainment Chatbot
 
-You want to watch a movie. Share your mood and what streaming services you have.
+You're in the mood for a comedy with a rating above 7 on IMDb, and you have Netflix and Hulu.
 
 Chat with the entertainment chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

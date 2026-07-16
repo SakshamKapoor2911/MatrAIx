@@ -1,6 +1,6 @@
 # Home-Services Chatbot
 
-You want to hire a cleaning service. Share your home size and cleaning priorities.
+You have a 3-bedroom, 2-bathroom house and want a bi-weekly cleaning service that focuses on kitchens and bathrooms. You need pricing and what's typically included.
 
 Chat with the home-services chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

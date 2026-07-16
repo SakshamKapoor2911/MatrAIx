@@ -1,6 +1,6 @@
 # Travel Chatbot
 
-You want travel insurance for an upcoming trip. Share your destination trip cost and concerns.
+You're spending $2,500 on a non-refundable trip to Japan next month and are worried about medical coverage abroad.
 
 Chat with the travel chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

@@ -1,6 +1,6 @@
 # Sustainability Chatbot
 
-You want to eat more locally. Share your location and dietary preferences.
+You're a vegetarian living in a suburb of Chicago and want to find a CSA that delivers organic vegetables weekly within a $30 budget.
 
 Chat with the sustainability chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

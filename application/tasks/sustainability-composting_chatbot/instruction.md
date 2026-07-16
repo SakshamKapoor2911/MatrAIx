@@ -1,6 +1,6 @@
 # Sustainability Chatbot
 
-You want to start composting. Share your living situation and outdoor space.
+You live in an apartment with a small balcony and want to start composting kitchen scraps without attracting pests.
 
 Chat with the sustainability chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

@@ -1,6 +1,6 @@
 # Technology Chatbot
 
-You want to buy a new device. Share what you need it for and your budget.
+You're a graphic designer needing a laptop that can handle Adobe Creative Suite smoothly, with a budget of $1,500. You also want good color accuracy.
 
 Chat with the technology chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

@@ -1,6 +1,6 @@
 # Music Chatbot
 
-You want to sing better. Share your experience level and what you want to improve.
+You sing in the shower and at karaoke but often run out of breath on long notes and can't hit high notes without straining.
 
 Chat with the music chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

@@ -1,6 +1,6 @@
 # Relationships Chatbot
 
-You want to communicate better with your partner. Share what communication patterns you want to change.
+You and your partner have been arguing more often lately, and you notice you tend to interrupt each other during disagreements.
 
 Chat with the relationships chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

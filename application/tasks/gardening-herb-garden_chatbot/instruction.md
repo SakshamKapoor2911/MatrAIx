@@ -1,6 +1,6 @@
 # Gardening Chatbot
 
-You want to grow herbs. Share whether indoors or outdoors and what you cook most.
+You cook Italian dishes twice a week and want to grow basil, oregano, and thyme on your sunny kitchen windowsill.
 
 Chat with the gardening chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

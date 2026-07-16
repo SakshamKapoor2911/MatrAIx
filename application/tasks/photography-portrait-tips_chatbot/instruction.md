@@ -1,6 +1,6 @@
 # Photography Chatbot
 
-You want to take better portraits. Share your equipment and what you photograph.
+You have a Canon Rebel T7 with the kit lens and want to take better natural-light portraits of your kids playing outdoors.
 
 Chat with the photography chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

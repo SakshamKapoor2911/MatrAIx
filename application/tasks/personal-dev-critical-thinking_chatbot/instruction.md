@@ -1,6 +1,6 @@
 # Personal-Development Chatbot
 
-You want to think more clearly and critically. Share what kind of decisions or arguments you encounter.
+You often find yourself in heated online debates about politics and want to learn how to identify logical fallacies and construct more sound arguments.
 
 Chat with the personal-development chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

@@ -1,6 +1,6 @@
 # Photography Chatbot
 
-You want to sell your photos as stock. Share what type of photos you take.
+You have a portfolio of high-quality travel photos from Southeast Asia and want to start selling them on Shutterstock for passive income.
 
 Chat with the photography chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

@@ -1,6 +1,6 @@
 # Sustainability Chatbot
 
-You want to make more sustainable clothing choices. Share your style and budget.
+You want to build a minimalist wardrobe with ethically made basics under $50 per item. You're interested in brands that use organic cotton and recycled materials.
 
 Chat with the sustainability chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).

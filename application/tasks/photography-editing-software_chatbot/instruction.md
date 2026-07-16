@@ -1,6 +1,6 @@
 # Photography Chatbot
 
-You want to edit your photos. Share what kind of editing you want to do.
+You shoot RAW with a Sony A6400 and want to learn how to edit portraits with smooth skin tones and natural-looking bokeh.
 
 Chat with the photography chatbot about this situation. Have at least two
 back-and-forth exchanges (four or more messages total).
