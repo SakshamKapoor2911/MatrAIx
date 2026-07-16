@@ -230,9 +230,10 @@ def test_application_task_matches_type_contract(task_dir: Path) -> None:
                 elif transport in {"sidecar_http", "external_http"}:
                     _require(
                         errors,
-                        local_compose.startswith("application/chatbot-api-sidecar_"),
+                        local_compose.startswith("application/chatbot-api-sidecar_")
+                        or local_compose == "application/shared-chat-sim",
                         "HTTP chatbot local_compose must be "
-                        "application/chatbot-api-sidecar_<sut>",
+                        "application/chatbot-api-sidecar_<sut> or application/shared-chat-sim",
                     )
 
         persona_env = _env_dir("application/shared-chat-persona")
