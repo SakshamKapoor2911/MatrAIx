@@ -315,7 +315,7 @@ def generate_task(row: dict, dry_run: bool = False) -> Path | None:
     persona_exposure_fields = _v(row, "persona_exposure_fields", "").strip() or "[]"
     context_description = _v(row, "context_description", "").strip() or _auto_context(domain)
 
-    local_compose = _v(row, "local_compose", "").strip() or f"application/chatbot-api-sidecar_{slug}"
+    local_compose = _v(row, "local_compose", "").strip() or "application/shared-chat-sim"
 
     variables = {
         "name": name,
