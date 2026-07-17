@@ -16,3 +16,16 @@ def test_all_registered_web_tasks_have_absolute_paths():
     for task in list_web_eval_tasks():
         task_path = REPO_ROOT / Path(str(task.task_path))
         assert task_path.is_dir(), "{} has missing task path".format(task.id)
+
+
+def test_mit_ocw_course_choice_is_registered():
+    task = get_web_eval_task("web-playwright-mit-ocw-course-choice")
+
+    assert task.task_path == (
+        "application/tasks/web-playwright-mit-ocw-course-choice"
+    )
+    assert task.task_kind == "task"
+    assert task.site_name == "MIT OpenCourseWare"
+    assert task.site_url == "https://ocw.mit.edu/search/"
+    assert task.output_artifact == "course_choice.json"
+    assert task.submission_profile == "course_choice"

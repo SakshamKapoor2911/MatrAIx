@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "1.0",
+  "pool": "persona/datasets/bench-dev-sample",
+  "sources": [],
+  "defaultMode": "stratified",
+  "dimensionFilters": {
+    "english_proficiency": [
+      "Basic (A1-A2)",
+      "Intermediate (B1-B2)",
+      "Fluent (C1-C2)",
+      "Native"
+    ],
+    "academic_field": [
+      "STEM",
+      "Medicine",
+      "Law",
+      "Business",
+      "Humanities",
+      "Social science",
+      "Arts",
+      "Interdisciplinary"
+    ],
+    "cog_reading_vs_watching": [
+      "Strongly prefers reading",
+      "No preference",
+      "Strongly prefers video"
+    ]
+  },
+  "stratifyFields": [
+    "academic_field",
+    "cog_reading_vs_watching"
+  ],
+  "sampleSizePerValueGroup": 1
+}
