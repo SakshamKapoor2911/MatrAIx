@@ -6,6 +6,13 @@ extraction after Koutian Wu's GPU allocation ended. It supersedes
 Xiaomin's original 2026-07-06 handoff to Koutian, when the extraction was still
 0% complete.
 
+> **Update (2026-07-17): core blocker resolved.** Koutian uploaded the exact
+> production selection index to HF PR #53 and identified PR #264 as the
+> authoritative `medium_b` implementation. Xiaomin verified the selection hash,
+> all 103 manifest bucket counts, and the exact 61,781-user remainder. A one-user
+> H200 FP8 smoke test is queued as Slurm job `32247994`; the bulk continuation
+> will launch only after that smoke output passes contract checks.
+
 ## Current verified status
 
 Source of truth: Hugging Face dataset PR #53 for
@@ -106,16 +113,37 @@ index is supplied.
 No Amazon GPU continuation job has been launched yet. This is intentional: the
 exact selected-user cohort is currently unavailable.
 
-## Blocking issue: exact selection index is missing
+## Resolved issue: exact selection index
 
-Koutian's continuation PR #241 refers to a shared file named:
+Koutian's continuation PR #241 originally referred to a shared file named:
 
 ```text
 selected_users_100k.parquet
 ```
 
-However, that exact file is not included in repository PR #241 or HF dataset PR
-#53, and no SHA-256 is recorded in the manifest.
+The exact file has now been uploaded to HF dataset PR #53:
+
+```text
+amazon/extraction_v1/qwen36/final_20260715/selected_users_100k.parquet
+amazon/extraction_v1/qwen36/final_20260715/selected_users_100k.sha256
+```
+
+Verified production SHA-256:
+
+```text
+8a0084628f32a06f8f823126f819ef1abcc8387978b44f79eb4f923cb5e8ce12
+```
+
+Local verified copy:
+
+```text
+persona/human_extraction/data/amazon/selected_users_100k_koutian.parquet
+```
+
+Validation results: 100,000 rows, 100,000 unique `user_id`, 256 buckets; every
+one of the 103 represented bucket counts matches the HF PR #53 manifest; all 14
+seeded partial-shard user IDs are members of this selection; exact remainder is
+61,781.
 
 Xiaomin has a local file at:
 
@@ -143,16 +171,13 @@ The mismatch is substantial, not a count-only formatting issue. Using Xiaomin's
 local parquet would extract a different cohort for untouched buckets and would
 not produce the intended 100K dataset.
 
-## Required from Koutian
+## Requested from Koutian — status
 
-Please provide the following before Xiaomin launches the remaining GPU jobs.
-The first item is mandatory; the others close reproducibility gaps.
+The original request and current resolution status are recorded below.
 
-### 1. Mandatory: exact selection parquet
+### 1. Exact selection parquet — resolved
 
-Provide the exact `selected_users_100k.parquet` used for the completed 38,219
-users, preferably by uploading it to HF dataset PR #53 alongside the manifest.
-It must contain at least:
+Uploaded to HF PR #53 and verified as described above. It contains:
 
 ```text
 user_id
@@ -160,20 +185,17 @@ user_bucket
 review_count
 ```
 
-Also provide its SHA-256 checksum.
+SHA-256 verified.
 
-### 2. Exact production runner snapshot or commit
+### 2. Exact production runner snapshot or commit — resolved for continuation
 
-Provide the exact script/commit used for the final `medium_b` tranches. The
-public repository currently splits the relevant behavior across unmerged PRs:
+Koutian identified the required public code as:
 
 - PR #174: portability and schema sanitizer
-- PR #177: `medium_b` prompt comparison/selection
+- PR #264: authoritative `medium_b` production implementation
 
-HF rows include `prompt_variant: "medium_b"`, but the public PR #174/#177 runner
-snapshots do not exactly reproduce the final row-writing code. Xiaomin has
-reconstructed the contract, but the original production snapshot is preferable
-for auditability.
+The isolated runtime now applies PR #264 directly on top of PR #174. It writes
+the same `prompt_variant: "medium_b"` field as the existing HF rows.
 
 ### 3. Schema revision/checksum
 
