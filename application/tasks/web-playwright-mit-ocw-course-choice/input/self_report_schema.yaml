@@ -1,0 +1,37 @@
+artifactName: user_feedback.json
+instructions: |
+  Reflect honestly as the persona after choosing an MIT OpenCourseWare course.
+  Base your answers on the course you selected, the alternatives you inspected,
+  and how confident you feel that the choice fits you.
+fields:
+  - key: needConstraintSatisfaction
+    prompt: How well did the selected course satisfy your learning needs or constraints?
+    kind: enum
+    choices: ["yes", "partially", "no"]
+  - key: personalPreferenceSatisfaction
+    prompt: How well did the selected course match your interests and learning preferences?
+    kind: enum
+    choices: ["yes", "partially", "no"]
+  - key: overallExperienceRating
+    prompt: Overall, how would you rate the course-selection experience from 1 to 10?
+    kind: integer
+    minimum: 1
+    maximum: 10
+  - key: reason
+    prompt: Briefly explain the rating in your own voice.
+  - key: trustLevel
+    prompt: "Optional: how confident are you in the final course choice from 1 to 10?"
+    kind: integer
+    minimum: 1
+    maximum: 10
+    required: false
+  - key: effortRating
+    prompt: "Optional: how effortful did the comparison feel from 1 to 10, where higher means more effort?"
+    kind: integer
+    minimum: 1
+    maximum: 10
+    required: false
+  - key: clarityOfNextStep
+    prompt: "Optional: after choosing, was your next learning step clear?"
+    kind: boolean
+    required: false

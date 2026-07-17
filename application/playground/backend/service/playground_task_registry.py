@@ -107,6 +107,13 @@ PLAYGROUND_TASK_INDEX: Dict[str, PlaygroundTaskEntry] = {
         output_artifact="book_interest.json",
         submission_profile="book_interest",
     ),
+    "web-playwright-mit-ocw-course-choice": PlaygroundTaskEntry(
+        application_type="web",
+        site_name="MIT OpenCourseWare",
+        site_url="https://ocw.mit.edu/search/",
+        output_artifact="course_choice.json",
+        submission_profile="course_choice",
+    ),
     # Chatbot
     "chat_recai": PlaygroundTaskEntry(application_type="chatbot"),
     "chat_openbb": PlaygroundTaskEntry(application_type="chatbot"),
