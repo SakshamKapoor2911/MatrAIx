@@ -218,6 +218,23 @@ def build_tool_step_client(
             temperature=temperature,
             capabilities=capabilities,
         )
+    if value.startswith("deepseek/"):
+        api_key = (os.environ.get("DEEPSEEK_API_KEY") or "").strip()
+        if not api_key:
+            raise RuntimeError(
+                "DEEPSEEK_API_KEY is required for persona model {!r}".format(value)
+            )
+        base_url = (
+            os.environ.get("DEEPSEEK_API_BASE")
+            or "https://api.deepseek.com"
+        ).strip()
+        return OpenAIToolStepClient(
+            value.split("/", 1)[1],
+            api_key=api_key,
+            base_url=base_url,
+            temperature=temperature,
+            capabilities=capabilities,
+        )
     if value.startswith("openai/"):
         return OpenAIToolStepClient(
             value.split("/", 1)[1],
