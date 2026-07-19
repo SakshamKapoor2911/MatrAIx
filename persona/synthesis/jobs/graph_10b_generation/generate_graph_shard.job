@@ -1,0 +1,129 @@
+#!/bin/bash
+#SBATCH -p seas_compute
+#SBATCH -n 1
+#SBATCH -c 48
+#SBATCH --mem=128G
+#SBATCH -t 0-06:00
+#SBATCH -o sbatch_logs/%x_%A_%a.out
+#SBATCH -e sbatch_logs/%x_%A_%a.err
+#SBATCH --mail-type=FAIL
+#SBATCH --mail-user=xiaominli@g.harvard.edu
+
+set -euo pipefail
+
+REPO_ROOT="${REPO_ROOT:-/n/netscratch/lu_lab/Lab/xiaominli/LLMResearch/MatrAIx}"
+OUTPUT_ROOT="${OUTPUT_ROOT:-$REPO_ROOT/persona/synthesis/generated/full_dag_10b_manual}"
+ROWS_PER_SHARD="${ROWS_PER_SHARD:-100000000}"
+BASE_SEED="${BASE_SEED:-420000}"
+BATCH_SIZE="${BATCH_SIZE:-25000}"
+WORKERS="${WORKERS:-${SLURM_CPUS_PER_TASK:-$(nproc)}}"
+PYTHON_BIN="${PYTHON_BIN:-python}"
+MONITOR_INTERVAL="${MONITOR_INTERVAL:-60}"
+BYTES_PER_ROW_ESTIMATE="${BYTES_PER_ROW_ESTIMATE:-403.98}"
+
+SHARD_ID="${SLURM_ARRAY_TASK_ID:-${SHARD_ID:-0}}"
+printf -v SHARD_TAG "%04d" "$SHARD_ID"
+SEED=$((BASE_SEED + SHARD_ID))
+
+SHARD_DIR="$OUTPUT_ROOT/shards"
+MANIFEST_DIR="$OUTPUT_ROOT/manifests"
+mkdir -p "$SHARD_DIR" "$MANIFEST_DIR" sbatch_logs
+
+OUT="$SHARD_DIR/full_dag_${ROWS_PER_SHARD}_shard_${SHARD_TAG}.codes.gz"
+SCHEMA="$OUT.schema.json"
+MANIFEST="$MANIFEST_DIR/full_dag_${ROWS_PER_SHARD}_shard_${SHARD_TAG}.manifest.json"
+
+cd "$REPO_ROOT"
+
+echo "=== Full DAG shard generation ==="
+echo "date=$(date -Is)"
+echo "hostname=$(hostname)"
+echo "repo=$REPO_ROOT"
+echo "output_root=$OUTPUT_ROOT"
+echo "shard_id=$SHARD_ID"
+echo "rows_per_shard=$ROWS_PER_SHARD"
+echo "seed=$SEED"
+echo "workers=$WORKERS"
+echo "batch_size=$BATCH_SIZE"
+echo "monitor_interval=$MONITOR_INTERVAL"
+echo "slurm_job_id=${SLURM_JOB_ID:-none}"
+echo "slurm_array_task_id=${SLURM_ARRAY_TASK_ID:-none}"
+echo "slurm_cpus_per_task=${SLURM_CPUS_PER_TASK:-none}"
+echo "nproc=$(nproc)"
+
+echo "--- CPU allocation ---"
+grep Cpus_allowed_list /proc/self/status || true
+
+echo "--- Output ---"
+echo "out=$OUT"
+echo "schema=$SCHEMA"
+echo "manifest=$MANIFEST"
+
+if [[ -s "$OUT" && -s "$SCHEMA" ]]; then
+  echo "SKIP: output and schema already exist"
+  exit 0
+fi
+
+start_epoch=$(date +%s)
+(
+  while true; do
+    if [[ -f "$OUT" ]]; then
+      bytes=$(stat -c%s "$OUT" 2>/dev/null || echo 0)
+      est_rows=$(python - <<PY
+bytes_value = int("$bytes")
+bytes_per_row = float("$BYTES_PER_ROW_ESTIMATE")
+print(int(bytes_value / bytes_per_row) if bytes_per_row else 0)
+PY
+)
+      echo "PROGRESS $(date -Is) shard=$SHARD_ID bytes=$bytes est_rows=$est_rows out=$OUT"
+    else
+      echo "PROGRESS $(date -Is) shard=$SHARD_ID waiting_for_output out=$OUT"
+    fi
+    sleep "$MONITOR_INTERVAL"
+  done
+) &
+monitor_pid=$!
+trap 'kill "$monitor_pid" 2>/dev/null || true' EXIT
+
+"$PYTHON_BIN" persona/synthesis/scripts/sample_personas.py \
+  --n "$ROWS_PER_SHARD" \
+  --seed "$SEED" \
+  --workers "$WORKERS" \
+  --batch-size "$BATCH_SIZE" \
+  --compress gzip \
+  --out "$OUT"
+kill "$monitor_pid" 2>/dev/null || true
+wait "$monitor_pid" 2>/dev/null || true
+trap - EXIT
+end_epoch=$(date +%s)
+elapsed=$((end_epoch - start_epoch))
+
+codes_bytes=$(stat -c%s "$OUT")
+schema_bytes=$(stat -c%s "$SCHEMA")
+sha256=$(sha256sum "$OUT" | awk '{print $1}')
+schema_sha256=$(sha256sum "$SCHEMA" | awk '{print $1}')
+
+cat > "$MANIFEST" <<JSON
+{
+  "date_finished": "$(date -Is)",
+  "hostname": "$(hostname)",
+  "slurm_job_id": "${SLURM_JOB_ID:-}",
+  "slurm_array_task_id": "${SLURM_ARRAY_TASK_ID:-}",
+  "shard_id": $SHARD_ID,
+  "rows": $ROWS_PER_SHARD,
+  "seed": $SEED,
+  "workers": $WORKERS,
+  "batch_size": $BATCH_SIZE,
+  "compression": "gzip",
+  "format": "codes",
+  "out": "$OUT",
+  "schema": "$SCHEMA",
+  "codes_bytes": $codes_bytes,
+  "schema_bytes": $schema_bytes,
+  "codes_sha256": "$sha256",
+  "schema_sha256": "$schema_sha256",
+  "elapsed_seconds": $elapsed
+}
+JSON
+
+echo "DONE shard=$SHARD_ID elapsed=${elapsed}s bytes=$codes_bytes sha256=$sha256"

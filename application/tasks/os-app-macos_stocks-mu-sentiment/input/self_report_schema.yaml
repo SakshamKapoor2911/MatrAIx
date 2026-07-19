@@ -1,0 +1,32 @@
+artifactName: user_feedback.json
+instructions: |
+  Reflect honestly as the persona after finishing this stock research task.
+  Focus on whether the information you gathered felt sufficient, how the
+  earnings context influenced your decision, and how confident you are.
+fields:
+  - key: sentiment
+    prompt: What is your final investment decision for MU?
+    kind: enum
+    choices: [buy, hold, sell]
+  - key: informationSufficiency
+    prompt: Did the Stocks app provide enough information (chart + news) to form a confident opinion?
+    kind: enum
+    choices: [yes, partially, no]
+  - key: earningsInfluence
+    prompt: How much did the earnings context influence your final sentiment?
+    kind: enum
+    choices: [heavily, somewhat, minimally]
+  - key: overallConfidenceRating
+    prompt: Overall, how confident are you in your buy/sell/hold decision from 1 to 10?
+    kind: integer
+    minimum: 1
+    maximum: 10
+  - key: reason
+    prompt: Briefly explain what drove your decision in your own voice.
+  - key: wouldActOnIt
+    prompt: "Optional: would you actually put real money behind this decision?"
+    kind: boolean
+    required: false
+  - key: missingInfoNote
+    prompt: "Optional: what additional information would have helped you decide?"
+    required: false

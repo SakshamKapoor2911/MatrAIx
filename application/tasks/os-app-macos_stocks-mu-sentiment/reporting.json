@@ -1,0 +1,221 @@
+{
+  "schemaVersion": "1.0",
+  "contextRules": [
+    {
+      "match": {
+        "contextType": "task_outcome"
+      },
+      "summaryDirectives": [
+        {
+          "id": "task_outcome.explanation_by_status",
+          "title": "Outcome explanation by status",
+          "targetFacetKey": "outcome_explanation",
+          "groupByFacetKey": "outcome_status",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        },
+        {
+          "id": "task_outcome.explanation_by_failure_reason",
+          "title": "Outcome explanation by failure reason",
+          "targetFacetKey": "outcome_explanation",
+          "groupByFacetKey": "primary_failure_reason",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ],
+      "judgeDirectives": [
+        {
+          "id": "task_outcome.failure_signal_scan",
+          "title": "Failure signal scan",
+          "targetFacetKey": "outcome_explanation",
+          "groupByFacetKey": "primary_failure_reason",
+          "groupByMode": "categorical",
+          "judgeKind": "llm_signal_judge",
+          "prompt": "Read each outcome explanation and classify which reusable execution-failure signals are explicitly present.",
+          "rubric": "Mark a signal true only when the explanation clearly states or strongly implies that signal.",
+          "signals": [
+            {
+              "key": "navigation_signal",
+              "label": "Navigation issue",
+              "valueType": "boolean"
+            },
+            {
+              "key": "grounding_signal",
+              "label": "Grounding issue",
+              "valueType": "boolean"
+            },
+            {
+              "key": "recovery_signal",
+              "label": "Recovery failure",
+              "valueType": "boolean"
+            },
+            {
+              "key": "instruction_reading_signal",
+              "label": "Instruction-reading issue",
+              "valueType": "boolean"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "goal_component"
+      },
+      "summaryDirectives": [
+        {
+          "id": "goal_component.evidence_by_component",
+          "title": "Goal component evidence by component",
+          "targetFacetKey": "goal_component_evidence",
+          "groupByFacetKey": "goal_component_key",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        },
+        {
+          "id": "goal_component.evidence_by_status",
+          "title": "Goal component evidence by status",
+          "targetFacetKey": "goal_component_evidence",
+          "groupByFacetKey": "goal_component_status",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "decision"
+      },
+      "summaryDirectives": [
+        {
+          "id": "decision.reason_by_outcome",
+          "title": "Reason by decision outcome",
+          "targetFacetKey": "reason",
+          "groupByFacetKey": "decision_outcome",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        },
+        {
+          "id": "decision.reason_by_basis_primary",
+          "title": "Reason by primary basis",
+          "targetFacetKey": "reason",
+          "groupByFacetKey": "basis_primary",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "user_feedback"
+      },
+      "summaryDirectives": [
+        {
+          "id": "user_feedback.reason_by_info_sufficiency",
+          "title": "Feedback reason by information sufficiency",
+          "targetFacetKey": "feedback_reason",
+          "groupByFacetKey": "information_sufficiency",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ],
+      "judgeDirectives": [
+        {
+          "id": "user_feedback.reason_signal_scan",
+          "title": "Feedback signal scan",
+          "targetFacetKey": "feedback_reason",
+          "groupByFacetKey": "earnings_influence",
+          "groupByMode": "categorical",
+          "judgeKind": "llm_signal_judge",
+          "prompt": "Read each feedback reason and classify which reusable subjective signals are explicitly present.",
+          "rubric": "Mark a signal true only when the feedback clearly states or strongly implies that signal.",
+          "signals": [
+            {
+              "key": "bullish_signal",
+              "label": "Bullish sentiment",
+              "valueType": "boolean"
+            },
+            {
+              "key": "bearish_signal",
+              "label": "Bearish sentiment",
+              "valueType": "boolean"
+            },
+            {
+              "key": "uncertainty_signal",
+              "label": "Uncertainty or ambivalence",
+              "valueType": "boolean"
+            },
+            {
+              "key": "data_driven_signal",
+              "label": "Data-driven reasoning",
+              "valueType": "boolean"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "persona_alignment"
+      },
+      "summaryDirectives": [
+        {
+          "id": "persona_alignment.explanation_by_status",
+          "title": "Persona alignment explanation by status",
+          "targetFacetKey": "persona_alignment_explanation",
+          "groupByFacetKey": "persona_alignment_status",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ],
+      "judgeDirectives": [
+        {
+          "id": "persona_alignment.signal_scan",
+          "title": "Persona alignment signal scan",
+          "targetFacetKey": "persona_alignment_explanation",
+          "groupByFacetKey": "persona_preference_axis_primary",
+          "groupByMode": "categorical",
+          "judgeKind": "llm_signal_judge",
+          "prompt": "Read the persona alignment explanation and classify which reusable persona signals are explicitly present.",
+          "rubric": "Mark a signal true only when the explanation clearly states or strongly implies that signal.",
+          "signals": [
+            {
+              "key": "risk_averse_signal",
+              "label": "Risk aversion",
+              "valueType": "boolean"
+            },
+            {
+              "key": "momentum_signal",
+              "label": "Momentum following",
+              "valueType": "boolean"
+            },
+            {
+              "key": "fundamental_signal",
+              "label": "Fundamental analysis",
+              "valueType": "boolean"
+            },
+            {
+              "key": "contrarian_signal",
+              "label": "Contrarian thinking",
+              "valueType": "boolean"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "decision_process"
+      },
+      "summaryDirectives": [
+        {
+          "id": "decision_process.notes_by_exploration_style",
+          "title": "Process notes by exploration style",
+          "targetFacetKey": "process_notes",
+          "groupByFacetKey": "exploration_style",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ]
+    }
+  ]
+}

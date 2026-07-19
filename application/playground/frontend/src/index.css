@@ -1,0 +1,741 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===========================================================================
+   Playground — design tokens ("Playground")
+   ---------------------------------------------------------------------------
+   Dark-first "mission control". Tokens are "R G B" triplets, consumed via
+   rgb(var(--x)/<alpha-value>) (see tailwind.config.ts) so every color supports
+   opacity utilities (bg-primary/10, border-secondary/25). Light is the default
+   (boot script adds `.light` on <html>); remove it for dark (:root ramp). See
+   src/hooks/useTheme.ts and index.html.
+   =========================================================================== */
+:root {
+  color-scheme: dark;
+
+  /* Surfaces — page → panels → inputs */
+  --surface-lowest: 14 14 15;   /* header, rails, inset wells */
+  --surface-dim: 19 19 20;      /* page background */
+  --surface-low: 28 27 28;      /* secondary fills, hover */
+  --surface: 32 31 32;          /* panels / cards */
+  --surface-high: 42 42 43;     /* raised chips, icon tiles */
+  --field: 13 13 14;            /* text inputs, code wells */
+
+  /* Lines */
+  --outline: 63 72 82;          /* default borders, scrollbar thumb */
+  --outline-dim: 42 42 44;      /* hairlines, dividers */
+
+  /* Brand — same blue ramp in dark and light */
+  --primary: 0 118 194;
+  --primary-dim: 0 92 152;
+  --primary-light: 56 176 224;
+  --primary-glow: 96 200 236;
+  --on-primary: 255 255 255;
+  --secondary: 78 222 163;      /* mint — success / available */
+  --secondary-dim: 0 165 114;
+  --accent: 167 139 250;        /* violet — pipeline / transport accents */
+  --accent-dim: 124 58 237;
+
+  /* Text */
+  --text-main: 229 226 227;     /* headings, primary text */
+  --text-variant: 190 199 212;  /* body, labels */
+  --text-dim: 154 160 166;      /* captions, hints, placeholders */
+
+  /* Status */
+  --danger: 255 107 122;        /* errors, destructive, low scores */
+  --warn: 242 181 59;           /* warnings, mid scores */
+
+  /* Score ramp (evaluation results only) — derived from status + mint */
+  --score-low: 255 107 122;     /* = danger */
+  --score-mid: 242 181 59;      /* = warn */
+  --score-high: 78 222 163;     /* = secondary (mint) */
+
+  /* Type — Inter for UI + headings (matches public MatrAIx site) */
+  --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --display: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Radii */
+  --radius-sm: 4px;
+  --radius: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+}
+
+:root.light {
+  color-scheme: light;
+
+  --surface-lowest: 255 255 255;
+  --surface-dim: 244 246 248;
+  --surface-low: 238 241 244;
+  --surface: 255 255 255;
+  --surface-high: 231 236 241;
+  --field: 237 241 245;
+
+  --outline: 203 213 225;
+  --outline-dim: 226 232 240;
+
+  --primary: 0 118 194;
+  --primary-dim: 0 92 152;
+  --primary-light: 56 176 224;
+  --primary-glow: 96 200 236;
+  --on-primary: 255 255 255;
+  --secondary: 0 150 103;
+  --secondary-dim: 0 120 84;
+  --accent: 109 40 217;
+  --accent-dim: 91 33 182;
+
+  --text-main: 17 23 31;
+  --text-variant: 55 65 81;
+  --text-dim: 100 116 139;
+
+  --danger: 190 50 70;
+  --warn: 176 120 16;
+
+  --score-low: 190 50 70;
+  --score-mid: 176 120 16;
+  --score-high: 0 150 103;
+}
+
+/* ===========================================================================
+   Base
+   =========================================================================== */
+@layer base {
+  * {
+    @apply box-border;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    font-family: var(--sans);
+    color: rgb(var(--text-main));
+    background: rgb(var(--surface-dim));
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  ::selection {
+    background: rgb(var(--primary) / 0.25);
+  }
+
+  /* One tokenized focus ring on every interactive element. */
+  :focus-visible {
+    outline: 2px solid rgb(var(--primary));
+    outline-offset: 2px;
+  }
+
+  /* Thin, theme-aware scrollbars everywhere. */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--outline)) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: rgb(var(--outline));
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--primary));
+  }
+}
+
+/* ===========================================================================
+   Playground utility classes (plain CSS, never purged — like .custom-scrollbar).
+   Font-family helpers (.font-sans/.font-display/.font-mono) are generated by
+   Tailwind from the fontFamily config, not hand-written here.
+   =========================================================================== */
+
+/* Mono, uppercase, letter-spaced micro-label (HUD). Pair with text-text-dim. */
+.hud {
+  font-family: var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+/* Bordered box with a top-left cyan corner bracket. Use on bg-surface panels.
+   In @layer components so Tailwind positioning utilities (absolute/fixed/sticky)
+   still win — otherwise `.panel` here would override `.absolute` by source order
+   and break every popover/overlay that combines the two. */
+@layer components {
+  .panel {
+    position: relative;
+  }
+  .panel::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    width: 9px;
+    height: 9px;
+    border-top: 2px solid rgb(var(--primary));
+    border-left: 2px solid rgb(var(--primary));
+    pointer-events: none;
+  }
+}
+
+/* Cyan glow — RESERVED for the single primary CTA on a view. */
+.glow {
+  box-shadow: 0 10px 34px -10px rgb(var(--primary) / 0.5);
+}
+
+/* Frosted glass panels for the cockpit setup shell. */
+@layer components {
+  .glass-panel {
+    border: 1px solid rgb(var(--outline) / 0.45);
+    background: linear-gradient(
+      145deg,
+      rgb(var(--surface) / 0.72) 0%,
+      rgb(var(--surface-low) / 0.55) 100%
+    );
+    backdrop-filter: blur(18px) saturate(1.35);
+    -webkit-backdrop-filter: blur(18px) saturate(1.35);
+    box-shadow:
+      0 1px 0 rgb(255 255 255 / 0.04) inset,
+      0 18px 48px -28px rgb(0 0 0 / 0.55);
+  }
+
+  .glass-panel-strong {
+    border: 1px solid rgb(var(--primary) / 0.22);
+    background: linear-gradient(
+      160deg,
+      rgb(var(--surface) / 0.88) 0%,
+      rgb(var(--surface-lowest) / 0.65) 100%
+    );
+    backdrop-filter: blur(22px) saturate(1.5);
+    -webkit-backdrop-filter: blur(22px) saturate(1.5);
+  }
+
+  .cockpit-mesh-bg {
+    background:
+      radial-gradient(ellipse 75% 50% at 12% -8%, rgb(var(--primary) / 0.1), transparent 55%),
+      radial-gradient(ellipse 60% 45% at 88% 100%, rgb(var(--primary) / 0.06), transparent 50%),
+      rgb(var(--surface-dim));
+  }
+
+  .glass-panel-rail {
+    border-left: 3px solid rgb(var(--primary) / 0.45);
+    box-shadow:
+      inset 4px 0 20px -16px rgb(var(--primary) / 0.25),
+      0 1px 0 rgb(255 255 255 / 0.04) inset,
+      0 18px 48px -28px rgb(0 0 0 / 0.55);
+  }
+
+  .cockpit-field-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgb(var(--text-dim));
+  }
+
+  /* Filled tone chips — shared by persona dims, transport, status. */
+  .tone-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border-radius: 9999px;
+    border: 1px solid transparent;
+    padding: 0.25rem 0.65rem;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.25;
+  }
+
+  .tone-chip__key {
+    font-weight: 600;
+  }
+
+  .tone-chip--primary .tone-chip__key {
+    color: rgb(var(--primary));
+  }
+
+  .tone-chip--accent .tone-chip__key {
+    color: rgb(var(--accent));
+  }
+
+  .tone-chip--secondary .tone-chip__key {
+    color: rgb(var(--secondary));
+  }
+
+  .tone-chip--warn .tone-chip__key {
+    color: rgb(var(--warn));
+  }
+
+  .tone-chip--danger .tone-chip__key {
+    color: rgb(var(--danger));
+  }
+
+  .tone-chip__dot {
+    height: 0.375rem;
+    width: 0.375rem;
+    flex-shrink: 0;
+    border-radius: 9999px;
+    background: currentColor;
+  }
+
+  .tone-chip--pulse-dot .tone-chip__dot {
+    animation: cockpit-chip-pulse 1.4s ease-in-out infinite;
+  }
+
+  .tone-chip--primary {
+    border-color: rgb(var(--primary) / 0.42);
+    background-color: rgb(var(--primary) / 0.22);
+    color: rgb(var(--text-main));
+  }
+
+  .tone-chip--accent {
+    border-color: rgb(var(--accent) / 0.42);
+    background-color: rgb(var(--accent) / 0.22);
+    color: rgb(var(--text-main));
+  }
+
+  .tone-chip--secondary {
+    border-color: rgb(var(--secondary) / 0.45);
+    background-color: rgb(var(--secondary) / 0.22);
+    color: rgb(var(--text-main));
+  }
+
+  .tone-chip--warn {
+    border-color: rgb(var(--warn) / 0.45);
+    background-color: rgb(var(--warn) / 0.22);
+    color: rgb(var(--text-main));
+  }
+
+  .tone-chip--danger {
+    border-color: rgb(var(--danger) / 0.45);
+    background-color: rgb(var(--danger) / 0.2);
+    color: rgb(var(--text-main));
+  }
+
+  .tone-chip--primary .tone-chip__dot {
+    background: rgb(var(--primary));
+  }
+
+  .tone-chip--accent .tone-chip__dot {
+    background: rgb(var(--accent));
+  }
+
+  .tone-chip--secondary .tone-chip__dot {
+    background: rgb(var(--secondary));
+  }
+
+  .tone-chip--warn .tone-chip__dot {
+    background: rgb(var(--warn));
+  }
+
+  .tone-chip--danger .tone-chip__dot {
+    background: rgb(var(--danger));
+  }
+
+  .tone-chip--solid {
+    font-weight: 600;
+  }
+
+  /* Selected / emphasized — stronger tint, text stays main (not inverted). */
+  .tone-chip--solid.tone-chip--primary {
+    border-color: rgb(var(--primary) / 0.58);
+    background-color: rgb(var(--primary) / 0.3);
+    color: rgb(var(--text-main));
+  }
+
+  .tone-chip--solid.tone-chip--accent {
+    border-color: rgb(var(--accent) / 0.58);
+    background-color: rgb(var(--accent) / 0.3);
+    color: rgb(var(--text-main));
+  }
+
+  .tone-chip--solid.tone-chip--secondary {
+    border-color: rgb(var(--secondary) / 0.58);
+    background-color: rgb(var(--secondary) / 0.3);
+    color: rgb(var(--text-main));
+  }
+
+  .tone-chip--solid.tone-chip--warn {
+    border-color: rgb(var(--warn) / 0.58);
+    background-color: rgb(var(--warn) / 0.32);
+    color: rgb(var(--text-main));
+  }
+
+  .tone-chip--solid.tone-chip--danger {
+    border-color: rgb(var(--danger) / 0.58);
+    background-color: rgb(var(--danger) / 0.28);
+    color: rgb(var(--text-main));
+  }
+
+  .tone-chip--muted {
+    border-color: rgb(var(--outline) / 0.45);
+    background-color: rgb(var(--surface-high) / 0.9);
+    color: rgb(var(--text-dim));
+  }
+
+  :root.light .tone-chip--primary {
+    background-color: rgb(var(--primary) / 0.14);
+  }
+
+  :root.light .tone-chip--accent {
+    background-color: rgb(var(--accent) / 0.14);
+  }
+
+  :root.light .tone-chip--secondary {
+    background-color: rgb(var(--secondary) / 0.14);
+  }
+
+  :root.light .tone-chip--warn {
+    background-color: rgb(var(--warn) / 0.16);
+  }
+
+  :root.light .tone-chip--danger {
+    background-color: rgb(var(--danger) / 0.12);
+  }
+
+  :root.light .tone-chip--solid.tone-chip--primary {
+    background-color: rgb(var(--primary) / 0.2);
+  }
+
+  :root.light .tone-chip--solid.tone-chip--accent {
+    background-color: rgb(var(--accent) / 0.2);
+  }
+
+  :root.light .tone-chip--solid.tone-chip--secondary {
+    background-color: rgb(var(--secondary) / 0.2);
+  }
+
+  :root.light .tone-chip--solid.tone-chip--warn {
+    background-color: rgb(var(--warn) / 0.22);
+  }
+
+  :root.light .tone-chip--solid.tone-chip--danger {
+    background-color: rgb(var(--danger) / 0.16);
+  }
+
+  .persona-card--selected {
+    border-color: rgb(var(--primary) / 0.55);
+    background-color: rgb(var(--primary) / 0.2);
+    box-shadow:
+      inset 4px 0 0 0 rgb(var(--primary)),
+      0 0 0 1px rgb(var(--primary) / 0.2);
+  }
+
+  :root.light .persona-card--selected {
+    background-color: rgb(var(--primary) / 0.12);
+  }
+
+  .cockpit-segment {
+    display: flex;
+    gap: 0.25rem;
+    border-radius: 0.375rem;
+    border: 1px solid rgb(var(--outline) / 0.55);
+    background: rgb(var(--surface-low));
+    padding: 0.25rem;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.04);
+  }
+
+  .cockpit-segment--grid {
+    display: grid;
+  }
+
+  .cockpit-segment__btn {
+    border: none;
+    border-radius: 0.25rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: rgb(var(--text-dim));
+    background: transparent;
+    transition:
+      background-color 0.15s ease,
+      color 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+
+  .cockpit-segment__btn--compact {
+    padding: 0.3rem 0.4rem;
+    font-size: 11px;
+    letter-spacing: 0.01em;
+  }
+
+  .cockpit-segment__btn:hover:not(:disabled):not(.cockpit-segment__btn--active) {
+    background-color: rgb(var(--surface));
+    color: rgb(var(--text-variant));
+  }
+
+  .cockpit-segment__btn--active {
+    background-color: rgb(var(--primary));
+    color: rgb(var(--on-primary));
+    box-shadow: 0 4px 14px -4px rgb(var(--primary) / 0.65);
+  }
+
+  @keyframes cockpit-chip-pulse {
+    0%,
+    100% {
+      opacity: 0.45;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+}
+
+/* Thin internal scrollbars for scroll panes (transcript, lists, code wells). */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgb(var(--outline));
+  border-radius: 9px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--primary));
+}
+
+/* ---- Material Symbols (icon set; lucide migration is a follow-up) ----
+   Default to the unfilled, regular-weight optical setting; components opt into
+   FILL/weight via inline font-variation-settings (the Sym primitive). */
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined";
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: "liga";
+  font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+/* ===========================================================================
+   Motion
+   =========================================================================== */
+@layer utilities {
+  /* Soft pulse for the "warming / running" cold-start indicator. */
+  @keyframes rb-pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.45;
+    }
+  }
+  .animate-rb-pulse {
+    animation: rb-pulse 1.4s ease-in-out infinite;
+  }
+
+  @keyframes rb-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  .animate-rb-spin {
+    animation: rb-spin 0.7s linear infinite;
+  }
+
+  /* Overlay entrance — popovers, dropdowns, menus. ease-out, short. */
+  @keyframes pop-in {
+    from {
+      opacity: 0;
+      transform: translateY(-4px) scale(0.985);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .pop-in {
+    animation: pop-in 0.14s cubic-bezier(0.22, 1, 0.36, 1);
+    transform-origin: top;
+  }
+
+  /* Drawer / sheet slide-in from the right. */
+  @keyframes slide-in-right {
+    from {
+      opacity: 0;
+      transform: translateX(16px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .slide-in-right {
+    animation: slide-in-right 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Quiet rise-in for content that arrives (lists, results, panels). */
+  @keyframes rise-in {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .rise-in {
+    animation: rise-in 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Backdrop / full-surface fade — scrims, full-screen overlays. */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  .fade-in {
+    animation: fade-in 0.15s ease-out;
+  }
+
+  /* -------------------------------------------------------------------------
+     Landing — centered home (shares cockpit-mesh-bg via StudioMeshShell)
+     ------------------------------------------------------------------------- */
+  .landing-home-hero {
+    animation-delay: 0.08s;
+  }
+
+  .landing-home-globe {
+    width: min(380px, 78vw);
+    height: min(380px, 78vw);
+    opacity: 0.92;
+  }
+
+  .landing-home-title {
+    font-family: var(--display);
+    font-size: clamp(1.5rem, 3.2vw, 2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: rgb(var(--text-main));
+  }
+
+  .landing-home-title-accent {
+    background: linear-gradient(
+      92deg,
+      rgb(var(--primary-light)) 0%,
+      rgb(var(--primary)) 55%,
+      rgb(var(--accent)) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .landing-stat-block {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .landing-stat-value {
+    font-family: var(--display);
+    font-size: clamp(3rem, 8vw, 4.75rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: rgb(var(--text-main));
+    text-shadow:
+      0 0 40px rgb(var(--primary) / 0.55),
+      0 0 80px rgb(var(--primary) / 0.25);
+  }
+
+  .landing-stat-value--home {
+    font-size: clamp(2.75rem, 7vw, 3.75rem);
+  }
+
+  .landing-stat-label {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgb(var(--primary) / 0.85);
+  }
+
+  .landing-cta-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 8px;
+    background: rgb(var(--primary));
+    padding: 10px 22px;
+    font-size: 15px;
+    font-weight: 600;
+    color: rgb(var(--on-primary));
+    box-shadow: 0 0 28px rgb(var(--primary) / 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  }
+
+  .landing-cta-primary:hover {
+    background: rgb(var(--primary-dim));
+    box-shadow: 0 0 40px rgb(var(--primary) / 0.5);
+  }
+
+  .landing-cta-primary:active {
+    transform: scale(0.98);
+  }
+
+  .landing-fade-up {
+    opacity: 0;
+    animation: landing-fade-up 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes landing-fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Batch report PDF capture: solid surfaces so html-to-image stays readable */
+.batch-report-pdf-capture {
+  background: #ffffff !important;
+}
+.batch-report-pdf-capture .glass-panel,
+.batch-report-pdf-capture [class*="backdrop-blur"] {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background-color: #ffffff !important;
+}

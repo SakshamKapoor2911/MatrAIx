@@ -1,0 +1,20 @@
+# Harbor smoke test — no API key. Runs examples/tasks/hello-world (reference solution).
+#
+#   uv run harbor run -c configs/jobs/example-job-recipe/harbor-smoke-local.yaml
+
+job_name: harbor-smoke-local
+jobs_dir: jobs
+n_attempts: 1
+timeout_multiplier: 1.0
+n_concurrent_trials: 1
+quiet: false
+
+environment:
+  type: docker
+  delete: true
+
+agents:
+  - name: oracle
+
+tasks:
+  - path: examples/tasks/hello-world

@@ -1,0 +1,38 @@
+artifactName: user_feedback.json
+instructions: |
+  Reflect honestly as the persona after finishing this OS/app task.
+  Focus on whether the shortcuts you picked genuinely match your needs,
+  how easy the Gallery was to browse, and whether you feel confident in
+  your choices.
+fields:
+  - key: needConstraintSatisfaction
+    prompt: How well did your three picks satisfy your core needs or daily routine?
+    kind: enum
+    choices: [yes, partially, no]
+  - key: personalPreferenceSatisfaction
+    prompt: How well did the available Gallery shortcuts match your personal preferences?
+    kind: enum
+    choices: [yes, partially, no]
+  - key: overallExperienceRating
+    prompt: Overall, how would you rate the browsing and picking experience from 1 to 10?
+    kind: integer
+    minimum: 1
+    maximum: 10
+  - key: reason
+    prompt: Briefly explain the rating in your own voice.
+  - key: trustLevel
+    prompt: "Optional: how confident are you that these three picks are the right ones for you, from 1 to 10?"
+    kind: integer
+    minimum: 1
+    maximum: 10
+    required: false
+  - key: effortRating
+    prompt: "Optional: how effortful did browsing and deciding feel from 1 to 10, where higher means more effort?"
+    kind: integer
+    minimum: 1
+    maximum: 10
+    required: false
+  - key: clarityOfNextStep
+    prompt: "Optional: did you feel clear about what you would do next with these shortcuts?"
+    kind: boolean
+    required: false

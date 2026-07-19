@@ -1,0 +1,1617 @@
+schemaVersion: "1.0"
+id: sppa_v1
+title: "NEA Survey of Public Participation in the Arts Survey"
+description: "The Survey of Public Participation in the Arts (SPPA) is the nation's largest, most representative study of U.S. adults' engagement with the arts. It is sponsored by the National E"
+questions:
+  - id: q0
+    prompt: "During the last 12 months, did you go to a live jazz performance? Do not include online or virtual performances, and do not include performances by elementary, middle, or high school student groups."
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q1
+    prompt: "How many times did you go to a live jazz performance during the last 12 months? Please enter a number."
+    type: free_text
+    construct: many_times_did_go_live
+    required: true
+  - id: q2
+    prompt: "During the last 12 months, did you go to a live Latin, Spanish, or salsa music performance? Do not include online or virtual performances, and do not include performances by elementary, middle, or high school student groups."
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q3
+    prompt: "How many times did you go to a live Latin, Spanish, or salsa music performance during the last 12 months? Please enter a number."
+    type: free_text
+    construct: many_times_did_go_live
+    required: true
+  - id: q4
+    prompt: "During the last 12 months, did you go to a live classical music performance? Do not include online or virtual performances, and do not include performances by elementary, middle, or high school student groups."
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q5
+    prompt: "How many times did you go to a live classical music performance during the last 12 months? Please enter a number."
+    type: free_text
+    construct: many_times_did_go_live
+    required: true
+  - id: q6
+    prompt: "During the last 12 months, did you go to a live opera? Do not include online or virtual performances, and do not include performances by elementary, middle, or high school student groups."
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q7
+    prompt: "How many times did you go to a live opera during the last 12 months? Please enter a number."
+    type: free_text
+    construct: many_times_did_go_live
+    required: true
+  - id: q8
+    prompt: "During the last 12 months, did you go to a live musical stage play? Do not include online or virtual performances, and do not include performances by elementary, middle, or high school student groups."
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q9
+    prompt: "How many times did you go to a live musical stage play during the last 12 months? Please enter a number."
+    type: free_text
+    construct: many_times_did_go_live
+    required: true
+  - id: q10
+    prompt: "During the last 12 months, did you go to a live stage play other than a musical? Do not include online or virtual performances, and do not include performances by elementary, middle, or high school student groups."
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q11
+    prompt: "How many times did you go to a live stage play other than a musical during the last 12 months? Please enter a number."
+    type: free_text
+    construct: many_times_did_go_live
+    required: true
+  - id: q12
+    prompt: "During the last 12 months, did you go to a live ballet performance? Do not include online or virtual performances, and do not include performances by elementary, middle, or high school student groups."
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q13
+    prompt: "How many times did you go to a live ballet performance during the last 12 months? Please enter a number."
+    type: free_text
+    construct: many_times_did_go_live
+    required: true
+  - id: q14
+    prompt: "During the last 12 months, did you go to a live dance performance other than ballet, such as modern, contemporary, folk, traditional, or tap dance? Do not include online or virtual performances, and do not include performances by elementary, middle, or high school student groups."
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q15
+    prompt: "How many times did you go to a live dance performance other than ballet during the last 12 months? Please enter a number."
+    type: free_text
+    construct: many_times_did_go_live
+    required: true
+  - id: q16
+    prompt: "During the last 12 months, did you go to any live music, dance, or theater performance other than the kinds already asked about? This may include rock, folk, or country music concerts; rap or hip-hop performances; comedy/improv, magic shows, or circus acts. Do not include online or virtual performances, and do not include elementary, middle, or high school performances."
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q17
+    prompt: "During the last 12 months, did you visit an art museum or gallery?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q18
+    prompt: "How many times did you visit an art museum or gallery during the last 12 months? Please enter a number."
+    type: free_text
+    construct: many_times_did_visit_art
+    required: true
+  - id: q19
+    prompt: "During the last 12 months, did you go to a crafts fair or a visual arts festival?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q20
+    prompt: "During the last 12 months, did you go to an outdoor festival that featured performing artists?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q21
+    prompt: "During the last 12 months, did you visit any place for its historic, architectural, or design value? This may be a park, building, monument, or neighborhood."
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q22
+    prompt: "With the exception of books required for work or school, did you read any books during the last 12 months? Include print books or electronic books."
+    type: single_choice
+    construct: exception_books_required_work_school
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q23
+    prompt: "About how many books did you read during the last 12 months? Please enter a number."
+    type: free_text
+    construct: many_books_did_read_during
+    required: true
+  - id: q24
+    prompt: "During the last 12 months, did you read any novels or short stories, in books, magazines, or newspapers, in paper form or online?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q25
+    prompt: "During the last 12 months, did you read any poetry, in books, magazines, or newspapers, in paper form or online?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q26
+    prompt: "During the last 12 months, did you read any plays, in books, magazines, or newspapers, in paper form or online?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q27
+    prompt: "Did you read any of these materials (novels or short stories, poetry, or plays) in an electronic format? Include e-books or other electronic formats such as websites."
+    type: single_choice
+    construct: did_read_any_these_materials
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q28
+    prompt: "Did you read these materials (novels or short stories, poetry, or plays) in printed form?"
+    type: single_choice
+    construct: did_read_these_materials_novels
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q29
+    prompt: "Did you listen to any recordings, broadcasts, or web streams of novels or short stories?"
+    type: single_choice
+    construct: did_listen_any_recordings_broadcasts
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q30
+    prompt: "Did you listen to any recordings, broadcasts, or web streams of poetry?"
+    type: single_choice
+    construct: did_listen_any_recordings_broadcasts
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q31
+    prompt: "During the last 12 months, with the exception of books required for work or school, did you read any biographies or memoirs?"
+    type: single_choice
+    construct: during_last_12_months_exception
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q32
+    prompt: "During the last 12 months, with the exception of books required for work or school, did you read any nonfiction books about science or technology?"
+    type: single_choice
+    construct: during_last_12_months_exception
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q33
+    prompt: "During the last 12 months, with the exception of books required for work or school, did you read any nonfiction books about history?"
+    type: single_choice
+    construct: during_last_12_months_exception
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q34
+    prompt: "During the last 12 months, with the exception of books required for work or school, did you read any religious texts or books about religion or spirituality?"
+    type: single_choice
+    construct: during_last_12_months_exception
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q35
+    prompt: "During the last 12 months, with the exception of books required for work or school, did you read any graphic novels, or books in comic-strip format?"
+    type: single_choice
+    construct: during_last_12_months_exception
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q36
+    prompt: "During the last 12 months, did you listen to any audiobooks? This could include recordings, broadcasts, or web streaming."
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q37
+    prompt: "During the last 12 months, did you go to a live music, theater, or dance performance, in person? Do not include online or virtual performances, or elementary, middle, or high school performances."
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q38
+    prompt: "During the last 12 months, did you go to a live book reading or a poetry or storytelling event, in person? Do not include virtual events viewed online."
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q39
+    prompt: "During the last 12 months, did you go to an art exhibit, such as paintings, sculpture, pottery, graphic design, or photography, in person? Do not include online or virtual exhibits."
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q40
+    prompt: "Thinking about the live performances, book readings/poetry/storytelling events, or art exhibits you attended, did you go to any of these events at a college or university campus?"
+    type: single_choice
+    construct: thinking_live_performances_book_readings
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q41
+    prompt: "Thinking about the live performances, book readings/poetry/storytelling events, or art exhibits you attended, did you go to any of these events at an elementary, middle, or high school?"
+    type: single_choice
+    construct: thinking_live_performances_book_readings
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q42
+    prompt: "Thinking about the live performances, book readings/poetry/storytelling events, or art exhibits you attended, did you go to any of these events at a church, synagogue, or other place of worship?"
+    type: single_choice
+    construct: thinking_live_performances_book_readings
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q43
+    prompt: "Thinking about the live performances, book readings/poetry/storytelling events, or art exhibits you attended, did you go to any of these events at a restaurant, bar, nightclub, or coffee shop?"
+    type: single_choice
+    construct: thinking_live_performances_book_readings
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q44
+    prompt: "Thinking about the live performances, book readings/poetry/storytelling events, or art exhibits you attended, did you go to any of these events at an open-air facility such as a park, pavilion, or amphitheater?"
+    type: single_choice
+    construct: thinking_live_performances_book_readings
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q45
+    prompt: "Thinking about the live performances, book readings/poetry/storytelling events, or art exhibits you attended, did you go to any of these events at a community center or public library?"
+    type: single_choice
+    construct: thinking_live_performances_book_readings
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q46
+    prompt: "Thinking about all the events you went to, did you first hear about them from a partner or spouse?"
+    type: single_choice
+    construct: thinking_all_events_went_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q47
+    prompt: "Thinking about all the events you went to, did you first hear about them from other family members?"
+    type: single_choice
+    construct: thinking_all_events_went_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q48
+    prompt: "Thinking about all the events you went to, did you first hear about them from friends, neighbors, or co-workers?"
+    type: single_choice
+    construct: thinking_all_events_went_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q49
+    prompt: "Thinking about all the events you went to, did you first hear about them from a community center, arts organization, or public library?"
+    type: single_choice
+    construct: thinking_all_events_went_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q50
+    prompt: "Thinking about all the events you went to, did you first hear about them from print or broadcast media like newspapers, magazines, TV, or radio?"
+    type: single_choice
+    construct: thinking_all_events_went_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q51
+    prompt: "Thinking about all the events you went to, did you first hear about them from social media, websites, or other online sources?"
+    type: single_choice
+    construct: thinking_all_events_went_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q52
+    prompt: "Thinking about all the events you went to, did you first hear about them from some other source?"
+    type: single_choice
+    construct: thinking_all_events_went_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q53
+    prompt: "During the last 12 months, did you go out to the movies or go see a film?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q54
+    prompt: "During the last 12 months, did you go to see any documentaries?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q55
+    prompt: "During the last 12 months, did you go to a film festival?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q56
+    prompt: "During the last 12 months, did you visit any place for its historic, architectural, or design value, such as a park, building, monument, or neighborhood?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q57
+    prompt: "During the last 12 months, did you use a device to watch or listen to jazz music?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q58
+    prompt: "How often do you use a device to watch or listen to jazz music?"
+    type: single_choice
+    construct: often_use_device_watch_listen
+    required: true
+    options:
+      - id: "a"
+        label: "Everyday"
+      - id: "b"
+        label: "At least once a week"
+      - id: "c"
+        label: "At least once a month but not every week"
+      - id: "d"
+        label: "At least 3 times a year but not every month"
+      - id: "e"
+        label: "1 or 2 times a year"
+  - id: q59
+    prompt: "During the last 12 months, did you use a device to watch or listen to Latin, Spanish, or salsa music?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q60
+    prompt: "How often do you use a device to watch or listen to Latin, Spanish, or salsa music?"
+    type: single_choice
+    construct: often_use_device_watch_listen
+    required: true
+    options:
+      - id: "a"
+        label: "Everyday"
+      - id: "b"
+        label: "At least once a week"
+      - id: "c"
+        label: "At least once a month but not every week"
+      - id: "d"
+        label: "At least 3 times a year but not every month"
+      - id: "e"
+        label: "1 or 2 times a year"
+  - id: q61
+    prompt: "During the last 12 months, did you use a device to watch or listen to classical music or opera?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q62
+    prompt: "How often do you use a device to watch or listen to classical music or opera?"
+    type: single_choice
+    construct: often_use_device_watch_listen
+    required: true
+    options:
+      - id: "a"
+        label: "Everyday"
+      - id: "b"
+        label: "At least once a week"
+      - id: "c"
+        label: "At least once a month but not every week"
+      - id: "d"
+        label: "At least 3 times a year but not every month"
+      - id: "e"
+        label: "1 or 2 times a year"
+  - id: q63
+    prompt: "During the last 12 months, did you use a device to watch or listen to other kinds of music, such as rock, pop, country, folk, rap or hip-hop?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q64
+    prompt: "How often do you use a device to watch or listen to other kinds of music?"
+    type: single_choice
+    construct: often_use_device_watch_listen
+    required: true
+    options:
+      - id: "a"
+        label: "Everyday"
+      - id: "b"
+        label: "At least once a week"
+      - id: "c"
+        label: "At least once a month but not every week"
+      - id: "d"
+        label: "At least 3 times a year but not every month"
+      - id: "e"
+        label: "1 or 2 times a year"
+  - id: q65
+    prompt: "During the last 12 months, did you use a device to watch or listen to theater productions, such as musicals or plays?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q66
+    prompt: "How often do you use a device to watch or listen to theater productions, such as musicals or plays?"
+    type: single_choice
+    construct: often_use_device_watch_listen
+    required: true
+    options:
+      - id: "a"
+        label: "Everyday"
+      - id: "b"
+        label: "At least once a week"
+      - id: "c"
+        label: "At least once a month but not every week"
+      - id: "d"
+        label: "At least 3 times a year but not every month"
+      - id: "e"
+        label: "1 or 2 times a year"
+  - id: q67
+    prompt: "During the last 12 months, did you use a device to watch dance performances?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q68
+    prompt: "How often do you use a device to watch dance performances?"
+    type: single_choice
+    construct: often_use_device_watch_dance
+    required: true
+    options:
+      - id: "a"
+        label: "Everyday"
+      - id: "b"
+        label: "At least once a week"
+      - id: "c"
+        label: "At least once a month but not every week"
+      - id: "d"
+        label: "At least 3 times a year but not every month"
+      - id: "e"
+        label: "1 or 2 times a year"
+  - id: q69
+    prompt: "During the last 12 months, did you use a device to watch or listen to programs, podcasts, or other video or audio content about music, dance, or theater?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q70
+    prompt: "How often did you use a device to watch or listen to programs, podcasts, or other content about music, dance, or theater?"
+    type: single_choice
+    construct: often_did_use_device_watch
+    required: true
+    options:
+      - id: "a"
+        label: "Everyday"
+      - id: "b"
+        label: "At least once a week"
+      - id: "c"
+        label: "At least once a month but not every week"
+      - id: "d"
+        label: "At least 3 times a year but not every month"
+      - id: "e"
+        label: "1 or 2 times a year"
+  - id: q71
+    prompt: "During the last 12 months, did you use a device to watch or listen to programs, podcasts, or other video or audio content about the visual arts?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q72
+    prompt: "How often did you use a device to watch or listen to programs, podcasts, or other content about the visual arts?"
+    type: single_choice
+    construct: often_did_use_device_watch
+    required: true
+    options:
+      - id: "a"
+        label: "Everyday"
+      - id: "b"
+        label: "At least once a week"
+      - id: "c"
+        label: "At least once a month but not every week"
+      - id: "d"
+        label: "At least 3 times a year but not every month"
+      - id: "e"
+        label: "1 or 2 times a year"
+  - id: q73
+    prompt: "During the last 12 months, did you use a device to watch or listen to programs, podcasts, or other video or audio content about books or writers?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q74
+    prompt: "How often did you use a device to watch or listen to programs, podcasts, or other content about books or writers?"
+    type: single_choice
+    construct: often_did_use_device_watch
+    required: true
+    options:
+      - id: "a"
+        label: "Everyday"
+      - id: "b"
+        label: "At least once a week"
+      - id: "c"
+        label: "At least once a month but not every week"
+      - id: "d"
+        label: "At least 3 times a year but not every month"
+      - id: "e"
+        label: "1 or 2 times a year"
+  - id: q75
+    prompt: "During the last 12 months, did you use a device to watch or listen to documentaries of any kind?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q76
+    prompt: "How often did you use a device to watch or listen to documentaries of any kind?"
+    type: single_choice
+    construct: often_did_use_device_watch
+    required: true
+    options:
+      - id: "a"
+        label: "Everyday"
+      - id: "b"
+        label: "At least once a week"
+      - id: "c"
+        label: "At least once a month but not every week"
+      - id: "d"
+        label: "At least 3 times a year but not every month"
+      - id: "e"
+        label: "1 or 2 times a year"
+  - id: q77
+    prompt: "During the last 12 months, did you use a device to look at visual art such as paintings, sculpture, or pottery?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q78
+    prompt: "How often did you use a device to look at visual art such as paintings, sculpture, or pottery?"
+    type: single_choice
+    construct: often_did_use_device_look
+    required: true
+    options:
+      - id: "a"
+        label: "Everyday"
+      - id: "b"
+        label: "At least once a week"
+      - id: "c"
+        label: "At least once a month but not every week"
+      - id: "d"
+        label: "At least 3 times a year but not every month"
+      - id: "e"
+        label: "1 or 2 times a year"
+  - id: q79
+    prompt: "During the last 12 months, did you use a device in a museum, theater, or concert hall to learn about or interact with an art exhibit or as part of a performance?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q80
+    prompt: "During the last 12 months, did you share publicly or post any information, content, or comments related to music, dance, or theater?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q81
+    prompt: "During the last 12 months, did you share publicly or post any information, content, or comments related to movies or films?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q82
+    prompt: "During the last 12 months, did you share publicly or post any information, content, or comments related to visual art?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q83
+    prompt: "During the last 12 months, did you share publicly or post any information, content, or comments related to books or literature?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q84
+    prompt: "During the last 12 months, did you work with pottery, ceramics, or jewelry?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q85
+    prompt: "During the last 12 months, did you do any leatherwork, metalwork or woodwork?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q86
+    prompt: "During the last 12 months, did you do any weaving, crocheting, quilting, needlepoint, knitting, or sewing?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q87
+    prompt: "During the last 12 months, did you do any singing, either by yourself, in a social gathering, or in a group or choir?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q88
+    prompt: "Did you perform or practice singing for other people? This may include singing as a solo performer or in a choir or other musical group."
+    type: single_choice
+    construct: did_perform_practice_singing_other
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q89
+    prompt: "During the last 12 months, did you play a musical instrument?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q90
+    prompt: "Did you play a musical instrument with one or more partners, a band, orchestra, or other music group?"
+    type: single_choice
+    construct: did_play_musical_instrument_one
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q91
+    prompt: "During the last 12 months, did you do any acting?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q92
+    prompt: "During the last 12 months, did you do any social dancing, including dancing at weddings, clubs, or other social settings?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q93
+    prompt: "During the last 12 months, did you perform or practice any dance, such as for an audience or as a form of artistic expression?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q94
+    prompt: "During the last 12 months, did you create any films or videos as an artistic activity?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q95
+    prompt: "During the last 12 months, did you take any photographs as an artistic activity?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q96
+    prompt: "During the last 12 months, did you create any other visual art, such as paintings, sculpture, graphic designs, or digital art?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q97
+    prompt: "During the last 12 months, did you do any creative writing, such as fiction, non-fiction, poetry, or plays?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q98
+    prompt: "During the last 12 months, did you design, code, or create any games, software, or tools for computers, mobile devices, or other platforms for artistic purposes?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q99
+    prompt: "During the last 12 months, did you create any performance or work of visual art using a computer or mobile device?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q100
+    prompt: "Who was your intended audience for most of your performances, art work, and/or creative writing?"
+    type: single_choice
+    construct: who_was_intended_audience_most
+    required: true
+    options:
+      - id: "a"
+        label: "Just yourself"
+      - id: "b"
+        label: "Only people you know personally"
+      - id: "c"
+        label: "General public, including people you may know personally"
+  - id: q101
+    prompt: "Did you use the internet to share any of your performances, art work, and/or creative writing?"
+    type: single_choice
+    construct: did_use_internet_share_any
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q102
+    prompt: "During the last 12 months, did you go to any amateur or professional sports events?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q103
+    prompt: "During the last 12 months, did you exercise or participate in any sports activities?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q104
+    prompt: "During the last 12 months, did you do any hunting or fishing?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q105
+    prompt: "During the last 12 months, did you participate in any other outdoor activities, such as camping, hiking, or canoeing?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q106
+    prompt: "During the last 12 months, did you work with indoor plants or do any gardening for pleasure?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q107
+    prompt: "During the last 12 months, did you do any interior, architectural work, fashion design, or landscaping as a pastime or hobby?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q108
+    prompt: "How often did you do any interior, architectural work, fashion design, or landscaping as a pastime or hobby?"
+    type: single_choice
+    construct: often_did_any_interior_architectural
+    required: true
+    options:
+      - id: "a"
+        label: "At least once a week"
+      - id: "b"
+        label: "At least once a month but not every week"
+      - id: "c"
+        label: "At least 3 or 4 times a year but not every month"
+      - id: "d"
+        label: "1 or 2 times a year"
+  - id: q109
+    prompt: "During the last 12 months, did you work on any projects in which you restored, rebuilt, or customized something, such as a historic home, a classic vehicle, or furniture?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q110
+    prompt: "How often did you work on projects to restore, rebuild, or customize something?"
+    type: single_choice
+    construct: often_did_work_projects_restore
+    required: true
+    options:
+      - id: "a"
+        label: "At least once a week"
+      - id: "b"
+        label: "At least once a month but not every week"
+      - id: "c"
+        label: "At least 3 or 4 times a year but not every month"
+      - id: "d"
+        label: "1 or 2 times a year"
+  - id: q111
+    prompt: "During the last 12 months, did you play any video or computer games? Include games played on smartphones, tablets, laptops, and other devices."
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q112
+    prompt: "How often did you play video or computer games?"
+    type: single_choice
+    construct: often_did_play_video_computer
+    required: true
+    options:
+      - id: "a"
+        label: "At least once a week"
+      - id: "b"
+        label: "At least once a month but not every week"
+      - id: "c"
+        label: "At least 3 or 4 times a year but not every month"
+      - id: "d"
+        label: "1 or 2 times a year"
+  - id: q113
+    prompt: "During the last 12 months, did you participate in any book clubs or reading groups?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q114
+    prompt: "How often did you participate in book clubs or reading groups?"
+    type: single_choice
+    construct: often_did_participate_book_clubs
+    required: true
+    options:
+      - id: "a"
+        label: "At least once a week"
+      - id: "b"
+        label: "At least once a month but not every week"
+      - id: "c"
+        label: "At least 3 or 4 times a year but not every month"
+      - id: "d"
+        label: "1 or 2 times a year"
+  - id: q115
+    prompt: "During the last 12 months, did you prepare or cook any food as an artistic activity or take part in a cooking class?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q116
+    prompt: "How often did you prepare or cook food as an artistic activity or take part in a cooking class?"
+    type: single_choice
+    construct: often_did_prepare_cook_food
+    required: true
+    options:
+      - id: "a"
+        label: "At least once a week"
+      - id: "b"
+        label: "At least once a month but not every week"
+      - id: "c"
+        label: "At least 3 or 4 times a year but not every month"
+      - id: "d"
+        label: "1 or 2 times a year"
+  - id: q117
+    prompt: "During the last 12 months, did you visit a public library?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q118
+    prompt: "How often did you visit a public library?"
+    type: single_choice
+    construct: often_did_visit_public_library
+    required: true
+    options:
+      - id: "a"
+        label: "At least once a week"
+      - id: "b"
+        label: "At least once a month but not every week"
+      - id: "c"
+        label: "At least 3 or 4 times a year but not every month"
+      - id: "d"
+        label: "1 or 2 times a year"
+  - id: q119
+    prompt: "During the last 12 months, did you do any volunteer or charity work?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q120
+    prompt: "Did you volunteer for an arts organization, group, or project?"
+    type: single_choice
+    construct: did_volunteer_arts_organization_group
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q121
+    prompt: "During the last 12 months, did you subscribe to season tickets to arts events or take out membership in an arts organization?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q122
+    prompt: "During the last 12 months, outside of any ticket purchases or subscriptions, did you donate any money, goods, or services to an arts organization, group, or project?"
+    type: single_choice
+    construct: during_last_12_months_outside
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q123
+    prompt: "During the last 12 months, did you purchase or acquire any pieces of art, such as paintings, drawings, sculpture, pottery, or other visual art?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q124
+    prompt: "During the last 12 months, did you participate in any community activities, meetings, or events?"
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q125
+    prompt: "In your lifetime, have you ever taken lessons or classes in music — either voice training or playing an instrument? Include online classes or lessons."
+    type: single_choice
+    construct: lifetime_have_ever_taken_lessons
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q126
+    prompt: "Were the music classes taken in school? Include online classes or lessons."
+    type: single_choice
+    construct: were_music_classes_taken_school
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q127
+    prompt: "During the last 12 months, did you take lessons or classes in music? Include online classes or lessons."
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q128
+    prompt: "During the last 12 months, did you learn music through other means not involving lessons or classes? This could include from family or friends, as family tradition, or by teaching yourself."
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q129
+    prompt: "In your lifetime, have you ever taken lessons or classes in photography or filmmaking? Include online classes or lessons."
+    type: single_choice
+    construct: lifetime_have_ever_taken_lessons
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q130
+    prompt: "Were the photography or filmmaking classes taken in school? Include online classes or lessons."
+    type: single_choice
+    construct: were_photography_filmmaking_classes_take
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q131
+    prompt: "During the last 12 months, did you take lessons or classes in photography or filmmaking? Include online classes or lessons."
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q132
+    prompt: "During the last 12 months, did you learn photography or filmmaking through other means not involving lessons or classes? This could include from family or friends, as family tradition, or by teaching yourself."
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q133
+    prompt: "In your lifetime, have you ever taken lessons or classes in other visual arts such as drawing, painting, pottery, weaving, or graphic or fashion design? Include online classes or lessons."
+    type: single_choice
+    construct: lifetime_have_ever_taken_lessons
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q134
+    prompt: "Were the other visual arts classes taken in school? Include online classes or lessons."
+    type: single_choice
+    construct: were_other_visual_arts_classes
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q135
+    prompt: "During the last 12 months, did you take lessons or classes in other visual arts? Include online classes or lessons."
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q136
+    prompt: "During the last 12 months, did you learn other visual arts through other means not involving lessons or classes? This could include from family or friends, as family tradition, or by teaching yourself."
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q137
+    prompt: "In your lifetime, have you ever taken lessons or classes in acting or theater? Include online classes or lessons."
+    type: single_choice
+    construct: lifetime_have_ever_taken_lessons
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q138
+    prompt: "Were the acting or theater classes taken in school? Include online classes or lessons."
+    type: single_choice
+    construct: were_acting_theater_classes_taken
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q139
+    prompt: "During the last 12 months, did you take lessons or classes in acting or theater? Include online classes or lessons."
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q140
+    prompt: "During the last 12 months, did you learn acting or theater through other means not involving lessons or classes? This could include from family or friends, as family tradition, or by teaching yourself."
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q141
+    prompt: "In your lifetime, have you ever taken lessons or classes in dance? Include online classes or lessons."
+    type: single_choice
+    construct: lifetime_have_ever_taken_lessons
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q142
+    prompt: "Were the dance classes taken in school? Include online classes or lessons."
+    type: single_choice
+    construct: were_dance_classes_taken_school
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q143
+    prompt: "During the last 12 months, did you take lessons or classes in dance? Include online classes or lessons."
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q144
+    prompt: "During the last 12 months, did you learn dance through other means not involving lessons or classes? This could include from family or friends, as family tradition, or by teaching yourself."
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q145
+    prompt: "In your lifetime, have you ever taken lessons or classes in creative writing? Include online classes or lessons."
+    type: single_choice
+    construct: lifetime_have_ever_taken_lessons
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q146
+    prompt: "Were the creative writing classes taken in school? Include online classes or lessons."
+    type: single_choice
+    construct: were_creative_writing_classes_taken
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q147
+    prompt: "During the last 12 months, did you take lessons or classes in creative writing? Include online classes or lessons."
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q148
+    prompt: "During the last 12 months, did you learn creative writing through other means not involving lessons or classes? This could include from family or friends, as family tradition, or by teaching yourself."
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q149
+    prompt: "In your lifetime, have you ever taken lessons or classes in art history or art or music appreciation? Include online classes or lessons."
+    type: single_choice
+    construct: lifetime_have_ever_taken_lessons
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q150
+    prompt: "Were the art history or art or music appreciation classes taken in school? Include online classes or lessons."
+    type: single_choice
+    construct: were_art_history_art_music
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q151
+    prompt: "During the last 12 months, did you take lessons or classes in art history or art or music appreciation? Include online classes or lessons."
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q152
+    prompt: "During the last 12 months, did you learn art history or art or music appreciation through other means not involving lessons or classes? This could include from family or friends, as family tradition, or by teaching yourself."
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q153
+    prompt: "In your lifetime, have you ever taken lessons or classes in creative coding or in computer animation or digital art? Include online classes or lessons."
+    type: single_choice
+    construct: lifetime_have_ever_taken_lessons
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q154
+    prompt: "Were the creative coding, computer animation, or digital art classes taken in school? Include online classes or lessons."
+    type: single_choice
+    construct: were_creative_coding_computer_animation
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q155
+    prompt: "During the last 12 months, did you take lessons or classes in creative coding, computer animation, or digital art? Include online classes or lessons."
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q156
+    prompt: "During the last 12 months, did you learn creative coding, computer animation, or digital art through other means not involving lessons or classes? This could include from family or friends, as family tradition, or by teaching yourself."
+    type: single_choice
+    construct: during_last_12_months_did
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"

@@ -1,0 +1,2783 @@
+schemaVersion: "1.0"
+id: hints_v1
+title: "NCI Health Information National Trends Survey"
+description: "The Health Information National Trends Survey (HINTS) is the National Cancer Institute's nationally representative survey of U.S. adults about how they access and use health inform"
+questions:
+  - id: q0
+    prompt: "Have you ever looked for information about cancer from any source?"
+    type: single_choice
+    construct: have_ever_looked_information_cancer
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q1
+    prompt: "Based on the results of your most recent search for information about cancer, how much do you agree or disagree with the following statement: It took a lot of effort to get the information you needed."
+    type: single_choice
+    construct: based_results_most_recent_search
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly agree"
+      - id: "b"
+        label: "Somewhat agree"
+      - id: "c"
+        label: "Somewhat disagree"
+      - id: "d"
+        label: "Strongly disagree"
+  - id: q2
+    prompt: "Based on the results of your most recent search for information about cancer, how much do you agree or disagree with the following statement: You felt frustrated during your search for the information."
+    type: single_choice
+    construct: based_results_most_recent_search
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly agree"
+      - id: "b"
+        label: "Somewhat agree"
+      - id: "c"
+        label: "Somewhat disagree"
+      - id: "d"
+        label: "Strongly disagree"
+  - id: q3
+    prompt: "Based on the results of your most recent search for information about cancer, how much do you agree or disagree with the following statement: You were concerned about the quality of the information."
+    type: single_choice
+    construct: based_results_most_recent_search
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly agree"
+      - id: "b"
+        label: "Somewhat agree"
+      - id: "c"
+        label: "Somewhat disagree"
+      - id: "d"
+        label: "Strongly disagree"
+  - id: q4
+    prompt: "Based on the results of your most recent search for information about cancer, how much do you agree or disagree with the following statement: The information you found was hard to understand."
+    type: single_choice
+    construct: based_results_most_recent_search
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly agree"
+      - id: "b"
+        label: "Somewhat agree"
+      - id: "c"
+        label: "Somewhat disagree"
+      - id: "d"
+        label: "Strongly disagree"
+  - id: q5
+    prompt: "In general, how much would you trust information about cancer from a doctor?"
+    type: single_choice
+    construct: general_much_would_trust_information
+    required: true
+    options:
+      - id: "a"
+        label: "A lot"
+      - id: "b"
+        label: "Some"
+      - id: "c"
+        label: "A little"
+      - id: "d"
+        label: "Not at all"
+  - id: q6
+    prompt: "In general, how much would you trust information about cancer from family or friends?"
+    type: single_choice
+    construct: general_much_would_trust_information
+    required: true
+    options:
+      - id: "a"
+        label: "A lot"
+      - id: "b"
+        label: "Some"
+      - id: "c"
+        label: "A little"
+      - id: "d"
+        label: "Not at all"
+  - id: q7
+    prompt: "In general, how much would you trust information about cancer from government health agencies?"
+    type: single_choice
+    construct: general_much_would_trust_information
+    required: true
+    options:
+      - id: "a"
+        label: "A lot"
+      - id: "b"
+        label: "Some"
+      - id: "c"
+        label: "A little"
+      - id: "d"
+        label: "Not at all"
+  - id: q8
+    prompt: "In general, how much would you trust information about cancer from charitable organizations?"
+    type: single_choice
+    construct: general_much_would_trust_information
+    required: true
+    options:
+      - id: "a"
+        label: "A lot"
+      - id: "b"
+        label: "Some"
+      - id: "c"
+        label: "A little"
+      - id: "d"
+        label: "Not at all"
+  - id: q9
+    prompt: "In general, how much would you trust information about cancer from religious organizations and leaders?"
+    type: single_choice
+    construct: general_much_would_trust_information
+    required: true
+    options:
+      - id: "a"
+        label: "A lot"
+      - id: "b"
+        label: "Some"
+      - id: "c"
+        label: "A little"
+      - id: "d"
+        label: "Not at all"
+  - id: q10
+    prompt: "In general, how much would you trust information about cancer from scientists?"
+    type: single_choice
+    construct: general_much_would_trust_information
+    required: true
+    options:
+      - id: "a"
+        label: "A lot"
+      - id: "b"
+        label: "Some"
+      - id: "c"
+        label: "A little"
+      - id: "d"
+        label: "Not at all"
+  - id: q11
+    prompt: "How often do health recommendations from experts seem to conflict or contradict one another?"
+    type: single_choice
+    construct: often_health_recommendations_from_expert
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Often"
+      - id: "d"
+        label: "Very Often"
+  - id: q12
+    prompt: "How often do health recommendations from experts seem to change over time?"
+    type: single_choice
+    construct: often_health_recommendations_from_expert
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Often"
+      - id: "d"
+        label: "Very Often"
+  - id: q13
+    prompt: "About how often do you use the Internet, either on a computer, laptop, smartphone or any other device?"
+    type: single_choice
+    construct: often_use_internet_either_computer
+    required: true
+    options:
+      - id: "a"
+        label: "More than once per day"
+      - id: "b"
+        label: "About once per day"
+      - id: "c"
+        label: "A few times a week"
+      - id: "d"
+        label: "Less than once per week"
+      - id: "e"
+        label: "Rarely"
+      - id: "f"
+        label: "Never"
+  - id: q14
+    prompt: "When you use the Internet, do you connect to it through a cellular network (4G / 5G / LTE)?"
+    type: single_choice
+    construct: when_use_internet_connect_it
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q15
+    prompt: "When you use the Internet, do you connect to it through a service such as DSL, cable, FiOS, Wi-Fi, or satellite?"
+    type: single_choice
+    construct: when_use_internet_connect_it
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q16
+    prompt: "In the past 12 months, have you used the Internet to look for health or medical information?"
+    type: single_choice
+    construct: past_12_months_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q17
+    prompt: "In the past 12 months, have you used the Internet to send a message to a health care provider or a health care provider's office?"
+    type: single_choice
+    construct: past_12_months_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q18
+    prompt: "In the past 12 months, have you used the Internet to view medical test results?"
+    type: single_choice
+    construct: past_12_months_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q19
+    prompt: "In the past 12 months, have you used the Internet to make an appointment with a health care provider?"
+    type: single_choice
+    construct: past_12_months_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q20
+    prompt: "How satisfied are you with your Internet connection at home to meet health-related needs?"
+    type: single_choice
+    construct: satisfied_internet_connection_home_meet
+    required: true
+    options:
+      - id: "a"
+        label: "Extremely satisfied"
+      - id: "b"
+        label: "Very satisfied"
+      - id: "c"
+        label: "Somewhat satisfied"
+      - id: "d"
+        label: "Not very satisfied"
+      - id: "e"
+        label: "Not at all satisfied"
+  - id: q21
+    prompt: "How much do you agree or disagree with the following statement: I find learning how to use new technology frustrating."
+    type: single_choice
+    construct: much_agree_disagree_following_statement
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly agree"
+      - id: "b"
+        label: "Somewhat agree"
+      - id: "c"
+        label: "Somewhat disagree"
+      - id: "d"
+        label: "Strongly disagree"
+  - id: q22
+    prompt: "How much do you agree or disagree with the following statement: I can use applications/programs (like Zoom) on my cell phone or computer without asking someone for help."
+    type: single_choice
+    construct: much_agree_disagree_following_statement
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly agree"
+      - id: "b"
+        label: "Somewhat agree"
+      - id: "c"
+        label: "Somewhat disagree"
+      - id: "d"
+        label: "Strongly disagree"
+  - id: q23
+    prompt: "How much do you agree or disagree with the following statement: I have the skills to find the health information I need on the Internet."
+    type: single_choice
+    construct: much_agree_disagree_following_statement
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly agree"
+      - id: "b"
+        label: "Somewhat agree"
+      - id: "c"
+        label: "Somewhat disagree"
+      - id: "d"
+        label: "Strongly disagree"
+  - id: q24
+    prompt: "In the last 12 months, did you use a desktop computer or laptop?"
+    type: single_choice
+    construct: last_12_months_did_use
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q25
+    prompt: "In the last 12 months, did you use a smartphone?"
+    type: single_choice
+    construct: last_12_months_did_use
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q26
+    prompt: "In the last 12 months, did you use a tablet?"
+    type: single_choice
+    construct: last_12_months_did_use
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q27
+    prompt: "In the last 12 months, did you use a smartwatch or other electronic wearable device (for example an Apple Watch or Fitbit)?"
+    type: single_choice
+    construct: last_12_months_did_use
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q28
+    prompt: "In the past 12 months, have you used a health or wellness app on your tablet or smartphone?"
+    type: single_choice
+    construct: past_12_months_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "I do not have any health apps on my tablet or smartphone"
+      - id: "d"
+        label: "I do not have a tablet or smartphone"
+  - id: q29
+    prompt: "In the past 12 months, have you used an electronic wearable device to monitor or track your health or activity? For example, a Fitbit, Apple Watch, or Garmin Vivofit."
+    type: single_choice
+    construct: past_12_months_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No, not in the past 12 months"
+      - id: "c"
+        label: "I have never used an electronic wearable device"
+  - id: q30
+    prompt: "In the past month, how often did you use an electronic wearable device to track your health?"
+    type: single_choice
+    construct: past_month_often_did_use
+    required: true
+    options:
+      - id: "a"
+        label: "Every day"
+      - id: "b"
+        label: "Almost every day"
+      - id: "c"
+        label: "1-2 times per week"
+      - id: "d"
+        label: "Less than once per week"
+      - id: "e"
+        label: "I did not use a wearable device in the past month"
+  - id: q31
+    prompt: "Would you be willing to share health data from your electronic wearable device with your health care provider?"
+    type: single_choice
+    construct: would_be_willing_share_health
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q32
+    prompt: "Have you shared health information from either an electronic monitoring device or smartphone with a health professional within the last 12 months?"
+    type: single_choice
+    construct: have_shared_health_information_from
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "I do not use a smartphone or electronic monitoring device"
+  - id: q33
+    prompt: "In the past 12 months, how often did you visit a social media site?"
+    type: single_choice
+    construct: past_12_months_often_did
+    required: true
+    options:
+      - id: "a"
+        label: "Almost every day"
+      - id: "b"
+        label: "At least once a week"
+      - id: "c"
+        label: "A few times a month"
+      - id: "d"
+        label: "Less than once a month"
+      - id: "e"
+        label: "Never"
+  - id: q34
+    prompt: "In the past 12 months, how often did you share personal health information on social media?"
+    type: single_choice
+    construct: past_12_months_often_did
+    required: true
+    options:
+      - id: "a"
+        label: "Almost every day"
+      - id: "b"
+        label: "At least once a week"
+      - id: "c"
+        label: "A few times a month"
+      - id: "d"
+        label: "Less than once a month"
+      - id: "e"
+        label: "Never"
+  - id: q35
+    prompt: "In the past 12 months, how often did you share general health-related information on social media (for example, a news article)?"
+    type: single_choice
+    construct: past_12_months_often_did
+    required: true
+    options:
+      - id: "a"
+        label: "Almost every day"
+      - id: "b"
+        label: "At least once a week"
+      - id: "c"
+        label: "A few times a month"
+      - id: "d"
+        label: "Less than once a month"
+      - id: "e"
+        label: "Never"
+  - id: q36
+    prompt: "In the past 12 months, how often did you interact with people who have similar health or medical issues on social media or online forums?"
+    type: single_choice
+    construct: past_12_months_often_did
+    required: true
+    options:
+      - id: "a"
+        label: "Almost every day"
+      - id: "b"
+        label: "At least once a week"
+      - id: "c"
+        label: "A few times a month"
+      - id: "d"
+        label: "Less than once a month"
+      - id: "e"
+        label: "Never"
+  - id: q37
+    prompt: "In the past 12 months, how often did you watch a health-related video on a social media site (for example, YouTube)?"
+    type: single_choice
+    construct: past_12_months_often_did
+    required: true
+    options:
+      - id: "a"
+        label: "Almost every day"
+      - id: "b"
+        label: "At least once a week"
+      - id: "c"
+        label: "A few times a month"
+      - id: "d"
+        label: "Less than once a month"
+      - id: "e"
+        label: "Never"
+  - id: q38
+    prompt: "How much of the health information that you see on social media do you think is false or misleading?"
+    type: single_choice
+    construct: much_health_information_that_see
+    required: true
+    options:
+      - id: "a"
+        label: "A lot"
+      - id: "b"
+        label: "Some"
+      - id: "c"
+        label: "A little"
+      - id: "d"
+        label: "None"
+      - id: "e"
+        label: "I do not use social media"
+  - id: q39
+    prompt: "How much do you agree or disagree with the following statement: I use information from social media to make decisions about my health."
+    type: single_choice
+    construct: much_agree_disagree_following_statement
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly agree"
+      - id: "b"
+        label: "Somewhat agree"
+      - id: "c"
+        label: "Somewhat disagree"
+      - id: "d"
+        label: "Strongly disagree"
+  - id: q40
+    prompt: "How much do you agree or disagree with the following statement: I use information from social media in discussions with my health care provider."
+    type: single_choice
+    construct: much_agree_disagree_following_statement
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly agree"
+      - id: "b"
+        label: "Somewhat agree"
+      - id: "c"
+        label: "Somewhat disagree"
+      - id: "d"
+        label: "Strongly disagree"
+  - id: q41
+    prompt: "How much do you agree or disagree with the following statement: I find it hard to tell whether health information on social media is true or false."
+    type: single_choice
+    construct: much_agree_disagree_following_statement
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly agree"
+      - id: "b"
+        label: "Somewhat agree"
+      - id: "c"
+        label: "Somewhat disagree"
+      - id: "d"
+        label: "Strongly disagree"
+  - id: q42
+    prompt: "How much do you agree or disagree with the following statement: Most of the people in my social media networks have the same views about health as me."
+    type: single_choice
+    construct: much_agree_disagree_following_statement
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly agree"
+      - id: "b"
+        label: "Somewhat agree"
+      - id: "c"
+        label: "Somewhat disagree"
+      - id: "d"
+        label: "Strongly disagree"
+  - id: q43
+    prompt: "Are you covered by any kind of health insurance or health care plan, including employer-sponsored insurance, prepaid plans, or government plans such as Medicare, Medicaid or TRICARE?"
+    type: single_choice
+    construct: covered_by_any_kind_health
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q44
+    prompt: "In the past 12 months, not counting times you went to an emergency room, how many times did you see a doctor, nurse, or other health professional to get care for yourself?"
+    type: single_choice
+    construct: past_12_months_not_counting
+    required: true
+    options:
+      - id: "a"
+        label: "None"
+      - id: "b"
+        label: "1 time"
+      - id: "c"
+        label: "2 times"
+      - id: "d"
+        label: "3 times"
+      - id: "e"
+        label: "4 times"
+      - id: "f"
+        label: "5-9 times"
+      - id: "g"
+        label: "10 or more times"
+  - id: q45
+    prompt: "Overall, how would you rate the quality of health care you received in the past 12 months?"
+    type: single_choice
+    construct: overall_would_rate_quality_health
+    required: true
+    options:
+      - id: "a"
+        label: "Excellent"
+      - id: "b"
+        label: "Very good"
+      - id: "c"
+        label: "Good"
+      - id: "d"
+        label: "Fair"
+      - id: "e"
+        label: "Poor"
+  - id: q46
+    prompt: "Thinking about your communication with all doctors, nurses, or other health professionals you saw during the past 12 months, how often did they give you the chance to ask all the health-related questions you had?"
+    type: single_choice
+    construct: thinking_communication_all_doctors_nurse
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Usually"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Never"
+  - id: q47
+    prompt: "Thinking about your communication with all doctors, nurses, or other health professionals you saw during the past 12 months, how often did they give the attention you needed to your feelings and emotions?"
+    type: single_choice
+    construct: thinking_communication_all_doctors_nurse
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Usually"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Never"
+  - id: q48
+    prompt: "Thinking about your communication with all doctors, nurses, or other health professionals you saw during the past 12 months, how often did they involve you in decisions about your health care as much as you wanted?"
+    type: single_choice
+    construct: thinking_communication_all_doctors_nurse
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Usually"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Never"
+  - id: q49
+    prompt: "Thinking about your communication with all doctors, nurses, or other health professionals you saw during the past 12 months, how often did they make sure you understood the things you needed to do to take care of your health?"
+    type: single_choice
+    construct: thinking_communication_all_doctors_nurse
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Usually"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Never"
+  - id: q50
+    prompt: "Thinking about your communication with all doctors, nurses, or other health professionals you saw during the past 12 months, how often did they explain things in a way you could understand?"
+    type: single_choice
+    construct: thinking_communication_all_doctors_nurse
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Usually"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Never"
+  - id: q51
+    prompt: "Thinking about your communication with all doctors, nurses, or other health professionals you saw during the past 12 months, how often did they spend enough time with you?"
+    type: single_choice
+    construct: thinking_communication_all_doctors_nurse
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Usually"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Never"
+  - id: q52
+    prompt: "Thinking about your communication with all doctors, nurses, or other health professionals you saw during the past 12 months, how often did they help you deal with feelings of uncertainty about your health or health care?"
+    type: single_choice
+    construct: thinking_communication_all_doctors_nurse
+    required: true
+    options:
+      - id: "a"
+        label: "Always"
+      - id: "b"
+        label: "Usually"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Never"
+  - id: q53
+    prompt: "In the past 12 months, was there a time when you had to wait for medical test results longer than you thought reasonable?"
+    type: single_choice
+    construct: past_12_months_was_there
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q54
+    prompt: "In the past 12 months, when getting care for a medical problem, was there a time when you had to redo a test or procedure because the earlier test results were not available?"
+    type: single_choice
+    construct: past_12_months_when_getting
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q55
+    prompt: "In the past 12 months, how often have you talked to a doctor, nurse, or other health professional about any kind of health information you found on the Internet?"
+    type: single_choice
+    construct: past_12_months_often_have
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "1 or 2 times"
+      - id: "c"
+        label: "More than 2 times"
+  - id: q56
+    prompt: "In the past 12 months, when I talked with a healthcare professional about information I found on the Internet, how much do you agree or disagree with the following statement: They were open to talking about the information with me."
+    type: single_choice
+    construct: past_12_months_when_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly agree"
+      - id: "b"
+        label: "Somewhat agree"
+      - id: "c"
+        label: "Somewhat disagree"
+      - id: "d"
+        label: "Strongly disagree"
+  - id: q57
+    prompt: "In the past 12 months, when I talked with a healthcare professional about information I found on the Internet, how much do you agree or disagree with the following statement: They respected what I had to say."
+    type: single_choice
+    construct: past_12_months_when_i
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly agree"
+      - id: "b"
+        label: "Somewhat agree"
+      - id: "c"
+        label: "Somewhat disagree"
+      - id: "d"
+        label: "Strongly disagree"
+  - id: q58
+    prompt: "As a result of talking to my doctor, nurse or other health professional about health information from the Internet, our interaction became…"
+    type: single_choice
+    construct: as_result_talking_my_doctor
+    required: true
+    options:
+      - id: "a"
+        label: "A lot worse"
+      - id: "b"
+        label: "A little worse"
+      - id: "c"
+        label: "No impact on our interaction"
+      - id: "d"
+        label: "A little better"
+      - id: "e"
+        label: "A lot better"
+  - id: q59
+    prompt: "How confident are you filling out medical forms by yourself?"
+    type: single_choice
+    construct: confident_filling_out_medical_forms
+    required: true
+    options:
+      - id: "a"
+        label: "Very"
+      - id: "b"
+        label: "Somewhat"
+      - id: "c"
+        label: "A little"
+      - id: "d"
+        label: "Not at all"
+  - id: q60
+    prompt: "How much do you trust the health care system (for example, hospitals, pharmacies, and other organizations involved in health care)?"
+    type: single_choice
+    construct: much_trust_health_care_system
+    required: true
+    options:
+      - id: "a"
+        label: "A lot"
+      - id: "b"
+        label: "Some"
+      - id: "c"
+        label: "A little"
+      - id: "d"
+        label: "Not at all"
+  - id: q61
+    prompt: "Have you ever experienced prejudice or been discriminated against when getting medical care?"
+    type: single_choice
+    construct: have_ever_experienced_prejudice_been
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q62
+    prompt: "In the past 12 months, how often did you get the help you needed from your primary care provider's office to manage your care among different providers and services?"
+    type: single_choice
+    construct: past_12_months_often_did
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Sometimes"
+      - id: "c"
+        label: "Usually"
+      - id: "d"
+        label: "Always"
+      - id: "e"
+        label: "I did not need help coordinating my care"
+      - id: "f"
+        label: "I did not visit a primary care provider"
+  - id: q63
+    prompt: "In the past 12 months, how often did your primary care provider's office seem informed and up-to-date about the care you got from other health care providers?"
+    type: single_choice
+    construct: past_12_months_often_did
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Sometimes"
+      - id: "c"
+        label: "Usually"
+      - id: "d"
+        label: "Always"
+      - id: "e"
+        label: "Not applicable"
+  - id: q64
+    prompt: "A telehealth visit is a telephone or video appointment with a doctor or health professional. In the past 12 months, did you receive care from a doctor or health professional using telehealth?"
+    type: single_choice
+    construct: telehealth_visit_telephone_video_appoint
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, by video"
+      - id: "b"
+        label: "Yes, by phone call (voice only with no video)"
+      - id: "c"
+        label: "Yes, some by video and some by phone call"
+      - id: "d"
+        label: "No telehealth visits in the past 12 months"
+  - id: q65
+    prompt: "If you have not used telehealth in the last 12 months, what was the primary reason?"
+    type: single_choice
+    construct: if_have_not_used_telehealth
+    required: true
+    options:
+      - id: "a"
+        label: "I did not have a need to visit a doctor or health professional"
+      - id: "b"
+        label: "I needed an examination or test that could only be done in-person"
+      - id: "c"
+        label: "I was not offered telehealth"
+      - id: "d"
+        label: "I didn't know how to use telehealth"
+      - id: "e"
+        label: "I preferred to see a doctor or health professional in-person"
+      - id: "f"
+        label: "I was concerned about the privacy of my personal health data"
+      - id: "g"
+        label: "My Internet or phone data cost too much"
+      - id: "h"
+        label: "My insurance did not cover telehealth or I could not afford it"
+      - id: "i"
+        label: "Other"
+  - id: q66
+    prompt: "What are the reasons you chose (a) telehealth visit(s) for yourself? (Select all that apply)"
+    type: multi_choice
+    construct: reasons_chose_telehealth_visit_s
+    required: true
+    options:
+      - id: "a"
+        label: "The health care provider recommended or required the visit use telehealth"
+      - id: "b"
+        label: "I wanted advice about whether I needed in-person medical care"
+      - id: "c"
+        label: "I wanted to avoid possible infection at the doctor's office or hospital (for example, COVID-19 or flu)"
+      - id: "d"
+        label: "It was more convenient than going to a doctor or health professional (for example, less travel or wait times)"
+      - id: "e"
+        label: "I needed to see a health professional that was not available in my area (for example, a second opinion from a specialist in another state)"
+      - id: "f"
+        label: "I could include family or other caregivers in my appointment"
+      - id: "g"
+        label: "Other"
+  - id: q67
+    prompt: "In general, how much do you agree or disagree with the following statement regarding your telehealth visit(s): I had technical problems with my telehealth visit(s) (for example, difficulty using the technology, trouble seeing or hearing my health care provider)."
+    type: single_choice
+    construct: general_much_agree_disagree_following
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly agree"
+      - id: "b"
+        label: "Somewhat agree"
+      - id: "c"
+        label: "Somewhat disagree"
+      - id: "d"
+        label: "Strongly disagree"
+  - id: q68
+    prompt: "In general, how much do you agree or disagree with the following statement regarding your telehealth visit(s): The care I received from telehealth was as good as a regular in-person visit."
+    type: single_choice
+    construct: general_much_agree_disagree_following
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly agree"
+      - id: "b"
+        label: "Somewhat agree"
+      - id: "c"
+        label: "Somewhat disagree"
+      - id: "d"
+        label: "Strongly disagree"
+  - id: q69
+    prompt: "In general, how much do you agree or disagree with the following statement regarding your telehealth visit(s): Telehealth made it easier for me to get care when and where I needed it."
+    type: single_choice
+    construct: general_much_agree_disagree_following
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly agree"
+      - id: "b"
+        label: "Somewhat agree"
+      - id: "c"
+        label: "Somewhat disagree"
+      - id: "d"
+        label: "Strongly disagree"
+  - id: q70
+    prompt: "In general, how much do you agree or disagree with the following statement regarding your telehealth visit(s): I would recommend using telehealth to another person."
+    type: single_choice
+    construct: general_much_agree_disagree_following
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly agree"
+      - id: "b"
+        label: "Somewhat agree"
+      - id: "c"
+        label: "Somewhat disagree"
+      - id: "d"
+        label: "Strongly disagree"
+  - id: q71
+    prompt: "What was the primary reason for your most recent telehealth visit?"
+    type: single_choice
+    construct: was_primary_reason_most_recent
+    required: true
+    options:
+      - id: "a"
+        label: "Annual visit or follow up appointment"
+      - id: "b"
+        label: "Acute care for a minor illness (for example, fever, sinus infection)"
+      - id: "c"
+        label: "Managing my chronic health condition/disease (for example, high blood pressure, diabetes, heart disease, obesity, cancer)"
+      - id: "d"
+        label: "Mental health, behavioral, or substance abuse issues (for example, depression, anxiety, drug or alcohol use)"
+      - id: "e"
+        label: "Physical Rehabilitation (physical therapy, occupational therapy, speech-language pathology)"
+      - id: "f"
+        label: "Other"
+  - id: q72
+    prompt: "How willing are you to do a telehealth visit in the future if one is offered to you?"
+    type: single_choice
+    construct: willing_telehealth_visit_future_if
+    required: true
+    options:
+      - id: "a"
+        label: "Very willing"
+      - id: "b"
+        label: "Somewhat willing"
+      - id: "c"
+        label: "Somewhat unwilling"
+      - id: "d"
+        label: "Very unwilling"
+  - id: q73
+    prompt: "Have you ever been offered online access to your medical records (for example, a patient portal) by your health care provider?"
+    type: single_choice
+    construct: have_ever_been_offered_online
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Don't know"
+  - id: q74
+    prompt: "Have you ever been offered online access to your medical records (for example, a patient portal) by your health insurer?"
+    type: single_choice
+    construct: have_ever_been_offered_online
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Don't know"
+  - id: q75
+    prompt: "Have any of your health care providers, including doctors, nurses, or office staff ever encouraged you to use an online medical record or patient portal?"
+    type: single_choice
+    construct: have_any_health_care_providers
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q76
+    prompt: "How many times did you access your online medical record or patient portal in the last 12 months?"
+    type: single_choice
+    construct: many_times_did_access_online
+    required: true
+    options:
+      - id: "a"
+        label: "0"
+      - id: "b"
+        label: "1 to 2 times"
+      - id: "c"
+        label: "3 to 5 times"
+      - id: "d"
+        label: "6 to 9 times"
+      - id: "e"
+        label: "10 or more times"
+  - id: q77
+    prompt: "How did you access your online medical record or patient portal?"
+    type: single_choice
+    construct: did_access_online_medical_record
+    required: true
+    options:
+      - id: "a"
+        label: "App"
+      - id: "b"
+        label: "Website"
+      - id: "c"
+        label: "Both app and website"
+      - id: "d"
+        label: "Don't know"
+  - id: q78
+    prompt: "In the past 12 months, have you used your online medical record or patient portal to look up test results?"
+    type: single_choice
+    construct: past_12_months_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q79
+    prompt: "In the past 12 months, have you used your online medical record or patient portal to view clinical notes (a health care provider's written notes that describe your visit)?"
+    type: single_choice
+    construct: past_12_months_have_used
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q80
+    prompt: "How easy or difficult was it to understand the health information in your online medical record or patient portal?"
+    type: single_choice
+    construct: easy_difficult_was_it_understand
+    required: true
+    options:
+      - id: "a"
+        label: "Very easy"
+      - id: "b"
+        label: "Somewhat easy"
+      - id: "c"
+        label: "Somewhat difficult"
+      - id: "d"
+        label: "Very difficult"
+  - id: q81
+    prompt: "Which of the following organizations/providers do you have an online medical record or patient portal with? (Select all that apply)"
+    type: multi_choice
+    construct: following_organizations_providers_have_o
+    required: true
+    options:
+      - id: "a"
+        label: "My primary care doctor's office"
+      - id: "b"
+        label: "Other health care provider(s) such as a specialty provider, counselor, or dentist"
+      - id: "c"
+        label: "My insurer(s)"
+      - id: "d"
+        label: "Clinical laboratory that performs lab tests"
+      - id: "e"
+        label: "Pharmacy"
+      - id: "f"
+        label: "Hospital"
+      - id: "g"
+        label: "I do not have any online medical records or patient portals"
+  - id: q82
+    prompt: "Have you ever used an app like 'Apple Health Records' or 'CommonHealth' to combine your medical information from different patient portals or online medical records into one place?"
+    type: single_choice
+    construct: have_ever_used_app_like
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q83
+    prompt: "In the past 12 months, were you given the option to decide whether or not you wanted to receive test results before your health care provider could discuss them with you?"
+    type: single_choice
+    construct: past_12_months_were_given
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Don't know"
+  - id: q84
+    prompt: "In the past 12 months, did you look at test results made available to you through your online medical record or patient portal before hearing about the result from your health care provider?"
+    type: single_choice
+    construct: past_12_months_did_look
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "I did not have any medical tests in the past 12 months"
+  - id: q85
+    prompt: "How well did you understand what the test results showed and what they meant for your care?"
+    type: single_choice
+    construct: well_did_understand_test_results
+    required: true
+    options:
+      - id: "a"
+        label: "Very well"
+      - id: "b"
+        label: "Well"
+      - id: "c"
+        label: "Fairly well"
+      - id: "d"
+        label: "Poorly"
+  - id: q86
+    prompt: "How would you describe your level of knowledge about palliative care?"
+    type: single_choice
+    construct: would_describe_level_knowledge_palliativ
+    required: true
+    options:
+      - id: "a"
+        label: "I've never heard of it"
+      - id: "b"
+        label: "I know a little bit about palliative care"
+      - id: "c"
+        label: "I know what palliative care is and could explain it to someone else"
+  - id: q87
+    prompt: "How much do you agree or disagree with the following statement about palliative care: If you accept palliative care, you must stop other treatments."
+    type: single_choice
+    construct: much_agree_disagree_following_statement
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly agree"
+      - id: "b"
+        label: "Somewhat agree"
+      - id: "c"
+        label: "Somewhat disagree"
+      - id: "d"
+        label: "Strongly disagree"
+      - id: "e"
+        label: "Don't know"
+  - id: q88
+    prompt: "Are you currently caring for or making health care decisions for someone with a disability or a medical, behavioral, or other condition? (Select all that apply)"
+    type: multi_choice
+    construct: currently_caring_making_health_care
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, a parent/parents"
+      - id: "b"
+        label: "Yes, a spouse/partner"
+      - id: "c"
+        label: "Yes, a child/children that need(s) special care due to a medical condition or disability"
+      - id: "d"
+        label: "Yes, another family member"
+      - id: "e"
+        label: "Yes, a friend or other non-relative"
+      - id: "f"
+        label: "No"
+  - id: q89
+    prompt: "Do you provide any of this care professionally as part of a job (for example, as a nurse or professional home health aide)?"
+    type: single_choice
+    construct: provide_any_this_care_professionally
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q90
+    prompt: "Please think about the individual for whom you are currently providing the most care. Please mark all conditions for which you have provided care for this person. (Select all that apply)"
+    type: multi_choice
+    construct: please_think_individual_whom_currently
+    required: true
+    options:
+      - id: "a"
+        label: "Cancer"
+      - id: "b"
+        label: "Alzheimer's, confusion, dementia, forgetfulness, brain injury, stroke, or other neurological issue"
+      - id: "c"
+        label: "A short-term but serious condition such as recovery from surgery or an injury"
+      - id: "d"
+        label: "A long-term illness such as high blood pressure, hypertension, diabetes, heart disease, heart attack, lung disease, or emphysema"
+      - id: "e"
+        label: "Difficulty moving around such as an orthopedic issue, a musculoskeletal issue, or an aging-related issue"
+      - id: "f"
+        label: "A mental health issue, substance abuse, intellectual or developmental issue"
+      - id: "g"
+        label: "Other"
+      - id: "h"
+        label: "Not sure/don't know"
+  - id: q91
+    prompt: "Think about the individual for whom you are currently providing the most care. How many times did you access that person's online medical record in the last 12 months?"
+    type: single_choice
+    construct: think_individual_whom_currently_providin
+    required: true
+    options:
+      - id: "a"
+        label: "Care recipient does not have an online medical record"
+      - id: "b"
+        label: "None"
+      - id: "c"
+        label: "1 to 2 times"
+      - id: "d"
+        label: "3 to 5 times"
+      - id: "e"
+        label: "6 to 9 times"
+      - id: "f"
+        label: "10 or more times"
+  - id: q92
+    prompt: "Which of the following types of genetic tests have you had? (Select all that apply)"
+    type: multi_choice
+    construct: following_types_genetic_tests_have
+    required: true
+    options:
+      - id: "a"
+        label: "Ancestry testing to understand where you and your relatives come from (for example, tests offered by companies such as Ancestry or 23andMe)"
+      - id: "b"
+        label: "Personal trait testing to understand whether you have genes that are linked to certain characteristics like enjoying the taste of cilantro (for example, tests offered by companies such as Ancestry or 23andMe)"
+      - id: "c"
+        label: "Testing for specific diseases to understand your risk of getting certain diseases such as breast cancer, colon cancer, cardiovascular (heart) disease, diabetes, or dementia/Alzheimer's"
+      - id: "d"
+        label: "Prenatal genetic carrier testing to determine the risk that a man and a woman will have a baby with certain diseases such as cystic fibrosis or Tay Sachs"
+      - id: "e"
+        label: "Other"
+      - id: "f"
+        label: "Not sure what type of genetic test I've had"
+      - id: "g"
+        label: "I have not had any genetic tests"
+  - id: q93
+    prompt: "What were the reasons you had genetic testing? (Select all that apply)"
+    type: multi_choice
+    construct: were_reasons_had_genetic_testing
+    required: true
+    options:
+      - id: "a"
+        label: "Doctor's recommendation"
+      - id: "b"
+        label: "Understand my family ancestry"
+      - id: "c"
+        label: "Find relatives"
+      - id: "d"
+        label: "Learn more about personal traits that may be influenced by genetics"
+      - id: "e"
+        label: "Learn more about my risk for certain diseases (for example, cancer or heart disease)"
+      - id: "f"
+        label: "Understand things like what diet might be best for me"
+      - id: "g"
+        label: "Prenatal testing – for example, carrier testing"
+      - id: "h"
+        label: "I received the test as a gift"
+      - id: "i"
+        label: "Other"
+  - id: q94
+    prompt: "Overall, how confident are you that your genetic testing results are correct and accurate?"
+    type: single_choice
+    construct: overall_confident_that_genetic_testing
+    required: true
+    options:
+      - id: "a"
+        label: "Completely confident"
+      - id: "b"
+        label: "Very confident"
+      - id: "c"
+        label: "Somewhat confident"
+      - id: "d"
+        label: "A little confident"
+      - id: "e"
+        label: "Not confident at all"
+  - id: q95
+    prompt: "If you had a genetic test, who did you think the laboratory that did your genetic test would share your results with? (Select all that apply)"
+    type: multi_choice
+    construct: if_had_genetic_test_who
+    required: true
+    options:
+      - id: "a"
+        label: "My healthcare provider"
+      - id: "b"
+        label: "Scientific researchers for research purposes"
+      - id: "c"
+        label: "Other for-profit companies for commercial purposes such as pharmaceutical companies or companies that gather and sell data"
+      - id: "d"
+        label: "Law enforcement agencies"
+      - id: "e"
+        label: "Health insurance companies"
+      - id: "f"
+        label: "Insurance companies for life, disability, or long term care insurance"
+      - id: "g"
+        label: "I was not sure with whom the laboratory would share my results"
+      - id: "h"
+        label: "I did not think my genetic test results would be shared with anyone besides me"
+  - id: q96
+    prompt: "Which of the following best describes your experience with clinical trials?"
+    type: single_choice
+    construct: following_best_describes_experience_clin
+    required: true
+    options:
+      - id: "a"
+        label: "I have never discussed participating in a clinical trial with a health care provider"
+      - id: "b"
+        label: "I have discussed participating in a clinical trial with a health care provider but decided not to participate"
+      - id: "c"
+        label: "I have discussed participating in a clinical trial with a health care provider but was not eligible to participate"
+      - id: "d"
+        label: "I have participated in a clinical trial"
+      - id: "e"
+        label: "I don't know/don't remember"
+  - id: q97
+    prompt: "Imagine that you had a health issue and you were invited to participate in a clinical trial for that issue. Which of the following would most influence your decision to participate in the clinical trial? (Select all that apply)"
+    type: multi_choice
+    construct: imagine_that_had_health_issue
+    required: true
+    options:
+      - id: "a"
+        label: "If I would be helping other people by participating"
+      - id: "b"
+        label: "If I would receive payment or other support for participating, such as transportation, childcare, or paid time off from work"
+      - id: "c"
+        label: "If my doctor encouraged me to participate"
+      - id: "d"
+        label: "If my family and friends encouraged me to participate"
+      - id: "e"
+        label: "If trying a new kind of care might give me a chance to get better"
+      - id: "f"
+        label: "If participating in the trial wasn't disruptive to my everyday life"
+      - id: "g"
+        label: "I would not be willing to participate in a clinical trial"
+  - id: q98
+    prompt: "How much do you agree or disagree with the following statement: People should be suspicious of clinical trials."
+    type: single_choice
+    construct: much_agree_disagree_following_statement
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly agree"
+      - id: "b"
+        label: "Somewhat agree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Somewhat disagree"
+      - id: "e"
+        label: "Strongly disagree"
+  - id: q99
+    prompt: "In general, would you say your health is...?"
+    type: single_choice
+    construct: general_would_say_health
+    required: true
+    options:
+      - id: "a"
+        label: "Excellent"
+      - id: "b"
+        label: "Very good"
+      - id: "c"
+        label: "Good"
+      - id: "d"
+        label: "Fair"
+      - id: "e"
+        label: "Poor"
+  - id: q100
+    prompt: "Overall, how confident are you about your ability to take good care of your health?"
+    type: single_choice
+    construct: overall_confident_ability_take_good
+    required: true
+    options:
+      - id: "a"
+        label: "Completely confident"
+      - id: "b"
+        label: "Very confident"
+      - id: "c"
+        label: "Somewhat confident"
+      - id: "d"
+        label: "A little confident"
+      - id: "e"
+        label: "Not confident at all"
+  - id: q101
+    prompt: "Do you have friends or family members that you talk to about your health?"
+    type: single_choice
+    construct: have_friends_family_members_that
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q102
+    prompt: "Do any of the following significantly limit your daily activities? Deafness or serious difficulty hearing"
+    type: single_choice
+    construct: any_following_significantly_limit_daily
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q103
+    prompt: "Do any of the following significantly limit your daily activities? Visual impairment or blindness"
+    type: single_choice
+    construct: any_following_significantly_limit_daily
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q104
+    prompt: "Do any of the following significantly limit your daily activities? Permanent or long term physical or mobility limitations"
+    type: single_choice
+    construct: any_following_significantly_limit_daily
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q105
+    prompt: "Do any of the following significantly limit your daily activities? Chronic pain"
+    type: single_choice
+    construct: any_following_significantly_limit_daily
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q106
+    prompt: "Has a doctor or other health professional ever told you that you had any of the following medical conditions: Diabetes or high blood sugar?"
+    type: single_choice
+    construct: has_doctor_other_health_professional
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q107
+    prompt: "Has a doctor or other health professional ever told you that you had any of the following medical conditions: High blood pressure or hypertension?"
+    type: single_choice
+    construct: has_doctor_other_health_professional
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q108
+    prompt: "Has a doctor or other health professional ever told you that you had any of the following medical conditions: A heart condition such as heart attack, angina, or congestive heart failure?"
+    type: single_choice
+    construct: has_doctor_other_health_professional
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q109
+    prompt: "Has a doctor or other health professional ever told you that you had any of the following medical conditions: Chronic lung disease, asthma, emphysema, or chronic bronchitis?"
+    type: single_choice
+    construct: has_doctor_other_health_professional
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q110
+    prompt: "Has a doctor or other health professional ever told you that you had any of the following medical conditions: Depression or anxiety disorder?"
+    type: single_choice
+    construct: has_doctor_other_health_professional
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q111
+    prompt: "About how tall are you without shoes? Please answer in feet and inches."
+    type: free_text
+    construct: tall_without_shoes_please_answer
+    required: true
+  - id: q112
+    prompt: "About how much do you weigh, in pounds, without shoes? Please enter a number."
+    type: free_text
+    construct: much_weigh_pounds_without_shoes
+    required: true
+  - id: q113
+    prompt: "During the past 30 days, how many hours of sleep did you usually get in a 24-hour period on a weekday? Please enter a number."
+    type: free_text
+    construct: during_past_30_days_many
+    required: true
+  - id: q114
+    prompt: "During the past 30 days, how many hours of sleep did you usually get in a 24-hour period on a weekend day? Please enter a number."
+    type: free_text
+    construct: during_past_30_days_many
+    required: true
+  - id: q115
+    prompt: "Over the past 2 weeks, how often have you been bothered by little interest or pleasure in doing things?"
+    type: single_choice
+    construct: over_past_2_weeks_often
+    required: true
+    options:
+      - id: "a"
+        label: "Nearly every day"
+      - id: "b"
+        label: "More than half the days"
+      - id: "c"
+        label: "Several days"
+      - id: "d"
+        label: "Not at all"
+  - id: q116
+    prompt: "Over the past 2 weeks, how often have you been bothered by feeling down, depressed, or hopeless?"
+    type: single_choice
+    construct: over_past_2_weeks_often
+    required: true
+    options:
+      - id: "a"
+        label: "Nearly every day"
+      - id: "b"
+        label: "More than half the days"
+      - id: "c"
+        label: "Several days"
+      - id: "d"
+        label: "Not at all"
+  - id: q117
+    prompt: "Over the past 2 weeks, how often have you been bothered by feeling nervous, anxious, or on edge?"
+    type: single_choice
+    construct: over_past_2_weeks_often
+    required: true
+    options:
+      - id: "a"
+        label: "Nearly every day"
+      - id: "b"
+        label: "More than half the days"
+      - id: "c"
+        label: "Several days"
+      - id: "d"
+        label: "Not at all"
+  - id: q118
+    prompt: "Over the past 2 weeks, how often have you been bothered by not being able to stop or control worrying?"
+    type: single_choice
+    construct: over_past_2_weeks_often
+    required: true
+    options:
+      - id: "a"
+        label: "Nearly every day"
+      - id: "b"
+        label: "More than half the days"
+      - id: "c"
+        label: "Several days"
+      - id: "d"
+        label: "Not at all"
+  - id: q119
+    prompt: "How often is this statement true for you: I feel left out."
+    type: single_choice
+    construct: often_this_statement_true_i
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Usually"
+      - id: "e"
+        label: "Always"
+  - id: q120
+    prompt: "How often is this statement true for you: I feel that people barely know me."
+    type: single_choice
+    construct: often_this_statement_true_i
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Usually"
+      - id: "e"
+        label: "Always"
+  - id: q121
+    prompt: "How often is this statement true for you: I feel isolated from others."
+    type: single_choice
+    construct: often_this_statement_true_i
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Usually"
+      - id: "e"
+        label: "Always"
+  - id: q122
+    prompt: "How often is this statement true for you: I feel that people are around me but not with me."
+    type: single_choice
+    construct: often_this_statement_true_i
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "Rarely"
+      - id: "c"
+        label: "Sometimes"
+      - id: "d"
+        label: "Usually"
+      - id: "e"
+        label: "Always"
+  - id: q123
+    prompt: "In a typical week, how many days do you do any physical activity or exercise of at least moderate intensity, such as brisk walking, bicycling at a regular pace, and swimming at a regular pace (do not include weightlifting)?"
+    type: single_choice
+    construct: typical_week_many_days_any
+    required: true
+    options:
+      - id: "a"
+        label: "None"
+      - id: "b"
+        label: "1 day per week"
+      - id: "c"
+        label: "2 days per week"
+      - id: "d"
+        label: "3 days per week"
+      - id: "e"
+        label: "4 days per week"
+      - id: "f"
+        label: "5 days per week"
+      - id: "g"
+        label: "6 days per week"
+      - id: "h"
+        label: "7 days per week"
+  - id: q124
+    prompt: "On the days that you do any physical activity or exercise of at least moderate intensity, how long do you typically do these activities? Please answer in minutes of physical activity per day."
+    type: free_text
+    construct: days_that_any_physical_activity
+    required: true
+  - id: q125
+    prompt: "In a typical week, outside of your job or work around the house, how many days do you do leisure-time physical activities specifically designed to strengthen your muscles such as lifting weights or circuit training (do not include cardio exercise such as walking, biking, or swimming)?"
+    type: single_choice
+    construct: typical_week_outside_job_work
+    required: true
+    options:
+      - id: "a"
+        label: "None"
+      - id: "b"
+        label: "1 day per week"
+      - id: "c"
+        label: "2 days per week"
+      - id: "d"
+        label: "3 days per week"
+      - id: "e"
+        label: "4 days per week"
+      - id: "f"
+        label: "5 days per week"
+      - id: "g"
+        label: "6 days per week"
+      - id: "h"
+        label: "7 days per week"
+  - id: q126
+    prompt: "During the past 7 days, how much time did you spend sitting on a typical day at home or at work? Please answer in hours sitting per day."
+    type: free_text
+    construct: during_past_7_days_much
+    required: true
+  - id: q127
+    prompt: "How much do you think climate change will harm your health?"
+    type: single_choice
+    construct: much_think_climate_change_will
+    required: true
+    options:
+      - id: "a"
+        label: "A lot"
+      - id: "b"
+        label: "Some"
+      - id: "c"
+        label: "A little"
+      - id: "d"
+        label: "Not at all"
+      - id: "e"
+        label: "Don't know"
+  - id: q128
+    prompt: "Thinking about your neighborhood, over the past 12 months, how much was it affected by extreme weather events (such as severe storms, droughts, floods, heat waves, cold snaps, etc.)?"
+    type: single_choice
+    construct: thinking_neighborhood_over_past_12
+    required: true
+    options:
+      - id: "a"
+        label: "A lot"
+      - id: "b"
+        label: "Some"
+      - id: "c"
+        label: "A little"
+      - id: "d"
+        label: "Not at all"
+  - id: q129
+    prompt: "How much do you worry that outdoor air pollution will harm your health?"
+    type: single_choice
+    construct: much_worry_that_outdoor_air
+    required: true
+    options:
+      - id: "a"
+        label: "A lot"
+      - id: "b"
+        label: "Some"
+      - id: "c"
+        label: "A little"
+      - id: "d"
+        label: "Not at all"
+  - id: q130
+    prompt: "How much do you worry that indoor air pollution will harm your health?"
+    type: single_choice
+    construct: much_worry_that_indoor_air
+    required: true
+    options:
+      - id: "a"
+        label: "A lot"
+      - id: "b"
+        label: "Some"
+      - id: "c"
+        label: "A little"
+      - id: "d"
+        label: "Not at all"
+  - id: q131
+    prompt: "During the past 12 months, how many times have you had a sunburn (even a small part of your skin turns red or hurts for 12 hours or more) from too much sun exposure? Please enter a number."
+    type: free_text
+    construct: during_past_12_months_many
+    required: true
+  - id: q132
+    prompt: "On the most recent time you were sunburned, what were you doing when you were sunburned? (Select all that apply)"
+    type: multi_choice
+    construct: most_recent_time_were_sunburned
+    required: true
+    options:
+      - id: "a"
+        label: "Working at your job"
+      - id: "b"
+        label: "Working outside at your own home or a family/friend's home"
+      - id: "c"
+        label: "Sunbathing"
+      - id: "d"
+        label: "Swimming"
+      - id: "e"
+        label: "Exercise (running, hiking, sports) (do not include swimming)"
+      - id: "f"
+        label: "Watching a sporting event"
+      - id: "g"
+        label: "Attending an outdoor event or venue (a concert, the zoo, a fair, etc.)"
+      - id: "h"
+        label: "Day-to-day activities"
+      - id: "i"
+        label: "Other"
+      - id: "j"
+        label: "Don't know"
+  - id: q133
+    prompt: "Were you drinking alcohol at any of the times when you were sunburned?"
+    type: single_choice
+    construct: were_drinking_alcohol_any_times
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q134
+    prompt: "Were you using marijuana or a marijuana product at any of the times when you were sunburned?"
+    type: single_choice
+    construct: were_using_marijuana_marijuana_product
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q135
+    prompt: "In the past 12 months, how often was the following true: Someone in your household cut the size of meals or skipped meals because there wasn't enough money for food."
+    type: single_choice
+    construct: past_12_months_often_was
+    required: true
+    options:
+      - id: "a"
+        label: "Very often true"
+      - id: "b"
+        label: "Often true"
+      - id: "c"
+        label: "Sometimes true"
+      - id: "d"
+        label: "Rarely true"
+      - id: "e"
+        label: "Never true"
+  - id: q136
+    prompt: "In the past 12 months, how often was the following true: Someone in your household was not able to afford to eat balanced meals."
+    type: single_choice
+    construct: past_12_months_often_was
+    required: true
+    options:
+      - id: "a"
+        label: "Very often true"
+      - id: "b"
+        label: "Often true"
+      - id: "c"
+        label: "Sometimes true"
+      - id: "d"
+        label: "Rarely true"
+      - id: "e"
+        label: "Never true"
+  - id: q137
+    prompt: "In the past 12 months, how often was the following true: Someone in your household was worried about being forced to move (for example, because of eviction or foreclosure)."
+    type: single_choice
+    construct: past_12_months_often_was
+    required: true
+    options:
+      - id: "a"
+        label: "Very often true"
+      - id: "b"
+        label: "Often true"
+      - id: "c"
+        label: "Sometimes true"
+      - id: "d"
+        label: "Rarely true"
+      - id: "e"
+        label: "Never true"
+  - id: q138
+    prompt: "In the past 12 months, how often was the following true: Lack of reliable transportation kept someone in your household from medical appointments, work, or from getting things needed for daily living."
+    type: single_choice
+    construct: past_12_months_often_was
+    required: true
+    options:
+      - id: "a"
+        label: "Very often true"
+      - id: "b"
+        label: "Often true"
+      - id: "c"
+        label: "Sometimes true"
+      - id: "d"
+        label: "Rarely true"
+      - id: "e"
+        label: "Never true"
+  - id: q139
+    prompt: "In the past 12 months, how often was the following true: You or someone in your household had difficulty paying or was unable to pay medical bills."
+    type: single_choice
+    construct: past_12_months_often_was
+    required: true
+    options:
+      - id: "a"
+        label: "Very often true"
+      - id: "b"
+        label: "Often true"
+      - id: "c"
+        label: "Sometimes true"
+      - id: "d"
+        label: "Rarely true"
+      - id: "e"
+        label: "Never true"
+  - id: q140
+    prompt: "If you were experiencing issues with housing, transportation, or affording or accessing healthy food, how comfortable would you be with your health care providers documenting the issue in your medical record for your healthcare purposes?"
+    type: single_choice
+    construct: if_were_experiencing_issues_housing
+    required: true
+    options:
+      - id: "a"
+        label: "Very comfortable"
+      - id: "b"
+        label: "Somewhat comfortable"
+      - id: "c"
+        label: "Somewhat uncomfortable"
+      - id: "d"
+        label: "Very uncomfortable"
+  - id: q141
+    prompt: "If you were experiencing issues with housing, transportation, or affording or accessing healthy food, how comfortable would you be with your health care providers sharing your information about these issues with other providers for your healthcare purposes?"
+    type: single_choice
+    construct: if_were_experiencing_issues_housing
+    required: true
+    options:
+      - id: "a"
+        label: "Very comfortable"
+      - id: "b"
+        label: "Somewhat comfortable"
+      - id: "c"
+        label: "Somewhat uncomfortable"
+      - id: "d"
+        label: "Very uncomfortable"
+  - id: q142
+    prompt: "About how many cups of fruit (including 100% pure fruit juice) do you eat or drink each day?"
+    type: single_choice
+    construct: many_cups_fruit_including_100
+    required: true
+    options:
+      - id: "a"
+        label: "None"
+      - id: "b"
+        label: "½ cup or less"
+      - id: "c"
+        label: "½ cup to less than 1 cup"
+      - id: "d"
+        label: "1 to less than 2 cups"
+      - id: "e"
+        label: "2 to less than 3 cups"
+      - id: "f"
+        label: "3 to less than 4 cups"
+      - id: "g"
+        label: "4 or more cups"
+  - id: q143
+    prompt: "About how many cups of vegetables (including 100% pure vegetable juice) do you eat or drink each day?"
+    type: single_choice
+    construct: many_cups_vegetables_including_100
+    required: true
+    options:
+      - id: "a"
+        label: "None"
+      - id: "b"
+        label: "½ cup or less"
+      - id: "c"
+        label: "½ cup to less than 1 cup"
+      - id: "d"
+        label: "1 to less than 2 cups"
+      - id: "e"
+        label: "2 to less than 3 cups"
+      - id: "f"
+        label: "3 to less than 4 cups"
+      - id: "g"
+        label: "4 or more cups"
+  - id: q144
+    prompt: "MyPlate is developed by the U.S. government to share with the public how to follow a healthy eating style and guide portion sizes at meals. Have you tried to follow the recommendations in the MyPlate plan? Would you say…"
+    type: single_choice
+    construct: myplate_developed_by_u_s
+    required: true
+    options:
+      - id: "a"
+        label: "Yes, I know about the MyPlate plan and have tried to follow recommendations"
+      - id: "b"
+        label: "I know about the MyPlate plan but have not tried to follow the recommendations"
+      - id: "c"
+        label: "No, I have never heard of MyPlate"
+  - id: q145
+    prompt: "Prepared meals include ready-to-eat foods from a deli, hot bar, or salad bar as well as packaged food items like frozen meals and canned items. Thinking about the last time you bought a prepared meal at a grocery store, did you use the calorie information in deciding what to buy?"
+    type: single_choice
+    construct: prepared_meals_include_ready_eat
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "I did not notice any calorie information on the last prepared meal I bought"
+      - id: "d"
+        label: "I do not buy prepared meals"
+  - id: q146
+    prompt: "During the past 30 days, on how many days did you have at least one drink of any alcoholic beverage? Please enter a number of days per month."
+    type: free_text
+    construct: during_past_30_days_many
+    required: true
+  - id: q147
+    prompt: "During the past 30 days, on the days when you drank alcohol, about how many alcoholic drinks did you drink on average? Please enter a number of drinks per day."
+    type: free_text
+    construct: during_past_30_days_days
+    required: true
+  - id: q148
+    prompt: "For males: During the past 30 days, how many times did you have 5 or more alcoholic drinks on one occasion? For females: During the past 30 days, how many times did you have 4 or more alcoholic drinks on one occasion?"
+    type: single_choice
+    construct: males_during_past_30_days
+    required: true
+    options:
+      - id: "a"
+        label: "Never"
+      - id: "b"
+        label: "1 or 2 times"
+      - id: "c"
+        label: "3 to 5 times"
+      - id: "d"
+        label: "6 to 10 times"
+      - id: "e"
+        label: "11 or more times"
+  - id: q149
+    prompt: "In your opinion, how does drinking alcohol affect the risk of getting cancer?"
+    type: single_choice
+    construct: opinion_does_drinking_alcohol_affect
+    required: true
+    options:
+      - id: "a"
+        label: "Decreases risk of cancer"
+      - id: "b"
+        label: "Has no effect on the risk of cancer"
+      - id: "c"
+        label: "Increases risk of cancer"
+      - id: "d"
+        label: "Don't know"
+  - id: q150
+    prompt: "To what extent would you support or oppose the following measure related to alcohol: Banning outdoor advertising of alcohol such as on billboards and bus stops?"
+    type: single_choice
+    construct: extent_would_support_oppose_following
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly oppose"
+      - id: "b"
+        label: "Oppose"
+      - id: "c"
+        label: "Neither support nor oppose"
+      - id: "d"
+        label: "Support"
+      - id: "e"
+        label: "Strongly support"
+  - id: q151
+    prompt: "To what extent would you support or oppose the following measure related to alcohol: Requiring specific warnings about cancer on alcohol containers?"
+    type: single_choice
+    construct: extent_would_support_oppose_following
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly oppose"
+      - id: "b"
+        label: "Oppose"
+      - id: "c"
+        label: "Neither support nor oppose"
+      - id: "d"
+        label: "Support"
+      - id: "e"
+        label: "Strongly support"
+  - id: q152
+    prompt: "Some products are approved to help people quit smoking (such as nicotine replacement therapy or prescription medications). Do you believe that any of the following tobacco products can help people quit smoking cigarettes? (Select all that apply)"
+    type: multi_choice
+    construct: some_products_approved_help_people
+    required: true
+    options:
+      - id: "a"
+        label: "Electronic nicotine devices (ENDS), like e-cigarettes"
+      - id: "b"
+        label: "Nicotine pouches"
+      - id: "c"
+        label: "Heated tobacco products, like IQOS"
+      - id: "d"
+        label: "Modified Risk Tobacco Products, like General Snus or VLN KING, VLN Menthol King"
+      - id: "e"
+        label: "None of these can help smokers quit smoking"
+      - id: "f"
+        label: "I don't know"
+  - id: q153
+    prompt: "In the past 6 months, have you seen messages saying that a Federal Court has ordered tobacco companies to make statements about the dangers of smoking cigarettes? These messages have been in stores where people buy cigarettes."
+    type: single_choice
+    construct: past_6_months_have_seen
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q154
+    prompt: "Based on the message(s) that you saw, which of the following statements are true? (Select all that apply)"
+    type: multi_choice
+    construct: based_message_s_that_saw
+    required: true
+    options:
+      - id: "a"
+        label: "I trusted the information"
+      - id: "b"
+        label: "I wanted to look for more information about the harms of smoking"
+      - id: "c"
+        label: "I thought about quitting smoking"
+      - id: "d"
+        label: "I thought about friends and family who smoke"
+      - id: "e"
+        label: "I liked that a court is ordering tobacco companies to \"tell the truth\""
+  - id: q155
+    prompt: "Have you smoked at least 100 cigarettes in your entire life?"
+    type: single_choice
+    construct: have_smoked_least_100_cigarettes
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q156
+    prompt: "How often do you now smoke cigarettes?"
+    type: single_choice
+    construct: often_now_smoke_cigarettes
+    required: true
+    options:
+      - id: "a"
+        label: "Every day"
+      - id: "b"
+        label: "Some days"
+      - id: "c"
+        label: "Not at all"
+  - id: q157
+    prompt: "Have you ever used any of the following tobacco products, even one or two times? (Select all that apply)"
+    type: multi_choice
+    construct: have_ever_used_any_following
+    required: true
+    options:
+      - id: "a"
+        label: "E-cigarettes (also known as vapes, vape-pens, tanks, mods or pod-mods)"
+      - id: "b"
+        label: "Cigars, including cigars, cigarillos, and little filtered cigars"
+      - id: "c"
+        label: "Hookah (also known as Waterpipe or shisha)"
+      - id: "d"
+        label: "Smokeless tobacco, including chewing tobacco, snus, and snuff"
+      - id: "e"
+        label: "Nicotine pouches"
+      - id: "f"
+        label: "Heated tobacco products, like IQOS"
+      - id: "g"
+        label: "Modified Risk Tobacco Products, like General Snus or VLN KING, VLN Menthol King"
+      - id: "h"
+        label: "I have never used any of these tobacco products"
+  - id: q158
+    prompt: "Do you now use any of the following tobacco products every day or some days? (Select all that apply)"
+    type: multi_choice
+    construct: now_use_any_following_tobacco
+    required: true
+    options:
+      - id: "a"
+        label: "E-cigarettes (also known as vapes, vape-pens, tanks, mods or pod-mods)"
+      - id: "b"
+        label: "Cigars, including cigars, cigarillos, and little filtered cigars"
+      - id: "c"
+        label: "Hookah (also known as Waterpipe or shisha)"
+      - id: "d"
+        label: "Smokeless tobacco, including chewing tobacco, snus, and snuff"
+      - id: "e"
+        label: "Nicotine pouches"
+      - id: "f"
+        label: "Heated tobacco products, like IQOS"
+      - id: "g"
+        label: "Modified Risk Tobacco Products, like General Snus or VLN KING, VLN Menthol King"
+      - id: "h"
+        label: "I do not currently use any of these products"
+  - id: q159
+    prompt: "Please mark all of the following ways you have used a product containing marijuana in the past 12 months (exclude the use of CBD or hemp products). (Select all that apply)"
+    type: multi_choice
+    construct: please_mark_all_following_ways
+    required: true
+    options:
+      - id: "a"
+        label: "I have not used any product containing marijuana in the past 12 months"
+      - id: "b"
+        label: "Smoking"
+      - id: "c"
+        label: "Vaping"
+      - id: "d"
+        label: "Dabbing"
+      - id: "e"
+        label: "Eating"
+      - id: "f"
+        label: "Drinking"
+      - id: "g"
+        label: "Applying a lotion"
+  - id: q160
+    prompt: "When you used marijuana during the past 12 months was it usually..."
+    type: single_choice
+    construct: when_used_marijuana_during_past
+    required: true
+    options:
+      - id: "a"
+        label: "For medical reasons"
+      - id: "b"
+        label: "For recreational reasons"
+      - id: "c"
+        label: "For medical and recreational reasons"
+  - id: q161
+    prompt: "I believe that using marijuana is..."
+    type: single_choice
+    construct: i_believe_that_using_marijuana
+    required: true
+    options:
+      - id: "a"
+        label: "Very harmful"
+      - id: "b"
+        label: "Somewhat harmful"
+      - id: "c"
+        label: "Both harmful and beneficial"
+      - id: "d"
+        label: "Neither harmful nor beneficial"
+      - id: "e"
+        label: "Somewhat beneficial"
+      - id: "f"
+        label: "Very beneficial"
+      - id: "g"
+        label: "Don't know"
+  - id: q162
+    prompt: "In the last 12 months, how much did worry about COVID-19 cause you to delay or avoid having a cancer screening test?"
+    type: single_choice
+    construct: last_12_months_much_did
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all"
+      - id: "b"
+        label: "A little"
+      - id: "c"
+        label: "Some"
+      - id: "d"
+        label: "A lot"
+      - id: "e"
+        label: "Not applicable (I had not planned to have a screening test)"
+  - id: q163
+    prompt: "At any time in the past year, did a doctor or other health professional talk with you about having a low-dose CT (LDCT) scan to check for lung cancer?"
+    type: single_choice
+    construct: any_time_past_year_did
+    required: true
+    options:
+      - id: "a"
+        label: "I have never heard of this test"
+      - id: "b"
+        label: "Yes"
+      - id: "c"
+        label: "No"
+      - id: "d"
+        label: "Don't know"
+  - id: q164
+    prompt: "Has a doctor or other health professional ever told you there are a few different tests to detect colorectal cancer (such as a colonoscopy, a sigmoidoscopy, or a stool test)?"
+    type: single_choice
+    construct: has_doctor_other_health_professional
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "I have never discussed these tests with a doctor or other health professional"
+  - id: q165
+    prompt: "Multi-Cancer Early Detection tests use a single blood test to detect many different cancers at the same time. Before today, had you ever heard of Multi-Cancer Early Detection tests?"
+    type: single_choice
+    construct: multi_cancer_early_detection_tests
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q166
+    prompt: "How valuable do you think it would be for you to have a Multi-Cancer Early Detection test right now?"
+    type: single_choice
+    construct: valuable_think_it_would_be
+    required: true
+    options:
+      - id: "a"
+        label: "Not at all valuable"
+      - id: "b"
+        label: "A little valuable"
+      - id: "c"
+        label: "Somewhat valuable"
+      - id: "d"
+        label: "Very valuable"
+  - id: q167
+    prompt: "Do you think the Hepatitis B virus (also known as Hep B or HBV) can cause cancer?"
+    type: single_choice
+    construct: think_hepatitis_b_virus_also
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Don't know"
+      - id: "d"
+        label: "I have never heard of HBV"
+  - id: q168
+    prompt: "Do you think the Hepatitis C virus (also known as Hep C or HCV) can cause cancer?"
+    type: single_choice
+    construct: think_hepatitis_c_virus_also
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Don't know"
+      - id: "d"
+        label: "I have never heard of HCV"
+  - id: q169
+    prompt: "In the future, it may be possible for people to collect their own sample for the cervical cancer screening test at home using a mailed test kit. If you had a choice, how would you prefer to do the cervical cancer screening test?"
+    type: single_choice
+    construct: future_it_may_be_possible
+    required: true
+    options:
+      - id: "a"
+        label: "Not applicable – I do not need cervical cancer screening"
+      - id: "b"
+        label: "I would prefer to have a health professional do the test in a doctor's office (as happens now)"
+      - id: "c"
+        label: "I would prefer to do the test myself at home"
+      - id: "d"
+        label: "I don't know which option I would choose"
+  - id: q170
+    prompt: "What are the reasons you would consider collecting your own at-home sample for cervical cancer screening? (Select all that apply)"
+    type: multi_choice
+    construct: reasons_would_consider_collecting_own
+    required: true
+    options:
+      - id: "a"
+        label: "Prefer not to take time off work"
+      - id: "b"
+        label: "Save transportation cost"
+      - id: "c"
+        label: "I live far from my healthcare provider"
+      - id: "d"
+        label: "Privacy"
+      - id: "e"
+        label: "To avoid embarrassment"
+      - id: "f"
+        label: "Other reasons not listed"
+  - id: q171
+    prompt: "How much do you agree or disagree with the following statement: It seems like everything causes cancer."
+    type: single_choice
+    construct: much_agree_disagree_following_statement
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly agree"
+      - id: "b"
+        label: "Somewhat agree"
+      - id: "c"
+        label: "Somewhat disagree"
+      - id: "d"
+        label: "Strongly disagree"
+  - id: q172
+    prompt: "How much do you agree or disagree with the following statement: There's not much you can do to lower your chances of getting cancer."
+    type: single_choice
+    construct: much_agree_disagree_following_statement
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly agree"
+      - id: "b"
+        label: "Somewhat agree"
+      - id: "c"
+        label: "Somewhat disagree"
+      - id: "d"
+        label: "Strongly disagree"
+  - id: q173
+    prompt: "How much do you agree or disagree with the following statement: There are so many different recommendations about preventing cancer, it's hard to know which ones to follow."
+    type: single_choice
+    construct: much_agree_disagree_following_statement
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly agree"
+      - id: "b"
+        label: "Somewhat agree"
+      - id: "c"
+        label: "Somewhat disagree"
+      - id: "d"
+        label: "Strongly disagree"
+  - id: q174
+    prompt: "How much do you agree or disagree with the following statement: When I think about cancer, I automatically think about death."
+    type: single_choice
+    construct: much_agree_disagree_following_statement
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly agree"
+      - id: "b"
+        label: "Somewhat agree"
+      - id: "c"
+        label: "Somewhat disagree"
+      - id: "d"
+        label: "Strongly disagree"
+  - id: q175
+    prompt: "Have you heard of \"chemo brain,\" \"chemo fog,\" or \"cancer-related cognitive impairment?\""
+    type: single_choice
+    construct: have_heard_chemo_brain_chemo
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q176
+    prompt: "As far as you know, who has a greater chance of getting cancer - a person with a 1 in 1,000 chance of getting cancer, or a person with a 1 in 100 chance?"
+    type: single_choice
+    construct: as_far_as_know_who
+    required: true
+    options:
+      - id: "a"
+        label: "1 in 100 is a greater chance of getting cancer"
+      - id: "b"
+        label: "1 in 1,000 is a greater chance of getting cancer"
+      - id: "c"
+        label: "Don't know"
+  - id: q177
+    prompt: "Have you ever been diagnosed as having cancer?"
+    type: single_choice
+    construct: have_ever_been_diagnosed_as
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+  - id: q178
+    prompt: "What type of cancer did you have? (Select all that apply)"
+    type: multi_choice
+    construct: type_cancer_did_have_select
+    required: true
+    options:
+      - id: "a"
+        label: "Bladder cancer"
+      - id: "b"
+        label: "Bone cancer"
+      - id: "c"
+        label: "Breast cancer"
+      - id: "d"
+        label: "Brain cancer"
+      - id: "e"
+        label: "Cervical cancer (cancer of the cervix)"
+      - id: "f"
+        label: "Colon cancer"
+      - id: "g"
+        label: "Endometrial cancer (cancer of the uterus)"
+      - id: "h"
+        label: "Eye or eye socket cancer"
+      - id: "i"
+        label: "Head and neck cancer"
+      - id: "j"
+        label: "Leukemia/Blood cancer"
+      - id: "k"
+        label: "Liver cancer"
+      - id: "l"
+        label: "Lung cancer"
+      - id: "m"
+        label: "Lymphoma (Hodgkin's)"
+      - id: "n"
+        label: "Lymphoma (Non-Hodgkin's)"
+      - id: "o"
+        label: "Melanoma"
+      - id: "p"
+        label: "Multiple myeloma"
+      - id: "q"
+        label: "Oral cancer"
+      - id: "r"
+        label: "Ovarian cancer"
+      - id: "s"
+        label: "Pancreatic cancer"
+      - id: "t"
+        label: "Pharyngeal (throat) cancer"
+      - id: "u"
+        label: "Prostate cancer"
+      - id: "v"
+        label: "Rectal cancer"
+      - id: "w"
+        label: "Renal cancer (kidney cancer)"
+      - id: "x"
+        label: "Skin cancer, non-melanoma"
+      - id: "y"
+        label: "Stomach cancer"
+      - id: "z"
+        label: "Testicular cancer"
+      - id: "aa"
+        label: "Thyroid cancer"
+      - id: "ab"
+        label: "Other"
+  - id: q179
+    prompt: "At what age were you first told that you had cancer? Please enter a number (years old)."
+    type: free_text
+    construct: age_were_first_told_that
+    required: true
+  - id: q180
+    prompt: "Have any of your first- or second-degree biological relatives (parents, brothers and sisters, children, grandparents, aunts and uncles, nieces and nephews) ever had cancer?"
+    type: single_choice
+    construct: have_any_first_second_degree
+    required: true
+    options:
+      - id: "a"
+        label: "Yes"
+      - id: "b"
+        label: "No"
+      - id: "c"
+        label: "Not sure"
+  - id: q181
+    prompt: "What is your age? Please enter a number (years old)."
+    type: free_text
+    construct: age_please_enter_number_years
+    required: true
+  - id: q182
+    prompt: "About how many hours do you work per week at all of your jobs and businesses combined? Please enter a number of hours of work per week."
+    type: free_text
+    construct: many_hours_work_per_week
+    required: true
+  - id: q183
+    prompt: "Which of the following best describe your current occupational status? (Select all that apply)"
+    type: multi_choice
+    construct: following_best_describe_current_occupati
+    required: true
+    options:
+      - id: "a"
+        label: "Employed, including self-employed"
+      - id: "b"
+        label: "Out of work for 1 year or more"
+      - id: "c"
+        label: "Out of work for less than 1 year"
+      - id: "d"
+        label: "A homemaker/caregiver"
+      - id: "e"
+        label: "A student"
+      - id: "f"
+        label: "Retired"
+      - id: "g"
+        label: "Unable to work (disabled)"
+      - id: "h"
+        label: "Other"
+  - id: q184
+    prompt: "In the past 30 days, my work hours included… (Select all that apply)"
+    type: multi_choice
+    construct: past_30_days_my_work
+    required: true
+    options:
+      - id: "a"
+        label: "I did not work in the past 30 days"
+      - id: "b"
+        label: "Early morning hours (4am-8am)"
+      - id: "c"
+        label: "Morning hours (8am-12pm)"
+      - id: "d"
+        label: "Afternoon hours (12pm-6pm)"
+      - id: "e"
+        label: "Evening hours (6pm-11pm)"
+      - id: "f"
+        label: "Night hours (11pm-4am)"
+  - id: q185
+    prompt: "What is your marital status?"
+    type: single_choice
+    construct: marital_status
+    required: true
+    options:
+      - id: "a"
+        label: "Married"
+      - id: "b"
+        label: "Living as married or living with a romantic partner"
+      - id: "c"
+        label: "Divorced"
+      - id: "d"
+        label: "Widowed"
+      - id: "e"
+        label: "Separated"
+      - id: "f"
+        label: "Single, never been married"
+  - id: q186
+    prompt: "What is the highest grade or level of schooling you completed?"
+    type: single_choice
+    construct: highest_grade_level_schooling_completed
+    required: true
+    options:
+      - id: "a"
+        label: "Less than 8 years"
+      - id: "b"
+        label: "8 through 11 years"
+      - id: "c"
+        label: "12 years or completed high school"
+      - id: "d"
+        label: "Post high school training other than college (vocational or technical)"
+      - id: "e"
+        label: "Some college"
+      - id: "f"
+        label: "College graduate"
+      - id: "g"
+        label: "Postgraduate"
+  - id: q187
+    prompt: "Are you of Hispanic, Latino/a, or Spanish origin? One or more categories may be selected. (Select all that apply)"
+    type: multi_choice
+    construct: hispanic_latino_spanish_origin_one
+    required: true
+    options:
+      - id: "a"
+        label: "No, not of Hispanic, Latino/a, or Spanish origin"
+      - id: "b"
+        label: "Yes, Mexican, Mexican American, Chicano/a"
+      - id: "c"
+        label: "Yes, Puerto Rican"
+      - id: "d"
+        label: "Yes, Cuban"
+      - id: "e"
+        label: "Yes, another Hispanic, Latino/a, or Spanish origin"
+  - id: q188
+    prompt: "What is your race? One or more categories may be selected. (Select all that apply)"
+    type: multi_choice
+    construct: race_one_more_categories_may
+    required: true
+    options:
+      - id: "a"
+        label: "White"
+      - id: "b"
+        label: "Black or African American"
+      - id: "c"
+        label: "American Indian or Alaska Native"
+      - id: "d"
+        label: "Asian Indian"
+      - id: "e"
+        label: "Chinese"
+      - id: "f"
+        label: "Filipino"
+      - id: "g"
+        label: "Japanese"
+      - id: "h"
+        label: "Korean"
+      - id: "i"
+        label: "Vietnamese"
+      - id: "j"
+        label: "Other Asian"
+      - id: "k"
+        label: "Native Hawaiian"
+      - id: "l"
+        label: "Guamanian or Chamorro"
+      - id: "m"
+        label: "Samoan"
+      - id: "n"
+        label: "Other Pacific Islander"
+  - id: q189
+    prompt: "How much do you agree or disagree with the following statement: I have a strong sense of belonging to my own ethnic, racial, and/or cultural group."
+    type: single_choice
+    construct: much_agree_disagree_following_statement
+    required: true
+    options:
+      - id: "a"
+        label: "Strongly agree"
+      - id: "b"
+        label: "Agree"
+      - id: "c"
+        label: "Neither agree nor disagree"
+      - id: "d"
+        label: "Disagree"
+      - id: "e"
+        label: "Strongly disagree"
+  - id: q190
+    prompt: "Do you think of yourself as…"
+    type: single_choice
+    construct: think_yourself_as
+    required: true
+    options:
+      - id: "a"
+        label: "Lesbian or gay"
+      - id: "b"
+        label: "Straight, that is, not gay or lesbian"
+      - id: "c"
+        label: "Bisexual"
+      - id: "d"
+        label: "I use a different term"
+      - id: "e"
+        label: "Don't know"
+  - id: q191
+    prompt: "Including yourself, how many people live in your household? Please enter a number."
+    type: free_text
+    construct: including_yourself_many_people_live
+    required: true
+  - id: q192
+    prompt: "How many children under the age of 18 live in your household? Please enter a number."
+    type: free_text
+    construct: many_children_under_age_18
+    required: true
+  - id: q193
+    prompt: "Thinking about politics these days, how would you describe your own political viewpoint?"
+    type: single_choice
+    construct: thinking_politics_these_days_would
+    required: true
+    options:
+      - id: "a"
+        label: "Very Liberal"
+      - id: "b"
+        label: "Liberal"
+      - id: "c"
+        label: "Somewhat Liberal"
+      - id: "d"
+        label: "Moderate"
+      - id: "e"
+        label: "Somewhat Conservative"
+      - id: "f"
+        label: "Conservative"
+      - id: "g"
+        label: "Very Conservative"
+  - id: q194
+    prompt: "Thinking about members of your family living in this household, what is your combined annual income, meaning the total pre-tax income from all sources earned in the past year?"
+    type: single_choice
+    construct: thinking_members_family_living_this
+    required: true
+    options:
+      - id: "a"
+        label: "$0 to $9,999"
+      - id: "b"
+        label: "$10,000 to $14,999"
+      - id: "c"
+        label: "$15,000 to $19,999"
+      - id: "d"
+        label: "$20,000 to $34,999"
+      - id: "e"
+        label: "$35,000 to $49,999"
+      - id: "f"
+        label: "$50,000 to $74,999"
+      - id: "g"
+        label: "$75,000 to $99,999"
+      - id: "h"
+        label: "$100,000 to $199,999"
+      - id: "i"
+        label: "$200,000 or more"
+  - id: q195
+    prompt: "Which one of these comes closest to your own feelings about your household's income?"
+    type: single_choice
+    construct: one_these_comes_closest_own
+    required: true
+    options:
+      - id: "a"
+        label: "Living comfortably on present income"
+      - id: "b"
+        label: "Getting by on present income"
+      - id: "c"
+        label: "Finding it difficult on present income"
+      - id: "d"
+        label: "Finding it very difficult on present income"

@@ -1,0 +1,65 @@
+services:
+  main:
+    depends_on:
+      multi-agent-medical-assistant-api:
+        condition: service_healthy
+
+  multi-agent-medical-assistant-api:
+    build:
+      context: ./multi-agent-medical-assistant-api
+    environment:
+      MEDICAL_ASSISTANT_URL: ${MEDICAL_ASSISTANT_URL:-http://multi-agent-medical-assistant:8000}
+      MEDICAL_ASSISTANT_TIMEOUT_SECONDS: ${MEDICAL_ASSISTANT_TIMEOUT_SECONDS:-180}
+      PYTHONUNBUFFERED: "1"
+    expose:
+      - "8000"
+    depends_on:
+      multi-agent-medical-assistant:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=5).read()",
+        ]
+      interval: 5s
+      timeout: 10s
+      retries: 20
+      start_period: 10s
+
+  multi-agent-medical-assistant:
+    build:
+      context: ./multi-agent-medical-assistant
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4o-mini}
+      OPENAI_EMBEDDING_MODEL: ${OPENAI_EMBEDDING_MODEL:-text-embedding-3-small}
+      TAVILY_API_KEY: ${TAVILY_API_KEY:-}
+      ELEVENLABS_API_KEY: ${ELEVENLABS_API_KEY:-}
+      HF_TOKEN: ${HF_TOKEN:-}
+      PYTHONUNBUFFERED: "1"
+    expose:
+      - "8000"
+    volumes:
+      - multi-agent-medical-assistant-cache:/root/.cache
+      - multi-agent-medical-assistant-uploads:/app/uploads
+      - multi-agent-medical-assistant-data:/app/data
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=20).read()",
+        ]
+      interval: 10s
+      timeout: 30s
+      retries: 30
+      start_period: 30s
+
+volumes:
+  multi-agent-medical-assistant-cache:
+  multi-agent-medical-assistant-uploads:
+  multi-agent-medical-assistant-data:

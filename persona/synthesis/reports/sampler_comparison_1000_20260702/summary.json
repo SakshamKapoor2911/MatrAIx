@@ -1,0 +1,62 @@
+{
+  "generated_at": "2026-07-02",
+  "seed": 42,
+  "count": 1000,
+  "constraint_based": {
+    "implementation": "personabench.persona_generator.generate_persona_pool",
+    "samples": 1000,
+    "dimension_count": 82,
+    "dev_dimension_count": 82,
+    "elapsed_seconds": 0.029695987701416016,
+    "validation_violations": 0,
+    "first_10_keys": [
+      "age_bracket",
+      "region",
+      "gender_identity",
+      "urbanicity",
+      "socioeconomic_band",
+      "primary_language",
+      "english_proficiency",
+      "multilingualism",
+      "register",
+      "domain"
+    ],
+    "sample_data_format": "codes",
+    "codes_output": "persona/synthesis/reports/sampler_comparison_1000_20260702/constraint_based_1000.codes",
+    "codes_schema_output": "persona/synthesis/reports/sampler_comparison_1000_20260702/constraint_based_1000.codes.schema.json",
+    "codes_file_bytes": 82000,
+    "codes_schema_file_bytes": 22921,
+    "codes_dtype": "uint8",
+    "analysis_jsonl_generated_but_not_committed": true,
+    "analysis_jsonl_file_bytes": 2796378
+  },
+  "full_dag_forward": {
+    "implementation": "persona.synthesis.sampler.sample_to_file_parallel",
+    "graph": "persona/synthesis/graph/full_dag.json",
+    "codes_output": "persona/synthesis/reports/sampler_comparison_1000_20260702/full_dag_forward_1000.codes",
+    "codes_schema_output": "persona/synthesis/reports/sampler_comparison_1000_20260702/full_dag_forward_1000.codes.schema.json",
+    "samples": 1000,
+    "emitted_nodes": 1224,
+    "codes_elapsed_seconds": 0.8476638793945312,
+    "codes_file_bytes": 1224000,
+    "codes_schema_file_bytes": 301307,
+    "codes_dtype": "uint8",
+    "first_10_keys": [
+      "age_bracket",
+      "region",
+      "gender_identity",
+      "urbanicity",
+      "socioeconomic_band",
+      "primary_language",
+      "english_proficiency",
+      "multilingualism",
+      "register",
+      "domain"
+    ],
+    "sample_data_format": "codes",
+    "analysis_jsonl_generated_but_not_committed": true,
+    "analysis_jsonl_output_not_committed": "full_dag_forward_1000.jsonl",
+    "analysis_jsonl_file_bytes": 38796803,
+    "analysis_jsonl_elapsed_seconds": 0.6231799125671387
+  }
+}

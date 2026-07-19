@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "1.0",
+  "contextRules": [
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.safe_first_task"
+      },
+      "summaryDirectives": [
+        {
+          "id": "safe_first_task.themes",
+          "title": "Themes in free-text answers",
+          "targetFacetKey": "response",
+          "groupByMode": "none",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ]
+    }
+  ]
+}

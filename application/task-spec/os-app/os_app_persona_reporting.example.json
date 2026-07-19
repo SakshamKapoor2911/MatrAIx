@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "1.0",
+  "contextRules": [
+    {
+      "match": {
+        "contextType": "persona_alignment"
+      },
+      "summaryDirectives": [
+        {
+          "id": "persona_alignment.explanation_by_status",
+          "title": "Persona alignment explanation by status",
+          "targetFacetKey": "persona_alignment_explanation",
+          "groupByFacetKey": "persona_alignment_status",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ],
+      "judgeDirectives": [
+        {
+          "id": "persona_alignment.signal_scan",
+          "title": "Persona alignment signal scan",
+          "targetFacetKey": "persona_alignment_explanation",
+          "groupByFacetKey": "persona_preference_axis_primary",
+          "groupByMode": "categorical",
+          "judgeKind": "llm_signal_judge",
+          "prompt": "Read the persona alignment explanation and classify which reusable persona signals are explicitly present.",
+          "rubric": "Mark a signal true only when the explanation clearly states or strongly implies that signal.",
+          "signals": [
+            {
+              "key": "privacy_signal",
+              "label": "Privacy sensitivity",
+              "valueType": "boolean"
+            },
+            {
+              "key": "convenience_signal",
+              "label": "Convenience seeking",
+              "valueType": "boolean"
+            },
+            {
+              "key": "risk_signal",
+              "label": "Risk avoidance",
+              "valueType": "boolean"
+            },
+            {
+              "key": "familiarity_signal",
+              "label": "Familiarity preference",
+              "valueType": "boolean"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "persona_constraint"
+      },
+      "summaryDirectives": [
+        {
+          "id": "persona_constraint.evidence_by_type",
+          "title": "Persona constraint evidence by type",
+          "targetFacetKey": "persona_constraint_evidence",
+          "groupByFacetKey": "persona_constraint_type",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        },
+        {
+          "id": "persona_constraint.evidence_by_status",
+          "title": "Persona constraint evidence by status",
+          "targetFacetKey": "persona_constraint_evidence",
+          "groupByFacetKey": "persona_constraint_status",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "decision"
+      },
+      "summaryDirectives": [
+        {
+          "id": "decision.reason_by_outcome",
+          "title": "Reason by decision outcome",
+          "targetFacetKey": "reason",
+          "groupByFacetKey": "decision_outcome",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        },
+        {
+          "id": "decision.reason_by_basis_primary",
+          "title": "Reason by primary basis",
+          "targetFacetKey": "reason",
+          "groupByFacetKey": "basis_primary",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "decision_process"
+      },
+      "summaryDirectives": [
+        {
+          "id": "decision_process.notes_by_exploration_style",
+          "title": "Process notes by exploration style",
+          "targetFacetKey": "process_notes",
+          "groupByFacetKey": "exploration_style",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ]
+    }
+  ]
+}

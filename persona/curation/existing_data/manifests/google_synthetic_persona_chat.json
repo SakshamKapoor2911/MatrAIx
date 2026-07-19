@@ -1,0 +1,12 @@
+{
+  "id": "synthetic_persona_chat",
+  "source": {
+    "type": "huggingface_dataset",
+    "repo_id": "google/Synthetic-Persona-Chat",
+    "url": "https://huggingface.co/datasets/google/Synthetic-Persona-Chat"
+  },
+  "dimensions_claimed": 3,
+  "format": "csv",
+  "license": "cc-by-4.0",
+  "notes": "Google persona-grounded dialogue dataset (Jandaghi et al., arXiv:2312.10007); built with a Generator-Critic LLM framework. HF hosts two CSV parts: (1) Synthetic-Persona-Chat_{train,valid,test}.csv — 8,938 / 1,000 / 968 rows (10,906 total); same PersonaChat persona pairs with new synthetic conversations. load_dataset() loads only these splits. (2) data/New-Persona-New-Conversations.csv — 11,001 rows with new synthetic personas and conversations. Verified columns (all parts): 'user 1 personas', 'user 2 personas' (newline-separated free-text persona sentences per speaker), 'Best Generated Conversation' (dialogue text). dimensions_claimed counts CSV columns, not structured MatrAIx dimensions; persona text requires parsing for dimension mapping (shallow, PersonaHub-like). Part 1 overlaps PersonaChat personas — dedup against any PersonaChat manifest. Paper reports ~20k conversations across both parts (~4.7k + ~5.6k personas)."
+}

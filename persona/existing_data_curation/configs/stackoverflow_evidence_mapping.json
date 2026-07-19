@@ -1,0 +1,110 @@
+{
+  "description": "Broad evidence categories for compressing Stack Overflow posting histories before mapping to the MatrAIx persona schema.",
+  "evidence_categories": [
+    {
+      "id": "technical_expertise",
+      "label": "Technical expertise",
+      "description": "Programming languages, frameworks, tools, and domains demonstrated through the tags, vocabulary, and depth of questions and answers.",
+      "inferability": "allowed_from_behavior",
+      "schema_categories": [
+        "Skills: Programming",
+        "Skills: Tools",
+        "Expertise: Skills",
+        "Expertise: Domains",
+        "Professional: Industry",
+        "Professional: Role",
+        "Professional: Career"
+      ]
+    },
+    {
+      "id": "topic_interests",
+      "label": "Topic interests",
+      "description": "Recurring tags, technologies, and subject areas the user engages with over time.",
+      "inferability": "allowed_from_behavior",
+      "schema_categories": [
+        "Interests: Topics",
+        "Interests: Hobbies",
+        "Expertise: Domains",
+        "Learning: Academic"
+      ]
+    },
+    {
+      "id": "problem_solving_style",
+      "label": "Problem-solving style",
+      "description": "How the user formulates problems and evaluates solutions, such as debugging rigor, research-before-asking, tradeoff analysis, or preference for minimal examples.",
+      "inferability": "allowed_from_behavior",
+      "schema_categories": [
+        "Risk & Decision",
+        "Behavior: Preferences",
+        "Personality: Big Five",
+        "Personality: Character"
+      ]
+    },
+    {
+      "id": "learning_behavior",
+      "label": "Learning behavior",
+      "description": "Asking versus answering balance, self-answering, follow-up edits, and how the user acquires and shares knowledge.",
+      "inferability": "allowed_from_behavior",
+      "schema_categories": [
+        "Learning: Style",
+        "Learning: Academic",
+        "Behavior: Habits",
+        "Behavior: Time"
+      ]
+    },
+    {
+      "id": "communication_style",
+      "label": "Communication style",
+      "description": "Writing patterns in public technical prose, such as thoroughness, structure, directness, tone, and courtesy.",
+      "inferability": "allowed_from_language",
+      "schema_categories": [
+        "Linguistic: Communication",
+        "Linguistic: Language",
+        "Learning: Style",
+        "Personality: Big Five",
+        "Personality: Character"
+      ]
+    },
+    {
+      "id": "values_and_motivations",
+      "label": "Values and motivations",
+      "description": "Grounded priorities reflected in posting behavior, such as helpfulness, correctness-seeking, craftsmanship, pragmatism, or knowledge-sharing.",
+      "inferability": "allowed_from_behavior",
+      "schema_categories": [
+        "Values & Motivation",
+        "Worldview: Beliefs",
+        "Personality: Character"
+      ]
+    },
+    {
+      "id": "work_context",
+      "label": "Work context",
+      "description": "Work practices visible in posts, such as production-system contexts, team workflows, tooling stacks, or deadline pressure mentioned while asking or answering.",
+      "inferability": "allowed_from_behavior",
+      "schema_categories": [
+        "Behavior: Work",
+        "Behavior: Habits"
+      ]
+    },
+    {
+      "id": "explicit_self_statements",
+      "label": "Explicit self-statements",
+      "description": "Direct statements about the user, such as job, education, location, health context, or life circumstances. These must be quoted directly and must not be inferred from technical activity alone.",
+      "inferability": "direct_only",
+      "schema_categories": [
+        "Demographic:*",
+        "Health:*",
+        "Professional:*",
+        "Learning: Academic",
+        "Personality: Relationships",
+        "Worldview: Beliefs"
+      ]
+    }
+  ],
+  "skip_by_default_schema_categories": [
+    "External: Datasets",
+    "State: Emotional",
+    "Narrative Identity & Life History"
+  ],
+  "direct_only_note": "Demographic, health condition, family status, occupation, geography, political affiliation, religious identity, and identity-like attributes require explicit quoted self-statements. Repeated technical or topical engagement can be preserved as skills, interests, preferences, or values, but should not be converted into asserted sensitive identity/status labels without explicit evidence."
+}

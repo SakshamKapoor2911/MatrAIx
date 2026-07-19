@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.0",
+  "personaSources": ["Nemotron", "OASIS", "PersonaHub", "PRIMEX"],
+  "devProfile": {
+    "dimensionCount": 82,
+    "groups": [
+      {
+        "id": "demographics",
+        "label": "Demographics",
+        "dimensionIds": ["age_bracket", "region", "life_stage", "gender_identity"]
+      },
+      {
+        "id": "context",
+        "label": "Context",
+        "dimensionIds": ["domain", "intent", "life_stage"]
+      },
+      {
+        "id": "values",
+        "label": "Values & style",
+        "dimensionIds": [
+          "economic_motivation",
+          "values_priority",
+          "decision_style",
+          "tech_savviness"
+        ]
+      }
+    ]
+  }
+}

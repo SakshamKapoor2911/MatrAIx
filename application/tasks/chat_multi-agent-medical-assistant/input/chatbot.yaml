@@ -1,0 +1,34 @@
+transport: sidecar_http
+runtimeDefaults:
+  applicationId: medical_assistant
+  applicationContext: medical_consultation
+  domain: medical_consultation
+capabilities:
+  - text_chat
+  - upload_image
+  - validate_output
+connection:
+  baseUrlEnv: CHATBOT_UPSTREAM_MEDICAL
+  legacyBaseUrlEnv: MEDICAL_CHATBOT_URL
+  baseUrl: http://multi-agent-medical-assistant-api:8000
+  healthPath: /health
+protocol:
+  sendMessage:
+    method: POST
+    path: /v1/messages
+    sessionIdField: sessionId
+    messageField: message
+    titleField: title
+    botTypeField: botType
+    engineField: engine
+    staticBody:
+      applicationId: medical_assistant
+      applicationContext: medical_consultation
+  response:
+    sessionIdField: sessionId
+    replyField: reply
+    turnField: turn
+artifacts:
+  transcript: transcript.json
+  applicationResult: application_result.json
+  feedback: user_feedback.json

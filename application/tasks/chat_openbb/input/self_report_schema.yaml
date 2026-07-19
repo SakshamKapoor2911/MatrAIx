@@ -1,0 +1,36 @@
+artifactName: user_feedback.json
+instructions: |
+  Reflect honestly as the persona after using the financial research assistant.
+  Focus on whether the guidance felt useful, trustworthy, and responsive to your
+  stated constraints.
+fields:
+  - key: needConstraintSatisfaction
+    prompt: How well did the assistant satisfy your financial research need or constraints?
+    kind: enum
+    choices: [yes, partially, no]
+  - key: personalPreferenceSatisfaction
+    prompt: How well did the assistant match your personal preferences or style of guidance?
+    kind: enum
+    choices: [yes, partially, no]
+  - key: overallExperienceRating
+    prompt: Overall, how would you rate the experience from 1 to 10?
+    kind: integer
+    minimum: 1
+    maximum: 10
+  - key: reason
+    prompt: Briefly explain the rating in your own voice.
+  - key: askedUsefulClarificationQuestions
+    prompt: Did the assistant ask useful clarification questions?
+    kind: boolean
+  - key: clarifyingNotes
+    prompt: Which clarification questions helped, or why they did not.
+  - key: trustLevel
+    prompt: How much did you trust the assistant on a scale from 1 to 10?
+    kind: integer
+    minimum: 1
+    maximum: 10
+    required: false
+  - key: feltUnderstood
+    prompt: Did you feel understood by the assistant?
+    kind: boolean
+    required: false

@@ -1,0 +1,32 @@
+version = "1.0"
+artifacts = ["/app/output"]
+
+[task]
+name = "application/chat-recai"
+
+[metadata]
+difficulty = "medium"
+type = "chatbot"
+domain = "commerce-retail"
+tags = [
+  "recommender agent",
+  "conversational recommendation",
+  "product discovery",
+  "multi turn chat",
+  "recommendation grounding",
+]
+
+[verifier]
+timeout_sec = 300.0
+
+[agent]
+timeout_sec = 900.0
+
+[environment]
+definition = "application/shared-chat-persona"
+local_compose = "application/chatbot-api-sidecar_recai"
+build_timeout_sec = 900.0
+cpus = 1
+memory_mb = 2048
+storage_mb = 10240
+gpus = 0

@@ -1,0 +1,36 @@
+transport: sidecar_http
+runtimeDefaults:
+  applicationId: recai
+  applicationContext: movie
+  domain: movie
+capabilities:
+  - text_chat
+  - structured_exposure
+connection:
+  baseUrlEnv: CHATBOT_API_URL
+  baseUrl: http://rec-agent-api:8000
+  healthPath: /health
+protocol:
+  sendMessage:
+    method: POST
+    path: /v1/messages
+    sessionIdField: sessionId
+    messageField: message
+    titleField: title
+    botTypeField: botType
+    contextField: applicationContext
+    staticBody: {}
+  response:
+    sessionIdField: sessionId
+    replyField: reply
+    turnField: turn
+structuredExposure:
+  fields:
+    - key: recommendedItems
+      label: Recommended items
+      selector: recommendedItems
+      format: item_list
+artifacts:
+  transcript: transcript.json
+  applicationResult: application_result.json
+  feedback: user_feedback.json

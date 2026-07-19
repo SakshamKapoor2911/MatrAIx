@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "application-task-spec-v1",
+  "sharedCoreContract": {
+    "status": "active",
+    "reference": "application/task-spec/shared_core_metric_contract.example.json"
+  },
+  "applicationTypes": {
+    "survey": {
+      "status": "active",
+      "driver": "survey_form",
+      "canonicalTask": "application/tasks/example-survey_product-feedback",
+      "artifactContract": [
+        "survey_result",
+        "answers",
+        "trajectory",
+        "metrics"
+      ]
+    },
+    "chatbot": {
+      "status": "active",
+      "driver": "chat_api_controller",
+      "canonicalTask": "application/tasks/chat_recai",
+      "artifactContract": [
+        "transcript",
+        "recommendation_result",
+        "persona_self_report",
+        "evaluation_result"
+      ]
+    },
+    "web": {
+      "status": "active",
+      "driver": "browser_or_computer_use",
+      "canonicalTask": "application/tasks/example-web-playwright_quote-choice",
+      "artifactContract": [
+        "trajectory",
+        "application_result",
+        "objective_result",
+        "persona_self_report"
+      ]
+    },
+    "os-app": {
+      "status": "active",
+      "driver": "computer_use_or_native_app",
+      "canonicalTask": "application/tasks/example-computer-use-ios_photo-access-review",
+      "artifactContract": [
+        "trajectory",
+        "application_result",
+        "objective_result",
+        "persona_self_report",
+        "local_artifacts"
+      ]
+    }
+  }
+}

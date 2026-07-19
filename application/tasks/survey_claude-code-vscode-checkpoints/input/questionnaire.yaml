@@ -1,0 +1,38 @@
+schemaVersion: "1.0"
+id: software_claude_code_vscode_checkpoints_v1
+title: Claude Code IDE Autonomy Survey
+description: Survey reactions to Claude Code's native VS Code extension and checkpoint feature.
+questions:
+  - id: reviewable_edits
+    prompt: I would use Claude Code inside VS Code to make multi-file code edits if I could review inline diffs before accepting changes.
+    type: likert
+    construct: coding_agent_reviewability
+    required: true
+    minValue: 1
+    maxValue: 5
+  - id: checkpoint_control
+    prompt: Checkpoint rollback would make me more comfortable letting a coding agent work autonomously on a complex task.
+    type: likert
+    construct: agentic_coding_control_trust
+    required: true
+    minValue: 1
+    maxValue: 5
+  - id: adoption_concern
+    prompt: What would be your biggest concern before using this feature on a real codebase?
+    type: single_choice
+    construct: coding_agent_adoption_barrier
+    required: true
+    options:
+      - id: incorrect_code_changes
+        label: Incorrect code changes
+      - id: hard_to_review_diffs
+        label: Hard to review diffs
+      - id: security_or_secret_exposure
+        label: Security or secret exposure
+      - id: too_much_autonomy
+        label: Too much autonomy
+  - id: safe_first_task
+    prompt: What coding task would you feel safest delegating to Claude Code first?
+    type: free_text
+    construct: safe_initial_coding_agent_use_case
+    required: true

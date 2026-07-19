@@ -1,0 +1,35 @@
+version = "1.0"
+artifacts = [ "/app/output",]
+
+[task]
+name = "application/computer-use-ios-photo-access-review"
+
+[metadata]
+difficulty = "easy"
+type = "os-app"
+os = "ios"
+domain = "software"
+tags = [ "photo permissions", "privacy settings", "app access review", "system settings",]
+
+
+[ios]
+device_type = "iPhone-17"
+runtime = "iOS-26-4"
+
+[verifier]
+timeout_sec = 300.0
+
+[agent]
+timeout_sec = 1800.0
+
+[environment]
+definition = "application/shared-os-app-mac-ios"
+cpus = 4
+memory_mb = 4096
+storage_mb = 40960
+gpus = 0
+
+[environment.healthcheck]
+command = "mkdir -p /app/output"
+timeout_sec = 30.0
+retries = 3

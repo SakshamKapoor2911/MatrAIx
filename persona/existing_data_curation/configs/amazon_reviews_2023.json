@@ -1,0 +1,23 @@
+{
+  "id": "amazon_reviews_2023",
+  "source": {
+    "type": "huggingface_reindexed_parquet",
+    "repo_id": "MatrAIx2026/MatrAIx2026",
+    "dataset_url": "https://huggingface.co/datasets/MatrAIx2026/MatrAIx2026",
+    "paper_url": "https://arxiv.org/abs/2403.03952",
+    "user_bucket_artifact": "amazon/modal_artifacts/amazon_reviews_2018_2023_user_buckets_min30_verified70_text2000",
+    "eligible_user_artifact": "amazon/modal_artifacts/amazon_reviews_2018_2023_eligible_users_min30_verified70_text2000",
+    "original_dataset_url": "https://amazon-reviews-2023.github.io/"
+  },
+  "format": "partitioned parquet",
+  "normalized_output": "user_histories.jsonl or user_histories.jsonl.gz",
+  "package_builder_input": "Pass the normalized output to scripts/make_amazon_package.sh as USER_HISTORIES_JSONL.",
+  "persona_relevance": [
+    "Longitudinal user review histories",
+    "Product/category preferences",
+    "Rating behavior",
+    "Preference explanations in review text",
+    "Verified-purchase and helpful-vote signals"
+  ],
+  "notes": "For package generation, export user histories from the Hugging Face reindexed Parquet artifact with scripts/export_hf_amazon_user_histories.py. Direct McAuley Lab rebuilding is outside this package-builder workflow."
+}

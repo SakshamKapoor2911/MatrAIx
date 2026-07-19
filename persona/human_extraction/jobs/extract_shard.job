@@ -1,0 +1,62 @@
+#!/bin/bash
+#SBATCH -p seas_gpu,gpu_h200
+#SBATCH --gres=gpu:nvidia_h200:1
+#SBATCH -n 1
+#SBATCH -c 16
+#SBATCH --mem=96G
+#SBATCH -t 2-00:00
+#SBATCH -o sbatch_logs/%x_%A_%a.out
+#SBATCH -e sbatch_logs/%x_%A_%a.err
+#SBATCH --mail-type=FAIL
+#SBATCH --mail-user=xiaominli@g.harvard.edu
+#
+# Persona extraction — one array task = one contiguous shard = one H200.
+# Runs across BOTH H200 pools (seas_gpu 2-day cap + gpu_h200 3-day cap); shards
+# are sized to fit one 2-day run (~10.6k profiles ≈ 1.75 days). 200 shards, up to
+# 100 concurrent (SLURM fills from whichever partition has free H200s):
+#
+#   cd persona/human_extraction/jobs
+#   mkdir -p sbatch_logs
+#   NUM_SHARDS=200 sbatch --array=0-199%100 extract_shard.job
+#
+# Resumable: run_extraction.py appends to shard_XXXX.jsonl and skips global_idx
+# already written, so a preempted / re-queued task continues where it left off.
+# Re-run the same sbatch line to top up any shards that didn't finish in 7 days.
+
+set -uo pipefail
+
+mamba init >/dev/null 2>&1 || true
+module load python/3.10.13-fasrc01
+module load cuda/12.4.1-fasrc01
+conda activate env05
+
+REPO_ROOT="/n/netscratch/lu_lab/Lab/xiaominli/LLMResearch/MatrAIx"
+PY="/n/home08/xiaominli/.conda/envs/env05/bin/python"
+
+# --- caches on netscratch (never home) ---
+export HF_HOME="/n/netscratch/lu_lab/Lab/xiaominli/mycache/hf_home"
+export HF_HUB_CACHE="$HF_HOME/hub"
+export HF_XET_CACHE="$HF_HOME/xet"
+export VLLM_CACHE_ROOT="/n/netscratch/lu_lab/Lab/xiaominli/mycache/vllm"
+export VLLM_WORKER_MULTIPROC_METHOD=spawn
+mkdir -p "$VLLM_CACHE_ROOT" sbatch_logs
+
+NUM_SHARDS="${NUM_SHARDS:-200}"
+SHARD_ID="${SLURM_ARRAY_TASK_ID:-${SHARD_ID:-0}}"
+OUT_DIR="${OUT_DIR:-$REPO_ROOT/persona/human_extraction/data/extraction_v1}"
+
+echo "=== persona extraction shard ==="
+echo "date=$(date -Is)  host=$(hostname)"
+echo "shard_id=$SHARD_ID  num_shards=$NUM_SHARDS  out_dir=$OUT_DIR"
+echo "slurm_job=${SLURM_JOB_ID:-none}  array_task=${SLURM_ARRAY_TASK_ID:-none}"
+nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv,noheader | head -1
+
+cd "$REPO_ROOT"
+start=$(date +%s)
+"$PY" -u persona/human_extraction/scripts/run_extraction.py \
+    --shard-id "$SHARD_ID" \
+    --num-shards "$NUM_SHARDS" \
+    --out-dir "$OUT_DIR"
+rc=$?
+echo "DONE shard=$SHARD_ID rc=$rc elapsed=$(( $(date +%s) - start ))s"
+exit $rc

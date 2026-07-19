@@ -1,0 +1,56 @@
+services:
+  main:
+    depends_on:
+      finance-chatbot:
+        condition: service_healthy
+
+  finance-chatbot:
+    build:
+      context: ./finance-chatbot
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      FINANCE_AGENT_MODEL: ${FINANCE_AGENT_MODEL:-gpt-4o-mini}
+      OPENBB_MCP_URL: ${OPENBB_MCP_URL:-http://openbb-mcp:8001/mcp}
+      OPENBB_MCP_CATEGORIES: ${OPENBB_MCP_CATEGORIES:-equity,etf,economy,news,crypto,fixedincome,index,technical}
+      OPENBB_MCP_TIMEOUT_SECONDS: ${OPENBB_MCP_TIMEOUT_SECONDS:-30}
+      TOKENIZERS_PARALLELISM: "false"
+      PYTHONUNBUFFERED: "1"
+    expose:
+      - "8000"
+    depends_on:
+      openbb-mcp:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=5).read()",
+        ]
+      interval: 5s
+      timeout: 10s
+      retries: 20
+      start_period: 20s
+
+  openbb-mcp:
+    platform: linux/amd64
+    build:
+      context: ./openbb-mcp
+    environment:
+      OPENBB_MCP_CATEGORIES: ${OPENBB_MCP_CATEGORIES:-equity,etf,economy,news,crypto,fixedincome,index,technical}
+      PYTHONUNBUFFERED: "1"
+    expose:
+      - "8001"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import socket; s=socket.create_connection(('127.0.0.1', 8001), timeout=10); s.close()",
+        ]
+      interval: 10s
+      timeout: 30s
+      retries: 20
+      start_period: 30s

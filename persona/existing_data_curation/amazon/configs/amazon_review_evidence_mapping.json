@@ -1,0 +1,109 @@
+{
+  "description": "Broad evidence categories for compressing Amazon review histories before mapping to the MatrAIx persona schema.",
+  "evidence_categories": [
+    {
+      "id": "product_interests",
+      "label": "Product interests",
+      "description": "Repeated product categories, titles, genres, hobbies, media, tools, and topics the reviewer engages with.",
+      "inferability": "allowed_from_behavior",
+      "schema_categories": [
+        "Interests:*",
+        "Expertise: Domains",
+        "Learning: Academic"
+      ]
+    },
+    {
+      "id": "consumption_preferences",
+      "label": "Consumption preferences",
+      "description": "Preferences visible in purchase/review behavior, such as price sensitivity, durability, convenience, aesthetics, quality, brand loyalty, or practical usefulness.",
+      "inferability": "allowed_from_behavior",
+      "schema_categories": [
+        "Behavior: Preferences",
+        "Values & Motivation",
+        "Risk & Decision"
+      ]
+    },
+    {
+      "id": "expertise_signals",
+      "label": "Expertise signals",
+      "description": "Technical vocabulary, comparative evaluation, domain-specific criteria, or repeated knowledgeable reviews in a field.",
+      "inferability": "allowed_from_behavior",
+      "schema_categories": [
+        "Expertise:*",
+        "Skills:*",
+        "Professional: Industry",
+        "Professional: Role",
+        "Professional: Career"
+      ]
+    },
+    {
+      "id": "behavioral_habits",
+      "label": "Behavioral habits",
+      "description": "Repeated routines or use contexts, such as reading habits, DIY repair, home organization, gifting, cooking, travel preparation, or repeated replacement purchases.",
+      "inferability": "allowed_from_behavior",
+      "schema_categories": [
+        "Behavior: Habits",
+        "Behavior: Time",
+        "Behavior: Work",
+        "Interests:*",
+        "Values & Motivation"
+      ]
+    },
+    {
+      "id": "decision_style",
+      "label": "Decision style",
+      "description": "How the reviewer evaluates options, such as research-heavy comparison, cautiousness, novelty-seeking, risk avoidance, or tolerance for tradeoffs.",
+      "inferability": "allowed_from_behavior",
+      "schema_categories": [
+        "Risk & Decision",
+        "Behavior: Preferences",
+        "Personality: Big Five",
+        "Personality: Character"
+      ]
+    },
+    {
+      "id": "values_and_motivations",
+      "label": "Values and motivations",
+      "description": "Grounded priorities stated or repeatedly reflected in reviews, such as learning, reliability, frugality, comfort, productivity, sustainability, creativity, safety, or care for others.",
+      "inferability": "allowed_from_behavior",
+      "schema_categories": [
+        "Values & Motivation",
+        "Worldview: Beliefs",
+        "Personality: Character"
+      ]
+    },
+    {
+      "id": "explicit_self_statements",
+      "label": "Explicit self-statements",
+      "description": "Direct statements about the reviewer, such as job, family role, health context, location, education, identity, or life circumstances. These must be quoted directly and must not be inferred from products alone.",
+      "inferability": "direct_only",
+      "schema_categories": [
+        "Demographic:*",
+        "Health:*",
+        "Professional:*",
+        "Learning: Academic",
+        "Social Identity, Relationships & Community",
+        "Personality: Relationships",
+        "Worldview: Beliefs"
+      ]
+    },
+    {
+      "id": "communication_style",
+      "label": "Communication style",
+      "description": "Review-writing patterns such as detailedness, directness, emotional tone, critique style, and explanation depth.",
+      "inferability": "allowed_from_language",
+      "schema_categories": [
+        "Linguistic:*",
+        "Learning: Style",
+        "Personality: Big Five",
+        "Personality: Character"
+      ]
+    }
+  ],
+  "skip_by_default_schema_categories": [
+    "External: Datasets",
+    "State: Emotional",
+    "Narrative Identity & Life History"
+  ],
+  "direct_only_note": "Demographic, health, family, occupation, geography, politics, religion, and identity-like attributes require explicit quoted self-statements. Product purchases alone are not sufficient evidence."
+}

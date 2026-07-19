@@ -1,0 +1,149 @@
+{
+  "schemaVersion": "1.0",
+  "contextRules": [
+    {
+      "match": {
+        "contextType": "task_outcome"
+      },
+      "summaryDirectives": [
+        {
+          "id": "task_outcome.explanation_by_status",
+          "title": "Outcome explanation by status",
+          "targetFacetKey": "outcome_explanation",
+          "groupByFacetKey": "outcome_status",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        },
+        {
+          "id": "task_outcome.explanation_by_failure_reason",
+          "title": "Outcome explanation by failure reason",
+          "targetFacetKey": "outcome_explanation",
+          "groupByFacetKey": "primary_failure_reason",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ],
+      "judgeDirectives": [
+        {
+          "id": "task_outcome.failure_signal_scan",
+          "title": "Failure signal scan",
+          "targetFacetKey": "outcome_explanation",
+          "groupByFacetKey": "primary_failure_reason",
+          "groupByMode": "categorical",
+          "judgeKind": "llm_signal_judge",
+          "prompt": "Read each outcome explanation and classify which reusable execution-failure signals are explicitly present.",
+          "rubric": "Mark a signal true only when the explanation clearly states or strongly implies that signal.",
+          "signals": [
+            {
+              "key": "navigation_signal",
+              "label": "Navigation issue",
+              "valueType": "boolean"
+            },
+            {
+              "key": "grounding_signal",
+              "label": "Grounding issue",
+              "valueType": "boolean"
+            },
+            {
+              "key": "recovery_signal",
+              "label": "Recovery failure",
+              "valueType": "boolean"
+            },
+            {
+              "key": "instruction_reading_signal",
+              "label": "Instruction-reading issue",
+              "valueType": "boolean"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "goal_component"
+      },
+      "summaryDirectives": [
+        {
+          "id": "goal_component.evidence_by_component",
+          "title": "Goal component evidence by component",
+          "targetFacetKey": "goal_component_evidence",
+          "groupByFacetKey": "goal_component_key",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        },
+        {
+          "id": "goal_component.evidence_by_status",
+          "title": "Goal component evidence by status",
+          "targetFacetKey": "goal_component_evidence",
+          "groupByFacetKey": "goal_component_status",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "side_effects"
+      },
+      "summaryDirectives": [
+        {
+          "id": "side_effects.notes_by_damage_type",
+          "title": "Side effect notes by damage type",
+          "targetFacetKey": "side_effect_notes",
+          "groupByFacetKey": "damage_type_primary",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "user_feedback"
+      },
+      "summaryDirectives": [
+        {
+          "id": "user_feedback.reason_by_need_satisfaction",
+          "title": "Feedback reason by need satisfaction",
+          "targetFacetKey": "feedback_reason",
+          "groupByFacetKey": "need_constraint_satisfaction",
+          "groupByMode": "categorical",
+          "summaryKind": "llm_bucket_summary"
+        }
+      ],
+      "judgeDirectives": [
+        {
+          "id": "user_feedback.reason_signal_scan",
+          "title": "Feedback signal scan",
+          "targetFacetKey": "feedback_reason",
+          "groupByFacetKey": "personal_preference_satisfaction",
+          "groupByMode": "categorical",
+          "judgeKind": "llm_signal_judge",
+          "prompt": "Read each feedback reason and classify which reusable subjective execution signals are explicitly present.",
+          "rubric": "Mark a signal true only when the feedback clearly states or strongly implies that signal.",
+          "signals": [
+            {
+              "key": "fit_signal",
+              "label": "Need or preference fit",
+              "valueType": "boolean"
+            },
+            {
+              "key": "trust_signal",
+              "label": "Trust or confidence",
+              "valueType": "boolean"
+            },
+            {
+              "key": "effort_signal",
+              "label": "Low or high effort",
+              "valueType": "boolean"
+            },
+            {
+              "key": "clarity_signal",
+              "label": "Clear next step",
+              "valueType": "boolean"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

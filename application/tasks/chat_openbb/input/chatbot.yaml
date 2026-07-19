@@ -1,0 +1,39 @@
+transport: sidecar_http
+runtimeDefaults:
+  applicationId: finance_openbb
+  applicationContext: financial_research
+  domain: financial_research
+capabilities:
+  - text_chat
+  - structured_exposure
+connection:
+  baseUrlEnv: CHATBOT_UPSTREAM_FINANCE
+  legacyBaseUrlEnv: FINANCE_CHATBOT_URL
+  baseUrl: http://finance-chatbot:8000
+  healthPath: /health
+protocol:
+  sendMessage:
+    method: POST
+    path: /v1/messages
+    sessionIdField: sessionId
+    messageField: message
+    titleField: title
+    botTypeField: botType
+    engineField: engine
+    staticBody:
+      applicationId: finance_openbb
+      applicationContext: financial_research
+  response:
+    sessionIdField: sessionId
+    replyField: reply
+    turnField: turn
+structuredExposure:
+  fields:
+    - key: groundedItems
+      label: Suggested tickers, funds, or instruments
+      selector: groundedItems
+      format: item_list
+artifacts:
+  transcript: transcript.json
+  applicationResult: application_result.json
+  feedback: user_feedback.json

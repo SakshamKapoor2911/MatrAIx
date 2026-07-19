@@ -1,0 +1,23 @@
+# Persona bench survey (dim grounding). Requires ANTHROPIC_API_KEY in your shell.
+#
+#   uv run harbor run -c configs/jobs/example-job-recipe/playground-example-survey-local.yaml
+
+job_name: playground-example-survey-local
+jobs_dir: jobs
+n_attempts: 1
+timeout_multiplier: 1.0
+n_concurrent_trials: 1
+quiet: false
+
+environment:
+  type: docker
+  delete: true
+
+agents:
+  - name: persona-claude-code
+    model_name: anthropic/claude-sonnet-4-6
+    kwargs:
+      persona_path: persona/datasets/bench-dev-sample/persona_0042.yaml
+
+tasks:
+  - path: persona/tasks/example-survey_product-feedback

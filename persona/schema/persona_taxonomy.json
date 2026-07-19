@@ -1,0 +1,913 @@
+{
+  "taxonomy_version": "1.0",
+  "name": "MatrAIx Persona Three-Layer Taxonomy",
+  "source_schema": "dimensions.json",
+  "count_unit": "persona_attributes",
+  "expected_attribute_count": 1290,
+  "expected_structure": {
+    "layer_1_groups": 5,
+    "layer_2_groups": 16,
+    "layer_3_groups": 55,
+    "schema_categories": 43
+  },
+  "hierarchy": [
+    {
+      "id": "background",
+      "label": "Background",
+      "expected_count": 238,
+      "children": [
+        {
+          "id": "demographics",
+          "label": "Demographics",
+          "expected_count": 52,
+          "children": [
+            {
+              "id": "core_demographics",
+              "label": "Core Demographics",
+              "expected_count": 25,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Demographic: Core"]
+              }
+            },
+            {
+              "id": "family",
+              "label": "Family",
+              "expected_count": 1,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Demographic: Family"]
+              }
+            },
+            {
+              "id": "cultural_background",
+              "label": "Cultural Background",
+              "expected_count": 2,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Demographic: Cultural"]
+              }
+            },
+            {
+              "id": "life_events",
+              "label": "Life Events",
+              "expected_count": 24,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Demographic: Life Events"]
+              }
+            }
+          ]
+        },
+        {
+          "id": "language",
+          "label": "Language",
+          "expected_count": 90,
+          "children": [
+            {
+              "id": "language_profile",
+              "label": "Language Profile",
+              "expected_count": 53,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Linguistic: Language"]
+              }
+            },
+            {
+              "id": "communication",
+              "label": "Communication",
+              "expected_count": 37,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Linguistic: Communication"]
+              }
+            }
+          ]
+        },
+        {
+          "id": "education",
+          "label": "Education",
+          "expected_count": 35,
+          "children": [
+            {
+              "id": "academic_background",
+              "label": "Academic Background",
+              "expected_count": 34,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Learning: Academic"]
+              }
+            },
+            {
+              "id": "learning_style",
+              "label": "Learning Style",
+              "expected_count": 1,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Learning: Style"]
+              }
+            }
+          ]
+        },
+        {
+          "id": "career",
+          "label": "Career",
+          "expected_count": 61,
+          "children": [
+            {
+              "id": "career_profile",
+              "label": "Career Profile",
+              "expected_count": 4,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Professional: Career"]
+              }
+            },
+            {
+              "id": "industry",
+              "label": "Industry",
+              "expected_count": 51,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Professional: Industry"]
+              }
+            },
+            {
+              "id": "developer_professional_context",
+              "label": "Developer Professional Context",
+              "expected_count": 6,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Developer: Professional Context"]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "psychology",
+      "label": "Psychology",
+      "expected_count": 210,
+      "children": [
+        {
+          "id": "personality",
+          "label": "Personality",
+          "expected_count": 90,
+          "children": [
+            {
+              "id": "character",
+              "label": "Character",
+              "expected_count": 34,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Personality: Character"]
+              }
+            },
+            {
+              "id": "big_five",
+              "label": "Big Five",
+              "expected_count": 50,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Personality: Big Five"]
+              }
+            },
+            {
+              "id": "mbti",
+              "label": "MBTI",
+              "expected_count": 2,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Personality: MBTI"]
+              }
+            },
+            {
+              "id": "relationships",
+              "label": "Relationships",
+              "expected_count": 4,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Personality: Relationships"]
+              }
+            }
+          ]
+        },
+        {
+          "id": "worldview",
+          "label": "Worldview",
+          "expected_count": 113,
+          "children": [
+            {
+              "id": "values_motivation",
+              "label": "Values & Motivation",
+              "expected_count": 46,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Values & Motivation"]
+              }
+            },
+            {
+              "id": "beliefs",
+              "label": "Beliefs",
+              "expected_count": 67,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Worldview: Beliefs"]
+              }
+            }
+          ]
+        },
+        {
+          "id": "decision_making",
+          "label": "Decision-Making",
+          "expected_count": 7,
+          "children": [
+            {
+              "id": "risk_decision",
+              "label": "Risk & Decision",
+              "expected_count": 7,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Risk & Decision"]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "capability",
+      "label": "Capability",
+      "expected_count": 331,
+      "children": [
+        {
+          "id": "domains",
+          "label": "Domains",
+          "expected_count": 144,
+          "children": [
+            {
+              "id": "cross_domain_expertise_profile",
+              "label": "Cross-Domain Expertise Profile",
+              "expected_count": 4,
+              "mapping": {
+                "mode": "explicit_attributes",
+                "schema_categories": ["Expertise: Domains"],
+                "attribute_ids": [
+                  "domain",
+                  "subject_specialty",
+                  "tech_savviness",
+                  "expertise_gap"
+                ]
+              }
+            },
+            {
+              "id": "computing_data_ai",
+              "label": "Computing, Data & AI",
+              "expected_count": 18,
+              "mapping": {
+                "mode": "explicit_attributes",
+                "schema_categories": ["Expertise: Domains"],
+                "attribute_ids": [
+                  "fam_machine_learning",
+                  "fam_deep_learning",
+                  "fam_statistics",
+                  "fam_data_science",
+                  "fam_cybersecurity",
+                  "fam_cryptography",
+                  "fam_computer_networking",
+                  "fam_databases",
+                  "fam_distributed_systems",
+                  "fam_operating_systems",
+                  "fam_compilers",
+                  "fam_cloud_infrastructure",
+                  "fam_devops",
+                  "fam_game_development",
+                  "fam_computer_graphics",
+                  "fam_computer_vision",
+                  "fam_natural_language_processing",
+                  "fam_human_computer_interaction"
+                ]
+              }
+            },
+            {
+              "id": "engineering_energy_infrastructure",
+              "label": "Engineering, Energy & Infrastructure",
+              "expected_count": 16,
+              "mapping": {
+                "mode": "explicit_attributes",
+                "schema_categories": ["Expertise: Domains"],
+                "attribute_ids": [
+                  "fam_structural_engineering",
+                  "fam_mechanical_engineering",
+                  "fam_electrical_engineering",
+                  "fam_civil_engineering",
+                  "fam_chemical_engineering",
+                  "fam_aerospace_engineering",
+                  "fam_robotics",
+                  "fam_control_systems",
+                  "fam_materials_science",
+                  "fam_nanotechnology",
+                  "fam_renewable_energy",
+                  "fam_nuclear_engineering",
+                  "fam_petroleum_engineering",
+                  "fam_mining",
+                  "fam_aviation",
+                  "fam_maritime_navigation"
+                ]
+              }
+            },
+            {
+              "id": "medicine_health_life_sciences",
+              "label": "Medicine, Health & Life Sciences",
+              "expected_count": 17,
+              "mapping": {
+                "mode": "explicit_attributes",
+                "schema_categories": ["Expertise: Domains"],
+                "attribute_ids": [
+                  "fam_cardiology",
+                  "fam_neurology",
+                  "fam_oncology",
+                  "fam_pediatrics",
+                  "fam_psychiatry",
+                  "fam_radiology",
+                  "fam_surgery",
+                  "fam_immunology",
+                  "fam_molecular_biology",
+                  "fam_genetics",
+                  "fam_veterinary_medicine",
+                  "fam_nursing",
+                  "fam_pharmacology",
+                  "fam_public_health",
+                  "fam_epidemiology",
+                  "fam_nutrition",
+                  "fam_sports_science"
+                ]
+              }
+            },
+            {
+              "id": "natural_environmental_sciences",
+              "label": "Natural & Environmental Sciences",
+              "expected_count": 17,
+              "mapping": {
+                "mode": "explicit_attributes",
+                "schema_categories": ["Expertise: Domains"],
+                "attribute_ids": [
+                  "fam_biochemistry",
+                  "fam_organic_chemistry",
+                  "fam_physical_chemistry",
+                  "fam_particle_physics",
+                  "fam_astrophysics",
+                  "fam_astronomy",
+                  "fam_geology",
+                  "fam_oceanography",
+                  "fam_climate_science",
+                  "fam_ecology",
+                  "fam_geographic_information_systems",
+                  "fam_meteorology",
+                  "fam_forestry",
+                  "fam_marine_biology",
+                  "fam_paleontology",
+                  "fam_agronomy",
+                  "fam_horticulture"
+                ]
+              }
+            },
+            {
+              "id": "law_economics_finance",
+              "label": "Law, Economics & Finance",
+              "expected_count": 17,
+              "mapping": {
+                "mode": "explicit_attributes",
+                "schema_categories": ["Expertise: Domains"],
+                "attribute_ids": [
+                  "fam_constitutional_law",
+                  "fam_contract_law",
+                  "fam_criminal_law",
+                  "fam_tax_law",
+                  "fam_intellectual_property",
+                  "fam_corporate_finance",
+                  "fam_quantitative_trading",
+                  "fam_accounting",
+                  "fam_auditing",
+                  "fam_macroeconomics",
+                  "fam_microeconomics",
+                  "fam_behavioral_economics",
+                  "fam_venture_capital",
+                  "fam_private_equity",
+                  "fam_real_estate",
+                  "fam_insurance",
+                  "fam_actuarial_science"
+                ]
+              }
+            },
+            {
+              "id": "social_sciences_public_affairs",
+              "label": "Social Sciences & Public Affairs",
+              "expected_count": 7,
+              "mapping": {
+                "mode": "explicit_attributes",
+                "schema_categories": ["Expertise: Domains"],
+                "attribute_ids": [
+                  "fam_sociology",
+                  "fam_psychology",
+                  "fam_cognitive_science",
+                  "fam_anthropology",
+                  "fam_international_relations",
+                  "fam_military_strategy",
+                  "fam_diplomacy"
+                ]
+              }
+            },
+            {
+              "id": "humanities_cultural_studies",
+              "label": "Humanities & Cultural Studies",
+              "expected_count": 10,
+              "mapping": {
+                "mode": "explicit_attributes",
+                "schema_categories": ["Expertise: Domains"],
+                "attribute_ids": [
+                  "fam_comparative_literature",
+                  "fam_philosophy",
+                  "fam_ethics",
+                  "fam_history",
+                  "fam_archaeology",
+                  "fam_linguistics",
+                  "fam_theology",
+                  "fam_art_history",
+                  "fam_music_theory",
+                  "fam_film_studies"
+                ]
+              }
+            },
+            {
+              "id": "education_human_services",
+              "label": "Education & Human Services",
+              "expected_count": 7,
+              "mapping": {
+                "mode": "explicit_attributes",
+                "schema_categories": ["Expertise: Domains"],
+                "attribute_ids": [
+                  "fam_curriculum_design",
+                  "fam_pedagogy",
+                  "fam_organizational_psychology",
+                  "fam_human_resources",
+                  "fam_counseling",
+                  "fam_library_science",
+                  "fam_social_work"
+                ]
+              }
+            },
+            {
+              "id": "arts_design_media",
+              "label": "Arts, Design & Media",
+              "expected_count": 17,
+              "mapping": {
+                "mode": "explicit_attributes",
+                "schema_categories": ["Expertise: Domains"],
+                "attribute_ids": [
+                  "fam_architecture",
+                  "fam_urban_planning",
+                  "fam_landscape_design",
+                  "fam_ux_research",
+                  "fam_graphic_design",
+                  "fam_industrial_design",
+                  "fam_typography",
+                  "fam_journalism",
+                  "fam_public_relations",
+                  "fam_fashion_design",
+                  "fam_textiles",
+                  "fam_photography",
+                  "fam_cinematography",
+                  "fam_music_production",
+                  "fam_sound_engineering",
+                  "fam_animation",
+                  "fam_3d_modeling"
+                ]
+              }
+            },
+            {
+              "id": "business_management_marketing",
+              "label": "Business, Management & Marketing",
+              "expected_count": 11,
+              "mapping": {
+                "mode": "explicit_attributes",
+                "schema_categories": ["Expertise: Domains"],
+                "attribute_ids": [
+                  "fam_brand_marketing",
+                  "fam_performance_marketing",
+                  "fam_seo",
+                  "fam_sales_engineering",
+                  "fam_supply_chain",
+                  "fam_logistics",
+                  "fam_operations_management",
+                  "fam_lean_manufacturing",
+                  "fam_quality_assurance",
+                  "fam_project_management",
+                  "fam_product_management"
+                ]
+              }
+            },
+            {
+              "id": "hospitality_culinary",
+              "label": "Hospitality & Culinary",
+              "expected_count": 3,
+              "mapping": {
+                "mode": "explicit_attributes",
+                "schema_categories": ["Expertise: Domains"],
+                "attribute_ids": [
+                  "fam_hospitality_management",
+                  "fam_culinary_arts",
+                  "fam_sommelier_knowledge"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "skills",
+          "label": "Skills",
+          "expected_count": 187,
+          "children": [
+            {
+              "id": "general_skills",
+              "label": "General Skills",
+              "expected_count": 64,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Expertise: Skills"]
+              }
+            },
+            {
+              "id": "tools",
+              "label": "Tools",
+              "expected_count": 69,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Skills: Tools"]
+              }
+            },
+            {
+              "id": "programming",
+              "label": "Programming",
+              "expected_count": 44,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Skills: Programming"]
+              }
+            },
+            {
+              "id": "developer_code_maintenance",
+              "label": "Developer Code Maintenance",
+              "expected_count": 10,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Developer: Code Maintenance"]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "behavior_interaction",
+      "label": "Behavior and Interaction",
+      "expected_count": 124,
+      "children": [
+        {
+          "id": "personal_behavior",
+          "label": "Personal Behavior",
+          "expected_count": 67,
+          "children": [
+            {
+              "id": "preferences",
+              "label": "Preferences",
+              "expected_count": 34,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Behavior: Preferences"]
+              }
+            },
+            {
+              "id": "habits",
+              "label": "Habits",
+              "expected_count": 30,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Behavior: Habits"]
+              }
+            },
+            {
+              "id": "time_use",
+              "label": "Time Use",
+              "expected_count": 3,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Behavior: Time"]
+              }
+            }
+          ]
+        },
+        {
+          "id": "interaction_state",
+          "label": "Interaction State",
+          "expected_count": 5,
+          "children": [
+            {
+              "id": "current_emotional_state",
+              "label": "Current Emotional State",
+              "expected_count": 1,
+              "mapping": {
+                "mode": "explicit_attributes",
+                "schema_categories": ["State: Emotional"],
+                "attribute_ids": ["emotional_state"]
+              }
+            },
+            {
+              "id": "task_interaction_context",
+              "label": "Task & Interaction Context",
+              "expected_count": 4,
+              "mapping": {
+                "mode": "explicit_attributes",
+                "schema_categories": ["State: Emotional"],
+                "attribute_ids": [
+                  "intent",
+                  "query_complexity",
+                  "prior_context",
+                  "device_context"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "work_practices",
+          "label": "Work Practices",
+          "expected_count": 13,
+          "children": [
+            {
+              "id": "general_work_practices",
+              "label": "General Work Practices",
+              "expected_count": 2,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Behavior: Work"]
+              }
+            },
+            {
+              "id": "developer_open_source_behavior",
+              "label": "Developer Open Source Behavior",
+              "expected_count": 7,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Developer: Open Source Behavior"]
+              }
+            },
+            {
+              "id": "developer_community_behavior",
+              "label": "Developer Community Behavior",
+              "expected_count": 4,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Developer: Community Behavior"]
+              }
+            }
+          ]
+        },
+        {
+          "id": "technology_use",
+          "label": "Technology Use",
+          "expected_count": 39,
+          "children": [
+            {
+              "id": "developer_ai_tool_adoption",
+              "label": "Developer AI Tool Adoption",
+              "expected_count": 8,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Developer: AI Adoption"]
+              }
+            },
+            {
+              "id": "developer_ai_workflow_tasks",
+              "label": "Developer AI Workflow Tasks",
+              "expected_count": 12,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Developer: AI Workflow Tasks"]
+              }
+            },
+            {
+              "id": "developer_coding_agent_adoption",
+              "label": "Developer Coding Agent Adoption",
+              "expected_count": 11,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Developer: Agent Adoption"]
+              }
+            },
+            {
+              "id": "developer_technology_evaluation",
+              "label": "Developer Technology Evaluation",
+              "expected_count": 8,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Developer: Technology Evaluation"]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lifestyle_health",
+      "label": "Lifestyle and Health",
+      "expected_count": 387,
+      "children": [
+        {
+          "id": "interests",
+          "label": "Interests",
+          "expected_count": 284,
+          "children": [
+            {
+              "id": "broad_interest_areas",
+              "label": "Broad Interest Areas",
+              "expected_count": 78,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Interests: Topics"]
+              }
+            },
+            {
+              "id": "media",
+              "label": "Media",
+              "expected_count": 81,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Interests: Media"]
+              }
+            },
+            {
+              "id": "hobbies",
+              "label": "Hobbies",
+              "expected_count": 50,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Interests: Hobbies"]
+              }
+            },
+            {
+              "id": "sports",
+              "label": "Sports",
+              "expected_count": 40,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Interests: Sports"]
+              }
+            },
+            {
+              "id": "food",
+              "label": "Food",
+              "expected_count": 35,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Interests: Food"]
+              }
+            }
+          ]
+        },
+        {
+          "id": "culture_daily_life",
+          "label": "Culture and Daily Life",
+          "expected_count": 74,
+          "children": [
+            {
+              "id": "cultural_familiarity",
+              "label": "Cultural Familiarity",
+              "expected_count": 40,
+              "mapping": {
+                "mode": "explicit_attributes",
+                "schema_categories": ["Interests: Culture"],
+                "attribute_ids": [
+                  "cult_united_states",
+                  "cult_canada",
+                  "cult_mexico",
+                  "cult_brazil",
+                  "cult_argentina",
+                  "cult_united_kingdom",
+                  "cult_france",
+                  "cult_germany",
+                  "cult_italy",
+                  "cult_spain",
+                  "cult_netherlands",
+                  "cult_sweden",
+                  "cult_poland",
+                  "cult_russia",
+                  "cult_turkey",
+                  "cult_egypt",
+                  "cult_saudi_arabia",
+                  "cult_uae",
+                  "cult_israel",
+                  "cult_iran",
+                  "cult_nigeria",
+                  "cult_kenya",
+                  "cult_south_africa",
+                  "cult_ethiopia",
+                  "cult_india",
+                  "cult_pakistan",
+                  "cult_bangladesh",
+                  "cult_china",
+                  "cult_japan",
+                  "cult_south_korea",
+                  "cult_vietnam",
+                  "cult_thailand",
+                  "cult_indonesia",
+                  "cult_philippines",
+                  "cult_australia",
+                  "cult_new_zealand",
+                  "cult_singapore",
+                  "cult_malaysia",
+                  "cult_greece",
+                  "cult_portugal"
+                ]
+              }
+            },
+            {
+              "id": "lifestyle_patterns",
+              "label": "Lifestyle Patterns",
+              "expected_count": 34,
+              "mapping": {
+                "mode": "explicit_attributes",
+                "schema_categories": ["Interests: Culture"],
+                "attribute_ids": [
+                  "lstyle_smoking",
+                  "lstyle_caffeine",
+                  "lstyle_cooking_freq",
+                  "lstyle_shopping_style",
+                  "lstyle_travel_freq",
+                  "lstyle_commute_mode",
+                  "lstyle_pet_ownership",
+                  "lstyle_screen_time",
+                  "lstyle_social_battery",
+                  "lstyle_planning_horizon",
+                  "lstyle_punctuality",
+                  "lstyle_tidiness",
+                  "lstyle_frugality",
+                  "lstyle_giving",
+                  "lstyle_news_freq",
+                  "lstyle_reading_freq",
+                  "lstyle_gaming_freq",
+                  "lstyle_streaming_hours",
+                  "lstyle_music_listening",
+                  "lstyle_podcast_listening",
+                  "lstyle_primary_social",
+                  "lstyle_primary_messenger",
+                  "lstyle_device_ecosystem",
+                  "lstyle_browser",
+                  "lstyle_payment_pref",
+                  "lstyle_banking_style",
+                  "lstyle_investment_style",
+                  "lstyle_subscription_count",
+                  "lstyle_coffee_ritual",
+                  "lstyle_fashion_sense",
+                  "lstyle_hobby_intensity",
+                  "lstyle_vacation_style",
+                  "lstyle_morning_routine",
+                  "lstyle_volunteering"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "health",
+          "label": "Health",
+          "expected_count": 29,
+          "children": [
+            {
+              "id": "health_status_accessibility",
+              "label": "Health Status & Accessibility",
+              "expected_count": 25,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": ["Health: Physical"]
+              }
+            },
+            {
+              "id": "health_orientation_behaviors",
+              "label": "Health Orientation & Behaviors",
+              "expected_count": 4,
+              "mapping": {
+                "mode": "all_in_categories",
+                "schema_categories": [
+                  "Health: Fitness",
+                  "Health: Lifestyle"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

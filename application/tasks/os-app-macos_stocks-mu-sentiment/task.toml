@@ -1,0 +1,102 @@
+version = "1.0"
+artifacts = [ "/app/output",]
+
+[task]
+name = "application/os-app-macos-stocks-mu-sentiment"
+
+[metadata]
+difficulty = "medium"
+type = "os-app"
+os = "macos"
+domain = "finance"
+tags = [
+  "stocks",
+  "investment sentiment",
+  "chart analysis",
+  "news reading",
+  "buy sell hold",
+]
+
+[verifier]
+timeout_sec = 300.0
+
+[verifier.env]
+HARBOR_VERIFIER_DIR = "/tmp/harbor/logs/verifier"
+
+[agent]
+timeout_sec = 1800.0
+
+[environment]
+definition = "application/shared-os-app-mac-ios"
+cpus = 4
+memory_mb = 4096
+storage_mb = 40960
+gpus = 0
+
+[environment.healthcheck]
+command = """
+mkdir -p /app/output
+mkdir -p /tmp/harbor/verifier 2>/dev/null; chmod 777 /tmp/harbor/verifier 2>/dev/null || true
+osascript <<'APPLESCRIPT'
+tell application "Stocks" to activate
+delay 3
+tell application "System Events"
+  -- Dismiss notification/permission dialogs
+  repeat 3 times
+    try
+      click button "OK" of window 1 of process "UserNotificationCenter"
+      delay 0.5
+    end try
+    try
+      click button 2 of window 1 of process "UserNotificationCenter"
+      delay 0.5
+    end try
+  end repeat
+  try
+    keystroke return
+  end try
+  delay 1
+  -- Maximize Stocks window
+  tell process "Stocks"
+    set frontmost to true
+    try
+      set position of window 1 to {0, 25}
+      set size of window 1 to {1920, 1055}
+    end try
+  end tell
+end tell
+-- Pre-configure Safari: open, dismiss dialogs, maximize, quit
+tell application "Safari" to activate
+delay 2
+tell application "System Events"
+  -- Dismiss Safari permission dialogs (e.g. Downloads folder access)
+  repeat 3 times
+    try
+      click button "OK" of window 1 of process "Safari"
+      delay 0.5
+    end try
+    try
+      click button 2 of window 1 of process "Safari"
+      delay 0.5
+    end try
+    try
+      click button "OK" of window 1 of process "UserNotificationCenter"
+      delay 0.5
+    end try
+  end repeat
+  tell process "Safari"
+    set frontmost to true
+    try
+      set position of window 1 to {0, 25}
+      set size of window 1 to {1920, 1055}
+    end try
+  end tell
+end tell
+tell application "Safari" to quit
+delay 1
+tell application "Stocks" to activate
+APPLESCRIPT
+true
+"""
+timeout_sec = 60.0
+retries = 3

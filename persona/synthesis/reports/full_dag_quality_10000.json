@@ -1,0 +1,227 @@
+{
+  "generated_at": "2026-07-03T13:35:06+00:00",
+  "graph": "persona/synthesis/graph/full_dag.json",
+  "sample_count": 10000,
+  "seed": 42,
+  "runtime": {
+    "python": "3.12.7",
+    "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.35"
+  },
+  "graph_summary": {
+    "graph_version": "v4.4_developer_extension",
+    "target_population": "global general population with developer/coding extension attributes gated by developer status, coding skill, and tool use",
+    "nodes": 1308,
+    "emitted_nodes": 1290,
+    "directed_edges": 6999,
+    "full_cpts": 54,
+    "full_cpt_rows": 17645,
+    "conditional_masks": 524,
+    "external_or_proxy_nodes": 0,
+    "external_or_proxy_emit_false": 0
+  },
+  "validation": {
+    "node_count": 1308,
+    "directed_edge_count": 6999,
+    "full_cpt_count": 54,
+    "full_cpt_row_count": 17645,
+    "conditional_mask_count": 524,
+    "duplicate_node_ids": 0,
+    "duplicate_directed_pairs": 0,
+    "missing_refs": [],
+    "bad_prior_nodes": [],
+    "edge_bad_rows": 0,
+    "edge_exact_zero_cells": 0,
+    "edge_exact_one_cells": 0,
+    "raw_backed_edge_count": 107,
+    "raw_backed_edges_affected_by_exact_zero_or_one": 0,
+    "raw_backed_low_entropy_rows_gt_0_98": 0,
+    "full_cpt_bad_rows": 0,
+    "full_cpt_exact_zero_cells": 0,
+    "full_cpt_deterministic_rows": 0,
+    "hard_zero_mask_values": 569,
+    "cycle_free": true,
+    "topological_dependency_violations": 0,
+    "topological_dependency_violation_examples": [],
+    "external_or_proxy_nodes": 0,
+    "external_or_proxy_emit_false": 0,
+    "validation_passed": true
+  },
+  "timings": {
+    "load_and_compile_seconds": 0.5666932059975807,
+    "static_validation_seconds": 0.374592402993585,
+    "sample_indices_seconds": 0.3937836800032528,
+    "marginal_audit_seconds": 0.011693828011630103,
+    "consistency_audit_seconds": 1.6036853280093055,
+    "total_seconds": 2.9504554070008453,
+    "sampling_throughput_per_second": 25394.65322665834,
+    "end_to_end_throughput_per_second": 3389.3072833000574
+  },
+  "focus_node_marginals": [
+    {
+      "node": "seniority",
+      "tvd_vs_prior": 0.13689999999999997,
+      "top_sample_values": "Student / intern: sample 38.98%, prior 34.00%; Entry: sample 18.60%, prior 10.00%; Mid: sample 14.11%, prior 17.00%; Retired: sample 9.80%, prior 18.30%"
+    },
+    {
+      "node": "role_function",
+      "tvd_vs_prior": 0.12250000000000001,
+      "top_sample_values": "Operations: sample 31.46%, prior 28.75%; Engineering: sample 10.59%, prior 11.25%; Sales / GTM: sample 9.97%, prior 10.00%; Research: sample 7.68%, prior 2.50%"
+    },
+    {
+      "node": "life_stage",
+      "tvd_vs_prior": 0.1006,
+      "top_sample_values": "Student: sample 35.39%, prior 30.00%; Mid-life: sample 19.43%, prior 19.00%; Early career: sample 13.19%, prior 13.00%; Retirement: sample 12.21%, prior 10.00%"
+    },
+    {
+      "node": "english_proficiency",
+      "tvd_vs_prior": 0.09830000000000003,
+      "top_sample_values": "None: sample 38.03%, prior 29.00%; Basic (A1-A2): sample 17.91%, prior 18.00%; Intermediate (B1-B2): sample 15.33%, prior 17.00%; Fluent (C1-C2): sample 15.30%, prior 14.50%"
+    },
+    {
+      "node": "demo_children_count",
+      "tvd_vs_prior": 0.05959999999999997,
+      "top_sample_values": "None: sample 55.72%, prior 60.00%; 3+ children: sample 12.40%, prior 11.00%; 2 children: sample 11.86%, prior 12.00%; Adult children: sample 11.06%, prior 6.50%"
+    },
+    {
+      "node": "highest_education",
+      "tvd_vs_prior": 0.04940000000000001,
+      "top_sample_values": "Secondary: sample 36.23%, prior 36.00%; No formal: sample 20.76%, prior 16.50%; Primary: sample 20.69%, prior 24.50%; Bachelor's: sample 8.08%, prior 8.00%"
+    },
+    {
+      "node": "years_experience",
+      "tvd_vs_prior": 0.04460000000000002,
+      "top_sample_values": "0-2: sample 45.05%, prior 42.00%; 11-20: sample 16.55%, prior 18.00%; 20+: sample 14.41%, prior 13.00%; 6-10: sample 12.99%, prior 14.00%"
+    },
+    {
+      "node": "demo_employment_status",
+      "tvd_vs_prior": 0.031799999999999974,
+      "top_sample_values": "Student: sample 33.23%, prior 33.00%; Full-time: sample 23.35%, prior 24.50%; Homemaker: sample 11.00%, prior 8.50%; Retired: sample 9.80%, prior 10.50%"
+    },
+    {
+      "node": "tech_savviness",
+      "tvd_vs_prior": 0.019699999999999995,
+      "top_sample_values": "Comfortable: sample 29.18%, prior 28.00%; Cautious adopter: sample 24.44%, prior 25.00%; Reluctant: sample 18.26%, prior 18.00%; Digital native: sample 14.59%, prior 16.00%"
+    },
+    {
+      "node": "domain",
+      "tvd_vs_prior": 0.0168,
+      "top_sample_values": "Agriculture: sample 23.31%, prior 24.00%; Manufacturing: sample 12.13%, prior 12.00%; Business & Management: sample 10.10%, prior 10.00%; Education: sample 7.51%, prior 7.00%"
+    },
+    {
+      "node": "region",
+      "tvd_vs_prior": 0.014965990000000012,
+      "top_sample_values": "South Asia: sample 25.39%, prior 25.23%; East Asia: sample 18.70%, prior 19.41%; Sub-Saharan Africa: sample 17.04%, prior 16.85%; Southeast Asia: sample 8.34%, prior 8.78%"
+    },
+    {
+      "node": "age_bracket",
+      "tvd_vs_prior": 0.014900000000000024,
+      "top_sample_values": "25-34: sample 14.58%, prior 14.50%; 5-12: sample 13.55%, prior 13.00%; 35-44: sample 13.26%, prior 13.30%; 45-54: sample 11.12%, prior 11.50%"
+    },
+    {
+      "node": "demo_ethnicity_broad",
+      "tvd_vs_prior": 0.014400000000000001,
+      "top_sample_values": "South Asian: sample 25.22%, prior 25.00%; East Asian: sample 20.07%, prior 20.50%; Black / African: sample 15.10%, prior 14.50%; White / European: sample 11.02%, prior 10.50%"
+    },
+    {
+      "node": "demo_religion_affiliation",
+      "tvd_vs_prior": 0.013500000000000017,
+      "top_sample_values": "Christian: sample 29.75%, prior 28.80%; Muslim: sample 25.21%, prior 25.60%; Hindu: sample 15.15%, prior 14.90%; None: sample 9.40%, prior 9.30%"
+    },
+    {
+      "node": "primary_language",
+      "tvd_vs_prior": 0.013099999999999997,
+      "top_sample_values": "English: sample 22.13%, prior 21.50%; Mandarin: sample 19.74%, prior 20.50%; Hindi: sample 10.47%, prior 10.50%; Spanish: sample 9.92%, prior 10.00%"
+    },
+    {
+      "node": "urbanicity",
+      "tvd_vs_prior": 0.007400000000000014,
+      "top_sample_values": "Rural: sample 35.24%, prior 34.50%; Dense urban: sample 24.13%, prior 24.50%; Suburban: sample 20.97%, prior 21.00%; Small town: sample 18.18%, prior 18.50%"
+    },
+    {
+      "node": "socioeconomic_band",
+      "tvd_vs_prior": 0.006200000000000018,
+      "top_sample_values": "Lower-middle: sample 33.17%, prior 33.00%; Low income: sample 33.14%, prior 33.50%; Middle: sample 21.95%, prior 21.50%; Upper-middle: sample 9.25%, prior 9.50%"
+    },
+    {
+      "node": "gender_identity",
+      "tvd_vs_prior": 0.005599999999999982,
+      "top_sample_values": "Man: sample 50.23%, prior 49.80%; Woman: sample 49.04%, prior 49.50%; Self-described: sample 0.33%, prior 0.20%; Non-binary: sample 0.26%, prior 0.30%"
+    }
+  ],
+  "top_focus_node_marginals": [
+    {
+      "node": "seniority",
+      "tvd_vs_prior": 0.13689999999999997,
+      "top_sample_values": "Student / intern: sample 38.98%, prior 34.00%; Entry: sample 18.60%, prior 10.00%; Mid: sample 14.11%, prior 17.00%; Retired: sample 9.80%, prior 18.30%"
+    },
+    {
+      "node": "role_function",
+      "tvd_vs_prior": 0.12250000000000001,
+      "top_sample_values": "Operations: sample 31.46%, prior 28.75%; Engineering: sample 10.59%, prior 11.25%; Sales / GTM: sample 9.97%, prior 10.00%; Research: sample 7.68%, prior 2.50%"
+    },
+    {
+      "node": "life_stage",
+      "tvd_vs_prior": 0.1006,
+      "top_sample_values": "Student: sample 35.39%, prior 30.00%; Mid-life: sample 19.43%, prior 19.00%; Early career: sample 13.19%, prior 13.00%; Retirement: sample 12.21%, prior 10.00%"
+    },
+    {
+      "node": "english_proficiency",
+      "tvd_vs_prior": 0.09830000000000003,
+      "top_sample_values": "None: sample 38.03%, prior 29.00%; Basic (A1-A2): sample 17.91%, prior 18.00%; Intermediate (B1-B2): sample 15.33%, prior 17.00%; Fluent (C1-C2): sample 15.30%, prior 14.50%"
+    },
+    {
+      "node": "demo_children_count",
+      "tvd_vs_prior": 0.05959999999999997,
+      "top_sample_values": "None: sample 55.72%, prior 60.00%; 3+ children: sample 12.40%, prior 11.00%; 2 children: sample 11.86%, prior 12.00%; Adult children: sample 11.06%, prior 6.50%"
+    },
+    {
+      "node": "highest_education",
+      "tvd_vs_prior": 0.04940000000000001,
+      "top_sample_values": "Secondary: sample 36.23%, prior 36.00%; No formal: sample 20.76%, prior 16.50%; Primary: sample 20.69%, prior 24.50%; Bachelor's: sample 8.08%, prior 8.00%"
+    },
+    {
+      "node": "years_experience",
+      "tvd_vs_prior": 0.04460000000000002,
+      "top_sample_values": "0-2: sample 45.05%, prior 42.00%; 11-20: sample 16.55%, prior 18.00%; 20+: sample 14.41%, prior 13.00%; 6-10: sample 12.99%, prior 14.00%"
+    },
+    {
+      "node": "demo_employment_status",
+      "tvd_vs_prior": 0.031799999999999974,
+      "top_sample_values": "Student: sample 33.23%, prior 33.00%; Full-time: sample 23.35%, prior 24.50%; Homemaker: sample 11.00%, prior 8.50%; Retired: sample 9.80%, prior 10.50%"
+    },
+    {
+      "node": "tech_savviness",
+      "tvd_vs_prior": 0.019699999999999995,
+      "top_sample_values": "Comfortable: sample 29.18%, prior 28.00%; Cautious adopter: sample 24.44%, prior 25.00%; Reluctant: sample 18.26%, prior 18.00%; Digital native: sample 14.59%, prior 16.00%"
+    },
+    {
+      "node": "domain",
+      "tvd_vs_prior": 0.0168,
+      "top_sample_values": "Agriculture: sample 23.31%, prior 24.00%; Manufacturing: sample 12.13%, prior 12.00%; Business & Management: sample 10.10%, prior 10.00%; Education: sample 7.51%, prior 7.00%"
+    }
+  ],
+  "consistency": {
+    "n": 10000,
+    "any_hard": 0,
+    "any_hard_share": 0.0,
+    "any_hard_or_strong": 0,
+    "any_hard_or_strong_share": 0.0,
+    "any_flagged": 16,
+    "any_flagged_share": 0.0016,
+    "severity_issue_counts": {
+      "soft": 16
+    },
+    "group_issue_counts": {
+      "finance": 16
+    },
+    "rules": [
+      {
+        "rule": "unbanked_mobile_wallet_or_crypto_payment",
+        "severity": "soft",
+        "group": "finance",
+        "count": 16,
+        "share": 0.0016
+      }
+    ]
+  }
+}
