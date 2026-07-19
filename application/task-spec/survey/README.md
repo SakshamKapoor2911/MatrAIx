@@ -167,8 +167,8 @@ Keep using the platform's existing artifact shape:
 
 - verifier writes `verifier/structured_output.json`
 - task root defines `reporting.json`
-- both continue to use `contexts[]`, `facets[]`, `summaryDirectives[]`, and
-  optional `judgeDirectives[]`
+- both continue to use `contexts[]`, `facets[]`, `summaryAnalyses[]`, and
+  optional `signalScans[]`
 
 See the example templates in this folder:
 
@@ -235,8 +235,8 @@ Default surveys answer with `questionId` + `value` only. Use an empty
 | `free_text` | Coverage summary + example quotes — **not** fake % bars |
 
 To extract themes / signals from `free_text` (or from `reason` when
-`askRationale` is true), add Layer 2 `summaryDirectives` /
-`judgeDirectives` in `reporting.json` that target the `response` or
+`askRationale` is true), add Layer 2 `summaryAnalyses` /
+`signalScans` in `reporting.json` that target the `response` or
 `reason` facet. See `survey_reporting.example.json` and
 `application/tasks/README.md` for a reason-by-response example.
 

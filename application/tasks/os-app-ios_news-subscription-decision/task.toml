@@ -24,7 +24,14 @@ device_type = "iPhone-17"
 runtime = "iOS-26-4"
 
 [verifier]
-timeout_sec = 120.0
+timeout_sec = 180.0
+
+# Best-effort verifier-side LLM signal extraction (conversion-barrier facets).
+# Resolved from the host env at verify time; if unset or unreachable the verifier
+# skips the signals and still passes on its deterministic facts.
+[verifier.env]
+OPENAI_API_KEY = "${OPENAI_API_KEY}"
+MODEL_NAME = "gpt-4o-mini"
 
 [agent]
 timeout_sec = 1800.0

@@ -220,8 +220,8 @@ Keep using the platform's existing artifact shape:
 
 - verifier writes `verifier/structured_output.json`
 - task root defines `reporting.json`
-- both continue to use `contexts[]`, `facets[]`, `summaryDirectives[]`, and
-  `judgeDirectives[]`
+- both continue to use `contexts[]`, `facets[]`, `summaryAnalyses[]`, and
+  `signalScans[]`
 
 This contract adds **standard context types, facet keys, and small shared
 enumerations** so contributors can extend task-specific details without

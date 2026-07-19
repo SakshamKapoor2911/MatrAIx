@@ -361,6 +361,7 @@ for i, (name, cat, reason) in enumerate(zip(pick_names, pick_categories, pick_re
                     "label": "Reason",
                     "role": "explanation",
                     "kind": "textual",
+                    "explainsFacetKey": "decision_category",
                     "value": reason,
                 },
             ],
@@ -448,6 +449,7 @@ if feedback is not None:
             "label": "Feedback reason",
             "role": "explanation",
             "kind": "textual",
+            "explainsFacetKey": "need_constraint_satisfaction",
             "value": feedback["feedback_reason"],
         },
         {

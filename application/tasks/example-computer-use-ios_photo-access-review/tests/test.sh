@@ -301,6 +301,7 @@ contexts = [
                 "label": "Reason",
                 "role": "explanation",
                 "kind": "textual",
+                "explainsFacetKey": "photo_access_level",
                 "value": reason.strip(),
             },
             {
@@ -408,6 +409,7 @@ if feedback is not None:
             "label": "Feedback reason",
             "role": "explanation",
             "kind": "textual",
+            "explainsFacetKey": "overall_experience_rating",
             "value": feedback["feedback_reason"],
         },
         {

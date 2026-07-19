@@ -309,6 +309,7 @@ def test_output_schema():
                     "label": "Reason",
                     "role": "explanation",
                     "kind": "textual",
+                    "explainsFacetKey": "basis_primary",
                     "value": reason.strip(),
                 },
                 {
@@ -351,6 +352,7 @@ def test_output_schema():
                     "label": "Comparison notes",
                     "role": "explanation",
                     "kind": "textual",
+                    "explainsFacetKey": "exploration_style",
                     "value": "The persona described a {} comparison pattern before picking this plan.".format(
                         exploration_style.replace("_", " ")
                     ),
@@ -373,6 +375,7 @@ def test_output_schema():
                 "label": "Feedback reason",
                 "role": "explanation",
                 "kind": "textual",
+                "explainsFacetKey": "overall_experience_rating",
                 "value": feedback["feedback_reason"],
             },
             {

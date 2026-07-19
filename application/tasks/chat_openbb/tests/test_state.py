@@ -14,6 +14,78 @@ TRANSCRIPT_PATH = OUTPUT_DIR / "transcript.json"
 FEEDBACK_PATH = OUTPUT_DIR / "user_feedback.json"
 
 
+def _llm_signal_facets(
+    text: str,
+    *,
+    specs: list[tuple[str, str]],
+    context_desc: str,
+    rubric: str,
+) -> list[dict[str, Any]]:
+    """Best-effort LLM signal extraction rendered as categorical facets.
+
+    Returns [] on any failure (missing OPENAI_API_KEY, no network, bad JSON, or a
+    timeout). Grading must never depend on this: these signals are additive
+    reporting facets only, so a failed call simply omits them and the trial still
+    passes on its deterministic facts.
+    """
+    import urllib.request
+
+    api_key = os.environ.get("OPENAI_API_KEY")
+    body_text = (text or "").strip()
+    if not api_key or not body_text:
+        return []
+    model = os.environ.get("MODEL_NAME", "gpt-4o-mini")
+    base = (
+        os.environ.get("OPENAI_BASE_URL")
+        or os.environ.get("OPENAI_API_BASE")
+        or "https://api.openai.com/v1"
+    ).rstrip("/")
+    schema = "\n".join(f"- {key}: {label}" for key, label in specs)
+    system = (
+        f"{context_desc} Return ONLY a JSON object whose keys are exactly these, "
+        f"each a boolean:\n{schema}\nRubric: {rubric}"
+    )
+    request_body = {
+        "model": model,
+        "messages": [
+            {"role": "system", "content": system},
+            {"role": "user", "content": body_text[:12000]},
+        ],
+        "temperature": 0,
+        "response_format": {"type": "json_object"},
+    }
+    try:
+        request = urllib.request.Request(
+            f"{base}/chat/completions",
+            data=json.dumps(request_body).encode("utf-8"),
+            headers={
+                "Authorization": f"Bearer {api_key}",
+                "Content-Type": "application/json",
+            },
+            method="POST",
+        )
+        with urllib.request.urlopen(request, timeout=40) as response:
+            completion = json.loads(response.read().decode("utf-8"))
+        content = completion["choices"][0]["message"]["content"]
+        parsed = json.loads(content)
+    except Exception:  # noqa: BLE001 — grading must survive any LLM failure
+        return []
+    facets: list[dict[str, Any]] = []
+    for key, label in specs:
+        value = parsed.get(key)
+        if isinstance(value, bool):
+            facets.append(
+                {
+                    "key": key,
+                    "label": label,
+                    "role": "evidence",
+                    "kind": "categorical",
+                    "value": "true" if value else "false",
+                }
+            )
+    return facets
+
+
 def _verifier_dir() -> Path:
     explicit = os.environ.get("HARBOR_VERIFIER_DIR")
     if explicit:
@@ -54,6 +126,37 @@ def _count_assistant_questions(messages: list[dict[str, Any]]) -> int:
         and isinstance(entry.get("content"), str)
         and "?" in entry["content"]
     )
+
+
+def _assistant_messages(messages: list[dict[str, Any]]) -> list[str]:
+    return [
+        entry["content"].strip()
+        for entry in messages
+        if entry.get("role") == "assistant"
+        and isinstance(entry.get("content"), str)
+        and entry["content"].strip()
+    ]
+
+
+def _assistant_output_text(messages: list[dict[str, Any]]) -> str:
+    replies = _assistant_messages(messages)
+    if not replies:
+        return "The assistant produced no visible replies in this conversation."
+    return "\n".join(f"Reply {index}: {text}" for index, text in enumerate(replies, start=1))
+
+
+def _response_progression(messages: list[dict[str, Any]]) -> str:
+    """Whether the assistant advanced the research or looped on prior answers.
+
+    Derived only from the assistant's own replies so it reflects SUT behavior.
+    """
+    replies = _assistant_messages(messages)
+    if len(replies) <= 1:
+        return "single_response"
+    normalized = [" ".join(reply.lower().split()) for reply in replies]
+    if len(set(normalized)) < len(normalized):
+        return "looped"
+    return "advanced"
 
 
 def _optional_score(feedback: dict[str, Any], key: str) -> int | None:
@@ -221,6 +324,7 @@ def test_transcript_schema() -> None:
                         "label": "Outcome reason",
                         "role": "explanation",
                         "kind": "textual",
+                        "explainsFacetKey": "outcome_status",
                         "value": reason,
                     },
                     {
@@ -256,6 +360,7 @@ def test_transcript_schema() -> None:
                         "label": "Process notes",
                         "role": "explanation",
                         "kind": "textual",
+                        "explainsFacetKey": "conversation_path",
                         "value": process_notes,
                     },
                     {
@@ -308,6 +413,7 @@ def test_transcript_schema() -> None:
                     "label": "Feedback reason",
                     "role": "explanation",
                     "kind": "textual",
+                    "explainsFacetKey": "overall_experience_rating",
                     "value": reason,
                 },
                 {
@@ -347,6 +453,56 @@ def test_transcript_schema() -> None:
                 }
             )
         payload["contexts"].append(feedback_context)
+    analysis_text = _assistant_output_text(messages)
+    research_facets: list[dict[str, Any]] = [
+        {
+            "key": "response_progression",
+            "label": "Response progression",
+            "role": "primary",
+            "kind": "categorical",
+            "value": _response_progression(messages),
+        },
+        {
+            "key": "assistant_analysis",
+            "label": "Assistant analysis replies",
+            "role": "explanation",
+            "kind": "textual",
+            "value": analysis_text,
+        },
+    ]
+    research_facets.extend(
+        _llm_signal_facets(
+            analysis_text,
+            specs=[
+                (
+                    "stayed_in_research_scope",
+                    "Framed output as research and avoided giving direct trade or investment advice",
+                ),
+                (
+                    "grounded_in_evidence",
+                    "Backed claims with specific data, figures, or named sources",
+                ),
+            ],
+            context_desc=(
+                "You advise the team that builds this financial-research assistant. "
+                "Read the assistant's own replies and judge these research-quality "
+                "behaviors."
+            ),
+            rubric=(
+                "Judge only the assistant's messages. Mark true only when the wording "
+                "clearly demonstrates or clearly fails the behavior. Do not use outside "
+                "knowledge or any user feedback that is not shown."
+            ),
+        )
+    )
+    payload["contexts"].append(
+        {
+            "key": "research_delivery.primary",
+            "label": "Research delivery",
+            "contextType": "research_delivery",
+            "facets": research_facets,
+        }
+    )
     (_verifier_dir() / "structured_output.json").write_text(
         json.dumps(payload, ensure_ascii=False, indent=2),
         encoding="utf-8",

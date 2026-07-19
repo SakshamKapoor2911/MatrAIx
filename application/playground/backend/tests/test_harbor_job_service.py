@@ -365,7 +365,7 @@ def test_get_job_surfaces_reporting_queue_status(tmp_path, monkeypatch):
                         "key": "question.q1",
                         "label": "Question 1",
                         "contextType": "question_response",
-                        "summaryDirectives": [
+                        "summaryAnalyses": [
                             {
                                 "id": "question.reason_summary",
                                 "title": "Reason summary",

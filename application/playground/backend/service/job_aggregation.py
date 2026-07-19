@@ -19,7 +19,7 @@ JOB_AGGREGATION_FILENAME = "aggregation.json"
 REPORTING_STATUS_FILENAME = "reporting_status.json"
 SCHEMA_VERSION = "1.0"
 FIELD_KINDS = frozenset({"numerical", "categorical", "textual"})
-SUMMARY_GROUP_BY_MODES = frozenset({"none", "categorical", "numeric_band"})
+SUMMARY_GROUP_BY_MODES = frozenset({"none", "categorical", "numeric_band", "persona_attribute"})
 JUDGE_GROUP_BY_MODES = SUMMARY_GROUP_BY_MODES
 REPORTING_LLM_ENABLE_ENV = "PLAYGROUND_REPORTING_ENABLE_LLM"
 REPORTING_LLM_MODEL_ENV = "PLAYGROUND_REPORTING_LLM_MODEL"
@@ -119,6 +119,10 @@ def build_job_aggregation(
     context_meta: dict[str, dict[str, Any]] = {}
     context_facet_keys: dict[str, list[str]] = {}
     reporting_cache: dict[str, dict[str, Any]] = {}
+    stratify_cache: dict[str, list[str]] = {}
+    stratify_fields: list[str] = []
+    persona_profile_cache: dict[str, dict[str, Any]] = {}
+    persona_dimensions_by_id: dict[str, dict[str, Any]] = {}
     trial_count = len(trial_dirs)
     completed_trials = 0
     artifact_ready_trials = 0
@@ -152,11 +156,24 @@ def build_job_aggregation(
 
         artifact_ready_trials += 1
         persona_id = _trial_persona_id(trial_dir)
+        if persona_id and persona_id not in persona_dimensions_by_id:
+            persona_dimensions_by_id[persona_id] = _trial_persona_dimensions(
+                trial_dir,
+                repo_root=repo_root,
+                cache=persona_profile_cache,
+            )
         reporting_config = _load_task_reporting_config(
             trial_dir=trial_dir,
             repo_root=repo_root,
             cache=reporting_cache,
         )
+        for dimension in _load_task_stratify_fields(
+            trial_dir=trial_dir,
+            repo_root=repo_root,
+            cache=stratify_cache,
+        ):
+            if dimension not in stratify_fields:
+                stratify_fields.append(dimension)
         for context in _iter_contexts(artifact):
             context_key = str(context.get("key") or "").strip()
             if not context_key:
@@ -169,6 +186,10 @@ def build_job_aggregation(
                 context=context,
                 reporting_config=reporting_config,
             )
+            resolved_distribution_directives = _resolve_distribution_directives(
+                context=context,
+                reporting_config=reporting_config,
+            )
             if context_key not in context_meta:
                 context_meta[context_key] = {
                     "key": context_key,
@@ -178,14 +199,17 @@ def build_job_aggregation(
                     "scaleMin": context.get("scaleMin"),
                     "scaleMax": context.get("scaleMax"),
                     "scaleLabels": context.get("scaleLabels"),
-                    "summaryDirectives": resolved_summary_directives,
-                    "judgeDirectives": resolved_judge_directives,
+                    "summaryAnalyses": resolved_summary_directives,
+                    "signalScans": resolved_judge_directives,
+                    "distributions": resolved_distribution_directives,
                 }
             else:
-                if resolved_summary_directives and not context_meta[context_key].get("summaryDirectives"):
-                    context_meta[context_key]["summaryDirectives"] = resolved_summary_directives
-                if resolved_judge_directives and not context_meta[context_key].get("judgeDirectives"):
-                    context_meta[context_key]["judgeDirectives"] = resolved_judge_directives
+                if resolved_summary_directives and not context_meta[context_key].get("summaryAnalyses"):
+                    context_meta[context_key]["summaryAnalyses"] = resolved_summary_directives
+                if resolved_judge_directives and not context_meta[context_key].get("signalScans"):
+                    context_meta[context_key]["signalScans"] = resolved_judge_directives
+                if resolved_distribution_directives and not context_meta[context_key].get("distributions"):
+                    context_meta[context_key]["distributions"] = resolved_distribution_directives
                 if not context_meta[context_key].get("questionType") and context.get("questionType"):
                     context_meta[context_key]["questionType"] = context.get("questionType")
                 if context_meta[context_key].get("scaleMin") is None and context.get("scaleMin") is not None:
@@ -209,6 +233,7 @@ def build_job_aggregation(
                         "label": facet.get("label") or facet_key,
                         "kind": kind,
                         "role": facet.get("role"),
+                        "explainsFacetKey": facet.get("explainsFacetKey"),
                         "group": context_key,
                         "description": facet.get("description"),
                         "unit": facet.get("unit"),
@@ -228,9 +253,16 @@ def build_job_aggregation(
                         existing["scaleMax"] = facet.get("scaleMax")
                     if not existing.get("role") and facet.get("role"):
                         existing["role"] = facet.get("role")
+                    if not existing.get("explainsFacetKey") and facet.get("explainsFacetKey"):
+                        existing["explainsFacetKey"] = facet.get("explainsFacetKey")
                     # Prefer primary over score/evidence when schema marks a hero rating.
                     if facet.get("role") == "primary":
                         existing["role"] = "primary"
+                # A declared binding is authoritative for role: a textual facet that
+                # explains another field is an explanation, regardless of its name.
+                meta_entry = field_meta[qualified_key]
+                if kind == "textual" and meta_entry.get("explainsFacetKey"):
+                    meta_entry["role"] = "explanation"
                 context_facet_keys.setdefault(context_key, [])
                 if qualified_key not in context_facet_keys[context_key]:
                     context_facet_keys[context_key].append(qualified_key)
@@ -273,6 +305,8 @@ def build_job_aggregation(
             facet_keys=context_facet_keys.get(key, []),
             fields_by_key=fields_by_key,
             field_values=field_values,
+            persona_dimensions=persona_dimensions_by_id,
+            stratify_fields=stratify_fields,
         )
         for key in sorted(context_meta)
     ]
@@ -362,6 +396,54 @@ def _trial_persona_id(trial_dir: Path) -> str | None:
     return stem or None
 
 
+def _trial_persona_path(trial_dir: Path) -> str | None:
+    config_path = trial_dir / "config.json"
+    if not config_path.is_file():
+        return None
+    try:
+        payload = json.loads(config_path.read_text(encoding="utf-8"))
+    except Exception:  # noqa: BLE001
+        return None
+    agent = payload.get("agent")
+    kwargs = agent.get("kwargs") if isinstance(agent, dict) else None
+    if not isinstance(kwargs, dict):
+        return None
+    persona_path = str(kwargs.get("persona_path") or "").strip()
+    return persona_path or None
+
+
+def _trial_persona_dimensions(
+    trial_dir: Path,
+    *,
+    repo_root: Path | None,
+    cache: dict[str, dict[str, Any]],
+) -> dict[str, Any]:
+    """Load the persona profile `dimensions` map (age_bracket, life_stage, …).
+
+    Used for the customer-insight reporting lens (`groupByMode: persona_attribute`)
+    so analyses can be sliced by who the persona is, not only by task outcome.
+    """
+    persona_path = _trial_persona_path(trial_dir)
+    if not persona_path or repo_root is None:
+        return {}
+    cached = cache.get(persona_path)
+    if cached is not None:
+        return cached
+    resolved = (repo_root / persona_path).resolve()
+    dimensions: dict[str, Any] = {}
+    if resolved.is_file():
+        try:
+            import yaml
+
+            raw = yaml.safe_load(resolved.read_text(encoding="utf-8"))
+            if isinstance(raw, dict) and isinstance(raw.get("dimensions"), dict):
+                dimensions = {str(k): v for k, v in raw["dimensions"].items() if v is not None}
+        except Exception:  # noqa: BLE001
+            dimensions = {}
+    cache[persona_path] = dimensions
+    return dimensions
+
+
 def _iter_fields(artifact: dict[str, Any]) -> list[dict[str, Any]]:
     fields = artifact.get("fields")
     if not isinstance(fields, list):
@@ -415,17 +497,62 @@ def _iter_facets(context: dict[str, Any]) -> list[dict[str, Any]]:
 
 
 def _iter_summary_directives(context: dict[str, Any]) -> list[dict[str, Any]]:
-    directives = context.get("summaryDirectives")
+    directives = context.get("summaryAnalyses")
     if not isinstance(directives, list):
         return []
     return [item for item in directives if isinstance(item, dict)]
 
 
 def _iter_judge_directives(context: dict[str, Any]) -> list[dict[str, Any]]:
-    directives = context.get("judgeDirectives")
+    directives = context.get("signalScans")
     if not isinstance(directives, list):
         return []
     return [item for item in directives if isinstance(item, dict)]
+
+
+def _iter_distribution_directives(source: dict[str, Any]) -> list[dict[str, Any]]:
+    directives = source.get("distributions")
+    if not isinstance(directives, list):
+        return []
+    return [item for item in directives if isinstance(item, dict)]
+
+
+def _resolve_distribution_directives(
+    *,
+    context: dict[str, Any],
+    reporting_config: dict[str, Any],
+) -> list[dict[str, Any]]:
+    """Author-declared persona cross-tab directives for a context.
+
+    Which facets to cross-tab is defined in ``reporting.json`` (``contextRules[]``
+    → ``distributions[]``, or inline on the verifier context) — never exhaustively
+    auto-selected. Each directive names a ``facetKey``; ``groupByPersonaDimensions``
+    is optional and defaults to the task's ``stratifyFields``. These render in the
+    Persona insights tab (routing is by directive type, not by which rule list).
+    """
+    context_key = str(context.get("key") or "").strip()
+    context_type = str(context.get("contextType") or "").strip()
+    resolved: list[dict[str, Any]] = list(_iter_distribution_directives(context))
+    for rule in reporting_config.get("contextRules") or []:
+        if isinstance(rule, dict) and _rule_matches_context(
+            rule, context_key=context_key, context_type=context_type
+        ):
+            resolved.extend(_iter_distribution_directives(rule))
+    seen: set[str] = set()
+    deduped: list[dict[str, Any]] = []
+    for directive in resolved:
+        facet_key = str(directive.get("facetKey") or "").strip()
+        if not facet_key:
+            continue
+        marker = "{}|{}".format(
+            facet_key,
+            str(directive.get("groupByPersonaDimension") or ""),
+        )
+        if marker in seen:
+            continue
+        seen.add(marker)
+        deduped.append(directive)
+    return deduped
 
 
 def _load_task_reporting_config(
@@ -456,6 +583,44 @@ def _load_task_reporting_config(
             return payload
     cache[task_path] = {}
     return {}
+
+
+def _load_task_stratify_fields(
+    *,
+    trial_dir: Path,
+    repo_root: Path | None,
+    cache: dict[str, list[str]],
+) -> list[str]:
+    """Default persona axes for the cross-tab lens (persona_strategy.json).
+
+    Prefers ``stratifyFields`` (the dimensions the cohort was balanced across).
+    When a strategy declares no stratify fields, falls back to the keys of
+    ``dimensionFilters`` (the dimensions the run was constrained to) so a
+    distribution directive without explicit axes still resolves to meaningful
+    segments.
+    """
+    task_path = _task_path_from_trial_config(trial_dir)
+    if not task_path or repo_root is None:
+        return []
+    cached = cache.get(task_path)
+    if cached is not None:
+        return cached
+    strategy_path = (repo_root / task_path).resolve() / "persona_strategy.json"
+    fields: list[str] = []
+    if strategy_path.is_file():
+        try:
+            payload = json.loads(strategy_path.read_text(encoding="utf-8"))
+        except Exception:  # noqa: BLE001
+            payload = {}
+        raw = payload.get("stratifyFields") if isinstance(payload, dict) else None
+        if isinstance(raw, list):
+            fields = [str(item).strip() for item in raw if str(item).strip()]
+        if not fields:
+            filters = payload.get("dimensionFilters") if isinstance(payload, dict) else None
+            if isinstance(filters, dict):
+                fields = [str(key).strip() for key in filters if str(key).strip()]
+    cache[task_path] = fields
+    return fields
 
 
 def _task_path_from_trial_config(trial_dir: Path) -> str | None:
@@ -640,13 +805,18 @@ def _feedback_facet_from_schema_field(field: Any, raw_value: Any) -> dict[str, A
     value = _coerce_feedback_value(kind, raw_value)
     if not _has_value(value):
         return None
+    explains = str(getattr(field, "explains", "") or "").strip()
     facet: dict[str, Any] = {
         "key": normalized_key,
         "label": _feedback_label(normalized_key, prompt=str(field.prompt or "")),
-        "role": _feedback_role(normalized_key, kind),
+        # A declared binding is the source of truth for role: any textual field
+        # that explains another field is an explanation, regardless of its name.
+        "role": "explanation" if (explains and kind == "textual") else _feedback_role(normalized_key, kind),
         "kind": kind,
         "value": value,
     }
+    if explains:
+        facet["explainsFacetKey"] = _normalized_feedback_key(explains)
     choices = tuple(str(choice).strip() for choice in (getattr(field, "choices", ()) or ()) if str(choice).strip())
     if kind == "categorical":
         if choices:
@@ -853,34 +1023,101 @@ def _feedback_label(normalized_key: str, *, prompt: str = "") -> str:
     return normalized_key.replace("_", " ").strip().title()
 
 
+def _rule_matches_context(rule: dict[str, Any], *, context_key: str, context_type: str) -> bool:
+    match = rule.get("match")
+    if not isinstance(match, dict):
+        return False
+    match_key = str(match.get("key") or "").strip()
+    match_type = str(match.get("contextType") or "").strip()
+    if match_key and match_key != context_key:
+        return False
+    if match_type and match_type != context_type:
+        return False
+    return True
+
+
+def _tag_directive_lens(directive: dict[str, Any], *, lens: str) -> dict[str, Any]:
+    """Copy a directive, stamp its analysis lens, and infer persona grouping.
+
+    A directive that names a persona dimension (`groupByPersonaDimension`) with no
+    explicit `groupByMode` defaults to persona-attribute grouping, so authors only
+    need to name the dimension. The lens stays Custom (task) regardless.
+    """
+    tagged = {**directive, "lens": str(directive.get("lens") or lens).strip().lower() or lens}
+    if (
+        str(tagged.get("groupByPersonaDimension") or "").strip()
+        and not str(tagged.get("groupByMode") or "").strip()
+    ):
+        tagged["groupByMode"] = "persona_attribute"
+    return tagged
+
+
+def _collect_rule_directives(
+    rules: Any,
+    *,
+    context_key: str,
+    context_type: str,
+    iterator: Any,
+    lens: str,
+) -> list[dict[str, Any]]:
+    out: list[dict[str, Any]] = []
+    if not isinstance(rules, list):
+        return out
+    for rule in rules:
+        if not isinstance(rule, dict) or not _rule_matches_context(
+            rule, context_key=context_key, context_type=context_type
+        ):
+            continue
+        for directive in iterator(rule):
+            if isinstance(directive, dict):
+                out.append(_tag_directive_lens(directive, lens=lens))
+    return out
+
+
+def _resolve_directives(
+    *,
+    context: dict[str, Any],
+    reporting_config: dict[str, Any],
+    iterator: Any,
+) -> list[dict[str, Any]]:
+    # Single rule list: contextRules. Summaries and signal scans always render in
+    # Custom analysis; a persona-dimension grouping is just an optional axis.
+    context_key = str(context.get("key") or "").strip()
+    context_type = str(context.get("contextType") or "").strip()
+    resolved: list[dict[str, Any]] = [
+        _tag_directive_lens(directive, lens="task")
+        for directive in iterator(context)
+        if isinstance(directive, dict)
+    ]
+    resolved += _collect_rule_directives(
+        reporting_config.get("contextRules"),
+        context_key=context_key,
+        context_type=context_type,
+        iterator=iterator,
+        lens="task",
+    )
+    seen: set[str] = set()
+    deduped: list[dict[str, Any]] = []
+    for directive in resolved:
+        directive_id = str(directive.get("id") or "")
+        marker = directive_id or json.dumps(directive, sort_keys=True, default=str)
+        if marker in seen:
+            continue
+        seen.add(marker)
+        deduped.append(directive)
+    return deduped
+
+
 def _resolve_summary_directives(
     *,
     context: dict[str, Any],
     reporting_config: dict[str, Any],
 ) -> list[dict[str, Any]]:
-    embedded = _iter_summary_directives(context)
-    rules = reporting_config.get("contextRules")
-    if not isinstance(rules, list):
-        return embedded
-    resolved = list(embedded)
-    context_key = str(context.get("key") or "").strip()
-    context_type = str(context.get("contextType") or "").strip()
-    for rule in rules:
-        if not isinstance(rule, dict):
-            continue
-        match = rule.get("match")
-        if not isinstance(match, dict):
-            continue
-        match_key = str(match.get("key") or "").strip()
-        match_type = str(match.get("contextType") or "").strip()
-        if match_key and match_key != context_key:
-            continue
-        if match_type and match_type != context_type:
-            continue
-        for directive in _iter_summary_directives(rule):
-            if directive not in resolved:
-                resolved.append(directive)
-    return resolved
+    return _resolve_directives(
+        context=context,
+        reporting_config=reporting_config,
+        iterator=_iter_summary_directives,
+    )
 
 
 def _resolve_judge_directives(
@@ -888,29 +1125,11 @@ def _resolve_judge_directives(
     context: dict[str, Any],
     reporting_config: dict[str, Any],
 ) -> list[dict[str, Any]]:
-    embedded = _iter_judge_directives(context)
-    rules = reporting_config.get("contextRules")
-    if not isinstance(rules, list):
-        return embedded
-    resolved = list(embedded)
-    context_key = str(context.get("key") or "").strip()
-    context_type = str(context.get("contextType") or "").strip()
-    for rule in rules:
-        if not isinstance(rule, dict):
-            continue
-        match = rule.get("match")
-        if not isinstance(match, dict):
-            continue
-        match_key = str(match.get("key") or "").strip()
-        match_type = str(match.get("contextType") or "").strip()
-        if match_key and match_key != context_key:
-            continue
-        if match_type and match_type != context_type:
-            continue
-        for directive in _iter_judge_directives(rule):
-            if directive not in resolved:
-                resolved.append(directive)
-    return resolved
+    return _resolve_directives(
+        context=context,
+        reporting_config=reporting_config,
+        iterator=_iter_judge_directives,
+    )
 
 
 def _is_discrete_subject_label_facet(meta: dict[str, Any]) -> bool:
@@ -985,30 +1204,395 @@ def _entries_look_categorical(entries: list[dict[str, Any]]) -> bool:
     return True
 
 
+AUTO_SUMMARY_SKIP_TEXT_LEAVES = frozenset({"task_goal_label"})
+
+
+def _auto_summary_directives(
+    *,
+    meta: dict[str, Any],
+    facets: list[dict[str, Any]],
+    field_values: dict[str, list[dict[str, Any]]],
+) -> list[dict[str, Any]]:
+    """Synthesize an LLM bucket-summary directive for each free-text reason facet.
+
+    Persona explanations (outcome_reason, feedback_reason, process_notes, …) are
+    best presented as a per-group LLM summary rather than raw quotes. These run
+    through the same summary + LLM + cache pipeline as reporting.json directives,
+    gated by the same reporting-LLM flag.
+    """
+    context_key = str(meta.get("key") or "")
+    directives: list[dict[str, Any]] = []
+    for facet in facets:
+        if facet.get("kind") != "textual":
+            continue
+        if str(facet.get("role") or "") not in {"explanation", "evidence", "supporting_text"}:
+            continue
+        leaf = _facet_key_leaf(facet)
+        if leaf in AUTO_SUMMARY_SKIP_TEXT_LEAVES:
+            continue
+        # Group only by the facet's explicitly declared target — never guessed.
+        axis = _resolve_explained_axis(facet, facets, field_values)
+        if axis is None:
+            continue
+        values = [
+            str(entry.get("value") or "").strip()
+            for entry in field_values.get(str(facet.get("key")), [])
+            if _has_value(entry.get("value"))
+        ]
+        values = [value for value in values if value]
+        unique = set(values)
+        # Too few / low-diversity explanations aren't worth an LLM summary —
+        # showing the handful of raw quotes is clearer (and matches the
+        # cross-facet low-diversity skip).
+        if len(values) < 3 or len(unique) < 3:
+            continue
+        directives.append(
+            {
+                "id": "{}.auto_summary.{}".format(context_key, leaf),
+                "title": str(facet.get("label") or facet.get("facetKey") or leaf),
+                "targetFacetKey": str(facet.get("facetKey") or leaf),
+                "groupByFacetKey": str(axis.get("facetKey")) or None,
+                "groupByMode": str(axis.get("mode")),
+                "bands": axis.get("bands"),
+                "summaryKind": "llm_bucket_summary",
+                "instruction": (
+                    "For each group, summarize the shared themes and notable differences across "
+                    "these persona explanations in 1-2 sentences. Be faithful and concise; do not "
+                    "invent facts."
+                ),
+                "auto": True,
+            }
+        )
+    return directives
+
+
+def _distribution_directive_dimensions(
+    directive: dict[str, Any], stratify_fields: list[str]
+) -> list[str]:
+    """Persona dimensions for a distribution directive.
+
+    Honors an explicit ``groupByPersonaDimensions`` list or single
+    ``groupByPersonaDimension``; otherwise defaults to the cohort's
+    ``stratifyFields`` so authors only need to name the facet.
+    """
+    raw = directive.get("groupByPersonaDimensions")
+    if isinstance(raw, list):
+        dims = [str(item).strip() for item in raw if str(item).strip()]
+        if dims:
+            return dims
+    single = str(directive.get("groupByPersonaDimension") or "").strip()
+    if single:
+        return [single]
+    return list(stratify_fields)
+
+
+# Signal facets eligible for the interactive persona explorer: the hero result,
+# numeric scores, and categorical evidence (never free-text or identities).
+PERSONA_DISTRIBUTION_ROLES = frozenset({"primary", "score", "evidence"})
+# Categorical facets with more distinct values than this are treated as ids/labels.
+PERSONA_DISTRIBUTION_MAX_CARDINALITY = 8
+# Bookkeeping facets that carry no per-segment signal.
+PERSONA_DISTRIBUTION_SKIP_LEAVES = frozenset(
+    {"task_author", "verifier_mode", "task_goal_label"}
+)
+
+
+def _persona_dimension_keys(persona_dimensions: dict[str, dict[str, Any]]) -> list[str]:
+    """Ordered union of every persona dimension key present in the cohort."""
+    keys: list[str] = []
+    seen: set[str] = set()
+    for dims in persona_dimensions.values():
+        if not isinstance(dims, dict):
+            continue
+        for key in dims:
+            normalized = str(key).strip()
+            if normalized and normalized not in seen:
+                seen.add(normalized)
+                keys.append(normalized)
+    return keys
+
+
+def _is_persona_explorer_facet(facet: dict[str, Any]) -> bool:
+    """Whether a facet is worth offering in the interactive persona explorer.
+
+    Keeps numeric/categorical signals (primary/score/evidence); drops free-text,
+    identities, near-unique categoricals, and bookkeeping leaves so the picker
+    stays meaningful instead of exhaustive.
+    """
+    kind = str(facet.get("kind") or "").strip().lower()
+    role = str(facet.get("role") or "").strip().lower()
+    if kind not in {"numerical", "categorical"} or role not in PERSONA_DISTRIBUTION_ROLES:
+        return False
+    if _is_discrete_subject_label_facet(facet):
+        return False
+    leaf = _facet_key_leaf(facet)
+    if leaf in PERSONA_DISTRIBUTION_SKIP_LEAVES:
+        return False
+    if leaf.endswith(("_subject_id", "_subject_label", "_id", "_label")):
+        return False
+    return True
+
+
+def _build_persona_distribution(
+    *,
+    context_key: str,
+    facet: dict[str, Any],
+    field_values: dict[str, list[dict[str, Any]]],
+    dimension: str,
+    persona_dimensions: dict[str, dict[str, Any]],
+    directive_id: str | None = None,
+    label: str | None = None,
+) -> dict[str, Any] | None:
+    """Cross-tab one signal facet against one persona dimension.
+
+    Returns a distribution object (counts + per-segment stats) or ``None`` when
+    the pairing has fewer than two non-empty segments. Shared by the declared
+    defaults and the interactive explorer options so both render identically.
+    """
+    kind = str(facet.get("kind") or "").strip().lower()
+    if kind not in {"numerical", "categorical"}:
+        return None
+    entries = [
+        entry
+        for entry in field_values.get(str(facet.get("key")), [])
+        if _has_value(entry.get("value")) and entry.get("trialName") is not None
+    ]
+    if len(entries) < 2:
+        return None
+    bucket_map = _persona_attribute_bucket_map(entries, dimension, persona_dimensions)
+    nonempty = {
+        bucket: bucket_entries
+        for bucket, bucket_entries in bucket_map.items()
+        if bucket_entries
+    }
+    if len(nonempty) < 2:
+        return None
+    leaf = _facet_key_leaf(facet)
+    buckets: list[dict[str, Any]] = []
+    for bucket, bucket_entries in sorted(
+        nonempty.items(), key=lambda item: (-len(item[1]), item[0])
+    ):
+        record: dict[str, Any] = {"bucket": bucket, "count": len(bucket_entries)}
+        if kind == "numerical":
+            record["numerical"] = _aggregate_numerical(bucket_entries)
+        else:
+            record["categorical"] = _aggregate_categorical(bucket_entries)
+        buckets.append(record)
+    distribution: dict[str, Any] = {
+        "id": directive_id
+        or "{}.persona_dist.{}.{}".format(context_key, leaf, dimension),
+        "facetKey": str(facet.get("facetKey") or leaf),
+        "facetLabel": str(label or facet.get("label") or leaf),
+        "kind": kind,
+        "groupByPersonaDimension": dimension,
+        "groupByLabel": _humanize_persona_dimension(dimension),
+        "lens": "persona",
+        "total": sum(len(items) for items in nonempty.values()),
+        "buckets": buckets,
+    }
+    if kind == "categorical":
+        overall_categories = [
+            row["value"] for row in _aggregate_categorical(entries).get("counts", [])
+        ]
+        if overall_categories:
+            distribution["categories"] = overall_categories
+    return distribution
+
+
+def _config_persona_distributions(
+    *,
+    meta: dict[str, Any],
+    facets: list[dict[str, Any]],
+    field_values: dict[str, list[dict[str, Any]]],
+    persona_dimensions: dict[str, dict[str, Any]],
+    stratify_fields: list[str],
+) -> list[dict[str, Any]]:
+    """Default persona cross-tabs, driven by author-declared directives.
+
+    Which signal facets get cross-tabbed *by default* is defined in
+    ``reporting.json`` (``contextRules[].distributions[]``) — the platform never
+    exhaustively enumerates every facet here. Each directive names a
+    numeric/categorical ``facetKey``; dimensions default to ``stratifyFields``.
+    Emits the per-segment distribution (counts / averages), no LLM.
+    """
+    directives = meta.get("distributions")
+    if not isinstance(directives, list) or not directives or not persona_dimensions:
+        return []
+    context_key = str(meta.get("key") or "")
+    facet_by_leaf = {_facet_key_leaf(facet): facet for facet in facets}
+    distributions: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for directive in directives:
+        facet_key = str(directive.get("facetKey") or "").strip()
+        if not facet_key:
+            continue
+        facet = facet_by_leaf.get(facet_key.split(".")[-1].replace("-", "_"))
+        if facet is None:
+            continue
+        leaf = _facet_key_leaf(facet)
+        dimensions = _distribution_directive_dimensions(directive, stratify_fields)
+        directive_id = str(directive.get("id") or "").strip()
+        title = str(directive.get("title") or "").strip()
+        for dimension in dimensions:
+            marker = "{}|{}".format(leaf, dimension)
+            if marker in seen:
+                continue
+            distribution = _build_persona_distribution(
+                context_key=context_key,
+                facet=facet,
+                field_values=field_values,
+                dimension=dimension,
+                persona_dimensions=persona_dimensions,
+                directive_id=directive_id if directive_id and len(dimensions) == 1 else None,
+                label=title or None,
+            )
+            if distribution is None:
+                continue
+            seen.add(marker)
+            distributions.append(distribution)
+    return distributions
+
+
+def _persona_distribution_options(
+    *,
+    meta: dict[str, Any],
+    facets: list[dict[str, Any]],
+    field_values: dict[str, list[dict[str, Any]]],
+    persona_dimensions: dict[str, dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """Every eligible ``(signal facet × persona dimension)`` cross-tab.
+
+    Backs the interactive explorer (facet on the left, persona dimension on the
+    right). Bounded by facets × dimensions and independent of cohort size, so it
+    stays cheap even for large runs. This is *not* rendered by default — it only
+    populates the picker; the default cards come from
+    :func:`_config_persona_distributions`.
+    """
+    if not persona_dimensions:
+        return []
+    context_key = str(meta.get("key") or "")
+    dimension_keys = _persona_dimension_keys(persona_dimensions)
+    if not dimension_keys:
+        return []
+    options: list[dict[str, Any]] = []
+    for facet in facets:
+        if not _is_persona_explorer_facet(facet):
+            continue
+        kind = str(facet.get("kind") or "").strip().lower()
+        if kind == "categorical":
+            entries = [
+                entry
+                for entry in field_values.get(str(facet.get("key")), [])
+                if _has_value(entry.get("value")) and entry.get("trialName") is not None
+            ]
+            distinct = {_categorical_key(entry.get("value")) for entry in entries}
+            if len(distinct) > PERSONA_DISTRIBUTION_MAX_CARDINALITY:
+                continue
+        for dimension in dimension_keys:
+            distribution = _build_persona_distribution(
+                context_key=context_key,
+                facet=facet,
+                field_values=field_values,
+                dimension=dimension,
+                persona_dimensions=persona_dimensions,
+            )
+            if distribution is not None:
+                options.append(distribution)
+    return options
+
+
 def _aggregate_context(
     *,
     meta: dict[str, Any],
     facet_keys: list[str],
     fields_by_key: dict[str, dict[str, Any]],
     field_values: dict[str, list[dict[str, Any]]],
+    persona_dimensions: dict[str, dict[str, Any]] | None = None,
+    stratify_fields: list[str] | None = None,
 ) -> dict[str, Any]:
+    persona_dimensions = persona_dimensions or {}
     facets = [fields_by_key[key] for key in facet_keys if key in fields_by_key]
     payload = {
         **meta,
         "facets": facets,
     }
-    summaries = _aggregate_context_summaries(meta=meta, facets=facets, field_values=field_values)
+    existing_directives = (
+        meta.get("summaryAnalyses") if isinstance(meta.get("summaryAnalyses"), list) else []
+    )
+    # (targetFacetKey, groupByFacetKey) pairs a task already declared explicitly.
+    existing_pairs = {
+        (
+            str(directive.get("targetFacetKey")),
+            str(directive.get("groupByFacetKey") or ""),
+        )
+        for directive in existing_directives
+        if isinstance(directive, dict)
+    }
+    # Schema-bound directives are additive: they add the reason's declared axis
+    # (e.g. reason by rating) without suppressing an explicit reporting.json view
+    # of the same reason on a different axis. Skip only exact-pair duplicates.
+    auto_directives = [
+        directive
+        for directive in _auto_summary_directives(
+            meta=meta, facets=facets, field_values=field_values
+        )
+        if (
+            str(directive.get("targetFacetKey")),
+            str(directive.get("groupByFacetKey") or ""),
+        )
+        not in existing_pairs
+    ]
+    summary_meta = (
+        {**meta, "summaryAnalyses": [*existing_directives, *auto_directives]}
+        if auto_directives
+        else meta
+    )
+    summaries = _aggregate_context_summaries(
+        meta=summary_meta,
+        facets=facets,
+        field_values=field_values,
+        persona_dimensions=persona_dimensions,
+    )
     if summaries:
         payload["summaries"] = summaries
-    judges = _aggregate_context_judges(meta=meta, facets=facets, field_values=field_values)
+    judges = _aggregate_context_judges(
+        meta=meta,
+        facets=facets,
+        field_values=field_values,
+        persona_dimensions=persona_dimensions,
+    )
     if judges:
         payload["judges"] = judges
+    # Keep the raw-quote cross-facet views too: the frontend shows the LLM
+    # summary when it completed, and falls back to these example quotes otherwise.
     cross_facet_views = _aggregate_context_cross_facet_views(
         facets=facets,
         field_values=field_values,
     )
     if cross_facet_views:
         payload["crossFacetViews"] = cross_facet_views
+    # Persona-insight lens: cross-tab the author-declared signal facets
+    # (reporting.json → contextRules[].distributions[]) against each persona
+    # dimension. Dimensions default to the cohort's stratifyFields.
+    persona_distributions = _config_persona_distributions(
+        meta=meta,
+        facets=facets,
+        field_values=field_values,
+        persona_dimensions=persona_dimensions,
+        stratify_fields=stratify_fields or [],
+    )
+    if persona_distributions:
+        payload["personaDistributions"] = persona_distributions
+    # Interactive explorer: every eligible facet × dimension pairing (bounded,
+    # non-LLM), shown only behind the picker — not as default cards.
+    persona_distribution_options = _persona_distribution_options(
+        meta=meta,
+        facets=facets,
+        field_values=field_values,
+        persona_dimensions=persona_dimensions,
+    )
+    if persona_distribution_options:
+        payload["personaDistributionOptions"] = persona_distribution_options
     return payload
 
 
@@ -1117,6 +1701,8 @@ def _reuse_cached_judge(current: dict[str, Any], cached: dict[str, Any]) -> None
     current["error"] = cached.get("error")
     current["overall"] = cached.get("overall")
     current["overallAssessment"] = cached.get("overallAssessment")
+    current["signalStats"] = cached.get("signalStats")
+    current["total"] = cached.get("total")
     cached_buckets = {
         str(bucket.get("bucket") or ""): bucket
         for bucket in cached.get("buckets", [])
@@ -1128,6 +1714,7 @@ def _reuse_cached_judge(current: dict[str, Any], cached: dict[str, Any]) -> None
             continue
         bucket["assessment"] = cached_bucket.get("assessment")
         bucket["signals"] = cached_bucket.get("signals")
+        bucket["signalStats"] = cached_bucket.get("signalStats")
 
 
 def _build_reporting_view(payload: dict[str, Any]) -> dict[str, Any]:
@@ -1264,6 +1851,7 @@ def _fingerprint_reporting_unit(unit: dict[str, Any]) -> str:
         "rubric": unit.get("rubric"),
         "signals": unit.get("signals"),
         "buckets": unit.get("buckets"),
+        "scanSamples": unit.get("scanSamples"),
         "overall": unit.get("overall"),
     }
     raw = json.dumps(payload, ensure_ascii=False, sort_keys=True)
@@ -1317,29 +1905,37 @@ def _execute_summary_llm(summary: dict[str, Any], *, client: Any) -> None:
 
 
 def _execute_judge_llm(judge: dict[str, Any], *, client: Any) -> None:
+    signals = judge.get("signals") if isinstance(judge.get("signals"), list) else []
+    samples = judge.get("scanSamples") if isinstance(judge.get("scanSamples"), list) else []
+    if not signals or not samples:
+        judge["status"] = "llm_failed"
+        judge["error"] = "no samples or signals to scan"
+        return
+
     system = (
-        "You are an evaluation judge. Inspect grouped samples, apply the provided rubric "
-        "and signals, and return strict JSON."
+        "You are an evaluation judge. Score EACH sample independently against the provided "
+        "signals: for every sample, list which signal keys its own words clearly describe or "
+        "strongly imply. Do not infer beyond the text. Return strict JSON."
     )
     user = json.dumps(
         {
-            "task": "Judge grouped evaluation samples.",
+            "task": "Independently score each sample against the signals.",
             "title": judge.get("title"),
             "prompt": judge.get("prompt"),
             "rubric": judge.get("rubric"),
-            "signals": judge.get("signals"),
-            "buckets": judge.get("buckets"),
+            "signals": [
+                {"key": s.get("key"), "label": s.get("label")}
+                for s in signals
+                if isinstance(s, dict)
+            ],
+            "samples": [
+                {"id": s.get("id"), "text": s.get("text")}
+                for s in samples
+                if isinstance(s, dict)
+            ],
             "expectedOutput": {
-                "overallAssessment": "string",
-                "bucketAssessments": [
-                    {
-                        "bucket": "string",
-                        "assessment": "string",
-                        "signals": [
-                            {"key": "string", "present": True, "evidence": "string"}
-                        ],
-                    }
-                ],
+                "overallAssessment": "one short sentence summarizing the dominant signals",
+                "samples": [{"id": 0, "present": ["signalKey"]}],
             },
         },
         ensure_ascii=False,
@@ -1351,39 +1947,128 @@ def _execute_judge_llm(judge: dict[str, Any], *, client: Any) -> None:
         judge["status"] = "llm_failed"
         judge["error"] = str(exc)
         return
+
+    valid_keys = {str(s.get("key")) for s in signals if isinstance(s, dict) and s.get("key")}
+    present_by_id: dict[int, set[str]] = {}
+    raw_samples = result.get("samples")
+    for item in raw_samples if isinstance(raw_samples, list) else []:
+        if not isinstance(item, dict):
+            continue
+        try:
+            sid = int(item.get("id"))
+        except (TypeError, ValueError):
+            continue
+        keys = item.get("present")
+        if isinstance(keys, list):
+            present_by_id[sid] = {
+                str(k).strip() for k in keys if str(k).strip() in valid_keys
+            }
+
+    total = len(samples)
+    group_totals: dict[str, int] = {}
+    group_present: dict[str, dict[str, int]] = {}
+    for sample in samples:
+        grp = str(sample.get("group") or "All")
+        group_totals[grp] = group_totals.get(grp, 0) + 1
+
+    signal_stats: list[dict[str, Any]] = []
+    for signal in signals:
+        if not isinstance(signal, dict):
+            continue
+        key = str(signal.get("key") or "").strip()
+        if not key:
+            continue
+        present_count = 0
+        examples: list[str] = []
+        for sample in samples:
+            try:
+                sid = int(sample.get("id"))
+            except (TypeError, ValueError):
+                continue
+            if key not in present_by_id.get(sid, set()):
+                continue
+            present_count += 1
+            grp = str(sample.get("group") or "All")
+            group_bucket = group_present.setdefault(grp, {})
+            group_bucket[key] = group_bucket.get(key, 0) + 1
+            text = str(sample.get("text") or "").strip()
+            if text and len(examples) < 3:
+                examples.append(text)
+        signal_stats.append(
+            {
+                "key": key,
+                "label": signal.get("label") or key,
+                "present": present_count,
+                "total": total,
+                "examples": examples,
+            }
+        )
+
+    judge["signalStats"] = signal_stats
+    judge["total"] = total
+    for bucket in judge.get("buckets", []) if isinstance(judge.get("buckets"), list) else []:
+        grp = str(bucket.get("bucket") or "")
+        present_map = group_present.get(grp, {})
+        group_total = group_totals.get(grp, bucket.get("count") or 0)
+        bucket["signalStats"] = [
+            {
+                "key": str(s.get("key")),
+                "label": s.get("label") or s.get("key"),
+                "present": present_map.get(str(s.get("key")), 0),
+                "total": group_total,
+            }
+            for s in signals
+            if isinstance(s, dict) and s.get("key")
+        ]
+
     overall_assessment = str(result.get("overallAssessment") or "").strip()
     if overall_assessment:
         judge["overallAssessment"] = overall_assessment
-    bucket_results = {
-        str(item.get("bucket") or ""): item
-        for item in result.get("bucketAssessments", [])
-        if isinstance(item, dict)
-    }
-    for bucket in judge.get("buckets", []) if isinstance(judge.get("buckets"), list) else []:
-        raw = bucket_results.get(str(bucket.get("bucket") or ""))
-        if not raw:
-            continue
-        assessment = str(raw.get("assessment") or "").strip()
-        if assessment:
-            bucket["assessment"] = assessment
-        signals = []
-        for signal in raw.get("signals", []):
-            if not isinstance(signal, dict):
-                continue
-            key = str(signal.get("key") or "").strip()
-            if not key:
-                continue
-            signals.append(
-                {
-                    "key": key,
-                    "present": bool(signal.get("present")),
-                    "evidence": str(signal.get("evidence") or "").strip() or None,
-                }
-            )
-        if signals:
-            bucket["signals"] = signals
     judge["status"] = "llm_completed"
     judge.pop("error", None)
+
+
+def _directive_lens(directive: dict[str, Any], *, group_by_mode: str) -> str:
+    """Which analysis tab a reporting unit belongs to.
+
+    - "general": Layer-1 auto reason summaries (common analysis)
+    - "task":    Custom analysis (SUT/task-owner lens; the default)
+
+    Summaries and signal scans always live in Custom analysis, even when grouped
+    by a persona dimension (that is just an optional grouping axis). The dedicated
+    persona lens is served by distributions (facts), not by LLM analyses.
+    """
+    explicit = str(directive.get("lens") or "").strip().lower()
+    if explicit in {"task", "persona", "general"}:
+        return explicit
+    # Auto reason summaries with no explicit lens are Layer-1 common analysis.
+    if directive.get("auto"):
+        return "general"
+    return "task"
+
+
+def _humanize_persona_dimension(dimension: str) -> str:
+    cleaned = str(dimension or "").replace("_", " ").strip()
+    return cleaned[:1].upper() + cleaned[1:] if cleaned else str(dimension)
+
+
+def _persona_attribute_bucket_map(
+    target_entries: list[dict[str, Any]],
+    dimension: str,
+    persona_dimensions: dict[str, dict[str, Any]],
+) -> dict[str, list[dict[str, Any]]]:
+    """Bucket target entries by a persona profile dimension (customer-insight lens)."""
+    bucket_map: dict[str, list[dict[str, Any]]] = {}
+    for entry in target_entries:
+        persona_id = entry.get("personaId")
+        dims = persona_dimensions.get(str(persona_id)) if persona_id is not None else None
+        if not isinstance(dims, dict):
+            continue
+        value = dims.get(dimension)
+        if value is None or (isinstance(value, str) and not value.strip()):
+            continue
+        bucket_map.setdefault(str(value), []).append(entry)
+    return bucket_map
 
 
 def _aggregate_context_summaries(
@@ -1391,9 +2076,10 @@ def _aggregate_context_summaries(
     meta: dict[str, Any],
     facets: list[dict[str, Any]],
     field_values: dict[str, list[dict[str, Any]]],
+    persona_dimensions: dict[str, dict[str, Any]] | None = None,
 ) -> list[dict[str, Any]]:
     facet_lookup = {str(facet.get("facetKey") or facet.get("key")): facet for facet in facets}
-    directives = meta.get("summaryDirectives")
+    directives = meta.get("summaryAnalyses")
     if not isinstance(directives, list):
         return []
     summaries: list[dict[str, Any]] = []
@@ -1404,6 +2090,7 @@ def _aggregate_context_summaries(
             context_key=str(meta.get("key") or ""),
             facet_lookup=facet_lookup,
             field_values=field_values,
+            persona_dimensions=persona_dimensions or {},
         )
         if summary:
             summaries.append(summary)
@@ -1417,7 +2104,9 @@ def _aggregate_summary_directive(
     context_key: str,
     facet_lookup: dict[str, dict[str, Any]],
     field_values: dict[str, list[dict[str, Any]]],
+    persona_dimensions: dict[str, dict[str, Any]] | None = None,
 ) -> dict[str, Any] | None:
+    persona_dimensions = persona_dimensions or {}
     target_facet_key = str(directive.get("targetFacetKey") or "").strip()
     if not target_facet_key:
         return None
@@ -1429,6 +2118,7 @@ def _aggregate_summary_directive(
         group_by_mode = "none"
     group_by_facet_key = str(directive.get("groupByFacetKey") or "").strip() or None
     group_by_field = facet_lookup.get(group_by_facet_key) if group_by_facet_key else None
+    persona_dimension = str(directive.get("groupByPersonaDimension") or "").strip() or None
     target_entries = [
         entry
         for entry in field_values.get(str(target_field.get("key")), [])
@@ -1438,7 +2128,15 @@ def _aggregate_summary_directive(
         return None
 
     bucket_map: dict[str, list[dict[str, Any]]] = {}
-    if group_by_mode == "none" or group_by_field is None:
+    if group_by_mode == "persona_attribute":
+        if not persona_dimension:
+            return None
+        bucket_map = _persona_attribute_bucket_map(
+            target_entries, persona_dimension, persona_dimensions
+        )
+        if not bucket_map:
+            return None
+    elif group_by_mode == "none" or group_by_field is None:
         bucket_map["All"] = target_entries
     elif group_by_mode == "categorical":
         group_entries = {
@@ -1454,6 +2152,11 @@ def _aggregate_summary_directive(
             bucket_map.setdefault(bucket, []).append(entry)
     else:
         bands = _normalize_numeric_bands(directive.get("bands"))
+        if not bands:
+            # No explicit bands: auto-bin the numeric axis by its distribution.
+            bands = _auto_numeric_bands(
+                _numeric_axis_values(group_by_field, field_values)
+            )
         if not bands:
             return None
         group_entries = {
@@ -1486,16 +2189,27 @@ def _aggregate_summary_directive(
     if not buckets:
         return None
     target_label = str(target_field.get("label") or target_facet_key)
-    group_by_label = str(group_by_field.get("label") or group_by_facet_key or "All")
+    if group_by_mode == "persona_attribute" and persona_dimension:
+        group_by_label = _humanize_persona_dimension(persona_dimension)
+    else:
+        group_by_label = str(
+            (group_by_field.get("label") if isinstance(group_by_field, dict) else None)
+            or group_by_facet_key
+            or "All"
+        )
     summary_kind = str(directive.get("summaryKind") or "bucketed_text").strip()
     return {
         "id": str(directive.get("id") or "{}.summary_{}".format(context_key, index + 1)),
         "title": str(directive.get("title") or "{} by {}".format(target_label, group_by_label)),
         "targetFacetKey": target_facet_key,
         "groupByFacetKey": group_by_facet_key,
+        "groupByPersonaDimension": persona_dimension,
+        "groupByLabel": group_by_label,
         "groupByMode": group_by_mode,
+        "lens": _directive_lens(directive, group_by_mode=group_by_mode),
         "summaryKind": summary_kind,
         "instruction": directive.get("instruction"),
+        "auto": bool(directive.get("auto")),
         "status": "ready_for_llm" if summary_kind.startswith("llm_") else "heuristic",
         "overall": overall,
         "buckets": buckets,
@@ -1507,9 +2221,10 @@ def _aggregate_context_judges(
     meta: dict[str, Any],
     facets: list[dict[str, Any]],
     field_values: dict[str, list[dict[str, Any]]],
+    persona_dimensions: dict[str, dict[str, Any]] | None = None,
 ) -> list[dict[str, Any]]:
     facet_lookup = {str(facet.get("facetKey") or facet.get("key")): facet for facet in facets}
-    directives = meta.get("judgeDirectives")
+    directives = meta.get("signalScans")
     if not isinstance(directives, list):
         return []
     judges: list[dict[str, Any]] = []
@@ -1520,6 +2235,7 @@ def _aggregate_context_judges(
             context_key=str(meta.get("key") or ""),
             facet_lookup=facet_lookup,
             field_values=field_values,
+            persona_dimensions=persona_dimensions or {},
         )
         if judge:
             judges.append(judge)
@@ -1533,7 +2249,9 @@ def _aggregate_judge_directive(
     context_key: str,
     facet_lookup: dict[str, dict[str, Any]],
     field_values: dict[str, list[dict[str, Any]]],
+    persona_dimensions: dict[str, dict[str, Any]] | None = None,
 ) -> dict[str, Any] | None:
+    persona_dimensions = persona_dimensions or {}
     target_facet_key = str(directive.get("targetFacetKey") or "").strip()
     if not target_facet_key:
         return None
@@ -1545,6 +2263,7 @@ def _aggregate_judge_directive(
         group_by_mode = "none"
     group_by_facet_key = str(directive.get("groupByFacetKey") or "").strip() or None
     group_by_field = facet_lookup.get(group_by_facet_key) if group_by_facet_key else None
+    persona_dimension = str(directive.get("groupByPersonaDimension") or "").strip() or None
     target_entries = [
         entry
         for entry in field_values.get(str(target_field.get("key")), [])
@@ -1554,7 +2273,15 @@ def _aggregate_judge_directive(
         return None
 
     bucket_map: dict[str, list[dict[str, Any]]] = {}
-    if group_by_mode == "none" or group_by_field is None:
+    if group_by_mode == "persona_attribute":
+        if not persona_dimension:
+            return None
+        bucket_map = _persona_attribute_bucket_map(
+            target_entries, persona_dimension, persona_dimensions
+        )
+        if not bucket_map:
+            return None
+    elif group_by_mode == "none" or group_by_field is None:
         bucket_map["All"] = target_entries
     elif group_by_mode == "categorical":
         group_entries = {
@@ -1570,6 +2297,11 @@ def _aggregate_judge_directive(
             bucket_map.setdefault(bucket, []).append(entry)
     else:
         bands = _normalize_numeric_bands(directive.get("bands"))
+        if not bands:
+            # No explicit bands: auto-bin the numeric axis by its distribution.
+            bands = _auto_numeric_bands(
+                _numeric_axis_values(group_by_field, field_values)
+            )
         if not bands:
             return None
         group_entries = {
@@ -1598,14 +2330,36 @@ def _aggregate_judge_directive(
     if not buckets:
         return None
     target_label = str(target_field.get("label") or target_facet_key)
-    group_by_label = str(group_by_field.get("label") or group_by_facet_key or "All")
+    if group_by_mode == "persona_attribute" and persona_dimension:
+        group_by_label = _humanize_persona_dimension(persona_dimension)
+    else:
+        group_by_label = str(
+            (group_by_field.get("label") if isinstance(group_by_field, dict) else None)
+            or group_by_facet_key
+            or "All"
+        )
+    # Per-trial samples for the LLM to score independently (primary prevalence view).
+    # The group label rides along so we can also produce an optional group breakdown.
+    scan_samples: list[dict[str, Any]] = []
+    for bucket in buckets:
+        for entry in bucket_map.get(bucket["bucket"], []):
+            text = _value_to_sample_string(entry.get("value"))
+            if not text:
+                continue
+            scan_samples.append(
+                {"id": len(scan_samples), "text": text, "group": bucket["bucket"]}
+            )
+
     judge_kind = str(directive.get("judgeKind") or "llm_signal_judge").strip()
     return {
         "id": str(directive.get("id") or "{}.judge_{}".format(context_key, index + 1)),
         "title": str(directive.get("title") or "{} judge by {}".format(target_label, group_by_label)),
         "targetFacetKey": target_facet_key,
         "groupByFacetKey": group_by_facet_key,
+        "groupByPersonaDimension": persona_dimension,
+        "groupByLabel": group_by_label,
         "groupByMode": group_by_mode,
+        "lens": _directive_lens(directive, group_by_mode=group_by_mode),
         "judgeKind": judge_kind,
         "prompt": directive.get("prompt"),
         "rubric": directive.get("rubric"),
@@ -1615,8 +2369,176 @@ def _aggregate_judge_directive(
             "count": len(target_entries),
             "samples": _sample_values(target_entries, limit=5),
         },
+        "total": len(scan_samples),
+        "signalStats": [],
+        "scanSamples": scan_samples,
         "buckets": buckets,
     }
+
+
+def _facet_key_leaf(facet: dict[str, Any]) -> str:
+    raw = str(facet.get("facetKey") or facet.get("key") or "").strip()
+    if not raw:
+        return ""
+    return raw.split(".")[-1].replace("-", "_")
+
+
+def _fmt_scale_value(value: float) -> str:
+    number = float(value)
+    if number.is_integer():
+        return str(int(number))
+    return f"{number:.1f}"
+
+
+def _numeric_bucket_labels(count: int) -> list[str]:
+    if count <= 1:
+        return ["All"]
+    if count == 2:
+        return ["Lower", "Higher"]
+    if count == 3:
+        return ["Low", "Medium", "High"]
+    return [f"Band {index + 1}" for index in range(count)]
+
+
+def _auto_numeric_bands(
+    values: list[Any], *, target_buckets: int = 3
+) -> list[dict[str, Any]]:
+    """Distribution-based (equal-frequency) bins for a numeric grouping axis.
+
+    Splits the observed values into up to ``target_buckets`` quantile groups of
+    roughly equal size, keeping equal values in the same bucket. Labels carry the
+    real observed value span (e.g. ``Low (1-3)``). Returns ``[]`` when the field
+    is constant or otherwise not worth splitting.
+    """
+    numbers = sorted(
+        float(value)
+        for value in values
+        if isinstance(value, (int, float)) and not isinstance(value, bool)
+    )
+    if not numbers:
+        return []
+    distinct = sorted(set(numbers))
+    if len(distinct) < 2:
+        return []
+
+    buckets = min(target_buckets, len(distinct))
+    counts = Counter(numbers)
+    total = len(numbers)
+    target = total / buckets
+
+    groups: list[list[float]] = []
+    current: list[float] = []
+    running = 0
+    for index, value in enumerate(distinct):
+        current.append(value)
+        running += counts[value]
+        remaining_values = len(distinct) - (index + 1)
+        if (
+            len(groups) < buckets - 1
+            and running >= target
+            and remaining_values >= buckets - len(groups) - 1
+        ):
+            groups.append(current)
+            current = []
+            running = 0
+    if current:
+        groups.append(current)
+    if len(groups) < 2:
+        return []
+
+    labels = _numeric_bucket_labels(len(groups))
+    bands: list[dict[str, Any]] = []
+    for group_index, group in enumerate(groups):
+        group_min, group_max = group[0], group[-1]
+        span = (
+            _fmt_scale_value(group_min)
+            if group_min == group_max
+            else f"{_fmt_scale_value(group_min)}-{_fmt_scale_value(group_max)}"
+        )
+        bands.append(
+            {
+                "label": f"{labels[group_index]} ({span})",
+                "min": None if group_index == 0 else group_min,
+                "max": None if group_index == len(groups) - 1 else group_max,
+            }
+        )
+    return bands
+
+
+def _categorical_axis_sizes(
+    facet: dict[str, Any], field_values: dict[str, list[dict[str, Any]]]
+) -> list[int]:
+    counts: Counter[str] = Counter()
+    for entry in field_values.get(str(facet.get("key")), []):
+        if entry.get("trialName") is None or not _has_value(entry.get("value")):
+            continue
+        counts[_categorical_key(entry.get("value"))] += 1
+    return list(counts.values())
+
+
+def _numeric_axis_values(
+    facet: dict[str, Any], field_values: dict[str, list[dict[str, Any]]]
+) -> list[float]:
+    values: list[float] = []
+    for entry in field_values.get(str(facet.get("key")), []):
+        if entry.get("trialName") is None or not _has_value(entry.get("value")):
+            continue
+        raw = entry.get("value")
+        if isinstance(raw, (int, float)) and not isinstance(raw, bool):
+            values.append(float(raw))
+    return values
+
+
+def _axis_record(
+    facet: dict[str, Any], mode: str, bands: list[dict[str, Any]] | None
+) -> dict[str, Any]:
+    return {
+        "facet": facet,
+        "key": str(facet.get("key")),
+        "facetKey": str(facet.get("facetKey") or facet.get("key") or ""),
+        "mode": mode,
+        "bands": bands,
+    }
+
+
+def _resolve_explained_axis(
+    text_facet: dict[str, Any],
+    facets: list[dict[str, Any]],
+    field_values: dict[str, list[dict[str, Any]]],
+) -> dict[str, Any] | None:
+    """Group axis for a textual facet, taken from its explicit ``explainsFacetKey``.
+
+    The binding is authored in the self-report schema (``explanation:`` under the
+    measured field) or emitted directly by a verifier — never guessed. Numeric
+    targets are auto-binned by their distribution; categorical targets group by
+    value. Returns ``None`` when there is no declared target or the target does
+    not split the cohort into >= 2 non-empty groups.
+    """
+    target_leaf = str(text_facet.get("explainsFacetKey") or "").strip()
+    if not target_leaf:
+        return None
+    target = next(
+        (
+            facet
+            for facet in facets
+            if facet is not text_facet and _facet_key_leaf(facet) == target_leaf
+        ),
+        None,
+    )
+    if target is None:
+        return None
+    kind = target.get("kind")
+    if kind == "numerical":
+        bands = _auto_numeric_bands(_numeric_axis_values(target, field_values))
+        if len(bands) < 2:
+            return None
+        return _axis_record(target, "numeric_band", bands)
+    if kind == "categorical":
+        nonempty = [size for size in _categorical_axis_sizes(target, field_values) if size > 0]
+        if len(nonempty) < 2:
+            return None
+        return _axis_record(target, "categorical", None)
+    return None
 
 
 def _aggregate_context_cross_facet_views(
@@ -1624,21 +2546,14 @@ def _aggregate_context_cross_facet_views(
     facets: list[dict[str, Any]],
     field_values: dict[str, list[dict[str, Any]]],
 ) -> list[dict[str, Any]]:
-    primary = next(
-        (
-            facet
-            for facet in facets
-            if facet.get("kind") == "categorical" and str(facet.get("role") or "") == "primary"
-        ),
-        None,
-    )
-    if primary is None:
-        return []
-    primary_entries = {
-        str(entry.get("trialName")): _categorical_key(entry.get("value"))
-        for entry in field_values.get(str(primary.get("key")), [])
-        if entry.get("trialName") is not None and _has_value(entry.get("value"))
-    }
+    """Raw-quote preview of each explanation grouped by its declared target axis.
+
+    The axis for every textual facet comes from its explicit ``explainsFacetKey``
+    binding (schema ``explanation:`` sub-field, or verifier-emitted). Facets with
+    no declared target get no grouped preview — no heuristic axis guessing.
+    """
+    # Fixed labels / non-persona prose should not become Common quote groups.
+    skip_text_leaves = {"task_goal_label"}
     cross_facet_views: list[dict[str, Any]] = []
     for facet in facets:
         if facet.get("kind") != "textual":
@@ -1646,20 +2561,63 @@ def _aggregate_context_cross_facet_views(
         role = str(facet.get("role") or "")
         if role not in {"explanation", "evidence", "supporting_text"}:
             continue
+        if _facet_key_leaf(facet) in skip_text_leaves:
+            continue
+        axis = _resolve_explained_axis(facet, facets, field_values)
+        if axis is None:
+            continue
+        axis_key = str(axis.get("key"))
+        axis_bands = axis.get("bands")
+        if str(axis.get("mode")) == "numeric_band" and axis_bands:
+            group_entries = {
+                str(entry.get("trialName")): _match_numeric_band(entry.get("value"), axis_bands)
+                for entry in field_values.get(axis_key, [])
+                if entry.get("trialName") is not None and _has_value(entry.get("value"))
+            }
+            group_entries = {
+                trial: bucket for trial, bucket in group_entries.items() if bucket is not None
+            }
+            band_order = {str(band.get("label")): index for index, band in enumerate(axis_bands)}
+        else:
+            group_entries = {
+                str(entry.get("trialName")): _categorical_key(entry.get("value"))
+                for entry in field_values.get(axis_key, [])
+                if entry.get("trialName") is not None and _has_value(entry.get("value"))
+            }
+            band_order = None
+        if not group_entries:
+            continue
         buckets: dict[str, list[str]] = {}
         for entry in field_values.get(str(facet.get("key")), []):
             trial_name = str(entry.get("trialName") or "")
-            bucket = primary_entries.get(trial_name)
+            bucket = group_entries.get(trial_name)
             value = str(entry.get("value") or "").strip()
             if not bucket or not value:
                 continue
             buckets.setdefault(bucket, []).append(value)
         if not buckets:
             continue
+        unique_values = {value for values in buckets.values() for value in values}
+        total_values = sum(len(values) for values in buckets.values())
+        # Low-diversity text (one or two templated notes repeated across the
+        # cohort) just echoes the same quote in every bucket — not a useful
+        # Common analysis grouping.
+        if len(unique_values) <= 2 and total_values > 2:
+            continue
+        if band_order is not None:
+            ordered_buckets = sorted(
+                buckets.items(),
+                key=lambda item: band_order.get(item[0], len(band_order)),
+            )
+        else:
+            ordered_buckets = sorted(
+                buckets.items(),
+                key=lambda item: (-len(item[1]), item[0]),
+            )
         cross_facet_views.append(
             {
                 "type": "text_by_primary_category",
-                "primaryFacetKey": primary.get("key"),
+                "primaryFacetKey": str(axis.get("facetKey") or axis_key),
                 "textFacetKey": facet.get("key"),
                 "buckets": [
                     {
@@ -1667,10 +2625,7 @@ def _aggregate_context_cross_facet_views(
                         "count": len(values),
                         "samples": list(dict.fromkeys(values))[:3],
                     }
-                    for category, values in sorted(
-                        buckets.items(),
-                        key=lambda item: (-len(item[1]), item[0]),
-                    )
+                    for category, values in ordered_buckets
                 ],
             }
         )

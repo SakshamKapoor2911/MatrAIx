@@ -91,6 +91,40 @@ def _count_assistant_questions(messages: list[dict[str, Any]]) -> int:
     )
 
 
+def _assistant_messages(messages: list[dict[str, Any]]) -> list[str]:
+    return [
+        item["content"].strip()
+        for item in messages
+        if item.get("role") == "assistant"
+        and isinstance(item.get("content"), str)
+        and item["content"].strip()
+    ]
+
+
+def _assistant_output_text(messages: list[dict[str, Any]]) -> str:
+    replies = _assistant_messages(messages)
+    if not replies:
+        return "The assistant produced no visible replies in this conversation."
+    return "\n".join(f"Reply {index}: {text}" for index, text in enumerate(replies, start=1))
+
+
+def _recommendation_adaptation(messages: list[dict[str, Any]]) -> str:
+    """How the assistant's recommendation evolved across the conversation.
+
+    Derived only from the assistant's own replies so it reflects SUT behavior,
+    not the persona's reaction.
+    """
+    replies = _assistant_messages(messages)
+    if len(replies) <= 1:
+        return "single_recommendation"
+    normalized = [" ".join(reply.lower().split()) for reply in replies]
+    # A reply that repeats verbatim after the persona pushed back is the
+    # classic "stuck in a loop" failure mode for a recommender.
+    if len(set(normalized)) < len(normalized):
+        return "repeated_same_pick"
+    return "adapted"
+
+
 def _derive_outcome_status(
     need_satisfaction: str | None,
     preference_satisfaction: str | None,
@@ -250,6 +284,7 @@ def main() -> int:
                         "label": "Feedback reason",
                         "role": "explanation",
                         "kind": "textual",
+                        "explainsFacetKey": "personal_preference_satisfaction",
                         "value": feedback_reason,
                     },
                     {
@@ -318,6 +353,7 @@ def main() -> int:
             "label": "Outcome reason",
             "role": "explanation",
             "kind": "textual",
+            "explainsFacetKey": "outcome_status",
             "value": outcome_reason,
         },
         {
@@ -341,9 +377,33 @@ def main() -> int:
             "label": "Process notes",
             "role": "explanation",
             "kind": "textual",
+            "explainsFacetKey": "conversation_path",
             "value": process_notes,
         },
     ]
+    contexts.append(
+        {
+            "key": "recommendation_delivery.primary",
+            "label": "Recommendation delivery",
+            "contextType": "recommendation_delivery",
+            "facets": [
+                {
+                    "key": "recommendation_adaptation",
+                    "label": "Recommendation adaptation",
+                    "role": "primary",
+                    "kind": "categorical",
+                    "value": _recommendation_adaptation(messages),
+                },
+                {
+                    "key": "assistant_recommendations",
+                    "label": "Assistant recommendation replies",
+                    "role": "explanation",
+                    "kind": "textual",
+                    "value": _assistant_output_text(messages),
+                },
+            ],
+        }
+    )
     (_verifier_dir() / "structured_output.json").write_text(
         json.dumps(
             {

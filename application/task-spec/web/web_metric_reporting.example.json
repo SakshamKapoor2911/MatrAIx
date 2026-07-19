@@ -5,7 +5,7 @@
       "match": {
         "contextType": "task_outcome"
       },
-      "summaryDirectives": [
+      "summaryAnalyses": [
         {
           "id": "task_outcome.explanation_by_status",
           "title": "Outcome explanation by status",
@@ -15,7 +15,7 @@
           "summaryKind": "llm_bucket_summary"
         }
       ],
-      "judgeDirectives": [
+      "signalScans": [
         {
           "id": "task_outcome.web_failure_signal_scan",
           "title": "Web failure signal scan",
@@ -54,7 +54,7 @@
       "match": {
         "contextType": "web_interaction"
       },
-      "summaryDirectives": [
+      "summaryAnalyses": [
         {
           "id": "web_interaction.notes_by_path_type",
           "title": "Web interaction notes by path type",
@@ -69,7 +69,7 @@
       "match": {
         "contextType": "web_artifact"
       },
-      "summaryDirectives": [
+      "summaryAnalyses": [
         {
           "id": "web_artifact.evidence_by_status",
           "title": "Web artifact evidence by status",
@@ -84,7 +84,7 @@
       "match": {
         "contextType": "user_feedback"
       },
-      "summaryDirectives": [
+      "summaryAnalyses": [
         {
           "id": "user_feedback.reason_by_need_satisfaction",
           "title": "Feedback reason by need satisfaction",
@@ -94,7 +94,7 @@
           "summaryKind": "llm_bucket_summary"
         }
       ],
-      "judgeDirectives": [
+      "signalScans": [
         {
           "id": "user_feedback.reason_signal_scan",
           "title": "Feedback signal scan",

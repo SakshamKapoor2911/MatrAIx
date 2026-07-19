@@ -15,6 +15,9 @@ class SelfReportField:
     minimum: int | None = None
     maximum: int | None = None
     choices: Tuple[str, ...] = ()
+    # Key of the field this textual field explains. When set, reporting groups
+    # this explanation by that target field (no heuristic axis guessing).
+    explains: str | None = None
 
 
 @dataclass(frozen=True)
@@ -53,6 +56,7 @@ DEFAULT_CHATBOT_SELF_REPORT_SCHEMA = SelfReportSchema(
         SelfReportField(
             key="reason",
             prompt="Briefly explain the rating in your own voice.",
+            explains="overallExperienceRating",
         ),
         SelfReportField(
             key="askedUsefulClarificationQuestions",
@@ -62,6 +66,7 @@ DEFAULT_CHATBOT_SELF_REPORT_SCHEMA = SelfReportSchema(
         SelfReportField(
             key="clarifyingNotes",
             prompt="Which clarifying questions helped, or why they did not.",
+            explains="askedUsefulClarificationQuestions",
         ),
         SelfReportField(
             key="trustLevel",

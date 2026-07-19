@@ -16,10 +16,12 @@ fields:
     kind: integer
     minimum: 1
     maximum: 10
-  - key: reason
-    prompt: Briefly explain the rating in your own voice.
+    explanation:
+      key: reason
+      prompt: Briefly explain the rating in your own voice.
   - key: askedUsefulClarificationQuestions
     prompt: Did the chatbot ask useful clarification questions?
     kind: boolean
-  - key: clarifyingNotes
-    prompt: Which clarification questions helped, or why they did not.
+    explanation:
+      key: clarifyingNotes
+      prompt: Which clarification questions helped, or why they did not.

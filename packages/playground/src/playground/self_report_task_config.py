@@ -54,33 +54,53 @@ def _read_schema_yaml(path: Path) -> dict[str, Any] | None:
     return dict(payload)
 
 
+def _field_from_item(
+    item: dict[str, Any], index: int, *, explains: str | None = None
+) -> SelfReportField:
+    key = _as_string(item.get("key"))
+    prompt = _as_string(item.get("prompt"))
+    if not key or not prompt:
+        raise ValueError(
+            "self_report_schema.fields[{}] requires key and prompt".format(index)
+        )
+    raw_choices = item.get("choices") or []
+    choices = tuple(
+        str(choice).strip()
+        for choice in raw_choices
+        if str(choice).strip()
+    )
+    return SelfReportField(
+        key=key,
+        prompt=prompt,
+        kind=_as_string(item.get("kind")) or "string",
+        required=_as_bool(item.get("required"), True),
+        minimum=_as_optional_int(item.get("minimum")),
+        maximum=_as_optional_int(item.get("maximum")),
+        choices=choices,
+        explains=explains or (_as_string(item.get("explains")) or None),
+    )
+
+
+def _explanation_blocks(item: dict[str, Any]) -> list[dict[str, Any]]:
+    """Inline ``explanation`` sub-field(s) authored under a measured field."""
+    raw = item.get("explanation")
+    if isinstance(raw, dict):
+        return [_as_mapping(raw)]
+    if isinstance(raw, list):
+        return [_as_mapping(block) for block in raw if isinstance(block, dict)]
+    return []
+
+
 def _load_schema_from_payload(payload: dict[str, Any]) -> SelfReportSchema:
     fields = []
     for index, entry in enumerate(payload.get("fields") or []):
         item = _as_mapping(entry)
-        key = _as_string(item.get("key"))
-        prompt = _as_string(item.get("prompt"))
-        if not key or not prompt:
-            raise ValueError(
-                "self_report_schema.fields[{}] requires key and prompt".format(index)
-            )
-        raw_choices = item.get("choices") or []
-        choices = tuple(
-            str(choice).strip()
-            for choice in raw_choices
-            if str(choice).strip()
-        )
-        fields.append(
-            SelfReportField(
-                key=key,
-                prompt=prompt,
-                kind=_as_string(item.get("kind")) or "string",
-                required=_as_bool(item.get("required"), True),
-                minimum=_as_optional_int(item.get("minimum")),
-                maximum=_as_optional_int(item.get("maximum")),
-                choices=choices,
-            )
-        )
+        parent = _field_from_item(item, index)
+        fields.append(parent)
+        # An ``explanation`` sub-block is authoring sugar for a flat textual field
+        # bound to its parent — the binding drives reporting's group-by axis.
+        for block in _explanation_blocks(item):
+            fields.append(_field_from_item(block, index, explains=parent.key))
     return SelfReportSchema(
         artifact_name=_as_string(payload.get("artifactName")) or "user_feedback.json",
         instructions=_as_string(payload.get("instructions")),

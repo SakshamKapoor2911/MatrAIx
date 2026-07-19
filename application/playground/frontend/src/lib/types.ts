@@ -677,6 +677,28 @@ export interface JobAggregationCrossFacetView {
   buckets?: JobAggregationCrossFacetViewBucket[];
 }
 
+export interface JobAggregationPersonaDistributionBucket {
+  /** Persona segment value (e.g. a life_stage or age_bracket). */
+  bucket: string;
+  count: number;
+  numerical?: JobAggregationNumerical | null;
+  categorical?: JobAggregationCategorical | null;
+}
+
+export interface JobAggregationPersonaDistribution {
+  id: string;
+  facetKey: string;
+  facetLabel: string;
+  kind: "numerical" | "categorical" | string;
+  groupByPersonaDimension: string;
+  groupByLabel: string;
+  lens?: string | null;
+  total: number;
+  /** Stable category column order (categorical only). */
+  categories?: string[] | null;
+  buckets: JobAggregationPersonaDistributionBucket[];
+}
+
 export interface JobAggregationSummaryBucket {
   bucket: string;
   count: number;
@@ -690,9 +712,15 @@ export interface JobAggregationSummary {
   title: string;
   targetFacetKey: string;
   groupByFacetKey?: string | null;
+  groupByPersonaDimension?: string | null;
+  groupByLabel?: string | null;
   groupByMode?: string | null;
+  /** Which analysis tab: "general" (auto), "task" (SUT), or "persona" (customer insight). */
+  lens?: string | null;
   summaryKind?: string | null;
   instruction?: string | null;
+  /** True for auto-synthesized reason summaries (Common), false/absent for reporting.json ones (Custom). */
+  auto?: boolean | null;
   status?: string | null;
   error?: string | null;
   overall?: JobAggregationTextual | null;
@@ -706,12 +734,23 @@ export interface JobAggregationJudgeSignal {
   description?: string | null;
 }
 
+export interface JobAggregationJudgeSignalStat {
+  key: string;
+  label: string;
+  /** How many scanned samples exhibit this signal. */
+  present: number;
+  /** Total scanned samples in scope (overall, or the group for a bucket). */
+  total: number;
+  examples?: string[] | null;
+}
+
 export interface JobAggregationJudgeBucket {
   bucket: string;
   count: number;
   samples: string[];
   assessment?: string | null;
   signals?: JobAggregationJudgeSignalResult[] | null;
+  signalStats?: JobAggregationJudgeSignalStat[] | null;
 }
 
 export interface JobAggregationJudgeSignalResult {
@@ -725,11 +764,19 @@ export interface JobAggregationJudge {
   title: string;
   targetFacetKey: string;
   groupByFacetKey?: string | null;
+  groupByPersonaDimension?: string | null;
+  groupByLabel?: string | null;
   groupByMode?: string | null;
+  /** Which analysis tab: "task" (SUT) or "persona" (customer insight). */
+  lens?: string | null;
   judgeKind?: string | null;
   prompt?: string | null;
   rubric?: unknown;
   signals: JobAggregationJudgeSignal[];
+  /** Per-signal prevalence across all scanned samples (primary view). */
+  signalStats?: JobAggregationJudgeSignalStat[] | null;
+  /** Total scanned samples backing signalStats. */
+  total?: number | null;
   status?: string | null;
   error?: string | null;
   overall?: {
@@ -774,6 +821,10 @@ export interface HarborJobAggregationContext {
   facets: JobAggregationField[];
   summaries?: JobAggregationSummary[];
   judges?: JobAggregationJudge[];
+  /** Default persona-insight lens: signals cross-tabbed by persona segment. */
+  personaDistributions?: JobAggregationPersonaDistribution[];
+  /** Every eligible facet × persona-dimension pairing, for the interactive explorer. */
+  personaDistributionOptions?: JobAggregationPersonaDistribution[];
   crossFacetViews?: JobAggregationCrossFacetView[];
   /** @deprecated Renamed to `crossFacetViews`. Kept for older aggregation artifacts. */
   relationships?: JobAggregationCrossFacetView[];

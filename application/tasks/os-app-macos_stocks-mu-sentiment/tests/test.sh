@@ -378,6 +378,7 @@ contexts = [
                 "label": "Reason",
                 "role": "explanation",
                 "kind": "textual",
+                "explainsFacetKey": "decision_outcome",
                 "value": reasoning.strip(),
             },
         ],
@@ -459,6 +460,7 @@ if feedback is not None:
             "label": "Feedback reason",
             "role": "explanation",
             "kind": "textual",
+            "explainsFacetKey": "information_sufficiency",
             "value": feedback["feedback_reason"],
         },
         {
@@ -493,6 +495,7 @@ if feedback is not None:
                 "label": "Missing info note",
                 "role": "explanation",
                 "kind": "textual",
+                "explainsFacetKey": "information_sufficiency",
                 "value": feedback["missing_info_note"],
             }
         )

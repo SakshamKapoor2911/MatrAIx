@@ -36,7 +36,7 @@ def test_build_job_aggregation_groups_text_by_categorical_directive(tmp_path: Pa
                 "key": "question.q1",
                 "label": "Question 1",
                 "contextType": "question_response",
-                "summaryDirectives": [
+                "summaryAnalyses": [
                     {
                         "id": "q1.reason_by_response",
                         "title": "Reason by response",
@@ -60,7 +60,7 @@ def test_build_job_aggregation_groups_text_by_categorical_directive(tmp_path: Pa
                 "key": "question.q1",
                 "label": "Question 1",
                 "contextType": "question_response",
-                "summaryDirectives": [
+                "summaryAnalyses": [
                     {
                         "id": "q1.reason_by_response",
                         "title": "Reason by response",
@@ -109,7 +109,7 @@ def test_build_job_aggregation_groups_text_by_numeric_band_directive(tmp_path: P
                         "key": "decision.review",
                         "label": "Decision review",
                         "contextType": "decision",
-                        "summaryDirectives": [
+                        "summaryAnalyses": [
                             {
                                 "id": "decision.reason_by_confidence",
                                 "title": "Reason by confidence",
@@ -151,7 +151,7 @@ def test_build_job_aggregation_reads_task_reporting_config(tmp_path: Path) -> No
                 "contextRules": [
                     {
                         "match": {"key": "decision.review"},
-                        "summaryDirectives": [
+                        "summaryAnalyses": [
                             {
                                 "id": "decision.reason_by_choice",
                                 "title": "Reason by choice",
@@ -230,7 +230,7 @@ def test_build_job_aggregation_synthesizes_user_feedback_context(tmp_path: Path)
                 "contextRules": [
                     {
                         "match": {"contextType": "user_feedback"},
-                        "summaryDirectives": [
+                        "summaryAnalyses": [
                             {
                                 "id": "user_feedback.reason_by_need_satisfaction",
                                 "title": "Feedback reason by need satisfaction",
@@ -240,7 +240,7 @@ def test_build_job_aggregation_synthesizes_user_feedback_context(tmp_path: Path)
                                 "summaryKind": "llm_bucket_summary",
                             }
                         ],
-                        "judgeDirectives": [
+                        "signalScans": [
                             {
                                 "id": "user_feedback.reason_signal_scan",
                                 "title": "Feedback signal scan",
@@ -363,6 +363,168 @@ def test_build_job_aggregation_synthesizes_user_feedback_context(tmp_path: Path)
     assert aggregation["reporting"]["totalUnits"] == 2
 
 
+def _write_feedback_task(
+    repo_root: Path, *, task: str, schema_lines: list[str]
+) -> None:
+    input_dir = repo_root / "application" / "tasks" / task / "input"
+    input_dir.mkdir(parents=True, exist_ok=True)
+    (input_dir / "self_report_schema.yaml").write_text(
+        "\n".join(schema_lines) + "\n", encoding="utf-8"
+    )
+
+
+def _write_feedback_trial(
+    job_dir: Path, *, task: str, trial: str, feedback: dict
+) -> None:
+    trial_dir = job_dir / trial
+    output_dir = trial_dir / "artifacts" / "app" / "output"
+    output_dir.mkdir(parents=True, exist_ok=True)
+    (trial_dir / "verifier").mkdir(parents=True, exist_ok=True)
+    (trial_dir / "result.json").write_text("{}", encoding="utf-8")
+    (trial_dir / "config.json").write_text(
+        json.dumps({"task": {"path": "application/tasks/" + task}}),
+        encoding="utf-8",
+    )
+    (trial_dir / "verifier" / "structured_output.json").write_text(
+        json.dumps({"presenceCheck": {"passed": True}, "contexts": []}),
+        encoding="utf-8",
+    )
+    (output_dir / "user_feedback.json").write_text(
+        json.dumps(feedback), encoding="utf-8"
+    )
+
+
+_NESTED_REASON_SCHEMA = [
+    "artifactName: user_feedback.json",
+    "fields:",
+    "  - key: needConstraintSatisfaction",
+    "    prompt: How well did the choice satisfy your need?",
+    "    kind: enum",
+    "  - key: overallExperienceRating",
+    "    prompt: Overall rating",
+    "    kind: integer",
+    "    minimum: 1",
+    "    maximum: 10",
+    "    explanation:",
+    "      key: reason",
+    "      prompt: Briefly explain the rating.",
+]
+
+
+def test_build_job_aggregation_schema_explanation_drives_numeric_group_axis(
+    tmp_path: Path,
+) -> None:
+    """Nested schema ``explanation`` binds reason to the rating (auto-binned)."""
+    repo_root = tmp_path
+    task = "example-web-schema-bound"
+    _write_feedback_task(repo_root, task=task, schema_lines=_NESTED_REASON_SCHEMA)
+    job_dir = repo_root / "jobs" / "job"
+    for index, (rating, reason) in enumerate(
+        [
+            (2, "Confusing flow and I gave up early."),
+            (6, "Mostly fine but a few rough edges."),
+            (9, "Smooth and trustworthy end to end."),
+        ]
+    ):
+        _write_feedback_trial(
+            job_dir,
+            task=task,
+            trial=f"trial-{index}",
+            feedback={
+                "needConstraintSatisfaction": "yes",
+                "overallExperienceRating": rating,
+                "reason": reason,
+            },
+        )
+
+    aggregation = build_job_aggregation(job_dir, repo_root=repo_root, enable_llm=False)
+    assert aggregation is not None
+    feedback = next(
+        context
+        for context in aggregation["contexts"]
+        if context.get("contextType") == "user_feedback"
+    )
+    views = feedback.get("crossFacetViews") or []
+    reason_view = next(
+        view
+        for view in views
+        if str(view.get("textFacetKey") or "").endswith("feedback_reason")
+    )
+    assert str(reason_view.get("primaryFacetKey") or "").endswith(
+        "overall_experience_rating"
+    )
+    assert len(reason_view.get("buckets") or []) >= 2
+    summaries = feedback.get("summaries") or []
+    reason_summary = next(
+        summary
+        for summary in summaries
+        if str(summary.get("targetFacetKey") or "").endswith("feedback_reason")
+    )
+    assert reason_summary.get("groupByMode") == "numeric_band"
+    assert str(reason_summary.get("groupByFacetKey") or "").endswith(
+        "overall_experience_rating"
+    )
+
+
+def test_build_job_aggregation_no_binding_no_reason_group(tmp_path: Path) -> None:
+    """A reason with no declared target gets no auto group-by (no heuristic guess)."""
+    repo_root = tmp_path
+    task = "example-web-unbound"
+    _write_feedback_task(
+        repo_root,
+        task=task,
+        schema_lines=[
+            "artifactName: user_feedback.json",
+            "fields:",
+            "  - key: needConstraintSatisfaction",
+            "    prompt: How well did the choice satisfy your need?",
+            "    kind: enum",
+            "  - key: overallExperienceRating",
+            "    prompt: Overall rating",
+            "    kind: integer",
+            "    minimum: 1",
+            "    maximum: 10",
+            "  - key: reason",
+            "    prompt: Briefly explain the rating.",
+        ],
+    )
+    job_dir = repo_root / "jobs" / "job"
+    for index, (need, rating, reason) in enumerate(
+        [
+            ("yes", 2, "Confusing flow and I gave up early."),
+            ("partially", 6, "Mostly fine but a few rough edges."),
+            ("no", 9, "Smooth and trustworthy end to end."),
+        ]
+    ):
+        _write_feedback_trial(
+            job_dir,
+            task=task,
+            trial=f"trial-{index}",
+            feedback={
+                "needConstraintSatisfaction": need,
+                "overallExperienceRating": rating,
+                "reason": reason,
+            },
+        )
+
+    aggregation = build_job_aggregation(job_dir, repo_root=repo_root, enable_llm=False)
+    assert aggregation is not None
+    feedback = next(
+        context
+        for context in aggregation["contexts"]
+        if context.get("contextType") == "user_feedback"
+    )
+    views = feedback.get("crossFacetViews") or []
+    assert not any(
+        str(view.get("textFacetKey") or "").endswith("feedback_reason") for view in views
+    )
+    summaries = feedback.get("summaries") or []
+    assert not any(
+        str(summary.get("targetFacetKey") or "").endswith("feedback_reason")
+        for summary in summaries
+    )
+
+
 def test_build_job_aggregation_emits_judge_units(tmp_path: Path) -> None:
     job_dir = tmp_path / "job"
     _write_trial(
@@ -379,7 +541,7 @@ def test_build_job_aggregation_emits_judge_units(tmp_path: Path) -> None:
                         {"key": "response", "label": "Response", "role": "primary", "kind": "categorical", "value": "yes"},
                         {"key": "reason", "label": "Reason", "role": "explanation", "kind": "textual", "value": "It is affordable."},
                     ],
-                    "judgeDirectives": [
+                    "signalScans": [
                         {
                             "id": "question.reason_signal_scan",
                             "title": "Reason signal scan",
@@ -428,7 +590,7 @@ def test_build_job_aggregation_executes_and_caches_llm_reporting(tmp_path: Path)
                     "key": "question.q1",
                     "label": "Question 1",
                     "contextType": "question_response",
-                    "summaryDirectives": [
+                    "summaryAnalyses": [
                         {
                             "id": "question.reason_summary",
                             "title": "Reason summary",
@@ -438,7 +600,7 @@ def test_build_job_aggregation_executes_and_caches_llm_reporting(tmp_path: Path)
                             "summaryKind": "llm_bucket_summary",
                         }
                     ],
-                    "judgeDirectives": [
+                    "signalScans": [
                         {
                             "id": "question.reason_judge",
                             "title": "Reason judge",
@@ -478,18 +640,8 @@ def test_build_job_aggregation_executes_and_caches_llm_reporting(tmp_path: Path)
             },
             {
                 "overallAssessment": "Pricing language is explicit in the positive bucket.",
-                "bucketAssessments": [
-                    {
-                        "bucket": "yes",
-                        "assessment": "This bucket repeatedly mentions affordability.",
-                        "signals": [
-                            {
-                                "key": "price_sensitivity",
-                                "present": True,
-                                "evidence": "affordable",
-                            }
-                        ],
-                    }
+                "samples": [
+                    {"id": 0, "present": ["price_sensitivity"]},
                 ],
             },
         ]
@@ -505,9 +657,11 @@ def test_build_job_aggregation_executes_and_caches_llm_reporting(tmp_path: Path)
     assert summary["buckets"][0]["summaryType"] == "llm"
     assert judge["status"] == "llm_completed"
     assert judge["overallAssessment"] == "Pricing language is explicit in the positive bucket."
-    assert judge["buckets"][0]["assessment"] == "This bucket repeatedly mentions affordability."
-    assert judge["buckets"][0]["signals"][0]["key"] == "price_sensitivity"
-    assert judge["buckets"][0]["signals"][0]["present"] is True
+    assert judge["total"] == 1
+    assert judge["signalStats"][0]["key"] == "price_sensitivity"
+    assert judge["signalStats"][0]["present"] == 1
+    assert judge["signalStats"][0]["total"] == 1
+    assert judge["buckets"][0]["signalStats"][0]["present"] == 1
     assert aggregation["reporting"]["status"] == "completed"
     assert aggregation["reporting"]["completedUnits"] == 2
     assert len(client.calls) == 2
@@ -520,7 +674,7 @@ def test_build_job_aggregation_executes_and_caches_llm_reporting(tmp_path: Path)
     assert cached_summary["status"] == "llm_completed"
     assert cached_summary["buckets"][0]["summary"] == "Affordable pricing was the main reason for positive responses."
     assert cached_judge["status"] == "llm_completed"
-    assert cached_judge["buckets"][0]["assessment"] == "This bucket repeatedly mentions affordability."
+    assert cached_judge["signalStats"][0]["present"] == 1
     assert cached_only["reporting"]["status"] == "completed"
 
 
@@ -619,6 +773,429 @@ def test_build_job_aggregation_promotes_subject_label_textual_to_categorical(
         "Introduction to Computer Science and Programming in Python": 1,
     }
     assert "textual" not in facet or facet.get("textual") is None
+
+
+def test_build_job_aggregation_groups_reason_by_declared_numeric_target(
+    tmp_path: Path,
+) -> None:
+    """A reason bound (explainsFacetKey) to a numeric rating groups by auto bands."""
+    job_dir = tmp_path / "job-feedback-common"
+    for index, (need, reason) in enumerate(
+        [
+            ("yes", "Clear and useful guidance."),
+            ("partially", "Helpful but incomplete."),
+            ("no", "Did not address my constraint."),
+        ]
+    ):
+        _write_trial(
+            job_dir,
+            f"trial-{index}",
+            {
+                "presenceCheck": {"passed": True},
+                "contexts": [
+                    {
+                        "key": "user_feedback.primary",
+                        "label": "User feedback",
+                        "contextType": "user_feedback",
+                        "facets": [
+                            {
+                                "key": "overall_experience_rating",
+                                "label": "Overall experience rating",
+                                "role": "score",
+                                "kind": "numerical",
+                                "value": 5 + index,
+                            },
+                            {
+                                "key": "feedback_reason",
+                                "label": "Feedback reason",
+                                "role": "explanation",
+                                "kind": "textual",
+                                # Explicit binding: reason explains the rating.
+                                "explainsFacetKey": "overall_experience_rating",
+                                "value": reason,
+                            },
+                            {
+                                "key": "need_constraint_satisfaction",
+                                "label": "Need or constraint satisfaction",
+                                "role": "evidence",
+                                "kind": "categorical",
+                                "value": need,
+                            },
+                            {
+                                "key": "clarification_questions_useful",
+                                "label": "Clarification questions useful",
+                                "role": "primary",
+                                "kind": "categorical",
+                                "value": "true" if index == 0 else "false",
+                            },
+                        ],
+                    }
+                ],
+            },
+        )
+
+    aggregation = build_job_aggregation(job_dir, enable_llm=False)
+    assert aggregation is not None
+    feedback = next(
+        context
+        for context in aggregation["contexts"]
+        if context.get("contextType") == "user_feedback"
+    )
+    views = feedback.get("crossFacetViews") or []
+    assert len(views) >= 1
+    view = next(
+        view
+        for view in views
+        if str(view.get("textFacetKey") or "").endswith("feedback_reason")
+    )
+    # Grouped by the declared rating target (auto-binned), not by needs met.
+    assert str(view.get("primaryFacetKey") or "").endswith("overall_experience_rating")
+    assert len(view.get("buckets") or []) == 3
+    # No reason should be grouped by need_constraint_satisfaction anymore.
+    assert not any(
+        str(view.get("primaryFacetKey") or "").endswith("need_constraint_satisfaction")
+        for view in views
+    )
+
+
+def test_build_job_aggregation_skips_constant_task_goal_cross_facet(tmp_path: Path) -> None:
+    job_dir = tmp_path / "job-skip-goal"
+    for index, status in enumerate(["resolved", "partially_resolved", "not_resolved"]):
+        _write_trial(
+            job_dir,
+            f"trial-{index}",
+            {
+                "presenceCheck": {"passed": True},
+                "contexts": [
+                    {
+                        "key": "task_outcome.primary",
+                        "label": "Task outcome",
+                        "contextType": "task_outcome",
+                        "facets": [
+                            {
+                                "key": "outcome_status",
+                                "label": "Outcome status",
+                                "role": "primary",
+                                "kind": "categorical",
+                                "value": status,
+                            },
+                            {
+                                "key": "outcome_reason",
+                                "label": "Outcome reason",
+                                "role": "explanation",
+                                "kind": "textual",
+                                "explainsFacetKey": "outcome_status",
+                                "value": f"Reason for {status}",
+                            },
+                            {
+                                "key": "task_goal_label",
+                                "label": "Task goal",
+                                "role": "evidence",
+                                "kind": "textual",
+                                "value": "Get useful medical guidance",
+                            },
+                        ],
+                    }
+                ],
+            },
+        )
+
+    aggregation = build_job_aggregation(job_dir, enable_llm=False)
+    assert aggregation is not None
+    outcome = aggregation["contexts"][0]
+    views = outcome.get("crossFacetViews") or []
+    text_keys = [str(view.get("textFacetKey") or "") for view in views]
+    assert any(key.endswith("outcome_reason") for key in text_keys)
+    assert not any(key.endswith("task_goal_label") for key in text_keys)
+
+
+def test_verifier_binding_forces_explanation_role(tmp_path: Path) -> None:
+    """A textual facet that declares explainsFacetKey is treated as an explanation
+    regardless of the role the verifier tagged, and groups by its declared target."""
+    job_dir = tmp_path / "job-role-binding"
+    for index, status in enumerate(["selected", "rejected", "deferred"]):
+        _write_trial(
+            job_dir,
+            f"trial-{index}",
+            {
+                "presenceCheck": {"passed": True},
+                "contexts": [
+                    {
+                        "key": "decision.primary",
+                        "label": "Primary decision",
+                        "contextType": "decision",
+                        "facets": [
+                            {
+                                "key": "decision_outcome",
+                                "label": "Decision outcome",
+                                "role": "primary",
+                                "kind": "categorical",
+                                "value": status,
+                            },
+                            {
+                                "key": "reason",
+                                "label": "Reason",
+                                # Deliberately mis-tagged: the binding must win.
+                                "role": "evidence",
+                                "kind": "textual",
+                                "explainsFacetKey": "decision_outcome",
+                                "value": f"Chose to {status} because option {index}.",
+                            },
+                        ],
+                    }
+                ],
+            },
+        )
+
+    aggregation = build_job_aggregation(job_dir, enable_llm=False)
+    assert aggregation is not None
+    decision = aggregation["contexts"][0]
+    reason_facet = next(
+        facet for facet in decision["facets"] if facet["facetKey"] == "reason"
+    )
+    # The declared binding overrides the (wrong) verifier role.
+    assert reason_facet["role"] == "explanation"
+    views = decision.get("crossFacetViews") or []
+    view = next(
+        view for view in views if str(view.get("textFacetKey") or "").endswith("reason")
+    )
+    assert str(view.get("primaryFacetKey") or "").endswith("decision_outcome")
+
+
+def _write_persona_trial(
+    job_dir: Path,
+    repo_root: Path,
+    *,
+    task: str,
+    trial: str,
+    persona_id: str,
+    dimensions: dict,
+    contexts: list,
+) -> None:
+    trial_dir = job_dir / trial
+    (trial_dir / "verifier").mkdir(parents=True, exist_ok=True)
+    (trial_dir / "result.json").write_text("{}", encoding="utf-8")
+    persona_rel = f"application/tasks/{task}/personas/persona_{persona_id}.yaml"
+    persona_abs = repo_root / persona_rel
+    persona_abs.parent.mkdir(parents=True, exist_ok=True)
+    dim_lines = "\n".join(f"  {key}: {value}" for key, value in dimensions.items())
+    persona_abs.write_text(f"dimensions:\n{dim_lines}\n", encoding="utf-8")
+    (trial_dir / "config.json").write_text(
+        json.dumps(
+            {
+                "task": {"path": f"application/tasks/{task}"},
+                "agent": {"kwargs": {"persona_path": persona_rel}},
+            }
+        ),
+        encoding="utf-8",
+    )
+    (trial_dir / "verifier" / "structured_output.json").write_text(
+        json.dumps({"presenceCheck": {"passed": True}, "contexts": contexts}),
+        encoding="utf-8",
+    )
+
+
+def _persona_feedback_contexts(rating, need, preference, reason):
+    return [
+        {
+            "key": "user_feedback.primary",
+            "label": "User feedback",
+            "contextType": "user_feedback",
+            "facets": [
+                {
+                    "key": "overall_experience_rating",
+                    "label": "Overall experience rating",
+                    "role": "score",
+                    "kind": "numerical",
+                    "value": rating,
+                },
+                {
+                    "key": "need_constraint_satisfaction",
+                    "label": "Need or constraint satisfaction",
+                    "role": "evidence",
+                    "kind": "categorical",
+                    "value": need,
+                },
+                {
+                    "key": "personal_preference_satisfaction",
+                    "label": "Personal preference satisfaction",
+                    "role": "evidence",
+                    "kind": "categorical",
+                    "value": preference,
+                },
+                {
+                    "key": "feedback_reason",
+                    "label": "Feedback reason",
+                    "role": "explanation",
+                    "kind": "textual",
+                    "explainsFacetKey": "overall_experience_rating",
+                    "value": reason,
+                },
+            ],
+        }
+    ]
+
+
+def test_persona_distributions_are_config_driven(tmp_path: Path) -> None:
+    """Default persona lens is driven by reporting.json (contextRules → distributions):
+    only declared facets become default cards, the explorer options enumerate every
+    eligible facet × dimension, and free-text reasons are NOT auto-summarized. A
+    persona-grouped summary in the same rule renders in Custom analysis (task lens)."""
+    repo_root = tmp_path
+    task = "example-persona-auto"
+    task_dir = repo_root / "application" / "tasks" / task
+    task_dir.mkdir(parents=True, exist_ok=True)
+    (task_dir / "persona_strategy.json").write_text(
+        json.dumps({"stratifyFields": ["life_stage"]}), encoding="utf-8"
+    )
+    (task_dir / "reporting.json").write_text(
+        json.dumps(
+            {
+                "contextRules": [
+                    {
+                        "match": {"contextType": "user_feedback"},
+                        "distributions": [
+                            {"facetKey": "overall_experience_rating"},
+                            {"facetKey": "need_constraint_satisfaction"},
+                        ],
+                        "summaryAnalyses": [
+                            {
+                                "id": "user_feedback.reason_by_life_stage",
+                                "title": "What each life stage wanted",
+                                "targetFacetKey": "feedback_reason",
+                                "groupByPersonaDimension": "life_stage",
+                                "summaryKind": "llm_bucket_summary",
+                            }
+                        ],
+                    }
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+    job_dir = repo_root / "jobs" / "job"
+    rows = [
+        ("p1", "new_parent", 6, "yes", "partially", "Needed reassurance."),
+        ("p2", "new_parent", 7, "partially", "yes", "Wanted clear next steps."),
+        ("p3", "retiree", 9, "yes", "yes", "Cost was transparent."),
+        ("p4", "retiree", 8, "no", "no", "Felt understood."),
+    ]
+    for persona_id, life_stage, rating, need, preference, reason in rows:
+        _write_persona_trial(
+            job_dir,
+            repo_root,
+            task=task,
+            trial=f"trial-{persona_id}",
+            persona_id=persona_id,
+            dimensions={"life_stage": life_stage},
+            contexts=_persona_feedback_contexts(rating, need, preference, reason),
+        )
+
+    aggregation = build_job_aggregation(job_dir, repo_root=repo_root, enable_llm=False)
+    assert aggregation is not None
+    feedback = next(
+        context
+        for context in aggregation["contexts"]
+        if context.get("contextType") == "user_feedback"
+    )
+    # Default cards: only the two declared facets, no more.
+    distributions = feedback.get("personaDistributions") or []
+    by_facet = {dist["facetKey"]: dist for dist in distributions}
+    assert set(by_facet) == {"overall_experience_rating", "need_constraint_satisfaction"}
+    rating_dist = by_facet["overall_experience_rating"]
+    assert rating_dist["kind"] == "numerical"
+    assert rating_dist["groupByPersonaDimension"] == "life_stage"
+    assert rating_dist["lens"] == "persona"
+    assert len(rating_dist["buckets"]) == 2
+    assert all(bucket["numerical"]["avg"] is not None for bucket in rating_dist["buckets"])
+    need_dist = by_facet["need_constraint_satisfaction"]
+    assert need_dist["kind"] == "categorical"
+    assert need_dist.get("categories")
+    assert all("categorical" in bucket for bucket in need_dist["buckets"])
+    # Explorer options enumerate every eligible facet — including the undeclared one.
+    option_facets = {
+        opt["facetKey"] for opt in feedback.get("personaDistributionOptions") or []
+    }
+    assert "personal_preference_satisfaction" in option_facets
+    assert "overall_experience_rating" in option_facets
+    # ...but the undeclared facet is not a default card.
+    assert "personal_preference_satisfaction" not in by_facet
+    # Routing is by directive type, not rule list: no summary lands in the persona
+    # tab; every LLM summary lives in Custom analysis (task lens).
+    summaries = feedback.get("summaries") or []
+    assert all(summary.get("lens") != "persona" for summary in summaries)
+    # The declared persona-grouped summary is present, tagged task lens, and the
+    # persona-attribute grouping was inferred from groupByPersonaDimension.
+    life_stage_summary = next(
+        summary
+        for summary in summaries
+        if summary.get("groupByPersonaDimension") == "life_stage"
+    )
+    assert life_stage_summary["lens"] == "task"
+    assert life_stage_summary["groupByMode"] == "persona_attribute"
+
+
+def test_persona_distribution_dimensions_fall_back_to_filters(tmp_path: Path) -> None:
+    """When persona_strategy has no stratifyFields, distribution directives without
+    explicit axes default to the dimensionFilters keys."""
+    repo_root = tmp_path
+    task = "example-persona-filters"
+    task_dir = repo_root / "application" / "tasks" / task
+    task_dir.mkdir(parents=True, exist_ok=True)
+    (task_dir / "persona_strategy.json").write_text(
+        json.dumps(
+            {
+                "dimensionFilters": {
+                    "life_stage": ["new_parent", "retiree"],
+                }
+            }
+        ),
+        encoding="utf-8",
+    )
+    (task_dir / "reporting.json").write_text(
+        json.dumps(
+            {
+                "contextRules": [
+                    {
+                        "match": {"contextType": "user_feedback"},
+                        "distributions": [{"facetKey": "overall_experience_rating"}],
+                    }
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+    job_dir = repo_root / "jobs" / "job"
+    rows = [
+        ("p1", "new_parent", 6, "yes", "partially", "a"),
+        ("p2", "new_parent", 7, "partially", "yes", "b"),
+        ("p3", "retiree", 9, "yes", "yes", "c"),
+        ("p4", "retiree", 8, "no", "no", "d"),
+    ]
+    for persona_id, life_stage, rating, need, preference, reason in rows:
+        _write_persona_trial(
+            job_dir,
+            repo_root,
+            task=task,
+            trial=f"trial-{persona_id}",
+            persona_id=persona_id,
+            dimensions={"life_stage": life_stage},
+            contexts=_persona_feedback_contexts(rating, need, preference, reason),
+        )
+
+    aggregation = build_job_aggregation(job_dir, repo_root=repo_root, enable_llm=False)
+    assert aggregation is not None
+    feedback = next(
+        context
+        for context in aggregation["contexts"]
+        if context.get("contextType") == "user_feedback"
+    )
+    distributions = feedback.get("personaDistributions") or []
+    rating_dist = next(
+        dist for dist in distributions if dist["facetKey"] == "overall_experience_rating"
+    )
+    # No stratifyFields → fell back to the dimensionFilters key.
+    assert rating_dist["groupByPersonaDimension"] == "life_stage"
 
 
 def test_aggregate_textual_clusters_near_duplicate_free_text(tmp_path: Path) -> None:

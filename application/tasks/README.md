@@ -184,7 +184,7 @@ shape below is an **opt-in** Layer 2 example when `askRationale` is true:
       "match": {
         "contextType": "question_response"
       },
-      "summaryDirectives": [
+      "summaryAnalyses": [
         {
           "id": "question.reason_by_response",
           "targetFacetKey": "reason",
@@ -193,7 +193,7 @@ shape below is an **opt-in** Layer 2 example when `askRationale` is true:
           "summaryKind": "llm_bucket_summary"
         }
       ],
-      "judgeDirectives": [
+      "signalScans": [
         {
           "id": "question.reason_signal_scan",
           "targetFacetKey": "reason",
