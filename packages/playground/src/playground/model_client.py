@@ -9,6 +9,7 @@ from typing import Any, Dict, Optional
 from playground.openai_client import OpenAIChatClient, coerce_json
 
 DASHSCOPE_DEFAULT_BASE_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1"
+DEEPSEEK_DEFAULT_BASE_URL = "https://api.deepseek.com/v1"
 
 
 def dashscope_model_id(model: str) -> str:
@@ -30,6 +31,25 @@ def dashscope_openai_client_kwargs(model: str) -> Dict[str, str]:
         os.environ.get("DASHSCOPE_API_BASE")
         or os.environ.get("LLM_BASE_URL")
         or DASHSCOPE_DEFAULT_BASE_URL
+    ).strip()
+    return {
+        "model": dashscope_model_id(model),
+        "api_key": api_key,
+        "base_url": base_url,
+    }
+
+
+def deepseek_openai_client_kwargs(model: str) -> Dict[str, str]:
+    """OpenAI SDK kwargs for DeepSeek chat."""
+    api_key = (os.environ.get("DEEPSEEK_API_KEY") or "").strip()
+    if not api_key:
+        raise RuntimeError(
+            "DEEPSEEK_API_KEY is required for persona model {!r}".format(model)
+        )
+    base_url = (
+        os.environ.get("DEEPSEEK_API_BASE")
+        or os.environ.get("LLM_BASE_URL")
+        or DEEPSEEK_DEFAULT_BASE_URL
     ).strip()
     return {
         "model": dashscope_model_id(model),

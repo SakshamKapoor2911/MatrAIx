@@ -218,6 +218,17 @@ def build_tool_step_client(
             temperature=temperature,
             capabilities=capabilities,
         )
+    if value.startswith("deepseek/"):
+        from playground.model_client import deepseek_openai_client_kwargs
+
+        kwargs = deepseek_openai_client_kwargs(value)
+        return OpenAIToolStepClient(
+            kwargs["model"],
+            api_key=kwargs["api_key"],
+            base_url=kwargs["base_url"],
+            temperature=temperature,
+            capabilities=capabilities,
+        )
     if value.startswith("openai/"):
         return OpenAIToolStepClient(
             value.split("/", 1)[1],
