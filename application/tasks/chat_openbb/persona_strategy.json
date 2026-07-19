@@ -1,17 +1,13 @@
 {
   "schemaVersion": "1.0",
   "sources": [],
-  "defaultMode": "random",
+  "defaultMode": "stratified",
   "dimensionFilters": {
-    "domain": [
-      "Finance & Economics",
-      "Business & Management"
-    ],
-    "age_bracket": [
-      "25-34",
-      "35-44",
-      "55-64"
-    ]
+    "investment_experience": ["Beginner", "Intermediate", "Advanced"],
+    "risk_tolerance": ["Conservative", "Moderate", "Aggressive"],
+    "research_focus": ["Equities", "ETFs & Funds", "Macro & Economics", "Crypto", "Fixed Income"],
+    "financial_literacy": ["Low", "Medium", "High"]
   },
-  "sampleSize": 6
+  "stratifyFields": ["investment_experience"],
+  "sampleSize": 5
 }
