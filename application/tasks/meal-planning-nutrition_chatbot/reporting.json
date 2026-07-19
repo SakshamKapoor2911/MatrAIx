@@ -5,6 +5,13 @@
       "match": {
         "contextType": "task_outcome"
       },
+      "distributions": [
+        {
+          "id": "task_outcome.status_by_segment",
+          "facetKey": "outcome_status",
+          "title": "Outcome status"
+        }
+      ],
       "summaryDirectives": [
         {
           "id": "task_outcome.reason_by_status",
@@ -87,6 +94,18 @@
       "match": {
         "contextType": "user_feedback"
       },
+      "distributions": [
+        {
+          "id": "user_feedback.rating_by_segment",
+          "facetKey": "overall_experience_rating",
+          "title": "Overall experience rating"
+        },
+        {
+          "id": "user_feedback.need_by_segment",
+          "facetKey": "need_constraint_satisfaction",
+          "title": "Need or constraint satisfaction"
+        }
+      ],
       "summaryDirectives": [
         {
           "id": "user_feedback.reason_by_clarification_value",
