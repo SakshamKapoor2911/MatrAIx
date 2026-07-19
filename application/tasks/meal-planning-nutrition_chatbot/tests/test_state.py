@@ -197,6 +197,7 @@ def main() -> None:
                     "label": "Outcome reason",
                     "role": "explanation",
                     "kind": "textual",
+                    "explainsFacetKey": "outcome_status",
                     "value": reason,
                 },
                 {
@@ -232,6 +233,7 @@ def main() -> None:
                     "label": "Process notes",
                     "role": "explanation",
                     "kind": "textual",
+                    "explainsFacetKey": "conversation_path",
                     "value": process_notes,
                 },
                 {
@@ -285,6 +287,7 @@ def main() -> None:
                     "label": "Feedback reason",
                     "role": "explanation",
                     "kind": "textual",
+                    "explainsFacetKey": "overall_experience_rating",
                     "value": fd["reason"],
                 },
                 {
