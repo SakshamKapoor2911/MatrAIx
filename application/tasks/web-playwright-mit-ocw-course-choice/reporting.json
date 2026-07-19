@@ -5,6 +5,13 @@
       "match": {
         "contextType": "task_outcome"
       },
+      "distributions": [
+        {
+          "id": "task_outcome.status_by_segment",
+          "facetKey": "outcome_status",
+          "title": "Outcome status"
+        }
+      ],
       "summaryDirectives": [
         {
           "id": "task_outcome.explanation_by_status",
@@ -84,6 +91,18 @@
       "match": {
         "contextType": "user_feedback"
       },
+      "distributions": [
+        {
+          "id": "user_feedback.rating_by_segment",
+          "facetKey": "overall_experience_rating",
+          "title": "Overall experience rating"
+        },
+        {
+          "id": "user_feedback.need_by_segment",
+          "facetKey": "need_constraint_satisfaction",
+          "title": "Need or constraint satisfaction"
+        }
+      ],
       "summaryDirectives": [
         {
           "id": "user_feedback.reason_by_need_satisfaction",
@@ -133,6 +152,13 @@
       "match": {
         "contextType": "decision"
       },
+      "distributions": [
+        {
+          "id": "decision.basis_by_segment",
+          "facetKey": "basis_primary",
+          "title": "Primary choice basis"
+        }
+      ],
       "summaryDirectives": [
         {
           "id": "decision.reason_by_outcome",
@@ -200,6 +226,13 @@
       "match": {
         "contextType": "decision_process"
       },
+      "distributions": [
+        {
+          "id": "decision_process.style_by_segment",
+          "facetKey": "exploration_style",
+          "title": "Exploration style"
+        }
+      ],
       "summaryDirectives": [
         {
           "id": "decision_process.notes_by_style",

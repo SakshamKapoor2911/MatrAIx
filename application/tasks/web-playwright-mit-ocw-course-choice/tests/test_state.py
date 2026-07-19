@@ -194,6 +194,7 @@ def _execution_contexts(
                     "label": "Outcome explanation",
                     "role": "explanation",
                     "kind": "textual",
+                    "explainsFacetKey": "outcome_status",
                     "value": (
                         f"The persona selected {subject_label} after recording "
                         f"{candidate_count} distinct MIT OCW candidates."
@@ -249,6 +250,7 @@ def _execution_contexts(
                     "label": "Artifact evidence",
                     "role": "explanation",
                     "kind": "textual",
+                    "explainsFacetKey": "artifact_status",
                     "value": "The selection metadata is internally consistent with the candidate list.",
                 },
             ],
@@ -270,6 +272,7 @@ def _execution_contexts(
                     "label": "Web interaction notes",
                     "role": "explanation",
                     "kind": "textual",
+                    "explainsFacetKey": "navigation_path_type",
                     "value": (
                         "The submission records a compare-then-commit path with "
                         f"{candidate_count} distinct course candidates."
@@ -358,6 +361,7 @@ def test_output_schema() -> None:
             "label": "Reason",
             "role": "explanation",
             "kind": "textual",
+            "explainsFacetKey": "decision_outcome",
             "value": reason,
         },
         {
@@ -439,6 +443,7 @@ def test_output_schema() -> None:
                         "label": "Comparison notes",
                         "role": "explanation",
                         "kind": "textual",
+                        "explainsFacetKey": "exploration_style",
                         "value": "Compared: " + "; ".join(
                             candidate["decision_subject_label"] for candidate in candidates
                         ),
@@ -463,6 +468,7 @@ def test_output_schema() -> None:
                 "label": "Feedback reason",
                 "role": "explanation",
                 "kind": "textual",
+                "explainsFacetKey": "overall_experience_rating",
                 "value": feedback["feedback_reason"],
             },
             {
