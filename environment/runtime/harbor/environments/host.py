@@ -5,6 +5,7 @@ from __future__ import annotations
 import asyncio
 import os
 import re
+import shlex
 import shutil
 from pathlib import Path, PurePosixPath
 
@@ -18,8 +19,19 @@ from harbor.models.task.config import EnvironmentConfig
 from harbor.models.trial.paths import EnvironmentPaths, TrialPaths
 
 _CONTAINER_PATH_PATTERN = re.compile(
-    r"/(?:app|tests)(?:/[^\s'\"`;]+)?|/logs/verifier(?:/[^\s'\"`;]+)?"
+    r"/(?:app|tests)(?:/[^\s'\"`;()]+)?|/logs/verifier(?:/[^\s'\"`;()]+)?"
 )
+
+_WINDOWS_DRIVE = re.compile(r"^([A-Za-z]):(?:\\|/)(.*)", re.ASCII)
+
+
+def _to_bash_path(path_str: str) -> str:
+    """Convert a Windows path to a WSL/bash-compatible forward-slash path."""
+    forward = path_str.replace("\\", "/")
+    m = _WINDOWS_DRIVE.match(forward)
+    if m:
+        return "/mnt/{}/{}".format(m.group(1).lower(), m.group(2))
+    return forward
 
 
 class HostEnvironment(BaseEnvironment):
@@ -113,9 +125,10 @@ class HostEnvironment(BaseEnvironment):
         rewritten = command
         for match in _CONTAINER_PATH_PATTERN.findall(rewritten):
             host_path = self.resolve_container_path(match.rstrip("/"))
+            host_str = shlex.quote(_to_bash_path(str(host_path)))
             if match.endswith("/"):
-                host_path = host_path / ""
-            rewritten = rewritten.replace(match, str(host_path), 1)
+                host_str += "/"
+            rewritten = rewritten.replace(match, host_str, 1)
         return rewritten
 
     @staticmethod
@@ -431,6 +444,21 @@ class HostEnvironment(BaseEnvironment):
         merged_env["PLAYGROUND_OUTPUT_DIR"] = str(output_dir)
         merged_env["HARBOR_VERIFIER_DIR"] = str(self.trial_paths.verifier_dir.resolve())
         merged_env["HARBOR_TESTS_DIR"] = str(self._tests_root.resolve())
+
+        # On Windows, WSL bash does not inherit Windows env vars automatically.
+        # Inject critical path env vars as inline bash exports. Non-path vars
+        # (e.g. API keys) are handled by the host Python process, not WSL bash.
+        if os.name == "nt":
+            _WSL_ENV_KEYS = ("MATRIX_OUTPUT_DIR", "PLAYGROUND_OUTPUT_DIR",
+                             "HARBOR_VERIFIER_DIR", "HARBOR_TESTS_DIR")
+            exports = []
+            for k in _WSL_ENV_KEYS:
+                v = merged_env.get(k)
+                if v:
+                    exports.append("export {}='{}'".format(k, _to_bash_path(v)))
+            if exports:
+                rewritten = "; ".join(exports) + "; " + rewritten
+
         return await self._run_command(
             ["bash", "-c", rewritten],
             cwd=workdir,

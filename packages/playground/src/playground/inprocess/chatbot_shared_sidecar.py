@@ -162,7 +162,10 @@ def _flock_path(compose_dir: Path, application_id: str) -> Path:
 
 
 def _with_file_lock(lock_path: Path, fn):  # noqa: ANN001
-    import fcntl
+    try:
+        import fcntl
+    except ImportError:
+        return fn()
 
     with lock_path.open("a+", encoding="utf-8") as handle:
         fcntl.flock(handle.fileno(), fcntl.LOCK_EX)
