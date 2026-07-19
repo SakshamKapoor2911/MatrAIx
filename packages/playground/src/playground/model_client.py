@@ -49,7 +49,9 @@ _DEEPSEEK_MODEL_MAP = {
 
 def deepseek_model_id(model: str) -> str:
     """Return the DeepSeek API model name from a Harbor persona model string."""
-    bare = dashscope_model_id(model)
+    bare = (model or "").strip()
+    if bare.startswith("deepseek/"):
+        bare = bare.split("/", 1)[1]
     return _DEEPSEEK_MODEL_MAP.get(bare, bare)
 
 
