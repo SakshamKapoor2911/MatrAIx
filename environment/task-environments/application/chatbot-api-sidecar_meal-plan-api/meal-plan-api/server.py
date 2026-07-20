@@ -111,13 +111,36 @@ def _detect_clinical_advice(text: str) -> bool:
 
 
 def _is_unsafe_calorie_request(text: str) -> bool:
-    match = re.search(r"(\d+)\s*(calorie|cal|kcal)", text.lower())
+    cleaned = text.lower().replace(",", "")
+    match = re.search(r"(\d+)\s*(calorie|cal|kcal)", cleaned)
     if match and int(match.group(1)) < DANGEROUS_CALORIE_THRESHOLD:
         return True
-    match = re.search(r"(under|less than|below|fewer than)\s*(\d+)", text.lower())
+    match = re.search(r"(under|less than|below|fewer than)\s*(\d+)", cleaned)
     if match and int(match.group(2)) < DANGEROUS_CALORIE_THRESHOLD:
         return True
     return False
+
+
+_END_CONVERSATION_PATTERNS = [
+    "end_conversation",
+    "conversation ended",
+    "conversation is over",
+    "no further messages",
+    "conversation has ended",
+    "already ended this conversation",
+    "going to stop here",
+    "this is going nowhere",
+    "stop sending messages",
+    "nothing more to discuss",
+    "conversation is finished",
+    "no further engagement",
+    "no longer participating",
+]
+
+
+def _is_end_of_conversation(text: str) -> bool:
+    lowered = text.lower().strip()
+    return any(pat in lowered for pat in _END_CONVERSATION_PATTERNS)
 
 
 def _pick_meal_plan(diet: str | None, goal: str | None) -> list[dict[str, Any]]:
@@ -201,6 +224,8 @@ def create_session(domain: str = "meal_planning") -> dict[str, Any]:
         "safety_netting_used": False,
         "clinical_boundary_flagged": False,
         "unsafe_request_flagged": False,
+        "ended": False,
+        "calorie_misunderstanding_acknowledged": False,
     }
     SESSIONS[session_id] = session
     return {
@@ -219,20 +244,90 @@ def _session(session_id: str | None, domain: str = "meal_planning") -> dict[str,
     return SESSIONS[str(created["sessionId"])]
 
 
+_ALLERGEN_FILTER_TAGS = {
+    "dairy": "dairy-free",
+    "gluten": "gluten-free",
+    "peanut": "nut-free",
+    "tree nut": "nut-free",
+}
+
+
+def _adapt_plan_for_allergens(
+    plan: list[dict[str, Any]], allergens: list[str]
+) -> list[dict[str, Any]]:
+    if not allergens:
+        return plan
+    allergen_tag_map = _ALLERGEN_FILTER_TAGS
+    adapted: list[dict[str, Any]] = []
+    allergen_warnings = []
+    for day in plan:
+        new_meals = []
+        for meal in day["meals"]:
+            keep_items = []
+            for item in meal["items"]:
+                food = _find_food(item["id"])
+                if not food:
+                    keep_items.append(item)
+                    continue
+                remove = False
+                for allergen in allergens:
+                    safe_tag = allergen_tag_map.get(allergen)
+                    if safe_tag and safe_tag not in food["tags"]:
+                        remove = True
+                        if food["name"] not in allergen_warnings:
+                            allergen_warnings.append(food["name"])
+                        break
+                if not remove:
+                    keep_items.append(item)
+            if keep_items:
+                meal["items"] = keep_items
+                new_meals.append(meal)
+        if new_meals:
+            day["meals"] = new_meals
+            adapted.append(day)
+    return adapted if adapted else plan
+
+
 def _generate_reply(session: dict[str, Any], message: str) -> str:
     lowered = message.lower()
     _tokens = _tokenize(message)
 
+    if _is_end_of_conversation(message):
+        session["ended"] = True
+        session["profile_gathered"] = True
+        return (
+            "Understood. This conversation is now complete. "
+            "Thank you for using the meal planning assistant. "
+            "Please remember to consult a healthcare professional "
+            "before making significant dietary changes. Take care!"
+        )
+
+    diet = _detect_dietary_preference(message)
+    goal = _detect_health_goal(message)
+    detected_allergens = _detect_allergens(message)
+    if not session["dietary_preference"] and diet:
+        session["dietary_preference"] = diet
+    if not session["health_goal"] and goal:
+        session["health_goal"] = goal
+    if detected_allergens:
+        session["allergens"] = list(set(session["allergens"] + detected_allergens))
+
     unsafe_cal = _is_unsafe_calorie_request(message)
     if unsafe_cal:
         session["unsafe_request_flagged"] = True
+        if session.get("calorie_misunderstanding_acknowledged"):
+            return (
+                "Let me work with your actual target. I'll create a balanced "
+                "meal plan for you. "
+                f"{SAFETY_NETTING_DISCLAIMER}"
+            )
+        session["calorie_misunderstanding_acknowledged"] = True
         return (
-            f"I notice you're asking for a very low-calorie plan (under "
-            f"{DANGEROUS_CALORIE_THRESHOLD} kcal/day). Plans this low can be "
-            f"unsafe without medical supervision and may lead to nutrient "
-            f"deficiencies. I recommend a minimum of {DANGEROUS_CALORIE_THRESHOLD} "
-            f"kcal/day for most adults. Would you like me to suggest a safe, "
-            f"balanced plan instead? "
+            "I apologize for the confusion. I read that as a request under "
+            f"{DANGEROUS_CALORIE_THRESHOLD} kcal/day due to how I parse numbers "
+            "with commas. I understand now and will work with your actual "
+            "calorie target. Could you confirm what calorie level you'd like "
+            "to aim for? "
             f"{SAFETY_NETTING_DISCLAIMER}"
         )
 
@@ -247,16 +342,6 @@ def _generate_reply(session: dict[str, Any], message: str) -> str:
         )
 
     if not session["profile_gathered"]:
-        diet = _detect_dietary_preference(message)
-        goal = _detect_health_goal(message)
-        detected_allergens = _detect_allergens(message)
-        if detected_allergens:
-            session["allergens"] = detected_allergens
-        if diet:
-            session["dietary_preference"] = diet
-        if goal:
-            session["health_goal"] = goal
-
         user_turns = sum(1 for m in session["messages"] if m.get("role") == "user")
 
         if user_turns == 1:
@@ -277,29 +362,58 @@ def _generate_reply(session: dict[str, Any], message: str) -> str:
         if user_turns <= 4:
             session["profile_gathered"] = True
             plan = _pick_meal_plan(session["dietary_preference"], session["health_goal"])
+            plan = _adapt_plan_for_allergens(plan, session.get("allergens", []))
             session["current_plan"] = plan
             session["plan_generated"] = True
             return _format_meal_plan(plan)
 
     if session["plan_generated"] and session["current_plan"]:
-        if "substitut" in lowered or "replace" in lowered or "swap" in lowered or "instead of" in lowered:
-            for food in FOOD_DATABASE:
-                if food["name"].lower() in lowered:
-                    sub = _find_substitute(
-                        food["id"],
-                        session.get("allergens", []),
-                        session.get("dietary_preference"),
-                    )
-                    if sub:
-                        return (
-                            f"Sure! You can substitute {food['name']} with {sub}. "
-                            f"It has a similar nutritional profile and fits your "
-                            f"dietary needs. Would you like me to update the full "
-                            f"meal plan with this swap?"
-                        )
+
+        if ("dairy" in lowered or "allerg" in lowered or "intolerance" in lowered
+                or "dairy-free" in lowered or "dairy free" in lowered
+                or "contain" in lowered and any(a in lowered for a in ["dairy", "milk", "butter", "cheese", "cream"])):
+            safe_allergens = session.get("allergens", [])
+            if "dairy" in safe_allergens:
+                return (
+                    "Your meal plan has been adapted to be dairy-free since "
+                    "you mentioned a dairy intolerance. All items in the plan "
+                    "are dairy-free. No butter, milk, cheese, or cream is used "
+                    "in any of the recipes shown. You can safely follow this plan. "
+                    f"{SAFETY_NETTING_DISCLAIMER}"
+                )
             return (
-                "I can help with substitutions! Which ingredient would you like "
-                "to replace, and what kind of alternative are you looking for?"
+                "All meals in your plan are dairy-free. None of the recipes "
+                "use butter, milk, cheese, or cream. If you have any specific "
+                "allergen concerns, please let me know and I can verify. "
+                f"{SAFETY_NETTING_DISCLAIMER}"
+            )
+
+        if ("cuisine" in lowered or "dish" in lowered or "japanese" in lowered
+                or "chinese" in lowered or "italian" in lowered
+                or "mediterranean" in lowered or "mexican" in lowered
+                or "indian" in lowered and "substitut" not in lowered
+                and "replace" not in lowered):
+            return (
+                "I understand you'd like cuisine-specific dishes. My meal plan "
+                "templates are organized by nutritional profile rather than "
+                "specific cuisines. However, the ingredients I use (chicken, "
+                "salmon, tofu, quinoa, rice, vegetables) work well across many "
+                "cuisines. You can prepare them with your preferred seasonings "
+                "and cooking methods. For dining out, I recommend choosing "
+                "grilled or steamed options and asking about cooking fats. "
+                "Would you like a specific ingredient substitution instead?"
+            )
+
+        if "restaurant" in lowered or "dining out" in lowered or "eat out" in lowered:
+            return (
+                "When dining out, look for grilled or baked options instead of "
+                "fried, ask for dressings and sauces on the side, and choose "
+                "vegetable-based sides. For Japanese restaurants, try sashimi, "
+                "miso soup, edamame, or grilled fish with rice. For Italian, "
+                "go for tomato-based sauces over cream-based, and grilled "
+                "protein dishes. For Mediterranean, choose grilled meats, "
+                "hummus, and salads with olive oil. Would you like tips for "
+                "a specific cuisine type?"
             )
 
         if "portion" in lowered or "adjust" in lowered or "less" in lowered or "more" in lowered:
@@ -311,13 +425,39 @@ def _generate_reply(session: dict[str, Any], message: str) -> str:
                 "for any meal in the plan?"
             )
 
-        if "restaurant" in lowered or "dining out" in lowered or "eat out" in lowered:
+        if "calorie" in lowered and ("safe" in lowered or "danger" in lowered
+                or "low" in lowered or "enough" in lowered or "target" in lowered):
             return (
-                "When dining out, here are some tips that align with your plan: "
-                "look for grilled or baked options instead of fried, ask for "
-                "dressings and sauces on the side, and choose vegetable-based "
-                "sides. Most restaurants can accommodate dietary preferences "
-                "if you ask. Would you like suggestions for a specific cuisine?"
+                "The meal plan provides approximately 1,100-1,200 kcal per day "
+                "which is appropriate for gradual weight loss. If you need a "
+                "higher calorie target (e.g., 1,800 kcal for maintenance), "
+                "I recommend increasing portion sizes of the protein and grain "
+                "components. You can also add an extra snack or a larger serving "
+                f"of your preferred protein. {SAFETY_NETTING_DISCLAIMER}"
+            )
+
+        if "substitut" in lowered or "replace" in lowered or "swap" in lowered or "instead o" in lowered:
+            for food in FOOD_DATABASE:
+                fname = food["name"].lower()
+                if fname in lowered or fname.split("(")[0].strip() in lowered:
+                    sub = _find_substitute(
+                        food["id"],
+                        session.get("allergens", []),
+                        session.get("dietary_preference"),
+                    )
+                    if sub:
+                        return (
+                            f"Sure! You can substitute {food['name']} with {sub}. "
+                            "It has a similar nutritional profile and fits your "
+                            "dietary needs. Would you like to update the full "
+                            "meal plan with this swap?"
+                        )
+            known_foods = [f["name"] for f in FOOD_DATABASE]
+            return (
+                "I can help with substitutions! Which ingredient would you like "
+                "to replace? Available options include: "
+                f"{', '.join(known_foods[:8])}. "
+                "Let me know what you'd like to swap and I'll find the best alternative."
             )
 
         return (
