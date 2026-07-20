@@ -121,6 +121,13 @@ PLAYGROUND_TASK_INDEX: Dict[str, PlaygroundTaskEntry] = {
         output_artifact="portfolio_backtest.json",
         submission_profile="portfolio_backtest",
     ),
+    "web-notion-plan-comparison": PlaygroundTaskEntry(
+        application_type="web",
+        site_name="Notion pricing",
+        site_url="https://www.notion.com/pricing",
+        output_artifact="notion_plan_comparison.json",
+        submission_profile="notion_plan_comparison",
+    ),
     # Chatbot
     "chat_recai": PlaygroundTaskEntry(application_type="chatbot"),
     "chat_openbb": PlaygroundTaskEntry(application_type="chatbot"),

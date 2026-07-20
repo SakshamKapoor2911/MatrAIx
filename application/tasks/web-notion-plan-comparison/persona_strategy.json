@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "1.0",
+  "pool": "persona/datasets/bench-dev-sample",
+  "sources": [],
+  "defaultMode": "stratified",
+  "dimensionFilters": {
+    "company_size": [
+      "Solo / freelance",
+      "Startup (<50)",
+      "SMB (50-500)",
+      "Mid (500-5k)",
+      "Enterprise (5k+)",
+      "Public sector",
+      "Academia",
+      "NGO"
+    ],
+    "economic_motivation": [
+      "Cost-sensitive",
+      "Value-driven",
+      "Premium-seeking",
+      "Indifferent"
+    ],
+    "age_bracket": [
+      "18-24",
+      "25-34",
+      "35-44",
+      "45-54",
+      "55-64",
+      "65-74"
+    ],
+    "english_proficiency": [
+      "Intermediate (B1-B2)",
+      "Fluent (C1-C2)",
+      "Native"
+    ]
+  },
+  "stratifyFields": [
+    "company_size",
+    "economic_motivation"
+  ],
+  "sampleSizePerValueGroup": 1
+}
