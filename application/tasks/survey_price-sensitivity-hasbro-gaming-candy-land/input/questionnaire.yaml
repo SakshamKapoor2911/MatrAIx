@@ -1,0 +1,48 @@
+schemaVersion: "1.0"
+id: price_sensitivity_v1
+title: "Price Sensitivity Survey — Hasbro Gaming Candy Land Kingdom"
+description: "How sensitive the persona is to this product's price and where their thresholds sit. This edition asks about Hasbro Gaming Candy Land Kingdom."
+questions:
+  - id: q_price_matters
+    prompt: "The price is the single most important factor in whether I would buy the Hasbro Gaming Candy Land Kingdom."
+    type: likert
+    construct: price_centrality
+    required: true
+    minValue: 1
+    maxValue: 5
+  - id: q_too_expensive
+    prompt: "At its current price, the Hasbro Gaming Candy Land Kingdom feels too expensive for me."
+    type: likert
+    construct: price_pain
+    required: true
+    minValue: 1
+    maxValue: 5
+  - id: q_threshold
+    prompt: "What best describes your reaction to the current price?"
+    type: single_choice
+    construct: price_threshold
+    required: true
+    options:
+      - id: "cheap_stock_up"
+        label: "So reasonable I might buy more than one."
+      - id: "fair_buy"
+        label: "Fair enough that I would just buy it."
+      - id: "hesitate"
+        label: "High enough that I would hesitate."
+      - id: "only_on_sale"
+        label: "I would only buy it on sale."
+      - id: "walk_away"
+        label: "High enough that I would walk away."
+  - id: q_price_vs_quality
+    prompt: "When you weigh price against quality here, which wins?"
+    type: single_choice
+    construct: price_quality_tradeoff
+    required: true
+    askRationale: true
+    options:
+      - id: "price_first"
+        label: "I prioritize the lowest price."
+      - id: "balance"
+        label: "I want a balance of price and quality."
+      - id: "quality_first"
+        label: "I will pay more for quality."
