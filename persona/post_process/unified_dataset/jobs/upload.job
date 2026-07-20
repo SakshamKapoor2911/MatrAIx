@@ -1,0 +1,33 @@
+#!/bin/bash
+#SBATCH -p seas_compute
+#SBATCH -n 1
+#SBATCH -c 8
+#SBATCH --mem=16G
+#SBATCH -t 3-00:00
+#SBATCH -o sbatch_logs/%x_%j.out
+#SBATCH -e sbatch_logs/%x_%j.err
+#SBATCH --mail-type=FAIL,END
+#SBATCH --mail-user=xiaominli@g.harvard.edu
+set -euo pipefail
+
+OUTPUT="${OUTPUT:?}"
+REPO_ID="${REPO_ID:-MatrAIx2026/Persona8B}"
+REVISION="${REVISION:-unified-8.4b}"
+if [[ -z "${HF_TOKEN_matraix:-}" && -z "${HF_TOKEN:-}" ]]; then
+  echo "No Hugging Face token is available. Export HF_TOKEN_matraix before submitting." >&2
+  exit 2
+fi
+export HF_TOKEN="${HF_TOKEN_matraix:-$HF_TOKEN}"
+"${PYTHON_BIN:?}" - <<'PY'
+import os
+from huggingface_hub import HfApi
+
+HfApi(token=os.environ["HF_TOKEN"]).create_branch(
+    repo_id=os.environ.get("REPO_ID", "MatrAIx2026/Persona8B"),
+    branch=os.environ.get("REVISION", "unified-8.4b"),
+    repo_type="dataset",
+    exist_ok=True,
+)
+PY
+hf upload-large-folder "$REPO_ID" "$OUTPUT" --repo-type dataset \
+  --revision "$REVISION" --num-workers 8 --token "$HF_TOKEN"

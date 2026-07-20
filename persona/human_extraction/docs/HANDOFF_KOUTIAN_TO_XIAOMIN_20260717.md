@@ -1,5 +1,13 @@
 # Amazon 100K Extraction — Koutian to Xiaomin Continuation (2026-07-17)
 
+> **Completion update (2026-07-19):** the continuation finished successfully.
+> `EXTRACTION_COMPLETE.json` reports 61,781 newly completed users and 100,000
+> global users. Independent validation against the authoritative selection
+> confirmed 256/256 exact bucket sets, 100,000 unique users, zero missing or
+> extra users, valid JSON, `medium_b`, and exactly 1,290 fields per row. The
+> existing 91,307-user frozen snapshot predates completion and still needs to be
+> rebuilt before publishing the full 100K package.
+
 This document records Xiaomin Li's takeover of the Amazon reviewer persona
 extraction after Koutian Wu's GPU allocation ended. It supersedes
 `../AMAZON_EXTRACTION_HANDOFF.md` for current status. The older document was

@@ -14,7 +14,7 @@ global_idx order); this job handles block --shard-id.
 
 Example (single card):
   python run_extraction.py --shard-id 0 --num-shards 50 \
-      --out-dir data/extraction_v1
+    --out-dir data/wiki/extraction_v1
 """
 from __future__ import annotations
 
@@ -36,7 +36,8 @@ from vllm import LLM, SamplingParams  # noqa: E402
 
 REPO_ROOT = Path("/n/netscratch/lu_lab/Lab/xiaominli/LLMResearch/MatrAIx")
 DATA_DIR = REPO_ROOT / "persona/human_extraction/data"
-DB_PATH = DATA_DIR / "wiki/matraix_wiki_profiles_20260601_v1.sqlite"
+WIKI_DATA_DIR = DATA_DIR / "wiki"
+DB_PATH = WIKI_DATA_DIR / "source/matraix_wiki_profiles_20260601_v1.sqlite"
 DIMENSIONS_JSON = REPO_ROOT / "persona/schema/dimensions.json"
 MODEL_ID = "Qwen/Qwen3.6-35B-A3B"
 
@@ -112,7 +113,7 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--shard-id", type=int, required=True)
     ap.add_argument("--num-shards", type=int, required=True)
-    ap.add_argument("--out-dir", default=str(DATA_DIR / "extraction_v1"))
+    ap.add_argument("--out-dir", default=str(WIKI_DATA_DIR / "extraction_v1"))
     ap.add_argument("--batch-profiles", type=int, default=64,
                     help="profiles per vLLM submit / checkpoint granularity")
     ap.add_argument("--max-dims-per-chunk", type=int, default=50)

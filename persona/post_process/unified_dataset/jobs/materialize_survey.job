@@ -1,0 +1,18 @@
+#!/bin/bash
+#SBATCH -p seas_compute
+#SBATCH -n 1
+#SBATCH -c 1
+#SBATCH --mem=4G
+#SBATCH -t 0-01:00
+#SBATCH -o sbatch_logs/%x_%j.out
+#SBATCH -e sbatch_logs/%x_%j.err
+#SBATCH --mail-type=FAIL
+#SBATCH --mail-user=xiaominli@g.harvard.edu
+set -euo pipefail
+
+R="${REPO_ROOT:?}"
+mkdir -p "$OUTPUT/data" "$OUTPUT/reports"
+cd "$R"
+PYTHONPATH="$R" "$PYTHON_BIN" -m persona.post_process.unified_dataset.materialize survey \
+  --source "$SURVEY" --schema "$SCHEMA" --rows-per-file 5000000 --row-group-size 100000 \
+  --output-dir "$OUTPUT/data" --report "$OUTPUT/reports/survey_0000.json"

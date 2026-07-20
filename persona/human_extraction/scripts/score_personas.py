@@ -14,7 +14,7 @@ REPO = Path("/n/netscratch/lu_lab/Lab/xiaominli/LLMResearch/MatrAIx")
 DIMS = json.load(open(REPO / "persona/schema/dimensions.json"))["dimensions"]
 ALLOWED = {d["id"]: set(str(v) for v in d.get("values", [])) for d in DIMS}
 N_DIMS = len(DIMS)
-JSONL = REPO / "persona/human_extraction/data/bench_cat50_random_pc1.jsonl"
+JSONL = REPO / "persona/human_extraction/data/wiki/diagnostics/bench_cat50_random_pc1.jsonl"
 
 with open(JSONL) as fh:
     rows = [json.loads(line) for line in fh]

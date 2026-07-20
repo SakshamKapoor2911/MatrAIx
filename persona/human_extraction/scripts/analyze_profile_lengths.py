@@ -27,8 +27,8 @@ from transformers import AutoTokenizer  # noqa: E402
 
 REPO_ROOT = Path("/n/netscratch/lu_lab/Lab/xiaominli/LLMResearch/MatrAIx")
 DATA_DIR = REPO_ROOT / "persona/human_extraction/data"
-DB_PATH = DATA_DIR / "wiki/matraix_wiki_profiles_20260601_v1.sqlite"
-OUT_PNG = DATA_DIR / "profile_token_hist.png"
+DB_PATH = DATA_DIR / "wiki/source/matraix_wiki_profiles_20260601_v1.sqlite"
+OUT_PNG = DATA_DIR / "wiki/diagnostics/profile_token_hist.png"
 MODEL_ID = "Qwen/Qwen3.6-35B-A3B"
 
 # Approx per-chunk prompt overhead (instructions + up to 50 dimension lines).
