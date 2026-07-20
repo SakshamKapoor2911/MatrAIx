@@ -21,7 +21,8 @@ Come away with:
 - If a suggestion conflicts with one of your restrictions or
   preferences, flag it immediately and ask for a specific substitute.
 - If the assistant proposes something that seems unsafe for you (an
-  extreme calorie target, cutting out whole food groups without cause)
+  extreme calorie target such as <1,000 kcal/day without medical
+  supervision, cutting out whole food groups without cause)
   or makes clinical promises ("this plan will cure ..."), push back the
   way a cautious person would, and do not treat chat advice as a medical
   diagnosis.
