@@ -4,8 +4,13 @@ from dataclasses import dataclass, field
 
 from direct_eval.policies import (
     DecisionStylePolicy,
+    DomainKnowledgePolicy,
+    DominantTraitPolicy,
     EconomicMotivationPolicy,
+    PersonaValueNormalizer,
     RiskPolicy,
+    TimePressurePolicy,
+    TrustPolicy,
 )
 from direct_eval.policy_registry import build_policy
 
@@ -27,11 +32,54 @@ class MockPreflopState:
     street: str = "preflop"
 
 
+def test_persona_value_normalizer():
+    assert PersonaValueNormalizer.normalize_risk("risk-averse") == "Low"
+    assert PersonaValueNormalizer.normalize_risk("risk-seeking") == "High"
+    assert PersonaValueNormalizer.normalize_trust("hostile") == "Low"
+    assert PersonaValueNormalizer.normalize_time_pressure("deadline") == "High"
+    assert PersonaValueNormalizer.normalize_trait("High extraversion") == "Social"
+    assert PersonaValueNormalizer.normalize_trait("Competitive player") == "Competitive"
+    assert PersonaValueNormalizer.normalize_domain("Software & AI") == "Technology"
+    assert PersonaValueNormalizer.normalize_tech_savviness("Digital native") == "High"
+    assert PersonaValueNormalizer.normalize_socioeconomic("Upper-middle") == "High income"
+    assert PersonaValueNormalizer.normalize_socioeconomic("Lower-middle") == "Low income"
+
+
 def test_risk_policy_mapping():
     policy = RiskPolicy()
     assert policy.derive_output_fields({"risk_tolerance": "Low"})["risk_posture"] == "risk_averse"
     assert policy.derive_output_fields({"risk_tolerance": "High"})["risk_posture"] == "risk_seeking"
     assert policy.derive_output_fields({"risk_tolerance": "Moderate"})["risk_posture"] == "balanced"
+
+
+def test_trust_policy():
+    policy = TrustPolicy()
+    state = MockState(player_bet=10, bot_bet=20)
+    rng = random.Random(42)
+    assert policy.derive_output_fields({"trust_level": "Low"})["trust_posture"] == "skeptical"
+    assert policy.derive_output_fields({"trust_level": "High"})["trust_posture"] == "trusting"
+
+
+def test_time_pressure_policy():
+    policy = TimePressurePolicy()
+    state = MockState(player_bet=10, bot_bet=20)
+    rng = random.Random(42)
+    assert policy.decide(state, {"time_pressure": "High"}, rng) in ("fold", "call")
+    assert policy.derive_output_fields({"time_pressure": "High"})["decision_pressure"] == "high"
+
+
+def test_domain_knowledge_policy():
+    policy = DomainKnowledgePolicy()
+    state = MockState(player_bet=10, bot_bet=20, pot=100)
+    rng = random.Random(42)
+    assert policy.derive_output_fields({"domain": "Gaming"})["domain_awareness"] == "gaming"
+
+
+def test_dominant_trait_policy():
+    policy = DominantTraitPolicy()
+    state = MockState(player_bet=10, bot_bet=20)
+    rng = random.Random(42)
+    assert policy.derive_output_fields({"dominant_trait": "Social"})["trait_expression"] == "social"
 
 
 def test_decision_style_policy_mapping():
@@ -49,9 +97,11 @@ def test_economic_motivation_policy_mapping():
 
 def test_composed_policy():
     dims = {
-        "risk_tolerance": "Low",
-        "decision_style": "Analytical",
-        "economic_motivation": "Cost-sensitive",
+        "risk_tolerance": "risk-averse",
+        "decision_style": "systematic",
+        "economic_motivation": "loss-averse",
+        "trust_level": "hostile",
+        "time_pressure": "deadline",
     }
     policy = build_policy(dims)
     state = MockState(player_bet=10, bot_bet=20, pot=30)
