@@ -80,7 +80,16 @@ def test_dev_dimension_ids_include_core_catalog_fields() -> None:
         "tech_savviness",
         "risk_tolerance",
         "economic_motivation",
+        "lstyle_diet_type",
+        "health_dietary_restriction",
+        "habit_meal_prepping",
+        "habit_skipping_breakfast",
+        "habit_late_night_snacking",
+        "att_veganism",
+        "fam_nutrition",
     } <= dev_ids
+    assert any(dim_id.startswith("cuis_") for dim_id in dev_ids)
+    assert len(dev_ids) == 124
 
 
 def test_generate_pool_has_no_violations() -> None:
@@ -89,6 +98,10 @@ def test_generate_pool_has_no_violations() -> None:
         assert validate_dimensions(entry["dimensions"]) == []
         assert entry.get("source") in {"Nemotron", "OASIS", "PersonaHub", "PRIMEX"}
         assert entry.get("version") == "1.0"
+        assert "lstyle_diet_type" in entry["dimensions"]
+        assert "health_dietary_restriction" in entry["dimensions"]
+        assert "habit_meal_prepping" in entry["dimensions"]
+        assert any(key.startswith("cuis_") for key in entry["dimensions"])
 
 
 def test_top_up_strata_adds_consistent_personas() -> None:
@@ -187,10 +200,24 @@ def test_generate_pool_strategy_top_up_only() -> None:
 
 
 def test_checked_in_sample_manifest_is_consistent() -> None:
+    from matraix.persona_consistency import load_dev_dimension_ids
+
+    food_dims = {
+        "lstyle_diet_type",
+        "health_dietary_restriction",
+        "habit_meal_prepping",
+        "habit_skipping_breakfast",
+        "habit_late_night_snacking",
+        "att_veganism",
+        "fam_nutrition",
+    }
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     assert manifest["count"] == len(manifest["personas"])
     assert manifest["count"] >= 2
     assert manifest.get("schema_version") == "1.0"
+    assert manifest.get("dimension_count") == 124
+    assert set(manifest["dimension_ids"]) == set(load_dev_dimension_ids())
+    assert food_dims <= set(manifest["dimension_ids"])
     for entry in manifest["personas"]:
         rel_path = entry if isinstance(entry, str) else entry["path"]
         if not isinstance(rel_path, str):
@@ -200,3 +227,7 @@ def test_checked_in_sample_manifest_is_consistent() -> None:
         assert validate_dimensions(payload["dimensions"]) == []
         assert payload.get("version") == "1.0"
         assert payload.get("source") in {"Nemotron", "OASIS", "PersonaHub", "PRIMEX"}
+        assert len(payload["dimensions"]) == 124
+        assert food_dims <= set(payload["dimensions"])
+        if isinstance(entry, dict) and isinstance(entry.get("dimensions"), dict):
+            assert food_dims <= set(entry["dimensions"])
