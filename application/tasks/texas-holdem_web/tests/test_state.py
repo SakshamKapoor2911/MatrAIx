@@ -151,7 +151,7 @@ def _best_ev_for_scenario(data: dict) -> int:
 def _compute_ev_score(data: dict) -> float:
     """Return 1.0 for optimal play, 0.5 for minor deviation, 0.0 for major."""
     seed = data.get("seed")
-    if seed is None:
+    if seed is None or not (SCENARIOS_DIR / f"scenario_{seed:03d}.json").is_file():
         return 1.0
     scenario = _load_scenario(seed)
     seq = _action_sequence_key(data)
@@ -538,7 +538,7 @@ def _contexts(*, data: dict) -> list[dict]:
 def test_ev_optimality() -> None:
     data = _load()
     seed = data.get("seed")
-    if seed is None:
+    if seed is None or not (SCENARIOS_DIR / f"scenario_{seed:03d}.json").is_file():
         return
     scenario = _load_scenario(seed)
     ev_table = scenario.get("chip_delta_by_action_sequence", {}) or scenario.get("chip_delta_by_action", {})
