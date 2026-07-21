@@ -7,7 +7,7 @@ import argparse
 import gzip
 import json
 from pathlib import Path
-from typing import Any, BinaryIO, Iterator
+from typing import Any, Iterator
 
 import numpy as np
 import pyarrow as pa

@@ -8,7 +8,6 @@ from collections import Counter
 import json
 from pathlib import Path
 
-import pyarrow.compute as pc
 import pyarrow.parquet as pq
 
 from persona.post_process.coreset_1m.build_coreset import CORESET_SCHEMA, SOURCE_COUNTS
