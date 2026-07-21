@@ -49,6 +49,8 @@ production chain is:
 |---|---:|---|
 | Calibrated 1M build | `33782802` | Cancelled before starting to rename this document |
 | Hugging Face upload | `33782808` | Cancelled with its unstarted build dependency |
+| Replacement calibrated build | `33783087` | Submitted after README rename |
+| Replacement Hugging Face upload | `33783089` | Pending on successful replacement build |
 
 This simplification changes only candidate I/O and scheduling. The build still
 performs one global deterministic calibration: it selects 323,438 Wiki rows to
