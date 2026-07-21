@@ -82,7 +82,9 @@ Submitted 2026-07-20:
 | Real Human Survey | `33386507` | Completed |
 | Strict finalization | `33386509` | Cancelled by failed dependency |
 | Original Hugging Face upload | `33386510` | Cancelled by failed dependency |
-| Accepted partial-snapshot upload | `33714427` | Submitted; initially pending for priority |
+| Initial partial-snapshot upload | `33714427` | Cancelled after 2:31:21 to remove the CLI token argument |
+| First secured upload resume | `33777486` | Cancelled after 1:07 for remote legacy-data cleanup |
+| Current secured upload resume | `33778360` | Submitted after cleanup; resumable cache retained |
 
 Synthetic materialization, 464 of 465 human tasks, and the Real Human Survey
 completed. Human task 73 failed; the dependency-bound strict finalizer and
@@ -112,6 +114,9 @@ revision: unified-8.4b
 
 The dedicated revision prevents this physical Parquet snapshot from being
 mixed with the repository's earlier 1B raw-code publication on `main`.
+Legacy raw-code shards and manifests inherited by this revision were removed in
+Hugging Face commit `3c67684566e1cd146e29a0613d8b6ee66580a4bb`. The revision is
+reserved for this physical Parquet snapshot and its release metadata.
 
 Target URL:
 
@@ -128,16 +133,16 @@ written into source, manifests, logs, or chat.
 ```bash
 cd /n/netscratch/lu_lab/Lab/xiaominli/LLMResearch/MatrAIx
 
-squeue -j 33714427 -o '%.18i %.30j %.14P %.10T %.10M %R'
-sacct -j 33714427 -X \
+squeue -j 33778360 -o '%.18i %.30j %.14P %.10T %.10M %R'
+sacct -j 33778360 -X \
   --format=JobID,JobName,State,ExitCode,Elapsed,Start,End
 
 cat persona/post_process/unified_dataset/results/persona8b_8_4b_20260720/manifest.json
 
 tail -n 100 \
-  persona/post_process/unified_dataset/jobs/sbatch_logs/persona8b_upload_partial_33714427.out
+  persona/post_process/unified_dataset/jobs/sbatch_logs/persona8b_upload_partial_33778360.out
 tail -n 100 \
-  persona/post_process/unified_dataset/jobs/sbatch_logs/persona8b_upload_partial_33714427.err
+  persona/post_process/unified_dataset/jobs/sbatch_logs/persona8b_upload_partial_33778360.err
 ```
 
 Array tasks write through temporary Parquet files and atomic reports. Failed or
@@ -145,7 +150,7 @@ preempted tasks can be resubmitted by array index without changing successful
 outputs. The upload command is resumable and stores its local progress metadata
 under the materialized folder.
 
-If upload job `33714427` fails or reaches its three-day wall time, resubmit
+If upload job `33778360` fails or reaches its three-day wall time, resubmit
 [`jobs/upload.job`](jobs/upload.job) with the same `OUTPUT`, `REPO_ID`, and
 `REVISION`. `hf upload-large-folder` reuses its local cache and skips completed
 work. Do not rerun the full materialization pipeline merely to resume upload.
@@ -169,5 +174,5 @@ work. Do not rerun the full materialization pipeline merely to resume upload.
 - Do not upload this physical snapshot to `main`; use `unified-8.4b`.
 - Do not delete source data, rejection bitmaps, reports, or completed Parquet
   shards while upload is active.
-- Do not declare the upload complete until job `33714427` succeeds and the
+- Do not declare the upload complete until job `33778360` succeeds and the
   dataset files are visible on the Hugging Face revision.
