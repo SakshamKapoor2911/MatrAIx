@@ -31,20 +31,22 @@ is known. It does not impute missing fields, guarantee a representative joint
 distribution, or remove source-selection bias. The build records known and
 missing counts plus achieved marginal errors in `audit.json` and `RESULTS.md`.
 
-Production DAG submitted 2026-07-21:
+The initial array-based production DAG (`33781136`, `33781139`, `33781143`, and
+`33781144`) was cancelled before any task started. The production build uses one
+small CPU job followed by one dependent upload job. It scans all approximately
+2.21M available human-grounded rows for the four calibration fields. For the
+synthetic candidate pool, it uses one seed-selected Parquet file and row group
+from 40 distinct seed-selected synthetic shards, yielding approximately 2.2M
+distributed candidates before selecting 400,000. The selected shards, file
+parts, and row-group positions are deterministic for seed `20260720` and are
+spread across the corpus rather than always taking the beginning of each shard.
 
-| Stage | Slurm job | Shape |
-|---|---:|---|
-| Human calibration scans | `33781136` | 6 one-CPU array tasks |
-| Synthetic calibration scans | `33781139` | 100 one-CPU tasks, max 50 concurrent |
-| Global calibration and materialization | `33781143` | 1 CPU, after both scan arrays |
-| Hugging Face upload | `33781144` | after successful build |
-
-The scan arrays write independent atomic `.npz` caches containing only stable
-row IDs and the four calibration codes. The final job merges those caches,
-performs one global deterministic calibration, writes and validates ten Parquet
-files, and produces the audit and manifest. This preserves global consistency
-while making the expensive input scans easy to backfill on the cluster.
+This simplification changes only candidate I/O and scheduling. The build still
+performs one global deterministic calibration: it selects 323,438 Wiki rows to
+move the human-grounded component toward the target margins, computes the
+remaining demographic residual after all 600,000 human-grounded rows, and then
+selects 400,000 synthetic rows to reduce that residual. It writes known/missing
+counts and achieved errors to `audit.json` and `RESULTS.md`.
 
 The Hugging Face target is:
 
@@ -66,7 +68,7 @@ the new build uploads.
 | PRISM Alignment | 1,487 | All retained rows |
 | GSS | 63,532 | All retained rows |
 | Real Human Survey | 508 | All rows |
-| Full-DAG synthetic | 400,000 | Calibrated sample from 100 source shards |
+| Full-DAG synthetic | 400,000 | Calibrated sample from 40 seed-selected source shards |
 
 “Human-grounded” means derived from a real profile, history, respondent, or
 survey record. It does not mean every model-extracted attribute is a verified
@@ -94,9 +96,10 @@ single source.
    Negative residuals are clipped and the remainder is projected back onto the
    400,000-row simplex; clipped mass is reported as infeasibility rather than
    hidden.
-6. Draw a 10M synthetic candidate pool by reading one Parquet row group from
-   each of the 100 independent Full-DAG source shards. Calibrate and sample
-   400,000 rows from this pool.
+6. Draw an approximately 2.2M-row synthetic candidate pool by selecting 40
+   distinct shards with the fixed seed, then selecting one Parquet file and one
+   row group within each shard. Calibrate and sample 400,000 rows from this
+   distributed pool.
 7. Use deterministic exponential-race priorities for weighted sampling without
    replacement. At every calibration iteration, solve $t$ so that
 

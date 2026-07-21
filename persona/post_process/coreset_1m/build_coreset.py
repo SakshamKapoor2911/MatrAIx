@@ -119,22 +119,6 @@ def named_columns(decoded: dict[str, np.ndarray], field_ids: list[str], field_in
     return {field_ids[index]: decoded[str(index)] for index in field_indices}
 
 
-def load_candidate_caches(paths: list[Path], field_ids: list[str]) -> tuple[np.ndarray, dict[str, np.ndarray]]:
-    row_parts = []
-    column_parts = {field_id: [] for field_id in field_ids}
-    for path in paths:
-        with np.load(path) as payload:
-            row_parts.append(payload["source_rows"])
-            for field_id in field_ids:
-                column_parts[field_id].append(payload[f"field__{field_id}"])
-    if not row_parts:
-        raise ValueError("At least one candidate cache is required")
-    return (
-        np.concatenate(row_parts).astype(np.uint64, copy=False),
-        {field_id: np.concatenate(parts) for field_id, parts in column_parts.items()},
-    )
-
-
 def select_rows(
     source: str,
     rows: np.ndarray,
@@ -298,13 +282,19 @@ def materialize_synthetic_candidates(
     return stats
 
 
-def discover_synthetic_candidates(data_root: Path) -> dict[Path, int]:
+def discover_synthetic_candidates(
+    data_root: Path, *, shard_count: int, seed: int
+) -> dict[Path, int]:
+    if not 1 <= shard_count <= 100:
+        raise ValueError("shard_count must be between 1 and 100")
+    rng = np.random.default_rng(seed)
     result = {}
-    for shard in range(100):
+    for shard in sorted(rng.choice(100, size=shard_count, replace=False).tolist()):
         files = sorted((data_root / "synthetic" / f"shard_{shard:04d}").glob("*.parquet"))
         if not files:
             raise FileNotFoundError(f"Synthetic shard {shard:04d} is not materialized")
-        result[files[0]] = 0
+        path = files[int(rng.integers(len(files)))]
+        result[path] = int(rng.integers(pq.ParquetFile(path).num_row_groups))
     return result
 
 
@@ -340,15 +330,9 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
     candidate_rows: dict[str, np.ndarray] = {}
     candidate_columns: dict[str, dict[str, np.ndarray]] = {}
     for source in HUMAN_SOURCES:
-        if args.candidate_cache:
-            cache_path = args.candidate_cache / "human" / f"{source}.npz"
-            candidate_rows[source], candidate_columns[source] = load_candidate_caches(
-                [cache_path], list(targets)
-            )
-        else:
-            rows, decoded = scan_candidates(all_paths[source], field_indices)
-            candidate_rows[source] = rows
-            candidate_columns[source] = named_columns(decoded, field_ids, field_indices)
+        rows, decoded = scan_candidates(all_paths[source], field_indices)
+        candidate_rows[source] = rows
+        candidate_columns[source] = named_columns(decoded, field_ids, field_indices)
 
     wiki_selected = select_rows(
         "wiki", candidate_rows["wiki"], candidate_columns["wiki"], targets, SOURCE_COUNTS["wiki"], args.seed
@@ -362,18 +346,15 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
             human_counts[name].update(source_counts[name])
 
     synthetic_targets, residual_diagnostics = residual_targets(targets, human_counts, SOURCE_COUNTS["synthetic"])
-    synthetic_row_groups = discover_synthetic_candidates(args.input_root / "data")
-    if args.candidate_cache:
-        cache_paths = [
-            args.candidate_cache / "synthetic" / f"shard_{shard:04d}.npz"
-            for shard in range(100)
-        ]
-        synthetic_rows, synthetic_columns = load_candidate_caches(cache_paths, list(targets))
-    else:
-        synthetic_rows, synthetic_decoded = scan_candidates(
-            list(synthetic_row_groups), field_indices, row_groups=synthetic_row_groups
-        )
-        synthetic_columns = named_columns(synthetic_decoded, field_ids, field_indices)
+    synthetic_row_groups = discover_synthetic_candidates(
+        args.input_root / "data",
+        shard_count=args.synthetic_candidate_shards,
+        seed=args.seed,
+    )
+    synthetic_rows, synthetic_decoded = scan_candidates(
+        list(synthetic_row_groups), field_indices, row_groups=synthetic_row_groups
+    )
+    synthetic_columns = named_columns(synthetic_decoded, field_ids, field_indices)
     synthetic_selected_array = select_rows(
         "synthetic", synthetic_rows, synthetic_columns, synthetic_targets, SOURCE_COUNTS["synthetic"], args.seed + 1
     )
@@ -415,6 +396,14 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
         ),
         "source_stats": source_stats,
         "synthetic_candidate_rows": len(synthetic_rows),
+        "synthetic_candidate_row_groups": [
+            {
+                "path": str(path.relative_to(args.input_root)),
+                "row_group": row_group,
+                "rows": pq.ParquetFile(path).metadata.row_group(row_group).num_rows,
+            }
+            for path, row_group in synthetic_row_groups.items()
+        ],
     }
     (args.output / "audit.json").write_text(json.dumps(audit, indent=2) + "\n", encoding="utf-8")
     manifest = {
@@ -439,7 +428,7 @@ def main() -> None:
     parser.add_argument("--codebook", type=Path, required=True)
     parser.add_argument("--targets", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--candidate-cache", type=Path)
+    parser.add_argument("--synthetic-candidate-shards", type=int, default=40)
     parser.add_argument("--seed", type=int, default=20260720)
     args = parser.parse_args()
     print(json.dumps(build(args), indent=2))

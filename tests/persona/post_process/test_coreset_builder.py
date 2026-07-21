@@ -1,13 +1,13 @@
 import numpy as np
 import pyarrow as pa
+import pyarrow.parquet as pq
 
 from persona.post_process.coreset_1m.build_coreset import (
     calibration_audit,
     decode_calibration_batch,
-    load_candidate_caches,
+    discover_synthetic_candidates,
     residual_targets,
 )
-from persona.post_process.coreset_1m.prepare_candidates import write_cache
 from persona.post_process.unified_dataset.schema import UNIFIED_SCHEMA
 
 
@@ -55,13 +55,23 @@ def test_calibration_audit_reports_missing_and_error() -> None:
     assert audit["field"]["categories"]["a"]["achieved"] == 0.5
 
 
-def test_candidate_cache_round_trip(tmp_path) -> None:
-    first = tmp_path / "first.npz"
-    second = tmp_path / "second.npz"
-    write_cache(first, np.array([1, 2], dtype=np.uint64), {"age": np.array([0, 1], dtype=np.int16)})
-    write_cache(second, np.array([3], dtype=np.uint64), {"age": np.array([-1], dtype=np.int16)})
+def test_synthetic_candidates_are_deterministic_and_spread_across_shards(tmp_path) -> None:
+    data_root = tmp_path / "data"
+    table = pa.table({"value": [1, 2, 3, 4]})
+    for shard in range(100):
+        shard_dir = data_root / "synthetic" / f"shard_{shard:04d}"
+        shard_dir.mkdir(parents=True)
+        for part in range(2):
+            pq.write_table(
+                table,
+                shard_dir / f"part_{part}.parquet",
+                row_group_size=2,
+            )
 
-    rows, columns = load_candidate_caches([first, second], ["age"])
+    first = discover_synthetic_candidates(data_root, shard_count=40, seed=7)
+    second = discover_synthetic_candidates(data_root, shard_count=40, seed=7)
 
-    assert rows.tolist() == [1, 2, 3]
-    assert columns["age"].tolist() == [0, 1, -1]
+    assert first == second
+    assert len(first) == 40
+    assert len({path.parent.name for path in first}) == 40
+    assert all(row_group in {0, 1} for row_group in first.values())
