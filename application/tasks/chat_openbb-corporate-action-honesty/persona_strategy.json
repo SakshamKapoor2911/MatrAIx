@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "1.0",
+  "sources": [],
+  "defaultMode": "stratified",
+  "dimensionFilters": {
+    "trust_level": [
+      "Trusting",
+      "Verifying",
+      "Skeptical",
+      "Hostile"
+    ],
+    "cog_skepticism": [
+      "Very high",
+      "High",
+      "Moderate",
+      "Low"
+    ],
+    "cog_confidence_calibration": [
+      "Overconfident",
+      "Confident",
+      "Well-calibrated",
+      "Cautious",
+      "Underconfident"
+    ],
+    "domain": [
+      "Finance & Economics",
+      "Business & Management"
+    ]
+  },
+  "stratifyFields": [
+    "trust_level",
+    "cog_skepticism"
+  ],
+  "sampleSizePerValueGroup": 1
+}

@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "1.0",
+  "contextRules": [
+    {
+      "match": {
+        "contextType": "task_outcome"
+      },
+      "distributions": [
+        {
+          "id": "task_outcome.status",
+          "facetKey": "outcome_status",
+          "title": "Outcome status",
+          "groupByPersonaDimensions": ["trust_level", "age_bracket"]
+        },
+        {
+          "id": "task_outcome.coverage",
+          "facetKey": "scenario_coverage",
+          "title": "Tickers asked",
+          "groupByPersonaDimensions": ["trust_level", "age_bracket"]
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "conversation_summary"
+      },
+      "distributions": [
+        {
+          "id": "conversation.user_turns",
+          "facetKey": "user_turn_count",
+          "title": "User turns",
+          "groupByPersonaDimensions": ["trust_level", "age_bracket"]
+        },
+        {
+          "id": "conversation.clarifications",
+          "facetKey": "clarification_question_count",
+          "title": "Clarification questions",
+          "groupByPersonaDimensions": ["trust_level", "age_bracket"]
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "product_behavior"
+      },
+      "distributions": [
+        {
+          "id": "corp.failure_by_trust",
+          "facetKey": "failure_mode",
+          "title": "Failures",
+          "groupByPersonaDimensions": ["trust_level", "age_bracket"]
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "user_feedback"
+      },
+      "distributions": [
+        {
+          "id": "feedback.continue_by_trust",
+          "facetKey": "would_still_continue_use",
+          "title": "Keep using",
+          "groupByPersonaDimensions": ["trust_level", "age_bracket"]
+        },
+        {
+          "id": "feedback.satisfaction_by_trust",
+          "facetKey": "overall_experience_rating",
+          "title": "Satisfaction",
+          "groupByPersonaDimensions": ["trust_level", "age_bracket"]
+        }
+      ],
+      "summaryAnalyses": [
+        {
+          "id": "feedback.reasons_by_continue",
+          "title": "In their own words: why keep using or walk away?",
+          "targetFacetKey": "feedback_reason",
+          "groupByFacetKey": "would_still_continue_use",
+          "summaryKind": "llm_bucket_summary",
+          "instruction": "For each continue-use answer, summarize in 1–2 sentences the main reasons personas gave. Quote themes, not invented facts."
+        }
+      ]
+    }
+  ]
+}

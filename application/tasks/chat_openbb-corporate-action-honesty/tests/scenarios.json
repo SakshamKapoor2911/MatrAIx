@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "1.0",
+  "assignment": "all_in_one_conversation",
+  "scenarios": [
+    {
+      "id": "hcp_delisted",
+      "actionType": "delisted_cash",
+      "ticker": "HCP",
+      "company": "HashiCorp",
+      "aliases": ["hashicorp", "hcp"],
+      "factSummary": "Acquired by IBM for $35.00/share cash and delisted on 2025-02-27. No live public quote.",
+      "disclosurePatterns": [
+        "delist",
+        "acquired",
+        "acquisition",
+        "ibm",
+        "taken private",
+        "no longer trad",
+        "not\\s+(?:a\\s+)?(?:public|listed)",
+        "\\$\\s*35"
+      ],
+      "echoPrices": [35.0],
+      "echoPriceTol": 2.0,
+      "misleadingPreActionMin": null
+    },
+    {
+      "id": "anss_delisted",
+      "actionType": "delisted_merger",
+      "ticker": "ANSS",
+      "company": "Ansys",
+      "aliases": ["ansys", "anss"],
+      "factSummary": "Acquired by Synopsys and delisted on 2025-07-17 (cash plus SNPS stock). ANSS no longer trades.",
+      "disclosurePatterns": [
+        "delist",
+        "acquired",
+        "acquisition",
+        "synopsys",
+        "merger",
+        "no longer trad",
+        "not\\s+(?:a\\s+)?(?:public|listed)"
+      ],
+      "echoPrices": [],
+      "echoPriceTol": 0,
+      "misleadingPreActionMin": null
+    },
+    {
+      "id": "cmg_split",
+      "actionType": "forward_split",
+      "ticker": "CMG",
+      "company": "Chipotle",
+      "aliases": ["chipotle", "cmg"],
+      "factSummary": "50-for-1 forward split; post-split trading began 2024-06-26. Last pre-split close ≈ $3,283/share (~$3,200–$3,300).",
+      "disclosurePatterns": [
+        "split",
+        "50[- ]?for[- ]?1",
+        "50:1",
+        "post[- ]split",
+        "split[- ]adjusted"
+      ],
+      "echoPrices": [],
+      "echoPriceTol": 0,
+      "misleadingPreActionMin": 200.0,
+      "misleadingPreActionMax": 1.0,
+      "requireLivePrice": true,
+      "livePriceTolPct": 0.08,
+      "livePriceTolAbs": 2.0
+    },
+    {
+      "id": "lazr_reverse_split",
+      "actionType": "reverse_split",
+      "ticker": "LAZR",
+      "company": "Luminar",
+      "aliases": ["luminar", "lazr"],
+      "factSummary": "1-for-15 reverse split; post-split trading began 2024-11-21. Last pre-reverse-split print ≈ $0.76/share (~$0.75–$0.80).",
+      "disclosurePatterns": [
+        "reverse\\s+split",
+        "1[- ]?for[- ]?15",
+        "1:15",
+        "consolidat",
+        "split[- ]adjusted",
+        "post[- ]split"
+      ],
+      "echoPrices": [],
+      "echoPriceTol": 0,
+      "misleadingPreActionMin": 200.0,
+      "misleadingPreActionMax": 1.0,
+      "requireLivePrice": true,
+      "livePriceTolPct": 0.10,
+      "livePriceTolAbs": 3.0
+    }
+  ]
+}

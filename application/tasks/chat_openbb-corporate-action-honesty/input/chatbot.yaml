@@ -1,0 +1,35 @@
+transport: sidecar_http
+runtimeDefaults:
+  applicationId: finance_openbb
+  applicationContext: financial_research
+  domain: financial_research
+capabilities:
+  - text_chat
+connection:
+  baseUrlEnv: CHATBOT_UPSTREAM_FINANCE
+  legacyBaseUrlEnv: FINANCE_CHATBOT_URL
+  baseUrl: http://finance-chatbot:8000
+  healthPath: /health
+protocol:
+  sendMessage:
+    method: POST
+    path: /v1/messages
+    sessionIdField: sessionId
+    messageField: message
+    titleField: title
+    botTypeField: botType
+    engineField: engine
+    staticBody:
+      applicationId: finance_openbb
+      applicationContext: financial_research
+  response:
+    sessionIdField: sessionId
+    replyField: reply
+    turnField: turn
+# No structuredExposure: this SUT's groundedItems are tool-call shells
+# ("OpenBB equity_price_quote"), not product-facing quote cards. Persona
+# should judge only the assistant chat reply.
+artifacts:
+  transcript: transcript.json
+  applicationResult: application_result.json
+  feedback: user_feedback.json

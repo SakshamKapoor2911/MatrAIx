@@ -59,6 +59,80 @@ def _is_context_length_error(exc: BaseException) -> bool:
     )
 
 
+def _is_transient_agent_error(exc: BaseException) -> bool:
+    """True for flaky upstream OpenAI / MCP transport failures worth retrying."""
+    text = str(exc).lower()
+    needles = (
+        "connection error",
+        "connection reset",
+        "connection aborted",
+        "connect error",
+        "timed out",
+        "timeout",
+        "temporarily unavailable",
+        "rate limit",
+        "too many requests",
+        "429",
+        "502",
+        "503",
+        "504",
+        "overloaded",
+        "server disconnected",
+        "remote protocol",
+        "apiconnectionerror",
+        "network error",
+        "eof occurred",
+    )
+    return any(needle in text for needle in needles)
+
+
+_AGENT_SEM: threading.Semaphore | None = None
+_AGENT_SEM_LOCK = threading.Lock()
+
+
+def _agent_semaphore() -> threading.Semaphore:
+    """Cap concurrent OpenAI+MCP agent runs across FastAPI worker threads.
+
+    Each Harbor trial hits ``asyncio.run`` in its own thread; an asyncio
+    semaphore would not serialize those. Queueing beats stampeding the API.
+    """
+    global _AGENT_SEM
+    with _AGENT_SEM_LOCK:
+        if _AGENT_SEM is None:
+            raw = os.environ.get("FINANCE_AGENT_MAX_CONCURRENT", "6").strip()
+            try:
+                limit = max(1, int(raw))
+            except ValueError:
+                limit = 6
+            _AGENT_SEM = threading.Semaphore(limit)
+        return _AGENT_SEM
+
+
+def _agent_retry_limit() -> int:
+    raw = os.environ.get("FINANCE_AGENT_RETRIES", "4").strip()
+    try:
+        return max(1, int(raw))
+    except ValueError:
+        return 4
+
+
+def _agent_max_turns() -> int:
+    # Agents SDK max_turns = tool-loop steps for ONE user message (not chat
+    # turns). Live OpenBB cohorts routinely issue 10–40 MCP tool calls on a
+    # single research question; 20 was too low (trials 503'd), 30 is still
+    # tight. Default 50; override with FINANCE_AGENT_MAX_TURNS.
+    raw = os.environ.get("FINANCE_AGENT_MAX_TURNS", "50").strip()
+    try:
+        return max(4, int(raw))
+    except ValueError:
+        return 50
+
+
+def _is_max_turns_error(exc: BaseException) -> bool:
+    text = str(exc).lower()
+    return "max turns" in text or "max_turns" in text
+
+
 def _select_openbb_categories(
     messages: List[Dict[str, str]], config: FinanceAgentConfig
 ) -> Tuple[str, ...]:
@@ -240,16 +314,33 @@ class OpenAIAgentsFinanceRunner:
         self, *, messages: List[Dict[str, str]], config: FinanceAgentConfig
     ) -> AgentResult:
         categories = _select_openbb_categories(messages, config)
-        try:
-            return await self._run_with_categories(
-                messages=messages, config=config, categories=categories
-            )
-        except Exception as exc:
-            if len(categories) <= 1 or not _is_context_length_error(exc):
-                raise
-            return await self._run_with_categories(
-                messages=messages, config=config, categories=categories[:1]
-            )
+        attempts = _agent_retry_limit()
+        last_exc: BaseException | None = None
+        for attempt in range(attempts):
+            await asyncio.to_thread(_agent_semaphore().acquire)
+            try:
+                try:
+                    return await self._run_with_categories(
+                        messages=messages, config=config, categories=categories
+                    )
+                except Exception as exc:
+                    if len(categories) > 1 and _is_context_length_error(exc):
+                        return await self._run_with_categories(
+                            messages=messages,
+                            config=config,
+                            categories=categories[:1],
+                        )
+                    raise
+            except Exception as exc:
+                last_exc = exc
+                if attempt + 1 >= attempts or not _is_transient_agent_error(exc):
+                    raise
+            finally:
+                _agent_semaphore().release()
+            # Exponential backoff between transient failures (cap 8s).
+            await asyncio.sleep(min(8.0, 0.6 * (2**attempt)))
+        assert last_exc is not None
+        raise last_exc
 
     async def _run_with_categories(
         self,
@@ -282,7 +373,35 @@ class OpenAIAgentsFinanceRunner:
                 model=config.model,
                 mcp_servers=[server],
             )
-            result = await Runner.run(agent, input=messages, max_turns=20)
+            try:
+                result = await Runner.run(
+                    agent, input=messages, max_turns=_agent_max_turns()
+                )
+            except Exception as exc:
+                # Tool-loop exhaustion must not 503 the whole Harbor trial.
+                if not _is_max_turns_error(exc):
+                    raise
+                partial = (
+                    getattr(exc, "result", None)
+                    or getattr(exc, "run_result", None)
+                    or getattr(exc, "data", None)
+                )
+                partial_text = str(getattr(partial, "final_output", "") or "").strip()
+                message = partial_text or (
+                    "I hit an internal research step limit while gathering market "
+                    "data and could not finish a complete answer this turn. Please "
+                    "ask again with a narrower question (one ticker or one metric)."
+                )
+                return AgentResult(
+                    assistant_message=message,
+                    tool_calls=_extract_tool_calls(partial) if partial else [],
+                    citations=_extract_citations(partial) if partial else [],
+                    raw={
+                        "maxTurnsExceeded": True,
+                        "activeOpenBBCategories": list(categories),
+                        "error": str(exc)[:300],
+                    },
+                )
 
         return AgentResult(
             assistant_message=str(getattr(result, "final_output", "") or ""),
@@ -373,10 +492,30 @@ class FinanceChatService:
             runner_messages = self._messages_for_runner(messages)
             try:
                 result = await self.runner.run(messages=runner_messages, config=self.config)
-            except RuntimeError:
-                raise
+            except RuntimeError as exc:
+                # Soft-degrade so a flaky upstream blip does not kill the trial.
+                if not (_is_transient_agent_error(exc) or _is_max_turns_error(exc)):
+                    raise
+                result = AgentResult(
+                    assistant_message=(
+                        "I'm having trouble reaching live market data right now. "
+                        "Please try that question again in a moment."
+                    ),
+                    raw={"degraded": True, "error": str(exc)[:300]},
+                )
             except Exception as exc:
-                raise RuntimeError("Finance application failed: {}".format(exc)) from exc
+                if _is_transient_agent_error(exc) or _is_max_turns_error(exc):
+                    result = AgentResult(
+                        assistant_message=(
+                            "I'm having trouble reaching live market data right now. "
+                            "Please try that question again in a moment."
+                        ),
+                        raw={"degraded": True, "error": str(exc)[:300]},
+                    )
+                else:
+                    raise RuntimeError(
+                        "Finance application failed: {}".format(exc)
+                    ) from exc
             turn = self._build_turn(session, user_text, result)
 
             with self._guard:

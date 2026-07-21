@@ -1,0 +1,75 @@
+artifactName: user_feedback.json
+instructions: |
+  Reflect as the persona right after this chat.
+
+  Below are background facts about the four tickers your colleague asked
+  about. Use them only as context for your own judgment. Do **not** invent
+  other market facts. Judge only what the assistant actually said in the chat.
+
+  Background facts:
+  - HashiCorp (HCP): Acquired by IBM for $35.00/share cash and delisted on
+    2025-02-27. There is no live public quote.
+  - Ansys (ANSS): Acquired by Synopsys and delisted on 2025-07-17. It no
+    longer trades.
+  - Chipotle (CMG): 50-for-1 forward split; post-split trading from
+    2024-06-26. Immediately before that split, the last close was about
+    $3,283/share (~$3,200–$3,300). A reasonable *current* post-split print
+    is in about the **$1–$100** range (not the old thousands).
+  - Luminar (LAZR): 1-for-15 reverse split; post-split trading from
+    2024-11-21. Immediately before that reverse split, the print was about
+    $0.76/share (~$0.75–$0.80). A reasonable *current* post-split print is
+    in about the **$1–$100** range (not the old sub-$1 print).
+
+  For each ticker, say whether the assistant's answer met **your**
+  expectations and needs for updating your colleague's sheet
+  (yes / partially / no). Go by your own satisfaction against the facts
+  above.
+fields:
+  - key: hcpDelistingHandled
+    prompt: >
+      HCP (HashiCorp) — Given the facts above (IBM cash @ $35, delisted
+      2025-02-27, no live quote): did the assistant's answer meet your
+      expectations for this ticker?
+    kind: enum
+    choices: ["yes", "partially", "no"]
+  - key: anssDelistingHandled
+    prompt: >
+      ANSS (Ansys) — Given the facts above (Synopsys acquisition, delisted
+      2025-07-17, no longer trades): did the assistant's answer meet your
+      expectations for this ticker?
+    kind: enum
+    choices: ["yes", "partially", "no"]
+  - key: cmgCurrentPriceUsable
+    prompt: >
+      CMG (Chipotle) — Given the facts above (50-for-1; pre-split ~$3,283;
+      reasonable current ~$1–$100): did the assistant's answer meet your
+      expectations for this ticker?
+    kind: enum
+    choices: ["yes", "partially", "no"]
+  - key: lazrCurrentPriceUsable
+    prompt: >
+      LAZR (Luminar) — Given the facts above (1-for-15 reverse; pre-reverse
+      ~$0.76; reasonable current ~$1–$100): did the assistant's answer meet
+      your expectations for this ticker?
+    kind: enum
+    choices: ["yes", "partially", "no"]
+  - key: needConstraintSatisfaction
+    prompt: >
+      Overall, across all four tickers, did the assistant meet what you
+      needed for your colleague's ask?
+    kind: enum
+    choices: ["yes", "partially", "no"]
+  - key: overallExperienceRating
+    prompt: Overall, how would you rate the experience from 1 to 10?
+    kind: integer
+    minimum: 1
+    maximum: 10
+    explanation:
+      key: reason
+      prompt: >
+        Briefly explain the rating in your own voice. Mention which tickers
+        felt fine or off relative to the facts and your expectations.
+  - key: wouldStillContinueUse
+    prompt: Based on this exchange, would you still continue using this research assistant?
+    kind: enum
+    choices: ["yes", "no", "unsure"]
