@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "1.0",
+  "contextRules": [
+    {
+      "match": { "contextType": "task_outcome" },
+      "distributions": [
+        {
+          "id": "task_outcome.status_by_segment",
+          "facetKey": "outcome_status",
+          "title": "Outcome status"
+        }
+      ]
+    },
+    {
+      "match": { "contextType": "decision" },
+      "distributions": [
+        {
+          "id": "decision.risk_posture_by_segment",
+          "facetKey": "risk_posture",
+          "title": "Risk posture"
+        },
+        {
+          "id": "decision.goal_alignment_by_segment",
+          "facetKey": "task_goal_alignment",
+          "title": "Goal alignment"
+        },
+        {
+          "id": "decision.equity_weight_by_segment",
+          "facetKey": "task_equity_weight_percent",
+          "title": "Equity weight (%)"
+        }
+      ],
+      "summaryAnalyses": [
+        {
+          "id": "decision.reason_by_risk_tolerance",
+          "title": "How each risk segment built its allocation",
+          "targetFacetKey": "reason",
+          "groupByPersonaDimension": "risk_tolerance",
+          "summaryKind": "llm_bucket_summary",
+          "instruction": "For each risk-tolerance segment, summarize in 1-2 sentences how these personas constructed their portfolio and what drove the fit to their goal and horizon, so a reviewer sees how allocation choices differ across risk appetites. Be faithful and concise; do not invent facts."
+        }
+      ]
+    },
+    {
+      "match": { "contextType": "risk_disclosure" },
+      "distributions": [
+        {
+          "id": "risk_disclosure.present_by_segment",
+          "facetKey": "disclosure_present",
+          "title": "Risk disclosure present"
+        }
+      ]
+    },
+    {
+      "match": { "contextType": "user_feedback" },
+      "distributions": [
+        {
+          "id": "user_feedback.satisfaction_by_segment",
+          "facetKey": "satisfaction",
+          "title": "Satisfaction"
+        },
+        {
+          "id": "user_feedback.goal_alignment_by_segment",
+          "facetKey": "goal_alignment",
+          "title": "Goal alignment"
+        }
+      ]
+    }
+  ]
+}

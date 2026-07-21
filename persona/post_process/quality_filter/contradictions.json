@@ -1,0 +1,214 @@
+{
+  "format": "persona_contradiction_rules",
+  "format_version": 1,
+  "schema": "../../schema/dimensions.json",
+  "policy": {
+    "action": "reject_row",
+    "scope": "high-confidence logical contradictions only",
+    "notes": [
+      "Rules operate on categorical values, not rendered persona text.",
+      "Rare but possible combinations should be warnings, not hard rejection rules.",
+      "A row is rejected when every condition field matches and the target has a bad value."
+    ]
+  },
+  "conditional_masks": [
+    {
+      "mask_id": "qf_under13_single_only",
+      "group": "age_relationship",
+      "rationale": "Children under 13 cannot have an adult marital or partnership status.",
+      "target": "demo_marital_status",
+      "condition": {"age_bracket": ["Under 5", "5-12"]},
+      "bad_values": ["In a relationship", "Engaged", "Married", "Domestic partnership", "Separated", "Divorced", "Widowed"],
+      "bad_value_multiplier": 0
+    },
+    {
+      "mask_id": "qf_under13_no_children",
+      "group": "age_family",
+      "rationale": "Children under 13 cannot themselves have children.",
+      "target": "demo_children_count",
+      "condition": {"age_bracket": ["Under 5", "5-12"]},
+      "bad_values": ["Expecting", "1 child", "2 children", "3+ children", "Adult children"],
+      "bad_value_multiplier": 0
+    },
+    {
+      "mask_id": "qf_under13_not_parent",
+      "group": "age_family",
+      "rationale": "Children under 13 cannot have a parental role.",
+      "target": "demo_parental_status",
+      "condition": {"age_bracket": ["Under 5", "5-12"]},
+      "bad_values": ["New parent", "Parent of minors", "Parent of adults", "Grandparent", "Step / foster parent"],
+      "bad_value_multiplier": 0
+    },
+    {
+      "mask_id": "qf_under5_no_completed_education",
+      "group": "age_education",
+      "rationale": "A child under 5 cannot have completed primary or higher education.",
+      "target": "highest_education",
+      "condition": {"age_bracket": ["Under 5"]},
+      "bad_values": ["Primary", "Secondary", "Vocational / cert", "Some college", "Associate's", "Bachelor's", "Master's", "Doctorate", "Postdoc"],
+      "bad_value_multiplier": 0
+    },
+    {
+      "mask_id": "qf_age_5_12_no_secondary_or_higher",
+      "group": "age_education",
+      "rationale": "A child aged 5-12 cannot have completed secondary or higher education.",
+      "target": "highest_education",
+      "condition": {"age_bracket": ["5-12"]},
+      "bad_values": ["Secondary", "Vocational / cert", "Some college", "Associate's", "Bachelor's", "Master's", "Doctorate", "Postdoc"],
+      "bad_value_multiplier": 0
+    },
+    {
+      "mask_id": "qf_age_13_17_no_bachelors_or_higher",
+      "group": "age_education",
+      "rationale": "The 13-17 bracket cannot plausibly have completed a bachelor's or postgraduate degree.",
+      "target": "highest_education",
+      "condition": {"age_bracket": ["13-17"]},
+      "bad_values": ["Bachelor's", "Master's", "Doctorate", "Postdoc"],
+      "bad_value_multiplier": 0
+    },
+    {
+      "mask_id": "qf_under13_no_adult_employment",
+      "group": "age_work",
+      "rationale": "Children under 13 cannot have an adult employment status.",
+      "target": "demo_employment_status",
+      "condition": {"age_bracket": ["Under 5", "5-12"]},
+      "bad_values": ["Full-time", "Part-time", "Self-employed", "Gig / freelance", "Unemployed", "Retired", "Homemaker"],
+      "bad_value_multiplier": 0
+    },
+    {
+      "mask_id": "qf_under13_no_professional_seniority",
+      "group": "age_work",
+      "rationale": "Children under 13 cannot hold a professional seniority level.",
+      "target": "seniority",
+      "condition": {"age_bracket": ["Under 5", "5-12"]},
+      "bad_values": ["Entry", "Mid", "Senior", "Lead / Principal", "Manager", "Director", "VP", "C-suite", "Founder", "Retired"],
+      "bad_value_multiplier": 0
+    },
+    {
+      "mask_id": "qf_under13_no_3plus_years_experience",
+      "group": "age_work",
+      "rationale": "Children under 13 cannot have three or more years of professional experience.",
+      "target": "years_experience",
+      "condition": {"age_bracket": ["Under 5", "5-12"]},
+      "bad_values": ["3-5", "6-10", "11-20", "20+"],
+      "bad_value_multiplier": 0
+    },
+    {
+      "mask_id": "qf_age_13_17_no_6plus_years_experience",
+      "group": "age_work",
+      "rationale": "The 13-17 bracket cannot have six or more years of professional experience.",
+      "target": "years_experience",
+      "condition": {"age_bracket": ["13-17"]},
+      "bad_values": ["6-10", "11-20", "20+"],
+      "bad_value_multiplier": 0
+    },
+    {
+      "mask_id": "qf_under13_no_adult_life_stage",
+      "group": "age_life_stage",
+      "rationale": "Children under 13 cannot occupy an adult life stage.",
+      "target": "life_stage",
+      "condition": {"age_bracket": ["Under 5", "5-12"]},
+      "bad_values": ["Early career", "Parent of young kids", "Mid-life", "Career change", "Empty nester", "Retirement"],
+      "bad_value_multiplier": 0
+    },
+    {
+      "mask_id": "qf_under13_not_current_driver",
+      "group": "age_driving",
+      "rationale": "Children under 13 cannot currently or legally drive.",
+      "target": "demo_driver_status",
+      "condition": {"age_bracket": ["Under 5", "5-12"]},
+      "bad_values": ["Daily driver", "Occasional driver", "Licensed, rarely drives"],
+      "bad_value_multiplier": 0
+    },
+    {
+      "mask_id": "qf_under13_never_smoked",
+      "group": "age_lifestyle",
+      "rationale": "Synthetic personas under 13 should not encode a smoking history.",
+      "target": "lstyle_smoking",
+      "condition": {"age_bracket": ["Under 5", "5-12"]},
+      "bad_values": ["Former", "Occasional", "Regular"],
+      "bad_value_multiplier": 0
+    },
+    {
+      "mask_id": "qf_under13_never_used_alcohol",
+      "group": "age_lifestyle",
+      "rationale": "Synthetic personas under 13 should not encode alcohol use.",
+      "target": "lstyle_alcohol_use",
+      "condition": {"age_bracket": ["Under 5", "5-12"]},
+      "bad_values": ["Rarely", "Socially", "Regularly", "Heavily"],
+      "bad_value_multiplier": 0
+    },
+    {
+      "mask_id": "qf_children_none_not_parent_like",
+      "group": "family",
+      "rationale": "A persona with no children cannot simultaneously claim a parent-like status.",
+      "target": "demo_parental_status",
+      "condition": {"demo_children_count": ["None"]},
+      "bad_values": ["New parent", "Parent of minors", "Parent of adults", "Grandparent", "Step / foster parent"],
+      "bad_value_multiplier": 0
+    },
+    {
+      "mask_id": "qf_children_present_requires_parent_status",
+      "group": "family",
+      "rationale": "A persona reporting children cannot simultaneously report not being a parent.",
+      "target": "demo_parental_status",
+      "condition": {"demo_children_count": ["1 child", "2 children", "3+ children", "Adult children"]},
+      "bad_values": ["Not a parent"],
+      "bad_value_multiplier": 0
+    },
+    {
+      "mask_id": "qf_not_parent_has_no_children",
+      "group": "family",
+      "rationale": "A persona reporting not being a parent cannot simultaneously report children.",
+      "target": "demo_children_count",
+      "condition": {"demo_parental_status": ["Not a parent"]},
+      "bad_values": ["1 child", "2 children", "3+ children", "Adult children"],
+      "bad_value_multiplier": 0
+    },
+    {
+      "mask_id": "qf_parent_young_kids_requires_children",
+      "group": "family",
+      "rationale": "The parent-of-young-kids life stage requires a child signal.",
+      "target": "life_stage",
+      "condition": {"demo_children_count": ["None"]},
+      "bad_values": ["Parent of young kids"],
+      "bad_value_multiplier": 0
+    },
+    {
+      "mask_id": "qf_parent_young_kids_requires_parent",
+      "group": "family",
+      "rationale": "The parent-of-young-kids life stage is incompatible with not being a parent.",
+      "target": "life_stage",
+      "condition": {"demo_parental_status": ["Not a parent"]},
+      "bad_values": ["Parent of young kids"],
+      "bad_value_multiplier": 0
+    },
+    {
+      "mask_id": "qf_empty_nester_requires_adult_children",
+      "group": "family",
+      "rationale": "An empty nester must have adult children or a corresponding parental status.",
+      "target": "life_stage",
+      "condition": {"demo_parental_status": ["Not a parent", "New parent", "Parent of minors", "Step / foster parent"]},
+      "bad_values": ["Empty nester"],
+      "bad_value_multiplier": 0
+    },
+    {
+      "mask_id": "qf_blind_not_current_driver",
+      "group": "health_driving",
+      "rationale": "A blind persona cannot be a current or licensed driver.",
+      "target": "demo_driver_status",
+      "condition": {"health_vision": ["Blind"]},
+      "bad_values": ["Daily driver", "Occasional driver", "Licensed, rarely drives"],
+      "bad_value_multiplier": 0
+    },
+    {
+      "mask_id": "qf_primary_english_requires_proficiency",
+      "group": "language",
+      "rationale": "English as the primary language is incompatible with basic or no English proficiency.",
+      "target": "english_proficiency",
+      "condition": {"primary_language": ["English"]},
+      "bad_values": ["Basic (A1-A2)", "None"],
+      "bad_value_multiplier": 0
+    }
+  ]
+}

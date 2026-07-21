@@ -40,10 +40,15 @@ human_extraction/
 
 ## Data
 
+- Real Human Survey release:
+  `data/matraix_persona_1m_public_release/Real Human Survey/merged_personas_508.jsonl`
+  contains survey personas for **508 confirmed real people** in JSONL format,
+  with one flattened 1,290-field persona per line. Unanswered survey fields
+  remain `null`.
 - Source: gated HF dataset `MatrAIx2026/MatrAIx2026`, file
-  `wiki/matraix_wiki_profiles_20260601_v1.sqlite` (~7.9 GB).
+  `wiki/source/matraix_wiki_profiles_20260601_v1.sqlite` (~7.9 GB).
 - Requires an HF token; read from env var `HF_TOKEN_matraix` (set in `~/.bashrc`).
-- Downloaded into `persona/human_extraction/data/wiki/...sqlite` via
+- Downloaded into `persona/human_extraction/data/wiki/source/...sqlite` via
   `hf_hub_download(local_dir=DATA_DIR)` — **not** committed to git.
 - Single table `profiles` (~2,125,897 rows) with columns:
   `global_idx, task_id, page_id, qid, title, source_url, profile_text,
@@ -143,7 +148,7 @@ cd persona/human_extraction/jobs
 mkdir -p sbatch_logs
 NUM_SHARDS=200 sbatch -p seas_gpu  --time=2-00:00 --array=0-99%50    extract_shard.job
 NUM_SHARDS=200 sbatch -p gpu_h200  --time=2-12:00 --array=100-199%50 extract_shard.job
-# each task -> data/extraction_v1/shard_XXXX.jsonl. Re-run the SAME two lines to
+# each task -> data/wiki/extraction_v1/shard_XXXX.jsonl. Re-run the SAME two lines to
 # top up shards that didn't finish (skips already-done global_idx).
 ```
 
@@ -169,7 +174,7 @@ change on each (re)submission — the commands below find jobs by **name**
 
 ```bash
 USER=xiaominli
-OUT=/n/netscratch/lu_lab/Lab/xiaominli/LLMResearch/MatrAIx/persona/human_extraction/data/extraction_v1
+OUT=/n/netscratch/lu_lab/Lab/xiaominli/LLMResearch/MatrAIx/persona/human_extraction/data/wiki/extraction_v1
 
 # queue state (use -r to EXPAND array tasks; squeue/sacct FOLD pending ones into
 # one _[...] row — that's why you 'only see a couple' rows)
@@ -188,11 +193,25 @@ tail -f jobs/sbatch_logs/extract_shard.job_*_<ARRAY_ID>.out
 grep -aliE "Traceback|CUDA error|out of memory" jobs/sbatch_logs/*.err
 ```
 
-**Output format** — `data/extraction_v1/shard_XXXX.jsonl`, one JSON object per
+**Output format** — `data/wiki/extraction_v1/shard_XXXX.jsonl`, one JSON object per
 profile: `{global_idx, qid, title, fields: [ {field_id, value, confidence,
 evidence, description, assignment_type}, ... ]}` (~1290 field objects/profile).
 Quality caveats + recommended post-processing (negatives / `assignment_type`) are
 in `docs/BENCHMARK.md` §8. Inspect/score with `scripts/score_personas.py`.
+
+### Subscription/API replacement for rows 0-1199
+
+Local `shard_0000.jsonl` rows with `global_idx` 0-1199 were replaced with the
+rich extraction artifact from `MatrAIx2026/Existing_Data` PR #51, immutable
+commit `0647ae3fd6bfba403e9c63a0c9350b35be806b05`. Identity was verified by
+exact `global_idx + qid` match before replacement.
+
+Use `scripts/replace_wiki_subscription_rows.py` to reproduce the conversion. It
+projects the PR's older 1,339-dimension contract onto the current 1,290 schema,
+validates values and grounding, backs up the original Qwen rows, writes through
+a temporary file, and atomically replaces the shard. The newer flattened PR
+head is retained for reference but is not suitable as a replacement source
+because it omits confidence, evidence, and assignment type.
 
 **Resuming after preemption / time-out:** just re-run the same two `sbatch`
 lines — `run_extraction.py` reads each `shard_XXXX.jsonl`, skips `global_idx`

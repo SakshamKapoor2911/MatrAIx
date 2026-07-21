@@ -1,0 +1,29 @@
+services:
+  main:
+    depends_on:
+      meal-plan-api:
+        condition: service_healthy
+
+  meal-plan-api:
+    build:
+      context: ./meal-plan-api
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      MEAL_PLAN_LLM: ${MEAL_PLAN_LLM:-}
+      MEAL_PLAN_MODEL: ${MEAL_PLAN_MODEL:-gpt-4o-mini}
+      MEAL_PLAN_LLM_CONCURRENCY: ${MEAL_PLAN_LLM_CONCURRENCY:-32}
+      MEAL_PLAN_MAX_SESSIONS: ${MEAL_PLAN_MAX_SESSIONS:-2000}
+    expose:
+      - "8000"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=2).read()",
+        ]
+      interval: 2s
+      timeout: 5s
+      retries: 15
+      start_period: 5s

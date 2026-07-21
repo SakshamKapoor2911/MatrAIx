@@ -26,6 +26,7 @@ from playground.types import PlaygroundConfig
 _SIDECAR_TASK_PATHS = {
     "finance_openbb": "application/tasks/chat_openbb",
     "medical_assistant": "application/tasks/chat_multi-agent-medical-assistant",
+    "meal_planning_nutrition": "application/tasks/chat_meal-planning-nutrition",
 }
 
 
@@ -103,6 +104,16 @@ def _application_for(application_id: str) -> Any:
                 "http://127.0.0.1:8902",
             ),
         )
+    if application_id == "meal_planning_nutrition":
+        return HTTPChatbotApplication(
+            application_id="meal_planning_nutrition",
+            default_context="meal_planning",
+            base_url=_sidecar_base_url(
+                "CHATBOT_API_URL",
+                "",
+                "http://127.0.0.1:8905",
+            ),
+        )
     raise ValueError("unsupported direct application: {}".format(application_id))
 
 
@@ -168,15 +179,20 @@ class HTTPChatbotApplication:
             detail = exc.read().decode("utf-8", errors="replace")
             raise HTTPException(status_code=exc.code, detail=detail) from exc
         except (TimeoutError, urllib.error.URLError) as exc:
+            upstream_hint = {
+                "finance_openbb": "CHATBOT_UPSTREAM_FINANCE",
+                "medical_assistant": "CHATBOT_UPSTREAM_MEDICAL",
+                "meal_planning_nutrition": "CHATBOT_API_URL",
+            }.get(self.application_id, "CHATBOT_API_URL")
             raise HTTPException(
                 status_code=503,
                 detail=(
                     "{} sidecar unavailable at {}. Start the chatbot sidecar "
-                    "or set CHATBOT_UPSTREAM_{}."
+                    "or set {}."
                 ).format(
                     self.application_id,
                     self.base_url,
-                    "FINANCE" if self.application_id == "finance_openbb" else "MEDICAL",
+                    upstream_hint,
                 ),
             ) from exc
         try:

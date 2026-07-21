@@ -876,6 +876,7 @@ export interface HarborJobDetail {
   result?: Record<string, unknown> | null;
   trials: HarborTrialView[];
   launch?: HarborLaunchView | null;
+  /** @deprecated Prefer GET …/aggregation; job detail no longer embeds the full report. */
   aggregation?: HarborJobAggregation | null;
 }
 

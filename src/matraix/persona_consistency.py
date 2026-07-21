@@ -9,8 +9,12 @@ from typing import Any
 
 DEFAULT_CATALOG_PATH = "persona/schema/dimensions.json"
 
-# Core catalog block (index 1-47): demographics, career, values, interaction state, etc.
-# Excludes fam_* / att_* floods that start at index 48+.
+# Standard checked-in / Playground persona fields are defined by
+# ``load_dev_dimension_ids()``: core block + all ``cog_*`` + food/diet/cuisine.
+#
+# Core catalog block (index 1-47): demographics, career, values, interaction
+# state, etc. Do not raise CORE_DEV_MAX_INDEX to pull food dims — that would also
+# ingest the fam_* / att_* floods that start at index 48+.
 CORE_DEV_MAX_INDEX = 47
 CORE_DEV_DIMENSION_IDS = (
     "age_bracket",
@@ -64,6 +68,20 @@ CORE_DEV_DIMENSION_IDS = (
 CORE_DEV_DIMENSION_ORDER = {
     dim_id: index for index, dim_id in enumerate(CORE_DEV_DIMENSION_IDS, start=1)
 }
+
+# Food / diet / cooking fields that belong in the standard dev set (plus every
+# ``cuis_*`` id from the catalog — matched by prefix in ``load_dev_dimension_ids``).
+DEV_FOOD_DIMENSION_IDS = frozenset(
+    {
+        "lstyle_diet_type",
+        "fam_nutrition",
+        "att_veganism",
+        "health_dietary_restriction",
+        "habit_meal_prepping",
+        "habit_skipping_breakfast",
+        "habit_late_night_snacking",
+    }
+)
 
 # life_stage must be plausible for age_bracket (no counterfactual life arcs).
 LIFE_STAGE_BY_AGE: dict[str, list[str]] = {
@@ -207,7 +225,11 @@ def _catalog_order(row: dict[str, Any]) -> int:
 def load_dev_dimension_ids(
     *, catalog_path: str = DEFAULT_CATALOG_PATH
 ) -> tuple[str, ...]:
-    """Dev persona fields: core block (index ≤ 47) + all ``cog_*`` communication dims."""
+    """Standard persona fields for bench-dev-sample and Playground generation.
+
+    Includes the core block (index ≤ 47), all ``cog_*`` communication dims,
+    food/diet/cooking dims (``DEV_FOOD_DIMENSION_IDS``), and every ``cuis_*``.
+    """
     ids: list[str] = []
     for row in _load_catalog_rows(catalog_path):
         dim_id = str(row["id"])
@@ -216,6 +238,8 @@ def load_dev_dimension_ids(
             index <= CORE_DEV_MAX_INDEX
             or dim_id in CORE_DEV_DIMENSION_ORDER
             or dim_id.startswith("cog_")
+            or dim_id in DEV_FOOD_DIMENSION_IDS
+            or dim_id.startswith("cuis_")
         ):
             ids.append(dim_id)
     return tuple(ids)

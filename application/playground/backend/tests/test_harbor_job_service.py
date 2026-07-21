@@ -484,10 +484,18 @@ def test_get_job_surfaces_reporting_queue_status(tmp_path, monkeypatch):
     detail = service.get_job("demo-job")
 
     assert detail is not None
-    assert detail["aggregation"]["reporting"]["status"] == "queued"
+    # Job detail no longer embeds the full aggregation payload or schedules
+    # reporting — that happens via get_job_aggregation / list_jobs.
+    assert detail.get("aggregation") is None
+    assert service._executor.calls == []
+
+    aggregation = service.get_job_aggregation("demo-job")
+    assert aggregation["reporting"]["status"] == "queued"
     assert len(service._executor.calls) == 1
     status_path = jobs_dir / "demo-job" / "reporting_status.json"
     assert status_path.is_file()
+    status = json.loads(status_path.read_text(encoding="utf-8"))
+    assert status["status"] == "queued"
 
     service.shutdown()
 

@@ -288,7 +288,21 @@ async def _run(args: argparse.Namespace) -> int:
     agent_version = os.environ.get("BROWSER_USE_VERSION", "unknown")
 
     llm = _create_llm(args.model)
-    browser = Browser(headless=True)
+
+    # Some sites' WAFs reject Chromium's default ``HeadlessChrome`` User-Agent
+    # with 403 before any page JS runs. Presenting a normal Chrome UA is enough
+    # to pass (the block is on the UA header, not the IP). Both the UA and
+    # headless mode are overridable via env for debugging.
+    headless = (os.environ.get("BROWSER_USE_HEADLESS", "1").strip().lower()
+                not in ("0", "false", "no"))
+    user_agent = os.environ.get("BROWSER_USE_USER_AGENT", "").strip() or (
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+        "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+    )
+    browser_kwargs: dict = {"headless": headless}
+    if user_agent:
+        browser_kwargs["user_agent"] = user_agent
+    browser = Browser(**browser_kwargs)
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 

@@ -107,10 +107,39 @@ PLAYGROUND_TASK_INDEX: Dict[str, PlaygroundTaskEntry] = {
         output_artifact="book_interest.json",
         submission_profile="book_interest",
     ),
+    "web-portfoliovisualizer_backtest-allocation": PlaygroundTaskEntry(
+        application_type="web",
+        site_name="Portfolio Visualizer",
+        site_url="https://www.portfoliovisualizer.com/backtest-portfolio",
+        output_artifact="portfolio_backtest.json",
+        submission_profile="portfolio_backtest",
+    ),
+    "web-cua-portfoliovisualizer_backtest-allocation": PlaygroundTaskEntry(
+        application_type="web",
+        site_name="Portfolio Visualizer",
+        site_url="https://www.portfoliovisualizer.com/backtest-portfolio",
+        output_artifact="portfolio_backtest.json",
+        submission_profile="portfolio_backtest",
+    ),
+    "web-mit-ocw-course-choice": PlaygroundTaskEntry(
+        application_type="web",
+        site_name="MIT OpenCourseWare",
+        site_url="https://ocw.mit.edu/search/",
+        output_artifact="course_choice.json",
+        submission_profile="course_choice",
+    ),
+    "web-notion-plan-comparison": PlaygroundTaskEntry(
+        application_type="web",
+        site_name="Notion pricing",
+        site_url="https://www.notion.com/pricing",
+        output_artifact="notion_plan_comparison.json",
+        submission_profile="notion_plan_comparison",
+    ),
     # Chatbot
     "chat_recai": PlaygroundTaskEntry(application_type="chatbot"),
     "chat_openbb": PlaygroundTaskEntry(application_type="chatbot"),
     "chat_multi-agent-medical-assistant": PlaygroundTaskEntry(application_type="chatbot"),
+    "chat_meal-planning-nutrition": PlaygroundTaskEntry(application_type="chatbot"),
     "example-chat-mcp_support_chatbot": PlaygroundTaskEntry(
         application_type="chatbot"
     ),

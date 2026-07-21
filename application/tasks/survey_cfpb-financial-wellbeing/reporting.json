@@ -1,4 +1,96 @@
 {
   "schemaVersion": "1.0",
-  "contextRules": []
+  "contextRules": [
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q0"
+      },
+      "distributions": [
+        {
+          "id": "q0.response_by_segment",
+          "facetKey": "response",
+          "title": "Life satisfaction"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q1"
+      },
+      "distributions": [
+        {
+          "id": "q1.response_by_segment",
+          "facetKey": "response",
+          "title": "Optimism about the future"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q3"
+      },
+      "distributions": [
+        {
+          "id": "q3.response_by_segment",
+          "facetKey": "response",
+          "title": "Could handle a major unexpected expense"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q5"
+      },
+      "distributions": [
+        {
+          "id": "q5.response_by_segment",
+          "facetKey": "response",
+          "title": "Because of my money situation, I feel like I will never have the things I want"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q7"
+      },
+      "distributions": [
+        {
+          "id": "q7.response_by_segment",
+          "facetKey": "response",
+          "title": "I am just getting by financially"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q10"
+      },
+      "distributions": [
+        {
+          "id": "q10.response_by_segment",
+          "facetKey": "response",
+          "title": "Money left over at end of month"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q119"
+      },
+      "distributions": [
+        {
+          "id": "q119.response_by_segment",
+          "facetKey": "response",
+          "title": "Who you seek money advice from"
+        }
+      ]
+    }
+  ]
 }

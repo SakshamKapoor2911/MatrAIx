@@ -1,5 +1,11 @@
 # Amazon Persona Extraction — Handoff / Runbook
 
+> **Provenance:** Xiaomin Li wrote this handoff for Koutian Wu on 2026-07-06,
+> before Koutian started the first successful Amazon extraction tranche. It
+> describes the original 0%-complete Slurm attempt and is retained for setup and
+> sharding context. It is **not** the current continuation status. See
+> `docs/HANDOFF_KOUTIAN_TO_XIAOMIN_20260717.md` for the 38.2%-complete takeover.
+
 Goal: extract persona attributes for **100,000 Amazon reviewers** (one persona =
 one user, built from that user's full review history) using Qwen3.6-35B-A3B on
 vLLM. All code is on `main`. The run is **sharded (256 buckets), resumable, and

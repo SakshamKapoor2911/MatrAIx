@@ -890,6 +890,10 @@ class HarborJobService:
         with self._guard:
             launch = self._launches.get(job_name)
 
+        # Job detail stays lightweight: the Runs UI loads the multi-MB batch
+        # report separately via GET /api/harbor/jobs/{job}/aggregation (which
+        # also drives the reporting scheduler). Embedding aggregation here made
+        # every job-detail poll rebuild and ship the full report payload.
         task_meta = self._job_task_meta(job_name, job_dir)
         return {
             "jobName": job_name,
@@ -908,11 +912,7 @@ class HarborJobService:
             "result": self._read_json(job_dir / "result.json"),
             "trials": trials,
             "launch": _launch_view(launch) if launch else None,
-            "aggregation": self._build_job_aggregation_view(
-                job_name,
-                job_dir,
-                trials=[str(trial.get("trialName") or "") for trial in trials if trial.get("trialName")],
-            ),
+            "aggregation": None,
         }
 
     def get_job_aggregation(self, job_name: str) -> dict[str, Any]:

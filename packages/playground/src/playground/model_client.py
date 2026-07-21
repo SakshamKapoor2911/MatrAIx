@@ -9,6 +9,11 @@ from typing import Any, Dict, Optional
 from playground.openai_client import OpenAIChatClient, coerce_json
 
 DASHSCOPE_DEFAULT_BASE_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1"
+DEEPSEEK_DEFAULT_BASE_URL = "https://api.deepseek.com"
+
+# Large survey envelopes (e.g. CFPB ~134 answers) need far more than a short chat reply.
+# 1200 truncates mid-JSON; 8192 covers compact one-shot instruments with headroom.
+ANTHROPIC_JSON_MAX_TOKENS = 8192
 
 
 def dashscope_model_id(model: str) -> str:
@@ -48,6 +53,7 @@ class AnthropicJSONClient:
         api_key: Optional[str] = None,
         temperature: float = 0.7,
         timeout_seconds: float = 180.0,
+        max_tokens: int = ANTHROPIC_JSON_MAX_TOKENS,
     ) -> None:
         self.model = model
         self.api_key = (
@@ -58,6 +64,7 @@ class AnthropicJSONClient:
         ).strip()
         self.temperature = temperature
         self.timeout_seconds = timeout_seconds
+        self.max_tokens = max_tokens
         if not self.api_key:
             raise RuntimeError(
                 "ANTHROPIC_API_KEY or CLAUDE_API_KEY is required for persona model {}".format(
@@ -68,7 +75,7 @@ class AnthropicJSONClient:
     def complete_json(self, system: str, user: str) -> Dict[str, Any]:
         body = {
             "model": self.model,
-            "max_tokens": 1200,
+            "max_tokens": self.max_tokens,
             "temperature": self.temperature,
             "system": system,
             "messages": [
@@ -111,7 +118,15 @@ class AnthropicJSONClient:
         for block in payload.get("content") or []:
             if isinstance(block, dict) and block.get("type") == "text":
                 text_parts.append(str(block.get("text") or ""))
-        return coerce_json("\n".join(text_parts))
+        text = "\n".join(text_parts)
+        if payload.get("stop_reason") == "max_tokens":
+            raise RuntimeError(
+                "Anthropic persona model output truncated at max_tokens={} "
+                "(incomplete JSON). Increase max_tokens for large survey envelopes.".format(
+                    self.max_tokens
+                )
+            )
+        return coerce_json(text)
 
 
 def _llm_proxy_base_url() -> str:
@@ -142,6 +157,22 @@ def build_json_client(model: str, *, temperature: float = 0.7) -> Any:
             model=kwargs["model"],
             api_key=kwargs["api_key"],
             base_url=kwargs["base_url"],
+            temperature=temperature,
+        )
+    if value.startswith("deepseek/"):
+        api_key = (os.environ.get("DEEPSEEK_API_KEY") or "").strip()
+        if not api_key:
+            raise RuntimeError(
+                "DEEPSEEK_API_KEY is required for persona model {!r}".format(value)
+            )
+        base_url = (
+            os.environ.get("DEEPSEEK_API_BASE")
+            or "https://api.deepseek.com"
+        ).strip()
+        return OpenAIChatClient(
+            model=value.split("/", 1)[1],
+            api_key=api_key,
+            base_url=base_url,
             temperature=temperature,
         )
     if value.startswith("openai/"):

@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "1.0",
+  "sources": [],
+  "defaultMode": "stratified",
+  "dimensionFilters": {
+    "age_bracket": ["25-34", "35-44", "45-54"],
+    "lstyle_diet_type": ["Omnivore", "Vegetarian", "Vegan"],
+    "health_dietary_restriction": ["Allergy", "Religious", "Medical"],
+    "habit_meal_prepping": ["Weekly", "Never"],
+    "fam_nutrition": ["Familiar", "Aware"],
+    "att_veganism": ["Enthusiast", "Neutral"],
+    "economic_motivation": ["Cost-sensitive", "Premium-seeking"]
+  },
+  "stratifyFields": [
+    "lstyle_diet_type",
+    "health_dietary_restriction",
+    "habit_meal_prepping",
+    "fam_nutrition",
+    "att_veganism",
+    "economic_motivation"
+  ],
+  "sampleSizePerValueGroup": 1,
+  "seed": 42
+}

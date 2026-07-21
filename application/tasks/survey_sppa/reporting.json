@@ -1,4 +1,70 @@
 {
   "schemaVersion": "1.0",
-  "contextRules": []
+  "contextRules": [
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q0"
+      },
+      "distributions": [
+        {
+          "id": "q0.response_by_segment",
+          "facetKey": "response",
+          "title": "Live jazz in last 12 months"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q2"
+      },
+      "distributions": [
+        {
+          "id": "q2.response_by_segment",
+          "facetKey": "response",
+          "title": "Live Latin/Spanish/salsa in last 12 months"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q4"
+      },
+      "distributions": [
+        {
+          "id": "q4.response_by_segment",
+          "facetKey": "response",
+          "title": "Live classical music in last 12 months"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q6"
+      },
+      "distributions": [
+        {
+          "id": "q6.response_by_segment",
+          "facetKey": "response",
+          "title": "Live opera in last 12 months"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q115"
+      },
+      "distributions": [
+        {
+          "id": "q115.response_by_segment",
+          "facetKey": "response",
+          "title": "Cooked food as artistic activity"
+        }
+      ]
+    }
+  ]
 }

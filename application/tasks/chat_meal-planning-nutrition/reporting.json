@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "1.0",
+  "contextRules": [
+    {
+      "match": { "contextType": "task_outcome" },
+      "distributions": [
+        {
+          "id": "task_outcome.status_by_segment",
+          "facetKey": "outcome_status",
+          "title": "Outcome status",
+          "groupByPersonaDimensions": [
+            "lstyle_diet_type",
+            "health_dietary_restriction",
+            "habit_meal_prepping"
+          ]
+        }
+      ]
+    },
+    {
+      "match": { "contextType": "user_feedback" },
+      "distributions": [
+        {
+          "id": "user_feedback.need_by_segment",
+          "facetKey": "need_constraint_satisfaction",
+          "title": "Need or constraint satisfaction",
+          "groupByPersonaDimensions": [
+            "lstyle_diet_type",
+            "health_dietary_restriction",
+            "habit_meal_prepping"
+          ]
+        },
+        {
+          "id": "user_feedback.preference_by_segment",
+          "facetKey": "personal_preference_satisfaction",
+          "title": "Personal preference satisfaction",
+          "groupByPersonaDimensions": [
+            "lstyle_diet_type",
+            "health_dietary_restriction",
+            "habit_meal_prepping"
+          ]
+        },
+        {
+          "id": "user_feedback.safety_by_segment",
+          "facetKey": "task_safety_flagged",
+          "title": "Safety flagged by assistant",
+          "groupByPersonaDimensions": [
+            "lstyle_diet_type",
+            "health_dietary_restriction",
+            "habit_meal_prepping"
+          ]
+        },
+        {
+          "id": "user_feedback.adherence_by_segment",
+          "facetKey": "task_adherence_likelihood",
+          "title": "Adherence likelihood",
+          "groupByPersonaDimensions": [
+            "lstyle_diet_type",
+            "health_dietary_restriction",
+            "habit_meal_prepping"
+          ]
+        },
+        {
+          "id": "user_feedback.rating_by_segment",
+          "facetKey": "overall_experience_rating",
+          "title": "Overall experience rating",
+          "groupByPersonaDimensions": [
+            "lstyle_diet_type",
+            "health_dietary_restriction",
+            "habit_meal_prepping"
+          ]
+        }
+      ]
+    }
+  ]
+}

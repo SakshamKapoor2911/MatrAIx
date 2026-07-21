@@ -1,0 +1,622 @@
+{
+  "format": "persona_projection_hll_config",
+  "format_version": 1,
+  "selection": "descending graph-prior entropy, round-robin across schema categories",
+  "hll_precision": 20,
+  "hll_registers": 1048576,
+  "relative_standard_error": 0.001015625,
+  "projections": [
+    {
+      "id": "entropy_rr_6",
+      "width": 6,
+      "fields": [
+        {
+          "id": "mbti_type",
+          "category": "Personality: MBTI",
+          "entropy_bits": 4.0,
+          "value_count": 16
+        },
+        {
+          "id": "domain",
+          "category": "Expertise: Domains",
+          "entropy_bits": 3.6072413347809813,
+          "value_count": 16
+        },
+        {
+          "id": "role_function",
+          "category": "Professional: Industry",
+          "entropy_bits": 3.2839347646250205,
+          "value_count": 13
+        },
+        {
+          "id": "age_bracket",
+          "category": "Demographic: Core",
+          "entropy_bits": 3.27535917477977,
+          "value_count": 11
+        },
+        {
+          "id": "primary_language",
+          "category": "Linguistic: Language",
+          "entropy_bits": 3.2415815280196467,
+          "value_count": 12
+        },
+        {
+          "id": "cultural_background",
+          "category": "Demographic: Cultural",
+          "entropy_bits": 3.0,
+          "value_count": 8
+        }
+      ]
+    },
+    {
+      "id": "entropy_rr_7",
+      "width": 7,
+      "fields": [
+        {
+          "id": "mbti_type",
+          "category": "Personality: MBTI",
+          "entropy_bits": 4.0,
+          "value_count": 16
+        },
+        {
+          "id": "domain",
+          "category": "Expertise: Domains",
+          "entropy_bits": 3.6072413347809813,
+          "value_count": 16
+        },
+        {
+          "id": "role_function",
+          "category": "Professional: Industry",
+          "entropy_bits": 3.2839347646250205,
+          "value_count": 13
+        },
+        {
+          "id": "age_bracket",
+          "category": "Demographic: Core",
+          "entropy_bits": 3.27535917477977,
+          "value_count": 11
+        },
+        {
+          "id": "primary_language",
+          "category": "Linguistic: Language",
+          "entropy_bits": 3.2415815280196467,
+          "value_count": 12
+        },
+        {
+          "id": "cultural_background",
+          "category": "Demographic: Cultural",
+          "entropy_bits": 3.0,
+          "value_count": 8
+        },
+        {
+          "id": "major_life_events",
+          "category": "Demographic: Life Events",
+          "entropy_bits": 3.0,
+          "value_count": 8
+        }
+      ]
+    },
+    {
+      "id": "entropy_rr_8",
+      "width": 8,
+      "fields": [
+        {
+          "id": "mbti_type",
+          "category": "Personality: MBTI",
+          "entropy_bits": 4.0,
+          "value_count": 16
+        },
+        {
+          "id": "domain",
+          "category": "Expertise: Domains",
+          "entropy_bits": 3.6072413347809813,
+          "value_count": 16
+        },
+        {
+          "id": "role_function",
+          "category": "Professional: Industry",
+          "entropy_bits": 3.2839347646250205,
+          "value_count": 13
+        },
+        {
+          "id": "age_bracket",
+          "category": "Demographic: Core",
+          "entropy_bits": 3.27535917477977,
+          "value_count": 11
+        },
+        {
+          "id": "primary_language",
+          "category": "Linguistic: Language",
+          "entropy_bits": 3.2415815280196467,
+          "value_count": 12
+        },
+        {
+          "id": "cultural_background",
+          "category": "Demographic: Cultural",
+          "entropy_bits": 3.0,
+          "value_count": 8
+        },
+        {
+          "id": "major_life_events",
+          "category": "Demographic: Life Events",
+          "entropy_bits": 3.0,
+          "value_count": 8
+        },
+        {
+          "id": "future_developer_skill_belief",
+          "category": "Developer: AI Adoption",
+          "entropy_bits": 2.9175279826076324,
+          "value_count": 8
+        }
+      ]
+    },
+    {
+      "id": "entropy_rr_9",
+      "width": 9,
+      "fields": [
+        {
+          "id": "mbti_type",
+          "category": "Personality: MBTI",
+          "entropy_bits": 4.0,
+          "value_count": 16
+        },
+        {
+          "id": "domain",
+          "category": "Expertise: Domains",
+          "entropy_bits": 3.6072413347809813,
+          "value_count": 16
+        },
+        {
+          "id": "role_function",
+          "category": "Professional: Industry",
+          "entropy_bits": 3.2839347646250205,
+          "value_count": 13
+        },
+        {
+          "id": "age_bracket",
+          "category": "Demographic: Core",
+          "entropy_bits": 3.27535917477977,
+          "value_count": 11
+        },
+        {
+          "id": "primary_language",
+          "category": "Linguistic: Language",
+          "entropy_bits": 3.2415815280196467,
+          "value_count": 12
+        },
+        {
+          "id": "cultural_background",
+          "category": "Demographic: Cultural",
+          "entropy_bits": 3.0,
+          "value_count": 8
+        },
+        {
+          "id": "major_life_events",
+          "category": "Demographic: Life Events",
+          "entropy_bits": 3.0,
+          "value_count": 8
+        },
+        {
+          "id": "future_developer_skill_belief",
+          "category": "Developer: AI Adoption",
+          "entropy_bits": 2.9175279826076324,
+          "value_count": 8
+        },
+        {
+          "id": "coding_agent_adoption_barrier",
+          "category": "Developer: Agent Adoption",
+          "entropy_bits": 2.8580747910018878,
+          "value_count": 8
+        }
+      ]
+    },
+    {
+      "id": "entropy_rr_10",
+      "width": 10,
+      "fields": [
+        {
+          "id": "mbti_type",
+          "category": "Personality: MBTI",
+          "entropy_bits": 4.0,
+          "value_count": 16
+        },
+        {
+          "id": "domain",
+          "category": "Expertise: Domains",
+          "entropy_bits": 3.6072413347809813,
+          "value_count": 16
+        },
+        {
+          "id": "role_function",
+          "category": "Professional: Industry",
+          "entropy_bits": 3.2839347646250205,
+          "value_count": 13
+        },
+        {
+          "id": "age_bracket",
+          "category": "Demographic: Core",
+          "entropy_bits": 3.27535917477977,
+          "value_count": 11
+        },
+        {
+          "id": "primary_language",
+          "category": "Linguistic: Language",
+          "entropy_bits": 3.2415815280196467,
+          "value_count": 12
+        },
+        {
+          "id": "cultural_background",
+          "category": "Demographic: Cultural",
+          "entropy_bits": 3.0,
+          "value_count": 8
+        },
+        {
+          "id": "major_life_events",
+          "category": "Demographic: Life Events",
+          "entropy_bits": 3.0,
+          "value_count": 8
+        },
+        {
+          "id": "future_developer_skill_belief",
+          "category": "Developer: AI Adoption",
+          "entropy_bits": 2.9175279826076324,
+          "value_count": 8
+        },
+        {
+          "id": "coding_agent_adoption_barrier",
+          "category": "Developer: Agent Adoption",
+          "entropy_bits": 2.8580747910018878,
+          "value_count": 8
+        },
+        {
+          "id": "academic_field",
+          "category": "Learning: Academic",
+          "entropy_bits": 2.816499079984843,
+          "value_count": 8
+        }
+      ]
+    },
+    {
+      "id": "entropy_rr_11",
+      "width": 11,
+      "fields": [
+        {
+          "id": "mbti_type",
+          "category": "Personality: MBTI",
+          "entropy_bits": 4.0,
+          "value_count": 16
+        },
+        {
+          "id": "domain",
+          "category": "Expertise: Domains",
+          "entropy_bits": 3.6072413347809813,
+          "value_count": 16
+        },
+        {
+          "id": "role_function",
+          "category": "Professional: Industry",
+          "entropy_bits": 3.2839347646250205,
+          "value_count": 13
+        },
+        {
+          "id": "age_bracket",
+          "category": "Demographic: Core",
+          "entropy_bits": 3.27535917477977,
+          "value_count": 11
+        },
+        {
+          "id": "primary_language",
+          "category": "Linguistic: Language",
+          "entropy_bits": 3.2415815280196467,
+          "value_count": 12
+        },
+        {
+          "id": "cultural_background",
+          "category": "Demographic: Cultural",
+          "entropy_bits": 3.0,
+          "value_count": 8
+        },
+        {
+          "id": "major_life_events",
+          "category": "Demographic: Life Events",
+          "entropy_bits": 3.0,
+          "value_count": 8
+        },
+        {
+          "id": "future_developer_skill_belief",
+          "category": "Developer: AI Adoption",
+          "entropy_bits": 2.9175279826076324,
+          "value_count": 8
+        },
+        {
+          "id": "coding_agent_adoption_barrier",
+          "category": "Developer: Agent Adoption",
+          "entropy_bits": 2.8580747910018878,
+          "value_count": 8
+        },
+        {
+          "id": "academic_field",
+          "category": "Learning: Academic",
+          "entropy_bits": 2.816499079984843,
+          "value_count": 8
+        },
+        {
+          "id": "developer_problem_profile",
+          "category": "Developer: Community Behavior",
+          "entropy_bits": 2.807354922057604,
+          "value_count": 7
+        }
+      ]
+    },
+    {
+      "id": "entropy_rr_12",
+      "width": 12,
+      "fields": [
+        {
+          "id": "mbti_type",
+          "category": "Personality: MBTI",
+          "entropy_bits": 4.0,
+          "value_count": 16
+        },
+        {
+          "id": "domain",
+          "category": "Expertise: Domains",
+          "entropy_bits": 3.6072413347809813,
+          "value_count": 16
+        },
+        {
+          "id": "role_function",
+          "category": "Professional: Industry",
+          "entropy_bits": 3.2839347646250205,
+          "value_count": 13
+        },
+        {
+          "id": "age_bracket",
+          "category": "Demographic: Core",
+          "entropy_bits": 3.27535917477977,
+          "value_count": 11
+        },
+        {
+          "id": "primary_language",
+          "category": "Linguistic: Language",
+          "entropy_bits": 3.2415815280196467,
+          "value_count": 12
+        },
+        {
+          "id": "cultural_background",
+          "category": "Demographic: Cultural",
+          "entropy_bits": 3.0,
+          "value_count": 8
+        },
+        {
+          "id": "major_life_events",
+          "category": "Demographic: Life Events",
+          "entropy_bits": 3.0,
+          "value_count": 8
+        },
+        {
+          "id": "future_developer_skill_belief",
+          "category": "Developer: AI Adoption",
+          "entropy_bits": 2.9175279826076324,
+          "value_count": 8
+        },
+        {
+          "id": "coding_agent_adoption_barrier",
+          "category": "Developer: Agent Adoption",
+          "entropy_bits": 2.8580747910018878,
+          "value_count": 8
+        },
+        {
+          "id": "academic_field",
+          "category": "Learning: Academic",
+          "entropy_bits": 2.816499079984843,
+          "value_count": 8
+        },
+        {
+          "id": "developer_problem_profile",
+          "category": "Developer: Community Behavior",
+          "entropy_bits": 2.807354922057604,
+          "value_count": 7
+        },
+        {
+          "id": "github_contribution_mode",
+          "category": "Developer: Open Source Behavior",
+          "entropy_bits": 2.789462896668019,
+          "value_count": 7
+        }
+      ]
+    },
+    {
+      "id": "entropy_rr_14",
+      "width": 14,
+      "fields": [
+        {
+          "id": "mbti_type",
+          "category": "Personality: MBTI",
+          "entropy_bits": 4.0,
+          "value_count": 16
+        },
+        {
+          "id": "domain",
+          "category": "Expertise: Domains",
+          "entropy_bits": 3.6072413347809813,
+          "value_count": 16
+        },
+        {
+          "id": "role_function",
+          "category": "Professional: Industry",
+          "entropy_bits": 3.2839347646250205,
+          "value_count": 13
+        },
+        {
+          "id": "age_bracket",
+          "category": "Demographic: Core",
+          "entropy_bits": 3.27535917477977,
+          "value_count": 11
+        },
+        {
+          "id": "primary_language",
+          "category": "Linguistic: Language",
+          "entropy_bits": 3.2415815280196467,
+          "value_count": 12
+        },
+        {
+          "id": "cultural_background",
+          "category": "Demographic: Cultural",
+          "entropy_bits": 3.0,
+          "value_count": 8
+        },
+        {
+          "id": "major_life_events",
+          "category": "Demographic: Life Events",
+          "entropy_bits": 3.0,
+          "value_count": 8
+        },
+        {
+          "id": "future_developer_skill_belief",
+          "category": "Developer: AI Adoption",
+          "entropy_bits": 2.9175279826076324,
+          "value_count": 8
+        },
+        {
+          "id": "coding_agent_adoption_barrier",
+          "category": "Developer: Agent Adoption",
+          "entropy_bits": 2.8580747910018878,
+          "value_count": 8
+        },
+        {
+          "id": "academic_field",
+          "category": "Learning: Academic",
+          "entropy_bits": 2.816499079984843,
+          "value_count": 8
+        },
+        {
+          "id": "developer_problem_profile",
+          "category": "Developer: Community Behavior",
+          "entropy_bits": 2.807354922057604,
+          "value_count": 7
+        },
+        {
+          "id": "github_contribution_mode",
+          "category": "Developer: Open Source Behavior",
+          "entropy_bits": 2.789462896668019,
+          "value_count": 7
+        },
+        {
+          "id": "lstyle_primary_social",
+          "category": "Interests: Culture",
+          "entropy_bits": 2.783054260583159,
+          "value_count": 8
+        },
+        {
+          "id": "intent",
+          "category": "State: Emotional",
+          "entropy_bits": 2.7654998145804965,
+          "value_count": 8
+        }
+      ]
+    },
+    {
+      "id": "entropy_rr_16",
+      "width": 16,
+      "fields": [
+        {
+          "id": "mbti_type",
+          "category": "Personality: MBTI",
+          "entropy_bits": 4.0,
+          "value_count": 16
+        },
+        {
+          "id": "domain",
+          "category": "Expertise: Domains",
+          "entropy_bits": 3.6072413347809813,
+          "value_count": 16
+        },
+        {
+          "id": "role_function",
+          "category": "Professional: Industry",
+          "entropy_bits": 3.2839347646250205,
+          "value_count": 13
+        },
+        {
+          "id": "age_bracket",
+          "category": "Demographic: Core",
+          "entropy_bits": 3.27535917477977,
+          "value_count": 11
+        },
+        {
+          "id": "primary_language",
+          "category": "Linguistic: Language",
+          "entropy_bits": 3.2415815280196467,
+          "value_count": 12
+        },
+        {
+          "id": "cultural_background",
+          "category": "Demographic: Cultural",
+          "entropy_bits": 3.0,
+          "value_count": 8
+        },
+        {
+          "id": "major_life_events",
+          "category": "Demographic: Life Events",
+          "entropy_bits": 3.0,
+          "value_count": 8
+        },
+        {
+          "id": "future_developer_skill_belief",
+          "category": "Developer: AI Adoption",
+          "entropy_bits": 2.9175279826076324,
+          "value_count": 8
+        },
+        {
+          "id": "coding_agent_adoption_barrier",
+          "category": "Developer: Agent Adoption",
+          "entropy_bits": 2.8580747910018878,
+          "value_count": 8
+        },
+        {
+          "id": "academic_field",
+          "category": "Learning: Academic",
+          "entropy_bits": 2.816499079984843,
+          "value_count": 8
+        },
+        {
+          "id": "developer_problem_profile",
+          "category": "Developer: Community Behavior",
+          "entropy_bits": 2.807354922057604,
+          "value_count": 7
+        },
+        {
+          "id": "github_contribution_mode",
+          "category": "Developer: Open Source Behavior",
+          "entropy_bits": 2.789462896668019,
+          "value_count": 7
+        },
+        {
+          "id": "lstyle_primary_social",
+          "category": "Interests: Culture",
+          "entropy_bits": 2.783054260583159,
+          "value_count": 8
+        },
+        {
+          "id": "intent",
+          "category": "State: Emotional",
+          "entropy_bits": 2.7654998145804965,
+          "value_count": 8
+        },
+        {
+          "id": "seniority",
+          "category": "Professional: Career",
+          "entropy_bits": 2.6401326952228974,
+          "value_count": 11
+        },
+        {
+          "id": "codebase_onboarding_style",
+          "category": "Developer: Code Maintenance",
+          "entropy_bits": 2.5849625007211565,
+          "value_count": 6
+        }
+      ]
+    }
+  ]
+}

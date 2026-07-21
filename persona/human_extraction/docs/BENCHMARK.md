@@ -9,7 +9,8 @@ Scripts:
 - `scripts/run_bench_extraction.py` — benchmark harness (prefix-cache toggle, chunk-size
   sweep in one model load, GPU-util monitor, markdown output).
 - `scripts/analyze_profile_lengths.py` — profile length distribution (Qwen tokens).
-- Raw machine rows: `data/benchmark_sweep.md`. Per-run outputs: `data/bench_*.jsonl`.
+- Raw machine rows: `data/wiki/diagnostics/benchmark_sweep.md`. Per-run outputs:
+  `data/wiki/diagnostics/bench_*.jsonl`.
 
 ---
 
@@ -114,7 +115,7 @@ The only lever left is **reducing output tokens per persona** (decode-bound):
 
 ## 8. Quality (manual scoring of 20 personas, selected cat50 config)
 
-Scored `data/bench_cat50_random_pc1.jsonl` (20 random profiles) — see
+Scored `data/wiki/diagnostics/bench_cat50_random_pc1.jsonl` (20 random profiles) — see
 `scripts/score_personas.py`.
 
 **Automated validity:** avg **1,286 / 1,290** fields present (18/20 at 100%

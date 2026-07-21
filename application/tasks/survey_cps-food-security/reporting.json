@@ -1,4 +1,83 @@
 {
   "schemaVersion": "1.0",
-  "contextRules": []
+  "contextRules": [
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q0"
+      },
+      "distributions": [
+        {
+          "id": "q0.response_by_segment",
+          "facetKey": "response",
+          "title": "Where bought food last week"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q2"
+      },
+      "distributions": [
+        {
+          "id": "q2.response_by_segment",
+          "facetKey": "response",
+          "title": "Bought food at restaurant last week"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q69"
+      },
+      "distributions": [
+        {
+          "id": "q69.response_by_segment",
+          "facetKey": "response",
+          "title": "Got free groceries (12 months)"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q70"
+      },
+      "distributions": [
+        {
+          "id": "q70.response_by_segment",
+          "facetKey": "response",
+          "title": "How often free groceries"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q71"
+      },
+      "distributions": [
+        {
+          "id": "q71.response_by_segment",
+          "facetKey": "response",
+          "title": "Got free groceries (30 days)"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q72"
+      },
+      "distributions": [
+        {
+          "id": "q72.response_by_segment",
+          "facetKey": "response",
+          "title": "Food pantry available in community"
+        }
+      ]
+    }
+  ]
 }

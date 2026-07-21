@@ -16,6 +16,7 @@ Pick the sidecar **by the persona-facing protocol** (`input/chatbot.yaml`
 | `chatbot-api-sidecar_acme-support-api/` | `example-chat-api_support_chatbot` | HTTP |
 | `chatbot-mcp-sidecar_acme-support/` | `example-chat-mcp_support_chatbot` | MCP |
 | `chatbot-api-sidecar_multi-agent-medical-assistant/` | `chat_multi-agent-medical-assistant` | HTTP adapter over product upstream |
+| `chatbot-api-sidecar_meal-plan-api/` | `chat_meal-planning-nutrition` | HTTP |
 
 ```toml
 [environment]

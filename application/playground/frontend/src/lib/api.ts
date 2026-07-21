@@ -2,6 +2,7 @@ import type {
   ConfigOptionsResponse,
   PlaygroundPersonasResponse,
   PlaygroundResult,
+  HarborJobAggregation,
   HarborJobDetail,
   HarborJobLaunchResponse,
   HarborJobsListResponse,
@@ -138,7 +139,7 @@ export const api = {
       { method: "POST" },
     ),
   getHarborJobAggregation: (jobName: string) =>
-    request<HarborJobDetail["aggregation"]>(
+    request<HarborJobAggregation>(
       `/api/harbor/jobs/${encodeURIComponent(jobName)}/aggregation`,
     ),
   downloadHarborJobReportPdf: (jobName: string) =>

@@ -1,0 +1,16 @@
+#!/bin/bash
+#SBATCH -p seas_compute
+#SBATCH -n 1
+#SBATCH -c 2
+#SBATCH --mem=8G
+#SBATCH -t 0-04:00
+#SBATCH -o sbatch_logs/%x_%j.out
+#SBATCH -e sbatch_logs/%x_%j.err
+#SBATCH --mail-type=FAIL,END
+#SBATCH --mail-user=xiaominli@g.harvard.edu
+set -euo pipefail
+
+R="${REPO_ROOT:?}"
+cd "$R"
+PYTHONPATH="$R" "$PYTHON_BIN" -m persona.post_process.unified_dataset.finalize \
+  --root "$OUTPUT" --reports-dir "$OUTPUT/reports" --schema-source "$SCHEMA"

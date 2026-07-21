@@ -1,0 +1,31 @@
+#!/bin/bash
+#SBATCH -p seas_compute
+#SBATCH -n 1
+#SBATCH -c 2
+#SBATCH --mem=12G
+#SBATCH -t 0-08:00
+#SBATCH -o sbatch_logs/%x_%A_%a.out
+#SBATCH -e sbatch_logs/%x_%A_%a.err
+#SBATCH --mail-type=FAIL
+#SBATCH --mail-user=xiaominli@g.harvard.edu
+set -euo pipefail
+
+R="${REPO_ROOT:?}"
+S="${SLURM_ARRAY_TASK_ID:?}"
+printf -v T "%04d" "$S"
+REPORT="$OUTPUT/reports/synthetic_$T.json"
+SOURCE="$R/persona/synthesis/generated/full_dag_10b_20260703/shards/full_dag_100000000_shard_$T.codes.gz"
+SCHEMA="$SOURCE.schema.json"
+BITMAP="$R/persona/post_process/deduplication/results/final_8_4b_20260719/bitmaps/shard_$T.reject.bits"
+OVERLAY=()
+if [[ "$S" -eq 0 ]]; then
+  OVERLAY=(--overlay-bitmap "$R/persona/post_process/deduplication/results/synthetic_transfer_500_20260720/shard_0000.transfer.reject.bits")
+fi
+
+mkdir -p "$OUTPUT/data/synthetic/shard_$T" "$OUTPUT/reports"
+rm -f -- "$OUTPUT/data/synthetic/shard_$T"/*.parquet.part
+cd "$R"
+PYTHONPATH="$R" "$PYTHON_BIN" -m persona.post_process.unified_dataset.materialize synthetic \
+  --source "$SOURCE" --schema "$SCHEMA" --reject-bitmap "$BITMAP" \
+  "${OVERLAY[@]}" --shard "$S" --rows-per-file 5000000 --row-group-size 100000 \
+  --output-dir "$OUTPUT/data/synthetic/shard_$T" --report "$REPORT"

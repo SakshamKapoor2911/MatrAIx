@@ -24,7 +24,7 @@ from vllm import LLM, SamplingParams  # noqa: E402
 
 REPO_ROOT = Path("/n/netscratch/lu_lab/Lab/xiaominli/LLMResearch/MatrAIx")
 DATA_DIR = REPO_ROOT / "persona/human_extraction/data"
-DB_PATH = DATA_DIR / "wiki/matraix_wiki_profiles_20260601_v1.sqlite"
+DB_PATH = DATA_DIR / "wiki/source/matraix_wiki_profiles_20260601_v1.sqlite"
 DIMENSIONS_JSON = REPO_ROOT / "persona/schema/dimensions.json"
 OUT_PATH = DATA_DIR / "sample_extraction_10.jsonl"
 

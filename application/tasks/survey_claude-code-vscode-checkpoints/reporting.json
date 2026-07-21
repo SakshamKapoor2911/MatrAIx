@@ -1,4 +1,44 @@
 {
   "schemaVersion": "1.0",
-  "contextRules": []
+  "contextRules": [
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.reviewable_edits"
+      },
+      "distributions": [
+        {
+          "id": "reviewable_edits.response_by_segment",
+          "facetKey": "response",
+          "title": "Comfort with multi-file AI edits"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.checkpoint_control"
+      },
+      "distributions": [
+        {
+          "id": "checkpoint_control.response_by_segment",
+          "facetKey": "response",
+          "title": "Checkpoint rollback comfort"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.adoption_concern"
+      },
+      "distributions": [
+        {
+          "id": "adoption_concern.response_by_segment",
+          "facetKey": "response",
+          "title": "Biggest adoption concern"
+        }
+      ]
+    }
+  ]
 }

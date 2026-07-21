@@ -317,6 +317,8 @@ def _chatbot_system_label(*, application_id: str, application_context: str) -> s
         return "financial research system"
     if application_id == "medical_assistant":
         return "medical assistant"
+    if application_id == "meal_planning_nutrition":
+        return "meal planning nutrition assistant"
     return "{} system".format(context)
 
 
@@ -430,6 +432,8 @@ class HarborPlaygroundRunner:
             env.setdefault("FINANCE_AGENT_MODEL", config.engine)
         elif config.application_id == "medical_assistant":
             env["COMPOSE_PROFILES"] = "medical"
+        elif config.application_id == "meal_planning_nutrition":
+            env.pop("COMPOSE_PROFILES", None)
         else:
             env["COMPOSE_PROFILES"] = "recai"
         project_env = Path("/tmp/matraix-harbor-project-venv")

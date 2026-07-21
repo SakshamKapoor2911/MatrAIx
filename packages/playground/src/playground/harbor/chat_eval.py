@@ -129,6 +129,8 @@ def default_chat_api_url(application_id: str) -> str:
         return "http://finance-chatbot:8000"
     if application_id == "medical_assistant":
         return "http://multi-agent-medical-assistant-api:8000"
+    if application_id == "meal_planning_nutrition":
+        return "http://meal-plan-api:8000"
     return "http://chatbot-api:8000"
 
 

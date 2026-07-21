@@ -1,4 +1,44 @@
 {
   "schemaVersion": "1.0",
-  "contextRules": []
+  "contextRules": [
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.pharmacy_convenience"
+      },
+      "distributions": [
+        {
+          "id": "pharmacy_convenience.response_by_segment",
+          "facetKey": "response",
+          "title": "Would use CVS chat for refill status"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.pharmacy_boundary_trust"
+      },
+      "distributions": [
+        {
+          "id": "pharmacy_boundary_trust.response_by_segment",
+          "facetKey": "response",
+          "title": "Comfort with pharmacy chat for simple tasks"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.pharmacy_hesitation"
+      },
+      "distributions": [
+        {
+          "id": "pharmacy_hesitation.response_by_segment",
+          "facetKey": "response",
+          "title": "Biggest hesitation"
+        }
+      ]
+    }
+  ]
 }

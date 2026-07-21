@@ -1,0 +1,27 @@
+#!/bin/bash
+#SBATCH -p seas_compute
+#SBATCH -n 1
+#SBATCH -c 1
+#SBATCH --mem=8G
+#SBATCH -t 0-01:00
+#SBATCH -o sbatch_logs/%x_%j.out
+#SBATCH -e sbatch_logs/%x_%j.err
+#SBATCH --mail-type=FAIL
+#SBATCH --mail-user=xiaominli@g.harvard.edu
+
+set -euo pipefail
+
+REPO_ROOT="${REPO_ROOT:-/n/netscratch/lu_lab/Lab/xiaominli/LLMResearch/MatrAIx}"
+PYTHON_BIN="${PYTHON_BIN:-/n/home08/xiaominli/.conda/envs/env05/bin/python}"
+CONFIG="${CONFIG:?CONFIG is required}"
+OUTPUT_DIR="${OUTPUT_DIR:?OUTPUT_DIR is required}"
+SUMMARY_OUT="${SUMMARY_OUT:?SUMMARY_OUT is required}"
+TARGET_ROWS="${TARGET_ROWS:-8397735907}"
+
+cd "$REPO_ROOT"
+PYTHONPATH="$REPO_ROOT" "$PYTHON_BIN" \
+  persona/post_process/deduplication/merge_projection_hll.py \
+  --input-dir "$OUTPUT_DIR" \
+  --config "$CONFIG" \
+  --target-rows "$TARGET_ROWS" \
+  --out "$SUMMARY_OUT"

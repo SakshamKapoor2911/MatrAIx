@@ -37,6 +37,10 @@ import {
 } from "./cockpit/setup/taskDetailSections";
 import { FOCUS_RING, Sym } from "./cockpit/cockpitShared";
 import {
+  CockpitSelect,
+  type CockpitSelectOption,
+} from "./cockpit/setup/CockpitSelect";
+import {
   StudioGlassPanel,
   StudioPageFrame,
   StudioPageHeader,
@@ -1679,6 +1683,7 @@ type PersonaDistributionGroup = {
   contextKey: string
   contextLabel: string
   distributions: AggregationPersonaDistribution[]
+  choiceOptions?: Array<{ id: string; label: string }>
 }
 
 /** Default persona lens: outcome/process/feedback signals cross-tabbed by segment. */
@@ -1689,10 +1694,17 @@ function collectPersonaDistributionGroups(
   for (const context of contexts) {
     const distributions = context.personaDistributions ?? []
     if (distributions.length === 0) continue
+    const labeled = explorerContextLabel(context)
     groups.push({
       contextKey: context.key,
-      contextLabel: contextTypeMeta(context.contextType)?.badge ?? context.label,
+      contextLabel: labeled.meta
+        ? `${labeled.meta} · ${labeled.label}`
+        : labeled.label,
       distributions,
+      choiceOptions: context.choiceOptions?.map((option) => ({
+        id: option.id,
+        label: option.label?.trim() || option.id,
+      })),
     })
   }
   return groups
@@ -1735,11 +1747,20 @@ function personaDistributionColumns(
  */
 function PersonaDistributionCard({
   distribution,
+  choiceOptions,
 }: {
   distribution: AggregationPersonaDistribution
+  /** Questionnaire options — map opaque ids to readable column labels. */
+  choiceOptions?: Array<{ id: string; label: string }>
 }) {
   const numeric = distribution.kind === "numerical"
   const columns = personaDistributionColumns(distribution)
+  const columnMeta = useMemo(
+    () => buildDistributionColumnMeta(columns, { numeric, choiceOptions }),
+    [columns, numeric, choiceOptions],
+  )
+  const signalLabel = humanizeFacetLabel(distribution.facetLabel, distribution.facetKey)
+  const segmentLabel = distribution.groupByLabel || "Persona segment"
   const countFor = (
     bucket: AggregationPersonaDistribution["buckets"][number],
     value: string,
@@ -1750,9 +1771,9 @@ function PersonaDistributionCard({
   return (
     <div className="space-y-2 rounded-lg border border-outline/35 bg-surface/50 p-3">
       <div className="flex items-baseline justify-between gap-2">
-        <div className="text-[13px] font-medium text-text-main">
-          {humanizeFacetLabel(distribution.facetLabel, distribution.facetKey)}
-          <span className="font-normal text-text-dim"> by {distribution.groupByLabel}</span>
+        <div className="min-w-0 text-[13px] font-medium text-text-main">
+          {signalLabel}
+          <span className="font-normal text-text-dim"> by {segmentLabel}</span>
         </div>
         <span className="shrink-0 font-mono text-[11px] text-text-dim">n={distribution.total}</span>
       </div>
@@ -1760,17 +1781,37 @@ function PersonaDistributionCard({
         <table className="w-full border-collapse text-[12px]">
           <thead>
             <tr className="text-left text-text-dim">
-              <th className="py-1 pr-3 font-medium">{distribution.groupByLabel}</th>
+              <th className="py-1 pr-3 font-medium">{segmentLabel}</th>
               <th className="py-1 pr-3 text-right font-medium">n</th>
-              {columns.map((value) => (
-                <th
-                  key={value}
-                  className="px-1 py-1 text-center font-medium"
-                  title={numeric ? `Value ${value}` : formatBucketLabel(value)}
-                >
-                  {numeric ? value : formatBucketLabel(value)}
-                </th>
-              ))}
+              {columns.map((value) => {
+                const meta = columnMeta.get(value) ?? {
+                  fullLabel: formatBucketLabel(value),
+                  title: formatBucketLabel(value),
+                  compact: false,
+                }
+                return (
+                  <th
+                    key={value}
+                    className={`px-1 py-1 font-medium align-bottom ${
+                      meta.compact ? "max-w-[3.25rem] text-center" : "text-center"
+                    }`}
+                    title={meta.title}
+                  >
+                    {meta.compact ? (
+                      <span
+                        className="mx-auto inline-block max-h-[9rem] whitespace-normal break-words text-[10px] leading-snug text-text-main"
+                        style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
+                      >
+                        {meta.fullLabel}
+                      </span>
+                    ) : (
+                      <span className="inline-block text-[12px] text-text-main">
+                        {meta.fullLabel}
+                      </span>
+                    )}
+                  </th>
+                )
+              })}
             </tr>
           </thead>
           <tbody>
@@ -1787,6 +1828,8 @@ function PersonaDistributionCard({
                   const share = bucket.count > 0 ? count / bucket.count : 0
                   const pct = Math.round(share * 100)
                   const intensity = count > 0 ? 0.1 + 0.55 * share : 0
+                  const meta = columnMeta.get(value)
+                  const answerLabel = meta?.title ?? formatBucketLabel(value)
                   return (
                     <td key={value} className="p-0.5 text-center align-middle">
                       <span
@@ -1799,9 +1842,7 @@ function PersonaDistributionCard({
                         }}
                         title={
                           count > 0
-                            ? `${formatBucketLabel(bucket.bucket)} · ${
-                                numeric ? value : formatBucketLabel(value)
-                              }: ${count} of ${bucket.count} (${pct}%)`
+                            ? `${formatBucketLabel(bucket.bucket)} · ${answerLabel}: ${count} of ${bucket.count} (${pct}%)`
                             : "0"
                         }
                       >
@@ -1816,7 +1857,8 @@ function PersonaDistributionCard({
         </table>
       </div>
       <p className="text-[11px] text-text-dim">
-        Cell = trials in that segment with that {numeric ? "value" : "answer"}; shade = share within the segment.
+        Cell = trials in that segment with that {numeric ? "value" : "answer"}; shade = share within
+        the segment.
       </p>
     </div>
   )
@@ -1834,7 +1876,11 @@ function PersonaDistributionList({ groups }: { groups: PersonaDistributionGroup[
           </p>
           <div className="grid gap-3 md:grid-cols-2">
             {group.distributions.map((distribution) => (
-              <PersonaDistributionCard key={distribution.id} distribution={distribution} />
+              <PersonaDistributionCard
+                key={distribution.id}
+                distribution={distribution}
+                choiceOptions={group.choiceOptions}
+              />
             ))}
           </div>
         </div>
@@ -1847,6 +1893,87 @@ type PersonaExplorerEntry = {
   contextKey: string
   contextLabel: string
   distribution: AggregationPersonaDistribution
+  choiceOptions?: Array<{ id: string; label: string }>
+}
+
+const LONG_COLUMN_LABEL_CHARS = 22
+
+type DistributionColumnMeta = {
+  fullLabel: string
+  title: string
+  /** Narrow vertical/wrapped header instead of a single horizontal line. */
+  compact: boolean
+}
+
+/**
+ * Column headers for persona heatmaps.
+ * Short labels stay on one line; long labels wrap vertically (web-style).
+ * Opaque choice ids (e.g. "c") map through questionnaire options when available.
+ */
+function buildDistributionColumnMeta(
+  columns: string[],
+  {
+    numeric,
+    choiceOptions,
+  }: {
+    numeric: boolean
+    choiceOptions?: Array<{ id: string; label: string }>
+  },
+): Map<string, DistributionColumnMeta> {
+  const byId = new Map(
+    (choiceOptions ?? []).map((option, index) => [
+      option.id,
+      { index: index + 1, label: option.label.trim() || option.id },
+    ]),
+  )
+  const meta = new Map<string, DistributionColumnMeta>()
+  columns.forEach((value) => {
+    if (numeric) {
+      meta.set(value, {
+        fullLabel: value,
+        title: `Score ${value}`,
+        compact: false,
+      })
+      return
+    }
+    const choice = byId.get(value)
+    if (choice) {
+      meta.set(value, {
+        fullLabel: choice.label,
+        title: `Option ${choice.index}: ${choice.label}`,
+        compact: choice.label.length > LONG_COLUMN_LABEL_CHARS,
+      })
+      return
+    }
+    const pretty = formatBucketLabel(value)
+    meta.set(value, {
+      fullLabel: pretty,
+      title: pretty,
+      compact: pretty.length > LONG_COLUMN_LABEL_CHARS,
+    })
+  })
+  return meta
+}
+
+/** Prefer the real question prompt over the generic "Question" type badge. */
+function explorerContextLabel(context: AggregationContext): {
+  label: string
+  meta?: string
+} {
+  if (context.contextType === "question_response") {
+    const prompt = (context.label || "").trim()
+    const shortId = (context.key || "").replace(/^question\./i, "").trim()
+    if (prompt) {
+      return {
+        label: prompt,
+        meta: shortId ? `Question ${shortId}` : undefined,
+      }
+    }
+    if (shortId) return { label: shortId }
+  }
+  return {
+    label: contextTypeMeta(context.contextType)?.badge ?? context.label,
+  }
 }
 
 /** Flatten every eligible facet × dimension pairing across contexts. */
@@ -1857,31 +1984,53 @@ function collectPersonaExplorerEntries(
   for (const context of contexts) {
     const options = context.personaDistributionOptions ?? []
     if (options.length === 0) continue
-    const contextLabel = contextTypeMeta(context.contextType)?.badge ?? context.label
+    const labeled = explorerContextLabel(context)
+    const choiceOptions = context.choiceOptions?.map((option) => ({
+      id: option.id,
+      label: option.label?.trim() || option.id,
+    }))
     for (const distribution of options) {
-      entries.push({ contextKey: context.key, contextLabel, distribution })
+      entries.push({
+        contextKey: context.key,
+        contextLabel: labeled.meta
+          ? `${labeled.meta} · ${labeled.label}`
+          : labeled.label,
+        distribution,
+        choiceOptions,
+      })
     }
   }
   return entries
 }
 
 /**
- * Interactive persona explorer: pick a signal facet (left) and a persona
- * dimension (right) to see any cross-tab on demand — beyond the default cards.
+ * Interactive persona explorer: pick a context and persona dimension to cross-tab.
+ * Survey mode hides the result-field picker (answers are always the primary facet).
  */
 function PersonaDistributionExplorer({
   entries,
+  hideResultField = false,
 }: {
   entries: PersonaExplorerEntry[]
+  hideResultField?: boolean
 }) {
   // Level 1 of the cascade: context (Decision, User feedback, …).
-  const contextOptions = useMemo(() => {
-    const seen = new Map<string, { contextKey: string; contextLabel: string }>()
+  const contextOptions = useMemo((): CockpitSelectOption[] => {
+    const seen = new Map<string, CockpitSelectOption>()
     for (const entry of entries) {
       if (!seen.has(entry.contextKey)) {
+        const shortId = entry.contextKey.replace(/^question\./i, "").trim()
+        // Prefer full prompt as the primary label; keep id as meta for scanability.
+        const sep = " · "
+        const hasSep = entry.contextLabel.includes(sep)
+        const meta = hasSep ? entry.contextLabel.split(sep)[0] : shortId || undefined
+        const label = hasSep
+          ? entry.contextLabel.slice(entry.contextLabel.indexOf(sep) + sep.length)
+          : entry.contextLabel
         seen.set(entry.contextKey, {
-          contextKey: entry.contextKey,
-          contextLabel: entry.contextLabel,
+          value: entry.contextKey,
+          label,
+          meta: meta && meta !== label ? meta : undefined,
         })
       }
     }
@@ -1889,116 +2038,136 @@ function PersonaDistributionExplorer({
   }, [entries])
 
   const [contextValue, setContextValue] = useState<string>(
-    contextOptions[0]?.contextKey ?? "",
+    contextOptions[0]?.value ?? "",
   )
-  const activeContext = contextOptions.some((option) => option.contextKey === contextValue)
+  const activeContext = contextOptions.some((option) => option.value === contextValue)
     ? contextValue
-    : contextOptions[0]?.contextKey ?? ""
+    : contextOptions[0]?.value ?? ""
 
   // Level 2 of the cascade: facets within the chosen context.
-  const facetOptions = useMemo(() => {
-    const seen = new Map<string, { facetKey: string; facetLabel: string }>()
+  const facetOptions = useMemo((): CockpitSelectOption[] => {
+    const seen = new Map<string, CockpitSelectOption>()
     for (const entry of entries) {
       if (entry.contextKey !== activeContext) continue
       if (!seen.has(entry.distribution.facetKey)) {
         seen.set(entry.distribution.facetKey, {
-          facetKey: entry.distribution.facetKey,
-          facetLabel: entry.distribution.facetLabel,
+          value: entry.distribution.facetKey,
+          label: humanizeFacetLabel(
+            entry.distribution.facetLabel,
+            entry.distribution.facetKey,
+          ),
         })
       }
     }
     return [...seen.values()]
   }, [entries, activeContext])
 
-  const [facetValue, setFacetValue] = useState<string>(facetOptions[0]?.facetKey ?? "")
-  const activeFacet = facetOptions.some((option) => option.facetKey === facetValue)
-    ? facetValue
-    : facetOptions[0]?.facetKey ?? ""
+  const [facetValue, setFacetValue] = useState<string>(facetOptions[0]?.value ?? "")
+  const preferredFacet =
+    hideResultField
+      ? facetOptions.find((option) => option.value === "response")?.value ??
+        facetOptions[0]?.value ??
+        ""
+      : facetOptions.some((option) => option.value === facetValue)
+        ? facetValue
+        : facetOptions[0]?.value ?? ""
+  const activeFacet = preferredFacet
 
-  const dimOptions = useMemo(() => {
-    const seen = new Map<string, { dimension: string; label: string }>()
+  const dimOptions = useMemo((): CockpitSelectOption[] => {
+    const seen = new Map<string, CockpitSelectOption>()
     for (const entry of entries) {
       if (entry.contextKey !== activeContext) continue
       if (entry.distribution.facetKey !== activeFacet) continue
       const dimension = entry.distribution.groupByPersonaDimension
       if (!seen.has(dimension)) {
-        seen.set(dimension, { dimension, label: entry.distribution.groupByLabel })
+        seen.set(dimension, {
+          value: dimension,
+          label: entry.distribution.groupByLabel,
+        })
       }
     }
     return [...seen.values()]
   }, [entries, activeContext, activeFacet])
 
-  const [dimValue, setDimValue] = useState<string>(dimOptions[0]?.dimension ?? "")
-  const activeDim = dimOptions.some((option) => option.dimension === dimValue)
+  const [dimValue, setDimValue] = useState<string>(dimOptions[0]?.value ?? "")
+  const activeDim = dimOptions.some((option) => option.value === dimValue)
     ? dimValue
-    : dimOptions[0]?.dimension ?? ""
+    : dimOptions[0]?.value ?? ""
 
-  const selected = useMemo(
+  const selectedEntry = useMemo(
     () =>
       entries.find(
         (entry) =>
           entry.contextKey === activeContext &&
           entry.distribution.facetKey === activeFacet &&
           entry.distribution.groupByPersonaDimension === activeDim,
-      )?.distribution ?? null,
+      ) ?? null,
     [entries, activeContext, activeFacet, activeDim],
   )
 
   if (contextOptions.length === 0) return null
 
-  const selectClass =
-    "h-8 max-w-full rounded border border-outline bg-surface px-2 text-[13px] text-text-main"
+  const showResultFieldPicker = !hideResultField && facetOptions.length > 1
+  const showDimPicker = dimOptions.length > 1
 
   return (
     <div className="space-y-3 rounded-xl glass-tile p-3">
       <div className="space-y-1">
         <ContextSectionHeader title="Explore by segment" />
         <p className="text-[12px] text-text-dim">
-          Pick any signal and persona dimension to see its distribution on demand.
+          {hideResultField
+            ? "Pick a question, then break personas into segments to cross-tab answers."
+            : showResultFieldPicker
+              ? "Pick a context, then which result field to plot, then how to break personas into segments."
+              : "Pick a context, then break personas into segments to cross-tab the result."}
         </p>
       </div>
-      <div className="flex flex-wrap items-center gap-2">
-        <select
+      <div className="grid gap-3">
+        <CockpitSelect
+          label={hideResultField ? "Question" : "Context"}
           value={activeContext}
-          onChange={(event) => setContextValue(event.target.value)}
-          className={`${selectClass} min-w-[9rem]`}
-          aria-label="Context"
-        >
-          {contextOptions.map((option) => (
-            <option key={option.contextKey} value={option.contextKey}>
-              {option.contextLabel}
-            </option>
-          ))}
-        </select>
-        <span className="text-[12px] text-text-dim">›</span>
-        <select
-          value={activeFacet}
-          onChange={(event) => setFacetValue(event.target.value)}
-          className={`${selectClass} min-w-[10rem]`}
-          aria-label="Signal"
-        >
-          {facetOptions.map((option) => (
-            <option key={option.facetKey} value={option.facetKey}>
-              {humanizeFacetLabel(option.facetLabel, option.facetKey)}
-            </option>
-          ))}
-        </select>
-        <span className="text-[12px] text-text-dim">by</span>
-        <select
-          value={activeDim}
-          onChange={(event) => setDimValue(event.target.value)}
-          className={`${selectClass} min-w-[9rem]`}
-          aria-label="Persona dimension"
-        >
-          {dimOptions.map((option) => (
-            <option key={option.dimension} value={option.dimension}>
-              {option.label}
-            </option>
-          ))}
-        </select>
+          options={contextOptions}
+          onChange={setContextValue}
+          wrapOptions
+          wideMenu
+        />
+        {showResultFieldPicker || showDimPicker ? (
+          <div
+            className={`grid gap-2 ${
+              showResultFieldPicker && showDimPicker ? "sm:grid-cols-2" : ""
+            }`}
+          >
+            {showResultFieldPicker ? (
+              <CockpitSelect
+                label="Result field"
+                value={activeFacet}
+                options={facetOptions}
+                onChange={setFacetValue}
+                hint="Which measured outcome to put on the columns (e.g. rating, decision)."
+              />
+            ) : null}
+            {showDimPicker ? (
+              <CockpitSelect
+                label="Break down by"
+                value={activeDim}
+                options={dimOptions}
+                onChange={setDimValue}
+                hint="Persona attribute used for rows (segments)."
+              />
+            ) : (
+              <p className="rounded-lg border border-outline/35 bg-surface/40 px-3 py-2 text-[12px] text-text-dim">
+                Rows fixed to{" "}
+                <span className="font-medium text-text-variant">{dimOptions[0]?.label}</span>.
+              </p>
+            )}
+          </div>
+        ) : null}
       </div>
-      {selected ? (
-        <PersonaDistributionCard distribution={selected} />
+      {selectedEntry ? (
+        <PersonaDistributionCard
+          distribution={selectedEntry.distribution}
+          choiceOptions={selectedEntry.choiceOptions}
+        />
       ) : (
         <p className="rounded-lg border border-outline/35 bg-surface/50 p-3 text-[12px] text-text-dim">
           No segment breakdown available for this pairing.
@@ -2083,12 +2252,16 @@ function DetailedEvaluationPanel({
   category,
   compactContexts,
   captureMode = false,
+  /** Survey per-question cards rendered as the General tab (web-style two-tab layout). */
+  surveyHeadlineContexts,
 }: {
   aggregation: HarborJobAggregation
   category: ReportingCategory
   compactContexts: AggregationContext[]
   captureMode?: boolean
+  surveyHeadlineContexts?: AggregationContext[]
 }) {
+  const isSurvey = category === "survey"
   const contexts = aggregation.contexts ?? []
   const trialCount = aggregation.coverage.trialCount
   const compactKeys = new Set(compactContexts.map((context) => context.key))
@@ -2107,14 +2280,22 @@ function DetailedEvaluationPanel({
   const personaDistGroups = collectPersonaDistributionGroups(contexts)
   const personaExplorerEntries = collectPersonaExplorerEntries(contexts)
 
-  const hasGeneral = commonContexts.length > 0 || compactContexts.length > 0
+  const surveyGeneralContexts = (surveyHeadlineContexts ?? []).filter(
+    (context) => context.contextType !== "trial_summary",
+  )
+  const hasSurveyGeneral =
+    isSurvey &&
+    (surveyGeneralContexts.length > 0 || compactContexts.length > 0)
+  const hasCommonGeneral =
+    !isSurvey && (commonContexts.length > 0 || compactContexts.length > 0)
+  const hasGeneral = hasSurveyGeneral || hasCommonGeneral
 
   const tabs = (
     [
       hasGeneral
         ? {
             id: "general" as const,
-            label: "General task analysis",
+            label: isSurvey ? "Per-question report" : "General task analysis",
           }
         : null,
       personaDistGroups.length > 0 ||
@@ -2136,75 +2317,92 @@ function DetailedEvaluationPanel({
   const [activeTab, setActiveTab] = useState<"general" | "task" | "persona">("general")
   const currentTabId = tabs.some((tab) => tab.id === activeTab) ? activeTab : tabs[0]?.id
 
+  if (tabs.length === 0) return null
+
   return (
     <StudioGlassPanel className="overflow-hidden bg-surface/95">
       <SectionHeader title="Detailed" />
       <div className="space-y-5 p-4">
-        {tabs.length === 0 ? (
-          <p className="text-[13px] text-text-dim">No detailed breakdowns for this batch yet.</p>
-        ) : (
-          <>
-            {captureMode ? null : (
-              <div className="flex gap-1.5 rounded-xl bg-surface/40 p-1" role="tablist">
-                {tabs.map((tab) => {
-                  const active = tab.id === currentTabId
-                  return (
-                    <button
-                      key={tab.id}
-                      type="button"
-                      role="tab"
-                      aria-selected={active}
-                      onClick={() => setActiveTab(tab.id)}
-                      className={`flex-1 rounded-lg border px-3 py-1.5 text-center text-[13px] font-medium transition-colors ${FOCUS_RING} ${
-                        active
-                          ? "border-primary/30 bg-primary/15 text-primary shadow-sm"
-                          : "border-outline/40 bg-surface/60 text-text-variant hover:border-primary/25 hover:bg-surface hover:text-text"
-                      }`}
-                    >
-                      {tab.label}
-                    </button>
-                  )
-                })}
-              </div>
-            )}
-
+        {captureMode || tabs.length <= 1 ? null : (
+          <div className="flex gap-1.5 rounded-xl bg-surface/40 p-1" role="tablist">
             {tabs.map((tab) => {
-              if (!captureMode && tab.id !== currentTabId) return null
+              const active = tab.id === currentTabId
               return (
-                <div key={tab.id} className="space-y-3">
-                  {captureMode ? (
-                    <div className="text-[13px] font-semibold uppercase tracking-wide text-primary">
-                      {tab.label}
-                    </div>
-                  ) : null}
-                  {tab.id === "general" ? (
-                    <>
-                      {compactContexts.length > 0 ? (
-                        <CompactContextGroup contexts={compactContexts} />
-                      ) : null}
-                      {commonContexts.map((context) => (
-                        <CommonContextPanel
-                          key={`common-${context.key}`}
-                          context={context}
-                          trialCount={trialCount}
-                        />
-                      ))}
-                    </>
-                  ) : null}
-                  {tab.id === "task" ? <AnalysisGroupList groups={taskGroups} /> : null}
-                  {tab.id === "persona" ? (
-                    <>
-                      <PersonaDistributionList groups={personaDistGroups} />
-                      {captureMode ? null : (
-                        <PersonaDistributionExplorer entries={personaExplorerEntries} />
-                      )}
-                    </>
-                  ) : null}
-                </div>
+                <button
+                  key={tab.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={active}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`flex-1 rounded-lg border px-3 py-1.5 text-center text-[13px] font-medium transition-colors ${FOCUS_RING} ${
+                    active
+                      ? "border-primary/30 bg-primary/15 text-primary shadow-sm"
+                      : "border-outline/40 bg-surface/60 text-text-variant hover:border-primary/25 hover:bg-surface hover:text-text"
+                  }`}
+                >
+                  {tab.label}
+                </button>
               )
             })}
-          </>
+          </div>
         )}
+
+        {tabs.map((tab) => {
+          if (!captureMode && tab.id !== currentTabId) return null
+          return (
+            <div key={tab.id} className="space-y-3">
+              {captureMode ? (
+                <div className="text-[13px] font-semibold uppercase tracking-wide text-primary">
+                  {tab.label}
+                </div>
+              ) : null}
+              {tab.id === "general" ? (
+                isSurvey ? (
+                  <>
+                    {compactContexts.length > 0 ? (
+                      <CompactContextGroup contexts={compactContexts} />
+                    ) : null}
+                    {surveyGeneralContexts.map((context) =>
+                      context.contextType === "question_response" ? (
+                        <SurveyQuestionCard key={context.key} context={context} />
+                      ) : context.contextType === "user_feedback" ||
+                        context.contextType === "feedback" ? (
+                        <UserFeedbackBatchCard key={context.key} context={context} />
+                      ) : (
+                        <ContextCard key={context.key} context={context} />
+                      ),
+                    )}
+                  </>
+                ) : (
+                  <>
+                    {compactContexts.length > 0 ? (
+                      <CompactContextGroup contexts={compactContexts} />
+                    ) : null}
+                    {commonContexts.map((context) => (
+                      <CommonContextPanel
+                        key={`common-${context.key}`}
+                        context={context}
+                        trialCount={trialCount}
+                      />
+                    ))}
+                  </>
+                )
+              ) : null}
+              {tab.id === "task" ? <AnalysisGroupList groups={taskGroups} /> : null}
+              {tab.id === "persona" ? (
+                <>
+                  <PersonaDistributionList groups={personaDistGroups} />
+                  {captureMode ? null : (
+                    <PersonaDistributionExplorer
+                      entries={personaExplorerEntries}
+                      hideResultField={isSurvey}
+                    />
+                  )}
+                </>
+              ) : null}
+            </div>
+          )
+        })}
       </div>
     </StudioGlassPanel>
   )
@@ -2403,7 +2601,11 @@ async function enrichBatchReportPdfMeta(meta: BatchReportPdfMeta): Promise<Batch
   }
 }
 
-function buildBatchReportPdfMeta(jobName: string, job: HarborJobDetail | undefined): BatchReportPdfMeta {
+function buildBatchReportPdfMeta(
+  jobName: string,
+  job: HarborJobDetail | undefined,
+  aggregation?: HarborJobAggregation | null,
+): BatchReportPdfMeta {
   const launch = job?.launch ?? null;
   const result = (job?.result ?? null) as Record<string, unknown> | null;
   const config = (job?.config ?? null) as Record<string, unknown> | null;
@@ -2418,8 +2620,8 @@ function buildBatchReportPdfMeta(jobName: string, job: HarborJobDetail | undefin
   const finished = typeof result?.finished_at === "string" ? result.finished_at : null;
   const runWindow = started || finished ? `${started || "-"} -> ${finished || "-"}` : null;
   const generatedAt =
-    typeof job?.aggregation?.generatedAt === "string" && job.aggregation.generatedAt
-      ? job.aggregation.generatedAt
+    typeof aggregation?.generatedAt === "string" && aggregation.generatedAt
+      ? aggregation.generatedAt
       : null;
   const parallelismRaw = config?.n_concurrent_trials;
   const parallelism =
@@ -3157,13 +3359,7 @@ function AggregationDashboard({
               className={`flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 py-2.5 text-[15px] font-semibold text-white shadow-sm transition-colors hover:bg-primary/90 ${FOCUS_RING}`}
             >
               <Sym name={open ? "expand_less" : "expand_more"} size={20} className="shrink-0" />
-              {open
-                ? isSurvey
-                  ? "Hide per-question report"
-                  : "Hide detailed report"
-                : isSurvey
-                  ? "Show per-question report"
-                  : "Show detailed report"}
+              {open ? "Hide detailed report" : "Show detailed report"}
               {isSurvey && !open ? (
                 <span className="ml-1 text-[13px] font-normal text-white/80">
                   {`· ${detailCount} ${detailLabel}`}
@@ -3176,35 +3372,13 @@ function AggregationDashboard({
 
       {open ? (
         contexts.length > 0 ? (
-          isSurvey ? (
-            <StudioGlassPanel className="overflow-hidden bg-surface/95">
-              <SectionHeader
-                title="Per-question report"
-                subtitle="Answer mix per question, with persona explanations underneath."
-              />
-              <div className="space-y-3 p-4">
-                {compactContexts.length > 0 ? <CompactContextGroup contexts={compactContexts} /> : null}
-                {headlineContexts
-                  .filter((context) => context.contextType !== "trial_summary")
-                  .map((context) =>
-                    context.contextType === "question_response" ? (
-                      <SurveyQuestionCard key={context.key} context={context} />
-                    ) : context.contextType === "user_feedback" || context.contextType === "feedback" ? (
-                      <UserFeedbackBatchCard key={context.key} context={context} />
-                    ) : (
-                      <ContextCard key={context.key} context={context} />
-                    ),
-                  )}
-              </div>
-            </StudioGlassPanel>
-          ) : (
-            <DetailedEvaluationPanel
-              aggregation={aggregation}
-              category={category}
-              compactContexts={compactContexts}
-              captureMode={captureMode}
-            />
-          )
+          <DetailedEvaluationPanel
+            aggregation={aggregation}
+            category={category}
+            compactContexts={compactContexts}
+            captureMode={captureMode}
+            surveyHeadlineContexts={isSurvey ? headlineContexts : undefined}
+          />
         ) : (
           <FlatAggregationFallback
             numerical={numerical}
@@ -5114,7 +5288,24 @@ export function HarborJobDetail({ jobName, onBack, onOpenTrial }: HarborJobDetai
     refetchInterval: (ctx) => {
       const launch = ctx.state.data?.launch;
       const trials = ctx.state.data?.trials ?? [];
-      const reporting = ctx.state.data?.aggregation?.reporting;
+      const pending = trials.some((trial) => !trial.completed);
+      if (launch?.status === "running" || launch?.status === "queued" || pending) {
+        return 3000;
+      }
+      return false;
+    },
+  });
+
+  const job = query.data;
+  const launch = job?.launch;
+  const trials = job?.trials ?? [];
+
+  const aggregationQuery = useQuery({
+    queryKey: ["harbor-job-aggregation", jobName],
+    queryFn: () => api.getHarborJobAggregation(jobName),
+    enabled: query.isSuccess && trials.length > 0,
+    refetchInterval: (ctx) => {
+      const reporting = ctx.state.data?.reporting;
       const pending = trials.some((trial) => !trial.completed);
       if (
         launch?.status === "running" ||
@@ -5129,11 +5320,16 @@ export function HarborJobDetail({ jobName, onBack, onOpenTrial }: HarborJobDetai
     },
   });
 
-  const job = query.data;
-  const launch = job?.launch;
-  const trials = job?.trials ?? [];
-  const aggregation = job?.aggregation ?? null;
-  const pdfMeta = useMemo(() => buildBatchReportPdfMeta(jobName, job), [jobName, job]);
+  const aggregation = aggregationQuery.data ?? null;
+  const aggregationLoading =
+    aggregationQuery.isEnabled &&
+    !aggregation &&
+    (aggregationQuery.isPending || aggregationQuery.isFetching) &&
+    !aggregationQuery.isError;
+  const pdfMeta = useMemo(
+    () => buildBatchReportPdfMeta(jobName, job, aggregation),
+    [jobName, job, aggregation],
+  );
 
   const progress = useMemo(() => {
     const done = trials.filter((trial) => trial.completed && trial.succeeded !== false && !trial.error).length;
@@ -5143,8 +5339,15 @@ export function HarborJobDetail({ jobName, onBack, onOpenTrial }: HarborJobDetai
   }, [trials]);
 
   const [view, setView] = useState<"report" | "runs">("report");
-  const hasReport = Boolean(aggregation);
+  const hasReport = Boolean(aggregation) || aggregationLoading;
   const activeView: "report" | "runs" = view === "report" && !hasReport ? "runs" : view;
+
+  const refreshAll = () => {
+    void query.refetch();
+    if (aggregationQuery.isEnabled) {
+      void aggregationQuery.refetch();
+    }
+  };
 
   return (
     <StudioPageFrame>
@@ -5171,8 +5374,8 @@ export function HarborJobDetail({ jobName, onBack, onOpenTrial }: HarborJobDetai
             </StudioToolbarButton>
             <StudioToolbarButton
               icon="refresh"
-              onClick={() => query.refetch()}
-              disabled={query.isFetching}
+              onClick={refreshAll}
+              disabled={query.isFetching || aggregationQuery.isFetching}
             >
               Refresh
             </StudioToolbarButton>
@@ -5242,6 +5445,13 @@ export function HarborJobDetail({ jobName, onBack, onOpenTrial }: HarborJobDetai
                 />
               </div>
             </div>
+          ) : null}
+
+          {activeView === "report" && aggregationLoading ? (
+            <StudioGlassPanel className="mb-4 flex items-center gap-2 px-4 py-8 text-[15px] text-text-variant">
+              <Sym name="autorenew" size={18} className="animate-rb-spin text-primary" />
+              Loading batch report…
+            </StudioGlassPanel>
           ) : null}
 
           {activeView === "report" && aggregation ? (

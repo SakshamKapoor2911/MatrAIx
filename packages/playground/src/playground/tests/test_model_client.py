@@ -2,6 +2,7 @@ import pytest
 
 from playground.model_client import (
     DASHSCOPE_DEFAULT_BASE_URL,
+    DEEPSEEK_DEFAULT_BASE_URL,
     build_json_client,
     dashscope_openai_client_kwargs,
 )
@@ -74,3 +75,53 @@ def test_build_json_client_requires_dashscope_key(monkeypatch):
     monkeypatch.delenv("DASHSCOPE_API_KEY", raising=False)
     with pytest.raises(RuntimeError, match="DASHSCOPE_API_KEY"):
         build_json_client("dashscope/qwen-plus")
+
+
+def test_build_json_client_routes_deepseek(monkeypatch):
+    monkeypatch.setenv("DEEPSEEK_API_KEY", "sk-deepseek-test")
+    monkeypatch.delenv("DEEPSEEK_API_BASE", raising=False)
+    created: list[dict[str, str]] = []
+
+    def fake_openai(**kwargs):
+        created.append(kwargs)
+        return _FakeOpenAI(**kwargs)
+
+    monkeypatch.setattr("openai.OpenAI", fake_openai)
+
+    client = build_json_client("deepseek/deepseek-chat")
+    assert isinstance(client, OpenAIChatClient)
+    assert client.model == "deepseek-chat"
+    assert created == [
+        {
+            "api_key": "sk-deepseek-test",
+            "base_url": DEEPSEEK_DEFAULT_BASE_URL,
+        }
+    ]
+
+
+def test_build_tool_step_client_routes_deepseek(monkeypatch):
+    monkeypatch.setenv("DEEPSEEK_API_KEY", "sk-deepseek-test")
+    monkeypatch.delenv("DEEPSEEK_API_BASE", raising=False)
+    created: list[dict[str, str]] = []
+
+    def fake_openai(**kwargs):
+        created.append(kwargs)
+        return _FakeOpenAI(**kwargs)
+
+    monkeypatch.setattr("openai.OpenAI", fake_openai)
+
+    client = build_tool_step_client("deepseek/deepseek-chat")
+    assert isinstance(client, OpenAIToolStepClient)
+    assert client.model == "deepseek-chat"
+    assert created == [
+        {
+            "api_key": "sk-deepseek-test",
+            "base_url": DEEPSEEK_DEFAULT_BASE_URL,
+        }
+    ]
+
+
+def test_build_json_client_requires_deepseek_key(monkeypatch):
+    monkeypatch.delenv("DEEPSEEK_API_KEY", raising=False)
+    with pytest.raises(RuntimeError, match="DEEPSEEK_API_KEY"):
+        build_json_client("deepseek/deepseek-chat")

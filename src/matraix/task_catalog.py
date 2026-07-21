@@ -98,6 +98,18 @@ APPLICATION_TASK_METADATA: dict[str, dict[str, object]] = {
             "multi turn chat",
         ],
     },
+    "chat_meal-planning-nutrition": {
+        "type": "chatbot",
+        "domain": DOMAIN_HEALTHCARE,
+        "tags": [
+            "nutrition",
+            "meal planning",
+            "dietary adherence",
+            "health coaching",
+            "multi turn chat",
+            "personalized recommendations",
+        ],
+    },
     "example-web-playwright_quote-choice": {
         "type": "web",
         "domain": DOMAIN_ARTS_CULTURE,

@@ -1,4 +1,83 @@
 {
   "schemaVersion": "1.0",
-  "contextRules": []
+  "contextRules": [
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q300"
+      },
+      "distributions": [
+        {
+          "id": "q300.response_by_segment",
+          "facetKey": "response",
+          "title": "Could cover a $400 emergency expense"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q297"
+      },
+      "distributions": [
+        {
+          "id": "q297.response_by_segment",
+          "facetKey": "response",
+          "title": "$400 emergency \u2014 payment method path A"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q298"
+      },
+      "distributions": [
+        {
+          "id": "q298.response_by_segment",
+          "facetKey": "response",
+          "title": "$400 emergency \u2014 payment method path B"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q328"
+      },
+      "distributions": [
+        {
+          "id": "q328.response_by_segment",
+          "facetKey": "response",
+          "title": "Health insurance coverage type"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q121"
+      },
+      "distributions": [
+        {
+          "id": "q121.response_by_segment",
+          "facetKey": "response",
+          "title": "Views on freelance / gig work"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q253"
+      },
+      "distributions": [
+        {
+          "id": "q253.response_by_segment",
+          "facetKey": "response",
+          "title": "Retired and worked for pay"
+        }
+      ]
+    }
+  ]
 }
