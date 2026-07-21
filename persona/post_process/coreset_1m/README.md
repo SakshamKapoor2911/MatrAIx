@@ -52,6 +52,29 @@ production chain is:
 | Replacement calibrated build | `33783087` | Running since 2026-07-21 02:37 EDT |
 | Replacement Hugging Face upload | `33783089` | Pending on successful replacement build |
 
+### Progress update: 2026-07-21 02:55 EDT
+
+- Build `33783087` has run for approximately 18 minutes on one CPU with a 24 GB
+   memory allocation. The live process is active at about 74% CPU and 296 MB RSS;
+   stderr and stdout remain empty.
+- The process has read approximately 809 MB through the four-field candidate
+   scan and is currently CPU-bound with no further read or write growth. This is
+   consistent with the first iterative calibration stage rather than a stalled
+   process.
+- No output directory or Parquet file exists yet. The build intentionally
+   creates the output only after human and synthetic candidate calibration has
+   completed.
+- Expected remaining phases are synthetic candidate scan/calibration, selected
+   row materialization into ten 100K Parquet files, SHA-256/manifest generation,
+   final validation, and the dependent upload.
+- Based on a same-implementation four-margin benchmark and current production
+   behavior, the build is expected to complete in roughly 1.5-4 hours from its
+   start; a conservative pathological-convergence bound is 4-6 hours. The Slurm
+   limit is eight hours.
+- Upload job `33783089` is correctly pending on `afterok:33783087`. The expected
+   1M release size is approximately 5-6 GB, so upload should normally take about
+   10-30 minutes after the build succeeds.
+
 This simplification changes only candidate I/O and scheduling. The build still
 performs one global deterministic calibration: it selects 323,438 Wiki rows to
 move the human-grounded component toward the target margins, computes the

@@ -160,6 +160,30 @@ written into source, manifests, logs, or chat.
   The separate token previously used by the initial job should be revoked and
   rotated because it was visible in that process's arguments.
 
+### 2026-07-21 02:55 EDT
+
+- Secured resume job `33778360` started at 02:37 EDT and has run for about 17
+  minutes on one node with eight CPUs and eight upload workers.
+- The resumable cache avoided repeating the full hash pass: all 2,734 local
+  files are already hashed, covering the complete 3.2 TB upload root.
+- Hugging Face uploader state reports 373 of 2,165 Parquet files pre-uploaded,
+  totaling 16.3 GB. Seven workers are actively pre-uploading and one is waiting.
+- The dynamic multipart display shows 119 of 127 files in the current processing
+  set and approximately 211/458 GB traversed within that set. These values
+  include in-progress/resumed multipart work and are not treated as committed
+  repository bytes.
+- The authoritative remote revision currently contains 826 committed files and
+  199,975,268 bytes. This includes 256 Amazon Parquet files totaling 198,832,257
+  bytes plus README, manifest, schema, reports, submission metadata, and
+  `.gitattributes`.
+- No new synthetic Parquet commit is visible remotely yet. Large LFS/Xet files
+  become visible only after their multipart upload and repository commit finish,
+  so pre-upload progress can advance substantially before remote committed bytes
+  change.
+- Current job logs contain no unrecovered exception or new rate-limit failure.
+  Continue monitoring both the uploader counters and the remote revision rather
+  than estimating progress from remote committed bytes alone.
+
 ## Run and monitor
 
 ```bash
