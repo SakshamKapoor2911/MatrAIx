@@ -7,8 +7,7 @@ planning spreadsheet:
 
 https://docs.google.com/spreadsheets/d/1CiXWXKKs9AxyqJbq1ZyBYqZj4-6RxRPPWzlB7zVzRyk/edit?gid=0#gid=0
 
-Right now the scope is **rows 2-7**, but **rows 4, 5, and 6 are not
-ready yet**.
+**Right now the scope is rows 2-7, and all of them are ready.**
 
 All tasks live in the MatrAIx codebase:
 
