@@ -36,7 +36,8 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_COUNT = 2000
 DEFAULT_GENERATED_DATASETS_DIR = REPO_ROOT / "persona" / "datasets" / "_generated"
 DEFAULT_STRATEGY_STRATUM_MIN = 2
-MAX_FILTER_STRATA = 256
+# Keep in sync with playground persona_pool_service.MAX_FILTER_STRATA.
+MAX_FILTER_STRATA = 2048
 
 
 def _default_out_dir(count: int) -> Path:

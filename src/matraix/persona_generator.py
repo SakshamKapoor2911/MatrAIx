@@ -217,7 +217,7 @@ def build_probe_strata(
 def build_filter_strata(
     dimension_filters: dict[str, list[str]],
     *,
-    max_strata: int = 256,
+    max_strata: int = 2048,
 ) -> list[dict[str, str]]:
     """Cartesian product of multi-value ``dimensionFilters`` → fixed strata cells.
 

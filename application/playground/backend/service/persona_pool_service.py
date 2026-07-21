@@ -32,7 +32,10 @@ DEFAULT_PERSONA_POOL = "persona/datasets/bench-dev-sample"
 GENERATED_DATASETS_DIR = "persona/datasets/_generated"
 COHORTS_DIR = "persona/datasets/cohorts"
 DIMENSION_CATEGORIES_PATH = "persona/schema/dimension_categories.json"
-MAX_FILTER_STRATA = 256
+# Soft guard against accidental filter explosions during auto top-up /
+# strategy-pool generation. Large cohort tasks (hundreds–thousands of
+# strata cells) are supported; raise further if a strategy needs it.
+MAX_FILTER_STRATA = 2048
 DEFAULT_STRATEGY_STRATUM_MIN = 2
 CohortKind = Literal["recipe", "frozen"]
 

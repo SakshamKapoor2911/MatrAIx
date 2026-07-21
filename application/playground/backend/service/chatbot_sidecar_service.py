@@ -84,6 +84,17 @@ _SIDECAR_SPECS: dict[str, SidecarSpec] = {
         legacy_env=None,
         probe="tcp",
     ),
+    "meal_planning_nutrition": SidecarSpec(
+        application_id="meal_planning_nutrition",
+        compose_dir=(
+            "environment/task-environments/application/chatbot-api-sidecar_meal-plan-api"
+        ),
+        service_name="meal-plan-api",
+        build_context="meal-plan-api",
+        host_port=8905,
+        primary_env="CHATBOT_API_URL",
+        legacy_env=None,
+    ),
 }
 
 

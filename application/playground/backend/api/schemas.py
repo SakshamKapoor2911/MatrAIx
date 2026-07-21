@@ -87,10 +87,12 @@ SUPPORTED_APPLICATION_IDS = (
     "medical_assistant",
     "acme_support_api",
     "acme_support_mcp",
+    "meal_planning_nutrition",
 )
 DEFAULT_APPLICATION_CONTEXTS = {
     "finance_openbb": "financial_research",
     "medical_assistant": "medical_consultation",
+    "meal_planning_nutrition": "meal_planning",
 }
 
 SUPPORTED_PERSONA_MODELS = tuple(PERSONA_MODEL_OPTIONS)
