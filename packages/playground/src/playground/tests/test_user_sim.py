@@ -185,6 +185,8 @@ def test_prompt_bundle_separates_persona_and_task():
     assert "## Task context" in bundle["taskPrompt"]
     assert "Kickoff instruction." in bundle["taskPrompt"]
     assert "Progressive disclosure" in bundle["harborPrompt"]
+    assert "Today is " in bundle["harborPrompt"]
+    assert "Today is " in report_prompt
     assert bundle["harborPrompt"].index("## Persona") < bundle["harborPrompt"].index("Progressive disclosure")
     assert "Keep messages short and natural (usually 1-3 sentences)." in bundle["harborPrompt"]
     assert "Prefer plainspoken end-user language" in bundle["harborPrompt"]
@@ -193,6 +195,17 @@ def test_prompt_bundle_separates_persona_and_task():
     assert "## Task instruction" in report_prompt
     assert "## Task context" in report_prompt
     assert "## Output schema" not in report_prompt
+
+
+def test_current_date_block_uses_provided_moment():
+    from datetime import datetime, timezone
+
+    from playground.user_sim.prompt import current_date_block
+
+    block = current_date_block(
+        now=datetime(2026, 7, 21, 0, 20, tzinfo=timezone.utc)
+    )
+    assert block == "Today is Tuesday, July 21, 2026, 00:20 UTC."
 
 
 def test_public_runner_delegates_to_user_sim(monkeypatch):

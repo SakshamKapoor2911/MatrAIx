@@ -182,6 +182,27 @@ def coerce_self_report_payload(
     return payload
 
 
+def schema_to_public_dict(schema: SelfReportSchema) -> Dict[str, Any]:
+    """Serialize a self-report schema for debrief / UI (task-agnostic)."""
+    return {
+        "artifactName": schema.artifact_name,
+        "instructions": schema.instructions,
+        "fields": [
+            {
+                "key": schema_field.key,
+                "prompt": schema_field.prompt,
+                "kind": schema_field.kind,
+                "required": schema_field.required,
+                "minimum": schema_field.minimum,
+                "maximum": schema_field.maximum,
+                "choices": list(schema_field.choices),
+                "explains": schema_field.explains,
+            }
+            for schema_field in schema.fields
+        ],
+    }
+
+
 def field_keys(schema: SelfReportSchema) -> Tuple[str, ...]:
     return tuple(schema_field.key for schema_field in schema.fields)
 

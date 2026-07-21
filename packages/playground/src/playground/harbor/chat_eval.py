@@ -129,8 +129,6 @@ def default_chat_api_url(application_id: str) -> str:
         return "http://finance-chatbot:8000"
     if application_id == "medical_assistant":
         return "http://multi-agent-medical-assistant-api:8000"
-    if application_id == "meal_planning_nutrition":
-        return "http://meal-plan-api:8000"
     return "http://chatbot-api:8000"
 
 
@@ -218,6 +216,8 @@ class HarborSidecarChatSession:
         body: Optional[Dict[str, Any]] = None,
         timeout_sec: int = 200,
     ) -> Dict[str, Any]:
+        import asyncio
+
         url = "{}{}".format(self._api_url, path)
         payload = json.dumps(body or {}, ensure_ascii=False, separators=(",", ":"))
         encoded = base64.b64encode(payload.encode("utf-8")).decode("ascii")
@@ -240,14 +240,34 @@ class HarborSidecarChatSession:
             """
         ).format(encoded=encoded, url=url, method=method)
         command = "python3 -c {}".format(shlex.quote(script.strip()))
-        result = await self._environment.exec(command, timeout_sec=timeout_sec)
-        if result.return_code != 0:
-            detail = (result.stderr or result.stdout or "").strip()
-            raise RuntimeError(
-                "chat sidecar request failed ({} {}): {}".format(method, path, detail)
+        # Retry transient sidecar/upstream failures (e.g. OpenAI connection blips
+        # under batch concurrency) instead of failing the whole trial.
+        attempts = 3 if method.upper() == "POST" else 1
+        last_detail = ""
+        for attempt in range(attempts):
+            result = await self._environment.exec(command, timeout_sec=timeout_sec)
+            if result.return_code == 0:
+                return parse_json_stdout((result.stdout or "").strip())
+            last_detail = (result.stderr or result.stdout or "").strip()
+            transient = any(
+                token in last_detail.lower()
+                for token in (
+                    "http 503",
+                    "connection error",
+                    "timed out",
+                    "timeout",
+                    "temporarily unavailable",
+                    "rate limit",
+                )
             )
-        parsed = parse_json_stdout((result.stdout or "").strip())
-        return parsed
+            if attempt + 1 >= attempts or not transient:
+                break
+            await asyncio.sleep(min(6.0, 0.8 * (2**attempt)))
+        raise RuntimeError(
+            "chat sidecar request failed ({} {}): {}".format(
+                method, path, last_detail
+            )
+        )
 
     async def run_turn_sync(self, message: str) -> Dict[str, Any]:
         protocol = self.runtime.protocol

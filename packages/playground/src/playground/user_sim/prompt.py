@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
@@ -13,6 +14,18 @@ _GUIDELINES_PATH = Path(__file__).resolve().parent / "sim_guidelines.md"
 
 def load_sim_guidelines() -> str:
     return _GUIDELINES_PATH.read_text(encoding="utf-8").strip()
+
+
+def current_date_block(*, now: datetime | None = None) -> str:
+    """Tell the persona what today/now is (host clock)."""
+    moment = now or datetime.now().astimezone()
+    return "Today is {weekday}, {month} {day}, {year}, {time}.".format(
+        weekday=moment.strftime("%A"),
+        month=moment.strftime("%B"),
+        day=moment.day,
+        year=moment.year,
+        time=moment.strftime("%H:%M %Z").strip(),
+    )
 
 
 def _persona_context(persona: Persona) -> str:
@@ -64,6 +77,7 @@ def assemble_system_prompt(
     task_bundle = task_bundle or TaskContentBundle()
     blocks = [
         "## Persona\n{}".format(render_persona_block(persona, persona_yaml_path=persona_yaml_path)),
+        current_date_block(),
         load_sim_guidelines(),
         _section("Task instruction", task_bundle.instruction_markdown),
         _section("Task context", task_bundle.context_markdown),
@@ -80,6 +94,7 @@ def assemble_report_system_prompt(
     task_bundle = task_bundle or TaskContentBundle()
     blocks = [
         "## Persona\n{}".format(render_persona_block(persona, persona_yaml_path=persona_yaml_path)),
+        current_date_block(),
         _section("Task instruction", task_bundle.instruction_markdown),
         _section("Task context", task_bundle.context_markdown),
     ]
