@@ -30,4 +30,4 @@ HfApi(token=os.environ["HF_TOKEN"]).create_branch(
 )
 PY
 hf upload-large-folder "$REPO_ID" "$OUTPUT" --repo-type dataset \
-  --revision "$REVISION" --num-workers 8 --token "$HF_TOKEN"
+  --revision "$REVISION" --num-workers 8
