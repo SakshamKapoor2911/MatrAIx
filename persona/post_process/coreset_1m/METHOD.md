@@ -41,6 +41,15 @@ distributed candidates before selecting 400,000. The selected shards, file
 parts, and row-group positions are deterministic for seed `20260720` and are
 spread across the corpus rather than always taking the beginning of each shard.
 
+The production seed selects exactly 2,187,354 synthetic candidates across 40
+shards, 16 Parquet part positions, and 34 row-group positions. The active
+production chain is:
+
+| Stage | Slurm job | State at submission |
+|---|---:|---|
+| Calibrated 1M build | `33782802` | Pending for priority |
+| Hugging Face upload | `33782808` | Pending on successful build |
+
 This simplification changes only candidate I/O and scheduling. The build still
 performs one global deterministic calibration: it selects 323,438 Wiki rows to
 move the human-grounded component toward the target margins, computes the
