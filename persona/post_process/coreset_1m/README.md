@@ -47,8 +47,8 @@ production chain is:
 
 | Stage | Slurm job | State at submission |
 |---|---:|---|
-| Calibrated 1M build | `33782802` | Pending for priority |
-| Hugging Face upload | `33782808` | Pending on successful build |
+| Calibrated 1M build | `33782802` | Cancelled before starting to rename this document |
+| Hugging Face upload | `33782808` | Cancelled with its unstarted build dependency |
 
 This simplification changes only candidate I/O and scheduling. The build still
 performs one global deterministic calibration: it selects 323,438 Wiki rows to
