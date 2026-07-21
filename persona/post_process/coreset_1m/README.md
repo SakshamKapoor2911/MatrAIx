@@ -49,7 +49,7 @@ production chain is:
 |---|---:|---|
 | Calibrated 1M build | `33782802` | Cancelled before starting to rename this document |
 | Hugging Face upload | `33782808` | Cancelled with its unstarted build dependency |
-| Replacement calibrated build | `33783087` | Submitted after README rename |
+| Replacement calibrated build | `33783087` | Running since 2026-07-21 02:37 EDT |
 | Replacement Hugging Face upload | `33783089` | Pending on successful replacement build |
 
 This simplification changes only candidate I/O and scheduling. The build still
@@ -123,6 +123,160 @@ single source.
 This approach is efficient because optimization sees only a few integer
 calibration codes per candidate. Full 1,290-attribute rows, descriptions, and
 grounding are read only for selected records.
+
+## Calibration mechanics with examples
+
+### Shared sample weights, not one greedy decision at a time
+
+Calibration does not add one persona to the final pool and then immediately
+update all realized counts. Instead, every candidate persona has one shared
+positive sampling weight $w_i$. Age, region, gender identity, and urbanicity all
+update that same weight. After those weights approximately satisfy all supplied
+margins in expectation, the build performs one fixed-size, without-replacement
+sample.
+
+For category $v$ of dimension $d$, the basic multiplicative update is
+
+$$
+w_i \leftarrow w_i\frac{T_{dv}}{E_{dv}}
+\quad\text{for candidates }i\text{ with }x_{id}=v,
+$$
+
+where $T_{dv}$ is the target expected count and $E_{dv}$ is the current expected
+count. A category that is overrepresented receives a factor below one; an
+underrepresented category receives a factor above one.
+
+The expected counts use fixed-size inclusion probabilities rather than raw
+candidate counts. Given current weights, the algorithm solves $t$ such that
+
+$$
+\pi_i=1-e^{-t w_i},
+\qquad
+\sum_i\pi_i=n,
+$$
+
+where $n$ is the required sample size. The current expected count for one
+category is
+
+$$
+E_{dv}=\sum_{i:x_{id}=v}\pi_i,
+$$
+
+and its target count is $T_{dv}=n p_{dv}$ for target share $p_{dv}$.
+
+### Numerical age example
+
+Suppose a pool has 100 candidates and the build must select 20. The pool has 80
+Young and 20 Old candidates, while the desired age margin is 60% Young and 40%
+Old. With equal initial weights, each candidate initially has expected inclusion
+probability 0.2, so the expected sample is:
+
+| Age | Current expected count | Target count | Update factor |
+|---|---:|---:|---:|
+| Young | 16 | 12 | $12/16=0.75$ |
+| Old | 4 | 8 | $8/4=2.00$ |
+
+All Young weights are multiplied by 0.75 and all Old weights by 2.00. This does
+not yet select anyone; it changes their relative inclusion probabilities.
+
+### Why all margins must be revisited
+
+Now also require a 50% Urban and 50% Rural margin. After the age update, suppose
+the expected sample contains 14 Urban and 6 Rural candidates. The region factors
+are therefore $10/14=0.714$ and $10/6=1.667$. Because each row has one shared
+weight, the combined effects are approximately:
+
+| Candidate profile | Age factor | Region factor | Combined weight |
+|---|---:|---:|---:|
+| Young + Urban | 0.75 | 0.714 | 0.536 |
+| Young + Rural | 0.75 | 1.667 | 1.250 |
+| Old + Urban | 2.00 | 0.714 | 1.428 |
+| Old + Rural | 2.00 | 1.667 | 3.334 |
+
+The region update can move the age margin away from 60/40. The algorithm
+therefore cycles through age, region, gender identity, and urbanicity repeatedly:
+
+```text
+age -> region -> gender identity -> urbanicity -> age -> ...
+```
+
+Later updates can partially undo earlier ones, but the next sweep observes and
+corrects that error. This is why the method is iterative rather than a single
+pass. The implementation uses bounded positive weights, at most 200 sweeps, and
+a small expected-margin convergence tolerance. Correlated or incompatible
+margins may prevent an exact solution; in that case the result is a bounded
+compromise and the achieved errors are reported.
+
+The `quality` and `weight` entries in `calibration_targets.json` document target
+provenance and confidence. The current optimizer applies every supplied margin
+sequentially; those metadata weights do not alter the multiplicative update.
+
+### Turning calibrated weights into an exact-size sample
+
+After expected margins converge, deterministic exponential-race sampling assigns
+candidate $i$ the priority
+
+$$
+q_i=\frac{-\log U_i}{w_i},
+$$
+
+where $U_i$ is generated deterministically from the seed and stable row ID. The
+build selects the $n$ smallest priorities. This gives exactly $n$ unique rows,
+favors candidates with larger calibrated weights, is independent of input order,
+and is reproducible for the same seed. It is not a sequential greedy procedure.
+
+Expected margins can differ slightly from the realized fixed-size sample. The
+final audit therefore measures the actual selected rows rather than assuming the
+expectations were achieved.
+
+### Human-to-synthetic residual example
+
+Synthetic calibration is not asked to match the global target independently.
+It compensates for the human-grounded component. Suppose one field has two
+categories with a 60%/40% target. Assume that field is known for 500,000 of the
+600,000 selected human-grounded rows and for all 400,000 synthetic rows. The
+final known-value denominator is therefore 900,000, giving desired counts:
+
+$$
+T_A=900{,}000\times0.60=540{,}000,
+\qquad
+T_B=900{,}000\times0.40=360{,}000.
+$$
+
+If the human-grounded selection already contains 350,000 known $A$ values and
+150,000 known $B$ values, the synthetic residual is
+
+$$
+r_A=540{,}000-350{,}000=190{,}000,
+\qquad
+r_B=360{,}000-150{,}000=210{,}000.
+$$
+
+The synthetic target is thus 47.5% $A$ and 52.5% $B$, even though the global
+target is 60%/40%. Combining human-grounded and synthetic rows then moves the
+full coreset toward the global target.
+
+If the human-grounded component already exceeds a category's final target, its
+raw residual is negative and synthetic rows cannot subtract observations. The
+implementation clips that residual to zero, renormalizes the remaining positive
+residuals, and records the clipped mass as infeasibility in `audit.json`.
+
+### Missing values and acceptance evidence
+
+Missing calibration values receive no update for that dimension and are never
+imputed. Consequently, a statement such as "age matches the target" means the
+age distribution among selected rows with known age. `audit.json` and
+`RESULTS.md` report, for every calibrated dimension:
+
+- target and achieved share for each category;
+- absolute error and maximum absolute error;
+- number of known and missing selected rows;
+- negative residual mass when the human-grounded component makes a target
+   category infeasible; and
+- exact synthetic candidate file and row-group provenance.
+
+These outputs distinguish best-effort marginal calibration from a claim of a
+fully representative joint population sample.
 
 ## Calibration scope and evidence
 
