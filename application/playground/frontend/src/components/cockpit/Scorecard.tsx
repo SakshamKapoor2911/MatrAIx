@@ -101,28 +101,33 @@ export function Scorecard({ questionnaire, metrics, phase }: ScorecardProps) {
             )}
           </div>
 
-          {/* Criterion rows */}
+          {/* Criterion rows — only fields that were actually authored */}
           <div className="mb-3 space-y-2.5">
-            <CriterionRow
-              label="Did it respect the must-haves?"
-              score={questionnaire.constraintSatisfaction}
-              max={5}
-              rationale={questionnaire.constraintRationale}
-            />
-            <CriterionRow
-              label="Did it match their tastes?"
-              score={questionnaire.preferenceSatisfaction}
-              max={5}
-              rationale={questionnaire.preferenceRationale}
-            />
+            {(questionnaire.constraintSatisfaction ?? 0) > 0 ? (
+              <CriterionRow
+                label="Did it respect the must-haves?"
+                score={questionnaire.constraintSatisfaction}
+                max={5}
+                rationale={questionnaire.constraintRationale}
+              />
+            ) : null}
+            {(questionnaire.preferenceSatisfaction ?? 0) > 0 ? (
+              <CriterionRow
+                label="Did it match their tastes?"
+                score={questionnaire.preferenceSatisfaction}
+                max={5}
+                rationale={questionnaire.preferenceRationale}
+              />
+            ) : null}
           </div>
 
           {/* Clarifying questions line */}
-          <ClarifyingLine
-            asked={questionnaire.askedUsefulClarifyingQuestions}
-            notes={questionnaire.clarifyingNotes}
-          />
-
+          {questionnaire.askedUsefulClarifyingQuestions || questionnaire.clarifyingNotes ? (
+            <ClarifyingLine
+              asked={questionnaire.askedUsefulClarifyingQuestions}
+              notes={questionnaire.clarifyingNotes}
+            />
+          ) : null}
           {/* Metrics strip: real counts only (no tokens / cost). */}
           <div className="mt-3 grid grid-cols-1 gap-2">
             <MetricTile value={String(metrics.numTurns)} caption="Total turns" />

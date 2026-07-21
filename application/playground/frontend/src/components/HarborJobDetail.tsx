@@ -188,12 +188,14 @@ const CONTEXT_PRIORITY_BY_CATEGORY: Record<ReportingCategory, Record<string, num
     experience: 6,
   },
   chatbot: {
+    // Shared chatbot contract only. Task-authored contextTypes are unlisted
+    // and fall back to a late default order (Custom tab).
     task_outcome: 0,
-    user_feedback: 1,
-    feedback: 1,
-    conversation_summary: 2,
-    coordination: 3,
-    policy_and_trust: 4,
+    conversation_summary: 1,
+    user_feedback: 2,
+    feedback: 2,
+    coordination: 13,
+    policy_and_trust: 14,
     question_response: 0,
   },
   survey: {
@@ -215,7 +217,14 @@ const HEADLINE_CONTEXT_TYPES: Record<ReportingCategory, Set<string>> = {
     "feedback",
     "question_response",
   ]),
-  chatbot: new Set(["task_outcome", "user_feedback", "feedback", "coordination", "question_response"]),
+  // Chatbot General = shared basics + self-report only. Any other contextType
+  // the task authors goes under Custom analysis (no per-task hardcoding).
+  chatbot: new Set([
+    "task_outcome",
+    "conversation_summary",
+    "user_feedback",
+    "feedback",
+  ]),
   survey: new Set(["question_response", "user_feedback", "feedback"]),
   generic: new Set(["decision", "user_feedback", "feedback", "question_response"]),
 };
@@ -237,30 +246,50 @@ const EXECUTION_CONTEXT_TYPES_BY_CATEGORY: Record<ReportingCategory, Set<string>
   ]),
 };
 
+/** Chatbot contexts that belong on the General tab. Everything else with
+ *  chartable facets is a task-authored angle → Custom task analysis. */
+const CHATBOT_GENERAL_CONTEXT_TYPES = new Set([
+  "task_outcome",
+  "conversation_summary",
+  "user_feedback",
+  "feedback",
+]);
+
+function isChatbotGeneralContext(contextType: string | null | undefined): boolean {
+  return CHATBOT_GENERAL_CONTEXT_TYPES.has(contextType ?? "")
+}
+
 const WEB_SIGNAL_CONTEXT_TYPES = new Set(["web_artifact", "web_interaction"]);
 const OS_APP_SIGNAL_CONTEXT_TYPES = new Set(["goal_component", "persona_alignment", "persona_constraint"]);
-const CHAT_SIGNAL_CONTEXT_TYPES = new Set(["conversation_summary", "coordination", "policy_and_trust"]);
+/** Shared chatbot signals only — never task-private contextTypes. */
+const CHAT_SIGNAL_CONTEXT_TYPES = new Set([
+  "conversation_summary",
+  "coordination",
+  "policy_and_trust",
+]);
 
 function inferReportingCategory(
   contexts: AggregationContext[],
   applicationType?: string | null,
 ): ReportingCategory {
+  // Prefer the job's declared application type over inferring from context keys,
+  // so task-authored contextTypes cannot reclassify the report surface.
+  const explicit = (applicationType ?? "").trim().toLowerCase()
+  if (explicit && explicit !== "unknown" && ["web", "os-app", "chatbot", "survey"].includes(explicit)) {
+    return explicit as ReportingCategory
+  }
+
   const contextTypes = new Set(contexts.map((context) => context.contextType).filter(Boolean) as string[])
   if ([...contextTypes].some((type) => CHAT_SIGNAL_CONTEXT_TYPES.has(type))) return "chatbot"
   if ([...contextTypes].some((type) => WEB_SIGNAL_CONTEXT_TYPES.has(type))) return "web"
   if ([...contextTypes].some((type) => OS_APP_SIGNAL_CONTEXT_TYPES.has(type))) return "os-app"
   if (contextTypes.has("question_response")) return "survey"
-
-  const explicit = (applicationType ?? "").trim().toLowerCase()
-  if (explicit && explicit !== "unknown" && ["web", "os-app", "chatbot", "survey"].includes(explicit)) {
-    return explicit as ReportingCategory
-  }
   return "generic"
 }
 
 type InsightGroup = "outcome" | "process" | "feedback"
 
-/** Every context type maps to one of the report's three narrative lenses. */
+/** Shared context types → narrative lens. Unknown/task-authored types fall through. */
 const CONTEXT_GROUP_BY_TYPE: Record<string, InsightGroup> = {
   task_outcome: "outcome",
   decision: "outcome",
@@ -447,9 +476,39 @@ function facetKeyLeaf(key: string | null | undefined): string {
   return parts[parts.length - 1] ?? raw
 }
 
+/** Long self-report prompts should stay sentence case — not CSS uppercase. */
+function isProseFacetTitle(label: string): boolean {
+  const text = label.trim()
+  if (text.length > 42) return true
+  if (/[—?]/.test(text)) return true
+  return text.split(/\s+/).filter(Boolean).length > 6
+}
+
+function facetTitleClassName(label: string, size: "sm" | "md" = "md"): string {
+  if (isProseFacetTitle(label)) {
+    return size === "sm"
+      ? "text-[11px] font-medium leading-snug text-text-dim normal-case tracking-normal"
+      : "text-[13px] font-medium leading-snug text-text-dim normal-case tracking-normal"
+  }
+  return size === "sm"
+    ? "text-[11px] font-medium uppercase tracking-wide text-text-dim"
+    : "text-[13px] font-medium uppercase tracking-wide text-text-dim"
+}
+
 function humanizeFacetLabel(label: string | null | undefined, key?: string | null): string {
   const leafKey = facetKeyLeaf(key)
-  const labelLooksLikeKey = Boolean(label && label.includes("."))
+  // Aggregation keys look like "user_feedback.primary.foo" (no spaces). Prose
+  const labelLooksLikeKey = Boolean(
+    label &&
+      label.includes(".") &&
+      !/\s/.test(label) &&
+      /^[a-zA-Z0-9_.-]+$/.test(label),
+  )
+  // Brainless: any authored multi-word label (self-report prompts, long titles)
+  // is shown as-is — never collapse to platform shortcuts like "Needs met".
+  if (label && !labelLooksLikeKey && /\s/.test(label.trim())) {
+    return label.trim()
+  }
   const raw = (
     labelLooksLikeKey ? leafKey || label || "" : label ?? (leafKey || key || "")
   ).trim()
@@ -460,8 +519,6 @@ function humanizeFacetLabel(label: string | null | undefined, key?: string | nul
     outcome_status: "Task outcome",
     outcome_reason: "Why this result",
     feedback_reason: "Why they rated it this way",
-    need_constraint_satisfaction: "Needs met",
-    personal_preference_satisfaction: "Preferences matched",
     clarification_questions_useful: "Clarifying questions useful",
     asked_useful_clarification_questions: "Clarifying questions useful",
     felt_understood: "Felt understood",
@@ -470,7 +527,6 @@ function humanizeFacetLabel(label: string | null | undefined, key?: string | nul
     resolution_basis: "How we judged the result",
     next_step_owner: "Who acts next",
     task_goal_label: "User goal",
-    overall_experience_rating: "Overall experience",
     trust_level: "Trust",
     effort_rating: "Effort",
     clarity_of_next_step: "Next step clear",
@@ -497,19 +553,13 @@ function humanizeFacetLabel(label: string | null | undefined, key?: string | nul
   if (normalized === "process notes") return "What happened in the chat"
   if (normalized === "resolution basis") return "How we judged the result"
   if (normalized === "next step owner") return "Who acts next"
-  if (
-    normalized === "need or constraint satisfaction" ||
-    normalized === "need constraint satisfaction"
-  ) {
-    return "Needs met"
-  }
   if (normalized === "personal preference satisfaction") return "Preferences matched"
   if (normalized === "clarification questions useful") return "Clarifying questions useful"
   if (normalized.endsWith(" reason")) {
     return `Why: ${raw.replace(/\s*reason$/i, "").trim() || "explanation"}`
   }
   // Never surface dotted aggregation keys in the UI.
-  if (raw.includes(".")) {
+  if (labelLooksLikeKey || (/^[a-zA-Z0-9_.-]+$/.test(raw) && raw.includes("."))) {
     const leaf = facetKeyLeaf(raw)
     const leafNorm = leaf.toLowerCase().replace(/-/g, "_")
     if (byKey[leafNorm]) return byKey[leafNorm]
@@ -608,8 +658,22 @@ function surveyReasonFacetForContext(context: AggregationContext): AggregationFi
   )
 }
 
+function humanizeContextTypeKey(contextType: string): string {
+  return contextType
+    .replace(/[_-]+/g, " ")
+    .replace(/\b\w/g, (ch) => ch.toUpperCase())
+}
+
 function contextTypeMeta(contextType: AggregationContextType | null | undefined) {
-  return contextType ? CONTEXT_TYPE_META[contextType] ?? null : null
+  if (!contextType) return null
+  const known = CONTEXT_TYPE_META[contextType]
+  if (known) return known
+  // Task-authored contextTypes: title-case the key, no bespoke copy.
+  return {
+    badge: humanizeContextTypeKey(contextType),
+    description: null as string | null,
+    order: 50,
+  }
 }
 
 function contextTypeDescription(context: AggregationContext): string | null {
@@ -915,9 +979,16 @@ function insightFacetsForContext(context: AggregationContext): AggregationField[
     if (!facets.some((entry) => entry.key === facet.key)) facets.push(facet)
   }
   push(primaryFacetForContext(context))
+  const isFeedback =
+    context.contextType === "user_feedback" || context.contextType === "feedback"
   for (const facet of context.facets) {
     if (facet.role === "score" && looksLikeRatingFacet(facet)) push(facet)
     if (facet.kind === "categorical" && facetUsesSemanticTone(facet)) push(facet)
+    // Self-report enums always belong in At a glance — including unanimous
+    // "unsure" / single-bucket answers that fail the semantic-tone heuristic.
+    if (isFeedback && facet.kind === "categorical" && facet.role === "evidence") {
+      push(facet)
+    }
   }
   return facets
 }
@@ -941,14 +1012,19 @@ function buildHeadlineInsightChips(
   const exclude = options?.excludeFacetKeys ?? new Set<string>()
   const seen = new Set<string>()
   for (const context of orderedContexts(contexts, category)) {
+    // Chatbot At a glance mirrors General: basics + self-report only.
+    // Task-authored contextTypes stay in Custom.
+    if (category === "chatbot" && !isChatbotGeneralContext(context.contextType)) continue
     if (shouldCompactContext(context, category)) continue
     const group = contextGroup(context.contextType) ?? undefined
     for (const facet of insightFacetsForContext(context)) {
       if (seen.has(facet.key) || exclude.has(facet.key)) continue
+      const nonFeedbackCount = chips.filter((chip) => chip.group !== "feedback").length
+      // Keep room for authored self-report enums; don't let outcome/process fill a hard cap.
+      if (group !== "feedback" && nonFeedbackCount >= 6) continue
       seen.add(facet.key)
       const chip = facetToInsightChip(facet)
       if (chip) chips.push({ ...chip, group })
-      if (chips.length >= 8) return chips
     }
   }
   return chips
@@ -1255,8 +1331,7 @@ function NumericalDistributionCard({
   const min = num?.min ?? null
   const max = num?.max ?? null
   const std = num?.std ?? null
-  const lo = facet.scaleMin ?? (min != null ? Math.floor(min) : null)
-  const hi = facet.scaleMax ?? (max != null ? Math.ceil(max) : null)
+  const { lo, hi, hasDeclaredScale } = resolveNumericalDisplayScale(facet)
   const byValue = new Map((num?.counts ?? []).map((entry) => [String(entry.value), entry.count]))
 
   const points: Array<{ value: number; count: number }> = []
@@ -1281,7 +1356,7 @@ function NumericalDistributionCard({
         </span>
         <span className="font-mono text-[13px] text-text-dim">
           avg {metricValue(avg)}
-          {lo != null && hi != null ? ` / ${hi}` : ""}
+          {hasDeclaredScale && hi != null ? ` / ${hi}` : ""}
         </span>
       </div>
 
@@ -1316,12 +1391,61 @@ function NumericalDistributionCard({
       )}
 
       <div className="mt-2 flex flex-wrap gap-x-3 gap-y-0.5 text-[12px] text-text-dim">
-        {min != null && max != null && min !== max ? <span>range {metricValue(min)}–{metricValue(max)}</span> : null}
+        {min != null ? <span>min {metricValue(min)}</span> : null}
+        {max != null ? <span>max {metricValue(max)}</span> : null}
+        {avg != null ? <span>avg {metricValue(avg)}</span> : null}
         {std != null ? <span>± {metricValue(std)}</span> : null}
         <span>{num?.count ?? trialCount} personas</span>
       </div>
     </div>
   )
+}
+
+/** Declared scale (1–10) vs observed cohort min/max — never treat observed max as full score. */
+function resolveNumericalDisplayScale(facet: AggregationField): {
+  lo: number | null
+  hi: number | null
+  hasDeclaredScale: boolean
+} {
+  const leaf = facetKeyLeaf(facet.key).toLowerCase().replace(/-/g, "_")
+  const haystack = `${leaf} ${facet.facetKey ?? ""} ${facet.label}`.toLowerCase()
+  const isOverallExperience =
+    leaf === "overall_experience_rating" || haystack.includes("overall experience")
+  const isKnownTenPoint =
+    isOverallExperience || leaf === "trust_level" || leaf === "effort_rating"
+
+  if (typeof facet.scaleMin === "number" && typeof facet.scaleMax === "number") {
+    return { lo: facet.scaleMin, hi: facet.scaleMax, hasDeclaredScale: true }
+  }
+  if (isKnownTenPoint) {
+    return {
+      lo: typeof facet.scaleMin === "number" ? facet.scaleMin : 1,
+      hi: typeof facet.scaleMax === "number" ? facet.scaleMax : 10,
+      hasDeclaredScale: true,
+    }
+  }
+  if (typeof facet.scaleMax === "number") {
+    return {
+      lo: typeof facet.scaleMin === "number" ? facet.scaleMin : facet.numerical?.min != null ? Math.floor(facet.numerical.min) : 1,
+      hi: facet.scaleMax,
+      hasDeclaredScale: true,
+    }
+  }
+  const inferred = inferRatingScale(facet)
+  if (inferred != null) {
+    return {
+      lo: typeof facet.scaleMin === "number" ? facet.scaleMin : 1,
+      hi: inferred,
+      hasDeclaredScale: true,
+    }
+  }
+  const min = facet.numerical?.min
+  const max = facet.numerical?.max
+  return {
+    lo: min != null ? Math.floor(min) : null,
+    hi: max != null ? Math.ceil(max) : null,
+    hasDeclaredScale: false,
+  }
 }
 
 function ratingBarClass(tone: "success" | "warn" | "danger"): string {
@@ -1568,7 +1692,7 @@ function InsightChip({
         colored ? toneBoxClass[tone] : "glass-tile"
       }`}
     >
-      <div className="text-[11px] uppercase tracking-wide text-text-dim">{label}</div>
+      <div className={facetTitleClassName(label, "sm")}>{label}</div>
       {hasSegments ? (
         <div className="mt-1.5 space-y-1.5">
           <div className="flex h-2 overflow-hidden rounded-full bg-surface-high/70">
@@ -1683,17 +1807,19 @@ type PersonaDistributionGroup = {
   contextKey: string
   contextLabel: string
   distributions: AggregationPersonaDistribution[]
+  standaloneFacets: AggregationField[]
   choiceOptions?: Array<{ id: string; label: string }>
 }
 
-/** Default persona lens: outcome/process/feedback signals cross-tabbed by segment. */
+/** Default persona lens: optional standalone facets + signal × segment cards. */
 function collectPersonaDistributionGroups(
   contexts: AggregationContext[],
 ): PersonaDistributionGroup[] {
   const groups: PersonaDistributionGroup[] = []
   for (const context of contexts) {
     const distributions = context.personaDistributions ?? []
-    if (distributions.length === 0) continue
+    const standaloneFacets = (context.personaStandaloneFacets ?? []).slice(0, 2)
+    if (distributions.length === 0 && standaloneFacets.length === 0) continue
     const labeled = explorerContextLabel(context)
     groups.push({
       contextKey: context.key,
@@ -1701,6 +1827,7 @@ function collectPersonaDistributionGroups(
         ? `${labeled.meta} · ${labeled.label}`
         : labeled.label,
       distributions,
+      standaloneFacets,
       choiceOptions: context.choiceOptions?.map((option) => ({
         id: option.id,
         label: option.label?.trim() || option.id,
@@ -1745,6 +1872,17 @@ function personaDistributionColumns(
  * or categories), cell colour = share within that segment. Shows the actual
  * interaction shape (not a collapsed average), and unifies numeric + categorical.
  */
+function stripSplitBySuffix(label: string): string {
+  // Tasks sometimes bake "— split by X" into titles; the card already shows the
+  // persona group-by, so drop the baked-in phrase to avoid "… by X by X".
+  return (
+    label
+      .replace(/\s*[—–-]\s*split by\s+.+$/i, "")
+      .replace(/\s+split by\s+.+$/i, "")
+      .trim() || label
+  )
+}
+
 function PersonaDistributionCard({
   distribution,
   choiceOptions,
@@ -1759,8 +1897,11 @@ function PersonaDistributionCard({
     () => buildDistributionColumnMeta(columns, { numeric, choiceOptions }),
     [columns, numeric, choiceOptions],
   )
-  const signalLabel = humanizeFacetLabel(distribution.facetLabel, distribution.facetKey)
+  const signalBase = stripSplitBySuffix(
+    humanizeFacetLabel(distribution.facetLabel, distribution.facetKey),
+  )
   const segmentLabel = distribution.groupByLabel || "Persona segment"
+  const showSegmentSuffix = Boolean(distribution.groupByPersonaDimension?.trim())
   const countFor = (
     bucket: AggregationPersonaDistribution["buckets"][number],
     value: string,
@@ -1772,8 +1913,13 @@ function PersonaDistributionCard({
     <div className="space-y-2 rounded-lg border border-outline/35 bg-surface/50 p-3">
       <div className="flex items-baseline justify-between gap-2">
         <div className="min-w-0 text-[13px] font-medium text-text-main">
-          {signalLabel}
-          <span className="font-normal text-text-dim"> by {segmentLabel}</span>
+          {signalBase}
+          {showSegmentSuffix ? (
+            <span className="font-normal text-text-dim">
+              {" "}
+              — by {segmentLabel} of persona
+            </span>
+          ) : null}
         </div>
         <span className="shrink-0 font-mono text-[11px] text-text-dim">n={distribution.total}</span>
       </div>
@@ -1864,25 +2010,58 @@ function PersonaDistributionCard({
   )
 }
 
-function PersonaDistributionList({ groups }: { groups: PersonaDistributionGroup[] }) {
+function PersonaDistributionList({
+  groups,
+  trialCount,
+}: {
+  groups: PersonaDistributionGroup[]
+  trialCount: number
+}) {
   if (groups.length === 0) return null
   return (
     <>
       {groups.map((group) => (
         <div key={`dist-${group.contextKey}`} className="space-y-3 rounded-xl glass-tile p-3">
           <ContextSectionHeader title={group.contextLabel} />
-          <p className="text-[12px] text-text-dim">
-            How each result differs across customer segments (stratified dimensions).
-          </p>
-          <div className="grid gap-3 md:grid-cols-2">
-            {group.distributions.map((distribution) => (
-              <PersonaDistributionCard
-                key={distribution.id}
-                distribution={distribution}
-                choiceOptions={group.choiceOptions}
-              />
-            ))}
-          </div>
+          {group.standaloneFacets.length > 0 ? (
+            <>
+              <p className="text-[12px] text-text-dim">Overall for this cohort</p>
+              <div className="grid gap-2 sm:grid-cols-2">
+                {group.standaloneFacets.map((facet) =>
+                  facet.kind === "numerical" && facet.numerical?.avg != null ? (
+                    <NumericalDistributionCard
+                      key={`solo-${group.contextKey}-${facet.key}`}
+                      facet={facet}
+                      trialCount={trialCount}
+                    />
+                  ) : facet.kind === "categorical" ? (
+                    <FacetCategoricalDistribution
+                      key={`solo-${group.contextKey}-${facet.key}`}
+                      facet={facet}
+                    />
+                  ) : null,
+                )}
+              </div>
+            </>
+          ) : null}
+          {group.distributions.length > 0 ? (
+            <>
+              <p className="text-[12px] text-text-dim">
+                {group.standaloneFacets.length > 0
+                  ? "How that differs across customer segments"
+                  : "How each result differs across customer segments"}
+              </p>
+              <div className="grid gap-3 md:grid-cols-2">
+                {group.distributions.map((distribution) => (
+                  <PersonaDistributionCard
+                    key={distribution.id}
+                    distribution={distribution}
+                    choiceOptions={group.choiceOptions}
+                  />
+                ))}
+              </div>
+            </>
+          ) : null}
         </div>
       ))}
     </>
@@ -2052,9 +2231,11 @@ function PersonaDistributionExplorer({
       if (!seen.has(entry.distribution.facetKey)) {
         seen.set(entry.distribution.facetKey, {
           value: entry.distribution.facetKey,
-          label: humanizeFacetLabel(
-            entry.distribution.facetLabel,
-            entry.distribution.facetKey,
+          label: stripSplitBySuffix(
+            humanizeFacetLabel(
+              entry.distribution.facetLabel,
+              entry.distribution.facetKey,
+            ),
           ),
         })
       }
@@ -2270,6 +2451,17 @@ function DetailedEvaluationPanel({
     (context) =>
       context.contextType !== "trial_summary" &&
       !compactKeys.has(context.key) &&
+      contextHasCommonContent(context, crossFacetViewsForContext(context)) &&
+      // Chatbot General = basics + self-report only; task-specific angles → Custom.
+      (category !== "chatbot" || isChatbotGeneralContext(context.contextType)),
+  )
+  // Task-specific context panels (e.g. product_behavior) for the Custom tab.
+  const customContextPanels = orderedContexts(contexts, category).filter(
+    (context) =>
+      category === "chatbot" &&
+      context.contextType !== "trial_summary" &&
+      !compactKeys.has(context.key) &&
+      !isChatbotGeneralContext(context.contextType) &&
       contextHasCommonContent(context, crossFacetViewsForContext(context)),
   )
 
@@ -2289,6 +2481,8 @@ function DetailedEvaluationPanel({
   const hasCommonGeneral =
     !isSurvey && (commonContexts.length > 0 || compactContexts.length > 0)
   const hasGeneral = hasSurveyGeneral || hasCommonGeneral
+  const hasCustomTask =
+    taskGroups.length > 0 || customContextPanels.length > 0
 
   const tabs = (
     [
@@ -2305,7 +2499,7 @@ function DetailedEvaluationPanel({
             label: "Persona insights",
           }
         : null,
-      taskGroups.length > 0
+      hasCustomTask
         ? {
             id: "task" as const,
             label: "Custom task analysis",
@@ -2388,10 +2582,26 @@ function DetailedEvaluationPanel({
                   </>
                 )
               ) : null}
-              {tab.id === "task" ? <AnalysisGroupList groups={taskGroups} /> : null}
+              {tab.id === "task" ? (
+                <>
+                  {customContextPanels.map((context) => (
+                    <CommonContextPanel
+                      key={`custom-${context.key}`}
+                      context={context}
+                      trialCount={trialCount}
+                    />
+                  ))}
+                  {taskGroups.length > 0 ? (
+                    <AnalysisGroupList groups={taskGroups} />
+                  ) : null}
+                </>
+              ) : null}
               {tab.id === "persona" ? (
                 <>
-                  <PersonaDistributionList groups={personaDistGroups} />
+                  <PersonaDistributionList
+                    groups={personaDistGroups}
+                    trialCount={trialCount}
+                  />
                   {captureMode ? null : (
                     <PersonaDistributionExplorer
                       entries={personaExplorerEntries}
@@ -4389,7 +4599,7 @@ function UserFeedbackBatchCard({ context }: { context: AggregationContext }) {
 
         {primaryRating ? (
           <div className="rounded-xl glass-tile p-3">
-            <div className="mb-2 text-[13px] font-medium uppercase tracking-wide text-text-dim">
+            <div className={`mb-2 ${facetTitleClassName(humanizeFacetLabel(primaryRating.label, primaryRating.key))}`}>
               {humanizeFacetLabel(primaryRating.label, primaryRating.key)}
             </div>
             <LikertQuestionBody context={feedbackRatingContext(primaryRating)} primary={primaryRating} />
@@ -4407,7 +4617,7 @@ function UserFeedbackBatchCard({ context }: { context: AggregationContext }) {
               )
               return (
                 <div key={facet.key} className="rounded-xl glass-tile p-3">
-                  <div className="mb-2 text-[13px] font-medium uppercase tracking-wide text-text-dim">
+                  <div className={`mb-2 ${facetTitleClassName(humanizeFacetLabel(facet.label, facet.key))}`}>
                     {humanizeFacetLabel(facet.label, facet.key)}
                   </div>
                   <ChoiceCompositionChart items={items} respondentCount={total} />
@@ -4421,7 +4631,7 @@ function UserFeedbackBatchCard({ context }: { context: AggregationContext }) {
           <div className="grid gap-3 lg:grid-cols-2">
             {otherRatings.map((facet) => (
               <div key={facet.key} className="rounded-xl glass-tile p-3">
-                <div className="mb-2 text-[13px] font-medium uppercase tracking-wide text-text-dim">
+                <div className={`mb-2 ${facetTitleClassName(humanizeFacetLabel(facet.label, facet.key))}`}>
                   {humanizeFacetLabel(facet.label, facet.key)}
                 </div>
                 <LikertQuestionBody context={feedbackRatingContext(facet)} primary={facet} />
@@ -4450,7 +4660,7 @@ function UserFeedbackBatchCard({ context }: { context: AggregationContext }) {
           return (
             <div key={facet.key} className="space-y-2 rounded-xl glass-tile p-3">
               <div>
-                <div className="text-[13px] font-medium uppercase tracking-wide text-text-dim">{facetTitle}</div>
+                <div className={facetTitleClassName(facetTitle)}>{facetTitle}</div>
                 {facet.role === "explanation" ? (
                   <p className="mt-0.5 text-[12px] leading-relaxed text-text-dim">
                     The persona&apos;s own words explaining the ratings above, from their post-chat self-report.

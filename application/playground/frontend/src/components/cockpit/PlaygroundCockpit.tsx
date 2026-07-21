@@ -355,6 +355,15 @@ function ChatbotEvalCockpit({
   } = useCockpitBatchJob(selectedPersonaIds, parallelTrials, "chatbot");
   const [exportSnapshot, setExportSnapshot] = useState<ExportSnapshot | null>(null);
 
+  // After navigating away/back, single-trial restore brings back the transcript
+  // but strategy hydrate used to wipe the left-rail selection. Re-adopt the
+  // persona id from the restored job when the rail is empty.
+  useEffect(() => {
+    const id = typeof job?.personaId === "string" ? job.personaId.trim() : "";
+    if (!id || phase === "idle" || selectedPersonaIds.length > 0) return;
+    setSelectedPersonaIds([id]);
+  }, [job?.personaId, phase, selectedPersonaIds.length, setSelectedPersonaIds]);
+
   useEffect(() => {
     if (!batchTaskId) return;
     setSelectedTaskId(batchTaskId);

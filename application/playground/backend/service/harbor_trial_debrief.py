@@ -732,6 +732,24 @@ def _enrich_debrief_prompts(
     if output_schema_markdown:
         debrief["outputSchemaMarkdown"] = output_schema_markdown
 
+    task_rel = _task_path_from_trial(trial_dir)
+    if task_rel:
+        try:
+            from playground.self_report_task_config import (
+                load_self_report_schema_for_task_path,
+            )
+            from playground.user_sim.self_report_contract import schema_to_public_dict
+
+            schema = load_self_report_schema_for_task_path(
+                task_rel,
+                repo_root=repo_root,
+                fallback_to_default=True,
+            )
+            if schema is not None:
+                debrief["selfReportSchema"] = schema_to_public_dict(schema)
+        except Exception:  # noqa: BLE001
+            pass
+
     persona_view = debrief.get("persona")
     if isinstance(persona_view, dict):
         context = str(persona_view.get("context") or "").strip()
@@ -1372,6 +1390,24 @@ def _map_cua_debrief(
     }
 
 
+def _ensure_host_verifier_scored(*, repo_root: Path, trial_dir: Path) -> None:
+    """Score on the host before debrief when sandbox verifier was disabled.
+
+    Playground os-app jobs disable in-sandbox verification and score from
+    downloaded artifacts on the host. ``harbor_job_service`` also runs the host
+    verifier after ``harbor run`` exits, but the UI can request debrief first;
+    without this guard the cockpit briefly shows 0% until a refresh.
+    """
+    if _read_reward_score(trial_dir) is not None:
+        return
+    try:
+        from playground.host_verifier import maybe_run_host_verifier
+
+        maybe_run_host_verifier(repo_root=repo_root, trial_dir=trial_dir)
+    except Exception:  # noqa: BLE001
+        return
+
+
 def map_trial_debrief(
     *,
     repo_root: Path,
@@ -1516,6 +1552,7 @@ def map_trial_debrief(
             repo_root=repo_root,
         )
     elif app_type == "os-app":
+        _ensure_host_verifier_scored(repo_root=repo_root, trial_dir=trial_dir)
         debrief = _map_cua_debrief(
             output_dir=output_dir,
             logs_dir=find_trial_logs_dir(trial_dir),
@@ -1547,6 +1584,12 @@ def map_trial_debrief(
     user_feedback = _read_user_feedback_artifact(trial_dir, output_dir=output_dir)
     if user_feedback is not None:
         debrief["userFeedback"] = user_feedback
+        try:
+            from playground.feedback import questionnaire_from_feedback
+
+            debrief["questionnaire"] = questionnaire_from_feedback(user_feedback).to_dict()
+        except Exception:  # noqa: BLE001
+            pass
     trial_error: str | None = None
     result_path = trial_dir / "result.json"
     if result_path.is_file():

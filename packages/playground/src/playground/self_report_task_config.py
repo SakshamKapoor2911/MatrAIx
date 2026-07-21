@@ -54,6 +54,33 @@ def _read_schema_yaml(path: Path) -> dict[str, Any] | None:
     return dict(payload)
 
 
+def _normalize_enum_choice(choice: Any) -> str:
+    """YAML 1.1 parses bare ``yes``/``no`` as booleans — restore enum tokens."""
+    if isinstance(choice, bool):
+        return "yes" if choice else "no"
+    return str(choice or "").strip()
+
+
+def _normalize_enum_choices(raw_choices: Any) -> tuple[str, ...]:
+    choices = tuple(
+        token
+        for token in (_normalize_enum_choice(choice) for choice in (raw_choices or []))
+        if token
+    )
+    lowered = [token.lower() for token in choices]
+    # Already-stringified bools from a prior bad load: True/partially/False.
+    if "partially" in lowered and "true" in lowered and "false" in lowered:
+        return tuple(
+            "yes"
+            if token.lower() == "true"
+            else "no"
+            if token.lower() == "false"
+            else token
+            for token in choices
+        )
+    return choices
+
+
 def _field_from_item(
     item: dict[str, Any], index: int, *, explains: str | None = None
 ) -> SelfReportField:
@@ -63,12 +90,7 @@ def _field_from_item(
         raise ValueError(
             "self_report_schema.fields[{}] requires key and prompt".format(index)
         )
-    raw_choices = item.get("choices") or []
-    choices = tuple(
-        str(choice).strip()
-        for choice in raw_choices
-        if str(choice).strip()
-    )
+    choices = _normalize_enum_choices(item.get("choices") or [])
     return SelfReportField(
         key=key,
         prompt=prompt,

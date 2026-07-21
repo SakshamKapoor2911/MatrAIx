@@ -161,6 +161,24 @@ export interface PlaygroundQuestionnaire {
   [key: string]: string | number | boolean | null | undefined;
 }
 
+/** Task-owned ``input/self_report_schema.yaml`` field (debrief / UI). */
+export interface SelfReportSchemaField {
+  key: string;
+  prompt: string;
+  kind: string;
+  required?: boolean;
+  minimum?: number | null;
+  maximum?: number | null;
+  choices?: string[];
+  explains?: string | null;
+}
+
+export interface SelfReportSchema {
+  artifactName?: string;
+  instructions?: string;
+  fields: SelfReportSchemaField[];
+}
+
 export interface UserFeedbackArtifact {
   [key: string]: string | number | boolean | null | undefined;
 }
@@ -842,6 +860,12 @@ export interface HarborJobAggregationContext {
   judges?: JobAggregationJudge[];
   /** Default persona-insight lens: signals cross-tabbed by persona segment. */
   personaDistributions?: JobAggregationPersonaDistribution[];
+  /**
+   * Cohort-level single facets for Persona insights (no persona cross).
+   * Authors declare these with ``groupByPersonaDimensions: []`` / ``standalone: true``
+   * (capped at 2 per context).
+   */
+  personaStandaloneFacets?: JobAggregationField[];
   /** Every eligible facet × persona-dimension pairing, for the interactive explorer. */
   personaDistributionOptions?: JobAggregationPersonaDistribution[];
   crossFacetViews?: JobAggregationCrossFacetView[];

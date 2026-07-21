@@ -283,6 +283,7 @@ def build_job_aggregation(
         for key in sorted(field_meta)
     ]
     _enrich_user_feedback_field_meta(field_meta)
+    _enrich_rating_scale_field_meta(field_meta)
     # Re-apply enrichment onto already-built field payloads.
     for field in fields:
         key = str(field.get("key") or "")
@@ -517,18 +518,37 @@ def _iter_distribution_directives(source: dict[str, Any]) -> list[dict[str, Any]
     return [item for item in directives if isinstance(item, dict)]
 
 
+def _distribution_directive_dedupe_marker(directive: dict[str, Any]) -> str:
+    """Unique key so the same facet can appear as standalone AND as a persona cross."""
+    facet_key = str(directive.get("facetKey") or "").strip()
+    if directive.get("standalone") is True:
+        return "{}|standalone".format(facet_key)
+    if "groupByPersonaDimensions" in directive:
+        raw = directive.get("groupByPersonaDimensions")
+        if isinstance(raw, list):
+            dims = [str(item).strip() for item in raw if str(item).strip()]
+            if not dims:
+                return "{}|standalone".format(facet_key)
+            return "{}|{}".format(facet_key, ",".join(dims))
+        return "{}|standalone".format(facet_key)
+    single = str(directive.get("groupByPersonaDimension") or "").strip()
+    if single:
+        return "{}|{}".format(facet_key, single)
+    # Omitted axes → later filled from stratifyFields; keep one default slot.
+    return "{}|default".format(facet_key)
+
+
 def _resolve_distribution_directives(
     *,
     context: dict[str, Any],
     reporting_config: dict[str, Any],
 ) -> list[dict[str, Any]]:
-    """Author-declared persona cross-tab directives for a context.
+    """Author-declared persona cards for a context (standalone and/or crosses).
 
-    Which facets to cross-tab is defined in ``reporting.json`` (``contextRules[]``
-    → ``distributions[]``, or inline on the verifier context) — never exhaustively
-    auto-selected. Each directive names a ``facetKey``; ``groupByPersonaDimensions``
-    is optional and defaults to the task's ``stratifyFields``. These render in the
-    Persona insights tab (routing is by directive type, not by which rule list).
+    Declared in ``reporting.json`` (``contextRules[]`` → ``distributions[]``, or
+    inline on the verifier context). Each directive names a ``facetKey``.
+    ``groupByPersonaDimensions: []`` / ``standalone: true`` → cohort-level card;
+    a non-empty list → persona cross-tab; omitted axes default to stratifyFields.
     """
     context_key = str(context.get("key") or "").strip()
     context_type = str(context.get("contextType") or "").strip()
@@ -541,13 +561,12 @@ def _resolve_distribution_directives(
     seen: set[str] = set()
     deduped: list[dict[str, Any]] = []
     for directive in resolved:
+        if not isinstance(directive, dict):
+            continue
         facet_key = str(directive.get("facetKey") or "").strip()
         if not facet_key:
             continue
-        marker = "{}|{}".format(
-            facet_key,
-            str(directive.get("groupByPersonaDimension") or ""),
-        )
+        marker = _distribution_directive_dedupe_marker(directive)
         if marker in seen:
             continue
         seen.add(marker)
@@ -756,29 +775,137 @@ def _user_feedback_candidates(trial_dir: Path) -> list[Path]:
     return candidates
 
 
+def _load_self_report_schema_fields(
+    task_path: str | None,
+    repo_root: Path | None,
+) -> list[Any]:
+    """Return authored self-report fields (with ``key`` / ``prompt``) for a task.
+
+    Prefer the playground helper when importable; otherwise read
+    ``input/self_report_schema.yaml`` directly so aggregation labels still use
+    the task prompt even if ``playground`` is not on ``PYTHONPATH``.
+    """
+    if not task_path or repo_root is None:
+        return []
+    try:
+        from playground.self_report_task_config import (
+            load_self_report_schema_for_task_path,
+        )
+
+        schema = load_self_report_schema_for_task_path(
+            task_path,
+            repo_root=repo_root,
+            fallback_to_default=False,
+        )
+        if schema is not None and schema.fields:
+            return list(schema.fields)
+    except Exception:  # noqa: BLE001 — fall through to YAML
+        pass
+
+    candidates = [
+        (repo_root / task_path / "input" / "self_report_schema.yaml").resolve(),
+        (repo_root / task_path / "self_report_schema.yaml").resolve(),
+    ]
+    for path in candidates:
+        if not path.is_file():
+            continue
+        try:
+            import yaml
+
+            payload = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+        except Exception:  # noqa: BLE001
+            continue
+        if not isinstance(payload, dict):
+            continue
+        fields: list[Any] = []
+        for index, entry in enumerate(payload.get("fields") or []):
+            if not isinstance(entry, dict):
+                continue
+            key = str(entry.get("key") or "").strip()
+            prompt = str(entry.get("prompt") or "").strip()
+            if not key or not prompt:
+                continue
+            raw_choices = entry.get("choices") or []
+            normalized_choices: list[str] = []
+            for choice in raw_choices:
+                # YAML 1.1 turns bare yes/no into booleans.
+                if isinstance(choice, bool):
+                    normalized_choices.append("yes" if choice else "no")
+                else:
+                    token = str(choice).strip()
+                    if token:
+                        normalized_choices.append(token)
+            lowered = [token.lower() for token in normalized_choices]
+            if "partially" in lowered and "true" in lowered and "false" in lowered:
+                normalized_choices = [
+                    "yes"
+                    if token.lower() == "true"
+                    else "no"
+                    if token.lower() == "false"
+                    else token
+                    for token in normalized_choices
+                ]
+            # Minimal duck-typed field for _feedback_facet_from_schema_field.
+            fields.append(
+                type(
+                    "YamlSelfReportField",
+                    (),
+                    {
+                        "key": key,
+                        "prompt": prompt,
+                        "kind": str(entry.get("kind") or "string").strip() or "string",
+                        "required": True,
+                        "minimum": entry.get("minimum"),
+                        "maximum": entry.get("maximum"),
+                        "choices": tuple(normalized_choices),
+                        "explains": None,
+                    },
+                )()
+            )
+            explanation = entry.get("explanation")
+            blocks = (
+                [explanation]
+                if isinstance(explanation, dict)
+                else (explanation if isinstance(explanation, list) else [])
+            )
+            for block in blocks:
+                if not isinstance(block, dict):
+                    continue
+                ekey = str(block.get("key") or "").strip()
+                eprompt = str(block.get("prompt") or "").strip()
+                if not ekey or not eprompt:
+                    continue
+                fields.append(
+                    type(
+                        "YamlSelfReportField",
+                        (),
+                        {
+                            "key": ekey,
+                            "prompt": eprompt,
+                            "kind": str(block.get("kind") or "string").strip() or "string",
+                            "required": True,
+                            "minimum": None,
+                            "maximum": None,
+                            "choices": (),
+                            "explains": key,
+                        },
+                    )()
+                )
+        if fields:
+            return fields
+    return []
+
+
 def _synthesized_user_feedback_context(
     raw_feedback: dict[str, Any],
     *,
     task_path: str | None,
     repo_root: Path | None,
 ) -> dict[str, Any] | None:
-    schema = None
-    if task_path and repo_root is not None:
-        try:
-            from playground.self_report_task_config import (
-                load_self_report_schema_for_task_path,
-            )
-
-            schema = load_self_report_schema_for_task_path(
-                task_path,
-                repo_root=repo_root,
-                fallback_to_default=False,
-            )
-        except Exception:  # noqa: BLE001
-            schema = None
+    schema_fields = _load_self_report_schema_fields(task_path, repo_root)
     facets: list[dict[str, Any]] = []
-    if schema is not None and schema.fields:
-        for field in schema.fields:
+    if schema_fields:
+        for field in schema_fields:
             if field.key not in raw_feedback:
                 continue
             facet = _feedback_facet_from_schema_field(field, raw_feedback.get(field.key))
@@ -905,6 +1032,29 @@ def _enrich_user_feedback_field_meta(field_meta: dict[str, dict[str, Any]]) -> N
             meta["role"] = "explanation"
 
 
+def _enrich_rating_scale_field_meta(field_meta: dict[str, dict[str, Any]]) -> None:
+    """Attach known 1–10 scales for rating facets in *any* context.
+
+    ``overall_experience_rating`` can appear under user_feedback or other
+    task contexts. Without an explicit scaleMax, the UI used to treat the
+    cohort's observed max (e.g. 4) as the full score.
+    """
+    for key, meta in field_meta.items():
+        leaf = _normalized_feedback_key(
+            str(meta.get("facetKey") or "").split(".")[-1]
+            or str(key).split(".")[-1]
+        )
+        if leaf not in {"overall_experience_rating", "trust_level", "effort_rating"}:
+            continue
+        kind = str(meta.get("kind") or "").strip().lower()
+        if kind and kind not in {"numerical", "integer"}:
+            continue
+        if meta.get("scaleMin") is None:
+            meta["scaleMin"] = 1
+        if meta.get("scaleMax") is None:
+            meta["scaleMax"] = 10
+
+
 def _default_feedback_categories(normalized_key: str, value: Any) -> list[str] | None:
     if normalized_key in {
         "need_constraint_satisfaction",
@@ -1004,20 +1154,7 @@ def _feedback_role(normalized_key: str, kind: str) -> str:
 
 
 def _feedback_label(normalized_key: str, *, prompt: str = "") -> str:
-    label_map = {
-        "overall_experience_rating": "Overall experience rating",
-        "need_constraint_satisfaction": "Need or constraint satisfaction",
-        "personal_preference_satisfaction": "Personal preference satisfaction",
-        "feedback_reason": "Feedback reason",
-        "trust_level": "Trust level",
-        "effort_rating": "Effort rating",
-        "clarity_of_next_step": "Clarity of next step",
-        "felt_understood": "Felt understood",
-        "asked_useful_clarification_questions": "Asked useful clarifying questions",
-        "clarifying_notes": "Clarifying notes",
-    }
-    if normalized_key in label_map:
-        return label_map[normalized_key]
+    """Label for a self-report facet — brainlessly the authored prompt when set."""
     if prompt.strip():
         return prompt.strip()
     return normalized_key.replace("_", " ").strip().title()
@@ -1274,12 +1411,18 @@ def _distribution_directive_dimensions(
     Honors an explicit ``groupByPersonaDimensions`` list or single
     ``groupByPersonaDimension``; otherwise defaults to the cohort's
     ``stratifyFields`` so authors only need to name the facet.
+
+    An explicit empty ``groupByPersonaDimensions: []`` (or
+    ``"standalone": true``) means a cohort-level card with no persona cross —
+    those render as independent facets in Persona insights (capped separately).
     """
-    raw = directive.get("groupByPersonaDimensions")
-    if isinstance(raw, list):
-        dims = [str(item).strip() for item in raw if str(item).strip()]
-        if dims:
-            return dims
+    if directive.get("standalone") is True:
+        return []
+    if "groupByPersonaDimensions" in directive:
+        raw = directive.get("groupByPersonaDimensions")
+        if not isinstance(raw, list):
+            return []
+        return [str(item).strip() for item in raw if str(item).strip()]
     single = str(directive.get("groupByPersonaDimension") or "").strip()
     if single:
         return [single]
@@ -1289,6 +1432,8 @@ def _distribution_directive_dimensions(
 # Signal facets eligible for the interactive persona explorer: the hero result,
 # numeric scores, and categorical evidence (never free-text or identities).
 PERSONA_DISTRIBUTION_ROLES = frozenset({"primary", "score", "evidence"})
+# Max cohort-level (non-crossed) cards per context in Persona insights.
+PERSONA_STANDALONE_MAX = 2
 # Categorical facets with more distinct values than this are treated as ids/labels.
 PERSONA_DISTRIBUTION_MAX_CARDINALITY = 8
 # Bookkeeping facets that carry no per-segment signal.
@@ -1406,23 +1551,26 @@ def _config_persona_distributions(
     field_values: dict[str, list[dict[str, Any]]],
     persona_dimensions: dict[str, dict[str, Any]],
     stratify_fields: list[str],
-) -> list[dict[str, Any]]:
-    """Default persona cross-tabs, driven by author-declared directives.
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Default persona cards from ``reporting.json`` distributions.
 
-    Which signal facets get cross-tabbed *by default* is defined in
-    ``reporting.json`` (``contextRules[].distributions[]``) — the platform never
-    exhaustively enumerates every facet here. Each directive names a
-    numeric/categorical ``facetKey``; dimensions default to ``stratifyFields``.
-    Emits the per-segment distribution (counts / averages), no LLM.
+    Returns ``(cross_tabs, standalone_facets)``:
+    - cross-tabs: signal × persona dimension heatmaps (Persona insights)
+    - standalone: up to ``PERSONA_STANDALONE_MAX`` cohort-level single facets
+      (explicit ``groupByPersonaDimensions: []`` or ``standalone: true``)
     """
     directives = meta.get("distributions")
-    if not isinstance(directives, list) or not directives or not persona_dimensions:
-        return []
+    if not isinstance(directives, list) or not directives:
+        return [], []
     context_key = str(meta.get("key") or "")
     facet_by_leaf = {_facet_key_leaf(facet): facet for facet in facets}
     distributions: list[dict[str, Any]] = []
-    seen: set[str] = set()
+    standalones: list[dict[str, Any]] = []
+    seen_cross: set[str] = set()
+    seen_standalone: set[str] = set()
     for directive in directives:
+        if not isinstance(directive, dict):
+            continue
         facet_key = str(directive.get("facetKey") or "").strip()
         if not facet_key:
             continue
@@ -1433,9 +1581,24 @@ def _config_persona_distributions(
         dimensions = _distribution_directive_dimensions(directive, stratify_fields)
         directive_id = str(directive.get("id") or "").strip()
         title = str(directive.get("title") or "").strip()
+        if not dimensions:
+            if leaf in seen_standalone or len(standalones) >= PERSONA_STANDALONE_MAX:
+                continue
+            # Standalone cards do not need persona dimension data.
+            entry = {
+                **facet,
+                "label": title or str(facet.get("label") or leaf),
+            }
+            if directive_id:
+                entry["standaloneId"] = directive_id
+            standalones.append(entry)
+            seen_standalone.add(leaf)
+            continue
+        if not persona_dimensions:
+            continue
         for dimension in dimensions:
             marker = "{}|{}".format(leaf, dimension)
-            if marker in seen:
+            if marker in seen_cross:
                 continue
             distribution = _build_persona_distribution(
                 context_key=context_key,
@@ -1448,9 +1611,9 @@ def _config_persona_distributions(
             )
             if distribution is None:
                 continue
-            seen.add(marker)
+            seen_cross.add(marker)
             distributions.append(distribution)
-    return distributions
+    return distributions, standalones
 
 
 def _persona_distribution_options(
@@ -1571,10 +1734,9 @@ def _aggregate_context(
     )
     if cross_facet_views:
         payload["crossFacetViews"] = cross_facet_views
-    # Persona-insight lens: cross-tab the author-declared signal facets
-    # (reporting.json → contextRules[].distributions[]) against each persona
-    # dimension. Dimensions default to the cohort's stratifyFields.
-    persona_distributions = _config_persona_distributions(
+    # Persona-insight lens: author-declared distributions from reporting.json.
+    # Cross-tabs (signal × persona dim) + up to 2 standalone cohort facets.
+    persona_distributions, persona_standalones = _config_persona_distributions(
         meta=meta,
         facets=facets,
         field_values=field_values,
@@ -1583,6 +1745,8 @@ def _aggregate_context(
     )
     if persona_distributions:
         payload["personaDistributions"] = persona_distributions
+    if persona_standalones:
+        payload["personaStandaloneFacets"] = persona_standalones
     # Interactive explorer: every eligible facet × dimension pairing (bounded,
     # non-LLM), shown only behind the picker — not as default cards.
     persona_distribution_options = _persona_distribution_options(
@@ -2048,7 +2212,16 @@ def _directive_lens(directive: dict[str, Any], *, group_by_mode: str) -> str:
 
 
 def _humanize_persona_dimension(dimension: str) -> str:
-    cleaned = str(dimension or "").replace("_", " ").strip()
+    key = str(dimension or "").strip().lower()
+    labels = {
+        "trust_level": "Trust level",
+        "age_bracket": "Age",
+        "age": "Age",
+        "cog_skepticism": "Skepticism",
+    }
+    if key in labels:
+        return labels[key]
+    cleaned = key.replace("_", " ").strip()
     return cleaned[:1].upper() + cleaned[1:] if cleaned else str(dimension)
 
 

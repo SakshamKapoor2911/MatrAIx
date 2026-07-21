@@ -256,6 +256,64 @@ def test_map_trial_debrief_chatbot(tmp_path: Path) -> None:
     assert debrief["harbor"]["trialName"] == "trial-0"
 
 
+def test_map_trial_debrief_attaches_task_self_report_schema(tmp_path: Path) -> None:
+    repo = tmp_path
+    _write_chat_trial(repo, "job-schema", "trial-schema")
+    task_dir = repo / "application" / "tasks" / "chat_recai"
+    task_dir.mkdir(parents=True, exist_ok=True)
+    (task_dir / "task.toml").write_text('[metadata]\ntype = "chat"\n', encoding="utf-8")
+    input_dir = task_dir / "input"
+    input_dir.mkdir(parents=True, exist_ok=True)
+    (input_dir / "self_report_schema.yaml").write_text(
+        "\n".join(
+            [
+                "artifactName: user_feedback.json",
+                "instructions: Judge each ticker.",
+                "fields:",
+                "  - key: hcpDelistingHandled",
+                "    prompt: Satisfied with HCP?",
+                "    kind: enum",
+                "    choices: [yes, partially, no]",
+                "  - key: overallExperienceRating",
+                "    prompt: Overall rating",
+                "    kind: integer",
+                "    minimum: 1",
+                "    maximum: 10",
+                "    explanation:",
+                "      key: reason",
+                "      prompt: Why?",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    trial_dir = repo / "jobs" / "job-schema" / "trial-schema"
+    (trial_dir / "config.json").write_text(
+        json.dumps({"task": {"path": "application/tasks/chat_recai"}}),
+        encoding="utf-8",
+    )
+    (trial_dir / "artifacts" / "app" / "output" / "user_feedback.json").write_text(
+        json.dumps(
+            {
+                "hcpDelistingHandled": "no",
+                "overallExperienceRating": 3,
+                "reason": "HCP failed.",
+            }
+        ),
+        encoding="utf-8",
+    )
+    debrief = map_trial_debrief(
+        repo_root=repo,
+        jobs_dir=repo / "jobs",
+        job_name="job-schema",
+        trial_name="trial-schema",
+    )
+    schema = debrief["selfReportSchema"]
+    assert schema["fields"][0]["key"] == "hcpDelistingHandled"
+    assert debrief["userFeedback"]["hcpDelistingHandled"] == "no"
+    assert debrief["questionnaire"]["overallRating"] == 3
+    assert debrief["questionnaire"]["preferenceSatisfaction"] == 0
+
+
 def test_map_trial_debrief_includes_verifier(tmp_path: Path) -> None:
     repo = tmp_path
     _write_chat_trial(repo, "job-v", "trial-v")
@@ -586,6 +644,61 @@ def test_map_trial_debrief_ios_cua_tmp_artifacts(tmp_path: Path) -> None:
     assert debrief["osAppResult"]["artifactName"] == "decision.json"
     assert debrief["userFeedback"]["overallExperienceRating"] == 8
     assert debrief.get("status") != "error"
+
+
+def test_map_trial_debrief_os_app_runs_host_verifier_before_scoring(tmp_path: Path, monkeypatch) -> None:
+    repo = tmp_path
+    task_dir = repo / "application" / "tasks" / "os-app-ios_news-subscription-decision"
+    task_dir.mkdir(parents=True)
+    (task_dir / "task.toml").write_text('[metadata]\ntype = "os-app"\n', encoding="utf-8")
+    (task_dir / "tests").mkdir()
+    (task_dir / "tests" / "test.sh").write_text("#!/usr/bin/env bash\n", encoding="utf-8")
+
+    trial_dir = repo / "jobs" / "job-ios" / "trial-host"
+    output = trial_dir / "artifacts" / "app" / "output"
+    output.mkdir(parents=True)
+    (output / "decision.json").write_text(
+        json.dumps(
+            {
+                "app_reviewed": "News",
+                "browsed_full_offer": True,
+                "reviewed_features_and_pricing": True,
+                "clicked_get_started": False,
+                "price_seen": "$12.99/month",
+                "highlights_noticed": ["WSJ"],
+                "reason": "Too expensive for my student budget right now.",
+            }
+        ),
+        encoding="utf-8",
+    )
+    (trial_dir / "config.json").write_text(
+        json.dumps({"task": {"path": "application/tasks/os-app-ios_news-subscription-decision"}}),
+        encoding="utf-8",
+    )
+    (trial_dir / "result.json").write_text("{}", encoding="utf-8")
+
+    def _fake_host_verifier(*, repo_root: Path, trial_dir: Path, timeout_sec: float | None = None) -> bool:
+        del repo_root, timeout_sec
+        verifier_dir = trial_dir / "verifier"
+        verifier_dir.mkdir(parents=True, exist_ok=True)
+        (verifier_dir / "reward.txt").write_text("1\n", encoding="utf-8")
+        return True
+
+    monkeypatch.setattr(
+        "playground.host_verifier.maybe_run_host_verifier",
+        _fake_host_verifier,
+    )
+
+    debrief = map_trial_debrief(
+        repo_root=repo,
+        jobs_dir=repo / "jobs",
+        job_name="job-ios",
+        trial_name="trial-host",
+    )
+    assert debrief["applicationType"] == "os-app"
+    assert debrief["osAppResult"]["success"] is True
+    assert debrief["osAppResult"]["score"] == 1.0
+    assert debrief["verifier"]["passed"] is True
 
 
 def test_map_trial_debrief_web_recovers_from_trajectory_when_artifact_missing(

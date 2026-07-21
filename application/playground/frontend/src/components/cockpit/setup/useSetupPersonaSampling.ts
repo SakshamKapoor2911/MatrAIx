@@ -143,6 +143,12 @@ export function useSetupPersonaSampling(
         personaModel: effectiveModel,
         parallelTrials: stored.parallelTrials,
       });
+      // Keep last cohort selection across remount/navigation. Strategy apply
+      // clears preview ids intentionally for explicit "Task default" toggles,
+      // but hydrate must not wipe a selection the operator already made.
+      if (stored.selectedPersonaIds.length > 0) {
+        applied.selectedPersonaIds = stored.selectedPersonaIds;
+      }
       applySetupRecord(applied);
       hydratedPathRef.current = path;
       return;
@@ -163,6 +169,9 @@ export function useSetupPersonaSampling(
       personaModel: effectiveModel,
       parallelTrials: stored.parallelTrials,
     });
+    if (stored.selectedPersonaIds.length > 0) {
+      applied.selectedPersonaIds = stored.selectedPersonaIds;
+    }
     applySetupRecord(applied);
     hydratedPathRef.current = path;
   }, [
