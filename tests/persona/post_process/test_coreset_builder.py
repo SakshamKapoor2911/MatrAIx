@@ -4,8 +4,10 @@ import pyarrow as pa
 from persona.post_process.coreset_1m.build_coreset import (
     calibration_audit,
     decode_calibration_batch,
+    load_candidate_caches,
     residual_targets,
 )
+from persona.post_process.coreset_1m.prepare_candidates import write_cache
 from persona.post_process.unified_dataset.schema import UNIFIED_SCHEMA
 
 
@@ -51,3 +53,15 @@ def test_calibration_audit_reports_missing_and_error() -> None:
     assert audit["field"]["known_rows"] == 900_000
     assert audit["field"]["missing_rows"] == 100_000
     assert audit["field"]["categories"]["a"]["achieved"] == 0.5
+
+
+def test_candidate_cache_round_trip(tmp_path) -> None:
+    first = tmp_path / "first.npz"
+    second = tmp_path / "second.npz"
+    write_cache(first, np.array([1, 2], dtype=np.uint64), {"age": np.array([0, 1], dtype=np.int16)})
+    write_cache(second, np.array([3], dtype=np.uint64), {"age": np.array([-1], dtype=np.int16)})
+
+    rows, columns = load_candidate_caches([first, second], ["age"])
+
+    assert rows.tolist() == [1, 2, 3]
+    assert columns["age"].tolist() == [0, 1, -1]

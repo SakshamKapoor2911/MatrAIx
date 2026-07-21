@@ -1,0 +1,19 @@
+#!/bin/bash
+#SBATCH --partition=seas_compute
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=4G
+#SBATCH --time=0-01:00:00
+#SBATCH --output=sbatch_logs/coreset_synthetic_%A_%a.out
+#SBATCH --error=sbatch_logs/coreset_synthetic_%A_%a.err
+set -euo pipefail
+
+shard="${SLURM_ARRAY_TASK_ID:?}"
+printf -v shard_name '%04d' "$shard"
+cd "${REPO_ROOT:?}"
+export PYTHONPATH="$REPO_ROOT"
+"${PYTHON_BIN:?}" -m persona.post_process.coreset_1m.prepare_candidates \
+  --input-root "${INPUT_ROOT:?}" \
+  --codebook "${CODEBOOK:?}" \
+  --targets "$REPO_ROOT/persona/post_process/coreset_1m/targets.json" \
+  --output "${CANDIDATE_CACHE:?}/synthetic/shard_$shard_name.npz" \
+  synthetic --shard "$shard"

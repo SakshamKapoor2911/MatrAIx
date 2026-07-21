@@ -1,8 +1,8 @@
 #!/bin/bash
 #SBATCH --partition=seas_compute
-#SBATCH --cpus-per-task=16
-#SBATCH --mem=128G
-#SBATCH --time=2-00:00:00
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=24G
+#SBATCH --time=0-08:00:00
 #SBATCH --output=sbatch_logs/coreset_build_%j.out
 #SBATCH --error=sbatch_logs/coreset_build_%j.err
 set -euo pipefail
@@ -12,6 +12,7 @@ export PYTHONPATH="$REPO_ROOT"
   --input-root "${INPUT_ROOT:?}" \
   --codebook "${CODEBOOK:?}" \
   --targets "$REPO_ROOT/persona/post_process/coreset_1m/targets.json" \
+  --candidate-cache "${CANDIDATE_CACHE:?}" \
   --output "${OUTPUT:?}"
 "$PYTHON_BIN" persona/post_process/coreset_1m/finalize.py \
   --root "$OUTPUT" \

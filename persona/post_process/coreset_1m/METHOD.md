@@ -18,11 +18,24 @@ This dataset is a deterministic, quality-filtered and deduplicated 1,000,000-row
 coreset of the MatrAIx 8.4B persona corpus. It contains exactly **600,000
 human-grounded personas (60%)** and **400,000 synthetic personas (40%)**.
 
+## Build status and interpretation
+
+The production build is submitted from the accepted 8,399,989,719-row unified
+snapshot. That snapshot omits 10,289 rows from one failed Wiki task, but retains
+1,936,153 Wiki rows, well above the 323,438 required for this coreset.
+
+The 60/40 human-grounded/synthetic split is a data-product design choice, not an
+estimate of a real-world source ratio. Calibration is a best-effort match to
+the listed one-dimensional population margins among personas where each field
+is known. It does not impute missing fields, guarantee a representative joint
+distribution, or remove source-selection bias. The build records known and
+missing counts plus achieved marginal errors in `audit.json` and `RESULTS.md`.
+
 ## Source composition
 
 | Source | Rows | Inclusion rule |
 |---|---:|---|
-| Wiki extraction | 323,438 | Calibrated sample from 1,946,442 retained rows |
+| Wiki extraction | 323,438 | Calibrated sample from 1,936,153 available retained rows |
 | Amazon Review extraction | 97,915 | All retained rows |
 | Stack Overflow survey extraction | 113,120 | All retained rows |
 | PRISM Alignment | 1,487 | All retained rows |
