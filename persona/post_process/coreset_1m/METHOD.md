@@ -31,6 +31,31 @@ is known. It does not impute missing fields, guarantee a representative joint
 distribution, or remove source-selection bias. The build records known and
 missing counts plus achieved marginal errors in `audit.json` and `RESULTS.md`.
 
+Production DAG submitted 2026-07-21:
+
+| Stage | Slurm job | Shape |
+|---|---:|---|
+| Human calibration scans | `33781136` | 6 one-CPU array tasks |
+| Synthetic calibration scans | `33781139` | 100 one-CPU tasks, max 50 concurrent |
+| Global calibration and materialization | `33781143` | 1 CPU, after both scan arrays |
+| Hugging Face upload | `33781144` | after successful build |
+
+The scan arrays write independent atomic `.npz` caches containing only stable
+row IDs and the four calibration codes. The final job merges those caches,
+performs one global deterministic calibration, writes and validates ten Parquet
+files, and produces the audit and manifest. This preserves global consistency
+while making the expensive input scans easy to backfill on the cluster.
+
+The Hugging Face target is:
+
+```text
+https://huggingface.co/datasets/MatrAIx2026/MatrAIx_Persona_1M_Public_Release/tree/main
+```
+
+Legacy contents were removed before this run in Hugging Face commit
+`a75d403bc834c80c90c9cd76e725a8c9d73e84df`; only `.gitattributes` remains until
+the new build uploads.
+
 ## Source composition
 
 | Source | Rows | Inclusion rule |
