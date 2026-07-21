@@ -6,10 +6,13 @@ import urllib.error
 import urllib.request
 from typing import Any, Dict, Optional
 
-from playground.openai_client import OpenAIChatClient, coerce_json
+from playground.openai_client import (
+    OpenAIChatClient,
+    coerce_json,
+    openai_model_supports_custom_temperature,
+)
 
 DASHSCOPE_DEFAULT_BASE_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1"
-DEEPSEEK_DEFAULT_BASE_URL = "https://api.deepseek.com"
 
 # Large survey envelopes (e.g. CFPB ~134 answers) need far more than a short chat reply.
 # 1200 truncates mid-JSON; 8192 covers compact one-shot instruments with headroom.
@@ -76,7 +79,6 @@ class AnthropicJSONClient:
         body = {
             "model": self.model,
             "max_tokens": self.max_tokens,
-            "temperature": self.temperature,
             "system": system,
             "messages": [
                 {
@@ -86,6 +88,8 @@ class AnthropicJSONClient:
                 }
             ],
         }
+        if openai_model_supports_custom_temperature(self.model):
+            body["temperature"] = self.temperature
         request = urllib.request.Request(
             "https://api.anthropic.com/v1/messages",
             data=json.dumps(body).encode("utf-8"),
@@ -170,22 +174,6 @@ def build_json_client(model: str, *, temperature: float = 0.7) -> Any:
             model=kwargs["model"],
             api_key=kwargs["api_key"],
             base_url=kwargs["base_url"],
-            temperature=temperature,
-        )
-    if value.startswith("deepseek/"):
-        api_key = (os.environ.get("DEEPSEEK_API_KEY") or "").strip()
-        if not api_key:
-            raise RuntimeError(
-                "DEEPSEEK_API_KEY is required for persona model {!r}".format(value)
-            )
-        base_url = (
-            os.environ.get("DEEPSEEK_API_BASE")
-            or "https://api.deepseek.com"
-        ).strip()
-        return OpenAIChatClient(
-            model=value.split("/", 1)[1],
-            api_key=api_key,
-            base_url=base_url,
             temperature=temperature,
         )
     if value.startswith("openai/"):

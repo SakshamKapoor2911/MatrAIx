@@ -63,6 +63,27 @@ def test_complete_json_omits_temperature_for_gpt5():
     assert kw["model"] == "gpt-5.5"
 
 
+def test_complete_json_omits_temperature_for_claude_opus_4_8():
+    fake = _FakeOpenAI('{"ok": true}')
+    client = OpenAIChatClient(
+        model="anthropic/claude-opus-4-8", client=fake, temperature=0.1
+    )
+    assert client.complete_json("sys", "user") == {"ok": True}
+    kw = fake.chat.completions.last_kwargs
+    assert "temperature" not in kw
+    assert kw["model"] == "anthropic/claude-opus-4-8"
+
+
+def test_openai_model_supports_custom_temperature_opus_rules():
+    from playground.openai_client import openai_model_supports_custom_temperature
+
+    assert openai_model_supports_custom_temperature("anthropic/claude-haiku-4-5")
+    assert openai_model_supports_custom_temperature("anthropic/claude-sonnet-4-6")
+    assert openai_model_supports_custom_temperature("claude-opus-4-1")
+    assert not openai_model_supports_custom_temperature("anthropic/claude-opus-4-8")
+    assert not openai_model_supports_custom_temperature("claude-opus-4-7")
+
+
 def test_complete_json_raises_on_unparseable():
     client = OpenAIChatClient(model="gpt-4o-mini", client=_FakeOpenAI("not json at all"))
     with pytest.raises(ValueError):

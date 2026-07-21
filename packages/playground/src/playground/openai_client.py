@@ -23,15 +23,22 @@ def coerce_json(text: str) -> Dict[str, Any]:
 
 
 def openai_model_supports_custom_temperature(model: str) -> bool:
-    """Whether OpenAI Chat Completions accepts a non-default ``temperature``.
+    """Whether Chat Completions / Messages accepts a non-default ``temperature``.
 
     GPT-5 family models currently only allow the API default (1); sending
-    ``0.1`` / ``0.7`` returns HTTP 400.
+    ``0.1`` / ``0.7`` returns HTTP 400. Claude Opus 4.7+ (and Bedrock Opus)
+    similarly reject an explicit non-default temperature.
     """
     lowered = (model or "").strip().lower()
-    if "/" in lowered:
-        lowered = lowered.rsplit("/", 1)[-1]
-    return not lowered.startswith("gpt-5")
+    bare = lowered.rsplit("/", 1)[-1] if "/" in lowered else lowered
+    if bare.startswith("gpt-5"):
+        return False
+    opus = re.search(r"opus-4-(\d+)", lowered)
+    if opus is not None and int(opus.group(1)) >= 7:
+        return False
+    if "bedrock" in lowered and "opus" in lowered:
+        return False
+    return True
 
 
 class ChatClient(Protocol):
