@@ -128,6 +128,38 @@ Authentication was verified as the `MatrAIx` Hugging Face identity before job
 submission. Tokens are provided through the environment and must never be
 written into source, manifests, logs, or chat.
 
+## Upload progress log
+
+### 2026-07-21 01:35 EDT
+
+- Current upload job: `33778360` on `seas_compute`, requesting one node, eight
+  CPUs, 16 GB memory, and eight Hugging Face upload workers.
+- Current scheduler state: `PENDING (Priority)`; the secured resume has not
+  started and has no stdout or stderr yet.
+- Cleaned remote revision: 826 committed files and 199,975,268 bytes.
+- Current Parquet progress: 256 committed files totaling 198,832,257 bytes,
+  all under `data/amazon/`.
+- Metadata already committed: release README, manifest, code schema, 565 task
+  reports, submission metadata, and `.gitattributes`.
+- Legacy cleanup: 20 inherited raw-code shards plus old manifests and run notes
+  (about 404 GB) were removed from `unified-8.4b` in Hugging Face commit
+  `3c67684566e1cd146e29a0613d8b6ee66580a4bb`.
+- Initial job `33714427` spent about two hours hashing the full 3.18 TB payload,
+  then ran eight concurrent uploads. Its first eight approximately 1.88 GB
+  synthetic transfers reached 100% locally but were not committed before that
+  job was cancelled, so they are not counted as remote completion. The local
+  `upload-large-folder` cache is retained for resume.
+- Observed aggregate network throughput during that first synthetic batch was
+  approximately 10-15 MB/s. At that rate, 3.18 TB requires roughly 2.5-3.7
+  days of transfer time, excluding queue time and retries. The three-day Slurm
+  wall time may therefore require at least one resumable resubmission.
+- One HTTP 502 was observed and retried automatically; no unrecovered upload
+  exception was recorded.
+- Credential hardening: `jobs/upload.job` now relies on the `HF_TOKEN`
+  environment variable and does not place a token in the process command line.
+  The separate token previously used by the initial job should be revoked and
+  rotated because it was visible in that process's arguments.
+
 ## Run and monitor
 
 ```bash
