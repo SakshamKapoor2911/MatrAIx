@@ -1,15 +1,20 @@
-"""Meal Planning & Nutrition Chatbot — deterministic system-prompt simulated sidecar."""
+"""Meal Planning & Nutrition Chatbot API."""
 
 from __future__ import annotations
 
+import copy
 import json
+import os
 import re
+import threading
 import uuid
+from collections import OrderedDict
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any
 from urllib.parse import parse_qs, urlparse
 
+from llm import generate_llm_reply
 from nutrition_data import (
     FOOD_DATABASE,
     MEAL_PLAN_TEMPLATES,
@@ -22,9 +27,39 @@ from nutrition_data import (
 
 
 def _get_plan(key: str) -> list[dict[str, Any]]:
-    return MEAL_PLAN_TEMPLATES.get(key) or MEAL_PLAN_TEMPLATES[DEFAULT_MEAL_PLAN]
+    # Always copy — allergen adaptation mutates the plan structure.
+    return copy.deepcopy(
+        MEAL_PLAN_TEMPLATES.get(key) or MEAL_PLAN_TEMPLATES[DEFAULT_MEAL_PLAN]
+    )
 
-SESSIONS: dict[str, dict[str, Any]] = {}
+
+_SESSIONS_LOCK = threading.RLock()
+_SESSION_LOCKS: dict[str, threading.RLock] = {}
+SESSIONS: OrderedDict[str, dict[str, Any]] = OrderedDict()
+
+
+def _max_sessions() -> int:
+    raw = os.environ.get("MEAL_PLAN_MAX_SESSIONS", "2000").strip()
+    try:
+        return max(32, int(raw))
+    except ValueError:
+        return 2000
+
+
+def _session_lock(session_id: str) -> threading.RLock:
+    with _SESSIONS_LOCK:
+        lock = _SESSION_LOCKS.get(session_id)
+        if lock is None:
+            lock = threading.RLock()
+            _SESSION_LOCKS[session_id] = lock
+        return lock
+
+
+def _evict_sessions_if_needed() -> None:
+    limit = _max_sessions()
+    while len(SESSIONS) >= limit:
+        old_id, _ = SESSIONS.popitem(last=False)
+        _SESSION_LOCKS.pop(old_id, None)
 
 
 def _find_food(food_id: str) -> dict[str, Any] | None:
@@ -227,7 +262,11 @@ def create_session(domain: str = "meal_planning") -> dict[str, Any]:
         "ended": False,
         "calorie_misunderstanding_acknowledged": False,
     }
-    SESSIONS[session_id] = session
+    with _SESSIONS_LOCK:
+        _evict_sessions_if_needed()
+        SESSIONS[session_id] = session
+        SESSIONS.move_to_end(session_id)
+        _SESSION_LOCKS[session_id] = threading.RLock()
     return {
         "sessionId": session_id,
         "config": {
@@ -238,10 +277,13 @@ def create_session(domain: str = "meal_planning") -> dict[str, Any]:
 
 
 def _session(session_id: str | None, domain: str = "meal_planning") -> dict[str, Any]:
-    if session_id and session_id in SESSIONS:
-        return SESSIONS[session_id]
+    with _SESSIONS_LOCK:
+        if session_id and session_id in SESSIONS:
+            SESSIONS.move_to_end(session_id)
+            return SESSIONS[session_id]
     created = create_session(domain)
-    return SESSIONS[str(created["sessionId"])]
+    with _SESSIONS_LOCK:
+        return SESSIONS[str(created["sessionId"])]
 
 
 _ALLERGEN_FILTER_TAGS = {
@@ -288,20 +330,7 @@ def _adapt_plan_for_allergens(
     return adapted if adapted else plan
 
 
-def _generate_reply(session: dict[str, Any], message: str) -> str:
-    lowered = message.lower()
-    _tokens = _tokenize(message)
-
-    if _is_end_of_conversation(message):
-        session["ended"] = True
-        session["profile_gathered"] = True
-        return (
-            "Understood. This conversation is now complete. "
-            "Thank you for using the meal planning assistant. "
-            "Please remember to consult a healthcare professional "
-            "before making significant dietary changes. Take care!"
-        )
-
+def _ingest_profile(session: dict[str, Any], message: str) -> None:
     diet = _detect_dietary_preference(message)
     goal = _detect_health_goal(message)
     detected_allergens = _detect_allergens(message)
@@ -311,6 +340,19 @@ def _generate_reply(session: dict[str, Any], message: str) -> str:
         session["health_goal"] = goal
     if detected_allergens:
         session["allergens"] = list(set(session["allergens"] + detected_allergens))
+
+
+def _hard_safety_reply(session: dict[str, Any], message: str) -> str | None:
+    """Deterministic safety / end gates — never routed through the LLM."""
+    if _is_end_of_conversation(message):
+        session["ended"] = True
+        session["profile_gathered"] = True
+        return (
+            "Understood. This conversation is now complete. "
+            "Thank you for using the meal planning assistant. "
+            "Please remember to consult a healthcare professional "
+            "before making significant dietary changes. Take care!"
+        )
 
     if not session.get("plan_generated"):
         unsafe_cal = _is_unsafe_calorie_request(message)
@@ -338,126 +380,155 @@ def _generate_reply(session: dict[str, Any], message: str) -> str:
             "with a general healthy meal plan if you'd like."
         )
 
-    if not session["profile_gathered"]:
-        user_turns = sum(1 for m in session["messages"] if m.get("role") == "user")
+    return None
 
-        if user_turns == 1:
-            return (
-                "Thanks for sharing! To create the best meal plan for you, "
-                "could you tell me about your dietary preferences? For example, "
-                "are you omnivore, vegetarian, vegan, keto, or no restriction? "
-                "Also, do you have any food allergies or intolerances I should know about?"
+
+def _materialize_plan_if_ready(session: dict[str, Any]) -> str | None:
+    """Pick/adapt plan from nutrition_data when profile is ready. Returns formatted plan."""
+    if session.get("plan_generated") and session.get("current_plan"):
+        return None
+    user_turns = sum(1 for m in session["messages"] if m.get("role") == "user")
+    if not session["profile_gathered"] and user_turns < 3:
+        return None
+    session["profile_gathered"] = True
+    plan = _pick_meal_plan(session["dietary_preference"], session["health_goal"])
+    plan = _adapt_plan_for_allergens(plan, session.get("allergens", []))
+    session["current_plan"] = plan
+    session["plan_generated"] = True
+    return _format_meal_plan(plan)
+
+
+def _resolve_substitution_note(session: dict[str, Any], message: str) -> str | None:
+    lowered = message.lower()
+    if not (
+        "substitut" in lowered
+        or "replace" in lowered
+        or "swap" in lowered
+        or "instead of" in lowered
+    ):
+        return None
+    for food in FOOD_DATABASE:
+        fname = food["name"].lower()
+        if fname in lowered or fname.split("(")[0].strip() in lowered:
+            sub = _find_substitute(
+                food["id"],
+                session.get("allergens", []),
+                session.get("dietary_preference"),
             )
-        if user_turns == 2:
+            if sub:
+                return (
+                    f"Resolved substitution from FOOD_DATABASE: "
+                    f"replace {food['name']} with {sub}."
+                )
             return (
-                "Great, that helps! What are your health goals? Are you looking "
-                "to lose weight, build muscle, manage blood sugar, improve heart "
-                "health, or something else? Also, how would you describe your "
-                "activity level — sedentary, lightly active, moderate, active, "
-                "or very active?"
+                f"User asked to substitute {food['name']}, but no safe "
+                "candidate was found in FOOD_DATABASE for their constraints."
             )
-        if user_turns <= 4:
-            session["profile_gathered"] = True
-            plan = _pick_meal_plan(session["dietary_preference"], session["health_goal"])
-            plan = _adapt_plan_for_allergens(plan, session.get("allergens", []))
-            session["current_plan"] = plan
-            session["plan_generated"] = True
-            return _format_meal_plan(plan)
+    known = ", ".join(f["name"] for f in FOOD_DATABASE[:8])
+    return (
+        "User asked for a substitution but no matching FOOD_DATABASE item "
+        f"was found in the message. Suggest from: {known}."
+    )
 
-    if session["plan_generated"] and session["current_plan"]:
 
-        if "restaurant" in lowered or "dining out" in lowered or "eat out" in lowered:
-            return (
-                "When dining out, look for grilled or baked options instead of "
-                "fried, ask for dressings and sauces on the side, and choose "
-                "vegetable-based sides. For Japanese restaurants, try sashimi, "
-                "miso soup, edamame, or grilled fish with rice. For Italian, "
-                "go for tomato-based sauces over cream-based, and grilled "
-                "protein dishes. For Mediterranean, choose grilled meats, "
-                "hummus, and salads with olive oil. Would you like tips for "
-                "a specific cuisine type?"
+def _generate_reply_llm(
+    session: dict[str, Any],
+    message: str,
+    *,
+    chat_completions: Any | None = None,
+) -> str | None:
+    """Grounded LLM utterance path."""
+    action_notes: list[str] = []
+    formatted_plan: str | None = None
+    plan_just_created = False
+
+    user_turns = sum(1 for m in session["messages"] if m.get("role") == "user")
+    if not session["profile_gathered"] and user_turns < 3:
+        action_notes.append(
+            f"Still gathering profile (user turn {user_turns}/3). "
+            "Ask naturally for missing diet preference, allergens, health goals, "
+            "and activity level. Do not invent a multi-day menu yet."
+        )
+        if session.get("dietary_preference"):
+            action_notes.append(
+                f"Known diet: {session['dietary_preference']}."
             )
-
-        if "calorie" in lowered and ("increase" in lowered or "raise" in lowered
-                or "higher" in lowered or "too low" in lowered
-                or "enough" in lowered or "target" in lowered):
-            return (
-                "To increase your daily calories, try adding an extra serving "
-                "of protein (chicken, salmon, eggs) or healthy fats (avocado, "
-                "almonds, olive oil) to meals. Adding a snack between meals "
-                "like fruit with nuts also helps. For 1,500-1,800 kcal, double "
-                "the protein portions and add an extra tablespoon of olive oil "
-                "to lunch and dinner."
+        if session.get("allergens"):
+            action_notes.append(
+                f"Known allergens: {', '.join(session['allergens'])}."
             )
-
-        if "portion" in lowered and ("size" in lowered or "double" in lowered
-                or "increase" in lowered or "adjust" in lowered):
-            return (
-                "Double the protein serving (chicken, salmon, tofu) and add "
-                "extra healthy fat (avocado, olive oil, almonds). Keep vegetables "
-                "as the base and increase grains by about 50%. Would you like "
-                "specific adjustments for a particular meal?"
+        if session.get("health_goal"):
+            action_notes.append(f"Known goal: {session['health_goal']}.")
+    else:
+        formatted = _materialize_plan_if_ready(session)
+        if formatted:
+            formatted_plan = formatted
+            plan_just_created = True
+            action_notes.append(
+                "Server materialized allergen-adapted plan from MEAL_PLAN_TEMPLATES. "
+                "Introduce it briefly; the formatted block will be appended if missing."
             )
-
-        if session.get("allergens") and not session.get("dairy_confirmed"):
-            if "dairy" in lowered or "intolerance" in lowered or "allerg" in lowered:
-                safe_allergens = session.get("allergens", [])
-                if "dairy" in safe_allergens:
-                    session["dairy_confirmed"] = True
-                    return (
-                        "Your meal plan is completely dairy-free. No butter, "
-                        "milk, cheese, or cream in any recipe. You can follow "
-                        "it safely. Let me know if you need adjustments!"
-                    )
-
-        if ("cuisine" in lowered or "dish" in lowered) and ("substitut" not in lowered
-                and "replace" not in lowered and "swap" not in lowered):
-            return (
-                "My meal plans use ingredients that work across many cuisines. "
-                "You can prepare them with your preferred seasonings and methods. "
-                "Would you like a specific ingredient substitution instead?"
-            )
-
-        if "substitut" in lowered or "replace" in lowered or "swap" in lowered or "instead of" in lowered:
-            for food in FOOD_DATABASE:
-                fname = food["name"].lower()
-                if fname in lowered or fname.split("(")[0].strip() in lowered:
-                    sub = _find_substitute(
-                        food["id"],
-                        session.get("allergens", []),
-                        session.get("dietary_preference"),
-                    )
-                    if sub:
-                        return (
-                            f"Sure! You can substitute {food['name']} with {sub}. "
-                            "It has a similar nutritional profile and fits your "
-                            "dietary needs. Would you like to update the full "
-                            "meal plan with this swap?"
-                        )
-            known_foods = [f["name"] for f in FOOD_DATABASE]
-            return (
-                "I can help with substitutions! Which ingredient would you like "
-                "to replace? Available options include: "
-                f"{', '.join(known_foods[:8])}. "
-                "Let me know what you'd like to swap and I'll find the best alternative."
+        elif session.get("plan_generated"):
+            action_notes.append(
+                "A template-backed plan is already on the session. Answer follow-ups; "
+                "do not invent a new menu."
             )
 
-        return (
-            "Is there anything else you'd like to adjust in your meal plan? "
-            "I can help with ingredient substitutions, portion adjustments, "
-            "restaurant-friendly options, or answer any other questions. "
-            f"{SAFETY_NETTING_DISCLAIMER}"
+    sub_note = _resolve_substitution_note(session, message)
+    if sub_note:
+        action_notes.append(sub_note)
+
+    lowered = message.lower()
+    if "restaurant" in lowered or "dining out" in lowered or "eat out" in lowered:
+        action_notes.append(
+            "User asked about dining out — give practical cuisine tips aligned "
+            "with their diet/allergens; do not invent a new home meal plan."
         )
 
-    plan = _pick_meal_plan(session["dietary_preference"], session["health_goal"])
-    if plan:
-        session["current_plan"] = plan
-        session["plan_generated"] = True
-        return _format_meal_plan(plan)
+    reply = generate_llm_reply(
+        session=session,
+        user_message=message,
+        action_notes=action_notes,
+        formatted_plan=formatted_plan,
+        chat_completions=chat_completions,
+    )
+    if not reply:
+        return formatted_plan if plan_just_created and formatted_plan else None
+
+    if plan_just_created and formatted_plan and "Day 1" not in reply:
+        reply = reply.rstrip() + "\n\n" + formatted_plan
+    elif (
+        plan_just_created
+        and formatted_plan
+        and SAFETY_NETTING_DISCLAIMER not in reply
+    ):
+        reply = reply.rstrip() + "\n\n" + SAFETY_NETTING_DISCLAIMER
+    return reply
+
+
+def _generate_reply(
+    session: dict[str, Any],
+    message: str,
+    *,
+    chat_completions: Any | None = None,
+) -> str:
+    hard = _hard_safety_reply(session, message)
+    if hard is not None:
+        return hard
+
+    _ingest_profile(session, message)
+
+    llm_reply = _generate_reply_llm(
+        session,
+        message,
+        chat_completions=chat_completions,
+    )
+    if llm_reply:
+        return llm_reply
+
     return (
-        "Let me prepare a balanced meal plan for you based on what we've discussed."
-    ) + "\n\n" + _format_meal_plan(
-        _get_plan(DEFAULT_MEAL_PLAN)
+        "I'm temporarily unable to generate a reply. "
+        "Please try again in a moment."
     )
 
 
@@ -465,37 +536,41 @@ def post_message(
     session_id: str | None,
     message: str,
     domain: str = "meal_planning",
+    *,
+    chat_completions: Any | None = None,
 ) -> dict[str, Any]:
     session = _session(session_id, domain)
     cleaned = message.strip()
     if not cleaned:
         raise ValueError("message must not be empty")
-    session["messages"].append({"role": "user", "content": cleaned})
-    reply = _generate_reply(session, cleaned)
-    session["messages"].append({"role": "assistant", "content": reply})
-    turn = {
-        "index": len(session["turns"]) + 1,
-        "userMessage": cleaned,
-        "assistantReply": reply,
-        "recommendedItems": [],
-    }
-    session["turns"].append(turn)
-    return {
-        "sessionId": session["sessionId"],
-        "reply": reply,
-        "turn": turn,
-        "recommendedItems": [],
-    }
+    with _session_lock(session["sessionId"]):
+        session["messages"].append({"role": "user", "content": cleaned})
+        reply = _generate_reply(session, cleaned, chat_completions=chat_completions)
+        session["messages"].append({"role": "assistant", "content": reply})
+        turn = {
+            "index": len(session["turns"]) + 1,
+            "userMessage": cleaned,
+            "assistantReply": reply,
+            "recommendedItems": [],
+        }
+        session["turns"].append(turn)
+        return {
+            "sessionId": session["sessionId"],
+            "reply": reply,
+            "turn": turn,
+            "recommendedItems": [],
+        }
 
 
 def get_conversation(session_id: str) -> dict[str, Any]:
     session = _session(session_id)
-    return {
-        "sessionId": session["sessionId"],
-        "domain": session["domain"],
-        "messages": session["messages"],
-        "turns": session["turns"],
-    }
+    with _session_lock(session["sessionId"]):
+        return {
+            "sessionId": session["sessionId"],
+            "domain": session["domain"],
+            "messages": list(session["messages"]),
+            "turns": list(session["turns"]),
+        }
 
 
 def get_recommendations(session_id: str) -> dict[str, Any]:
@@ -563,6 +638,8 @@ class Handler(BaseHTTPRequestHandler):
 
 def main() -> int:
     server = ThreadingHTTPServer(("0.0.0.0", 8000), Handler)
+    server.daemon_threads = True
+    server.request_queue_size = 128
     server.serve_forever()
     return 0
 

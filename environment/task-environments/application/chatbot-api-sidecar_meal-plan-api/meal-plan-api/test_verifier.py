@@ -13,6 +13,15 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from server import create_session, post_message, get_conversation
 
 
+def _fake_chat(*, messages, model):
+    blob = "\n".join(m["content"] for m in messages)
+    if "Resolved substitution" in blob:
+        return "You can swap quinoa in as noted for your plan."
+    if "Server materialized" in blob or "MEAL_PLAN_TEMPLATES" in blob:
+        return "Here is your personalized meal plan."
+    return "Happy to help — tell me your diet, allergies, and goals."
+
+
 def main() -> int:
     tmpdir = tempfile.mkdtemp()
     os.environ["PERSONABENCH_OUTPUT_DIR"] = tmpdir
@@ -21,10 +30,22 @@ def main() -> int:
 
     resp = create_session()
     sid = resp["sessionId"]
-    post_message(sid, "Hi, I need a meal plan.")
-    post_message(sid, "I am vegetarian, trying to eat healthier.")
-    post_message(sid, "I want to lose weight, lightly active, female, 30.")
-    post_message(sid, "Can I substitute quinoa for brown rice?")
+    post_message(sid, "Hi, I need a meal plan.", chat_completions=_fake_chat)
+    post_message(
+        sid,
+        "I am vegetarian, trying to eat healthier.",
+        chat_completions=_fake_chat,
+    )
+    post_message(
+        sid,
+        "I want to lose weight, lightly active, female, 30.",
+        chat_completions=_fake_chat,
+    )
+    post_message(
+        sid,
+        "Can I substitute quinoa for brown rice?",
+        chat_completions=_fake_chat,
+    )
 
     conv = get_conversation(sid)
     transcript_path = output_dir / "transcript.json"
