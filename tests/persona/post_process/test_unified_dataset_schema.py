@@ -1,6 +1,8 @@
+import json
 from pathlib import Path
 
 import pyarrow as pa
+import pytest
 
 from persona.post_process.unified_dataset.schema import (
     ATTRIBUTE_BYTES,
@@ -11,17 +13,21 @@ from persona.post_process.unified_dataset.schema import (
 from persona.post_process.unified_dataset.materialize import _human_row, _meaningful_grounding
 
 
-def _schema_path() -> Path:
-    repo_root = Path(__file__).resolve().parents[3]
-    return next(
-        (repo_root / "persona/synthesis/generated/full_dag_10b_20260703/shards").glob(
-            "*.schema.json"
-        )
-    )
+@pytest.fixture
+def codec(tmp_path: Path) -> AttributeCodec:
+    columns = [
+        {
+            "id": "age_bracket" if index == 0 else f"field_{index:04d}",
+            "values": [f"value_{index}_0", f"value_{index}_1"],
+        }
+        for index in range(1290)
+    ]
+    schema_path = tmp_path / "fixture.codes.schema.json"
+    schema_path.write_text(json.dumps({"columns": columns}), encoding="utf-8")
+    return AttributeCodec.from_codes_schema(schema_path)
 
 
-def test_codec_preserves_values_and_nulls() -> None:
-    codec = AttributeCodec.from_codes_schema(_schema_path())
+def test_codec_preserves_values_and_nulls(codec: AttributeCodec) -> None:
     values = {
         field_id: next(iter(value_codes))
         for field_id, value_codes in zip(codec.field_ids, codec.value_codes)
@@ -37,8 +43,7 @@ def test_codec_preserves_values_and_nulls() -> None:
     assert overrides is None
 
 
-def test_codec_preserves_off_schema_values_as_overrides() -> None:
-    codec = AttributeCodec.from_codes_schema(_schema_path())
+def test_codec_preserves_off_schema_values_as_overrides(codec: AttributeCodec) -> None:
     values = {
         field_id: next(iter(value_codes))
         for field_id, value_codes in zip(codec.field_ids, codec.value_codes)
@@ -61,9 +66,7 @@ def test_fixed_binary_array_is_zero_copy_compatible() -> None:
     assert array[1].as_py() == matrix[1].tobytes()
 
 
-def test_codec_null_fills_sparse_field_lists() -> None:
-    codec = AttributeCodec.from_codes_schema(_schema_path())
-
+def test_codec_null_fills_sparse_field_lists(codec: AttributeCodec) -> None:
     attributes, null_bitmap, overrides = codec.encode_fields(
         [{"field_id": codec.field_ids[0], "value": next(iter(codec.value_codes[0]))}]
     )
@@ -75,9 +78,7 @@ def test_codec_null_fills_sparse_field_lists() -> None:
     assert overrides is None
 
 
-def test_codec_ignores_unknown_fields_for_categorical_encoding() -> None:
-    codec = AttributeCodec.from_codes_schema(_schema_path())
-
+def test_codec_ignores_unknown_fields_for_categorical_encoding(codec: AttributeCodec) -> None:
     _, null_bitmap, overrides = codec.encode_fields(
         [{"field_id": "legacy_removed_field", "value": "legacy value"}]
     )
@@ -104,8 +105,7 @@ def test_grounding_normalizes_numeric_string_confidence() -> None:
     assert grounding[0]["confidence"] == 0.8
 
 
-def test_human_row_aligns_sparse_grounding_to_codebook_index() -> None:
-    codec = AttributeCodec.from_codes_schema(_schema_path())
+def test_human_row_aligns_sparse_grounding_to_codebook_index(codec: AttributeCodec) -> None:
     target_index = 10
     row = _human_row(
         {
