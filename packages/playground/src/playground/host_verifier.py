@@ -1,21 +1,26 @@
-"""Score an OS-app trial on the Playground host when the sandbox did not.
+"""Score an OS-app trial on the Playground host from downloaded artifacts.
 
-Harbor's primary verifier path executes ``tests/test.sh`` inside the sandbox.
-Some computer-use environments (notably iOS) never produce ``verifier/reward.*``
-even after the agent finished and artifacts were downloaded — the sandbox exec
-channel simply cannot run the host-native verifier script.
+For **use-computer** (macOS/iOS) jobs, Playground disables the in-sandbox
+verifier and relies on this host path as the primary scorer: the agent's
+final JSON lives on the host (``agent/final_answer.txt`` / trajectory), while
+sandbox ``/app/output`` writes are remapped and often missing.
 
-Those verifiers only read already-collected submission files, so the same
-``tests/test.sh`` can be executed on this machine against the trial's
-downloaded artifacts. Artifact source paths and timeouts come from the task's
-``task.toml``; the host path under ``trial/artifacts/`` follows Harbor's
-``source_relative_path`` mapping.
+Harbor may still run ``tests/test.sh`` inside Docker computer-use sandboxes
+(mounted paths). This module also remains a rescue when a sandbox left no
+reward or scored ``0`` despite a recoverable host-side submission.
+
+Artifact source paths and timeouts come from the task's ``task.toml``; the
+host path under ``trial/artifacts/`` follows Harbor's
+``source_relative_path`` mapping. When the primary JSON is missing under
+``artifacts/app/output/``, this module materializes it from agent logs before
+running ``tests/test.sh``.
 """
 
 from __future__ import annotations
 
 import json
 import os
+import re
 import shutil
 import subprocess
 import tomllib
@@ -29,6 +34,11 @@ _LOCKS_GUARD = Lock()
 _REWARD_FILENAMES = ("reward.txt", "reward.json")
 _MISSING_REWARD_EXCEPTION = "RewardFileNotFoundError"
 _DEFAULT_TIMEOUT_SEC = 120.0
+_OUTPUT_ARTIFACT_RE = re.compile(
+    r"""OUTPUT_DIR\s*/\s*["']([^"']+\.json)["']"""
+)
+_SKIP_OUTPUT_ARTIFACTS = frozenset({"user_feedback.json"})
+_JSON_OBJECT_RE = re.compile(r"\{[\s\S]*\}")
 
 
 def _lock_for(key: str) -> Lock:
@@ -108,15 +118,6 @@ def _verifier_timeout_sec(task_data: dict) -> float:
     return _DEFAULT_TIMEOUT_SEC
 
 
-def _reward_already_present(trial_dir: Path) -> bool:
-    verifier_dir = trial_dir / "verifier"
-    for name in _REWARD_FILENAMES:
-        path = verifier_dir / name
-        if path.is_file() and path.stat().st_size > 0:
-            return True
-    return False
-
-
 def _exception_type(trial_dir: Path) -> str | None:
     result_path = trial_dir / "result.json"
     if not result_path.is_file():
@@ -162,6 +163,101 @@ def _downloaded_artifact_dir(trial_dir: Path, source: str) -> Path:
     return trial_dir / "artifacts" / Path(source_relative_path(source))
 
 
+def _expected_output_artifacts(task_dir: Path) -> list[str]:
+    """Primary submission filenames declared by ``tests/test.sh``."""
+    test_sh = task_dir / "tests" / "test.sh"
+    if not test_sh.is_file():
+        return []
+    names = _OUTPUT_ARTIFACT_RE.findall(
+        test_sh.read_text(encoding="utf-8", errors="replace")
+    )
+    ordered: list[str] = []
+    for name in names:
+        if name in _SKIP_OUTPUT_ARTIFACTS or name in ordered:
+            continue
+        ordered.append(name)
+    return ordered
+
+
+def _parse_json_object(text: str) -> dict | None:
+    match = _JSON_OBJECT_RE.search(text or "")
+    if not match:
+        return None
+    try:
+        parsed = json.loads(match.group())
+    except json.JSONDecodeError:
+        return None
+    return parsed if isinstance(parsed, dict) else None
+
+
+def _extract_submission_from_agent_logs(trial_dir: Path) -> dict | None:
+    agent_dir = trial_dir / "agent"
+    final_answer = agent_dir / "final_answer.txt"
+    if final_answer.is_file():
+        parsed = _parse_json_object(
+            final_answer.read_text(encoding="utf-8", errors="replace")
+        )
+        if parsed is not None:
+            return parsed
+
+    trajectory_path = agent_dir / "trajectory.json"
+    if not trajectory_path.is_file():
+        return None
+    try:
+        trajectory = _read_json(trajectory_path)
+    except Exception:  # noqa: BLE001
+        return None
+    steps = trajectory.get("steps") if isinstance(trajectory, dict) else None
+    if not isinstance(steps, list):
+        return None
+    for step in reversed(steps):
+        if not isinstance(step, dict):
+            continue
+        message = step.get("message")
+        if not isinstance(message, str):
+            continue
+        parsed = _parse_json_object(message)
+        if parsed is not None:
+            return parsed
+    return None
+
+
+def _materialize_output_from_agent_logs(
+    *, trial_dir: Path, task_dir: Path, sources: list[str]
+) -> bool:
+    """Write missing primary JSON into downloaded ``/app/output`` from agent logs.
+
+    Returns ``True`` when at least one new submission file was written.
+    """
+    output_sources = [source for source in sources if source.rstrip("/") == "/app/output"]
+    if not output_sources:
+        return False
+    artifact_names = _expected_output_artifacts(task_dir)
+    if not artifact_names:
+        return False
+
+    output_dir = _downloaded_artifact_dir(trial_dir, "/app/output")
+    missing = [name for name in artifact_names if not (output_dir / name).is_file()]
+    if not missing:
+        return False
+
+    payload = _extract_submission_from_agent_logs(trial_dir)
+    if payload is None:
+        return False
+
+    try:
+        output_dir.mkdir(parents=True, exist_ok=True)
+        # One hand-in JSON becomes the first missing primary artifact.
+        target = output_dir / missing[0]
+        target.write_text(
+            json.dumps(payload, ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
+    except OSError:
+        return False
+    return True
+
+
 def _prepare_host_scoring(
     trial_dir: Path, sources: list[str]
 ) -> tuple[list[tuple[str, Path]], dict[str, str]] | None:
@@ -197,30 +293,6 @@ def _prepare_host_scoring(
     return stage_pairs, env_overrides
 
 
-def _stageable_sources(trial_dir: Path, sources: list[str]) -> list[tuple[str, Path]]:
-    """Return (source, downloaded_dir) pairs that can be staged for host scoring."""
-    stageable: list[tuple[str, Path]] = []
-    for source in sources:
-        downloaded = _downloaded_artifact_dir(trial_dir, source)
-        if not _dir_has_files(downloaded):
-            continue
-        staged = Path(source)
-        parent = staged.parent
-        try:
-            parent.mkdir(parents=True, exist_ok=True)
-            probe = parent / f".matraix-host-verifier-probe-{uuid.uuid4().hex}"
-            probe.write_text("", encoding="utf-8")
-            probe.unlink(missing_ok=True)
-        except OSError:
-            continue
-        stageable.append((source, downloaded))
-    return stageable
-
-
-def _backup_suffix() -> str:
-    return f".matraix-host-verifier-{uuid.uuid4().hex}.bak"
-
-
 def _stage_sources(pairs: list[tuple[str, Path]]) -> list[tuple[Path, Path | None]]:
     """Copy downloaded artifacts onto their declared absolute sources.
 
@@ -232,7 +304,10 @@ def _stage_sources(pairs: list[tuple[str, Path]]) -> list[tuple[Path, Path | Non
             staged_root = Path(source)
             backup_dir: Path | None = None
             if staged_root.exists() or staged_root.is_symlink():
-                backup_dir = staged_root.with_name(staged_root.name + _backup_suffix())
+                backup_dir = staged_root.with_name(
+                    staged_root.name
+                    + f".matraix-host-verifier-{uuid.uuid4().hex}.bak"
+                )
                 shutil.rmtree(backup_dir, ignore_errors=True)
                 shutil.move(str(staged_root), str(backup_dir))
             shutil.copytree(downloaded, staged_root)
@@ -250,8 +325,8 @@ def _restore_staged(staged: list[tuple[Path, Path | None]]) -> None:
             shutil.move(str(backup_dir), str(staged_root))
 
 
-def _backfill_trial_result(trial_dir: Path, reward: float) -> None:
-    """Clear a stale missing-reward exception once host scoring succeeded."""
+def _write_trial_verifier_result(trial_dir: Path, reward: float) -> None:
+    """Persist host scoring into ``result.json`` (and clear stale verifier errors)."""
     result_path = trial_dir / "result.json"
     if not result_path.is_file():
         return
@@ -262,9 +337,8 @@ def _backfill_trial_result(trial_dir: Path, reward: float) -> None:
     if not isinstance(payload, dict):
         return
     exc = payload.get("exception_info")
-    if not isinstance(exc, dict) or exc.get("exception_type") != _MISSING_REWARD_EXCEPTION:
-        return
-    payload["exception_info"] = None
+    if isinstance(exc, dict) and exc.get("exception_type") == _MISSING_REWARD_EXCEPTION:
+        payload["exception_info"] = None
     payload["verifier_result"] = {"rewards": {"reward": reward}}
     try:
         result_path.write_text(
@@ -274,18 +348,25 @@ def _backfill_trial_result(trial_dir: Path, reward: float) -> None:
         pass
 
 
+def _should_run_host_verifier(trial_dir: Path, *, materialized: bool) -> bool:
+    """Host-score when sandbox left no reward, or reward=0 after we recovered a file."""
+    reward = _read_reward_value(trial_dir / "verifier")
+    if reward is None:
+        return True
+    if reward > 0:
+        return False
+    # Sandbox scored 0 — only retry on host when we newly recovered a submission.
+    return materialized
+
+
 def maybe_run_host_verifier(
     *, repo_root: Path, trial_dir: Path, timeout_sec: float | None = None
 ) -> bool:
-    """Run the task verifier on this host when the sandbox left no reward.
+    """Run the task verifier on this host against downloaded trial artifacts.
 
     Returns ``True`` when a host verifier run happened, ``False`` when it was
-    skipped (already scored, no downloaded artifacts, source path not writable
-    on this host, no test script, etc.).
+    skipped (already passed, nothing to score, no test script, etc.).
     """
-    if _reward_already_present(trial_dir):
-        return False
-
     task_path = _task_path_from_trial(trial_dir)
     if not task_path:
         return False
@@ -303,6 +384,12 @@ def maybe_run_host_verifier(
     if not sources:
         return False
 
+    materialized = _materialize_output_from_agent_logs(
+        trial_dir=trial_dir, task_dir=task_dir, sources=sources
+    )
+    if not _should_run_host_verifier(trial_dir, materialized=materialized):
+        return False
+
     pairs = _prepare_host_scoring(trial_dir, sources)
     if pairs is None:
         return False
@@ -312,7 +399,9 @@ def maybe_run_host_verifier(
 
     verifier_dir = trial_dir / "verifier"
     verifier_dir.mkdir(parents=True, exist_ok=True)
-    effective_timeout = timeout_sec if timeout_sec is not None else _verifier_timeout_sec(task_data)
+    effective_timeout = (
+        timeout_sec if timeout_sec is not None else _verifier_timeout_sec(task_data)
+    )
 
     lock_keys = [source for source, _ in stage_pairs] or ["/app/output"]
     locks = [_lock_for(key) for key in lock_keys]
@@ -348,14 +437,14 @@ def maybe_run_host_verifier(
             lock.release()
 
     stdout_path = verifier_dir / "test-stdout.txt"
-    if stdout_text.strip() and not (stdout_path.is_file() and stdout_path.stat().st_size > 0):
+    if stdout_text.strip():
         try:
             stdout_path.write_text(stdout_text, encoding="utf-8")
         except OSError:
             pass
 
     reward = _read_reward_value(verifier_dir)
-    if reward is not None and _exception_type(trial_dir) == _MISSING_REWARD_EXCEPTION:
-        _backfill_trial_result(trial_dir, reward)
+    if reward is not None:
+        _write_trial_verifier_result(trial_dir, reward)
 
     return True

@@ -42,6 +42,7 @@ def test_run_harbor_job_invokes_command_runner(tmp_path, monkeypatch) -> None:
     assert result["exitCode"] == 0
     assert calls
     assert calls[0]["command"][:2] == ["echo", "harbor"]
+    assert "--yes" in calls[0]["command"]
     assert calls[0]["env"]["MATRIX_SURVEY_TASK_PATH"] == "application/tasks/survey_product-attitudes"
     pythonpath = calls[0]["env"]["PYTHONPATH"].split(":")
     assert str(tmp_path) in pythonpath

@@ -16,6 +16,16 @@
           "facetKey": "decision_confidence",
           "title": "Decision confidence"
         }
+      ],
+      "summaryAnalyses": [
+        {
+          "id": "decision.reason_by_risk_tolerance",
+          "title": "How each risk segment framed MU",
+          "targetFacetKey": "reason",
+          "groupByPersonaDimension": "risk_tolerance",
+          "summaryKind": "llm_bucket_summary",
+          "instruction": "For each risk-tolerance segment, summarize in 1-2 sentences what tipped buy vs sell vs hold — charts, news, and/or the earnings context. Be faithful and concise; do not invent facts."
+        }
       ]
     },
     {
@@ -27,6 +37,16 @@
           "id": "user_feedback.info_sufficiency_by_segment",
           "facetKey": "information_sufficiency",
           "title": "Information sufficiency"
+        },
+        {
+          "id": "user_feedback.earnings_influence_by_segment",
+          "facetKey": "earnings_influence",
+          "title": "Earnings context influence"
+        },
+        {
+          "id": "user_feedback.would_act_by_segment",
+          "facetKey": "would_act_on_it",
+          "title": "Would put real money behind it"
         }
       ]
     }

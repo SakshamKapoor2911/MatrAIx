@@ -113,6 +113,7 @@ def run_harbor_job(
         config_yaml=config_yaml,
     )
     command = list(harbor_command or default_harbor_command()) + [
+        "--yes",
         "-c",
         rel_config_path(config_path, repo_root),
     ]

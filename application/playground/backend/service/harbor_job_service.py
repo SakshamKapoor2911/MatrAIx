@@ -1076,6 +1076,23 @@ class HarborJobService:
                     kwargs = agent.setdefault("kwargs", {})
                     if isinstance(kwargs, dict):
                         kwargs["cua_backend"] = os_app_backend
+                        # use.computer defaults to 50 steps; stocks/news-style
+                        # browse+decide tasks routinely need more headroom.
+                        kwargs.setdefault("max_steps", 100)
+        # use-computer OS-app tasks hand in JSON; sandbox path remap makes in-VM
+        # verify flaky. Score on the Playground host from downloaded artifacts /
+        # final_answer / trajectory instead (see playground.host_verifier).
+        env_block = job_config.get("environment")
+        if isinstance(env_block, dict) and env_block.get("type") == "use-computer":
+            existing_verifier = job_config.get("verifier")
+            verifier_cfg = dict(existing_verifier) if isinstance(existing_verifier, dict) else {}
+            verifier_cfg["disable"] = True
+            job_config["verifier"] = verifier_cfg
+            for agent in job_config.get("agents", []):
+                if isinstance(agent, dict):
+                    kwargs = agent.setdefault("kwargs", {})
+                    if isinstance(kwargs, dict):
+                        kwargs.setdefault("max_steps", 100)
         job_meta = job_config.pop("_job_meta", None)
 
         self.generated_configs_dir.mkdir(parents=True, exist_ok=True)
@@ -1316,6 +1333,7 @@ class HarborJobService:
             record.status = "running"
 
         command = list(self.harbor_command) + [
+            "--yes",
             "-c",
             _rel_path(config_path, self.repo_root),
         ]

@@ -25,19 +25,45 @@ OUTPUT_DIR = Path(
 
 path = OUTPUT_DIR / "sentiment.json"
 
-if not path.is_file():
-    logs_root = Path("/tmp/harbor/logs") if Path("/tmp/harbor/logs").is_dir() else Path("/logs")
-    fa_path = logs_root / "agent" / "final_answer.txt"
-    if fa_path.is_file():
+def _recover_submission_from_final_answer() -> None:
+    """Materialize sentiment.json from the harness final answer when needed.
+
+    computer-1 writes the agent's final JSON to final_answer.txt (host + sandbox
+    agent logs, and optionally the output dir). Prefer that over requiring the
+    agent to create files via Finder/Terminal.
+    """
+    if path.is_file():
+        return
+    candidates = [
+        OUTPUT_DIR / "final_answer.txt",
+        Path("/tmp/harbor/logs/agent/final_answer.txt"),
+        Path("/logs/agent/final_answer.txt"),
+    ]
+    for fa_path in candidates:
+        if not fa_path.is_file():
+            continue
         raw = fa_path.read_text(encoding="utf-8", errors="replace").strip()
         match = re.search(r"\{[\s\S]*\}", raw)
-        if match:
-            try:
-                candidate = json.loads(match.group())
-                path.parent.mkdir(parents=True, exist_ok=True)
-                path.write_text(json.dumps(candidate, indent=2, ensure_ascii=False))
-            except (json.JSONDecodeError, OSError):
-                pass
+        if not match:
+            continue
+        try:
+            candidate = json.loads(match.group())
+        except json.JSONDecodeError:
+            continue
+        if not isinstance(candidate, dict):
+            continue
+        try:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(
+                json.dumps(candidate, indent=2, ensure_ascii=False),
+                encoding="utf-8",
+            )
+            return
+        except OSError:
+            continue
+
+
+_recover_submission_from_final_answer()
 
 if not path.is_file():
     sys.exit(f"missing {path}")

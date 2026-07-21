@@ -32,7 +32,7 @@ provided above.
    content, and the earnings context provided above, decide whether you would
    **buy**, **sell**, or **hold** MU right now.
 
-Save `/app/output/sentiment.json`:
+Hand in your decision as JSON (this is your final answer — see rules below):
 
 ```json
 {
@@ -78,3 +78,7 @@ Rules:
   Base your decision solely on: (a) the Stocks app content (charts + news
   articles linked from the app), and (b) the earnings context provided above.
 - Do NOT use Spotlight or open any other application besides what Stocks opens.
+- **When you are done researching, stop using the desktop UI and submit the
+  JSON above as your final answer text.** Do **not** open Terminal, Finder,
+  Notes, TextEdit, or any other app to create or save a file — the harness
+  records your final answer for scoring.

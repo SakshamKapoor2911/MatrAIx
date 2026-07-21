@@ -546,6 +546,38 @@ def test_launch_ios_cua_uses_use_computer_environment(tmp_path, monkeypatch):
     service.shutdown()
 
 
+def test_run_harbor_passes_yes_to_skip_host_env_prompt(tmp_path):
+    repo = tmp_path
+    jobs_dir = repo / "jobs"
+    jobs_dir.mkdir()
+    config_path = repo / "configs" / "jobs" / "demo-job.yaml"
+    config_path.parent.mkdir(parents=True)
+    config_path.write_text("job_name: demo-job\n", encoding="utf-8")
+
+    calls: list[list[str]] = []
+
+    def _fake_run(command, *, cwd, env):
+        calls.append(list(command))
+        return 0
+
+    service = HarborJobService(
+        repo_root=repo,
+        jobs_dir=jobs_dir,
+        generated_configs_dir=repo / "configs" / "jobs",
+        command_runner=_fake_run,
+        harbor_command=("echo", "harbor", "run"),
+    )
+    with service._guard:
+        service._launches["demo-job"] = HarborLaunchRecord(
+            job_name="demo-job",
+            config_path="configs/jobs/demo-job.yaml",
+        )
+
+    service._run_harbor("demo-job", config_path)
+    assert calls == [["echo", "harbor", "run", "--yes", "-c", "configs/jobs/demo-job.yaml"]]
+    service.shutdown()
+
+
 def test_trial_live_stage_from_artifacts(tmp_path):
     from backend.service.harbor_job_service import (
         _resolve_trial_stage,
