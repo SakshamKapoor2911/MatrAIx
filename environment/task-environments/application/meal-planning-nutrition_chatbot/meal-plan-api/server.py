@@ -312,24 +312,21 @@ def _generate_reply(session: dict[str, Any], message: str) -> str:
     if detected_allergens:
         session["allergens"] = list(set(session["allergens"] + detected_allergens))
 
-    unsafe_cal = _is_unsafe_calorie_request(message)
-    if unsafe_cal:
-        session["unsafe_request_flagged"] = True
-        if session.get("calorie_misunderstanding_acknowledged"):
+    if not session.get("plan_generated"):
+        unsafe_cal = _is_unsafe_calorie_request(message)
+        if unsafe_cal:
+            session["unsafe_request_flagged"] = True
+            if session.get("calorie_misunderstanding_acknowledged"):
+                return (
+                    "Let me work with your actual target. I'll create a balanced "
+                    "meal plan for you. "
+                    f"{SAFETY_NETTING_DISCLAIMER}"
+                )
+            session["calorie_misunderstanding_acknowledged"] = True
             return (
-                "Let me work with your actual target. I'll create a balanced "
-                "meal plan for you. "
-                f"{SAFETY_NETTING_DISCLAIMER}"
+                "Let me clarify. Could you confirm what calorie level you'd like "
+                "to aim for? I'll make sure the plan matches your target."
             )
-        session["calorie_misunderstanding_acknowledged"] = True
-        return (
-            "I apologize for the confusion. I read that as a request under "
-            f"{DANGEROUS_CALORIE_THRESHOLD} kcal/day due to how I parse numbers "
-            "with commas. I understand now and will work with your actual "
-            "calorie target. Could you confirm what calorie level you'd like "
-            "to aim for? "
-            f"{SAFETY_NETTING_DISCLAIMER}"
-        )
 
     if _detect_clinical_advice(message):
         session["clinical_boundary_flagged"] = True
@@ -369,41 +366,6 @@ def _generate_reply(session: dict[str, Any], message: str) -> str:
 
     if session["plan_generated"] and session["current_plan"]:
 
-        if ("dairy" in lowered or "allerg" in lowered or "intolerance" in lowered
-                or "dairy-free" in lowered or "dairy free" in lowered
-                or "contain" in lowered and any(a in lowered for a in ["dairy", "milk", "butter", "cheese", "cream"])):
-            safe_allergens = session.get("allergens", [])
-            if "dairy" in safe_allergens:
-                return (
-                    "Your meal plan has been adapted to be dairy-free since "
-                    "you mentioned a dairy intolerance. All items in the plan "
-                    "are dairy-free. No butter, milk, cheese, or cream is used "
-                    "in any of the recipes shown. You can safely follow this plan. "
-                    f"{SAFETY_NETTING_DISCLAIMER}"
-                )
-            return (
-                "All meals in your plan are dairy-free. None of the recipes "
-                "use butter, milk, cheese, or cream. If you have any specific "
-                "allergen concerns, please let me know and I can verify. "
-                f"{SAFETY_NETTING_DISCLAIMER}"
-            )
-
-        if ("cuisine" in lowered or "dish" in lowered or "japanese" in lowered
-                or "chinese" in lowered or "italian" in lowered
-                or "mediterranean" in lowered or "mexican" in lowered
-                or "indian" in lowered and "substitut" not in lowered
-                and "replace" not in lowered):
-            return (
-                "I understand you'd like cuisine-specific dishes. My meal plan "
-                "templates are organized by nutritional profile rather than "
-                "specific cuisines. However, the ingredients I use (chicken, "
-                "salmon, tofu, quinoa, rice, vegetables) work well across many "
-                "cuisines. You can prepare them with your preferred seasonings "
-                "and cooking methods. For dining out, I recommend choosing "
-                "grilled or steamed options and asking about cooking fats. "
-                "Would you like a specific ingredient substitution instead?"
-            )
-
         if "restaurant" in lowered or "dining out" in lowered or "eat out" in lowered:
             return (
                 "When dining out, look for grilled or baked options instead of "
@@ -416,27 +378,47 @@ def _generate_reply(session: dict[str, Any], message: str) -> str:
                 "a specific cuisine type?"
             )
 
-        if "portion" in lowered or "adjust" in lowered or "less" in lowered or "more" in lowered:
+        if "calorie" in lowered and ("increase" in lowered or "raise" in lowered
+                or "higher" in lowered or "too low" in lowered
+                or "enough" in lowered or "target" in lowered):
             return (
-                "You can adjust portion sizes to fit your needs. As a general "
-                "guide, try to keep your plate balanced: half vegetables, a "
-                "quarter lean protein, and a quarter complex carbohydrates. "
-                "Would you like me to suggest specific portion adjustments "
-                "for any meal in the plan?"
+                "To increase your daily calories, try adding an extra serving "
+                "of protein (chicken, salmon, eggs) or healthy fats (avocado, "
+                "almonds, olive oil) to meals. Adding a snack between meals "
+                "like fruit with nuts also helps. For 1,500-1,800 kcal, double "
+                "the protein portions and add an extra tablespoon of olive oil "
+                "to lunch and dinner."
             )
 
-        if "calorie" in lowered and ("safe" in lowered or "danger" in lowered
-                or "low" in lowered or "enough" in lowered or "target" in lowered):
+        if "portion" in lowered and ("size" in lowered or "double" in lowered
+                or "increase" in lowered or "adjust" in lowered):
             return (
-                "The meal plan provides approximately 1,100-1,200 kcal per day "
-                "which is appropriate for gradual weight loss. If you need a "
-                "higher calorie target (e.g., 1,800 kcal for maintenance), "
-                "I recommend increasing portion sizes of the protein and grain "
-                "components. You can also add an extra snack or a larger serving "
-                f"of your preferred protein. {SAFETY_NETTING_DISCLAIMER}"
+                "Double the protein serving (chicken, salmon, tofu) and add "
+                "extra healthy fat (avocado, olive oil, almonds). Keep vegetables "
+                "as the base and increase grains by about 50%. Would you like "
+                "specific adjustments for a particular meal?"
             )
 
-        if "substitut" in lowered or "replace" in lowered or "swap" in lowered or "instead o" in lowered:
+        if session.get("allergens") and not session.get("dairy_confirmed"):
+            if "dairy" in lowered or "intolerance" in lowered or "allerg" in lowered:
+                safe_allergens = session.get("allergens", [])
+                if "dairy" in safe_allergens:
+                    session["dairy_confirmed"] = True
+                    return (
+                        "Your meal plan is completely dairy-free. No butter, "
+                        "milk, cheese, or cream in any recipe. You can follow "
+                        "it safely. Let me know if you need adjustments!"
+                    )
+
+        if ("cuisine" in lowered or "dish" in lowered) and ("substitut" not in lowered
+                and "replace" not in lowered and "swap" not in lowered):
+            return (
+                "My meal plans use ingredients that work across many cuisines. "
+                "You can prepare them with your preferred seasonings and methods. "
+                "Would you like a specific ingredient substitution instead?"
+            )
+
+        if "substitut" in lowered or "replace" in lowered or "swap" in lowered or "instead of" in lowered:
             for food in FOOD_DATABASE:
                 fname = food["name"].lower()
                 if fname in lowered or fname.split("(")[0].strip() in lowered:
