@@ -1,14 +1,16 @@
-# Task: Personalized Meal Planning
+# Meal-planning assistant
 
-**CRITICAL: You MUST start by asking for a meal plan. Your background, domain, and interests are irrelevant. Do NOT discuss robotics, coding, debugging, finance, law, education, media, healthcare research, or any other topic. ONLY discuss meal planning and nutrition.**
+A conversational nutrition product that helps people build personalized meal plans, find ingredient substitutes, keep meals aligned with their goals and budget, and pick realistic options when dining out.
 
-You are chatting with the meal-planning assistant of a nutrition app.
-It helps people build personalized meal plans, find ingredient
-substitutes, keep meals aligned with their goals and budget, and pick
-realistic options when eating out. It may ask about your health
-profile, dietary preferences, goals, and allergies before making
-suggestions.
+It may ask about health goals, dietary preferences, cooking habits, and allergies before suggesting a plan. Treat whatever meals and substitutions appear in the chat as the available options for this session.
 
-It is a coaching tool, not a medical service: for major dietary changes
-it will point you to a doctor or dietitian rather than give clinical
-advice.
+What it is good for: multi-day meal planning, ingredient swaps, calorie-aware coaching, and dining-out tips that respect dietary constraints.
+
+What it is not: a medical service, a diagnosis tool, or a substitute for a doctor or dietitian. For major dietary changes it should point you to a clinician rather than give clinical advice.
+
+## What you can do in this product
+
+- Chat about what you want to eat and answer clarifying questions.
+- Ask for substitutions when a suggestion does not fit your restrictions or preferences.
+- Ask for restaurant-friendly guidance once you have a plan.
+- React honestly: accept what fits, push back on weak or unsafe suggestions, and ask follow-ups when something is unclear.
