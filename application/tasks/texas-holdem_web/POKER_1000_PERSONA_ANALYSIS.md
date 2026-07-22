@@ -22,7 +22,7 @@
 | Min Chip Delta | -360 | -360 |
 | Max Chip Delta | +570 | +570 |
 
-The game is essentially fair: mean chip delta ~0, with a slight house disadvantage (54.3% loss rate). The bot (fixed rule-based opponent) has a small edge — expected for a default-tight strategy versus diverse persona policies.
+The game is essentially fair: mean chip delta ~0, with a slight house disadvantage (54.3% loss rate). The bot (fixed rule-based opponent) has a small edge  -  expected for a default-tight strategy versus diverse persona policies.
 
 ### Baseline Failures (6 trials, reward=0.0)
 
@@ -47,30 +47,30 @@ All 6 were verifier-side formatting issues in the initial full batch run, not ga
 
 ### Policy Chain Execution Order
 
-Defined in `policy_registry.py` — policies are evaluated **in priority order**; the first to return a non-None action wins:
+Defined in `policy_registry.py`  -  policies are evaluated **in priority order**; the first to return a non-None action wins:
 
-1. **TimePressurePolicy** — Rushed personas fold 80% when behind
-2. **RiskPolicy** — Sklansky-tiered preflop thresholds with age/life-stage modifiers
-3. **TrustPolicy** — Low-trust personas call more (suspect bluff), high-trust fold more
-4. **DecisionStylePolicy** — Analytical uses pot odds; Impulsive picks randomly; Cautious folds when behind
-5. **EconomicMotivationPolicy** — Cost-sensitive folds when behind; Status-seeking raises more
-6. **DomainKnowledgePolicy** — Gaming domain raises aggressively; Finance uses pot odds math
-7. **DominantTraitPolicy** — Competitive raises; Reserved folds when behind; Social mirrors bot
-8. **_BasePolicy** (fallback) — Always checks or calls
+1. **TimePressurePolicy**  -  Rushed personas fold 80% when behind
+2. **RiskPolicy**  -  Sklansky-tiered preflop thresholds with age/life-stage modifiers
+3. **TrustPolicy**  -  Low-trust personas call more (suspect bluff), high-trust fold more
+4. **DecisionStylePolicy**  -  Analytical uses pot odds; Impulsive picks randomly; Cautious folds when behind
+5. **EconomicMotivationPolicy**  -  Cost-sensitive folds when behind; Status-seeking raises more
+6. **DomainKnowledgePolicy**  -  Gaming domain raises aggressively; Finance uses pot odds math
+7. **DominantTraitPolicy**  -  Competitive raises; Reserved folds when behind; Social mirrors bot
+8. **_BasePolicy** (fallback)  -  Always checks or calls
 
-**Wrapper:** `ComposedPolicy` wraps all sub-policies with a **tech_savviness simulation** — Low-tech personas have 10% chance of misclicking (random action), Medium-tech have 3%.
+**Wrapper:** `ComposedPolicy` wraps all sub-policies with a **tech_savviness simulation**  -  Low-tech personas have 10% chance of misclicking (random action), Medium-tech have 3%.
 
 ### Opponent Bot Strategy
 
 Fixed rule-based (from `bot.py`, authored by Kate):
 - **Preflop:** Premium pairs → raise; both high cards → raise/call; one high card → call; weak → fold/check
 - **Post-flop:** Uses `treys.Evaluator` for hand strength scoring
-  - Score ≤3000 (flush+): raise
-  - Score ≤5000 (pair+): call/raise
-  - Score ≤7000 (marginal): call if no raise; fold if raised
+  - Score <=3000 (flush+): raise
+  - Score <=5000 (pair+): call/raise
+  - Score <=7000 (marginal): call if no raise; fold if raised
   - Score >7000 (weak): fold if raised; check
 
-The bot has **no persona adaptation** — it plays the same tight-aggressive strategy against every persona. All behavioral diversity in the 1,000 trials comes from the 7 sub-policies above.
+The bot has **no persona adaptation**  -  it plays the same tight-aggressive strategy against every persona. All behavioral diversity in the 1,000 trials comes from the 7 sub-policies above.
 
 ---
 
@@ -85,7 +85,7 @@ The bot has **no persona adaptation** — it plays the same tight-aggressive str
 | **balanced** | 501 | **45.1%** | **-2.9** | -20 |
 | **risk_averse** | 319 | **25.4%** | **-10.3** | -20 |
 
-The spread from best (82.0%) to worst (25.4%) is **56.6 percentage points** — the largest single predictor of performance.
+The spread from best (82.0%) to worst (25.4%) is **56.6 percentage points**  -  the largest single predictor of performance.
 
 #### Risk Posture × Exploration Style Interaction
 
@@ -153,7 +153,7 @@ At 9.1% win rate on 23 trials, pot odds usage is **counterproductive**. Mathemat
 
 1. **DecisionStylePolicy** calls based on pot odds but then the bot re-raises on later streets, trapping the caller.
 2. The `_pot_odds_decision` in `DecisionStylePolicy` (line 352-357) calls when `pot_odds <= 0.4`, which may be too loose for heads-up play.
-3. Pot odds from `DomainKnowledgePolicy` (line 226-228) uses a similar threshold (`pot_odds <= 0.35`) — both may be too permissive.
+3. Pot odds from `DomainKnowledgePolicy` (line 226-228) uses a similar threshold (`pot_odds <= 0.35`)  -  both may be too permissive.
 
 ---
 
@@ -163,7 +163,7 @@ All 1,000 personas have 82-dimension profiles from the `generated_1000_manifest.
 
 ### Strongest Signals (10%+ win rate spread)
 
-| Dimension | Category | Win Rate | Avg Chip | Δ Win Rate |
+| Dimension | Category | Win Rate | Avg Chip | Delta  Win Rate |
 |---|---|---|---|---|
 | **Dominant Trait** | High agreeableness | 46.7% | +8.4 | **+7.8pp** |
 | | High neuroticism | 38.9% | -15.3 | |
@@ -180,7 +180,7 @@ All 1,000 personas have 82-dimension profiles from the `generated_1000_manifest.
 
 ### Medium Signals (5-10% win rate spread)
 
-| Dimension | Best | Win Rate | Worst | Win Rate | Δ |
+| Dimension | Best | Win Rate | Worst | Win Rate | Delta  |
 |---|---|---|---|---|---|
 | **Trust Level** | Verifying | **51.9%** | Hostile | 38.5% | 13.4pp |
 | **Neurotype** | ADHD | **47.8%** | Neurotypical | 38.5% | 9.3pp |
@@ -198,7 +198,7 @@ All 1,000 personas have 82-dimension profiles from the `generated_1000_manifest.
 | **Decision Speed** | ~200 each | 4.4pp | Balanced (45.9%) vs Snap (41.5%) |
 | **Time Pressure** | ~250 each | 5.7pp | Deadline (46.4%) vs No rush (40.6%) |
 
-Counterintuitive: **Deadline** time pressure outperforms **No rush**. And **Opportunity-focused** risk framing doesn't help (43.9%) — essentially the same as **Threat-focused** (42.2%).
+Counterintuitive: **Deadline** time pressure outperforms **No rush**. And **Opportunity-focused** risk framing doesn't help (43.9%)  -  essentially the same as **Threat-focused** (42.2%).
 
 ### Notable Comparisons (Winners vs Losers)
 
@@ -206,19 +206,19 @@ Counterintuitive: **Deadline** time pressure outperforms **No rush**. And **Oppo
 | Persona | Chips | Risk Posture | Exploration | Notable Dimensions |
 |---|---|---|---|---|
 | 0022 | +570 | balanced | compared_multiple | ADHD, Hostile trust, Opportunity-focused, age 13-17 |
-| 0198 | +540 | risk_seeking | compared_multiple | — |
-| 0333 | +520 | balanced | compared_multiple | — |
-| 1000 | +500 | risk_seeking | quick_pick | — |
-| 0636 | +470 | opportunistic | quick_pick | — |
+| 0198 | +540 | risk_seeking | compared_multiple |  -  |
+| 0333 | +520 | balanced | compared_multiple |  -  |
+| 1000 | +500 | risk_seeking | quick_pick |  -  |
+| 0636 | +470 | opportunistic | quick_pick |  -  |
 
 **Bottom 5 Losers (worst chip delta):**
 | Persona | Chips | Risk Posture | Exploration | Notable Dimensions |
 |---|---|---|---|---|
 | 0065 | -360 | risk_averse | compared_multiple | Anxiety-prone, Threat-focused, Avoidant tech, Hostile trust, age 13-17 |
-| 0661 | -340 | risk_seeking | quick_pick | — |
-| 0059 | -320 | risk_averse | deep_research | — |
-| 0565 | -320 | balanced | compared_multiple | — |
-| 0045 | -280 | balanced | compared_multiple | — |
+| 0661 | -340 | risk_seeking | quick_pick |  -  |
+| 0059 | -320 | risk_averse | deep_research |  -  |
+| 0565 | -320 | balanced | compared_multiple |  -  |
+| 0045 | -280 | balanced | compared_multiple |  -  |
 
 Persona 0022 (best) and 0065 (worst) are both age 13-17, both non-binary. The key difference: 0022 is Risk-tolerant + Opportunity-focused + ADHD (impulsive, bets aggressively), while 0065 is Risk-averse + Anxiety-prone + Threat-focused (folds too much).
 
@@ -228,13 +228,13 @@ Persona 0022 (best) and 0065 (worst) are both age 13-17, both non-binary. The ke
 
 | Range | Count | Interpretation |
 |---|---|---|
-| ≤ -200 | 42 | Big losses (all-in confrontations) |
+| <= -200 | 42 | Big losses (all-in confrontations) |
 | -199 to -100 | 46 | Medium losses |
 | -99 to -1 | 455 | Small losses (blind steals, small pots) |
 | 0 | 20 | Ties |
 | 1 to 99 | 358 | Small wins |
 | 100 to 199 | 16 | Medium wins |
-| ≥ 200 | 63 | Big wins (all-in double-ups) |
+| >= 200 | 63 | Big wins (all-in double-ups) |
 
 The distribution is asymmetric: **big wins (63) outnumber big losses (42)**, suggesting aggressive play (when it works) generates larger pots than it loses. But the overall mean is still ~0 because the frequent small losses (455) outweigh the big wins.
 
@@ -254,16 +254,16 @@ The generated-1000 dataset samples from both pools. Source did not significantly
 ## 8. Methodological Caveats
 
 1. **Single run, no replication.** All 1,000 trials used seed 42. A different base seed would produce different deterministic personas and different game seeds. Variance between runs should be tested.
-2. **The bot is fixed.** The opponent plays identically against every persona. A persona-adaptive bot would change the dynamics — the current results measure how personas fare against a baseline tight-aggressive strategy, not against each other.
+2. **The bot is fixed.** The opponent plays identically against every persona. A persona-adaptive bot would change the dynamics  -  the current results measure how personas fare against a baseline tight-aggressive strategy, not against each other.
 3. **Policy chain priority matters.** The policy evaluation order in `build_policy()` determines which dimensions dominate. Currently `TimePressurePolicy` runs first, then `RiskPolicy`. Reordering would change behavior.
 4. **Normative thresholds not calibrated.** The Sklansky fold probabilities, TrustPolicy call rates, etc. were set as reasonable first guesses. They have not been calibrated against real human poker data or game-theoretic optimal ranges.
-5. **No post-flop depth.** The current policies operate primarily on preflop hand strength and simple bet-position heuristics. Post-flop play (bet sizing, board texture, implied odds) is minimal — most decisions reduce to "fold behind, check ahead, raise sometimes."
+5. **No post-flop depth.** The current policies operate primarily on preflop hand strength and simple bet-position heuristics. Post-flop play (bet sizing, board texture, implied odds) is minimal  -  most decisions reduce to "fold behind, check ahead, raise sometimes."
 
 ---
 
 ## 9. Recommendations for Future Iterations
 
-These are refinement opportunities, not blockers. The 1,000/1,000 pass rate at μ=1.0 is solid.
+These are refinement opportunities, not blockers. The 1,000/1,000 pass rate at mean =1.0 is solid.
 
 ### Policy Tuning
 
@@ -271,7 +271,7 @@ These are refinement opportunities, not blockers. The 1,000/1,000 pass rate at �
 |---|---|---|
 | 1 | Risk-averse win rate too low (25.4%) | Loosen `_FOLD_PREFLOP` for `"Low"` risk: reduce Tier 5 fold from 30%→15%, Tier 7 from 70%→50% |
 | 2 | Opportunistic too dominant (82-91%) | Add a "recklessness penalty": fold pocket pairs on wet boards, or cap post-flop raise frequency at 60% |
-| 3 | Pot odds strategy broken (9.1%) | Investigate `_pot_odds_decision` in `DecisionStylePolicy` and `DomainKnowledgePolicy` — tighten threshold from 0.4→0.25 or add fold-to-re-raise logic |
+| 3 | Pot odds strategy broken (9.1%) | Investigate `_pot_odds_decision` in `DecisionStylePolicy` and `DomainKnowledgePolicy`  -  tighten threshold from 0.4→0.25 or add fold-to-re-raise logic |
 | 4 | Only 4.6% use non-hand-strength strategies | Add more `EconomicMotivation` values in the persona dataset, or map additional dimensions (e.g., `cog_risk_framing`) to `task_strategy_basis` |
 
 ### Dimension Mapping
@@ -290,7 +290,7 @@ These are refinement opportunities, not blockers. The 1,000/1,000 pass rate at �
 | # | Issue | Recommendation |
 |---|---|---|
 | 11 | 82 dimensions exist but only 9 are normalized | Add normalizers for: `cog_risk_framing`, `cognitive_style` dimensions (6+), `cultural_background`, `neurotype`, `emotional_state` |
-| 12 | Policy chain is hardcoded | Make policy priority configurable per-persona via `persona_strategy.json` — different personas could have different policy weights |
+| 12 | Policy chain is hardcoded | Make policy priority configurable per-persona via `persona_strategy.json`  -  different personas could have different policy weights |
 | 13 | No post-flop sophistication | Add board texture evaluation (wet vs dry, paired boards, flush/straight draws) and stack-to-pot ratio (SPR) awareness |
 | 14 | Single fixed bot opponent | Consider persona-adaptive bot that adjusts to opponents' tendencies (exploitative play) |
 
@@ -299,9 +299,9 @@ These are refinement opportunities, not blockers. The 1,000/1,000 pass rate at �
 ## 10. Data Files
 
 All results files are on `staging/poker-sklansky-preflop`:
-- `results/texas_holdem_1000_results_100pct.csv` — 1,000 trials, all reward=1.0
-- `results/texas_holdem_1000_results.csv` — Raw baseline (994 pass, 6 verifier failures)
-- `results/rollout_summary_100pct.json` — Aggregate stats for corrected dataset
-- `results/rollout_summary.json` — Aggregate stats for raw dataset
-- `results/generated_1000_manifest.json` — Full 82-dimension profiles for all 1,000 personas
-- `results/texas-holdem-1000-persona-raw.tar.gz` — Individual trial artifacts (50 MB)
+- `results/texas_holdem_1000_results_100pct.csv`  -  1,000 trials, all reward=1.0
+- `results/texas_holdem_1000_results.csv`  -  Raw baseline (994 pass, 6 verifier failures)
+- `results/rollout_summary_100pct.json`  -  Aggregate stats for corrected dataset
+- `results/rollout_summary.json`  -  Aggregate stats for raw dataset
+- `results/generated_1000_manifest.json`  -  Full 82-dimension profiles for all 1,000 personas
+- `results/texas-holdem-1000-persona-raw.tar.gz`  -  Individual trial artifacts (50 MB)
