@@ -90,6 +90,8 @@ class DirectEngineEvaluator:
             "pot_size": state.pot,
             "decision_outcome": "selected" if state.chip_delta >= 0 else "rejected",
             "basis_primary": "quality" if state.chip_delta >= 0 else "price",
+            "risk_tolerance": self.dims.get("risk_tolerance", "unknown"),
+            "decision_style": self.dims.get("decision_style", "unknown"),
             "risk_posture": risk_posture,
             "exploration_style": exploration_style,
             "task_strategy_basis": task_strategy_basis,
