@@ -84,7 +84,7 @@ Submitted 2026-07-20:
 | Original Hugging Face upload | `33386510` | Cancelled by failed dependency |
 | Initial partial-snapshot upload | `33714427` | Cancelled after 2:31:21 to remove the CLI token argument |
 | First secured upload resume | `33777486` | Cancelled after 1:07 for remote legacy-data cleanup |
-| Current secured upload resume | `33778360` | Submitted after cleanup; resumable cache retained |
+| Secured upload completion | `33778360` | Completed in 5:36:53 with exit code 0 |
 
 Synthetic materialization, 464 of 465 human tasks, and the Real Human Survey
 completed. Human task 73 failed; the dependency-bound strict finalizer and
@@ -105,11 +105,11 @@ files:          2,165
 bytes:          3,184,579,171,356
 ```
 
-Hugging Face target:
+Hugging Face locations:
 
 ```text
-repo: MatrAIx2026/Persona8B
-revision: unified-8.4b
+primary mirror: https://huggingface.co/datasets/MatrAIx/Persona8B/tree/main
+original upload: https://huggingface.co/datasets/MatrAIx2026/Persona8B/tree/unified-8.4b
 ```
 
 The dedicated revision prevents this physical Parquet snapshot from being
@@ -121,7 +121,7 @@ reserved for this physical Parquet snapshot and its release metadata.
 Target URL:
 
 ```text
-https://huggingface.co/datasets/MatrAIx2026/Persona8B/tree/unified-8.4b
+https://huggingface.co/datasets/MatrAIx/Persona8B/tree/main
 ```
 
 Authentication was verified as the `MatrAIx` Hugging Face identity before job
@@ -184,6 +184,25 @@ written into source, manifests, logs, or chat.
   Continue monitoring both the uploader counters and the remote revision rather
   than estimating progress from remote committed bytes alone.
 
+### 2026-07-22: `MatrAIx/Persona8B` mirror verification
+
+- Dedicated environment credential `HF_TOKEN_persona8b` was verified with the
+  `MatrAIx` Hugging Face identity and write access to `MatrAIx/Persona8B`.
+- The target `main` revision already contains the complete accepted snapshot, so
+  another 3.18 TB network transfer was not submitted.
+- All 2,734 local payload files are present remotely with identical paths and
+  byte sizes. The only extra remote file is the expected `.gitattributes`.
+- All 2,165 Parquet LFS objects were compared by SHA-256 using the local
+  `upload-large-folder` cache and remote LFS metadata: 2,165 matches, zero
+  missing paths, zero extra data paths, and zero hash mismatches.
+- Verified Parquet bytes: 3,184,579,171,356. The remote data subtree contains
+  exactly 2,165 files: 1,700 synthetic and 465 human/survey Parquet files.
+- Top-level `README.md`, `manifest.json`, `persona_codes.schema.json`, and
+  `submission.json` also have byte-identical SHA-256 hashes locally and remotely.
+- The target's upload history shows the final `upload-large-folder` commit at
+  2026-07-21 12:14 UTC. The target is therefore treated as a complete verified
+  mirror rather than retransmitted redundantly.
+
 ## Run and monitor
 
 ```bash
@@ -206,10 +225,10 @@ preempted tasks can be resubmitted by array index without changing successful
 outputs. The upload command is resumable and stores its local progress metadata
 under the materialized folder.
 
-If upload job `33778360` fails or reaches its three-day wall time, resubmit
-[`jobs/upload.job`](jobs/upload.job) with the same `OUTPUT`, `REPO_ID`, and
-`REVISION`. `hf upload-large-folder` reuses its local cache and skips completed
-work. Do not rerun the full materialization pipeline merely to resume upload.
+Upload job `33778360` completed successfully. If a future mirror repair is
+needed, resubmit [`jobs/upload.job`](jobs/upload.job) with the desired `REPO_ID`
+and `REVISION`; `hf upload-large-folder` reuses its local cache and server-side
+LFS/Xet objects. Do not rerun the materialization pipeline to repair a mirror.
 
 ## Production inputs
 
@@ -227,8 +246,9 @@ work. Do not rerun the full materialization pipeline merely to resume upload.
 
 - Do not describe this accepted snapshot as exactly 8.4B rows.
 - Do not upload the quarantined task-73 `.parquet.part` file.
-- Do not upload this physical snapshot to `main`; use `unified-8.4b`.
+- `MatrAIx2026/Persona8B` uses `unified-8.4b`; the verified
+  `MatrAIx/Persona8B` mirror intentionally uses `main`.
 - Do not delete source data, rejection bitmaps, reports, or completed Parquet
   shards while upload is active.
-- Do not declare the upload complete until job `33778360` succeeds and the
-  dataset files are visible on the Hugging Face revision.
+- Both documented Hugging Face locations are complete and manifest-verified as
+  of 2026-07-22.
