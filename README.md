@@ -147,6 +147,12 @@ Literature: [docs/research/](docs/research/README.md)
 
 ---
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=MatrAIx-ai/MatrAIx&type=Date)](https://star-history.com/#MatrAIx-ai/MatrAIx&Date)
+
+---
+
 ## License
 
 Apache 2.0 — see [LICENSE](LICENSE).
