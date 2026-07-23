@@ -24,6 +24,8 @@ from backend.service.job_aggregation import (
     REPORTING_LLM_ENABLE_ENV,
     REPORTING_LLM_MODEL_ENV,
     build_job_aggregation,
+    job_aggregation_artifact_is_fresh,
+    read_job_aggregation_artifact,
     read_reporting_status_artifact,
     reporting_status_artifact_path,
     write_reporting_status_artifact,
@@ -670,11 +672,15 @@ class HarborJobService:
         *,
         trials: list[str] | None = None,
     ) -> dict[str, Any] | None:
-        aggregation = build_job_aggregation(
-            job_dir,
-            repo_root=self.repo_root,
-            enable_llm=False,
-        )
+        cached = read_job_aggregation_artifact(job_dir)
+        if job_aggregation_artifact_is_fresh(job_dir, cached):
+            aggregation = cached
+        else:
+            aggregation = build_job_aggregation(
+                job_dir,
+                repo_root=self.repo_root,
+                enable_llm=False,
+            )
         self._maybe_schedule_reporting(
             job_name,
             job_dir,

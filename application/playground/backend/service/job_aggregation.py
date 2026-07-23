@@ -24,6 +24,11 @@ JUDGE_GROUP_BY_MODES = SUMMARY_GROUP_BY_MODES
 REPORTING_LLM_ENABLE_ENV = "PLAYGROUND_REPORTING_ENABLE_LLM"
 REPORTING_LLM_MODEL_ENV = "PLAYGROUND_REPORTING_LLM_MODEL"
 DEFAULT_REPORTING_LLM_MODEL = "openai/gpt-4o-mini"
+# High-cardinality categorical group-bys (e.g. course titles) can produce
+# hundreds of buckets; one JSON completion cannot reliably cover them all.
+SUMMARY_LLM_BUCKET_CHUNK = 30
+SUMMARY_LLM_SAMPLE_LIMIT = 2
+SUMMARY_LLM_SAMPLE_CHARS = 400
 # Discrete selected-item titles (course/book/product names). Always exact-count;
 # never TF-IDF theme-cluster even when verifiers historically tagged them textual.
 DISCRETE_SUBJECT_LABEL_FACET_KEYS = frozenset(
@@ -72,6 +77,56 @@ def read_job_aggregation_artifact(job_dir: Path) -> dict[str, Any] | None:
     return payload if isinstance(payload, dict) else None
 
 
+def iter_job_trial_dirs(job_dir: Path) -> list[Path]:
+    """Trial directories under a job (excludes bookkeeping folders)."""
+    if not job_dir.is_dir():
+        return []
+    return sorted(
+        [
+            path
+            for path in job_dir.iterdir()
+            if path.is_dir()
+            and path.name not in {"_inputs", "_generated"}
+            and not path.name.startswith(".")
+        ]
+    )
+
+
+def cheap_job_coverage(job_dir: Path) -> dict[str, int]:
+    """Coverage counts from directory layout + result.json presence only."""
+    trial_dirs = iter_job_trial_dirs(job_dir)
+    completed = sum(1 for path in trial_dirs if (path / "result.json").is_file())
+    trial_count = len(trial_dirs)
+    return {
+        "trialCount": trial_count,
+        "completedTrials": completed,
+        "pendingTrials": trial_count - completed,
+    }
+
+
+def job_aggregation_artifact_is_fresh(
+    job_dir: Path,
+    payload: dict[str, Any] | None,
+) -> bool:
+    """True when cached aggregation coverage still matches disk (no eval reads)."""
+    if not isinstance(payload, dict):
+        return False
+    coverage = payload.get("coverage")
+    if not isinstance(coverage, dict):
+        return False
+    live = cheap_job_coverage(job_dir)
+    if live["trialCount"] <= 0:
+        return False
+    try:
+        return (
+            int(coverage.get("trialCount")) == live["trialCount"]
+            and int(coverage.get("completedTrials")) == live["completedTrials"]
+            and int(coverage.get("pendingTrials")) == live["pendingTrials"]
+        )
+    except (TypeError, ValueError):
+        return False
+
+
 def read_reporting_status_artifact(job_dir: Path) -> dict[str, Any] | None:
     path = reporting_status_artifact_path(job_dir)
     if not path.is_file():
@@ -104,13 +159,7 @@ def build_job_aggregation(
         return None
 
     previous_payload = read_job_aggregation_artifact(job_dir)
-    trial_dirs = sorted(
-        [
-            path
-            for path in job_dir.iterdir()
-            if path.is_dir() and path.name not in {"_inputs", "_generated"} and not path.name.startswith(".")
-        ]
-    )
+    trial_dirs = iter_job_trial_dirs(job_dir)
     if not trial_dirs:
         return None
 
@@ -1840,7 +1889,8 @@ def _cached_result_matches(cached: dict[str, Any] | None, fingerprint: str) -> b
         return False
     if str(cached.get("llmFingerprint") or "") != fingerprint:
         return False
-    return str(cached.get("status") or "") in {"llm_completed", "llm_failed"}
+    # Only reuse successes — llm_failed must be retryable on the next reporting pass.
+    return str(cached.get("status") or "") == "llm_completed"
 
 
 def _reuse_cached_summary(current: dict[str, Any], cached: dict[str, Any]) -> None:
@@ -2022,18 +2072,50 @@ def _fingerprint_reporting_unit(unit: dict[str, Any]) -> str:
     return hashlib.sha256(raw.encode("utf-8")).hexdigest()
 
 
-def _execute_summary_llm(summary: dict[str, Any], *, client: Any) -> None:
-    system = (
+def _lean_summary_buckets_for_llm(buckets: list[Any]) -> list[dict[str, Any]]:
+    """Shrink bucket payloads so large cohort prompts stay within model limits."""
+    lean: list[dict[str, Any]] = []
+    for bucket in buckets:
+        if not isinstance(bucket, dict):
+            continue
+        samples_raw = bucket.get("samples")
+        samples: list[str] = []
+        if isinstance(samples_raw, list):
+            for sample in samples_raw[:SUMMARY_LLM_SAMPLE_LIMIT]:
+                text = str(sample or "").strip()
+                if not text:
+                    continue
+                samples.append(text[:SUMMARY_LLM_SAMPLE_CHARS])
+        lean.append(
+            {
+                "bucket": bucket.get("bucket"),
+                "count": bucket.get("count"),
+                "samples": samples,
+            }
+        )
+    return lean
+
+
+def _summary_llm_system_prompt() -> str:
+    return (
         "You are an evaluation reporting assistant. Summarize grouped user text samples "
         "concisely and return strict JSON."
     )
-    instruction = str(summary.get("instruction") or "").strip()
-    user = json.dumps(
+
+
+def _summary_llm_user_payload(
+    *,
+    title: Any,
+    instruction: str,
+    buckets: list[dict[str, Any]],
+) -> str:
+    return json.dumps(
         {
             "task": "Summarize grouped text buckets for a completed evaluation job.",
-            "title": summary.get("title"),
-            "instruction": instruction or "Summarize each bucket faithfully without inventing new facts.",
-            "buckets": summary.get("buckets"),
+            "title": title,
+            "instruction": instruction
+            or "Summarize each bucket faithfully without inventing new facts.",
+            "buckets": buckets,
             "expectedOutput": {
                 "overallSummary": "string",
                 "bucketSummaries": [{"bucket": "string", "summary": "string"}],
@@ -2042,28 +2124,165 @@ def _execute_summary_llm(summary: dict[str, Any], *, client: Any) -> None:
         ensure_ascii=False,
         indent=2,
     )
-    try:
-        result = client.complete_json(system, user)
-    except Exception as exc:  # noqa: BLE001
-        summary["status"] = "llm_failed"
-        summary["error"] = str(exc)
-        return
-    overall_summary = str(result.get("overallSummary") or "").strip()
-    if overall_summary:
-        overall = summary.get("overall")
-        if isinstance(overall, dict):
-            overall["summary"] = overall_summary
-            overall["summaryType"] = "llm"
-    bucket_summaries = {
+
+
+def _bucket_summaries_from_llm_result(result: dict[str, Any]) -> dict[str, str]:
+    return {
         str(item.get("bucket") or ""): str(item.get("summary") or "").strip()
         for item in result.get("bucketSummaries", [])
-        if isinstance(item, dict)
+        if isinstance(item, dict) and str(item.get("bucket") or "").strip()
     }
+
+
+def _apply_bucket_summaries(
+    summary: dict[str, Any],
+    bucket_summaries: dict[str, str],
+) -> int:
+    applied = 0
     for bucket in summary.get("buckets", []) if isinstance(summary.get("buckets"), list) else []:
+        if not isinstance(bucket, dict):
+            continue
         value = bucket_summaries.get(str(bucket.get("bucket") or ""))
-        if value:
-            bucket["summary"] = value
-            bucket["summaryType"] = "llm"
+        if not value:
+            continue
+        bucket["summary"] = value
+        bucket["summaryType"] = "llm"
+        applied += 1
+    return applied
+
+
+def _set_summary_overall(summary: dict[str, Any], overall_summary: str) -> None:
+    text = overall_summary.strip()
+    if not text:
+        return
+    overall = summary.get("overall")
+    if not isinstance(overall, dict):
+        overall = {}
+        summary["overall"] = overall
+    overall["summary"] = text
+    overall["summaryType"] = "llm"
+
+
+def _merge_summary_chunk_overalls(
+    *,
+    client: Any,
+    title: Any,
+    chunk_overalls: list[str],
+) -> str:
+    if not chunk_overalls:
+        return ""
+    if len(chunk_overalls) == 1:
+        return chunk_overalls[0]
+    try:
+        result = client.complete_json(
+            "You are an evaluation reporting assistant. Merge partial summaries into one "
+            "concise overall summary. Return strict JSON.",
+            json.dumps(
+                {
+                    "task": "Merge chunk summaries into one overallSummary.",
+                    "title": title,
+                    "partialSummaries": chunk_overalls,
+                    "expectedOutput": {"overallSummary": "string"},
+                },
+                ensure_ascii=False,
+                indent=2,
+            ),
+        )
+    except Exception:  # noqa: BLE001
+        return " ".join(chunk_overalls)
+    if not isinstance(result, dict):
+        return " ".join(chunk_overalls)
+    merged = str(result.get("overallSummary") or "").strip()
+    return merged or " ".join(chunk_overalls)
+
+
+def _execute_summary_llm(summary: dict[str, Any], *, client: Any) -> None:
+    buckets = summary.get("buckets")
+    if not isinstance(buckets, list) or not buckets:
+        summary["status"] = "llm_failed"
+        summary["error"] = "no buckets to summarize"
+        return
+
+    instruction = str(summary.get("instruction") or "").strip()
+    title = summary.get("title")
+    system = _summary_llm_system_prompt()
+
+    # Small jobs keep the single-shot path; large cohort group-bys are chunked so
+    # the model can return strict JSON without truncating mid-object.
+    if len(buckets) <= SUMMARY_LLM_BUCKET_CHUNK:
+        user = _summary_llm_user_payload(
+            title=title,
+            instruction=instruction,
+            buckets=_lean_summary_buckets_for_llm(buckets),
+        )
+        try:
+            result = client.complete_json(system, user)
+        except Exception as exc:  # noqa: BLE001
+            summary["status"] = "llm_failed"
+            summary["error"] = str(exc)
+            return
+        if not isinstance(result, dict):
+            summary["status"] = "llm_failed"
+            summary["error"] = "Reporting LLM returned a non-object JSON payload."
+            return
+        _set_summary_overall(summary, str(result.get("overallSummary") or ""))
+        _apply_bucket_summaries(summary, _bucket_summaries_from_llm_result(result))
+        summary["status"] = "llm_completed"
+        summary.pop("error", None)
+        return
+
+    bucket_summaries: dict[str, str] = {}
+    chunk_overalls: list[str] = []
+    chunk_errors: list[str] = []
+    total_chunks = (len(buckets) + SUMMARY_LLM_BUCKET_CHUNK - 1) // SUMMARY_LLM_BUCKET_CHUNK
+    for chunk_index, start in enumerate(range(0, len(buckets), SUMMARY_LLM_BUCKET_CHUNK), start=1):
+        chunk = buckets[start : start + SUMMARY_LLM_BUCKET_CHUNK]
+        user = _summary_llm_user_payload(
+            title=title,
+            instruction=instruction,
+            buckets=_lean_summary_buckets_for_llm(chunk),
+        )
+        try:
+            result = client.complete_json(system, user)
+        except Exception as exc:  # noqa: BLE001
+            chunk_errors.append("chunk {}/{}: {}".format(chunk_index, total_chunks, exc))
+            continue
+        if not isinstance(result, dict):
+            chunk_errors.append(
+                "chunk {}/{}: Reporting LLM returned a non-object JSON payload.".format(
+                    chunk_index, total_chunks
+                )
+            )
+            continue
+        overall = str(result.get("overallSummary") or "").strip()
+        if overall:
+            chunk_overalls.append(overall)
+        bucket_summaries.update(_bucket_summaries_from_llm_result(result))
+
+    applied = _apply_bucket_summaries(summary, bucket_summaries)
+    if chunk_overalls:
+        _set_summary_overall(
+            summary,
+            _merge_summary_chunk_overalls(
+                client=client,
+                title=title,
+                chunk_overalls=chunk_overalls,
+            ),
+        )
+
+    if chunk_errors and applied == 0:
+        summary["status"] = "llm_failed"
+        summary["error"] = "; ".join(chunk_errors[:3])
+        return
+    if chunk_errors:
+        summary["status"] = "llm_failed"
+        summary["error"] = "{}; applied {}/{} bucket summaries".format(
+            "; ".join(chunk_errors[:3]),
+            applied,
+            len(buckets),
+        )
+        return
+
     summary["status"] = "llm_completed"
     summary.pop("error", None)
 

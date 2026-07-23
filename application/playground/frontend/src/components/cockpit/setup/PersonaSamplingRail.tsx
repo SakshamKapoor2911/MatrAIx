@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { api, ApiError } from "@/lib/api";
 import {
   PERSONA_BENCH_POOL,
+  PERSONA_CARD_PREVIEW_LIMIT,
   type PersonaPoolPersonaCard,
   type TaskPersonaStrategy,
 } from "@/lib/types";
@@ -243,14 +244,24 @@ export function PersonaSamplingRail({
     staleTime: 60_000,
   });
 
+  const previewPersonaIds = useMemo(
+    () => selectedPersonaIds.slice(0, PERSONA_CARD_PREVIEW_LIMIT),
+    [selectedPersonaIds],
+  );
+
   const lockedCohortQuery = useQuery({
-    queryKey: ["persona-pool-locked-cohort", selectedPersonaIds.join(",")],
+    queryKey: [
+      "persona-pool-locked-cohort",
+      personaPool ?? PERSONA_BENCH_POOL,
+      previewPersonaIds.join(","),
+    ],
     queryFn: () =>
       api.getPersonaPoolCards({
-        personaIds: selectedPersonaIds,
-        limit: selectedPersonaIds.length,
+        pool: personaPool ?? undefined,
+        personaIds: previewPersonaIds,
+        limit: previewPersonaIds.length,
       }),
-    enabled: Boolean(disabled) && mode !== "single" && selectedPersonaIds.length > 0,
+    enabled: Boolean(disabled) && mode !== "single" && previewPersonaIds.length > 0,
     staleTime: 300_000,
   });
 
@@ -327,7 +338,8 @@ export function PersonaSamplingRail({
         taskPath: taskPath?.trim() || undefined,
         autoEnsureStrategyPool: true,
       });
-      const cards = result.personas.map((row) => ({
+      // Select the full cohort immediately; only keep a small card preview for the rail.
+      const cards = result.personas.slice(0, PERSONA_CARD_PREVIEW_LIMIT).map((row) => ({
         personaId: row.personaId,
         name: row.name ?? `persona-${row.personaId}`,
         source: row.source,
@@ -535,7 +547,11 @@ export function PersonaSamplingRail({
                 onClick={() => void handleGenerate()}
                 className={`flex h-9 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-lg bg-surface-high/90 text-[13px] font-medium text-text-main hover:bg-surface-high disabled:opacity-50 ${FOCUS_RING}`}
               >
-                <Sym name="auto_awesome" size={15} className="text-primary" />
+                <Sym
+                  name={generating ? "autorenew" : "auto_awesome"}
+                  size={15}
+                  className={generating ? "animate-rb-spin text-primary" : "text-primary"}
+                />
                 {generating ? "Generating…" : "Generate preview"}
               </button>
             </div>
@@ -595,6 +611,14 @@ export function PersonaSamplingRail({
                 onOpenDetail={() => setDetailPersona(persona)}
               />
             ))}
+            {mode !== "single" &&
+              selectedPersonaIds.length > displayCards.length &&
+              displayCards.length > 0 && (
+                <p className="rounded-lg border border-dashed border-outline/40 px-3 py-2 text-center text-[12px] text-text-dim">
+                  Previewing {displayCards.length} of {selectedPersonaIds.length} selected — full
+                  cohort is ready to launch.
+                </p>
+              )}
             {mode === "single" && !defaultCardsQuery.isLoading && displayCards.length === 0 && (
               <p className="rounded-lg border border-dashed border-outline/40 p-4 text-center text-[13px] text-text-dim">
                 No personas loaded. Check that the backend is running.
