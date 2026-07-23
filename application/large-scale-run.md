@@ -17,12 +17,47 @@ https://github.com/MatrAIx-ai/MatrAIx
 
 ## Personas
 
-Run each task with **1000 personas**, generated in **stratified mode**
-from the task's own `persona_strategy.json`. Set `sampleSize` to `1000`
-to request an exact total of 1000 personas. Do not also set
-`sampleSizePerValueGroup`: the two fields are mutually exclusive, and
-`sampleSizePerValueGroup` sets a quota for every stratum rather than an
-exact total.
+> [!IMPORTANT]
+> **A task-specific Hugging Face persona check is mandatory before every
+> run. Do not generate, sample, or substitute personas until this check has
+> been completed.**
+
+The canonical published data is under:
+
+https://huggingface.co/datasets/MatrAIx2026/Demo_Application_Data/tree/main
+
+For **each task independently**:
+
+1. Identify the task's type and exact task folder in the dataset, for example
+   `Type 2 - Chatbot/<task>/`.
+2. Inspect that exact task folder for a case-sensitive
+   `Persona Profiles/` directory.
+3. If `Persona Profiles/` exists, use the persona YAML files from that folder.
+   These are the canonical cohort for the task. **Do not randomly generate a
+   new cohort, rerun stratified generation, use a generic sample, or silently
+   fall back to another persona source.**
+4. Validate the published cohort before running: record the dataset revision,
+   count the `persona_*.yaml` files, check `manifest.json` when present, and
+   ensure the run configuration references the downloaded files.
+5. Record the Hugging Face task path, revision, persona count, and local
+   download path in the run README/configuration so the cohort is reproducible.
+
+The check must be performed even if another task of the same type has a
+`Persona Profiles/` folder. Personas are task-specific and must not be reused
+across tasks unless the dataset explicitly publishes them under that task.
+
+Only when the exact task folder has **no** `Persona Profiles/` directory may
+you generate personas from the task's own `persona_strategy.json`. In that
+fallback case, run with **1000 personas** in **stratified mode**. Set
+`sampleSize` to `1000` and do not also set `sampleSizePerValueGroup`: the two
+fields are mutually exclusive, and `sampleSizePerValueGroup` sets a quota for
+every stratum rather than an exact total. Save the generated cohort as the
+task-level `Persona Profiles/` directory so later runs can reuse it.
+
+If the dataset lookup fails because of authentication, connectivity, an
+ambiguous task mapping, or an invalid/mismatched manifest, stop and resolve
+the issue. **Failure to complete the check is not permission to generate a
+replacement cohort.**
 
 ## Running
 
@@ -41,23 +76,26 @@ Save everything for each run to the HuggingFace dataset:
 
 https://huggingface.co/datasets/MatrAIx2026/Demo_Application_Data/tree/main
 
-Place the `modelname_taskname` folder inside the existing folder on the
-dataset's main that matches the task's type (for example
-`Type 1 - Survey/`, `Type 2 - Chatbot/`, `Type 3 - Website/`,
-`Type 4 - App/`), using this structure:
+Place the run inside the existing dataset task folder, using the standard
+task-level persona and model-level artifact structure:
 
 ```
-folder: <type folder>/modelname_taskname
-├── persona profile/          1000 personas automatically generated
-│                             (stratified mode with sampleSize set to 1000),
-│                             each persona has its own yaml file
-├── artifact/                 all telemetries
-├── report/                   required PDF batch report plus the aggregation
-│                             data used to generate it
-├── README                    a small description of the task and the
-│                             configurations of the run
-└── persona_strategy.json
+folder: <type folder>/<task>/
+├── README.md
+├── Persona Profiles/         canonical task cohort
+│   ├── manifest.json         when available
+│   ├── persona_strategy.json when available
+│   └── persona_<id>.yaml
+└── <model-or-provider>/
+    ├── artifact/
+    │   └── jobs/
+    │       └── <evaluation-run>/  all run data and telemetry
+    └── report/                    required PDF batch report plus aggregation
 ```
+
+Do not duplicate `Persona Profiles/` inside a model/provider folder. Smoke
+tests, preflight runs, scheduler logs, sidecar/service logs, and report-build
+logs are not final evaluation artifacts and should not be uploaded.
 
 ## Generate and validate the PDF report
 
@@ -126,8 +164,8 @@ instructions/context, persona strategy, captured batch results, and the
 persona cohort. A successful trial run without this canonical PDF is not a
 complete large-scale deliverable.
 
-**Final note:** upload everything generated to
+**Final note:** upload the final evaluation deliverables to
 [MatrAIx2026/Demo_Application_Data](https://huggingface.co/datasets/MatrAIx2026/Demo_Application_Data/tree/main)
-on Hugging Face. Put each `modelname_taskname` folder under the matching task
-type folder on the dataset's `main` branch (for example, `Type 1 - Survey/`,
-`Type 2 - Chatbot/`, `Type 3 - Website/`, or `Type 4 - App/`).
+on Hugging Face. Put each model/provider folder under the exact task folder on
+the dataset's `main` branch, and keep the canonical persona cohort at the task
+level in `Persona Profiles/`.
