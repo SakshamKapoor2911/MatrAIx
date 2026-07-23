@@ -500,6 +500,73 @@ def test_get_job_surfaces_reporting_queue_status(tmp_path, monkeypatch):
     service.shutdown()
 
 
+def test_get_job_aggregation_reuses_fresh_artifact(tmp_path, monkeypatch):
+    repo = tmp_path
+    jobs_dir = repo / "jobs"
+    job_dir = jobs_dir / "cached-job"
+    trial_dir = job_dir / "trial-1"
+    (trial_dir / "verifier").mkdir(parents=True, exist_ok=True)
+    (trial_dir / "result.json").write_text("{}", encoding="utf-8")
+    (trial_dir / "config.json").write_text(
+        json.dumps({"task": {"path": "application/tasks/example-task"}}),
+        encoding="utf-8",
+    )
+    (trial_dir / "verifier" / "structured_output.json").write_text(
+        json.dumps(
+            {
+                "presenceCheck": {"passed": True},
+                "contexts": [
+                    {
+                        "key": "question.q1",
+                        "label": "Question 1",
+                        "contextType": "question_response",
+                        "facets": [
+                            {
+                                "key": "response",
+                                "label": "Response",
+                                "role": "primary",
+                                "kind": "categorical",
+                                "value": "yes",
+                            }
+                        ],
+                    }
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+    monkeypatch.delenv("PLAYGROUND_REPORTING_ENABLE_LLM", raising=False)
+    service = HarborJobService(
+        repo_root=repo,
+        jobs_dir=jobs_dir,
+        generated_configs_dir=repo / "configs" / "jobs",
+    )
+    service._executor = _FakeExecutor()
+
+    first = service.get_job_aggregation("cached-job")
+    generated_at = first["generatedAt"]
+    artifact_mtime = (job_dir / "aggregation.json").stat().st_mtime_ns
+
+    second = service.get_job_aggregation("cached-job")
+    assert second["generatedAt"] == generated_at
+    assert (job_dir / "aggregation.json").stat().st_mtime_ns == artifact_mtime
+
+    # New completed trial makes the cache stale and forces a rebuild.
+    trial_2 = job_dir / "trial-2"
+    (trial_2 / "verifier").mkdir(parents=True, exist_ok=True)
+    (trial_2 / "result.json").write_text("{}", encoding="utf-8")
+    (trial_2 / "verifier" / "structured_output.json").write_text(
+        (trial_dir / "verifier" / "structured_output.json").read_text(encoding="utf-8"),
+        encoding="utf-8",
+    )
+    third = service.get_job_aggregation("cached-job")
+    assert third["coverage"]["trialCount"] == 2
+    assert third["coverage"]["completedTrials"] == 2
+    assert (job_dir / "aggregation.json").stat().st_mtime_ns > artifact_mtime
+
+    service.shutdown()
+
+
 def test_launch_ios_cua_uses_use_computer_environment(tmp_path, monkeypatch):
     repo = tmp_path
     jobs_dir = repo / "jobs"

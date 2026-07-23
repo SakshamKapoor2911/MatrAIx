@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { api } from "@/lib/api";
 import type { PersonaPoolPersonaCard } from "@/lib/types";
+import { PERSONA_CARD_PREVIEW_LIMIT } from "@/lib/types";
 import { useHarborBatchLive } from "@/lib/useHarborBatchLive";
 import type { HarborCockpitPhase } from "@/lib/useHarborCockpitRun";
 import type { HarborCockpitTaskKind } from "@/lib/harborCockpitMappers";
@@ -117,14 +118,20 @@ export function useCockpitBatchJob(
     }
   }, [batchJobName, retryBusy]);
 
+  // Preview-only: launch uses the full ID list; the mosaic does not need every card.
+  const previewPersonaIds = useMemo(
+    () => effectivePersonaIds.slice(0, PERSONA_CARD_PREVIEW_LIMIT),
+    [effectivePersonaIds],
+  );
+
   const personaCardsQuery = useQuery({
-    queryKey: ["batch-cohort-personas", effectivePersonaIds.join(",")],
+    queryKey: ["batch-cohort-personas", previewPersonaIds.join(",")],
     queryFn: () =>
       api.getPersonaPoolCards({
-        personaIds: effectivePersonaIds,
-        limit: effectivePersonaIds.length,
+        personaIds: previewPersonaIds,
+        limit: previewPersonaIds.length,
       }),
-    enabled: effectivePersonaIds.length > 0,
+    enabled: previewPersonaIds.length > 0,
     staleTime: 300_000,
   });
 

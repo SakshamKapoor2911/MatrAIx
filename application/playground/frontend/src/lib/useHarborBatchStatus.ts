@@ -4,6 +4,7 @@ import { api, ApiError } from "./api";
 import type { HarborStatusCode } from "./types";
 
 const POLL_MS = 1_000;
+const TERMINAL_LAUNCH_STATUSES = new Set(["completed", "failed", "cancelled"]);
 
 export interface BatchStatusSnapshot {
   version: number;
@@ -14,6 +15,15 @@ export interface BatchStatusSnapshot {
   trialNames: string[];
   personaIds: (string | null)[];
   personaNames: (string | null)[];
+}
+
+function shouldStopPolling(snapshot: BatchStatusSnapshot): boolean {
+  const { pending, running, done, error } = snapshot.counts;
+  if (pending > 0 || running > 0) return false;
+  const launch = (snapshot.launchStatus ?? "").toLowerCase();
+  if (TERMINAL_LAUNCH_STATUSES.has(launch)) return true;
+  // Disk-only completed jobs may have a null launchStatus.
+  return snapshot.trialCount > 0 && done + error >= snapshot.trialCount;
 }
 
 /**
@@ -36,7 +46,15 @@ export function useHarborBatchStatus(jobName: string | null, enabled: boolean) {
     }
 
     let cancelled = false;
+    let intervalId: number | null = null;
     stateRef.current = null;
+
+    const stopPolling = () => {
+      if (intervalId != null) {
+        window.clearInterval(intervalId);
+        intervalId = null;
+      }
+    };
 
     const tick = async () => {
       const since = stateRef.current?.version ?? 0;
@@ -86,6 +104,9 @@ export function useHarborBatchStatus(jobName: string | null, enabled: boolean) {
 
         stateRef.current = next;
         setSnapshot(next);
+        if (shouldStopPolling(next)) {
+          stopPolling();
+        }
       } catch (exc) {
         if (cancelled) return;
         setError(exc instanceof ApiError ? exc.message : exc instanceof Error ? exc.message : String(exc));
@@ -93,10 +114,10 @@ export function useHarborBatchStatus(jobName: string | null, enabled: boolean) {
     };
 
     void tick();
-    const id = window.setInterval(() => void tick(), POLL_MS);
+    intervalId = window.setInterval(() => void tick(), POLL_MS);
     return () => {
       cancelled = true;
-      window.clearInterval(id);
+      stopPolling();
     };
   }, [jobName, enabled]);
 
