@@ -38,3 +38,14 @@ def test_notion_plan_comparison_is_registered():
     assert task.site_url == "https://www.notion.com/pricing"
     assert task.output_artifact == "notion_plan_comparison.json"
     assert task.submission_profile == "notion_plan_comparison"
+
+
+def test_allrecipes_recipe_choice_is_registered():
+    task = get_web_eval_task("web-allrecipes-recipe-choice")
+
+    assert task.task_path == "application/tasks/web-allrecipes-recipe-choice"
+    assert task.task_kind == "task"
+    assert task.site_name == "Allrecipes"
+    assert task.site_url == "https://www.allrecipes.com/"
+    assert task.output_artifact == "recipe_choice.json"
+    assert task.submission_profile == "recipe_choice"

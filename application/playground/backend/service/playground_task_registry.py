@@ -135,6 +135,13 @@ PLAYGROUND_TASK_INDEX: Dict[str, PlaygroundTaskEntry] = {
         output_artifact="notion_plan_comparison.json",
         submission_profile="notion_plan_comparison",
     ),
+    "web-allrecipes-recipe-choice": PlaygroundTaskEntry(
+        application_type="web",
+        site_name="Allrecipes",
+        site_url="https://www.allrecipes.com/",
+        output_artifact="recipe_choice.json",
+        submission_profile="recipe_choice",
+    ),
     # Chatbot
     "chat_recai": PlaygroundTaskEntry(application_type="chatbot"),
     "chat_openbb": PlaygroundTaskEntry(application_type="chatbot"),
