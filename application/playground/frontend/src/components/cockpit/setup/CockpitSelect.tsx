@@ -23,6 +23,8 @@ export interface CockpitSelectProps {
   hint?: string;
   /** Render the label to the left of the field instead of above (denser). */
   inlineLabel?: boolean;
+  /** Extra classes for the label (e.g. fixed width so stacked inline selects align). */
+  labelClassName?: string;
   /** Allow long option labels to wrap instead of truncating (survey prompts). */
   wrapOptions?: boolean;
   /** Make the open menu wider than the trigger for long option text. */
@@ -37,6 +39,7 @@ export function CockpitSelect({
   disabled,
   hint,
   inlineLabel = false,
+  labelClassName,
   wrapOptions = false,
   wideMenu = false,
 }: CockpitSelectProps) {
@@ -122,7 +125,7 @@ export function CockpitSelect({
       <span
         className={`text-[13px] font-medium text-text-dim normal-case tracking-normal ${
           inlineLabel ? "shrink-0" : ""
-        }`}
+        } ${labelClassName ?? ""}`}
       >
         {label}
       </span>

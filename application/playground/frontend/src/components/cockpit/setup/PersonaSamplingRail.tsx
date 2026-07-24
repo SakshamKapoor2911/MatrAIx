@@ -29,13 +29,17 @@ const TAB_LABELS: Record<PersonaSamplingMode, string> = {
   single: "Quick",
   random: "Random",
   stratified: "Stratified",
+  all: "All",
 };
 
 const TAB_TITLES: Record<PersonaSamplingMode, string> = {
   single: "Quick pick",
   random: "Random sample",
   stratified: "Stratified",
+  all: "Use every persona in the selected dataset",
 };
+
+const TAB_ORDER: PersonaSamplingMode[] = ["single", "random", "stratified", "all"];
 
 /** Default showcase personas from bench-dev-sample (smoke + spread). */
 const QUICK_PICK_PERSONA_IDS = ["0042", "0001", "0328", "0058", "0012", "0020", "0030", "0040"];
@@ -56,6 +60,7 @@ function strategyModeLabel(mode: string | null | undefined): string {
   if (mode === "stratified") return "Stratified";
   if (mode === "random") return "Random sample";
   if (mode === "single") return "Quick pick";
+  if (mode === "all") return "All";
   return "Custom";
 }
 
@@ -223,22 +228,39 @@ export function PersonaSamplingRail({
   const [sampleSizeDraft, setSampleSizeDraft] = useState<string | null>(null);
   const [perCellDraft, setPerCellDraft] = useState<string | null>(null);
 
+  const activePool = personaPool?.trim() || PERSONA_BENCH_POOL;
+  const isBenchPool = activePool === PERSONA_BENCH_POOL;
+
+  const datasetsQuery = useQuery({
+    queryKey: ["persona-pool-datasets"],
+    queryFn: () => api.listPersonaDatasets(),
+    staleTime: 60_000,
+  });
+
   const catalogQuery = useQuery({
-    queryKey: ["persona-pool-catalog"],
-    queryFn: () => api.getPersonaPoolCatalog(),
+    queryKey: ["persona-pool-catalog", activePool],
+    queryFn: () => api.getPersonaPoolCatalog(activePool),
     staleTime: 60_000,
   });
 
   const defaultCardsQuery = useQuery({
-    queryKey: ["persona-pool-default-cards", QUICK_PICK_PERSONA_IDS.join(",")],
+    queryKey: [
+      "persona-pool-default-cards",
+      activePool,
+      isBenchPool ? QUICK_PICK_PERSONA_IDS.join(",") : "preview",
+    ],
     queryFn: async () => {
       try {
         return await api.getPersonaPoolCards({
+          pool: activePool,
           limit: QUICK_PICK_PERSONA_IDS.length,
-          personaIds: QUICK_PICK_PERSONA_IDS,
+          personaIds: isBenchPool ? QUICK_PICK_PERSONA_IDS : undefined,
         });
       } catch {
-        return { pool: PERSONA_BENCH_POOL, personas: fallbackQuickPickCards() };
+        return {
+          pool: activePool,
+          personas: isBenchPool ? fallbackQuickPickCards() : [],
+        };
       }
     },
     staleTime: 60_000,
@@ -315,7 +337,40 @@ export function PersonaSamplingRail({
     [mode, onSelectedPersonaIdsChange, selectedPersonaIds],
   );
 
+  const handleSelectAll = useCallback(async () => {
+    setGenerating(true);
+    setGenerateError(null);
+    setGenerateCommand(null);
+    try {
+      const pool = activePool;
+      const idsResult = await api.listPersonaPoolIds(pool);
+      const personaIds = idsResult.personaIds;
+      if (personaIds.length === 0) {
+        throw new ApiError(404, "This dataset has no persona YAML files.");
+      }
+      const preview = await api.getPersonaPoolCards({
+        pool,
+        limit: Math.min(PERSONA_CARD_PREVIEW_LIMIT, personaIds.length),
+        personaIds: personaIds.slice(0, PERSONA_CARD_PREVIEW_LIMIT),
+      });
+      setGeneratedCards(preview.personas);
+      onSelectedPersonaIdsChange(personaIds);
+      onPersonaPoolChange?.(pool);
+    } catch (err) {
+      const raw =
+        err instanceof ApiError ? err.message : "Could not load the full dataset cohort.";
+      setGenerateError(raw);
+      setGenerateCommand(null);
+    } finally {
+      setGenerating(false);
+    }
+  }, [activePool, onPersonaPoolChange, onSelectedPersonaIdsChange]);
+
   const handleGenerate = useCallback(async () => {
+    if (mode === "all") {
+      await handleSelectAll();
+      return;
+    }
     setGenerating(true);
     setGenerateError(null);
     setGenerateCommand(null);
@@ -329,6 +384,7 @@ export function PersonaSamplingRail({
           ? clampPerCell(sampleSizePerValueGroup)
           : undefined;
       const result = await api.samplePersonaPool({
+        pool: personaPool?.trim() || PERSONA_BENCH_POOL,
         sampleSize,
         seed,
         sources: filters.sources.length ? filters.sources : undefined,
@@ -361,9 +417,11 @@ export function PersonaSamplingRail({
     }
   }, [
     filters,
+    handleSelectAll,
     mode,
     onPersonaPoolChange,
     onSelectedPersonaIdsChange,
+    personaPool,
     sampleSize,
     sampleSizePerValueGroup,
     seed,
@@ -371,30 +429,75 @@ export function PersonaSamplingRail({
     taskPath,
   ]);
 
+  const datasetOptions = useMemo<CockpitSelectOption[]>(() => {
+    const listed = datasetsQuery.data?.datasets ?? [];
+    const options: CockpitSelectOption[] = listed.map((item) => ({
+      value: item.pool,
+      label: item.label,
+      meta: item.count > 0 ? `${item.count} personas` : undefined,
+      group: item.kind === "generated" ? "Generated" : "Datasets",
+    }));
+    if (!options.some((opt) => opt.value === activePool)) {
+      const slug = activePool.split("/").filter(Boolean).pop() || "bench-dev-sample";
+      options.unshift({
+        value: activePool,
+        label: slug,
+        group: activePool.includes("/_generated/") ? "Generated" : "Datasets",
+      });
+    }
+    if (options.length === 0) {
+      return [{ value: PERSONA_BENCH_POOL, label: "bench-dev-sample", group: "Datasets" }];
+    }
+    return options;
+  }, [activePool, datasetsQuery.data?.datasets]);
+
+  const handleDatasetChange = useCallback(
+    (pool: string) => {
+      if (pool === activePool) return;
+      onPersonaPoolChange?.(pool);
+      onSelectedPersonaIdsChange([]);
+      setGeneratedCards([]);
+      setGenerateError(null);
+      setGenerateCommand(null);
+      setDetailPersona(null);
+    },
+    [activePool, onPersonaPoolChange, onSelectedPersonaIdsChange],
+  );
+
   const filterCount = activeFilterCount(filters);
   const poolCount = catalogQuery.data?.count;
   const showModelSelector =
     taskType === "survey" || taskType === "chatbot" || taskType === "web" || taskType === "os-app";
   const strategyLocked = hasTaskStrategy && useTaskDefaultStrategy;
   const customSamplingUnlocked = !strategyLocked;
-  const poolFooterLabel = poolSlugLabel(personaPool?.trim() || PERSONA_BENCH_POOL);
+  const poolFooterLabel = poolSlugLabel(activePool);
 
   return (
     <aside className="glass-panel glass-panel-rail relative flex h-full min-h-0 flex-col rounded-xl p-4">
       <div className="shrink-0">
         <CockpitRailHeader label="Persona" />
 
-        <div className="mb-2">
+        <div className="mb-2 space-y-1.5">
           {showModelSelector && (
             <CockpitSelect
               label="Model"
               inlineLabel
+              labelClassName="w-[4.25rem]"
               value={personaModel}
               options={personaModelOptions}
               disabled={disabled}
               onChange={onPersonaModelChange}
             />
           )}
+          <CockpitSelect
+            label="Dataset"
+            inlineLabel
+            labelClassName="w-[4.25rem]"
+            value={activePool}
+            options={datasetOptions}
+            disabled={disabled}
+            onChange={handleDatasetChange}
+          />
         </div>
 
         {hasTaskStrategy && taskPersonaStrategy ? (
@@ -418,8 +521,8 @@ export function PersonaSamplingRail({
           </div>
         ) : null}
 
-        <div className="cockpit-segment cockpit-segment--grid mb-2 grid-cols-3">
-          {(Object.keys(TAB_LABELS) as PersonaSamplingMode[]).map((tab) => (
+        <div className="cockpit-segment cockpit-segment--grid mb-2 grid-cols-4">
+          {TAB_ORDER.map((tab) => (
             <button
               key={tab}
               type="button"
@@ -441,7 +544,44 @@ export function PersonaSamplingRail({
           </p>
         ) : null}
 
-        {mode !== "single" && (
+        {mode === "all" && (
+          <div className="mb-2 space-y-1.5">
+            <p className="glass-tile rounded-lg px-2.5 py-1.5 text-[12px] leading-snug text-text-variant">
+              Run the full selected dataset cohort
+              {typeof poolCount === "number" ? (
+                <>
+                  {" "}
+                  · <span className="font-mono text-text-main">{poolCount}</span> personas
+                </>
+              ) : null}
+              .
+            </p>
+            <button
+              type="button"
+              disabled={disabled || generating}
+              onClick={() => void handleSelectAll()}
+              className={`flex h-9 w-full items-center justify-center gap-1.5 rounded-lg bg-surface-high/90 text-[13px] font-medium text-text-main hover:bg-surface-high disabled:opacity-50 ${FOCUS_RING}`}
+            >
+              <Sym
+                name={generating ? "autorenew" : "done_all"}
+                size={15}
+                className={generating ? "animate-rb-spin text-primary" : "text-primary"}
+              />
+              {generating
+                ? "Loading cohort…"
+                : typeof poolCount === "number"
+                  ? `Select all · ${poolCount}`
+                  : "Select all"}
+            </button>
+            {generateError ? (
+              <div className="space-y-1.5 rounded-lg border border-danger/30 bg-danger/5 px-2.5 py-2">
+                <p className="text-[12px] leading-snug text-danger">{generateError}</p>
+              </div>
+            ) : null}
+          </div>
+        )}
+
+        {mode !== "single" && mode !== "all" && (
           <div className="mb-2 space-y-1.5">
             {customSamplingUnlocked ? (
               <button
@@ -594,7 +734,9 @@ export function PersonaSamplingRail({
         ) : (
           <div className="space-y-2">
             {mode === "single" && defaultCardsQuery.isLoading && quickPickCards.length === 0 && (
-              <p className="text-[13px] text-text-variant">Loading bench-dev-sample…</p>
+              <p className="text-[13px] text-text-variant">
+                Loading {activePool.split("/").filter(Boolean).pop() || "dataset"}…
+              </p>
             )}
             {mode === "single" && defaultCardsQuery.isError && quickPickCards.length > 0 && (
               <p className="text-[12px] text-warn">
@@ -628,7 +770,9 @@ export function PersonaSamplingRail({
               <p className="rounded-lg border border-dashed border-outline/40 p-4 text-center text-[13px] text-text-dim">
                 {strategyLocked
                   ? "Generate a preview cohort from the task default strategy."
-                  : "Set filters and generate a preview cohort."}
+                  : mode === "all"
+                    ? "Select all to load every persona from the chosen dataset."
+                    : "Set filters and generate a preview cohort."}
               </p>
             )}
             {mode !== "single" &&

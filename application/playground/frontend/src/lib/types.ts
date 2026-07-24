@@ -944,6 +944,25 @@ export interface PersonaPoolCatalog {
   };
 }
 
+export interface PersonaDatasetOption {
+  pool: string;
+  label: string;
+  kind: "dataset" | "generated" | string;
+  count: number;
+  default?: boolean;
+}
+
+export interface PersonaDatasetListResponse {
+  datasets: PersonaDatasetOption[];
+  defaultPool: string;
+}
+
+export interface PersonaPoolIdsResponse {
+  pool: string;
+  personaIds: string[];
+  count: number;
+}
+
 export interface PersonaPoolSampleResult {
   pool: string;
   matchedCount: number;

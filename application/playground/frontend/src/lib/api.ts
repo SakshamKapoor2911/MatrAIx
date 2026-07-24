@@ -9,8 +9,10 @@ import type {
   HarborJobLiveResponse,
   HarborJobStatusResponse,
   HarborTrialEventsResponse,
+  PersonaDatasetListResponse,
   PersonaPoolCatalog,
   PersonaPoolCardsResponse,
+  PersonaPoolIdsResponse,
   PersonaPoolPersonaDetail,
   PersonaPoolSampleResult,
   TaskDetail,
@@ -212,6 +214,12 @@ export const api = {
       body: JSON.stringify(body),
     }),
 
+  listPersonaDatasets: () =>
+    request<PersonaDatasetListResponse>("/api/persona-pool/datasets"),
+  listPersonaPoolIds: (pool = PERSONA_BENCH_POOL) =>
+    request<PersonaPoolIdsResponse>(
+      `/api/persona-pool/ids?${new URLSearchParams({ pool }).toString()}`,
+    ),
   getPersonaPoolCatalog: (pool = PERSONA_BENCH_POOL) =>
     request<PersonaPoolCatalog>(
       `/api/persona-pool/catalog?${new URLSearchParams({ pool }).toString()}`,
@@ -244,14 +252,14 @@ export const api = {
       ),
     );
   },
-  listAllPersonaPoolCards: async (pageSize = 50) => {
+  listAllPersonaPoolCards: async (pageSize = 50, poolPath = PERSONA_BENCH_POOL) => {
     const personas: PersonaPoolCardsResponse["personas"] = [];
-    let pool = PERSONA_BENCH_POOL;
+    let pool = poolPath.trim() || PERSONA_BENCH_POOL;
     let offset = 0;
     for (;;) {
       const page = await request<PersonaPoolCardsResponse>(
         `/api/persona-pool/personas${qs({
-          pool: PERSONA_BENCH_POOL,
+          pool,
           all: "true",
           limit: pageSize,
           offset,

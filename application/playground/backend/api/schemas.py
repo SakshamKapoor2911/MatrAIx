@@ -844,6 +844,27 @@ class PersonaPoolCatalogResponse(BaseModel):
     dimensionCategories: Dict[str, Any] = Field(default_factory=dict)
 
 
+class PersonaDatasetOption(BaseModel):
+    model_config = ConfigDict(extra="allow")
+
+    pool: str
+    label: str
+    kind: str = "dataset"
+    count: int = 0
+    default: bool = False
+
+
+class PersonaDatasetListResponse(BaseModel):
+    datasets: List[PersonaDatasetOption] = Field(default_factory=list)
+    defaultPool: str = "persona/datasets/bench-dev-sample"
+
+
+class PersonaPoolIdsResponse(BaseModel):
+    pool: str
+    personaIds: List[str] = Field(default_factory=list)
+    count: int = 0
+
+
 class PersonaPoolSampleRequest(BaseModel):
     pool: str = "persona/datasets/bench-dev-sample"
     sampleSize: int = 4

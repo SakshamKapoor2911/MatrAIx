@@ -29,8 +29,11 @@ PERSONA_CARD_DIMENSIONS = (
 )
 
 DEFAULT_PERSONA_POOL = "persona/datasets/bench-dev-sample"
+DATASETS_DIR = "persona/datasets"
 GENERATED_DATASETS_DIR = "persona/datasets/_generated"
 COHORTS_DIR = "persona/datasets/cohorts"
+# Top-level dirs under persona/datasets that are not selectable pools.
+_DATASETS_SKIP_TOP_LEVEL = frozenset({"_generated", "cohorts"})
 DIMENSION_CATEGORIES_PATH = "persona/schema/dimension_categories.json"
 # Soft guard against accidental filter explosions during auto top-up /
 # strategy-pool generation. Large cohort tasks (hundreds–thousands of
@@ -230,6 +233,103 @@ class PersonaPoolService:
         )
         return {**summary, "dimensionCategories": categories}
 
+    def _is_persona_dataset_dir(self, path: Path) -> bool:
+        if not path.is_dir():
+            return False
+        if (path / "manifest.json").is_file():
+            return True
+        return next(path.glob("persona_*.yaml"), None) is not None
+
+    def _dataset_count_hint(self, path: Path) -> int:
+        """Read pool size without loading multi‑MB manifests into memory."""
+        manifest_path = path / "manifest.json"
+        if manifest_path.is_file():
+            try:
+                size = manifest_path.stat().st_size
+            except OSError:
+                size = 0
+            if 0 < size <= 2_000_000:
+                try:
+                    payload = self._read_json(manifest_path)
+                    return int(
+                        payload.get("count") or len(payload.get("personas") or [])
+                    )
+                except (OSError, ValueError, json.JSONDecodeError, TypeError):
+                    pass
+            else:
+                # Large strategy pools put ``"count": N`` near the top.
+                try:
+                    with manifest_path.open("r", encoding="utf-8") as handle:
+                        head = handle.read(8192)
+                    match = re.search(r'"count"\s*:\s*(\d+)', head)
+                    if match:
+                        return int(match.group(1))
+                except (OSError, ValueError):
+                    pass
+        try:
+            return sum(1 for _ in path.glob("persona_*.yaml"))
+        except OSError:
+            return 0
+
+    def _dataset_entry(self, *, pool: str, label: str, kind: str, path: Path) -> dict[str, Any]:
+        return {
+            "pool": pool,
+            "label": label,
+            "kind": kind,
+            "count": self._dataset_count_hint(path),
+            "default": pool == DEFAULT_PERSONA_POOL,
+        }
+
+    def list_datasets(self) -> list[dict[str, Any]]:
+        """Discover selectable persona pools under ``persona/datasets/``.
+
+        Returns checked-in top-level pools first (default ``bench-dev-sample``),
+        then any local ``_generated/*`` strategy pools. Missing default is still
+        surfaced so the UI can keep its fallback option.
+        """
+        datasets_root = self.repo_root / DATASETS_DIR
+        by_pool: dict[str, dict[str, Any]] = {}
+
+        if datasets_root.is_dir():
+            for child in sorted(datasets_root.iterdir(), key=lambda p: p.name.lower()):
+                if not child.is_dir() or child.name in _DATASETS_SKIP_TOP_LEVEL:
+                    continue
+                if not self._is_persona_dataset_dir(child):
+                    continue
+                pool = f"{DATASETS_DIR}/{child.name}"
+                by_pool[pool] = self._dataset_entry(
+                    pool=pool, label=child.name, kind="dataset", path=child
+                )
+
+            generated_root = self.repo_root / GENERATED_DATASETS_DIR
+            if generated_root.is_dir():
+                for child in sorted(
+                    generated_root.iterdir(), key=lambda p: p.name.lower()
+                ):
+                    if not self._is_persona_dataset_dir(child):
+                        continue
+                    pool = f"{GENERATED_DATASETS_DIR}/{child.name}"
+                    by_pool[pool] = self._dataset_entry(
+                        pool=pool, label=child.name, kind="generated", path=child
+                    )
+
+        if DEFAULT_PERSONA_POOL not in by_pool:
+            by_pool[DEFAULT_PERSONA_POOL] = self._dataset_entry(
+                pool=DEFAULT_PERSONA_POOL,
+                label="bench-dev-sample",
+                kind="dataset",
+                path=self.repo_root / DEFAULT_PERSONA_POOL,
+            )
+
+        ordered = sorted(
+            by_pool.values(),
+            key=lambda item: (
+                0 if item["default"] else 1 if item["kind"] == "dataset" else 2,
+                str(item["label"]).lower(),
+            ),
+        )
+        return ordered
+
     def _normalize_dimension_filters(
         self, dimension_filters: dict[str, str | list[str]] | None
     ) -> dict[str, str | list[str]]:
@@ -333,6 +433,60 @@ class PersonaPoolService:
             "source": str(entry.get("source") or ""),
             "path": str(entry.get("path") or ""),
             "dimensions": display,
+        }
+
+    def list_persona_ids(
+        self, persona_pool: str = DEFAULT_PERSONA_POOL
+    ) -> dict[str, Any]:
+        """Return every persona id in a pool (for ``All`` cohort selection).
+
+        Prefers a moderate-size ``manifest.json`` persona list (canonical HF
+        cohorts). Falls back to ``persona_*.yaml`` filenames when the manifest
+        is missing, incomplete, or too large to load cheaply.
+        """
+        pool_dir = self._pool_dir(persona_pool)
+        if not pool_dir.is_dir():
+            raise FileNotFoundError("persona pool not found: {}".format(persona_pool))
+
+        ids: list[str] = []
+        manifest_path = pool_dir / "manifest.json"
+        if manifest_path.is_file():
+            try:
+                size = manifest_path.stat().st_size
+            except OSError:
+                size = 0
+            if 0 < size <= 8_000_000:
+                try:
+                    payload = self._read_json(manifest_path)
+                    for item in payload.get("personas") or []:
+                        if isinstance(item, dict):
+                            pid = str(item.get("persona_id") or "").strip()
+                        elif isinstance(item, str):
+                            stem = Path(item).stem
+                            pid = (
+                                stem[len("persona_") :]
+                                if stem.startswith("persona_")
+                                else stem
+                            )
+                        else:
+                            pid = ""
+                        if pid:
+                            ids.append(pid)
+                except (OSError, ValueError, json.JSONDecodeError, TypeError):
+                    ids = []
+
+        if not ids:
+            for path in sorted(pool_dir.glob("persona_*.yaml")):
+                stem = path.stem
+                if stem.startswith("persona_"):
+                    pid = stem[len("persona_") :]
+                    if pid:
+                        ids.append(pid)
+
+        return {
+            "pool": persona_pool,
+            "personaIds": ids,
+            "count": len(ids),
         }
 
     def list_persona_cards(

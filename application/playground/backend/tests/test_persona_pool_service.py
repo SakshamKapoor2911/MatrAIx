@@ -86,6 +86,50 @@ def _write_pool(repo: Path) -> None:
     )
 
 
+def test_list_persona_ids_from_yaml_filenames(tmp_path):
+    repo = tmp_path
+    _write_pool(repo)
+    service = PersonaPoolService(repo_root=repo)
+    listed = service.list_persona_ids("persona/datasets/bench-dev-sample")
+    assert listed["count"] == 2
+    assert listed["personaIds"] == ["0001", "0002"]
+
+
+def test_list_datasets_includes_default_and_extras(tmp_path):
+    repo = tmp_path
+    _write_pool(repo)
+    extra = repo / "persona" / "datasets" / "bench-dev-extra"
+    extra.mkdir(parents=True)
+    (extra / "manifest.json").write_text(
+        json.dumps({"count": 1, "personas": [{"persona_id": "0001"}]}),
+        encoding="utf-8",
+    )
+    generated = repo / "persona" / "datasets" / "_generated" / "strategy-demo"
+    generated.mkdir(parents=True)
+    (generated / "manifest.json").write_text(
+        json.dumps({"count": 3, "personas": []}),
+        encoding="utf-8",
+    )
+    (repo / "persona" / "datasets" / "cohorts" / "ignore-me").mkdir(parents=True)
+    (repo / "persona" / "datasets" / "cohorts" / "ignore-me" / "manifest.json").write_text(
+        "{}",
+        encoding="utf-8",
+    )
+    service = PersonaPoolService(repo_root=repo)
+
+    listed = service.list_datasets()
+    pools = [item["pool"] for item in listed]
+    assert pools[0] == "persona/datasets/bench-dev-sample"
+    assert listed[0]["default"] is True
+    assert listed[0]["label"] == "bench-dev-sample"
+    assert "persona/datasets/bench-dev-extra" in pools
+    assert "persona/datasets/_generated/strategy-demo" in pools
+    assert "persona/datasets/cohorts/ignore-me" not in pools
+    by_pool = {item["pool"]: item for item in listed}
+    assert by_pool["persona/datasets/bench-dev-extra"]["count"] == 1
+    assert by_pool["persona/datasets/_generated/strategy-demo"]["kind"] == "generated"
+
+
 def test_save_list_and_resolve_cohort(tmp_path, monkeypatch):
     repo = tmp_path
     _write_pool(repo)
