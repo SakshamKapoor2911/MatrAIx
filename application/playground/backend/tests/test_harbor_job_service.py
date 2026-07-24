@@ -739,6 +739,65 @@ def test_get_job_status_running_marker(tmp_path):
     assert snapshot["counts"]["running"] == 1
 
 
+def test_list_jobs_skips_aggregation_rebuild_for_completed_reporting(tmp_path, monkeypatch):
+    import json
+
+    jobs_dir = tmp_path / "jobs"
+    job_dir = jobs_dir / "done-job"
+    job_dir.mkdir(parents=True)
+    (job_dir / "result.json").write_text(
+        json.dumps(
+            {
+                "finished_at": "2026-07-01T12:00:00Z",
+                "n_total_trials": 1008,
+                "stats": {"n_completed_trials": 1008, "n_errored_trials": 0},
+            }
+        ),
+        encoding="utf-8",
+    )
+    (job_dir / "aggregation.json").write_text(
+        json.dumps(
+            {
+                "schemaVersion": "1.0",
+                "artifactType": "job_aggregation",
+                "coverage": {
+                    "trialCount": 1008,
+                    "completedTrials": 1008,
+                    "pendingTrials": 0,
+                },
+                "fields": [],
+                "contexts": [],
+                "reporting": {"status": "completed", "totalUnits": 0, "completedUnits": 0},
+            }
+        ),
+        encoding="utf-8",
+    )
+    monkeypatch.setenv("PLAYGROUND_REPORTING_ENABLE_LLM", "1")
+    calls: list[str] = []
+
+    def _boom(*_args, **_kwargs):
+        calls.append("build")
+        raise AssertionError("list_jobs must not rebuild aggregation for terminal reporting")
+
+    monkeypatch.setattr(
+        "backend.service.harbor_job_service.build_job_aggregation",
+        _boom,
+    )
+    service = HarborJobService(
+        repo_root=tmp_path,
+        jobs_dir=jobs_dir,
+        generated_configs_dir=tmp_path / "configs",
+    )
+    rows = service.list_jobs()
+    assert len(rows) == 1
+    assert rows[0]["jobName"] == "done-job"
+    assert rows[0]["trialCount"] == 1008
+    assert rows[0]["completedTrials"] == 1008
+    assert rows[0]["status"] == "success"
+    assert calls == []
+    service.shutdown()
+
+
 def test_list_jobs_reports_success_and_failed_status(tmp_path):
     import json
 
@@ -753,7 +812,8 @@ def test_list_jobs_reports_success_and_failed_status(tmp_path):
         json.dumps(
             {
                 "finished_at": "2026-07-01T12:00:00Z",
-                "stats": {"n_errored_trials": 0},
+                "n_total_trials": 1,
+                "stats": {"n_completed_trials": 1, "n_errored_trials": 0},
             }
         ),
         encoding="utf-8",
