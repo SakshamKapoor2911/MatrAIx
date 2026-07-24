@@ -137,6 +137,11 @@ def _build_cua_delegate(
             return OpenAICUAAgent(**common)
         if provider == "gemini":
             return GeminiCUAAgent(**common)
+        from matraix.agents.persona.use_computer_cua_protocol import (
+            apply_use_computer_anthropic_cua_protocol_patch,
+        )
+
+        apply_use_computer_anthropic_cua_protocol_patch()
         return AnthropicCUAAgent(**common)
 
     from harbor.agents.computer_1 import Computer1

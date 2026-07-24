@@ -2,9 +2,10 @@
 
 Drives Claude's native computer-use tool through the first-party ``anthropic``
 SDK (``AnthropicBedrock`` for Bedrock). This module is imported lazily by the
-provider registry, so the SDK import below only happens when this flavor is
-selected; a missing dependency surfaces as a friendly ``harbor[computer-1]``
-hint from ``load_provider``.
+provider registry. The SDK itself is imported only when a provider instance is
+constructed, so helpers like ``cua_protocol_for_model`` stay usable in unit
+tests without ``anthropic`` installed. A missing dependency surfaces as a
+friendly ``harbor[computer-1]`` hint from ``load_provider``.
 """
 
 from __future__ import annotations
@@ -12,8 +13,6 @@ from __future__ import annotations
 import asyncio
 import logging
 from typing import TYPE_CHECKING, Any, cast
-
-from anthropic import Anthropic, AnthropicBedrock
 
 from harbor.agents.computer_1.providers.base import (
     StepProvider,
@@ -288,6 +287,10 @@ class AnthropicProvider(StepProvider):
         self._cua_beta, self._cua_tool_type = cua_protocol_for_model(self.model_name)
         # Typed Any: Anthropic and AnthropicBedrock expose the same
         # beta.messages.create surface through distinct resource classes.
+        # Import the SDK here (not at module import) so protocol helpers can be
+        # unit-tested without the optional anthropic extra installed.
+        from anthropic import Anthropic, AnthropicBedrock
+
         self._client: Any
         if self.bedrock:
             self._client = AnthropicBedrock(aws_region=aws_region or "us-east-1")

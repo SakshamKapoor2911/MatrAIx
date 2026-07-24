@@ -89,3 +89,57 @@ def test_resolve_desktop_cua_provider_from_model_and_backend() -> None:
     assert resolve_desktop_cua_provider(
         "openai/gpt-5.5", cua_backend="anthropic"
     ) == "anthropic"
+
+
+def test_correct_anthropic_cua_create_kwargs_opus_4_8_uses_new_tool() -> None:
+    from matraix.agents.persona.use_computer_cua_protocol import (
+        correct_anthropic_cua_create_kwargs,
+    )
+
+    # use-computer 0.0.44 would have sent the legacy tool for opus-4-8.
+    corrected = correct_anthropic_cua_create_kwargs(
+        {
+            "model": "claude-opus-4-8",
+            "betas": ["computer-use-2025-01-24"],
+            "tools": [
+                {
+                    "type": "computer_20250124",
+                    "name": "computer",
+                    "display_width_px": 1280,
+                    "display_height_px": 800,
+                }
+            ],
+        }
+    )
+    assert corrected["betas"] == ["computer-use-2025-11-24"]
+    assert corrected["tools"][0]["type"] == "computer_20251124"
+    assert corrected["tools"][0]["name"] == "computer"
+
+
+def test_correct_anthropic_cua_create_kwargs_haiku_4_5_stays_legacy() -> None:
+    from matraix.agents.persona.use_computer_cua_protocol import (
+        correct_anthropic_cua_create_kwargs,
+    )
+
+    corrected = correct_anthropic_cua_create_kwargs(
+        {
+            "model": "claude-haiku-4-5",
+            "betas": ["computer-use-2025-01-24"],
+            "tools": [{"type": "computer_20250124", "name": "computer"}],
+        }
+    )
+    assert corrected["betas"] == ["computer-use-2025-01-24"]
+    assert corrected["tools"][0]["type"] == "computer_20250124"
+
+
+def test_apply_use_computer_anthropic_cua_protocol_patch_is_idempotent() -> None:
+    from matraix.agents.persona.use_computer_cua_protocol import (
+        apply_use_computer_anthropic_cua_protocol_patch,
+    )
+
+    first = apply_use_computer_anthropic_cua_protocol_patch()
+    second = apply_use_computer_anthropic_cua_protocol_patch()
+    # First call may be True (newly applied) or False if another test already
+    # patched; second must always be False (idempotent).
+    assert second is False
+    assert first in {True, False}
