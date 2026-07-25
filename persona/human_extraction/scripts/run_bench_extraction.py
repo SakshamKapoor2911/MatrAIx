@@ -8,7 +8,7 @@ get BOTH:
   2. an accurate throughput measurement to extrapolate to the full 1M-profile run.
 
 Outputs:
-  - data/bench_extraction_<N>.jsonl   : one JSON object per profile (all fields)
+    - data/wiki/diagnostics/bench_extraction_<N>.jsonl: one JSON object per profile
   - prints a throughput report + 1M-profile time estimate.
 """
 
@@ -34,7 +34,8 @@ from vllm import LLM, SamplingParams  # noqa: E402
 
 REPO_ROOT = Path("/n/netscratch/lu_lab/Lab/xiaominli/LLMResearch/MatrAIx")
 DATA_DIR = REPO_ROOT / "persona/human_extraction/data"
-DB_PATH = DATA_DIR / "wiki/matraix_wiki_profiles_20260601_v1.sqlite"
+DIAGNOSTICS_DIR = DATA_DIR / "wiki/diagnostics"
+DB_PATH = DATA_DIR / "wiki/source/matraix_wiki_profiles_20260601_v1.sqlite"
 DIMENSIONS_JSON = REPO_ROOT / "persona/schema/dimensions.json"
 
 MODEL_ID = "Qwen/Qwen3.6-35B-A3B"
@@ -212,7 +213,8 @@ def run_once(llm, sampling, rows, dims_all, by_category, dims_per_chunk, pack,
     }
     for gid, out in zip(index, outputs):
         results[gid]["fields"].extend(parse_fields(out.outputs[0].text))
-    out_path = DATA_DIR / f"bench_{tag}.jsonl"
+    DIAGNOSTICS_DIR.mkdir(parents=True, exist_ok=True)
+    out_path = DIAGNOSTICS_DIR / f"bench_{tag}.jsonl"
     with open(out_path, "w") as fh:
         for gid in results:
             fh.write(json.dumps(results[gid], ensure_ascii=False) + "\n")
@@ -283,7 +285,7 @@ def main() -> None:
                     help="flatten dims across categories (fewer, larger chunks)")
     ap.add_argument("--dims-chunk-sweep", default="50",
                     help="comma list of dims-per-chunk values to sweep in one model load")
-    ap.add_argument("--md-out", default=str(DATA_DIR / "benchmark_sweep.md"))
+    ap.add_argument("--md-out", default=str(DIAGNOSTICS_DIR / "benchmark_sweep.md"))
     args = ap.parse_args()
 
     schema_doc = json.load(open(DIMENSIONS_JSON))

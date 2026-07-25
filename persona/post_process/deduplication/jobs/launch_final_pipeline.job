@@ -1,0 +1,10 @@
+#!/bin/bash
+#SBATCH -p seas_compute
+#SBATCH -n 1
+#SBATCH -c 1
+#SBATCH --mem=2G
+#SBATCH -t 0-00:15
+#SBATCH -o sbatch_logs/%x_%j.out
+#SBATCH -e sbatch_logs/%x_%j.err
+set -euo pipefail
+exec /n/netscratch/lu_lab/Lab/xiaominli/LLMResearch/MatrAIx/persona/post_process/deduplication/jobs/launch_final_pipeline.sh

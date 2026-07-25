@@ -87,10 +87,12 @@ SUPPORTED_APPLICATION_IDS = (
     "medical_assistant",
     "acme_support_api",
     "acme_support_mcp",
+    "meal_planning_nutrition",
 )
 DEFAULT_APPLICATION_CONTEXTS = {
     "finance_openbb": "financial_research",
     "medical_assistant": "medical_consultation",
+    "meal_planning_nutrition": "meal_planning",
 }
 
 SUPPORTED_PERSONA_MODELS = tuple(PERSONA_MODEL_OPTIONS)
@@ -840,6 +842,27 @@ class PersonaPoolCatalogResponse(BaseModel):
     schemaVersion: Optional[str] = None
     dimensionCategoriesPath: Optional[str] = None
     dimensionCategories: Dict[str, Any] = Field(default_factory=dict)
+
+
+class PersonaDatasetOption(BaseModel):
+    model_config = ConfigDict(extra="allow")
+
+    pool: str
+    label: str
+    kind: str = "dataset"
+    count: int = 0
+    default: bool = False
+
+
+class PersonaDatasetListResponse(BaseModel):
+    datasets: List[PersonaDatasetOption] = Field(default_factory=list)
+    defaultPool: str = "persona/datasets/bench-dev-sample"
+
+
+class PersonaPoolIdsResponse(BaseModel):
+    pool: str
+    personaIds: List[str] = Field(default_factory=list)
+    count: int = 0
 
 
 class PersonaPoolSampleRequest(BaseModel):

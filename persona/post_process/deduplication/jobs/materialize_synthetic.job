@@ -1,0 +1,11 @@
+#!/bin/bash
+#SBATCH -p seas_compute
+#SBATCH -n 1
+#SBATCH -c 1
+#SBATCH --mem=16G
+#SBATCH -t 0-04:00
+#SBATCH -o sbatch_logs/%x_%A_%a.out
+#SBATCH -e sbatch_logs/%x_%A_%a.err
+set -euo pipefail
+R="${REPO_ROOT:?}"; S="${SLURM_ARRAY_TASK_ID:?}"; printf -v T "%04d" "$S"; mkdir -p "$OUTPUT/shard_$T"; cd "$R"
+PYTHONPATH="$R" "$PYTHON_BIN" persona/post_process/deduplication/materialize_synthetic.py --shard "$S" --projection "$PROJECTION" --config "$CONFIG" --source "$R/persona/synthesis/generated/full_dag_10b_20260703/shards/full_dag_100000000_shard_$T.codes.gz" --quality-bitmap "$R/persona/post_process/quality_filter/results/full_filter_20260719/synthetic/full_dag_100000000_shard_$T.reject.bits" --out "$OUTPUT/shard_$T"

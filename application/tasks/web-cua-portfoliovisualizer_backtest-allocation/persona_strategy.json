@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.0",
+  "sources": [],
+  "defaultMode": "stratified",
+  "stratifyFields": [
+    "risk_tolerance"
+  ],
+  "dimensionFilters": {
+    "age_bracket": [
+      "25-34",
+      "35-44",
+      "45-54",
+      "55-64",
+      "65-74"
+    ],
+    "risk_tolerance": [
+      "Risk-averse",
+      "Cautious",
+      "Balanced",
+      "Risk-tolerant",
+      "Risk-seeking"
+    ],
+    "socioeconomic_band": [
+      "Lower-middle",
+      "Middle",
+      "Upper-middle",
+      "High income"
+    ]
+  },
+  "sampleSizePerValueGroup": 2
+}

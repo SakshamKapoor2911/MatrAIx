@@ -35,12 +35,26 @@ def _make_agent(tmp_path: Path) -> Computer1:
 
 def _decode_write_command(cmd: str) -> tuple[str, str]:
     """Pull the destination path and decoded UTF-8 text out of the shell write."""
-    parts = shlex.split(cmd)
-    # The base64 payload is the argument after ``printf '%s'``.
-    printf_idx = parts.index("printf")
-    encoded = parts[printf_idx + 2]
-    redirect_idx = parts.index(">")
-    target_path = parts[redirect_idx + 1]
+    # Prefer the explicit `target=...` assignment from the dual-write command.
+    for part in shlex.split(cmd):
+        if part.startswith("target="):
+            # Shell forms like `target='/path';` leave a trailing `;` on this token.
+            target_path = part.split("=", 1)[1].rstrip(";")
+            break
+    else:
+        parts = shlex.split(cmd)
+        redirect_idx = parts.index(">")
+        target_path = parts[redirect_idx + 1].rstrip(";")
+
+    encoded = None
+    for part in shlex.split(cmd):
+        if part.startswith("encoded="):
+            encoded = part.split("=", 1)[1].rstrip(";")
+            break
+    if encoded is None:
+        parts = shlex.split(cmd)
+        printf_idx = parts.index("printf")
+        encoded = parts[printf_idx + 2].rstrip(";")
     return target_path, base64.b64decode(encoded).decode("utf-8")
 
 
@@ -59,6 +73,9 @@ async def test_write_final_answer_writes_via_environment_exec(tmp_path):
     target_path, decoded = _decode_write_command(cmd)
     assert target_path == str(EnvironmentPaths.agent_dir / FINAL_ANSWER_FILENAME)
     assert decoded == "the answer is 42"
+    assert (tmp_path / FINAL_ANSWER_FILENAME).read_text(encoding="utf-8") == (
+        "the answer is 42"
+    )
 
 
 @pytest.mark.asyncio
@@ -114,8 +131,7 @@ async def test_fallback_writes_when_no_final_answer_file(tmp_path, monkeypatch):
     monkeypatch.setattr(agent, "_litellm_extract_text_fallback", _empty_extract)
 
     env = AsyncMock()
-    # First call: ``test -f`` returns rc=1 (file missing).
-    # Second call: ``mkdir -p ... && printf ... | base64 -d > final_answer.txt``.
+    # Second call: dual-write shell (`encoded=` / `target=` / base64 -d).
     env.exec.side_effect = [
         SimpleNamespace(return_code=1, stdout="", stderr=""),
         SimpleNamespace(return_code=0, stdout="", stderr=""),

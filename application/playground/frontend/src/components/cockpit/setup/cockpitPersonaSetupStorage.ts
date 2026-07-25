@@ -126,7 +126,9 @@ function normalizeRecord(
       ? record.selectedPersonaIds.filter((id): id is string => typeof id === "string")
       : [],
     samplingMode:
-      record.samplingMode === "random" || record.samplingMode === "stratified"
+      record.samplingMode === "random" ||
+      record.samplingMode === "stratified" ||
+      record.samplingMode === "all"
         ? record.samplingMode
         : "single",
     groupFilters: record.groupFilters ?? emptyPersonaDimensionFilters(),
@@ -181,7 +183,7 @@ export function setupFromPersonaStrategy(
   if (!strategy) return next;
 
   const mode = strategy.defaultMode;
-  if (mode === "single" || mode === "random" || mode === "stratified") {
+  if (mode === "single" || mode === "random" || mode === "stratified" || mode === "all") {
     next.samplingMode = mode;
   }
 

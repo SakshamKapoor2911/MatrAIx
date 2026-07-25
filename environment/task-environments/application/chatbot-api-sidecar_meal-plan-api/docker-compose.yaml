@@ -7,6 +7,12 @@ services:
   meal-plan-api:
     build:
       context: ./meal-plan-api
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      MEAL_PLAN_LLM: ${MEAL_PLAN_LLM:-}
+      MEAL_PLAN_MODEL: ${MEAL_PLAN_MODEL:-gpt-4o-mini}
+      MEAL_PLAN_LLM_CONCURRENCY: ${MEAL_PLAN_LLM_CONCURRENCY:-32}
+      MEAL_PLAN_MAX_SESSIONS: ${MEAL_PLAN_MAX_SESSIONS:-2000}
     expose:
       - "8000"
     healthcheck:

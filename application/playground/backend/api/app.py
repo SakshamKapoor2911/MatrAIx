@@ -1052,6 +1052,33 @@ def create_app(catalog_path: Optional[str] = None) -> FastAPI:
         return FileResponse(path, media_type="video/mp4", filename="recording.mp4")
 
     @app.get(
+        "/api/persona-pool/datasets",
+        response_model=schemas.PersonaDatasetListResponse,
+        tags=["persona-pool"],
+    )
+    def list_persona_datasets(
+        services: AppState = Depends(get_services),
+    ) -> Dict[str, Any]:
+        return {
+            "datasets": services.persona_pool.list_datasets(),
+            "defaultPool": "persona/datasets/bench-dev-sample",
+        }
+
+    @app.get(
+        "/api/persona-pool/ids",
+        response_model=schemas.PersonaPoolIdsResponse,
+        tags=["persona-pool"],
+    )
+    def list_persona_pool_ids(
+        pool: str = Query(default="persona/datasets/bench-dev-sample"),
+        services: AppState = Depends(get_services),
+    ) -> Dict[str, Any]:
+        try:
+            return services.persona_pool.list_persona_ids(pool)
+        except (ValueError, FileNotFoundError, OSError) as exc:
+            raise HTTPException(status_code=404, detail=str(exc)) from exc
+
+    @app.get(
         "/api/persona-pool/catalog",
         response_model=schemas.PersonaPoolCatalogResponse,
         tags=["persona-pool"],

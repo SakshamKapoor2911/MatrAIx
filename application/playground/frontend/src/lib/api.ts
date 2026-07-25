@@ -2,14 +2,17 @@ import type {
   ConfigOptionsResponse,
   PlaygroundPersonasResponse,
   PlaygroundResult,
+  HarborJobAggregation,
   HarborJobDetail,
   HarborJobLaunchResponse,
   HarborJobsListResponse,
   HarborJobLiveResponse,
   HarborJobStatusResponse,
   HarborTrialEventsResponse,
+  PersonaDatasetListResponse,
   PersonaPoolCatalog,
   PersonaPoolCardsResponse,
+  PersonaPoolIdsResponse,
   PersonaPoolPersonaDetail,
   PersonaPoolSampleResult,
   TaskDetail,
@@ -26,8 +29,11 @@ import type {
   WebTrace,
   OsAppEvalTasksResponse,
 } from "./types";
-import { PERSONA_BENCH_POOL } from "./types";
+import { PERSONA_BENCH_POOL, PERSONA_CARD_PREVIEW_LIMIT } from "./types";
 import { normalizePersonaPoolName } from "./personaDisplay";
+
+/** Backend `/persona-pool/personas` rejects limit > 500. */
+const PERSONA_POOL_CARDS_LIMIT_MAX = 500;
 
 export class ApiError extends Error {
   readonly status: number;
@@ -138,7 +144,7 @@ export const api = {
       { method: "POST" },
     ),
   getHarborJobAggregation: (jobName: string) =>
-    request<HarborJobDetail["aggregation"]>(
+    request<HarborJobAggregation>(
       `/api/harbor/jobs/${encodeURIComponent(jobName)}/aggregation`,
     ),
   downloadHarborJobReportPdf: (jobName: string) =>
@@ -208,37 +214,52 @@ export const api = {
       body: JSON.stringify(body),
     }),
 
+  listPersonaDatasets: () =>
+    request<PersonaDatasetListResponse>("/api/persona-pool/datasets"),
+  listPersonaPoolIds: (pool = PERSONA_BENCH_POOL) =>
+    request<PersonaPoolIdsResponse>(
+      `/api/persona-pool/ids?${new URLSearchParams({ pool }).toString()}`,
+    ),
   getPersonaPoolCatalog: (pool = PERSONA_BENCH_POOL) =>
     request<PersonaPoolCatalog>(
       `/api/persona-pool/catalog?${new URLSearchParams({ pool }).toString()}`,
     ),
   getPersonaPoolCards: async (input?: {
+    pool?: string;
     limit?: number;
     offset?: number;
     seed?: number;
     personaIds?: string[];
     all?: boolean;
-  }) =>
-    normalizePersonaPoolCardsResponse(
+  }) => {
+    const personaIds = input?.personaIds?.slice(0, PERSONA_CARD_PREVIEW_LIMIT);
+    const requestedLimit = input?.limit ?? personaIds?.length ?? 10;
+    const limit = Math.min(
+      Math.max(1, requestedLimit),
+      PERSONA_CARD_PREVIEW_LIMIT,
+      PERSONA_POOL_CARDS_LIMIT_MAX,
+    );
+    return normalizePersonaPoolCardsResponse(
       await request<PersonaPoolCardsResponse>(
         `/api/persona-pool/personas${qs({
-          pool: PERSONA_BENCH_POOL,
-          limit: input?.limit,
+          pool: input?.pool?.trim() || PERSONA_BENCH_POOL,
+          limit,
           offset: input?.offset,
           seed: input?.seed,
-          personaIds: input?.personaIds?.join(","),
+          personaIds: personaIds?.join(","),
           all: input?.all ? "true" : undefined,
         })}`,
       ),
-    ),
-  listAllPersonaPoolCards: async (pageSize = 50) => {
+    );
+  },
+  listAllPersonaPoolCards: async (pageSize = 50, poolPath = PERSONA_BENCH_POOL) => {
     const personas: PersonaPoolCardsResponse["personas"] = [];
-    let pool = PERSONA_BENCH_POOL;
+    let pool = poolPath.trim() || PERSONA_BENCH_POOL;
     let offset = 0;
     for (;;) {
       const page = await request<PersonaPoolCardsResponse>(
         `/api/persona-pool/personas${qs({
-          pool: PERSONA_BENCH_POOL,
+          pool,
           all: "true",
           limit: pageSize,
           offset,

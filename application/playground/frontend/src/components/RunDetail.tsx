@@ -451,6 +451,8 @@ function ChatbotDebrief({ run }: { run: RunDetailView }) {
         transcript={run.transcript ?? []}
         persona={run.persona}
         questionnaire={run.questionnaire}
+        userFeedback={run.userFeedback}
+        selfReportSchema={run.selfReportSchema}
         metricScores={run.metricScores}
         verifier={run.verifier}
         trialEvaluation={run.trialEvaluation}

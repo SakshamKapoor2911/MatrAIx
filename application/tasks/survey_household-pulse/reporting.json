@@ -1,4 +1,83 @@
 {
   "schemaVersion": "1.0",
-  "contextRules": []
+  "contextRules": [
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q50"
+      },
+      "distributions": [
+        {
+          "id": "q50.response_by_segment",
+          "facetKey": "response",
+          "title": "Difficulty paying for household expenses (7 days)"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q54"
+      },
+      "distributions": [
+        {
+          "id": "q54.response_by_segment",
+          "facetKey": "response",
+          "title": "Got free groceries (7 days)"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q79"
+      },
+      "distributions": [
+        {
+          "id": "q79.response_by_segment",
+          "facetKey": "response",
+          "title": "Months reduced or forwent expenses (12 months)"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q3"
+      },
+      "distributions": [
+        {
+          "id": "q3.response_by_segment",
+          "facetKey": "response",
+          "title": "Highest education completed"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q97"
+      },
+      "distributions": [
+        {
+          "id": "q97.response_by_segment",
+          "facetKey": "response",
+          "title": "Employer / former employer health insurance"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q104"
+      },
+      "distributions": [
+        {
+          "id": "q104.response_by_segment",
+          "facetKey": "response",
+          "title": "Other health insurance coverage"
+        }
+      ]
+    }
+  ]
 }

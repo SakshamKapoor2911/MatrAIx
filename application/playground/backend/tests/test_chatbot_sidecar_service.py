@@ -16,6 +16,7 @@ def test_resolve_health_url_defaults(monkeypatch: pytest.MonkeyPatch) -> None:
     assert svc.resolve_health_url("finance_openbb") == "http://127.0.0.1:8901"
     assert svc.resolve_health_url("medical_assistant") == "http://127.0.0.1:8902"
     assert svc.resolve_health_url("acme_support_mcp") == "http://127.0.0.1:8903"
+    assert svc.resolve_health_url("meal_planning_nutrition") == "http://127.0.0.1:8905"
 
 
 def test_sidecar_status_unknown_application() -> None:
@@ -32,6 +33,7 @@ def test_list_sidecar_statuses(monkeypatch: pytest.MonkeyPatch) -> None:
         "medical_assistant",
         "acme_support_api",
         "acme_support_mcp",
+        "meal_planning_nutrition",
     }
     assert all(item["ok"] for item in statuses)
     by_id = {item["applicationId"]: item for item in statuses}
@@ -40,6 +42,7 @@ def test_list_sidecar_statuses(monkeypatch: pytest.MonkeyPatch) -> None:
     assert by_id["medical_assistant"]["canStart"] is True
     assert by_id["acme_support_api"]["canStart"] is True
     assert by_id["acme_support_mcp"]["canStart"] is True
+    assert by_id["meal_planning_nutrition"]["canStart"] is True
 
 
 def test_start_sidecar_runs_compose_for_sidecar_only(

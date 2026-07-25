@@ -3,7 +3,14 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from backend.service.job_aggregation import build_job_aggregation
+from backend.service.job_aggregation import (
+    SUMMARY_LLM_BUCKET_CHUNK,
+    _execute_summary_llm,
+    build_job_aggregation,
+    job_aggregation_artifact_is_fresh,
+    read_job_aggregation_artifact,
+    write_job_aggregation,
+)
 
 
 def _write_trial(job_dir: Path, trial_name: str, payload: dict) -> None:
@@ -361,6 +368,55 @@ def test_build_job_aggregation_synthesizes_user_feedback_context(tmp_path: Path)
     assert feedback_context["judges"][0]["id"] == "user_feedback.reason_signal_scan"
     assert aggregation["reporting"]["status"] == "ready"
     assert aggregation["reporting"]["totalUnits"] == 2
+
+
+def test_yaml_yes_no_choices_not_boolified(tmp_path: Path) -> None:
+    """Bare YAML ``yes``/``no`` must stay enum choice tokens, not booleans."""
+    repo_root = tmp_path
+    task = "chat_openbb-corporate-action-honesty"
+    _write_feedback_task(
+        repo_root,
+        task=task,
+        schema_lines=[
+            "artifactName: user_feedback.json",
+            "fields:",
+            "  - key: hcpDelistingHandled",
+            "    prompt: Did HCP meet expectations?",
+            "    kind: enum",
+            "    choices: [yes, partially, no]",
+            "  - key: needConstraintSatisfaction",
+            "    prompt: Overall, did the assistant meet what you needed?",
+            "    kind: enum",
+            "    choices: [yes, partially, no]",
+        ],
+    )
+    job_dir = repo_root / "jobs" / "job"
+    _write_feedback_trial(
+        job_dir,
+        task=task,
+        trial="trial-1",
+        feedback={
+            "hcpDelistingHandled": "True",
+            "needConstraintSatisfaction": "partially",
+        },
+    )
+
+    aggregation = build_job_aggregation(job_dir, repo_root=repo_root)
+    assert aggregation is not None
+    feedback = next(
+        context
+        for context in aggregation["contexts"]
+        if context["contextType"] == "user_feedback"
+    )
+    facets = {facet["facetKey"]: facet for facet in feedback["facets"]}
+    assert facets["hcp_delisting_handled"]["categories"] == ["yes", "partially", "no"]
+    # Authored enum value is kept as-is (lowercased only).
+    assert facets["hcp_delisting_handled"]["categorical"]["counts"] == [
+        {"value": "true", "count": 1}
+    ]
+    assert facets["need_constraint_satisfaction"]["label"] == (
+        "Overall, did the assistant meet what you needed?"
+    )
 
 
 def _write_feedback_task(
@@ -1135,6 +1191,83 @@ def test_persona_distributions_are_config_driven(tmp_path: Path) -> None:
     assert life_stage_summary["groupByMode"] == "persona_attribute"
 
 
+def test_persona_standalone_facets_from_empty_groupby(tmp_path: Path) -> None:
+    """Explicit empty groupByPersonaDimensions → cohort cards, not heatmaps."""
+    repo_root = tmp_path
+    task = "example-persona-standalone"
+    task_dir = repo_root / "application" / "tasks" / task
+    task_dir.mkdir(parents=True, exist_ok=True)
+    (task_dir / "persona_strategy.json").write_text(
+        json.dumps({"stratifyFields": ["life_stage"]}), encoding="utf-8"
+    )
+    (task_dir / "reporting.json").write_text(
+        json.dumps(
+            {
+                "contextRules": [
+                    {
+                        "match": {"contextType": "user_feedback"},
+                        "distributions": [
+                            {
+                                "facetKey": "overall_experience_rating",
+                                "title": "Overall satisfaction",
+                                "groupByPersonaDimensions": [],
+                            },
+                            {
+                                "facetKey": "need_constraint_satisfaction",
+                                "title": "Needs met?",
+                                "standalone": True,
+                            },
+                            {
+                                "facetKey": "overall_experience_rating",
+                                "title": "Satisfaction by life stage",
+                                "groupByPersonaDimensions": ["life_stage"],
+                            },
+                            {
+                                "facetKey": "personal_preference_satisfaction",
+                                "title": "Third standalone should be dropped",
+                                "groupByPersonaDimensions": [],
+                            },
+                        ],
+                    }
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+    job_dir = repo_root / "jobs" / "job"
+    for persona_id, life_stage, rating, need, preference, reason in [
+        ("p1", "new_parent", 6, "yes", "partially", "a"),
+        ("p2", "retiree", 9, "no", "yes", "b"),
+    ]:
+        _write_persona_trial(
+            job_dir,
+            repo_root,
+            task=task,
+            trial=f"trial-{persona_id}",
+            persona_id=persona_id,
+            dimensions={"life_stage": life_stage},
+            contexts=_persona_feedback_contexts(rating, need, preference, reason),
+        )
+
+    aggregation = build_job_aggregation(job_dir, repo_root=repo_root, enable_llm=False)
+    assert aggregation is not None
+    feedback = next(
+        context
+        for context in aggregation["contexts"]
+        if context.get("contextType") == "user_feedback"
+    )
+    standalones = feedback.get("personaStandaloneFacets") or []
+    assert len(standalones) == 2
+    assert [row["facetKey"] for row in standalones] == [
+        "overall_experience_rating",
+        "need_constraint_satisfaction",
+    ]
+    assert standalones[0]["label"] == "Overall satisfaction"
+    crosses = feedback.get("personaDistributions") or []
+    assert len(crosses) == 1
+    assert crosses[0]["groupByPersonaDimension"] == "life_stage"
+
+
 def test_persona_distribution_dimensions_fall_back_to_filters(tmp_path: Path) -> None:
     """When persona_strategy has no stratifyFields, distribution directives without
     explicit axes default to the dimensionFilters keys."""
@@ -1251,3 +1384,263 @@ def test_aggregate_textual_clusters_near_duplicate_free_text(tmp_path: Path) -> 
     other = next(row for row in textual["counts"] if "completely different" in row["value"].lower())
     assert other["count"] == 1
     assert "theme" in textual["summary"].lower()
+
+
+def test_execute_summary_llm_chunks_high_cardinality_buckets() -> None:
+    bucket_count = SUMMARY_LLM_BUCKET_CHUNK + 5
+    summary = {
+        "id": "decision.primary.auto_summary.reason",
+        "title": "Reason",
+        "instruction": "Summarize each bucket.",
+        "overall": {"summary": "", "summaryType": "heuristic"},
+        "buckets": [
+            {
+                "bucket": "Course {}".format(index),
+                "count": index + 1,
+                "samples": ["Reason for course {}.".format(index)],
+                "summary": "heuristic {}".format(index),
+                "summaryType": "heuristic",
+            }
+            for index in range(bucket_count)
+        ],
+        "status": "ready_for_llm",
+    }
+
+    class _ChunkAwareClient:
+        def __init__(self) -> None:
+            self.calls: list[dict] = []
+
+        def complete_json(self, system: str, user: str) -> dict:
+            payload = json.loads(user)
+            self.calls.append(payload)
+            if "partialSummaries" in payload:
+                return {"overallSummary": "Merged cohort themes across course groups."}
+            buckets = payload.get("buckets") or []
+            return {
+                "overallSummary": "Chunk with {} buckets.".format(len(buckets)),
+                "bucketSummaries": [
+                    {
+                        "bucket": bucket["bucket"],
+                        "summary": "LLM summary for {}.".format(bucket["bucket"]),
+                    }
+                    for bucket in buckets
+                ],
+            }
+
+    client = _ChunkAwareClient()
+    _execute_summary_llm(summary, client=client)
+
+    assert summary["status"] == "llm_completed"
+    assert summary["overall"]["summaryType"] == "llm"
+    assert "Merged cohort themes" in summary["overall"]["summary"]
+    assert all(bucket.get("summaryType") == "llm" for bucket in summary["buckets"])
+    # 2 bucket chunks + 1 overall merge
+    expected_chunks = (bucket_count + SUMMARY_LLM_BUCKET_CHUNK - 1) // SUMMARY_LLM_BUCKET_CHUNK
+    assert len(client.calls) == expected_chunks + 1
+    assert all(len(call.get("buckets") or []) <= SUMMARY_LLM_BUCKET_CHUNK for call in client.calls if "buckets" in call)
+
+
+def test_execute_summary_llm_single_shot_for_small_bucket_sets() -> None:
+    summary = {
+        "id": "small.summary",
+        "title": "Reason",
+        "buckets": [
+            {"bucket": "yes", "count": 2, "samples": ["Affordable."], "summaryType": "heuristic"},
+            {"bucket": "no", "count": 1, "samples": ["Too costly."], "summaryType": "heuristic"},
+        ],
+        "overall": {"summary": "", "summaryType": "heuristic"},
+        "status": "ready_for_llm",
+    }
+    client = _FakeChatClient(
+        [
+            {
+                "overallSummary": "Price dominated the rationale.",
+                "bucketSummaries": [
+                    {"bucket": "yes", "summary": "Liked the price."},
+                    {"bucket": "no", "summary": "Rejected on price."},
+                ],
+            }
+        ]
+    )
+    _execute_summary_llm(summary, client=client)
+    assert summary["status"] == "llm_completed"
+    assert len(client.calls) == 1
+    assert summary["buckets"][0]["summary"] == "Liked the price."
+
+
+def test_failed_llm_summary_is_not_reused_from_cache(tmp_path: Path) -> None:
+    job_dir = tmp_path / "job-retry-failed"
+    _write_trial(
+        job_dir,
+        "trial-1",
+        {
+            "presenceCheck": {"passed": True},
+            "contexts": [
+                {
+                    "key": "question.q1",
+                    "label": "Question 1",
+                    "contextType": "question_response",
+                    "summaryAnalyses": [
+                        {
+                            "id": "question.reason_summary",
+                            "title": "Reason summary",
+                            "targetFacetKey": "reason",
+                            "groupByFacetKey": "response",
+                            "groupByMode": "categorical",
+                            "summaryKind": "llm_bucket_summary",
+                        }
+                    ],
+                    "facets": [
+                        {
+                            "key": "response",
+                            "label": "Response",
+                            "role": "primary",
+                            "kind": "categorical",
+                            "value": "yes",
+                        },
+                        {
+                            "key": "reason",
+                            "label": "Reason",
+                            "role": "explanation",
+                            "kind": "textual",
+                            "value": "Affordable and simple.",
+                        },
+                    ],
+                }
+            ],
+        },
+    )
+    _write_trial(
+        job_dir,
+        "trial-2",
+        {
+            "presenceCheck": {"passed": True},
+            "contexts": [
+                {
+                    "key": "question.q1",
+                    "label": "Question 1",
+                    "contextType": "question_response",
+                    "summaryAnalyses": [
+                        {
+                            "id": "question.reason_summary",
+                            "title": "Reason summary",
+                            "targetFacetKey": "reason",
+                            "groupByFacetKey": "response",
+                            "groupByMode": "categorical",
+                            "summaryKind": "llm_bucket_summary",
+                        }
+                    ],
+                    "facets": [
+                        {
+                            "key": "response",
+                            "label": "Response",
+                            "role": "primary",
+                            "kind": "categorical",
+                            "value": "no",
+                        },
+                        {
+                            "key": "reason",
+                            "label": "Reason",
+                            "role": "explanation",
+                            "kind": "textual",
+                            "value": "Too expensive for me.",
+                        },
+                    ],
+                }
+            ],
+        },
+    )
+
+    class _FlakyClient:
+        def __init__(self) -> None:
+            self.calls = 0
+
+        def complete_json(self, system: str, user: str) -> dict:
+            self.calls += 1
+            if self.calls == 1:
+                raise ValueError("boom")
+            payload = json.loads(user)
+            return {
+                "overallSummary": "Recovered summary.",
+                "bucketSummaries": [
+                    {"bucket": bucket["bucket"], "summary": "ok {}".format(bucket["bucket"])}
+                    for bucket in payload.get("buckets") or []
+                ],
+            }
+
+    client = _FlakyClient()
+    first = build_job_aggregation(job_dir, llm_client=client, enable_llm=True)
+    assert first is not None
+    assert first["contexts"][0]["summaries"][0]["status"] == "llm_failed"
+    assert client.calls == 1
+
+    second = build_job_aggregation(job_dir, llm_client=client, enable_llm=True)
+    assert second is not None
+    assert second["contexts"][0]["summaries"][0]["status"] == "llm_completed"
+    assert second["contexts"][0]["summaries"][0]["overall"]["summary"] == "Recovered summary."
+    assert client.calls == 2
+
+
+def test_job_aggregation_artifact_is_fresh_matches_disk_coverage(tmp_path: Path) -> None:
+    job_dir = tmp_path / "fresh-job"
+    payload = {
+        "presenceCheck": {"passed": True},
+        "contexts": [
+            {
+                "key": "question.q1",
+                "label": "Question 1",
+                "contextType": "question_response",
+                "facets": [
+                    {
+                        "key": "response",
+                        "label": "Response",
+                        "role": "primary",
+                        "kind": "categorical",
+                        "value": "yes",
+                    }
+                ],
+            }
+        ],
+    }
+    _write_trial(job_dir, "trial-1", payload)
+    _write_trial(job_dir, "trial-2", payload)
+
+    aggregation = build_job_aggregation(job_dir, enable_llm=False)
+    assert aggregation is not None
+    assert job_aggregation_artifact_is_fresh(job_dir, aggregation)
+
+    # Pending trial makes coverage stale.
+    pending = job_dir / "trial-3"
+    pending.mkdir(parents=True)
+    assert not job_aggregation_artifact_is_fresh(job_dir, aggregation)
+
+    # Completing the pending trial without rebuilding stays stale until coverage updates.
+    (pending / "result.json").write_text("{}", encoding="utf-8")
+    assert not job_aggregation_artifact_is_fresh(job_dir, aggregation)
+
+    rebuilt = build_job_aggregation(job_dir, enable_llm=False)
+    assert rebuilt is not None
+    assert rebuilt["coverage"]["trialCount"] == 3
+    assert job_aggregation_artifact_is_fresh(job_dir, rebuilt)
+    assert job_aggregation_artifact_is_fresh(job_dir, read_job_aggregation_artifact(job_dir))
+
+
+def test_job_aggregation_artifact_is_fresh_rejects_bad_payload(tmp_path: Path) -> None:
+    job_dir = tmp_path / "empty-job"
+    job_dir.mkdir()
+    assert not job_aggregation_artifact_is_fresh(job_dir, None)
+    assert not job_aggregation_artifact_is_fresh(job_dir, {"coverage": {}})
+    write_job_aggregation(
+        job_dir,
+        {
+            "coverage": {
+                "trialCount": 1,
+                "completedTrials": 1,
+                "pendingTrials": 0,
+            }
+        },
+    )
+    # No trial dirs on disk → not fresh.
+    assert not job_aggregation_artifact_is_fresh(
+        job_dir, read_job_aggregation_artifact(job_dir)
+    )

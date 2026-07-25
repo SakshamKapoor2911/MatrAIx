@@ -26,6 +26,24 @@
           "facetKey": "habit_signal",
           "title": "Habit or effort barrier"
         }
+      ],
+      "summaryAnalyses": [
+        {
+          "id": "decision.reason_by_economic_motivation",
+          "title": "How each economic segment framed News+",
+          "targetFacetKey": "reason",
+          "groupByPersonaDimension": "economic_motivation",
+          "summaryKind": "llm_bucket_summary",
+          "instruction": "For each economic-motivation segment, summarize in 1-2 sentences what tipped subscribe vs decline — price, catalog/publisher fit, substitutes, and/or habit. Be faithful and concise; do not invent facts."
+        },
+        {
+          "id": "decision.reason_by_media_diet",
+          "title": "How News vs long-form readers framed News+",
+          "targetFacetKey": "reason",
+          "groupByPersonaDimension": "media_diet",
+          "summaryKind": "llm_bucket_summary",
+          "instruction": "For each media-diet segment, summarize in 1-2 sentences what tipped subscribe vs decline — catalog fit, reading habits, price, and/or substitutes. Be faithful and concise; do not invent facts."
+        }
       ]
     },
     {
@@ -37,6 +55,16 @@
           "id": "user_feedback.need_by_segment",
           "facetKey": "need_constraint_satisfaction",
           "title": "Need or constraint satisfaction"
+        },
+        {
+          "id": "user_feedback.preference_by_segment",
+          "facetKey": "personal_preference_satisfaction",
+          "title": "Features/pricing fit"
+        },
+        {
+          "id": "user_feedback.experience_by_segment",
+          "facetKey": "overall_experience_rating",
+          "title": "Overall experience"
         }
       ]
     }

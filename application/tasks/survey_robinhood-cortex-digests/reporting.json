@@ -1,4 +1,44 @@
 {
   "schemaVersion": "1.0",
-  "contextRules": []
+  "contextRules": [
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.market_summary_utility"
+      },
+      "distributions": [
+        {
+          "id": "market_summary_utility.response_by_segment",
+          "facetKey": "response",
+          "title": "Would use Cortex Digests"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.source_transparency"
+      },
+      "distributions": [
+        {
+          "id": "source_transparency.response_by_segment",
+          "facetKey": "response",
+          "title": "Trust with source transparency"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.ai_investing_concern"
+      },
+      "distributions": [
+        {
+          "id": "ai_investing_concern.response_by_segment",
+          "facetKey": "response",
+          "title": "Biggest AI investing concern"
+        }
+      ]
+    }
+  ]
 }

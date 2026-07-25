@@ -17,7 +17,7 @@ News+ subscription from the offer screen.
      (do not complete payment).
    - If you **would not subscribe**: **do not** tap Get Started; stop the task.
 
-Hand in your decision as JSON:
+Hand in your decision as JSON (this is your final answer — see rules below):
 
 ```json
 {
@@ -40,3 +40,7 @@ Rules:
   (publication names you noticed are especially useful).
 - `reason` must be at least 10 characters.
 - Do not finish a real paid purchase. Do not change unrelated system settings.
+- **When you are done browsing and deciding, stop using the device UI and submit
+  the JSON above as your final answer text.** Do **not** open Files, Notes, or
+  any other app to create or save a file — the harness records your final
+  answer for scoring.

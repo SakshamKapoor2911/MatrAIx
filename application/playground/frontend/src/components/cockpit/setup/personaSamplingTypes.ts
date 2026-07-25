@@ -1,6 +1,6 @@
 /** Persona sampling state shared by the cockpit left rail. */
 
-export type PersonaSamplingMode = "single" | "random" | "stratified";
+export type PersonaSamplingMode = "single" | "random" | "stratified" | "all";
 
 export interface PersonaDimensionFilters {
   sources: string[];

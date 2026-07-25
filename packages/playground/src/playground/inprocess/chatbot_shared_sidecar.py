@@ -49,6 +49,7 @@ _PRIMARY_SERVICE_ORDER: tuple[str, ...] = (
     "rec-agent-api",
     "support-api",
     "support-bot",
+    "meal-plan-api",
 )
 
 _SHARED_BY_SERVICE: dict[str, SharedSidecarSpec] = {
@@ -89,6 +90,13 @@ _SHARED_BY_SERVICE: dict[str, SharedSidecarSpec] = {
         host_port=8903,
         primary_env="CHATBOT_MCP_URL",
         probe="tcp",
+    ),
+    "meal-plan-api": SharedSidecarSpec(
+        application_id="meal_planning_nutrition",
+        service_name="meal-plan-api",
+        build_context="meal-plan-api",
+        host_port=8905,
+        primary_env="CHATBOT_API_URL",
     ),
 }
 

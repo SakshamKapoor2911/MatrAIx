@@ -484,10 +484,85 @@ def test_get_job_surfaces_reporting_queue_status(tmp_path, monkeypatch):
     detail = service.get_job("demo-job")
 
     assert detail is not None
-    assert detail["aggregation"]["reporting"]["status"] == "queued"
+    # Job detail no longer embeds the full aggregation payload or schedules
+    # reporting — that happens via get_job_aggregation / list_jobs.
+    assert detail.get("aggregation") is None
+    assert service._executor.calls == []
+
+    aggregation = service.get_job_aggregation("demo-job")
+    assert aggregation["reporting"]["status"] == "queued"
     assert len(service._executor.calls) == 1
     status_path = jobs_dir / "demo-job" / "reporting_status.json"
     assert status_path.is_file()
+    status = json.loads(status_path.read_text(encoding="utf-8"))
+    assert status["status"] == "queued"
+
+    service.shutdown()
+
+
+def test_get_job_aggregation_reuses_fresh_artifact(tmp_path, monkeypatch):
+    repo = tmp_path
+    jobs_dir = repo / "jobs"
+    job_dir = jobs_dir / "cached-job"
+    trial_dir = job_dir / "trial-1"
+    (trial_dir / "verifier").mkdir(parents=True, exist_ok=True)
+    (trial_dir / "result.json").write_text("{}", encoding="utf-8")
+    (trial_dir / "config.json").write_text(
+        json.dumps({"task": {"path": "application/tasks/example-task"}}),
+        encoding="utf-8",
+    )
+    (trial_dir / "verifier" / "structured_output.json").write_text(
+        json.dumps(
+            {
+                "presenceCheck": {"passed": True},
+                "contexts": [
+                    {
+                        "key": "question.q1",
+                        "label": "Question 1",
+                        "contextType": "question_response",
+                        "facets": [
+                            {
+                                "key": "response",
+                                "label": "Response",
+                                "role": "primary",
+                                "kind": "categorical",
+                                "value": "yes",
+                            }
+                        ],
+                    }
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+    monkeypatch.delenv("PLAYGROUND_REPORTING_ENABLE_LLM", raising=False)
+    service = HarborJobService(
+        repo_root=repo,
+        jobs_dir=jobs_dir,
+        generated_configs_dir=repo / "configs" / "jobs",
+    )
+    service._executor = _FakeExecutor()
+
+    first = service.get_job_aggregation("cached-job")
+    generated_at = first["generatedAt"]
+    artifact_mtime = (job_dir / "aggregation.json").stat().st_mtime_ns
+
+    second = service.get_job_aggregation("cached-job")
+    assert second["generatedAt"] == generated_at
+    assert (job_dir / "aggregation.json").stat().st_mtime_ns == artifact_mtime
+
+    # New completed trial makes the cache stale and forces a rebuild.
+    trial_2 = job_dir / "trial-2"
+    (trial_2 / "verifier").mkdir(parents=True, exist_ok=True)
+    (trial_2 / "result.json").write_text("{}", encoding="utf-8")
+    (trial_2 / "verifier" / "structured_output.json").write_text(
+        (trial_dir / "verifier" / "structured_output.json").read_text(encoding="utf-8"),
+        encoding="utf-8",
+    )
+    third = service.get_job_aggregation("cached-job")
+    assert third["coverage"]["trialCount"] == 2
+    assert third["coverage"]["completedTrials"] == 2
+    assert (job_dir / "aggregation.json").stat().st_mtime_ns > artifact_mtime
 
     service.shutdown()
 
@@ -535,6 +610,38 @@ def test_launch_ios_cua_uses_use_computer_environment(tmp_path, monkeypatch):
     assert "type: use-computer" in text
     assert "platform: ios" in text
     assert "cua_backend: ios" in text
+    service.shutdown()
+
+
+def test_run_harbor_passes_yes_to_skip_host_env_prompt(tmp_path):
+    repo = tmp_path
+    jobs_dir = repo / "jobs"
+    jobs_dir.mkdir()
+    config_path = repo / "configs" / "jobs" / "demo-job.yaml"
+    config_path.parent.mkdir(parents=True)
+    config_path.write_text("job_name: demo-job\n", encoding="utf-8")
+
+    calls: list[list[str]] = []
+
+    def _fake_run(command, *, cwd, env):
+        calls.append(list(command))
+        return 0
+
+    service = HarborJobService(
+        repo_root=repo,
+        jobs_dir=jobs_dir,
+        generated_configs_dir=repo / "configs" / "jobs",
+        command_runner=_fake_run,
+        harbor_command=("echo", "harbor", "run"),
+    )
+    with service._guard:
+        service._launches["demo-job"] = HarborLaunchRecord(
+            job_name="demo-job",
+            config_path="configs/jobs/demo-job.yaml",
+        )
+
+    service._run_harbor("demo-job", config_path)
+    assert calls == [["echo", "harbor", "run", "--yes", "-c", "configs/jobs/demo-job.yaml"]]
     service.shutdown()
 
 
@@ -632,6 +739,65 @@ def test_get_job_status_running_marker(tmp_path):
     assert snapshot["counts"]["running"] == 1
 
 
+def test_list_jobs_skips_aggregation_rebuild_for_completed_reporting(tmp_path, monkeypatch):
+    import json
+
+    jobs_dir = tmp_path / "jobs"
+    job_dir = jobs_dir / "done-job"
+    job_dir.mkdir(parents=True)
+    (job_dir / "result.json").write_text(
+        json.dumps(
+            {
+                "finished_at": "2026-07-01T12:00:00Z",
+                "n_total_trials": 1008,
+                "stats": {"n_completed_trials": 1008, "n_errored_trials": 0},
+            }
+        ),
+        encoding="utf-8",
+    )
+    (job_dir / "aggregation.json").write_text(
+        json.dumps(
+            {
+                "schemaVersion": "1.0",
+                "artifactType": "job_aggregation",
+                "coverage": {
+                    "trialCount": 1008,
+                    "completedTrials": 1008,
+                    "pendingTrials": 0,
+                },
+                "fields": [],
+                "contexts": [],
+                "reporting": {"status": "completed", "totalUnits": 0, "completedUnits": 0},
+            }
+        ),
+        encoding="utf-8",
+    )
+    monkeypatch.setenv("PLAYGROUND_REPORTING_ENABLE_LLM", "1")
+    calls: list[str] = []
+
+    def _boom(*_args, **_kwargs):
+        calls.append("build")
+        raise AssertionError("list_jobs must not rebuild aggregation for terminal reporting")
+
+    monkeypatch.setattr(
+        "backend.service.harbor_job_service.build_job_aggregation",
+        _boom,
+    )
+    service = HarborJobService(
+        repo_root=tmp_path,
+        jobs_dir=jobs_dir,
+        generated_configs_dir=tmp_path / "configs",
+    )
+    rows = service.list_jobs()
+    assert len(rows) == 1
+    assert rows[0]["jobName"] == "done-job"
+    assert rows[0]["trialCount"] == 1008
+    assert rows[0]["completedTrials"] == 1008
+    assert rows[0]["status"] == "success"
+    assert calls == []
+    service.shutdown()
+
+
 def test_list_jobs_reports_success_and_failed_status(tmp_path):
     import json
 
@@ -646,7 +812,8 @@ def test_list_jobs_reports_success_and_failed_status(tmp_path):
         json.dumps(
             {
                 "finished_at": "2026-07-01T12:00:00Z",
-                "stats": {"n_errored_trials": 0},
+                "n_total_trials": 1,
+                "stats": {"n_completed_trials": 1, "n_errored_trials": 0},
             }
         ),
         encoding="utf-8",

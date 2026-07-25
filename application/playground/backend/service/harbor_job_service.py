@@ -24,6 +24,8 @@ from backend.service.job_aggregation import (
     REPORTING_LLM_ENABLE_ENV,
     REPORTING_LLM_MODEL_ENV,
     build_job_aggregation,
+    job_aggregation_artifact_is_fresh,
+    read_job_aggregation_artifact,
     read_reporting_status_artifact,
     reporting_status_artifact_path,
     write_reporting_status_artifact,
@@ -670,11 +672,15 @@ class HarborJobService:
         *,
         trials: list[str] | None = None,
     ) -> dict[str, Any] | None:
-        aggregation = build_job_aggregation(
-            job_dir,
-            repo_root=self.repo_root,
-            enable_llm=False,
-        )
+        cached = read_job_aggregation_artifact(job_dir)
+        if job_aggregation_artifact_is_fresh(job_dir, cached):
+            aggregation = cached
+        else:
+            aggregation = build_job_aggregation(
+                job_dir,
+                repo_root=self.repo_root,
+                enable_llm=False,
+            )
         self._maybe_schedule_reporting(
             job_name,
             job_dir,
@@ -693,6 +699,14 @@ class HarborJobService:
     ) -> None:
         if not self._reporting_enabled():
             return
+        # Prefer on-disk aggregation. Terminal reporting must not rebuild
+        # (list_jobs used to call build_job_aggregation for every finished
+        # large job on every Runs refresh — multi-minute / 100% CPU).
+        if aggregation is None:
+            aggregation = read_job_aggregation_artifact(job_dir)
+        cached_status = self._aggregation_reporting_status(aggregation)
+        if cached_status in {"completed", "completed_with_errors", "failed"}:
+            return
         if not self._job_reporting_ready(job_name, trials):
             return
         with self._guard:
@@ -708,7 +722,7 @@ class HarborJobService:
                 return
             if live_status in {"queued", "running"} and actively_tracked:
                 return
-        if aggregation is None:
+        if aggregation is None or not job_aggregation_artifact_is_fresh(job_dir, aggregation):
             aggregation = build_job_aggregation(
                 job_dir,
                 repo_root=self.repo_root,
@@ -774,31 +788,53 @@ class HarborJobService:
         summaries: list[dict[str, Any]] = []
         for job_name in self._list_job_names():
             job_dir = self.jobs_dir / job_name
-            trials = self._list_trial_names(job_name)
             # The listing does NOT embed each job's full aggregation — that is a
             # multi-MB payload per job the Runs list never reads (fetched on
             # demand via GET /api/harbor/jobs/{job}/aggregation). We still drive
-            # the reporting scheduler here, but with aggregation built lazily so
-            # the expensive build only runs for jobs that are actually ready to
-            # report, not for every job on every poll.
-            self._maybe_schedule_reporting(job_name, job_dir, trials=trials)
+            # the reporting scheduler here, but never rebuild aggregation just to
+            # discover a terminal reporting status.
+            self._maybe_schedule_reporting(job_name, job_dir)
             started_at, updated_at, finished_at, sort_ts = _job_listing_times(job_dir)
-            completed_trials = sum(
-                1 for trial_name in trials if self._trial_has_result(job_name, trial_name)
-            )
-            failed_trials_on_disk = sum(
-                1
-                for trial_name in trials
-                if _trial_result_error(
-                    self._read_json(job_dir / trial_name / "result.json")
-                )
-                is not None
-            )
             job_result = self._read_json(job_dir / "result.json")
+            stats = (
+                job_result.get("stats")
+                if isinstance(job_result, dict) and isinstance(job_result.get("stats"), dict)
+                else None
+            )
+            # Finished jobs already carry authoritative counts in result.json —
+            # avoid scandir + per-trial result.json reads across 1k-trial cohorts.
+            finished_total = (
+                int(job_result.get("n_total_trials") or 0)
+                if isinstance(job_result, dict)
+                else 0
+            )
+            if (
+                isinstance(job_result, dict)
+                and job_result.get("finished_at")
+                and isinstance(stats, dict)
+                and finished_total > 0
+            ):
+                trial_count = finished_total
+                completed_trials = int(stats.get("n_completed_trials") or 0)
+                failed_trials_on_disk = int(stats.get("n_errored_trials") or 0)
+            else:
+                trials = self._list_trial_names(job_name)
+                trial_count = len(trials)
+                completed_trials = sum(
+                    1 for trial_name in trials if self._trial_has_result(job_name, trial_name)
+                )
+                failed_trials_on_disk = sum(
+                    1
+                    for trial_name in trials
+                    if _trial_result_error(
+                        self._read_json(job_dir / trial_name / "result.json")
+                    )
+                    is not None
+                )
             with self._guard:
                 launch = self._launches.get(job_name)
             status, failed_trials = _job_list_status(
-                trial_count=len(trials),
+                trial_count=trial_count,
                 completed_trials=completed_trials,
                 failed_trials_on_disk=failed_trials_on_disk,
                 job_result=job_result,
@@ -815,7 +851,7 @@ class HarborJobService:
                     "difficulty": task_meta.get("difficulty"),
                     "tags": task_meta.get("tags") or [],
                     "metaType": task_meta.get("metaType"),
-                    "trialCount": len(trials),
+                    "trialCount": trial_count,
                     "completedTrials": completed_trials,
                     "startedAt": started_at,
                     "updatedAt": updated_at,
@@ -890,6 +926,10 @@ class HarborJobService:
         with self._guard:
             launch = self._launches.get(job_name)
 
+        # Job detail stays lightweight: the Runs UI loads the multi-MB batch
+        # report separately via GET /api/harbor/jobs/{job}/aggregation (which
+        # also drives the reporting scheduler). Embedding aggregation here made
+        # every job-detail poll rebuild and ship the full report payload.
         task_meta = self._job_task_meta(job_name, job_dir)
         return {
             "jobName": job_name,
@@ -908,11 +948,7 @@ class HarborJobService:
             "result": self._read_json(job_dir / "result.json"),
             "trials": trials,
             "launch": _launch_view(launch) if launch else None,
-            "aggregation": self._build_job_aggregation_view(
-                job_name,
-                job_dir,
-                trials=[str(trial.get("trialName") or "") for trial in trials if trial.get("trialName")],
-            ),
+            "aggregation": None,
         }
 
     def get_job_aggregation(self, job_name: str) -> dict[str, Any]:
@@ -1076,6 +1112,23 @@ class HarborJobService:
                     kwargs = agent.setdefault("kwargs", {})
                     if isinstance(kwargs, dict):
                         kwargs["cua_backend"] = os_app_backend
+                        # use.computer defaults to 50 steps; stocks/news-style
+                        # browse+decide tasks routinely need more headroom.
+                        kwargs.setdefault("max_steps", 100)
+        # use-computer OS-app tasks hand in JSON; sandbox path remap makes in-VM
+        # verify flaky. Score on the Playground host from downloaded artifacts /
+        # final_answer / trajectory instead (see playground.host_verifier).
+        env_block = job_config.get("environment")
+        if isinstance(env_block, dict) and env_block.get("type") == "use-computer":
+            existing_verifier = job_config.get("verifier")
+            verifier_cfg = dict(existing_verifier) if isinstance(existing_verifier, dict) else {}
+            verifier_cfg["disable"] = True
+            job_config["verifier"] = verifier_cfg
+            for agent in job_config.get("agents", []):
+                if isinstance(agent, dict):
+                    kwargs = agent.setdefault("kwargs", {})
+                    if isinstance(kwargs, dict):
+                        kwargs.setdefault("max_steps", 100)
         job_meta = job_config.pop("_job_meta", None)
 
         self.generated_configs_dir.mkdir(parents=True, exist_ok=True)
@@ -1316,6 +1369,7 @@ class HarborJobService:
             record.status = "running"
 
         command = list(self.harbor_command) + [
+            "--yes",
             "-c",
             _rel_path(config_path, self.repo_root),
         ]

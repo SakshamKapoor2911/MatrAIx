@@ -22,7 +22,11 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@v8.1.0
         with:
+          # Keep uv itself current; pin Ruff below so lint does not drift with
+          # every upstream Ruff release (0.16 enabled thousands of new findings).
           version: "latest"
 
       - name: Run ruff lint
-        run: uvx ruff check .
+        # Pin to the version locked in uv.lock (ruff==0.15.20). Unpinned
+        # `uvx ruff` started failing repo-wide after Ruff 0.16.0 shipped.
+        run: uvx ruff@0.15.20 check .

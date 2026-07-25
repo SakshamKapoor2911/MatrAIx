@@ -1,4 +1,83 @@
 {
   "schemaVersion": "1.0",
-  "contextRules": []
+  "contextRules": [
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q0"
+      },
+      "distributions": [
+        {
+          "id": "q0.response_by_segment",
+          "facetKey": "response",
+          "title": "Smoked 100+ cigarettes in lifetime"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q2"
+      },
+      "distributions": [
+        {
+          "id": "q2.response_by_segment",
+          "facetKey": "response",
+          "title": "Now smoke every day / some days / not at all"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q4"
+      },
+      "distributions": [
+        {
+          "id": "q4.response_by_segment",
+          "facetKey": "response",
+          "title": "Usually menthol vs non-menthol"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q6"
+      },
+      "distributions": [
+        {
+          "id": "q6.response_by_segment",
+          "facetKey": "response",
+          "title": "First cigarette within first hour of waking"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q7"
+      },
+      "distributions": [
+        {
+          "id": "q7.response_by_segment",
+          "facetKey": "response",
+          "title": "Usually buy own cigarettes"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q22"
+      },
+      "distributions": [
+        {
+          "id": "q22.response_by_segment",
+          "facetKey": "response",
+          "title": "Quit attempt used counseling/meds"
+        }
+      ]
+    }
+  ]
 }

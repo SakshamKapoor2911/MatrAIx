@@ -197,7 +197,7 @@ def validate_persona_strategy_file(
                 )
 
                 stratify_filters = {field: list(filters[field]) for field in stratify}
-                strata = build_filter_strata(stratify_filters, max_strata=200)
+                strata = build_filter_strata(stratify_filters, max_strata=2048)
                 feasible, _dropped = filter_feasible_strata(strata)
                 min_cells = len(feasible)
                 if min_cells and int(sample_size) < min_cells:

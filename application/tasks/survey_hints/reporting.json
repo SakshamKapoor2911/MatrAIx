@@ -1,4 +1,83 @@
 {
   "schemaVersion": "1.0",
-  "contextRules": []
+  "contextRules": [
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q0"
+      },
+      "distributions": [
+        {
+          "id": "q0.response_by_segment",
+          "facetKey": "response",
+          "title": "Ever looked for cancer information"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q5"
+      },
+      "distributions": [
+        {
+          "id": "q5.response_by_segment",
+          "facetKey": "response",
+          "title": "Trust cancer info from a doctor"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q43"
+      },
+      "distributions": [
+        {
+          "id": "q43.response_by_segment",
+          "facetKey": "response",
+          "title": "Covered by health insurance"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q44"
+      },
+      "distributions": [
+        {
+          "id": "q44.response_by_segment",
+          "facetKey": "response",
+          "title": "Past-year non-ER health visits"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q88"
+      },
+      "distributions": [
+        {
+          "id": "q88.response_by_segment",
+          "facetKey": "response",
+          "title": "Caregiving / health decisions for others"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q140"
+      },
+      "distributions": [
+        {
+          "id": "q140.response_by_segment",
+          "facetKey": "response",
+          "title": "Would discuss housing/transport/food issues with clinician"
+        }
+      ]
+    }
+  ]
 }

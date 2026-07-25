@@ -1,0 +1,25 @@
+#!/bin/bash
+#SBATCH -p seas_compute
+#SBATCH -n 1
+#SBATCH -c 1
+#SBATCH --mem=4G
+#SBATCH -t 0-01:00
+#SBATCH -o sbatch_logs/%x_%j.out
+#SBATCH -e sbatch_logs/%x_%j.err
+#SBATCH --mail-type=FAIL
+#SBATCH --mail-user=xiaominli@g.harvard.edu
+
+set -euo pipefail
+
+REPO_ROOT="${REPO_ROOT:-/n/netscratch/lu_lab/Lab/xiaominli/LLMResearch/MatrAIx}"
+PYTHON_BIN="${PYTHON_BIN:-/n/home08/xiaominli/.conda/envs/env05/bin/python}"
+SYNTHETIC_MANIFEST="${SYNTHETIC_MANIFEST:?SYNTHETIC_MANIFEST is required}"
+HUMAN_MANIFEST="${HUMAN_MANIFEST:?HUMAN_MANIFEST is required}"
+SUMMARY_OUT="${SUMMARY_OUT:?SUMMARY_OUT is required}"
+
+cd "$REPO_ROOT"
+PYTHONPATH="$REPO_ROOT" "$PYTHON_BIN" \
+  persona/post_process/quality_filter/summarize_results.py \
+  --manifest "$SYNTHETIC_MANIFEST" \
+  --manifest "$HUMAN_MANIFEST" \
+  --out "$SUMMARY_OUT"

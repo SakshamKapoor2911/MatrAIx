@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "1.0",
+  "pool": "persona/datasets/bench-dev-sample",
+  "sources": [],
+  "defaultMode": "stratified",
+  "dimensionFilters": {
+    "time_pressure": [
+      "Deadline",
+      "Moderate",
+      "No rush"
+    ],
+    "values_priority": [
+      "Novelty",
+      "Tradition"
+    ],
+    "age_bracket": [
+      "18-24",
+      "25-34",
+      "35-44",
+      "45-54",
+      "55-64",
+      "65-74"
+    ]
+  },
+  "stratifyFields": [
+    "time_pressure",
+    "values_priority"
+  ],
+  "sampleSizePerValueGroup": 2
+}

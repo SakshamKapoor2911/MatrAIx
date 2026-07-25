@@ -1,4 +1,57 @@
 {
   "schemaVersion": "1.0",
-  "contextRules": []
+  "contextRules": [
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.concept_fit"
+      },
+      "distributions": [
+        {
+          "id": "concept_fit.response_by_segment",
+          "facetKey": "response",
+          "title": "Need fit (1\u20135)"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.preference_fit"
+      },
+      "distributions": [
+        {
+          "id": "preference_fit.response_by_segment",
+          "facetKey": "response",
+          "title": "Preference fit (1\u20135)"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.adoption_barrier"
+      },
+      "distributions": [
+        {
+          "id": "adoption_barrier.response_by_segment",
+          "facetKey": "response",
+          "title": "Biggest adoption barrier"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.purchase_likelihood"
+      },
+      "distributions": [
+        {
+          "id": "purchase_likelihood.response_by_segment",
+          "facetKey": "response",
+          "title": "Purchase / trial likelihood"
+        }
+      ]
+    }
+  ]
 }

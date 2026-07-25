@@ -1,0 +1,28 @@
+version = "1.0"
+artifacts = [ "/app/output",]
+
+[task]
+name = "application/allrecipes-recipe-choice"
+
+[metadata]
+difficulty = "easy"
+type = "web"
+domain = "food-lifestyle"
+tags = [ "allrecipes", "recipe choice", "time pressure", "novelty and tradition", "persona-sensitive comparison", "playwright dom browsing",]
+
+
+[verifier]
+timeout_sec = 300.0
+
+[agent]
+timeout_sec = 600.0
+network_mode = "public"
+
+[environment]
+definition = "application/shared-web-playwright"
+build_timeout_sec = 900.0
+cpus = 1
+memory_mb = 2048
+storage_mb = 10240
+gpus = 0
+network_mode = "public"

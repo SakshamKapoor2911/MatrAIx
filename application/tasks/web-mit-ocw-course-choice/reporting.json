@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "1.0",
+  "contextRules": [
+    {
+      "match": {
+        "contextType": "decision"
+      },
+      "distributions": [
+        {
+          "id": "decision.subject_by_segment",
+          "facetKey": "decision_subject_label",
+          "title": "Selected course"
+        },
+        {
+          "id": "decision.basis_by_segment",
+          "facetKey": "basis_primary",
+          "title": "Primary basis"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "user_feedback"
+      },
+      "distributions": [
+        {
+          "id": "user_feedback.rating_by_segment",
+          "facetKey": "overall_experience_rating",
+          "title": "Overall experience rating"
+        }
+      ]
+    }
+  ]
+}

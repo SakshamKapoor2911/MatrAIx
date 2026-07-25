@@ -21,13 +21,13 @@ import json
 import os
 from pathlib import Path
 
-output_root = (
+OUTPUT_DIR = Path(
     os.environ.get("PLAYGROUND_OUTPUT_DIR")
     or os.environ.get("MATRIX_OUTPUT_DIR")
     or os.environ.get("HARBOR_OUTPUT_DIR")
     or {artifact_source!r}
 )
-decision_path = Path(output_root) / "decision.json"
+decision_path = OUTPUT_DIR / "decision.json"
 if not decision_path.is_file():
     raise SystemExit("missing decision.json")
 
@@ -159,6 +159,79 @@ def test_host_verifier_skips_when_reward_already_present(tmp_path: Path):
         assert ran is False
     finally:
         shutil.rmtree(stage_root, ignore_errors=True)
+
+
+def test_host_verifier_rescues_zero_reward_from_trajectory(tmp_path: Path):
+    """Sandbox reward=0 from a missing file can be fixed from the agent trajectory."""
+    repo_root = tmp_path / "repo"
+    task_rel = "application/tasks/fake-os-app"
+    _write_fake_task(repo_root, task_rel, artifact_source="/app/output")
+
+    trial_dir = tmp_path / "trial"
+    _write_trial(
+        trial_dir,
+        task_rel,
+        artifact_source="/app/output",
+        with_decision=False,
+        with_exception=False,
+    )
+    # Sandbox already wrote a failing reward.
+    verifier_dir = trial_dir / "verifier"
+    verifier_dir.mkdir(parents=True, exist_ok=True)
+    (verifier_dir / "reward.txt").write_text("0", encoding="utf-8")
+    (verifier_dir / "test-stdout.txt").write_text(
+        "missing /Users/lume/output/decision.json\n", encoding="utf-8"
+    )
+    (trial_dir / "result.json").write_text(
+        json.dumps({"verifier_result": {"rewards": {"reward": 0.0}}}),
+        encoding="utf-8",
+    )
+
+    agent_dir = trial_dir / "agent"
+    agent_dir.mkdir(parents=True, exist_ok=True)
+    (agent_dir / "trajectory.json").write_text(
+        json.dumps(
+            {
+                "steps": [
+                    {"step_id": 1, "message": "browsing"},
+                    {
+                        "step_id": 2,
+                        "message": '{\n  "clicked": true\n}',
+                    },
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    ran = maybe_run_host_verifier(repo_root=repo_root, trial_dir=trial_dir)
+    assert ran is True
+    assert (trial_dir / "artifacts" / "app" / "output" / "decision.json").is_file()
+    assert (verifier_dir / "reward.txt").read_text(encoding="utf-8").strip() == "1"
+    result = json.loads((trial_dir / "result.json").read_text(encoding="utf-8"))
+    assert result["verifier_result"] == {"rewards": {"reward": 1.0}}
+
+
+def test_host_verifier_skips_zero_reward_without_recoverable_submission(tmp_path: Path):
+    repo_root = tmp_path / "repo"
+    task_rel = "application/tasks/fake-os-app"
+    _write_fake_task(repo_root, task_rel, artifact_source="/app/output")
+
+    trial_dir = tmp_path / "trial"
+    _write_trial(
+        trial_dir,
+        task_rel,
+        artifact_source="/app/output",
+        with_decision=False,
+        with_exception=False,
+    )
+    verifier_dir = trial_dir / "verifier"
+    verifier_dir.mkdir(parents=True, exist_ok=True)
+    (verifier_dir / "reward.txt").write_text("0", encoding="utf-8")
+
+    ran = maybe_run_host_verifier(repo_root=repo_root, trial_dir=trial_dir)
+    assert ran is False
+    assert (verifier_dir / "reward.txt").read_text(encoding="utf-8").strip() == "0"
 
 
 def test_host_verifier_skips_when_nothing_was_submitted(tmp_path: Path):

@@ -1,0 +1,10 @@
+#!/bin/bash
+#SBATCH -p seas_compute
+#SBATCH -n 1
+#SBATCH -c 1
+#SBATCH --mem=4G
+#SBATCH -t 0-01:00
+#SBATCH -o sbatch_logs/%x_%j.out
+#SBATCH -e sbatch_logs/%x_%j.err
+set -euo pipefail
+R="${REPO_ROOT:?}"; cd "$R"; PYTHONPATH="$R" "$PYTHON_BIN" persona/post_process/deduplication/summarize_final.py --synthetic "$SYNTHETIC" --human "$HUMAN" --total-target "${TOTAL_TARGET:-8400000000}" --out "$OUTPUT"

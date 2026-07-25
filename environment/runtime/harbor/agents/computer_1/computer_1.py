@@ -1297,14 +1297,35 @@ class Computer1(BaseAgent):
     # ------------------------------------------------------------------
 
     async def _write_final_answer(self, answer: str) -> None:
+        text = answer or ""
+        # Always persist on the host trial logs dir. For use-computer / non-mounted
+        # sandboxes, Trial._upload_agent_logs copies this back to the environment
+        # before verify — so scoring does not depend on the agent knowing a
+        # filesystem path or on a fragile in-sandbox shell redirect alone.
+        try:
+            host_target = Path(self.logs_dir) / FINAL_ANSWER_FILENAME
+            host_target.parent.mkdir(parents=True, exist_ok=True)
+            host_target.write_text(text, encoding="utf-8")
+        except Exception as exc:
+            self.logger.warning("Failed to write host final_answer.txt: %s", exc)
+
         if self._session is None:
             raise RuntimeError("Session is not set. Call setup() first.")
         target = EnvironmentPaths.agent_dir / FINAL_ANSWER_FILENAME
-        encoded = base64.b64encode((answer or "").encode("utf-8")).decode("ascii")
+        encoded = base64.b64encode(text.encode("utf-8")).decode("ascii")
+        # Mirror into the trial output dir when the environment exports one, so
+        # verifiers that only probe HARBOR_OUTPUT_DIR can still recover the JSON.
         cmd = (
-            f"mkdir -p {shlex.quote(str(target.parent))} && "
-            f"printf '%s' {shlex.quote(encoded)} | base64 -d > "
-            f"{shlex.quote(str(target))}"
+            "set -e; "
+            f"encoded={shlex.quote(encoded)}; "
+            f"target={shlex.quote(str(target))}; "
+            'mkdir -p "$(dirname "$target")"; '
+            'printf \'%s\' "$encoded" | base64 -d > "$target"; '
+            'outdir="${HARBOR_OUTPUT_DIR:-${MATRIX_OUTPUT_DIR:-${PLAYGROUND_OUTPUT_DIR:-}}}"; '
+            'if [ -n "$outdir" ]; then '
+            'mkdir -p "$outdir"; '
+            f'cp "$target" "$outdir/{FINAL_ANSWER_FILENAME}"; '
+            "fi"
         )
         result = await self._session.environment.exec(command=cmd, timeout_sec=30)
         if result.return_code != 0:

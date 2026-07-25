@@ -1,4 +1,96 @@
 {
   "schemaVersion": "1.0",
-  "contextRules": []
+  "contextRules": [
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q0"
+      },
+      "distributions": [
+        {
+          "id": "q0.response_by_segment",
+          "facetKey": "response",
+          "title": "I know where my money goes"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q1"
+      },
+      "distributions": [
+        {
+          "id": "q1.response_by_segment",
+          "facetKey": "response",
+          "title": "I am confident managing money day-to-day"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q5"
+      },
+      "distributions": [
+        {
+          "id": "q5.response_by_segment",
+          "facetKey": "response",
+          "title": "Money left over at end of month"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q34"
+      },
+      "distributions": [
+        {
+          "id": "q34.response_by_segment",
+          "facetKey": "response",
+          "title": "Household saving for retirement"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q110"
+      },
+      "distributions": [
+        {
+          "id": "q110.response_by_segment",
+          "facetKey": "response",
+          "title": "Difficulty paying a bill \u2014 most recent"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q129"
+      },
+      "distributions": [
+        {
+          "id": "q129.response_by_segment",
+          "facetKey": "response",
+          "title": "Has health insurance"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q160"
+      },
+      "distributions": [
+        {
+          "id": "q160.response_by_segment",
+          "facetKey": "response",
+          "title": "Autopay on primary credit card"
+        }
+      ]
+    }
+  ]
 }

@@ -1,4 +1,83 @@
 {
   "schemaVersion": "1.0",
-  "contextRules": []
+  "contextRules": [
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q0"
+      },
+      "distributions": [
+        {
+          "id": "q0.response_by_segment",
+          "facetKey": "response",
+          "title": "How household handles finances"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q2"
+      },
+      "distributions": [
+        {
+          "id": "q2.response_by_segment",
+          "facetKey": "response",
+          "title": "Has checking or savings account"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q3"
+      },
+      "distributions": [
+        {
+          "id": "q3.response_by_segment",
+          "facetKey": "response",
+          "title": "Any time without bank account (12 months)"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q14"
+      },
+      "distributions": [
+        {
+          "id": "q14.response_by_segment",
+          "facetKey": "response",
+          "title": "Reasons for not having an account"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q28"
+      },
+      "distributions": [
+        {
+          "id": "q28.response_by_segment",
+          "facetKey": "response",
+          "title": "Used account for financial services (12 months)"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q62"
+      },
+      "distributions": [
+        {
+          "id": "q62.response_by_segment",
+          "facetKey": "response",
+          "title": "Other nonbank financial products (12 months)"
+        }
+      ]
+    }
+  ]
 }

@@ -115,6 +115,8 @@ export type RunDetailView = Omit<
   } | null;
   /** Raw post-run self-reflection artifact from ``user_feedback.json`` when present. */
   userFeedback?: UserFeedbackArtifact | null;
+  /** Task-owned self-report schema used to render personalized feedback fields. */
+  selfReportSchema?: import("@/lib/types").SelfReportSchema | null;
   /** Raw trial-level structured evaluation from ``verifier/structured_output.json`` when present. */
   trialEvaluation?: TrialEvaluationArtifact | null;
   /** Harbor task ``instruction.md`` when the debrief API enriches it. */

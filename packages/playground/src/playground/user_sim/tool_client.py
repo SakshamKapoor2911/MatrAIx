@@ -9,6 +9,7 @@ import urllib.request
 from typing import Any, Dict, List, Optional, Protocol, Sequence
 
 from playground.chatbot_capabilities import ChatbotCapability
+from playground.openai_client import openai_model_supports_custom_temperature
 from playground.user_sim.tools import (
     ToolCall,
     anthropic_tool_definitions,
@@ -61,8 +62,6 @@ class OpenAIToolStepClient:
         self._client = client
 
     def complete_with_tools(self, messages: List[Dict[str, Any]]) -> List[ToolCall]:
-        from playground.openai_client import openai_model_supports_custom_temperature
-
         kwargs: Dict[str, Any] = {
             "model": self.model,
             "messages": messages,
@@ -124,11 +123,12 @@ class AnthropicToolStepClient:
         body = {
             "model": self.model,
             "max_tokens": 1200,
-            "temperature": self.temperature,
             "system": "\n\n".join(system_parts),
             "messages": convo,
             "tools": self._tools,
         }
+        if openai_model_supports_custom_temperature(self.model):
+            body["temperature"] = self.temperature
         request = urllib.request.Request(
             "https://api.anthropic.com/v1/messages",
             data=json.dumps(body).encode("utf-8"),

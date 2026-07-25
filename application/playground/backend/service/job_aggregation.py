@@ -24,6 +24,11 @@ JUDGE_GROUP_BY_MODES = SUMMARY_GROUP_BY_MODES
 REPORTING_LLM_ENABLE_ENV = "PLAYGROUND_REPORTING_ENABLE_LLM"
 REPORTING_LLM_MODEL_ENV = "PLAYGROUND_REPORTING_LLM_MODEL"
 DEFAULT_REPORTING_LLM_MODEL = "openai/gpt-4o-mini"
+# High-cardinality categorical group-bys (e.g. course titles) can produce
+# hundreds of buckets; one JSON completion cannot reliably cover them all.
+SUMMARY_LLM_BUCKET_CHUNK = 30
+SUMMARY_LLM_SAMPLE_LIMIT = 2
+SUMMARY_LLM_SAMPLE_CHARS = 400
 # Discrete selected-item titles (course/book/product names). Always exact-count;
 # never TF-IDF theme-cluster even when verifiers historically tagged them textual.
 DISCRETE_SUBJECT_LABEL_FACET_KEYS = frozenset(
@@ -72,6 +77,56 @@ def read_job_aggregation_artifact(job_dir: Path) -> dict[str, Any] | None:
     return payload if isinstance(payload, dict) else None
 
 
+def iter_job_trial_dirs(job_dir: Path) -> list[Path]:
+    """Trial directories under a job (excludes bookkeeping folders)."""
+    if not job_dir.is_dir():
+        return []
+    return sorted(
+        [
+            path
+            for path in job_dir.iterdir()
+            if path.is_dir()
+            and path.name not in {"_inputs", "_generated"}
+            and not path.name.startswith(".")
+        ]
+    )
+
+
+def cheap_job_coverage(job_dir: Path) -> dict[str, int]:
+    """Coverage counts from directory layout + result.json presence only."""
+    trial_dirs = iter_job_trial_dirs(job_dir)
+    completed = sum(1 for path in trial_dirs if (path / "result.json").is_file())
+    trial_count = len(trial_dirs)
+    return {
+        "trialCount": trial_count,
+        "completedTrials": completed,
+        "pendingTrials": trial_count - completed,
+    }
+
+
+def job_aggregation_artifact_is_fresh(
+    job_dir: Path,
+    payload: dict[str, Any] | None,
+) -> bool:
+    """True when cached aggregation coverage still matches disk (no eval reads)."""
+    if not isinstance(payload, dict):
+        return False
+    coverage = payload.get("coverage")
+    if not isinstance(coverage, dict):
+        return False
+    live = cheap_job_coverage(job_dir)
+    if live["trialCount"] <= 0:
+        return False
+    try:
+        return (
+            int(coverage.get("trialCount")) == live["trialCount"]
+            and int(coverage.get("completedTrials")) == live["completedTrials"]
+            and int(coverage.get("pendingTrials")) == live["pendingTrials"]
+        )
+    except (TypeError, ValueError):
+        return False
+
+
 def read_reporting_status_artifact(job_dir: Path) -> dict[str, Any] | None:
     path = reporting_status_artifact_path(job_dir)
     if not path.is_file():
@@ -104,13 +159,7 @@ def build_job_aggregation(
         return None
 
     previous_payload = read_job_aggregation_artifact(job_dir)
-    trial_dirs = sorted(
-        [
-            path
-            for path in job_dir.iterdir()
-            if path.is_dir() and path.name not in {"_inputs", "_generated"} and not path.name.startswith(".")
-        ]
-    )
+    trial_dirs = iter_job_trial_dirs(job_dir)
     if not trial_dirs:
         return None
 
@@ -283,6 +332,7 @@ def build_job_aggregation(
         for key in sorted(field_meta)
     ]
     _enrich_user_feedback_field_meta(field_meta)
+    _enrich_rating_scale_field_meta(field_meta)
     # Re-apply enrichment onto already-built field payloads.
     for field in fields:
         key = str(field.get("key") or "")
@@ -517,18 +567,37 @@ def _iter_distribution_directives(source: dict[str, Any]) -> list[dict[str, Any]
     return [item for item in directives if isinstance(item, dict)]
 
 
+def _distribution_directive_dedupe_marker(directive: dict[str, Any]) -> str:
+    """Unique key so the same facet can appear as standalone AND as a persona cross."""
+    facet_key = str(directive.get("facetKey") or "").strip()
+    if directive.get("standalone") is True:
+        return "{}|standalone".format(facet_key)
+    if "groupByPersonaDimensions" in directive:
+        raw = directive.get("groupByPersonaDimensions")
+        if isinstance(raw, list):
+            dims = [str(item).strip() for item in raw if str(item).strip()]
+            if not dims:
+                return "{}|standalone".format(facet_key)
+            return "{}|{}".format(facet_key, ",".join(dims))
+        return "{}|standalone".format(facet_key)
+    single = str(directive.get("groupByPersonaDimension") or "").strip()
+    if single:
+        return "{}|{}".format(facet_key, single)
+    # Omitted axes → later filled from stratifyFields; keep one default slot.
+    return "{}|default".format(facet_key)
+
+
 def _resolve_distribution_directives(
     *,
     context: dict[str, Any],
     reporting_config: dict[str, Any],
 ) -> list[dict[str, Any]]:
-    """Author-declared persona cross-tab directives for a context.
+    """Author-declared persona cards for a context (standalone and/or crosses).
 
-    Which facets to cross-tab is defined in ``reporting.json`` (``contextRules[]``
-    → ``distributions[]``, or inline on the verifier context) — never exhaustively
-    auto-selected. Each directive names a ``facetKey``; ``groupByPersonaDimensions``
-    is optional and defaults to the task's ``stratifyFields``. These render in the
-    Persona insights tab (routing is by directive type, not by which rule list).
+    Declared in ``reporting.json`` (``contextRules[]`` → ``distributions[]``, or
+    inline on the verifier context). Each directive names a ``facetKey``.
+    ``groupByPersonaDimensions: []`` / ``standalone: true`` → cohort-level card;
+    a non-empty list → persona cross-tab; omitted axes default to stratifyFields.
     """
     context_key = str(context.get("key") or "").strip()
     context_type = str(context.get("contextType") or "").strip()
@@ -541,13 +610,12 @@ def _resolve_distribution_directives(
     seen: set[str] = set()
     deduped: list[dict[str, Any]] = []
     for directive in resolved:
+        if not isinstance(directive, dict):
+            continue
         facet_key = str(directive.get("facetKey") or "").strip()
         if not facet_key:
             continue
-        marker = "{}|{}".format(
-            facet_key,
-            str(directive.get("groupByPersonaDimension") or ""),
-        )
+        marker = _distribution_directive_dedupe_marker(directive)
         if marker in seen:
             continue
         seen.add(marker)
@@ -756,29 +824,137 @@ def _user_feedback_candidates(trial_dir: Path) -> list[Path]:
     return candidates
 
 
+def _load_self_report_schema_fields(
+    task_path: str | None,
+    repo_root: Path | None,
+) -> list[Any]:
+    """Return authored self-report fields (with ``key`` / ``prompt``) for a task.
+
+    Prefer the playground helper when importable; otherwise read
+    ``input/self_report_schema.yaml`` directly so aggregation labels still use
+    the task prompt even if ``playground`` is not on ``PYTHONPATH``.
+    """
+    if not task_path or repo_root is None:
+        return []
+    try:
+        from playground.self_report_task_config import (
+            load_self_report_schema_for_task_path,
+        )
+
+        schema = load_self_report_schema_for_task_path(
+            task_path,
+            repo_root=repo_root,
+            fallback_to_default=False,
+        )
+        if schema is not None and schema.fields:
+            return list(schema.fields)
+    except Exception:  # noqa: BLE001 — fall through to YAML
+        pass
+
+    candidates = [
+        (repo_root / task_path / "input" / "self_report_schema.yaml").resolve(),
+        (repo_root / task_path / "self_report_schema.yaml").resolve(),
+    ]
+    for path in candidates:
+        if not path.is_file():
+            continue
+        try:
+            import yaml
+
+            payload = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+        except Exception:  # noqa: BLE001
+            continue
+        if not isinstance(payload, dict):
+            continue
+        fields: list[Any] = []
+        for index, entry in enumerate(payload.get("fields") or []):
+            if not isinstance(entry, dict):
+                continue
+            key = str(entry.get("key") or "").strip()
+            prompt = str(entry.get("prompt") or "").strip()
+            if not key or not prompt:
+                continue
+            raw_choices = entry.get("choices") or []
+            normalized_choices: list[str] = []
+            for choice in raw_choices:
+                # YAML 1.1 turns bare yes/no into booleans.
+                if isinstance(choice, bool):
+                    normalized_choices.append("yes" if choice else "no")
+                else:
+                    token = str(choice).strip()
+                    if token:
+                        normalized_choices.append(token)
+            lowered = [token.lower() for token in normalized_choices]
+            if "partially" in lowered and "true" in lowered and "false" in lowered:
+                normalized_choices = [
+                    "yes"
+                    if token.lower() == "true"
+                    else "no"
+                    if token.lower() == "false"
+                    else token
+                    for token in normalized_choices
+                ]
+            # Minimal duck-typed field for _feedback_facet_from_schema_field.
+            fields.append(
+                type(
+                    "YamlSelfReportField",
+                    (),
+                    {
+                        "key": key,
+                        "prompt": prompt,
+                        "kind": str(entry.get("kind") or "string").strip() or "string",
+                        "required": True,
+                        "minimum": entry.get("minimum"),
+                        "maximum": entry.get("maximum"),
+                        "choices": tuple(normalized_choices),
+                        "explains": None,
+                    },
+                )()
+            )
+            explanation = entry.get("explanation")
+            blocks = (
+                [explanation]
+                if isinstance(explanation, dict)
+                else (explanation if isinstance(explanation, list) else [])
+            )
+            for block in blocks:
+                if not isinstance(block, dict):
+                    continue
+                ekey = str(block.get("key") or "").strip()
+                eprompt = str(block.get("prompt") or "").strip()
+                if not ekey or not eprompt:
+                    continue
+                fields.append(
+                    type(
+                        "YamlSelfReportField",
+                        (),
+                        {
+                            "key": ekey,
+                            "prompt": eprompt,
+                            "kind": str(block.get("kind") or "string").strip() or "string",
+                            "required": True,
+                            "minimum": None,
+                            "maximum": None,
+                            "choices": (),
+                            "explains": key,
+                        },
+                    )()
+                )
+        if fields:
+            return fields
+    return []
+
+
 def _synthesized_user_feedback_context(
     raw_feedback: dict[str, Any],
     *,
     task_path: str | None,
     repo_root: Path | None,
 ) -> dict[str, Any] | None:
-    schema = None
-    if task_path and repo_root is not None:
-        try:
-            from playground.self_report_task_config import (
-                load_self_report_schema_for_task_path,
-            )
-
-            schema = load_self_report_schema_for_task_path(
-                task_path,
-                repo_root=repo_root,
-                fallback_to_default=False,
-            )
-        except Exception:  # noqa: BLE001
-            schema = None
+    schema_fields = _load_self_report_schema_fields(task_path, repo_root)
     facets: list[dict[str, Any]] = []
-    if schema is not None and schema.fields:
-        for field in schema.fields:
+    if schema_fields:
+        for field in schema_fields:
             if field.key not in raw_feedback:
                 continue
             facet = _feedback_facet_from_schema_field(field, raw_feedback.get(field.key))
@@ -905,6 +1081,29 @@ def _enrich_user_feedback_field_meta(field_meta: dict[str, dict[str, Any]]) -> N
             meta["role"] = "explanation"
 
 
+def _enrich_rating_scale_field_meta(field_meta: dict[str, dict[str, Any]]) -> None:
+    """Attach known 1–10 scales for rating facets in *any* context.
+
+    ``overall_experience_rating`` can appear under user_feedback or other
+    task contexts. Without an explicit scaleMax, the UI used to treat the
+    cohort's observed max (e.g. 4) as the full score.
+    """
+    for key, meta in field_meta.items():
+        leaf = _normalized_feedback_key(
+            str(meta.get("facetKey") or "").split(".")[-1]
+            or str(key).split(".")[-1]
+        )
+        if leaf not in {"overall_experience_rating", "trust_level", "effort_rating"}:
+            continue
+        kind = str(meta.get("kind") or "").strip().lower()
+        if kind and kind not in {"numerical", "integer"}:
+            continue
+        if meta.get("scaleMin") is None:
+            meta["scaleMin"] = 1
+        if meta.get("scaleMax") is None:
+            meta["scaleMax"] = 10
+
+
 def _default_feedback_categories(normalized_key: str, value: Any) -> list[str] | None:
     if normalized_key in {
         "need_constraint_satisfaction",
@@ -1004,20 +1203,7 @@ def _feedback_role(normalized_key: str, kind: str) -> str:
 
 
 def _feedback_label(normalized_key: str, *, prompt: str = "") -> str:
-    label_map = {
-        "overall_experience_rating": "Overall experience rating",
-        "need_constraint_satisfaction": "Need or constraint satisfaction",
-        "personal_preference_satisfaction": "Personal preference satisfaction",
-        "feedback_reason": "Feedback reason",
-        "trust_level": "Trust level",
-        "effort_rating": "Effort rating",
-        "clarity_of_next_step": "Clarity of next step",
-        "felt_understood": "Felt understood",
-        "asked_useful_clarification_questions": "Asked useful clarifying questions",
-        "clarifying_notes": "Clarifying notes",
-    }
-    if normalized_key in label_map:
-        return label_map[normalized_key]
+    """Label for a self-report facet — brainlessly the authored prompt when set."""
     if prompt.strip():
         return prompt.strip()
     return normalized_key.replace("_", " ").strip().title()
@@ -1274,12 +1460,18 @@ def _distribution_directive_dimensions(
     Honors an explicit ``groupByPersonaDimensions`` list or single
     ``groupByPersonaDimension``; otherwise defaults to the cohort's
     ``stratifyFields`` so authors only need to name the facet.
+
+    An explicit empty ``groupByPersonaDimensions: []`` (or
+    ``"standalone": true``) means a cohort-level card with no persona cross —
+    those render as independent facets in Persona insights (capped separately).
     """
-    raw = directive.get("groupByPersonaDimensions")
-    if isinstance(raw, list):
-        dims = [str(item).strip() for item in raw if str(item).strip()]
-        if dims:
-            return dims
+    if directive.get("standalone") is True:
+        return []
+    if "groupByPersonaDimensions" in directive:
+        raw = directive.get("groupByPersonaDimensions")
+        if not isinstance(raw, list):
+            return []
+        return [str(item).strip() for item in raw if str(item).strip()]
     single = str(directive.get("groupByPersonaDimension") or "").strip()
     if single:
         return [single]
@@ -1289,6 +1481,8 @@ def _distribution_directive_dimensions(
 # Signal facets eligible for the interactive persona explorer: the hero result,
 # numeric scores, and categorical evidence (never free-text or identities).
 PERSONA_DISTRIBUTION_ROLES = frozenset({"primary", "score", "evidence"})
+# Max cohort-level (non-crossed) cards per context in Persona insights.
+PERSONA_STANDALONE_MAX = 2
 # Categorical facets with more distinct values than this are treated as ids/labels.
 PERSONA_DISTRIBUTION_MAX_CARDINALITY = 8
 # Bookkeeping facets that carry no per-segment signal.
@@ -1406,23 +1600,26 @@ def _config_persona_distributions(
     field_values: dict[str, list[dict[str, Any]]],
     persona_dimensions: dict[str, dict[str, Any]],
     stratify_fields: list[str],
-) -> list[dict[str, Any]]:
-    """Default persona cross-tabs, driven by author-declared directives.
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Default persona cards from ``reporting.json`` distributions.
 
-    Which signal facets get cross-tabbed *by default* is defined in
-    ``reporting.json`` (``contextRules[].distributions[]``) — the platform never
-    exhaustively enumerates every facet here. Each directive names a
-    numeric/categorical ``facetKey``; dimensions default to ``stratifyFields``.
-    Emits the per-segment distribution (counts / averages), no LLM.
+    Returns ``(cross_tabs, standalone_facets)``:
+    - cross-tabs: signal × persona dimension heatmaps (Persona insights)
+    - standalone: up to ``PERSONA_STANDALONE_MAX`` cohort-level single facets
+      (explicit ``groupByPersonaDimensions: []`` or ``standalone: true``)
     """
     directives = meta.get("distributions")
-    if not isinstance(directives, list) or not directives or not persona_dimensions:
-        return []
+    if not isinstance(directives, list) or not directives:
+        return [], []
     context_key = str(meta.get("key") or "")
     facet_by_leaf = {_facet_key_leaf(facet): facet for facet in facets}
     distributions: list[dict[str, Any]] = []
-    seen: set[str] = set()
+    standalones: list[dict[str, Any]] = []
+    seen_cross: set[str] = set()
+    seen_standalone: set[str] = set()
     for directive in directives:
+        if not isinstance(directive, dict):
+            continue
         facet_key = str(directive.get("facetKey") or "").strip()
         if not facet_key:
             continue
@@ -1433,9 +1630,24 @@ def _config_persona_distributions(
         dimensions = _distribution_directive_dimensions(directive, stratify_fields)
         directive_id = str(directive.get("id") or "").strip()
         title = str(directive.get("title") or "").strip()
+        if not dimensions:
+            if leaf in seen_standalone or len(standalones) >= PERSONA_STANDALONE_MAX:
+                continue
+            # Standalone cards do not need persona dimension data.
+            entry = {
+                **facet,
+                "label": title or str(facet.get("label") or leaf),
+            }
+            if directive_id:
+                entry["standaloneId"] = directive_id
+            standalones.append(entry)
+            seen_standalone.add(leaf)
+            continue
+        if not persona_dimensions:
+            continue
         for dimension in dimensions:
             marker = "{}|{}".format(leaf, dimension)
-            if marker in seen:
+            if marker in seen_cross:
                 continue
             distribution = _build_persona_distribution(
                 context_key=context_key,
@@ -1448,9 +1660,9 @@ def _config_persona_distributions(
             )
             if distribution is None:
                 continue
-            seen.add(marker)
+            seen_cross.add(marker)
             distributions.append(distribution)
-    return distributions
+    return distributions, standalones
 
 
 def _persona_distribution_options(
@@ -1571,10 +1783,9 @@ def _aggregate_context(
     )
     if cross_facet_views:
         payload["crossFacetViews"] = cross_facet_views
-    # Persona-insight lens: cross-tab the author-declared signal facets
-    # (reporting.json → contextRules[].distributions[]) against each persona
-    # dimension. Dimensions default to the cohort's stratifyFields.
-    persona_distributions = _config_persona_distributions(
+    # Persona-insight lens: author-declared distributions from reporting.json.
+    # Cross-tabs (signal × persona dim) + up to 2 standalone cohort facets.
+    persona_distributions, persona_standalones = _config_persona_distributions(
         meta=meta,
         facets=facets,
         field_values=field_values,
@@ -1583,6 +1794,8 @@ def _aggregate_context(
     )
     if persona_distributions:
         payload["personaDistributions"] = persona_distributions
+    if persona_standalones:
+        payload["personaStandaloneFacets"] = persona_standalones
     # Interactive explorer: every eligible facet × dimension pairing (bounded,
     # non-LLM), shown only behind the picker — not as default cards.
     persona_distribution_options = _persona_distribution_options(
@@ -1676,7 +1889,8 @@ def _cached_result_matches(cached: dict[str, Any] | None, fingerprint: str) -> b
         return False
     if str(cached.get("llmFingerprint") or "") != fingerprint:
         return False
-    return str(cached.get("status") or "") in {"llm_completed", "llm_failed"}
+    # Only reuse successes — llm_failed must be retryable on the next reporting pass.
+    return str(cached.get("status") or "") == "llm_completed"
 
 
 def _reuse_cached_summary(current: dict[str, Any], cached: dict[str, Any]) -> None:
@@ -1858,18 +2072,50 @@ def _fingerprint_reporting_unit(unit: dict[str, Any]) -> str:
     return hashlib.sha256(raw.encode("utf-8")).hexdigest()
 
 
-def _execute_summary_llm(summary: dict[str, Any], *, client: Any) -> None:
-    system = (
+def _lean_summary_buckets_for_llm(buckets: list[Any]) -> list[dict[str, Any]]:
+    """Shrink bucket payloads so large cohort prompts stay within model limits."""
+    lean: list[dict[str, Any]] = []
+    for bucket in buckets:
+        if not isinstance(bucket, dict):
+            continue
+        samples_raw = bucket.get("samples")
+        samples: list[str] = []
+        if isinstance(samples_raw, list):
+            for sample in samples_raw[:SUMMARY_LLM_SAMPLE_LIMIT]:
+                text = str(sample or "").strip()
+                if not text:
+                    continue
+                samples.append(text[:SUMMARY_LLM_SAMPLE_CHARS])
+        lean.append(
+            {
+                "bucket": bucket.get("bucket"),
+                "count": bucket.get("count"),
+                "samples": samples,
+            }
+        )
+    return lean
+
+
+def _summary_llm_system_prompt() -> str:
+    return (
         "You are an evaluation reporting assistant. Summarize grouped user text samples "
         "concisely and return strict JSON."
     )
-    instruction = str(summary.get("instruction") or "").strip()
-    user = json.dumps(
+
+
+def _summary_llm_user_payload(
+    *,
+    title: Any,
+    instruction: str,
+    buckets: list[dict[str, Any]],
+) -> str:
+    return json.dumps(
         {
             "task": "Summarize grouped text buckets for a completed evaluation job.",
-            "title": summary.get("title"),
-            "instruction": instruction or "Summarize each bucket faithfully without inventing new facts.",
-            "buckets": summary.get("buckets"),
+            "title": title,
+            "instruction": instruction
+            or "Summarize each bucket faithfully without inventing new facts.",
+            "buckets": buckets,
             "expectedOutput": {
                 "overallSummary": "string",
                 "bucketSummaries": [{"bucket": "string", "summary": "string"}],
@@ -1878,28 +2124,165 @@ def _execute_summary_llm(summary: dict[str, Any], *, client: Any) -> None:
         ensure_ascii=False,
         indent=2,
     )
-    try:
-        result = client.complete_json(system, user)
-    except Exception as exc:  # noqa: BLE001
-        summary["status"] = "llm_failed"
-        summary["error"] = str(exc)
-        return
-    overall_summary = str(result.get("overallSummary") or "").strip()
-    if overall_summary:
-        overall = summary.get("overall")
-        if isinstance(overall, dict):
-            overall["summary"] = overall_summary
-            overall["summaryType"] = "llm"
-    bucket_summaries = {
+
+
+def _bucket_summaries_from_llm_result(result: dict[str, Any]) -> dict[str, str]:
+    return {
         str(item.get("bucket") or ""): str(item.get("summary") or "").strip()
         for item in result.get("bucketSummaries", [])
-        if isinstance(item, dict)
+        if isinstance(item, dict) and str(item.get("bucket") or "").strip()
     }
+
+
+def _apply_bucket_summaries(
+    summary: dict[str, Any],
+    bucket_summaries: dict[str, str],
+) -> int:
+    applied = 0
     for bucket in summary.get("buckets", []) if isinstance(summary.get("buckets"), list) else []:
+        if not isinstance(bucket, dict):
+            continue
         value = bucket_summaries.get(str(bucket.get("bucket") or ""))
-        if value:
-            bucket["summary"] = value
-            bucket["summaryType"] = "llm"
+        if not value:
+            continue
+        bucket["summary"] = value
+        bucket["summaryType"] = "llm"
+        applied += 1
+    return applied
+
+
+def _set_summary_overall(summary: dict[str, Any], overall_summary: str) -> None:
+    text = overall_summary.strip()
+    if not text:
+        return
+    overall = summary.get("overall")
+    if not isinstance(overall, dict):
+        overall = {}
+        summary["overall"] = overall
+    overall["summary"] = text
+    overall["summaryType"] = "llm"
+
+
+def _merge_summary_chunk_overalls(
+    *,
+    client: Any,
+    title: Any,
+    chunk_overalls: list[str],
+) -> str:
+    if not chunk_overalls:
+        return ""
+    if len(chunk_overalls) == 1:
+        return chunk_overalls[0]
+    try:
+        result = client.complete_json(
+            "You are an evaluation reporting assistant. Merge partial summaries into one "
+            "concise overall summary. Return strict JSON.",
+            json.dumps(
+                {
+                    "task": "Merge chunk summaries into one overallSummary.",
+                    "title": title,
+                    "partialSummaries": chunk_overalls,
+                    "expectedOutput": {"overallSummary": "string"},
+                },
+                ensure_ascii=False,
+                indent=2,
+            ),
+        )
+    except Exception:  # noqa: BLE001
+        return " ".join(chunk_overalls)
+    if not isinstance(result, dict):
+        return " ".join(chunk_overalls)
+    merged = str(result.get("overallSummary") or "").strip()
+    return merged or " ".join(chunk_overalls)
+
+
+def _execute_summary_llm(summary: dict[str, Any], *, client: Any) -> None:
+    buckets = summary.get("buckets")
+    if not isinstance(buckets, list) or not buckets:
+        summary["status"] = "llm_failed"
+        summary["error"] = "no buckets to summarize"
+        return
+
+    instruction = str(summary.get("instruction") or "").strip()
+    title = summary.get("title")
+    system = _summary_llm_system_prompt()
+
+    # Small jobs keep the single-shot path; large cohort group-bys are chunked so
+    # the model can return strict JSON without truncating mid-object.
+    if len(buckets) <= SUMMARY_LLM_BUCKET_CHUNK:
+        user = _summary_llm_user_payload(
+            title=title,
+            instruction=instruction,
+            buckets=_lean_summary_buckets_for_llm(buckets),
+        )
+        try:
+            result = client.complete_json(system, user)
+        except Exception as exc:  # noqa: BLE001
+            summary["status"] = "llm_failed"
+            summary["error"] = str(exc)
+            return
+        if not isinstance(result, dict):
+            summary["status"] = "llm_failed"
+            summary["error"] = "Reporting LLM returned a non-object JSON payload."
+            return
+        _set_summary_overall(summary, str(result.get("overallSummary") or ""))
+        _apply_bucket_summaries(summary, _bucket_summaries_from_llm_result(result))
+        summary["status"] = "llm_completed"
+        summary.pop("error", None)
+        return
+
+    bucket_summaries: dict[str, str] = {}
+    chunk_overalls: list[str] = []
+    chunk_errors: list[str] = []
+    total_chunks = (len(buckets) + SUMMARY_LLM_BUCKET_CHUNK - 1) // SUMMARY_LLM_BUCKET_CHUNK
+    for chunk_index, start in enumerate(range(0, len(buckets), SUMMARY_LLM_BUCKET_CHUNK), start=1):
+        chunk = buckets[start : start + SUMMARY_LLM_BUCKET_CHUNK]
+        user = _summary_llm_user_payload(
+            title=title,
+            instruction=instruction,
+            buckets=_lean_summary_buckets_for_llm(chunk),
+        )
+        try:
+            result = client.complete_json(system, user)
+        except Exception as exc:  # noqa: BLE001
+            chunk_errors.append("chunk {}/{}: {}".format(chunk_index, total_chunks, exc))
+            continue
+        if not isinstance(result, dict):
+            chunk_errors.append(
+                "chunk {}/{}: Reporting LLM returned a non-object JSON payload.".format(
+                    chunk_index, total_chunks
+                )
+            )
+            continue
+        overall = str(result.get("overallSummary") or "").strip()
+        if overall:
+            chunk_overalls.append(overall)
+        bucket_summaries.update(_bucket_summaries_from_llm_result(result))
+
+    applied = _apply_bucket_summaries(summary, bucket_summaries)
+    if chunk_overalls:
+        _set_summary_overall(
+            summary,
+            _merge_summary_chunk_overalls(
+                client=client,
+                title=title,
+                chunk_overalls=chunk_overalls,
+            ),
+        )
+
+    if chunk_errors and applied == 0:
+        summary["status"] = "llm_failed"
+        summary["error"] = "; ".join(chunk_errors[:3])
+        return
+    if chunk_errors:
+        summary["status"] = "llm_failed"
+        summary["error"] = "{}; applied {}/{} bucket summaries".format(
+            "; ".join(chunk_errors[:3]),
+            applied,
+            len(buckets),
+        )
+        return
+
     summary["status"] = "llm_completed"
     summary.pop("error", None)
 
@@ -2048,7 +2431,16 @@ def _directive_lens(directive: dict[str, Any], *, group_by_mode: str) -> str:
 
 
 def _humanize_persona_dimension(dimension: str) -> str:
-    cleaned = str(dimension or "").replace("_", " ").strip()
+    key = str(dimension or "").strip().lower()
+    labels = {
+        "trust_level": "Trust level",
+        "age_bracket": "Age",
+        "age": "Age",
+        "cog_skepticism": "Skepticism",
+    }
+    if key in labels:
+        return labels[key]
+    cleaned = key.replace("_", " ").strip()
     return cleaned[:1].upper() + cleaned[1:] if cleaned else str(dimension)
 
 

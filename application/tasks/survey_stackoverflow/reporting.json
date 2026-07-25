@@ -1,4 +1,83 @@
 {
   "schemaVersion": "1.0",
-  "contextRules": []
+  "contextRules": [
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q0"
+      },
+      "distributions": [
+        {
+          "id": "q0.response_by_segment",
+          "facetKey": "response",
+          "title": "Are you someone who writes code?"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q3"
+      },
+      "distributions": [
+        {
+          "id": "q3.response_by_segment",
+          "facetKey": "response",
+          "title": "Current employment status"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q11"
+      },
+      "distributions": [
+        {
+          "id": "q11.response_by_segment",
+          "facetKey": "response",
+          "title": "Current / most recent tech job"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q20"
+      },
+      "distributions": [
+        {
+          "id": "q20.response_by_segment",
+          "facetKey": "response",
+          "title": "Job satisfaction as professional developer"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q22"
+      },
+      "distributions": [
+        {
+          "id": "q22.response_by_segment",
+          "facetKey": "response",
+          "title": "Is AI a threat to your current job?"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.q15"
+      },
+      "distributions": [
+        {
+          "id": "q15.response_by_segment",
+          "facetKey": "response",
+          "title": "Influenced a technology purchase"
+        }
+      ]
+    }
+  ]
 }

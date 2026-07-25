@@ -39,6 +39,10 @@ PERSONA_MODEL_KNOB_META: Dict[str, Dict[str, str]] = {
         "label": "Claude Sonnet 4.6",
         "description": "Stronger persona simulation at higher cost.",
     },
+    "anthropic/claude-opus-4-8": {
+        "label": "Claude Opus 4.8",
+        "description": "Highest-capability Claude persona simulation; highest cost.",
+    },
     "openai/gpt-4o-mini": {
         "label": "GPT-4o mini",
         "description": "OpenAI persona simulation with lower cost.",

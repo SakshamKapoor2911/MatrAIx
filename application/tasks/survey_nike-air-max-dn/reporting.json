@@ -1,4 +1,44 @@
 {
   "schemaVersion": "1.0",
-  "contextRules": []
+  "contextRules": [
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.dynamic_air_appeal"
+      },
+      "distributions": [
+        {
+          "id": "dynamic_air_appeal.response_by_segment",
+          "facetKey": "response",
+          "title": "Dynamic Air interest lift"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.comfort_price_tolerance"
+      },
+      "distributions": [
+        {
+          "id": "comfort_price_tolerance.response_by_segment",
+          "facetKey": "response",
+          "title": "Pay more for noticeable cushioning"
+        }
+      ]
+    },
+    {
+      "match": {
+        "contextType": "question_response",
+        "key": "question.purchase_driver"
+      },
+      "distributions": [
+        {
+          "id": "purchase_driver.response_by_segment",
+          "facetKey": "response",
+          "title": "Top purchase driver"
+        }
+      ]
+    }
+  ]
 }

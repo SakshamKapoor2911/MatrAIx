@@ -43,7 +43,7 @@ mkdir -p "$VLLM_CACHE_ROOT" sbatch_logs
 
 NUM_SHARDS="${NUM_SHARDS:-200}"
 SHARD_ID="${SLURM_ARRAY_TASK_ID:-${SHARD_ID:-0}}"
-OUT_DIR="${OUT_DIR:-$REPO_ROOT/persona/human_extraction/data/extraction_v1}"
+OUT_DIR="${OUT_DIR:-$REPO_ROOT/persona/human_extraction/data/wiki/extraction_v1}"
 
 echo "=== persona extraction shard ==="
 echo "date=$(date -Is)  host=$(hostname)"

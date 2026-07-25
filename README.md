@@ -147,6 +147,18 @@ Literature: [docs/research/](docs/research/README.md)
 
 ---
 
+## Star History
+
+<a href="https://www.star-history.com/?repos=MatrAIx-ai%2FMatrAIx&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=MatrAIx-ai/MatrAIx&type=date&theme=dark&legend=top-left&sealed_token=qlhUK1GNCbwEzVBgvIljmXHDgwWEJn9XR0nA2HZ25C3PuehFlXS5of-7EPUIocdhmHKcdgt6GMKyP3VSKxZ7ZabWvWmqS66Jo_6FYLJ6IvwXgsLgnsjRzg" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=MatrAIx-ai/MatrAIx&type=date&legend=top-left&sealed_token=qlhUK1GNCbwEzVBgvIljmXHDgwWEJn9XR0nA2HZ25C3PuehFlXS5of-7EPUIocdhmHKcdgt6GMKyP3VSKxZ7ZabWvWmqS66Jo_6FYLJ6IvwXgsLgnsjRzg" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=MatrAIx-ai/MatrAIx&type=date&legend=top-left&sealed_token=qlhUK1GNCbwEzVBgvIljmXHDgwWEJn9XR0nA2HZ25C3PuehFlXS5of-7EPUIocdhmHKcdgt6GMKyP3VSKxZ7ZabWvWmqS66Jo_6FYLJ6IvwXgsLgnsjRzg" />
+ </picture>
+</a>
+
+---
+
 ## License
 
 Apache 2.0 — see [LICENSE](LICENSE).
