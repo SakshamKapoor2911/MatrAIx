@@ -12,7 +12,12 @@ permissions:
 
 jobs:
   lint-and-format:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+      fail-fast: false
+    runs-on: ${{ matrix.os }}
+    continue-on-error: ${{ matrix.os == 'macos-latest' }}
     timeout-minutes: 10
 
     steps:
