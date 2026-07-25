@@ -21,25 +21,16 @@ from backend.service.survey_types import (
 )
 from playground.model_client import build_json_client
 from playground.types import Persona
+from playground.user_sim.prompt import render_persona_block
 
 
-def persona_system_prompt(persona: Persona) -> str:
-    parts = [
-        "You are a simulated user with predefined persona attributes.",
-        "Stay in character as this user throughout the task.",
-        "",
-        "Persona:",
-        persona.context or persona.summary or persona.name,
-    ]
-    if persona.preferences:
-        parts.append("Preferences: {}".format(", ".join(persona.preferences)))
-    if persona.dislikes:
-        parts.append("Dislikes: {}".format(", ".join(persona.dislikes)))
-    if persona.constraints:
-        parts.append("Constraints: {}".format(", ".join(persona.constraints)))
-    if persona.communication_style:
-        parts.append("Communication style: {}".format(persona.communication_style))
-    return "\n".join(parts)
+def persona_system_prompt(persona: Persona, *, persona_yaml_path: str) -> str:
+    persona_body = render_persona_block(
+        persona, persona_yaml_path=persona_yaml_path
+    ).strip()
+    if not persona_body:
+        raise ValueError(f"empty persona render for yaml path: {persona_yaml_path}")
+    return "## Persona\n{}".format(persona_body)
 
 
 def build_survey_task_prompt(*, instrument: SurveyInstrument) -> str:
@@ -90,6 +81,7 @@ class InprocessSurveyEvalRunner:
         config: Optional[SurveyEvalConfig] = None,
         *,
         created_at: str,
+        persona_yaml_path: str,
         on_event: Optional[Callable[[Dict[str, Any]], None]] = None,
     ) -> SurveyEvalResult:
         config = config or SurveyEvalConfig()
@@ -99,9 +91,12 @@ class InprocessSurveyEvalRunner:
                 on_event(event)
 
         task_prompt = build_survey_task_prompt(instrument=instrument)
+        persona_prompt = persona_system_prompt(
+            persona, persona_yaml_path=persona_yaml_path
+        )
         prompts = {
-            "personaPrompt": persona_system_prompt(persona),
-            "harborPrompt": persona_system_prompt(persona),
+            "personaPrompt": persona_prompt,
+            "harborPrompt": persona_prompt,
             "taskPrompt": task_prompt,
         }
         emit({"type": "prompts", "prompts": prompts})

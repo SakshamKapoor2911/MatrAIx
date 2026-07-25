@@ -31,12 +31,16 @@ def _utc_now() -> str:
 
 
 def _eval_persona(persona: object) -> EvalPersona:
+    """Map Harbor persona → EvalPersona metadata for survey results.
+
+    Prompt text does **not** come from ``summary`` / ``context`` (unused on
+    dimensions cohorts). Harbor always passes ``persona_yaml_path`` so the
+    runner renders the YAML via ``render_persona_block``.
+    """
     data = getattr(persona, "data", {}) or {}
     return EvalPersona(
         id=str(getattr(persona, "persona_id", None) or data.get("persona_id") or "persona"),
         name=str(getattr(persona, "display_name", None) or data.get("name") or "Persona"),
-        summary=str(getattr(persona, "summary", None) or data.get("summary") or ""),
-        context=str(data.get("context") or getattr(persona, "summary", "") or ""),
         source=str(data.get("source") or ""),
     )
 
@@ -145,6 +149,7 @@ class PersonaJsonSurvey(PersonaMixin, BaseAgent):
             instrument_path=self._survey_instrument_path,
         )
         persona = _eval_persona(self._persona)
+        persona_yaml_path = str(self._persona.persona_path)
         created_at = _utc_now()
         trial_dir = self.logs_dir.parent
         event_writer = TrialEventWriter.for_trial_dir(trial_dir)
@@ -195,6 +200,7 @@ class PersonaJsonSurvey(PersonaMixin, BaseAgent):
             config=survey_config,
             created_at=created_at,
             on_event=on_event,
+            persona_yaml_path=persona_yaml_path,
         )
         payload = _survey_result_payload(result)
         with tempfile.NamedTemporaryFile("w", encoding="utf-8", suffix=".json", delete=False) as handle:

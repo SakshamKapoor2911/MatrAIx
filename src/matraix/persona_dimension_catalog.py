@@ -396,6 +396,9 @@ def _narrative_communication_style(
     )
 
     def _phrase(keys: tuple[str, ...]) -> str | None:
+        # Always "label: value". Free-prose "{value} {label}" collides whenever the
+        # catalog value already carries the label's meaning (e.g. "strongly visual"
+        # + "visual vs verbal thinking").
         parts: list[str] = []
         for dim_id in keys:
             text = _dim_value(dimensions, dim_id)
@@ -405,23 +408,23 @@ def _narrative_communication_style(
             label = str(
                 (meta or {}).get("label") or dim_id.removeprefix("cog_")
             ).lower()
-            parts.append(f"{text.lower()} {label}")
+            parts.append(f"{label}: {text.lower()}")
         if not parts:
             return None
         if len(parts) == 1:
             return parts[0]
         if len(parts) == 2:
-            return f"{parts[0]} and {parts[1]}"
-        return ", ".join(parts[:-1]) + f", and {parts[-1]}"
+            return f"{parts[0]}; {parts[1]}"
+        return "; ".join(parts[:-1]) + f"; and {parts[-1]}"
 
     voice = _phrase(voice_keys)
     thinking = _phrase(thinking_keys)
     habits = _phrase(habit_keys)
 
     return _paragraph(
-        f"My voice tends to be {voice}" if voice else None,
-        f"My thinking style is {thinking}" if thinking else None,
-        f"In conversation I am {habits}" if habits else None,
+        f"My voice — {voice}" if voice else None,
+        f"My thinking style — {thinking}" if thinking else None,
+        f"In conversation — {habits}" if habits else None,
     )
 
 

@@ -11,8 +11,8 @@ from backend.service.appworld_types import (
     AppWorldResultArtifact,
     AppWorldTrace,
 )
-from playground.inprocess.survey_eval import persona_system_prompt
 from playground.types import Persona
+from playground.user_sim.prompt import render_persona_block
 
 
 def build_appworld_task_prompt(task: AppWorldEvalTask) -> str:
@@ -49,7 +49,7 @@ class LocalAppWorldEvalRunner:
             if on_event is not None:
                 on_event(event)
 
-        persona_prompt = persona_system_prompt(persona)
+        persona_prompt = "## Persona\n{}".format(render_persona_block(persona).strip())
         task_prompt = build_appworld_task_prompt(task)
         prompts = {
             "personaPrompt": persona_prompt,

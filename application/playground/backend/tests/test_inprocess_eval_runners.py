@@ -1,5 +1,6 @@
 import json
 import urllib.request
+from pathlib import Path
 
 from playground.inprocess.chatbot_eval import DirectApplicationSession
 from playground.inprocess.survey_eval import InprocessSurveyEvalRunner
@@ -21,11 +22,30 @@ def _persona():
     return Persona(
         id="p1",
         name="Persona One",
-        context="A budget-conscious user who prefers clear information.",
     )
 
 
-def test_inprocess_survey_runner_returns_result_and_prompts(monkeypatch):
+def _persona_yaml(tmp_path: Path) -> str:
+    path = tmp_path / "persona_p1.yaml"
+    path.write_text(
+        "\n".join(
+            [
+                "persona_id: 'p1'",
+                "version: '1.0'",
+                "dimensions:",
+                "  age_bracket: 25-34",
+                "  region: North America",
+                "  gender_identity: Woman",
+                "  socioeconomic_band: Middle",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    return str(path)
+
+
+def test_inprocess_survey_runner_returns_result_and_prompts(monkeypatch, tmp_path):
     client = FakeJSONClient(
         {
             "answers": [
@@ -46,6 +66,8 @@ def test_inprocess_survey_runner_returns_result_and_prompts(monkeypatch):
         id="survey1",
         title="Survey",
         description="A survey about a concrete feature.",
+        ask_rationale=True,
+        ask_confidence=True,
         questions=[SurveyQuestion(id="fit", prompt="This fits me.")],
     )
 
@@ -54,6 +76,7 @@ def test_inprocess_survey_runner_returns_result_and_prompts(monkeypatch):
         instrument,
         SurveyEvalConfig(persona_model="openai/gpt-4o-mini"),
         created_at="2026-06-26T00:00:00Z",
+        persona_yaml_path=_persona_yaml(tmp_path),
     )
 
     assert result.config.mode == "inprocess_persona_survey"
