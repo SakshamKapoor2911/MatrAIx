@@ -350,8 +350,11 @@ class OpenAIAgentsFinanceRunner:
         categories: Tuple[str, ...],
     ) -> AgentResult:
         try:
-            from agents import Agent, Runner
+            from agents import Agent, Runner, set_default_openai_api, set_tracing_disabled
             from agents.mcp import MCPServerStreamableHttp
+
+            set_default_openai_api("chat_completions")
+            set_tracing_disabled(True)
         except ImportError as exc:  # pragma: no cover - depends on live env
             raise RuntimeError(
                 "Finance application runtime is not installed. Install "
