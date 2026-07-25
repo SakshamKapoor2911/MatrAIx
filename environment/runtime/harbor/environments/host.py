@@ -115,7 +115,7 @@ class HostEnvironment(BaseEnvironment):
             host_path = self.resolve_container_path(match.rstrip("/"))
             if match.endswith("/"):
                 host_path = host_path / ""
-            rewritten = rewritten.replace(match, str(host_path), 1)
+            rewritten = rewritten.replace(match, host_path.as_posix(), 1)
         return rewritten
 
     @staticmethod

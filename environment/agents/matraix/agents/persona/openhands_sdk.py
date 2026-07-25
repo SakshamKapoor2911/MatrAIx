@@ -3,13 +3,14 @@
 from __future__ import annotations
 
 from pathlib import Path
+from typing import Any
 
 from harbor.agents.installed.openhands_sdk import OpenHandsSDK
 from harbor.environments.base import BaseEnvironment
 from harbor.models.agent.context import AgentContext
 from harbor.models.agent.name import AgentName
 
-from matraix.agents.persona.cua_submission import materialize_ecommerce_interaction_file
+from matraix.agents.persona.cua_submission import materialize_cua_submission_profile
 from matraix.agents.persona.mixin import PersonaMixin
 
 
@@ -23,13 +24,15 @@ class PersonaOpenHandsSDK(PersonaMixin, OpenHandsSDK):
         logs_dir: Path,
         persona_path: str | None = None,
         persona_template_path: str | None = None,
-        **kwargs,
+        cua_submission_profile: str | None = None,
+        **kwargs: Any,
     ) -> None:
         self._init_persona(
             persona_path,
             AgentName.PERSONA_OPENHANDS_SDK.value,
             persona_template_path=persona_template_path,
         )
+        self._cua_submission_profile = cua_submission_profile
         super().__init__(logs_dir=logs_dir, **kwargs)
 
     def render_instruction(self, instruction: str) -> str:
@@ -44,8 +47,10 @@ class PersonaOpenHandsSDK(PersonaMixin, OpenHandsSDK):
     ) -> None:
         await self._prepare_persona_trial(environment)
         await super().run(instruction, environment, context)
-        await materialize_ecommerce_interaction_file(
-            environment,
-            self.logs_dir,
-            logger=self.logger,
-        )
+        if self._cua_submission_profile:
+            await materialize_cua_submission_profile(
+                self._cua_submission_profile,
+                environment,
+                self.logs_dir,
+                logger=self.logger,
+            )

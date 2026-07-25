@@ -93,8 +93,8 @@ def test_host_rewrite_command_paths_rewrites_verifier_stdout(tmp_path: Path) -> 
     rewritten = env._normalize_shell_invocation(env._rewrite_command_paths(command))
     assert "'/tests/" not in rewritten
     assert "'/logs/verifier" not in rewritten
-    assert str((tests_dir / "test.sh").resolve()) in rewritten
-    assert str((trial_paths.verifier_dir / "test-stdout.txt").resolve()) in rewritten
+    assert (tests_dir / "test.sh").resolve().as_posix() in rewritten
+    assert (trial_paths.verifier_dir / "test-stdout.txt").resolve().as_posix() in rewritten
     assert rewritten.startswith("bash ")
 
 
